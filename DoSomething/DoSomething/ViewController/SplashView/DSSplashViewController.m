@@ -10,6 +10,7 @@
 #import "DSSplashScrollView.h"
 #import "DSAppCommon.h"
 #import "DSConfig.h"
+#import "DSLoginViewController.h"
 
 @interface DSSplashViewController () <UIScrollViewDelegate,DSSplashViewController>
 {
@@ -22,7 +23,6 @@
 @end
 
 @implementation DSSplashViewController
-
 - (void)viewDidLoad {
     [super viewDidLoad];
 
@@ -53,6 +53,23 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
+
+- (IBAction)createAnAccount:(id)sender{
+    
+    DSLoginViewController *DSLoginView  = [[DSLoginViewController alloc]initWithNibName:@"DSLoginViewController" bundle:nil];
+    DSLoginView.temp = @"createAnAccount";
+    [self.navigationController pushViewController:DSLoginView animated:YES];
+}
+- (IBAction)Signin:(id)sender{
+    
+    DSLoginViewController *DSLoginView  = [[DSLoginViewController alloc]initWithNibName:@"DSLoginViewController" bundle:nil];
+    DSLoginView.temp = @"Signin";
+
+    [self.navigationController pushViewController:DSLoginView animated:YES];
+}
+
+
 
 
 #pragma mark- Load Initilization
