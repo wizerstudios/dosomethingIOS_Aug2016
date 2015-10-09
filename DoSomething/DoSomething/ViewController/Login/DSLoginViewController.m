@@ -7,25 +7,49 @@
 //
 
 #import "DSLoginViewController.h"
+#import "DSSplashViewController.h"
+#define PATRON_BOLD(Value)      [UIFont fontWithName:@"Patron-Bold" size:Value]
+#define PATRON_REG(Value)       [UIFont fontWithName:@"Patron-Regular" size:Value]
+
 
 @interface DSLoginViewController ()
 
 @end
 
 @implementation DSLoginViewController
-@synthesize temp,facebookLabel,emailLabel,buttonActionLabel,termsOfUseButton,privacyPolicyButton,signInButton;
+@synthesize temp,facebookLabel,emailLabel,buttonActionLabel,termsOfUseButton,privacyPolicyButton,signInButton,forgotButton,createAnAccVButton,instructionLabel;
 - (void)viewDidLoad {
-    [super viewDidLoad];
+    [super viewDidLoad];   
+    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
+
     
     if ([temp isEqualToString:@"createAnAccount"]){
-        facebookLabel.text =@"Create an account using Facebook";
+        NSString *string = @"Create an account using Facebook";
+        
+        NSMutableAttributedString *attStr = [[NSMutableAttributedString alloc] initWithString:string ];
+        [attStr addAttribute:NSFontAttributeName value:PATRON_REG(12) range:[string rangeOfString:@"Create an account using"]];
+        
+        [attStr addAttribute:NSFontAttributeName value:PATRON_BOLD(12) range:[string rangeOfString:@"Facebook"]];
+        facebookLabel.attributedText = attStr;
+        
         emailLabel.text =@"or sign up with your email";
         buttonActionLabel.text =@"Create Your Account";
+        instructionLabel.text =@"By selecting this,you agree to our Terms of Use and our Privacy Policy";
+        createAnAccVButton.hidden =YES;
+        forgotButton.hidden=YES;
 
 
             }
     if ([temp isEqualToString:@"Signin"]){
-        facebookLabel.text =@"Log in with Facebook";
+        
+            NSString *string = @"Log in with Facebook";
+            
+            NSMutableAttributedString *attStr = [[NSMutableAttributedString alloc] initWithString:string ];
+            [attStr addAttribute:NSFontAttributeName value:PATRON_REG(12) range:[string rangeOfString:@"Log in with"]];
+        
+            [attStr addAttribute:NSFontAttributeName value:PATRON_BOLD(12) range:[string rangeOfString:@"Facebook"]];
+            facebookLabel.attributedText = attStr;
+        
         emailLabel.text =@"or log in with your email";
         buttonActionLabel.text =@"Sign in";
         privacyPolicyButton.hidden =YES;
@@ -36,9 +60,16 @@
 
     
     
-    UIView *statusBarView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 320, 20)];
-    statusBarView.backgroundColor = [UIColor redColor];
-    [self.navigationController.navigationBar addSubview:statusBarView];    // Do any additional setup after loading the view from its nib.
+}
+- (IBAction)HaveAnAccount:(id)sender {
+    DSSplashViewController * DSSplashView  = [[DSSplashViewController alloc]initWithNibName:@"DSSplashViewController" bundle:nil];    
+    [self.navigationController pushViewController:DSSplashView animated:YES];
+
+    
+}
+- (IBAction)Back:(id)sender {
+    DSSplashViewController * DSSplashView  = [[DSSplashViewController alloc]initWithNibName:@"DSSplashViewController" bundle:nil];
+    [self.navigationController pushViewController:DSSplashView animated:YES];
 }
 
 - (void)didReceiveMemoryWarning {

@@ -21,8 +21,7 @@
                     <rect key="frame" x="0.0" y="607" width="188" height="60"/>
                     <color key="backgroundColor" red="0.94509803921568625" green="0.94509803921568625" blue="0.94509803921568625" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="60" id="EoB-c2-VIJ"/>
-                        <constraint firstAttribute="width" constant="188" id="xi6-oT-dJ2"/>
+                        <constraint firstAttribute="height" constant="60" id="pn2-oc-Daq"/>
                     </constraints>
                     <state key="normal" title="create An Account">
                         <color key="titleColor" red="0.8784313725490196" green="0.24313725490196078" blue="0.30980392156862746" alpha="1" colorSpace="calibratedRGB"/>
@@ -35,10 +34,6 @@
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="n6M-Sv-efu" userLabel="signinButton">
                     <rect key="frame" x="188" y="607" width="187" height="60"/>
                     <color key="backgroundColor" red="0.8784313725490196" green="0.24313725490196078" blue="0.30980392156862746" alpha="1" colorSpace="calibratedRGB"/>
-                    <constraints>
-                        <constraint firstAttribute="height" constant="60" id="kLS-9g-xoh"/>
-                        <constraint firstAttribute="width" constant="187" id="v6D-r0-Wqx"/>
-                    </constraints>
                     <state key="normal" title="Sign in">
                         <color key="titleColor" red="0.94509803921568625" green="0.94509803921568625" blue="0.94509803921568625" alpha="1" colorSpace="calibratedRGB"/>
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -50,11 +45,14 @@
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
             <constraints>
-                <constraint firstAttribute="trailing" secondItem="n6M-Sv-efu" secondAttribute="trailing" id="Jou-Bn-0bY"/>
-                <constraint firstAttribute="bottom" secondItem="n6M-Sv-efu" secondAttribute="bottom" id="MwN-hK-nci"/>
-                <constraint firstItem="xWF-rI-FeD" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="PVN-sq-8r5"/>
-                <constraint firstItem="n6M-Sv-efu" firstAttribute="leading" secondItem="xWF-rI-FeD" secondAttribute="trailing" id="eU6-q8-o1s"/>
-                <constraint firstAttribute="bottom" secondItem="xWF-rI-FeD" secondAttribute="bottom" id="rcw-Wp-JrD"/>
+                <constraint firstItem="xWF-rI-FeD" firstAttribute="width" secondItem="n6M-Sv-efu" secondAttribute="width" constant="1" id="9T3-WU-gKQ"/>
+                <constraint firstItem="xWF-rI-FeD" firstAttribute="height" secondItem="n6M-Sv-efu" secondAttribute="height" id="ACG-qL-auV"/>
+                <constraint firstItem="n6M-Sv-efu" firstAttribute="leading" secondItem="xWF-rI-FeD" secondAttribute="trailing" id="Hbb-sm-crT"/>
+                <constraint firstAttribute="bottom" secondItem="xWF-rI-FeD" secondAttribute="bottom" id="NIo-3i-pId"/>
+                <constraint firstItem="n6M-Sv-efu" firstAttribute="leading" secondItem="xWF-rI-FeD" secondAttribute="trailing" id="cK5-BJ-Qyh"/>
+                <constraint firstItem="xWF-rI-FeD" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="sP1-cH-dWU"/>
+                <constraint firstAttribute="bottom" secondItem="n6M-Sv-efu" secondAttribute="bottom" id="wDD-DK-WAV"/>
+                <constraint firstAttribute="trailing" secondItem="n6M-Sv-efu" secondAttribute="trailing" id="xP4-bW-Is1"/>
             </constraints>
             <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
             <point key="canvasLocation" x="311.5" y="343.5"/>
