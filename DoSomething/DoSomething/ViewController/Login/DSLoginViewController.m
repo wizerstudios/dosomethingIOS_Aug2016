@@ -13,7 +13,7 @@
 @end
 
 @implementation DSLoginViewController
-@synthesize temp,facebookLabel,emailLabel,buttonActionLabel,termsOfUseLabel,privacyPolicyLabel,signinLabel;
+@synthesize temp,facebookLabel,emailLabel,buttonActionLabel,termsOfUseButton,privacyPolicyButton,signInButton;
 - (void)viewDidLoad {
     [super viewDidLoad];
     
@@ -21,9 +21,6 @@
         facebookLabel.text =@"Create an account using Facebook";
         emailLabel.text =@"or sign up with your email";
         buttonActionLabel.text =@"Create Your Account";
-        termsOfUseLabel.text =@"Terms of Use";
-        privacyPolicyLabel.text =@"Privacy Policy";
-        signinLabel.text =@"Have an account? Sign In";
 
 
             }
@@ -31,6 +28,9 @@
         facebookLabel.text =@"Log in with Facebook";
         emailLabel.text =@"or log in with your email";
         buttonActionLabel.text =@"Sign in";
+        privacyPolicyButton.hidden =YES;
+        termsOfUseButton.hidden =YES;
+        signInButton.hidden =YES;
         
     }
 
