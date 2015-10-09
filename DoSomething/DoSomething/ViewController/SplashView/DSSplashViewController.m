@@ -109,8 +109,7 @@
                                                                    metrics:nil
                                                                      views:NSDictionaryOfVariableBindings(splashView)];
     
-    [self.view addConstraints:VConstrints];
-    
+    [self.view addConstraints:VConstrints];    
     
     
     [splashView.layer setBorderColor:[UIColor clearColor].CGColor];
