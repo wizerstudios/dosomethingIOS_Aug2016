@@ -96,24 +96,27 @@
     
     [self.view addSubview:splashView];
     
-    NSArray *hConstrints = [NSLayoutConstraint constraintsWithVisualFormat:@"H:|[splashView]|"
+    NSArray *hConstrints = [NSLayoutConstraint constraintsWithVisualFormat:@"H:|-0-[splashView]-0-|"
                                                                    options:0
                                                                    metrics:nil
                                                                      views:NSDictionaryOfVariableBindings(splashView)];
     
     [self.view addConstraints:hConstrints];
     
-    [self.view addConstraint:[NSLayoutConstraint constraintWithItem:splashView
-                                                          attribute:NSLayoutAttributeBottom
-                                                          relatedBy:NSLayoutRelationEqual
-                                                             toItem:signupButton
-                                                          attribute:NSLayoutAttributeTop
-                                                         multiplier:1
-                                                           constant:0]];
+    
+    NSArray *VConstrints = [NSLayoutConstraint constraintsWithVisualFormat:@"V:|-0-[splashView]-60-|"
+                                                                   options:0
+                                                                   metrics:nil
+                                                                     views:NSDictionaryOfVariableBindings(splashView)];
+    
+    [self.view addConstraints:VConstrints];
+    
+    
     
     [splashView.layer setBorderColor:[UIColor clearColor].CGColor];
     
     [splashView.layer setBorderWidth:2.0f];
 }
+
 
 @end
