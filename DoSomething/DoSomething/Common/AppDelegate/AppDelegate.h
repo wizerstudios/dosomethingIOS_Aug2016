@@ -7,11 +7,15 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "DSSplashViewController.h"
 
 @interface AppDelegate : UIResponder <UIApplicationDelegate>
+{
+    DSSplashViewController *splashViewController;
 
+}
 @property (strong, nonatomic) UIWindow *window;
 
-
+@property (nonatomic, strong) UINavigationController *navigationController;
 @end
 

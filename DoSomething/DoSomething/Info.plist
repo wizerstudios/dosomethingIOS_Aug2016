@@ -24,8 +24,6 @@
 	<true/>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
-	<key>UIMainStoryboardFile</key>
-	<string>Main</string>
 	<key>UIRequiredDeviceCapabilities</key>
 	<array>
 		<string>armv7</string>
@@ -34,6 +32,22 @@
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
 		<string>UIInterfaceOrientationPortraitUpsideDown</string>
+	</array>
+	<key>UIAppFonts</key>
+	<array>
+		<string>FutworaPro-Regular.otf</string>
+		<string>Patron-Black.ttf</string>
+		<string>Patron-BlackItalic.ttf</string>
+		<string>Patron-Bold.ttf</string>
+		<string>Patron-BoldItalic.ttf</string>
+		<string>Patron-ExtraLight.ttf</string>
+		<string>Patron-Italic.ttf</string>
+		<string>Patron-ExtraLightItalic.ttf</string>
+		<string>Patron-Medium.ttf</string>
+		<string>Patron-MediumItalic.ttf</string>
+		<string>Patron-Regular.ttf</string>
+		<string>Patron-Thin.ttf</string>
+		<string>Patron-ThinItalic.ttf</string>
 	</array>
 </dict>
 </plist>

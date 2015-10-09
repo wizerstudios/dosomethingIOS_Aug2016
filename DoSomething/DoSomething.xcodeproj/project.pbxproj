@@ -8,24 +8,65 @@
 
 /* Begin PBXBuildFile section */
 		065BAC521BC7A135005AF493 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 065BAC511BC7A135005AF493 /* main.m */; };
-		065BAC551BC7A135005AF493 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 065BAC541BC7A135005AF493 /* AppDelegate.m */; };
-		065BAC581BC7A135005AF493 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 065BAC571BC7A135005AF493 /* ViewController.m */; };
-		065BAC5B1BC7A135005AF493 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 065BAC591BC7A135005AF493 /* Main.storyboard */; };
 		065BAC5D1BC7A135005AF493 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 065BAC5C1BC7A135005AF493 /* Assets.xcassets */; };
-		065BAC601BC7A135005AF493 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 065BAC5E1BC7A135005AF493 /* LaunchScreen.storyboard */; };
+		C6D5F60C1BC7AF500050C1AE /* Launch Screen.xib in Resources */ = {isa = PBXBuildFile; fileRef = C6D5F60B1BC7AF500050C1AE /* Launch Screen.xib */; };
+		C6D5F6101BC7B05D0050C1AE /* DSSplashViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C6D5F60E1BC7B05D0050C1AE /* DSSplashViewController.m */; };
+		C6D5F6111BC7B05D0050C1AE /* DSSplashViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C6D5F60F1BC7B05D0050C1AE /* DSSplashViewController.xib */; };
+		C6D5F6151BC7B0970050C1AE /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = C6D5F6141BC7B0970050C1AE /* AppDelegate.m */; };
+		C6D5F6181BC7B17D0050C1AE /* DSSplashScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = C6D5F6171BC7B17D0050C1AE /* DSSplashScrollView.m */; };
+		C6D5F61C1BC7B3E60050C1AE /* DSAppCommon.m in Sources */ = {isa = PBXBuildFile; fileRef = C6D5F61B1BC7B3E60050C1AE /* DSAppCommon.m */; };
+		C6D5F6391BC7B52C0050C1AE /* FutworaPro-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = C6D5F62C1BC7B52C0050C1AE /* FutworaPro-Regular.otf */; };
+		C6D5F63A1BC7B52C0050C1AE /* Patron-Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C6D5F62D1BC7B52C0050C1AE /* Patron-Black.ttf */; };
+		C6D5F63B1BC7B52C0050C1AE /* Patron-BlackItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C6D5F62E1BC7B52C0050C1AE /* Patron-BlackItalic.ttf */; };
+		C6D5F63C1BC7B52C0050C1AE /* Patron-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C6D5F62F1BC7B52C0050C1AE /* Patron-Bold.ttf */; };
+		C6D5F63D1BC7B52C0050C1AE /* Patron-BoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C6D5F6301BC7B52C0050C1AE /* Patron-BoldItalic.ttf */; };
+		C6D5F63E1BC7B52C0050C1AE /* Patron-ExtraLight.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C6D5F6311BC7B52C0050C1AE /* Patron-ExtraLight.ttf */; };
+		C6D5F63F1BC7B52C0050C1AE /* Patron-ExtraLightItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C6D5F6321BC7B52C0050C1AE /* Patron-ExtraLightItalic.ttf */; };
+		C6D5F6401BC7B52C0050C1AE /* Patron-Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C6D5F6331BC7B52C0050C1AE /* Patron-Italic.ttf */; };
+		C6D5F6411BC7B52C0050C1AE /* Patron-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C6D5F6341BC7B52C0050C1AE /* Patron-Medium.ttf */; };
+		C6D5F6421BC7B52C0050C1AE /* Patron-MediumItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C6D5F6351BC7B52C0050C1AE /* Patron-MediumItalic.ttf */; };
+		C6D5F6431BC7B52C0050C1AE /* Patron-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C6D5F6361BC7B52C0050C1AE /* Patron-Regular.ttf */; };
+		C6D5F6441BC7B52C0050C1AE /* Patron-Thin.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C6D5F6371BC7B52C0050C1AE /* Patron-Thin.ttf */; };
+		C6D5F6451BC7B52C0050C1AE /* Patron-ThinItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C6D5F6381BC7B52C0050C1AE /* Patron-ThinItalic.ttf */; };
+		C6D5F6491BC7BBAC0050C1AE /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C6D5F6481BC7BBAC0050C1AE /* Images.xcassets */; };
+		C6D5F64B1BC7BBE20050C1AE /* splash.png in Resources */ = {isa = PBXBuildFile; fileRef = C6D5F64A1BC7BBE20050C1AE /* splash.png */; };
+		C6D5F6501BC7C50C0050C1AE /* Splash1.jpg in Resources */ = {isa = PBXBuildFile; fileRef = C6D5F64E1BC7C50C0050C1AE /* Splash1.jpg */; };
+		C6D5F6511BC7C50C0050C1AE /* Splash2.jpg in Resources */ = {isa = PBXBuildFile; fileRef = C6D5F64F1BC7C50C0050C1AE /* Splash2.jpg */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		065BAC4D1BC7A135005AF493 /* DoSomething.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DoSomething.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		065BAC511BC7A135005AF493 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		065BAC531BC7A135005AF493 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
-		065BAC541BC7A135005AF493 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		065BAC561BC7A135005AF493 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		065BAC571BC7A135005AF493 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
-		065BAC5A1BC7A135005AF493 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		065BAC5C1BC7A135005AF493 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		065BAC5F1BC7A135005AF493 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		065BAC611BC7A135005AF493 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		C6D5F60B1BC7AF500050C1AE /* Launch Screen.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "Launch Screen.xib"; sourceTree = "<group>"; };
+		C6D5F60D1BC7B05D0050C1AE /* DSSplashViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DSSplashViewController.h; path = ViewController/SplashView/DSSplashViewController.h; sourceTree = "<group>"; };
+		C6D5F60E1BC7B05D0050C1AE /* DSSplashViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DSSplashViewController.m; path = ViewController/SplashView/DSSplashViewController.m; sourceTree = "<group>"; };
+		C6D5F60F1BC7B05D0050C1AE /* DSSplashViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = DSSplashViewController.xib; path = ViewController/SplashView/DSSplashViewController.xib; sourceTree = "<group>"; };
+		C6D5F6131BC7B0970050C1AE /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		C6D5F6141BC7B0970050C1AE /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		C6D5F6161BC7B17D0050C1AE /* DSSplashScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DSSplashScrollView.h; path = ViewController/SplashView/SplashScrollView/DSSplashScrollView.h; sourceTree = "<group>"; };
+		C6D5F6171BC7B17D0050C1AE /* DSSplashScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DSSplashScrollView.m; path = ViewController/SplashView/SplashScrollView/DSSplashScrollView.m; sourceTree = "<group>"; };
+		C6D5F61A1BC7B3E60050C1AE /* DSAppCommon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DSAppCommon.h; path = ../AppCommon/DSAppCommon.h; sourceTree = "<group>"; };
+		C6D5F61B1BC7B3E60050C1AE /* DSAppCommon.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DSAppCommon.m; path = ../AppCommon/DSAppCommon.m; sourceTree = "<group>"; };
+		C6D5F62C1BC7B52C0050C1AE /* FutworaPro-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "FutworaPro-Regular.otf"; sourceTree = "<group>"; };
+		C6D5F62D1BC7B52C0050C1AE /* Patron-Black.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Patron-Black.ttf"; sourceTree = "<group>"; };
+		C6D5F62E1BC7B52C0050C1AE /* Patron-BlackItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Patron-BlackItalic.ttf"; sourceTree = "<group>"; };
+		C6D5F62F1BC7B52C0050C1AE /* Patron-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Patron-Bold.ttf"; sourceTree = "<group>"; };
+		C6D5F6301BC7B52C0050C1AE /* Patron-BoldItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Patron-BoldItalic.ttf"; sourceTree = "<group>"; };
+		C6D5F6311BC7B52C0050C1AE /* Patron-ExtraLight.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Patron-ExtraLight.ttf"; sourceTree = "<group>"; };
+		C6D5F6321BC7B52C0050C1AE /* Patron-ExtraLightItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Patron-ExtraLightItalic.ttf"; sourceTree = "<group>"; };
+		C6D5F6331BC7B52C0050C1AE /* Patron-Italic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Patron-Italic.ttf"; sourceTree = "<group>"; };
+		C6D5F6341BC7B52C0050C1AE /* Patron-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Patron-Medium.ttf"; sourceTree = "<group>"; };
+		C6D5F6351BC7B52C0050C1AE /* Patron-MediumItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Patron-MediumItalic.ttf"; sourceTree = "<group>"; };
+		C6D5F6361BC7B52C0050C1AE /* Patron-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Patron-Regular.ttf"; sourceTree = "<group>"; };
+		C6D5F6371BC7B52C0050C1AE /* Patron-Thin.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Patron-Thin.ttf"; sourceTree = "<group>"; };
+		C6D5F6381BC7B52C0050C1AE /* Patron-ThinItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Patron-ThinItalic.ttf"; sourceTree = "<group>"; };
+		C6D5F6461BC7B6550050C1AE /* DSConfig.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DSConfig.h; sourceTree = "<group>"; };
+		C6D5F6481BC7BBAC0050C1AE /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		C6D5F64A1BC7BBE20050C1AE /* splash.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = splash.png; sourceTree = "<group>"; };
+		C6D5F64E1BC7C50C0050C1AE /* Splash1.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = Splash1.jpg; sourceTree = "<group>"; };
+		C6D5F64F1BC7C50C0050C1AE /* Splash2.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = Splash2.jpg; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,14 +99,9 @@
 		065BAC4F1BC7A135005AF493 /* DoSomething */ = {
 			isa = PBXGroup;
 			children = (
-				065BAC531BC7A135005AF493 /* AppDelegate.h */,
-				065BAC541BC7A135005AF493 /* AppDelegate.m */,
-				065BAC561BC7A135005AF493 /* ViewController.h */,
-				065BAC571BC7A135005AF493 /* ViewController.m */,
-				065BAC591BC7A135005AF493 /* Main.storyboard */,
-				065BAC5C1BC7A135005AF493 /* Assets.xcassets */,
-				065BAC5E1BC7A135005AF493 /* LaunchScreen.storyboard */,
-				065BAC611BC7A135005AF493 /* Info.plist */,
+				C6D5F6081BC7A4340050C1AE /* Common */,
+				C6D5F60A1BC7A4560050C1AE /* ViewController */,
+				C6D5F60B1BC7AF500050C1AE /* Launch Screen.xib */,
 				065BAC501BC7A135005AF493 /* Supporting Files */,
 			);
 			path = DoSomething;
@@ -74,9 +110,94 @@
 		065BAC501BC7A135005AF493 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				C6D5F6521BC7C5940050C1AE /* SplashImage */,
+				C6D5F62B1BC7B52C0050C1AE /* Fonts */,
+				065BAC5C1BC7A135005AF493 /* Assets.xcassets */,
+				C6D5F6481BC7BBAC0050C1AE /* Images.xcassets */,
+				065BAC611BC7A135005AF493 /* Info.plist */,
 				065BAC511BC7A135005AF493 /* main.m */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		C6D5F6081BC7A4340050C1AE /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				C6D5F6471BC7BB540050C1AE /* AppCommon */,
+				C6D5F6121BC7B0970050C1AE /* AppDelegate */,
+				C6D5F6461BC7B6550050C1AE /* DSConfig.h */,
+			);
+			name = Common;
+			sourceTree = "<group>";
+		};
+		C6D5F60A1BC7A4560050C1AE /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				C6D5F6191BC7B21D0050C1AE /* SplashScrollView */,
+				C6D5F60D1BC7B05D0050C1AE /* DSSplashViewController.h */,
+				C6D5F60E1BC7B05D0050C1AE /* DSSplashViewController.m */,
+				C6D5F60F1BC7B05D0050C1AE /* DSSplashViewController.xib */,
+			);
+			name = ViewController;
+			sourceTree = "<group>";
+		};
+		C6D5F6121BC7B0970050C1AE /* AppDelegate */ = {
+			isa = PBXGroup;
+			children = (
+				C6D5F6131BC7B0970050C1AE /* AppDelegate.h */,
+				C6D5F6141BC7B0970050C1AE /* AppDelegate.m */,
+			);
+			name = AppDelegate;
+			path = Common/AppDelegate;
+			sourceTree = "<group>";
+		};
+		C6D5F6191BC7B21D0050C1AE /* SplashScrollView */ = {
+			isa = PBXGroup;
+			children = (
+				C6D5F6161BC7B17D0050C1AE /* DSSplashScrollView.h */,
+				C6D5F6171BC7B17D0050C1AE /* DSSplashScrollView.m */,
+			);
+			name = SplashScrollView;
+			sourceTree = "<group>";
+		};
+		C6D5F62B1BC7B52C0050C1AE /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				C6D5F62C1BC7B52C0050C1AE /* FutworaPro-Regular.otf */,
+				C6D5F62D1BC7B52C0050C1AE /* Patron-Black.ttf */,
+				C6D5F62E1BC7B52C0050C1AE /* Patron-BlackItalic.ttf */,
+				C6D5F62F1BC7B52C0050C1AE /* Patron-Bold.ttf */,
+				C6D5F6301BC7B52C0050C1AE /* Patron-BoldItalic.ttf */,
+				C6D5F6311BC7B52C0050C1AE /* Patron-ExtraLight.ttf */,
+				C6D5F6321BC7B52C0050C1AE /* Patron-ExtraLightItalic.ttf */,
+				C6D5F6331BC7B52C0050C1AE /* Patron-Italic.ttf */,
+				C6D5F6341BC7B52C0050C1AE /* Patron-Medium.ttf */,
+				C6D5F6351BC7B52C0050C1AE /* Patron-MediumItalic.ttf */,
+				C6D5F6361BC7B52C0050C1AE /* Patron-Regular.ttf */,
+				C6D5F6371BC7B52C0050C1AE /* Patron-Thin.ttf */,
+				C6D5F6381BC7B52C0050C1AE /* Patron-ThinItalic.ttf */,
+			);
+			path = Fonts;
+			sourceTree = "<group>";
+		};
+		C6D5F6471BC7BB540050C1AE /* AppCommon */ = {
+			isa = PBXGroup;
+			children = (
+				C6D5F61A1BC7B3E60050C1AE /* DSAppCommon.h */,
+				C6D5F61B1BC7B3E60050C1AE /* DSAppCommon.m */,
+			);
+			name = AppCommon;
+			path = Common/AppDelegate;
+			sourceTree = "<group>";
+		};
+		C6D5F6521BC7C5940050C1AE /* SplashImage */ = {
+			isa = PBXGroup;
+			children = (
+				C6D5F64E1BC7C50C0050C1AE /* Splash1.jpg */,
+				C6D5F64F1BC7C50C0050C1AE /* Splash2.jpg */,
+				C6D5F64A1BC7BBE20050C1AE /* splash.png */,
+			);
+			name = SplashImage;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -136,9 +257,26 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				065BAC601BC7A135005AF493 /* LaunchScreen.storyboard in Resources */,
+				C6D5F63F1BC7B52C0050C1AE /* Patron-ExtraLightItalic.ttf in Resources */,
 				065BAC5D1BC7A135005AF493 /* Assets.xcassets in Resources */,
-				065BAC5B1BC7A135005AF493 /* Main.storyboard in Resources */,
+				C6D5F63D1BC7B52C0050C1AE /* Patron-BoldItalic.ttf in Resources */,
+				C6D5F6391BC7B52C0050C1AE /* FutworaPro-Regular.otf in Resources */,
+				C6D5F6401BC7B52C0050C1AE /* Patron-Italic.ttf in Resources */,
+				C6D5F63A1BC7B52C0050C1AE /* Patron-Black.ttf in Resources */,
+				C6D5F6421BC7B52C0050C1AE /* Patron-MediumItalic.ttf in Resources */,
+				C6D5F60C1BC7AF500050C1AE /* Launch Screen.xib in Resources */,
+				C6D5F6441BC7B52C0050C1AE /* Patron-Thin.ttf in Resources */,
+				C6D5F6411BC7B52C0050C1AE /* Patron-Medium.ttf in Resources */,
+				C6D5F6431BC7B52C0050C1AE /* Patron-Regular.ttf in Resources */,
+				C6D5F6491BC7BBAC0050C1AE /* Images.xcassets in Resources */,
+				C6D5F6451BC7B52C0050C1AE /* Patron-ThinItalic.ttf in Resources */,
+				C6D5F63E1BC7B52C0050C1AE /* Patron-ExtraLight.ttf in Resources */,
+				C6D5F63B1BC7B52C0050C1AE /* Patron-BlackItalic.ttf in Resources */,
+				C6D5F63C1BC7B52C0050C1AE /* Patron-Bold.ttf in Resources */,
+				C6D5F64B1BC7BBE20050C1AE /* splash.png in Resources */,
+				C6D5F6501BC7C50C0050C1AE /* Splash1.jpg in Resources */,
+				C6D5F6511BC7C50C0050C1AE /* Splash2.jpg in Resources */,
+				C6D5F6111BC7B05D0050C1AE /* DSSplashViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -149,32 +287,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				065BAC581BC7A135005AF493 /* ViewController.m in Sources */,
-				065BAC551BC7A135005AF493 /* AppDelegate.m in Sources */,
+				C6D5F6101BC7B05D0050C1AE /* DSSplashViewController.m in Sources */,
+				C6D5F61C1BC7B3E60050C1AE /* DSAppCommon.m in Sources */,
 				065BAC521BC7A135005AF493 /* main.m in Sources */,
+				C6D5F6151BC7B0970050C1AE /* AppDelegate.m in Sources */,
+				C6D5F6181BC7B17D0050C1AE /* DSSplashScrollView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXVariantGroup section */
-		065BAC591BC7A135005AF493 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				065BAC5A1BC7A135005AF493 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
-		065BAC5E1BC7A135005AF493 /* LaunchScreen.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				065BAC5F1BC7A135005AF493 /* Base */,
-			);
-			name = LaunchScreen.storyboard;
-			sourceTree = "<group>";
-		};
-/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		065BAC621BC7A135005AF493 /* Debug */ = {
@@ -300,6 +421,7 @@
 				065BAC661BC7A135005AF493 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
