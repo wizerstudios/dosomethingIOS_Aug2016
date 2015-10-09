@@ -138,11 +138,11 @@
 		C6D5F60A1BC7A4560050C1AE /* ViewController */ = {
 			isa = PBXGroup;
 			children = (
-				EACB22B71BC7C7F7002FAD54 /* Login */,
 				C6D5F6191BC7B21D0050C1AE /* SplashScrollView */,
 				C6D5F60D1BC7B05D0050C1AE /* DSSplashViewController.h */,
 				C6D5F60E1BC7B05D0050C1AE /* DSSplashViewController.m */,
 				C6D5F60F1BC7B05D0050C1AE /* DSSplashViewController.xib */,
+				EACB22B71BC7C7F7002FAD54 /* Login */,
 			);
 			name = ViewController;
 			sourceTree = "<group>";
