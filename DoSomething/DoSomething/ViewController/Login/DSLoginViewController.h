@@ -13,8 +13,9 @@
 @property (strong, nonatomic) IBOutlet UILabel *facebookLabel;
 @property (strong, nonatomic) IBOutlet UILabel *emailLabel;
 @property (strong, nonatomic) IBOutlet UILabel *buttonActionLabel;
-@property (strong, nonatomic) IBOutlet UILabel *termsOfUseLabel;
-@property (strong, nonatomic) IBOutlet UILabel *privacyPolicyLabel;
-@property (strong, nonatomic) IBOutlet UILabel *signinLabel;
+@property (strong, nonatomic) IBOutlet UIButton *termsOfUseButton;
+@property (strong, nonatomic) IBOutlet UIButton *privacyPolicyButton;
+@property (strong, nonatomic) IBOutlet UIButton *signInButton;
+@property (strong, nonatomic) IBOutlet UIButton *forgotButton;
 
 @end

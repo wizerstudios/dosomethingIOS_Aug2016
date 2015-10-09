@@ -17,29 +17,45 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xWF-rI-FeD" userLabel="SignupButton">
-                    <rect key="frame" x="0.0" y="617" width="188" height="50"/>
-                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xWF-rI-FeD" userLabel="SignupButton">
+                    <rect key="frame" x="0.0" y="607" width="188" height="60"/>
+                    <color key="backgroundColor" red="0.94509803921568625" green="0.94509803921568625" blue="0.94509803921568625" alpha="1" colorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="60" id="EoB-c2-VIJ"/>
+                        <constraint firstAttribute="width" constant="188" id="xi6-oT-dJ2"/>
+                    </constraints>
                     <state key="normal" title="create An Account">
-                        <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="titleColor" red="0.8784313725490196" green="0.24313725490196078" blue="0.30980392156862746" alpha="1" colorSpace="calibratedRGB"/>
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
                     <connections>
-                        <action selector="createAnAccount:" destination="-1" eventType="touchUpInside" id="IKB-55-rPF"/>
+                        <action selector="createAnAccount:" destination="-1" eventType="touchUpInside" id="aY3-U7-5cc"/>
                     </connections>
                 </button>
-                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="n6M-Sv-efu" userLabel="signinButton">
-                    <rect key="frame" x="189" y="617" width="187" height="50"/>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="n6M-Sv-efu" userLabel="signinButton">
+                    <rect key="frame" x="188" y="607" width="187" height="60"/>
+                    <color key="backgroundColor" red="0.8784313725490196" green="0.24313725490196078" blue="0.30980392156862746" alpha="1" colorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="60" id="kLS-9g-xoh"/>
+                        <constraint firstAttribute="width" constant="187" id="v6D-r0-Wqx"/>
+                    </constraints>
                     <state key="normal" title="Sign in">
-                        <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="titleColor" red="0.94509803921568625" green="0.94509803921568625" blue="0.94509803921568625" alpha="1" colorSpace="calibratedRGB"/>
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
                     <connections>
-                        <action selector="Signin:" destination="-1" eventType="touchUpInside" id="fpC-3u-rW2"/>
+                        <action selector="Signin:" destination="-1" eventType="touchUpInside" id="T5C-cl-2qg"/>
                     </connections>
                 </button>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="n6M-Sv-efu" secondAttribute="trailing" id="Jou-Bn-0bY"/>
+                <constraint firstAttribute="bottom" secondItem="n6M-Sv-efu" secondAttribute="bottom" id="MwN-hK-nci"/>
+                <constraint firstItem="xWF-rI-FeD" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="PVN-sq-8r5"/>
+                <constraint firstItem="n6M-Sv-efu" firstAttribute="leading" secondItem="xWF-rI-FeD" secondAttribute="trailing" id="eU6-q8-o1s"/>
+                <constraint firstAttribute="bottom" secondItem="xWF-rI-FeD" secondAttribute="bottom" id="rcw-Wp-JrD"/>
+            </constraints>
             <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
             <point key="canvasLocation" x="311.5" y="343.5"/>
         </view>

@@ -11,13 +11,6 @@
 
 @protocol DSSplashViewController <NSObject>
 
-- (void)setHiddenAction;
-
-- (void)setShowAction;
-
-//- (void)showConnexionView;
-//
-//- (void)showInscriptionView;
 
 
 @end
@@ -25,10 +18,6 @@
 
 @interface DSSplashScrollView : UIView
 
-
-- (void) pauseScrollingTimer;
-
-- (void) resumeScrollingTimer;
 
 @property (nonatomic, retain) id <DSSplashViewController> splashDelegate;
 @end

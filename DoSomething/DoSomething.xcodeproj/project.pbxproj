@@ -8,12 +8,11 @@
 
 /* Begin PBXBuildFile section */
 		065BAC521BC7A135005AF493 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 065BAC511BC7A135005AF493 /* main.m */; };
-		065BAC5D1BC7A135005AF493 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 065BAC5C1BC7A135005AF493 /* Assets.xcassets */; };
+		C61A36CD1BC7ED90000E649A /* DSSplashViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C61A36C81BC7ED90000E649A /* DSSplashViewController.m */; };
+		C61A36CE1BC7ED90000E649A /* DSSplashViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C61A36C91BC7ED90000E649A /* DSSplashViewController.xib */; };
+		C61A36CF1BC7ED90000E649A /* DSSplashScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = C61A36CC1BC7ED90000E649A /* DSSplashScrollView.m */; };
 		C6D5F60C1BC7AF500050C1AE /* Launch Screen.xib in Resources */ = {isa = PBXBuildFile; fileRef = C6D5F60B1BC7AF500050C1AE /* Launch Screen.xib */; };
-		C6D5F6101BC7B05D0050C1AE /* DSSplashViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C6D5F60E1BC7B05D0050C1AE /* DSSplashViewController.m */; };
-		C6D5F6111BC7B05D0050C1AE /* DSSplashViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C6D5F60F1BC7B05D0050C1AE /* DSSplashViewController.xib */; };
 		C6D5F6151BC7B0970050C1AE /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = C6D5F6141BC7B0970050C1AE /* AppDelegate.m */; };
-		C6D5F6181BC7B17D0050C1AE /* DSSplashScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = C6D5F6171BC7B17D0050C1AE /* DSSplashScrollView.m */; };
 		C6D5F61C1BC7B3E60050C1AE /* DSAppCommon.m in Sources */ = {isa = PBXBuildFile; fileRef = C6D5F61B1BC7B3E60050C1AE /* DSAppCommon.m */; };
 		C6D5F6391BC7B52C0050C1AE /* FutworaPro-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = C6D5F62C1BC7B52C0050C1AE /* FutworaPro-Regular.otf */; };
 		C6D5F63A1BC7B52C0050C1AE /* Patron-Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C6D5F62D1BC7B52C0050C1AE /* Patron-Black.ttf */; };
@@ -28,10 +27,7 @@
 		C6D5F6431BC7B52C0050C1AE /* Patron-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C6D5F6361BC7B52C0050C1AE /* Patron-Regular.ttf */; };
 		C6D5F6441BC7B52C0050C1AE /* Patron-Thin.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C6D5F6371BC7B52C0050C1AE /* Patron-Thin.ttf */; };
 		C6D5F6451BC7B52C0050C1AE /* Patron-ThinItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C6D5F6381BC7B52C0050C1AE /* Patron-ThinItalic.ttf */; };
-		C6D5F6491BC7BBAC0050C1AE /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C6D5F6481BC7BBAC0050C1AE /* Images.xcassets */; };
-		C6D5F64B1BC7BBE20050C1AE /* splash.png in Resources */ = {isa = PBXBuildFile; fileRef = C6D5F64A1BC7BBE20050C1AE /* splash.png */; };
-		C6D5F6501BC7C50C0050C1AE /* Splash1.jpg in Resources */ = {isa = PBXBuildFile; fileRef = C6D5F64E1BC7C50C0050C1AE /* Splash1.jpg */; };
-		C6D5F6511BC7C50C0050C1AE /* Splash2.jpg in Resources */ = {isa = PBXBuildFile; fileRef = C6D5F64F1BC7C50C0050C1AE /* Splash2.jpg */; };
+		C6D5F67C1BC7EC440050C1AE /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C6D5F67B1BC7EC440050C1AE /* Images.xcassets */; };
 		EACB22BB1BC7C7F7002FAD54 /* DSLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EACB22B91BC7C7F7002FAD54 /* DSLoginViewController.m */; };
 		EACB22BC1BC7C7F7002FAD54 /* DSLoginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = EACB22BA1BC7C7F7002FAD54 /* DSLoginViewController.xib */; };
 /* End PBXBuildFile section */
@@ -39,16 +35,15 @@
 /* Begin PBXFileReference section */
 		065BAC4D1BC7A135005AF493 /* DoSomething.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DoSomething.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		065BAC511BC7A135005AF493 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		065BAC5C1BC7A135005AF493 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		065BAC611BC7A135005AF493 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		C61A36C71BC7ED90000E649A /* DSSplashViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DSSplashViewController.h; path = ViewController/SplashView/DSSplashViewController.h; sourceTree = "<group>"; };
+		C61A36C81BC7ED90000E649A /* DSSplashViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DSSplashViewController.m; path = ViewController/SplashView/DSSplashViewController.m; sourceTree = "<group>"; };
+		C61A36C91BC7ED90000E649A /* DSSplashViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = DSSplashViewController.xib; path = ViewController/SplashView/DSSplashViewController.xib; sourceTree = "<group>"; };
+		C61A36CB1BC7ED90000E649A /* DSSplashScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DSSplashScrollView.h; sourceTree = "<group>"; };
+		C61A36CC1BC7ED90000E649A /* DSSplashScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DSSplashScrollView.m; sourceTree = "<group>"; };
 		C6D5F60B1BC7AF500050C1AE /* Launch Screen.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "Launch Screen.xib"; sourceTree = "<group>"; };
-		C6D5F60D1BC7B05D0050C1AE /* DSSplashViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DSSplashViewController.h; path = ViewController/SplashView/DSSplashViewController.h; sourceTree = "<group>"; };
-		C6D5F60E1BC7B05D0050C1AE /* DSSplashViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DSSplashViewController.m; path = ViewController/SplashView/DSSplashViewController.m; sourceTree = "<group>"; };
-		C6D5F60F1BC7B05D0050C1AE /* DSSplashViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = DSSplashViewController.xib; path = ViewController/SplashView/DSSplashViewController.xib; sourceTree = "<group>"; };
 		C6D5F6131BC7B0970050C1AE /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		C6D5F6141BC7B0970050C1AE /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		C6D5F6161BC7B17D0050C1AE /* DSSplashScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DSSplashScrollView.h; path = ViewController/SplashView/SplashScrollView/DSSplashScrollView.h; sourceTree = "<group>"; };
-		C6D5F6171BC7B17D0050C1AE /* DSSplashScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DSSplashScrollView.m; path = ViewController/SplashView/SplashScrollView/DSSplashScrollView.m; sourceTree = "<group>"; };
 		C6D5F61A1BC7B3E60050C1AE /* DSAppCommon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DSAppCommon.h; path = ../AppCommon/DSAppCommon.h; sourceTree = "<group>"; };
 		C6D5F61B1BC7B3E60050C1AE /* DSAppCommon.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DSAppCommon.m; path = ../AppCommon/DSAppCommon.m; sourceTree = "<group>"; };
 		C6D5F62C1BC7B52C0050C1AE /* FutworaPro-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "FutworaPro-Regular.otf"; sourceTree = "<group>"; };
@@ -65,10 +60,7 @@
 		C6D5F6371BC7B52C0050C1AE /* Patron-Thin.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Patron-Thin.ttf"; sourceTree = "<group>"; };
 		C6D5F6381BC7B52C0050C1AE /* Patron-ThinItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Patron-ThinItalic.ttf"; sourceTree = "<group>"; };
 		C6D5F6461BC7B6550050C1AE /* DSConfig.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DSConfig.h; sourceTree = "<group>"; };
-		C6D5F6481BC7BBAC0050C1AE /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
-		C6D5F64A1BC7BBE20050C1AE /* splash.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = splash.png; sourceTree = "<group>"; };
-		C6D5F64E1BC7C50C0050C1AE /* Splash1.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = Splash1.jpg; sourceTree = "<group>"; };
-		C6D5F64F1BC7C50C0050C1AE /* Splash2.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = Splash2.jpg; sourceTree = "<group>"; };
+		C6D5F67B1BC7EC440050C1AE /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		EACB22B81BC7C7F7002FAD54 /* DSLoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DSLoginViewController.h; sourceTree = "<group>"; };
 		EACB22B91BC7C7F7002FAD54 /* DSLoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DSLoginViewController.m; sourceTree = "<group>"; };
 		EACB22BA1BC7C7F7002FAD54 /* DSLoginViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DSLoginViewController.xib; sourceTree = "<group>"; };
@@ -115,14 +107,22 @@
 		065BAC501BC7A135005AF493 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				C6D5F6521BC7C5940050C1AE /* SplashImage */,
+				C6D5F67B1BC7EC440050C1AE /* Images.xcassets */,
 				C6D5F62B1BC7B52C0050C1AE /* Fonts */,
-				065BAC5C1BC7A135005AF493 /* Assets.xcassets */,
-				C6D5F6481BC7BBAC0050C1AE /* Images.xcassets */,
 				065BAC611BC7A135005AF493 /* Info.plist */,
 				065BAC511BC7A135005AF493 /* main.m */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		C61A36CA1BC7ED90000E649A /* SplashScrollView */ = {
+			isa = PBXGroup;
+			children = (
+				C61A36CB1BC7ED90000E649A /* DSSplashScrollView.h */,
+				C61A36CC1BC7ED90000E649A /* DSSplashScrollView.m */,
+			);
+			name = SplashScrollView;
+			path = ViewController/SplashView/SplashScrollView;
 			sourceTree = "<group>";
 		};
 		C6D5F6081BC7A4340050C1AE /* Common */ = {
@@ -138,10 +138,10 @@
 		C6D5F60A1BC7A4560050C1AE /* ViewController */ = {
 			isa = PBXGroup;
 			children = (
-				C6D5F6191BC7B21D0050C1AE /* SplashScrollView */,
-				C6D5F60D1BC7B05D0050C1AE /* DSSplashViewController.h */,
-				C6D5F60E1BC7B05D0050C1AE /* DSSplashViewController.m */,
-				C6D5F60F1BC7B05D0050C1AE /* DSSplashViewController.xib */,
+				C61A36CA1BC7ED90000E649A /* SplashScrollView */,
+				C61A36C71BC7ED90000E649A /* DSSplashViewController.h */,
+				C61A36C81BC7ED90000E649A /* DSSplashViewController.m */,
+				C61A36C91BC7ED90000E649A /* DSSplashViewController.xib */,
 				EACB22B71BC7C7F7002FAD54 /* Login */,
 			);
 			name = ViewController;
@@ -155,15 +155,6 @@
 			);
 			name = AppDelegate;
 			path = Common/AppDelegate;
-			sourceTree = "<group>";
-		};
-		C6D5F6191BC7B21D0050C1AE /* SplashScrollView */ = {
-			isa = PBXGroup;
-			children = (
-				C6D5F6161BC7B17D0050C1AE /* DSSplashScrollView.h */,
-				C6D5F6171BC7B17D0050C1AE /* DSSplashScrollView.m */,
-			);
-			name = SplashScrollView;
 			sourceTree = "<group>";
 		};
 		C6D5F62B1BC7B52C0050C1AE /* Fonts */ = {
@@ -194,16 +185,6 @@
 			);
 			name = AppCommon;
 			path = Common/AppDelegate;
-			sourceTree = "<group>";
-		};
-		C6D5F6521BC7C5940050C1AE /* SplashImage */ = {
-			isa = PBXGroup;
-			children = (
-				C6D5F64E1BC7C50C0050C1AE /* Splash1.jpg */,
-				C6D5F64F1BC7C50C0050C1AE /* Splash2.jpg */,
-				C6D5F64A1BC7BBE20050C1AE /* splash.png */,
-			);
-			name = SplashImage;
 			sourceTree = "<group>";
 		};
 		EACB22B71BC7C7F7002FAD54 /* Login */ = {
@@ -276,7 +257,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				C6D5F63F1BC7B52C0050C1AE /* Patron-ExtraLightItalic.ttf in Resources */,
-				065BAC5D1BC7A135005AF493 /* Assets.xcassets in Resources */,
 				C6D5F63D1BC7B52C0050C1AE /* Patron-BoldItalic.ttf in Resources */,
 				C6D5F6391BC7B52C0050C1AE /* FutworaPro-Regular.otf in Resources */,
 				C6D5F6401BC7B52C0050C1AE /* Patron-Italic.ttf in Resources */,
@@ -287,15 +267,12 @@
 				C6D5F6441BC7B52C0050C1AE /* Patron-Thin.ttf in Resources */,
 				C6D5F6411BC7B52C0050C1AE /* Patron-Medium.ttf in Resources */,
 				C6D5F6431BC7B52C0050C1AE /* Patron-Regular.ttf in Resources */,
-				C6D5F6491BC7BBAC0050C1AE /* Images.xcassets in Resources */,
+				C6D5F67C1BC7EC440050C1AE /* Images.xcassets in Resources */,
 				C6D5F6451BC7B52C0050C1AE /* Patron-ThinItalic.ttf in Resources */,
+				C61A36CE1BC7ED90000E649A /* DSSplashViewController.xib in Resources */,
 				C6D5F63E1BC7B52C0050C1AE /* Patron-ExtraLight.ttf in Resources */,
 				C6D5F63B1BC7B52C0050C1AE /* Patron-BlackItalic.ttf in Resources */,
 				C6D5F63C1BC7B52C0050C1AE /* Patron-Bold.ttf in Resources */,
-				C6D5F64B1BC7BBE20050C1AE /* splash.png in Resources */,
-				C6D5F6501BC7C50C0050C1AE /* Splash1.jpg in Resources */,
-				C6D5F6511BC7C50C0050C1AE /* Splash2.jpg in Resources */,
-				C6D5F6111BC7B05D0050C1AE /* DSSplashViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -306,12 +283,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C6D5F6101BC7B05D0050C1AE /* DSSplashViewController.m in Sources */,
 				C6D5F61C1BC7B3E60050C1AE /* DSAppCommon.m in Sources */,
 				EACB22BB1BC7C7F7002FAD54 /* DSLoginViewController.m in Sources */,
 				065BAC521BC7A135005AF493 /* main.m in Sources */,
 				C6D5F6151BC7B0970050C1AE /* AppDelegate.m in Sources */,
-				C6D5F6181BC7B17D0050C1AE /* DSSplashScrollView.m in Sources */,
+				C61A36CD1BC7ED90000E649A /* DSSplashViewController.m in Sources */,
+				C61A36CF1BC7ED90000E649A /* DSSplashScrollView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
