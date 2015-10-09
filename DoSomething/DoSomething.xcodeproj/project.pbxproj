@@ -32,6 +32,8 @@
 		C6D5F64B1BC7BBE20050C1AE /* splash.png in Resources */ = {isa = PBXBuildFile; fileRef = C6D5F64A1BC7BBE20050C1AE /* splash.png */; };
 		C6D5F6501BC7C50C0050C1AE /* Splash1.jpg in Resources */ = {isa = PBXBuildFile; fileRef = C6D5F64E1BC7C50C0050C1AE /* Splash1.jpg */; };
 		C6D5F6511BC7C50C0050C1AE /* Splash2.jpg in Resources */ = {isa = PBXBuildFile; fileRef = C6D5F64F1BC7C50C0050C1AE /* Splash2.jpg */; };
+		EACB22BB1BC7C7F7002FAD54 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EACB22B91BC7C7F7002FAD54 /* LoginViewController.m */; };
+		EACB22BC1BC7C7F7002FAD54 /* LoginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = EACB22BA1BC7C7F7002FAD54 /* LoginViewController.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -67,6 +69,9 @@
 		C6D5F64A1BC7BBE20050C1AE /* splash.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = splash.png; sourceTree = "<group>"; };
 		C6D5F64E1BC7C50C0050C1AE /* Splash1.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = Splash1.jpg; sourceTree = "<group>"; };
 		C6D5F64F1BC7C50C0050C1AE /* Splash2.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = Splash2.jpg; sourceTree = "<group>"; };
+		EACB22B81BC7C7F7002FAD54 /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
+		EACB22B91BC7C7F7002FAD54 /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
+		EACB22BA1BC7C7F7002FAD54 /* LoginViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LoginViewController.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -133,6 +138,7 @@
 		C6D5F60A1BC7A4560050C1AE /* ViewController */ = {
 			isa = PBXGroup;
 			children = (
+				EACB22B71BC7C7F7002FAD54 /* Login */,
 				C6D5F6191BC7B21D0050C1AE /* SplashScrollView */,
 				C6D5F60D1BC7B05D0050C1AE /* DSSplashViewController.h */,
 				C6D5F60E1BC7B05D0050C1AE /* DSSplashViewController.m */,
@@ -200,6 +206,17 @@
 			name = SplashImage;
 			sourceTree = "<group>";
 		};
+		EACB22B71BC7C7F7002FAD54 /* Login */ = {
+			isa = PBXGroup;
+			children = (
+				EACB22B81BC7C7F7002FAD54 /* LoginViewController.h */,
+				EACB22B91BC7C7F7002FAD54 /* LoginViewController.m */,
+				EACB22BA1BC7C7F7002FAD54 /* LoginViewController.xib */,
+			);
+			name = Login;
+			path = ViewController/Login;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -262,6 +279,7 @@
 				C6D5F63D1BC7B52C0050C1AE /* Patron-BoldItalic.ttf in Resources */,
 				C6D5F6391BC7B52C0050C1AE /* FutworaPro-Regular.otf in Resources */,
 				C6D5F6401BC7B52C0050C1AE /* Patron-Italic.ttf in Resources */,
+				EACB22BC1BC7C7F7002FAD54 /* LoginViewController.xib in Resources */,
 				C6D5F63A1BC7B52C0050C1AE /* Patron-Black.ttf in Resources */,
 				C6D5F6421BC7B52C0050C1AE /* Patron-MediumItalic.ttf in Resources */,
 				C6D5F60C1BC7AF500050C1AE /* Launch Screen.xib in Resources */,
@@ -289,6 +307,7 @@
 			files = (
 				C6D5F6101BC7B05D0050C1AE /* DSSplashViewController.m in Sources */,
 				C6D5F61C1BC7B3E60050C1AE /* DSAppCommon.m in Sources */,
+				EACB22BB1BC7C7F7002FAD54 /* LoginViewController.m in Sources */,
 				065BAC521BC7A135005AF493 /* main.m in Sources */,
 				C6D5F6151BC7B0970050C1AE /* AppDelegate.m in Sources */,
 				C6D5F6181BC7B17D0050C1AE /* DSSplashScrollView.m in Sources */,
