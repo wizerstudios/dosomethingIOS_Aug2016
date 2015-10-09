@@ -6,13 +6,13 @@
 //  Copyright (c) 2015 OClock Apps. All rights reserved.
 //
 
-#import "LoginViewController.h"
+#import "DSLoginViewController.h"
 
-@interface LoginViewController ()
+@interface DSLoginViewController ()
 
 @end
 
-@implementation LoginViewController
+@implementation DSLoginViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
