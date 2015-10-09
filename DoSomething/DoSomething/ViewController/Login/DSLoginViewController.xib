@@ -86,28 +86,64 @@
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WcK-qu-f6Q">
                             <rect key="frame" x="0.0" y="325" width="320" height="245"/>
                             <subviews>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="U4U-CE-Y0a">
-                                    <rect key="frame" x="3" y="8" width="90" height="21"/>
-                                    <fontDescription key="fontDescription" name="Patron-Regular" family="Patron" pointSize="17"/>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="U4U-CE-Y0a">
+                                    <rect key="frame" x="5" y="5" width="90" height="21"/>
+                                    <constraints>
+                                        <constraint firstAttribute="width" constant="90" id="1AG-5A-mF1"/>
+                                        <constraint firstAttribute="height" constant="21" id="MGR-tI-0XR"/>
+                                    </constraints>
+                                    <fontDescription key="fontDescription" name="Patron-Regular" family="Patron" pointSize="10"/>
                                     <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                     <nil key="highlightedColor"/>
                                 </label>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IIr-8P-fx8">
-                                    <rect key="frame" x="98" y="8" width="90" height="21"/>
-                                    <fontDescription key="fontDescription" name="Patron-Regular" family="Patron" pointSize="17"/>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IIr-8P-fx8">
+                                    <rect key="frame" x="100" y="5" width="90" height="21"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="21" id="R88-OZ-gcO"/>
+                                        <constraint firstAttribute="width" constant="90" id="fYl-Gc-snD"/>
+                                    </constraints>
+                                    <fontDescription key="fontDescription" name="Patron-Regular" family="Patron" pointSize="10"/>
                                     <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                     <nil key="highlightedColor"/>
                                 </label>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kUn-fe-cLW">
-                                    <rect key="frame" x="193" y="8" width="119" height="21"/>
-                                    <fontDescription key="fontDescription" name="Patron-Regular" family="Patron" pointSize="18"/>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kUn-fe-cLW">
+                                    <rect key="frame" x="189" y="5" width="119" height="21"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="21" id="0GA-GG-ynt"/>
+                                        <constraint firstAttribute="width" constant="119" id="2VY-ya-UOh"/>
+                                    </constraints>
+                                    <fontDescription key="fontDescription" name="Patron-Regular" family="Patron" pointSize="10"/>
                                     <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                     <nil key="highlightedColor"/>
                                 </label>
+                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ldv-Yo-r7V">
+                                    <rect key="frame" x="96" y="0.0" width="85" height="30"/>
+                                    <state key="normal">
+                                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                    </state>
+                                </button>
+                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AyU-aA-cs2">
+                                    <rect key="frame" x="195" y="0.0" width="117" height="30"/>
+                                    <state key="normal">
+                                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                    </state>
+                                </button>
+                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TrV-dd-2rk">
+                                    <rect key="frame" x="0.0" y="0.0" width="90" height="30"/>
+                                    <state key="normal">
+                                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                    </state>
+                                </button>
                             </subviews>
                             <color key="backgroundColor" red="0.23529411764705882" green="0.23529411764705882" blue="0.23529411764705882" alpha="1" colorSpace="calibratedRGB"/>
                             <constraints>
+                                <constraint firstItem="U4U-CE-Y0a" firstAttribute="top" secondItem="WcK-qu-f6Q" secondAttribute="top" constant="5" id="47F-9g-BWC"/>
+                                <constraint firstItem="IIr-8P-fx8" firstAttribute="top" secondItem="WcK-qu-f6Q" secondAttribute="top" constant="5" id="6sE-7L-hpO"/>
+                                <constraint firstItem="U4U-CE-Y0a" firstAttribute="leading" secondItem="WcK-qu-f6Q" secondAttribute="leading" constant="5" id="A55-vI-Zl8"/>
+                                <constraint firstItem="IIr-8P-fx8" firstAttribute="leading" secondItem="U4U-CE-Y0a" secondAttribute="trailing" constant="5" id="Rs7-tQ-9QP"/>
                                 <constraint firstAttribute="height" constant="245" id="dez-u0-BPD"/>
+                                <constraint firstItem="kUn-fe-cLW" firstAttribute="top" secondItem="WcK-qu-f6Q" secondAttribute="top" constant="5" id="oca-DL-LWB"/>
+                                <constraint firstItem="kUn-fe-cLW" firstAttribute="leading" secondItem="IIr-8P-fx8" secondAttribute="trailing" constant="-1" id="xYL-Es-Zk3"/>
                             </constraints>
                         </view>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2n5-Rp-pPi">
