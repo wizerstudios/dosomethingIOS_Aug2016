@@ -24,7 +24,7 @@
 
     
     if ([temp isEqualToString:@"createAnAccount"]){
-        self.signInButtonHeight.constant =+50;
+        self.signInButtonHeight.constant =-30;
         NSString *string = @"Create an account using Facebook";
         NSMutableAttributedString *attStr = [[NSMutableAttributedString alloc] initWithString:string ];
         [attStr addAttribute:NSFontAttributeName value:PATRON_REG(12) range:[string rangeOfString:@"Create an account using"]];
