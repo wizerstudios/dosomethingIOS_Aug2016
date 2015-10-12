@@ -18,12 +18,14 @@
             <string>Patron-Regular</string>
             <string>Patron-Regular</string>
             <string>Patron-Regular</string>
+            <string>Patron-Regular</string>
         </mutableArray>
     </customFonts>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="DSLoginViewController">
             <connections>
                 <outlet property="buttonActionLabel" destination="iq7-kC-sy5" id="rGF-dE-vfi"/>
+                <outlet property="createAnAccLabel" destination="zTU-Oo-6WB" id="Q1i-Jl-mtW"/>
                 <outlet property="createAnAccVButton" destination="2Wy-w5-R5T" id="gCn-Qa-jBq"/>
                 <outlet property="emailLabel" destination="sR7-yr-HZB" id="H1s-b1-0iz"/>
                 <outlet property="facebookLabel" destination="ocI-oM-Rhj" id="h8I-Ty-WjK"/>
@@ -31,6 +33,7 @@
                 <outlet property="instructionLabel" destination="PDw-LH-wcg" id="5oW-Mt-o8P"/>
                 <outlet property="privacyPolicyButton" destination="Ldv-Yo-r7V" id="z1P-MI-Gh6"/>
                 <outlet property="signInButton" destination="AyU-aA-cs2" id="ngs-O1-YG7"/>
+                <outlet property="signInButtonHeight" destination="sAy-bI-Jag" id="aLO-dj-Mpe"/>
                 <outlet property="termsOfUseButton" destination="TrV-dd-2rk" id="s6D-5h-nh0"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
@@ -53,8 +56,11 @@
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="DsB-lT-SIw">
                             <rect key="frame" x="0.0" y="20" width="320" height="40"/>
                             <subviews>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ocI-oM-Rhj">
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ocI-oM-Rhj">
                                     <rect key="frame" x="32" y="10" width="270" height="21"/>
+                                    <constraints>
+                                        <constraint firstAttribute="width" constant="270" id="k75-25-KRo"/>
+                                    </constraints>
                                     <fontDescription key="fontDescription" name="Patron-Regular" family="Patron" pointSize="12"/>
                                     <color key="textColor" red="0.396078431372549" green="0.47450980392156861" blue="0.66274509803921566" alpha="1" colorSpace="calibratedRGB"/>
                                     <nil key="highlightedColor"/>
@@ -62,39 +68,66 @@
                             </subviews>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <constraints>
+                                <constraint firstItem="ocI-oM-Rhj" firstAttribute="leading" secondItem="DsB-lT-SIw" secondAttribute="leading" constant="32" id="2nr-Ce-mlD"/>
+                                <constraint firstItem="ocI-oM-Rhj" firstAttribute="top" secondItem="DsB-lT-SIw" secondAttribute="top" constant="10" id="GZT-HI-WBi"/>
                                 <constraint firstAttribute="height" constant="40" id="v1Y-1D-Dg4"/>
+                                <constraint firstAttribute="bottom" secondItem="ocI-oM-Rhj" secondAttribute="bottom" constant="9" id="xGx-lg-bEZ"/>
                             </constraints>
                         </view>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ciY-M6-6s7">
                             <rect key="frame" x="0.0" y="60" width="320" height="126"/>
                             <subviews>
-                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Password" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="rXR-Rw-64v">
+                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Password" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="rXR-Rw-64v">
                                     <rect key="frame" x="32" y="86" width="283" height="40"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="40" id="quJ-5d-pHe"/>
+                                    </constraints>
                                     <fontDescription key="fontDescription" name="Patron-Regular" family="Patron" pointSize="13"/>
                                     <textInputTraits key="textInputTraits"/>
                                 </textField>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="K9r-v6-kBk">
-                                    <rect key="frame" x="32" y="82" width="270" height="2"/>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="K9r-v6-kBk">
+                                    <rect key="frame" x="32" y="82" width="260" height="2"/>
                                     <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="2" id="HT0-TX-v4k"/>
+                                    </constraints>
                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                     <nil key="highlightedColor"/>
                                 </label>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sR7-yr-HZB">
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sR7-yr-HZB">
                                     <rect key="frame" x="32" y="10" width="270" height="21"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="21" id="SqZ-oY-dy9"/>
+                                    </constraints>
                                     <fontDescription key="fontDescription" name="Patron-Regular" family="Patron" pointSize="11"/>
                                     <color key="textColor" red="0.89411764709999997" green="0.1647058824" blue="0.01176470588" alpha="1" colorSpace="calibratedRGB"/>
                                     <nil key="highlightedColor"/>
                                 </label>
-                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Email" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="c7o-Yq-ofS">
+                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Email" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="c7o-Yq-ofS">
                                     <rect key="frame" x="32" y="43" width="283" height="40"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="40" id="UWK-lm-ohl"/>
+                                    </constraints>
                                     <fontDescription key="fontDescription" name="Patron-Regular" family="Patron" pointSize="13"/>
                                     <textInputTraits key="textInputTraits"/>
                                 </textField>
                             </subviews>
                             <color key="backgroundColor" red="0.97254901960784312" green="0.97254901960784312" blue="0.97254901960784312" alpha="1" colorSpace="calibratedRGB"/>
                             <constraints>
+                                <constraint firstItem="sR7-yr-HZB" firstAttribute="leading" secondItem="ciY-M6-6s7" secondAttribute="leading" constant="32" id="7pX-BU-0aS"/>
+                                <constraint firstAttribute="trailing" secondItem="K9r-v6-kBk" secondAttribute="trailing" constant="28" id="8xl-yK-4pv"/>
+                                <constraint firstAttribute="trailing" secondItem="c7o-Yq-ofS" secondAttribute="trailing" constant="5" id="DSj-Xg-ynm"/>
+                                <constraint firstItem="K9r-v6-kBk" firstAttribute="top" secondItem="sR7-yr-HZB" secondAttribute="bottom" constant="51" id="Hao-4h-MWF"/>
+                                <constraint firstAttribute="trailing" secondItem="sR7-yr-HZB" secondAttribute="trailing" constant="18" id="JRt-Sd-Rqw"/>
+                                <constraint firstAttribute="trailing" secondItem="rXR-Rw-64v" secondAttribute="trailing" constant="5" id="Ke0-Lj-bKL"/>
+                                <constraint firstItem="K9r-v6-kBk" firstAttribute="leading" secondItem="ciY-M6-6s7" secondAttribute="leading" constant="32" id="L3D-cs-jVM"/>
+                                <constraint firstItem="sR7-yr-HZB" firstAttribute="top" secondItem="ciY-M6-6s7" secondAttribute="top" constant="10" id="O8z-Mm-IKJ"/>
                                 <constraint firstAttribute="height" constant="126" id="ZF1-bT-j5e"/>
+                                <constraint firstItem="c7o-Yq-ofS" firstAttribute="leading" secondItem="ciY-M6-6s7" secondAttribute="leading" constant="32" id="cQ9-hx-aFW"/>
+                                <constraint firstItem="rXR-Rw-64v" firstAttribute="leading" secondItem="ciY-M6-6s7" secondAttribute="leading" constant="32" id="jS4-qY-TKQ"/>
+                                <constraint firstItem="rXR-Rw-64v" firstAttribute="top" secondItem="K9r-v6-kBk" secondAttribute="bottom" constant="2" id="l8Q-rU-Os3"/>
+                                <constraint firstItem="c7o-Yq-ofS" firstAttribute="top" secondItem="sR7-yr-HZB" secondAttribute="bottom" constant="12" id="xce-XK-PJ0"/>
                             </constraints>
                         </view>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WcK-qu-f6Q">
@@ -106,19 +139,19 @@
                                         <constraint firstAttribute="height" constant="30" id="9Ib-6i-1Mp"/>
                                         <constraint firstAttribute="width" constant="90" id="W6N-4r-ZJv"/>
                                     </constraints>
-                                    <fontDescription key="fontDescription" name="Patron-Regular" family="Patron" pointSize="11"/>
+                                    <fontDescription key="fontDescription" name="Patron-Regular" family="Patron" pointSize="10"/>
                                     <state key="normal" title="Terms of Use">
                                         <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                     </state>
                                 </button>
                                 <button opaque="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="749" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AyU-aA-cs2">
-                                    <rect key="frame" x="195" y="5" width="117" height="30"/>
+                                    <rect key="frame" x="189" y="5" width="123" height="30"/>
                                     <constraints>
-                                        <constraint firstAttribute="width" constant="117" id="Anm-YA-taj"/>
+                                        <constraint firstAttribute="width" constant="123" id="Anm-YA-taj"/>
                                         <constraint firstAttribute="height" constant="30" id="Jsl-gz-AUW"/>
                                     </constraints>
-                                    <fontDescription key="fontDescription" name="Patron-Regular" family="Patron" pointSize="11"/>
+                                    <fontDescription key="fontDescription" name="Patron-Regular" family="Patron" pointSize="10"/>
                                     <state key="normal" title="Have an account? Sign In">
                                         <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -133,7 +166,7 @@
                                         <constraint firstAttribute="width" constant="91" id="ARX-86-VV2"/>
                                         <constraint firstAttribute="height" constant="30" id="PCi-39-YyT"/>
                                     </constraints>
-                                    <fontDescription key="fontDescription" name="Patron-Regular" family="Patron" pointSize="11"/>
+                                    <fontDescription key="fontDescription" name="Patron-Regular" family="Patron" pointSize="10"/>
                                     <state key="normal" title="Privacy Policy">
                                         <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -145,7 +178,7 @@
                                         <constraint firstAttribute="height" constant="30" id="h4A-nt-I7h"/>
                                         <constraint firstAttribute="width" constant="123" id="slp-OZ-dtM"/>
                                     </constraints>
-                                    <fontDescription key="fontDescription" name="Patron-Regular" family="Patron" pointSize="11"/>
+                                    <fontDescription key="fontDescription" name="Patron-Regular" family="Patron" pointSize="10"/>
                                     <state key="normal" title="Create an Account">
                                         <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -157,7 +190,7 @@
                                         <constraint firstAttribute="height" constant="30" id="NeT-Fb-vBl"/>
                                         <constraint firstAttribute="width" constant="100" id="Q4G-P3-yjI"/>
                                     </constraints>
-                                    <fontDescription key="fontDescription" name="Patron-Regular" family="Patron" pointSize="11"/>
+                                    <fontDescription key="fontDescription" name="Patron-Regular" family="Patron" pointSize="10"/>
                                     <state key="normal" title="Forgot password?">
                                         <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -188,8 +221,18 @@
                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                             </state>
                         </button>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zTU-Oo-6WB">
+                            <rect key="frame" x="60" y="202" width="200" height="10"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="200" id="cPm-bE-gqK"/>
+                                <constraint firstAttribute="height" constant="10" id="gDl-4m-4YJ"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" name="Patron-Regular" family="Patron" pointSize="11"/>
+                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <nil key="highlightedColor"/>
+                        </label>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iq7-kC-sy5">
-                            <rect key="frame" x="60" y="197" width="200" height="10"/>
+                            <rect key="frame" x="60" y="202" width="200" height="10"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="10" id="U3C-Kl-mHU"/>
                                 <constraint firstAttribute="width" constant="200" id="XYl-Sm-Bii"/>
@@ -199,7 +242,7 @@
                             <nil key="highlightedColor"/>
                         </label>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PDw-LH-wcg">
-                            <rect key="frame" x="20" y="210" width="280" height="10"/>
+                            <rect key="frame" x="20" y="215" width="280" height="10"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="280" id="j6f-dn-iqi"/>
                                 <constraint firstAttribute="height" constant="10" id="kLL-Z3-d8e"/>
@@ -231,7 +274,7 @@
                         <constraint firstAttribute="trailing" secondItem="UCk-i4-sP1" secondAttribute="trailing" id="3JR-v4-zZg"/>
                         <constraint firstAttribute="trailing" secondItem="DsB-lT-SIw" secondAttribute="trailing" id="Cg9-10-WUV"/>
                         <constraint firstItem="6vw-lR-Sh4" firstAttribute="leading" secondItem="3nk-J8-Vnw" secondAttribute="leading" id="HoF-vW-Ser"/>
-                        <constraint firstItem="iq7-kC-sy5" firstAttribute="top" secondItem="ciY-M6-6s7" secondAttribute="bottom" constant="11" id="NCX-uY-bzZ"/>
+                        <constraint firstItem="iq7-kC-sy5" firstAttribute="top" secondItem="ciY-M6-6s7" secondAttribute="bottom" constant="16" id="NCX-uY-bzZ"/>
                         <constraint firstAttribute="trailing" secondItem="WcK-qu-f6Q" secondAttribute="trailing" id="NJl-PM-Gpj"/>
                         <constraint firstAttribute="trailing" secondItem="6vw-lR-Sh4" secondAttribute="trailing" id="OV6-CS-yGx"/>
                         <constraint firstItem="hAO-ls-Iye" firstAttribute="leading" secondItem="3nk-J8-Vnw" secondAttribute="leading" id="RBg-hU-d7F"/>
@@ -239,7 +282,9 @@
                         <constraint firstItem="DsB-lT-SIw" firstAttribute="top" secondItem="6vw-lR-Sh4" secondAttribute="bottom" id="Rzf-7f-HSS"/>
                         <constraint firstItem="6vw-lR-Sh4" firstAttribute="top" secondItem="3nk-J8-Vnw" secondAttribute="top" id="TnZ-g0-dXV"/>
                         <constraint firstItem="PDw-LH-wcg" firstAttribute="top" secondItem="iq7-kC-sy5" secondAttribute="bottom" constant="3" id="UfZ-ec-q2H"/>
+                        <constraint firstItem="zTU-Oo-6WB" firstAttribute="top" secondItem="ciY-M6-6s7" secondAttribute="bottom" constant="16" id="VlO-Wt-2r5"/>
                         <constraint firstAttribute="bottom" secondItem="WcK-qu-f6Q" secondAttribute="bottom" id="Xgp-wm-e6E"/>
+                        <constraint firstAttribute="centerX" secondItem="zTU-Oo-6WB" secondAttribute="centerX" id="bc5-cE-0dF"/>
                         <constraint firstItem="WcK-qu-f6Q" firstAttribute="leading" secondItem="3nk-J8-Vnw" secondAttribute="leading" id="eez-T6-YE4"/>
                         <constraint firstItem="WcK-qu-f6Q" firstAttribute="top" secondItem="hAO-ls-Iye" secondAttribute="bottom" id="g9X-eT-8pS"/>
                         <constraint firstItem="UCk-i4-sP1" firstAttribute="leading" secondItem="3nk-J8-Vnw" secondAttribute="leading" id="ghE-Fd-QD3"/>

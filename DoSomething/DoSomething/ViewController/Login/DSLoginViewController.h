@@ -19,5 +19,7 @@
 @property (strong, nonatomic) IBOutlet UIButton *forgotButton;
 @property (strong, nonatomic) IBOutlet UIButton *createAnAccVButton;
 @property (strong, nonatomic) IBOutlet UILabel *instructionLabel;
+@property (strong, nonatomic) IBOutlet NSLayoutConstraint *signInButtonHeight;
+@property (strong, nonatomic) IBOutlet UILabel *createAnAccLabel;
 
 @end
