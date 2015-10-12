@@ -55,7 +55,8 @@
 
 #define Patron_Regular(_size)                  [UIFont fontWithName:@"Patron-Regular.ttf"              size:_size]
 
-#define Patron_Thin(_size)                  [UIFont fontWithName:@"Patron-Thin.ttf"              size:_size]
-#define Patron_ThinItalic(_size)                  [UIFont fontWithName:@"Patron-ThinItalic.ttf"              size:_size]
-
+#define Patron_Thin(_size)                    [UIFont fontWithName:@"Patron-Thin.ttf"              size:_size]
+#define Patron_ThinItalic(_size)              [UIFont fontWithName:@"Patron-ThinItalic.ttf"              size:_size]
+#define PATRON_BOLD(Value)                  [UIFont fontWithName:@"Patron-Bold" size:Value]
+#define PATRON_REG(Value)                    [UIFont fontWithName:@"Patron-Regular" size:Value]
 

@@ -10,16 +10,16 @@
 
 @interface DSLoginViewController : UIViewController
 @property (nonatomic, retain) NSString *temp;
-@property (strong, nonatomic) IBOutlet UILabel *facebookLabel;
-@property (strong, nonatomic) IBOutlet UILabel *emailLabel;
-@property (strong, nonatomic) IBOutlet UILabel *buttonActionLabel;
-@property (strong, nonatomic) IBOutlet UIButton *termsOfUseButton;
-@property (strong, nonatomic) IBOutlet UIButton *privacyPolicyButton;
-@property (strong, nonatomic) IBOutlet UIButton *signInButton;
-@property (strong, nonatomic) IBOutlet UIButton *forgotButton;
-@property (strong, nonatomic) IBOutlet UIButton *createAnAccButton;
-@property (strong, nonatomic) IBOutlet UILabel *instructionLabel;
-@property (strong, nonatomic) IBOutlet NSLayoutConstraint *signInButtonHeight;
-@property (strong, nonatomic) IBOutlet UILabel *createAnAccLabel;
+@property (strong, nonatomic) IBOutlet UILabel *labelFacebook;
+@property (strong, nonatomic) IBOutlet UILabel *labelEmail;
+@property (strong, nonatomic) IBOutlet UILabel *labelSignIn;
+@property (strong, nonatomic) IBOutlet UIButton *buttonTermsOfUse;
+@property (strong, nonatomic) IBOutlet UIButton *buttonPrivacyPolicy;
+@property (strong, nonatomic) IBOutlet UIButton *buttonSignIn;
+@property (strong, nonatomic) IBOutlet UIButton *buttonForgotPass;
+@property (strong, nonatomic) IBOutlet UIButton *buttonCreateAnAcc;
+@property (strong, nonatomic) IBOutlet UILabel *labelInstruction;
+@property (strong, nonatomic) IBOutlet NSLayoutConstraint *buttonSignInHeightConstraint;
+@property (strong, nonatomic) IBOutlet UILabel *labelCreateAnAcc;
 
 @end
