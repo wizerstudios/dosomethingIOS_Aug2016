@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		065BAC521BC7A135005AF493 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 065BAC511BC7A135005AF493 /* main.m */; };
+		6A8D15D31BCC059B000F1FB4 /* DSProfileTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A8D15D11BCC059B000F1FB4 /* DSProfileTableViewController.m */; };
+		6A8D15D41BCC059B000F1FB4 /* DSProfileTableViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6A8D15D21BCC059B000F1FB4 /* DSProfileTableViewController.xib */; };
 		C61A36CD1BC7ED90000E649A /* DSSplashViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C61A36C81BC7ED90000E649A /* DSSplashViewController.m */; };
 		C61A36CE1BC7ED90000E649A /* DSSplashViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C61A36C91BC7ED90000E649A /* DSSplashViewController.xib */; };
 		C61A36CF1BC7ED90000E649A /* DSSplashScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = C61A36CC1BC7ED90000E649A /* DSSplashScrollView.m */; };
@@ -38,6 +40,9 @@
 		065BAC4D1BC7A135005AF493 /* DoSomething.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DoSomething.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		065BAC511BC7A135005AF493 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		065BAC611BC7A135005AF493 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		6A8D15D01BCC059B000F1FB4 /* DSProfileTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DSProfileTableViewController.h; sourceTree = "<group>"; };
+		6A8D15D11BCC059B000F1FB4 /* DSProfileTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DSProfileTableViewController.m; sourceTree = "<group>"; };
+		6A8D15D21BCC059B000F1FB4 /* DSProfileTableViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DSProfileTableViewController.xib; sourceTree = "<group>"; };
 		C61A36C71BC7ED90000E649A /* DSSplashViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DSSplashViewController.h; path = ViewController/SplashView/DSSplashViewController.h; sourceTree = "<group>"; };
 		C61A36C81BC7ED90000E649A /* DSSplashViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DSSplashViewController.m; path = ViewController/SplashView/DSSplashViewController.m; sourceTree = "<group>"; };
 		C61A36C91BC7ED90000E649A /* DSSplashViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = DSSplashViewController.xib; path = ViewController/SplashView/DSSplashViewController.xib; sourceTree = "<group>"; };
@@ -120,6 +125,17 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		6A8D15CF1BCC059B000F1FB4 /* Profile */ = {
+			isa = PBXGroup;
+			children = (
+				6A8D15D01BCC059B000F1FB4 /* DSProfileTableViewController.h */,
+				6A8D15D11BCC059B000F1FB4 /* DSProfileTableViewController.m */,
+				6A8D15D21BCC059B000F1FB4 /* DSProfileTableViewController.xib */,
+			);
+			name = Profile;
+			path = ViewController/Profile;
+			sourceTree = "<group>";
+		};
 		C61A36CA1BC7ED90000E649A /* SplashScrollView */ = {
 			isa = PBXGroup;
 			children = (
@@ -149,6 +165,7 @@
 				C61A36C81BC7ED90000E649A /* DSSplashViewController.m */,
 				C61A36C91BC7ED90000E649A /* DSSplashViewController.xib */,
 				EACB22B71BC7C7F7002FAD54 /* Login */,
+				6A8D15CF1BCC059B000F1FB4 /* Profile */,
 			);
 			name = ViewController;
 			sourceTree = "<group>";
@@ -280,6 +297,7 @@
 				C6D5F63A1BC7B52C0050C1AE /* Patron-Black.ttf in Resources */,
 				C6D5F6421BC7B52C0050C1AE /* Patron-MediumItalic.ttf in Resources */,
 				C6D5F60C1BC7AF500050C1AE /* Launch Screen.xib in Resources */,
+				6A8D15D41BCC059B000F1FB4 /* DSProfileTableViewController.xib in Resources */,
 				C6D5F6441BC7B52C0050C1AE /* Patron-Thin.ttf in Resources */,
 				C6D5F6411BC7B52C0050C1AE /* Patron-Medium.ttf in Resources */,
 				C6D5F6431BC7B52C0050C1AE /* Patron-Regular.ttf in Resources */,
@@ -307,6 +325,7 @@
 				C61A36CD1BC7ED90000E649A /* DSSplashViewController.m in Sources */,
 				EAF3D4A51BCB8EBA0097994D /* CustomNavigationView.m in Sources */,
 				C61A36CF1BC7ED90000E649A /* DSSplashScrollView.m in Sources */,
+				6A8D15D31BCC059B000F1FB4 /* DSProfileTableViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

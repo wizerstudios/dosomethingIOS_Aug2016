@@ -21,5 +21,6 @@
 @property (strong, nonatomic) IBOutlet UILabel *labelInstruction;
 @property (strong, nonatomic) IBOutlet NSLayoutConstraint *buttonSignInHeightConstraint;
 @property (strong, nonatomic) IBOutlet UILabel *labelCreateAnAcc;
+@property (strong, nonatomic) IBOutlet UIButton *buttonHaveAnAcc;
 
 @end
