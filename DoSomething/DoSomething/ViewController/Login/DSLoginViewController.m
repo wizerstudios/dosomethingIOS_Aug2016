@@ -17,7 +17,7 @@
 @end
 
 @implementation DSLoginViewController
-@synthesize temp,facebookLabel,emailLabel,buttonActionLabel,termsOfUseButton,privacyPolicyButton,signInButton,forgotButton,createAnAccVButton,instructionLabel,createAnAccLabel;
+@synthesize temp,facebookLabel,emailLabel,buttonActionLabel,termsOfUseButton,privacyPolicyButton,signInButton,forgotButton,createAnAccButton,instructionLabel,createAnAccLabel;
 - (void)viewDidLoad {
     [super viewDidLoad];   
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
@@ -35,7 +35,7 @@
         emailLabel.text =@"or sign up with your email";
         createAnAccLabel.text =@"Create Your Account";
         instructionLabel.text =@"By selecting this,you agree to our Terms of Use and our Privacy Policy";
-        createAnAccVButton.hidden =YES;
+        createAnAccButton.hidden =YES;
         forgotButton.hidden=YES;
 
 
@@ -63,11 +63,21 @@
     
 }
 - (IBAction)HaveAnAccount:(id)sender {
-    DSSplashViewController * DSSplashView  = [[DSSplashViewController alloc]initWithNibName:@"DSSplashViewController" bundle:nil];    
-    [self.navigationController pushViewController:DSSplashView animated:YES];
+    DSLoginViewController * DSLoginView  = [[DSLoginViewController alloc]initWithNibName:@"DSLoginViewController" bundle:nil];
+    DSLoginView.temp = @"Signin";
+    [self.navigationController pushViewController:DSLoginView animated:YES];
 
     
 }
+- (IBAction)CreateAnAccButton:(id)sender {
+    DSLoginViewController * DSLoginView  = [[DSLoginViewController alloc]initWithNibName:@"DSLoginViewController" bundle:nil];
+    DSLoginView.temp = @"createAnAccount";
+    [self.navigationController pushViewController:DSLoginView animated:YES];
+    
+    
+}
+
+
 - (IBAction)Back:(id)sender {
     DSSplashViewController * DSSplashView  = [[DSSplashViewController alloc]initWithNibName:@"DSSplashViewController" bundle:nil];
     [self.navigationController pushViewController:DSSplashView animated:YES];

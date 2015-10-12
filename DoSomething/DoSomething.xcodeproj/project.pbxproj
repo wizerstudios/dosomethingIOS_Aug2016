@@ -30,6 +30,8 @@
 		C6D5F67C1BC7EC440050C1AE /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C6D5F67B1BC7EC440050C1AE /* Images.xcassets */; };
 		EACB22BB1BC7C7F7002FAD54 /* DSLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EACB22B91BC7C7F7002FAD54 /* DSLoginViewController.m */; };
 		EACB22BC1BC7C7F7002FAD54 /* DSLoginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = EACB22BA1BC7C7F7002FAD54 /* DSLoginViewController.xib */; };
+		EAF3D4A51BCB8EBA0097994D /* CustomNavigationView.m in Sources */ = {isa = PBXBuildFile; fileRef = EAF3D4A31BCB8EBA0097994D /* CustomNavigationView.m */; };
+		EAF3D4A61BCB8EBA0097994D /* CustomNavigationView.xib in Resources */ = {isa = PBXBuildFile; fileRef = EAF3D4A41BCB8EBA0097994D /* CustomNavigationView.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -64,6 +66,9 @@
 		EACB22B81BC7C7F7002FAD54 /* DSLoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DSLoginViewController.h; sourceTree = "<group>"; };
 		EACB22B91BC7C7F7002FAD54 /* DSLoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DSLoginViewController.m; sourceTree = "<group>"; };
 		EACB22BA1BC7C7F7002FAD54 /* DSLoginViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DSLoginViewController.xib; sourceTree = "<group>"; };
+		EAF3D4A21BCB8EBA0097994D /* CustomNavigationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomNavigationView.h; sourceTree = "<group>"; };
+		EAF3D4A31BCB8EBA0097994D /* CustomNavigationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomNavigationView.m; sourceTree = "<group>"; };
+		EAF3D4A41BCB8EBA0097994D /* CustomNavigationView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CustomNavigationView.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -128,6 +133,7 @@
 		C6D5F6081BC7A4340050C1AE /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				EAF3D4A11BCB8EBA0097994D /* CustomNavigation */,
 				C6D5F6471BC7BB540050C1AE /* AppCommon */,
 				C6D5F6121BC7B0970050C1AE /* AppDelegate */,
 				C6D5F6461BC7B6550050C1AE /* DSConfig.h */,
@@ -196,6 +202,17 @@
 			);
 			name = Login;
 			path = ViewController/Login;
+			sourceTree = "<group>";
+		};
+		EAF3D4A11BCB8EBA0097994D /* CustomNavigation */ = {
+			isa = PBXGroup;
+			children = (
+				EAF3D4A21BCB8EBA0097994D /* CustomNavigationView.h */,
+				EAF3D4A31BCB8EBA0097994D /* CustomNavigationView.m */,
+				EAF3D4A41BCB8EBA0097994D /* CustomNavigationView.xib */,
+			);
+			name = CustomNavigation;
+			path = Common/CustomNavigation;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -270,6 +287,7 @@
 				C6D5F6451BC7B52C0050C1AE /* Patron-ThinItalic.ttf in Resources */,
 				C61A36CE1BC7ED90000E649A /* DSSplashViewController.xib in Resources */,
 				C6D5F63E1BC7B52C0050C1AE /* Patron-ExtraLight.ttf in Resources */,
+				EAF3D4A61BCB8EBA0097994D /* CustomNavigationView.xib in Resources */,
 				C6D5F63B1BC7B52C0050C1AE /* Patron-BlackItalic.ttf in Resources */,
 				C6D5F63C1BC7B52C0050C1AE /* Patron-Bold.ttf in Resources */,
 			);
@@ -287,6 +305,7 @@
 				065BAC521BC7A135005AF493 /* main.m in Sources */,
 				C6D5F6151BC7B0970050C1AE /* AppDelegate.m in Sources */,
 				C61A36CD1BC7ED90000E649A /* DSSplashViewController.m in Sources */,
+				EAF3D4A51BCB8EBA0097994D /* CustomNavigationView.m in Sources */,
 				C61A36CF1BC7ED90000E649A /* DSSplashScrollView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
