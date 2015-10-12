@@ -17,7 +17,9 @@
 @property (strong, nonatomic) IBOutlet UIButton *privacyPolicyButton;
 @property (strong, nonatomic) IBOutlet UIButton *signInButton;
 @property (strong, nonatomic) IBOutlet UIButton *forgotButton;
-@property (strong, nonatomic) IBOutlet UIButton *createAnAccVButton;
+@property (strong, nonatomic) IBOutlet UIButton *createAnAccButton;
 @property (strong, nonatomic) IBOutlet UILabel *instructionLabel;
+@property (strong, nonatomic) IBOutlet NSLayoutConstraint *signInButtonHeight;
+@property (strong, nonatomic) IBOutlet UILabel *createAnAccLabel;
 
 @end
