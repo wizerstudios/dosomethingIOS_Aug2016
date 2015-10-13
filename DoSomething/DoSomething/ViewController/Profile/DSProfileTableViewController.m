@@ -137,6 +137,7 @@
  
     
        if (indexPath.row == 1 || indexPath.row == 2 || indexPath.row == 4)
+       {
                 if (cell == nil)
                 {
                     [[NSBundle mainBundle] loadNibNamed:@"DSProfileTableViewCell" owner:self options:nil];
@@ -147,7 +148,7 @@
                   
     cell.placeHolderTextField.placeholder = titleText;
     cell.labelTitleText.text = titleText;
-    
+       }
 
     [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
     return cell;
