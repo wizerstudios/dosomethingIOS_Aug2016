@@ -25,14 +25,22 @@
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="t35-GY-BW2">
                     <rect key="frame" x="0.0" y="0.0" width="320" height="75"/>
                     <subviews>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="D O S O M E T H I N G" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dl2-RR-YB9">
-                            <rect key="frame" x="60" y="27" width="200" height="20"/>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="D O S O M E T H I N G" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dl2-RR-YB9">
+                            <rect key="frame" x="60" y="32" width="200" height="20"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="20" id="JUN-JJ-bx8"/>
+                                <constraint firstAttribute="width" constant="200" id="RO1-a6-a7N"/>
+                            </constraints>
                             <fontDescription key="fontDescription" name="Patron-Regular" family="Patron" pointSize="19"/>
                             <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fn4-ol-eRv">
-                            <rect key="frame" x="274" y="23" width="46" height="30"/>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fn4-ol-eRv">
+                            <rect key="frame" x="274" y="32" width="46" height="20"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="46" id="czu-n9-pxv"/>
+                                <constraint firstAttribute="height" constant="20" id="doL-rQ-ee1"/>
+                            </constraints>
                             <fontDescription key="fontDescription" name="Patron-Regular" family="Patron" pointSize="15"/>
                             <state key="normal" title="Save">
                                 <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -45,19 +53,31 @@
                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                             </state>
                         </button>
-                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="back_Arrow" translatesAutoresizingMaskIntoConstraints="NO" id="EAr-ik-mY1">
-                            <rect key="frame" x="13" y="28" width="20" height="20"/>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="back_Arrow" translatesAutoresizingMaskIntoConstraints="NO" id="EAr-ik-mY1">
+                            <rect key="frame" x="13" y="32" width="20" height="20"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="20" id="IHV-35-Llm"/>
+                                <constraint firstAttribute="width" constant="20" id="uym-a1-6f2"/>
+                            </constraints>
                         </imageView>
                     </subviews>
                     <color key="backgroundColor" red="0.90196078431372551" green="0.24705882352941178" blue="0.31764705882352939" alpha="1" colorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstItem="fn4-ol-eRv" firstAttribute="top" secondItem="t35-GY-BW2" secondAttribute="top" constant="32" id="0E8-Wl-9RF"/>
+                        <constraint firstItem="EAr-ik-mY1" firstAttribute="leading" secondItem="t35-GY-BW2" secondAttribute="leading" constant="13" id="LGF-96-IAM"/>
+                        <constraint firstAttribute="centerX" secondItem="dl2-RR-YB9" secondAttribute="centerX" id="SFy-VO-lyK"/>
+                        <constraint firstItem="EAr-ik-mY1" firstAttribute="top" secondItem="t35-GY-BW2" secondAttribute="top" constant="32" id="hut-0E-Aen"/>
+                        <constraint firstAttribute="trailing" secondItem="fn4-ol-eRv" secondAttribute="trailing" id="kDw-LV-nKr"/>
+                        <constraint firstAttribute="height" constant="75" id="ufw-cB-yoh"/>
+                        <constraint firstItem="dl2-RR-YB9" firstAttribute="top" secondItem="t35-GY-BW2" secondAttribute="top" constant="32" id="vps-PD-Glk"/>
+                    </constraints>
                 </view>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
-                <constraint firstItem="t35-GY-BW2" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="APE-uc-U4D"/>
-                <constraint firstItem="t35-GY-BW2" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="G6f-gT-47C"/>
-                <constraint firstAttribute="bottom" secondItem="t35-GY-BW2" secondAttribute="bottom" id="Gm3-Ez-AE5"/>
-                <constraint firstAttribute="trailing" secondItem="t35-GY-BW2" secondAttribute="trailing" id="jSI-xK-Hzp"/>
+                <constraint firstItem="t35-GY-BW2" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="Ebx-y0-s20"/>
+                <constraint firstAttribute="trailing" secondItem="t35-GY-BW2" secondAttribute="trailing" id="WZI-mb-06J"/>
+                <constraint firstItem="t35-GY-BW2" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="dhF-zd-mFf"/>
             </constraints>
             <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="lightContent"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>

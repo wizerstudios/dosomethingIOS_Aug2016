@@ -55,7 +55,7 @@
      [buttonCreateAnAcc setTitle:@"Create an Account" forState:UIControlStateNormal];
      buttonPrivacyPolicy.hidden =YES;
      buttonTermsOfUse.hidden =YES;
-     buttonSignIn.hidden =YES;
+     buttonSignIn.hidden =NO;
     }
 
     

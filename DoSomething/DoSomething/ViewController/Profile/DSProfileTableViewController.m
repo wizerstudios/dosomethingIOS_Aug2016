@@ -10,7 +10,9 @@
 #import "CustomNavigationView.h"
 
 @interface DSProfileTableViewController ()
-
+{
+    NSMutableArray *placeHolderArray;
+}
 @end
 
 @implementation DSProfileTableViewController
@@ -18,6 +20,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self loadNavigation];
+    [self initializeArray];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -44,6 +47,102 @@
 - (void)BackAction {
     [self.navigationController popViewControllerAnimated:YES];
 }
+
+-(void)initializeArray{
+    placeHolderArray = [[NSMutableArray alloc]init];
+    
+       [placeHolderArray insertObject:[[NSMutableArray alloc]initWithObjects:
+                                 [NSMutableDictionary dictionaryWithObjectsAndKeys:@"Firstname",@"placeholder", nil],
+                                 [NSMutableDictionary dictionaryWithObjectsAndKeys:@"Lastname",@"placeholder", nil],
+                                 [NSMutableDictionary dictionaryWithObjectsAndKeys:@"male",@"placeholder", nil],
+                                 [NSMutableDictionary dictionaryWithObjectsAndKeys:@"Date of Birth",@"placeholder", nil],
+                                 [NSMutableDictionary dictionaryWithObjectsAndKeys:@"About You",@"placeholder", nil],
+                                 [NSMutableDictionary dictionaryWithObjectsAndKeys:@"Hobbies",@"placeholder", nil],
+                                 nil] atIndex:0];
+    
+}
+#pragma mark - TableView Datasource & Delegate
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+{
+    return 1;
+}
+
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    
+   
+        return [placeHolderArray count];
+    
+    
+    
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    
+    
+    
+    if (indexPath.row == 5 ){
+        return 90;
+
+    }
+    
+    
+    return 40;
+}
+
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    static NSString *cellIdentifier = @"Cell";
+    
+    DSProfileTableViewCell *cell = (DSProfileTableViewCell *)[tableView dequeueReusableCellWithIdentifier:cellIdentifier];
+    NSString *titleText;
+    NSString *placeHolderText;
+    
+        placeHolderText =  [[placeHolderArray valueForKey:@"placeholder"]objectAtIndex:indexPath.row];
+    
+    
+    
+            if (indexPath.row == 5)
+            {
+                
+                if (cell == nil)
+                {
+                    [[NSBundle mainBundle] loadNibNamed:@"DSProfileTableViewCell" owner:self options:nil];
+                    cell = cellAddIcon;
+                    
+                }
+//
+                
+            }
+            if (indexPath.row == 2)
+            {
+                if (cell == nil)
+                {
+                    [[NSBundle mainBundle] loadNibNamed:@"DSProfileTableViewCell" owner:self  options:nil];
+                    cell = cellButton;
+                    
+                }
+            }
+            
+    
+                if (cell == nil)
+                {
+                    [[NSBundle mainBundle] loadNibNamed:@"DSProfileTableViewCell" owner:self options:nil];
+                    cell = cellTextField;
+                }
+                                   cell.placeHolderTextField.text = titleText;
+                  
+
+    
+
+    [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
+    return cell;
+    
+}
+
 
 
 
