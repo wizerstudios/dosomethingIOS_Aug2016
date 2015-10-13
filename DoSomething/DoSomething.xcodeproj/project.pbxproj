@@ -10,6 +10,8 @@
 		065BAC521BC7A135005AF493 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 065BAC511BC7A135005AF493 /* main.m */; };
 		6A50C21C1BCCBB8C002B11AC /* DSProfileTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A50C21A1BCCBB8C002B11AC /* DSProfileTableViewCell.m */; };
 		6A50C21D1BCCBB8C002B11AC /* DSProfileTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6A50C21B1BCCBB8C002B11AC /* DSProfileTableViewCell.xib */; };
+		6A50C2271BCCC310002B11AC /* ChatsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A50C2251BCCC310002B11AC /* ChatsTableViewController.m */; };
+		6A50C2281BCCC310002B11AC /* ChatsTableViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6A50C2261BCCC310002B11AC /* ChatsTableViewController.xib */; };
 		6A8D15D31BCC059B000F1FB4 /* DSProfileTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A8D15D11BCC059B000F1FB4 /* DSProfileTableViewController.m */; };
 		6A8D15D41BCC059B000F1FB4 /* DSProfileTableViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6A8D15D21BCC059B000F1FB4 /* DSProfileTableViewController.xib */; };
 		C61A36CD1BC7ED90000E649A /* DSSplashViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C61A36C81BC7ED90000E649A /* DSSplashViewController.m */; };
@@ -45,6 +47,9 @@
 		6A50C2191BCCBB8C002B11AC /* DSProfileTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DSProfileTableViewCell.h; sourceTree = "<group>"; };
 		6A50C21A1BCCBB8C002B11AC /* DSProfileTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DSProfileTableViewCell.m; sourceTree = "<group>"; };
 		6A50C21B1BCCBB8C002B11AC /* DSProfileTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DSProfileTableViewCell.xib; sourceTree = "<group>"; };
+		6A50C2241BCCC310002B11AC /* ChatsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChatsTableViewController.h; sourceTree = "<group>"; };
+		6A50C2251BCCC310002B11AC /* ChatsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChatsTableViewController.m; sourceTree = "<group>"; };
+		6A50C2261BCCC310002B11AC /* ChatsTableViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ChatsTableViewController.xib; sourceTree = "<group>"; };
 		6A8D15D01BCC059B000F1FB4 /* DSProfileTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DSProfileTableViewController.h; sourceTree = "<group>"; };
 		6A8D15D11BCC059B000F1FB4 /* DSProfileTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DSProfileTableViewController.m; sourceTree = "<group>"; };
 		6A8D15D21BCC059B000F1FB4 /* DSProfileTableViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DSProfileTableViewController.xib; sourceTree = "<group>"; };
@@ -130,6 +135,17 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		6A50C2231BCCC310002B11AC /* Chats */ = {
+			isa = PBXGroup;
+			children = (
+				6A50C2241BCCC310002B11AC /* ChatsTableViewController.h */,
+				6A50C2251BCCC310002B11AC /* ChatsTableViewController.m */,
+				6A50C2261BCCC310002B11AC /* ChatsTableViewController.xib */,
+			);
+			name = Chats;
+			path = ViewController/Chats;
+			sourceTree = "<group>";
+		};
 		6A8D15CF1BCC059B000F1FB4 /* Profile */ = {
 			isa = PBXGroup;
 			children = (
@@ -174,6 +190,7 @@
 				C61A36C91BC7ED90000E649A /* DSSplashViewController.xib */,
 				EACB22B71BC7C7F7002FAD54 /* Login */,
 				6A8D15CF1BCC059B000F1FB4 /* Profile */,
+				6A50C2231BCCC310002B11AC /* Chats */,
 			);
 			name = ViewController;
 			sourceTree = "<group>";
@@ -304,6 +321,7 @@
 				C6D5F6401BC7B52C0050C1AE /* Patron-Italic.ttf in Resources */,
 				EACB22BC1BC7C7F7002FAD54 /* DSLoginViewController.xib in Resources */,
 				C6D5F63A1BC7B52C0050C1AE /* Patron-Black.ttf in Resources */,
+				6A50C2281BCCC310002B11AC /* ChatsTableViewController.xib in Resources */,
 				C6D5F6421BC7B52C0050C1AE /* Patron-MediumItalic.ttf in Resources */,
 				C6D5F60C1BC7AF500050C1AE /* Launch Screen.xib in Resources */,
 				6A8D15D41BCC059B000F1FB4 /* DSProfileTableViewController.xib in Resources */,
@@ -332,6 +350,7 @@
 				065BAC521BC7A135005AF493 /* main.m in Sources */,
 				6A50C21C1BCCBB8C002B11AC /* DSProfileTableViewCell.m in Sources */,
 				C6D5F6151BC7B0970050C1AE /* AppDelegate.m in Sources */,
+				6A50C2271BCCC310002B11AC /* ChatsTableViewController.m in Sources */,
 				C61A36CD1BC7ED90000E649A /* DSSplashViewController.m in Sources */,
 				EAF3D4A51BCB8EBA0097994D /* CustomNavigationView.m in Sources */,
 				C61A36CF1BC7ED90000E649A /* DSSplashScrollView.m in Sources */,
