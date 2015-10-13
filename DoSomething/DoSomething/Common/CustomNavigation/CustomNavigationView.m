@@ -23,29 +23,13 @@
 }
 
 
-//#pragma mark - Navigation Methods
-//- (void)setstatusBarHidden:(BOOL)_hide {
-//    [self.statusBarView setHidden:_hide];
-//}
-//-(void)setnavbgViewHidden:(BOOL)_hide{
-//    [self.navView setHidden:_hide];
-//}
-//
-//
-//-(void)setlogoutButtonHidden:(BOOL)_hide{
-//    [self.logoutButton setHidden:_hide];
-//}
-//
+#pragma mark - Navigation Methods
+-(void)setbuttonBackHidden:(BOOL)_hide{
+    [self.buttonBack setHidden:_hide];
+}
+
 //-(void)setbackButtonHidden:(BOOL)_hide{
 //    [self.backButton setHidden:_hide];
-//}
-//
-//-(void)setmenuButtonHidden:(BOOL)_hide{
-//    [self.menuButton setHidden:_hide];
-//}
-//
-//- (void)setlogoButtonHidden:(BOOL)_hide{
-//     [self.logoButton setHidden:_hide];
 //}
 
 
