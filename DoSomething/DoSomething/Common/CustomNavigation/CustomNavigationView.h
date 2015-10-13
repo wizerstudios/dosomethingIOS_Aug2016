@@ -13,6 +13,7 @@
 }
 
 
+@property (strong, nonatomic) IBOutlet UIButton *buttonBack;
 
 
 //- (void)setstatusBarHidden:(BOOL)_hide;

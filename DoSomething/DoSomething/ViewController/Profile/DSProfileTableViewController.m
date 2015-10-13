@@ -34,11 +34,17 @@
     CustomNavigationView *customNavigation;
     customNavigation = [[CustomNavigationView alloc] initWithNibName:@"CustomNavigationView" bundle:nil];
     customNavigation.view.frame = CGRectMake(0, 0, CGRectGetWidth(self.view.frame), 56);
+     [customNavigation.buttonBack addTarget:self action:@selector(BackAction) forControlEvents:UIControlEventTouchUpInside];
 //    [customNavigation setlogoutButtonHidden:YES];
 //    [customNavigation setbackButtonHidden:YES];
     [self.view addSubview:customNavigation.view];    
     
     
 }
+- (void)BackAction {
+    [self.navigationController popViewControllerAnimated:YES];
+}
+
+
 
 @end
