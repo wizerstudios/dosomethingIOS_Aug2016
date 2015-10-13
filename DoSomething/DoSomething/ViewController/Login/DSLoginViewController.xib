@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7706" systemVersion="14E46" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7706" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
@@ -66,7 +66,7 @@
                                         <constraint firstAttribute="height" constant="21" id="YYX-IF-1GL"/>
                                     </constraints>
                                     <fontDescription key="fontDescription" name="Patron-Regular" family="Patron" pointSize="12"/>
-                                    <color key="textColor" red="0.396078431372549" green="0.47450980392156861" blue="0.66274509803921566" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="textColor" red="0.10980392156862745" green="0.23137254901960785" blue="0.52941176470588236" alpha="1" colorSpace="calibratedRGB"/>
                                     <nil key="highlightedColor"/>
                                 </label>
                             </subviews>
@@ -140,7 +140,7 @@
                                         <constraint firstAttribute="width" constant="90" id="5Nc-AF-TyC"/>
                                         <constraint firstAttribute="height" constant="30" id="I02-sb-t8H"/>
                                     </constraints>
-                                    <fontDescription key="fontDescription" name="Patron-Regular" family="Patron" pointSize="10"/>
+                                    <fontDescription key="fontDescription" name="Patron-Regular" family="Patron" pointSize="9"/>
                                     <state key="normal">
                                         <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -152,7 +152,7 @@
                                         <constraint firstAttribute="height" constant="30" id="DsW-fE-541"/>
                                         <constraint firstAttribute="width" constant="123" id="IJj-t1-pkF"/>
                                     </constraints>
-                                    <fontDescription key="fontDescription" name="Patron-Regular" family="Patron" pointSize="10"/>
+                                    <fontDescription key="fontDescription" name="Patron-Regular" family="Patron" pointSize="9"/>
                                     <state key="normal">
                                         <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -162,12 +162,12 @@
                                     </connections>
                                 </button>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ldv-Yo-r7V">
-                                    <rect key="frame" x="96" y="5" width="70" height="30"/>
+                                    <rect key="frame" x="92" y="5" width="70" height="30"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="30" id="Vp3-cv-AIl"/>
                                         <constraint firstAttribute="width" constant="70" id="gq8-88-zzA"/>
                                     </constraints>
-                                    <fontDescription key="fontDescription" name="Patron-Regular" family="Patron" pointSize="10"/>
+                                    <fontDescription key="fontDescription" name="Patron-Regular" family="Patron" pointSize="9"/>
                                     <state key="normal">
                                         <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -179,7 +179,7 @@
                                         <constraint firstAttribute="width" constant="100" id="L6m-wJ-Cc5"/>
                                         <constraint firstAttribute="height" constant="30" id="dnV-mg-3mB"/>
                                     </constraints>
-                                    <fontDescription key="fontDescription" name="Patron-Regular" family="Patron" pointSize="10"/>
+                                    <fontDescription key="fontDescription" name="Patron-Regular" family="Patron" pointSize="9"/>
                                     <state key="normal">
                                         <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -191,7 +191,7 @@
                                         <constraint firstAttribute="width" constant="113" id="E4J-s9-2lb"/>
                                         <constraint firstAttribute="height" constant="30" id="cgK-Z4-0OI"/>
                                     </constraints>
-                                    <fontDescription key="fontDescription" name="Patron-Regular" family="Patron" pointSize="10"/>
+                                    <fontDescription key="fontDescription" name="Patron-Regular" family="Patron" pointSize="9"/>
                                     <state key="normal">
                                         <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -210,7 +210,7 @@
                                 <constraint firstItem="TrV-dd-2rk" firstAttribute="top" secondItem="WcK-qu-f6Q" secondAttribute="top" constant="5" id="P7z-aq-qP1"/>
                                 <constraint firstItem="zfX-6r-Awh" firstAttribute="leading" secondItem="WcK-qu-f6Q" secondAttribute="leading" constant="5" id="ReR-Sb-Znf"/>
                                 <constraint firstItem="2Wy-w5-R5T" firstAttribute="top" secondItem="WcK-qu-f6Q" secondAttribute="top" constant="5" id="SlX-Y8-2mp"/>
-                                <constraint firstItem="Ldv-Yo-r7V" firstAttribute="leading" secondItem="TrV-dd-2rk" secondAttribute="trailing" constant="6" id="Wmp-Nl-lhQ"/>
+                                <constraint firstItem="Ldv-Yo-r7V" firstAttribute="leading" secondItem="TrV-dd-2rk" secondAttribute="trailing" constant="2" id="Wmp-Nl-lhQ"/>
                                 <constraint firstAttribute="trailing" secondItem="AyU-aA-cs2" secondAttribute="trailing" constant="8" id="f3H-z5-jFp"/>
                                 <constraint firstItem="zfX-6r-Awh" firstAttribute="top" secondItem="WcK-qu-f6Q" secondAttribute="top" constant="5" id="prm-eS-gCc"/>
                             </constraints>
@@ -231,7 +231,7 @@
                                 <constraint firstAttribute="height" constant="10" id="Eem-Iw-4Gu"/>
                                 <constraint firstAttribute="width" constant="200" id="jLN-4i-1aT"/>
                             </constraints>
-                            <fontDescription key="fontDescription" name="Patron-Bold" family="Patron" pointSize="11"/>
+                            <fontDescription key="fontDescription" name="Patron-Bold" family="Patron" pointSize="12"/>
                             <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <nil key="highlightedColor"/>
                         </label>
@@ -241,7 +241,7 @@
                                 <constraint firstAttribute="height" constant="10" id="6iU-rI-zc0"/>
                                 <constraint firstAttribute="width" constant="200" id="PcT-ka-pN1"/>
                             </constraints>
-                            <fontDescription key="fontDescription" name="Patron-Regular" family="Patron" pointSize="11"/>
+                            <fontDescription key="fontDescription" name="Patron-Regular" family="Patron" pointSize="12"/>
                             <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
@@ -261,7 +261,7 @@
                             <constraints>
                                 <constraint firstAttribute="height" constant="40" id="hJa-aK-l9L"/>
                             </constraints>
-                            <fontDescription key="fontDescription" name="Patron-Bold" family="Patron" pointSize="11"/>
+                            <fontDescription key="fontDescription" name="Patron-Bold" family="Patron" pointSize="12"/>
                             <state key="normal" title="Back">
                                 <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>

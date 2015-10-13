@@ -24,13 +24,13 @@
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
     
  if ([temp isEqualToString:@"createAnAccount"]){
-      self.buttonSignInHeightConstraint.constant =50;
+      self.buttonSignInHeightConstraint.constant =52;
       NSString *string = @"Create an account using Facebook";
       NSMutableAttributedString *attStr = [[NSMutableAttributedString alloc] initWithString:string ];
       [attStr addAttribute:NSFontAttributeName value:PATRON_REG(12) range:[string rangeOfString:@"Create an account using"]];
       [attStr addAttribute:NSFontAttributeName value:PATRON_BOLD(12) range:[string rangeOfString:@"Facebook"]];
       labelFacebook.attributedText = attStr;
-      labelEmail.text =@"or sign up with your email";
+      labelEmail.text =@"Or sign up with your email";
       labelCreateAnAcc.text =@"Create Your Account";
       labelInstruction.text =@"By selecting this,you agree to our Terms of Use and our Privacy Policy";
       [buttonTermsOfUse setTitle:@"Terms of Use" forState:UIControlStateNormal];
@@ -49,7 +49,7 @@
      [attStr addAttribute:NSFontAttributeName value:PATRON_BOLD(12) range:[string rangeOfString:@"Facebook"]];
      labelFacebook.attributedText = attStr;
         
-     labelEmail.text =@"or log in with your email";
+     labelEmail.text =@"Or log in with your email";
      labelSignIn.text =@"Sign in";
      [buttonForgotPass setTitle:@"Forgot password?" forState:UIControlStateNormal];
      [buttonCreateAnAcc setTitle:@"Create an Account" forState:UIControlStateNormal];
@@ -86,13 +86,5 @@
 - (IBAction)Back:(id)sender {
     [self.navigationController popViewControllerAnimated:YES];
 }
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
-
-
-
 
 @end

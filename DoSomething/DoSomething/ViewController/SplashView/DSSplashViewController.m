@@ -77,10 +77,10 @@
 - (void)setInitialization{
     
     [signupButton   setTitle:NSLocalizedString(@"Create an Account", @"") forState:UIControlStateNormal];
-    [signupButton.titleLabel setFont:[COMMON getResizeableFont:FutworaPro_Regular(12)]];
+    [signupButton.titleLabel setFont:[COMMON getResizeableFont:PATRON_BOLD(12)]];
     
     [signinButton setTitle:NSLocalizedString(@"Sign In", @"") forState:UIControlStateNormal];
-    [signinButton.titleLabel setFont:[COMMON getResizeableFont:FutworaPro_Regular(12)]];
+    [signinButton.titleLabel setFont:[COMMON getResizeableFont:PATRON_BOLD(12)]];
 }
 
 
@@ -104,7 +104,7 @@
     [self.view addConstraints:hConstrints];
     
     
-    NSArray *VConstrints = [NSLayoutConstraint constraintsWithVisualFormat:@"V:|-0-[splashView]-60-|"
+    NSArray *VConstrints = [NSLayoutConstraint constraintsWithVisualFormat:@"V:|-0-[splashView]-50-|"
                                                                    options:0
                                                                    metrics:nil
                                                                      views:NSDictionaryOfVariableBindings(splashView)];

@@ -1,14 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7706" systemVersion="14E46" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7706" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
     </dependencies>
-    <customFonts key="customFonts">
-        <mutableArray key="Patron-Regular.ttf">
-            <string>Patron-Regular</string>
-        </mutableArray>
-    </customFonts>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="DSProfileTableViewController">
             <connections>
@@ -24,50 +19,20 @@
                     <rect key="frame" x="0.0" y="0.0" width="320" height="570"/>
                     <subviews>
                         <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="HcG-cC-Fek">
-                            <rect key="frame" x="0.0" y="270" width="320" height="300"/>
+                            <rect key="frame" x="0.0" y="57" width="320" height="505"/>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <connections>
                                 <outlet property="dataSource" destination="-1" id="6gW-oT-ZQd"/>
                                 <outlet property="delegate" destination="-1" id="gkf-pE-zHf"/>
                             </connections>
                         </tableView>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Your Profile" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NK6-rf-pLT">
-                            <rect key="frame" x="10" y="65" width="72" height="21"/>
-                            <constraints>
-                                <constraint firstAttribute="height" constant="21" id="324-yU-1sr"/>
-                                <constraint firstAttribute="width" constant="72" id="D8g-IU-Ved"/>
-                            </constraints>
-                            <fontDescription key="fontDescription" name="Patron-Regular" family="Patron" pointSize="11"/>
-                            <color key="textColor" red="0.38823529411764707" green="0.38823529411764707" blue="0.38823529411764707" alpha="1" colorSpace="calibratedRGB"/>
-                            <nil key="highlightedColor"/>
-                        </label>
-                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="camera_icon" translatesAutoresizingMaskIntoConstraints="NO" id="qnU-Yf-Zn2">
-                            <rect key="frame" x="145" y="222" width="30" height="25"/>
-                            <constraints>
-                                <constraint firstAttribute="height" constant="25" id="EAE-I3-737"/>
-                                <constraint firstAttribute="width" constant="30" id="mYi-9J-aAD"/>
-                            </constraints>
-                        </imageView>
-                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="profleImage" translatesAutoresizingMaskIntoConstraints="NO" id="a7l-51-drI">
-                            <rect key="frame" x="98" y="89" width="125" height="125"/>
-                            <constraints>
-                                <constraint firstAttribute="height" constant="125" id="cFB-xs-7gX"/>
-                                <constraint firstAttribute="width" constant="125" id="vnf-Nf-eaa"/>
-                            </constraints>
-                        </imageView>
                     </subviews>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
-                        <constraint firstAttribute="bottom" secondItem="HcG-cC-Fek" secondAttribute="bottom" id="7p2-07-mcd"/>
-                        <constraint firstItem="NK6-rf-pLT" firstAttribute="leading" secondItem="ina-fx-Lum" secondAttribute="leading" constant="10" id="Ckr-Vo-3LF"/>
-                        <constraint firstAttribute="trailing" secondItem="HcG-cC-Fek" secondAttribute="trailing" id="cLS-bb-UoD"/>
-                        <constraint firstAttribute="centerX" secondItem="qnU-Yf-Zn2" secondAttribute="centerX" id="iFb-FJ-djO"/>
-                        <constraint firstItem="NK6-rf-pLT" firstAttribute="top" secondItem="ina-fx-Lum" secondAttribute="top" constant="65" id="ijz-uT-zF8"/>
-                        <constraint firstItem="a7l-51-drI" firstAttribute="top" secondItem="ina-fx-Lum" secondAttribute="top" constant="89" id="jOG-Ne-zbr"/>
-                        <constraint firstItem="HcG-cC-Fek" firstAttribute="leading" secondItem="ina-fx-Lum" secondAttribute="leading" id="rP1-V7-qZX"/>
-                        <constraint firstItem="HcG-cC-Fek" firstAttribute="top" secondItem="qnU-Yf-Zn2" secondAttribute="bottom" constant="23" id="vl6-BO-OsO"/>
-                        <constraint firstAttribute="centerX" secondItem="a7l-51-drI" secondAttribute="centerX" id="wLc-QV-guY"/>
-                        <constraint firstItem="qnU-Yf-Zn2" firstAttribute="top" secondItem="a7l-51-drI" secondAttribute="bottom" constant="8" id="yrT-Ta-Gvg"/>
+                        <constraint firstAttribute="bottom" secondItem="HcG-cC-Fek" secondAttribute="bottom" constant="8" id="LJE-Xx-AOF"/>
+                        <constraint firstItem="HcG-cC-Fek" firstAttribute="top" secondItem="ina-fx-Lum" secondAttribute="top" constant="57" id="Sh4-tL-Xpe"/>
+                        <constraint firstItem="HcG-cC-Fek" firstAttribute="leading" secondItem="ina-fx-Lum" secondAttribute="leading" id="TLS-Mn-ueu"/>
+                        <constraint firstAttribute="trailing" secondItem="HcG-cC-Fek" secondAttribute="trailing" id="vJp-FZ-Y1Z"/>
                     </constraints>
                 </view>
             </subviews>
@@ -82,8 +47,4 @@
             <point key="canvasLocation" x="232" y="368"/>
         </view>
     </objects>
-    <resources>
-        <image name="camera_icon" width="37" height="37"/>
-        <image name="profleImage" width="163" height="163"/>
-    </resources>
 </document>

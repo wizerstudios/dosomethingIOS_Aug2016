@@ -9,4 +9,5 @@
 #import <UIKit/UIKit.h>
 
 @interface DSSplashViewController : UIViewController
+@property (strong, nonatomic) IBOutlet UIView *buttonView;
 @end
