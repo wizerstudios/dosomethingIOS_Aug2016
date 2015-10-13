@@ -10,13 +10,13 @@
 		065BAC521BC7A135005AF493 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 065BAC511BC7A135005AF493 /* main.m */; };
 		6A50C21C1BCCBB8C002B11AC /* DSProfileTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A50C21A1BCCBB8C002B11AC /* DSProfileTableViewCell.m */; };
 		6A50C21D1BCCBB8C002B11AC /* DSProfileTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6A50C21B1BCCBB8C002B11AC /* DSProfileTableViewCell.xib */; };
-		6A50C2271BCCC310002B11AC /* ChatsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A50C2251BCCC310002B11AC /* ChatsTableViewController.m */; };
-		6A50C2281BCCC310002B11AC /* ChatsTableViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6A50C2261BCCC310002B11AC /* ChatsTableViewController.xib */; };
+		6A50C2271BCCC310002B11AC /* DSChatsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A50C2251BCCC310002B11AC /* DSChatsTableViewController.m */; };
+		6A50C2281BCCC310002B11AC /* DSChatsTableViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6A50C2261BCCC310002B11AC /* DSChatsTableViewController.xib */; };
+		6A50C22F1BCCFF36002B11AC /* DSSplashScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A50C22B1BCCFF36002B11AC /* DSSplashScrollView.m */; };
+		6A50C2301BCCFF36002B11AC /* DSSplashViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A50C22D1BCCFF36002B11AC /* DSSplashViewController.m */; };
+		6A50C2311BCCFF36002B11AC /* DSSplashViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6A50C22E1BCCFF36002B11AC /* DSSplashViewController.xib */; };
 		6A8D15D31BCC059B000F1FB4 /* DSProfileTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A8D15D11BCC059B000F1FB4 /* DSProfileTableViewController.m */; };
 		6A8D15D41BCC059B000F1FB4 /* DSProfileTableViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6A8D15D21BCC059B000F1FB4 /* DSProfileTableViewController.xib */; };
-		C61A36CD1BC7ED90000E649A /* DSSplashViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C61A36C81BC7ED90000E649A /* DSSplashViewController.m */; };
-		C61A36CE1BC7ED90000E649A /* DSSplashViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C61A36C91BC7ED90000E649A /* DSSplashViewController.xib */; };
-		C61A36CF1BC7ED90000E649A /* DSSplashScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = C61A36CC1BC7ED90000E649A /* DSSplashScrollView.m */; };
 		C6D5F60C1BC7AF500050C1AE /* Launch Screen.xib in Resources */ = {isa = PBXBuildFile; fileRef = C6D5F60B1BC7AF500050C1AE /* Launch Screen.xib */; };
 		C6D5F6151BC7B0970050C1AE /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = C6D5F6141BC7B0970050C1AE /* AppDelegate.m */; };
 		C6D5F61C1BC7B3E60050C1AE /* DSAppCommon.m in Sources */ = {isa = PBXBuildFile; fileRef = C6D5F61B1BC7B3E60050C1AE /* DSAppCommon.m */; };
@@ -47,17 +47,17 @@
 		6A50C2191BCCBB8C002B11AC /* DSProfileTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DSProfileTableViewCell.h; sourceTree = "<group>"; };
 		6A50C21A1BCCBB8C002B11AC /* DSProfileTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DSProfileTableViewCell.m; sourceTree = "<group>"; };
 		6A50C21B1BCCBB8C002B11AC /* DSProfileTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DSProfileTableViewCell.xib; sourceTree = "<group>"; };
-		6A50C2241BCCC310002B11AC /* ChatsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChatsTableViewController.h; sourceTree = "<group>"; };
-		6A50C2251BCCC310002B11AC /* ChatsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChatsTableViewController.m; sourceTree = "<group>"; };
-		6A50C2261BCCC310002B11AC /* ChatsTableViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ChatsTableViewController.xib; sourceTree = "<group>"; };
+		6A50C2241BCCC310002B11AC /* DSChatsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DSChatsTableViewController.h; sourceTree = "<group>"; };
+		6A50C2251BCCC310002B11AC /* DSChatsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DSChatsTableViewController.m; sourceTree = "<group>"; };
+		6A50C2261BCCC310002B11AC /* DSChatsTableViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DSChatsTableViewController.xib; sourceTree = "<group>"; };
+		6A50C22A1BCCFF36002B11AC /* DSSplashScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DSSplashScrollView.h; sourceTree = "<group>"; };
+		6A50C22B1BCCFF36002B11AC /* DSSplashScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DSSplashScrollView.m; sourceTree = "<group>"; };
+		6A50C22C1BCCFF36002B11AC /* DSSplashViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DSSplashViewController.h; sourceTree = "<group>"; };
+		6A50C22D1BCCFF36002B11AC /* DSSplashViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DSSplashViewController.m; sourceTree = "<group>"; };
+		6A50C22E1BCCFF36002B11AC /* DSSplashViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DSSplashViewController.xib; sourceTree = "<group>"; };
 		6A8D15D01BCC059B000F1FB4 /* DSProfileTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DSProfileTableViewController.h; sourceTree = "<group>"; };
 		6A8D15D11BCC059B000F1FB4 /* DSProfileTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DSProfileTableViewController.m; sourceTree = "<group>"; };
 		6A8D15D21BCC059B000F1FB4 /* DSProfileTableViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DSProfileTableViewController.xib; sourceTree = "<group>"; };
-		C61A36C71BC7ED90000E649A /* DSSplashViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DSSplashViewController.h; path = ViewController/SplashView/DSSplashViewController.h; sourceTree = "<group>"; };
-		C61A36C81BC7ED90000E649A /* DSSplashViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DSSplashViewController.m; path = ViewController/SplashView/DSSplashViewController.m; sourceTree = "<group>"; };
-		C61A36C91BC7ED90000E649A /* DSSplashViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = DSSplashViewController.xib; path = ViewController/SplashView/DSSplashViewController.xib; sourceTree = "<group>"; };
-		C61A36CB1BC7ED90000E649A /* DSSplashScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DSSplashScrollView.h; sourceTree = "<group>"; };
-		C61A36CC1BC7ED90000E649A /* DSSplashScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DSSplashScrollView.m; sourceTree = "<group>"; };
 		C6D5F60B1BC7AF500050C1AE /* Launch Screen.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "Launch Screen.xib"; sourceTree = "<group>"; };
 		C6D5F6131BC7B0970050C1AE /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		C6D5F6141BC7B0970050C1AE /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -138,12 +138,25 @@
 		6A50C2231BCCC310002B11AC /* Chats */ = {
 			isa = PBXGroup;
 			children = (
-				6A50C2241BCCC310002B11AC /* ChatsTableViewController.h */,
-				6A50C2251BCCC310002B11AC /* ChatsTableViewController.m */,
-				6A50C2261BCCC310002B11AC /* ChatsTableViewController.xib */,
+				6A50C2241BCCC310002B11AC /* DSChatsTableViewController.h */,
+				6A50C2251BCCC310002B11AC /* DSChatsTableViewController.m */,
+				6A50C2261BCCC310002B11AC /* DSChatsTableViewController.xib */,
 			);
 			name = Chats;
 			path = ViewController/Chats;
+			sourceTree = "<group>";
+		};
+		6A50C2291BCCFF36002B11AC /* SplashView */ = {
+			isa = PBXGroup;
+			children = (
+				6A50C22A1BCCFF36002B11AC /* DSSplashScrollView.h */,
+				6A50C22B1BCCFF36002B11AC /* DSSplashScrollView.m */,
+				6A50C22C1BCCFF36002B11AC /* DSSplashViewController.h */,
+				6A50C22D1BCCFF36002B11AC /* DSSplashViewController.m */,
+				6A50C22E1BCCFF36002B11AC /* DSSplashViewController.xib */,
+			);
+			name = SplashView;
+			path = ViewController/SplashView;
 			sourceTree = "<group>";
 		};
 		6A8D15CF1BCC059B000F1FB4 /* Profile */ = {
@@ -160,16 +173,6 @@
 			path = ViewController/Profile;
 			sourceTree = "<group>";
 		};
-		C61A36CA1BC7ED90000E649A /* SplashScrollView */ = {
-			isa = PBXGroup;
-			children = (
-				C61A36CB1BC7ED90000E649A /* DSSplashScrollView.h */,
-				C61A36CC1BC7ED90000E649A /* DSSplashScrollView.m */,
-			);
-			name = SplashScrollView;
-			path = ViewController/SplashView/SplashScrollView;
-			sourceTree = "<group>";
-		};
 		C6D5F6081BC7A4340050C1AE /* Common */ = {
 			isa = PBXGroup;
 			children = (
@@ -184,10 +187,7 @@
 		C6D5F60A1BC7A4560050C1AE /* ViewController */ = {
 			isa = PBXGroup;
 			children = (
-				C61A36CA1BC7ED90000E649A /* SplashScrollView */,
-				C61A36C71BC7ED90000E649A /* DSSplashViewController.h */,
-				C61A36C81BC7ED90000E649A /* DSSplashViewController.m */,
-				C61A36C91BC7ED90000E649A /* DSSplashViewController.xib */,
+				6A50C2291BCCFF36002B11AC /* SplashView */,
 				EACB22B71BC7C7F7002FAD54 /* Login */,
 				6A8D15CF1BCC059B000F1FB4 /* Profile */,
 				6A50C2231BCCC310002B11AC /* Chats */,
@@ -321,7 +321,7 @@
 				C6D5F6401BC7B52C0050C1AE /* Patron-Italic.ttf in Resources */,
 				EACB22BC1BC7C7F7002FAD54 /* DSLoginViewController.xib in Resources */,
 				C6D5F63A1BC7B52C0050C1AE /* Patron-Black.ttf in Resources */,
-				6A50C2281BCCC310002B11AC /* ChatsTableViewController.xib in Resources */,
+				6A50C2281BCCC310002B11AC /* DSChatsTableViewController.xib in Resources */,
 				C6D5F6421BC7B52C0050C1AE /* Patron-MediumItalic.ttf in Resources */,
 				C6D5F60C1BC7AF500050C1AE /* Launch Screen.xib in Resources */,
 				6A8D15D41BCC059B000F1FB4 /* DSProfileTableViewController.xib in Resources */,
@@ -330,8 +330,8 @@
 				C6D5F6431BC7B52C0050C1AE /* Patron-Regular.ttf in Resources */,
 				C6D5F67C1BC7EC440050C1AE /* Images.xcassets in Resources */,
 				C6D5F6451BC7B52C0050C1AE /* Patron-ThinItalic.ttf in Resources */,
-				C61A36CE1BC7ED90000E649A /* DSSplashViewController.xib in Resources */,
 				C6D5F63E1BC7B52C0050C1AE /* Patron-ExtraLight.ttf in Resources */,
+				6A50C2311BCCFF36002B11AC /* DSSplashViewController.xib in Resources */,
 				EAF3D4A61BCB8EBA0097994D /* CustomNavigationView.xib in Resources */,
 				C6D5F63B1BC7B52C0050C1AE /* Patron-BlackItalic.ttf in Resources */,
 				C6D5F63C1BC7B52C0050C1AE /* Patron-Bold.ttf in Resources */,
@@ -347,13 +347,13 @@
 			files = (
 				C6D5F61C1BC7B3E60050C1AE /* DSAppCommon.m in Sources */,
 				EACB22BB1BC7C7F7002FAD54 /* DSLoginViewController.m in Sources */,
+				6A50C22F1BCCFF36002B11AC /* DSSplashScrollView.m in Sources */,
 				065BAC521BC7A135005AF493 /* main.m in Sources */,
+				6A50C2301BCCFF36002B11AC /* DSSplashViewController.m in Sources */,
 				6A50C21C1BCCBB8C002B11AC /* DSProfileTableViewCell.m in Sources */,
 				C6D5F6151BC7B0970050C1AE /* AppDelegate.m in Sources */,
-				6A50C2271BCCC310002B11AC /* ChatsTableViewController.m in Sources */,
-				C61A36CD1BC7ED90000E649A /* DSSplashViewController.m in Sources */,
+				6A50C2271BCCC310002B11AC /* DSChatsTableViewController.m in Sources */,
 				EAF3D4A51BCB8EBA0097994D /* CustomNavigationView.m in Sources */,
-				C61A36CF1BC7ED90000E649A /* DSSplashScrollView.m in Sources */,
 				6A8D15D31BCC059B000F1FB4 /* DSProfileTableViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

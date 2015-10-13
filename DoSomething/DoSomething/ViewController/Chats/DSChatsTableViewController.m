@@ -6,14 +6,14 @@
 //  Copyright (c) 2015 OClock Apps. All rights reserved.
 //
 
-#import "ChatsTableViewController.h"
+#import "DSChatsTableViewController.h"
 #import "CustomNavigationView.h"
 
-@interface ChatsTableViewController ()
+@interface DSChatsTableViewController ()
 
 @end
 
-@implementation ChatsTableViewController
+@implementation DSChatsTableViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
