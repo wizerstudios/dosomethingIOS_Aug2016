@@ -4,6 +4,14 @@
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
     </dependencies>
+    <customFonts key="customFonts">
+        <mutableArray key="FutworaPro-Regular.otf">
+            <string>FutworaPro-Regular</string>
+        </mutableArray>
+        <mutableArray key="Patron-Bold.ttf">
+            <string>Patron-Bold</string>
+        </mutableArray>
+    </customFonts>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="DSSplashViewController">
             <connections>
@@ -23,7 +31,8 @@
                     <constraints>
                         <constraint firstAttribute="height" constant="60" id="pn2-oc-Daq"/>
                     </constraints>
-                    <state key="normal" title="create An Account">
+                    <fontDescription key="fontDescription" name="Patron-Bold" family="Patron" pointSize="15"/>
+                    <state key="normal" title="Create an Account">
                         <color key="titleColor" red="0.8784313725490196" green="0.24313725490196078" blue="0.30980392156862746" alpha="1" colorSpace="calibratedRGB"/>
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
@@ -34,7 +43,8 @@
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="n6M-Sv-efu" userLabel="signinButton">
                     <rect key="frame" x="188" y="607" width="187" height="60"/>
                     <color key="backgroundColor" red="0.8784313725490196" green="0.24313725490196078" blue="0.30980392156862746" alpha="1" colorSpace="calibratedRGB"/>
-                    <state key="normal" title="Sign in">
+                    <fontDescription key="fontDescription" name="FutworaPro-Regular" family="Futwora Pro" pointSize="15"/>
+                    <state key="normal" title="Sign In">
                         <color key="titleColor" red="0.94509803921568625" green="0.94509803921568625" blue="0.94509803921568625" alpha="1" colorSpace="calibratedRGB"/>
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
