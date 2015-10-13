@@ -7,7 +7,15 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "DSProfileTableViewCell.h"
 
 @interface DSProfileTableViewController : UIViewController
+{
+IBOutlet DSProfileTableViewCell *cellButton;
+IBOutlet DSProfileTableViewCell *cellAddIcon;
+IBOutlet DSProfileTableViewCell *cellTextField;
 
+
+
+}
 @end
