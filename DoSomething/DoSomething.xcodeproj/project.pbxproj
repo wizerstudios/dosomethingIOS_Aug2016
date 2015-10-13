@@ -127,6 +127,7 @@
 		065BAC501BC7A135005AF493 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				6A50C2321BCD3217002B11AC /* Images */,
 				C6D5F67B1BC7EC440050C1AE /* Images.xcassets */,
 				C6D5F62B1BC7B52C0050C1AE /* Fonts */,
 				065BAC611BC7A135005AF493 /* Info.plist */,
@@ -157,6 +158,13 @@
 			);
 			name = SplashView;
 			path = ViewController/SplashView;
+			sourceTree = "<group>";
+		};
+		6A50C2321BCD3217002B11AC /* Images */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Images;
 			sourceTree = "<group>";
 		};
 		6A8D15CF1BCC059B000F1FB4 /* Profile */ = {

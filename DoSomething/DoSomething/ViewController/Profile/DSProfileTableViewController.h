@@ -11,6 +11,7 @@
 
 @interface DSProfileTableViewController : UIViewController
 {
+IBOutlet DSProfileTableViewCell *cellProfileImg;
 IBOutlet DSProfileTableViewCell *cellButton;
 IBOutlet DSProfileTableViewCell *cellAddIcon;
 IBOutlet DSProfileTableViewCell *cellTextField;

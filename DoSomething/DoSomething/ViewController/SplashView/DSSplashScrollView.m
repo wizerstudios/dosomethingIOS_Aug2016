@@ -353,8 +353,7 @@
             [[self scrollTimer] invalidate];
             
             [self setScrollTimer: nil];
-        }
-        
+        }        
         self.pagerConstraint.constant = 0;//(40)
         
         

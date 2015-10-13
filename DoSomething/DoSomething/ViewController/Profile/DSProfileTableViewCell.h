@@ -10,5 +10,6 @@
 
 @interface DSProfileTableViewCell : UITableViewCell
 @property (weak, nonatomic) IBOutlet UITextField *placeHolderTextField;
+@property (weak, nonatomic) IBOutlet UILabel *labelTitleText;
 
 @end

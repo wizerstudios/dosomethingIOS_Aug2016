@@ -9,9 +9,9 @@
 #import "DSProfileTableViewController.h"
 #import "CustomNavigationView.h"
 
-@interface DSProfileTableViewController ()
+@interface DSProfileTableViewController ()<UITextFieldDelegate>
 {
-    NSMutableArray *placeHolderArray;
+    NSArray *placeHolderArray;
 }
 @end
 
@@ -49,16 +49,16 @@
 }
 
 -(void)initializeArray{
-    placeHolderArray = [[NSMutableArray alloc]init];
+     placeHolderArray = [[NSArray alloc]initWithObjects:@"Firstname"@"Firstname",@"Lastname",@"male",@"Date of Birth",@"About You",@"Hobbies",nil];
     
-       [placeHolderArray insertObject:[[NSMutableArray alloc]initWithObjects:
-                                 [NSMutableDictionary dictionaryWithObjectsAndKeys:@"Firstname",@"placeholder", nil],
-                                 [NSMutableDictionary dictionaryWithObjectsAndKeys:@"Lastname",@"placeholder", nil],
-                                 [NSMutableDictionary dictionaryWithObjectsAndKeys:@"male",@"placeholder", nil],
-                                 [NSMutableDictionary dictionaryWithObjectsAndKeys:@"Date of Birth",@"placeholder", nil],
-                                 [NSMutableDictionary dictionaryWithObjectsAndKeys:@"About You",@"placeholder", nil],
-                                 [NSMutableDictionary dictionaryWithObjectsAndKeys:@"Hobbies",@"placeholder", nil],
-                                 nil] atIndex:0];
+//       [placeHolderArray insertObject:[[NSMutableArray alloc]initWithObjects:
+//                                 [NSMutableDictionary dictionaryWithObjectsAndKeys:@"Firstname",@"placeholder", nil],
+//                                 [NSMutableDictionary dictionaryWithObjectsAndKeys:@"Lastname",@"placeholder", nil],
+//                                 [NSMutableDictionary dictionaryWithObjectsAndKeys:@"male",@"placeholder", nil],
+//                                 [NSMutableDictionary dictionaryWithObjectsAndKeys:@"Date of Birth",@"placeholder", nil],
+//                                 [NSMutableDictionary dictionaryWithObjectsAndKeys:@"About You",@"placeholder", nil],
+//                                 [NSMutableDictionary dictionaryWithObjectsAndKeys:@"Hobbies",@"placeholder", nil],
+//                                 nil] atIndex:0];
     
 }
 #pragma mark - TableView Datasource & Delegate
@@ -70,22 +70,19 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    
-   
-        return [placeHolderArray count];
-    
-    
+        return [placeHolderArray count];    
     
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     
-    
-    
-    if (indexPath.row == 5 ){
-        return 90;
+    if (indexPath.row == 0 ){
+        return 200;
 
+    }
+    if (indexPath.row == 5) {
+        return 90;
     }
     
     
@@ -101,23 +98,22 @@
     NSString *titleText;
     NSString *placeHolderText;
     
-        placeHolderText =  [[placeHolderArray valueForKey:@"placeholder"]objectAtIndex:indexPath.row];
+        placeHolderText =  [placeHolderArray objectAtIndex:indexPath.row];
     
     
     
-            if (indexPath.row == 5)
+            if (indexPath.row == 0)
             {
                 
                 if (cell == nil)
                 {
                     [[NSBundle mainBundle] loadNibNamed:@"DSProfileTableViewCell" owner:self options:nil];
-                    cell = cellAddIcon;
+                    cell = cellProfileImg;
                     
                 }
-//
                 
             }
-            if (indexPath.row == 2)
+            if (indexPath.row == 3)
             {
                 if (cell == nil)
                 {
@@ -126,16 +122,31 @@
                     
                 }
             }
+    if (indexPath.row == 5)
+    {
+        
+        if (cell == nil)
+        {
+            [[NSBundle mainBundle] loadNibNamed:@"DSProfileTableViewCell" owner:self options:nil];
+            cell = cellAddIcon;
             
+        }
+        
+    }
     
+ 
+    
+       if (indexPath.row == 1 || indexPath.row == 2 || indexPath.row == 4)
                 if (cell == nil)
                 {
                     [[NSBundle mainBundle] loadNibNamed:@"DSProfileTableViewCell" owner:self options:nil];
-                    cell = cellTextField;
+                     cell = cellTextField;
+                    
                 }
-                                   cell.placeHolderTextField.text = titleText;
+    
                   
-
+    cell.placeHolderTextField.placeholder = titleText;
+    cell.labelTitleText.text = titleText;
     
 
     [cell setSelectionStyle:UITableViewCellSelectionStyleNone];

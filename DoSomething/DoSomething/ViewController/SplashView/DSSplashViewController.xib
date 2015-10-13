@@ -26,10 +26,10 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xWF-rI-FeD" userLabel="SignupButton">
-                    <rect key="frame" x="0.0" y="607" width="188" height="60"/>
+                    <rect key="frame" x="0.0" y="612" width="188" height="55"/>
                     <color key="backgroundColor" red="0.94509803921568625" green="0.94509803921568625" blue="0.94509803921568625" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="60" id="pn2-oc-Daq"/>
+                        <constraint firstAttribute="height" constant="55" id="pn2-oc-Daq"/>
                     </constraints>
                     <fontDescription key="fontDescription" name="Patron-Bold" family="Patron" pointSize="15"/>
                     <state key="normal" title="Create an Account">
@@ -41,7 +41,7 @@
                     </connections>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="n6M-Sv-efu" userLabel="signinButton">
-                    <rect key="frame" x="188" y="607" width="187" height="60"/>
+                    <rect key="frame" x="188" y="612" width="187" height="55"/>
                     <color key="backgroundColor" red="0.8784313725490196" green="0.24313725490196078" blue="0.30980392156862746" alpha="1" colorSpace="calibratedRGB"/>
                     <fontDescription key="fontDescription" name="FutworaPro-Regular" family="Futwora Pro" pointSize="15"/>
                     <state key="normal" title="Sign In">

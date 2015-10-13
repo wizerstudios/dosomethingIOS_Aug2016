@@ -104,7 +104,7 @@
     [self.view addConstraints:hConstrints];
     
     
-    NSArray *VConstrints = [NSLayoutConstraint constraintsWithVisualFormat:@"V:|-0-[splashView]-60-|"
+    NSArray *VConstrints = [NSLayoutConstraint constraintsWithVisualFormat:@"V:|-0-[splashView]-55-|"
                                                                    options:0
                                                                    metrics:nil
                                                                      views:NSDictionaryOfVariableBindings(splashView)];
