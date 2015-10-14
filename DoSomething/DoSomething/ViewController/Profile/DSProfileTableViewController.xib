@@ -20,11 +20,11 @@
                     <rect key="frame" x="0.0" y="0.0" width="320" height="570"/>
                     <subviews>
                         <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="HcG-cC-Fek">
-                            <rect key="frame" x="0.0" y="0.0" width="320" height="570"/>
-                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <rect key="frame" x="10" y="25" width="300" height="545"/>
+                            <color key="backgroundColor" red="0.90980392156862744" green="0.90980392156862744" blue="0.90980392156862744" alpha="1" colorSpace="calibratedRGB"/>
                             <color key="sectionIndexBackgroundColor" red="0.90980392156862744" green="0.90980392156862744" blue="0.90980392156862744" alpha="1" colorSpace="calibratedRGB"/>
                             <view key="tableHeaderView" contentMode="scaleToFill" id="E0L-1V-gEn">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="20"/>
+                                <rect key="frame" x="0.0" y="0.0" width="300" height="20"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
@@ -34,11 +34,12 @@
                             </connections>
                         </tableView>
                     </subviews>
+                    <color key="backgroundColor" red="0.90980392156862744" green="0.90980392156862744" blue="0.90980392156862744" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
-                        <constraint firstItem="HcG-cC-Fek" firstAttribute="leading" secondItem="ina-fx-Lum" secondAttribute="leading" id="4vR-Xn-zlc"/>
+                        <constraint firstItem="HcG-cC-Fek" firstAttribute="leading" secondItem="ina-fx-Lum" secondAttribute="leading" constant="10" id="4vR-Xn-zlc"/>
                         <constraint firstAttribute="bottom" secondItem="HcG-cC-Fek" secondAttribute="bottom" id="APx-oD-dMv"/>
-                        <constraint firstAttribute="trailing" secondItem="HcG-cC-Fek" secondAttribute="trailing" id="T59-JO-CdM"/>
-                        <constraint firstItem="HcG-cC-Fek" firstAttribute="top" secondItem="ina-fx-Lum" secondAttribute="top" id="Uo0-6N-Nym"/>
+                        <constraint firstAttribute="trailing" secondItem="HcG-cC-Fek" secondAttribute="trailing" constant="10" id="T59-JO-CdM"/>
+                        <constraint firstItem="HcG-cC-Fek" firstAttribute="top" secondItem="ina-fx-Lum" secondAttribute="top" constant="25" id="Uo0-6N-Nym"/>
                     </constraints>
                 </view>
             </subviews>

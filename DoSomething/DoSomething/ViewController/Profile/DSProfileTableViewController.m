@@ -22,6 +22,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    [self loadNavigation];
     [self initializeArray];
 }
 
@@ -29,29 +30,19 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
--(void)viewWillAppear:(BOOL)animated
-{
-    [self loadNavigation];
-    [[UIApplication sharedApplication] setStatusBarHidden:YES];
-
-}
 
 -(void)loadNavigation{
     
-    self.navigationController.navigationBarHidden=NO;
+    self.navigationController.navigationBarHidden=YES;
     [self.navigationItem setHidesBackButton:YES animated:NO];
     [self.navigationController.navigationBar setTranslucent:NO];
     
     CustomNavigationView *customNavigation;
     customNavigation = [[CustomNavigationView alloc] initWithNibName:@"CustomNavigationView" bundle:nil];
-    customNavigation.view.frame = CGRectMake(0, 0, CGRectGetWidth(self.view.frame),56);
-    [self.navigationController.navigationBar addSubview:customNavigation.view];
-
+    customNavigation.view.frame = CGRectMake(0, 0, CGRectGetWidth(self.view.frame),10);
     customNavigation.view.backgroundColor =[UIColor blackColor];
      [customNavigation.buttonBack addTarget:self action:@selector(BackAction) forControlEvents:UIControlEventTouchUpInside];
-//    [customNavigation setlogoutButtonHidden:YES];
-//    [customNavigation setbackButtonHidden:YES];
-    
+    [self.view addSubview:customNavigation.view];    
     
     
 }

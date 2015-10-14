@@ -240,7 +240,7 @@
     UIPageControl *pager = [[UIPageControl alloc] init];
     pager.pageIndicatorTintColor = [UIColor redColor];
     
-    pager.currentPageIndicatorTintColor =[UIColor colorWithPatternImage:[UIImage imageNamed:@"dot_active"]];
+//    pager.currentPageIndicatorTintColor =[UIColor colorWithPatternImage:[UIImage imageNamed:@"dot_active"]];
 //    pager.transform = CGAffineTransformMakeScale(1.0, 1.0);
     
     [pager setNumberOfPages: 3];
