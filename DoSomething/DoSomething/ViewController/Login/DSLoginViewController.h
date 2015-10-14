@@ -28,6 +28,7 @@
 @property (strong, nonatomic) IBOutlet NSLayoutConstraint *layoutConstraintTxtFieldViewHeight;
 @property (strong, nonatomic) IBOutlet NSLayoutConstraint *layoutConstraintSignInButtonHeight;
 @property (strong, nonatomic) IBOutlet NSLayoutConstraint *layoutConstraintBackButtonHeight;
+@property (strong, nonatomic) IBOutlet NSLayoutConstraint *layoutConstraintFBlblHeight;
 
 
 @end

@@ -22,7 +22,6 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [self loadNavigation];
     [self initializeArray];
 }
 
@@ -30,10 +29,16 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+-(void)viewWillAppear:(BOOL)animated
+{
+    [self loadNavigation];
+    [[UIApplication sharedApplication] setStatusBarHidden:YES];
+
+}
 
 -(void)loadNavigation{
     
-    self.navigationController.navigationBarHidden=YES;
+    self.navigationController.navigationBarHidden=NO;
     [self.navigationItem setHidesBackButton:YES animated:NO];
     [self.navigationController.navigationBar setTranslucent:NO];
     

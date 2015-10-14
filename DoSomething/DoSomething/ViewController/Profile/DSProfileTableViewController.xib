@@ -20,9 +20,14 @@
                     <rect key="frame" x="0.0" y="0.0" width="320" height="570"/>
                     <subviews>
                         <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="HcG-cC-Fek">
-                            <rect key="frame" x="0.0" y="45" width="320" height="525"/>
+                            <rect key="frame" x="0.0" y="0.0" width="320" height="570"/>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <color key="sectionIndexBackgroundColor" red="0.90980392156862744" green="0.90980392156862744" blue="0.90980392156862744" alpha="1" colorSpace="calibratedRGB"/>
+                            <view key="tableHeaderView" contentMode="scaleToFill" id="E0L-1V-gEn">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="20"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
                             <connections>
                                 <outlet property="dataSource" destination="-1" id="6gW-oT-ZQd"/>
                                 <outlet property="delegate" destination="-1" id="gkf-pE-zHf"/>
@@ -30,20 +35,21 @@
                         </tableView>
                     </subviews>
                     <constraints>
-                        <constraint firstAttribute="bottom" secondItem="HcG-cC-Fek" secondAttribute="bottom" id="3a1-wo-vrq"/>
-                        <constraint firstItem="HcG-cC-Fek" firstAttribute="leading" secondItem="ina-fx-Lum" secondAttribute="leading" id="Lvh-4c-2mN"/>
-                        <constraint firstItem="HcG-cC-Fek" firstAttribute="top" secondItem="ina-fx-Lum" secondAttribute="top" constant="45" id="YFs-fg-2bm"/>
-                        <constraint firstAttribute="trailing" secondItem="HcG-cC-Fek" secondAttribute="trailing" id="kdN-hJ-F9a"/>
+                        <constraint firstItem="HcG-cC-Fek" firstAttribute="leading" secondItem="ina-fx-Lum" secondAttribute="leading" id="4vR-Xn-zlc"/>
+                        <constraint firstAttribute="bottom" secondItem="HcG-cC-Fek" secondAttribute="bottom" id="APx-oD-dMv"/>
+                        <constraint firstAttribute="trailing" secondItem="HcG-cC-Fek" secondAttribute="trailing" id="T59-JO-CdM"/>
+                        <constraint firstItem="HcG-cC-Fek" firstAttribute="top" secondItem="ina-fx-Lum" secondAttribute="top" id="Uo0-6N-Nym"/>
                     </constraints>
                 </view>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
-                <constraint firstAttribute="trailing" secondItem="ina-fx-Lum" secondAttribute="trailing" id="6eL-wL-Lr8"/>
-                <constraint firstItem="ina-fx-Lum" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="BKN-gk-g7M"/>
-                <constraint firstItem="ina-fx-Lum" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="Gjh-cg-rdB"/>
-                <constraint firstAttribute="bottom" secondItem="ina-fx-Lum" secondAttribute="bottom" id="frW-NB-icA"/>
+                <constraint firstAttribute="bottom" secondItem="ina-fx-Lum" secondAttribute="bottom" id="QZS-Eg-jdS"/>
+                <constraint firstItem="ina-fx-Lum" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="fJ4-9J-09O"/>
+                <constraint firstAttribute="trailing" secondItem="ina-fx-Lum" secondAttribute="trailing" id="pWO-kF-1wn"/>
+                <constraint firstItem="ina-fx-Lum" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="tOb-VD-NH4"/>
             </constraints>
+            <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="blackOpaque"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <point key="canvasLocation" x="232" y="368"/>
         </view>

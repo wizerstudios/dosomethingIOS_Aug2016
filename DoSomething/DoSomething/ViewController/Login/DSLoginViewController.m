@@ -10,6 +10,7 @@
 #import "DSSplashViewController.h"
 #import "DSProfileTableViewController.h"
 #import "DSConfig.h"
+#import "DSAppCommon.h"
 
 
 
@@ -19,6 +20,15 @@
 
 @implementation DSLoginViewController
 @synthesize temp,labelFacebook,labelEmail,labelSignIn,buttonTermsOfUse,buttonPrivacyPolicy,buttonSignIn,buttonForgotPass,buttonCreateAnAcc,labelInstruction,labelCreateAnAcc,buttonHaveAnAcc;
+
+-(void)viewWillAppear:(BOOL)animated
+{
+    self.navigationController.navigationBarHidden=YES;
+    [self.navigationItem setHidesBackButton:YES animated:NO];
+    [self.navigationController.navigationBar setTranslucent:NO];
+}
+
+
 - (void)viewDidLoad {
     [super viewDidLoad];   
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
@@ -32,7 +42,10 @@
  if ([temp isEqualToString:@"createAnAccount"]){
       self.buttonSignInHeightConstraint.constant =56;
      if (IS_IPHONE6 ||IS_IPHONE6_Plus){
-     self.layoutConstraintSignInButtonHeight.constant =70;
+//         [labelFacebook setFont:PATRON_REG(38)];
+//         self.layoutConstraintFBlblHeight.constant =25;
+
+       self.layoutConstraintSignInButtonHeight.constant =70;
      }
       NSString *string = @"Create an account using Facebook";
       NSMutableAttributedString *attStr = [[NSMutableAttributedString alloc] initWithString:string ];
@@ -51,7 +64,10 @@
 
 }
  if ([temp isEqualToString:@"Signin"]){
-       
+     if (IS_IPHONE6 ||IS_IPHONE6_Plus){
+     self.layoutConstraintSignInButtonHeight.constant =50;
+
+     }
       NSString *string = @"Log in with Facebook";
       NSMutableAttributedString *attStr = [[NSMutableAttributedString alloc] initWithString:string ];
      [attStr addAttribute:NSFontAttributeName value:PATRON_REG(12) range:[string rangeOfString:@"Log in with"]];

@@ -119,11 +119,7 @@
          [self.view addConstraints:VConstrints];
          self.layoutHeightConstraintSignInBtn.constant =65;
          self.layoutHeightConstraintSignUpBtn.constant =65;
-     }
-    
-   
-    
-    
+     }    
     
     
     [splashView.layer setBorderColor:[UIColor clearColor].CGColor];
