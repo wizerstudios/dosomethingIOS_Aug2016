@@ -36,6 +36,8 @@
 		C6D5F67C1BC7EC440050C1AE /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C6D5F67B1BC7EC440050C1AE /* Images.xcassets */; };
 		EACB22BB1BC7C7F7002FAD54 /* DSLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EACB22B91BC7C7F7002FAD54 /* DSLoginViewController.m */; };
 		EACB22BC1BC7C7F7002FAD54 /* DSLoginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = EACB22BA1BC7C7F7002FAD54 /* DSLoginViewController.xib */; };
+		EAED12701BCE55B00069E39D /* DSHobbiesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EAED126E1BCE55B00069E39D /* DSHobbiesViewController.m */; };
+		EAED12711BCE55B00069E39D /* DSHobbiesViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = EAED126F1BCE55B00069E39D /* DSHobbiesViewController.xib */; };
 		EAF3D4A51BCB8EBA0097994D /* CustomNavigationView.m in Sources */ = {isa = PBXBuildFile; fileRef = EAF3D4A31BCB8EBA0097994D /* CustomNavigationView.m */; };
 		EAF3D4A61BCB8EBA0097994D /* CustomNavigationView.xib in Resources */ = {isa = PBXBuildFile; fileRef = EAF3D4A41BCB8EBA0097994D /* CustomNavigationView.xib */; };
 /* End PBXBuildFile section */
@@ -81,6 +83,9 @@
 		EACB22B81BC7C7F7002FAD54 /* DSLoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DSLoginViewController.h; sourceTree = "<group>"; };
 		EACB22B91BC7C7F7002FAD54 /* DSLoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DSLoginViewController.m; sourceTree = "<group>"; };
 		EACB22BA1BC7C7F7002FAD54 /* DSLoginViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DSLoginViewController.xib; sourceTree = "<group>"; };
+		EAED126D1BCE55B00069E39D /* DSHobbiesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DSHobbiesViewController.h; sourceTree = "<group>"; };
+		EAED126E1BCE55B00069E39D /* DSHobbiesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DSHobbiesViewController.m; sourceTree = "<group>"; };
+		EAED126F1BCE55B00069E39D /* DSHobbiesViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DSHobbiesViewController.xib; sourceTree = "<group>"; };
 		EAF3D4A21BCB8EBA0097994D /* CustomNavigationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomNavigationView.h; sourceTree = "<group>"; };
 		EAF3D4A31BCB8EBA0097994D /* CustomNavigationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomNavigationView.m; sourceTree = "<group>"; };
 		EAF3D4A41BCB8EBA0097994D /* CustomNavigationView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CustomNavigationView.xib; sourceTree = "<group>"; };
@@ -195,6 +200,7 @@
 		C6D5F60A1BC7A4560050C1AE /* ViewController */ = {
 			isa = PBXGroup;
 			children = (
+				EAED126C1BCE55B00069E39D /* Hobbies */,
 				6A50C2291BCCFF36002B11AC /* SplashView */,
 				EACB22B71BC7C7F7002FAD54 /* Login */,
 				6A8D15CF1BCC059B000F1FB4 /* Profile */,
@@ -252,6 +258,17 @@
 			);
 			name = Login;
 			path = ViewController/Login;
+			sourceTree = "<group>";
+		};
+		EAED126C1BCE55B00069E39D /* Hobbies */ = {
+			isa = PBXGroup;
+			children = (
+				EAED126D1BCE55B00069E39D /* DSHobbiesViewController.h */,
+				EAED126E1BCE55B00069E39D /* DSHobbiesViewController.m */,
+				EAED126F1BCE55B00069E39D /* DSHobbiesViewController.xib */,
+			);
+			name = Hobbies;
+			path = ViewController/Hobbies;
 			sourceTree = "<group>";
 		};
 		EAF3D4A11BCB8EBA0097994D /* CustomNavigation */ = {
@@ -330,6 +347,7 @@
 				EACB22BC1BC7C7F7002FAD54 /* DSLoginViewController.xib in Resources */,
 				C6D5F63A1BC7B52C0050C1AE /* Patron-Black.ttf in Resources */,
 				6A50C2281BCCC310002B11AC /* DSChatsTableViewController.xib in Resources */,
+				EAED12711BCE55B00069E39D /* DSHobbiesViewController.xib in Resources */,
 				C6D5F6421BC7B52C0050C1AE /* Patron-MediumItalic.ttf in Resources */,
 				C6D5F60C1BC7AF500050C1AE /* Launch Screen.xib in Resources */,
 				6A8D15D41BCC059B000F1FB4 /* DSProfileTableViewController.xib in Resources */,
@@ -355,6 +373,7 @@
 			files = (
 				C6D5F61C1BC7B3E60050C1AE /* DSAppCommon.m in Sources */,
 				EACB22BB1BC7C7F7002FAD54 /* DSLoginViewController.m in Sources */,
+				EAED12701BCE55B00069E39D /* DSHobbiesViewController.m in Sources */,
 				6A50C22F1BCCFF36002B11AC /* DSSplashScrollView.m in Sources */,
 				065BAC521BC7A135005AF493 /* main.m in Sources */,
 				6A50C2301BCCFF36002B11AC /* DSSplashViewController.m in Sources */,

@@ -22,5 +22,12 @@
 @property (strong, nonatomic) IBOutlet NSLayoutConstraint *buttonSignInHeightConstraint;
 @property (strong, nonatomic) IBOutlet UILabel *labelCreateAnAcc;
 @property (strong, nonatomic) IBOutlet UIButton *buttonHaveAnAcc;
+@property (strong, nonatomic) IBOutlet NSLayoutConstraint *layoutConstraintTapBarImageHeight;
+@property (strong, nonatomic) IBOutlet NSLayoutConstraint *layoutConstraintStatusBarHeight;
+@property (strong, nonatomic) IBOutlet NSLayoutConstraint *layoutConstraintFBlblViewHeight;
+@property (strong, nonatomic) IBOutlet NSLayoutConstraint *layoutConstraintTxtFieldViewHeight;
+@property (strong, nonatomic) IBOutlet NSLayoutConstraint *layoutConstraintSignInButtonHeight;
+@property (strong, nonatomic) IBOutlet NSLayoutConstraint *layoutConstraintBackButtonHeight;
+
 
 @end

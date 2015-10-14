@@ -22,9 +22,18 @@
 - (void)viewDidLoad {
     [super viewDidLoad];   
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
-    
+    if (IS_IPHONE6 ||IS_IPHONE6_Plus){
+     self.layoutConstraintTapBarImageHeight.constant =60;
+        self.layoutConstraintStatusBarHeight.constant =25;
+        self.layoutConstraintFBlblViewHeight.constant=50;
+        self.layoutConstraintTxtFieldViewHeight.constant =162;
+        self.layoutConstraintBackButtonHeight.constant =55;
+    }
  if ([temp isEqualToString:@"createAnAccount"]){
-      self.buttonSignInHeightConstraint.constant =52;
+      self.buttonSignInHeightConstraint.constant =56;
+     if (IS_IPHONE6 ||IS_IPHONE6_Plus){
+     self.layoutConstraintSignInButtonHeight.constant =70;
+     }
       NSString *string = @"Create an account using Facebook";
       NSMutableAttributedString *attStr = [[NSMutableAttributedString alloc] initWithString:string ];
       [attStr addAttribute:NSFontAttributeName value:PATRON_REG(12) range:[string rangeOfString:@"Create an account using"]];
