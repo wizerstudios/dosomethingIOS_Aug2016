@@ -7,7 +7,9 @@
 //
 
 #import "DSProfileTableViewController.h"
+#import "DSHobbiesViewController.h"
 #import "CustomNavigationView.h"
+
 
 @interface DSProfileTableViewController ()<UITextFieldDelegate>
 {
@@ -20,7 +22,6 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [self loadNavigation];
     [self initializeArray];
 }
 
@@ -28,25 +29,39 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+-(void)viewWillAppear:(BOOL)animated
+{
+    [self loadNavigation];
+    [[UIApplication sharedApplication] setStatusBarHidden:YES];
+
+}
 
 -(void)loadNavigation{
     
-    self.navigationController.navigationBarHidden=YES;
+    self.navigationController.navigationBarHidden=NO;
     [self.navigationItem setHidesBackButton:YES animated:NO];
     [self.navigationController.navigationBar setTranslucent:NO];
     
     CustomNavigationView *customNavigation;
     customNavigation = [[CustomNavigationView alloc] initWithNibName:@"CustomNavigationView" bundle:nil];
-    customNavigation.view.frame = CGRectMake(0, 0, CGRectGetWidth(self.view.frame), 45);
+    customNavigation.view.frame = CGRectMake(0, 0, CGRectGetWidth(self.view.frame),56);
+    [self.navigationController.navigationBar addSubview:customNavigation.view];
+
+    customNavigation.view.backgroundColor =[UIColor blackColor];
      [customNavigation.buttonBack addTarget:self action:@selector(BackAction) forControlEvents:UIControlEventTouchUpInside];
 //    [customNavigation setlogoutButtonHidden:YES];
 //    [customNavigation setbackButtonHidden:YES];
-    [self.view addSubview:customNavigation.view];    
+    
     
     
 }
 - (void)BackAction {
     [self.navigationController popViewControllerAnimated:YES];
+}
+- (void)pushToHobbiesView {
+    DSHobbiesViewController * DSHobbiesView  = [[DSHobbiesViewController alloc]initWithNibName:@"DSHobbiesViewController" bundle:nil];
+    [self.navigationController pushViewController:DSHobbiesView animated:YES];
+
 }
 
 -(void)initializeArray{
@@ -108,6 +123,7 @@
             cell = cellAddIcon;
             
         }
+        [cell.buttonPushHobbies addTarget:self action:@selector(pushToHobbiesView) forControlEvents:UIControlEventTouchUpInside];
         
     }
     if (indexPath.row == 4)

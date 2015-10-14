@@ -9,16 +9,15 @@
 #import <UIKit/UIKit.h>
 #import "DSProfileTableViewCell.h"
 
-@interface DSProfileTableViewController : UIViewController
+@interface DSProfileTableViewController : UIViewController<UINavigationControllerDelegate>
 {
-IBOutlet DSProfileTableViewCell *cellProfileImg;
-IBOutlet DSProfileTableViewCell *cellButton;
-IBOutlet DSProfileTableViewCell *cellAddIcon;
-IBOutlet DSProfileTableViewCell *cellTextField;
-IBOutlet DSProfileTableViewCell *cellDatePicker;
-
-
-
+ IBOutlet DSProfileTableViewCell *cellProfileImg;
+ IBOutlet DSProfileTableViewCell *cellButton;
+ IBOutlet DSProfileTableViewCell *cellAddIcon;
+ IBOutlet DSProfileTableViewCell *cellTextField;
+ IBOutlet DSProfileTableViewCell *cellDatePicker;
 
 }
+@property (strong, nonatomic) IBOutlet UITableView *tableviewProfile;
+
 @end

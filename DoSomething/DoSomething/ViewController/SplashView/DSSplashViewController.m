@@ -102,14 +102,24 @@
                                                                      views:NSDictionaryOfVariableBindings(splashView)];
     
     [self.view addConstraints:hConstrints];
+    if (IS_IPHONE4 ||IS_IPHONE5 )  {
+        NSArray *VConstrints = [NSLayoutConstraint constraintsWithVisualFormat:@"V:|-0-[splashView]-50-|"
+                                                                       options:0
+                                                                       metrics:nil
+                                                                         views:NSDictionaryOfVariableBindings(splashView)];
+        [self.view addConstraints:VConstrints];
+       
+    }
     
-    
-    NSArray *VConstrints = [NSLayoutConstraint constraintsWithVisualFormat:@"V:|-0-[splashView]-50-|"
-                                                                   options:0
-                                                                   metrics:nil
-                                                                     views:NSDictionaryOfVariableBindings(splashView)];
-    
-    [self.view addConstraints:VConstrints];    
+     if (IS_IPHONE6 ||IS_IPHONE6_Plus) {
+         NSArray *VConstrints = [NSLayoutConstraint constraintsWithVisualFormat:@"V:|-0-[splashView]-65-|"
+                                                                        options:0
+                                                                        metrics:nil
+                                                                          views:NSDictionaryOfVariableBindings(splashView)];
+         [self.view addConstraints:VConstrints];
+         self.layoutHeightConstraintSignInBtn.constant =65;
+         self.layoutHeightConstraintSignUpBtn.constant =65;
+     }    
     
     
     [splashView.layer setBorderColor:[UIColor clearColor].CGColor];

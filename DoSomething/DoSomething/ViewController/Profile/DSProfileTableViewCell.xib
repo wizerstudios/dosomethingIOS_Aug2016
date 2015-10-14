@@ -53,7 +53,7 @@
                                     <constraint firstAttribute="width" constant="75" id="aSn-C0-XXz"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="Patron-Regular" family="Patron" pointSize="12"/>
-                                <color key="textColor" red="0.035294117647058823" green="0.38039215686274508" blue="0.38039215686274508" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="textColor" red="0.63137254901960782" green="0.63137254901960782" blue="0.63137254901960782" alpha="1" colorSpace="deviceRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Camera_Icon" translatesAutoresizingMaskIntoConstraints="NO" id="fTA-Na-Mia">
@@ -104,7 +104,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="gK1-Mm-U1j">
-                                <rect key="frame" x="75" y="1" width="225" height="38"/>
+                                <rect key="frame" x="75" y="0.0" width="225" height="38"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <fontDescription key="fontDescription" name="Patron-Regular" family="Patron" pointSize="9"/>
                                 <textInputTraits key="textInputTraits"/>
@@ -214,12 +214,24 @@
                                     <constraint firstAttribute="width" constant="28" id="YTd-x2-N6D"/>
                                 </constraints>
                             </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PXd-hC-CNF">
+                                <rect key="frame" x="130" y="27" width="38" height="38"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="38" id="DO9-jb-q25"/>
+                                    <constraint firstAttribute="width" constant="38" id="rVk-6O-xSy"/>
+                                </constraints>
+                                <state key="normal">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="hCe-cD-hwS" firstAttribute="top" secondItem="CBw-9W-xH2" secondAttribute="bottom" constant="11" id="TGN-9o-P63"/>
                             <constraint firstItem="CBw-9W-xH2" firstAttribute="top" secondItem="hoj-aW-4aX" secondAttribute="top" id="V4S-MB-Kay"/>
+                            <constraint firstAttribute="centerX" secondItem="PXd-hC-CNF" secondAttribute="centerX" constant="1" id="asI-ua-WVs"/>
                             <constraint firstItem="CBw-9W-xH2" firstAttribute="leading" secondItem="hoj-aW-4aX" secondAttribute="leading" constant="8" id="hEQ-gd-e4c"/>
+                            <constraint firstItem="PXd-hC-CNF" firstAttribute="top" secondItem="CBw-9W-xH2" secondAttribute="bottom" constant="6" id="mH5-1A-8dQ"/>
                             <constraint firstAttribute="centerX" secondItem="hCe-cD-hwS" secondAttribute="centerX" constant="1" id="u4f-m0-Mlo"/>
                         </constraints>
                     </view>
@@ -232,6 +244,9 @@
                     <constraint firstAttribute="trailing" secondItem="hoj-aW-4aX" secondAttribute="trailing" constant="10" id="vVk-uA-kIP"/>
                 </constraints>
             </tableViewCellContentView>
+            <connections>
+                <outlet property="buttonPushHobbies" destination="PXd-hC-CNF" id="VBM-Li-tDT"/>
+            </connections>
             <point key="canvasLocation" x="284" y="579"/>
         </tableViewCell>
         <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="jaf-ij-gGi" customClass="DSProfileTableViewCell">

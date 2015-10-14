@@ -13,5 +13,6 @@
 @property (weak, nonatomic) IBOutlet UILabel *labelTitleText;
 @property (weak, nonatomic) IBOutlet UILabel *labelDPTitleText;
 @property (weak, nonatomic) IBOutlet UITextField *textFieldDPPlaceHolder;
+@property (weak, nonatomic) IBOutlet UIButton *buttonPushHobbies;
 
 @end

@@ -9,5 +9,8 @@
 #import <UIKit/UIKit.h>
 
 @interface DSSplashViewController : UIViewController
+@property (strong, nonatomic) IBOutlet NSLayoutConstraint *layoutHeightConstraintSignUpBtn;
+@property (strong, nonatomic) IBOutlet NSLayoutConstraint *layoutHeightConstraintSignInBtn;
+
 @property (strong, nonatomic) IBOutlet UIView *buttonView;
 @end

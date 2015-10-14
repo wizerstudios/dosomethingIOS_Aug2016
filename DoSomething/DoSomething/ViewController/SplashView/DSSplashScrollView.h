@@ -7,9 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "pageControl.h"
 
 
 @protocol DSSplashViewController <NSObject>
+
+
 
 
 

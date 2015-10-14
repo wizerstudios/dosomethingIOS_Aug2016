@@ -20,8 +20,9 @@
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
 
     splashViewController = [[DSSplashViewController alloc] initWithNibName:@"DSSplashViewController" bundle:nil];
+    self.window.rootViewController = splashViewController;
     self.navigationController = [[UINavigationController alloc] initWithRootViewController:splashViewController];
-    self.window.rootViewController = self.navigationController;
+    [self.window setRootViewController:self.navigationController];
     self.window.backgroundColor=[UIColor whiteColor];
     [self.window makeKeyAndVisible];
     return YES;
