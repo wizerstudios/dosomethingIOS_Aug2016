@@ -12,6 +12,7 @@
 @interface DSProfileTableViewController ()<UITextFieldDelegate>
 {
     NSArray *placeHolderArray;
+    NSArray *titleArray;
 }
 @end
 
@@ -36,7 +37,7 @@
     
     CustomNavigationView *customNavigation;
     customNavigation = [[CustomNavigationView alloc] initWithNibName:@"CustomNavigationView" bundle:nil];
-    customNavigation.view.frame = CGRectMake(0, 0, CGRectGetWidth(self.view.frame), 56);
+    customNavigation.view.frame = CGRectMake(0, 0, CGRectGetWidth(self.view.frame), 45);
      [customNavigation.buttonBack addTarget:self action:@selector(BackAction) forControlEvents:UIControlEventTouchUpInside];
 //    [customNavigation setlogoutButtonHidden:YES];
 //    [customNavigation setbackButtonHidden:YES];
@@ -49,16 +50,9 @@
 }
 
 -(void)initializeArray{
-     placeHolderArray = [[NSArray alloc]initWithObjects:@"Firstname"@"Firstname",@"Lastname",@"male",@"Date of Birth",@"About You",@"Hobbies",nil];
+     placeHolderArray = [[NSArray alloc]initWithObjects:@"Firstname",@"Firstname",@"Lastname",@"male",@"DD/MM/YYYY",@"Write something about yourself here.",@"Hobbies",nil];
+    titleArray = [[NSArray alloc]initWithObjects:@"Firstname",@"Firstname",@"Lastname",@"male",@"Date of Birth",@"About You",@"Hobbies",nil];
     
-//       [placeHolderArray insertObject:[[NSMutableArray alloc]initWithObjects:
-//                                 [NSMutableDictionary dictionaryWithObjectsAndKeys:@"Firstname",@"placeholder", nil],
-//                                 [NSMutableDictionary dictionaryWithObjectsAndKeys:@"Lastname",@"placeholder", nil],
-//                                 [NSMutableDictionary dictionaryWithObjectsAndKeys:@"male",@"placeholder", nil],
-//                                 [NSMutableDictionary dictionaryWithObjectsAndKeys:@"Date of Birth",@"placeholder", nil],
-//                                 [NSMutableDictionary dictionaryWithObjectsAndKeys:@"About You",@"placeholder", nil],
-//                                 [NSMutableDictionary dictionaryWithObjectsAndKeys:@"Hobbies",@"placeholder", nil],
-//                                 nil] atIndex:0];
     
 }
 #pragma mark - TableView Datasource & Delegate
@@ -81,9 +75,13 @@
         return 200;
 
     }
-    if (indexPath.row == 5) {
+    if (indexPath.row == 6) {
         return 90;
     }
+    if (indexPath.row == 4) {
+        return 55;
+    }
+
     
     
     return 40;
@@ -99,8 +97,43 @@
     NSString *placeHolderText;
     
         placeHolderText =  [placeHolderArray objectAtIndex:indexPath.row];
+        titleText       =  [titleArray objectAtIndex:indexPath.row];
     
-    
+    if (indexPath.row == 6)
+    {
+        
+        if (cell == nil)
+        {
+            [[NSBundle mainBundle] loadNibNamed:@"DSProfileTableViewCell" owner:self options:nil];
+            cell = cellAddIcon;
+            
+        }
+        
+    }
+    if (indexPath.row == 4)
+    {
+        
+        if (cell == nil)
+        {
+            [[NSBundle mainBundle] loadNibNamed:@"DSProfileTableViewCell" owner:self options:nil];
+            cell = cellDatePicker;
+            
+        }
+        cell.textFieldDPPlaceHolder.placeholder = placeHolderText;
+        cell.labelDPTitleText.text = titleText;
+        
+    }
+    if (indexPath.row == 3)
+    {
+        if (cell == nil)
+        {
+            [[NSBundle mainBundle] loadNibNamed:@"DSProfileTableViewCell" owner:self  options:nil];
+            cell = cellButton;
+            
+        }
+    }
+
+
     
             if (indexPath.row == 0)
             {
@@ -113,30 +146,9 @@
                 }
                 
             }
-            if (indexPath.row == 3)
-            {
-                if (cell == nil)
-                {
-                    [[NSBundle mainBundle] loadNibNamed:@"DSProfileTableViewCell" owner:self  options:nil];
-                    cell = cellButton;
-                    
-                }
-            }
-    if (indexPath.row == 5)
-    {
-        
-        if (cell == nil)
-        {
-            [[NSBundle mainBundle] loadNibNamed:@"DSProfileTableViewCell" owner:self options:nil];
-            cell = cellAddIcon;
-            
-        }
-        
-    }
     
- 
     
-       if (indexPath.row == 1 || indexPath.row == 2 || indexPath.row == 4)
+       if (indexPath.row == 1 || indexPath.row == 2|| indexPath.row == 5)
        {
                 if (cell == nil)
                 {
@@ -146,7 +158,7 @@
                 }
     
                   
-    cell.placeHolderTextField.placeholder = titleText;
+    cell.textFieldPlaceHolder.placeholder = placeHolderText;
     cell.labelTitleText.text = titleText;
        }
 
