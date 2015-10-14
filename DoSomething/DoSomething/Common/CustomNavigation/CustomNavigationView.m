@@ -27,6 +27,7 @@
 - (void)viewDidLoad {
     
     [super viewDidLoad];
+    [self.view setFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width,65)];
     
 }
 

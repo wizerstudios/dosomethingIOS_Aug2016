@@ -38,7 +38,6 @@
 		EACB22BC1BC7C7F7002FAD54 /* DSLoginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = EACB22BA1BC7C7F7002FAD54 /* DSLoginViewController.xib */; };
 		EAED12701BCE55B00069E39D /* DSHobbiesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EAED126E1BCE55B00069E39D /* DSHobbiesViewController.m */; };
 		EAED12711BCE55B00069E39D /* DSHobbiesViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = EAED126F1BCE55B00069E39D /* DSHobbiesViewController.xib */; };
-		EAED127B1BCEA1280069E39D /* pageControl.m in Sources */ = {isa = PBXBuildFile; fileRef = EAED127A1BCEA1280069E39D /* pageControl.m */; };
 		EAF3D4A51BCB8EBA0097994D /* CustomNavigationView.m in Sources */ = {isa = PBXBuildFile; fileRef = EAF3D4A31BCB8EBA0097994D /* CustomNavigationView.m */; };
 		EAF3D4A61BCB8EBA0097994D /* CustomNavigationView.xib in Resources */ = {isa = PBXBuildFile; fileRef = EAF3D4A41BCB8EBA0097994D /* CustomNavigationView.xib */; };
 /* End PBXBuildFile section */
@@ -87,8 +86,6 @@
 		EAED126D1BCE55B00069E39D /* DSHobbiesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DSHobbiesViewController.h; sourceTree = "<group>"; };
 		EAED126E1BCE55B00069E39D /* DSHobbiesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DSHobbiesViewController.m; sourceTree = "<group>"; };
 		EAED126F1BCE55B00069E39D /* DSHobbiesViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DSHobbiesViewController.xib; sourceTree = "<group>"; };
-		EAED12791BCEA1280069E39D /* pageControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = pageControl.h; sourceTree = "<group>"; };
-		EAED127A1BCEA1280069E39D /* pageControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = pageControl.m; sourceTree = "<group>"; };
 		EAF3D4A21BCB8EBA0097994D /* CustomNavigationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomNavigationView.h; sourceTree = "<group>"; };
 		EAF3D4A31BCB8EBA0097994D /* CustomNavigationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomNavigationView.m; sourceTree = "<group>"; };
 		EAF3D4A41BCB8EBA0097994D /* CustomNavigationView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CustomNavigationView.xib; sourceTree = "<group>"; };
@@ -192,7 +189,6 @@
 		C6D5F6081BC7A4340050C1AE /* Common */ = {
 			isa = PBXGroup;
 			children = (
-				EAED12781BCEA1280069E39D /* pageControl */,
 				EAF3D4A11BCB8EBA0097994D /* CustomNavigation */,
 				C6D5F6471BC7BB540050C1AE /* AppCommon */,
 				C6D5F6121BC7B0970050C1AE /* AppDelegate */,
@@ -273,16 +269,6 @@
 			);
 			name = Hobbies;
 			path = ViewController/Hobbies;
-			sourceTree = "<group>";
-		};
-		EAED12781BCEA1280069E39D /* pageControl */ = {
-			isa = PBXGroup;
-			children = (
-				EAED12791BCEA1280069E39D /* pageControl.h */,
-				EAED127A1BCEA1280069E39D /* pageControl.m */,
-			);
-			name = pageControl;
-			path = Common/pageControl;
 			sourceTree = "<group>";
 		};
 		EAF3D4A11BCB8EBA0097994D /* CustomNavigation */ = {
@@ -395,7 +381,6 @@
 				C6D5F6151BC7B0970050C1AE /* AppDelegate.m in Sources */,
 				6A50C2271BCCC310002B11AC /* DSChatsTableViewController.m in Sources */,
 				EAF3D4A51BCB8EBA0097994D /* CustomNavigationView.m in Sources */,
-				EAED127B1BCEA1280069E39D /* pageControl.m in Sources */,
 				6A8D15D31BCC059B000F1FB4 /* DSProfileTableViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
