@@ -9,7 +9,9 @@
 #import <UIKit/UIKit.h>
 
 @interface DSProfileTableViewCell : UITableViewCell
-@property (weak, nonatomic) IBOutlet UITextField *placeHolderTextField;
+@property (weak, nonatomic) IBOutlet UITextField *textFieldPlaceHolder;
 @property (weak, nonatomic) IBOutlet UILabel *labelTitleText;
+@property (weak, nonatomic) IBOutlet UILabel *labelDPTitleText;
+@property (weak, nonatomic) IBOutlet UITextField *textFieldDPPlaceHolder;
 
 @end
