@@ -35,15 +35,15 @@
     
     self.navigationController.navigationBarHidden=NO;
     [self.navigationItem setHidesBackButton:YES animated:NO];
-    [self.navigationController setNavigationBarHidden:NO animated:NO];
-    [self.navigationController.navigationBar setTranslucent:YES];
+    [self.navigationController.navigationBar setTranslucent:NO];
+    
     CustomNavigationView *customNavigation;
     customNavigation = [[CustomNavigationView alloc] initWithNibName:@"CustomNavigationView" bundle:nil];    
-    [customNavigation.buttonBack addTarget:self action:@selector(BackAction) forControlEvents:UIControlEventTouchUpInside];
+    [customNavigation.buttonBack addTarget:self action:@selector(BackAction:) forControlEvents:UIControlEventTouchUpInside];
     [self.navigationController.navigationBar addSubview:customNavigation.view];
     
 }
-- (void)BackAction {
+- (IBAction)BackAction:(id)sender{
     [self.navigationController popViewControllerAnimated:YES];
 }
 - (void)pushToHobbiesView {
@@ -219,13 +219,9 @@
         
     }
     
-    
     [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
     return cell;
     
 }
-
-
-
 
 @end

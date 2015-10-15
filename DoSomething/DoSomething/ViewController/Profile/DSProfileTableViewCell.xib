@@ -404,19 +404,31 @@
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="az7-5N-PtG">
                         <rect key="frame" x="0.0" y="50" width="320" height="39"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="New Meassages" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qcr-zf-Jse">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="New Meassages" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qcr-zf-Jse">
                                 <rect key="frame" x="5" y="16" width="100" height="9"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="100" id="fPd-FA-5qx"/>
+                                    <constraint firstAttribute="height" constant="9" id="gSS-Ka-W3y"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" name="Patron-Regular" family="Patron" pointSize="10"/>
                                 <color key="textColor" red="0.63137254901960782" green="0.63137254901960782" blue="0.63137254901960782" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="switch_on" translatesAutoresizingMaskIntoConstraints="NO" id="AMx-wQ-Zv5">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="switch_on" translatesAutoresizingMaskIntoConstraints="NO" id="AMx-wQ-Zv5">
                                 <rect key="frame" x="205" y="10" width="30" height="20"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="30" id="gqG-o1-dxM"/>
+                                    <constraint firstAttribute="height" constant="20" id="hja-9g-rpo"/>
+                                </constraints>
                             </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="qcr-zf-Jse" firstAttribute="top" secondItem="az7-5N-PtG" secondAttribute="top" constant="16" id="Jev-XU-Box"/>
+                            <constraint firstItem="qcr-zf-Jse" firstAttribute="leading" secondItem="az7-5N-PtG" secondAttribute="leading" constant="5" id="PBu-Kv-aFk"/>
                             <constraint firstAttribute="height" constant="39" id="ZF0-Yf-4gk"/>
+                            <constraint firstItem="AMx-wQ-Zv5" firstAttribute="top" secondItem="az7-5N-PtG" secondAttribute="top" constant="10" id="pe8-lj-xLB"/>
+                            <constraint firstAttribute="trailing" secondItem="AMx-wQ-Zv5" secondAttribute="trailing" constant="85" id="tCk-Fa-iW0"/>
                         </constraints>
                     </view>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Notifications" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Uec-ou-dGP">

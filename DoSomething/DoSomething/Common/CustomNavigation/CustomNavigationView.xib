@@ -14,7 +14,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="CustomNavigationView">
             <connections>
-                <outlet property="buttonBack" destination="CB6-yC-cZA" id="hjE-pT-aq3"/>
+                <outlet property="buttonBack" destination="CB6-yC-cZA" id="aV4-Li-L44"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -27,7 +27,7 @@
                     <rect key="frame" x="0.0" y="0.0" width="320" height="65"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="D O S O M E T H I N G" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dl2-RR-YB9">
-                            <rect key="frame" x="60" y="32" width="200" height="20"/>
+                            <rect key="frame" x="60" y="25" width="200" height="20"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="20" id="JUN-JJ-bx8"/>
                                 <constraint firstAttribute="width" constant="200" id="RO1-a6-a7N"/>
@@ -37,7 +37,7 @@
                             <nil key="highlightedColor"/>
                         </label>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fn4-ol-eRv">
-                            <rect key="frame" x="274" y="32" width="46" height="20"/>
+                            <rect key="frame" x="274" y="25" width="46" height="20"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="46" id="czu-n9-pxv"/>
                                 <constraint firstAttribute="height" constant="20" id="doL-rQ-ee1"/>
@@ -49,7 +49,8 @@
                             </state>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CB6-yC-cZA">
-                            <rect key="frame" x="5" y="25" width="30" height="30"/>
+                            <rect key="frame" x="5" y="18" width="30" height="30"/>
+                            <color key="backgroundColor" red="0.63137254899999995" green="0.63137254899999995" blue="0.63137254899999995" alpha="1" colorSpace="calibratedRGB"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="30" id="8SC-TI-0zq"/>
                                 <constraint firstAttribute="height" constant="30" id="INr-Gb-dr6"/>
@@ -59,7 +60,7 @@
                             </state>
                         </button>
                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="back_Arrow" translatesAutoresizingMaskIntoConstraints="NO" id="EAr-ik-mY1">
-                            <rect key="frame" x="13" y="32" width="20" height="20"/>
+                            <rect key="frame" x="13" y="25" width="20" height="20"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="20" id="IHV-35-Llm"/>
                                 <constraint firstAttribute="width" constant="20" id="uym-a1-6f2"/>
@@ -68,16 +69,16 @@
                     </subviews>
                     <color key="backgroundColor" red="0.90196078431372551" green="0.24705882352941178" blue="0.31764705882352939" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
-                        <constraint firstItem="fn4-ol-eRv" firstAttribute="top" secondItem="t35-GY-BW2" secondAttribute="top" constant="32" id="0E8-Wl-9RF"/>
+                        <constraint firstItem="fn4-ol-eRv" firstAttribute="top" secondItem="t35-GY-BW2" secondAttribute="top" constant="25" id="0E8-Wl-9RF"/>
                         <constraint firstItem="EAr-ik-mY1" firstAttribute="leading" secondItem="t35-GY-BW2" secondAttribute="leading" constant="13" id="LGF-96-IAM"/>
                         <constraint firstAttribute="centerX" secondItem="dl2-RR-YB9" secondAttribute="centerX" id="SFy-VO-lyK"/>
                         <constraint firstAttribute="width" secondItem="t35-GY-BW2" secondAttribute="height" multiplier="64:15" constant="42.666666666666686" id="XNY-MS-LZ4"/>
                         <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="65" id="fcN-gz-jsr"/>
-                        <constraint firstItem="EAr-ik-mY1" firstAttribute="top" secondItem="t35-GY-BW2" secondAttribute="top" constant="32" id="hut-0E-Aen"/>
-                        <constraint firstItem="CB6-yC-cZA" firstAttribute="top" secondItem="t35-GY-BW2" secondAttribute="top" constant="25" id="jgU-n1-Cl3"/>
+                        <constraint firstItem="EAr-ik-mY1" firstAttribute="top" secondItem="t35-GY-BW2" secondAttribute="top" constant="25" id="hut-0E-Aen"/>
+                        <constraint firstItem="CB6-yC-cZA" firstAttribute="top" secondItem="t35-GY-BW2" secondAttribute="top" constant="18" id="jgU-n1-Cl3"/>
                         <constraint firstAttribute="trailing" secondItem="fn4-ol-eRv" secondAttribute="trailing" id="kDw-LV-nKr"/>
                         <constraint firstAttribute="height" constant="65" id="ufw-cB-yoh"/>
-                        <constraint firstItem="dl2-RR-YB9" firstAttribute="top" secondItem="t35-GY-BW2" secondAttribute="top" constant="32" id="vps-PD-Glk"/>
+                        <constraint firstItem="dl2-RR-YB9" firstAttribute="top" secondItem="t35-GY-BW2" secondAttribute="top" constant="25" id="vps-PD-Glk"/>
                         <constraint firstItem="CB6-yC-cZA" firstAttribute="leading" secondItem="t35-GY-BW2" secondAttribute="leading" constant="5" id="y5H-4k-Glg"/>
                     </constraints>
                 </view>
