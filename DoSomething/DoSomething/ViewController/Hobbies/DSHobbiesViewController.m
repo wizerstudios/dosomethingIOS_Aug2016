@@ -7,7 +7,6 @@
 //
 
 #import "DSHobbiesViewController.h"
-#import "CustomNavigationView.h"
 
 @interface DSHobbiesViewController ()
 
@@ -17,7 +16,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [self loadNavigation];
+//    [self loadNavigation];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -25,18 +24,18 @@
     // Dispose of any resources that can be recreated.
 }
 
--(void)loadNavigation{
-    
-    self.navigationController.navigationBarHidden=NO;
-    [self.navigationItem setHidesBackButton:YES animated:NO];
-    [self.navigationController.navigationBar setTranslucent:NO];
-    CustomNavigationView *customNavigation;
-    customNavigation = [[CustomNavigationView alloc] initWithNibName:@"CustomNavigationView" bundle:nil];    
-    [customNavigation.buttonBack addTarget:self action:@selector(BackAction) forControlEvents:UIControlEventTouchUpInside];
-    [self.navigationController.navigationBar addSubview:customNavigation.view];
-    
-    
-}
+//-(void)loadNavigation{
+//    
+//    self.navigationController.navigationBarHidden=NO;
+//    [self.navigationItem setHidesBackButton:YES animated:NO];
+//    [self.navigationController.navigationBar setTranslucent:NO];
+//    CustomNavigationView *customNavigation;
+//    customNavigation = [[CustomNavigationView alloc] initWithNibName:@"CustomNavigationView" bundle:nil];    
+//    [customNavigation.buttonBack addTarget:self action:@selector(BackAction) forControlEvents:UIControlEventTouchUpInside];
+//    [self.navigationController.navigationBar addSubview:customNavigation.view];
+//    
+//    
+//}
 - (void)BackAction {
     [self.navigationController popViewControllerAnimated:YES];
 }

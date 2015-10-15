@@ -8,7 +8,7 @@
 
 #import "DSProfileTableViewController.h"
 #import "DSHobbiesViewController.h"
-#import "CustomNavigationView.h"
+#import "CustomNavigation.h"
 
 
 @interface DSProfileTableViewController ()<UITextFieldDelegate>
@@ -22,8 +22,8 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [self loadNavigation];
     [self initializeArray];
+    [self loadNavigation];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -33,19 +33,15 @@
 
 -(void)loadNavigation{
     
-    self.navigationController.navigationBarHidden=NO;
-    [self.navigationItem setHidesBackButton:YES animated:NO];
-    [self.navigationController.navigationBar setTranslucent:NO];
+    self.navigationController.navigationBar.hidden      = NO;
     
-    CustomNavigationView *customNavigation;
-    customNavigation = [[CustomNavigationView alloc] initWithNibName:@"CustomNavigationView" bundle:nil];    
-    [customNavigation.buttonBack addTarget:self action:@selector(BackAction:) forControlEvents:UIControlEventTouchUpInside];
-    [self.navigationController.navigationBar addSubview:customNavigation.view];
+    self.navigationController.navigationBar.translucent = NO;
     
+    CustomNavigation *navigation = [[CustomNavigation alloc] initWithNibName:@"CustomNavigation" bundle:nil];
+    
+    [self.view addSubview:navigation.view];
 }
-- (IBAction)BackAction:(id)sender{
-    [self.navigationController popViewControllerAnimated:YES];
-}
+
 - (void)pushToHobbiesView {
     DSHobbiesViewController * DSHobbiesView  = [[DSHobbiesViewController alloc]initWithNibName:@"DSHobbiesViewController" bundle:nil];
     [self.navigationController pushViewController:DSHobbiesView animated:YES];
