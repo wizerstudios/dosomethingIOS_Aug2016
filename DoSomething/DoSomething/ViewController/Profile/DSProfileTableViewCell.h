@@ -14,5 +14,6 @@
 @property (weak, nonatomic) IBOutlet UILabel *labelDPTitleText;
 @property (weak, nonatomic) IBOutlet UITextField *textFieldDPPlaceHolder;
 @property (weak, nonatomic) IBOutlet UIButton *buttonPushHobbies;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *layoutConstraintViewHeight;
 
 @end

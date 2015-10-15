@@ -48,8 +48,12 @@
                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                             </state>
                         </button>
-                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CB6-yC-cZA">
-                            <rect key="frame" x="5" y="22" width="46" height="30"/>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CB6-yC-cZA">
+                            <rect key="frame" x="5" y="25" width="30" height="30"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="30" id="8SC-TI-0zq"/>
+                                <constraint firstAttribute="height" constant="30" id="INr-Gb-dr6"/>
+                            </constraints>
                             <state key="normal">
                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                             </state>
@@ -70,9 +74,11 @@
                         <constraint firstAttribute="width" secondItem="t35-GY-BW2" secondAttribute="height" multiplier="64:15" constant="42.666666666666686" id="XNY-MS-LZ4"/>
                         <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="65" id="fcN-gz-jsr"/>
                         <constraint firstItem="EAr-ik-mY1" firstAttribute="top" secondItem="t35-GY-BW2" secondAttribute="top" constant="32" id="hut-0E-Aen"/>
+                        <constraint firstItem="CB6-yC-cZA" firstAttribute="top" secondItem="t35-GY-BW2" secondAttribute="top" constant="25" id="jgU-n1-Cl3"/>
                         <constraint firstAttribute="trailing" secondItem="fn4-ol-eRv" secondAttribute="trailing" id="kDw-LV-nKr"/>
                         <constraint firstAttribute="height" constant="65" id="ufw-cB-yoh"/>
                         <constraint firstItem="dl2-RR-YB9" firstAttribute="top" secondItem="t35-GY-BW2" secondAttribute="top" constant="32" id="vps-PD-Glk"/>
+                        <constraint firstItem="CB6-yC-cZA" firstAttribute="leading" secondItem="t35-GY-BW2" secondAttribute="leading" constant="5" id="y5H-4k-Glg"/>
                     </constraints>
                 </view>
             </subviews>

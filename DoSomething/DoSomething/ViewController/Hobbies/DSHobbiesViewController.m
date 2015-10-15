@@ -27,16 +27,13 @@
 
 -(void)loadNavigation{
     
-    self.navigationController.navigationBarHidden=YES;
+    self.navigationController.navigationBarHidden=NO;
     [self.navigationItem setHidesBackButton:YES animated:NO];
     [self.navigationController.navigationBar setTranslucent:NO];
     CustomNavigationView *customNavigation;
-    customNavigation = [[CustomNavigationView alloc] initWithNibName:@"CustomNavigationView" bundle:nil];
-    
-    customNavigation.view.frame = CGRectMake(0, 0, CGRectGetWidth(self.view.frame), 65);
-    customNavigation.view.backgroundColor =[UIColor blackColor];
+    customNavigation = [[CustomNavigationView alloc] initWithNibName:@"CustomNavigationView" bundle:nil];    
     [customNavigation.buttonBack addTarget:self action:@selector(BackAction) forControlEvents:UIControlEventTouchUpInside];
-    [self.view addSubview:customNavigation.view];
+    [self.navigationController.navigationBar addSubview:customNavigation.view];
     
     
 }

@@ -33,17 +33,14 @@
 
 -(void)loadNavigation{
     
-    self.navigationController.navigationBarHidden=YES;
+    self.navigationController.navigationBarHidden=NO;
     [self.navigationItem setHidesBackButton:YES animated:NO];
-    [self.navigationController.navigationBar setTranslucent:NO];
-    
+    [self.navigationController setNavigationBarHidden:NO animated:NO];
+    [self.navigationController.navigationBar setTranslucent:YES];
     CustomNavigationView *customNavigation;
-    customNavigation = [[CustomNavigationView alloc] initWithNibName:@"CustomNavigationView" bundle:nil];
-    customNavigation.view.frame = CGRectMake(0, 0, CGRectGetWidth(self.view.frame),10);
-    customNavigation.view.backgroundColor =[UIColor blackColor];
-     [customNavigation.buttonBack addTarget:self action:@selector(BackAction) forControlEvents:UIControlEventTouchUpInside];
-    [self.view addSubview:customNavigation.view];    
-    
+    customNavigation = [[CustomNavigationView alloc] initWithNibName:@"CustomNavigationView" bundle:nil];    
+    [customNavigation.buttonBack addTarget:self action:@selector(BackAction) forControlEvents:UIControlEventTouchUpInside];
+    [self.navigationController.navigationBar addSubview:customNavigation.view];
     
 }
 - (void)BackAction {
@@ -56,8 +53,8 @@
 }
 
 -(void)initializeArray{
-     placeHolderArray = [[NSArray alloc]initWithObjects:@"Firstname",@"Firstname",@"Lastname",@"male",@"DD/MM/YYYY",@"Write something about yourself here.",@"Hobbies",nil];
-    titleArray = [[NSArray alloc]initWithObjects:@"Firstname",@"Firstname",@"Lastname",@"male",@"Date of Birth",@"About You",@"Hobbies",nil];
+     placeHolderArray = [[NSArray alloc]initWithObjects:@"Firstname",@"Firstname",@"Lastname",@"male",@"DD/MM/YYYY",@"Write something about yourself here.",@"Hobbies",@"Email&Password",@"switch_on",@"TermsOfUse",nil];
+    titleArray = [[NSArray alloc]initWithObjects:@"Firstname",@"Firstname",@"Lastname",@"male",@"Date of Birth",@"About You",@"Hobbies",@"Email&Password",@"switch_on",@"TermsOfUse",nil];
     
     
 }
@@ -79,16 +76,21 @@
     
     if (indexPath.row == 0 ){
         return 200;
-
-    }
-    if (indexPath.row == 6) {
-        return 90;
     }
     if (indexPath.row == 4) {
         return 55;
     }
-
-    
+   
+    if (indexPath.row == 6 || indexPath.row ==8) {
+        return 90;
+    }
+    if ( indexPath.row == 7) {
+        return 120;
+    }
+   
+    if (indexPath.row == 9) {
+        return 80;
+    }
     
     return 40;
 }
@@ -104,19 +106,41 @@
     
         placeHolderText =  [placeHolderArray objectAtIndex:indexPath.row];
         titleText       =  [titleArray objectAtIndex:indexPath.row];
-    
-    if (indexPath.row == 6)
+    if (indexPath.row == 0)
     {
         
         if (cell == nil)
         {
             [[NSBundle mainBundle] loadNibNamed:@"DSProfileTableViewCell" owner:self options:nil];
-            cell = cellAddIcon;
+            cell = cellProfileImg;
             
         }
-        [cell.buttonPushHobbies addTarget:self action:@selector(pushToHobbiesView) forControlEvents:UIControlEventTouchUpInside];
         
     }
+    if (indexPath.row == 1 || indexPath.row == 2)
+    {
+        if (cell == nil)
+        {
+            [[NSBundle mainBundle] loadNibNamed:@"DSProfileTableViewCell" owner:self options:nil];
+            cell = cellTextField;
+            
+        }
+        
+        
+        cell.textFieldPlaceHolder.placeholder = placeHolderText;
+        cell.labelTitleText.text = titleText;
+    }
+    if (indexPath.row == 3)
+    {
+        if (cell == nil)
+        {
+            [[NSBundle mainBundle] loadNibNamed:@"DSProfileTableViewCell" owner:self  options:nil];
+            cell = cellButton;
+            
+        }
+    }
+
+
     if (indexPath.row == 4)
     {
         
@@ -130,45 +154,72 @@
         cell.labelDPTitleText.text = titleText;
         
     }
-    if (indexPath.row == 3)
+    if (indexPath.row == 5)
     {
         if (cell == nil)
         {
-            [[NSBundle mainBundle] loadNibNamed:@"DSProfileTableViewCell" owner:self  options:nil];
-            cell = cellButton;
+            [[NSBundle mainBundle] loadNibNamed:@"DSProfileTableViewCell" owner:self options:nil];
+            cell = cellTextField;
             
         }
+        
+        cell.layoutConstraintViewHeight.constant =54;
+        cell.textFieldPlaceHolder.placeholder = placeHolderText;
+        cell.labelTitleText.text = titleText;
     }
 
+    
+    if (indexPath.row == 6)
+    {
+        
+        if (cell == nil)
+        {
+            [[NSBundle mainBundle] loadNibNamed:@"DSProfileTableViewCell" owner:self options:nil];
+            cell = cellAddIcon;
+            
+        }
+        [cell.buttonPushHobbies addTarget:self action:@selector(pushToHobbiesView) forControlEvents:UIControlEventTouchUpInside];
+        
+    }
+   
+    
 
-    
-            if (indexPath.row == 0)
-            {
-                
-                if (cell == nil)
-                {
-                    [[NSBundle mainBundle] loadNibNamed:@"DSProfileTableViewCell" owner:self options:nil];
-                    cell = cellProfileImg;
-                    
-                }
-                
-            }
-    
-    
-       if (indexPath.row == 1 || indexPath.row == 2|| indexPath.row == 5)
-       {
-                if (cell == nil)
-                {
-                    [[NSBundle mainBundle] loadNibNamed:@"DSProfileTableViewCell" owner:self options:nil];
-                     cell = cellTextField;
-                    
-                }
-    
-                  
-    cell.textFieldPlaceHolder.placeholder = placeHolderText;
-    cell.labelTitleText.text = titleText;
-       }
+    if (indexPath.row == 7)
+    {
+        
+        if (cell == nil)
+        {
+            [[NSBundle mainBundle] loadNibNamed:@"DSProfileTableViewCell" owner:self options:nil];
+            cell = cellEmailPassword;
+            
+        }
+        
+    }
+    if (indexPath.row == 8)
+    {
+        
+        if (cell == nil)
+        {
+            [[NSBundle mainBundle] loadNibNamed:@"DSProfileTableViewCell" owner:self options:nil];
+            cell = CellSwitchOn;
+            
+        }
+        
+    }
 
+    if (indexPath.row == 9)
+    {
+        
+        if (cell == nil)
+        {
+            [[NSBundle mainBundle] loadNibNamed:@"DSProfileTableViewCell" owner:self options:nil];
+            cell = CellTermsOfUse;
+            
+        }
+        
+    }
+    
+    
     [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
     return cell;
     

@@ -16,7 +16,9 @@
  IBOutlet DSProfileTableViewCell *cellAddIcon;
  IBOutlet DSProfileTableViewCell *cellTextField;
  IBOutlet DSProfileTableViewCell *cellDatePicker;
-
+ IBOutlet DSProfileTableViewCell *cellEmailPassword;
+ IBOutlet DSProfileTableViewCell *CellSwitchOn;
+ IBOutlet DSProfileTableViewCell *CellTermsOfUse;
 }
 @property (strong, nonatomic) IBOutlet UITableView *tableviewProfile;
 

@@ -19,15 +19,17 @@
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ina-fx-Lum">
                     <rect key="frame" x="0.0" y="0.0" width="320" height="570"/>
                     <subviews>
-                        <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="HcG-cC-Fek">
-                            <rect key="frame" x="10" y="25" width="300" height="545"/>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ui0-Zy-Ddu">
+                            <rect key="frame" x="0.0" y="0.0" width="320" height="20"/>
+                            <color key="backgroundColor" red="0.89411764709999997" green="0.1647058824" blue="0.01176470588" alpha="1" colorSpace="calibratedRGB"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="20" id="6tL-8J-HJU"/>
+                            </constraints>
+                        </view>
+                        <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="HcG-cC-Fek">
+                            <rect key="frame" x="10" y="85" width="300" height="485"/>
                             <color key="backgroundColor" red="0.90980392156862744" green="0.90980392156862744" blue="0.90980392156862744" alpha="1" colorSpace="calibratedRGB"/>
                             <color key="sectionIndexBackgroundColor" red="0.90980392156862744" green="0.90980392156862744" blue="0.90980392156862744" alpha="1" colorSpace="calibratedRGB"/>
-                            <view key="tableHeaderView" contentMode="scaleToFill" id="E0L-1V-gEn">
-                                <rect key="frame" x="0.0" y="0.0" width="300" height="20"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                            </view>
                             <connections>
                                 <outlet property="dataSource" destination="-1" id="6gW-oT-ZQd"/>
                                 <outlet property="delegate" destination="-1" id="gkf-pE-zHf"/>
@@ -36,10 +38,13 @@
                     </subviews>
                     <color key="backgroundColor" red="0.90980392156862744" green="0.90980392156862744" blue="0.90980392156862744" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
-                        <constraint firstItem="HcG-cC-Fek" firstAttribute="leading" secondItem="ina-fx-Lum" secondAttribute="leading" constant="10" id="4vR-Xn-zlc"/>
-                        <constraint firstAttribute="bottom" secondItem="HcG-cC-Fek" secondAttribute="bottom" id="APx-oD-dMv"/>
-                        <constraint firstAttribute="trailing" secondItem="HcG-cC-Fek" secondAttribute="trailing" constant="10" id="T59-JO-CdM"/>
-                        <constraint firstItem="HcG-cC-Fek" firstAttribute="top" secondItem="ina-fx-Lum" secondAttribute="top" constant="25" id="Uo0-6N-Nym"/>
+                        <constraint firstItem="ui0-Zy-Ddu" firstAttribute="top" secondItem="ina-fx-Lum" secondAttribute="top" id="4ds-Jg-D97"/>
+                        <constraint firstItem="HcG-cC-Fek" firstAttribute="top" secondItem="ui0-Zy-Ddu" secondAttribute="bottom" constant="65" id="5oi-zk-EhR"/>
+                        <constraint firstItem="ui0-Zy-Ddu" firstAttribute="leading" secondItem="ina-fx-Lum" secondAttribute="leading" id="IRR-2a-7cE"/>
+                        <constraint firstItem="HcG-cC-Fek" firstAttribute="leading" secondItem="ina-fx-Lum" secondAttribute="leading" constant="10" id="Lq3-as-LJL"/>
+                        <constraint firstAttribute="trailing" secondItem="ui0-Zy-Ddu" secondAttribute="trailing" id="Nra-GQ-acH"/>
+                        <constraint firstAttribute="trailing" secondItem="HcG-cC-Fek" secondAttribute="trailing" constant="10" id="n7z-KV-065"/>
+                        <constraint firstAttribute="bottom" secondItem="HcG-cC-Fek" secondAttribute="bottom" id="oee-Jd-ya4"/>
                     </constraints>
                 </view>
             </subviews>
@@ -50,7 +55,7 @@
                 <constraint firstAttribute="trailing" secondItem="ina-fx-Lum" secondAttribute="trailing" id="pWO-kF-1wn"/>
                 <constraint firstItem="ina-fx-Lum" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="tOb-VD-NH4"/>
             </constraints>
-            <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="blackOpaque"/>
+            <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="lightContent"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <point key="canvasLocation" x="232" y="368"/>
         </view>
