@@ -52,8 +52,8 @@
 		EAEF25281BCF9EF600F83E82 /* IQToolbar.m in Sources */ = {isa = PBXBuildFile; fileRef = EAEF25171BCF9EF600F83E82 /* IQToolbar.m */; };
 		EAEF25291BCF9EF600F83E82 /* IQUIView+IQKeyboardToolbar.m in Sources */ = {isa = PBXBuildFile; fileRef = EAEF25191BCF9EF600F83E82 /* IQUIView+IQKeyboardToolbar.m */; };
 		EAEF252A1BCF9EF600F83E82 /* IQKeyboardManager.bundle in Resources */ = {isa = PBXBuildFile; fileRef = EAEF251C1BCF9EF600F83E82 /* IQKeyboardManager.bundle */; };
-		EAEF252E1BCFCA8600F83E82 /* CustomNavigation.m in Sources */ = {isa = PBXBuildFile; fileRef = EAEF252C1BCFCA8600F83E82 /* CustomNavigation.m */; };
-		EAEF252F1BCFCA8600F83E82 /* CustomNavigation.xib in Resources */ = {isa = PBXBuildFile; fileRef = EAEF252D1BCFCA8600F83E82 /* CustomNavigation.xib */; };
+		EAEF25351BCFEBF400F83E82 /* CustomNavigationView.m in Sources */ = {isa = PBXBuildFile; fileRef = EAEF25331BCFEBF400F83E82 /* CustomNavigationView.m */; };
+		EAEF25361BCFEBF400F83E82 /* CustomNavigationView.xib in Resources */ = {isa = PBXBuildFile; fileRef = EAEF25341BCFEBF400F83E82 /* CustomNavigationView.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -130,9 +130,9 @@
 		EAEF25191BCF9EF600F83E82 /* IQUIView+IQKeyboardToolbar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "IQUIView+IQKeyboardToolbar.m"; sourceTree = "<group>"; };
 		EAEF251A1BCF9EF600F83E82 /* KeyboardManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KeyboardManager.h; sourceTree = "<group>"; };
 		EAEF251C1BCF9EF600F83E82 /* IQKeyboardManager.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = IQKeyboardManager.bundle; sourceTree = "<group>"; };
-		EAEF252B1BCFCA8600F83E82 /* CustomNavigation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CustomNavigation.h; path = CustomNavigation/CustomNavigation.h; sourceTree = "<group>"; };
-		EAEF252C1BCFCA8600F83E82 /* CustomNavigation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CustomNavigation.m; path = CustomNavigation/CustomNavigation.m; sourceTree = "<group>"; };
-		EAEF252D1BCFCA8600F83E82 /* CustomNavigation.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = CustomNavigation.xib; path = CustomNavigation/CustomNavigation.xib; sourceTree = "<group>"; };
+		EAEF25321BCFEBF400F83E82 /* CustomNavigationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomNavigationView.h; sourceTree = "<group>"; };
+		EAEF25331BCFEBF400F83E82 /* CustomNavigationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomNavigationView.m; sourceTree = "<group>"; };
+		EAEF25341BCFEBF400F83E82 /* CustomNavigationView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CustomNavigationView.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -233,7 +233,7 @@
 		C6D5F6081BC7A4340050C1AE /* Common */ = {
 			isa = PBXGroup;
 			children = (
-				EAEF25301BCFCA9700F83E82 /* Custom Navigation */,
+				EAEF25311BCFEBF400F83E82 /* CustomNavigation */,
 				EAEF24F81BCF9EF600F83E82 /* IQKeyBoardManager */,
 				C6D5F6471BC7BB540050C1AE /* AppCommon */,
 				C6D5F6121BC7B0970050C1AE /* AppDelegate */,
@@ -402,14 +402,15 @@
 			path = Resources;
 			sourceTree = "<group>";
 		};
-		EAEF25301BCFCA9700F83E82 /* Custom Navigation */ = {
+		EAEF25311BCFEBF400F83E82 /* CustomNavigation */ = {
 			isa = PBXGroup;
 			children = (
-				EAEF252B1BCFCA8600F83E82 /* CustomNavigation.h */,
-				EAEF252C1BCFCA8600F83E82 /* CustomNavigation.m */,
-				EAEF252D1BCFCA8600F83E82 /* CustomNavigation.xib */,
+				EAEF25321BCFEBF400F83E82 /* CustomNavigationView.h */,
+				EAEF25331BCFEBF400F83E82 /* CustomNavigationView.m */,
+				EAEF25341BCFEBF400F83E82 /* CustomNavigationView.xib */,
 			);
-			name = "Custom Navigation";
+			name = CustomNavigation;
+			path = Common/CustomNavigation;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -471,6 +472,7 @@
 			files = (
 				EAEF252A1BCF9EF600F83E82 /* IQKeyboardManager.bundle in Resources */,
 				C6D5F63F1BC7B52C0050C1AE /* Patron-ExtraLightItalic.ttf in Resources */,
+				EAEF25361BCFEBF400F83E82 /* CustomNavigationView.xib in Resources */,
 				C6D5F63D1BC7B52C0050C1AE /* Patron-BoldItalic.ttf in Resources */,
 				6A50C21D1BCCBB8C002B11AC /* DSProfileTableViewCell.xib in Resources */,
 				C6D5F6391BC7B52C0050C1AE /* FutworaPro-Regular.otf in Resources */,
@@ -485,7 +487,6 @@
 				C6D5F6441BC7B52C0050C1AE /* Patron-Thin.ttf in Resources */,
 				C6D5F6411BC7B52C0050C1AE /* Patron-Medium.ttf in Resources */,
 				C6D5F6431BC7B52C0050C1AE /* Patron-Regular.ttf in Resources */,
-				EAEF252F1BCFCA8600F83E82 /* CustomNavigation.xib in Resources */,
 				C6D5F67C1BC7EC440050C1AE /* Images.xcassets in Resources */,
 				C6D5F6451BC7B52C0050C1AE /* Patron-ThinItalic.ttf in Resources */,
 				C6D5F63E1BC7B52C0050C1AE /* Patron-ExtraLight.ttf in Resources */,
@@ -510,7 +511,6 @@
 				EAEF251E1BCF9EF600F83E82 /* IQUITextFieldView+Additions.m in Sources */,
 				EAED12701BCE55B00069E39D /* DSHobbiesViewController.m in Sources */,
 				6A50C22F1BCCFF36002B11AC /* DSSplashScrollView.m in Sources */,
-				EAEF252E1BCFCA8600F83E82 /* CustomNavigation.m in Sources */,
 				EAEF25261BCF9EF600F83E82 /* IQBarButtonItem.m in Sources */,
 				EAEF25271BCF9EF600F83E82 /* IQTitleBarButtonItem.m in Sources */,
 				EAEF251F1BCF9EF600F83E82 /* IQUIView+Hierarchy.m in Sources */,
@@ -518,6 +518,7 @@
 				6A50C2301BCCFF36002B11AC /* DSSplashViewController.m in Sources */,
 				6A50C21C1BCCBB8C002B11AC /* DSProfileTableViewCell.m in Sources */,
 				EAEF25241BCF9EF600F83E82 /* IQSegmentedNextPrevious.m in Sources */,
+				EAEF25351BCFEBF400F83E82 /* CustomNavigationView.m in Sources */,
 				EAEF25251BCF9EF600F83E82 /* IQTextView.m in Sources */,
 				EAEF25211BCF9EF600F83E82 /* IQUIWindow+Hierarchy.m in Sources */,
 				EAEF25231BCF9EF600F83E82 /* IQKeyboardReturnKeyHandler.m in Sources */,

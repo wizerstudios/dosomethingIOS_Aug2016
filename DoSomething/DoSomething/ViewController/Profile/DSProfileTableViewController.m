@@ -8,7 +8,8 @@
 
 #import "DSProfileTableViewController.h"
 #import "DSHobbiesViewController.h"
-#import "CustomNavigation.h"
+#import "CustomNavigationView.h"
+#import "DSConfig.h"
 
 
 @interface DSProfileTableViewController ()<UITextFieldDelegate>
@@ -30,16 +31,27 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-
 -(void)loadNavigation{
     
-    self.navigationController.navigationBar.hidden      = NO;
+    self.navigationController.navigationBarHidden=NO;
+    [self.navigationItem setHidesBackButton:YES animated:NO];
+    [self.navigationController.navigationBar setTranslucent:YES];
     
-    self.navigationController.navigationBar.translucent = NO;
+    CustomNavigationView *customNavigation;
+    customNavigation = [[CustomNavigationView alloc] initWithNibName:@"CustomNavigationView" bundle:nil];
+     if (IS_IPHONE4 ||IS_IPHONE5)
+     {
+    customNavigation.view.frame = CGRectMake(0,-20, CGRectGetWidth(self.view.frame), 65);
+     }
+    customNavigation.view.frame = CGRectMake(0,-20, 420, 83);
+
+    [self.navigationController.navigationBar addSubview:customNavigation.view];
     
-    CustomNavigation *navigation = [[CustomNavigation alloc] initWithNibName:@"CustomNavigation" bundle:nil];
-    
-    [self.view addSubview:navigation.view];
+    [customNavigation.buttonBack addTarget:self action:@selector(backAction) forControlEvents:UIControlEventTouchUpInside];
+}
+-(void)backAction
+{
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 - (void)pushToHobbiesView {
@@ -49,8 +61,8 @@
 }
 
 -(void)initializeArray{
-     placeHolderArray = [[NSArray alloc]initWithObjects:@"Firstname",@"Firstname",@"Lastname",@"male",@"DD/MM/YYYY",@"Write something about yourself here.",@"Hobbies",@"Email&Password",@"switch_on",@"TermsOfUse",nil];
-    titleArray = [[NSArray alloc]initWithObjects:@"Firstname",@"Firstname",@"Lastname",@"male",@"Date of Birth",@"About You",@"Hobbies",@"Email&Password",@"switch_on",@"TermsOfUse",nil];
+     placeHolderArray = [[NSArray alloc]initWithObjects:@"Image",@"First Name",@"Last Name",@"male",@"DD / MM / YYYY",@"Write something about yourself here.",@"Hobbies",@"Email&Password",@"switch_on",@"TermsOfUse",nil];
+    titleArray = [[NSArray alloc]initWithObjects:@"Image",@"First Name",@"Last Name",@"male",@"Date of Birth",@"About You",@"Hobbies",@"Email&Password",@"switch_on",@"TermsOfUse",nil];
     
     
 }
@@ -69,26 +81,48 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    
+    if (IS_IPHONE4 ||IS_IPHONE5){
     if (indexPath.row == 0 ){
         return 200;
+        }
+        if (indexPath.row == 4) {
+            return 55;
+        }
+        
+        if (indexPath.row == 6 || indexPath.row ==8) {
+            return 90;
+        }
+        if ( indexPath.row == 7) {
+            return 120;
+        }
+        
+        if (indexPath.row == 9) {
+            return 80;
+        }
+
+         return 40;
+    }
+    if (indexPath.row == 0 ){
+        return 258;
     }
     if (indexPath.row == 4) {
-        return 55;
+        return 65;
     }
-   
+    
     if (indexPath.row == 6 || indexPath.row ==8) {
         return 90;
     }
     if ( indexPath.row == 7) {
         return 120;
     }
-   
+    
     if (indexPath.row == 9) {
         return 80;
     }
+
+        return 50;
     
-    return 40;
+   
 }
 
 
@@ -121,6 +155,11 @@
             cell = cellTextField;
             
         }
+        if (IS_IPHONE6 ||IS_IPHONE6_Plus)
+        {
+            cell.layoutConstraintViewHeight.constant =49;
+
+        }
         
         
         cell.textFieldPlaceHolder.placeholder = placeHolderText;
@@ -146,6 +185,11 @@
             cell = cellDatePicker;
             
         }
+        if (IS_IPHONE6 ||IS_IPHONE6_Plus)
+        {
+            cell.layoutConstraintDatePickerViewYPos.constant =49;
+            
+        }
         cell.textFieldDPPlaceHolder.placeholder = placeHolderText;
         cell.labelDPTitleText.text = titleText;
         
@@ -158,8 +202,14 @@
             cell = cellTextField;
             
         }
+        cell.layoutConstraintViewHeight.constant =40;
+
+        if (IS_IPHONE6 ||IS_IPHONE6_Plus)
+        {
+            cell.layoutConstraintViewHeight.constant =49;
+            
+        }
         
-        cell.layoutConstraintViewHeight.constant =54;
         cell.textFieldPlaceHolder.placeholder = placeHolderText;
         cell.labelTitleText.text = titleText;
     }

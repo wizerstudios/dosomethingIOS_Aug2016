@@ -15,5 +15,7 @@
 @property (weak, nonatomic) IBOutlet UITextField *textFieldDPPlaceHolder;
 @property (weak, nonatomic) IBOutlet UIButton *buttonPushHobbies;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *layoutConstraintViewHeight;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *layoutConstraintDatePickerViewYPos;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *layoutConstraintDatePickerViewHeight;
 
 @end

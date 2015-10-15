@@ -11,7 +11,7 @@
 #import "DSProfileTableViewController.h"
 #import "DSConfig.h"
 #import "DSAppCommon.h"
-#import "CustomNavigation.h"
+#import "CustomNavigationView.h"
 
 
 

@@ -11,10 +11,12 @@
             <string>Patron-Bold</string>
             <string>Patron-Bold</string>
             <string>Patron-Bold</string>
+            <string>Patron-Bold</string>
+            <string>Patron-Bold</string>
+            <string>Patron-Bold</string>
+            <string>Patron-Bold</string>
         </mutableArray>
         <mutableArray key="Patron-Regular.ttf">
-            <string>Patron-Regular</string>
-            <string>Patron-Regular</string>
             <string>Patron-Regular</string>
             <string>Patron-Regular</string>
             <string>Patron-Regular</string>
@@ -62,7 +64,7 @@
                                     <constraint firstAttribute="height" constant="21" id="1u2-3f-aol"/>
                                     <constraint firstAttribute="width" constant="75" id="aSn-C0-XXz"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" name="Patron-Regular" family="Patron" pointSize="12"/>
+                                <fontDescription key="fontDescription" name="Patron-Bold" family="Patron" pointSize="12"/>
                                 <color key="textColor" red="0.63137254901960782" green="0.63137254901960782" blue="0.63137254901960782" alpha="1" colorSpace="deviceRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
@@ -94,7 +96,8 @@
                 </constraints>
             </tableViewCellContentView>
             <connections>
-                <outlet property="layoutConstraintViewHeight" destination="FnL-mI-8IP" id="WvD-S3-8vK"/>
+                <outlet property="layoutConstraintDatePickerViewHeight" destination="52Q-9f-cv2" id="866-WY-gN9"/>
+                <outlet property="layoutConstraintDatePickerViewYPos" destination="0aR-x0-d8A" id="zs0-oQ-NDb"/>
             </connections>
             <point key="canvasLocation" x="286" y="158"/>
         </tableViewCell>
@@ -105,7 +108,7 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ybA-oX-dju">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="38"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="39"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ybe-7x-IRf">
                                 <rect key="frame" x="5" y="10" width="75" height="16"/>
@@ -118,9 +121,9 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="gK1-Mm-U1j">
-                                <rect key="frame" x="80" y="0.0" width="220" height="38"/>
+                                <rect key="frame" x="100" y="0.0" width="220" height="40"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <fontDescription key="fontDescription" name="Patron-Regular" family="Patron" pointSize="9"/>
+                                <fontDescription key="fontDescription" name="Patron-Regular" family="Patron" pointSize="10"/>
                                 <textInputTraits key="textInputTraits"/>
                                 <connections>
                                     <outlet property="delegate" destination="-1" id="nFh-KG-BU8"/>
@@ -129,13 +132,13 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstAttribute="height" constant="38" id="FnL-mI-8IP"/>
-                            <constraint firstAttribute="bottom" secondItem="gK1-Mm-U1j" secondAttribute="bottom" id="GOE-cF-2Ii"/>
+                            <constraint firstAttribute="height" constant="39" id="FnL-mI-8IP"/>
+                            <constraint firstAttribute="bottom" secondItem="gK1-Mm-U1j" secondAttribute="bottom" constant="-1" id="GOE-cF-2Ii"/>
                             <constraint firstItem="gK1-Mm-U1j" firstAttribute="top" secondItem="ybA-oX-dju" secondAttribute="top" id="TOj-3d-84h"/>
                             <constraint firstItem="Ybe-7x-IRf" firstAttribute="leading" secondItem="ybA-oX-dju" secondAttribute="leading" constant="5" id="bt7-HS-a5r"/>
                             <constraint firstItem="Ybe-7x-IRf" firstAttribute="top" secondItem="ybA-oX-dju" secondAttribute="top" constant="10" id="dU8-Na-Q8V"/>
-                            <constraint firstItem="gK1-Mm-U1j" firstAttribute="leading" secondItem="Ybe-7x-IRf" secondAttribute="trailing" id="vrF-c7-Biy"/>
-                            <constraint firstAttribute="trailing" secondItem="gK1-Mm-U1j" secondAttribute="trailing" constant="20" id="wDx-hG-UgV"/>
+                            <constraint firstItem="gK1-Mm-U1j" firstAttribute="leading" secondItem="Ybe-7x-IRf" secondAttribute="trailing" constant="20" id="vrF-c7-Biy"/>
+                            <constraint firstAttribute="trailing" secondItem="gK1-Mm-U1j" secondAttribute="trailing" id="wDx-hG-UgV"/>
                         </constraints>
                     </view>
                 </subviews>
@@ -146,12 +149,18 @@
                     <constraint firstItem="ybA-oX-dju" firstAttribute="top" secondItem="bUT-el-FE9" secondAttribute="top" id="eP6-TB-Kh9"/>
                     <constraint firstAttribute="trailing" secondItem="ybA-oX-dju" secondAttribute="trailing" id="gUa-mF-cfc"/>
                 </constraints>
+                <variation key="default">
+                    <mask key="constraints">
+                        <exclude reference="WTa-h8-3OY"/>
+                    </mask>
+                </variation>
             </tableViewCellContentView>
             <connections>
                 <outlet property="labelTitleText" destination="Ybe-7x-IRf" id="SE5-Eo-YfH"/>
+                <outlet property="layoutConstraintViewHeight" destination="FnL-mI-8IP" id="4JY-Ur-uGV"/>
                 <outlet property="textFieldPlaceHolder" destination="gK1-Mm-U1j" id="j7l-0n-gRF"/>
             </connections>
-            <point key="canvasLocation" x="278" y="327"/>
+            <point key="canvasLocation" x="751" y="68"/>
         </tableViewCell>
         <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="4Qx-3m-Frc" customClass="DSProfileTableViewCell">
             <rect key="frame" x="0.0" y="0.0" width="320" height="40"/>
@@ -172,10 +181,10 @@
                                 </state>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LoD-qB-lM8">
-                                <rect key="frame" x="0.0" y="0.0" width="159" height="38"/>
+                                <rect key="frame" x="0.0" y="0.0" width="160" height="38"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="159" id="QGC-eB-yKu"/>
+                                    <constraint firstAttribute="width" constant="160" id="QGC-eB-yKu"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="Patron-Regular" family="Patron" pointSize="10"/>
                                 <state key="normal" title="Male">
@@ -190,10 +199,10 @@
                             <constraint firstAttribute="bottom" secondItem="LoD-qB-lM8" secondAttribute="bottom" id="Lia-2L-10f"/>
                             <constraint firstAttribute="trailing" secondItem="Ge4-Nf-ula" secondAttribute="trailing" id="MMH-Xb-pC2"/>
                             <constraint firstAttribute="height" constant="38" id="N4O-cz-hBp"/>
-                            <constraint firstItem="LoD-qB-lM8" firstAttribute="width" secondItem="Ge4-Nf-ula" secondAttribute="width" id="Th6-jn-o49"/>
+                            <constraint firstItem="LoD-qB-lM8" firstAttribute="width" secondItem="Ge4-Nf-ula" secondAttribute="width" constant="1" id="Th6-jn-o49"/>
                             <constraint firstItem="LoD-qB-lM8" firstAttribute="top" secondItem="PhM-S8-8li" secondAttribute="top" id="Thb-Uh-cDY"/>
-                            <constraint firstItem="Ge4-Nf-ula" firstAttribute="leading" secondItem="LoD-qB-lM8" secondAttribute="trailing" constant="2" id="UqI-PO-7Cb"/>
-                            <constraint firstItem="Ge4-Nf-ula" firstAttribute="leading" secondItem="LoD-qB-lM8" secondAttribute="trailing" constant="2" id="jlK-yY-in9"/>
+                            <constraint firstItem="Ge4-Nf-ula" firstAttribute="leading" secondItem="LoD-qB-lM8" secondAttribute="trailing" constant="1" id="UqI-PO-7Cb"/>
+                            <constraint firstItem="Ge4-Nf-ula" firstAttribute="leading" secondItem="LoD-qB-lM8" secondAttribute="trailing" constant="1" id="jlK-yY-in9"/>
                             <constraint firstAttribute="bottom" secondItem="Ge4-Nf-ula" secondAttribute="bottom" id="qYn-2I-3lb"/>
                             <constraint firstItem="LoD-qB-lM8" firstAttribute="leading" secondItem="PhM-S8-8li" secondAttribute="leading" id="v3b-Xr-9Sy"/>
                             <constraint firstItem="Ge4-Nf-ula" firstAttribute="top" secondItem="PhM-S8-8li" secondAttribute="top" id="wMg-IE-0gD"/>
@@ -208,7 +217,7 @@
                     <constraint firstAttribute="trailing" secondItem="PhM-S8-8li" secondAttribute="trailing" id="tCA-IT-bhO"/>
                 </constraints>
             </tableViewCellContentView>
-            <point key="canvasLocation" x="278" y="414"/>
+            <point key="canvasLocation" x="751" y="176"/>
         </tableViewCell>
         <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="5Fu-f3-SQN" customClass="DSProfileTableViewCell">
             <rect key="frame" x="0.0" y="0.0" width="320" height="90"/>
@@ -270,7 +279,7 @@
             <connections>
                 <outlet property="buttonPushHobbies" destination="PXd-hC-CNF" id="VBM-Li-tDT"/>
             </connections>
-            <point key="canvasLocation" x="278" y="530"/>
+            <point key="canvasLocation" x="757" y="301"/>
         </tableViewCell>
         <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="jaf-ij-gGi" customClass="DSProfileTableViewCell">
             <rect key="frame" x="0.0" y="0.0" width="320" height="53"/>
@@ -292,22 +301,21 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="dvF-0c-ao5">
-                                <rect key="frame" x="80" y="0.0" width="220" height="41"/>
-                                <fontDescription key="fontDescription" name="Patron-Regular" family="Patron" pointSize="9"/>
+                                <rect key="frame" x="100" y="0.0" width="220" height="41"/>
+                                <fontDescription key="fontDescription" name="Patron-Regular" family="Patron" pointSize="10"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
-                            <constraint firstAttribute="trailing" secondItem="dvF-0c-ao5" secondAttribute="trailing" constant="20" id="1rA-X0-Bly"/>
+                            <constraint firstAttribute="trailing" secondItem="dvF-0c-ao5" secondAttribute="trailing" id="1rA-X0-Bly"/>
                             <constraint firstItem="dvF-0c-ao5" firstAttribute="top" secondItem="jke-W9-34h" secondAttribute="top" id="2Dw-Ov-3vZ"/>
                             <constraint firstAttribute="height" constant="43" id="52Q-9f-cv2"/>
                             <constraint firstItem="q6F-Oj-Gjb" firstAttribute="leading" secondItem="jke-W9-34h" secondAttribute="leading" constant="5" id="6ri-Hh-1yV"/>
                             <constraint firstAttribute="bottom" secondItem="dvF-0c-ao5" secondAttribute="bottom" constant="2" id="E5K-KN-iAV"/>
                             <constraint firstItem="q6F-Oj-Gjb" firstAttribute="top" secondItem="jke-W9-34h" secondAttribute="top" constant="10" id="MZz-01-QcR"/>
-                            <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="43" id="i80-dI-e69"/>
                             <constraint firstAttribute="width" constant="320" id="uKB-0R-1CO"/>
-                            <constraint firstItem="dvF-0c-ao5" firstAttribute="leading" secondItem="q6F-Oj-Gjb" secondAttribute="trailing" id="zTb-W6-svt"/>
+                            <constraint firstItem="dvF-0c-ao5" firstAttribute="leading" secondItem="q6F-Oj-Gjb" secondAttribute="trailing" constant="20" id="zTb-W6-svt"/>
                         </constraints>
                     </view>
                 </subviews>
@@ -330,7 +338,7 @@
                 <outlet property="labelDPTitleText" destination="q6F-Oj-Gjb" id="iRk-hA-3dY"/>
                 <outlet property="textFieldDPPlaceHolder" destination="dvF-0c-ao5" id="M44-wF-lTx"/>
             </connections>
-            <point key="canvasLocation" x="278" y="653.5"/>
+            <point key="canvasLocation" x="286" y="351.5"/>
         </tableViewCell>
         <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="Cjl-HK-Sie" customClass="DSProfileTableViewCell">
             <rect key="frame" x="0.0" y="0.0" width="320" height="120"/>
@@ -343,24 +351,24 @@
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Email" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Pdf-dj-LfX">
                                 <rect key="frame" x="14" y="14" width="42" height="13"/>
-                                <fontDescription key="fontDescription" name="Patron-Regular" family="Patron" pointSize="10"/>
+                                <fontDescription key="fontDescription" name="Patron-Bold" family="Patron" pointSize="10"/>
                                 <color key="textColor" red="0.63137254901960782" green="0.63137254901960782" blue="0.63137254901960782" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Password" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PmN-E8-WPL">
                                 <rect key="frame" x="14" y="47" width="54" height="14"/>
-                                <fontDescription key="fontDescription" name="Patron-Regular" family="Patron" pointSize="10"/>
+                                <fontDescription key="fontDescription" name="Patron-Bold" family="Patron" pointSize="10"/>
                                 <color key="textColor" red="0.63137254901960782" green="0.63137254901960782" blue="0.63137254901960782" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Email" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="sig-cR-Dgx">
                                 <rect key="frame" x="100" y="4" width="180" height="30"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <fontDescription key="fontDescription" name="Patron-Regular" family="Patron" pointSize="10"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Password" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="nd4-Zf-byl">
                                 <rect key="frame" x="100" y="42" width="180" height="30"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <fontDescription key="fontDescription" name="Patron-Regular" family="Patron" pointSize="10"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                         </subviews>
@@ -393,7 +401,7 @@
                     <constraint firstAttribute="bottom" secondItem="SHS-IW-ID9" secondAttribute="bottom" constant="-1" id="zv6-0b-KS9"/>
                 </constraints>
             </tableViewCellContentView>
-            <point key="canvasLocation" x="271" y="784"/>
+            <point key="canvasLocation" x="286" y="494"/>
         </tableViewCell>
         <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="OpY-gd-Xse" customClass="DSProfileTableViewCell">
             <rect key="frame" x="0.0" y="0.0" width="320" height="90"/>
@@ -410,15 +418,15 @@
                                     <constraint firstAttribute="width" constant="100" id="fPd-FA-5qx"/>
                                     <constraint firstAttribute="height" constant="9" id="gSS-Ka-W3y"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" name="Patron-Regular" family="Patron" pointSize="10"/>
+                                <fontDescription key="fontDescription" name="Patron-Bold" family="Patron" pointSize="10"/>
                                 <color key="textColor" red="0.63137254901960782" green="0.63137254901960782" blue="0.63137254901960782" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="switch_on" translatesAutoresizingMaskIntoConstraints="NO" id="AMx-wQ-Zv5">
-                                <rect key="frame" x="205" y="10" width="30" height="20"/>
+                                <rect key="frame" x="205" y="12" width="30" height="16"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="30" id="gqG-o1-dxM"/>
-                                    <constraint firstAttribute="height" constant="20" id="hja-9g-rpo"/>
+                                    <constraint firstAttribute="height" constant="16" id="hja-9g-rpo"/>
                                 </constraints>
                             </imageView>
                         </subviews>
@@ -427,14 +435,14 @@
                             <constraint firstItem="qcr-zf-Jse" firstAttribute="top" secondItem="az7-5N-PtG" secondAttribute="top" constant="16" id="Jev-XU-Box"/>
                             <constraint firstItem="qcr-zf-Jse" firstAttribute="leading" secondItem="az7-5N-PtG" secondAttribute="leading" constant="5" id="PBu-Kv-aFk"/>
                             <constraint firstAttribute="height" constant="39" id="ZF0-Yf-4gk"/>
-                            <constraint firstItem="AMx-wQ-Zv5" firstAttribute="top" secondItem="az7-5N-PtG" secondAttribute="top" constant="10" id="pe8-lj-xLB"/>
+                            <constraint firstItem="AMx-wQ-Zv5" firstAttribute="top" secondItem="az7-5N-PtG" secondAttribute="top" constant="12" id="pe8-lj-xLB"/>
                             <constraint firstAttribute="trailing" secondItem="AMx-wQ-Zv5" secondAttribute="trailing" constant="85" id="tCk-Fa-iW0"/>
                         </constraints>
                     </view>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Notifications" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Uec-ou-dGP">
-                        <rect key="frame" x="6" y="30" width="109" height="10"/>
+                        <rect key="frame" x="6" y="28" width="109" height="14"/>
                         <constraints>
-                            <constraint firstAttribute="height" constant="10" id="5ts-a8-jVw"/>
+                            <constraint firstAttribute="height" constant="14" id="5ts-a8-jVw"/>
                             <constraint firstAttribute="width" constant="109" id="LDN-hr-9bl"/>
                         </constraints>
                         <fontDescription key="fontDescription" name="Patron-Bold" family="Patron" pointSize="13"/>
@@ -444,15 +452,15 @@
                 </subviews>
                 <color key="backgroundColor" red="0.90980392156862744" green="0.90980392156862744" blue="0.90980392156862744" alpha="1" colorSpace="calibratedRGB"/>
                 <constraints>
-                    <constraint firstItem="Uec-ou-dGP" firstAttribute="top" secondItem="n69-t5-BKB" secondAttribute="top" constant="30" id="1FH-SG-ASE"/>
+                    <constraint firstItem="Uec-ou-dGP" firstAttribute="top" secondItem="n69-t5-BKB" secondAttribute="top" constant="28" id="1FH-SG-ASE"/>
                     <constraint firstItem="Uec-ou-dGP" firstAttribute="leading" secondItem="n69-t5-BKB" secondAttribute="leading" constant="6" id="9M2-O3-cpi"/>
-                    <constraint firstItem="az7-5N-PtG" firstAttribute="top" secondItem="Uec-ou-dGP" secondAttribute="bottom" constant="10" id="G3y-p8-bTr"/>
+                    <constraint firstItem="az7-5N-PtG" firstAttribute="top" secondItem="Uec-ou-dGP" secondAttribute="bottom" constant="8" id="G3y-p8-bTr"/>
                     <constraint firstItem="az7-5N-PtG" firstAttribute="leading" secondItem="n69-t5-BKB" secondAttribute="leading" id="SxD-uC-5EL"/>
                     <constraint firstAttribute="bottom" secondItem="az7-5N-PtG" secondAttribute="bottom" id="VyS-Kf-YEC"/>
                     <constraint firstAttribute="trailing" secondItem="az7-5N-PtG" secondAttribute="trailing" id="iEy-JK-0bQ"/>
                 </constraints>
             </tableViewCellContentView>
-            <point key="canvasLocation" x="271" y="954"/>
+            <point key="canvasLocation" x="296" y="651"/>
         </tableViewCell>
         <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="1cD-va-IDg" customClass="DSProfileTableViewCell">
             <rect key="frame" x="0.0" y="0.0" width="320" height="80"/>
@@ -495,7 +503,7 @@
                     <constraint firstItem="bzZ-MU-7QJ" firstAttribute="leading" secondItem="VtB-GW-ldJ" secondAttribute="trailing" constant="2" id="ytd-6U-q6o"/>
                 </constraints>
             </tableViewCellContentView>
-            <point key="canvasLocation" x="278" y="1082"/>
+            <point key="canvasLocation" x="296" y="798"/>
         </tableViewCell>
     </objects>
     <resources>
