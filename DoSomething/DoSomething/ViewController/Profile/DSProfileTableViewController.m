@@ -43,8 +43,9 @@
      {
     customNavigation.view.frame = CGRectMake(0,-20, CGRectGetWidth(self.view.frame), 65);
      }
+    else    {
     customNavigation.view.frame = CGRectMake(0,-20, 420, 83);
-
+    }
     [self.navigationController.navigationBar addSubview:customNavigation.view];
     
     [customNavigation.buttonBack addTarget:self action:@selector(backAction) forControlEvents:UIControlEventTouchUpInside];

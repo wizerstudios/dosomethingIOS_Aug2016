@@ -20,7 +20,7 @@
                     <rect key="frame" x="0.0" y="0.0" width="320" height="570"/>
                     <subviews>
                         <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="HcG-cC-Fek">
-                            <rect key="frame" x="10" y="20" width="300" height="550"/>
+                            <rect key="frame" x="15" y="0.0" width="290" height="570"/>
                             <color key="backgroundColor" red="0.90980392156862744" green="0.90980392156862744" blue="0.90980392156862744" alpha="1" colorSpace="calibratedRGB"/>
                             <color key="sectionIndexBackgroundColor" red="0.90980392156862744" green="0.90980392156862744" blue="0.90980392156862744" alpha="1" colorSpace="calibratedRGB"/>
                             <connections>
@@ -31,9 +31,9 @@
                     </subviews>
                     <color key="backgroundColor" red="0.90980392156862744" green="0.90980392156862744" blue="0.90980392156862744" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
-                        <constraint firstItem="HcG-cC-Fek" firstAttribute="top" secondItem="ina-fx-Lum" secondAttribute="top" constant="20" id="BQL-sD-3hn"/>
-                        <constraint firstItem="HcG-cC-Fek" firstAttribute="leading" secondItem="ina-fx-Lum" secondAttribute="leading" constant="10" id="Lq3-as-LJL"/>
-                        <constraint firstAttribute="trailing" secondItem="HcG-cC-Fek" secondAttribute="trailing" constant="10" id="n7z-KV-065"/>
+                        <constraint firstItem="HcG-cC-Fek" firstAttribute="top" secondItem="ina-fx-Lum" secondAttribute="top" id="BQL-sD-3hn"/>
+                        <constraint firstItem="HcG-cC-Fek" firstAttribute="leading" secondItem="ina-fx-Lum" secondAttribute="leading" constant="15" id="Lq3-as-LJL"/>
+                        <constraint firstAttribute="trailing" secondItem="HcG-cC-Fek" secondAttribute="trailing" constant="15" id="n7z-KV-065"/>
                         <constraint firstAttribute="bottom" secondItem="HcG-cC-Fek" secondAttribute="bottom" id="oee-Jd-ya4"/>
                     </constraints>
                 </view>
