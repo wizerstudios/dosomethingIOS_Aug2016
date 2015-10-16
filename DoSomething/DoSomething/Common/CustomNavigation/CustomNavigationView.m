@@ -22,10 +22,10 @@
     [self.view setFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, CGRectGetHeight(self.view.frame))];
 
     if (IS_IPHONE6 ||IS_IPHONE6_Plus){
-    self.layoutConstraintLabelYPos.constant =45;
-    self.layoutConstraintBackBtnYPos.constant =39;
-    self.layoutConstraintSaveBtnYPos.constant = 42;
-    self.layoutConstraintBackArrowYPos.constant=45;
+    self.layoutConstraintLabelYPos.constant =35;
+    self.layoutConstraintBackBtnYPos.constant =29;
+    self.layoutConstraintSaveBtnYPos.constant = 32;
+    self.layoutConstraintBackArrowYPos.constant=35;
     }
 }
 

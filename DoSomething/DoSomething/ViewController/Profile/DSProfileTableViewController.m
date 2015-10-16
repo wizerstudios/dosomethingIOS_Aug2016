@@ -38,18 +38,12 @@
     
     CustomNavigationView *customNavigation;
     customNavigation = [[CustomNavigationView alloc] initWithNibName:@"CustomNavigationView" bundle:nil];
-     if (IS_IPHONE4 ||IS_IPHONE5)
-     {
     customNavigation.view.frame = CGRectMake(0,-20, CGRectGetWidth(self.view.frame), 65);
-     }
-    else    {
-    customNavigation.view.frame = CGRectMake(0,-20, 420, 83);
+    if (IS_IPHONE6 ||IS_IPHONE6_Plus){
+        customNavigation.view.frame = CGRectMake(0,-20, 420, 83);
         self.layoutConstraintTableViewYPos.constant= 20;
-        
-
     }
     [self.navigationController.navigationBar addSubview:customNavigation.view];
-    
     [customNavigation.buttonBack addTarget:self action:@selector(backAction) forControlEvents:UIControlEventTouchUpInside];
 }
 -(void)backAction
