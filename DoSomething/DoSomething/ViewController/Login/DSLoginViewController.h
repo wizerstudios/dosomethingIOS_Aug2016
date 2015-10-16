@@ -30,5 +30,11 @@
 @property (strong, nonatomic) IBOutlet NSLayoutConstraint *layoutConstraintBackButtonHeight;
 @property (strong, nonatomic) IBOutlet NSLayoutConstraint *layoutConstraintFBlblHeight;
 
+@property (strong, nonatomic) IBOutlet NSLayoutConstraint *layoutConstraintCreateAnACCLabelYPos;
+@property (strong, nonatomic) IBOutlet NSLayoutConstraint *layoutConstraintInstructionLabelYPos;
+@property (strong, nonatomic) IBOutlet NSLayoutConstraint *layoutConstraintSignInLabelYPos;
+@property (strong, nonatomic) IBOutlet NSLayoutConstraint *layoutConstraintEmailTextFieldlYPos;
+@property (strong, nonatomic) IBOutlet NSLayoutConstraint *layoutConstraintTextFieldCenterLabelYPos;
+@property (strong, nonatomic) IBOutlet NSLayoutConstraint *layoutConstraintPassTextFieldlYPos;
 
 @end

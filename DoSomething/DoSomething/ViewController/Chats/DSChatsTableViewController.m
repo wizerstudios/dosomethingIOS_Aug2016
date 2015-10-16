@@ -7,7 +7,6 @@
 //
 
 #import "DSChatsTableViewController.h"
-#import "CustomNavigationView.h"
 
 @interface DSChatsTableViewController ()
 
@@ -17,23 +16,22 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [self loadNavigation];
 }
 
--(void)loadNavigation{
-    
-    self.navigationController.navigationBarHidden=YES;
-    [self.navigationItem setHidesBackButton:YES animated:NO];
-    [self.navigationController.navigationBar setTranslucent:NO];
-    
-    CustomNavigationView *customNavigation;
-    customNavigation = [[CustomNavigationView alloc] initWithNibName:@"CustomNavigationView" bundle:nil];
-    customNavigation.view.frame = CGRectMake(0, 0, CGRectGetWidth(self.view.frame), 56);
-    
-   [customNavigation setbuttonBackHidden:YES];
-    [self.view addSubview:customNavigation.view];
-    
-    
-}
-
+//-(void)loadNavigation{
+//    
+//    self.navigationController.navigationBarHidden=YES;
+//    [self.navigationItem setHidesBackButton:YES animated:NO];
+//    [self.navigationController.navigationBar setTranslucent:NO];
+//    
+//    CustomNavigationView *customNavigation;
+//    customNavigation = [[CustomNavigationView alloc] initWithNibName:@"CustomNavigationView" bundle:nil];
+//    customNavigation.view.frame = CGRectMake(0, 0, CGRectGetWidth(self.view.frame), 56);
+//    
+//   [customNavigation setbuttonBackHidden:YES];
+//    [self.view addSubview:customNavigation.view];
+//    
+//    
+//}
+//
 @end

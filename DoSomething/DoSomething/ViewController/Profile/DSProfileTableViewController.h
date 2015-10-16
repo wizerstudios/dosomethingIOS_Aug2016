@@ -16,8 +16,14 @@
  IBOutlet DSProfileTableViewCell *cellAddIcon;
  IBOutlet DSProfileTableViewCell *cellTextField;
  IBOutlet DSProfileTableViewCell *cellDatePicker;
-
+ IBOutlet DSProfileTableViewCell *cellEmailPassword;
+ IBOutlet DSProfileTableViewCell *CellSwitchOn;
+ IBOutlet DSProfileTableViewCell *CellTermsOfUse;
 }
 @property (strong, nonatomic) IBOutlet UITableView *tableviewProfile;
+@property (strong, nonatomic) IBOutlet NSLayoutConstraint *layoutConstraintTableViewYPos;
+@property (strong, nonatomic) IBOutlet NSLayoutConstraint *layoutConstraintDatePickerViewLeadingPos;
+@property (strong, nonatomic) IBOutlet NSLayoutConstraint *layoutConstraintTableViewTraillingPos;
+@property (strong, nonatomic) IBOutlet NSLayoutConstraint *layoutConstraintTableViewBottomPos;
 
 @end

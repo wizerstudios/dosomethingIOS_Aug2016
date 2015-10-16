@@ -7,6 +7,7 @@
 //
 
 #import "CustomNavigationView.h"
+#import "DSConfig.h"
 
 @interface CustomNavigationView ()
 
@@ -14,32 +15,20 @@
 
 @implementation CustomNavigationView
       
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-{
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    
-    if (self) {
-        // Custom initialization
-    }
-    return self;
-}
 
 - (void)viewDidLoad {
     
     [super viewDidLoad];
-    [self.view setFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width,65)];
-    
+    [self.view setFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, CGRectGetHeight(self.view.frame))];
+
+    if (IS_IPHONE6 ||IS_IPHONE6_Plus){
+    self.layoutConstraintLabelYPos.constant =35;
+    self.layoutConstraintBackBtnYPos.constant =29;
+    self.layoutConstraintSaveBtnYPos.constant = 32;
+    self.layoutConstraintBackArrowYPos.constant=35;
+    }
 }
 
-
-#pragma mark - Navigation Methods
--(void)setbuttonBackHidden:(BOOL)_hide{
-    [self.buttonBack setHidden:_hide];
-}
-
-//-(void)setbackButtonHidden:(BOOL)_hide{
-//    [self.backButton setHidden:_hide];
-//}
 
 
 @end

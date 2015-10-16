@@ -14,5 +14,17 @@
 @property (weak, nonatomic) IBOutlet UILabel *labelDPTitleText;
 @property (weak, nonatomic) IBOutlet UITextField *textFieldDPPlaceHolder;
 @property (weak, nonatomic) IBOutlet UIButton *buttonPushHobbies;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *layoutConstraintViewHeight;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *layoutConstraintDatePickerViewYPos;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *layoutConstraintDatePickerViewHeight;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *layoutConstraintTermsOfUseBtnDependViewHeight;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *layoutConstraintAccLabelYPos;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *layoutConstraintEmailPassViewHeight;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *layoutConstraintNotificationViewHeight;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *layoutConstraintNotificationLabelYPos;
+@property (strong, nonatomic) IBOutlet NSLayoutConstraint *layoutConstraintProfileImageWidth;
+@property (strong, nonatomic) IBOutlet NSLayoutConstraint *layoutConstraintProfileImageHeight;
+
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *layoutConstraintRadioButtonYPos;
 
 @end
