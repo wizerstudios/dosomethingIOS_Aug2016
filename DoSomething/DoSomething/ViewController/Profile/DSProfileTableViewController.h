@@ -21,5 +21,9 @@
  IBOutlet DSProfileTableViewCell *CellTermsOfUse;
 }
 @property (strong, nonatomic) IBOutlet UITableView *tableviewProfile;
+@property (strong, nonatomic) IBOutlet NSLayoutConstraint *layoutConstraintTableViewYPos;
+@property (strong, nonatomic) IBOutlet NSLayoutConstraint *layoutConstraintDatePickerViewLeadingPos;
+@property (strong, nonatomic) IBOutlet NSLayoutConstraint *layoutConstraintTableViewTraillingPos;
+@property (strong, nonatomic) IBOutlet NSLayoutConstraint *layoutConstraintTableViewBottomPos;
 
 @end

@@ -20,7 +20,6 @@
 @end
 
 @implementation DSProfileTableViewController
-
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self initializeArray];
@@ -45,6 +44,9 @@
      }
     else    {
     customNavigation.view.frame = CGRectMake(0,-20, 420, 83);
+        self.layoutConstraintTableViewYPos.constant= 20;
+        
+
     }
     [self.navigationController.navigationBar addSubview:customNavigation.view];
     
@@ -101,27 +103,27 @@
             return 80;
         }
 
-         return 40;
+    return 40;
     }
-    if (indexPath.row == 0 ){
-        return 258;
-    }
-    if (indexPath.row == 4) {
-        return 65;
-    }
+        if (indexPath.row == 0 ){
+            return 258;
+        }
+        if (indexPath.row == 4) {
+            return 70;
+        }
     
-    if (indexPath.row == 6 || indexPath.row ==8) {
-        return 90;
-    }
-    if ( indexPath.row == 7) {
-        return 120;
-    }
+        if (indexPath.row == 6 || indexPath.row ==8) {
+            return 120;
+        }
+        if ( indexPath.row == 7) {
+            return 160;
+        }
     
-    if (indexPath.row == 9) {
-        return 80;
-    }
-
-        return 50;
+        if (indexPath.row == 9) {
+            return 98;
+        }
+    
+    return 50;
     
    
 }
@@ -146,8 +148,14 @@
             cell = cellProfileImg;
             
         }
+        if (IS_IPHONE6 ||IS_IPHONE6_Plus)
+        {
+            cell.layoutConstraintProfileImageHeight.constant =159;
+            cell.layoutConstraintProfileImageWidth.constant =161;
+            
+        }
         
-    }
+           }
     if (indexPath.row == 1 || indexPath.row == 2)
     {
         if (cell == nil)
@@ -186,11 +194,8 @@
             cell = cellDatePicker;
             
         }
-        if (IS_IPHONE6 ||IS_IPHONE6_Plus)
-        {
-            cell.layoutConstraintDatePickerViewYPos.constant =49;
-            
-        }
+       
+        
         cell.textFieldDPPlaceHolder.placeholder = placeHolderText;
         cell.labelDPTitleText.text = titleText;
         
@@ -203,11 +208,12 @@
             cell = cellTextField;
             
         }
+        
         cell.layoutConstraintViewHeight.constant =40;
 
         if (IS_IPHONE6 ||IS_IPHONE6_Plus)
         {
-            cell.layoutConstraintViewHeight.constant =49;
+            cell.layoutConstraintViewHeight.constant =50;
             
         }
         
@@ -239,8 +245,10 @@
             [[NSBundle mainBundle] loadNibNamed:@"DSProfileTableViewCell" owner:self options:nil];
             cell = cellEmailPassword;
             
+        }if (IS_IPHONE6 ||IS_IPHONE6_Plus){
+        cell.layoutConstraintAccLabelYPos.constant =42;
+        cell.layoutConstraintEmailPassViewHeight.constant =50;
         }
-        
     }
     if (indexPath.row == 8)
     {
@@ -251,7 +259,11 @@
             cell = CellSwitchOn;
             
         }
-        
+        if (IS_IPHONE6 ||IS_IPHONE6_Plus){
+        cell.layoutConstraintNotificationLabelYPos.constant = 40;
+        cell.layoutConstraintNotificationViewHeight.constant=51;
+        cell.layoutConstraintRadioButtonYPos.constant = 18;
+        }
     }
 
     if (indexPath.row == 9)
@@ -263,7 +275,10 @@
             cell = CellTermsOfUse;
             
         }
-        
+        if (IS_IPHONE6 ||IS_IPHONE6_Plus){
+        cell.layoutConstraintTermsOfUseBtnDependViewHeight.constant =50;
+        }
+       
     }
     
     [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
