@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7706" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <mutableArray key="Patron-Bold.ttf">
+            <string>Patron-Bold</string>
+        </mutableArray>
+        <mutableArray key="Patron-Regular.ttf">
+            <string>Patron-Regular</string>
+        </mutableArray>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="DSInterestAndHobbiesViewController">
+            <connections>
+                <outlet property="interestAndHobbiesCollectionView" destination="djR-MD-Avp" id="wAX-W8-Tdh"/>
+                <outlet property="layoutConstraintcollectionviewYPos" destination="b1u-1e-W8Y" id="Msr-Zf-2N9"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="djR-MD-Avp">
+                    <rect key="frame" x="10" y="46" width="300" height="522"/>
+                    <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                    <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="Dp7-xo-bMG">
+                        <size key="itemSize" width="50" height="60"/>
+                        <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                        <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                        <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                    </collectionViewFlowLayout>
+                    <connections>
+                        <outlet property="dataSource" destination="i5M-Pr-FkT" id="kuH-mC-OzR"/>
+                        <outlet property="delegate" destination="i5M-Pr-FkT" id="20R-pe-AOj"/>
+                    </connections>
+                </collectionView>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0zs-8r-iM7">
+                    <rect key="frame" x="10" y="0.0" width="300" height="112"/>
+                    <subviews>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Your interest and Hobbies" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VKf-xC-fkK">
+                            <rect key="frame" x="16" y="73" width="132" height="21"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="21" id="9mV-rz-yRi"/>
+                                <constraint firstAttribute="width" constant="132" id="ti2-RG-2pZ"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" name="Patron-Bold" family="Patron" pointSize="9"/>
+                            <color key="textColor" red="0.50980392156862742" green="0.50980392156862742" blue="0.50980392156862742" alpha="1" colorSpace="calibratedRGB"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tap to select your intterests and hobbies " lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Jca-BZ-Kzh">
+                            <rect key="frame" x="62" y="96" width="176" height="21"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="21" id="3vo-h2-Z6j"/>
+                                <constraint firstAttribute="height" constant="21" id="Cgh-C8-Zdr"/>
+                                <constraint firstAttribute="width" constant="176" id="Ojk-DZ-BV8"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" name="Patron-Regular" family="Patron" pointSize="9"/>
+                            <color key="textColor" red="0.76470588235294112" green="0.76470588235294112" blue="0.76470588235294112" alpha="1" colorSpace="calibratedRGB"/>
+                            <nil key="highlightedColor"/>
+                            <variation key="default">
+                                <mask key="constraints">
+                                    <exclude reference="Cgh-C8-Zdr"/>
+                                </mask>
+                            </variation>
+                        </label>
+                    </subviews>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="bottom" secondItem="VKf-xC-fkK" secondAttribute="bottom" constant="18" id="8gG-5V-CX8"/>
+                        <constraint firstItem="VKf-xC-fkK" firstAttribute="leading" secondItem="0zs-8r-iM7" secondAttribute="leading" constant="16" id="BkW-FD-3lr"/>
+                        <constraint firstAttribute="trailing" secondItem="VKf-xC-fkK" secondAttribute="trailing" constant="152" id="aJk-uj-gfd"/>
+                        <constraint firstItem="VKf-xC-fkK" firstAttribute="top" secondItem="0zs-8r-iM7" secondAttribute="top" constant="73" id="b1u-1e-W8Y"/>
+                        <constraint firstItem="Jca-BZ-Kzh" firstAttribute="top" secondItem="VKf-xC-fkK" secondAttribute="bottom" constant="2" id="dAE-Je-FqF"/>
+                        <constraint firstAttribute="centerX" secondItem="Jca-BZ-Kzh" secondAttribute="centerX" id="oC3-xK-pU7"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <color key="backgroundColor" red="0.90980392156862744" green="0.90980392156862744" blue="0.90980392156862744" alpha="1" colorSpace="calibratedRGB"/>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="djR-MD-Avp" secondAttribute="trailing" constant="10" id="52M-BB-6WO"/>
+                <constraint firstItem="djR-MD-Avp" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="10" id="BLy-oh-TVW"/>
+                <constraint firstItem="0zs-8r-iM7" firstAttribute="leading" secondItem="djR-MD-Avp" secondAttribute="leading" id="FCv-MQ-TC4"/>
+                <constraint firstItem="0zs-8r-iM7" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="fcm-je-VLN"/>
+                <constraint firstItem="djR-MD-Avp" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="46" id="tvB-My-dqi"/>
+                <constraint firstAttribute="bottom" secondItem="djR-MD-Avp" secondAttribute="bottom" id="zJH-49-Cal"/>
+            </constraints>
+            <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
+        </view>
+    </objects>
+</document>

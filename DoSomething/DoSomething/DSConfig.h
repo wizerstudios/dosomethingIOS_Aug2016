@@ -21,7 +21,7 @@
 
 #define IS_IPHONE6_Plus                 (([[UIScreen mainScreen] bounds].size.height-736)?NO:YES)
 
-#define IS_IPAD                 (([[UIScreen mainScreen] bounds].size.height-768)?NO:YES)
+#define IS_IPAD                         (([[UIScreen mainScreen] bounds].size.height-768)?NO:YES)
 
 // OS Versions
 #define IS_GREATER_IOS7                 (([[[UIDevice currentDevice] systemVersion] floatValue] >= 7)?YES:NO)
@@ -33,30 +33,33 @@
 
 #pragma mark - FONTS
 
-#define FutworaPro_Regular(_size)                  [UIFont fontWithName:@"FutworaPro-Regular.otf"              size:_size]
+#define FutworaPro_Regular(_size)       [UIFont fontWithName:@"FutworaPro-Regular.otf" size:_size]
 
-#define Patron_Black(_size)                  [UIFont fontWithName:@"Patron-Black.ttf"              size:_size]
+#define Patron_Black(_size)             [UIFont fontWithName:@"Patron-Black.ttf" size:_size]
 
-#define Patron_BlackItalic(_size)                  [UIFont fontWithName:@"Patron-BlackItalic.ttf"              size:_size]
+#define Patron_BlackItalic(_size)       [UIFont fontWithName:@"Patron-BlackItalic.ttf" size:_size]
 
-#define Patron_Bold(_size)                  [UIFont fontWithName:@"Patron-Bold.ttf"              size:_size]
+#define Patron_Bold(_size)              [UIFont fontWithName:@"Patron-Bold.ttf" size:_size]
 
-#define Patron_BoldItalic(_size)                  [UIFont fontWithName:@"Patron-BoldItalic.ttf"              size:_size]
+#define Patron_BoldItalic(_size)        [UIFont fontWithName:@"Patron-BoldItalic.ttf" size:_size]
 
-#define Patron_ExtraLight(_size)                  [UIFont fontWithName:@"Patron-ExtraLight.ttf"              size:_size]
+#define Patron_ExtraLight(_size)        [UIFont fontWithName:@"Patron-ExtraLight.ttf" size:_size]
 
-#define Patron_ExtraLightItalic(_size)                  [UIFont fontWithName:@"Patron-ExtraLightItalic.ttf"              size:_size]
+#define Patron_ExtraLightItalic(_size)  [UIFont fontWithName:@"Patron-ExtraLightItalic.ttf" size:_size]
 
-#define Patron_Italic(_size)                  [UIFont fontWithName:@"Patron-Italic.ttf"              size:_size]
+#define Patron_Italic(_size)            [UIFont fontWithName:@"Patron-Italic.ttf" size:_size]
 
-#define Patron_Medium(_size)                  [UIFont fontWithName:@"Patron-Medium.ttf"              size:_size]
+#define Patron_Medium(_size)            [UIFont fontWithName:@"Patron-Medium.ttf" size:_size]
 
-#define Patron_MediumItalic(_size)                  [UIFont fontWithName:@"Patron-MediumItalic.ttf"              size:_size]
+#define Patron_MediumItalic(_size)      [UIFont fontWithName:@"Patron-MediumItalic.ttf" size:_size]
 
-#define Patron_Regular(_size)                  [UIFont fontWithName:@"Patron-Regular.ttf"              size:_size]
+#define Patron_Regular(_size)           [UIFont fontWithName:@"Patron-Regular.ttf" size:_size]
 
-#define Patron_Thin(_size)                    [UIFont fontWithName:@"Patron-Thin.ttf"              size:_size]
-#define Patron_ThinItalic(_size)              [UIFont fontWithName:@"Patron-ThinItalic.ttf"              size:_size]
-#define PATRON_BOLD(Value)                  [UIFont fontWithName:@"Patron-Bold" size:Value]
-#define PATRON_REG(Value)                    [UIFont fontWithName:@"Patron-Regular" size:Value]
+#define Patron_Thin(_size)              [UIFont fontWithName:@"Patron-Thin.ttf" size:_size]
+
+#define Patron_ThinItalic(_size)        [UIFont fontWithName:@"Patron-ThinItalic.ttf" size:_size]
+
+#define PATRON_BOLD(Value)              [UIFont fontWithName:@"Patron-Bold" size:Value]
+
+#define PATRON_REG(Value)               [UIFont fontWithName:@"Patron-Regular" size:Value]
 

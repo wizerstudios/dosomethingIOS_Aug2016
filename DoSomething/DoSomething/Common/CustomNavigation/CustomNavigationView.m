@@ -24,7 +24,7 @@
     if (IS_IPHONE6 ||IS_IPHONE6_Plus){
     self.layoutConstraintLabelYPos.constant =35;
     self.layoutConstraintBackBtnYPos.constant =29;
-    self.layoutConstraintSaveBtnYPos.constant = 32;
+    self.layoutConstraintSaveBtnYPos.constant = 30;
     self.layoutConstraintBackArrowYPos.constant=35;
     }
 }
