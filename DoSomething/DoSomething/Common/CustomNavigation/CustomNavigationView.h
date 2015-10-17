@@ -12,12 +12,16 @@
     
 }
 
-
 @property (strong, nonatomic) IBOutlet UIButton *buttonBack;
+
+@property (strong,nonatomic)  IBOutlet UIButton * menuBtn;
+
+@property (strong,nonatomic)  IBOutlet UIButton  * saveBtn;
 
 @property (strong, nonatomic) IBOutlet NSLayoutConstraint *layoutConstraintBackBtnYPos;
 
 @property (strong, nonatomic) IBOutlet NSLayoutConstraint *layoutConstraintBackArrowYPos;
+
 @property (strong, nonatomic) IBOutlet NSLayoutConstraint *layoutConstraintLabelYPos;
 
 @property (strong, nonatomic) IBOutlet NSLayoutConstraint *layoutConstraintSaveBtnYPos;

@@ -8,6 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		065BAC521BC7A135005AF493 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 065BAC511BC7A135005AF493 /* main.m */; };
+		6A5098F01BD2201600131709 /* HomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A5098EE1BD2201600131709 /* HomeViewController.m */; };
+		6A5098F11BD2201600131709 /* HomeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6A5098EF1BD2201600131709 /* HomeViewController.xib */; };
+		6A5098F61BD241D900131709 /* HomeCustomCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A5098F41BD241D900131709 /* HomeCustomCell.m */; };
+		6A5098F71BD241D900131709 /* HomeCustomCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6A5098F51BD241D900131709 /* HomeCustomCell.xib */; };
 		6A50C21C1BCCBB8C002B11AC /* DSProfileTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A50C21A1BCCBB8C002B11AC /* DSProfileTableViewCell.m */; };
 		6A50C21D1BCCBB8C002B11AC /* DSProfileTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6A50C21B1BCCBB8C002B11AC /* DSProfileTableViewCell.xib */; };
 		6A50C2271BCCC310002B11AC /* DSChatsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A50C2251BCCC310002B11AC /* DSChatsTableViewController.m */; };
@@ -60,6 +64,12 @@
 		065BAC4D1BC7A135005AF493 /* DoSomething.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DoSomething.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		065BAC511BC7A135005AF493 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		065BAC611BC7A135005AF493 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		6A5098ED1BD2201600131709 /* HomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeViewController.h; sourceTree = "<group>"; };
+		6A5098EE1BD2201600131709 /* HomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeViewController.m; sourceTree = "<group>"; };
+		6A5098EF1BD2201600131709 /* HomeViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HomeViewController.xib; sourceTree = "<group>"; };
+		6A5098F31BD241D900131709 /* HomeCustomCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeCustomCell.h; sourceTree = "<group>"; };
+		6A5098F41BD241D900131709 /* HomeCustomCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeCustomCell.m; sourceTree = "<group>"; };
+		6A5098F51BD241D900131709 /* HomeCustomCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HomeCustomCell.xib; sourceTree = "<group>"; };
 		6A50C2191BCCBB8C002B11AC /* DSProfileTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DSProfileTableViewCell.h; sourceTree = "<group>"; };
 		6A50C21A1BCCBB8C002B11AC /* DSProfileTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DSProfileTableViewCell.m; sourceTree = "<group>"; };
 		6A50C21B1BCCBB8C002B11AC /* DSProfileTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DSProfileTableViewCell.xib; sourceTree = "<group>"; };
@@ -185,6 +195,28 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		6A5098EC1BD21FE400131709 /* HomeView */ = {
+			isa = PBXGroup;
+			children = (
+				6A5098F21BD241AE00131709 /* HomeCustomCell */,
+				6A5098ED1BD2201600131709 /* HomeViewController.h */,
+				6A5098EE1BD2201600131709 /* HomeViewController.m */,
+				6A5098EF1BD2201600131709 /* HomeViewController.xib */,
+			);
+			name = HomeView;
+			path = ViewController/HomeView;
+			sourceTree = "<group>";
+		};
+		6A5098F21BD241AE00131709 /* HomeCustomCell */ = {
+			isa = PBXGroup;
+			children = (
+				6A5098F31BD241D900131709 /* HomeCustomCell.h */,
+				6A5098F41BD241D900131709 /* HomeCustomCell.m */,
+				6A5098F51BD241D900131709 /* HomeCustomCell.xib */,
+			);
+			path = HomeCustomCell;
+			sourceTree = "<group>";
+		};
 		6A50C2231BCCC310002B11AC /* Chats */ = {
 			isa = PBXGroup;
 			children = (
@@ -245,6 +277,7 @@
 		C6D5F60A1BC7A4560050C1AE /* ViewController */ = {
 			isa = PBXGroup;
 			children = (
+				6A5098EC1BD21FE400131709 /* HomeView */,
 				EAED126C1BCE55B00069E39D /* Hobbies */,
 				6A50C2291BCCFF36002B11AC /* SplashView */,
 				EACB22B71BC7C7F7002FAD54 /* Login */,
@@ -490,9 +523,11 @@
 				C6D5F67C1BC7EC440050C1AE /* Images.xcassets in Resources */,
 				C6D5F6451BC7B52C0050C1AE /* Patron-ThinItalic.ttf in Resources */,
 				C6D5F63E1BC7B52C0050C1AE /* Patron-ExtraLight.ttf in Resources */,
+				6A5098F71BD241D900131709 /* HomeCustomCell.xib in Resources */,
 				6A50C2311BCCFF36002B11AC /* DSSplashViewController.xib in Resources */,
 				C6D5F63B1BC7B52C0050C1AE /* Patron-BlackItalic.ttf in Resources */,
 				C6D5F63C1BC7B52C0050C1AE /* Patron-Bold.ttf in Resources */,
+				6A5098F11BD2201600131709 /* HomeViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -506,6 +541,7 @@
 				EAEF25221BCF9EF600F83E82 /* IQKeyboardManager.m in Sources */,
 				EAEF251D1BCF9EF600F83E82 /* IQNSArray+Sort.m in Sources */,
 				EAEF25201BCF9EF600F83E82 /* IQUIViewController+Additions.m in Sources */,
+				6A5098F01BD2201600131709 /* HomeViewController.m in Sources */,
 				C6D5F61C1BC7B3E60050C1AE /* DSAppCommon.m in Sources */,
 				EACB22BB1BC7C7F7002FAD54 /* DSLoginViewController.m in Sources */,
 				EAEF251E1BCF9EF600F83E82 /* IQUITextFieldView+Additions.m in Sources */,
@@ -517,6 +553,7 @@
 				065BAC521BC7A135005AF493 /* main.m in Sources */,
 				6A50C2301BCCFF36002B11AC /* DSSplashViewController.m in Sources */,
 				6A50C21C1BCCBB8C002B11AC /* DSProfileTableViewCell.m in Sources */,
+				6A5098F61BD241D900131709 /* HomeCustomCell.m in Sources */,
 				EAEF25241BCF9EF600F83E82 /* IQSegmentedNextPrevious.m in Sources */,
 				EAEF25351BCFEBF400F83E82 /* CustomNavigationView.m in Sources */,
 				EAEF25251BCF9EF600F83E82 /* IQTextView.m in Sources */,

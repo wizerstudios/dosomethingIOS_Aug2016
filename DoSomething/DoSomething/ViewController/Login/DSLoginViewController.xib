@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7706" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6751" systemVersion="14A389" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6736"/>
     </dependencies>
     <customFonts key="customFonts">
         <mutableArray key="Patron-Bold.ttf">
@@ -33,6 +33,7 @@
                 <outlet property="buttonSignIn" destination="UCk-i4-sP1" id="AgQ-Z0-jdo"/>
                 <outlet property="buttonSignInHeightConstraint" destination="u0V-VH-kJA" id="JxS-Fn-0jh"/>
                 <outlet property="buttonTermsOfUse" destination="TrV-dd-2rk" id="jRB-dd-Sti"/>
+                <outlet property="emailTxt" destination="c7o-Yq-ofS" id="iCb-Gz-hlm"/>
                 <outlet property="labelCreateAnAcc" destination="zTU-Oo-6WB" id="pMM-J5-jlF"/>
                 <outlet property="labelEmail" destination="sR7-yr-HZB" id="dTx-x4-7Ee"/>
                 <outlet property="labelFacebook" destination="ocI-oM-Rhj" id="8Ko-aM-2S7"/>
@@ -51,6 +52,7 @@
                 <outlet property="layoutConstraintTapBarImageHeight" destination="WGH-U3-uXa" id="xFa-kB-Wqu"/>
                 <outlet property="layoutConstraintTextFieldCenterLabelYPos" destination="BpH-Da-kMm" id="8Ao-9t-9oK"/>
                 <outlet property="layoutConstraintTxtFieldViewHeight" destination="y1q-5u-QAL" id="wHQ-pO-6dX"/>
+                <outlet property="passwordTxt" destination="rXR-Rw-64v" id="5Tg-bE-ogj"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
