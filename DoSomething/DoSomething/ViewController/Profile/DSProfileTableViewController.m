@@ -43,6 +43,8 @@
         customNavigation.view.frame = CGRectMake(0,-20, 375, 83);
         self.layoutConstraintTableViewYPos.constant= 20;
     }
+    [customNavigation.menuBtn setHidden:YES];
+    [customNavigation.buttonBack setHidden:NO];
     [self.navigationController.navigationBar addSubview:customNavigation.view];
     [customNavigation.buttonBack addTarget:self action:@selector(backAction) forControlEvents:UIControlEventTouchUpInside];
 }

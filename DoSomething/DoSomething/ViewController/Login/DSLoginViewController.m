@@ -7,11 +7,18 @@
 //
 
 #import "DSLoginViewController.h"
+
 #import "DSSplashViewController.h"
+
 #import "DSProfileTableViewController.h"
+
 #import "DSConfig.h"
+
 #import "DSAppCommon.h"
+
 #import "CustomNavigationView.h"
+
+#import "HomeViewController.h"
 
 
 
@@ -88,6 +95,7 @@
      buttonPrivacyPolicy.hidden =YES;
      buttonTermsOfUse.hidden =YES;
      buttonSignIn.hidden =NO;
+     [buttonSignIn addTarget:self action:@selector(SignButtonAction) forControlEvents:UIControlEventTouchUpInside];
     }
 
     
@@ -114,7 +122,29 @@
 
 }
 
+-(void)SignButtonAction
+{
+//    if([self.emailTxt.text isEqualToString:@""])
+//    {
+//        [self alterMsg:@"Enter valied EmailID"];
+//    }
+//    else if ([self.passwordTxt.text isEqualToString:@""])
+//    {
+//        [self alterMsg:@"Enter valied EmailID"];
+//    }
+//    else
+//    {
+        HomeViewController * objHomeview = [[HomeViewController alloc]initWithNibName:@"HomeViewController" bundle:nil];
+        [self.navigationController pushViewController:objHomeview animated:NO];
+    //}
+}
 
+-(void)alterMsg:(NSString*)msgStr
+{
+    UIAlertView * objalterMsg =[[UIAlertView alloc]initWithTitle:nil message:msgStr delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+    [objalterMsg show];
+    
+}
 - (IBAction)Back:(id)sender {
     [self.navigationController popViewControllerAnimated:YES];
 }

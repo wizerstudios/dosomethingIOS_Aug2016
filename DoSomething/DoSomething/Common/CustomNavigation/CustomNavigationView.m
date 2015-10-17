@@ -20,7 +20,10 @@
     
     [super viewDidLoad];
     [self.view setFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, CGRectGetHeight(self.view.frame))];
-
+    self.menuBtn.hidden    = YES;
+    self.buttonBack.hidden = YES;
+    self.saveBtn .hidden   = YES;
+    
     if (IS_IPHONE6 ||IS_IPHONE6_Plus){
     self.layoutConstraintLabelYPos.constant =35;
     self.layoutConstraintBackBtnYPos.constant =29;
