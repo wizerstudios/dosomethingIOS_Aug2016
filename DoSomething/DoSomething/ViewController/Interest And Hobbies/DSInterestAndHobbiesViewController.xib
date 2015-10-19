@@ -16,7 +16,8 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="DSInterestAndHobbiesViewController">
             <connections>
                 <outlet property="interestAndHobbiesCollectionView" destination="djR-MD-Avp" id="wAX-W8-Tdh"/>
-                <outlet property="layoutConstraintcollectionviewYPos" destination="b1u-1e-W8Y" id="Msr-Zf-2N9"/>
+                <outlet property="layoutConstraintCollectionviewYPos" destination="tvB-My-dqi" id="gC7-Fv-1nz"/>
+                <outlet property="layoutConstraintinterestAndHobbiesLabelYPos" destination="b1u-1e-W8Y" id="zES-Pb-Z80"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>

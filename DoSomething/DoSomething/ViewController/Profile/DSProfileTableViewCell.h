@@ -24,6 +24,7 @@
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *layoutConstraintNotificationLabelYPos;
 @property (strong, nonatomic) IBOutlet NSLayoutConstraint *layoutConstraintProfileImageWidth;
 @property (strong, nonatomic) IBOutlet NSLayoutConstraint *layoutConstraintProfileImageHeight;
+@property (weak, nonatomic) IBOutlet UIImageView *hobbiesImageView;
 
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *layoutConstraintRadioButtonYPos;
 

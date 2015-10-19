@@ -16,6 +16,7 @@
 {
     NSArray *placeHolderArray;
     NSArray *titleArray;
+    NSMutableArray *interstAndHobbiesArray;
 }
 @end
 
@@ -43,6 +44,11 @@
         customNavigation.view.frame = CGRectMake(0,-20, 375, 83);
         self.layoutConstraintTableViewYPos.constant= 20;
     }
+    if(IS_IPHONE6_Plus)
+    {
+        customNavigation.view.frame = CGRectMake(0,-20, 420, 83);
+        self.layoutConstraintTableViewYPos.constant= 20;
+    }
     [customNavigation.menuBtn setHidden:YES];
     [customNavigation.buttonBack setHidden:NO];
     [customNavigation.saveBtn setHidden:NO];
@@ -61,6 +67,7 @@
 }
 
 -(void)initializeArray{
+    interstAndHobbiesArray =[[NSUserDefaults standardUserDefaults] valueForKey:@"SelectedItem"];
      placeHolderArray = [[NSArray alloc]initWithObjects:@"Image",@"First Name",@"Last Name",@"male",@"DD / MM / YYYY",@"Write something about yourself here.",@"Hobbies",@"Email&Password",@"switch_on",@"TermsOfUse",nil];
     titleArray = [[NSArray alloc]initWithObjects:@"Image",@"First Name",@"Last Name",@"male",@"Date of Birth",@"About You",@"Hobbies",@"Email&Password",@"switch_on",@"TermsOfUse",nil];
     
@@ -229,7 +236,16 @@
             
         }
         [cell.buttonPushHobbies addTarget:self action:@selector(pushToHobbiesView) forControlEvents:UIControlEventTouchUpInside];
+        for (int i =0; i<interstAndHobbiesArray.count; i++) {
+            
         
+        if ([interstAndHobbiesArray valueForKey:@"imageNormal"]==[interstAndHobbiesArray valueForKey:@"imageActive"]) {
+        
+            NSString *image =[[[interstAndHobbiesArray valueForKey:@"imageNormal"]objectAtIndex:indexPath.section]objectAtIndex:i];
+            [cell.hobbiesImageView setImage:[UIImage imageNamed:image]];
+
+        }
+        }
     }
    
     
