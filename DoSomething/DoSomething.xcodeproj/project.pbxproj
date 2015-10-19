@@ -8,8 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		065BAC521BC7A135005AF493 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 065BAC511BC7A135005AF493 /* main.m */; };
-		6A5098F01BD2201600131709 /* HomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A5098EE1BD2201600131709 /* HomeViewController.m */; };
-		6A5098F61BD241D900131709 /* HomeCustomCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A5098F41BD241D900131709 /* HomeCustomCell.m */; };
 		6A50C21C1BCCBB8C002B11AC /* DSProfileTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A50C21A1BCCBB8C002B11AC /* DSProfileTableViewCell.m */; };
 		6A50C21D1BCCBB8C002B11AC /* DSProfileTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6A50C21B1BCCBB8C002B11AC /* DSProfileTableViewCell.xib */; };
 		6A50C2271BCCC310002B11AC /* DSChatsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A50C2251BCCC310002B11AC /* DSChatsTableViewController.m */; };
@@ -225,8 +223,6 @@
 		065BAC4D1BC7A135005AF493 /* DoSomething.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DoSomething.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		065BAC511BC7A135005AF493 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		065BAC611BC7A135005AF493 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		6A5098EE1BD2201600131709 /* HomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeViewController.m; sourceTree = "<group>"; };
-		6A5098F41BD241D900131709 /* HomeCustomCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeCustomCell.m; sourceTree = "<group>"; };
 		6A50C2191BCCBB8C002B11AC /* DSProfileTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DSProfileTableViewCell.h; sourceTree = "<group>"; };
 		6A50C21A1BCCBB8C002B11AC /* DSProfileTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DSProfileTableViewCell.m; sourceTree = "<group>"; };
 		6A50C21B1BCCBB8C002B11AC /* DSProfileTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DSProfileTableViewCell.xib; sourceTree = "<group>"; };
@@ -1216,7 +1212,6 @@
 				EAEF25221BCF9EF600F83E82 /* IQKeyboardManager.m in Sources */,
 				EAEF251D1BCF9EF600F83E82 /* IQNSArray+Sort.m in Sources */,
 				EAEF25201BCF9EF600F83E82 /* IQUIViewController+Additions.m in Sources */,
-				6A5098F01BD2201600131709 /* HomeViewController.m in Sources */,
 				C6D5F61C1BC7B3E60050C1AE /* DSAppCommon.m in Sources */,
 				EACB22BB1BC7C7F7002FAD54 /* DSLoginViewController.m in Sources */,
 				EAEF251E1BCF9EF600F83E82 /* IQUITextFieldView+Additions.m in Sources */,
@@ -1228,7 +1223,6 @@
 				065BAC521BC7A135005AF493 /* main.m in Sources */,
 				6A50C2301BCCFF36002B11AC /* DSSplashViewController.m in Sources */,
 				6A50C21C1BCCBB8C002B11AC /* DSProfileTableViewCell.m in Sources */,
-				6A5098F61BD241D900131709 /* HomeCustomCell.m in Sources */,
 				EAEF25241BCF9EF600F83E82 /* IQSegmentedNextPrevious.m in Sources */,
 				EAE5562C1BD4AD5900DFA5D8 /* HomeCustomCell.m in Sources */,
 				EAEF25351BCFEBF400F83E82 /* CustomNavigationView.m in Sources */,
