@@ -9,9 +9,7 @@
 /* Begin PBXBuildFile section */
 		065BAC521BC7A135005AF493 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 065BAC511BC7A135005AF493 /* main.m */; };
 		6A5098F01BD2201600131709 /* HomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A5098EE1BD2201600131709 /* HomeViewController.m */; };
-		6A5098F11BD2201600131709 /* HomeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6A5098EF1BD2201600131709 /* HomeViewController.xib */; };
 		6A5098F61BD241D900131709 /* HomeCustomCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A5098F41BD241D900131709 /* HomeCustomCell.m */; };
-		6A5098F71BD241D900131709 /* HomeCustomCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6A5098F51BD241D900131709 /* HomeCustomCell.xib */; };
 		6A50C21C1BCCBB8C002B11AC /* DSProfileTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A50C21A1BCCBB8C002B11AC /* DSProfileTableViewCell.m */; };
 		6A50C21D1BCCBB8C002B11AC /* DSProfileTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6A50C21B1BCCBB8C002B11AC /* DSProfileTableViewCell.xib */; };
 		6A50C2271BCCC310002B11AC /* DSChatsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A50C2251BCCC310002B11AC /* DSChatsTableViewController.m */; };
@@ -40,6 +38,10 @@
 		C6D5F67C1BC7EC440050C1AE /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C6D5F67B1BC7EC440050C1AE /* Images.xcassets */; };
 		EACB22BB1BC7C7F7002FAD54 /* DSLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EACB22B91BC7C7F7002FAD54 /* DSLoginViewController.m */; };
 		EACB22BC1BC7C7F7002FAD54 /* DSLoginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = EACB22BA1BC7C7F7002FAD54 /* DSLoginViewController.xib */; };
+		EAE5562C1BD4AD5900DFA5D8 /* HomeCustomCell.m in Sources */ = {isa = PBXBuildFile; fileRef = EAE556271BD4AD5900DFA5D8 /* HomeCustomCell.m */; };
+		EAE5562D1BD4AD5900DFA5D8 /* HomeCustomCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = EAE556281BD4AD5900DFA5D8 /* HomeCustomCell.xib */; };
+		EAE5562E1BD4AD5900DFA5D8 /* HomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EAE5562A1BD4AD5900DFA5D8 /* HomeViewController.m */; };
+		EAE5562F1BD4AD5900DFA5D8 /* HomeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = EAE5562B1BD4AD5900DFA5D8 /* HomeViewController.xib */; };
 		EAED12701BCE55B00069E39D /* DSHobbiesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EAED126E1BCE55B00069E39D /* DSHobbiesViewController.m */; };
 		EAED12711BCE55B00069E39D /* DSHobbiesViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = EAED126F1BCE55B00069E39D /* DSHobbiesViewController.xib */; };
 		EAEF251D1BCF9EF600F83E82 /* IQNSArray+Sort.m in Sources */ = {isa = PBXBuildFile; fileRef = EAEF24FB1BCF9EF600F83E82 /* IQNSArray+Sort.m */; };
@@ -223,12 +225,8 @@
 		065BAC4D1BC7A135005AF493 /* DoSomething.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DoSomething.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		065BAC511BC7A135005AF493 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		065BAC611BC7A135005AF493 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		6A5098ED1BD2201600131709 /* HomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeViewController.h; sourceTree = "<group>"; };
 		6A5098EE1BD2201600131709 /* HomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeViewController.m; sourceTree = "<group>"; };
-		6A5098EF1BD2201600131709 /* HomeViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HomeViewController.xib; sourceTree = "<group>"; };
-		6A5098F31BD241D900131709 /* HomeCustomCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeCustomCell.h; sourceTree = "<group>"; };
 		6A5098F41BD241D900131709 /* HomeCustomCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeCustomCell.m; sourceTree = "<group>"; };
-		6A5098F51BD241D900131709 /* HomeCustomCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HomeCustomCell.xib; sourceTree = "<group>"; };
 		6A50C2191BCCBB8C002B11AC /* DSProfileTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DSProfileTableViewCell.h; sourceTree = "<group>"; };
 		6A50C21A1BCCBB8C002B11AC /* DSProfileTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DSProfileTableViewCell.m; sourceTree = "<group>"; };
 		6A50C21B1BCCBB8C002B11AC /* DSProfileTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DSProfileTableViewCell.xib; sourceTree = "<group>"; };
@@ -266,6 +264,12 @@
 		EACB22B81BC7C7F7002FAD54 /* DSLoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DSLoginViewController.h; sourceTree = "<group>"; };
 		EACB22B91BC7C7F7002FAD54 /* DSLoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DSLoginViewController.m; sourceTree = "<group>"; };
 		EACB22BA1BC7C7F7002FAD54 /* DSLoginViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DSLoginViewController.xib; sourceTree = "<group>"; };
+		EAE556261BD4AD5900DFA5D8 /* HomeCustomCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeCustomCell.h; sourceTree = "<group>"; };
+		EAE556271BD4AD5900DFA5D8 /* HomeCustomCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeCustomCell.m; sourceTree = "<group>"; };
+		EAE556281BD4AD5900DFA5D8 /* HomeCustomCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HomeCustomCell.xib; sourceTree = "<group>"; };
+		EAE556291BD4AD5900DFA5D8 /* HomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeViewController.h; sourceTree = "<group>"; };
+		EAE5562A1BD4AD5900DFA5D8 /* HomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeViewController.m; sourceTree = "<group>"; };
+		EAE5562B1BD4AD5900DFA5D8 /* HomeViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HomeViewController.xib; sourceTree = "<group>"; };
 		EAED126D1BCE55B00069E39D /* DSHobbiesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DSHobbiesViewController.h; sourceTree = "<group>"; };
 		EAED126E1BCE55B00069E39D /* DSHobbiesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DSHobbiesViewController.m; sourceTree = "<group>"; };
 		EAED126F1BCE55B00069E39D /* DSHobbiesViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DSHobbiesViewController.xib; sourceTree = "<group>"; };
@@ -515,28 +519,6 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		6A5098EC1BD21FE400131709 /* HomeView */ = {
-			isa = PBXGroup;
-			children = (
-				6A5098F21BD241AE00131709 /* HomeCustomCell */,
-				6A5098ED1BD2201600131709 /* HomeViewController.h */,
-				6A5098EE1BD2201600131709 /* HomeViewController.m */,
-				6A5098EF1BD2201600131709 /* HomeViewController.xib */,
-			);
-			name = HomeView;
-			path = ViewController/HomeView;
-			sourceTree = "<group>";
-		};
-		6A5098F21BD241AE00131709 /* HomeCustomCell */ = {
-			isa = PBXGroup;
-			children = (
-				6A5098F31BD241D900131709 /* HomeCustomCell.h */,
-				6A5098F41BD241D900131709 /* HomeCustomCell.m */,
-				6A5098F51BD241D900131709 /* HomeCustomCell.xib */,
-			);
-			path = HomeCustomCell;
-			sourceTree = "<group>";
-		};
 		6A50C2231BCCC310002B11AC /* Chats */ = {
 			isa = PBXGroup;
 			children = (
@@ -590,6 +572,7 @@
 		C6D5F60A1BC7A4560050C1AE /* ViewController */ = {
 			isa = PBXGroup;
 			children = (
+				EAE556241BD4AD5900DFA5D8 /* HomeView */,
 				EAFC96541BD20FD400B3593D /* Interest And Hobbies */,
 				EAED126C1BCE55B00069E39D /* Hobbies */,
 				6A50C2291BCCFF36002B11AC /* SplashView */,
@@ -649,6 +632,28 @@
 			);
 			name = Login;
 			path = ViewController/Login;
+			sourceTree = "<group>";
+		};
+		EAE556241BD4AD5900DFA5D8 /* HomeView */ = {
+			isa = PBXGroup;
+			children = (
+				EAE556251BD4AD5900DFA5D8 /* HomeCustomCell */,
+				EAE556291BD4AD5900DFA5D8 /* HomeViewController.h */,
+				EAE5562A1BD4AD5900DFA5D8 /* HomeViewController.m */,
+				EAE5562B1BD4AD5900DFA5D8 /* HomeViewController.xib */,
+			);
+			name = HomeView;
+			path = ViewController/HomeView;
+			sourceTree = "<group>";
+		};
+		EAE556251BD4AD5900DFA5D8 /* HomeCustomCell */ = {
+			isa = PBXGroup;
+			children = (
+				EAE556261BD4AD5900DFA5D8 /* HomeCustomCell.h */,
+				EAE556271BD4AD5900DFA5D8 /* HomeCustomCell.m */,
+				EAE556281BD4AD5900DFA5D8 /* HomeCustomCell.xib */,
+			);
+			path = HomeCustomCell;
 			sourceTree = "<group>";
 		};
 		EAED126C1BCE55B00069E39D /* Hobbies */ = {
@@ -1111,6 +1116,7 @@
 				EACB22BC1BC7C7F7002FAD54 /* DSLoginViewController.xib in Resources */,
 				EAFC971B1BD21A1200B3593D /* photography_active.png in Resources */,
 				EAFC97651BD21A1200B3593D /* cat.png in Resources */,
+				EAE5562D1BD4AD5900DFA5D8 /* HomeCustomCell.xib in Resources */,
 				EAFC977B1BD21A1200B3593D /* italianfood.png in Resources */,
 				EAFC97291BD21A1200B3593D /* travell_active.png in Resources */,
 				EAFC97661BD21A1200B3593D /* cat_active.png in Resources */,
@@ -1160,6 +1166,7 @@
 				C6D5F6441BC7B52C0050C1AE /* Patron-Thin.ttf in Resources */,
 				EAFC97521BD21A1200B3593D /* shopping.png in Resources */,
 				EAFC97101BD21A1200B3593D /* golf.png in Resources */,
+				EAE5562F1BD4AD5900DFA5D8 /* HomeViewController.xib in Resources */,
 				EAFC978C1BD21A1200B3593D /* sycling.png in Resources */,
 				EAFC97571BD21A1200B3593D /* swimming_active.png in Resources */,
 				EAFC973A1BD21A1200B3593D /* finance.png in Resources */,
@@ -1223,11 +1230,13 @@
 				6A50C21C1BCCBB8C002B11AC /* DSProfileTableViewCell.m in Sources */,
 				6A5098F61BD241D900131709 /* HomeCustomCell.m in Sources */,
 				EAEF25241BCF9EF600F83E82 /* IQSegmentedNextPrevious.m in Sources */,
+				EAE5562C1BD4AD5900DFA5D8 /* HomeCustomCell.m in Sources */,
 				EAEF25351BCFEBF400F83E82 /* CustomNavigationView.m in Sources */,
 				EAEF25251BCF9EF600F83E82 /* IQTextView.m in Sources */,
 				EAEF25211BCF9EF600F83E82 /* IQUIWindow+Hierarchy.m in Sources */,
 				EAFC96581BD20FD400B3593D /* DSInterestAndHobbiesViewController.m in Sources */,
 				EAEF25231BCF9EF600F83E82 /* IQKeyboardReturnKeyHandler.m in Sources */,
+				EAE5562E1BD4AD5900DFA5D8 /* HomeViewController.m in Sources */,
 				C6D5F6151BC7B0970050C1AE /* AppDelegate.m in Sources */,
 				EAEF25291BCF9EF600F83E82 /* IQUIView+IQKeyboardToolbar.m in Sources */,
 				EAFC97971BD21CF800B3593D /* DSInterestAndHobbiesCollectionViewCell.m in Sources */,
