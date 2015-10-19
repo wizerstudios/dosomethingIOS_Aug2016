@@ -7,7 +7,7 @@
 //
 
 #import "DSProfileTableViewController.h"
-#import "DSHobbiesViewController.h"
+#import "DSInterestAndHobbiesViewController.h"
 #import "CustomNavigationView.h"
 #import "DSConfig.h"
 
@@ -40,9 +40,11 @@
     customNavigation = [[CustomNavigationView alloc] initWithNibName:@"CustomNavigationView" bundle:nil];
     customNavigation.view.frame = CGRectMake(0,-20, CGRectGetWidth(self.view.frame), 65);
     if (IS_IPHONE6 ||IS_IPHONE6_Plus){
-        customNavigation.view.frame = CGRectMake(0,-20, 420, 83);
+        customNavigation.view.frame = CGRectMake(0,-20, 375, 83);
         self.layoutConstraintTableViewYPos.constant= 20;
     }
+    [customNavigation.menuBtn setHidden:YES];
+    [customNavigation.buttonBack setHidden:NO];
     [self.navigationController.navigationBar addSubview:customNavigation.view];
     [customNavigation.buttonBack addTarget:self action:@selector(backAction) forControlEvents:UIControlEventTouchUpInside];
 }
@@ -52,7 +54,7 @@
 }
 
 - (void)pushToHobbiesView {
-    DSHobbiesViewController * DSHobbiesView  = [[DSHobbiesViewController alloc]initWithNibName:@"DSHobbiesViewController" bundle:nil];
+    DSInterestAndHobbiesViewController * DSHobbiesView  = [[DSInterestAndHobbiesViewController alloc]initWithNibName:@"DSInterestAndHobbiesViewController" bundle:nil];
     [self.navigationController pushViewController:DSHobbiesView animated:YES];
 
 }

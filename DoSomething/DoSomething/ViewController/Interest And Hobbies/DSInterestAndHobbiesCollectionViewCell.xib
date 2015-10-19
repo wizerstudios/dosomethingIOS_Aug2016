@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7706" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <mutableArray key="Patron-Regular.ttf">
+            <string>Patron-Regular</string>
+        </mutableArray>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="InterestAndHobbiesCollectionViewCell" id="gTV-IL-0wX" customClass="DSInterestAndHobbiesCollectionViewCell">
+            <rect key="frame" x="0.0" y="0.0" width="60" height="70"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                <rect key="frame" x="0.0" y="0.0" width="60" height="70"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HeF-YN-pV0">
+                        <rect key="frame" x="0.0" y="0.0" width="60" height="70"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Fpn-uL-VPb">
+                                <rect key="frame" x="5" y="0.0" width="50" height="40"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="50" id="S9N-55-Plc"/>
+                                    <constraint firstAttribute="height" constant="40" id="SiS-r3-VI6"/>
+                                </constraints>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="veP-mT-gce">
+                                <rect key="frame" x="0.0" y="40" width="60" height="10"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="60" id="KuV-gt-PN8"/>
+                                    <constraint firstAttribute="height" constant="10" id="wAb-Ht-b93"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="Patron-Regular" family="Patron" pointSize="8"/>
+                                <color key="textColor" red="0.29019607843137252" green="0.29019607843137252" blue="0.29019607843137252" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="Fpn-uL-VPb" secondAttribute="trailing" constant="5" id="AMh-d5-X0f"/>
+                            <constraint firstItem="veP-mT-gce" firstAttribute="leading" secondItem="HeF-YN-pV0" secondAttribute="leading" id="Br3-hP-ygs"/>
+                            <constraint firstItem="veP-mT-gce" firstAttribute="top" secondItem="Fpn-uL-VPb" secondAttribute="bottom" id="arC-Pc-ndP"/>
+                            <constraint firstAttribute="bottom" secondItem="veP-mT-gce" secondAttribute="bottom" constant="20" id="cnq-po-upF"/>
+                            <constraint firstItem="veP-mT-gce" firstAttribute="top" secondItem="Fpn-uL-VPb" secondAttribute="bottom" id="crt-8j-bhL"/>
+                            <constraint firstItem="Fpn-uL-VPb" firstAttribute="top" secondItem="HeF-YN-pV0" secondAttribute="top" id="tGb-LB-FpL"/>
+                            <constraint firstAttribute="trailing" secondItem="veP-mT-gce" secondAttribute="trailing" id="tg5-b5-K0l"/>
+                            <constraint firstItem="Fpn-uL-VPb" firstAttribute="leading" secondItem="HeF-YN-pV0" secondAttribute="leading" constant="5" id="zwX-hs-bGe"/>
+                        </constraints>
+                    </view>
+                </subviews>
+                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+            </view>
+            <constraints>
+                <constraint firstItem="HeF-YN-pV0" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="SuF-Tj-4YG"/>
+                <constraint firstItem="HeF-YN-pV0" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="iPs-Py-Mip"/>
+            </constraints>
+            <connections>
+                <outlet property="interestAndHobbiesImageView" destination="Fpn-uL-VPb" id="zXf-Na-9aP"/>
+                <outlet property="nameLabel" destination="veP-mT-gce" id="pVp-gd-Eo6"/>
+            </connections>
+            <point key="canvasLocation" x="539" y="321"/>
+        </collectionViewCell>
+    </objects>
+</document>
