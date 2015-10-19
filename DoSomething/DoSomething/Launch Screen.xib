@@ -28,6 +28,6 @@
         </view>
     </objects>
     <resources>
-        <image name="splashScreen" width="828" height="1472"/>
+        <image name="splashScreen" width="414" height="669"/>
     </resources>
 </document>

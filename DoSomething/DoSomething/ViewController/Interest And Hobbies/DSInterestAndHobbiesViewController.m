@@ -25,7 +25,7 @@
     [super viewDidLoad];
     [self.interestAndHobbiesCollectionView registerClass:[UICollectionReusableView class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"HeaderView"];
     UICollectionViewFlowLayout *flowLayout = [[UICollectionViewFlowLayout alloc] init];
-    flowLayout.headerReferenceSize = CGSizeMake(self.interestAndHobbiesCollectionView.bounds.size.width, 40);
+    flowLayout.headerReferenceSize = CGSizeMake(self.interestAndHobbiesCollectionView.bounds.size.width, 48);
     [self.interestAndHobbiesCollectionView setCollectionViewLayout:flowLayout];
     [self loadNavigation];
     [self initializeArray];
@@ -46,6 +46,10 @@
     }
     [self.navigationController.navigationBar addSubview:customNavigation.view];
     [customNavigation.buttonBack addTarget:self action:@selector(backAction) forControlEvents:UIControlEventTouchUpInside];
+    [customNavigation.menuBtn setHidden:YES];
+    [customNavigation.buttonBack setHidden:NO];
+    [customNavigation.saveBtn setHidden:NO];
+
 }
 -(void)backAction
 {
@@ -76,6 +80,7 @@
                                           [NSDictionary dictionaryWithObjectsAndKeys:@"cooking.png",@"imageNormal",@"cooking_active.png",@"imageActive",@"COOKING",@"name", nil],
                                           [NSDictionary dictionaryWithObjectsAndKeys:@"fastfood.png",@"imageNormal",@"fastfood_active.png",@"imageActive",@"FASTFOOD",@"name", nil],
                                           [NSDictionary dictionaryWithObjectsAndKeys:@"italianfood.png",@"imageNormal",@"italianfood_active.png",@"imageActive",@"ITALIANFOOD",@"name", nil],
+                                          [NSDictionary dictionaryWithObjectsAndKeys:@"",@"imageNormal",@"",@"imageActive",@"",@"name", nil],
                                           [NSDictionary dictionaryWithObjectsAndKeys:@"japanesefood.png",@"imageNormal",@"japanesefood_active.png",@"imageActive",@"JAPANESEFOOD",@"name", nil],
                                           [NSDictionary dictionaryWithObjectsAndKeys:@"food.png",@"imageNormal",@"food_active.png",@"imageActive",@"KOREANFOOD",@"name", nil]
 
@@ -83,11 +88,11 @@
     [interstAndHobbiesArray insertObject:[[NSMutableArray alloc]initWithObjects:[NSDictionary dictionaryWithObjectsAndKeys:@"cat.png",@"imageNormal",@"cat_active.png",@"imageActive",@"CAT",@"name", nil],
                                           [NSDictionary dictionaryWithObjectsAndKeys:@"dog.png",@"imageNormal",@"dog_active.png",@"imageActive",@"DOG",@"name", nil],
                                           nil]atIndex:2];
-    [interstAndHobbiesArray insertObject:[[NSMutableArray alloc]initWithObjects:[NSDictionary dictionaryWithObjectsAndKeys:@"Boardgames.png",@"imageNormal",@"guitar_active.png",@"imageActive",@"BOARDGAMES",@"name", nil],
+    [interstAndHobbiesArray insertObject:[[NSMutableArray alloc]initWithObjects:[NSDictionary dictionaryWithObjectsAndKeys:@"Boardgames.png",@"imageNormal",@"Boardgames_active.png",@"imageActive",@"BOARDGAMES",@"name", nil],
                                           [NSDictionary dictionaryWithObjectsAndKeys:@"fishing.png",@"imageNormal",@"fishing_active.png",@"imageActive",@"FISHING",@"name", nil],
                                           [NSDictionary dictionaryWithObjectsAndKeys:@"game.png",@"imageNormal",@"game_active.png",@"imageActive",@"GAMING",@"name", nil],
                                           [NSDictionary dictionaryWithObjectsAndKeys:@"gardening.png",@"imageNormal",@"gardening_active.png",@"imageActive",@"GARDENING",@"name", nil],
-                                          [NSDictionary dictionaryWithObjectsAndKeys:@"finance.png",@"imageNormal",@"finance_acative.png",@"imageActive",@"FINANCE",@"name", nil]
+                                          [NSDictionary dictionaryWithObjectsAndKeys:@"finance.png",@"imageNormal",@"finance_active.png",@"imageActive",@"FINANCE",@"name", nil]
 
                                           ,nil]atIndex:3];
     
@@ -126,7 +131,7 @@
             }
         }
         
-        UILabel *label=[[UILabel alloc] initWithFrame:CGRectMake(0, 23, (self.view.frame.size.width), 10)];
+        UILabel *label=[[UILabel alloc] initWithFrame:CGRectMake(0, 26, (self.view.frame.size.width), 10)];
     
         label.textAlignment = NSTextAlignmentCenter;
         label.textColor =[UIColor colorWithRed:(float)231.0/255 green:(float)90.0/255 blue:(float)102.0/255 alpha:1.0f];
@@ -164,9 +169,9 @@
         CGFloat contentWidth = collectionView.frame.size.width-collectionView.contentInset.left-collectionView.contentInset.right;
         if( totalCellWidth>contentWidth )
         {
-            
             CGFloat padding = (totalCellWidth - contentWidth) / 8.0;
             return UIEdgeInsetsMake(0, padding, 0, padding);
+           
         }
         
     }
@@ -184,6 +189,7 @@
 -(UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     DSInterestAndHobbiesCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"InterestAndHobbiesCollectionViewCell" forIndexPath:indexPath];
+    
     [cell.nameLabel setText:[[[interstAndHobbiesArray valueForKey:@"name"]objectAtIndex:indexPath.section]objectAtIndex:indexPath.row]];
     NSString *image =[[[interstAndHobbiesArray valueForKey:@"imageNormal"]objectAtIndex:indexPath.section]objectAtIndex:indexPath.row];
     [cell.interestAndHobbiesImageView setImage:[UIImage imageNamed:image]];
@@ -193,26 +199,33 @@
 }
 
 
-//- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
-//
-//   {
-//       CGFloat picDimension;
-//       if (indexPath.section == 1 ) {
-//           if (indexPath.item == 5 || indexPath .item ==6) {
-//               picDimension = self.view.frame.size.width / 7.0f;
-//               return CGSizeMake(picDimension, picDimension);
-//           }
-//           
-//
-//       }
-//    
-//       return CGSizeMake(picDimension, picDimension);
-//   }
-//
+-(CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    CGFloat collectionCellWidth;
+    CGFloat finalWidthWithPadding;
+    if (indexPath.section == 0 || indexPath.section ==1 || indexPath.section ==3 ) {
+        int numberOfCellInRow = 6;
+        int padding = 4;
+        collectionCellWidth =  [[UIScreen mainScreen] bounds].size.width/numberOfCellInRow;
+        finalWidthWithPadding = collectionCellWidth - (padding);
+        return CGSizeMake(finalWidthWithPadding , finalWidthWithPadding);
+    }
+    if (indexPath.section ==2) {
+        int numberOfCellInRow = 7;
+        int padding = 1;
+        collectionCellWidth =  [[UIScreen mainScreen] bounds].size.width/numberOfCellInRow;
+        finalWidthWithPadding = collectionCellWidth - (padding);
+        return CGSizeMake(finalWidthWithPadding , finalWidthWithPadding);
 
-- (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout minimumLineSpacingForSectionAtIndex:(NSInteger)section {
-    return 25.0;
+    }
+    return CGSizeMake(finalWidthWithPadding , finalWidthWithPadding);
+
+    
 }
+
+//- (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout minimumLineSpacingForSectionAtIndex:(NSInteger)section {
+//    return 25.0;
+//}
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath;
 

@@ -26,7 +26,7 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="djR-MD-Avp">
-                    <rect key="frame" x="10" y="46" width="300" height="522"/>
+                    <rect key="frame" x="10" y="42" width="300" height="522"/>
                     <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                     <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="Dp7-xo-bMG">
                         <size key="itemSize" width="50" height="60"/>
@@ -86,8 +86,8 @@
                 <constraint firstItem="djR-MD-Avp" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="10" id="BLy-oh-TVW"/>
                 <constraint firstItem="0zs-8r-iM7" firstAttribute="leading" secondItem="djR-MD-Avp" secondAttribute="leading" id="FCv-MQ-TC4"/>
                 <constraint firstItem="0zs-8r-iM7" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="fcm-je-VLN"/>
-                <constraint firstItem="djR-MD-Avp" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="46" id="tvB-My-dqi"/>
-                <constraint firstAttribute="bottom" secondItem="djR-MD-Avp" secondAttribute="bottom" id="zJH-49-Cal"/>
+                <constraint firstItem="djR-MD-Avp" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="42" id="tvB-My-dqi"/>
+                <constraint firstAttribute="bottom" secondItem="djR-MD-Avp" secondAttribute="bottom" constant="4" id="zJH-49-Cal"/>
             </constraints>
             <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
         </view>
