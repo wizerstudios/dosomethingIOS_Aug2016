@@ -5,8 +5,8 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
     </dependencies>
     <customFonts key="customFonts">
-        <mutableArray key="Patron-Regular.ttf">
-            <string>Patron-Regular</string>
+        <mutableArray key="Patron-Bold.ttf">
+            <string>Patron-Bold</string>
         </mutableArray>
     </customFonts>
     <objects>
@@ -34,8 +34,8 @@
                                     <constraint firstAttribute="width" constant="60" id="KuV-gt-PN8"/>
                                     <constraint firstAttribute="height" constant="10" id="wAb-Ht-b93"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" name="Patron-Regular" family="Patron" pointSize="8"/>
-                                <color key="textColor" red="0.29019607843137252" green="0.29019607843137252" blue="0.29019607843137252" alpha="1" colorSpace="calibratedRGB"/>
+                                <fontDescription key="fontDescription" name="Patron-Bold" family="Patron" pointSize="8"/>
+                                <color key="textColor" red="0.52941176470588236" green="0.52941176470588236" blue="0.52941176470588236" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
