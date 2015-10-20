@@ -10,6 +10,7 @@
 
 @interface DSInterestAndHobbiesViewController : UIViewController<UICollectionViewDataSource,UICollectionViewDelegate,UICollectionViewDelegateFlowLayout>
 @property (strong, nonatomic) IBOutlet UICollectionView *interestAndHobbiesCollectionView;
-@property (strong, nonatomic) IBOutlet NSLayoutConstraint *layoutConstraintcollectionviewYPos;
+@property (strong, nonatomic) IBOutlet NSLayoutConstraint *layoutConstraintinterestAndHobbiesLabelYPos;
+@property (strong, nonatomic) IBOutlet NSLayoutConstraint *layoutConstraintCollectionviewYPos;
 
 @end
