@@ -12,5 +12,6 @@
 @property (strong, nonatomic) IBOutlet UICollectionView *interestAndHobbiesCollectionView;
 @property (strong, nonatomic) IBOutlet NSLayoutConstraint *layoutConstraintinterestAndHobbiesLabelYPos;
 @property (strong, nonatomic) IBOutlet NSLayoutConstraint *layoutConstraintCollectionviewYPos;
+@property (strong, nonatomic) IBOutlet NSLayoutConstraint *layoutConstraintTapLabelYPos;
 
 @end

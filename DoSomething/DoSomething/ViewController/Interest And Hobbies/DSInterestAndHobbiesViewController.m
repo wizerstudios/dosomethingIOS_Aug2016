@@ -28,7 +28,12 @@
     flowLayout.headerReferenceSize = CGSizeMake(self.interestAndHobbiesCollectionView.bounds.size.width, 48);
     [self.interestAndHobbiesCollectionView setCollectionViewLayout:flowLayout];
     [self loadNavigation];
+    
     [self initializeArray];
+}
+-(void)viewWillAppear:(BOOL)animated
+{
+    
 }
 
 -(void)loadNavigation{
@@ -42,18 +47,22 @@
     customNavigation.view.frame = CGRectMake(0,-20, (self.view.frame.size.width), 65);
     if (IS_IPHONE6 ){
         customNavigation.view.frame = CGRectMake(0,-20, 375, 83);
-        self.layoutConstraintinterestAndHobbiesLabelYPos.constant =90;
-        self.layoutConstraintCollectionviewYPos.constant =48;
+        self.layoutConstraintinterestAndHobbiesLabelYPos.constant =98;
+        self.layoutConstraintCollectionviewYPos.constant =65;
+        self.layoutConstraintTapLabelYPos.constant = 6;
     }
     if(IS_IPHONE6_Plus)
     {
         customNavigation.view.frame = CGRectMake(0,-20, 420, 83);
-        self.layoutConstraintinterestAndHobbiesLabelYPos.constant =90;
-        self.layoutConstraintCollectionviewYPos.constant =48;
+        self.layoutConstraintinterestAndHobbiesLabelYPos.constant =98;
+        self.layoutConstraintCollectionviewYPos.constant =65;
+        self.layoutConstraintTapLabelYPos.constant = 6;
+
 
     }
     [self.navigationController.navigationBar addSubview:customNavigation.view];
     [customNavigation.buttonBack addTarget:self action:@selector(backAction) forControlEvents:UIControlEventTouchUpInside];
+    [customNavigation.saveBtn addTarget:self action:@selector(saveAction) forControlEvents:UIControlEventTouchUpInside];
     [customNavigation.menuBtn setHidden:YES];
     [customNavigation.buttonBack setHidden:NO];
     [customNavigation.saveBtn setHidden:NO];
@@ -64,6 +73,10 @@
     [self.navigationController popViewControllerAnimated:YES];
 }
 
+-(void)saveAction
+{
+    [self.navigationController popViewControllerAnimated:YES];
+}
 
 
 
@@ -74,12 +87,16 @@
     interestAndHobbiesCollectionView.delegate=self;
     interestAndHobbiesCollectionView.dataSource=self;
     
-    sectionArray = [[NSArray alloc]initWithObjects:@"ARTS",@"FOOD",@"PETS",@"RECREATION",nil];
-    interstAndHobbiesArray = [[NSMutableArray alloc] initWithCapacity: 4];
-    
     interstAndHobbiesArray =[[NSUserDefaults standardUserDefaults] valueForKey:@"SelectedItem"];
-    if (interstAndHobbiesArray == NULL) {
+    sectionArray = [[NSArray alloc]initWithObjects:@"ARTS",@"FOOD",@"PETS",@"RECREATION",nil];
+
     
+    NSLog(@"cacheContactDict =%@",interstAndHobbiesArray);
+    if(interstAndHobbiesArray == nil){
+    
+    
+    
+    interstAndHobbiesArray = [[NSMutableArray alloc] initWithCapacity: 4];
     
     
     [interstAndHobbiesArray insertObject:[[NSMutableArray alloc]initWithObjects:[NSMutableDictionary dictionaryWithObjectsAndKeys:@"guitar.png",@"imageNormal",@"guitar_active.png",@"imageActive",@"GUITAR",@"name", nil],
@@ -109,7 +126,6 @@
 
                                           ,nil]atIndex:3];
     }
-    
     [interestAndHobbiesCollectionView reloadData];
     
     
@@ -144,7 +160,7 @@
             }
         }
         
-        UILabel *label=[[UILabel alloc] initWithFrame:CGRectMake(0, 30, (self.view.frame.size.width), 10)];
+        UILabel *label=[[UILabel alloc] initWithFrame:CGRectMake(0, 26, (self.view.frame.size.width), 10)];
     
         label.textAlignment = NSTextAlignmentCenter;
         label.textColor =[UIColor colorWithRed:(float)231.0/255 green:(float)90.0/255 blue:(float)102.0/255 alpha:1.0f];
@@ -189,9 +205,6 @@
         
     }
     
-    
-    
-    
     return UIEdgeInsetsZero;
 }
 
@@ -227,15 +240,26 @@
         finalWidthWithPadding = collectionCellWidth - (padding);
         return CGSizeMake(finalWidthWithPadding , finalWidthWithPadding);
         }
-        else
+         else if(IS_IPHONE6)
         {
-            int numberOfCellInRow = 6;
+            int numberOfCellInRow = 5;
             int padding = 1;
             collectionCellWidth =  [[UIScreen mainScreen] bounds].size.width/numberOfCellInRow;
             finalWidthWithPadding = collectionCellWidth - (padding);
             return CGSizeMake(finalWidthWithPadding , finalWidthWithPadding);
 
         }
+        
+             else if(IS_IPHONE5)
+        {
+            int numberOfCellInRow = 6;
+            int padding = 1;
+            collectionCellWidth =  [[UIScreen mainScreen] bounds].size.width/numberOfCellInRow;
+            finalWidthWithPadding = collectionCellWidth - (padding);
+            return CGSizeMake(finalWidthWithPadding , finalWidthWithPadding);
+            
+        }
+
     }
     
       if (indexPath.section == 0 || indexPath.section ==3 )
@@ -248,7 +272,7 @@
               finalWidthWithPadding = collectionCellWidth - (padding);
               return CGSizeMake(finalWidthWithPadding , finalWidthWithPadding);
           }
-          else
+          else if(IS_IPHONE6)
           {
               int numberOfCellInRow = 6;
               int padding = 1;
@@ -257,6 +281,17 @@
               return CGSizeMake(finalWidthWithPadding , finalWidthWithPadding);
               
           }
+          else if(IS_IPHONE5)
+          {
+              int numberOfCellInRow = 6;
+              int padding = 2;
+              collectionCellWidth =  [[UIScreen mainScreen] bounds].size.width/numberOfCellInRow;
+              finalWidthWithPadding = collectionCellWidth - (padding);
+              return CGSizeMake(finalWidthWithPadding , finalWidthWithPadding);
+              
+          }
+
+          
       }
 
     
@@ -269,13 +304,23 @@
             finalWidthWithPadding = collectionCellWidth - (padding);
             return CGSizeMake(finalWidthWithPadding , finalWidthWithPadding);
         }
-        else
+        else if(IS_IPHONE6)
+
         {
             int numberOfCellInRow = 7;
             int padding = 1;
             collectionCellWidth =  [[UIScreen mainScreen] bounds].size.width/numberOfCellInRow;
             finalWidthWithPadding = collectionCellWidth - (padding);
             return CGSizeMake(finalWidthWithPadding , finalWidthWithPadding);
+        }
+        else if(IS_IPHONE5)
+        {
+            int numberOfCellInRow = 6;
+            int padding = 1;
+            collectionCellWidth =  [[UIScreen mainScreen] bounds].size.width/numberOfCellInRow;
+            finalWidthWithPadding = collectionCellWidth - (padding);
+            return CGSizeMake(finalWidthWithPadding , finalWidthWithPadding);
+            
         }
         
 

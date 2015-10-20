@@ -296,7 +296,7 @@
 			isa = PBXGroup;
 			children = (
 				C6D5F67B1BC7EC440050C1AE /* Images.xcassets */,
-				EAFC96C41BD21A1100B3593D /* Hobbies Images */,
+				EAFC96C41BD21A1100B3593D /* Hobbies  */,
 				C6D5F62B1BC7B52C0050C1AE /* Fonts */,
 				065BAC611BC7A135005AF493 /* Info.plist */,
 				065BAC511BC7A135005AF493 /* main.m */,
@@ -357,11 +357,11 @@
 		C6D5F60A1BC7A4560050C1AE /* ViewController */ = {
 			isa = PBXGroup;
 			children = (
-				EAE556241BD4AD5900DFA5D8 /* HomeView */,
-				EAFC96541BD20FD400B3593D /*  Hobbies */,
 				6A50C2291BCCFF36002B11AC /* SplashView */,
 				EACB22B71BC7C7F7002FAD54 /* Login */,
+				EAE556241BD4AD5900DFA5D8 /* HomeView */,
 				6A8D15CF1BCC059B000F1FB4 /* Profile */,
+				EAFC96541BD20FD400B3593D /* Hobbies */,
 				6A50C2231BCCC310002B11AC /* Chats */,
 			);
 			name = ViewController;
@@ -421,10 +421,10 @@
 		EAE556241BD4AD5900DFA5D8 /* HomeView */ = {
 			isa = PBXGroup;
 			children = (
-				EAE556251BD4AD5900DFA5D8 /* HomeCustomCell */,
 				EAE556291BD4AD5900DFA5D8 /* HomeViewController.h */,
 				EAE5562A1BD4AD5900DFA5D8 /* HomeViewController.m */,
 				EAE5562B1BD4AD5900DFA5D8 /* HomeViewController.xib */,
+				EAE556251BD4AD5900DFA5D8 /* HomeCustomCell */,
 			);
 			name = HomeView;
 			path = ViewController/HomeView;
@@ -537,7 +537,7 @@
 			path = Common/CustomNavigation;
 			sourceTree = "<group>";
 		};
-		EAFC96541BD20FD400B3593D /*  Hobbies */ = {
+		EAFC96541BD20FD400B3593D /* Hobbies */ = {
 			isa = PBXGroup;
 			children = (
 				EAFC96551BD20FD400B3593D /* DSInterestAndHobbiesViewController.h */,
@@ -547,11 +547,11 @@
 				EAFC97951BD21CF800B3593D /* DSInterestAndHobbiesCollectionViewCell.m */,
 				EAFC97961BD21CF800B3593D /* DSInterestAndHobbiesCollectionViewCell.xib */,
 			);
-			name = " Hobbies";
+			name = Hobbies;
 			path = "ViewController/Interest And Hobbies";
 			sourceTree = "<group>";
 		};
-		EAFC96C41BD21A1100B3593D /* Hobbies Images */ = {
+		EAFC96C41BD21A1100B3593D /* Hobbies  */ = {
 			isa = PBXGroup;
 			children = (
 				EAFC96C51BD21A1100B3593D /* bbq.png */,
@@ -607,7 +607,7 @@
 				EAFC96F71BD21A1200B3593D /* violin.png */,
 				EAFC96F81BD21A1200B3593D /* violin_active.png */,
 			);
-			name = "Hobbies Images";
+			name = "Hobbies ";
 			path = "Interest And Hobbies Images/@3x";
 			sourceTree = "<group>";
 		};

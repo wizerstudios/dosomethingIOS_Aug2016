@@ -17,6 +17,7 @@
             <connections>
                 <outlet property="interestAndHobbiesCollectionView" destination="djR-MD-Avp" id="wAX-W8-Tdh"/>
                 <outlet property="layoutConstraintCollectionviewYPos" destination="tvB-My-dqi" id="gC7-Fv-1nz"/>
+                <outlet property="layoutConstraintTapLabelYPos" destination="dAE-Je-FqF" id="24t-I8-fdA"/>
                 <outlet property="layoutConstraintinterestAndHobbiesLabelYPos" destination="b1u-1e-W8Y" id="zES-Pb-Z80"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
@@ -44,24 +45,24 @@
                     <rect key="frame" x="10" y="0.0" width="300" height="112"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Your interest and Hobbies" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VKf-xC-fkK">
-                            <rect key="frame" x="16" y="73" width="132" height="21"/>
+                            <rect key="frame" x="7" y="73" width="132" height="21"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="21" id="9mV-rz-yRi"/>
                                 <constraint firstAttribute="width" constant="132" id="ti2-RG-2pZ"/>
                             </constraints>
-                            <fontDescription key="fontDescription" name="Patron-Bold" family="Patron" pointSize="9"/>
+                            <fontDescription key="fontDescription" name="Patron-Bold" family="Patron" pointSize="10"/>
                             <color key="textColor" red="0.50980392156862742" green="0.50980392156862742" blue="0.50980392156862742" alpha="1" colorSpace="calibratedRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tap to select your intterests and hobbies " lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Jca-BZ-Kzh">
-                            <rect key="frame" x="62" y="96" width="176" height="21"/>
+                            <rect key="frame" x="62" y="96" width="200" height="21"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="21" id="3vo-h2-Z6j"/>
                                 <constraint firstAttribute="height" constant="21" id="Cgh-C8-Zdr"/>
-                                <constraint firstAttribute="width" constant="176" id="Ojk-DZ-BV8"/>
+                                <constraint firstAttribute="width" constant="200" id="Ojk-DZ-BV8"/>
                             </constraints>
-                            <fontDescription key="fontDescription" name="Patron-Regular" family="Patron" pointSize="9"/>
-                            <color key="textColor" red="0.76470588235294112" green="0.76470588235294112" blue="0.76470588235294112" alpha="1" colorSpace="calibratedRGB"/>
+                            <fontDescription key="fontDescription" name="Patron-Regular" family="Patron" pointSize="10"/>
+                            <color key="textColor" red="0.70588235294117641" green="0.70588235294117641" blue="0.70588235294117641" alpha="1" colorSpace="calibratedRGB"/>
                             <nil key="highlightedColor"/>
                             <variation key="default">
                                 <mask key="constraints">
@@ -73,11 +74,11 @@
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
                         <constraint firstAttribute="bottom" secondItem="VKf-xC-fkK" secondAttribute="bottom" constant="18" id="8gG-5V-CX8"/>
-                        <constraint firstItem="VKf-xC-fkK" firstAttribute="leading" secondItem="0zs-8r-iM7" secondAttribute="leading" constant="16" id="BkW-FD-3lr"/>
-                        <constraint firstAttribute="trailing" secondItem="VKf-xC-fkK" secondAttribute="trailing" constant="152" id="aJk-uj-gfd"/>
+                        <constraint firstItem="VKf-xC-fkK" firstAttribute="leading" secondItem="0zs-8r-iM7" secondAttribute="leading" constant="7" id="BkW-FD-3lr"/>
+                        <constraint firstAttribute="trailing" secondItem="VKf-xC-fkK" secondAttribute="trailing" constant="161" id="aJk-uj-gfd"/>
                         <constraint firstItem="VKf-xC-fkK" firstAttribute="top" secondItem="0zs-8r-iM7" secondAttribute="top" constant="73" id="b1u-1e-W8Y"/>
                         <constraint firstItem="Jca-BZ-Kzh" firstAttribute="top" secondItem="VKf-xC-fkK" secondAttribute="bottom" constant="2" id="dAE-Je-FqF"/>
-                        <constraint firstAttribute="centerX" secondItem="Jca-BZ-Kzh" secondAttribute="centerX" id="oC3-xK-pU7"/>
+                        <constraint firstAttribute="centerX" secondItem="Jca-BZ-Kzh" secondAttribute="centerX" constant="-12" id="oC3-xK-pU7"/>
                     </constraints>
                 </view>
             </subviews>

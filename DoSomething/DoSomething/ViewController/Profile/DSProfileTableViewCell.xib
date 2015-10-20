@@ -68,7 +68,7 @@
                                 <color key="textColor" red="0.55294117647058827" green="0.55294117647058827" blue="0.55294117647058827" alpha="1" colorSpace="deviceRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Camera_Icon" translatesAutoresizingMaskIntoConstraints="NO" id="fTA-Na-Mia">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="camera_Icon" translatesAutoresizingMaskIntoConstraints="NO" id="fTA-Na-Mia">
                                 <rect key="frame" x="135" y="170" width="30" height="25"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="30" id="RPx-LB-z21"/>
@@ -96,8 +96,10 @@
                 </constraints>
             </tableViewCellContentView>
             <connections>
+                <outlet property="emailTextField" destination="sig-cR-Dgx" id="oS1-2G-p6T"/>
                 <outlet property="layoutConstraintProfileImageHeight" destination="kB6-PF-qFE" id="rPZ-1Y-Rx6"/>
                 <outlet property="layoutConstraintProfileImageWidth" destination="Dgs-wp-y9R" id="gs7-6y-GW9"/>
+                <outlet property="passwordTextField" destination="nd4-Zf-byl" id="Il3-28-zBZ"/>
             </connections>
             <point key="canvasLocation" x="286" y="158"/>
         </tableViewCell>
@@ -124,7 +126,7 @@
                                 <rect key="frame" x="100" y="0.0" width="200" height="39"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <fontDescription key="fontDescription" name="Patron-Regular" family="Patron" pointSize="10"/>
-                                <textInputTraits key="textInputTraits"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="words"/>
                                 <connections>
                                     <outlet property="delegate" destination="-1" id="nFh-KG-BU8"/>
                                 </connections>
@@ -172,15 +174,6 @@
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PhM-S8-8li">
                         <rect key="frame" x="0.0" y="0.0" width="300" height="38"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="249" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ge4-Nf-ula">
-                                <rect key="frame" x="151" y="0.0" width="149" height="38"/>
-                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                <fontDescription key="fontDescription" name="Patron-Regular" family="Patron" pointSize="10"/>
-                                <state key="normal" title="Female">
-                                    <color key="titleColor" red="0.63137254901960782" green="0.63137254901960782" blue="0.63137254901960782" alpha="1" colorSpace="calibratedRGB"/>
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                            </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LoD-qB-lM8">
                                 <rect key="frame" x="0.0" y="0.0" width="150" height="38"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -197,6 +190,15 @@
                                         <exclude reference="QGC-eB-yKu"/>
                                     </mask>
                                 </variation>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="249" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ge4-Nf-ula">
+                                <rect key="frame" x="151" y="0.0" width="149" height="38"/>
+                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <fontDescription key="fontDescription" name="Patron-Regular" family="Patron" pointSize="10"/>
+                                <state key="normal" title="Female">
+                                    <color key="titleColor" red="0.63137254901960782" green="0.63137254901960782" blue="0.63137254901960782" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
                             </button>
                         </subviews>
                         <color key="backgroundColor" red="0.90980392156862744" green="0.90980392156862744" blue="0.90980392156862744" alpha="1" colorSpace="calibratedRGB"/>
@@ -223,6 +225,10 @@
                     <constraint firstAttribute="trailing" secondItem="PhM-S8-8li" secondAttribute="trailing" id="tCA-IT-bhO"/>
                 </constraints>
             </tableViewCellContentView>
+            <connections>
+                <outlet property="femaleButton" destination="Ge4-Nf-ula" id="wWg-gP-eTU"/>
+                <outlet property="maleButton" destination="LoD-qB-lM8" id="rGC-86-rWn"/>
+            </connections>
             <point key="canvasLocation" x="751" y="176"/>
         </tableViewCell>
         <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="5Fu-f3-SQN" customClass="DSProfileTableViewCell">
@@ -323,6 +329,9 @@
                                         <exclude reference="q5d-en-p3o"/>
                                     </mask>
                                 </variation>
+                                <connections>
+                                    <outlet property="delegate" destination="-1" id="WJA-io-tCk"/>
+                                </connections>
                             </textField>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -396,6 +405,9 @@
                                 </constraints>
                                 <fontDescription key="fontDescription" name="Patron-Regular" family="Patron" pointSize="10"/>
                                 <textInputTraits key="textInputTraits"/>
+                                <connections>
+                                    <outlet property="delegate" destination="-1" id="JcU-75-xM7"/>
+                                </connections>
                             </textField>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Password" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="nd4-Zf-byl">
                                 <rect key="frame" x="100" y="42" width="200" height="30"/>
@@ -405,6 +417,9 @@
                                 </constraints>
                                 <fontDescription key="fontDescription" name="Patron-Regular" family="Patron" pointSize="10"/>
                                 <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
+                                <connections>
+                                    <outlet property="delegate" destination="-1" id="2nH-NW-TmI"/>
+                                </connections>
                             </textField>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -580,8 +595,8 @@
         </tableViewCell>
     </objects>
     <resources>
-        <image name="Camera_Icon" width="37" height="37"/>
         <image name="Pluis_icon" width="37" height="37"/>
+        <image name="camera_Icon" width="37" height="37"/>
         <image name="profile_noimg" width="163" height="163"/>
         <image name="switch_on" width="35" height="18"/>
     </resources>
