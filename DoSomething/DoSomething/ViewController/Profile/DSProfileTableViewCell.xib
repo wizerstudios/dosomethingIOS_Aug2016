@@ -96,10 +96,8 @@
                 </constraints>
             </tableViewCellContentView>
             <connections>
-                <outlet property="emailTextField" destination="sig-cR-Dgx" id="oS1-2G-p6T"/>
                 <outlet property="layoutConstraintProfileImageHeight" destination="kB6-PF-qFE" id="rPZ-1Y-Rx6"/>
                 <outlet property="layoutConstraintProfileImageWidth" destination="Dgs-wp-y9R" id="gs7-6y-GW9"/>
-                <outlet property="passwordTextField" destination="nd4-Zf-byl" id="Il3-28-zBZ"/>
             </connections>
             <point key="canvasLocation" x="286" y="158"/>
         </tableViewCell>
@@ -190,6 +188,9 @@
                                         <exclude reference="QGC-eB-yKu"/>
                                     </mask>
                                 </variation>
+                                <connections>
+                                    <action selector="maleButtonAction:" destination="-1" eventType="touchUpInside" id="Egd-IJ-0cs"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="249" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ge4-Nf-ula">
                                 <rect key="frame" x="151" y="0.0" width="149" height="38"/>
@@ -267,12 +268,18 @@
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                             </button>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="QlI-RY-tGe">
-                                <rect key="frame" x="8" y="27" width="44" height="45"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="QlI-RY-tGe">
+                                <rect key="frame" x="8" y="27" width="38" height="38"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="38" id="7MA-c7-2PD"/>
+                                    <constraint firstAttribute="width" constant="38" id="lwS-SW-Bl1"/>
+                                </constraints>
                             </imageView>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
+                            <constraint firstItem="QlI-RY-tGe" firstAttribute="top" secondItem="CBw-9W-xH2" secondAttribute="bottom" constant="6" id="4s6-YI-NBM"/>
+                            <constraint firstItem="QlI-RY-tGe" firstAttribute="leading" secondItem="hoj-aW-4aX" secondAttribute="leading" constant="8" id="Eii-B2-GBL"/>
                             <constraint firstItem="hCe-cD-hwS" firstAttribute="top" secondItem="CBw-9W-xH2" secondAttribute="bottom" constant="11" id="TGN-9o-P63"/>
                             <constraint firstItem="CBw-9W-xH2" firstAttribute="top" secondItem="hoj-aW-4aX" secondAttribute="top" id="V4S-MB-Kay"/>
                             <constraint firstAttribute="centerX" secondItem="PXd-hC-CNF" secondAttribute="centerX" constant="11" id="asI-ua-WVs"/>
@@ -397,7 +404,7 @@
                                 <color key="textColor" red="0.65490196078431373" green="0.65490196078431373" blue="0.65490196078431373" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Email" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="sig-cR-Dgx">
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="sig-cR-Dgx">
                                 <rect key="frame" x="100" y="4" width="200" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="200" id="PQr-aG-ItR"/>
@@ -409,7 +416,7 @@
                                     <outlet property="delegate" destination="-1" id="JcU-75-xM7"/>
                                 </connections>
                             </textField>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Password" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="nd4-Zf-byl">
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="nd4-Zf-byl">
                                 <rect key="frame" x="100" y="42" width="200" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="DM0-Fa-DpI"/>
@@ -468,8 +475,10 @@
                 </constraints>
             </tableViewCellContentView>
             <connections>
+                <outlet property="emailTextField" destination="sig-cR-Dgx" id="Fnb-Nf-P8O"/>
                 <outlet property="layoutConstraintAccLabelYPos" destination="m8Z-Lg-POi" id="8lK-YC-X8M"/>
                 <outlet property="layoutConstraintEmailPassViewHeight" destination="53r-GQ-4Fb" id="wme-sr-ngX"/>
+                <outlet property="passwordTextField" destination="nd4-Zf-byl" id="XJa-vF-VIw"/>
             </connections>
             <point key="canvasLocation" x="286" y="494"/>
         </tableViewCell>

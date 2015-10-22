@@ -19,7 +19,7 @@
     // Override point for customization after application launch.
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
 
-    splashViewController = [[DSSplashViewController alloc] initWithNibName:@"DSSplashViewController" bundle:nil];
+    splashViewController = [[DSHomeViewController alloc] initWithNibName:@"DSHomeViewController" bundle:nil];
     self.window.rootViewController = splashViewController;
     self.navigationController = [[UINavigationController alloc] initWithRootViewController:splashViewController];
     [self.window setRootViewController:self.navigationController];
