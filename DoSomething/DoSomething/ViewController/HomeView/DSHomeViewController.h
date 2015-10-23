@@ -33,7 +33,6 @@
 @property (strong, nonatomic) IBOutlet UIPageControl *infoPageControl;
 @property(nonatomic,retain)id<HelpViewDelegate> delegate;
 @property (nonatomic,retain) NSLayoutConstraint *pagerConstraint;
-@property (strong, nonatomic) IBOutlet NSLayoutConstraint *layoutConstraintsCreateAnAccBtnHeight;
-@property (strong, nonatomic) IBOutlet NSLayoutConstraint *layoutConstraintsSignInBtnHeight;
+//@property (nonatomic) CGFloat scrollPointsPerSecond;
 
 @end

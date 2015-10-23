@@ -8,6 +8,7 @@
 
 #import "DSInterestAndHobbiesViewController.h"
 #import "DSInterestAndHobbiesCollectionViewCell.h"
+#import "DSProfileTableViewController.h"
 #import "CustomNavigationView.h"
 #import "DSConfig.h"
 
@@ -16,6 +17,7 @@
     
     NSMutableArray *interstAndHobbiesArray,*interestArray;
     NSArray *sectionArray;
+    NSMutableArray *imageNormalArray;
 }
 @end
 
@@ -27,21 +29,20 @@
     UICollectionViewFlowLayout *flowLayout = [[UICollectionViewFlowLayout alloc] init];
     flowLayout.headerReferenceSize = CGSizeMake(self.interestAndHobbiesCollectionView.bounds.size.width, 48);
     [self.interestAndHobbiesCollectionView setCollectionViewLayout:flowLayout];
-    [self loadNavigation];
     [self initializeArray];
     [self localArray];
 }
--(void)viewWillAppear:(BOOL)animated
-{
-    
-}
 
--(void)loadNavigation{
-    
+-(void)viewWillAppear:(BOOL)animated{
     self.navigationController.navigationBarHidden=NO;
     [self.navigationItem setHidesBackButton:YES animated:NO];
     [self.navigationController.navigationBar setTranslucent:YES];
+    imageNormalArray =[[NSUserDefaults standardUserDefaults] valueForKey:@"SelectedItemNormal"];
     
+    if (!imageNormalArray) {
+        imageNormalArray = [[NSMutableArray alloc] init];
+    }
+
     CustomNavigationView *customNavigation;
     customNavigation = [[CustomNavigationView alloc] initWithNibName:@"CustomNavigationView" bundle:nil];
     customNavigation.view.frame = CGRectMake(0,-20, (self.view.frame.size.width), 65);
@@ -71,6 +72,7 @@
 -(void)backAction
 {
     [self.navigationController popViewControllerAnimated:YES];
+
 }
 
 -(void)saveAction
@@ -81,12 +83,7 @@
 {
     sectionArray = [[NSArray alloc]initWithObjects:@"ARTS",@"FOOD",@"PETS",@"RECREATION",nil];
     
-    
-    NSLog(@"cacheContactDict =%@",interestArray);
-    
-        
-        
-        interestArray = [[NSMutableArray alloc] initWithCapacity: 4];
+    interestArray = [[NSMutableArray alloc] initWithCapacity: 4];
 
 [interestArray insertObject:[[NSMutableArray alloc]initWithObjects:[NSMutableDictionary dictionaryWithObjectsAndKeys:@"guitar.png",@"imageNormal",@"guitar_active.png",@"imageActive",@"GUITAR",@"name", nil],
                                       [NSMutableDictionary dictionaryWithObjectsAndKeys:@"paint.png",@"imageNormal",@"paint_active.png",@"imageActive",@"PAINTING",@"name", nil],
@@ -123,11 +120,13 @@
     interestAndHobbiesCollectionView.delegate=self;
     interestAndHobbiesCollectionView.dataSource=self;
     
-    interstAndHobbiesArray =[[NSUserDefaults standardUserDefaults] valueForKey:@"SelectedItem"];
+    imageNormalArray =[[NSMutableArray alloc]init];
+
+    interstAndHobbiesArray = [[[NSUserDefaults standardUserDefaults] valueForKey:@"SelectedItem"] mutableCopy];
+
     sectionArray = [[NSArray alloc]initWithObjects:@"ARTS",@"FOOD",@"PETS",@"RECREATION",nil];
 
     
-    NSLog(@"cacheContactDict =%@",interstAndHobbiesArray);
     if(interstAndHobbiesArray == nil){
     
     
@@ -371,18 +370,30 @@
 //    return 25.0;
 //}
 
+//
+
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath;
 
 {
-    DSInterestAndHobbiesCollectionViewCell *dataselCell = (DSInterestAndHobbiesCollectionViewCell *)[collectionView cellForItemAtIndexPath:indexPath];
-    
-    
-    
+    DSInterestAndHobbiesCollectionViewCell *dataselCell = (DSInterestAndHobbiesCollectionViewCell *)[collectionView cellForItemAtIndexPath:indexPath];    
+
     NSString *imageActive =[[[interstAndHobbiesArray valueForKey:@"imageActive"]objectAtIndex:indexPath.section]objectAtIndex:indexPath.row];
     NSString *imageNormal =[[[interstAndHobbiesArray valueForKey:@"imageNormal"]objectAtIndex:indexPath.section]objectAtIndex:indexPath.row];
+
+
     if (imageActive != imageNormal) {
+        [imageNormalArray addObject:imageNormal];
+        [[NSUserDefaults standardUserDefaults] setObject:imageNormalArray forKey:@"SelectedItemNormal"];
+        [[NSUserDefaults standardUserDefaults] synchronize];
+        
         [dataselCell.interestAndHobbiesImageView setImage:[UIImage imageNamed:imageActive]];
-        [[[interstAndHobbiesArray objectAtIndex:indexPath.section] objectAtIndex:indexPath.row] setObject:imageActive forKey:@"imageNormal"];
+        NSMutableArray *tempselectedSection = [[interstAndHobbiesArray objectAtIndex:indexPath.section] mutableCopy];
+        NSMutableDictionary *tempselectedDict = [[tempselectedSection objectAtIndex:indexPath.row] mutableCopy];
+        
+        [tempselectedDict setObject:imageActive forKey:@"imageNormal"];
+        
+        [tempselectedSection replaceObjectAtIndex:indexPath.row withObject:tempselectedDict];
+        [interstAndHobbiesArray replaceObjectAtIndex:indexPath.section withObject:tempselectedSection];
         
         dataselCell.nameLabel.textColor=[UIColor colorWithRed:(float)224.0/255 green:(float)62.0/255 blue:(float)79.0/255 alpha:1.0f];
         [[NSUserDefaults standardUserDefaults] setObject:interstAndHobbiesArray forKey:@"SelectedItem"];
@@ -390,16 +401,21 @@
     }
 
      if (imageActive == imageNormal) {
-    NSString *image =[[[interestArray valueForKey:@"imageNormal"]objectAtIndex:indexPath.section]objectAtIndex:indexPath.row];
+     NSString *image =[[[interestArray valueForKey:@"imageNormal"]objectAtIndex:indexPath.section]objectAtIndex:indexPath.row];
+     [imageNormalArray removeObject:image];
+         
+         [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"SelectedItemNormal"];
+         [[NSUserDefaults standardUserDefaults] synchronize];
+         
+         
     [dataselCell.interestAndHobbiesImageView setImage:[UIImage imageNamed:image]];
      dataselCell.nameLabel.textColor=[UIColor colorWithRed:(float)135.0/255 green:(float)135.0/255 blue:(float)135.0/255 alpha:1.0f];
     [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"SelectedItem"];
     [[NSUserDefaults standardUserDefaults] synchronize];
 
-//    [[NSUserDefaults standardUserDefaults] setObject:interstAndHobbiesArray forKey:@"SelectedItem"];
-//    [[NSUserDefaults standardUserDefaults] synchronize];
      }
 }
+
 
 
 

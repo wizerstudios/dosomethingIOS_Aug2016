@@ -49,6 +49,7 @@
 		EAEF252A1BCF9EF600F83E82 /* IQKeyboardManager.bundle in Resources */ = {isa = PBXBuildFile; fileRef = EAEF251C1BCF9EF600F83E82 /* IQKeyboardManager.bundle */; };
 		EAEF25351BCFEBF400F83E82 /* CustomNavigationView.m in Sources */ = {isa = PBXBuildFile; fileRef = EAEF25331BCFEBF400F83E82 /* CustomNavigationView.m */; };
 		EAEF25361BCFEBF400F83E82 /* CustomNavigationView.xib in Resources */ = {isa = PBXBuildFile; fileRef = EAEF25341BCFEBF400F83E82 /* CustomNavigationView.xib */; };
+		EAF1871A1BDA352B004C25EA /* DAAutoScroll.m in Sources */ = {isa = PBXBuildFile; fileRef = EAF187191BDA352B004C25EA /* DAAutoScroll.m */; };
 		EAF1DC511BD8B2AF00D51354 /* DSHomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EAF1DC4F1BD8B2AF00D51354 /* DSHomeViewController.m */; };
 		EAF1DC521BD8B2AF00D51354 /* DSHomeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = EAF1DC501BD8B2AF00D51354 /* DSHomeViewController.xib */; };
 		EAFC96581BD20FD400B3593D /* DSInterestAndHobbiesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EAFC96561BD20FD400B3593D /* DSInterestAndHobbiesViewController.m */; };
@@ -178,6 +179,8 @@
 		EAEF25321BCFEBF400F83E82 /* CustomNavigationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomNavigationView.h; sourceTree = "<group>"; };
 		EAEF25331BCFEBF400F83E82 /* CustomNavigationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomNavigationView.m; sourceTree = "<group>"; };
 		EAEF25341BCFEBF400F83E82 /* CustomNavigationView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CustomNavigationView.xib; sourceTree = "<group>"; };
+		EAF187181BDA352B004C25EA /* DAAutoScroll.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DAAutoScroll.h; sourceTree = "<group>"; };
+		EAF187191BDA352B004C25EA /* DAAutoScroll.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DAAutoScroll.m; sourceTree = "<group>"; };
 		EAF1DC4E1BD8B2AF00D51354 /* DSHomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DSHomeViewController.h; sourceTree = "<group>"; };
 		EAF1DC4F1BD8B2AF00D51354 /* DSHomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DSHomeViewController.m; sourceTree = "<group>"; };
 		EAF1DC501BD8B2AF00D51354 /* DSHomeViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DSHomeViewController.xib; sourceTree = "<group>"; };
@@ -319,6 +322,7 @@
 		C6D5F6081BC7A4340050C1AE /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				EAF187171BDA352B004C25EA /* DAAutoScroll */,
 				EAEF25311BCFEBF400F83E82 /* CustomNavigation */,
 				EAEF24F81BCF9EF600F83E82 /* IQKeyBoardManager */,
 				C6D5F6471BC7BB540050C1AE /* AppCommon */,
@@ -488,6 +492,16 @@
 			path = Common/CustomNavigation;
 			sourceTree = "<group>";
 		};
+		EAF187171BDA352B004C25EA /* DAAutoScroll */ = {
+			isa = PBXGroup;
+			children = (
+				EAF187181BDA352B004C25EA /* DAAutoScroll.h */,
+				EAF187191BDA352B004C25EA /* DAAutoScroll.m */,
+			);
+			name = DAAutoScroll;
+			path = Common/DAAutoScroll;
+			sourceTree = "<group>";
+		};
 		EAF1DC4D1BD8B2AF00D51354 /* HomeView */ = {
 			isa = PBXGroup;
 			children = (
@@ -604,6 +618,7 @@
 				TargetAttributes = {
 					065BAC4C1BC7A135005AF493 = {
 						CreatedOnToolsVersion = 7.0.1;
+						DevelopmentTeam = L424XTW63D;
 					};
 				};
 			};
@@ -738,6 +753,7 @@
 				EAEF25291BCF9EF600F83E82 /* IQUIView+IQKeyboardToolbar.m in Sources */,
 				EAFC97971BD21CF800B3593D /* DSInterestAndHobbiesCollectionViewCell.m in Sources */,
 				6A50C2271BCCC310002B11AC /* DSChatsTableViewController.m in Sources */,
+				EAF1871A1BDA352B004C25EA /* DAAutoScroll.m in Sources */,
 				6A8D15D31BCC059B000F1FB4 /* DSProfileTableViewController.m in Sources */,
 				EAEF25281BCF9EF600F83E82 /* IQToolbar.m in Sources */,
 			);
@@ -830,11 +846,14 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = DoSomething/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.oclockapps.DoSomething;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Debug;
 		};
@@ -842,11 +861,14 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = DoSomething/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.oclockapps.DoSomething;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Release;
 		};

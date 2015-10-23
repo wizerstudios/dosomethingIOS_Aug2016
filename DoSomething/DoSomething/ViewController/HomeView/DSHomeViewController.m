@@ -10,7 +10,7 @@
 #import "DSConfig.h"
 #import "DSAppCommon.h"
 #import "DSLoginViewController.h"
-
+#import "DAAutoScroll.h"
 @interface DSHomeViewController ()
 {
     int frameHt;
@@ -36,19 +36,15 @@
     isTimerStop=NO;
    
     if(IS_IPHONE6_Plus ) {
-        frameHt=670;
+        frameHt=674;
         frameWt= 414;
-        self.layoutConstraintsCreateAnAccBtnHeight.constant =68;
-        self.layoutConstraintsSignInBtnHeight.constant =68;
-        bannerImageArr=[[NSMutableArray alloc]initWithObjects:@"splashImage_1",@"splashImage_2" ,@"splashImage_3", nil];
+             bannerImageArr=[[NSMutableArray alloc]initWithObjects:@"splashImage_1",@"splashImage_2" ,@"splashImage_3", nil];
         
     }
     
     if(IS_IPHONE6 ) {
         frameHt=609;
         frameWt= 374;
-        self.layoutConstraintsCreateAnAccBtnHeight.constant =60;
-        self.layoutConstraintsSignInBtnHeight.constant =60;
         bannerImageArr=[[NSMutableArray alloc]initWithObjects:@"splashImage_1",@"splashImage_2" ,@"splashImage_3", nil];
 
     }
@@ -61,7 +57,6 @@
     }
 
     [self loadSlideScroll];
-    // Do any additional setup after loading the view from its nib.
 }
 
 - (void)viewWillAppear:(BOOL)animated{
@@ -101,9 +96,19 @@
     
     for(int i=0;i<self.infoPageControl.numberOfPages;i++)
     {
+//        CGFloat pageWidth = CGRectGetWidth([self.scrollViewImage bounds]);
+//        
+//        CGFloat offset = [self.scrollViewImage contentOffset].x;
+//        
+//        NSUInteger currentPage = (NSUInteger) round((offset/pageWidth));
+//        
+//        [[self infoPageControl] setCurrentPage: currentPage];
+//        
+        
         [imageViewActive setFrame:CGRectMake(0, 0,10, 10)];
         [imageViewActive setImage:[UIImage imageNamed:@"dot_active"]];
         [pgDtView addSubview:imageViewActive];
+        
 
       
         imageViewDot=[[UIImageView alloc]init];
@@ -111,6 +116,8 @@
         [imageViewDot setImage:[UIImage imageNamed:@"dot_Image"]];
         [pgDtView addSubview:imageViewDot];
        
+        
+
         [self.view addSubview:pgDtView];
         if(IS_IPHONE6_Plus ){
             [pgDtView setFrame:CGRectMake(190, 624, self.infoPageControl.numberOfPages*13, 10)];
@@ -130,9 +137,17 @@
     
     
 }
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView
+{
+    [scrollView startScrolling];
+}
+
+
+
 -(void)timerFunction{
     jslider=bannerImageArr.count;
     timer1 = [NSTimer scheduledTimerWithTimeInterval:2.0 target:self selector:@selector(nextPage:) userInfo:nil repeats:YES];
+
 }
 -(void)nextPage:(NSTimer *)_timer
 {
@@ -157,7 +172,37 @@
 
     }
     
+    
+ 
+
+    
 }
+
+//#pragma mark - Page Control Change Action
+//
+//- (void) pagerDidChangeValue
+//{
+//    if ([[self scrollTimer] isValid])
+//    {
+//        [self setScrollTimerPaused: NO];
+//        
+//        [[self scrollTimer] invalidate];
+//        
+//        [self setScrollTimer: nil];
+//    }
+//    
+//    NSUInteger newPage = (NSUInteger) [[self pager] currentPage];
+//    
+//    
+//    CGFloat newOffset = newPage * CGRectGetWidth([[self scrollView] bounds]);
+//    
+//    if (newOffset == [[self scrollView] contentOffset].x)
+//        return;
+//    
+//    [[self scrollView] setContentOffset: CGPointMake(newOffset, 0) animated: YES];
+//}
+//
+
 //- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView2
 //{
 //    isTimerStop=YES;
