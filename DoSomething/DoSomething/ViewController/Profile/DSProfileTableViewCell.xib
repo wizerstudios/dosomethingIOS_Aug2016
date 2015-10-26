@@ -25,6 +25,7 @@
             <string>Patron-Regular</string>
             <string>Patron-Regular</string>
             <string>Patron-Regular</string>
+            <string>Patron-Regular</string>
         </mutableArray>
     </customFonts>
     <objects>
@@ -275,6 +276,12 @@
                                     <constraint firstAttribute="width" constant="38" id="lwS-SW-Bl1"/>
                                 </constraints>
                             </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rCJ-9F-cbH">
+                                <rect key="frame" x="8" y="69" width="38" height="13"/>
+                                <fontDescription key="fontDescription" name="Patron-Regular" family="Patron" pointSize="6"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
@@ -301,6 +308,7 @@
             <connections>
                 <outlet property="buttonPushHobbies" destination="PXd-hC-CNF" id="VBM-Li-tDT"/>
                 <outlet property="hobbiesImageView" destination="QlI-RY-tGe" id="VYe-1b-yBt"/>
+                <outlet property="hobbiesNameLabel" destination="rCJ-9F-cbH" id="gta-RI-dpJ"/>
             </connections>
             <point key="canvasLocation" x="757" y="301"/>
         </tableViewCell>

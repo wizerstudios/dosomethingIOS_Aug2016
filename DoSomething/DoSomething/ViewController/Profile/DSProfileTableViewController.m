@@ -14,7 +14,7 @@
 
 @interface DSProfileTableViewController ()<UITextFieldDelegate>
 {
-    NSMutableArray *placeHolderArray, *imageNormalArray;
+    NSMutableArray *placeHolderArray, *imageNormalArray,*hobbiesNameArray;
     NSArray *titleArray;
     NSMutableArray *interstAndHobbiesArray;
     UIDatePicker *datePicker;
@@ -198,6 +198,10 @@
 
     interstAndHobbiesArray =[[NSUserDefaults standardUserDefaults] valueForKey:@"SelectedItem"];
     imageNormalArray =[[NSUserDefaults standardUserDefaults] valueForKey:@"SelectedItemNormal"];
+    
+    hobbiesNameArray =[[NSUserDefaults standardUserDefaults] valueForKey:@"SelectedItemName"];
+   
+
 
     
     placeHolderArray = [[NSMutableArray alloc] initWithCapacity: 1];
@@ -417,6 +421,17 @@
             [hobbiesImage setImage:[UIImage imageNamed:image]];
             [cell addSubview:hobbiesImage];
         }
+        for (int i =0; i< [hobbiesNameArray  count]; i++) {
+            
+            UILabel *hobbiesname = [[UILabel alloc]initWithFrame:CGRectMake(i*30, 65, 38, 15)];
+            [hobbiesname setFont:[UIFont fontWithName:@"Patron-Regular" size:6]];
+
+            NSString *image =[hobbiesNameArray objectAtIndex:i];
+            
+            hobbiesname.text = image;
+            [cell addSubview:hobbiesname];
+        }
+        
        
     }
    
