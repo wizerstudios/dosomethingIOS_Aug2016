@@ -57,6 +57,7 @@
     }
 
     [self loadSlideScroll];
+    _scrollViewImage.userInteractionEnabled = NO;
 }
 
 - (void)viewWillAppear:(BOOL)animated{
@@ -88,35 +89,30 @@
     
     xslider=0;
     pgDtView=[[UIView alloc]init];
+    imageViewActive = [[UIImageView alloc]init];
     pgDtView.backgroundColor=[UIColor clearColor];
-    imageViewActive =[[UIImageView alloc]init];
-    
     self.infoPageControl.numberOfPages=bannerImageArr.count;
+    
+    _infoPageControl.pageIndicatorTintColor = [UIColor redColor];
     
     for(int i=0;i<self.infoPageControl.numberOfPages;i++)
     {
-//        CGFloat pageWidth = CGRectGetWidth([self.scrollViewImage bounds]);
-//        
-//        CGFloat offset = [self.scrollViewImage contentOffset].x;
-//        
-//        NSUInteger currentPage = (NSUInteger) round((offset/pageWidth));
-//        
-//        [[self infoPageControl] setCurrentPage: currentPage];
-//        
+        if(i == _infoPageControl.currentPage)
+        {
+            [imageViewActive setFrame:CGRectMake(0, 0,10, 10)];
+            [imageViewActive setImage:[UIImage imageNamed:@"dot_active"]];
+            [pgDtView addSubview:imageViewActive];
+        }
         
-        [imageViewActive setFrame:CGRectMake(0, 0,10, 10)];
-        [imageViewActive setImage:[UIImage imageNamed:@"dot_active"]];
-        [pgDtView addSubview:imageViewActive];
+            imageViewDot=[[UIImageView alloc]init];
+            imageViewDot.tag = i+11;
+            [imageViewDot setFrame:CGRectMake(i*13, 0, 10, 10 )];
+            [imageViewDot setImage:[UIImage imageNamed:@"dot_Image"]];
+            [pgDtView addSubview:imageViewDot];
         
-
-      
-        imageViewDot=[[UIImageView alloc]init];
-        [imageViewDot setFrame:CGRectMake(i*13, 0, 10, 10 )];
-        [imageViewDot setImage:[UIImage imageNamed:@"dot_Image"]];
-        [pgDtView addSubview:imageViewDot];
-       
+        if(imageViewDot.tag == 11)
+            imageViewDot.hidden = YES;
         
-
         [self.view addSubview:pgDtView];
         if(IS_IPHONE6_Plus ){
             [pgDtView setFrame:CGRectMake(190, 624, self.infoPageControl.numberOfPages*13, 10)];
@@ -131,15 +127,9 @@
             [pgDtView setFrame:CGRectMake(142, 484, self.infoPageControl.numberOfPages*13, 10)];
         }
     }
-    
+
     [self timerFunction];
 }
-- (void)scrollViewDidScroll:(UIScrollView *)scrollView
-{
-    [scrollView startScrolling];
-}
-
-
 
 -(void)timerFunction{
     jslider=bannerImageArr.count;
@@ -148,62 +138,75 @@
 }
 -(void)nextPage:(NSTimer *)_timer
 {
-    
-    if (isTimerStop==NO) {
         CGRect newRect ;
-        if(jslider < bannerImageArr.count){
+        if(jslider < bannerImageArr.count)
+        {
             xslider += frameWt;
             newRect = CGRectMake(xslider, 0,frameWt,frameHt);
             [imageViewActive setImage:[UIImage imageNamed:@"dot_active"]];
             [self.scrollViewImage scrollRectToVisible:newRect animated:YES];
             [imageViewActive setFrame:CGRectMake(jslider*13, 0, 10, 10)];
-            jslider++;
             
+            for(UIView *subView in [pgDtView subviews])
+            {
+                if(subView.tag == jslider+11)
+                    subView.hidden = YES;
+                else
+                    subView.hidden = NO;
+            }
+        jslider++;
         }
-        else{
+        else
+        {
             xslider=0-frameWt;
             jslider=0;
             [self.scrollViewImage setContentOffset:CGPointMake(0, 0)];
             [imageViewActive setFrame:CGRectMake(jslider*13, 0, 10, 10)];
+            for(UIView *subView in [pgDtView subviews])
+            {
+                if(subView.tag == jslider+11)
+                    subView.hidden = YES;
+                else
+                    subView.hidden = NO;
+            }
         }
-
-    }
-    
-    
- 
-
-    
 }
 
-//#pragma mark - Page Control Change Action
-//
-//- (void) pagerDidChangeValue
-//{
-//    if ([[self scrollTimer] isValid])
-//    {
-//        [self setScrollTimerPaused: NO];
-//        
-//        [[self scrollTimer] invalidate];
-//        
-//        [self setScrollTimer: nil];
-//    }
-//    
-//    NSUInteger newPage = (NSUInteger) [[self pager] currentPage];
-//    
-//    
-//    CGFloat newOffset = newPage * CGRectGetWidth([[self scrollView] bounds]);
-//    
-//    if (newOffset == [[self scrollView] contentOffset].x)
-//        return;
-//    
-//    [[self scrollView] setContentOffset: CGPointMake(newOffset, 0) animated: YES];
-//}
-//
+/*
+#pragma mark - Page Control Change Action
 
-//- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView2
-//{
-//    isTimerStop=YES;
-//}
+- (void) pagerDidChangeValue
+{
+    if ([[self scrollTimer] isValid])
+    {
+        [self setScrollTimerPaused: NO];
+        
+        [[self scrollTimer] invalidate];
+        
+        [self setScrollTimer: nil];
+    }
+    
+    NSUInteger newPage = (NSUInteger) [[self pager] currentPage];
+    
+    
+    CGFloat newOffset = newPage * CGRectGetWidth([[self scrollView] bounds]);
+    
+    if (newOffset == [[self scrollView] contentOffset].x)
+        return;
+    
+    [[self scrollView] setContentOffset: CGPointMake(newOffset, 0) animated: YES];
+}
+
+
+- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView2
+{
+    isTimerStop=YES;
+}
+
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView
+{
+    [scrollView startScrolling];
+}
 
 -(void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView2
 {
@@ -212,6 +215,7 @@
     self.infoPageControl.currentPage=jslider;
     [imageViewActive setFrame:CGRectMake(jslider*13, 0, 10, 10)];
 }
+*/
 
 - (IBAction)createAnAccount:(id)sender{
     
