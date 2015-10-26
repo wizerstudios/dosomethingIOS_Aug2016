@@ -404,14 +404,23 @@
      NSString *image =[[[interestArray valueForKey:@"imageNormal"]objectAtIndex:indexPath.section]objectAtIndex:indexPath.row];
      [imageNormalArray removeObject:image];
          
-         [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"SelectedItemNormal"];
+    [dataselCell.interestAndHobbiesImageView setImage:[UIImage imageNamed:image]];
+         NSMutableArray *tempselectedSection = [[interstAndHobbiesArray objectAtIndex:indexPath.section] mutableCopy];
+         NSMutableDictionary *tempselectedDict = [[tempselectedSection objectAtIndex:indexPath.row] mutableCopy];
+         
+         [tempselectedDict setObject:image forKey:@"imageNormal"];
+
+         [tempselectedSection replaceObjectAtIndex:indexPath.row withObject:tempselectedDict];
+         [interstAndHobbiesArray replaceObjectAtIndex:indexPath.section withObject:tempselectedSection];
+
+         
+         [[NSUserDefaults standardUserDefaults] setObject:imageNormalArray forKey:@"SelectedItemNormal"];
          [[NSUserDefaults standardUserDefaults] synchronize];
          
          
-    [dataselCell.interestAndHobbiesImageView setImage:[UIImage imageNamed:image]];
      dataselCell.nameLabel.textColor=[UIColor colorWithRed:(float)135.0/255 green:(float)135.0/255 blue:(float)135.0/255 alpha:1.0f];
-    [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"SelectedItem"];
-    [[NSUserDefaults standardUserDefaults] synchronize];
+         [[NSUserDefaults standardUserDefaults] setObject:interstAndHobbiesArray forKey:@"SelectedItem"];
+         [[NSUserDefaults standardUserDefaults] synchronize];
 
      }
 }
