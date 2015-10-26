@@ -27,6 +27,11 @@
 @property (weak, nonatomic) IBOutlet UIImageView *hobbiesImageView;
 @property (weak, nonatomic) IBOutlet UILabel *hobbiesNameLabel;
 
+@property (weak, nonatomic) IBOutlet UIImageView *plusIconImageView;
+
+
+
+
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *layoutConstraintRadioButtonYPos;
 @property (weak, nonatomic) IBOutlet UIButton *maleButton;
 @property (weak, nonatomic) IBOutlet UIButton *femaleButton;

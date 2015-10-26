@@ -49,6 +49,7 @@
 		EAEF252A1BCF9EF600F83E82 /* IQKeyboardManager.bundle in Resources */ = {isa = PBXBuildFile; fileRef = EAEF251C1BCF9EF600F83E82 /* IQKeyboardManager.bundle */; };
 		EAEF25351BCFEBF400F83E82 /* CustomNavigationView.m in Sources */ = {isa = PBXBuildFile; fileRef = EAEF25331BCFEBF400F83E82 /* CustomNavigationView.m */; };
 		EAEF25361BCFEBF400F83E82 /* CustomNavigationView.xib in Resources */ = {isa = PBXBuildFile; fileRef = EAEF25341BCFEBF400F83E82 /* CustomNavigationView.xib */; };
+		EAF16E401BDE1EBE00E6E5CE /* Pluis_icon1.png in Resources */ = {isa = PBXBuildFile; fileRef = EAF16E3F1BDE1EBE00E6E5CE /* Pluis_icon1.png */; };
 		EAF1871A1BDA352B004C25EA /* DAAutoScroll.m in Sources */ = {isa = PBXBuildFile; fileRef = EAF187191BDA352B004C25EA /* DAAutoScroll.m */; };
 		EAF1DC511BD8B2AF00D51354 /* DSHomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EAF1DC4F1BD8B2AF00D51354 /* DSHomeViewController.m */; };
 		EAF1DC521BD8B2AF00D51354 /* DSHomeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = EAF1DC501BD8B2AF00D51354 /* DSHomeViewController.xib */; };
@@ -179,6 +180,7 @@
 		EAEF25321BCFEBF400F83E82 /* CustomNavigationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomNavigationView.h; sourceTree = "<group>"; };
 		EAEF25331BCFEBF400F83E82 /* CustomNavigationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomNavigationView.m; sourceTree = "<group>"; };
 		EAEF25341BCFEBF400F83E82 /* CustomNavigationView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CustomNavigationView.xib; sourceTree = "<group>"; };
+		EAF16E3F1BDE1EBE00E6E5CE /* Pluis_icon1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Pluis_icon1.png; sourceTree = "<group>"; };
 		EAF187181BDA352B004C25EA /* DAAutoScroll.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DAAutoScroll.h; sourceTree = "<group>"; };
 		EAF187191BDA352B004C25EA /* DAAutoScroll.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DAAutoScroll.m; sourceTree = "<group>"; };
 		EAF1DC4E1BD8B2AF00D51354 /* DSHomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DSHomeViewController.h; sourceTree = "<group>"; };
@@ -530,6 +532,7 @@
 		EAFC96C41BD21A1100B3593D /* Hobbies  */ = {
 			isa = PBXGroup;
 			children = (
+				EAF16E3F1BDE1EBE00E6E5CE /* Pluis_icon1.png */,
 				EAFC96C51BD21A1100B3593D /* bbq.png */,
 				EAFC96C61BD21A1100B3593D /* bbq_active.png */,
 				EAFC96C71BD21A1100B3593D /* Boardgames.png */,
@@ -699,6 +702,7 @@
 				C6D5F6421BC7B52C0050C1AE /* Patron-MediumItalic.ttf in Resources */,
 				C6D5F60C1BC7AF500050C1AE /* Launch Screen.xib in Resources */,
 				EAFC976B1BD21A1200B3593D /* fastfood.png in Resources */,
+				EAF16E401BDE1EBE00E6E5CE /* Pluis_icon1.png in Resources */,
 				6A8D15D41BCC059B000F1FB4 /* DSProfileTableViewController.xib in Resources */,
 				EAFC97931BD21A1200B3593D /* violin_active.png in Resources */,
 				C6D5F6441BC7B52C0050C1AE /* Patron-Thin.ttf in Resources */,
