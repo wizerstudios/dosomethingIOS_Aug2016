@@ -73,7 +73,6 @@
     }
     for (int i=0; i<bannerImageArr.count;  i++)
     {
-        
         infoImage = [[UIImageView alloc] initWithFrame:CGRectMake(i*frameWt, 0, frameWt, frameHt)];
         infoImage.tag = i+1;
         UIImageView *imageforBanner=[[UIImageView alloc] init];
@@ -134,8 +133,6 @@
     }
     
     [self timerFunction];
-    
-    
 }
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView
 {
@@ -207,13 +204,13 @@
 //{
 //    isTimerStop=YES;
 //}
+
 -(void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView2
 {
     jslider = scrollView2.contentOffset.x/frameWt;
     [self.scrollViewImage setNeedsDisplay];
     self.infoPageControl.currentPage=jslider;
     [imageViewActive setFrame:CGRectMake(jslider*13, 0, 10, 10)];
-   
 }
 
 - (IBAction)createAnAccount:(id)sender{
