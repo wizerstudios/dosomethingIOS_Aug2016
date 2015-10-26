@@ -25,10 +25,10 @@
     self.saveBtn .hidden   = YES;
     
     if (IS_IPHONE6 ||IS_IPHONE6_Plus){
-    self.layoutConstraintLabelYPos.constant =35;
+    self.layoutConstraintLabelYPos.constant =31;
     self.layoutConstraintBackBtnYPos.constant =29;
-    self.layoutConstraintSaveBtnYPos.constant = 30;
-    self.layoutConstraintBackArrowYPos.constant=35;
+    self.layoutConstraintSaveBtnYPos.constant = 31;
+    self.layoutConstraintBackArrowYPos.constant=36;
     }
 }
 

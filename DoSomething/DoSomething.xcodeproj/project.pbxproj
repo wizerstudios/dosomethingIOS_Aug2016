@@ -12,9 +12,6 @@
 		6A50C21D1BCCBB8C002B11AC /* DSProfileTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6A50C21B1BCCBB8C002B11AC /* DSProfileTableViewCell.xib */; };
 		6A50C2271BCCC310002B11AC /* DSChatsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A50C2251BCCC310002B11AC /* DSChatsTableViewController.m */; };
 		6A50C2281BCCC310002B11AC /* DSChatsTableViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6A50C2261BCCC310002B11AC /* DSChatsTableViewController.xib */; };
-		6A50C22F1BCCFF36002B11AC /* DSSplashScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A50C22B1BCCFF36002B11AC /* DSSplashScrollView.m */; };
-		6A50C2301BCCFF36002B11AC /* DSSplashViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A50C22D1BCCFF36002B11AC /* DSSplashViewController.m */; };
-		6A50C2311BCCFF36002B11AC /* DSSplashViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6A50C22E1BCCFF36002B11AC /* DSSplashViewController.xib */; };
 		6A8D15D31BCC059B000F1FB4 /* DSProfileTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A8D15D11BCC059B000F1FB4 /* DSProfileTableViewController.m */; };
 		6A8D15D41BCC059B000F1FB4 /* DSProfileTableViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6A8D15D21BCC059B000F1FB4 /* DSProfileTableViewController.xib */; };
 		C6D5F60C1BC7AF500050C1AE /* Launch Screen.xib in Resources */ = {isa = PBXBuildFile; fileRef = C6D5F60B1BC7AF500050C1AE /* Launch Screen.xib */; };
@@ -36,10 +33,6 @@
 		C6D5F67C1BC7EC440050C1AE /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C6D5F67B1BC7EC440050C1AE /* Images.xcassets */; };
 		EACB22BB1BC7C7F7002FAD54 /* DSLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EACB22B91BC7C7F7002FAD54 /* DSLoginViewController.m */; };
 		EACB22BC1BC7C7F7002FAD54 /* DSLoginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = EACB22BA1BC7C7F7002FAD54 /* DSLoginViewController.xib */; };
-		EAE5562C1BD4AD5900DFA5D8 /* HomeCustomCell.m in Sources */ = {isa = PBXBuildFile; fileRef = EAE556271BD4AD5900DFA5D8 /* HomeCustomCell.m */; };
-		EAE5562D1BD4AD5900DFA5D8 /* HomeCustomCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = EAE556281BD4AD5900DFA5D8 /* HomeCustomCell.xib */; };
-		EAE5562E1BD4AD5900DFA5D8 /* HomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EAE5562A1BD4AD5900DFA5D8 /* HomeViewController.m */; };
-		EAE5562F1BD4AD5900DFA5D8 /* HomeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = EAE5562B1BD4AD5900DFA5D8 /* HomeViewController.xib */; };
 		EAEF251D1BCF9EF600F83E82 /* IQNSArray+Sort.m in Sources */ = {isa = PBXBuildFile; fileRef = EAEF24FB1BCF9EF600F83E82 /* IQNSArray+Sort.m */; };
 		EAEF251E1BCF9EF600F83E82 /* IQUITextFieldView+Additions.m in Sources */ = {isa = PBXBuildFile; fileRef = EAEF24FD1BCF9EF600F83E82 /* IQUITextFieldView+Additions.m */; };
 		EAEF251F1BCF9EF600F83E82 /* IQUIView+Hierarchy.m in Sources */ = {isa = PBXBuildFile; fileRef = EAEF24FF1BCF9EF600F83E82 /* IQUIView+Hierarchy.m */; };
@@ -56,6 +49,9 @@
 		EAEF252A1BCF9EF600F83E82 /* IQKeyboardManager.bundle in Resources */ = {isa = PBXBuildFile; fileRef = EAEF251C1BCF9EF600F83E82 /* IQKeyboardManager.bundle */; };
 		EAEF25351BCFEBF400F83E82 /* CustomNavigationView.m in Sources */ = {isa = PBXBuildFile; fileRef = EAEF25331BCFEBF400F83E82 /* CustomNavigationView.m */; };
 		EAEF25361BCFEBF400F83E82 /* CustomNavigationView.xib in Resources */ = {isa = PBXBuildFile; fileRef = EAEF25341BCFEBF400F83E82 /* CustomNavigationView.xib */; };
+		EAF1871A1BDA352B004C25EA /* DAAutoScroll.m in Sources */ = {isa = PBXBuildFile; fileRef = EAF187191BDA352B004C25EA /* DAAutoScroll.m */; };
+		EAF1DC511BD8B2AF00D51354 /* DSHomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EAF1DC4F1BD8B2AF00D51354 /* DSHomeViewController.m */; };
+		EAF1DC521BD8B2AF00D51354 /* DSHomeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = EAF1DC501BD8B2AF00D51354 /* DSHomeViewController.xib */; };
 		EAFC96581BD20FD400B3593D /* DSInterestAndHobbiesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EAFC96561BD20FD400B3593D /* DSInterestAndHobbiesViewController.m */; };
 		EAFC96591BD20FD400B3593D /* DSInterestAndHobbiesViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = EAFC96571BD20FD400B3593D /* DSInterestAndHobbiesViewController.xib */; };
 		EAFC97601BD21A1200B3593D /* bbq.png in Resources */ = {isa = PBXBuildFile; fileRef = EAFC96C51BD21A1100B3593D /* bbq.png */; };
@@ -124,11 +120,6 @@
 		6A50C2241BCCC310002B11AC /* DSChatsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DSChatsTableViewController.h; sourceTree = "<group>"; };
 		6A50C2251BCCC310002B11AC /* DSChatsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DSChatsTableViewController.m; sourceTree = "<group>"; };
 		6A50C2261BCCC310002B11AC /* DSChatsTableViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DSChatsTableViewController.xib; sourceTree = "<group>"; };
-		6A50C22A1BCCFF36002B11AC /* DSSplashScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DSSplashScrollView.h; sourceTree = "<group>"; };
-		6A50C22B1BCCFF36002B11AC /* DSSplashScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DSSplashScrollView.m; sourceTree = "<group>"; };
-		6A50C22C1BCCFF36002B11AC /* DSSplashViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DSSplashViewController.h; sourceTree = "<group>"; };
-		6A50C22D1BCCFF36002B11AC /* DSSplashViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DSSplashViewController.m; sourceTree = "<group>"; };
-		6A50C22E1BCCFF36002B11AC /* DSSplashViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DSSplashViewController.xib; sourceTree = "<group>"; };
 		6A8D15D01BCC059B000F1FB4 /* DSProfileTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DSProfileTableViewController.h; sourceTree = "<group>"; };
 		6A8D15D11BCC059B000F1FB4 /* DSProfileTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DSProfileTableViewController.m; sourceTree = "<group>"; };
 		6A8D15D21BCC059B000F1FB4 /* DSProfileTableViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DSProfileTableViewController.xib; sourceTree = "<group>"; };
@@ -155,12 +146,6 @@
 		EACB22B81BC7C7F7002FAD54 /* DSLoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DSLoginViewController.h; sourceTree = "<group>"; };
 		EACB22B91BC7C7F7002FAD54 /* DSLoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DSLoginViewController.m; sourceTree = "<group>"; };
 		EACB22BA1BC7C7F7002FAD54 /* DSLoginViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DSLoginViewController.xib; sourceTree = "<group>"; };
-		EAE556261BD4AD5900DFA5D8 /* HomeCustomCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeCustomCell.h; sourceTree = "<group>"; };
-		EAE556271BD4AD5900DFA5D8 /* HomeCustomCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeCustomCell.m; sourceTree = "<group>"; };
-		EAE556281BD4AD5900DFA5D8 /* HomeCustomCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HomeCustomCell.xib; sourceTree = "<group>"; };
-		EAE556291BD4AD5900DFA5D8 /* HomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeViewController.h; sourceTree = "<group>"; };
-		EAE5562A1BD4AD5900DFA5D8 /* HomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeViewController.m; sourceTree = "<group>"; };
-		EAE5562B1BD4AD5900DFA5D8 /* HomeViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HomeViewController.xib; sourceTree = "<group>"; };
 		EAEF24FA1BCF9EF600F83E82 /* IQNSArray+Sort.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "IQNSArray+Sort.h"; sourceTree = "<group>"; };
 		EAEF24FB1BCF9EF600F83E82 /* IQNSArray+Sort.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "IQNSArray+Sort.m"; sourceTree = "<group>"; };
 		EAEF24FC1BCF9EF600F83E82 /* IQUITextFieldView+Additions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "IQUITextFieldView+Additions.h"; sourceTree = "<group>"; };
@@ -194,6 +179,11 @@
 		EAEF25321BCFEBF400F83E82 /* CustomNavigationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomNavigationView.h; sourceTree = "<group>"; };
 		EAEF25331BCFEBF400F83E82 /* CustomNavigationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomNavigationView.m; sourceTree = "<group>"; };
 		EAEF25341BCFEBF400F83E82 /* CustomNavigationView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CustomNavigationView.xib; sourceTree = "<group>"; };
+		EAF187181BDA352B004C25EA /* DAAutoScroll.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DAAutoScroll.h; sourceTree = "<group>"; };
+		EAF187191BDA352B004C25EA /* DAAutoScroll.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DAAutoScroll.m; sourceTree = "<group>"; };
+		EAF1DC4E1BD8B2AF00D51354 /* DSHomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DSHomeViewController.h; sourceTree = "<group>"; };
+		EAF1DC4F1BD8B2AF00D51354 /* DSHomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DSHomeViewController.m; sourceTree = "<group>"; };
+		EAF1DC501BD8B2AF00D51354 /* DSHomeViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DSHomeViewController.xib; sourceTree = "<group>"; };
 		EAFC96551BD20FD400B3593D /* DSInterestAndHobbiesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DSInterestAndHobbiesViewController.h; sourceTree = "<group>"; };
 		EAFC96561BD20FD400B3593D /* DSInterestAndHobbiesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DSInterestAndHobbiesViewController.m; sourceTree = "<group>"; };
 		EAFC96571BD20FD400B3593D /* DSInterestAndHobbiesViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DSInterestAndHobbiesViewController.xib; sourceTree = "<group>"; };
@@ -315,19 +305,6 @@
 			path = ViewController/Chats;
 			sourceTree = "<group>";
 		};
-		6A50C2291BCCFF36002B11AC /* SplashView */ = {
-			isa = PBXGroup;
-			children = (
-				6A50C22A1BCCFF36002B11AC /* DSSplashScrollView.h */,
-				6A50C22B1BCCFF36002B11AC /* DSSplashScrollView.m */,
-				6A50C22C1BCCFF36002B11AC /* DSSplashViewController.h */,
-				6A50C22D1BCCFF36002B11AC /* DSSplashViewController.m */,
-				6A50C22E1BCCFF36002B11AC /* DSSplashViewController.xib */,
-			);
-			name = SplashView;
-			path = ViewController/SplashView;
-			sourceTree = "<group>";
-		};
 		6A8D15CF1BCC059B000F1FB4 /* Profile */ = {
 			isa = PBXGroup;
 			children = (
@@ -345,6 +322,7 @@
 		C6D5F6081BC7A4340050C1AE /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				EAF187171BDA352B004C25EA /* DAAutoScroll */,
 				EAEF25311BCFEBF400F83E82 /* CustomNavigation */,
 				EAEF24F81BCF9EF600F83E82 /* IQKeyBoardManager */,
 				C6D5F6471BC7BB540050C1AE /* AppCommon */,
@@ -357,9 +335,8 @@
 		C6D5F60A1BC7A4560050C1AE /* ViewController */ = {
 			isa = PBXGroup;
 			children = (
-				6A50C2291BCCFF36002B11AC /* SplashView */,
+				EAF1DC4D1BD8B2AF00D51354 /* HomeView */,
 				EACB22B71BC7C7F7002FAD54 /* Login */,
-				EAE556241BD4AD5900DFA5D8 /* HomeView */,
 				6A8D15CF1BCC059B000F1FB4 /* Profile */,
 				EAFC96541BD20FD400B3593D /* Hobbies */,
 				6A50C2231BCCC310002B11AC /* Chats */,
@@ -416,28 +393,6 @@
 			);
 			name = Login;
 			path = ViewController/Login;
-			sourceTree = "<group>";
-		};
-		EAE556241BD4AD5900DFA5D8 /* HomeView */ = {
-			isa = PBXGroup;
-			children = (
-				EAE556291BD4AD5900DFA5D8 /* HomeViewController.h */,
-				EAE5562A1BD4AD5900DFA5D8 /* HomeViewController.m */,
-				EAE5562B1BD4AD5900DFA5D8 /* HomeViewController.xib */,
-				EAE556251BD4AD5900DFA5D8 /* HomeCustomCell */,
-			);
-			name = HomeView;
-			path = ViewController/HomeView;
-			sourceTree = "<group>";
-		};
-		EAE556251BD4AD5900DFA5D8 /* HomeCustomCell */ = {
-			isa = PBXGroup;
-			children = (
-				EAE556261BD4AD5900DFA5D8 /* HomeCustomCell.h */,
-				EAE556271BD4AD5900DFA5D8 /* HomeCustomCell.m */,
-				EAE556281BD4AD5900DFA5D8 /* HomeCustomCell.xib */,
-			);
-			path = HomeCustomCell;
 			sourceTree = "<group>";
 		};
 		EAEF24F81BCF9EF600F83E82 /* IQKeyBoardManager */ = {
@@ -535,6 +490,27 @@
 			);
 			name = CustomNavigation;
 			path = Common/CustomNavigation;
+			sourceTree = "<group>";
+		};
+		EAF187171BDA352B004C25EA /* DAAutoScroll */ = {
+			isa = PBXGroup;
+			children = (
+				EAF187181BDA352B004C25EA /* DAAutoScroll.h */,
+				EAF187191BDA352B004C25EA /* DAAutoScroll.m */,
+			);
+			name = DAAutoScroll;
+			path = Common/DAAutoScroll;
+			sourceTree = "<group>";
+		};
+		EAF1DC4D1BD8B2AF00D51354 /* HomeView */ = {
+			isa = PBXGroup;
+			children = (
+				EAF1DC4E1BD8B2AF00D51354 /* DSHomeViewController.h */,
+				EAF1DC4F1BD8B2AF00D51354 /* DSHomeViewController.m */,
+				EAF1DC501BD8B2AF00D51354 /* DSHomeViewController.xib */,
+			);
+			name = HomeView;
+			path = ViewController/HomeView;
 			sourceTree = "<group>";
 		};
 		EAFC96541BD20FD400B3593D /* Hobbies */ = {
@@ -672,6 +648,7 @@
 				EAFC97791BD21A1200B3593D /* guitar.png in Resources */,
 				EAFC97691BD21A1200B3593D /* dog.png in Resources */,
 				EAFC97901BD21A1200B3593D /* travell.png in Resources */,
+				EAF1DC521BD8B2AF00D51354 /* DSHomeViewController.xib in Resources */,
 				EAFC976C1BD21A1200B3593D /* fastfood_active.png in Resources */,
 				EAFC97881BD21A1200B3593D /* soccer.png in Resources */,
 				EAEF252A1BCF9EF600F83E82 /* IQKeyboardManager.bundle in Resources */,
@@ -708,7 +685,6 @@
 				EAFC97811BD21A1200B3593D /* photography.png in Resources */,
 				EACB22BC1BC7C7F7002FAD54 /* DSLoginViewController.xib in Resources */,
 				EAFC97651BD21A1200B3593D /* cat.png in Resources */,
-				EAE5562D1BD4AD5900DFA5D8 /* HomeCustomCell.xib in Resources */,
 				EAFC977B1BD21A1200B3593D /* italianfood.png in Resources */,
 				EAFC97661BD21A1200B3593D /* cat_active.png in Resources */,
 				C6D5F63A1BC7B52C0050C1AE /* Patron-Black.ttf in Resources */,
@@ -726,7 +702,6 @@
 				6A8D15D41BCC059B000F1FB4 /* DSProfileTableViewController.xib in Resources */,
 				EAFC97931BD21A1200B3593D /* violin_active.png in Resources */,
 				C6D5F6441BC7B52C0050C1AE /* Patron-Thin.ttf in Resources */,
-				EAE5562F1BD4AD5900DFA5D8 /* HomeViewController.xib in Resources */,
 				EAFC978C1BD21A1200B3593D /* sycling.png in Resources */,
 				C6D5F6411BC7B52C0050C1AE /* Patron-Medium.ttf in Resources */,
 				C6D5F6431BC7B52C0050C1AE /* Patron-Regular.ttf in Resources */,
@@ -738,7 +713,6 @@
 				C6D5F6451BC7B52C0050C1AE /* Patron-ThinItalic.ttf in Resources */,
 				C6D5F63E1BC7B52C0050C1AE /* Patron-ExtraLight.ttf in Resources */,
 				EAFC976E1BD21A1200B3593D /* finance_acative.png in Resources */,
-				6A50C2311BCCFF36002B11AC /* DSSplashViewController.xib in Resources */,
 				EAFC97981BD21CF800B3593D /* DSInterestAndHobbiesCollectionViewCell.xib in Resources */,
 				EAFC97801BD21A1200B3593D /* paint_active.png in Resources */,
 				C6D5F63B1BC7B52C0050C1AE /* Patron-BlackItalic.ttf in Resources */,
@@ -763,25 +737,23 @@
 				C6D5F61C1BC7B3E60050C1AE /* DSAppCommon.m in Sources */,
 				EACB22BB1BC7C7F7002FAD54 /* DSLoginViewController.m in Sources */,
 				EAEF251E1BCF9EF600F83E82 /* IQUITextFieldView+Additions.m in Sources */,
-				6A50C22F1BCCFF36002B11AC /* DSSplashScrollView.m in Sources */,
 				EAEF25261BCF9EF600F83E82 /* IQBarButtonItem.m in Sources */,
+				EAF1DC511BD8B2AF00D51354 /* DSHomeViewController.m in Sources */,
 				EAEF25271BCF9EF600F83E82 /* IQTitleBarButtonItem.m in Sources */,
 				EAEF251F1BCF9EF600F83E82 /* IQUIView+Hierarchy.m in Sources */,
 				065BAC521BC7A135005AF493 /* main.m in Sources */,
-				6A50C2301BCCFF36002B11AC /* DSSplashViewController.m in Sources */,
 				6A50C21C1BCCBB8C002B11AC /* DSProfileTableViewCell.m in Sources */,
 				EAEF25241BCF9EF600F83E82 /* IQSegmentedNextPrevious.m in Sources */,
-				EAE5562C1BD4AD5900DFA5D8 /* HomeCustomCell.m in Sources */,
 				EAEF25351BCFEBF400F83E82 /* CustomNavigationView.m in Sources */,
 				EAEF25251BCF9EF600F83E82 /* IQTextView.m in Sources */,
 				EAEF25211BCF9EF600F83E82 /* IQUIWindow+Hierarchy.m in Sources */,
 				EAFC96581BD20FD400B3593D /* DSInterestAndHobbiesViewController.m in Sources */,
 				EAEF25231BCF9EF600F83E82 /* IQKeyboardReturnKeyHandler.m in Sources */,
-				EAE5562E1BD4AD5900DFA5D8 /* HomeViewController.m in Sources */,
 				C6D5F6151BC7B0970050C1AE /* AppDelegate.m in Sources */,
 				EAEF25291BCF9EF600F83E82 /* IQUIView+IQKeyboardToolbar.m in Sources */,
 				EAFC97971BD21CF800B3593D /* DSInterestAndHobbiesCollectionViewCell.m in Sources */,
 				6A50C2271BCCC310002B11AC /* DSChatsTableViewController.m in Sources */,
+				EAF1871A1BDA352B004C25EA /* DAAutoScroll.m in Sources */,
 				6A8D15D31BCC059B000F1FB4 /* DSProfileTableViewController.m in Sources */,
 				EAEF25281BCF9EF600F83E82 /* IQToolbar.m in Sources */,
 			);
@@ -880,6 +852,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.oclockapps.DoSomething;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Debug;
 		};
@@ -893,6 +866,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.oclockapps.DoSomething;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Release;
 		};

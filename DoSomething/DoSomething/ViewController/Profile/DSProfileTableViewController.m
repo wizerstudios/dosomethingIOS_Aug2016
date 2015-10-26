@@ -14,7 +14,7 @@
 
 @interface DSProfileTableViewController ()<UITextFieldDelegate>
 {
-    NSMutableArray *placeHolderArray;
+    NSMutableArray *placeHolderArray, *imageNormalArray;
     NSArray *titleArray;
     NSMutableArray *interstAndHobbiesArray;
     UIDatePicker *datePicker;
@@ -26,16 +26,16 @@
 @implementation DSProfileTableViewController
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [self initializeArray];
-    [self loadNavigation];
+
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
--(void)loadNavigation{
-    
+-(void)viewWillAppear:(BOOL)animated
+{
+   
     self.navigationController.navigationBarHidden=NO;
     [self.navigationItem setHidesBackButton:YES animated:NO];
     [self.navigationController.navigationBar setTranslucent:YES];
@@ -57,7 +57,10 @@
     [customNavigation.saveBtn setHidden:NO];
     [self.navigationController.navigationBar addSubview:customNavigation.view];
     [customNavigation.buttonBack addTarget:self action:@selector(backAction) forControlEvents:UIControlEventTouchUpInside];
+    [self initializeArray];
+
 }
+
 -(void)loadDatePicker:(NSInteger)_tag{
     currentTextfield=(UITextField *)[self.view viewWithTag:_tag];
     datePicker   = [[UIDatePicker alloc] initWithFrame:CGRectMake(0, 300, 320, 150)];
@@ -129,10 +132,26 @@
             
 
         }
+            
 
     }
     
-    
+        else if (indexPath.row ==7 ) {
+            if ((selOptionVal = cell.emailTextField.text)) {
+                if(selOptionVal != nil || ![selOptionVal isEqualToString:@""]){
+                    [[[placeHolderArray objectAtIndex:indexPath.section] objectAtIndex:indexPath.row] setObject:selOptionVal forKey:@"TypingText"];
+
+            }
+                
+            }
+            selOptionVal = cell.passwordTextField.text;
+            
+            if(selOptionVal != nil || ![selOptionVal isEqualToString:@""]){
+                [[[placeHolderArray objectAtIndex:indexPath.section] objectAtIndex:indexPath.row] setObject:selOptionVal forKey:@"TypingTextPass"];
+            }
+            
+        }
+
     NSLog(@"personalArray =%@", placeHolderArray);
     
     [cell.textFieldPlaceHolder   resignFirstResponder];
@@ -153,6 +172,13 @@
     [Cell.maleButton setTitleColor:[UIColor redColor] forState:UIControlStateNormal];
     
 }
+- (IBAction)maleButtonAction:(id)sender {
+    DSProfileTableViewCell *Cell;
+    Cell.maleButton.tintColor =[UIColor redColor];
+}
+
+
+
 -(void)femaleButtonAction
 {
     DSProfileTableViewCell *Cell;
@@ -168,19 +194,22 @@
 }
 
 -(void)initializeArray{
+    imageNormalArray =[[NSMutableArray alloc]init];
+
     interstAndHobbiesArray =[[NSUserDefaults standardUserDefaults] valueForKey:@"SelectedItem"];
-//     placeHolderArray = [[NSArray alloc]initWithObjects:@"Image",@"First Name",@"Last Name",@"male",@"DD / MM / YYYY",@"Write something about yourself here.",@"Hobbies",@"Email&Password",@"switch_on",@"TermsOfUse",nil];
+    imageNormalArray =[[NSUserDefaults standardUserDefaults] valueForKey:@"SelectedItemNormal"];
+
     
     placeHolderArray = [[NSMutableArray alloc] initWithCapacity: 1];
 
     [placeHolderArray insertObject:[[NSMutableArray alloc]initWithObjects:[NSMutableDictionary dictionaryWithObjectsAndKeys:@"Image",@"placeHolder",@"",@"TypingText", nil],
                                    [NSMutableDictionary dictionaryWithObjectsAndKeys:@"First Name",@"placeHolder",@"",@"TypingText", nil],
                                    [NSMutableDictionary dictionaryWithObjectsAndKeys:@"Last Name",@"placeHolder",@"",@"TypingText", nil],
-                                   [NSMutableDictionary dictionaryWithObjectsAndKeys:@"male",@"placeHolder",@"",@"TypingText", nil],
+                                   [NSMutableDictionary dictionaryWithObjectsAndKeys:@"Male",@"placeHolder",@"Female",@"placeHolder",@"",@"TypingText", nil],
                                    [NSMutableDictionary dictionaryWithObjectsAndKeys:@"DD / MM / YYYY",@"placeHolder",@"",@"TypingText", nil],
                                    [NSMutableDictionary dictionaryWithObjectsAndKeys:@"Write something about yourself here.",@"placeHolder",@"",@"TypingText", nil],
                                    [NSMutableDictionary dictionaryWithObjectsAndKeys:@"Hobbies",@"placeHolder",@"",@"TypingText", nil],
-                                   [NSMutableDictionary dictionaryWithObjectsAndKeys:@"Email&Password",@"placeHolder",@"",@"TypingText", nil],
+                                   [NSMutableDictionary dictionaryWithObjectsAndKeys:@"Email",@"placeHolder",@"Password",@"placeHolderPass",@"",@"TypingText",@"",@"TypingTextPass", nil],
                                    [NSMutableDictionary dictionaryWithObjectsAndKeys:@"switch_on",@"placeHolder",@"",@"TypingText",nil],
                                    [NSMutableDictionary dictionaryWithObjectsAndKeys:@"TermsOfUse",@"placeHolder",@"",@"TypingText", nil],nil]atIndex:0];
     
@@ -257,12 +286,18 @@
     
     DSProfileTableViewCell *cell = (DSProfileTableViewCell *)[tableView dequeueReusableCellWithIdentifier:cellIdentifier];
     NSString *titleText;
-    NSString *placeHolderText;
-    NSString *typingText;
+    NSString *placeHolderText,*placeHolderTextPass;
+    NSString *typingText,*typingTextPass;
     
 
-         typingText = [[[placeHolderArray valueForKey:@"TypingText" ]objectAtIndex:indexPath.section]objectAtIndex:indexPath.row];
-        placeHolderText =  [[[placeHolderArray valueForKey:@"placeHolder" ]objectAtIndex:indexPath.section]objectAtIndex:indexPath.row];
+        typingText      = [[[placeHolderArray valueForKey:@"TypingText" ]objectAtIndex:indexPath.section]objectAtIndex:indexPath.row];
+        typingTextPass      = [[[placeHolderArray valueForKey:@"TypingTextPass" ]objectAtIndex:indexPath.section]objectAtIndex:indexPath.row];
+
+
+        placeHolderText     =  [[[placeHolderArray valueForKey:@"placeHolder" ]objectAtIndex:indexPath.section]objectAtIndex:indexPath.row];
+        placeHolderTextPass =  [[[placeHolderArray valueForKey:@"placeHolderPass" ]objectAtIndex:indexPath.section]objectAtIndex:indexPath.row];
+
+    
         titleText       =  [titleArray objectAtIndex:indexPath.row];
     if (indexPath.row == 0)
     {
@@ -374,28 +409,15 @@
             
         }
         [cell.buttonPushHobbies addTarget:self action:@selector(pushToHobbiesView) forControlEvents:UIControlEventTouchUpInside];
-        for (int i =0; i<[interstAndHobbiesArray  count]; i++) {
-            NSString *imageNormal;
-            NSString *imageActive;
-            imageNormal= [[[interstAndHobbiesArray valueForKey:@"imageNormal"]objectAtIndex:indexPath.section]objectAtIndex:i];
-            imageActive = [[[interstAndHobbiesArray valueForKey:@"imageActive"]objectAtIndex:indexPath.section]objectAtIndex:i];
-          
-        if (imageNormal== imageActive) {
+        for (int i =0; i< [imageNormalArray  count]; i++) {
             
-           UIImageView *hobbiesImage = [[UIImageView alloc]initWithFrame:CGRectMake(i*30, 20, 47, 47)];
-            NSString *image =[[[interstAndHobbiesArray valueForKey:@"imageNormal"]objectAtIndex:indexPath.section]objectAtIndex:i];   
+           UIImageView *hobbiesImage = [[UIImageView alloc]initWithFrame:CGRectMake(i*30, 27, 38, 38)];
+            NSString *image =[imageNormalArray objectAtIndex:i];
             
-
-            NSString *trim = [NSString stringWithFormat:@"_active"];
-            NSString *result = [[image componentsSeparatedByString:trim] componentsJoinedByString:@""];
-            NSLog(@"%@", result);
-            
-            
-            [hobbiesImage setImage:[UIImage imageNamed:result]];
+            [hobbiesImage setImage:[UIImage imageNamed:image]];
             [cell addSubview:hobbiesImage];
-
         }
-        }
+       
     }
    
     
@@ -410,17 +432,28 @@
             
         }
         
-//        if([typingText isEqualToString:@""] || typingText == nil)
-//        {
-//           cell.emailTextField.placeholder = placeHolderText;
-//            cell.passwordTextField.placeholder =placeHolderText;
-//        }
-//          else
-//          {
+        
+        if([typingText isEqualToString:@""] || typingText == nil)
+        {
+           cell.emailTextField.placeholder = placeHolderText;
+        }
+          else
+          {
             cell.emailTextField.text = typingText;
-            cell.passwordTextField.text = typingText;
 
-//          }
+          }
+        
+        if([typingTextPass isEqualToString:@""] || typingTextPass == nil)
+        {
+            cell.passwordTextField.placeholder =placeHolderTextPass;
+        }
+        else
+        {
+            cell.passwordTextField.text = typingTextPass;
+            
+        }
+        
+        
         
         if (IS_IPHONE6 ||IS_IPHONE6_Plus){
         cell.layoutConstraintAccLabelYPos.constant =42;

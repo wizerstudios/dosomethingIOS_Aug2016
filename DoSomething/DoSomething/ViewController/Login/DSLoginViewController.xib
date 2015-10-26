@@ -101,7 +101,7 @@
                                         <constraint firstAttribute="height" constant="40" id="B4a-0D-dzG"/>
                                     </constraints>
                                     <fontDescription key="fontDescription" name="Patron-Regular" family="Patron" pointSize="13"/>
-                                    <textInputTraits key="textInputTraits"/>
+                                    <textInputTraits key="textInputTraits" keyboardType="emailAddress"/>
                                 </textField>
                                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Password" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="rXR-Rw-64v">
                                     <rect key="frame" x="32" y="86" width="283" height="40"/>
@@ -109,7 +109,7 @@
                                         <constraint firstAttribute="height" constant="40" id="yGS-Ss-T9h"/>
                                     </constraints>
                                     <fontDescription key="fontDescription" name="Patron-Regular" family="Patron" pointSize="13"/>
-                                    <textInputTraits key="textInputTraits"/>
+                                    <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
                                 </textField>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="K9r-v6-kBk">
                                     <rect key="frame" x="32" y="82" width="260" height="1"/>
