@@ -33,6 +33,10 @@
 		C6D5F67C1BC7EC440050C1AE /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C6D5F67B1BC7EC440050C1AE /* Images.xcassets */; };
 		EACB22BB1BC7C7F7002FAD54 /* DSLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EACB22B91BC7C7F7002FAD54 /* DSLoginViewController.m */; };
 		EACB22BC1BC7C7F7002FAD54 /* DSLoginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = EACB22BA1BC7C7F7002FAD54 /* DSLoginViewController.xib */; };
+		EADB949C1BDF566C00512374 /* HomeCustomCell.m in Sources */ = {isa = PBXBuildFile; fileRef = EADB94971BDF566C00512374 /* HomeCustomCell.m */; };
+		EADB949D1BDF566C00512374 /* HomeCustomCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = EADB94981BDF566C00512374 /* HomeCustomCell.xib */; };
+		EADB949E1BDF566C00512374 /* HomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EADB949A1BDF566C00512374 /* HomeViewController.m */; };
+		EADB949F1BDF566C00512374 /* HomeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = EADB949B1BDF566C00512374 /* HomeViewController.xib */; };
 		EAEF251D1BCF9EF600F83E82 /* IQNSArray+Sort.m in Sources */ = {isa = PBXBuildFile; fileRef = EAEF24FB1BCF9EF600F83E82 /* IQNSArray+Sort.m */; };
 		EAEF251E1BCF9EF600F83E82 /* IQUITextFieldView+Additions.m in Sources */ = {isa = PBXBuildFile; fileRef = EAEF24FD1BCF9EF600F83E82 /* IQUITextFieldView+Additions.m */; };
 		EAEF251F1BCF9EF600F83E82 /* IQUIView+Hierarchy.m in Sources */ = {isa = PBXBuildFile; fileRef = EAEF24FF1BCF9EF600F83E82 /* IQUIView+Hierarchy.m */; };
@@ -147,6 +151,12 @@
 		EACB22B81BC7C7F7002FAD54 /* DSLoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DSLoginViewController.h; sourceTree = "<group>"; };
 		EACB22B91BC7C7F7002FAD54 /* DSLoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DSLoginViewController.m; sourceTree = "<group>"; };
 		EACB22BA1BC7C7F7002FAD54 /* DSLoginViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DSLoginViewController.xib; sourceTree = "<group>"; };
+		EADB94961BDF566C00512374 /* HomeCustomCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeCustomCell.h; sourceTree = "<group>"; };
+		EADB94971BDF566C00512374 /* HomeCustomCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeCustomCell.m; sourceTree = "<group>"; };
+		EADB94981BDF566C00512374 /* HomeCustomCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HomeCustomCell.xib; sourceTree = "<group>"; };
+		EADB94991BDF566C00512374 /* HomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeViewController.h; sourceTree = "<group>"; };
+		EADB949A1BDF566C00512374 /* HomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeViewController.m; sourceTree = "<group>"; };
+		EADB949B1BDF566C00512374 /* HomeViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HomeViewController.xib; sourceTree = "<group>"; };
 		EAEF24FA1BCF9EF600F83E82 /* IQNSArray+Sort.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "IQNSArray+Sort.h"; sourceTree = "<group>"; };
 		EAEF24FB1BCF9EF600F83E82 /* IQNSArray+Sort.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "IQNSArray+Sort.m"; sourceTree = "<group>"; };
 		EAEF24FC1BCF9EF600F83E82 /* IQUITextFieldView+Additions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "IQUITextFieldView+Additions.h"; sourceTree = "<group>"; };
@@ -337,6 +347,7 @@
 		C6D5F60A1BC7A4560050C1AE /* ViewController */ = {
 			isa = PBXGroup;
 			children = (
+				EADB94941BDF566C00512374 /* DosomethingView */,
 				EAF1DC4D1BD8B2AF00D51354 /* HomeView */,
 				EACB22B71BC7C7F7002FAD54 /* Login */,
 				6A8D15CF1BCC059B000F1FB4 /* Profile */,
@@ -395,6 +406,28 @@
 			);
 			name = Login;
 			path = ViewController/Login;
+			sourceTree = "<group>";
+		};
+		EADB94941BDF566C00512374 /* DosomethingView */ = {
+			isa = PBXGroup;
+			children = (
+				EADB94951BDF566C00512374 /* HomeCustomCell */,
+				EADB94991BDF566C00512374 /* HomeViewController.h */,
+				EADB949A1BDF566C00512374 /* HomeViewController.m */,
+				EADB949B1BDF566C00512374 /* HomeViewController.xib */,
+			);
+			name = DosomethingView;
+			path = ViewController/DosomethingView;
+			sourceTree = "<group>";
+		};
+		EADB94951BDF566C00512374 /* HomeCustomCell */ = {
+			isa = PBXGroup;
+			children = (
+				EADB94961BDF566C00512374 /* HomeCustomCell.h */,
+				EADB94971BDF566C00512374 /* HomeCustomCell.m */,
+				EADB94981BDF566C00512374 /* HomeCustomCell.xib */,
+			);
+			path = HomeCustomCell;
 			sourceTree = "<group>";
 		};
 		EAEF24F81BCF9EF600F83E82 /* IQKeyBoardManager */ = {
@@ -655,6 +688,7 @@
 				EAFC976C1BD21A1200B3593D /* fastfood_active.png in Resources */,
 				EAFC97881BD21A1200B3593D /* soccer.png in Resources */,
 				EAEF252A1BCF9EF600F83E82 /* IQKeyboardManager.bundle in Resources */,
+				EADB949D1BDF566C00512374 /* HomeCustomCell.xib in Resources */,
 				C6D5F63F1BC7B52C0050C1AE /* Patron-ExtraLightItalic.ttf in Resources */,
 				EAEF25361BCFEBF400F83E82 /* CustomNavigationView.xib in Resources */,
 				EAFC97761BD21A1200B3593D /* gardening_active.png in Resources */,
@@ -715,6 +749,7 @@
 				EAFC96591BD20FD400B3593D /* DSInterestAndHobbiesViewController.xib in Resources */,
 				EAFC978D1BD21A1200B3593D /* sycling_active.png in Resources */,
 				C6D5F6451BC7B52C0050C1AE /* Patron-ThinItalic.ttf in Resources */,
+				EADB949F1BDF566C00512374 /* HomeViewController.xib in Resources */,
 				C6D5F63E1BC7B52C0050C1AE /* Patron-ExtraLight.ttf in Resources */,
 				EAFC976E1BD21A1200B3593D /* finance_acative.png in Resources */,
 				EAFC97981BD21CF800B3593D /* DSInterestAndHobbiesCollectionViewCell.xib in Resources */,
@@ -750,6 +785,7 @@
 				EAEF25241BCF9EF600F83E82 /* IQSegmentedNextPrevious.m in Sources */,
 				EAEF25351BCFEBF400F83E82 /* CustomNavigationView.m in Sources */,
 				EAEF25251BCF9EF600F83E82 /* IQTextView.m in Sources */,
+				EADB949C1BDF566C00512374 /* HomeCustomCell.m in Sources */,
 				EAEF25211BCF9EF600F83E82 /* IQUIWindow+Hierarchy.m in Sources */,
 				EAFC96581BD20FD400B3593D /* DSInterestAndHobbiesViewController.m in Sources */,
 				EAEF25231BCF9EF600F83E82 /* IQKeyboardReturnKeyHandler.m in Sources */,
@@ -757,6 +793,7 @@
 				EAEF25291BCF9EF600F83E82 /* IQUIView+IQKeyboardToolbar.m in Sources */,
 				EAFC97971BD21CF800B3593D /* DSInterestAndHobbiesCollectionViewCell.m in Sources */,
 				6A50C2271BCCC310002B11AC /* DSChatsTableViewController.m in Sources */,
+				EADB949E1BDF566C00512374 /* HomeViewController.m in Sources */,
 				EAF1871A1BDA352B004C25EA /* DAAutoScroll.m in Sources */,
 				6A8D15D31BCC059B000F1FB4 /* DSProfileTableViewController.m in Sources */,
 				EAEF25281BCF9EF600F83E82 /* IQToolbar.m in Sources */,
