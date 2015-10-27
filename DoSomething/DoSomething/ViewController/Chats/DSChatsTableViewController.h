@@ -8,6 +8,12 @@
 
 #import <UIKit/UIKit.h>
 
-@interface DSChatsTableViewController : UIViewController
+@interface DSChatsTableViewController : UIViewController <UITableViewDataSource, UITableViewDelegate>
+
+{
+    
+}
+
+@property (strong, nonatomic) IBOutlet UITableView *ChatTableView;
 
 @end

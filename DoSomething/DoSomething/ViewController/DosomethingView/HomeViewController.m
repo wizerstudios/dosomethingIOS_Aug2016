@@ -98,8 +98,6 @@
     }
     else    {
         customNavigation.view.frame = CGRectMake(0,-20,420, 75);
-        
-        
     }
     [customNavigation.menuBtn setHidden:NO];
     [customNavigation.buttonBack setHidden:YES];
