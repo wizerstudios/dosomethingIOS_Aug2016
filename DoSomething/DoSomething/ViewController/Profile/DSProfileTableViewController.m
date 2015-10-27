@@ -292,12 +292,12 @@
     DSProfileTableViewCell *cell = (DSProfileTableViewCell *)[tableView dequeueReusableCellWithIdentifier:cellIdentifier];
     NSString *titleText;
     NSString *placeHolderText,*placeHolderTextPass,*placeHolderFemale;
-    NSString *typingText,*typingTextPass;
+    NSString *typingText,*typingTextPass,*typingTextFemale;
     
 
-        typingText      = [[[placeHolderArray valueForKey:@"TypingText" ]objectAtIndex:indexPath.section]objectAtIndex:indexPath.row];
-        typingTextPass      = [[[placeHolderArray valueForKey:@"TypingTextPass" ]objectAtIndex:indexPath.section]objectAtIndex:indexPath.row];
-
+        typingText       = [[[placeHolderArray valueForKey:@"TypingText" ]objectAtIndex:indexPath.section]objectAtIndex:indexPath.row];
+        typingTextPass   = [[[placeHolderArray valueForKey:@"TypingTextPass" ]objectAtIndex:indexPath.section]objectAtIndex:indexPath.row];
+//        typingTextFemale = [[[placeHolderArray valueForKey:@"TypingTextFemale" ]objectAtIndex:indexPath.section]objectAtIndex:indexPath.row];
 
         placeHolderText     =  [[[placeHolderArray valueForKey:@"placeHolder" ]objectAtIndex:indexPath.section]objectAtIndex:indexPath.row];
         placeHolderTextPass =  [[[placeHolderArray valueForKey:@"placeHolderPass" ]objectAtIndex:indexPath.section]objectAtIndex:indexPath.row];
@@ -354,19 +354,64 @@
             cell = cellButton;
             
         }
+        
+        
+//        if([typingText isEqualToString:@""] || typingText == nil)
+//        {
+//            [maleLabel setText:placeHolderText];
+//        }
+//        else
+//        {
+//            cell.emailTextField.text = typingText;
+//            
+//        }
+//        
+//        if([typingTextPass isEqualToString:@""] || typingTextPass == nil)
+//        {
+//            [femaleLabel setText:placeHolderFemale];
+//        }
+//        else
+//        {
+//            femaleLabel.text = typingTextPass;
+//            
+//        }
+//
+        
+        
+        //        if([typingText isEqualToString:@""] || typingText == nil)
+        //        {
+        //            [maleLabel setText:placeHolderText];
+        //        }
+        //        else
+        //        {
+        //            cell.emailTextField.text = typingText;
+        //
+        //        }
+        //
+        //        if([typingTextFemale isEqualToString:@""] || typingTextFemale == nil)
+        //        {
+        //            [femaleLabel setText:placeHolderFemale];
+        //        }
+        //        else
+        //        {
+        //            femaleLabel.text = typingTextFemale;
+        //            
+        //        }
+        
+        
+        
+        
         cell.maleButton.userInteractionEnabled = YES;
         cell.femaleButton.userInteractionEnabled = YES;
         
         maleLabel =[[UILabel alloc]initWithFrame:CGRectMake(55, 15, 40, 10)];
         maleLabel.font = [UIFont fontWithName:@"Patron-Regular" size:9.0];
         maleLabel.textColor =[UIColor colorWithRed:(float)161.0/255 green:(float)161.0/255 blue:(float)161.0/255 alpha:1.0f];
-
         [maleLabel setText:placeHolderText];
         [cell.maleButton addSubview:maleLabel];
         femaleLabel =[[UILabel alloc]initWithFrame:CGRectMake(55, 15, 40, 10)];
         femaleLabel.font = [UIFont fontWithName:@"Patron-Regular" size:9.0];
         femaleLabel.textColor =[UIColor colorWithRed:(float)161.0/255 green:(float)161.0/255 blue:(float)161.0/255 alpha:1.0f];
-
         [femaleLabel setText:placeHolderFemale];
         [cell.femaleButton addSubview:femaleLabel];
   
@@ -492,13 +537,15 @@
    
             }
             }
-                       NSString *image =[imageNormalArray objectAtIndex:i];
+             NSString *image =[imageNormalArray objectAtIndex:i];
             
             [hobbiesImage setImage:[UIImage imageNamed:image]];
             
             if (image == plusIcon) {
                 hobbiesImage.userInteractionEnabled = YES;
                 [hobbiesImage addSubview:pushToHobbiesButton];
+                
+                
                
 
             }
@@ -553,7 +600,7 @@
                     
             
             [hobbiesname setFont:[UIFont fontWithName:@"Patron-Regular" size:7]];
-            hobbiesname.textColor =[UIColor colorWithRed:(float)161.0/255 green:(float)161.0/255 blue:(float)161.0/255 alpha:1.0f];
+            hobbiesname.textColor =[UIColor colorWithRed:(float)102.0/255 green:(float)102.0/255 blue:(float)102.0/255 alpha:1.0f];
 
             
             hobbiesname.text = image;
