@@ -196,10 +196,11 @@
 -(void)initializeArray{
     imageNormalArray =[[NSMutableArray alloc]init];
 
-    interstAndHobbiesArray =[[NSUserDefaults standardUserDefaults] valueForKey:@"SelectedItem"];
-    imageNormalArray =[[NSUserDefaults standardUserDefaults] valueForKey:@"SelectedItemNormal"];
+
+    interstAndHobbiesArray =[[[NSUserDefaults standardUserDefaults] valueForKey:@"SelectedItem"]mutableCopy];
+    imageNormalArray =[[[NSUserDefaults standardUserDefaults] valueForKey:@"SelectedItemNormal"]mutableCopy];
     
-    hobbiesNameArray =[[NSUserDefaults standardUserDefaults] valueForKey:@"SelectedItemName"];
+    hobbiesNameArray =[[[NSUserDefaults standardUserDefaults] valueForKey:@"SelectedItemName"]mutableCopy];
    
 
    
@@ -245,13 +246,11 @@
         if (indexPath.row == 4) {
             return 55;
         }
-        if ( indexPath.row ==6) {
+        if ( indexPath.row ==6 ||  indexPath.row ==8) {
             return 150;
         }
 
-        if ( indexPath.row ==8) {
-            return 90;
-        }
+       
         if ( indexPath.row == 7) {
             return 120;
         }
@@ -425,27 +424,12 @@
        
         
         NSString *plusIcon = @"Pluis_icon1.png";
-        for (int i=0; i<[imageNormalArray count]; i++) {
-            NSString *image =[imageNormalArray objectAtIndex:i];
-            if (image == plusIcon){
-                [imageNormalArray removeObject:plusIcon];              
-                
-            }
-            
+        if ([imageNormalArray count] >=1) {
             [imageNormalArray addObject:plusIcon];
- 
+
         }
-        
-        if ([imageNormalArray objectAtIndex:0]== plusIcon) {
-            cell.plusIconImageView.hidden = NO;
-            [cell.buttonPushHobbies addTarget:self action:@selector(pushToHobbiesView) forControlEvents:UIControlEventTouchUpInside];
-            
-        }
-        
-        else
-        {
-        
-        [imageNormalArray objectAtIndex:[imageNormalArray  count]-1];
+       
+
         UIButton *pushToHobbiesButton =[[UIButton alloc]initWithFrame:CGRectMake(0, 0, 40, 40)];
 
 
@@ -564,7 +548,7 @@
        
     }
    
-    }
+//    }
 
     if (indexPath.row == 7)
     {
