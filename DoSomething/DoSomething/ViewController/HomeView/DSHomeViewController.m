@@ -34,7 +34,7 @@
 {
     [super viewDidLoad];    
     isTimerStop=NO;
-   
+    
     if(IS_IPHONE6_Plus ) {
         frameHt=674;
         frameWt= 414;
@@ -53,7 +53,6 @@
         frameHt=518;
         frameWt=320;
         bannerImageArr=[[NSMutableArray alloc]initWithObjects:@"splashImage_1",@"splashImage_2" ,@"splashImage_3", nil];
-
     }
 
     [self loadSlideScroll];
@@ -97,12 +96,9 @@
     
     for(int i=0;i<self.infoPageControl.numberOfPages;i++)
     {
-        if(i == _infoPageControl.currentPage)
-        {
             [imageViewActive setFrame:CGRectMake(0, 0,10, 10)];
             [imageViewActive setImage:[UIImage imageNamed:@"dot_active"]];
             [pgDtView addSubview:imageViewActive];
-        }
         
             imageViewDot=[[UIImageView alloc]init];
             imageViewDot.tag = i+11;
@@ -155,6 +151,7 @@
                     subView.hidden = NO;
             }
         jslider++;
+            
         }
         else
         {
@@ -162,6 +159,7 @@
             jslider=0;
             [self.scrollViewImage setContentOffset:CGPointMake(0, 0)];
             [imageViewActive setFrame:CGRectMake(jslider*13, 0, 10, 10)];
+            
             for(UIView *subView in [pgDtView subviews])
             {
                 if(subView.tag == jslider+11)
