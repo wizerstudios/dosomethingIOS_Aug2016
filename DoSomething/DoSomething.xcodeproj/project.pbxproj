@@ -356,6 +356,14 @@
 			name = ActionSheet;
 			sourceTree = "<group>";
 		};
+		51322A0C1BDFA5EE00418216 /* LocationView */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = LocationView;
+			path = ViewController/Chats;
+			sourceTree = "<group>";
+		};
 		6A50C2231BCCC310002B11AC /* Chats */ = {
 			isa = PBXGroup;
 			children = (
@@ -406,6 +414,7 @@
 				6A8D15CF1BCC059B000F1FB4 /* Profile */,
 				EAFC96541BD20FD400B3593D /* Hobbies */,
 				6A50C2231BCCC310002B11AC /* Chats */,
+				51322A0C1BDFA5EE00418216 /* LocationView */,
 			);
 			name = ViewController;
 			sourceTree = "<group>";

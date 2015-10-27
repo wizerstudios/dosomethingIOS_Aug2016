@@ -62,6 +62,8 @@
                                     target:nil
                                     action:nil];
     [[self navigationItem] setBackBarButtonItem:newBackButton];
+    
+    selectedArray = [[NSMutableArray alloc]init];
 
 }
 -(void)viewWillAppear:(BOOL)animated
@@ -117,7 +119,34 @@
     return [menuArray count];
 }
 
+-(UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    static NSString *cellIdentifier = @"ItemCell";
+    HomeCustomCell *cell = (HomeCustomCell *)[collectionView dequeueReusableCellWithReuseIdentifier:cellIdentifier forIndexPath:indexPath];
+    [cell setNeedsDisplay];
+    
+    cell.MenuImg = nil;
+    cell.MenuTittle = nil;
+    
+    if (cell != nil)
+    {
+        cell.MenuImg = (UIImageView *)[cell viewWithTag:101];
+        cell.MenuTittle = (UILabel *)[cell viewWithTag:201];
+    }
+    
+    NSDictionary *data = [menuArray objectAtIndex:indexPath.row];
+    
+    cell.MenuTittle.textColor = [UIColor colorWithRed:(164/255.0f) green:(164/255.0f) blue:(164/255.0f) alpha:1.0f];
+    NSString * objstr = [NSString stringWithFormat:@"%@",[data valueForKey:NORMAL_IMAGE]];
+    cell.MenuImg.image = [UIImage imageNamed:objstr];
+    
+    cell.layer.shouldRasterize = YES;
+    cell.layer.rasterizationScale = [UIScreen mainScreen].scale;
+    
+    return cell;
+}
 
+/*
 -(UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     
     if (indexPath.row < menuArray.count) {
@@ -174,6 +203,7 @@
     
     return cell;
 }
+ */
 
 - (UICollectionViewCell *)loadingCellForIndexPath:(NSIndexPath *)indexPath {
     
@@ -190,15 +220,57 @@
     return returnSize;
 }
 
+- (UICollectionReusableView *)collectionView:(UICollectionView *)collectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath
+{
+    if (kind == UICollectionElementKindSectionHeader)
+    {
+        UICollectionReusableView *reusableview = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"HeaderView" forIndexPath:indexPath];
+        
+        if (reusableview==nil)
+        {
+            reusableview=[[UICollectionReusableView alloc] initWithFrame:CGRectMake(0, 0, 375, 50)];
+        }
+        
+        for (UIView* view in reusableview.subviews)
+        {
+            if ([view isKindOfClass:[UILabel class]]) {
+                [view removeFromSuperview];
+            }
+        }
+        
+        UILabel *label=[[UILabel alloc] initWithFrame:CGRectMake(0, 0, 375, 50)];
+        
+        NSMutableDictionary *data = [menuArray objectAtIndex:indexPath.section];
+        NSString *cellData = [data objectForKey:@"RUNNING"];
+        
+        label.text=cellData;
+        [reusableview addSubview:label];
+        return reusableview;
+    }
+    return nil;
+}
+
+
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSString *selectImage=[menuArray objectAtIndex:indexPath.row];
     isSelectMenu=YES;
-    [[NSUserDefaults standardUserDefaults] setInteger:indexPath.row forKey:@"selected_menu"];
-    [[NSUserDefaults standardUserDefaults] synchronize];
-
-    //[self didCreateImagepopupview:selectImage];
+    NSArray *arrSelect = [_homeCollectionView indexPathsForSelectedItems];
+    [selectedArray addObject:arrSelect];
     
+    if([selectedArray count] <= 3)
+    {
+        HomeCustomCell *cell = (HomeCustomCell *)[collectionView cellForItemAtIndexPath:indexPath];
+        NSMutableDictionary *data = [menuArray objectAtIndex:indexPath.row];
+        
+        cell.MenuTittle.textColor = [UIColor colorWithRed:(199/255.0f) green:(65/255.0f) blue:(81/255.0f) alpha:1.0f];
+        NSString * objstr = [NSString stringWithFormat:@"%@",[data valueForKey:ACTIVE_IMAGE]];
+        cell.MenuImg.image = [UIImage imageNamed:objstr];
+    }
+    else
+    {
+        UIAlertView *alert = [[UIAlertView alloc]initWithTitle:nil message:@"ONLY 3 ACTIVITES CAN BE SELECTED" delegate:nil cancelButtonTitle:@"OKAY" otherButtonTitles:nil];
+        [alert show];
+    }
 }
 
 - (void)fetchMoreItems {

@@ -12,7 +12,7 @@
 
 {
     NSMutableArray * menuArray;
-    NSArray *selectedArray;
+    NSMutableArray *selectedArray;
 }
 @property(nonatomic,strong) IBOutlet UICollectionView * homeCollectionView;
 

@@ -46,13 +46,6 @@
     imageArray =[[NSArray alloc] initWithObjects:@"Galglot2x.png",@"yuna2x.png",@"taylor2x.png",nil];
     badgeimage=[[NSArray alloc] initWithObjects:@"18-Chats copy 3.png",@"18-Chats copy 2.png",@" ",nil];
     
-    [self setUpTableView];
-}
-
-- (void)setUpTableView
-{
-    ChatTableView.delegate=self;
-    ChatTableView.dataSource=self;
 }
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
