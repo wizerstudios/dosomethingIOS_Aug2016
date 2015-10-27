@@ -51,6 +51,8 @@
                   [NSDictionary dictionaryWithObjectsAndKeys:@"movies_Inactive.png",NORMAL_IMAGE,@"movies_active.png",ACTIVE_IMAGE,@"SOCCER",CAPTION, nil],
                  nil];
     
+    NSLog(@"%@", menuArray);
+    
 
 }
 -(void)viewWillAppear:(BOOL)animated
@@ -106,6 +108,7 @@
     return [menuArray count];
 }
 
+
 -(UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     
     if (indexPath.row < menuArray.count) {
@@ -119,9 +122,8 @@
         [self fetchMoreItems];
         return [self loadingCellForIndexPath:indexPath];
     }
-    
-    
 }
+
 - (UICollectionViewCell *)itemCellForIndexPath:(NSIndexPath *)indexPath {
     
     HomeCustomCell *cell = (HomeCustomCell *)[self.homeCollectionView dequeueReusableCellWithReuseIdentifier:ITEM_CELL_IDENTIFIER forIndexPath:indexPath];
@@ -177,7 +179,6 @@
     
     HomeCustomCell *cell = (HomeCustomCell *)[self.homeCollectionView dequeueReusableCellWithReuseIdentifier:LOADING_CELL_IDENTIFIER forIndexPath:indexPath];
     
-   
     return cell;
 }
 
@@ -191,12 +192,17 @@
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
+//    HomeCustomCell *cell = (HomeCustomCell *)[collectionView cellForItemAtIndexPath:indexPath];
+//    NSDictionary *Dic = [menuArray objectAtIndex:indexPath.row];
+//    
+//    cell.MenuTittle.textColor = [UIColor colorWithRed:(199/255.0f) green:(65/255.0f) blue:(81/255.0f) alpha:1.0f];
+//    NSString * objstr = [NSString stringWithFormat:@"%@",[Dic valueForKey:ACTIVE_IMAGE]];
+//    cell.MenuImg.image = [UIImage imageNamed:objstr];
+    
     NSString *selectImage=[menuArray objectAtIndex:indexPath.row];
-    NSLog(@"selectContent:%@",selectImage);
-    //selectedMenuIndex = indexPath.row;
+    [selectedArray addObject:selectImage];
     isSelectMenu=YES;
     [[NSUserDefaults standardUserDefaults] setInteger:indexPath.row forKey:@"selected_menu"];
-    
     [[NSUserDefaults standardUserDefaults] synchronize];
 
     //[self didCreateImagepopupview:selectImage];

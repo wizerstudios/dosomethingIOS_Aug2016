@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6751" systemVersion="14A389" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7706" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6736"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="HomeViewController">
@@ -17,7 +17,7 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PHx-F9-heI">
-                    <rect key="frame" x="0.0" y="480" width="320" height="45"/>
+                    <rect key="frame" x="0.0" y="474" width="320" height="45"/>
                     <color key="backgroundColor" red="0.90196078431372551" green="0.24705882352941178" blue="0.31764705882352939" alpha="0.90000000000000002" colorSpace="custom" customColorSpace="sRGB"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="45" id="USj-qN-BgI"/>
@@ -29,7 +29,7 @@
                     </state>
                 </button>
                 <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="9eq-ck-Eus">
-                    <rect key="frame" x="10" y="85" width="300" height="395"/>
+                    <rect key="frame" x="10" y="80" width="300" height="394"/>
                     <color key="backgroundColor" red="0.90980392156862744" green="0.90980392156862744" blue="0.90980392156862744" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <inset key="scrollIndicatorInsets" minX="20" minY="0.0" maxX="10" maxY="0.0"/>
                     <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="cyT-a9-EmV">
@@ -43,15 +43,27 @@
                         <outlet property="delegate" destination="-1" id="0ey-6p-01t"/>
                     </connections>
                 </collectionView>
+                <tabBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Anm-pK-OyM">
+                    <rect key="frame" x="0.0" y="521" width="320" height="49"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <items>
+                        <tabBarItem title="Item" id="l6L-QH-Bh4"/>
+                        <tabBarItem title="Item" id="GGg-LV-Xjk"/>
+                        <tabBarItem title="Item" id="gJJ-LX-vwp"/>
+                    </items>
+                </tabBar>
             </subviews>
             <color key="backgroundColor" red="0.90980392156862744" green="0.90980392156862744" blue="0.90980392156862744" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
                 <constraint firstAttribute="trailing" secondItem="9eq-ck-Eus" secondAttribute="trailing" constant="10" id="47A-q2-Ddk"/>
                 <constraint firstItem="9eq-ck-Eus" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="10" id="Azf-4t-DLl"/>
-                <constraint firstItem="9eq-ck-Eus" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="85" id="CgO-0T-lNl"/>
+                <constraint firstItem="9eq-ck-Eus" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="80" id="CgO-0T-lNl"/>
+                <constraint firstItem="Anm-pK-OyM" firstAttribute="top" secondItem="PHx-F9-heI" secondAttribute="bottom" constant="2" id="PMi-j6-gde"/>
+                <constraint firstItem="Anm-pK-OyM" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="cJ7-Xm-3wb"/>
+                <constraint firstAttribute="bottom" secondItem="Anm-pK-OyM" secondAttribute="bottom" id="dWm-G5-c0n"/>
                 <constraint firstItem="PHx-F9-heI" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="mDL-9b-LIT"/>
                 <constraint firstAttribute="trailing" secondItem="PHx-F9-heI" secondAttribute="trailing" id="mxM-VH-msK"/>
-                <constraint firstAttribute="bottom" secondItem="PHx-F9-heI" secondAttribute="bottom" constant="45" id="pU0-dZ-AFa"/>
+                <constraint firstAttribute="trailing" secondItem="Anm-pK-OyM" secondAttribute="trailing" id="n3b-wp-dfI"/>
                 <constraint firstItem="PHx-F9-heI" firstAttribute="top" secondItem="9eq-ck-Eus" secondAttribute="bottom" id="zI2-A2-ogG"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
