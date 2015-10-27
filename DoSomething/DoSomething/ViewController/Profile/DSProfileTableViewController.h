@@ -19,6 +19,7 @@
  IBOutlet DSProfileTableViewCell *cellEmailPassword;
  IBOutlet DSProfileTableViewCell *CellSwitchOn;
  IBOutlet DSProfileTableViewCell *CellTermsOfUse;
+ IBOutlet DSProfileTableViewCell *cellTextView;
 }
 @property (strong, nonatomic) IBOutlet UITableView *tableviewProfile;
 @property (strong, nonatomic) IBOutlet NSLayoutConstraint *layoutConstraintTableViewYPos;

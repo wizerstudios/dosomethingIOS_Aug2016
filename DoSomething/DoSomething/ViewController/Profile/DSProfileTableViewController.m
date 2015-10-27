@@ -19,6 +19,8 @@
     NSMutableArray *interstAndHobbiesArray;
     UIDatePicker *datePicker;
     UITextField *currentTextfield;
+    UILabel *maleLabel;
+    UILabel *femaleLabel;
 
 }
 @end
@@ -96,7 +98,7 @@
 - (void)textFieldDidEndEditing:(UITextField *)textField{
     
     id textFieldSuper = textField;
-    textField.textColor =[UIColor blackColor];
+    textField.textColor =[UIColor colorWithRed:(float)161.0/255 green:(float)161.0/255 blue:(float)161.0/255 alpha:1.0f];
     
     while (![textFieldSuper isKindOfClass:[UITableViewCell class]]) {
         
@@ -168,21 +170,19 @@
 }
 -(void)maleButtonAction
 {
-    DSProfileTableViewCell *Cell;
-    [Cell.maleButton setTitleColor:[UIColor redColor] forState:UIControlStateNormal];
+    maleLabel .textColor =[UIColor redColor];
+    femaleLabel.textColor =[UIColor colorWithRed:(float)161.0/255 green:(float)161.0/255 blue:(float)161.0/255 alpha:1.0f];
+
     
-}
-- (IBAction)maleButtonAction:(id)sender {
-    DSProfileTableViewCell *Cell;
-    Cell.maleButton.tintColor =[UIColor redColor];
 }
 
 
 
 -(void)femaleButtonAction
 {
-    DSProfileTableViewCell *Cell;
-    [Cell.femaleButton setTitleColor:[UIColor redColor] forState:UIControlStateNormal];
+    femaleLabel .textColor =[UIColor redColor];
+    maleLabel.textColor =[UIColor colorWithRed:(float)161.0/255 green:(float)161.0/255 blue:(float)161.0/255 alpha:1.0f];
+
 
     
 }
@@ -209,7 +209,7 @@
     [placeHolderArray insertObject:[[NSMutableArray alloc]initWithObjects:[NSMutableDictionary dictionaryWithObjectsAndKeys:@"Image",@"placeHolder",@"",@"TypingText", nil],
                                    [NSMutableDictionary dictionaryWithObjectsAndKeys:@"First Name",@"placeHolder",@"",@"TypingText", nil],
                                    [NSMutableDictionary dictionaryWithObjectsAndKeys:@"Last Name",@"placeHolder",@"",@"TypingText", nil],
-                                   [NSMutableDictionary dictionaryWithObjectsAndKeys:@"Male",@"placeHolder",@"Female",@"placeHolder",@"",@"TypingText", nil],
+                                   [NSMutableDictionary dictionaryWithObjectsAndKeys:@"Male",@"placeHolder",@"Female",@"placeHolderFemale",@"",@"TypingText", nil],
                                    [NSMutableDictionary dictionaryWithObjectsAndKeys:@"DD / MM / YYYY",@"placeHolder",@"",@"TypingText", nil],
                                    [NSMutableDictionary dictionaryWithObjectsAndKeys:@"Write something about yourself here.",@"placeHolder",@"",@"TypingText", nil],
                                    [NSMutableDictionary dictionaryWithObjectsAndKeys:@"Hobbies",@"placeHolder",@"",@"TypingText", nil],
@@ -267,13 +267,10 @@
         if (indexPath.row == 4) {
             return 70;
         }
-        if ( indexPath.row ==6) {
+        if ( indexPath.row ==6||  indexPath.row ==8) {
         return 150;
         }
     
-        if ( indexPath.row ==8) {
-            return 120;
-        }
         if ( indexPath.row == 7) {
             return 160;
         }
@@ -294,7 +291,7 @@
     
     DSProfileTableViewCell *cell = (DSProfileTableViewCell *)[tableView dequeueReusableCellWithIdentifier:cellIdentifier];
     NSString *titleText;
-    NSString *placeHolderText,*placeHolderTextPass;
+    NSString *placeHolderText,*placeHolderTextPass,*placeHolderFemale;
     NSString *typingText,*typingTextPass;
     
 
@@ -304,6 +301,8 @@
 
         placeHolderText     =  [[[placeHolderArray valueForKey:@"placeHolder" ]objectAtIndex:indexPath.section]objectAtIndex:indexPath.row];
         placeHolderTextPass =  [[[placeHolderArray valueForKey:@"placeHolderPass" ]objectAtIndex:indexPath.section]objectAtIndex:indexPath.row];
+        placeHolderFemale =  [[[placeHolderArray valueForKey:@"placeHolderFemale" ]objectAtIndex:indexPath.section]objectAtIndex:indexPath.row];
+
 
     
         titleText       =  [titleArray objectAtIndex:indexPath.row];
@@ -355,6 +354,25 @@
             cell = cellButton;
             
         }
+        cell.maleButton.userInteractionEnabled = YES;
+        cell.femaleButton.userInteractionEnabled = YES;
+        
+        maleLabel =[[UILabel alloc]initWithFrame:CGRectMake(55, 15, 40, 10)];
+        maleLabel.font = [UIFont fontWithName:@"Patron-Regular" size:9.0];
+        maleLabel.textColor =[UIColor colorWithRed:(float)161.0/255 green:(float)161.0/255 blue:(float)161.0/255 alpha:1.0f];
+
+        [maleLabel setText:placeHolderText];
+        [cell.maleButton addSubview:maleLabel];
+        femaleLabel =[[UILabel alloc]initWithFrame:CGRectMake(55, 15, 40, 10)];
+        femaleLabel.font = [UIFont fontWithName:@"Patron-Regular" size:9.0];
+        femaleLabel.textColor =[UIColor colorWithRed:(float)161.0/255 green:(float)161.0/255 blue:(float)161.0/255 alpha:1.0f];
+
+        [femaleLabel setText:placeHolderFemale];
+        [cell.femaleButton addSubview:femaleLabel];
+  
+        [cell.maleButton addTarget:self action:@selector(maleButtonAction) forControlEvents:UIControlEventTouchUpInside];
+        [cell.femaleButton addTarget:self action:@selector(femaleButtonAction) forControlEvents:UIControlEventTouchUpInside];
+
 
         
     }
@@ -387,7 +405,7 @@
         if (cell == nil)
         {
             [[NSBundle mainBundle] loadNibNamed:@"DSProfileTableViewCell" owner:self options:nil];
-            cell = cellTextField;
+            cell = cellTextView;
             
         }
         
@@ -399,11 +417,13 @@
             
         }
         
-        if([typingText isEqualToString:@""] || typingText == nil)
-            cell.textFieldPlaceHolder.placeholder = placeHolderText;
-        else
-            cell.textFieldPlaceHolder.text = typingText;
-            cell.labelTitleText.text = titleText;
+        cell.labelAboutYou.text =titleText;
+        
+//        if([typingText isEqualToString:@""] || typingText == nil)
+//            cell.textViewAboutYou.placeholder = placeHolderText;
+//        else
+//            cell.textFieldPlaceHolder.text = typingText;
+//            cell.labelTitleText.text = titleText;
     }
 
     
@@ -418,8 +438,6 @@
 
             
         }
-        
-        
         
        
         
@@ -624,11 +642,9 @@
     return cell;
     
 }
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
-
-{
-    DSProfileTableViewCell *cell ;
-    [cell.maleButton addTarget:self action:@selector(maleButtonAction) forControlEvents:UIControlEventTouchUpInside];
-    [cell.femaleButton addTarget:self action:@selector(femaleButtonAction) forControlEvents:UIControlEventTouchUpInside];
-}
+//- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+//
+//{
+//    DSProfileTableViewCell *cell ;
+//   }
 @end
