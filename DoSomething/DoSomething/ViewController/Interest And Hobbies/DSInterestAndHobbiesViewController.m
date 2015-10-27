@@ -37,8 +37,8 @@
     self.navigationController.navigationBarHidden=NO;
     [self.navigationItem setHidesBackButton:YES animated:NO];
     [self.navigationController.navigationBar setTranslucent:YES];
-    imageNormalImageArray =[[NSUserDefaults standardUserDefaults] valueForKey:@"SelectedItemNormal"];
-    hobbiesNameArray = [[NSUserDefaults standardUserDefaults] valueForKey:@"SelectedItemName"];
+    imageNormalImageArray =[[[NSUserDefaults standardUserDefaults] valueForKey:@"SelectedItemNormal"]mutableCopy];
+    hobbiesNameArray = [[[NSUserDefaults standardUserDefaults] valueForKey:@"SelectedItemName"]mutableCopy];
     
     if (!hobbiesNameArray) {
         hobbiesNameArray = [[NSMutableArray alloc] init];
