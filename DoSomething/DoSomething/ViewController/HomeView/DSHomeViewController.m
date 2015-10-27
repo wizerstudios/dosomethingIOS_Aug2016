@@ -53,7 +53,6 @@
         frameHt=518;
         frameWt=320;
         bannerImageArr=[[NSMutableArray alloc]initWithObjects:@"splashImage_1",@"splashImage_2" ,@"splashImage_3", nil];
-
     }
 
     [self loadSlideScroll];
