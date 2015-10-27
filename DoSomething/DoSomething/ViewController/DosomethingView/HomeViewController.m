@@ -19,6 +19,7 @@
 #import "DSConfig.h"
 
 #import "HomeCustomCell.h"
+#import "AppDelegate.h"
 
 #define ITEMS_PAGE_SIZE 4
 #define ITEM_CELL_IDENTIFIER @"ItemCell"
@@ -26,6 +27,7 @@
 
 @interface HomeViewController ()
 {
+    AppDelegate *appDelegate;
     BOOL isSelectMenu;
 }
 
@@ -51,13 +53,22 @@
                   [NSDictionary dictionaryWithObjectsAndKeys:@"movies_Inactive.png",NORMAL_IMAGE,@"movies_active.png",ACTIVE_IMAGE,@"SOCCER",CAPTION, nil],
                  nil];
     
-    NSLog(@"%@", menuArray);
+    [[UINavigationBar appearance] setBackgroundImage:[UIImage imageNamed:@" "] forBarMetrics:UIBarMetricsDefault];
+    self.navigationItem.leftBarButtonItem.title = @"Log Out";
     
+    UIBarButtonItem *newBackButton =
+    [[UIBarButtonItem alloc] initWithTitle:@" "
+                                     style:UIBarButtonItemStylePlain
+                                    target:nil
+                                    action:nil];
+    [[self navigationItem] setBackBarButtonItem:newBackButton];
 
 }
 -(void)viewWillAppear:(BOOL)animated
 {
     [self setupCollectionView];
+    appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+    appDelegate.buttonsView.hidden=NO;
 }
 
 -(void)setupCollectionView {
@@ -127,20 +138,14 @@
 - (UICollectionViewCell *)itemCellForIndexPath:(NSIndexPath *)indexPath {
     
     HomeCustomCell *cell = (HomeCustomCell *)[self.homeCollectionView dequeueReusableCellWithReuseIdentifier:ITEM_CELL_IDENTIFIER forIndexPath:indexPath];
-    
-    //NSString *imageName = [menuArray objectAtIndex:indexPath.row];
-   // NSLog(@"imageName:%@",imageName);
-//    [cell setImageName:imageName];
-//    [cell updateCell];
     NSDictionary *Dic = [menuArray objectAtIndex:indexPath.row];
     
     //cell.selectionStyle = UITableViewCellSelectionStyleNone;
-    
    // cell.backgroundColor=[UIColor colorWithRed:(232/255.0f) green:(232/255.0f) blue:(232/255.0f) alpha:1.0f];
    
     
-    if([[NSUserDefaults standardUserDefaults] integerForKey:@"selected_menu"] == indexPath.row) {
-        
+    if([[NSUserDefaults standardUserDefaults] integerForKey:@"selected_menu"] == indexPath.row)
+    {
         if(isSelectMenu==YES)
         {
         cell.MenuTittle.textColor = [UIColor colorWithRed:(199/255.0f) green:(65/255.0f) blue:(81/255.0f) alpha:1.0f];
@@ -162,9 +167,6 @@
         
         NSString * objstr = [NSString stringWithFormat:@"%@",[Dic valueForKey:NORMAL_IMAGE]];
         cell.MenuImg.image = [UIImage imageNamed:objstr];
-
-        //[cell.icon_btn setImage:[UIImage imageNamed:[Dic valueForKey:NORMAL_IMAGE]] forState:UIControlStateNormal];
-        
     }
         
     cell.MenuTittle.text = [Dic valueForKey:CAPTION];
@@ -192,15 +194,7 @@
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
-//    HomeCustomCell *cell = (HomeCustomCell *)[collectionView cellForItemAtIndexPath:indexPath];
-//    NSDictionary *Dic = [menuArray objectAtIndex:indexPath.row];
-//    
-//    cell.MenuTittle.textColor = [UIColor colorWithRed:(199/255.0f) green:(65/255.0f) blue:(81/255.0f) alpha:1.0f];
-//    NSString * objstr = [NSString stringWithFormat:@"%@",[Dic valueForKey:ACTIVE_IMAGE]];
-//    cell.MenuImg.image = [UIImage imageNamed:objstr];
-    
     NSString *selectImage=[menuArray objectAtIndex:indexPath.row];
-    [selectedArray addObject:selectImage];
     isSelectMenu=YES;
     [[NSUserDefaults standardUserDefaults] setInteger:indexPath.row forKey:@"selected_menu"];
     [[NSUserDefaults standardUserDefaults] synchronize];

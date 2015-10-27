@@ -7,12 +7,16 @@
 //
 
 #import "AppDelegate.h"
+#import "DSConfig.h"
 
 @interface AppDelegate ()
 
 @end
 
 @implementation AppDelegate
+
+@synthesize locationButton,menuButton,chatsButton,buttonsView,buttons_array;
+@synthesize homePage,chatPage,window;
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
@@ -23,10 +27,128 @@
     self.window.rootViewController = splashViewController;
     self.navigationController = [[UINavigationController alloc] initWithRootViewController:splashViewController];
     [self.window setRootViewController:self.navigationController];
+    
+    [[UINavigationBar appearance] setBarTintColor:[UIColor colorWithRed:(230.0/255) green:(30.0/255) blue:(55.0 /255) alpha:1.0]];
+    [[UINavigationBar appearance] setTintColor:[UIColor whiteColor]];
+    [[UINavigationBar appearance] setBackIndicatorImage:[UIImage imageNamed:@"menu_icon.png"]];
+    [[UINavigationBar appearance] setBackIndicatorTransitionMaskImage:[UIImage imageNamed:@"menu_icon.png"]];
+    NSDictionary *textTitleOptions = [NSDictionary dictionaryWithObjectsAndKeys:[UIColor whiteColor], UITextAttributeTextColor, [UIColor whiteColor], UITextAttributeTextShadowColor, nil];
+    [[UINavigationBar appearance] setTitleTextAttributes:textTitleOptions];
+    
     self.window.backgroundColor=[UIColor whiteColor];
     [self.window makeKeyAndVisible];
+    
+    [self TabBarViews];
+    
     return YES;
 }
+
+-(void)TabBarViews
+{
+    int wVal=self.window.bounds.size.width;
+    int hVal=self.window.bounds.size.height;
+    buttonsView=[[UIView alloc]init];
+    
+    [buttonsView setBackgroundColor:[UIColor colorWithRed:(float)239.0/255 green:(float)239.0/255 blue:(float)239.0/255 alpha:1.0f]];
+    
+    if (IS_IPHONE4) {
+        buttonsView.frame=CGRectMake(0,hVal-hVal/10,wVal,hVal/10);
+        buttonsView.hidden=YES;
+        
+    }
+    else if (IS_IPHONE5)
+    {
+        buttonsView.frame=CGRectMake(0,hVal-hVal/11,wVal,hVal/11);
+        buttonsView.hidden=YES;
+        
+    }
+    else if (IS_IPHONE6)
+    {
+        buttonsView.frame=CGRectMake(0,hVal-hVal/13,wVal,hVal/13);
+        buttonsView.hidden=YES;
+        
+    }
+    else if (IS_IPHONE6_Plus)
+    {
+        buttonsView.frame=CGRectMake(0,hVal-hVal/15,wVal,hVal/15);
+        buttonsView.hidden=YES;
+    }
+    locationButton=[[UIButton alloc]init];
+    menuButton=[[UIButton alloc]init];
+    chatsButton=[[UIButton alloc]init];
+    
+    [locationButton setBackgroundImage:[UIImage imageNamed:@"loaction.png"] forState:UIControlStateNormal];
+    UIImage *locationActive = [UIImage imageNamed:@"loaction_active.png"];
+    [locationButton setBackgroundImage:locationActive forState:UIControlStateSelected];
+    
+    [menuButton setBackgroundImage:[UIImage imageNamed:@"menu1.png"] forState:UIControlStateNormal];
+    UIImage *menuActive = [UIImage imageNamed:@"menu1.png"];
+    [menuButton setBackgroundImage:menuActive forState:UIControlStateSelected];
+    
+    [chatsButton setBackgroundImage:[UIImage imageNamed:@"chats.png"] forState:UIControlStateNormal];
+    UIImage *chatActive = [UIImage imageNamed:@"chats_active.png"];
+    [chatsButton setBackgroundImage:chatActive forState:UIControlStateSelected];
+    
+    
+    [locationButton addTarget:self action:@selector(locationView) forControlEvents:UIControlEventTouchUpInside];
+    
+    [menuButton addTarget:self action:@selector(menuView) forControlEvents:UIControlEventTouchUpInside];
+    
+    [chatsButton addTarget:self action:@selector(chatView) forControlEvents:UIControlEventTouchUpInside];
+    
+    locationButton.frame=CGRectMake(30,3,50,50);
+    menuButton.frame=CGRectMake(140,3,45,45);
+    chatsButton.frame=CGRectMake(240,3,50,50);
+    
+    if(IS_IPHONE6)
+    {
+        
+        locationButton.frame=CGRectMake(50,3,50,50);
+        menuButton.frame=CGRectMake(170,3,45,45);
+        chatsButton.frame=CGRectMake(280,3,50,50);
+    }
+    else if   (IS_IPHONE6_Plus)
+    {
+        locationButton.frame=CGRectMake(60,3,50,50);
+        menuButton.frame=CGRectMake(190,3,45,45);
+        chatsButton.frame=CGRectMake(320,3,50,50);
+    }
+    [self.window.rootViewController.view addSubview:buttonsView];
+    
+    [buttonsView addSubview:locationButton];
+    [buttonsView addSubview:menuButton];
+    [buttonsView addSubview:chatsButton];
+    
+    buttons_array=[[NSMutableArray alloc]init];
+    [buttons_array addObject:locationButton];
+    [buttons_array addObject:menuButton];
+    [buttons_array addObject:chatsButton];
+}
+
+-(void)locationView
+{
+    [locationButton setBackgroundImage:[UIImage imageNamed:@"loaction_active.png"] forState:UIControlStateNormal];
+    [chatsButton setBackgroundImage:[UIImage imageNamed:@"chats.png"] forState:UIControlStateNormal];
+    
+//    locationPage =[[ViewController1 alloc]initWithNibName:@"ViewController1" bundle:nil];
+//    [self.navigationController pushViewController:locationPage animated:NO];
+}
+-(void)menuView{
+    [chatsButton setBackgroundImage:[UIImage imageNamed:@"chats.png"] forState:UIControlStateNormal];
+    [locationButton setBackgroundImage:[UIImage imageNamed:@"loaction.png"] forState:UIControlStateNormal];
+    
+    homePage =[[HomeViewController alloc]initWithNibName:@"ViewController2" bundle:nil];
+    [self.navigationController pushViewController:homePage animated:NO];
+}
+-(void)chatView
+{
+    [chatsButton setBackgroundImage:[UIImage imageNamed:@"chats_active.png"] forState:UIControlStateNormal];
+    [locationButton setBackgroundImage:[UIImage imageNamed:@"loaction.png"] forState:UIControlStateNormal];
+    
+    chatPage =[[DSChatsTableViewController alloc]initWithNibName:@"ChatViewController" bundle:nil];
+    [self.navigationController pushViewController:chatPage animated:NO];
+}
+
 
 - (void)applicationWillResignActive:(UIApplication *)application {
     // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
