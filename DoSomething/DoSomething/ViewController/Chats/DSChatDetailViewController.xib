@@ -210,7 +210,7 @@
                                 <constraint firstAttribute="height" constant="4" id="9ca-Dv-PH5"/>
                             </constraints>
                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                            <color key="textColor" red="0.72139954758713132" green="0.72139954758713132" blue="0.72139954758713132" alpha="1" colorSpace="calibratedRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
                     </subviews>

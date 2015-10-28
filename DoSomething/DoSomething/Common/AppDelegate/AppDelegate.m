@@ -94,7 +94,6 @@
     
     if(IS_IPHONE6)
     {
-        
         locationButton.frame=CGRectMake(50,3,50,50);
         menuButton.frame=CGRectMake(170,3,45,45);
         chatsButton.frame=CGRectMake(280,3,50,50);

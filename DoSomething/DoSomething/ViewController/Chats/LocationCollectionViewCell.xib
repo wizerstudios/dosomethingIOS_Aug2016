@@ -18,9 +18,9 @@
                         <rect key="frame" x="0.0" y="0.0" width="108" height="194"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Profile_Picture" translatesAutoresizingMaskIntoConstraints="NO" id="iTj-xa-1EH">
-                                <rect key="frame" x="0.0" y="14" width="104" height="95"/>
+                                <rect key="frame" x="0.0" y="14" width="104" height="104"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="95" id="Mwq-BI-nni"/>
+                                    <constraint firstAttribute="height" constant="104" id="Mwq-BI-nni"/>
                                     <constraint firstAttribute="width" constant="104" id="hb3-JS-CL4"/>
                                 </constraints>
                             </imageView>
