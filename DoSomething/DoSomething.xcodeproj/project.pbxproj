@@ -31,6 +31,7 @@
 		C6D5F6441BC7B52C0050C1AE /* Patron-Thin.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C6D5F6371BC7B52C0050C1AE /* Patron-Thin.ttf */; };
 		C6D5F6451BC7B52C0050C1AE /* Patron-ThinItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C6D5F6381BC7B52C0050C1AE /* Patron-ThinItalic.ttf */; };
 		C6D5F67C1BC7EC440050C1AE /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C6D5F67B1BC7EC440050C1AE /* Images.xcassets */; };
+		EA784F001BE0950500863A6D /* DVSwitch.m in Sources */ = {isa = PBXBuildFile; fileRef = EA784EFF1BE0950500863A6D /* DVSwitch.m */; };
 		EACB22BB1BC7C7F7002FAD54 /* DSLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EACB22B91BC7C7F7002FAD54 /* DSLoginViewController.m */; };
 		EACB22BC1BC7C7F7002FAD54 /* DSLoginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = EACB22BA1BC7C7F7002FAD54 /* DSLoginViewController.xib */; };
 		EADB949C1BDF566C00512374 /* HomeCustomCell.m in Sources */ = {isa = PBXBuildFile; fileRef = EADB94971BDF566C00512374 /* HomeCustomCell.m */; };
@@ -148,6 +149,8 @@
 		C6D5F6381BC7B52C0050C1AE /* Patron-ThinItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Patron-ThinItalic.ttf"; sourceTree = "<group>"; };
 		C6D5F6461BC7B6550050C1AE /* DSConfig.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DSConfig.h; sourceTree = "<group>"; };
 		C6D5F67B1BC7EC440050C1AE /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		EA784EFE1BE0950500863A6D /* DVSwitch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DVSwitch.h; sourceTree = "<group>"; };
+		EA784EFF1BE0950500863A6D /* DVSwitch.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DVSwitch.m; sourceTree = "<group>"; };
 		EACB22B81BC7C7F7002FAD54 /* DSLoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DSLoginViewController.h; sourceTree = "<group>"; };
 		EACB22B91BC7C7F7002FAD54 /* DSLoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DSLoginViewController.m; sourceTree = "<group>"; };
 		EACB22BA1BC7C7F7002FAD54 /* DSLoginViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DSLoginViewController.xib; sourceTree = "<group>"; };
@@ -334,6 +337,7 @@
 		C6D5F6081BC7A4340050C1AE /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				EA784EFD1BE0950500863A6D /* Switcher */,
 				EAF187171BDA352B004C25EA /* DAAutoScroll */,
 				EAEF25311BCFEBF400F83E82 /* CustomNavigation */,
 				EAEF24F81BCF9EF600F83E82 /* IQKeyBoardManager */,
@@ -395,6 +399,16 @@
 			);
 			name = AppCommon;
 			path = Common/AppDelegate;
+			sourceTree = "<group>";
+		};
+		EA784EFD1BE0950500863A6D /* Switcher */ = {
+			isa = PBXGroup;
+			children = (
+				EA784EFE1BE0950500863A6D /* DVSwitch.h */,
+				EA784EFF1BE0950500863A6D /* DVSwitch.m */,
+			);
+			name = Switcher;
+			path = Common/Switcher;
 			sourceTree = "<group>";
 		};
 		EACB22B71BC7C7F7002FAD54 /* Login */ = {
@@ -775,6 +789,7 @@
 				EAEF25201BCF9EF600F83E82 /* IQUIViewController+Additions.m in Sources */,
 				C6D5F61C1BC7B3E60050C1AE /* DSAppCommon.m in Sources */,
 				EACB22BB1BC7C7F7002FAD54 /* DSLoginViewController.m in Sources */,
+				EA784F001BE0950500863A6D /* DVSwitch.m in Sources */,
 				EAEF251E1BCF9EF600F83E82 /* IQUITextFieldView+Additions.m in Sources */,
 				EAEF25261BCF9EF600F83E82 /* IQBarButtonItem.m in Sources */,
 				EAF1DC511BD8B2AF00D51354 /* DSHomeViewController.m in Sources */,

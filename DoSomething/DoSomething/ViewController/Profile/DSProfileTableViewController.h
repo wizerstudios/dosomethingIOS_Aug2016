@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "DSProfileTableViewCell.h"
+#import "DVSwitch.h"
 
 @interface DSProfileTableViewController : UIViewController<UINavigationControllerDelegate>
 {
@@ -21,6 +22,7 @@
  IBOutlet DSProfileTableViewCell *CellTermsOfUse;
  IBOutlet DSProfileTableViewCell *cellTextView;
 }
+@property (strong, nonatomic) DVSwitch *switcher;
 @property (strong, nonatomic) IBOutlet UITableView *tableviewProfile;
 @property (strong, nonatomic) IBOutlet NSLayoutConstraint *layoutConstraintTableViewYPos;
 @property (strong, nonatomic) IBOutlet NSLayoutConstraint *layoutConstraintDatePickerViewLeadingPos;
