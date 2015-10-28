@@ -267,7 +267,7 @@
             else if([imageNormalArray count] <= 15)
                 return 200;
             else if([imageNormalArray count] <= 20)
-                return 260;
+                return 280;
         }
 
        
@@ -513,6 +513,11 @@
         
         for (int i =0; i< [imageNormalArray  count]; i++) {
             
+//            NSString *strName = [imageNormalArray objectAtIndex:i];
+//            float imgSize = ([strName isEqualToString:@"Pluis_icon1.png"]) ? 38 : 50;
+            
+            float imgSize = 38;
+            
             cell.plusIconImageView.hidden = YES;
             UIImageView *hobbiesImage;
             
@@ -521,16 +526,15 @@
                 
                 if(IS_IPHONE5){
                     
-                    hobbiesImage = [[UIImageView alloc]initWithFrame:CGRectMake(i*58, 22, 50, 40)];
+                    hobbiesImage = [[UIImageView alloc]initWithFrame:CGRectMake(i*58, 22, imgSize, imgSize)];
                 }
                 if(IS_IPHONE6){
                     
-                    hobbiesImage = [[UIImageView alloc]initWithFrame:CGRectMake(i*70, 17, 50, 50)];
-                    NSLog(@"%@", hobbiesImage);
+                    hobbiesImage = [[UIImageView alloc]initWithFrame:CGRectMake(i*70, 17, imgSize, imgSize)];
                 }
                 if(IS_IPHONE6_Plus)
                 {
-                    hobbiesImage = [[UIImageView alloc]initWithFrame:CGRectMake(i*80, 22, 50, 50)];
+                    hobbiesImage = [[UIImageView alloc]initWithFrame:CGRectMake(i*80, 22, imgSize, imgSize)];
                     
                 }
                 
@@ -541,32 +545,31 @@
                 
                 if(IS_IPHONE5){
                     
-                    hobbiesImage = [[UIImageView alloc]initWithFrame:CGRectMake((i)%5*58, 85, 50, 40)];
+                    hobbiesImage = [[UIImageView alloc]initWithFrame:CGRectMake((i)%5*58, 85, imgSize, imgSize)];
                 }
                 if(IS_IPHONE6){
                     
-                    hobbiesImage = [[UIImageView alloc]initWithFrame:CGRectMake((i)%5*70, 80, 50, 50)];
-                    NSLog(@"%@", hobbiesImage);
+                    hobbiesImage = [[UIImageView alloc]initWithFrame:CGRectMake((i)%5*70, 80, imgSize, imgSize)];
                 }
                 if(IS_IPHONE6_Plus)
                 {
-                    hobbiesImage = [[UIImageView alloc]initWithFrame:CGRectMake((i)%5*80, 90, 50, 50)];
+                    hobbiesImage = [[UIImageView alloc]initWithFrame:CGRectMake((i)%5*80, 90, imgSize, imgSize)];
                 }
             }
             else if(i <= 14)
             {
                 if(IS_IPHONE5){
                     
-                    hobbiesImage = [[UIImageView alloc]initWithFrame:CGRectMake((i)%5*58, 148, 50, 40)];
+                    hobbiesImage = [[UIImageView alloc]initWithFrame:CGRectMake((i)%5*58, 148, imgSize, imgSize)];
                 }
                 if(IS_IPHONE6){
                     
-                    hobbiesImage = [[UIImageView alloc]initWithFrame:CGRectMake((i)%5*70, 143, 50, 50)];
+                    hobbiesImage = [[UIImageView alloc]initWithFrame:CGRectMake((i)%5*70, 143, imgSize, imgSize)];
                     NSLog(@"%@", hobbiesImage);
                 }
                 if(IS_IPHONE6_Plus)
                 {
-                    hobbiesImage = [[UIImageView alloc]initWithFrame:CGRectMake((i)%5*80, 158, 50, 50)];
+                    hobbiesImage = [[UIImageView alloc]initWithFrame:CGRectMake((i)%5*80, 158, imgSize, imgSize)];
                     
                 }
             }
@@ -574,16 +577,16 @@
             {
                 if(IS_IPHONE5){
                     
-                    hobbiesImage = [[UIImageView alloc]initWithFrame:CGRectMake((i)%5*58, 211, 50, 40)];
+                    hobbiesImage = [[UIImageView alloc]initWithFrame:CGRectMake((i)%5*58, 211, imgSize, imgSize)];
                 }
                 if(IS_IPHONE6){
                     
-                    hobbiesImage = [[UIImageView alloc]initWithFrame:CGRectMake((i)%5*70, 206, 50, 50)];
+                    hobbiesImage = [[UIImageView alloc]initWithFrame:CGRectMake((i)%5*70, 206, imgSize, imgSize)];
                     NSLog(@"%@", hobbiesImage);
                 }
                 if(IS_IPHONE6_Plus)
                 {
-                    hobbiesImage = [[UIImageView alloc]initWithFrame:CGRectMake((i)%5*80, 226, 50, 50)];
+                    hobbiesImage = [[UIImageView alloc]initWithFrame:CGRectMake((i)%5*80, 226, imgSize, imgSize)];
                     
                 }
             }
@@ -594,10 +597,6 @@
             if (image == plusIcon) {
                 hobbiesImage.userInteractionEnabled = YES;
                 [hobbiesImage addSubview:pushToHobbiesButton];
-                
-                
-                
-                
             }
             [cell addSubview:hobbiesImage];
             [pushToHobbiesButton addTarget:self action:@selector(pushToHobbiesView) forControlEvents:UIControlEventTouchUpInside];
@@ -616,11 +615,11 @@
                 
                 if(IS_IPHONE5){
                     
-                    hobbiesname = [[UILabel alloc]initWithFrame:CGRectMake(i*55, 65, 60, 15)];
+                    hobbiesname = [[UILabel alloc]initWithFrame:CGRectMake(i*58, 65, 60, 15)];
                 }
                 if(IS_IPHONE6){
                     
-                    hobbiesname = [[UILabel alloc]initWithFrame:CGRectMake(i*70, 65, 55, 15)];
+                    hobbiesname = [[UILabel alloc]initWithFrame:CGRectMake(i*65, 60, 55, 15)];
                 }
                 if(IS_IPHONE6_Plus)
                 {
@@ -634,11 +633,11 @@
             {
                 if(IS_IPHONE5){
                     
-                    hobbiesname = [[UILabel alloc]initWithFrame:CGRectMake((i)%5*55, 125, 60, 15)];
+                    hobbiesname = [[UILabel alloc]initWithFrame:CGRectMake((i)%5*55, 126, 60, 15)];
                 }
                 if(IS_IPHONE6){
                     
-                    hobbiesname = [[UILabel alloc]initWithFrame:CGRectMake((i)%5*70, 125, 55, 15)];
+                    hobbiesname = [[UILabel alloc]initWithFrame:CGRectMake((i)%5*70, 121, 55, 15)];
                 }
                 if(IS_IPHONE6_Plus)
                 {
@@ -650,11 +649,11 @@
             {
                 if(IS_IPHONE5){
                     
-                    hobbiesname = [[UILabel alloc]initWithFrame:CGRectMake((i)%5*55, 185, 60, 15)];
+                    hobbiesname = [[UILabel alloc]initWithFrame:CGRectMake((i)%5*55, 188, 60, 15)];
                 }
                 if(IS_IPHONE6){
                     
-                    hobbiesname = [[UILabel alloc]initWithFrame:CGRectMake((i)%5*70, 185, 55, 15)];
+                    hobbiesname = [[UILabel alloc]initWithFrame:CGRectMake((i)%5*70, 182, 55, 15)];
                 }
                 if(IS_IPHONE6_Plus)
                 {
@@ -666,7 +665,7 @@
             {
                 if(IS_IPHONE5){
                     
-                    hobbiesname = [[UILabel alloc]initWithFrame:CGRectMake((i)%5*55, 245, 60, 15)];
+                    hobbiesname = [[UILabel alloc]initWithFrame:CGRectMake((i)%5*55, 250, 60, 15)];
                 }
                 if(IS_IPHONE6){
                     
@@ -681,6 +680,7 @@
             
             
             [hobbiesname setFont:[UIFont fontWithName:@"Patron-Regular" size:7]];
+            hobbiesname.textAlignment = NSTextAlignmentCenter;
             hobbiesname.textColor =[UIColor colorWithRed:(float)102.0/255 green:(float)102.0/255 blue:(float)102.0/255 alpha:1.0f];
             
             
