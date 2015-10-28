@@ -18,22 +18,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-    
-    UIBarButtonItem *newBackButton =
-    [[UIBarButtonItem alloc] initWithTitle:@" "
-                                     style:UIBarButtonItemStylePlain
-                                    target:nil
-                                    action:nil];
-    [[self navigationItem] setBackBarButtonItem:newBackButton];
-    
     ProfileName.text=activestring;
-    
     ProfileImage.image =[UIImage imageNamed:activestring1];
-    
-    [[UINavigationBar appearance] setBackIndicatorImage:[UIImage imageNamed:@"menu_icon.png"]];
-    [[UINavigationBar appearance] setBackIndicatorTransitionMaskImage:[UIImage imageNamed:@"menu_icon.png"]];
-    self.navigationItem.title =@"DOSOMETHING";
-    self.navigationItem.leftBarButtonItem.title = @"Log Out";
     
     Message1.text =@" Hey;)";
     Message1.layer.masksToBounds = YES;
