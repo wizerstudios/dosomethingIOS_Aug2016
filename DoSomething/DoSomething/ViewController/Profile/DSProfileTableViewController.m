@@ -10,6 +10,7 @@
 #import "DSInterestAndHobbiesViewController.h"
 #import "CustomNavigationView.h"
 #import "DSConfig.h"
+#import "HomeViewController.h"
 
 
 @interface DSProfileTableViewController ()<UITextFieldDelegate>
@@ -37,6 +38,8 @@
 }
 -(void)viewWillAppear:(BOOL)animated
 {
+    
+   
    
     self.navigationController.navigationBarHidden=NO;
     [self.navigationItem setHidesBackButton:YES animated:NO];
@@ -58,6 +61,7 @@
     [customNavigation.buttonBack setHidden:NO];
     [customNavigation.saveBtn setHidden:NO];
     [self.navigationController.navigationBar addSubview:customNavigation.view];
+    [customNavigation.saveBtn addTarget:self action:@selector(saveAction) forControlEvents:UIControlEventTouchUpInside];
     [customNavigation.buttonBack addTarget:self action:@selector(backAction) forControlEvents:UIControlEventTouchUpInside];
     [self initializeArray];
 
@@ -72,6 +76,12 @@
     datePicker.tag =_tag;
     [currentTextfield setInputView:datePicker];
     currentTextfield.tintColor=[UIColor clearColor];
+}
+
+-(void)saveAction
+{
+     HomeViewController * objHomeview = [[HomeViewController alloc]initWithNibName:@"HomeViewController" bundle:nil];
+    [self.navigationController pushViewController:objHomeview animated:NO];
 }
 
 - (void)DateSelectionAction:(UIDatePicker *)sender
@@ -299,7 +309,7 @@
             else if([imageNormalArray count] <= 15)
                 return 200;
             else if([imageNormalArray count] <= 20)
-                return 260;
+                return 265;
         }
     
         if(indexPath.row ==8)
