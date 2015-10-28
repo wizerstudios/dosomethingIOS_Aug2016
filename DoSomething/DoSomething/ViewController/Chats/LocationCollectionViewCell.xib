@@ -45,7 +45,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dt4-Ra-Gaf">
-                                <rect key="frame" x="25" y="94" width="58" height="14"/>
+                                <rect key="frame" x="25" y="84" width="58" height="14"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="58" id="nsg-gV-fn5"/>
                                     <constraint firstAttribute="height" constant="14" id="xtH-GT-Uh0"/>
@@ -92,7 +92,7 @@
                             <constraint firstItem="mEk-Ed-yGy" firstAttribute="top" secondItem="cl7-gA-vho" secondAttribute="bottom" constant="7" id="vRH-Vq-R8L"/>
                             <constraint firstAttribute="trailing" secondItem="iTj-xa-1EH" secondAttribute="trailing" constant="4" id="xf5-un-X4b"/>
                             <constraint firstItem="mEk-Ed-yGy" firstAttribute="leading" secondItem="tsK-FG-yTh" secondAttribute="leading" constant="4" id="z3O-0V-ojO"/>
-                            <constraint firstItem="cl7-gA-vho" firstAttribute="top" secondItem="dt4-Ra-Gaf" secondAttribute="bottom" constant="12" id="zRo-zj-H8z"/>
+                            <constraint firstItem="cl7-gA-vho" firstAttribute="top" secondItem="dt4-Ra-Gaf" secondAttribute="bottom" constant="22" id="zRo-zj-H8z"/>
                         </constraints>
                     </view>
                 </subviews>
