@@ -260,7 +260,14 @@
             return 55;
         }
         if ( indexPath.row ==6) {
-            return 100;
+            if([imageNormalArray count] < 1)
+                return 100;
+            else if([imageNormalArray count] <= 10)
+                return 150;
+            else if([imageNormalArray count] <= 15)
+                return 200;
+            else if([imageNormalArray count] <= 20)
+                return 260;
         }
 
        
@@ -407,9 +414,6 @@
 //                    femaleLabel.text = typingTextFemale;
 //                    
 //                }
-        
-        
-        
         
         cell.maleButton.userInteractionEnabled = YES;
         cell.femaleButton.userInteractionEnabled = YES;

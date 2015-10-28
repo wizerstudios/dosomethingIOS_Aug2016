@@ -17,9 +17,9 @@
             <string>Patron-Bold</string>
             <string>Patron-Bold</string>
             <string>Patron-Bold</string>
+            <string>Patron-Bold</string>
         </mutableArray>
         <mutableArray key="Patron-Regular.ttf">
-            <string>Patron-Regular</string>
             <string>Patron-Regular</string>
             <string>Patron-Regular</string>
             <string>Patron-Regular</string>
@@ -75,10 +75,10 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="camera_icon" translatesAutoresizingMaskIntoConstraints="NO" id="fTA-Na-Mia">
-                                <rect key="frame" x="135" y="170" width="30" height="25"/>
+                                <rect key="frame" x="128" y="166" width="45" height="40"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="30" id="RPx-LB-z21"/>
-                                    <constraint firstAttribute="height" constant="25" id="SxI-bG-gdc"/>
+                                    <constraint firstAttribute="width" constant="45" id="RPx-LB-z21"/>
+                                    <constraint firstAttribute="height" constant="40" id="SxI-bG-gdc"/>
                                 </constraints>
                             </imageView>
                         </subviews>
@@ -87,7 +87,7 @@
                             <constraint firstAttribute="centerX" secondItem="fTA-Na-Mia" secondAttribute="centerX" id="0De-Aa-gHV"/>
                             <constraint firstItem="MDZ-Us-VGR" firstAttribute="leading" secondItem="R2K-2f-wgq" secondAttribute="leading" constant="2" id="5xx-Dd-yD1"/>
                             <constraint firstAttribute="height" constant="200" id="7F0-fM-zw1"/>
-                            <constraint firstItem="fTA-Na-Mia" firstAttribute="top" secondItem="bAy-v9-r7J" secondAttribute="bottom" constant="5" id="Fge-Gk-AOe"/>
+                            <constraint firstItem="fTA-Na-Mia" firstAttribute="top" secondItem="bAy-v9-r7J" secondAttribute="bottom" constant="1" id="Fge-Gk-AOe"/>
                             <constraint firstItem="bAy-v9-r7J" firstAttribute="top" secondItem="R2K-2f-wgq" secondAttribute="top" constant="40" id="ee9-7n-lhz"/>
                             <constraint firstItem="MDZ-Us-VGR" firstAttribute="top" secondItem="R2K-2f-wgq" secondAttribute="top" constant="10" id="hQE-mh-1iI"/>
                             <constraint firstAttribute="centerX" secondItem="bAy-v9-r7J" secondAttribute="centerX" id="l0j-96-DGY"/>
@@ -634,7 +634,7 @@
                                     <constraint firstAttribute="width" constant="75" id="8xS-QW-n05"/>
                                     <constraint firstAttribute="height" constant="16" id="DZN-uA-14C"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" name="Patron-Regular" family="Patron" pointSize="10"/>
+                                <fontDescription key="fontDescription" name="Patron-Bold" family="Patron" pointSize="10"/>
                                 <color key="textColor" red="0.40000000000000002" green="0.40000000000000002" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
