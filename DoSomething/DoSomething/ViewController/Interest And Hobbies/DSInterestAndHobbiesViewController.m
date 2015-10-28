@@ -37,8 +37,8 @@
     self.navigationController.navigationBarHidden=NO;
     [self.navigationItem setHidesBackButton:YES animated:NO];
     [self.navigationController.navigationBar setTranslucent:YES];
-    imageNormalImageArray =[[NSUserDefaults standardUserDefaults] valueForKey:@"SelectedItemNormal"];
-    hobbiesNameArray = [[NSUserDefaults standardUserDefaults] valueForKey:@"SelectedItemName"];
+    imageNormalImageArray =[[[NSUserDefaults standardUserDefaults] valueForKey:@"SelectedItemNormal"]mutableCopy];
+    hobbiesNameArray = [[[NSUserDefaults standardUserDefaults] valueForKey:@"SelectedItemName"]mutableCopy];
     
     if (!hobbiesNameArray) {
         hobbiesNameArray = [[NSMutableArray alloc] init];
@@ -112,7 +112,7 @@
                                       [NSMutableDictionary dictionaryWithObjectsAndKeys:@"fishing.png",@"imageNormal",@"fishing_active.png",@"imageActive",@"FISHING",@"name", nil],
                                       [NSMutableDictionary dictionaryWithObjectsAndKeys:@"game.png",@"imageNormal",@"game_active.png",@"imageActive",@"GAMING",@"name", nil],
                                       [NSMutableDictionary dictionaryWithObjectsAndKeys:@"gardening.png",@"imageNormal",@"gardening_active.png",@"imageActive",@"GARDENING",@"name", nil],
-                                      [NSMutableDictionary dictionaryWithObjectsAndKeys:@"finance.png",@"imageNormal",@"finance_active.png",@"imageActive",@"FINANCE",@"name", nil]
+                                      [NSMutableDictionary dictionaryWithObjectsAndKeys:@"finance.png",@"imageNormal",@"finance_acative.png",@"imageActive",@"FINANCE",@"name", nil]
                                       
                                       ,nil]atIndex:3];
 }
