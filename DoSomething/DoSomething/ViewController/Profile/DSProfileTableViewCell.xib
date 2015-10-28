@@ -17,9 +17,9 @@
             <string>Patron-Bold</string>
             <string>Patron-Bold</string>
             <string>Patron-Bold</string>
-            <string>Patron-Bold</string>
         </mutableArray>
         <mutableArray key="Patron-Regular.ttf">
+            <string>Patron-Regular</string>
             <string>Patron-Regular</string>
             <string>Patron-Regular</string>
             <string>Patron-Regular</string>
@@ -71,7 +71,7 @@
                                     <constraint firstAttribute="width" constant="75" id="aSn-C0-XXz"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="Patron-Bold" family="Patron" pointSize="13"/>
-                                <color key="textColor" red="0.55294117647058827" green="0.55294117647058827" blue="0.55294117647058827" alpha="1" colorSpace="deviceRGB"/>
+                                <color key="textColor" red="0.40000000000000002" green="0.40000000000000002" blue="0.40000000000000002" alpha="1" colorSpace="deviceRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="camera_icon" translatesAutoresizingMaskIntoConstraints="NO" id="fTA-Na-Mia">
@@ -124,12 +124,12 @@
                                     <constraint firstAttribute="height" constant="16" id="cGX-23-ddo"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="Patron-Bold" family="Patron" pointSize="10"/>
-                                <color key="textColor" red="0.63137254901960782" green="0.63137254901960782" blue="0.63137254901960782" alpha="1" colorSpace="deviceRGB"/>
+                                <color key="textColor" red="0.40000000000000002" green="0.40000000000000002" blue="0.40000000000000002" alpha="1" colorSpace="deviceRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="gK1-Mm-U1j">
                                 <rect key="frame" x="100" y="0.0" width="200" height="39"/>
-                                <color key="textColor" red="0.63137254901960782" green="0.63137254901960782" blue="0.63137254901960782" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="textColor" red="0.59999999999999998" green="0.59999999999999998" blue="0.59999999999999998" alpha="1" colorSpace="calibratedRGB"/>
                                 <fontDescription key="fontDescription" name="Patron-Regular" family="Patron" pointSize="10"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="words"/>
                                 <connections>
@@ -238,14 +238,14 @@
             <point key="canvasLocation" x="751" y="176"/>
         </tableViewCell>
         <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="5Fu-f3-SQN" customClass="DSProfileTableViewCell">
-            <rect key="frame" x="0.0" y="0.0" width="300" height="150"/>
+            <rect key="frame" x="0.0" y="0.0" width="300" height="100"/>
             <autoresizingMask key="autoresizingMask"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="5Fu-f3-SQN" id="d97-4g-Rc2">
                 <rect key="frame" x="0.0" y="0.0" width="300" height="149"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hoj-aW-4aX">
-                        <rect key="frame" x="0.0" y="0.0" width="300" height="150"/>
+                        <rect key="frame" x="0.0" y="0.0" width="300" height="100"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Your Interests and Hobbies" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CBw-9W-xH2">
                                 <rect key="frame" x="5" y="0.0" width="137" height="21"/>
@@ -254,7 +254,7 @@
                                     <constraint firstAttribute="height" constant="21" id="uoR-fz-bPZ"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="Patron-Bold" family="Patron" pointSize="10"/>
-                                <color key="textColor" red="0.63137254901960782" green="0.63137254901960782" blue="0.63137254901960782" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="textColor" red="0.40000000000000002" green="0.40000000000000002" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Pluis_icon" translatesAutoresizingMaskIntoConstraints="NO" id="hCe-cD-hwS">
@@ -323,7 +323,7 @@
                                     <constraint firstAttribute="width" constant="75" id="uWJ-2U-3Qs"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="Patron-Bold" family="Patron" pointSize="10"/>
-                                <color key="textColor" red="0.63137254901960782" green="0.63137254901960782" blue="0.63137254901960782" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="textColor" red="0.40000000000000002" green="0.40000000000000002" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="dvF-0c-ao5">
@@ -332,7 +332,7 @@
                                     <constraint firstAttribute="width" constant="200" id="0UF-I0-d2g"/>
                                     <constraint firstAttribute="height" constant="39" id="q5d-en-p3o"/>
                                 </constraints>
-                                <color key="textColor" red="0.63137254901960782" green="0.63137254901960782" blue="0.63137254901960782" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="textColor" red="0.59999999999999998" green="0.59999999999999998" blue="0.59999999999999998" alpha="1" colorSpace="calibratedRGB"/>
                                 <fontDescription key="fontDescription" name="Patron-Regular" family="Patron" pointSize="10"/>
                                 <textInputTraits key="textInputTraits"/>
                                 <variation key="default">
@@ -396,7 +396,7 @@
                                     <constraint firstAttribute="width" constant="75" id="UvY-72-sv1"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="Patron-Bold" family="Patron" pointSize="10"/>
-                                <color key="textColor" red="0.65490196078431373" green="0.65490196078431373" blue="0.65490196078431373" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="textColor" red="0.40000000000000002" green="0.40000000000000002" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Password" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PmN-E8-WPL">
@@ -406,7 +406,7 @@
                                     <constraint firstAttribute="width" constant="75" id="W4w-hf-GrS"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="Patron-Bold" family="Patron" pointSize="10"/>
-                                <color key="textColor" red="0.65490196078431373" green="0.65490196078431373" blue="0.65490196078431373" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="textColor" red="0.40000000000000002" green="0.40000000000000002" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="sig-cR-Dgx">
@@ -415,7 +415,7 @@
                                     <constraint firstAttribute="width" constant="200" id="PQr-aG-ItR"/>
                                     <constraint firstAttribute="height" constant="30" id="QPv-zN-RNh"/>
                                 </constraints>
-                                <color key="textColor" red="0.63137254901960782" green="0.63137254901960782" blue="0.63137254901960782" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="textColor" red="0.59999999999999998" green="0.59999999999999998" blue="0.59999999999999998" alpha="1" colorSpace="calibratedRGB"/>
                                 <fontDescription key="fontDescription" name="Patron-Regular" family="Patron" pointSize="10"/>
                                 <textInputTraits key="textInputTraits"/>
                                 <connections>
@@ -428,7 +428,7 @@
                                     <constraint firstAttribute="height" constant="30" id="DM0-Fa-DpI"/>
                                     <constraint firstAttribute="width" constant="200" id="d75-jA-3wP"/>
                                 </constraints>
-                                <color key="textColor" red="0.63137254901960782" green="0.63137254901960782" blue="0.63137254901960782" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="textColor" red="0.59999999999999998" green="0.59999999999999998" blue="0.59999999999999998" alpha="1" colorSpace="calibratedRGB"/>
                                 <fontDescription key="fontDescription" name="Patron-Regular" family="Patron" pointSize="10"/>
                                 <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
                                 <connections>
@@ -462,7 +462,7 @@
                             <constraint firstAttribute="width" constant="89" id="b42-Sp-QfY"/>
                         </constraints>
                         <fontDescription key="fontDescription" name="Patron-Bold" family="Patron" pointSize="13"/>
-                        <color key="textColor" red="0.55294117647058827" green="0.55294117647058827" blue="0.55294117647058827" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="textColor" red="0.40000000000000002" green="0.40000000000000002" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                         <variation key="default">
                             <mask key="constraints">
@@ -503,7 +503,7 @@
                             <constraint firstAttribute="width" constant="109" id="JKg-gW-an7"/>
                         </constraints>
                         <fontDescription key="fontDescription" name="Patron-Bold" family="Patron" pointSize="13"/>
-                        <color key="textColor" red="0.55294117647058827" green="0.55294117647058827" blue="0.55294117647058827" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="textColor" red="0.40000000000000002" green="0.40000000000000002" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="az7-5N-PtG">
@@ -511,8 +511,8 @@
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="New Meassages" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qcr-zf-Jse">
                                 <rect key="frame" x="5" y="18" width="100" height="10"/>
-                                <fontDescription key="fontDescription" name="Patron-Bold" family="Patron" pointSize="10"/>
-                                <color key="textColor" red="0.65490196078431373" green="0.65490196078431373" blue="0.65490196078431373" alpha="1" colorSpace="calibratedRGB"/>
+                                <fontDescription key="fontDescription" name="Patron-Regular" family="Patron" pointSize="10"/>
+                                <color key="textColor" red="0.40000000000000002" green="0.40000000000000002" blue="0.40000000000000002" alpha="1" colorSpace="deviceRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="x9c-o5-63T">
@@ -524,24 +524,24 @@
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="switch_on" translatesAutoresizingMaskIntoConstraints="NO" id="AMx-wQ-Zv5">
                                 <rect key="frame" x="181" y="16" width="25" height="14"/>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Sound" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="d31-cU-6WU">
-                                <rect key="frame" x="5" y="46" width="100" height="10"/>
-                                <fontDescription key="fontDescription" name="Patron-Bold" family="Patron" pointSize="10"/>
-                                <color key="textColor" red="0.65490196078431373" green="0.65490196078431373" blue="0.65490196078431373" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="switch_off" translatesAutoresizingMaskIntoConstraints="NO" id="4Zx-qS-Ya1">
                                 <rect key="frame" x="181" y="44" width="25" height="14"/>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Vibration" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="j8h-Zb-xvj">
                                 <rect key="frame" x="5" y="74" width="100" height="10"/>
                                 <fontDescription key="fontDescription" name="Patron-Bold" family="Patron" pointSize="10"/>
-                                <color key="textColor" red="0.65490196078431373" green="0.65490196078431373" blue="0.65490196078431373" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="textColor" red="0.40000000000000002" green="0.40000000000000002" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="switch_on" translatesAutoresizingMaskIntoConstraints="NO" id="OqI-11-vHb">
                                 <rect key="frame" x="181" y="72" width="25" height="14"/>
                             </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Sound" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="d31-cU-6WU">
+                                <rect key="frame" x="5" y="46" width="100" height="10"/>
+                                <fontDescription key="fontDescription" name="Patron-Bold" family="Patron" pointSize="10"/>
+                                <color key="textColor" red="0.40000000000000002" green="0.40000000000000002" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
@@ -635,13 +635,13 @@
                                     <constraint firstAttribute="height" constant="16" id="DZN-uA-14C"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="Patron-Regular" family="Patron" pointSize="10"/>
-                                <color key="textColor" red="0.63137254901960782" green="0.63137254901960782" blue="0.63137254901960782" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="textColor" red="0.40000000000000002" green="0.40000000000000002" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ij6-cp-dTs">
                                 <rect key="frame" x="100" y="0.0" width="200" height="40"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <color key="textColor" red="0.63137254901960782" green="0.63137254901960782" blue="0.63137254901960782" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="textColor" red="0.59999999999999998" green="0.59999999999999998" blue="0.59999999999999998" alpha="1" colorSpace="calibratedRGB"/>
                                 <fontDescription key="fontDescription" name="Patron-Regular" family="Patron" pointSize="10"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>

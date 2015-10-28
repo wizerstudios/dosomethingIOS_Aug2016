@@ -32,7 +32,13 @@
 
 -(void)viewWillAppear:(BOOL)animated
 {
-    self.navigationController.navigationBarHidden=YES;
+    [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"SelectedItem"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+    [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"SelectedItemNormal"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+    [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"SelectedItemName"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+     self.navigationController.navigationBarHidden=YES;
     [self.navigationItem setHidesBackButton:YES animated:NO];
     [self.navigationController.navigationBar setTranslucent:NO];
 }
