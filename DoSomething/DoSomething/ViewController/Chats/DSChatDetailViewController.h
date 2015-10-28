@@ -8,9 +8,9 @@
 
 #import <UIKit/UIKit.h>
 #import <QuartzCore/QuartzCore.h>
-#import "IBActionSheet.h"
+//#import "IBActionSheet.h"
 
-@interface DSChatDetailViewController : UIViewController <IBActionSheetDelegate, UIActionSheetDelegate>
+@interface DSChatDetailViewController : UIViewController <UIActionSheetDelegate> //<IBActionSheetDelegate, UIActionSheetDelegate>
 
 {
     IBOutlet UILabel *OnlineLabel;
@@ -29,7 +29,7 @@
 @property(nonatomic,retain) NSString *activestring;
 @property(nonatomic,retain) NSString *activestring1;
 
-@property IBActionSheet *standardIBAS, *customIBAS, *funkyIBAS;
+//@property IBActionSheet *standardIBAS, *customIBAS, *funkyIBAS;
 
 @property (strong, nonatomic) IBOutlet UIButton *funkyIBASButton;
 @property UIView *semiTransparentView;

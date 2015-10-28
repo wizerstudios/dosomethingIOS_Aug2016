@@ -46,6 +46,7 @@
     [self.navigationItem setHidesBackButton:YES animated:NO];
 }
 
+/*
 - (IBAction)showReallyFunkyIBActionSheet:(id)sender
 {
     self.funkyIBAS = [[IBActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:nil destructiveButtonTitle:nil otherButtonTitles:@"Block", @"Delete",@"Cancel", nil];
@@ -138,6 +139,7 @@
     button.layer.borderWidth = 0.0f;
     button.layer.borderColor = button.titleLabel.textColor.CGColor;
 }
+ */
 
 
 - (void)didReceiveMemoryWarning {
