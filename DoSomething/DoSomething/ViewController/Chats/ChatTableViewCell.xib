@@ -138,7 +138,7 @@
                 <outlet property="Time" destination="CWk-TD-Uwu" id="jkK-1R-g1Y"/>
                 <outlet property="profileImageView" destination="5Et-lg-nur" id="kWk-Zj-vSR"/>
             </connections>
-            <point key="canvasLocation" x="329" y="189"/>
+            <point key="canvasLocation" x="196" y="192"/>
         </tableViewCell>
     </objects>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">

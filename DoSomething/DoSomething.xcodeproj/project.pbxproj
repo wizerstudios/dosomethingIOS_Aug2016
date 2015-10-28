@@ -10,7 +10,6 @@
 		065BAC521BC7A135005AF493 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 065BAC511BC7A135005AF493 /* main.m */; };
 		513229FB1BDF930A00418216 /* TabBarHomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 513229F91BDF930A00418216 /* TabBarHomeViewController.m */; };
 		513229FC1BDF930A00418216 /* TabBarHomeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 513229FA1BDF930A00418216 /* TabBarHomeViewController.xib */; };
-		51322A021BDF948000418216 /* ChatTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 51322A001BDF948000418216 /* ChatTableViewCell.xib */; };
 		51322A061BDF961800418216 /* DSChatDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 51322A041BDF961800418216 /* DSChatDetailViewController.m */; };
 		51322A071BDF961800418216 /* DSChatDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 51322A051BDF961800418216 /* DSChatDetailViewController.xib */; };
 		51322A131BDFBEDB00418216 /* DSLocationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 51322A0E1BDFBEDB00418216 /* DSLocationViewController.m */; };
@@ -33,6 +32,8 @@
 		51ED4E631BE08EDF0079E030 /* 12-Chats.png in Resources */ = {isa = PBXBuildFile; fileRef = 51ED4E601BE08EDF0079E030 /* 12-Chats.png */; };
 		51ED4E641BE08EDF0079E030 /* 19-ChatWindow.png in Resources */ = {isa = PBXBuildFile; fileRef = 51ED4E611BE08EDF0079E030 /* 19-ChatWindow.png */; };
 		51ED4E6C1BE0C5D50079E030 /* IBActionSheet.m in Sources */ = {isa = PBXBuildFile; fileRef = 51ED4E6B1BE0C5D50079E030 /* IBActionSheet.m */; };
+		51ED4E701BE0CB540079E030 /* ChatTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 51ED4E6E1BE0CB540079E030 /* ChatTableViewCell.m */; };
+		51ED4E711BE0CB540079E030 /* ChatTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 51ED4E6F1BE0CB540079E030 /* ChatTableViewCell.xib */; };
 		6A50C21C1BCCBB8C002B11AC /* DSProfileTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A50C21A1BCCBB8C002B11AC /* DSProfileTableViewCell.m */; };
 		6A50C21D1BCCBB8C002B11AC /* DSProfileTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6A50C21B1BCCBB8C002B11AC /* DSProfileTableViewCell.xib */; };
 		6A8D15D31BCC059B000F1FB4 /* DSProfileTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A8D15D11BCC059B000F1FB4 /* DSProfileTableViewController.m */; };
@@ -146,9 +147,6 @@
 		513229F81BDF930A00418216 /* TabBarHomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TabBarHomeViewController.h; sourceTree = "<group>"; };
 		513229F91BDF930A00418216 /* TabBarHomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TabBarHomeViewController.m; sourceTree = "<group>"; };
 		513229FA1BDF930A00418216 /* TabBarHomeViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TabBarHomeViewController.xib; sourceTree = "<group>"; };
-		513229FE1BDF948000418216 /* ChatTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChatTableViewCell.h; sourceTree = "<group>"; };
-		513229FF1BDF948000418216 /* ChatTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChatTableViewCell.m; sourceTree = "<group>"; };
-		51322A001BDF948000418216 /* ChatTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ChatTableViewCell.xib; sourceTree = "<group>"; };
 		51322A031BDF961800418216 /* DSChatDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DSChatDetailViewController.h; sourceTree = "<group>"; };
 		51322A041BDF961800418216 /* DSChatDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DSChatDetailViewController.m; sourceTree = "<group>"; };
 		51322A051BDF961800418216 /* DSChatDetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DSChatDetailViewController.xib; sourceTree = "<group>"; };
@@ -176,6 +174,9 @@
 		51ED4E611BE08EDF0079E030 /* 19-ChatWindow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "19-ChatWindow.png"; sourceTree = "<group>"; };
 		51ED4E6A1BE0C5D50079E030 /* IBActionSheet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IBActionSheet.h; sourceTree = "<group>"; };
 		51ED4E6B1BE0C5D50079E030 /* IBActionSheet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IBActionSheet.m; sourceTree = "<group>"; };
+		51ED4E6D1BE0CB540079E030 /* ChatTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChatTableViewCell.h; sourceTree = "<group>"; };
+		51ED4E6E1BE0CB540079E030 /* ChatTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChatTableViewCell.m; sourceTree = "<group>"; };
+		51ED4E6F1BE0CB540079E030 /* ChatTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ChatTableViewCell.xib; sourceTree = "<group>"; };
 		6A50C2191BCCBB8C002B11AC /* DSProfileTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DSProfileTableViewCell.h; sourceTree = "<group>"; };
 		6A50C21A1BCCBB8C002B11AC /* DSProfileTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DSProfileTableViewCell.m; sourceTree = "<group>"; };
 		6A50C21B1BCCBB8C002B11AC /* DSProfileTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DSProfileTableViewCell.xib; sourceTree = "<group>"; };
@@ -376,12 +377,12 @@
 			isa = PBXGroup;
 			children = (
 				51ED4E5E1BE08BD50079E030 /* Images */,
-				513229FE1BDF948000418216 /* ChatTableViewCell.h */,
-				513229FF1BDF948000418216 /* ChatTableViewCell.m */,
-				51322A001BDF948000418216 /* ChatTableViewCell.xib */,
 				51322A031BDF961800418216 /* DSChatDetailViewController.h */,
 				51322A041BDF961800418216 /* DSChatDetailViewController.m */,
 				51322A051BDF961800418216 /* DSChatDetailViewController.xib */,
+				51ED4E6D1BE0CB540079E030 /* ChatTableViewCell.h */,
+				51ED4E6E1BE0CB540079E030 /* ChatTableViewCell.m */,
+				51ED4E6F1BE0CB540079E030 /* ChatTableViewCell.xib */,
 			);
 			name = ChatCells;
 			sourceTree = "<group>";
@@ -857,6 +858,7 @@
 				EAFC977F1BD21A1200B3593D /* paint.png in Resources */,
 				EAFC97611BD21A1200B3593D /* bbq_active.png in Resources */,
 				EAFC978E1BD21A1200B3593D /* tanning.png in Resources */,
+				51ED4E711BE0CB540079E030 /* ChatTableViewCell.xib in Resources */,
 				EAFC976D1BD21A1200B3593D /* finance.png in Resources */,
 				51322A271BDFBFAA00418216 /* request_send.png in Resources */,
 				EAFC976A1BD21A1200B3593D /* dog_active.png in Resources */,
@@ -872,7 +874,6 @@
 				C6D5F6401BC7B52C0050C1AE /* Patron-Italic.ttf in Resources */,
 				EAFC97711BD21A1200B3593D /* food.png in Resources */,
 				EAFC97851BD21A1200B3593D /* radio.png in Resources */,
-				51322A021BDF948000418216 /* ChatTableViewCell.xib in Resources */,
 				51322A161BDFBEDB00418216 /* LocationCollectionViewCell.xib in Resources */,
 				EAFC97871BD21A1200B3593D /* shopping_active.png in Resources */,
 				EAFC97811BD21A1200B3593D /* photography.png in Resources */,
@@ -960,6 +961,7 @@
 				EAFC96581BD20FD400B3593D /* DSInterestAndHobbiesViewController.m in Sources */,
 				EAEF25231BCF9EF600F83E82 /* IQKeyboardReturnKeyHandler.m in Sources */,
 				51322A061BDF961800418216 /* DSChatDetailViewController.m in Sources */,
+				51ED4E701BE0CB540079E030 /* ChatTableViewCell.m in Sources */,
 				C6D5F6151BC7B0970050C1AE /* AppDelegate.m in Sources */,
 				EAEF25291BCF9EF600F83E82 /* IQUIView+IQKeyboardToolbar.m in Sources */,
 				513229FB1BDF930A00418216 /* TabBarHomeViewController.m in Sources */,

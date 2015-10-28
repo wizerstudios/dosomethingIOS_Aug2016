@@ -7,7 +7,8 @@
 //
 
 #import "ChatTableViewCell.h"
-
+#import "DSChatsTableViewController.h"
+#import "DSChatDetailViewController.h"
 
 @implementation ChatTableViewCell
 @synthesize ChatImage,ChatName,Message,Time,profileImageView;
