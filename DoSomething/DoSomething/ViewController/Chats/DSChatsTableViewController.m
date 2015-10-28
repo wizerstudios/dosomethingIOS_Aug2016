@@ -10,8 +10,6 @@
 #import "ChatTableViewCell.h"
 #import "DSChatDetailViewController.h"
 
-
-//TESTING CHAT
 @interface DSChatsTableViewController ()
 
 {
