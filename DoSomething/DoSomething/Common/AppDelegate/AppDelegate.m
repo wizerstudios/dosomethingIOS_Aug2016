@@ -27,14 +27,6 @@
     self.window.rootViewController = splashViewController;
     self.navigationController = [[UINavigationController alloc] initWithRootViewController:splashViewController];
     [self.window setRootViewController:self.navigationController];
-    
-    [[UINavigationBar appearance] setBarTintColor:[UIColor colorWithRed:(230.0/255) green:(30.0/255) blue:(55.0 /255) alpha:1.0]];
-    [[UINavigationBar appearance] setTintColor:[UIColor whiteColor]];
-    [[UINavigationBar appearance] setBackIndicatorImage:[UIImage imageNamed:@"menu_icon.png"]];
-    [[UINavigationBar appearance] setBackIndicatorTransitionMaskImage:[UIImage imageNamed:@"menu_icon.png"]];
-    NSDictionary *textTitleOptions = [NSDictionary dictionaryWithObjectsAndKeys:[UIColor whiteColor], UITextAttributeTextColor, [UIColor whiteColor], UITextAttributeTextShadowColor, nil];
-    [[UINavigationBar appearance] setTitleTextAttributes:textTitleOptions];
-    
     self.window.backgroundColor=[UIColor whiteColor];
     [self.window makeKeyAndVisible];
     

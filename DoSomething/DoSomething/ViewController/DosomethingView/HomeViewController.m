@@ -243,6 +243,7 @@
     else
     {
         UIAlertView *alert = [[UIAlertView alloc]initWithTitle:nil message:@"ONLY 3 ACTIVITES CAN BE SELECTED" delegate:nil cancelButtonTitle:@"OKAY" otherButtonTitles:nil];
+        alert.backgroundColor = [UIColor redColor];
         [alert show];
     }
 }

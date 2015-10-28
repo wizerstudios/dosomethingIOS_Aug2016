@@ -22,7 +22,7 @@
     
     UINib *cellNib = [UINib nibWithNibName:@"LocationCollectionViewCell" bundle:nil];
     [self.locationCollectionView registerNib:cellNib forCellWithReuseIdentifier:@"LocationCell"];
-
+    
     locationCollectionView.delegate=self;
     locationCollectionView.dataSource=self;
     
@@ -45,7 +45,11 @@
     // Dispose of any resources that can be recreated.
 }
 
-
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    [self.navigationItem setHidesBackButton:YES animated:NO];
+}
 
 -(NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView{
     
@@ -70,9 +74,6 @@
     locationCellView.imageProfile.image =[UIImage imageNamed:MyPatternString ];
     locationCellView.nameProfile.text =[profileNames objectAtIndex:indexPath.row];
     locationCellView.kiloMeter.text=[kiloMeterlabel objectAtIndex:indexPath.row];
-    
-    NSLog(@"arrayname-->%@",locationCellView.nameProfile.text);
-    NSLog(@"arrayimage-->%@",locationCellView.imageProfile.image);
     
     return locationCellView;
 }

@@ -54,6 +54,12 @@
 
 }
 
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    [self.navigationItem setHidesBackButton:YES animated:NO];
+}
+
 - (IBAction)showReallyFunkyIBActionSheet:(id)sender
 {
     self.funkyIBAS = [[IBActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:nil destructiveButtonTitle:nil otherButtonTitles:@"Block", @"Delete",@"Cancel", nil];
