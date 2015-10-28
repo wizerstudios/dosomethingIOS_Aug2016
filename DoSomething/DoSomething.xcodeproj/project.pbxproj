@@ -13,7 +13,6 @@
 		51322A021BDF948000418216 /* ChatTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 51322A001BDF948000418216 /* ChatTableViewCell.xib */; };
 		51322A061BDF961800418216 /* DSChatDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 51322A041BDF961800418216 /* DSChatDetailViewController.m */; };
 		51322A071BDF961800418216 /* DSChatDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 51322A051BDF961800418216 /* DSChatDetailViewController.xib */; };
-		51322A0B1BDF976D00418216 /* IBActionSheet.m in Sources */ = {isa = PBXBuildFile; fileRef = 51322A0A1BDF976D00418216 /* IBActionSheet.m */; };
 		51322A131BDFBEDB00418216 /* DSLocationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 51322A0E1BDFBEDB00418216 /* DSLocationViewController.m */; };
 		51322A141BDFBEDB00418216 /* DSLocationViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 51322A0F1BDFBEDB00418216 /* DSLocationViewController.xib */; };
 		51322A151BDFBEDB00418216 /* LocationCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 51322A111BDFBEDB00418216 /* LocationCollectionViewCell.m */; };
@@ -33,6 +32,7 @@
 		51ED4E621BE08EDF0079E030 /* 18-Chats.png in Resources */ = {isa = PBXBuildFile; fileRef = 51ED4E5F1BE08EDF0079E030 /* 18-Chats.png */; };
 		51ED4E631BE08EDF0079E030 /* 12-Chats.png in Resources */ = {isa = PBXBuildFile; fileRef = 51ED4E601BE08EDF0079E030 /* 12-Chats.png */; };
 		51ED4E641BE08EDF0079E030 /* 19-ChatWindow.png in Resources */ = {isa = PBXBuildFile; fileRef = 51ED4E611BE08EDF0079E030 /* 19-ChatWindow.png */; };
+		51ED4E6C1BE0C5D50079E030 /* IBActionSheet.m in Sources */ = {isa = PBXBuildFile; fileRef = 51ED4E6B1BE0C5D50079E030 /* IBActionSheet.m */; };
 		6A50C21C1BCCBB8C002B11AC /* DSProfileTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A50C21A1BCCBB8C002B11AC /* DSProfileTableViewCell.m */; };
 		6A50C21D1BCCBB8C002B11AC /* DSProfileTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6A50C21B1BCCBB8C002B11AC /* DSProfileTableViewCell.xib */; };
 		6A8D15D31BCC059B000F1FB4 /* DSProfileTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A8D15D11BCC059B000F1FB4 /* DSProfileTableViewController.m */; };
@@ -152,7 +152,6 @@
 		51322A031BDF961800418216 /* DSChatDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DSChatDetailViewController.h; sourceTree = "<group>"; };
 		51322A041BDF961800418216 /* DSChatDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DSChatDetailViewController.m; sourceTree = "<group>"; };
 		51322A051BDF961800418216 /* DSChatDetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DSChatDetailViewController.xib; sourceTree = "<group>"; };
-		51322A0A1BDF976D00418216 /* IBActionSheet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IBActionSheet.m; sourceTree = "<group>"; };
 		51322A0D1BDFBEDB00418216 /* DSLocationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DSLocationViewController.h; sourceTree = "<group>"; };
 		51322A0E1BDFBEDB00418216 /* DSLocationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DSLocationViewController.m; sourceTree = "<group>"; };
 		51322A0F1BDFBEDB00418216 /* DSLocationViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DSLocationViewController.xib; sourceTree = "<group>"; };
@@ -175,6 +174,8 @@
 		51ED4E5F1BE08EDF0079E030 /* 18-Chats.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "18-Chats.png"; sourceTree = "<group>"; };
 		51ED4E601BE08EDF0079E030 /* 12-Chats.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "12-Chats.png"; sourceTree = "<group>"; };
 		51ED4E611BE08EDF0079E030 /* 19-ChatWindow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "19-ChatWindow.png"; sourceTree = "<group>"; };
+		51ED4E6A1BE0C5D50079E030 /* IBActionSheet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IBActionSheet.h; sourceTree = "<group>"; };
+		51ED4E6B1BE0C5D50079E030 /* IBActionSheet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IBActionSheet.m; sourceTree = "<group>"; };
 		6A50C2191BCCBB8C002B11AC /* DSProfileTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DSProfileTableViewCell.h; sourceTree = "<group>"; };
 		6A50C21A1BCCBB8C002B11AC /* DSProfileTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DSProfileTableViewCell.m; sourceTree = "<group>"; };
 		6A50C21B1BCCBB8C002B11AC /* DSProfileTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DSProfileTableViewCell.xib; sourceTree = "<group>"; };
@@ -427,6 +428,16 @@
 			name = Images;
 			sourceTree = "<group>";
 		};
+		51ED4E691BE0C5D50079E030 /* IBActionSheet */ = {
+			isa = PBXGroup;
+			children = (
+				51ED4E6A1BE0C5D50079E030 /* IBActionSheet.h */,
+				51ED4E6B1BE0C5D50079E030 /* IBActionSheet.m */,
+			);
+			name = IBActionSheet;
+			path = Common/IBActionSheet;
+			sourceTree = "<group>";
+		};
 		6A50C2231BCCC310002B11AC /* Chats */ = {
 			isa = PBXGroup;
 			children = (
@@ -461,6 +472,7 @@
 				EAEF25311BCFEBF400F83E82 /* CustomNavigation */,
 				EAEF24F81BCF9EF600F83E82 /* IQKeyBoardManager */,
 				C6D5F6471BC7BB540050C1AE /* AppCommon */,
+				51ED4E691BE0C5D50079E030 /* IBActionSheet */,
 				C6D5F6121BC7B0970050C1AE /* AppDelegate */,
 				C6D5F6461BC7B6550050C1AE /* DSConfig.h */,
 			);
@@ -927,6 +939,7 @@
 				EAEF251D1BCF9EF600F83E82 /* IQNSArray+Sort.m in Sources */,
 				EAEF25201BCF9EF600F83E82 /* IQUIViewController+Additions.m in Sources */,
 				C6D5F61C1BC7B3E60050C1AE /* DSAppCommon.m in Sources */,
+				51ED4E6C1BE0C5D50079E030 /* IBActionSheet.m in Sources */,
 				51322A131BDFBEDB00418216 /* DSLocationViewController.m in Sources */,
 				EACB22BB1BC7C7F7002FAD54 /* DSLoginViewController.m in Sources */,
 				EA784F001BE0950500863A6D /* DVSwitch.m in Sources */,
@@ -943,7 +956,6 @@
 				EAEF25251BCF9EF600F83E82 /* IQTextView.m in Sources */,
 				EADB949C1BDF566C00512374 /* HomeCustomCell.m in Sources */,
 				EAEF25211BCF9EF600F83E82 /* IQUIWindow+Hierarchy.m in Sources */,
-				51322A0B1BDF976D00418216 /* IBActionSheet.m in Sources */,
 				51322A151BDFBEDB00418216 /* LocationCollectionViewCell.m in Sources */,
 				EAFC96581BD20FD400B3593D /* DSInterestAndHobbiesViewController.m in Sources */,
 				EAEF25231BCF9EF600F83E82 /* IQKeyboardReturnKeyHandler.m in Sources */,
