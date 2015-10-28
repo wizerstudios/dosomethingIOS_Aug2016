@@ -8,6 +8,8 @@
 
 #import "DSLocationViewController.h"
 #import "LocationCollectionViewCell.h"
+#import "CustomNavigationView.h"
+#import "DSConfig.h"
 
 
 @interface DSLocationViewController ()
@@ -20,6 +22,23 @@
 @synthesize profileImages,profileNames,kiloMeterlabel;
 - (void)viewDidLoad {
     
+    CustomNavigationView *customNavigation;
+    customNavigation = [[CustomNavigationView alloc] initWithNibName:@"CustomNavigationView" bundle:nil];
+    customNavigation.view.frame = CGRectMake(0,-20, CGRectGetWidth(self.view.frame), 65);
+    if (IS_IPHONE6 ){
+        customNavigation.view.frame = CGRectMake(0,-20, 375, 83);
+    }
+    if(IS_IPHONE6_Plus)
+    {
+        customNavigation.view.frame = CGRectMake(0,-20, 420, 83);
+    }
+    [customNavigation.menuBtn setHidden:YES];
+    [customNavigation.buttonBack setHidden:NO];
+    [customNavigation.saveBtn setHidden:NO];
+    [self.navigationController.navigationBar addSubview:customNavigation.view];
+//    [customNavigation.saveBtn addTarget:self action:@selector(saveAction) forControlEvents:UIControlEventTouchUpInside];
+//    [customNavigation.buttonBack addTarget:self action:@selector(backAction) forControlEvents:UIControlEventTouchUpInside];
+    
     UINib *cellNib = [UINib nibWithNibName:@"LocationCollectionViewCell" bundle:nil];
     [self.locationCollectionView registerNib:cellNib forCellWithReuseIdentifier:@"LocationCell"];
     
@@ -27,9 +46,7 @@
     locationCollectionView.dataSource=self;
     
     profileNames=[[NSArray alloc]initWithObjects:@"Michelle Chong",@"Zoe Tay ",@"Felicia Chin",@"Yuna",@"TAylor Schilling",@"Gal Gadot", nil];
-    
     profileImages=[[NSArray alloc]initWithObjects:@"chong.png",@"zoe_tay.png",@"felicin.png",@"yuna.png",@"taylor.png",@"Galglot.png", nil];
-    
      kiloMeterlabel=[[NSArray alloc]initWithObjects:@"20km",@"1km",@"200km",@"2km",@"10km",@"1.6km", nil];
   
     UICollectionViewFlowLayout *flowLayout1 = [[UICollectionViewFlowLayout alloc] init];
