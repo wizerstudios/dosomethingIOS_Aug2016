@@ -15,6 +15,7 @@
             <connections>
                 <outlet property="backButtonImg" destination="ycz-YH-7lA" id="laP-Yd-AAp"/>
                 <outlet property="buttonBack" destination="CB6-yC-cZA" id="hjE-pT-aq3"/>
+                <outlet property="layoutConstraintBackArrowYPos" destination="oia-BD-Zxf" id="rX8-mh-ZgC"/>
                 <outlet property="layoutConstraintBackBtnYPos" destination="Fa3-ZJ-H0b" id="IRa-gw-wvX"/>
                 <outlet property="layoutConstraintLabelYPos" destination="shb-wQ-1JW" id="SKf-Xc-xWx"/>
                 <outlet property="layoutConstraintSaveBtnYPos" destination="Fbl-kM-KX1" id="3jZ-Le-v2H"/>
@@ -41,18 +42,6 @@
                             <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fn4-ol-eRv">
-                            <rect key="frame" x="270" y="32" width="46" height="20"/>
-                            <constraints>
-                                <constraint firstAttribute="width" constant="46" id="mJ6-bn-cR5"/>
-                                <constraint firstAttribute="height" constant="20" id="ncV-XU-S7c"/>
-                            </constraints>
-                            <fontDescription key="fontDescription" name="Patron-Regular" family="Patron" pointSize="14"/>
-                            <state key="normal" title="Save">
-                                <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                            </state>
-                        </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CB6-yC-cZA">
                             <rect key="frame" x="10" y="26" width="35" height="27"/>
                             <constraints>
@@ -78,6 +67,18 @@
                                 <constraint firstAttribute="width" constant="18" id="nuV-uX-3Rr"/>
                             </constraints>
                         </imageView>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fn4-ol-eRv">
+                            <rect key="frame" x="268" y="32" width="46" height="20"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="46" id="mJ6-bn-cR5"/>
+                                <constraint firstAttribute="height" constant="20" id="ncV-XU-S7c"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" name="Patron-Regular" family="Patron" pointSize="14"/>
+                            <state key="normal" title="Save">
+                                <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                            </state>
+                        </button>
                     </subviews>
                     <color key="backgroundColor" red="0.90196078431372551" green="0.24705882352941178" blue="0.31764705882352939" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
@@ -88,7 +89,7 @@
                         <constraint firstAttribute="centerX" secondItem="dl2-RR-YB9" secondAttribute="centerX" id="gBD-4y-hlc"/>
                         <constraint firstItem="ycz-YH-7lA" firstAttribute="top" secondItem="t35-GY-BW2" secondAttribute="top" constant="32" id="oia-BD-Zxf"/>
                         <constraint firstItem="dl2-RR-YB9" firstAttribute="top" secondItem="t35-GY-BW2" secondAttribute="top" constant="32" id="shb-wQ-1JW"/>
-                        <constraint firstAttribute="trailing" secondItem="fn4-ol-eRv" secondAttribute="trailing" constant="4" id="x6Z-nV-WID"/>
+                        <constraint firstAttribute="trailing" secondItem="fn4-ol-eRv" secondAttribute="trailing" constant="6" id="x6Z-nV-WID"/>
                     </constraints>
                 </view>
             </subviews>

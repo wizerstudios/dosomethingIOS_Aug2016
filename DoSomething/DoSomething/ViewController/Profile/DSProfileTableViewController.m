@@ -45,7 +45,7 @@
     CustomNavigationView *customNavigation;
     customNavigation = [[CustomNavigationView alloc] initWithNibName:@"CustomNavigationView" bundle:nil];
     customNavigation.view.frame = CGRectMake(0,-20, CGRectGetWidth(self.view.frame), 65);
-    if (IS_IPHONE6 ||IS_IPHONE6_Plus){
+    if (IS_IPHONE6 ){
         customNavigation.view.frame = CGRectMake(0,-20, 375, 83);
         self.layoutConstraintTableViewYPos.constant= 20;
     }
@@ -124,6 +124,19 @@
             
         }
     }
+//    else if (indexPath.row ==3 ) {
+//        selOptionVal = cell.textFieldDPPlaceHolder.text;
+//        
+//        if(selOptionVal != nil || ![selOptionVal isEqualToString:@""]){
+//            [[[placeHolderArray objectAtIndex:indexPath.section] objectAtIndex:indexPath.row] setObject:selOptionVal forKey:@"TypingText"];
+//            
+//            
+//            
+//        }
+    
+        
+//    }
+
     
         else if (indexPath.row ==4 ) {
             selOptionVal = cell.textFieldDPPlaceHolder.text;
@@ -209,7 +222,7 @@
     [placeHolderArray insertObject:[[NSMutableArray alloc]initWithObjects:[NSMutableDictionary dictionaryWithObjectsAndKeys:@"Image",@"placeHolder",@"",@"TypingText", nil],
                                    [NSMutableDictionary dictionaryWithObjectsAndKeys:@"First Name",@"placeHolder",@"",@"TypingText", nil],
                                    [NSMutableDictionary dictionaryWithObjectsAndKeys:@"Last Name",@"placeHolder",@"",@"TypingText", nil],
-                                   [NSMutableDictionary dictionaryWithObjectsAndKeys:@"Male",@"placeHolder",@"Female",@"placeHolderFemale",@"",@"TypingText", nil],
+                                   [NSMutableDictionary dictionaryWithObjectsAndKeys:@"Male",@"placeHolder",@"Female",@"placeHolderFemale",@"",@"TypingText",@"",@"TypingTextFemale", nil],
                                    [NSMutableDictionary dictionaryWithObjectsAndKeys:@"DD / MM / YYYY",@"placeHolder",@"",@"TypingText", nil],
                                    [NSMutableDictionary dictionaryWithObjectsAndKeys:@"Write something about yourself here.",@"placeHolder",@"",@"TypingText", nil],
                                    [NSMutableDictionary dictionaryWithObjectsAndKeys:@"Hobbies",@"placeHolder",@"",@"TypingText", nil],
@@ -246,14 +259,18 @@
         if (indexPath.row == 4) {
             return 55;
         }
-        if ( indexPath.row ==6 ||  indexPath.row ==8) {
-            return 150;
+        if ( indexPath.row ==6) {
+            return 100;
         }
 
        
         if ( indexPath.row == 7) {
             return 120;
         }
+        if (indexPath.row ==8) {
+            return 150;
+        }
+
         
         if (indexPath.row == 9) {
             return 80;
@@ -297,7 +314,7 @@
 
         typingText       = [[[placeHolderArray valueForKey:@"TypingText" ]objectAtIndex:indexPath.section]objectAtIndex:indexPath.row];
         typingTextPass   = [[[placeHolderArray valueForKey:@"TypingTextPass" ]objectAtIndex:indexPath.section]objectAtIndex:indexPath.row];
-//        typingTextFemale = [[[placeHolderArray valueForKey:@"TypingTextFemale" ]objectAtIndex:indexPath.section]objectAtIndex:indexPath.row];
+        typingTextFemale = [[[placeHolderArray valueForKey:@"TypingTextFemale" ]objectAtIndex:indexPath.section]objectAtIndex:indexPath.row];
 
         placeHolderText     =  [[[placeHolderArray valueForKey:@"placeHolder" ]objectAtIndex:indexPath.section]objectAtIndex:indexPath.row];
         placeHolderTextPass =  [[[placeHolderArray valueForKey:@"placeHolderPass" ]objectAtIndex:indexPath.section]objectAtIndex:indexPath.row];
@@ -356,47 +373,28 @@
         }
         
         
-//        if([typingText isEqualToString:@""] || typingText == nil)
-//        {
-//            [maleLabel setText:placeHolderText];
-//        }
-//        else
-//        {
-//            cell.emailTextField.text = typingText;
-//            
-//        }
+
+       
+        
+//                if([typingText isEqualToString:@""] || typingText == nil)
+//                {
+//                    [maleLabel setText:placeHolderText];
+//                }
+//                else
+//                {
+//                    cell.emailTextField.text = typingText;
 //        
-//        if([typingTextPass isEqualToString:@""] || typingTextPass == nil)
-//        {
-//            [femaleLabel setText:placeHolderFemale];
-//        }
-//        else
-//        {
-//            femaleLabel.text = typingTextPass;
-//            
-//        }
-//
-        
-        
-        //        if([typingText isEqualToString:@""] || typingText == nil)
-        //        {
-        //            [maleLabel setText:placeHolderText];
-        //        }
-        //        else
-        //        {
-        //            cell.emailTextField.text = typingText;
-        //
-        //        }
-        //
-        //        if([typingTextFemale isEqualToString:@""] || typingTextFemale == nil)
-        //        {
-        //            [femaleLabel setText:placeHolderFemale];
-        //        }
-        //        else
-        //        {
-        //            femaleLabel.text = typingTextFemale;
-        //            
-        //        }
+//                }
+//        
+//                if([typingTextFemale isEqualToString:@""] || typingTextFemale == nil)
+//                {
+//                    [femaleLabel setText:placeHolderFemale];
+//                }
+//                else
+//                {
+//                    femaleLabel.text = typingTextFemale;
+//                    
+//                }
         
         
         
@@ -409,6 +407,7 @@
         maleLabel.textColor =[UIColor colorWithRed:(float)161.0/255 green:(float)161.0/255 blue:(float)161.0/255 alpha:1.0f];
         [maleLabel setText:placeHolderText];
         [cell.maleButton addSubview:maleLabel];
+        
         femaleLabel =[[UILabel alloc]initWithFrame:CGRectMake(55, 15, 40, 10)];
         femaleLabel.font = [UIFont fontWithName:@"Patron-Regular" size:9.0];
         femaleLabel.textColor =[UIColor colorWithRed:(float)161.0/255 green:(float)161.0/255 blue:(float)161.0/255 alpha:1.0f];
@@ -667,6 +666,23 @@
         cell.layoutConstraintNotificationViewHeight.constant=51;
         cell.layoutConstraintRadioButtonYPos.constant = 18;
         }
+        
+        
+//        DVSwitch *fifth = [DVSwitch switchWithStringsArray:@[@"", @""]];
+//        fifth.frame = CGRectMake(10,10, self.view.frame.size.width / 2 - 100, 20);
+//        fifth.sliderOffset = 1.0;
+//        fifth.cornerRadius = 10;
+//        fifth.font = [UIFont fontWithName:@"Baskerville-Italic" size:18];
+//        fifth.labelTextColorOutsideSlider = [UIColor colorWithRed:255/255.0 green:30/255.0 blue:30/255.0 alpha:1.0];
+//        fifth.labelTextColorInsideSlider = [UIColor colorWithRed:255 green:255 blue:102 alpha:1.0];
+//        fifth.backgroundColor = [UIColor colorWithRed:255/255.0 green:204/255.0 blue:0/255.0 alpha:1.0];
+//        fifth.sliderColor = [UIColor colorWithRed:255/255.0 green:0/255.0 blue:0/255.0 alpha:1.0];
+//        [cell addSubview:fifth];
+//
+        
+        
+        
+        
     }
 
     if (indexPath.row == 9)
