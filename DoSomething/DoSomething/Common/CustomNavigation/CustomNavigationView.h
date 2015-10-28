@@ -13,6 +13,7 @@
 }
 
 @property (strong, nonatomic) IBOutlet UIButton *buttonBack;
+@property (strong, nonatomic) IBOutlet UIImageView *backButtonImg;
 
 @property (strong,nonatomic)  IBOutlet UIButton * menuBtn;
 

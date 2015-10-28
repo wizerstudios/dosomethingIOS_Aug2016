@@ -1,8 +1,8 @@
 //
-//  ChatsTableViewController.m
+//  DSChatsTableViewController.m
 //  DoSomething
 //
-//  Created by Sha on 10/13/15.
+//  Created by ocsdeveloper9 on 10/28/15.
 //  Copyright (c) 2015 OClock Apps. All rights reserved.
 //
 
@@ -24,45 +24,24 @@
 @end
 
 @implementation DSChatsTableViewController
-@synthesize ChatTableView;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    // Do any additional setup after loading the view from its nib.
     
-//    self.navigationItem.title =@"DOSOMETHING";
-//    self.navigationItem.leftBarButtonItem.title = @"Log Out";
-//    [[UINavigationBar appearance] setBackIndicatorImage:[UIImage imageNamed:@"menu_icon.png"]];
-//    [[UINavigationBar appearance] setBackIndicatorTransitionMaskImage:[UIImage imageNamed:@"menu_icon.png"]];
-//    UIBarButtonItem *newBackButton =
-//    [[UIBarButtonItem alloc] initWithTitle:@" "
-//                                     style:UIBarButtonItemStylePlain
-//                                    target:nil
-//                                    action:nil];
-//    [[self navigationItem] setBackBarButtonItem:newBackButton];
-        
     ChatNameArray =[[NSArray alloc] initWithObjects:@"Gal Gadot",@"Yuna",@"Taylor",nil];
     MessageArray =[[NSArray alloc] initWithObjects:@" Haha Sure I'll see you at 7:)",@"Hello?",@"See Ya!",nil];
     timeArray = [[NSArray alloc] initWithObjects:@"19:58",@"17:20",@"15:30",nil];
-    imageArray =[[NSArray alloc] initWithObjects:@"Galglot2x.png",@"yuna2x.png",@"taylor2x.png",nil];
-    badgeimage=[[NSArray alloc] initWithObjects:@"18-Chats copy 3.png",@"18-Chats copy 2.png",@" ",nil];
-    
+    imageArray =[[NSArray alloc] initWithObjects:@"Galglot.png",@"yuna.png",@"taylor.png",nil];
+    badgeimage=[[NSArray alloc] initWithObjects:@"18-Chats.png",@"12-Chats.png",@" ",nil];
 }
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-{
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self)
-    {
-        ChatTableView.delegate=self;
-        ChatTableView.dataSource=self;
-    }
-    
-    return self;
+- (void)didReceiveMemoryWarning {
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
 }
 
-#pragma mark - Tableview DataSource
-
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+-(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     return [timeArray count];
 }
@@ -80,6 +59,7 @@
     {
         NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"ChatTableViewCell" owner:nil options:nil];
         Cell = [nib objectAtIndex:0];
+        
     }
     Cell.ChatName .text = [ChatNameArray objectAtIndex:indexPath.row];
     Cell.Message.text= [MessageArray objectAtIndex:indexPath.row];
@@ -124,21 +104,14 @@
     [self.navigationController pushViewController:ChatDetail animated:YES];
 }
 
+/*
+#pragma mark - Navigation
 
-//-(void)loadNavigation{
-//    
-//    self.navigationController.navigationBarHidden=YES;
-//    [self.navigationItem setHidesBackButton:YES animated:NO];
-//    [self.navigationController.navigationBar setTranslucent:NO];
-//    
-//    CustomNavigationView *customNavigation;
-//    customNavigation = [[CustomNavigationView alloc] initWithNibName:@"CustomNavigationView" bundle:nil];
-//    customNavigation.view.frame = CGRectMake(0, 0, CGRectGetWidth(self.view.frame), 56);
-//    
-//   [customNavigation setbuttonBackHidden:YES];
-//    [self.view addSubview:customNavigation.view];
-//    
-//    
-//}
-//
+// In a storyboard-based application, you will often want to do a little preparation before navigation
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    // Get the new view controller using [segue destinationViewController].
+    // Pass the selected object to the new view controller.
+}
+*/
+
 @end

@@ -29,10 +29,13 @@
 		51322A291BDFBFAA00418216 /* taylor.png in Resources */ = {isa = PBXBuildFile; fileRef = 51322A1F1BDFBFAA00418216 /* taylor.png */; };
 		51322A2A1BDFBFAA00418216 /* yuna.png in Resources */ = {isa = PBXBuildFile; fileRef = 51322A201BDFBFAA00418216 /* yuna.png */; };
 		51322A2B1BDFBFAA00418216 /* zoe_tay.png in Resources */ = {isa = PBXBuildFile; fileRef = 51322A211BDFBFAA00418216 /* zoe_tay.png */; };
+		51ED4E5C1BE0895A0079E030 /* DSChatsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 51ED4E5A1BE0895A0079E030 /* DSChatsTableViewController.m */; };
+		51ED4E5D1BE0895A0079E030 /* DSChatsTableViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 51ED4E5B1BE0895A0079E030 /* DSChatsTableViewController.xib */; };
+		51ED4E621BE08EDF0079E030 /* 18-Chats.png in Resources */ = {isa = PBXBuildFile; fileRef = 51ED4E5F1BE08EDF0079E030 /* 18-Chats.png */; };
+		51ED4E631BE08EDF0079E030 /* 12-Chats.png in Resources */ = {isa = PBXBuildFile; fileRef = 51ED4E601BE08EDF0079E030 /* 12-Chats.png */; };
+		51ED4E641BE08EDF0079E030 /* 19-ChatWindow.png in Resources */ = {isa = PBXBuildFile; fileRef = 51ED4E611BE08EDF0079E030 /* 19-ChatWindow.png */; };
 		6A50C21C1BCCBB8C002B11AC /* DSProfileTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A50C21A1BCCBB8C002B11AC /* DSProfileTableViewCell.m */; };
 		6A50C21D1BCCBB8C002B11AC /* DSProfileTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6A50C21B1BCCBB8C002B11AC /* DSProfileTableViewCell.xib */; };
-		6A50C2271BCCC310002B11AC /* DSChatsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A50C2251BCCC310002B11AC /* DSChatsTableViewController.m */; };
-		6A50C2281BCCC310002B11AC /* DSChatsTableViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6A50C2261BCCC310002B11AC /* DSChatsTableViewController.xib */; };
 		6A8D15D31BCC059B000F1FB4 /* DSProfileTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A8D15D11BCC059B000F1FB4 /* DSProfileTableViewController.m */; };
 		6A8D15D41BCC059B000F1FB4 /* DSProfileTableViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6A8D15D21BCC059B000F1FB4 /* DSProfileTableViewController.xib */; };
 		C6D5F60C1BC7AF500050C1AE /* Launch Screen.xib in Resources */ = {isa = PBXBuildFile; fileRef = C6D5F60B1BC7AF500050C1AE /* Launch Screen.xib */; };
@@ -167,12 +170,15 @@
 		51322A1F1BDFBFAA00418216 /* taylor.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = taylor.png; sourceTree = "<group>"; };
 		51322A201BDFBFAA00418216 /* yuna.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = yuna.png; sourceTree = "<group>"; };
 		51322A211BDFBFAA00418216 /* zoe_tay.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = zoe_tay.png; sourceTree = "<group>"; };
+		51ED4E591BE0895A0079E030 /* DSChatsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DSChatsTableViewController.h; sourceTree = "<group>"; };
+		51ED4E5A1BE0895A0079E030 /* DSChatsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DSChatsTableViewController.m; sourceTree = "<group>"; };
+		51ED4E5B1BE0895A0079E030 /* DSChatsTableViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DSChatsTableViewController.xib; sourceTree = "<group>"; };
+		51ED4E5F1BE08EDF0079E030 /* 18-Chats.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "18-Chats.png"; sourceTree = "<group>"; };
+		51ED4E601BE08EDF0079E030 /* 12-Chats.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "12-Chats.png"; sourceTree = "<group>"; };
+		51ED4E611BE08EDF0079E030 /* 19-ChatWindow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "19-ChatWindow.png"; sourceTree = "<group>"; };
 		6A50C2191BCCBB8C002B11AC /* DSProfileTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DSProfileTableViewCell.h; sourceTree = "<group>"; };
 		6A50C21A1BCCBB8C002B11AC /* DSProfileTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DSProfileTableViewCell.m; sourceTree = "<group>"; };
 		6A50C21B1BCCBB8C002B11AC /* DSProfileTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DSProfileTableViewCell.xib; sourceTree = "<group>"; };
-		6A50C2241BCCC310002B11AC /* DSChatsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DSChatsTableViewController.h; sourceTree = "<group>"; };
-		6A50C2251BCCC310002B11AC /* DSChatsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DSChatsTableViewController.m; sourceTree = "<group>"; };
-		6A50C2261BCCC310002B11AC /* DSChatsTableViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DSChatsTableViewController.xib; sourceTree = "<group>"; };
 		6A8D15D01BCC059B000F1FB4 /* DSProfileTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DSProfileTableViewController.h; sourceTree = "<group>"; };
 		6A8D15D11BCC059B000F1FB4 /* DSProfileTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DSProfileTableViewController.m; sourceTree = "<group>"; };
 		6A8D15D21BCC059B000F1FB4 /* DSProfileTableViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DSProfileTableViewController.xib; sourceTree = "<group>"; };
@@ -367,6 +373,7 @@
 		513229FD1BDF944E00418216 /* ChatCells */ = {
 			isa = PBXGroup;
 			children = (
+				51ED4E5E1BE08BD50079E030 /* Images */,
 				513229FE1BDF948000418216 /* ChatTableViewCell.h */,
 				513229FF1BDF948000418216 /* ChatTableViewCell.m */,
 				51322A001BDF948000418216 /* ChatTableViewCell.xib */,
@@ -418,13 +425,23 @@
 			name = Images;
 			sourceTree = "<group>";
 		};
+		51ED4E5E1BE08BD50079E030 /* Images */ = {
+			isa = PBXGroup;
+			children = (
+				51ED4E5F1BE08EDF0079E030 /* 18-Chats.png */,
+				51ED4E601BE08EDF0079E030 /* 12-Chats.png */,
+				51ED4E611BE08EDF0079E030 /* 19-ChatWindow.png */,
+			);
+			name = Images;
+			sourceTree = "<group>";
+		};
 		6A50C2231BCCC310002B11AC /* Chats */ = {
 			isa = PBXGroup;
 			children = (
 				513229FD1BDF944E00418216 /* ChatCells */,
-				6A50C2241BCCC310002B11AC /* DSChatsTableViewController.h */,
-				6A50C2251BCCC310002B11AC /* DSChatsTableViewController.m */,
-				6A50C2261BCCC310002B11AC /* DSChatsTableViewController.xib */,
+				51ED4E591BE0895A0079E030 /* DSChatsTableViewController.h */,
+				51ED4E5A1BE0895A0079E030 /* DSChatsTableViewController.m */,
+				51ED4E5B1BE0895A0079E030 /* DSChatsTableViewController.xib */,
 			);
 			name = Chats;
 			path = ViewController/Chats;
@@ -850,15 +867,16 @@
 				EAFC977B1BD21A1200B3593D /* italianfood.png in Resources */,
 				EAFC97661BD21A1200B3593D /* cat_active.png in Resources */,
 				C6D5F63A1BC7B52C0050C1AE /* Patron-Black.ttf in Resources */,
-				6A50C2281BCCC310002B11AC /* DSChatsTableViewController.xib in Resources */,
 				EAFC97841BD21A1200B3593D /* piano_active.png in Resources */,
 				EAFC977E1BD21A1200B3593D /* japanesefood_active.png in Resources */,
 				EAFC978F1BD21A1200B3593D /* tanning_active.png in Resources */,
 				EAFC97891BD21A1200B3593D /* soccer_active.png in Resources */,
 				51322A281BDFBFAA00418216 /* request_send1.png in Resources */,
 				EAFC97771BD21A1200B3593D /* golf.png in Resources */,
+				51ED4E641BE08EDF0079E030 /* 19-ChatWindow.png in Resources */,
 				EAFC97641BD21A1200B3593D /* camera_icon.png in Resources */,
 				51322A231BDFBFAA00418216 /* chong.png in Resources */,
+				51ED4E631BE08EDF0079E030 /* 12-Chats.png in Resources */,
 				EAFC97751BD21A1200B3593D /* gardening.png in Resources */,
 				C6D5F6421BC7B52C0050C1AE /* Patron-MediumItalic.ttf in Resources */,
 				51322A241BDFBFAA00418216 /* felicin.png in Resources */,
@@ -867,6 +885,7 @@
 				EAF16E401BDE1EBE00E6E5CE /* Pluis_icon1.png in Resources */,
 				6A8D15D41BCC059B000F1FB4 /* DSProfileTableViewController.xib in Resources */,
 				EAFC97931BD21A1200B3593D /* violin_active.png in Resources */,
+				51ED4E621BE08EDF0079E030 /* 18-Chats.png in Resources */,
 				C6D5F6441BC7B52C0050C1AE /* Patron-Thin.ttf in Resources */,
 				EAFC978C1BD21A1200B3593D /* sycling.png in Resources */,
 				51322A141BDFBEDB00418216 /* DSLocationViewController.xib in Resources */,
@@ -884,6 +903,7 @@
 				EAFC976E1BD21A1200B3593D /* finance_acative.png in Resources */,
 				EAFC97981BD21CF800B3593D /* DSInterestAndHobbiesCollectionViewCell.xib in Resources */,
 				EAFC97801BD21A1200B3593D /* paint_active.png in Resources */,
+				51ED4E5D1BE0895A0079E030 /* DSChatsTableViewController.xib in Resources */,
 				C6D5F63B1BC7B52C0050C1AE /* Patron-BlackItalic.ttf in Resources */,
 				EAFC97821BD21A1200B3593D /* photography_active.png in Resources */,
 				EAFC97781BD21A1200B3593D /* golf_active.png in Resources */,
@@ -911,6 +931,7 @@
 				EAEF251E1BCF9EF600F83E82 /* IQUITextFieldView+Additions.m in Sources */,
 				EAEF25261BCF9EF600F83E82 /* IQBarButtonItem.m in Sources */,
 				EAF1DC511BD8B2AF00D51354 /* DSHomeViewController.m in Sources */,
+				51ED4E5C1BE0895A0079E030 /* DSChatsTableViewController.m in Sources */,
 				EAEF25271BCF9EF600F83E82 /* IQTitleBarButtonItem.m in Sources */,
 				EAEF251F1BCF9EF600F83E82 /* IQUIView+Hierarchy.m in Sources */,
 				065BAC521BC7A135005AF493 /* main.m in Sources */,
@@ -929,7 +950,6 @@
 				EAEF25291BCF9EF600F83E82 /* IQUIView+IQKeyboardToolbar.m in Sources */,
 				513229FB1BDF930A00418216 /* TabBarHomeViewController.m in Sources */,
 				EAFC97971BD21CF800B3593D /* DSInterestAndHobbiesCollectionViewCell.m in Sources */,
-				6A50C2271BCCC310002B11AC /* DSChatsTableViewController.m in Sources */,
 				EADB949E1BDF566C00512374 /* HomeViewController.m in Sources */,
 				EAF1871A1BDA352B004C25EA /* DAAutoScroll.m in Sources */,
 				6A8D15D31BCC059B000F1FB4 /* DSProfileTableViewController.m in Sources */,

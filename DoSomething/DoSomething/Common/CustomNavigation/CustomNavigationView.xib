@@ -13,6 +13,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="CustomNavigationView">
             <connections>
+                <outlet property="backButtonImg" destination="ycz-YH-7lA" id="laP-Yd-AAp"/>
                 <outlet property="buttonBack" destination="CB6-yC-cZA" id="hjE-pT-aq3"/>
                 <outlet property="layoutConstraintBackBtnYPos" destination="Fa3-ZJ-H0b" id="IRa-gw-wvX"/>
                 <outlet property="layoutConstraintLabelYPos" destination="shb-wQ-1JW" id="SKf-Xc-xWx"/>
