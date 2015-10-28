@@ -16,7 +16,7 @@
 @implementation AppDelegate
 
 @synthesize locationButton,menuButton,chatsButton,buttonsView,buttons_array;
-@synthesize homePage,chatPage,window;
+@synthesize homePage,chatPage,window, locationPage;
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
@@ -130,8 +130,8 @@
     [locationButton setBackgroundImage:[UIImage imageNamed:@"loaction_active.png"] forState:UIControlStateNormal];
     [chatsButton setBackgroundImage:[UIImage imageNamed:@"chats.png"] forState:UIControlStateNormal];
     
-//    locationPage =[[ViewController1 alloc]initWithNibName:@"ViewController1" bundle:nil];
-//    [self.navigationController pushViewController:locationPage animated:NO];
+    locationPage =[[DSLocationViewController alloc]initWithNibName:@"DSLocationViewController" bundle:nil];
+    [self.navigationController pushViewController:locationPage animated:NO];
 }
 -(void)menuView{
     [chatsButton setBackgroundImage:[UIImage imageNamed:@"chats.png"] forState:UIControlStateNormal];

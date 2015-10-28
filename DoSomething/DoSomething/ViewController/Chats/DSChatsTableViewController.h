@@ -13,7 +13,6 @@
 {
     
 }
-
 @property (strong, nonatomic) IBOutlet UITableView *ChatTableView;
 
 @end

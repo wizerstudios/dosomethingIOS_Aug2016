@@ -10,6 +10,7 @@
 #import "DSHomeViewController.h"
 #import "HomeViewController.h"
 #import "DSChatsTableViewController.h"
+#import "DSLocationViewController.h"
 
 @interface AppDelegate : UIResponder <UIApplicationDelegate>
 {
@@ -23,6 +24,7 @@
 @property (nonatomic, strong) UINavigationController *navigationController;
 
 @property (strong, nonatomic) HomeViewController *homePage;
+@property (strong, nonatomic) DSLocationViewController *locationPage;
 @property (strong, nonatomic) DSChatsTableViewController *chatPage;
 
 

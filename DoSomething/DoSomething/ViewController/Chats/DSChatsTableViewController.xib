@@ -7,7 +7,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="DSChatsTableViewController">
             <connections>
-                <outlet property="ChatTableView" destination="mKL-NB-Sje" id="OdF-bx-VOv"/>
+                <outlet property="ChatTableView" destination="EO9-8c-bVe" id="YnK-Kr-MWU"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="DLq-qv-m1t"/>
             </connections>
         </placeholder>
@@ -16,22 +16,22 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="mKL-NB-Sje">
-                    <rect key="frame" x="0.0" y="0.0" width="320" height="569"/>
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="EO9-8c-bVe">
+                    <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <connections>
-                        <outlet property="dataSource" destination="-1" id="TGx-gr-Qxo"/>
-                        <outlet property="delegate" destination="-1" id="HTB-3W-Mt8"/>
+                        <outlet property="dataSource" destination="-1" id="hNP-pg-XHr"/>
+                        <outlet property="delegate" destination="-1" id="P1R-FR-3sq"/>
                     </connections>
                 </tableView>
             </subviews>
             <constraints>
-                <constraint firstAttribute="bottom" secondItem="mKL-NB-Sje" secondAttribute="bottom" constant="-1" id="0UK-Io-uhB"/>
-                <constraint firstItem="mKL-NB-Sje" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="S1S-BE-yVR"/>
-                <constraint firstItem="mKL-NB-Sje" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="SuW-nk-byS"/>
-                <constraint firstAttribute="trailing" secondItem="mKL-NB-Sje" secondAttribute="trailing" id="owA-y4-xJW"/>
+                <constraint firstAttribute="trailing" secondItem="EO9-8c-bVe" secondAttribute="trailing" id="H8j-dV-U30"/>
+                <constraint firstItem="EO9-8c-bVe" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="L7R-mw-hMn"/>
+                <constraint firstItem="EO9-8c-bVe" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="jCS-CB-2G6"/>
+                <constraint firstAttribute="bottom" secondItem="EO9-8c-bVe" secondAttribute="bottom" id="p1d-sE-2oS"/>
             </constraints>
-            <point key="canvasLocation" x="588" y="434"/>
+            <point key="canvasLocation" x="1040" y="436"/>
         </view>
     </objects>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">

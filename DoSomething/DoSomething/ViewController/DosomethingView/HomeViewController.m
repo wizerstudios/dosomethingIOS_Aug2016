@@ -53,24 +53,14 @@
                   [NSDictionary dictionaryWithObjectsAndKeys:@"movies_Inactive.png",NORMAL_IMAGE,@"movies_active.png",ACTIVE_IMAGE,@"SOCCER",CAPTION, nil],
                  nil];
     
-    [[UINavigationBar appearance] setBackgroundImage:[UIImage imageNamed:@" "] forBarMetrics:UIBarMetricsDefault];
-    self.navigationItem.leftBarButtonItem.title = @"Log Out";
-    
-    UIBarButtonItem *newBackButton =
-    [[UIBarButtonItem alloc] initWithTitle:@" "
-                                     style:UIBarButtonItemStylePlain
-                                    target:nil
-                                    action:nil];
-    [[self navigationItem] setBackBarButtonItem:newBackButton];
-    
     selectedArray = [[NSMutableArray alloc]init];
 
 }
 -(void)viewWillAppear:(BOOL)animated
 {
-    [self setupCollectionView];
     appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
     appDelegate.buttonsView.hidden=NO;
+    [self setupCollectionView];
 }
 
 -(void)setupCollectionView {
@@ -136,9 +126,24 @@
     
     NSDictionary *data = [menuArray objectAtIndex:indexPath.row];
     
-    cell.MenuTittle.textColor = [UIColor colorWithRed:(164/255.0f) green:(164/255.0f) blue:(164/255.0f) alpha:1.0f];
-    NSString * objstr = [NSString stringWithFormat:@"%@",[data valueForKey:NORMAL_IMAGE]];
-    cell.MenuImg.image = [UIImage imageNamed:objstr];
+    if (isSelectMenu)
+    {
+        for (NSIndexPath *collectionIndexPath in [_homeCollectionView indexPathsForSelectedItems])
+        {
+            if ([indexPath isEqual:collectionIndexPath])
+            {
+                cell.MenuTittle.textColor = [UIColor colorWithRed:(199/255.0f) green:(65/255.0f) blue:(81/255.0f) alpha:1.0f];
+                NSString * objstr = [NSString stringWithFormat:@"%@",[data valueForKey:ACTIVE_IMAGE]];
+                cell.MenuImg.image = [UIImage imageNamed:objstr];
+                break;
+            }
+        }
+    }
+    else{
+        cell.MenuTittle.textColor = [UIColor colorWithRed:(164/255.0f) green:(164/255.0f) blue:(164/255.0f) alpha:1.0f];
+        NSString * objstr = [NSString stringWithFormat:@"%@",[data valueForKey:NORMAL_IMAGE]];
+        cell.MenuImg.image = [UIImage imageNamed:objstr];
+    }
     
     cell.layer.shouldRasterize = YES;
     cell.layer.rasterizationScale = [UIScreen mainScreen].scale;
@@ -220,37 +225,6 @@
     return returnSize;
 }
 
-- (UICollectionReusableView *)collectionView:(UICollectionView *)collectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath
-{
-    if (kind == UICollectionElementKindSectionHeader)
-    {
-        UICollectionReusableView *reusableview = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"HeaderView" forIndexPath:indexPath];
-        
-        if (reusableview==nil)
-        {
-            reusableview=[[UICollectionReusableView alloc] initWithFrame:CGRectMake(0, 0, 375, 50)];
-        }
-        
-        for (UIView* view in reusableview.subviews)
-        {
-            if ([view isKindOfClass:[UILabel class]]) {
-                [view removeFromSuperview];
-            }
-        }
-        
-        UILabel *label=[[UILabel alloc] initWithFrame:CGRectMake(0, 0, 375, 50)];
-        
-        NSMutableDictionary *data = [menuArray objectAtIndex:indexPath.section];
-        NSString *cellData = [data objectForKey:@"RUNNING"];
-        
-        label.text=cellData;
-        [reusableview addSubview:label];
-        return reusableview;
-    }
-    return nil;
-}
-
-
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
     isSelectMenu=YES;
@@ -272,6 +246,19 @@
         [alert show];
     }
 }
+
+//-(void)collectionView: (UICollectionView *)collectionView didDeselectItemAtIndexPath:(NSIndexPath *)indexPath
+//{
+//    NSArray *arrSelect = [_homeCollectionView indexPathsForSelectedItems];
+//    [selectedArray removeObject:arrSelect];
+//    
+//    HomeCustomCell *cell = (HomeCustomCell *)[collectionView cellForItemAtIndexPath:indexPath];
+//    NSMutableDictionary *data = [menuArray objectAtIndex:indexPath.row];
+//    
+//    cell.MenuTittle.textColor = [UIColor colorWithRed:(164/255.0f) green:(164/255.0f) blue:(164/255.0f) alpha:1.0f];
+//    NSString * objstr = [NSString stringWithFormat:@"%@",[data valueForKey:NORMAL_IMAGE]];
+//    cell.MenuImg.image = [UIImage imageNamed:objstr];
+//}
 
 - (void)fetchMoreItems {
     NSLog(@"FETCHING MORE ITEMS ******************");

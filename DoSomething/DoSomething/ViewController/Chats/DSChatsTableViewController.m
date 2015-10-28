@@ -39,7 +39,7 @@
 //                                    target:nil
 //                                    action:nil];
 //    [[self navigationItem] setBackBarButtonItem:newBackButton];
-    
+        
     ChatNameArray =[[NSArray alloc] initWithObjects:@"Gal Gadot",@"Yuna",@"Taylor",nil];
     MessageArray =[[NSArray alloc] initWithObjects:@" Haha Sure I'll see you at 7:)",@"Hello?",@"See Ya!",nil];
     timeArray = [[NSArray alloc] initWithObjects:@"19:58",@"17:20",@"15:30",nil];
@@ -62,7 +62,8 @@
 
 #pragma mark - Tableview DataSource
 
--(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
     return [timeArray count];
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
