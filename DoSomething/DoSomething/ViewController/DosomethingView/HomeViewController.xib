@@ -44,12 +44,12 @@
                     </connections>
                 </collectionView>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text=" " lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XYt-PN-Eqh">
-                    <rect key="frame" x="0.0" y="517" width="320" height="2"/>
-                    <color key="backgroundColor" red="0.37268906389633594" green="0.37268906389633594" blue="0.37268906389633594" alpha="1" colorSpace="calibratedRGB"/>
+                    <rect key="frame" x="0.0" y="518" width="320" height="1"/>
+                    <color key="backgroundColor" red="0.30544501228775689" green="0.30544501228775689" blue="0.30544501228775689" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
                         <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="2" id="I5q-be-Dck"/>
                         <constraint firstAttribute="height" constant="4" id="bQu-tg-krg"/>
-                        <constraint firstAttribute="height" constant="2" id="fIQ-JK-diL"/>
+                        <constraint firstAttribute="height" constant="1" id="fIQ-JK-diL"/>
                         <constraint firstAttribute="width" constant="320" id="h3O-aM-GW8"/>
                     </constraints>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
