@@ -271,6 +271,7 @@
     CGFloat collectionCellWidth;
     CGFloat finalWidthWithPadding;
     if ( indexPath.section ==1 ) {
+        
         if(IS_IPHONE6_Plus)
         {
         int numberOfCellInRow = 5;
@@ -303,6 +304,7 @@
     
       if (indexPath.section == 0 || indexPath.section ==3 )
       {
+          
           if(IS_IPHONE6_Plus)
           {
               int numberOfCellInRow = 6;
@@ -335,6 +337,7 @@
 
     
     if (indexPath.section ==2) {
+        
         if(IS_IPHONE6_Plus)
         {
             int numberOfCellInRow = 8;
@@ -364,10 +367,8 @@
         
 
     }
-    
     return CGSizeMake(finalWidthWithPadding , finalWidthWithPadding);
 
-    
 }
 
 //- (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout minimumLineSpacingForSectionAtIndex:(NSInteger)section {
