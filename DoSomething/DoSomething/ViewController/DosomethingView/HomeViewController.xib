@@ -29,7 +29,7 @@
                     </state>
                 </button>
                 <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="9eq-ck-Eus">
-                    <rect key="frame" x="10" y="80" width="300" height="394"/>
+                    <rect key="frame" x="10" y="80" width="300" height="391"/>
                     <color key="backgroundColor" red="0.90980392156862744" green="0.90980392156862744" blue="0.90980392156862744" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <inset key="scrollIndicatorInsets" minX="20" minY="0.0" maxX="10" maxY="0.0"/>
                     <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="cyT-a9-EmV">
@@ -52,7 +52,7 @@
                 <constraint firstItem="PHx-F9-heI" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="mDL-9b-LIT"/>
                 <constraint firstAttribute="trailing" secondItem="PHx-F9-heI" secondAttribute="trailing" id="mxM-VH-msK"/>
                 <constraint firstAttribute="bottom" secondItem="PHx-F9-heI" secondAttribute="bottom" constant="51" id="nsR-zJ-Xxc"/>
-                <constraint firstItem="PHx-F9-heI" firstAttribute="top" secondItem="9eq-ck-Eus" secondAttribute="bottom" id="zI2-A2-ogG"/>
+                <constraint firstItem="PHx-F9-heI" firstAttribute="top" secondItem="9eq-ck-Eus" secondAttribute="bottom" constant="3" id="zI2-A2-ogG"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
         </view>
