@@ -43,18 +43,42 @@
                         <outlet property="delegate" destination="-1" id="0ey-6p-01t"/>
                     </connections>
                 </collectionView>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text=" " lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XYt-PN-Eqh">
+                    <rect key="frame" x="0.0" y="517" width="320" height="2"/>
+                    <color key="backgroundColor" red="0.37268906389633594" green="0.37268906389633594" blue="0.37268906389633594" alpha="1" colorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="2" id="I5q-be-Dck"/>
+                        <constraint firstAttribute="height" constant="4" id="bQu-tg-krg"/>
+                        <constraint firstAttribute="height" constant="2" id="fIQ-JK-diL"/>
+                        <constraint firstAttribute="width" constant="320" id="h3O-aM-GW8"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                    <nil key="highlightedColor"/>
+                    <variation key="default">
+                        <mask key="constraints">
+                            <exclude reference="I5q-be-Dck"/>
+                            <exclude reference="bQu-tg-krg"/>
+                            <exclude reference="h3O-aM-GW8"/>
+                        </mask>
+                    </variation>
+                </label>
             </subviews>
             <color key="backgroundColor" red="0.90980392156862744" green="0.90980392156862744" blue="0.90980392156862744" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
                 <constraint firstAttribute="trailing" secondItem="9eq-ck-Eus" secondAttribute="trailing" constant="10" id="47A-q2-Ddk"/>
+                <constraint firstAttribute="trailing" secondItem="XYt-PN-Eqh" secondAttribute="trailing" id="5hy-bE-cJR"/>
                 <constraint firstItem="9eq-ck-Eus" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="10" id="Azf-4t-DLl"/>
                 <constraint firstItem="9eq-ck-Eus" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="80" id="CgO-0T-lNl"/>
                 <constraint firstItem="PHx-F9-heI" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="mDL-9b-LIT"/>
                 <constraint firstAttribute="trailing" secondItem="PHx-F9-heI" secondAttribute="trailing" id="mxM-VH-msK"/>
                 <constraint firstAttribute="bottom" secondItem="PHx-F9-heI" secondAttribute="bottom" constant="51" id="nsR-zJ-Xxc"/>
+                <constraint firstAttribute="bottom" secondItem="XYt-PN-Eqh" secondAttribute="bottom" constant="51" id="pUq-Ay-1m9"/>
+                <constraint firstItem="XYt-PN-Eqh" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="ujJ-Wc-OtW"/>
                 <constraint firstItem="PHx-F9-heI" firstAttribute="top" secondItem="9eq-ck-Eus" secondAttribute="bottom" constant="3" id="zI2-A2-ogG"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <point key="canvasLocation" x="230" y="421"/>
         </view>
     </objects>
 </document>

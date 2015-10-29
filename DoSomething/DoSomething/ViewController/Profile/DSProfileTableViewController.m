@@ -276,7 +276,7 @@
         }
         if ( indexPath.row ==6) {
             if([imageNormalArray count] < 1)
-                return 60;
+                return 70;
             else if([imageNormalArray count] <= 5)
                 return commonHeight + 46;
             else if([imageNormalArray count] <= 10)
@@ -310,7 +310,7 @@
         }
         if ( indexPath.row ==6) {
             if([imageNormalArray count] < 1)
-                return 150;
+                return 80;
             else if([imageNormalArray count] <= 5)
                 return commonHeight + 46;
             else if([imageNormalArray count] <= 10)

@@ -50,7 +50,7 @@
                  [NSDictionary dictionaryWithObjectsAndKeys:@"karaoke_Inactive.png",NORMAL_IMAGE,@"karaoke_active.png",ACTIVE_IMAGE,@"KERAOKE",CAPTION, nil],
                  [NSDictionary dictionaryWithObjectsAndKeys:@"gym_Inactive.png",NORMAL_IMAGE,@"gym_active.png",ACTIVE_IMAGE,@"GYM",CAPTION, nil],
                   [NSDictionary dictionaryWithObjectsAndKeys:@"tennis_Inactive.png",NORMAL_IMAGE,@"tennis_active.png",ACTIVE_IMAGE,@"TENNIS",CAPTION, nil],
-                  [NSDictionary dictionaryWithObjectsAndKeys:@"movies_Inactive.png",NORMAL_IMAGE,@"movies_active.png",ACTIVE_IMAGE,@"SOCCER",CAPTION, nil],
+                  [NSDictionary dictionaryWithObjectsAndKeys:@"soocer_Inactive",NORMAL_IMAGE,@"soocer_active",ACTIVE_IMAGE,@"SOCCER",CAPTION, nil],
                  nil];
     
     CustomNavigationView *customNavigation;
@@ -180,7 +180,10 @@
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath{
     CGSize returnSize = CGSizeZero;
     
-    returnSize = CGSizeMake((self.view.frame.size.width/4.0), 110);
+    if (IS_IPHONE6 ||IS_IPHONE6_Plus)
+        returnSize = CGSizeMake((self.view.frame.size.width/4.0), 110);
+    if (IS_IPHONE4 ||IS_IPHONE5 )
+        returnSize = CGSizeMake((self.view.frame.size.width/3.5), 89);
     
     return returnSize;
 }
