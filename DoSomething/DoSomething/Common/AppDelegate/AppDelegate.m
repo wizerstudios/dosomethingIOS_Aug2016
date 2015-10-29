@@ -128,7 +128,7 @@
     [chatsButton setBackgroundImage:[UIImage imageNamed:@"chats.png"] forState:UIControlStateNormal];
     [locationButton setBackgroundImage:[UIImage imageNamed:@"loaction.png"] forState:UIControlStateNormal];
     
-    homePage =[[HomeViewController alloc]initWithNibName:@"ViewController2" bundle:nil];
+    homePage =[[HomeViewController alloc]initWithNibName:@"HomeViewController" bundle:nil];
     [self.navigationController pushViewController:homePage animated:NO];
 }
 -(void)chatView

@@ -8,8 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		065BAC521BC7A135005AF493 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 065BAC511BC7A135005AF493 /* main.m */; };
-		513229FB1BDF930A00418216 /* TabBarHomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 513229F91BDF930A00418216 /* TabBarHomeViewController.m */; };
-		513229FC1BDF930A00418216 /* TabBarHomeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 513229FA1BDF930A00418216 /* TabBarHomeViewController.xib */; };
 		51322A061BDF961800418216 /* DSChatDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 51322A041BDF961800418216 /* DSChatDetailViewController.m */; };
 		51322A071BDF961800418216 /* DSChatDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 51322A051BDF961800418216 /* DSChatDetailViewController.xib */; };
 		51322A131BDFBEDB00418216 /* DSLocationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 51322A0E1BDFBEDB00418216 /* DSLocationViewController.m */; };
@@ -144,9 +142,6 @@
 		065BAC4D1BC7A135005AF493 /* DoSomething.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DoSomething.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		065BAC511BC7A135005AF493 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		065BAC611BC7A135005AF493 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		513229F81BDF930A00418216 /* TabBarHomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TabBarHomeViewController.h; sourceTree = "<group>"; };
-		513229F91BDF930A00418216 /* TabBarHomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TabBarHomeViewController.m; sourceTree = "<group>"; };
-		513229FA1BDF930A00418216 /* TabBarHomeViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TabBarHomeViewController.xib; sourceTree = "<group>"; };
 		51322A031BDF961800418216 /* DSChatDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DSChatDetailViewController.h; sourceTree = "<group>"; };
 		51322A041BDF961800418216 /* DSChatDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DSChatDetailViewController.m; sourceTree = "<group>"; };
 		51322A051BDF961800418216 /* DSChatDetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DSChatDetailViewController.xib; sourceTree = "<group>"; };
@@ -363,16 +358,6 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		513229F11BDF918800418216 /* TabBarViewController */ = {
-			isa = PBXGroup;
-			children = (
-				513229F81BDF930A00418216 /* TabBarHomeViewController.h */,
-				513229F91BDF930A00418216 /* TabBarHomeViewController.m */,
-				513229FA1BDF930A00418216 /* TabBarHomeViewController.xib */,
-			);
-			name = TabBarViewController;
-			sourceTree = "<group>";
-		};
 		513229FD1BDF944E00418216 /* ChatCells */ = {
 			isa = PBXGroup;
 			children = (
@@ -483,7 +468,6 @@
 		C6D5F60A1BC7A4560050C1AE /* ViewController */ = {
 			isa = PBXGroup;
 			children = (
-				513229F11BDF918800418216 /* TabBarViewController */,
 				EADB94941BDF566C00512374 /* DosomethingView */,
 				EAF1DC4D1BD8B2AF00D51354 /* HomeView */,
 				EACB22B71BC7C7F7002FAD54 /* Login */,
@@ -909,7 +893,6 @@
 				EAFC97831BD21A1200B3593D /* piano.png in Resources */,
 				EAFC976F1BD21A1200B3593D /* fishing.png in Resources */,
 				C6D5F67C1BC7EC440050C1AE /* Images.xcassets in Resources */,
-				513229FC1BDF930A00418216 /* TabBarHomeViewController.xib in Resources */,
 				EAFC96591BD20FD400B3593D /* DSInterestAndHobbiesViewController.xib in Resources */,
 				EAFC978D1BD21A1200B3593D /* sycling_active.png in Resources */,
 				C6D5F6451BC7B52C0050C1AE /* Patron-ThinItalic.ttf in Resources */,
@@ -964,7 +947,6 @@
 				51ED4E701BE0CB540079E030 /* ChatTableViewCell.m in Sources */,
 				C6D5F6151BC7B0970050C1AE /* AppDelegate.m in Sources */,
 				EAEF25291BCF9EF600F83E82 /* IQUIView+IQKeyboardToolbar.m in Sources */,
-				513229FB1BDF930A00418216 /* TabBarHomeViewController.m in Sources */,
 				EAFC97971BD21CF800B3593D /* DSInterestAndHobbiesCollectionViewCell.m in Sources */,
 				EADB949E1BDF566C00512374 /* HomeViewController.m in Sources */,
 				EAF1871A1BDA352B004C25EA /* DAAutoScroll.m in Sources */,
