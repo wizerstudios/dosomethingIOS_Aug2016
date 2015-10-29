@@ -276,7 +276,7 @@
         }
         if ( indexPath.row ==6) {
             if([imageNormalArray count] < 1)
-                return 150;
+                return 60;
             else if([imageNormalArray count] <= 5)
                 return commonHeight + 46;
             else if([imageNormalArray count] <= 10)
@@ -725,7 +725,6 @@
         
         if([place1 isEqualToString:@""] || place1 == nil)
         {
-            
             NSString *NewMessageImage =[[[placeHolderArray objectAtIndex:indexPath.section] objectAtIndex:indexPath.row] valueForKey:@"placeHolder"];
             
             
