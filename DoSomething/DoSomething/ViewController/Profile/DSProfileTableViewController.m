@@ -235,15 +235,15 @@
     placeHolderArray = [[NSMutableArray alloc] initWithCapacity: 1];
 
     [placeHolderArray insertObject:[[NSMutableArray alloc]initWithObjects:[NSMutableDictionary dictionaryWithObjectsAndKeys:@"Image",@"placeHolder",@"",@"TypingText", nil],
-                                   [NSMutableDictionary dictionaryWithObjectsAndKeys:@"First Name",@"placeHolder",@"",@"TypingText", nil],
-                                   [NSMutableDictionary dictionaryWithObjectsAndKeys:@"Last Name",@"placeHolder",@"",@"TypingText", nil],
-                                   [NSMutableDictionary dictionaryWithObjectsAndKeys:@"Male",@"placeHolder",@"Female",@"placeHolderFemale",@"",@"TypingText",@"",@"TypingTextFemale", nil],
-                                   [NSMutableDictionary dictionaryWithObjectsAndKeys:@"DD / MM / YYYY",@"placeHolder",@"",@"TypingText", nil],
-                                   [NSMutableDictionary dictionaryWithObjectsAndKeys:@"Write something about yourself here.",@"placeHolder",@"",@"TypingText", nil],
-                                   [NSMutableDictionary dictionaryWithObjectsAndKeys:@"Hobbies",@"placeHolder",@"",@"TypingText", nil],
-                                   [NSMutableDictionary dictionaryWithObjectsAndKeys:@"Email",@"placeHolder",@"Password",@"placeHolderPass",@"",@"TypingText",@"",@"TypingTextPass", nil],
-                                   [NSMutableDictionary dictionaryWithObjectsAndKeys:@"switch_on",@"placeHolder",@"",@"TypingText",nil],
-                                   [NSMutableDictionary dictionaryWithObjectsAndKeys:@"TermsOfUse",@"placeHolder",@"",@"TypingText", nil],nil]atIndex:0];
+                                    [NSMutableDictionary dictionaryWithObjectsAndKeys:@"First Name",@"placeHolder",@"",@"TypingText", nil],
+                                    [NSMutableDictionary dictionaryWithObjectsAndKeys:@"Last Name",@"placeHolder",@"",@"TypingText", nil],
+                                    [NSMutableDictionary dictionaryWithObjectsAndKeys:@"Male",@"placeHolder",@"Female",@"placeHolderFemale",@"",@"TypingText",@"",@"TypingTextFemale", nil],
+                                    [NSMutableDictionary dictionaryWithObjectsAndKeys:@"DD / MM / YYYY",@"placeHolder",@"",@"TypingText", nil],
+                                    [NSMutableDictionary dictionaryWithObjectsAndKeys:@"Write something about yourself here.",@"placeHolder",@"",@"TypingText", nil],
+                                    [NSMutableDictionary dictionaryWithObjectsAndKeys:@"Hobbies",@"placeHolder",@"",@"TypingText", nil],
+                                    [NSMutableDictionary dictionaryWithObjectsAndKeys:@"Email",@"placeHolder",@"Password",@"placeHolderPass",@"",@"TypingText",@"",@"TypingTextPass", nil],
+                                    [NSMutableDictionary dictionaryWithObjectsAndKeys:@"switch_on",@"placeHolder",@"",@"NewMessageImage",@"",@"SoundImage",@"",@"VibrationImage",nil],
+                                    [NSMutableDictionary dictionaryWithObjectsAndKeys:@"TermsOfUse",@"placeHolder",@"",@"TypingText", nil],nil]atIndex:0];
     
     titleArray = [[NSArray alloc]initWithObjects:@"Image",@"First Name",@"Last Name",@"male",@"Date of Birth",@"About You",@"Hobbies",@"Email&Password",@"switch_on",@"TermsOfUse",nil];
     
@@ -348,6 +348,7 @@
     NSString *titleText;
     NSString *placeHolderText,*placeHolderTextPass,*placeHolderFemale;
     NSString *typingText,*typingTextPass,*typingTextFemale;
+    NSString *newMessageImage,*soundImage,*vibrationImage;
     
 
         typingText       = [[[placeHolderArray valueForKey:@"TypingText" ]objectAtIndex:indexPath.section]objectAtIndex:indexPath.row];
@@ -357,6 +358,10 @@
         placeHolderText     =  [[[placeHolderArray valueForKey:@"placeHolder" ]objectAtIndex:indexPath.section]objectAtIndex:indexPath.row];
         placeHolderTextPass =  [[[placeHolderArray valueForKey:@"placeHolderPass" ]objectAtIndex:indexPath.section]objectAtIndex:indexPath.row];
         placeHolderFemale =  [[[placeHolderArray valueForKey:@"placeHolderFemale" ]objectAtIndex:indexPath.section]objectAtIndex:indexPath.row];
+    
+    newMessageImage =  [[[placeHolderArray valueForKey:@"NewMessageImage" ]objectAtIndex:indexPath.section]objectAtIndex:indexPath.row];
+    soundImage =  [[[placeHolderArray valueForKey:@"SoundImage" ]objectAtIndex:indexPath.section]objectAtIndex:indexPath.row];
+    vibrationImage =  [[[placeHolderArray valueForKey:@"VibrationImage" ]objectAtIndex:indexPath.section]objectAtIndex:indexPath.row];
 
 
     
@@ -623,23 +628,48 @@
             
         }
         if (IS_IPHONE6 ||IS_IPHONE6_Plus){
-        cell.layoutConstraintNotificationLabelYPos.constant = 40;
-        cell.layoutConstraintNotificationViewHeight.constant=51;
-        cell.layoutConstraintRadioButtonYPos.constant = 18;
+            cell.layoutConstraintNotificationLabelYPos.constant = 40;
+            cell.layoutConstraintNotificationViewHeight.constant=51;
+            cell.layoutConstraintRadioButtonYPos.constant = 18;
+        }
+        cell.messSwitchBtn.userInteractionEnabled = YES;
+        cell.vibrationSwitchBtn.userInteractionEnabled = YES;
+        cell.SoundSwitchBtn.userInteractionEnabled = YES;
+        
+        [cell.messSwitchBtn setTag:2000];
+        [cell.SoundSwitchBtn setTag:2001];
+        [cell.vibrationSwitchBtn setTag:2002];
+        
+        
+        if([newMessageImage isEqualToString:@""] || newMessageImage == nil)
+        {
+            [cell.imageViewNewMessSwitch setImage:[UIImage imageNamed:placeHolderText]];
+        }
+        else
+        {
+            [cell.imageViewNewMessSwitch setImage:[UIImage imageNamed:newMessageImage]];
+        }
+        if([vibrationImage isEqualToString:@""] || vibrationImage == nil)
+        {
+            [cell.imageViewVibrationSwitch setImage:[UIImage imageNamed:placeHolderText]];
+        }
+        else
+        {
+            [cell.imageViewVibrationSwitch setImage:[UIImage imageNamed:vibrationImage]];
+        }
+        if([soundImage isEqualToString:@""] || soundImage == nil)
+        {
+            [cell.imageViewSoundSwitch setImage:[UIImage imageNamed:placeHolderText]];
+        }
+        else
+        {
+            [cell.imageViewSoundSwitch setImage:[UIImage imageNamed:soundImage]];
         }
         
+        [cell.vibrationSwitchBtn addTarget:self action:@selector(newMessSwitchBtnAction:) forControlEvents:UIControlEventTouchUpInside];
+        [cell.SoundSwitchBtn addTarget:self action:@selector(newMessSwitchBtnAction:) forControlEvents:UIControlEventTouchUpInside];
+        [cell.messSwitchBtn addTarget:self action:@selector(newMessSwitchBtnAction:) forControlEvents:UIControlEventTouchUpInside];
         
-//        DVSwitch *fifth = [DVSwitch switchWithStringsArray:@[@"", @""]];
-//        fifth.frame = CGRectMake(10,10, self.view.frame.size.width / 2 - 100, 20);
-//        fifth.sliderOffset = 1.0;
-//        fifth.cornerRadius = 10;
-//        fifth.font = [UIFont fontWithName:@"Baskerville-Italic" size:18];
-//        fifth.labelTextColorOutsideSlider = [UIColor colorWithRed:255/255.0 green:30/255.0 blue:30/255.0 alpha:1.0];
-//        fifth.labelTextColorInsideSlider = [UIColor colorWithRed:255 green:255 blue:102 alpha:1.0];
-//        fifth.backgroundColor = [UIColor colorWithRed:255/255.0 green:204/255.0 blue:0/255.0 alpha:1.0];
-//        fifth.sliderColor = [UIColor colorWithRed:255/255.0 green:0/255.0 blue:0/255.0 alpha:1.0];
-//        [cell addSubview:fifth];
-//
     }
 
     if (indexPath.row == 9)
@@ -670,6 +700,165 @@
         commonWidth = (cell.contentView.frame.size.width - 20) / 14;
         imageSize = commonWidth * 2;
     }
+}
+
+-(void)newMessSwitchBtnAction:(UIButton *)sender
+{
+    id button = sender;
+    while (![button isKindOfClass:[UITableViewCell class]]) {
+        button = [button superview];
+    }
+    NSIndexPath *indexPath;
+    
+    DSProfileTableViewCell *cell;
+    
+    indexPath = [_tableviewProfile indexPathForCell:(UITableViewCell *)button];
+    cell = (DSProfileTableViewCell *) [_tableviewProfile cellForRowAtIndexPath:[NSIndexPath indexPathForRow:indexPath.row inSection:0]];
+    
+    
+    NSArray *titleArray1  = [[NSArray alloc]initWithObjects:@"switch_on",@"switch_off", nil];
+    NSString *selOptionVal;
+    
+    if([sender tag] == 2000){
+        NSString *place1 =[[[placeHolderArray objectAtIndex:indexPath.section] objectAtIndex:indexPath.row] valueForKey:@"NewMessageImage"];
+        
+        
+        if([place1 isEqualToString:@""] || place1 == nil)
+        {
+            
+            NSString *NewMessageImage =[[[placeHolderArray objectAtIndex:indexPath.section] objectAtIndex:indexPath.row] valueForKey:@"placeHolder"];
+            
+            
+            
+            if (NewMessageImage == [titleArray1 objectAtIndex:0]) {
+                selOptionVal = [titleArray1 objectAtIndex:1];
+            }
+            if (NewMessageImage == [titleArray1 objectAtIndex:1]) {
+                selOptionVal = [titleArray1 objectAtIndex:0];
+            }
+            
+            
+            
+            if(selOptionVal != nil || ![selOptionVal isEqualToString:@""])
+                [[[placeHolderArray objectAtIndex:indexPath.section] objectAtIndex:indexPath.row] setObject:selOptionVal forKey:@"NewMessageImage"];
+        }
+        
+        
+        else
+            
+        {
+            
+            NSString *NewMessageImage =[[[placeHolderArray objectAtIndex:indexPath.section] objectAtIndex:indexPath.row] valueForKey:@"NewMessageImage"];
+            
+            
+            if (NewMessageImage == [titleArray1 objectAtIndex:0]) {
+                selOptionVal = [titleArray1 objectAtIndex:1];
+            }
+            if (NewMessageImage == [titleArray1 objectAtIndex:1]) {
+                selOptionVal = [titleArray1 objectAtIndex:0];
+            }
+            if(selOptionVal != nil || ![selOptionVal isEqualToString:@""])
+                [[[placeHolderArray objectAtIndex:indexPath.section] objectAtIndex:indexPath.row] setObject:selOptionVal forKey:@"NewMessageImage"];
+            
+            
+        }
+    }
+    
+    
+    if([sender tag] == 2001){
+        
+        NSString *place =[[[placeHolderArray objectAtIndex:indexPath.section] objectAtIndex:indexPath.row] valueForKey:@"SoundImage"];
+        
+        
+        if([place isEqualToString:@""] || place == nil)
+        {
+            
+            NSString *SoundImage =[[[placeHolderArray objectAtIndex:indexPath.section] objectAtIndex:indexPath.row] valueForKey:@"placeHolder"];
+            
+            
+            
+            
+            if (SoundImage == [titleArray1 objectAtIndex:0]) {
+                selOptionVal = [titleArray1 objectAtIndex:1];
+            }
+            if (SoundImage == [titleArray1 objectAtIndex:1]) {
+                selOptionVal = [titleArray1 objectAtIndex:0];
+            }
+            
+            
+            if(selOptionVal != nil || ![selOptionVal isEqualToString:@""])
+                [[[placeHolderArray objectAtIndex:indexPath.section] objectAtIndex:indexPath.row] setObject:selOptionVal forKey:@"SoundImage"];
+        }
+        
+        
+        else
+            
+        {
+            
+            NSString *SoundImage =[[[placeHolderArray objectAtIndex:indexPath.section] objectAtIndex:indexPath.row] valueForKey:@"SoundImage"];
+            
+            
+            if (SoundImage == [titleArray1 objectAtIndex:0]) {
+                selOptionVal = [titleArray1 objectAtIndex:1];
+            }
+            if (SoundImage == [titleArray1 objectAtIndex:1]) {
+                selOptionVal = [titleArray1 objectAtIndex:0];
+            }
+            if(selOptionVal != nil || ![selOptionVal isEqualToString:@""])
+                [[[placeHolderArray objectAtIndex:indexPath.section] objectAtIndex:indexPath.row] setObject:selOptionVal forKey:@"SoundImage"];
+            
+            
+        }
+        
+        
+    }
+    
+    
+    if([sender tag] == 2002){
+        
+        NSString *place =[[[placeHolderArray objectAtIndex:indexPath.section] objectAtIndex:indexPath.row] valueForKey:@"VibrationImage"];
+        
+        
+        if([place isEqualToString:@""] || place == nil)
+        {
+            
+            NSString *VibrationImage =[[[placeHolderArray objectAtIndex:indexPath.section] objectAtIndex:indexPath.row] valueForKey:@"placeHolder"];
+            
+            
+            
+            
+            if (VibrationImage == [titleArray1 objectAtIndex:0]) {
+                selOptionVal = [titleArray1 objectAtIndex:1];
+            }
+            if (VibrationImage == [titleArray1 objectAtIndex:1]) {
+                selOptionVal = [titleArray1 objectAtIndex:0];
+            }
+            
+            
+            if(selOptionVal != nil || ![selOptionVal isEqualToString:@""])
+                [[[placeHolderArray objectAtIndex:indexPath.section] objectAtIndex:indexPath.row] setObject:selOptionVal forKey:@"VibrationImage"];
+        }
+        
+        
+        else
+            
+        {
+            
+            NSString *VibrationImage =[[[placeHolderArray objectAtIndex:indexPath.section] objectAtIndex:indexPath.row] valueForKey:@"VibrationImage"];
+            
+            
+            if (VibrationImage == [titleArray1 objectAtIndex:0]) {
+                selOptionVal = [titleArray1 objectAtIndex:1];
+            }
+            if (VibrationImage == [titleArray1 objectAtIndex:1]) {
+                selOptionVal = [titleArray1 objectAtIndex:0];
+            }
+            if(selOptionVal != nil || ![selOptionVal isEqualToString:@""])
+                [[[placeHolderArray objectAtIndex:indexPath.section] objectAtIndex:indexPath.row] setObject:selOptionVal forKey:@"VibrationImage"];
+        }
+    }
+    
+    [_tableviewProfile reloadData];
 }
 //- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 //
