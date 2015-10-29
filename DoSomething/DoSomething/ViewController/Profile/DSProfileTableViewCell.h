@@ -34,6 +34,7 @@
 @property (weak, nonatomic) IBOutlet UIImageView *imageViewSoundSwitch;
 @property (weak, nonatomic) IBOutlet UIImageView *imageViewVibrationSwitch;
 
+@property (weak, nonatomic) IBOutlet UILabel *hobbiesLabel;
 
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *layoutConstraintRadioButtonYPos;
 @property (weak, nonatomic) IBOutlet UIButton *maleButton;
