@@ -134,7 +134,7 @@
 -(void)chatView
 {
     [chatsButton setBackgroundImage:[UIImage imageNamed:@"chats_active.png"] forState:UIControlStateNormal];
-    [locationButton setBackgroundImage:[UIImage imageNamed:@"loaction.png"] forState:UIControlStateNormal];
+    [locationButton setBackgroundImage:[UIImage imageNamed:@"loaction_normal.png"] forState:UIControlStateNormal];
     
     chatPage =[[DSChatsTableViewController alloc]initWithNibName:@"DSChatsTableViewController" bundle:nil];
     [self.navigationController pushViewController:chatPage animated:NO];
