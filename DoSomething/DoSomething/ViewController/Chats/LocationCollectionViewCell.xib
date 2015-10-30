@@ -14,8 +14,8 @@
             <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                 <rect key="frame" x="0.0" y="0.0" width="105" height="194"/>
                 <subviews>
-                    <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="lNt-g0-diT">
-                        <rect key="frame" x="0.0" y="0.0" width="104" height="194"/>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lNt-g0-diT">
+                        <rect key="frame" x="0.0" y="0.0" width="108" height="194"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Qrf-6q-c2F">
                                 <rect key="frame" x="5" y="14" width="95" height="95"/>
@@ -107,6 +107,7 @@
                                 <exclude reference="0Jx-0w-SUo"/>
                                 <exclude reference="h2e-bB-Ooz"/>
                                 <exclude reference="hf5-C0-buq"/>
+                                <exclude reference="7vM-VO-uWK"/>
                             </mask>
                         </variation>
                     </view>
