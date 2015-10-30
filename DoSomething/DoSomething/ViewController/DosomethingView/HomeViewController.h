@@ -12,7 +12,12 @@
 
 {
     NSMutableArray * menuArray;
+    IBOutlet UIView *alertBgView;
+    IBOutlet UILabel *alertMsgLabel;
+    IBOutlet UIButton *alertCancelButton;
+    IBOutlet UIView *alertMainBgView;
 }
 @property(nonatomic,strong) IBOutlet UICollectionView * homeCollectionView;
+- (IBAction)alertPressCancel:(id)sender;
 
 @end

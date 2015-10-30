@@ -29,6 +29,8 @@
     BOOL isSelectMenu;
     NSArray *selectedArray;
     int selectedCellCount;
+    
+    NSMutableArray *selectedItemsArray;
 }
 
 @end
@@ -71,6 +73,9 @@
 //    [customNavigation.buttonBack addTarget:self action:@selector(backAction) forControlEvents:UIControlEventTouchUpInside];
     
     selectedArray = [[NSMutableArray alloc]init];
+    selectedItemsArray = [[NSMutableArray alloc]init];
+    alertBgView.hidden = YES;
+    alertMainBgView.hidden = YES;
 }
 -(void)viewWillAppear:(BOOL)animated
 {
@@ -191,46 +196,46 @@
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
     isSelectMenu=YES;
+    HomeCustomCell *cell = (HomeCustomCell *)[collectionView cellForItemAtIndexPath:indexPath];
+    NSMutableDictionary *data = [menuArray objectAtIndex:indexPath.row];
     
-    if(selectedCellCount <= 2)
+    if([selectedItemsArray count] <= 2)
     {
-        selectedCellCount++;
-        HomeCustomCell *cell = (HomeCustomCell *)[collectionView cellForItemAtIndexPath:indexPath];
-        NSMutableDictionary *data = [menuArray objectAtIndex:indexPath.row];
-        
+        [selectedItemsArray addObject:[data valueForKey:@"Caption"]];
         cell.MenuTittle.textColor = [UIColor colorWithRed:(199/255.0f) green:(65/255.0f) blue:(81/255.0f) alpha:1.0f];
         NSString * objstr = [NSString stringWithFormat:@"%@",[data valueForKey:ACTIVE_IMAGE]];
         cell.MenuImg.image = [UIImage imageNamed:objstr];
     }
     else
     {
-        UIAlertView *alert = [[UIAlertView alloc]initWithTitle:nil message:nil delegate:nil cancelButtonTitle:@"OKAY" otherButtonTitles:nil];
+        alertBgView.hidden = NO;
+        alertMainBgView.hidden = NO;
         
-        UIView *bgView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, alert.frame.size.width, alert.frame.size.height)];
-        [alert setValue:bgView forKey:@"accessoryView"];
-        bgView.backgroundColor = [UIColor colorWithRed:(230/255.0f) green:(63/255.0f) blue:(81/255.0f) alpha:1.0f];
-        
-        UILabel *msgLbl = [[UILabel alloc]initWithFrame:CGRectMake(50, 20, 180, 60)];
-        msgLbl.text = @"ONLY 3 ACTIVIES\nCAN BE SELECTED";
-        msgLbl.textAlignment = NSTextAlignmentCenter;
-        msgLbl.lineBreakMode = NSLineBreakByWordWrapping;
-        msgLbl.numberOfLines = 2;
-        msgLbl.textColor = [UIColor whiteColor];
-        [bgView addSubview:msgLbl];
-        
-        [alert show];
+        alertMsgLabel.text = @"ONLY 3 ACTIVIES\nCAN BE SELECTED";
+        alertMsgLabel.textAlignment = NSTextAlignmentCenter;
+        alertMsgLabel.lineBreakMode = NSLineBreakByWordWrapping;
+        alertMsgLabel.numberOfLines = 2;
+        alertMsgLabel.textColor = [UIColor whiteColor];
     }
 }
 
 -(void)collectionView: (UICollectionView *)collectionView didDeselectItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    selectedCellCount--;
     HomeCustomCell *cell = (HomeCustomCell *)[collectionView cellForItemAtIndexPath:indexPath];
     NSMutableDictionary *data = [menuArray objectAtIndex:indexPath.row];
+    NSArray *selectArray = [[NSArray alloc]init];
+    selectArray = [selectedItemsArray copy];
     
-    cell.MenuTittle.textColor = [UIColor colorWithRed:(164/255.0f) green:(164/255.0f) blue:(164/255.0f) alpha:1.0f];
-    NSString * objstr = [NSString stringWithFormat:@"%@",[data valueForKey:NORMAL_IMAGE]];
-    cell.MenuImg.image = [UIImage imageNamed:objstr];
+    for(NSString *strDeselect in selectArray)
+    {
+        if([[data valueForKey:@"Caption"] isEqualToString:strDeselect])
+        {
+            [selectedItemsArray removeObject:strDeselect];
+            cell.MenuTittle.textColor = [UIColor colorWithRed:(164/255.0f) green:(164/255.0f) blue:(164/255.0f) alpha:1.0f];
+            NSString * objstr = [NSString stringWithFormat:@"%@",[data valueForKey:NORMAL_IMAGE]];
+            cell.MenuImg.image = [UIImage imageNamed:objstr];
+        }
+    }
 }
 
 - (void)fetchMoreItems {
@@ -260,4 +265,8 @@
 
 
 
+- (IBAction)alertPressCancel:(id)sender {
+    alertBgView.hidden = YES;
+    alertMainBgView.hidden = YES;
+}
 @end
