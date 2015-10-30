@@ -145,7 +145,7 @@
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OHT-ya-kYl">
                             <rect key="frame" x="160" y="304" width="110" height="40"/>
-                            <color key="backgroundColor" red="0.69756758272091157" green="0.69756758272091157" blue="0.69756758272091157" alpha="1" colorSpace="calibratedRGB"/>
+                            <color key="backgroundColor" red="0.64692247548230553" green="0.64692247548230553" blue="0.64692247548230553" alpha="1" colorSpace="calibratedRGB"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="110" id="88l-8h-uub"/>
                                 <constraint firstAttribute="height" constant="40" id="NKc-gA-PNK"/>
