@@ -34,7 +34,7 @@
     }
     [customNavigation.menuBtn setHidden:NO];
     [customNavigation.buttonBack setHidden:YES];
-    [customNavigation.saveBtn setHidden:NO];
+    [customNavigation.saveBtn setHidden:YES];
     [self.navigationController.navigationBar addSubview:customNavigation.view];
 //    [customNavigation.saveBtn addTarget:self action:@selector(saveAction) forControlEvents:UIControlEventTouchUpInside];
 //    [customNavigation.buttonBack addTarget:self action:@selector(backAction) forControlEvents:UIControlEventTouchUpInside];
@@ -52,6 +52,15 @@
     UICollectionViewFlowLayout *flowLayout1 = [[UICollectionViewFlowLayout alloc] init];
     flowLayout1.headerReferenceSize = CGSizeMake(locationCollectionView.bounds.size.width, 55);
     [locationCollectionView setCollectionViewLayout:flowLayout1];
+    
+    if(IS_IPHONE5)
+        [self.view addConstraint:[NSLayoutConstraint constraintWithItem:locationCollectionView
+                                                              attribute:NSLayoutAttributeTop
+                                                              relatedBy:NSLayoutRelationEqual
+                                                                 toItem:self.view
+                                                              attribute:NSLayoutAttributeTop
+                                                             multiplier:1.0
+                                                               constant:-20.0]];
 
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
@@ -82,7 +91,7 @@
 {
     LocationCollectionViewCell*locationCellView = [collectionView dequeueReusableCellWithReuseIdentifier:@"LocationCell" forIndexPath:indexPath];
     if(IS_IPHONE5)
-        locationCellView.bounds = CGRectMake(0,0, 100, 190);
+        locationCellView.bounds = CGRectMake(0,0, 100, 180);
     if(IS_IPHONE6)
         locationCellView.bounds = CGRectMake(0,0, 100, 180);
     
@@ -102,7 +111,7 @@
     if (IS_IPHONE6 ||IS_IPHONE6_Plus)
         returnSize = CGSizeMake((self.view.frame.size.width / 3.200f), (self.view.frame.size.width / 3.200f));
     if (IS_IPHONE4 ||IS_IPHONE5 )
-        returnSize = CGSizeMake((self.view.frame.size.width / 3.700f), 130);
+        returnSize = CGSizeMake((self.view.frame.size.width / 3.300f), 130);
     
     return returnSize;
 }
