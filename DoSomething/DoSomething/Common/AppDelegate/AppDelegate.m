@@ -40,8 +40,8 @@
     int wVal=self.window.bounds.size.width;
     int hVal=self.window.bounds.size.height;
     buttonsView=[[UIView alloc]init];
-    
-    [buttonsView setBackgroundColor:[UIColor colorWithRed:(float)239.0/255 green:(float)239.0/255 blue:(float)239.0/255 alpha:1.0f]];
+    [buttonsView setBackgroundColor:[UIColor whiteColor]];
+//    [buttonsView setBackgroundColor:[UIColor colorWithRed:(float)239.0/255 green:(float)239.0/255 blue:(float)239.0/255 alpha:1.0f]];
     
     if (IS_IPHONE4) {
         buttonsView.frame=CGRectMake(0,hVal-hVal/10,wVal,hVal/10);

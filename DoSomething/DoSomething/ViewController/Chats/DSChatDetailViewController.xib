@@ -162,10 +162,10 @@
                             <nil key="highlightedColor"/>
                         </label>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text=" " lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fak-05-4vX">
-                            <rect key="frame" x="132" y="54" width="180" height="30"/>
+                            <rect key="frame" x="118" y="54" width="194" height="30"/>
                             <color key="backgroundColor" red="0.90196078430000004" green="0.2470588235" blue="0.32156862749999998" alpha="1" colorSpace="calibratedRGB"/>
                             <constraints>
-                                <constraint firstAttribute="width" constant="180" id="VDu-fO-9s6"/>
+                                <constraint firstAttribute="width" constant="194" id="VDu-fO-9s6"/>
                                 <constraint firstAttribute="height" constant="30" id="oP9-Kw-mlP"/>
                             </constraints>
                             <fontDescription key="fontDescription" name="Patron-Medium" family="Patron" pointSize="12"/>
@@ -203,11 +203,11 @@
                             <nil key="highlightedColor"/>
                         </label>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text=" " lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HWQ-D5-Dwc">
-                            <rect key="frame" x="0.0" y="387" width="320" height="4"/>
-                            <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                            <rect key="frame" x="0.0" y="387" width="320" height="3"/>
+                            <color key="backgroundColor" red="0.43402661416443244" green="0.43402661416443244" blue="0.43402661416443244" alpha="1" colorSpace="calibratedRGB"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="320" id="8v4-bQ-P0N"/>
-                                <constraint firstAttribute="height" constant="4" id="9ca-Dv-PH5"/>
+                                <constraint firstAttribute="height" constant="3" id="9ca-Dv-PH5"/>
                             </constraints>
                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                             <color key="textColor" red="0.72139954758713132" green="0.72139954758713132" blue="0.72139954758713132" alpha="1" colorSpace="calibratedRGB"/>
@@ -220,7 +220,7 @@
                         <constraint firstAttribute="trailing" secondItem="iDF-C7-vhI" secondAttribute="trailing" constant="215" id="1vl-oe-mY7"/>
                         <constraint firstAttribute="bottom" secondItem="2mc-lt-SjM" secondAttribute="bottom" constant="54" id="2Pq-Pq-PlC"/>
                         <constraint firstItem="vPY-7G-Faa" firstAttribute="top" secondItem="HnE-Z5-OcU" secondAttribute="top" constant="7" id="3DN-DB-Xqm"/>
-                        <constraint firstItem="fak-05-4vX" firstAttribute="leading" secondItem="95L-kz-lld" secondAttribute="leading" constant="132" id="40k-qu-JNh"/>
+                        <constraint firstItem="fak-05-4vX" firstAttribute="leading" secondItem="95L-kz-lld" secondAttribute="leading" constant="118" id="40k-qu-JNh"/>
                         <constraint firstAttribute="trailing" secondItem="HWQ-D5-Dwc" secondAttribute="trailing" id="4ey-c1-mrN"/>
                         <constraint firstItem="HWQ-D5-Dwc" firstAttribute="leading" secondItem="95L-kz-lld" secondAttribute="leading" id="7DY-L4-ubs"/>
                         <constraint firstItem="fak-05-4vX" firstAttribute="top" secondItem="aSX-cZ-HbQ" secondAttribute="bottom" constant="-22" id="8JB-0G-i15"/>

@@ -21,15 +21,15 @@
     ProfileName.text=activestring;
     ProfileImage.image =[UIImage imageNamed:activestring1];
     
-    Message1.text =@" Hey;)";
+    Message1.text =@"   Hey;)";
     Message1.layer.masksToBounds = YES;
     Message1.layer.cornerRadius = 8.0;
     
-    Message2.text =@" Wanna meet for a drink?";
+    Message2.text =@"   Wanna meet for a drink?";
     Message2.layer.masksToBounds = YES;
     Message2.layer.cornerRadius = 8.0;
     
-    Message3.text =@" oh hi!";
+    Message3.text =@"   oh hi!";
     Message3.layer.masksToBounds = YES;
     Message3.layer.cornerRadius = 8.0;
     

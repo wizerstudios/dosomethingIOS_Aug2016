@@ -17,7 +17,7 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="x4s-f8-PZR">
-                    <rect key="frame" x="0.0" y="0.0" width="320" height="570"/>
+                    <rect key="frame" x="10" y="0.0" width="300" height="570"/>
                     <color key="backgroundColor" red="0.9137254901960784" green="0.9137254901960784" blue="0.9137254901960784" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="550" id="3Sk-QT-LlE"/>
@@ -59,15 +59,15 @@
                     </variation>
                 </label>
             </subviews>
-            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <color key="backgroundColor" red="0.86029469261286873" green="0.86029469261286873" blue="0.86029469261286873" alpha="1" colorSpace="calibratedRGB"/>
             <constraints>
                 <constraint firstAttribute="bottom" secondItem="x4s-f8-PZR" secondAttribute="bottom" id="2n1-YP-tKb"/>
                 <constraint firstAttribute="bottom" secondItem="x4s-f8-PZR" secondAttribute="bottom" constant="96" id="3cT-Xe-bJC"/>
                 <constraint firstAttribute="trailing" secondItem="x4s-f8-PZR" secondAttribute="trailing" id="Nm0-r1-Udq"/>
                 <constraint firstItem="x4s-f8-PZR" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="59" id="UeT-rd-OiH"/>
-                <constraint firstAttribute="trailing" secondItem="x4s-f8-PZR" secondAttribute="trailing" id="Wxh-UC-lxA"/>
+                <constraint firstAttribute="trailing" secondItem="x4s-f8-PZR" secondAttribute="trailing" constant="10" id="Wxh-UC-lxA"/>
                 <constraint firstItem="x4s-f8-PZR" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="YAp-6P-33P"/>
-                <constraint firstItem="x4s-f8-PZR" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="dlM-ZQ-4Hw"/>
+                <constraint firstItem="x4s-f8-PZR" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="10" id="dlM-ZQ-4Hw"/>
                 <constraint firstItem="6KM-IH-R35" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="fWX-h2-hq7"/>
                 <constraint firstAttribute="trailing" secondItem="x4s-f8-PZR" secondAttribute="trailing" constant="10" id="ghc-gJ-kC4"/>
                 <constraint firstAttribute="bottom" secondItem="6KM-IH-R35" secondAttribute="bottom" constant="51" id="jBb-fv-5nt"/>

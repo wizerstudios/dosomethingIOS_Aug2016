@@ -32,8 +32,8 @@
     {
         customNavigation.view.frame = CGRectMake(0,-20, 420, 83);
     }
-    [customNavigation.menuBtn setHidden:YES];
-    [customNavigation.buttonBack setHidden:NO];
+    [customNavigation.menuBtn setHidden:NO];
+    [customNavigation.buttonBack setHidden:YES];
     [customNavigation.saveBtn setHidden:NO];
     [self.navigationController.navigationBar addSubview:customNavigation.view];
 //    [customNavigation.saveBtn addTarget:self action:@selector(saveAction) forControlEvents:UIControlEventTouchUpInside];
@@ -81,7 +81,10 @@
 -(UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     LocationCollectionViewCell*locationCellView = [collectionView dequeueReusableCellWithReuseIdentifier:@"LocationCell" forIndexPath:indexPath];
-    locationCellView.bounds = CGRectMake(0,0, 100, 180);
+    if(IS_IPHONE5)
+        locationCellView.bounds = CGRectMake(0,0, 100, 190);
+    if(IS_IPHONE6)
+        locationCellView.bounds = CGRectMake(0,0, 100, 180);
     
     NSString *MyPatternString = [profileImages objectAtIndex:indexPath.row];
     
@@ -89,25 +92,29 @@
     locationCellView.nameProfile.text =[profileNames objectAtIndex:indexPath.row];
     locationCellView.kiloMeter.text=[kiloMeterlabel objectAtIndex:indexPath.row];
     
-    locationCellView.backgroundColor = [UIColor blueColor];
     locationCollectionView.backgroundColor = [UIColor clearColor];
     return locationCellView;
 }
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    CGFloat picWidth = self.view.frame.size.width / 4;
-    CGFloat picHeight = self.view.frame.size.height / 6;
-    return CGSizeMake(picWidth, picHeight);
+    CGSize returnSize = CGSizeZero;
+    
+    if (IS_IPHONE6 ||IS_IPHONE6_Plus)
+        returnSize = CGSizeMake((self.view.frame.size.width / 3.200f), (self.view.frame.size.width / 3.200f));
+    if (IS_IPHONE4 ||IS_IPHONE5 )
+        returnSize = CGSizeMake((self.view.frame.size.width / 3.700f), 130);
+    
+    return returnSize;
 }
 
-//- (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout minimumLineSpacingForSectionAtIndex:(NSInteger)section {
-//    return 50.0;
-//}
-//
-//- (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout minimumInteritemSpacingForSectionAtIndex:(NSInteger)section {
-//    
-//    return 1.0;
-//}
+- (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout minimumLineSpacingForSectionAtIndex:(NSInteger)section {
+    return 50.0;
+}
+
+- (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout minimumInteritemSpacingForSectionAtIndex:(NSInteger)section {
+    
+    return 1.0;
+}
 
 
 - (UIEdgeInsets)collectionView:(UICollectionView*)collectionView layout:(UICollectionViewLayout *)collectionViewLayout insetForSectionAtIndex:(NSInteger)section {
