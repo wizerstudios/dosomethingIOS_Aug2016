@@ -34,6 +34,7 @@
                 <constraint firstItem="CDk-AK-Onw" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="11" id="0x4-dm-k5s"/>
                 <constraint firstAttribute="bottom" secondItem="W2T-Ws-Y05" secondAttribute="bottom" constant="2" id="6YV-Lr-EZs"/>
                 <constraint firstItem="W2T-Ws-Y05" firstAttribute="top" secondItem="CDk-AK-Onw" secondAttribute="bottom" constant="8" id="6jZ-a9-jwh"/>
+                <constraint firstItem="W2T-Ws-Y05" firstAttribute="top" secondItem="CDk-AK-Onw" secondAttribute="bottom" constant="5" id="JTQ-nd-7tz"/>
                 <constraint firstItem="W2T-Ws-Y05" firstAttribute="top" secondItem="CDk-AK-Onw" secondAttribute="bottom" constant="9" id="QDJ-eR-PwL"/>
                 <constraint firstItem="CDk-AK-Onw" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="3" id="Sdg-zv-f3a"/>
                 <constraint firstAttribute="trailing" secondItem="W2T-Ws-Y05" secondAttribute="trailing" constant="4" id="Wh9-YW-a14"/>
@@ -51,6 +52,7 @@
                     <exclude reference="0x4-dm-k5s"/>
                     <exclude reference="jA1-SZ-gDg"/>
                     <exclude reference="uub-OA-4l8"/>
+                    <exclude reference="6YV-Lr-EZs"/>
                     <exclude reference="6jZ-a9-jwh"/>
                     <exclude reference="QDJ-eR-PwL"/>
                     <exclude reference="XBV-Im-byv"/>
