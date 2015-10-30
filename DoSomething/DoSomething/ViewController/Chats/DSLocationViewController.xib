@@ -17,7 +17,7 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="x4s-f8-PZR">
-                    <rect key="frame" x="10" y="0.0" width="300" height="568"/>
+                    <rect key="frame" x="10" y="0.0" width="300" height="513"/>
                     <color key="backgroundColor" red="0.9137254901960784" green="0.9137254901960784" blue="0.9137254901960784" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="550" id="3Sk-QT-LlE"/>
@@ -61,7 +61,7 @@
             </subviews>
             <color key="backgroundColor" red="0.86029469261286873" green="0.86029469261286873" blue="0.86029469261286873" alpha="1" colorSpace="calibratedRGB"/>
             <constraints>
-                <constraint firstAttribute="bottom" secondItem="x4s-f8-PZR" secondAttribute="bottom" id="2n1-YP-tKb"/>
+                <constraint firstAttribute="bottom" secondItem="x4s-f8-PZR" secondAttribute="bottom" constant="55" id="2n1-YP-tKb"/>
                 <constraint firstAttribute="bottom" secondItem="x4s-f8-PZR" secondAttribute="bottom" constant="96" id="3cT-Xe-bJC"/>
                 <constraint firstAttribute="trailing" secondItem="x4s-f8-PZR" secondAttribute="trailing" id="Nm0-r1-Udq"/>
                 <constraint firstItem="x4s-f8-PZR" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="59" id="UeT-rd-OiH"/>
