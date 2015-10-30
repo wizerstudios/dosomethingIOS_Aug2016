@@ -11,6 +11,8 @@
                 <outlet property="alertCancelButton" destination="cXK-g5-ngw" id="cVg-1B-zse"/>
                 <outlet property="alertMainBgView" destination="eLR-eO-d76" id="QIb-8n-ROi"/>
                 <outlet property="alertMsgLabel" destination="GAi-ao-27j" id="360-oM-urg"/>
+                <outlet property="btnNo" destination="OHT-ya-kYl" id="tR0-o1-Zbe"/>
+                <outlet property="btnYes" destination="FJh-XQ-ozf" id="SBm-fK-24Z"/>
                 <outlet property="homeCollectionView" destination="9eq-ck-Eus" id="rQq-lw-xRv"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
@@ -31,6 +33,9 @@
                         <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
+                    <connections>
+                        <action selector="pressDosomething:" destination="-1" eventType="touchUpInside" id="Aew-kz-rOj"/>
+                    </connections>
                 </button>
                 <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="9eq-ck-Eus">
                     <rect key="frame" x="10" y="80" width="300" height="391"/>
@@ -122,25 +127,69 @@
                                 <action selector="alertPressCancel:" destination="-1" eventType="touchUpInside" id="niO-eK-Ql9"/>
                             </connections>
                         </button>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FJh-XQ-ozf">
+                            <rect key="frame" x="50" y="304" width="110" height="40"/>
+                            <color key="backgroundColor" red="0.97601792899999995" green="0.97601792899999995" blue="0.97601792899999995" alpha="1" colorSpace="calibratedRGB"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="110" id="G0N-kK-w2h"/>
+                                <constraint firstAttribute="height" constant="40" id="rDC-oa-Nqp"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                            <state key="normal" title="YES">
+                                <color key="titleColor" red="0.8609884726" green="0.26356275010000002" blue="0.22628780509999999" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                            </state>
+                            <connections>
+                                <action selector="alertPressYes:" destination="-1" eventType="touchUpInside" id="bfS-4C-tuR"/>
+                            </connections>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OHT-ya-kYl">
+                            <rect key="frame" x="160" y="304" width="110" height="40"/>
+                            <color key="backgroundColor" red="0.69756758272091157" green="0.69756758272091157" blue="0.69756758272091157" alpha="1" colorSpace="calibratedRGB"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="110" id="88l-8h-uub"/>
+                                <constraint firstAttribute="height" constant="40" id="NKc-gA-PNK"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                            <state key="normal" title="NO">
+                                <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                            </state>
+                            <connections>
+                                <action selector="alertPressNo:" destination="-1" eventType="touchUpInside" id="mAs-Hy-1eE"/>
+                            </connections>
+                        </button>
                     </subviews>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     <constraints>
                         <constraint firstAttribute="bottom" secondItem="GAi-ao-27j" secondAttribute="bottom" constant="214" id="69B-c7-o91"/>
                         <constraint firstItem="GAi-ao-27j" firstAttribute="leading" secondItem="Ibo-4o-23l" secondAttribute="leading" constant="60" id="86D-g9-O9e"/>
                         <constraint firstAttribute="centerX" secondItem="GAi-ao-27j" secondAttribute="centerX" id="BmE-HU-19k"/>
+                        <constraint firstItem="OHT-ya-kYl" firstAttribute="leading" secondItem="FJh-XQ-ozf" secondAttribute="trailing" id="C95-l4-LWm"/>
                         <constraint firstAttribute="trailing" secondItem="GAi-ao-27j" secondAttribute="trailing" constant="60" id="CLi-FZ-CFy"/>
                         <constraint firstItem="cXK-g5-ngw" firstAttribute="top" secondItem="GAi-ao-27j" secondAttribute="bottom" id="D5B-a2-ak6"/>
                         <constraint firstAttribute="centerX" secondItem="GAi-ao-27j" secondAttribute="centerX" id="EEt-8N-VLh"/>
                         <constraint firstAttribute="trailing" secondItem="GAi-ao-27j" secondAttribute="trailing" constant="60" id="IxB-ic-R0z"/>
                         <constraint firstAttribute="bottom" secondItem="GAi-ao-27j" secondAttribute="bottom" constant="240" id="MhY-IB-7en"/>
+                        <constraint firstItem="FJh-XQ-ozf" firstAttribute="width" secondItem="OHT-ya-kYl" secondAttribute="width" id="PU2-pc-tGJ"/>
                         <constraint firstItem="GAi-ao-27j" firstAttribute="centerX" secondItem="cXK-g5-ngw" secondAttribute="centerX" id="QgD-bs-7LB"/>
+                        <constraint firstItem="OHT-ya-kYl" firstAttribute="leading" secondItem="FJh-XQ-ozf" secondAttribute="trailing" id="Qwh-Kt-cFj"/>
+                        <constraint firstItem="FJh-XQ-ozf" firstAttribute="leading" secondItem="GAi-ao-27j" secondAttribute="leading" id="TWZ-Zn-EJj"/>
+                        <constraint firstItem="FJh-XQ-ozf" firstAttribute="height" secondItem="OHT-ya-kYl" secondAttribute="height" id="Ytk-ok-QnN"/>
+                        <constraint firstItem="FJh-XQ-ozf" firstAttribute="top" secondItem="GAi-ao-27j" secondAttribute="bottom" id="Zql-vv-vbE"/>
                         <constraint firstAttribute="centerY" secondItem="GAi-ao-27j" secondAttribute="centerY" constant="0.5" id="dl5-WJ-oLL"/>
                         <constraint firstItem="GAi-ao-27j" firstAttribute="leading" secondItem="Ibo-4o-23l" secondAttribute="leading" constant="60" id="fad-Da-kpb"/>
+                        <constraint firstItem="OHT-ya-kYl" firstAttribute="top" secondItem="GAi-ao-27j" secondAttribute="bottom" id="flk-sp-bd2"/>
                         <constraint firstAttribute="trailing" secondItem="GAi-ao-27j" secondAttribute="trailing" constant="60" id="hJb-4H-w94"/>
+                        <constraint firstItem="GAi-ao-27j" firstAttribute="trailing" secondItem="OHT-ya-kYl" secondAttribute="trailing" constant="4" id="hnn-KW-RqW"/>
+                        <constraint firstItem="FJh-XQ-ozf" firstAttribute="leading" secondItem="GAi-ao-27j" secondAttribute="leading" id="mEt-em-oLy"/>
+                        <constraint firstItem="FJh-XQ-ozf" firstAttribute="top" secondItem="GAi-ao-27j" secondAttribute="bottom" id="moX-47-xuJ"/>
                         <constraint firstAttribute="centerY" secondItem="GAi-ao-27j" secondAttribute="centerY" constant="32.5" id="ojA-uU-VWz"/>
                         <constraint firstItem="GAi-ao-27j" firstAttribute="top" secondItem="Ibo-4o-23l" secondAttribute="top" constant="214" id="qO3-wY-1wW"/>
                         <constraint firstItem="GAi-ao-27j" firstAttribute="width" secondItem="cXK-g5-ngw" secondAttribute="width" id="sGY-1C-wte"/>
                         <constraint firstItem="GAi-ao-27j" firstAttribute="top" secondItem="Ibo-4o-23l" secondAttribute="top" constant="175" id="vrn-UT-UiU"/>
+                        <constraint firstItem="OHT-ya-kYl" firstAttribute="top" secondItem="GAi-ao-27j" secondAttribute="bottom" id="wB9-qG-0In"/>
+                        <constraint firstItem="GAi-ao-27j" firstAttribute="trailing" secondItem="OHT-ya-kYl" secondAttribute="trailing" id="zoT-ZJ-gpz"/>
                     </constraints>
                     <variation key="default">
                         <mask key="constraints">
@@ -152,9 +201,16 @@
                             <exclude reference="MhY-IB-7en"/>
                             <exclude reference="fad-Da-kpb"/>
                             <exclude reference="hJb-4H-w94"/>
+                            <exclude reference="hnn-KW-RqW"/>
                             <exclude reference="ojA-uU-VWz"/>
                             <exclude reference="qO3-wY-1wW"/>
                             <exclude reference="vrn-UT-UiU"/>
+                            <exclude reference="Ytk-ok-QnN"/>
+                            <exclude reference="mEt-em-oLy"/>
+                            <exclude reference="moX-47-xuJ"/>
+                            <exclude reference="C95-l4-LWm"/>
+                            <exclude reference="Qwh-Kt-cFj"/>
+                            <exclude reference="wB9-qG-0In"/>
                         </mask>
                     </variation>
                 </view>
@@ -201,7 +257,7 @@
                     <include reference="NbL-I3-PdF"/>
                 </mask>
             </variation>
-            <point key="canvasLocation" x="836" y="424"/>
+            <point key="canvasLocation" x="1077" y="427"/>
         </view>
     </objects>
 </document>

@@ -33,6 +33,31 @@
                         <outlet property="delegate" destination="i5M-Pr-FkT" id="ELi-we-E9N"/>
                     </connections>
                 </collectionView>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text=" " lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6KM-IH-R35">
+                    <rect key="frame" x="0.0" y="516" width="320" height="3"/>
+                    <color key="backgroundColor" red="0.43531473414986599" green="0.43531473414986599" blue="0.43531473414986599" alpha="1" colorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="3" id="GNM-l9-VCX"/>
+                        <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="2" id="JL6-lD-2rf"/>
+                        <constraint firstAttribute="height" constant="4" id="Kqg-uL-hP9"/>
+                        <constraint firstAttribute="width" constant="320" id="Sh0-0c-5dk"/>
+                        <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="3" id="W1n-dA-ty4"/>
+                        <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="3" id="Xpj-yA-8Po"/>
+                        <constraint firstAttribute="height" constant="1" id="uga-ih-ndB"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <nil key="highlightedColor"/>
+                    <variation key="default">
+                        <mask key="constraints">
+                            <exclude reference="JL6-lD-2rf"/>
+                            <exclude reference="Kqg-uL-hP9"/>
+                            <exclude reference="Sh0-0c-5dk"/>
+                            <exclude reference="W1n-dA-ty4"/>
+                            <exclude reference="Xpj-yA-8Po"/>
+                            <exclude reference="uga-ih-ndB"/>
+                        </mask>
+                    </variation>
+                </label>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
@@ -43,8 +68,11 @@
                 <constraint firstAttribute="trailing" secondItem="x4s-f8-PZR" secondAttribute="trailing" id="Wxh-UC-lxA"/>
                 <constraint firstItem="x4s-f8-PZR" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="YAp-6P-33P"/>
                 <constraint firstItem="x4s-f8-PZR" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="dlM-ZQ-4Hw"/>
+                <constraint firstItem="6KM-IH-R35" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="fWX-h2-hq7"/>
                 <constraint firstAttribute="trailing" secondItem="x4s-f8-PZR" secondAttribute="trailing" constant="10" id="ghc-gJ-kC4"/>
+                <constraint firstAttribute="bottom" secondItem="6KM-IH-R35" secondAttribute="bottom" constant="51" id="jBb-fv-5nt"/>
                 <constraint firstItem="x4s-f8-PZR" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="k9K-ov-e4w"/>
+                <constraint firstAttribute="trailing" secondItem="6KM-IH-R35" secondAttribute="trailing" id="rii-1U-jd8"/>
                 <constraint firstItem="x4s-f8-PZR" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="10" id="shA-FK-KFj"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>

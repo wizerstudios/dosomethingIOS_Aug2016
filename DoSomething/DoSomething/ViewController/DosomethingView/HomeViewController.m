@@ -210,6 +210,9 @@
     {
         alertBgView.hidden = NO;
         alertMainBgView.hidden = NO;
+        alertCancelButton.hidden = NO;
+        btnYes.hidden = YES;
+        btnNo.hidden = YES;
         
         alertMsgLabel.text = @"ONLY 3 ACTIVIES\nCAN BE SELECTED";
         alertMsgLabel.textAlignment = NSTextAlignmentCenter;
@@ -265,7 +268,33 @@
 
 
 
+- (IBAction)pressDosomething:(id)sender {
+    
+    alertBgView.hidden = NO;
+    alertMainBgView.hidden = NO;
+    btnYes.hidden = NO;
+    btnNo.hidden = NO;
+    alertCancelButton.hidden = NO;
+    
+    alertMsgLabel.text = @"AVAILABLE NOW?";
+    alertMsgLabel.textAlignment = NSTextAlignmentCenter;
+    alertMsgLabel.lineBreakMode = NSLineBreakByWordWrapping;
+    alertMsgLabel.textColor = [UIColor whiteColor];
+}
+
 - (IBAction)alertPressCancel:(id)sender {
+    alertBgView.hidden = YES;
+    alertMainBgView.hidden = YES;
+}
+
+- (IBAction)alertPressYes:(id)sender {
+    
+    alertBgView.hidden = YES;
+    alertMainBgView.hidden = YES;
+}
+
+- (IBAction)alertPressNo:(id)sender {
+    
     alertBgView.hidden = YES;
     alertMainBgView.hidden = YES;
 }
