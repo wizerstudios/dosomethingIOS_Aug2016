@@ -496,7 +496,13 @@
         commonHeight = imageSize+15;
         
         NSString *plusIcon = @"Pluis_icon1.png";
-        if ([imageNormalArray count] >=1) {
+        if ([imageNormalArray count] >=1)
+        {
+            for(NSString *strPlus in imageNormalArray)
+            {
+                if([strPlus isEqualToString:@"Pluis_icon1.png"])
+                    [imageNormalArray removeObject:strPlus];
+            }
             [imageNormalArray addObject:plusIcon];
         }
         
@@ -677,6 +683,7 @@
 
 -(void)newMessSwitchBtnAction:(UIButton *)sender
 {
+    
     id button = sender;
     while (![button isKindOfClass:[UITableViewCell class]]) {
         button = [button superview];
@@ -698,6 +705,7 @@
         
         if([place1 isEqualToString:@""] || place1 == nil)
         {
+            
             NSString *NewMessageImage =[[[placeHolderArray objectAtIndex:indexPath.section] objectAtIndex:indexPath.row] valueForKey:@"placeHolder"];
             
             
@@ -827,9 +835,14 @@
             }
             if(selOptionVal != nil || ![selOptionVal isEqualToString:@""])
                 [[[placeHolderArray objectAtIndex:indexPath.section] objectAtIndex:indexPath.row] setObject:selOptionVal forKey:@"VibrationImage"];
+            
+            
         }
+        
+        
     }
     
+    NSLog(@"placeHolderArray %@",placeHolderArray);
     [_tableviewProfile reloadData];
 }
 //- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
