@@ -415,30 +415,6 @@
             
         }
         
-        
-
-       
-        
-//                if([typingText isEqualToString:@""] || typingText == nil)
-//                {
-//                    [maleLabel setText:placeHolderText];
-//                }
-//                else
-//                {
-//                    cell.emailTextField.text = typingText;
-//        
-//                }
-//        
-//                if([typingTextFemale isEqualToString:@""] || typingTextFemale == nil)
-//                {
-//                    [femaleLabel setText:placeHolderFemale];
-//                }
-//                else
-//                {
-//                    femaleLabel.text = typingTextFemale;
-//                    
-//                }
-        
         cell.maleButton.userInteractionEnabled = YES;
         cell.femaleButton.userInteractionEnabled = YES;
         
@@ -456,9 +432,6 @@
   
         [cell.maleButton addTarget:self action:@selector(maleButtonAction) forControlEvents:UIControlEventTouchUpInside];
         [cell.femaleButton addTarget:self action:@selector(femaleButtonAction) forControlEvents:UIControlEventTouchUpInside];
-
-
-        
     }
 
 
