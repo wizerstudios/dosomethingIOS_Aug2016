@@ -41,12 +41,12 @@
                     <nil key="highlightedColor"/>
                     <variation key="default">
                         <mask key="constraints">
-                            <exclude reference="Nei-xp-NSs"/>
-                            <exclude reference="8DJ-Dl-zy5"/>
-                            <exclude reference="WdO-Yi-Hzx"/>
-                            <exclude reference="O6q-pe-Xxj"/>
                             <exclude reference="0K2-ry-bte"/>
+                            <exclude reference="8DJ-Dl-zy5"/>
+                            <exclude reference="Nei-xp-NSs"/>
+                            <exclude reference="O6q-pe-Xxj"/>
                             <exclude reference="UoE-ig-BFP"/>
+                            <exclude reference="WdO-Yi-Hzx"/>
                         </mask>
                     </variation>
                 </label>

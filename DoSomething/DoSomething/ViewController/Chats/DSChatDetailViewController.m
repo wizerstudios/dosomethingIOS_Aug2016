@@ -7,6 +7,8 @@
 //
 
 #import "DSChatDetailViewController.h"
+#import "CustomNavigationView.h"
+#import "DSConfig.h"
 
 @interface DSChatDetailViewController ()
 
@@ -37,6 +39,24 @@
     Time2.text =@"13:20";
     Time3.text =@"13:24";
     OnlineLabel.text =@"Online";
+    
+    CustomNavigationView *customNavigation;
+    customNavigation = [[CustomNavigationView alloc] initWithNibName:@"CustomNavigationView" bundle:nil];
+    customNavigation.view.frame = CGRectMake(0,-20, CGRectGetWidth(self.view.frame), 65);//65
+    if (IS_IPHONE6 ){
+        customNavigation.view.frame = CGRectMake(0,-20, 375, 76);
+    }
+    if(IS_IPHONE6_Plus)
+    {
+        customNavigation.view.frame = CGRectMake(0,-20, 420, 83);
+    }
+    [customNavigation.menuBtn setHidden:YES];
+    [customNavigation.buttonBack setHidden:NO];
+    [customNavigation.saveBtn setHidden:NO];
+    
+    [self.navigationController.navigationBar addSubview:customNavigation.view];
+    //    [customNavigation.saveBtn addTarget:self action:@selector(saveAction) forControlEvents:UIControlEventTouchUpInside];
+        [customNavigation.buttonBack addTarget:self action:@selector(backAction) forControlEvents:UIControlEventTouchUpInside];
 
 }
 
@@ -80,6 +100,11 @@
 
 - (void)actionSheet:(IBActionSheet *)actionSheet didDismissWithButtonIndex:(NSInteger)buttonIndex {
     NSLog(@"Dismissed with button index %ld", (long)buttonIndex);
+}
+
+- (void)backAction
+{
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 #pragma mark - All the other junk for the sample project
