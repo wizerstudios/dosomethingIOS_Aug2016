@@ -171,7 +171,6 @@
     _homeCollectionView.allowsMultipleSelection = YES;
     cell.layer.shouldRasterize = YES;
     cell.layer.rasterizationScale = [UIScreen mainScreen].scale;
-    
     return cell;
 }
 
@@ -188,7 +187,7 @@
     if (IS_IPHONE6 ||IS_IPHONE6_Plus)
         returnSize = CGSizeMake((self.view.frame.size.width/4.0), 110);
     if (IS_IPHONE4 ||IS_IPHONE5 )
-        returnSize = CGSizeMake((self.view.frame.size.width/3.5), 89);
+        returnSize = CGSizeMake((self.view.frame.size.width/3.6), 89);
     
     return returnSize;
 }
