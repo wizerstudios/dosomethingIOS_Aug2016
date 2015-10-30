@@ -26,6 +26,7 @@
 @end
 
 @implementation DSChatsTableViewController
+@synthesize ChatTableView;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -53,6 +54,15 @@
     timeArray = [[NSArray alloc] initWithObjects:@"19:58",@"17:20",@"15:30",nil];
     imageArray =[[NSArray alloc] initWithObjects:@"Galglot.png",@"yuna.png",@"taylor.png",nil];
     badgeimage=[[NSArray alloc] initWithObjects:@"18-Chats.png",@"12-Chats.png",@" ",nil];
+    
+    if(IS_IPHONE6)
+        [self.view addConstraint:[NSLayoutConstraint constraintWithItem:ChatTableView
+                                                              attribute:NSLayoutAttributeTop
+                                                              relatedBy:NSLayoutRelationEqual
+                                                                 toItem:self.view
+                                                              attribute:NSLayoutAttributeTop
+                                                             multiplier:1.0
+                                                               constant:20.0]];
     
     }
 
@@ -99,7 +109,7 @@
     
     NSString *ProfileName1=[NSString stringWithFormat:@"%@",[badgeimage objectAtIndex:indexPath.row]];
     [Cell.profileImageView setImage:[UIImage imageNamed:ProfileName1]];
-    _ChatTableView.backgroundColor = [UIColor colorWithRed:237.0f/255.0f green:237.0f/255.0f blue:237.0f/255.0f alpha:1.0f];
+    ChatTableView.backgroundColor = [UIColor colorWithRed:237.0f/255.0f green:237.0f/255.0f blue:237.0f/255.0f alpha:1.0f];
     
     return Cell;
 }

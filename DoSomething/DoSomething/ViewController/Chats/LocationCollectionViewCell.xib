@@ -72,7 +72,7 @@
                                     <constraint firstAttribute="height" constant="12" id="U7d-gb-7Kh"/>
                                     <constraint firstAttribute="width" constant="100" id="aMc-bv-66e"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="9"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="9"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>

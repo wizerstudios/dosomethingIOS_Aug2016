@@ -111,13 +111,13 @@
     if (IS_IPHONE6 ||IS_IPHONE6_Plus)
         returnSize = CGSizeMake((self.view.frame.size.width / 3.200f), (self.view.frame.size.width / 3.200f));
     if (IS_IPHONE4 ||IS_IPHONE5 )
-        returnSize = CGSizeMake((self.view.frame.size.width / 3.300f), 130);
+        returnSize = CGSizeMake((self.view.frame.size.width / 3.300f), 134);
     
     return returnSize;
 }
 
 - (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout minimumLineSpacingForSectionAtIndex:(NSInteger)section {
-    return 50.0;
+    return 55.0;
 }
 
 - (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout minimumInteritemSpacingForSectionAtIndex:(NSInteger)section {
