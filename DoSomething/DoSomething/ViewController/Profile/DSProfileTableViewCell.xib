@@ -82,6 +82,25 @@
                                     <constraint firstAttribute="height" constant="31" id="SxI-bG-gdc"/>
                                 </constraints>
                             </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="L4l-gD-IHh">
+                                <rect key="frame" x="120" y="166" width="61" height="31"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="31" id="58d-vW-K30"/>
+                                    <constraint firstAttribute="width" constant="61" id="Pb6-Lu-atc"/>
+                                    <constraint firstAttribute="width" constant="61" id="SaL-68-112"/>
+                                    <constraint firstAttribute="height" constant="25" id="W9g-oI-4LC"/>
+                                </constraints>
+                                <state key="normal">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="SaL-68-112"/>
+                                        <exclude reference="W9g-oI-4LC"/>
+                                    </mask>
+                                </variation>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="0.90980392156862744" green="0.90980392156862744" blue="0.90980392156862744" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
@@ -90,12 +109,20 @@
                             <constraint firstAttribute="height" constant="200" id="7F0-fM-zw1"/>
                             <constraint firstItem="fTA-Na-Mia" firstAttribute="top" secondItem="bAy-v9-r7J" secondAttribute="bottom" constant="1" id="Fge-Gk-AOe"/>
                             <constraint firstAttribute="centerY" secondItem="fTA-Na-Mia" secondAttribute="centerY" constant="-86" id="KOC-90-eR8"/>
+                            <constraint firstItem="bAy-v9-r7J" firstAttribute="centerY" secondItem="L4l-gD-IHh" secondAttribute="centerY" constant="-78.5" id="W8e-GP-TpU"/>
+                            <constraint firstItem="bAy-v9-r7J" firstAttribute="centerX" secondItem="L4l-gD-IHh" secondAttribute="centerX" id="X6e-UC-e0Z"/>
+                            <constraint firstAttribute="centerX" secondItem="L4l-gD-IHh" secondAttribute="centerX" constant="-0.5" id="Yzw-MV-6rI"/>
                             <constraint firstItem="bAy-v9-r7J" firstAttribute="top" secondItem="R2K-2f-wgq" secondAttribute="top" constant="40" id="ee9-7n-lhz"/>
                             <constraint firstItem="MDZ-Us-VGR" firstAttribute="top" secondItem="R2K-2f-wgq" secondAttribute="top" constant="10" id="hQE-mh-1iI"/>
+                            <constraint firstAttribute="bottom" secondItem="L4l-gD-IHh" secondAttribute="bottom" constant="3" id="hTw-Ml-OYo"/>
                             <constraint firstAttribute="centerX" secondItem="bAy-v9-r7J" secondAttribute="centerX" id="l0j-96-DGY"/>
+                            <constraint firstItem="bAy-v9-r7J" firstAttribute="centerX" secondItem="L4l-gD-IHh" secondAttribute="centerX" constant="-2" id="za9-gY-jQy"/>
                         </constraints>
                         <variation key="default">
                             <mask key="constraints">
+                                <exclude reference="W8e-GP-TpU"/>
+                                <exclude reference="X6e-UC-e0Z"/>
+                                <exclude reference="za9-gY-jQy"/>
                                 <exclude reference="KOC-90-eR8"/>
                             </mask>
                         </variation>
@@ -110,10 +137,12 @@
             </tableViewCellContentView>
             <connections>
                 <outlet property="SoundSwitchBtn" destination="AGY-3d-BBY" id="ajE-uN-nSa"/>
+                <outlet property="cameraButton" destination="L4l-gD-IHh" id="Utw-3t-AWx"/>
                 <outlet property="hobbiesLabel" destination="CBw-9W-xH2" id="LLK-iC-TSe"/>
                 <outlet property="layoutConstraintProfileImageHeight" destination="kB6-PF-qFE" id="rPZ-1Y-Rx6"/>
                 <outlet property="layoutConstraintProfileImageWidth" destination="Dgs-wp-y9R" id="gs7-6y-GW9"/>
                 <outlet property="messSwitchBtn" destination="PI4-If-qxu" id="AqB-OW-fUt"/>
+                <outlet property="profileImageview" destination="bAy-v9-r7J" id="Gbd-JG-Yl5"/>
                 <outlet property="vibrationSwitchBtn" destination="Lnh-6T-lN0" id="UBo-YO-Kmr"/>
             </connections>
             <point key="canvasLocation" x="286" y="158"/>
@@ -201,7 +230,7 @@
                                 <color key="textColor" red="0.40000000000000002" green="0.40000000000000002" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Pluis_icon" translatesAutoresizingMaskIntoConstraints="NO" id="hCe-cD-hwS">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Plus_icon" translatesAutoresizingMaskIntoConstraints="NO" id="hCe-cD-hwS">
                                 <rect key="frame" x="125" y="32" width="28" height="28"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="28" id="2lA-vJ-crr"/>
@@ -866,7 +895,7 @@
         </tableViewCell>
     </objects>
     <resources>
-        <image name="Pluis_icon" width="37" height="37"/>
+        <image name="Plus_icon" width="37" height="37"/>
         <image name="camera_icon" width="37" height="37"/>
         <image name="profile_noimg" width="163" height="163"/>
     </resources>

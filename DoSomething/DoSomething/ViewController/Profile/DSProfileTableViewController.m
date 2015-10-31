@@ -22,6 +22,7 @@
     UITextField *currentTextfield;
     UILabel *maleLabel;
     UILabel *femaleLabel;
+    NSString *textviewText;
     
     float commonWidth, commonHeight;
     float yAxis;
@@ -32,6 +33,8 @@
 @end
 
 @implementation DSProfileTableViewController
+@synthesize profileData;
+
 - (void)viewDidLoad {
     [super viewDidLoad];
 
@@ -369,17 +372,26 @@
         {
             [[NSBundle mainBundle] loadNibNamed:@"DSProfileTableViewCell" owner:self options:nil];
             cell = cellProfileImg;
-            
         }
         
         if (IS_IPHONE6 ||IS_IPHONE6_Plus)
         {
             cell.layoutConstraintProfileImageHeight.constant =159;
             cell.layoutConstraintProfileImageWidth.constant =161;
-            
         }
         
-           }
+        if(!profileData)
+            [cell.profileImageview setImage:[UIImage imageNamed:@"profile_noimg"]];
+        else
+            [cell.profileImageview setImage:[UIImage imageWithData:profileData]];
+        
+        cell.profileImageview.layer.cornerRadius = cell.profileImageview.frame.size.height / 2;
+        cell.profileImageview.layer.masksToBounds = YES;
+        cell.cameraButton.userInteractionEnabled = YES;
+        [cell.cameraButton setTag:101];
+        [cell.cameraButton addTarget:self action:@selector(selectCamera:) forControlEvents:UIControlEventTouchUpInside];
+        
+    }
     if (indexPath.row == 1 || indexPath.row == 2)
     {
         if (cell == nil)
@@ -520,6 +532,7 @@
             
         }
         
+        cell.textViewAboutYou.text = textviewText;
         cell.labelAboutYou.text =titleText;
         cell.textViewHeaderLabel.text =placeHolderText;
         cell.textViewAboutYou.delegate = self;
@@ -537,12 +550,12 @@
         space = imageSize / 2;
         commonHeight = imageSize+15;
         
-        NSString *plusIcon = @"Pluis_icon.png";
+        NSString *plusIcon = @"Plus_icon.png";
         if ([imageNormalArray count] >=1)
         {
             for(NSString *strPlus in imageNormalArray)
             {
-                if([strPlus isEqualToString:@"Pluis_icon.png"])
+                if([strPlus isEqualToString:@"Plus_icon.png"])
                     [imageNormalArray removeObject:strPlus];
             }
             [imageNormalArray addObject:plusIcon];
@@ -567,6 +580,7 @@
             
             if (image == plusIcon) {
                 hobbiesImage.userInteractionEnabled = YES;
+                pushToHobbiesButton.imageView.contentMode = UIViewContentModeScaleAspectFit;
                 [hobbiesImage addSubview:pushToHobbiesButton];
             }
             
@@ -596,8 +610,6 @@
             hobbiesname.text = image;
             [cell addSubview:hobbiesname];
             hobbiesname.textAlignment = NSTextAlignmentCenter;
-            
-            
         }
     }
     
@@ -953,7 +965,6 @@
         }
         
     }
-    NSLog(@"placeHolderArray %@",placeHolderArray);
     [_tableviewProfile reloadData];
 }
 
@@ -964,9 +975,44 @@
     CGPoint position = [textView convertPoint:CGPointZero toView: _tableviewProfile ];
     NSIndexPath *indexPath = [_tableviewProfile indexPathForRowAtPoint: position];
     DSProfileTableViewCell *cell = (DSProfileTableViewCell *)[_tableviewProfile cellForRowAtIndexPath:indexPath];
-    
     cell.textViewHeaderLabel.hidden = YES;
+    
+    textviewText = textView.text;
 }
+
+#pragma mark - Camera Action
+-(void)selectCamera: (UIButton *)sender
+{
+    if([sender tag] == 101)
+    {
+        if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera])
+        {
+            UIImagePickerController *imagePicker = [[UIImagePickerController alloc] init];
+            imagePicker.sourceType =  UIImagePickerControllerSourceTypeCamera;
+            imagePicker.delegate = (id)self;
+            imagePicker.cameraFlashMode = UIImagePickerControllerCameraFlashModeOff;
+            imagePicker.allowsEditing = NO;
+            [self presentViewController:imagePicker animated:YES completion:nil];
+        }
+        else
+        {
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error"message:@"This device doesn't have a camera."delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil];
+            [alert show];
+        }
+    }
+}
+- (void) imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
+{
+    [self dismissViewControllerAnimated:YES completion:nil];
+    profileData = UIImageJPEGRepresentation([info objectForKey:UIImagePickerControllerOriginalImage], 0.1);
+    [_tableviewProfile reloadData];
+}
+- (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker
+{
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+
 
 //- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 //
