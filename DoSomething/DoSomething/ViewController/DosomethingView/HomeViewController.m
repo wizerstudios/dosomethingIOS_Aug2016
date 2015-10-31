@@ -190,6 +190,8 @@
         return 27.0;
     else if(IS_IPHONE6)
         return 8.0;
+    else if(IS_IPHONE5)
+        return 7.0;
     else
         return 5.0;
 }
@@ -204,8 +206,10 @@
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath{
     CGSize returnSize = CGSizeZero;
     
-    if (IS_IPHONE6 || IS_IPHONE6_Plus)
+    if (IS_IPHONE6)
         returnSize = CGSizeMake((self.view.frame.size.width/4.0), 110);
+    if(IS_IPHONE6_Plus)
+        returnSize = CGSizeMake((self.view.frame.size.width/4.5), 110);
     if (IS_IPHONE4 ||IS_IPHONE5 )
         returnSize = CGSizeMake((self.view.frame.size.width/3.6), 88);
     
