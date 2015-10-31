@@ -76,6 +76,15 @@
     selectedItemsArray = [[NSMutableArray alloc]init];
     alertBgView.hidden = YES;
     alertMainBgView.hidden = YES;
+    
+    if(IS_IPHONE5)
+        [self.view addConstraint:[NSLayoutConstraint constraintWithItem:_homeCollectionView
+                                                              attribute:NSLayoutAttributeTop
+                                                              relatedBy:NSLayoutRelationEqual
+                                                                 toItem:self.view
+                                                              attribute:NSLayoutAttributeTop
+                                                             multiplier:1.0
+                                                               constant:75.0]];
 }
 -(void)viewWillAppear:(BOOL)animated
 {
@@ -171,7 +180,18 @@
     _homeCollectionView.allowsMultipleSelection = YES;
     cell.layer.shouldRasterize = YES;
     cell.layer.rasterizationScale = [UIScreen mainScreen].scale;
+
     return cell;
+}
+
+- (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout minimumLineSpacingForSectionAtIndex:(NSInteger)section {
+    
+    if(IS_IPHONE6_Plus)
+        return 27.0;
+    else if(IS_IPHONE6)
+        return 8.0;
+    else
+        return 5.0;
 }
 
 - (UICollectionViewCell *)loadingCellForIndexPath:(NSIndexPath *)indexPath {
@@ -184,10 +204,10 @@
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath{
     CGSize returnSize = CGSizeZero;
     
-    if (IS_IPHONE6 ||IS_IPHONE6_Plus)
+    if (IS_IPHONE6 || IS_IPHONE6_Plus)
         returnSize = CGSizeMake((self.view.frame.size.width/4.0), 110);
     if (IS_IPHONE4 ||IS_IPHONE5 )
-        returnSize = CGSizeMake((self.view.frame.size.width/3.6), 89);
+        returnSize = CGSizeMake((self.view.frame.size.width/3.6), 88);
     
     return returnSize;
 }
