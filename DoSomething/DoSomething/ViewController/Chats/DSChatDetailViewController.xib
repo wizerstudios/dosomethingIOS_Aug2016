@@ -204,7 +204,7 @@
                         </label>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text=" " lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HWQ-D5-Dwc">
                             <rect key="frame" x="0.0" y="387" width="320" height="3"/>
-                            <color key="backgroundColor" red="0.43402661416443244" green="0.43402661416443244" blue="0.43402661416443244" alpha="1" colorSpace="calibratedRGB"/>
+                            <color key="backgroundColor" red="0.56872888038016089" green="0.56872888038016089" blue="0.56872888038016089" alpha="1" colorSpace="calibratedRGB"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="320" id="8v4-bQ-P0N"/>
                                 <constraint firstAttribute="height" constant="3" id="9ca-Dv-PH5"/>

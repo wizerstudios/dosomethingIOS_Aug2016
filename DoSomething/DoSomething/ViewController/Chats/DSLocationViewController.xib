@@ -59,7 +59,7 @@
                     </variation>
                 </label>
             </subviews>
-            <color key="backgroundColor" red="0.86029469261286873" green="0.86029469261286873" blue="0.86029469261286873" alpha="1" colorSpace="calibratedRGB"/>
+            <color key="backgroundColor" red="0.48627450980392156" green="0.48627450980392156" blue="0.48627450980392156" alpha="0.19" colorSpace="calibratedRGB"/>
             <constraints>
                 <constraint firstAttribute="bottom" secondItem="x4s-f8-PZR" secondAttribute="bottom" constant="55" id="2n1-YP-tKb"/>
                 <constraint firstAttribute="bottom" secondItem="x4s-f8-PZR" secondAttribute="bottom" constant="96" id="3cT-Xe-bJC"/>

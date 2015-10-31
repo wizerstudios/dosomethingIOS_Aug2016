@@ -48,5 +48,8 @@
 @property (weak, nonatomic) IBOutlet UIButton *messSwitchBtn;
 @property (weak, nonatomic) IBOutlet UIButton *SoundSwitchBtn;
 @property (weak, nonatomic) IBOutlet UIButton *vibrationSwitchBtn;
+@property (weak, nonatomic) IBOutlet UILabel *labelMale;
+@property (weak, nonatomic) IBOutlet UILabel *labelFemale;
+@property (weak, nonatomic) IBOutlet UILabel *textViewHeaderLabel;
 
 @end

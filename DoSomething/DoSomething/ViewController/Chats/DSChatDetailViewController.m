@@ -52,7 +52,7 @@
     }
     [customNavigation.menuBtn setHidden:YES];
     [customNavigation.buttonBack setHidden:NO];
-    [customNavigation.saveBtn setHidden:NO];
+    [customNavigation.saveBtn setHidden:YES];
     
     [self.navigationController.navigationBar addSubview:customNavigation.view];
     //    [customNavigation.saveBtn addTarget:self action:@selector(saveAction) forControlEvents:UIControlEventTouchUpInside];
