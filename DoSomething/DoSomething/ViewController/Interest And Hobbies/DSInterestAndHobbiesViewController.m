@@ -8,7 +8,6 @@
 
 #import "DSInterestAndHobbiesViewController.h"
 #import "DSInterestAndHobbiesCollectionViewCell.h"
-#import "DSProfileTableViewController.h"
 #import "CustomNavigationView.h"
 #import "DSConfig.h"
 
@@ -22,7 +21,7 @@
 @end
 
 @implementation DSInterestAndHobbiesViewController
-@synthesize interestAndHobbiesCollectionView;
+@synthesize interestAndHobbiesCollectionView, profileDetailsArray;
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self.interestAndHobbiesCollectionView registerClass:[UICollectionReusableView class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"HeaderView"];
@@ -80,6 +79,8 @@
 
 -(void)saveAction
 {
+    DSProfileTableViewController *profile = [[DSProfileTableViewController alloc]init];
+    profile.placeHolderArray = profileDetailsArray;
     [self.navigationController popViewControllerAnimated:YES];
 }
 -(void)localArray

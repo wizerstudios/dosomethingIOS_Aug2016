@@ -15,7 +15,7 @@
 
 @interface DSProfileTableViewController ()
 {
-    NSMutableArray *placeHolderArray, *imageNormalArray,*hobbiesNameArray;
+    NSMutableArray *imageNormalArray,*hobbiesNameArray;
     NSArray *titleArray;
     NSMutableArray *interstAndHobbiesArray;
     UIDatePicker *datePicker;
@@ -32,7 +32,7 @@
 @end
 
 @implementation DSProfileTableViewController
-@synthesize profileData, textviewText;
+@synthesize profileData, textviewText, placeHolderArray;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -125,7 +125,7 @@
     
     DSProfileTableViewCell *cell;
     
-    indexPath = [self.tableviewProfile indexPathForCell:(UITableViewCell *)textFieldSuper];
+    indexPath = [self.tableviewProfile indexPathForCell:(DSProfileTableViewCell *)textFieldSuper];
     
     cell = (DSProfileTableViewCell *) [self.tableviewProfile cellForRowAtIndexPath:[NSIndexPath indexPathForRow:indexPath.row inSection:indexPath.section]];
     
@@ -147,9 +147,6 @@
         
         if(selOptionVal != nil || ![selOptionVal isEqualToString:@""]){
             [[[placeHolderArray objectAtIndex:indexPath.section] objectAtIndex:indexPath.row] setObject:selOptionVal forKey:@"TypingText"];
-            
-            
-            
         }
         
         
@@ -188,6 +185,7 @@
 
 - (void)pushToHobbiesView {
     DSInterestAndHobbiesViewController * DSHobbiesView  = [[DSInterestAndHobbiesViewController alloc]initWithNibName:@"DSInterestAndHobbiesViewController" bundle:nil];
+    DSHobbiesView.profileDetailsArray = placeHolderArray;
     [self.navigationController pushViewController:DSHobbiesView animated:YES];
 
 }
@@ -306,8 +304,6 @@
         }
     
     return 50;
-    
-   
 }
 
 

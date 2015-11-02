@@ -157,7 +157,7 @@
         {
             xslider=0-frameWt;
             jslider=0;
-            [self.scrollViewImage setContentOffset:CGPointMake(0, 0)];
+            [self.scrollViewImage setContentOffset:CGPointMake(0, 0) animated:YES];
             [imageViewActive setFrame:CGRectMake(jslider*13, 0, 10, 10)];
             
             for(UIView *subView in [pgDtView subviews])

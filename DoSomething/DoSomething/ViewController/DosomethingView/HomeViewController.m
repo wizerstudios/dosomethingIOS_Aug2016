@@ -49,7 +49,7 @@
                  [NSDictionary dictionaryWithObjectsAndKeys:@"meals_InActive.png",NORMAL_IMAGE,@"meals_active.png",ACTIVE_IMAGE,@"MEALS",CAPTION, nil],
                  [NSDictionary dictionaryWithObjectsAndKeys:@"coffee_Inactive.png",NORMAL_IMAGE,@"coffee_active.png",ACTIVE_IMAGE,@"COFFEE",CAPTION, nil],
                  [NSDictionary dictionaryWithObjectsAndKeys:@"shopping_Inactive.png",NORMAL_IMAGE,@"shopping_active.png",ACTIVE_IMAGE,@"SHOPPING",CAPTION, nil],
-                 [NSDictionary dictionaryWithObjectsAndKeys:@"karaoke_Inactive.png",NORMAL_IMAGE,@"karaoke_active.png",ACTIVE_IMAGE,@"KERAOKE",CAPTION, nil],
+                 [NSDictionary dictionaryWithObjectsAndKeys:@"karaoke_Inactive.png",NORMAL_IMAGE,@"karaoke_active.png",ACTIVE_IMAGE,@"KARAOKE",CAPTION, nil],
                  [NSDictionary dictionaryWithObjectsAndKeys:@"gym_Inactive.png",NORMAL_IMAGE,@"gym_active.png",ACTIVE_IMAGE,@"GYM",CAPTION, nil],
                   [NSDictionary dictionaryWithObjectsAndKeys:@"tennis_Inactive.png",NORMAL_IMAGE,@"tennis_active.png",ACTIVE_IMAGE,@"TENNIS",CAPTION, nil],
                   [NSDictionary dictionaryWithObjectsAndKeys:@"soocer_Inactive",NORMAL_IMAGE,@"soocer_active",ACTIVE_IMAGE,@"SOCCER",CAPTION, nil],
