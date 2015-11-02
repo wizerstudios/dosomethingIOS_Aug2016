@@ -57,7 +57,9 @@
     [self.navigationController.navigationBar addSubview:customNavigation.view];
     //    [customNavigation.saveBtn addTarget:self action:@selector(saveAction) forControlEvents:UIControlEventTouchUpInside];
         [customNavigation.buttonBack addTarget:self action:@selector(backAction) forControlEvents:UIControlEventTouchUpInside];
-
+    
+    _transparentView.hidden = YES;
+    _backgroundView.hidden = YES;
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -68,40 +70,10 @@
 
 - (IBAction)showReallyFunkyIBActionSheet:(id)sender
 {
-    self.funkyIBAS = [[IBActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:nil destructiveButtonTitle:nil otherButtonTitles:@"Block", @"Delete",@"Cancel", nil];
-    
-    self.funkyIBAS.buttonResponse = IBActionSheetButtonResponseShrinksOnPress;
-    [self.funkyIBAS setButtonTextColor:[UIColor whiteColor] forButtonAtIndex:0];
-    [self.funkyIBAS setButtonBackgroundColor:[UIColor  colorWithRed:(118/255.0) green:(118/255.0) blue:(118/255.0) alpha:1.0] forButtonAtIndex:0];
-    [self.funkyIBAS setFont:[UIFont fontWithName:@"patron-reguler" size:17] forButtonAtIndex:0];
-    
-    [self.funkyIBAS setButtonTextColor:[UIColor whiteColor] forButtonAtIndex:1];
-    [self.funkyIBAS setButtonBackgroundColor:[UIColor colorWithRed:(230/255.0) green:(63/255.0) blue:(82/255.0) alpha:1.0] forButtonAtIndex:1];
-    [self.funkyIBAS setFont:[UIFont fontWithName:@"patron-reguler" size:17] forButtonAtIndex:1];
-    
-    [self.funkyIBAS setButtonTextColor:[UIColor lightGrayColor] forButtonAtIndex:2];
-    [self.funkyIBAS setButtonBackgroundColor:[UIColor whiteColor] forButtonAtIndex:2];
-    
-    [self.funkyIBAS setFont:[UIFont fontWithName:@"patron-reguler" size:17]forButtonAtIndex:2];
-    
-    [self.funkyIBAS showInView:self.view];
+     _menuImageview.hidden = YES;
+    _transparentView.hidden = NO;
+    _backgroundView.hidden = NO;
 }
-
-#pragma mark - IBActionSheet/UIActionSheet Delegate Method
-
-- (void)actionSheet:(IBActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
-    NSLog(@"Button at index: %ld clicked\nIts title is '%@'", (long)buttonIndex, [actionSheet buttonTitleAtIndex:buttonIndex]);
-}
-
-
-- (void)actionSheet:(IBActionSheet *)actionSheet willDismissWithButtonIndex:(NSInteger)buttonIndex {
-    NSLog(@"Will dismiss with button index %ld", (long)buttonIndex);
-}
-
-- (void)actionSheet:(IBActionSheet *)actionSheet didDismissWithButtonIndex:(NSInteger)buttonIndex {
-    NSLog(@"Dismissed with button index %ld", (long)buttonIndex);
-}
-
 - (void)backAction
 {
     [self.navigationController popViewControllerAnimated:YES];
@@ -180,4 +152,21 @@
 }
 */
 
+- (IBAction)pressCancel:(id)sender {
+    _transparentView.hidden = YES;
+    _backgroundView.hidden = YES;
+     _menuImageview.hidden = NO;
+}
+
+- (IBAction)pressDelete:(id)sender {
+    _transparentView.hidden = YES;
+    _backgroundView.hidden = YES;
+     _menuImageview.hidden = NO;
+}
+
+- (IBAction)pressBlock:(id)sender {
+    _transparentView.hidden = YES;
+    _backgroundView.hidden = YES;
+     _menuImageview.hidden = NO;
+}
 @end
