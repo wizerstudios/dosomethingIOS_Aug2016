@@ -4,6 +4,7 @@
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <customFonts key="customFonts">
         <mutableArray key="Patron-Medium.ttf">
@@ -40,10 +41,10 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="d8c-9A-h96">
-                    <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                    <rect key="frame" x="0.0" y="8" width="320" height="560"/>
                     <subviews>
                         <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vf2-dO-FNR">
-                            <rect key="frame" x="0.0" y="10" width="320" height="44"/>
+                            <rect key="frame" x="0.0" y="2" width="320" height="44"/>
                             <items>
                                 <navigationItem title="Title" id="QVa-CW-tbb"/>
                             </items>
@@ -246,7 +247,7 @@
             </subviews>
             <color key="backgroundColor" red="0.90980392160000001" green="0.90980392160000001" blue="0.90980392160000001" alpha="0.89000000000000001" colorSpace="calibratedRGB"/>
             <constraints>
-                <constraint firstItem="d8c-9A-h96" firstAttribute="top" secondItem="o0E-7A-6vB" secondAttribute="top" id="BTZ-iQ-fhK"/>
+                <constraint firstItem="d8c-9A-h96" firstAttribute="top" secondItem="o0E-7A-6vB" secondAttribute="topMargin" id="BTZ-iQ-fhK"/>
                 <constraint firstItem="d8c-9A-h96" firstAttribute="trailing" secondItem="95L-kz-lld" secondAttribute="trailing" id="GZJ-KV-Ad6"/>
                 <constraint firstItem="2mc-lt-SjM" firstAttribute="top" secondItem="vf2-dO-FNR" secondAttribute="bottom" constant="425" id="Hz0-O4-aU4"/>
                 <constraint firstItem="Vyo-Sj-gzT" firstAttribute="leading" secondItem="o0E-7A-6vB" secondAttribute="leading" id="N1W-du-GsT"/>

@@ -39,7 +39,7 @@
     badgeimage=[[NSArray alloc] initWithObjects:@"12-Chats.png",@"18-Chats.png",@" ",nil];
 //    badgeimage=[[NSArray alloc] initWithObjects:@"18-Chats.png",@"12-Chats.png",@" ",nil];
     
-    if(IS_IPHONE6)
+    if(IS_IPHONE6 || IS_IPHONE6_Plus)
         [self.view addConstraint:[NSLayoutConstraint constraintWithItem:ChatTableView
                                                               attribute:NSLayoutAttributeTop
                                                               relatedBy:NSLayoutRelationEqual

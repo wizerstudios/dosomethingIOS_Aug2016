@@ -3,6 +3,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="DSChatsTableViewController">
@@ -17,7 +18,7 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="4sn-Vx-DnA">
-                    <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                    <rect key="frame" x="0.0" y="8" width="320" height="560"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <color key="sectionIndexBackgroundColor" red="0.92941176470588238" green="0.92941176470588238" blue="0.92941176470588238" alpha="1" colorSpace="calibratedRGB"/>
                     <connections>
@@ -55,7 +56,7 @@
             <constraints>
                 <constraint firstAttribute="bottom" secondItem="4sn-Vx-DnA" secondAttribute="bottom" id="11f-ur-8dI"/>
                 <constraint firstItem="4sn-Vx-DnA" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="Hh4-mR-o6V"/>
-                <constraint firstItem="4sn-Vx-DnA" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="YaU-v8-IuU"/>
+                <constraint firstItem="4sn-Vx-DnA" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="topMargin" id="YaU-v8-IuU"/>
                 <constraint firstItem="4sn-Vx-DnA" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="Zlt-S8-SfU"/>
                 <constraint firstAttribute="trailing" secondItem="4sn-Vx-DnA" secondAttribute="trailing" id="aqA-r6-9VA"/>
                 <constraint firstAttribute="bottom" secondItem="RV3-3A-Nan" secondAttribute="bottom" constant="51" id="dzP-7y-y8M"/>
