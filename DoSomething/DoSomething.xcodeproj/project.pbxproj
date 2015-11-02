@@ -24,6 +24,7 @@
 		51322A291BDFBFAA00418216 /* taylor.png in Resources */ = {isa = PBXBuildFile; fileRef = 51322A1F1BDFBFAA00418216 /* taylor.png */; };
 		51322A2A1BDFBFAA00418216 /* yuna.png in Resources */ = {isa = PBXBuildFile; fileRef = 51322A201BDFBFAA00418216 /* yuna.png */; };
 		51322A2B1BDFBFAA00418216 /* zoe_tay.png in Resources */ = {isa = PBXBuildFile; fileRef = 51322A211BDFBFAA00418216 /* zoe_tay.png */; };
+		51560BC01BE76D53009FCF2A /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 51560BBF1BE76D53009FCF2A /* AudioToolbox.framework */; };
 		51ED4E621BE08EDF0079E030 /* 18-Chats.png in Resources */ = {isa = PBXBuildFile; fileRef = 51ED4E5F1BE08EDF0079E030 /* 18-Chats.png */; };
 		51ED4E631BE08EDF0079E030 /* 12-Chats.png in Resources */ = {isa = PBXBuildFile; fileRef = 51ED4E601BE08EDF0079E030 /* 12-Chats.png */; };
 		51ED4E641BE08EDF0079E030 /* 19-ChatWindow.png in Resources */ = {isa = PBXBuildFile; fileRef = 51ED4E611BE08EDF0079E030 /* 19-ChatWindow.png */; };
@@ -161,6 +162,7 @@
 		51322A1F1BDFBFAA00418216 /* taylor.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = taylor.png; sourceTree = "<group>"; };
 		51322A201BDFBFAA00418216 /* yuna.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = yuna.png; sourceTree = "<group>"; };
 		51322A211BDFBFAA00418216 /* zoe_tay.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = zoe_tay.png; sourceTree = "<group>"; };
+		51560BBF1BE76D53009FCF2A /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		51ED4E5F1BE08EDF0079E030 /* 18-Chats.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "18-Chats.png"; sourceTree = "<group>"; };
 		51ED4E601BE08EDF0079E030 /* 12-Chats.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "12-Chats.png"; sourceTree = "<group>"; };
 		51ED4E611BE08EDF0079E030 /* 19-ChatWindow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "19-ChatWindow.png"; sourceTree = "<group>"; };
@@ -313,6 +315,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				51560BC01BE76D53009FCF2A /* AudioToolbox.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -350,6 +353,7 @@
 			isa = PBXGroup;
 			children = (
 				C6D5F67B1BC7EC440050C1AE /* Images.xcassets */,
+				51560BBC1BE76AEF009FCF2A /* Framework */,
 				EAFC96C41BD21A1100B3593D /* Hobbies  */,
 				C6D5F62B1BC7B52C0050C1AE /* Fonts */,
 				065BAC611BC7A135005AF493 /* Info.plist */,
@@ -388,6 +392,14 @@
 			);
 			name = Images;
 			path = ../Chats;
+			sourceTree = "<group>";
+		};
+		51560BBC1BE76AEF009FCF2A /* Framework */ = {
+			isa = PBXGroup;
+			children = (
+				51560BBF1BE76D53009FCF2A /* AudioToolbox.framework */,
+			);
+			name = Framework;
 			sourceTree = "<group>";
 		};
 		51ED4E5E1BE08BD50079E030 /* Images */ = {
@@ -1044,6 +1056,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer: Loganathan Venkatesh (RNTZRSZ4TL)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/DoSomething",
+				);
 				INFOPLIST_FILE = DoSomething/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -1058,6 +1074,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Distribution: O Clock Software Pvt Ltd (384S95M8XQ)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/DoSomething",
+				);
 				INFOPLIST_FILE = DoSomething/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";

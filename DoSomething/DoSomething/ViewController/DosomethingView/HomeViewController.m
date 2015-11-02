@@ -18,6 +18,7 @@
 
 #import "HomeCustomCell.h"
 #import "AppDelegate.h"
+#import <AudioToolbox/AudioToolbox.h>
 
 #define ITEMS_PAGE_SIZE 4
 #define ITEM_CELL_IDENTIFIER @"ItemCell"
@@ -219,6 +220,8 @@
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
     isSelectMenu=YES;
+   // AudioServicesPlaySystemSound(kSystemSoundID_Vibrate);
+    
     HomeCustomCell *cell = (HomeCustomCell *)[collectionView cellForItemAtIndexPath:indexPath];
     NSMutableDictionary *data = [menuArray objectAtIndex:indexPath.row];
     
@@ -247,6 +250,8 @@
 
 -(void)collectionView: (UICollectionView *)collectionView didDeselectItemAtIndexPath:(NSIndexPath *)indexPath
 {
+//    AudioServicesPlaySystemSound(kSystemSoundID_Vibrate);
+    
     HomeCustomCell *cell = (HomeCustomCell *)[collectionView cellForItemAtIndexPath:indexPath];
     NSMutableDictionary *data = [menuArray objectAtIndex:indexPath.row];
     NSArray *selectArray = [[NSArray alloc]init];
