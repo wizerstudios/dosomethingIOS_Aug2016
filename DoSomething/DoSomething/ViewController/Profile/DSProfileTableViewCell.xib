@@ -75,27 +75,24 @@
                                 <color key="textColor" red="0.40000000000000002" green="0.40000000000000002" blue="0.40000000000000002" alpha="1" colorSpace="deviceRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="camera_icon" translatesAutoresizingMaskIntoConstraints="NO" id="fTA-Na-Mia">
-                                <rect key="frame" x="133" y="166" width="34" height="31"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="34" id="RPx-LB-z21"/>
-                                    <constraint firstAttribute="height" constant="31" id="SxI-bG-gdc"/>
-                                </constraints>
-                            </imageView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="L4l-gD-IHh">
-                                <rect key="frame" x="120" y="166" width="61" height="31"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="L4l-gD-IHh">
+                                <rect key="frame" x="136" y="166" width="30" height="30"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="31" id="58d-vW-K30"/>
+                                    <constraint firstAttribute="height" constant="30" id="BZt-iq-FHp"/>
+                                    <constraint firstAttribute="width" constant="30" id="K5N-AU-MOg"/>
                                     <constraint firstAttribute="width" constant="61" id="Pb6-Lu-atc"/>
                                     <constraint firstAttribute="width" constant="61" id="SaL-68-112"/>
                                     <constraint firstAttribute="height" constant="25" id="W9g-oI-4LC"/>
                                 </constraints>
-                                <state key="normal">
+                                <state key="normal" image="camera_icon">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <variation key="default">
                                     <mask key="constraints">
+                                        <exclude reference="58d-vW-K30"/>
+                                        <exclude reference="Pb6-Lu-atc"/>
                                         <exclude reference="SaL-68-112"/>
                                         <exclude reference="W9g-oI-4LC"/>
                                     </mask>
@@ -104,11 +101,8 @@
                         </subviews>
                         <color key="backgroundColor" red="0.90980392156862744" green="0.90980392156862744" blue="0.90980392156862744" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
-                            <constraint firstAttribute="centerX" secondItem="fTA-Na-Mia" secondAttribute="centerX" id="0De-Aa-gHV"/>
                             <constraint firstItem="MDZ-Us-VGR" firstAttribute="leading" secondItem="R2K-2f-wgq" secondAttribute="leading" constant="2" id="5xx-Dd-yD1"/>
                             <constraint firstAttribute="height" constant="200" id="7F0-fM-zw1"/>
-                            <constraint firstItem="fTA-Na-Mia" firstAttribute="top" secondItem="bAy-v9-r7J" secondAttribute="bottom" constant="1" id="Fge-Gk-AOe"/>
-                            <constraint firstAttribute="centerY" secondItem="fTA-Na-Mia" secondAttribute="centerY" constant="-86" id="KOC-90-eR8"/>
                             <constraint firstItem="bAy-v9-r7J" firstAttribute="centerY" secondItem="L4l-gD-IHh" secondAttribute="centerY" constant="-78.5" id="W8e-GP-TpU"/>
                             <constraint firstItem="bAy-v9-r7J" firstAttribute="centerX" secondItem="L4l-gD-IHh" secondAttribute="centerX" id="X6e-UC-e0Z"/>
                             <constraint firstAttribute="centerX" secondItem="L4l-gD-IHh" secondAttribute="centerX" constant="-0.5" id="Yzw-MV-6rI"/>
@@ -116,6 +110,8 @@
                             <constraint firstItem="MDZ-Us-VGR" firstAttribute="top" secondItem="R2K-2f-wgq" secondAttribute="top" constant="10" id="hQE-mh-1iI"/>
                             <constraint firstAttribute="bottom" secondItem="L4l-gD-IHh" secondAttribute="bottom" constant="3" id="hTw-Ml-OYo"/>
                             <constraint firstAttribute="centerX" secondItem="bAy-v9-r7J" secondAttribute="centerX" id="l0j-96-DGY"/>
+                            <constraint firstAttribute="centerX" secondItem="L4l-gD-IHh" secondAttribute="centerX" constant="-0.5" id="yFK-dy-zGY"/>
+                            <constraint firstItem="L4l-gD-IHh" firstAttribute="top" secondItem="bAy-v9-r7J" secondAttribute="bottom" constant="1" id="ycL-AP-z8p"/>
                             <constraint firstItem="bAy-v9-r7J" firstAttribute="centerX" secondItem="L4l-gD-IHh" secondAttribute="centerX" constant="-2" id="za9-gY-jQy"/>
                         </constraints>
                         <variation key="default">
@@ -123,7 +119,8 @@
                                 <exclude reference="W8e-GP-TpU"/>
                                 <exclude reference="X6e-UC-e0Z"/>
                                 <exclude reference="za9-gY-jQy"/>
-                                <exclude reference="KOC-90-eR8"/>
+                                <exclude reference="Yzw-MV-6rI"/>
+                                <exclude reference="hTw-Ml-OYo"/>
                             </mask>
                         </variation>
                     </view>

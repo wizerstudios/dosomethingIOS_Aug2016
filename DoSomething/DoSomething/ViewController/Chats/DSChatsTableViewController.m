@@ -58,17 +58,17 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    [self setNavigation];
     [self.navigationItem setHidesBackButton:YES animated:NO];
+    [self setNavigation];
 }
 
 - (void)setNavigation
 {
     CustomNavigationView *customNavigation;
     customNavigation = [[CustomNavigationView alloc] initWithNibName:@"CustomNavigationView" bundle:nil];
-    customNavigation.view.frame = CGRectMake(0,-20, CGRectGetWidth(self.view.frame), 65);//65
+    customNavigation.view.frame = CGRectMake(0,-20, CGRectGetWidth(self.view.frame), 65);
     if (IS_IPHONE6 ){
-        customNavigation.view.frame = CGRectMake(0,-20, 375, 76);//(0,-20, 375, 83)
+        customNavigation.view.frame = CGRectMake(0,-20, 375, 83);
     }
     if(IS_IPHONE6_Plus)
     {
@@ -77,7 +77,6 @@
     [customNavigation.menuBtn setHidden:NO];
     [customNavigation.buttonBack setHidden:YES];
     [customNavigation.saveBtn setHidden:YES];
-    
     [self.navigationController.navigationBar addSubview:customNavigation.view];
     //    [customNavigation.saveBtn addTarget:self action:@selector(saveAction) forControlEvents:UIControlEventTouchUpInside];
     //    [customNavigation.buttonBack addTarget:self action:@selector(backAction) forControlEvents:UIControlEventTouchUpInside];

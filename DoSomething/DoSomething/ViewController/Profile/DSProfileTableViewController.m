@@ -22,7 +22,6 @@
     UITextField *currentTextfield;
     UILabel *maleLabel;
     UILabel *femaleLabel;
-    NSString *textviewText;
     
     float commonWidth, commonHeight;
     float yAxis;
@@ -33,7 +32,7 @@
 @end
 
 @implementation DSProfileTableViewController
-@synthesize profileData;
+@synthesize profileData, textviewText;
 
 - (void)viewDidLoad {
     [super viewDidLoad];

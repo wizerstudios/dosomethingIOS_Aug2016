@@ -55,6 +55,7 @@
             <constraints>
                 <constraint firstAttribute="bottom" secondItem="4sn-Vx-DnA" secondAttribute="bottom" id="11f-ur-8dI"/>
                 <constraint firstItem="4sn-Vx-DnA" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="Hh4-mR-o6V"/>
+                <constraint firstItem="4sn-Vx-DnA" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="YaU-v8-IuU"/>
                 <constraint firstItem="4sn-Vx-DnA" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="Zlt-S8-SfU"/>
                 <constraint firstAttribute="trailing" secondItem="4sn-Vx-DnA" secondAttribute="trailing" id="aqA-r6-9VA"/>
                 <constraint firstAttribute="bottom" secondItem="RV3-3A-Nan" secondAttribute="bottom" constant="51" id="dzP-7y-y8M"/>
@@ -62,6 +63,11 @@
                 <constraint firstItem="RV3-3A-Nan" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="pbd-GA-udH"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <variation key="default">
+                <mask key="constraints">
+                    <exclude reference="Hh4-mR-o6V"/>
+                </mask>
+            </variation>
             <point key="canvasLocation" x="665" y="470"/>
         </view>
     </objects>

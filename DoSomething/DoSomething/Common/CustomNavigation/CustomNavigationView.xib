@@ -47,7 +47,7 @@
                         <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CB6-yC-cZA">
                             <rect key="frame" x="10" y="26" width="24" height="30"/>
                             <constraints>
-                                <constraint firstAttribute="width" constant="35" id="UxX-c1-e9D"/>
+                                <constraint firstAttribute="width" constant="20" id="UxX-c1-e9D"/>
                                 <constraint firstAttribute="height" constant="27" id="fFw-7X-6Nc"/>
                             </constraints>
                             <inset key="contentEdgeInsets" minX="0.0" minY="3" maxX="0.0" maxY="3"/>

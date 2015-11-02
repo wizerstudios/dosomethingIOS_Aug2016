@@ -29,5 +29,6 @@
 @property (strong, nonatomic) IBOutlet NSLayoutConstraint *layoutConstraintTableViewTraillingPos;
 @property (strong, nonatomic) IBOutlet NSLayoutConstraint *layoutConstraintTableViewBottomPos;
 @property (strong, nonatomic) NSData *profileData;
+@property (nonatomic, strong)  NSString *textviewText;
 
 @end

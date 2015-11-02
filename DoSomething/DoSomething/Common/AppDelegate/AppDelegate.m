@@ -73,8 +73,8 @@
     UIImage *locationActive = [UIImage imageNamed:@"loaction_active.png"];
     [locationButton setBackgroundImage:locationActive forState:UIControlStateSelected];
     
-    [menuButton setBackgroundImage:[UIImage imageNamed:@"menu1.png"] forState:UIControlStateNormal];
-    UIImage *menuActive = [UIImage imageNamed:@"menu1.png"];
+    [menuButton setBackgroundImage:[UIImage imageNamed:@"menu_btn.png"] forState:UIControlStateNormal];
+    UIImage *menuActive = [UIImage imageNamed:@"menu_btn.png"];
     [menuButton setBackgroundImage:menuActive forState:UIControlStateSelected];
     
     [chatsButton setBackgroundImage:[UIImage imageNamed:@"chats.png"] forState:UIControlStateNormal];
