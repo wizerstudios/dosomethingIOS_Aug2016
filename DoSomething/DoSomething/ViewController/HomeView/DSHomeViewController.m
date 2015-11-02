@@ -44,7 +44,7 @@
     
     if(IS_IPHONE6 ) {
         frameHt=609;
-        frameWt= 374;
+        frameWt= 375;
         bannerImageArr=[[NSMutableArray alloc]initWithObjects:@"splashImage_one",@"splashImage_two" ,@"splashImage_three",@"splashImage_four" ,@"splashImage_five", nil];
 
     }
