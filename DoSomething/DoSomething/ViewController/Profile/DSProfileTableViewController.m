@@ -13,7 +13,7 @@
 #import "HomeViewController.h"
 
 
-@interface DSProfileTableViewController ()<UITextFieldDelegate>
+@interface DSProfileTableViewController ()
 {
     NSMutableArray *placeHolderArray, *imageNormalArray,*hobbiesNameArray;
     NSArray *titleArray;
@@ -45,9 +45,6 @@
 }
 -(void)viewWillAppear:(BOOL)animated
 {
-    
-   
-   
     self.navigationController.navigationBarHidden=NO;
     [self.navigationItem setHidesBackButton:YES animated:NO];
     [self.navigationController.navigationBar setTranslucent:YES];
@@ -71,6 +68,7 @@
     [customNavigation.saveBtn addTarget:self action:@selector(saveAction) forControlEvents:UIControlEventTouchUpInside];
     [customNavigation.buttonBack addTarget:self action:@selector(backAction) forControlEvents:UIControlEventTouchUpInside];
     [self initializeArray];
+    [_tableviewProfile reloadData];
 
 }
 
@@ -112,6 +110,7 @@
     return YES;
     
 }
+
 - (void)textFieldDidEndEditing:(UITextField *)textField{
     
     id textFieldSuper = textField;
@@ -141,49 +140,37 @@
             
         }
     }
-//    else if (indexPath.row ==3 ) {
-//        selOptionVal = cell.textFieldDPPlaceHolder.text;
-//        
-//        if(selOptionVal != nil || ![selOptionVal isEqualToString:@""]){
-//            [[[placeHolderArray objectAtIndex:indexPath.section] objectAtIndex:indexPath.row] setObject:selOptionVal forKey:@"TypingText"];
-//            
-//            
-//            
-//        }
     
+    
+    else if (indexPath.row ==4 ) {
+        selOptionVal = cell.textFieldDPPlaceHolder.text;
         
-//    }
-
-    
-        else if (indexPath.row ==4 ) {
-            selOptionVal = cell.textFieldDPPlaceHolder.text;
+        if(selOptionVal != nil || ![selOptionVal isEqualToString:@""]){
+            [[[placeHolderArray objectAtIndex:indexPath.section] objectAtIndex:indexPath.row] setObject:selOptionVal forKey:@"TypingText"];
             
+            
+            
+        }
+        
+        
+    }
+    
+    else if (indexPath.row ==7 ) {
+        if ((selOptionVal = cell.emailTextField.text)) {
             if(selOptionVal != nil || ![selOptionVal isEqualToString:@""]){
                 [[[placeHolderArray objectAtIndex:indexPath.section] objectAtIndex:indexPath.row] setObject:selOptionVal forKey:@"TypingText"];
                 
+            }
             
-
         }
-            
-
+        selOptionVal = cell.passwordTextField.text;
+        
+        if(selOptionVal != nil || ![selOptionVal isEqualToString:@""]){
+            [[[placeHolderArray objectAtIndex:indexPath.section] objectAtIndex:indexPath.row] setObject:selOptionVal forKey:@"TypingTextPass"];
+        }
+        
     }
     
-        else if (indexPath.row ==7 ) {
-            if ((selOptionVal = cell.emailTextField.text)) {
-                if(selOptionVal != nil || ![selOptionVal isEqualToString:@""]){
-                    [[[placeHolderArray objectAtIndex:indexPath.section] objectAtIndex:indexPath.row] setObject:selOptionVal forKey:@"TypingText"];
-
-            }
-                
-            }
-            selOptionVal = cell.passwordTextField.text;
-            
-            if(selOptionVal != nil || ![selOptionVal isEqualToString:@""]){
-                [[[placeHolderArray objectAtIndex:indexPath.section] objectAtIndex:indexPath.row] setObject:selOptionVal forKey:@"TypingTextPass"];
-            }
-            
-        }
-
     NSLog(@"personalArray =%@", placeHolderArray);
     
     [cell.textFieldPlaceHolder   resignFirstResponder];
@@ -198,20 +185,6 @@
 {
     [self.navigationController popViewControllerAnimated:YES];
 }
-
-//-(void)maleButtonAction
-//{
-//    maleLabel .textColor =[UIColor redColor];
-//    femaleLabel.textColor =[UIColor colorWithRed:(float)161.0/255 green:(float)161.0/255 blue:(float)161.0/255 alpha:1.0f];
-//}
-//-(void)femaleButtonAction
-//{
-//    femaleLabel .textColor =[UIColor redColor];
-//    maleLabel.textColor =[UIColor colorWithRed:(float)161.0/255 green:(float)161.0/255 blue:(float)161.0/255 alpha:1.0f];
-//
-//
-//    
-//}
 
 - (void)pushToHobbiesView {
     DSInterestAndHobbiesViewController * DSHobbiesView  = [[DSInterestAndHobbiesViewController alloc]initWithNibName:@"DSInterestAndHobbiesViewController" bundle:nil];
@@ -410,8 +383,6 @@
             cell.textFieldPlaceHolder.placeholder = placeHolderText;
         else
             cell.textFieldPlaceHolder.text = typingText;
-        
-        
     }
     if (indexPath.row == 3)
     {
@@ -530,6 +501,12 @@
             cell.layoutConstraintViewHeight.constant =50;
             
         }
+        
+        if(textviewText == nil)
+            cell.textViewHeaderLabel.hidden = NO;
+        else
+            cell.textViewHeaderLabel.hidden = YES;
+            
         
         cell.textViewAboutYou.text = textviewText;
         cell.labelAboutYou.text =titleText;
@@ -970,6 +947,16 @@
 #pragma mark - Textview delegate
 
 -(void)textViewDidBeginEditing:(UITextView *)textView
+{
+    CGPoint position = [textView convertPoint:CGPointZero toView: _tableviewProfile ];
+    NSIndexPath *indexPath = [_tableviewProfile indexPathForRowAtPoint: position];
+    DSProfileTableViewCell *cell = (DSProfileTableViewCell *)[_tableviewProfile cellForRowAtIndexPath:indexPath];
+    cell.textViewHeaderLabel.hidden = YES;
+    
+    textviewText = textView.text;
+}
+
+-(void)textViewDidEndEditing:(UITextView *)textView
 {
     CGPoint position = [textView convertPoint:CGPointZero toView: _tableviewProfile ];
     NSIndexPath *indexPath = [_tableviewProfile indexPathForRowAtPoint: position];
