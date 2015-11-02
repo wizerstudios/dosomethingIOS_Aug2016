@@ -240,7 +240,7 @@
         btnYes.hidden = YES;
         btnNo.hidden = YES;
         
-        alertMsgLabel.text = @"ONLY 3 ACTIVIES\nCAN BE SELECTED";
+        alertMsgLabel.text = @"ONLY 3 ACTIVITIES\nCAN BE SELECTED";
         alertMsgLabel.textAlignment = NSTextAlignmentCenter;
         alertMsgLabel.lineBreakMode = NSLineBreakByWordWrapping;
         alertMsgLabel.numberOfLines = 2;
