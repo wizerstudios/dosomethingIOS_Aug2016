@@ -63,3 +63,26 @@
 
 #define PATRON_REG(Value)               [UIFont fontWithName:@"Patron-Regular" size:Value]
 
+#define appDel  ((AppDelegate *)[UIApplication sharedApplication].delegate)
+
+//API Keys
+
+#define Login_API               @"signin"
+#define Registe_API             @"register"
+#define ProfileUpdate_API       @"updateprofile"
+#define LocationUpdate_API      @"updatelocation"
+#define GetHobbies_API          @"gethobbies"
+#define DoSomething_API         @"dosomethinglist"
+#define UpdateDoSomething_API   @"updatedosomething"
+#define NearestUsers_API        @"nearestusers"
+#define UserDetails_API         @"getuserdetails"
+#define SendRequest_API         @"sendrequest"
+#define ChatHistory_API         @"getChatHistory"
+#define UserChatHistory_API     @"getUserChatHistory"
+#define SendMessage_API         @"sendMessage"
+#define BlockUser_API           @"blockUser"
+#define DeleteUserChat_API      @"DeleteUserChatHistory"
+
+
+
+
