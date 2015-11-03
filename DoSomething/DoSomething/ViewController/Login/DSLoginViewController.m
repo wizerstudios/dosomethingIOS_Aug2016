@@ -15,6 +15,7 @@
 #import "DSWebservice.h"
 #import "OpenUDID.h"
 #import <MapKit/MapKit.h>
+#import "NSString+validations.h"
 
 @interface DSLoginViewController ()<CLLocationManagerDelegate>
 {
@@ -50,7 +51,8 @@
 
 
 - (void)viewDidLoad {
-    [super viewDidLoad];   
+    [super viewDidLoad];
+    objWebService = [[DSWebservice alloc]init];
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
     if (IS_IPHONE6 ||IS_IPHONE6_Plus){
      self.layoutConstraintTapBarImageHeight.constant =51;
@@ -179,44 +181,80 @@
     
     
 }
+#pragma mark - CreateButtonAction
 -(void)CreateAnAccount
 {
-    DSProfileTableViewController *  DSProfileTableView  = [[DSProfileTableViewController alloc]initWithNibName:@"DSProfileTableViewController" bundle:nil];
-    [self.navigationController pushViewController: DSProfileTableView animated:YES];
-
+    objSigninType=@"1";
+    if([NSString isEmpty:self.emailTxt.text] && [NSString isEmpty:self.passwordTxt.text]){
+        [DSAppCommon showSimpleAlertWithMessage:FILL_DETAILS];
+        return;
+    }
+    if([NSString isEmpty:self.emailTxt.text] && ![NSString isEmpty:self.passwordTxt.text]){
+        [DSAppCommon showSimpleAlertWithMessage:EMAIL_REQUIRED];
+        return;
+    }
+    if(![NSString isEmpty:self.emailTxt.text] && [NSString isEmpty:self.passwordTxt.text]){
+        [DSAppCommon showSimpleAlertWithMessage:PASSWORD_REQUIRED];
+        return;
+    }
+    if(![NSString isEmpty:self.emailTxt.text] && ![NSString isEmpty:self.passwordTxt.text]){
+        if(![NSString validateEmail:self.emailTxt.text]){
+            [DSAppCommon showSimpleAlertWithMessage:INVALID_EMAIL];
+            return;
+        }
+        [self loadCreateAPI];
+    }
 }
+#pragma mark - SignButtonAction
 -(void)SignButtonAction
 {
     //isSignin =YES;
     
     objSigninType=@"1";
-    if([self.emailTxt.text isEqualToString:@""])
-    {
-        [self alterMsg:@"Enter valid EmailID"];
+    if([NSString isEmpty:self.emailTxt.text] && [NSString isEmpty:self.passwordTxt.text]){
+        [DSAppCommon showSimpleAlertWithMessage:FILL_DETAILS];
+        return;
     }
-    else if ([self.passwordTxt.text isEqualToString:@""])
-    {
-        [self alterMsg:@"Enter valid password"];
+    if([NSString isEmpty:self.emailTxt.text] && ![NSString isEmpty:self.passwordTxt.text]){
+        [DSAppCommon showSimpleAlertWithMessage:EMAIL_REQUIRED];
+        return;
     }
-    else
-    {
+    if(![NSString isEmpty:self.emailTxt.text] && [NSString isEmpty:self.passwordTxt.text]){
+        [DSAppCommon showSimpleAlertWithMessage:PASSWORD_REQUIRED];
+        return;
+    }
+    if(![NSString isEmpty:self.emailTxt.text] && ![NSString isEmpty:self.passwordTxt.text]){
+        if(![NSString validateEmail:self.emailTxt.text]){
+            [DSAppCommon showSimpleAlertWithMessage:INVALID_EMAIL];
+            return;
+        }
         [self loadloginAPI];
-        
     }
     
 }
-
+#pragma mark - loginByFacebook
 -(void)loginByFacebook
 {
     objSigninType=@"2";
   //  [self alterMsg:@"FaceBook"];
+    
+}
+#pragma mark - gotoProfileView
+-(void)gotoProfileView{
+    DSProfileTableViewController *  DSProfileTableView  = [[DSProfileTableViewController alloc]initWithNibName:@"DSProfileTableViewController" bundle:nil];
+    [self.navigationController pushViewController: DSProfileTableView animated:YES];
 }
 
-
+#pragma mark - gotoHomeView
+-(void)gotoHomeView{
+    
+    HomeViewController * objHomeview = [[HomeViewController alloc]initWithNibName:@"HomeViewController" bundle:nil];
+    [self.navigationController pushViewController:objHomeview animated:NO];
+    
+}
+#pragma mark - loadloginAPI
 -(void)loadloginAPI
 {
-    
-    objWebService = [[DSWebservice alloc]init];
     [objWebService getLogin:Login_API
                        type:objSigninType
                       email:self.emailTxt.text
@@ -230,16 +268,55 @@
                      device:@"iPhone"
                    deviceid:deviceUdid
                     success:^(AFHTTPRequestOperation *operation, id responseObject)
-     {
-         NSLog(@"GETLOGIN--->>>%@",responseObject);
-         
-         HomeViewController * objHomeview = [[HomeViewController alloc]initWithNibName:@"HomeViewController" bundle:nil];
-         [self.navigationController pushViewController:objHomeview animated:NO];
-         
-     }
-                    failure:^(AFHTTPRequestOperation *operation, id error)
-     {
-     }];
+    {
+        NSLog(@"GETLOGIN--->>>%@",responseObject);
+        NSLog(@"Status--->>>%@",[[responseObject objectForKey:@"signin"]objectForKey:@"status"]);
+        
+        if (responseObject != NULL) {
+            [self gotoHomeView];
+        }
+        else {
+            [DSAppCommon showSimpleAlertWithMessage:[[responseObject objectForKey:@"signin"]objectForKey:@"Message"]];
+        }
+        
+//        if ([responseObject objectForKey:@"signin"] != NULL) {
+//            [self gotoHomeView];
+//        }
+//        else if([responseObject objectForKey:@"signin"]!= NULL){
+//            [DSAppCommon showSimpleAlertWithMessage:[[responseObject objectForKey:@"signin"]objectForKey:@"Message"]];
+//        }
+        
+    }
+                    failure:^(AFHTTPRequestOperation *operation, id error){
+                    }];
+}
+
+#pragma mark - loadCreateAPI
+-(void)loadCreateAPI
+{
+   [objWebService postRegister:Register_API
+                          type:objSigninType
+                    first_name:@""
+                     last_name:@""
+                         email:self.emailTxt.text
+                      password:self.passwordTxt.text
+                     profileId:@""
+                           dob:@""
+                  profileImage:@""
+                        gender:@""
+                      latitude:currentLatitude
+                     longitude:currentLongitude
+                        device:@"iPhone"
+                      deviceid:deviceUdid
+                       success:^(AFHTTPRequestOperation *operation, id responseObject)
+    {
+        NSLog(@"Register->%@",responseObject);
+        [self gotoProfileView];
+    }
+                       failure:^(AFHTTPRequestOperation *operation, id error) {
+                           
+                       }];
+    
 }
 
 -(void)alterMsg:(NSString*)msgStr
@@ -248,6 +325,7 @@
     [objalterMsg show];
     
 }
+#pragma mark - BackAction
 - (IBAction)Back:(id)sender {
     [self.navigationController popViewControllerAnimated:YES];
 }

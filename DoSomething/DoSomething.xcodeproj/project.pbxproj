@@ -33,6 +33,7 @@
 		2B83CAC71BE895AB0064EC7F /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2B83CAC21BE895AB0064EC7F /* Default@2x.png */; };
 		2B83CAC81BE895AB0064EC7F /* Default-667h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2B83CAC31BE895AB0064EC7F /* Default-667h@2x.png */; };
 		2B83CACA1BE8975F0064EC7F /* Default-736h@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2B83CAC91BE8975F0064EC7F /* Default-736h@3x.png */; };
+		2B83CACE1BE8D4FD0064EC7F /* NSString+validations.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B83CACD1BE8D4FD0064EC7F /* NSString+validations.m */; };
 		511C735D1BE3801100D3D61D /* ChatTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 511C73581BE3801100D3D61D /* ChatTableViewCell.m */; };
 		511C735E1BE3801100D3D61D /* ChatTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 511C73591BE3801100D3D61D /* ChatTableViewCell.xib */; };
 		511C735F1BE3801100D3D61D /* DSChatDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 511C735B1BE3801100D3D61D /* DSChatDetailViewController.m */; };
@@ -215,6 +216,8 @@
 		2B83CAC21BE895AB0064EC7F /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
 		2B83CAC31BE895AB0064EC7F /* Default-667h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-667h@2x.png"; sourceTree = "<group>"; };
 		2B83CAC91BE8975F0064EC7F /* Default-736h@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-736h@3x.png"; sourceTree = "<group>"; };
+		2B83CACC1BE8D4FD0064EC7F /* NSString+validations.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+validations.h"; sourceTree = "<group>"; };
+		2B83CACD1BE8D4FD0064EC7F /* NSString+validations.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+validations.m"; sourceTree = "<group>"; };
 		511C73571BE3801100D3D61D /* ChatTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChatTableViewCell.h; sourceTree = "<group>"; };
 		511C73581BE3801100D3D61D /* ChatTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChatTableViewCell.m; sourceTree = "<group>"; };
 		511C73591BE3801100D3D61D /* ChatTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ChatTableViewCell.xib; sourceTree = "<group>"; };
@@ -537,6 +540,16 @@
 			path = Defaults;
 			sourceTree = "<group>";
 		};
+		2B83CACB1BE8D4FD0064EC7F /* LoginValidations */ = {
+			isa = PBXGroup;
+			children = (
+				2B83CACC1BE8D4FD0064EC7F /* NSString+validations.h */,
+				2B83CACD1BE8D4FD0064EC7F /* NSString+validations.m */,
+			);
+			name = LoginValidations;
+			path = Common/LoginValidations;
+			sourceTree = "<group>";
+		};
 		513229FD1BDF944E00418216 /* ChatCells */ = {
 			isa = PBXGroup;
 			children = (
@@ -641,6 +654,7 @@
 		C6D5F6081BC7A4340050C1AE /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				2B83CACB1BE8D4FD0064EC7F /* LoginValidations */,
 				2B83CAB91BE8915A0064EC7F /* OpenUDID */,
 				2B83CA701BE873F80064EC7F /* Helpers */,
 				2B83CAAC1BE8744E0064EC7F /* DSWebservice */,
@@ -1137,6 +1151,7 @@
 				065BAC521BC7A135005AF493 /* main.m in Sources */,
 				6A50C21C1BCCBB8C002B11AC /* DSProfileTableViewCell.m in Sources */,
 				EAEF25241BCF9EF600F83E82 /* IQSegmentedNextPrevious.m in Sources */,
+				2B83CACE1BE8D4FD0064EC7F /* NSString+validations.m in Sources */,
 				2B83CAAA1BE873F80064EC7F /* UIRefreshControl+AFNetworking.m in Sources */,
 				2B83CAAF1BE8744E0064EC7F /* DSWebservice.m in Sources */,
 				511C735D1BE3801100D3D61D /* ChatTableViewCell.m in Sources */,

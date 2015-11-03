@@ -11,17 +11,25 @@
 #import "CustomNavigationView.h"
 #import "DSConfig.h"
 #import "HomeViewController.h"
+#import "DSAppCommon.h"
+#import "DSWebservice.h"
+#import "OpenUDID.h"
+#import <MapKit/MapKit.h>
+#import "NSString+validations.h"
 
 
 @interface DSProfileTableViewController ()
 {
-    NSMutableArray *imageNormalArray,*hobbiesNameArray;
-    NSArray *titleArray;
-    NSMutableArray *interstAndHobbiesArray;
-    UIDatePicker *datePicker;
-    UITextField *currentTextfield;
-    UILabel *maleLabel;
-    UILabel *femaleLabel;
+    DSWebservice            * objWebService;
+    CLLocationManager       *locationManager;
+    NSString                *currentLatitude,*currentLongitude;
+    NSMutableArray          *imageNormalArray,*hobbiesNameArray;
+    NSArray                 *titleArray;
+    NSMutableArray          *interstAndHobbiesArray;
+    UIDatePicker            *datePicker;
+    UITextField             *currentTextfield;
+    UILabel                 *maleLabel;
+    UILabel                 *femaleLabel;
     
     float commonWidth, commonHeight;
     float yAxis;
@@ -36,6 +44,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    objWebService = [[DSWebservice alloc]init];
 
 }
 
@@ -71,6 +80,53 @@
     [_tableviewProfile reloadData];
 
 }
+#pragma mark get user CurrentLocation
+
+- (void)getUserCurrenLocation{
+    
+    if(!locationManager){
+        
+        locationManager                 = [[CLLocationManager alloc] init];
+        locationManager.delegate        = self;
+        locationManager.distanceFilter  = kCLLocationAccuracyKilometer;
+        locationManager.desiredAccuracy = kCLLocationAccuracyBest;
+        locationManager.activityType    = CLActivityTypeAutomotiveNavigation;
+    }
+    if ([locationManager respondsToSelector:@selector(requestAlwaysAuthorization)])
+        [locationManager requestAlwaysAuthorization];
+    
+    if ([locationManager respondsToSelector:@selector(requestWhenInUseAuthorization)])
+        [locationManager requestWhenInUseAuthorization];
+    
+    [locationManager startUpdatingLocation];
+}
+
+-(void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations {
+    
+    
+    CLLocation *newLocation = [locations lastObject];
+    
+    currentLatitude         = [NSString stringWithFormat:@"%@",[NSNumber numberWithDouble:newLocation.coordinate.latitude]];
+    
+    currentLongitude        = [NSString stringWithFormat:@"%@",[NSNumber numberWithDouble:newLocation.coordinate.longitude]];
+    
+    [[NSUserDefaults standardUserDefaults] setObject:currentLatitude  forKey:@"currentLatitude"];
+    [[NSUserDefaults standardUserDefaults] setObject:currentLongitude forKey:@"currentLongitude"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+    
+    // Turn off the location manager to save power.
+    [locationManager stopUpdatingLocation];
+    
+    NSLog(@"current latitude & longitude for main view = %@ & %@",currentLatitude,currentLongitude);
+    
+}
+
+- (void)locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error
+{
+    
+    NSLog(@"Cannot find the location for main view.");
+}
+
 
 -(void)loadDatePicker:(NSInteger)_tag{
     currentTextfield=(UITextField *)[self.view viewWithTag:_tag];
@@ -85,8 +141,32 @@
 
 -(void)saveAction
 {
-     HomeViewController * objHomeview = [[HomeViewController alloc]initWithNibName:@"HomeViewController" bundle:nil];
+    [objWebService profileUpdate:ProfileUpdate_API
+                      first_name:@"test"
+                       last_name:@"test"
+                             dob:@""
+                          image1:@""
+                          image2:@""
+                          image3:@""
+                          gender:@""
+                           about:@""
+                         hobbies:@""
+                        latitude:currentLatitude
+                       longitude:currentLongitude
+                    notification:@""
+                       sessionid:@""
+                         success:^(AFHTTPRequestOperation *operation, id responseObject) {
+                             [self gotoHomeView];
+                             
+                         } failure:^(AFHTTPRequestOperation *operation, id error) {
+                             
+                         }];
+}
+#pragma mark - gotoHomeView
+-(void)gotoHomeView{
+    HomeViewController * objHomeview = [[HomeViewController alloc]initWithNibName:@"HomeViewController" bundle:nil];
     [self.navigationController pushViewController:objHomeview animated:NO];
+
 }
 
 - (void)DateSelectionAction:(UIDatePicker *)sender

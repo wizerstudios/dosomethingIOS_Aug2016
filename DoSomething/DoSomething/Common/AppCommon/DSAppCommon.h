@@ -31,6 +31,7 @@ typedef enum {
 
 // ResizeableFont
 - (UIFont *)getResizeableFont:(UIFont *)currentFont;
++(void)showSimpleAlertWithMessage:(NSString *)message;
 
 @end
 extern DSAppCommon *sharedCommon;

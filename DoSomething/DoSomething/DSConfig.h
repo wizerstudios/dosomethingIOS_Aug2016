@@ -65,10 +65,20 @@
 
 #define appDel  ((AppDelegate *)[UIApplication sharedApplication].delegate)
 
+#define APP_TITLE                   @"DoSomething"
+
+#define FILL_DETAILS                @"Please enter Email and Password"
+
+#define INVALID_EMAIL               @"Enter Valid Email ID"
+
+#define EMAIL_REQUIRED              @"Email Required"
+
+#define PASSWORD_REQUIRED           @"Password Required"
+
 //API Keys
 
 #define Login_API               @"signin"
-#define Registe_API             @"register"
+#define Register_API             @"register"
 #define ProfileUpdate_API       @"updateprofile"
 #define LocationUpdate_API      @"updatelocation"
 #define GetHobbies_API          @"gethobbies"
