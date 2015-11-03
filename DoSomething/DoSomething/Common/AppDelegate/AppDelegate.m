@@ -40,8 +40,8 @@
     int wVal=self.window.bounds.size.width;
     int hVal=self.window.bounds.size.height;
     buttonsView=[[UIView alloc]init];
-    
-    [buttonsView setBackgroundColor:[UIColor colorWithRed:(float)239.0/255 green:(float)239.0/255 blue:(float)239.0/255 alpha:1.0f]];
+    [buttonsView setBackgroundColor:[UIColor whiteColor]];
+//    [buttonsView setBackgroundColor:[UIColor colorWithRed:(float)239.0/255 green:(float)239.0/255 blue:(float)239.0/255 alpha:1.0f]];
     
     if (IS_IPHONE4) {
         buttonsView.frame=CGRectMake(0,hVal-hVal/10,wVal,hVal/10);
@@ -73,8 +73,8 @@
     UIImage *locationActive = [UIImage imageNamed:@"loaction_active.png"];
     [locationButton setBackgroundImage:locationActive forState:UIControlStateSelected];
     
-    [menuButton setBackgroundImage:[UIImage imageNamed:@"menu1.png"] forState:UIControlStateNormal];
-    UIImage *menuActive = [UIImage imageNamed:@"menu1.png"];
+    [menuButton setBackgroundImage:[UIImage imageNamed:@"menu_btn.png"] forState:UIControlStateNormal];
+    UIImage *menuActive = [UIImage imageNamed:@"menu_btn.png"];
     [menuButton setBackgroundImage:menuActive forState:UIControlStateSelected];
     
     [chatsButton setBackgroundImage:[UIImage imageNamed:@"chats.png"] forState:UIControlStateNormal];
@@ -126,15 +126,15 @@
 }
 -(void)menuView{
     [chatsButton setBackgroundImage:[UIImage imageNamed:@"chats.png"] forState:UIControlStateNormal];
-    [locationButton setBackgroundImage:[UIImage imageNamed:@"loaction.png"] forState:UIControlStateNormal];
+    [locationButton setBackgroundImage:[UIImage imageNamed:@"loaction_normal.png"] forState:UIControlStateNormal];
     
-    homePage =[[HomeViewController alloc]initWithNibName:@"ViewController2" bundle:nil];
+    homePage =[[HomeViewController alloc]initWithNibName:@"HomeViewController" bundle:nil];
     [self.navigationController pushViewController:homePage animated:NO];
 }
 -(void)chatView
 {
     [chatsButton setBackgroundImage:[UIImage imageNamed:@"chats_active.png"] forState:UIControlStateNormal];
-    [locationButton setBackgroundImage:[UIImage imageNamed:@"loaction.png"] forState:UIControlStateNormal];
+    [locationButton setBackgroundImage:[UIImage imageNamed:@"loaction_normal.png"] forState:UIControlStateNormal];
     
     chatPage =[[DSChatsTableViewController alloc]initWithNibName:@"DSChatsTableViewController" bundle:nil];
     [self.navigationController pushViewController:chatPage animated:NO];

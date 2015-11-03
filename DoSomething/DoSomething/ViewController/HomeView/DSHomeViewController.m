@@ -38,21 +38,27 @@
     if(IS_IPHONE6_Plus ) {
         frameHt=674;
         frameWt= 414;
-             bannerImageArr=[[NSMutableArray alloc]initWithObjects:@"splashImage_1",@"splashImage_2" ,@"splashImage_3", nil];
+             bannerImageArr=[[NSMutableArray alloc]initWithObjects:@"splashImage_one",@"splashImage_two" ,@"splashImage_three",@"splashImage_four" ,@"splashImage_five", nil];
         
     }
     
     if(IS_IPHONE6 ) {
         frameHt=609;
-        frameWt= 374;
-        bannerImageArr=[[NSMutableArray alloc]initWithObjects:@"splashImage_1",@"splashImage_2" ,@"splashImage_3", nil];
+        frameWt= 375;
+        bannerImageArr=[[NSMutableArray alloc]initWithObjects:@"splashImage_one",@"splashImage_two" ,@"splashImage_three",@"splashImage_four" ,@"splashImage_five", nil];
 
     }
-      if(IS_IPHONE5 )
+      if(IS_IPHONE5)
     {
         frameHt=518;
         frameWt=320;
-        bannerImageArr=[[NSMutableArray alloc]initWithObjects:@"splashImage_1",@"splashImage_2" ,@"splashImage_3", nil];
+        bannerImageArr=[[NSMutableArray alloc]initWithObjects:@"splashImage_one",@"splashImage_two" ,@"splashImage_three",@"splashImage_four" ,@"splashImage_five", nil];
+    }
+    if(IS_IPHONE4 )
+    {
+        frameHt=438;
+        frameWt=320;
+        bannerImageArr=[[NSMutableArray alloc]initWithObjects:@"splashImage_one",@"splashImage_two" ,@"splashImage_three",@"splashImage_four" ,@"splashImage_five", nil];
     }
 
     [self loadSlideScroll];
@@ -114,13 +120,15 @@
             [pgDtView setFrame:CGRectMake(190, 624, self.infoPageControl.numberOfPages*13, 10)];
             
         }
-
         if(IS_IPHONE6 ){
             [pgDtView setFrame:CGRectMake(169, 570, self.infoPageControl.numberOfPages*13, 10)];
         }
-             if(IS_IPHONE5 )
+             if(IS_IPHONE5)
        {
             [pgDtView setFrame:CGRectMake(142, 484, self.infoPageControl.numberOfPages*13, 10)];
+        }
+        if(IS_IPHONE4){
+            [pgDtView setFrame:CGRectMake(142, 410, self.infoPageControl.numberOfPages*13, 10)];
         }
     }
 
@@ -157,7 +165,7 @@
         {
             xslider=0-frameWt;
             jslider=0;
-            [self.scrollViewImage setContentOffset:CGPointMake(0, 0)];
+            [self.scrollViewImage setContentOffset:CGPointMake(0, 0) animated:YES];
             [imageViewActive setFrame:CGRectMake(jslider*13, 0, 10, 10)];
             
             for(UIView *subView in [pgDtView subviews])

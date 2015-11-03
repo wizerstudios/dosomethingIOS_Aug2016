@@ -7,6 +7,8 @@
 //
 
 #import "DSChatDetailViewController.h"
+#import "CustomNavigationView.h"
+#import "DSConfig.h"
 
 @interface DSChatDetailViewController ()
 
@@ -21,15 +23,15 @@
     ProfileName.text=activestring;
     ProfileImage.image =[UIImage imageNamed:activestring1];
     
-    Message1.text =@" Hey;)";
+    Message1.text =@"   Hey;)";
     Message1.layer.masksToBounds = YES;
     Message1.layer.cornerRadius = 8.0;
     
-    Message2.text =@" Wanna meet for a drink?";
+    Message2.text =@"   Wanna meet for a drink?";
     Message2.layer.masksToBounds = YES;
     Message2.layer.cornerRadius = 8.0;
     
-    Message3.text =@" oh hi!";
+    Message3.text =@"   oh hi!";
     Message3.layer.masksToBounds = YES;
     Message3.layer.cornerRadius = 8.0;
     
@@ -37,7 +39,27 @@
     Time2.text =@"13:20";
     Time3.text =@"13:24";
     OnlineLabel.text =@"Online";
-
+    
+    CustomNavigationView *customNavigation;
+    customNavigation = [[CustomNavigationView alloc] initWithNibName:@"CustomNavigationView" bundle:nil];
+    customNavigation.view.frame = CGRectMake(0,-20, CGRectGetWidth(self.view.frame), 65);//65
+    if (IS_IPHONE6 ){
+        customNavigation.view.frame = CGRectMake(0,-20, 375, 76);
+    }
+    if(IS_IPHONE6_Plus)
+    {
+        customNavigation.view.frame = CGRectMake(0,-20, 420, 83);
+    }
+    [customNavigation.menuBtn setHidden:YES];
+    [customNavigation.buttonBack setHidden:NO];
+    [customNavigation.saveBtn setHidden:YES];
+    
+    [self.navigationController.navigationBar addSubview:customNavigation.view];
+    //    [customNavigation.saveBtn addTarget:self action:@selector(saveAction) forControlEvents:UIControlEventTouchUpInside];
+        [customNavigation.buttonBack addTarget:self action:@selector(backAction) forControlEvents:UIControlEventTouchUpInside];
+    
+    _transparentView.hidden = YES;
+    _backgroundView.hidden = YES;
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -48,38 +70,13 @@
 
 - (IBAction)showReallyFunkyIBActionSheet:(id)sender
 {
-    self.funkyIBAS = [[IBActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:nil destructiveButtonTitle:nil otherButtonTitles:@"Block", @"Delete",@"Cancel", nil];
-    
-    self.funkyIBAS.buttonResponse = IBActionSheetButtonResponseShrinksOnPress;
-    [self.funkyIBAS setButtonTextColor:[UIColor whiteColor] forButtonAtIndex:0];
-    [self.funkyIBAS setButtonBackgroundColor:[UIColor  colorWithRed:(118/255.0) green:(118/255.0) blue:(118/255.0) alpha:1.0] forButtonAtIndex:0];
-    [self.funkyIBAS setFont:[UIFont fontWithName:@"patron-reguler" size:17] forButtonAtIndex:0];
-    
-    [self.funkyIBAS setButtonTextColor:[UIColor whiteColor] forButtonAtIndex:1];
-    [self.funkyIBAS setButtonBackgroundColor:[UIColor colorWithRed:(230/255.0) green:(63/255.0) blue:(82/255.0) alpha:1.0] forButtonAtIndex:1];
-    [self.funkyIBAS setFont:[UIFont fontWithName:@"patron-reguler" size:17] forButtonAtIndex:1];
-    
-    [self.funkyIBAS setButtonTextColor:[UIColor lightGrayColor] forButtonAtIndex:2];
-    [self.funkyIBAS setButtonBackgroundColor:[UIColor whiteColor] forButtonAtIndex:2];
-    
-    [self.funkyIBAS setFont:[UIFont fontWithName:@"patron-reguler" size:17]forButtonAtIndex:2];
-    
-    [self.funkyIBAS showInView:self.view];
+     _menuImageview.hidden = YES;
+    _transparentView.hidden = NO;
+    _backgroundView.hidden = NO;
 }
-
-#pragma mark - IBActionSheet/UIActionSheet Delegate Method
-
-- (void)actionSheet:(IBActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
-    NSLog(@"Button at index: %ld clicked\nIts title is '%@'", (long)buttonIndex, [actionSheet buttonTitleAtIndex:buttonIndex]);
-}
-
-
-- (void)actionSheet:(IBActionSheet *)actionSheet willDismissWithButtonIndex:(NSInteger)buttonIndex {
-    NSLog(@"Will dismiss with button index %ld", (long)buttonIndex);
-}
-
-- (void)actionSheet:(IBActionSheet *)actionSheet didDismissWithButtonIndex:(NSInteger)buttonIndex {
-    NSLog(@"Dismissed with button index %ld", (long)buttonIndex);
+- (void)backAction
+{
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 #pragma mark - All the other junk for the sample project
@@ -155,4 +152,21 @@
 }
 */
 
+- (IBAction)pressCancel:(id)sender {
+    _transparentView.hidden = YES;
+    _backgroundView.hidden = YES;
+     _menuImageview.hidden = NO;
+}
+
+- (IBAction)pressDelete:(id)sender {
+    _transparentView.hidden = YES;
+    _backgroundView.hidden = YES;
+     _menuImageview.hidden = NO;
+}
+
+- (IBAction)pressBlock:(id)sender {
+    _transparentView.hidden = YES;
+    _backgroundView.hidden = YES;
+     _menuImageview.hidden = NO;
+}
 @end

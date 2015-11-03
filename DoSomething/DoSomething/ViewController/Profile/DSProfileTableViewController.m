@@ -10,22 +10,30 @@
 #import "DSInterestAndHobbiesViewController.h"
 #import "CustomNavigationView.h"
 #import "DSConfig.h"
+#import "HomeViewController.h"
 
 
-@interface DSProfileTableViewController ()<UITextFieldDelegate>
+@interface DSProfileTableViewController ()
 {
-    NSMutableArray *placeHolderArray, *imageNormalArray,*hobbiesNameArray;
+    NSMutableArray *imageNormalArray,*hobbiesNameArray;
     NSArray *titleArray;
     NSMutableArray *interstAndHobbiesArray;
     UIDatePicker *datePicker;
     UITextField *currentTextfield;
     UILabel *maleLabel;
     UILabel *femaleLabel;
+    
+    float commonWidth, commonHeight;
+    float yAxis;
+    float imageSize;
+    float space;
 
 }
 @end
 
 @implementation DSProfileTableViewController
+@synthesize profileData, textviewText, placeHolderArray;
+
 - (void)viewDidLoad {
     [super viewDidLoad];
 
@@ -37,7 +45,6 @@
 }
 -(void)viewWillAppear:(BOOL)animated
 {
-   
     self.navigationController.navigationBarHidden=NO;
     [self.navigationItem setHidesBackButton:YES animated:NO];
     [self.navigationController.navigationBar setTranslucent:YES];
@@ -58,8 +65,10 @@
     [customNavigation.buttonBack setHidden:NO];
     [customNavigation.saveBtn setHidden:NO];
     [self.navigationController.navigationBar addSubview:customNavigation.view];
+    [customNavigation.saveBtn addTarget:self action:@selector(saveAction) forControlEvents:UIControlEventTouchUpInside];
     [customNavigation.buttonBack addTarget:self action:@selector(backAction) forControlEvents:UIControlEventTouchUpInside];
     [self initializeArray];
+    [_tableviewProfile reloadData];
 
 }
 
@@ -72,6 +81,12 @@
     datePicker.tag =_tag;
     [currentTextfield setInputView:datePicker];
     currentTextfield.tintColor=[UIColor clearColor];
+}
+
+-(void)saveAction
+{
+     HomeViewController * objHomeview = [[HomeViewController alloc]initWithNibName:@"HomeViewController" bundle:nil];
+    [self.navigationController pushViewController:objHomeview animated:NO];
 }
 
 - (void)DateSelectionAction:(UIDatePicker *)sender
@@ -95,6 +110,7 @@
     return YES;
     
 }
+
 - (void)textFieldDidEndEditing:(UITextField *)textField{
     
     id textFieldSuper = textField;
@@ -109,7 +125,7 @@
     
     DSProfileTableViewCell *cell;
     
-    indexPath = [self.tableviewProfile indexPathForCell:(UITableViewCell *)textFieldSuper];
+    indexPath = [self.tableviewProfile indexPathForCell:(DSProfileTableViewCell *)textFieldSuper];
     
     cell = (DSProfileTableViewCell *) [self.tableviewProfile cellForRowAtIndexPath:[NSIndexPath indexPathForRow:indexPath.row inSection:indexPath.section]];
     
@@ -124,49 +140,34 @@
             
         }
     }
-//    else if (indexPath.row ==3 ) {
-//        selOptionVal = cell.textFieldDPPlaceHolder.text;
-//        
-//        if(selOptionVal != nil || ![selOptionVal isEqualToString:@""]){
-//            [[[placeHolderArray objectAtIndex:indexPath.section] objectAtIndex:indexPath.row] setObject:selOptionVal forKey:@"TypingText"];
-//            
-//            
-//            
-//        }
     
+    
+    else if (indexPath.row ==4 ) {
+        selOptionVal = cell.textFieldDPPlaceHolder.text;
         
-//    }
-
+        if(selOptionVal != nil || ![selOptionVal isEqualToString:@""]){
+            [[[placeHolderArray objectAtIndex:indexPath.section] objectAtIndex:indexPath.row] setObject:selOptionVal forKey:@"TypingText"];
+        }
+        
+        
+    }
     
-        else if (indexPath.row ==4 ) {
-            selOptionVal = cell.textFieldDPPlaceHolder.text;
-            
+    else if (indexPath.row ==7 ) {
+        if ((selOptionVal = cell.emailTextField.text)) {
             if(selOptionVal != nil || ![selOptionVal isEqualToString:@""]){
                 [[[placeHolderArray objectAtIndex:indexPath.section] objectAtIndex:indexPath.row] setObject:selOptionVal forKey:@"TypingText"];
                 
+            }
             
-
         }
-            
-
+        selOptionVal = cell.passwordTextField.text;
+        
+        if(selOptionVal != nil || ![selOptionVal isEqualToString:@""]){
+            [[[placeHolderArray objectAtIndex:indexPath.section] objectAtIndex:indexPath.row] setObject:selOptionVal forKey:@"TypingTextPass"];
+        }
+        
     }
     
-        else if (indexPath.row ==7 ) {
-            if ((selOptionVal = cell.emailTextField.text)) {
-                if(selOptionVal != nil || ![selOptionVal isEqualToString:@""]){
-                    [[[placeHolderArray objectAtIndex:indexPath.section] objectAtIndex:indexPath.row] setObject:selOptionVal forKey:@"TypingText"];
-
-            }
-                
-            }
-            selOptionVal = cell.passwordTextField.text;
-            
-            if(selOptionVal != nil || ![selOptionVal isEqualToString:@""]){
-                [[[placeHolderArray objectAtIndex:indexPath.section] objectAtIndex:indexPath.row] setObject:selOptionVal forKey:@"TypingTextPass"];
-            }
-            
-        }
-
     NSLog(@"personalArray =%@", placeHolderArray);
     
     [cell.textFieldPlaceHolder   resignFirstResponder];
@@ -181,27 +182,10 @@
 {
     [self.navigationController popViewControllerAnimated:YES];
 }
--(void)maleButtonAction
-{
-    maleLabel .textColor =[UIColor redColor];
-    femaleLabel.textColor =[UIColor colorWithRed:(float)161.0/255 green:(float)161.0/255 blue:(float)161.0/255 alpha:1.0f];
-
-    
-}
-
-
-
--(void)femaleButtonAction
-{
-    femaleLabel .textColor =[UIColor redColor];
-    maleLabel.textColor =[UIColor colorWithRed:(float)161.0/255 green:(float)161.0/255 blue:(float)161.0/255 alpha:1.0f];
-
-
-    
-}
 
 - (void)pushToHobbiesView {
     DSInterestAndHobbiesViewController * DSHobbiesView  = [[DSInterestAndHobbiesViewController alloc]initWithNibName:@"DSInterestAndHobbiesViewController" bundle:nil];
+    DSHobbiesView.profileDetailsArray = placeHolderArray;
     [self.navigationController pushViewController:DSHobbiesView animated:YES];
 
 }
@@ -220,15 +204,15 @@
     placeHolderArray = [[NSMutableArray alloc] initWithCapacity: 1];
 
     [placeHolderArray insertObject:[[NSMutableArray alloc]initWithObjects:[NSMutableDictionary dictionaryWithObjectsAndKeys:@"Image",@"placeHolder",@"",@"TypingText", nil],
-                                   [NSMutableDictionary dictionaryWithObjectsAndKeys:@"First Name",@"placeHolder",@"",@"TypingText", nil],
-                                   [NSMutableDictionary dictionaryWithObjectsAndKeys:@"Last Name",@"placeHolder",@"",@"TypingText", nil],
-                                   [NSMutableDictionary dictionaryWithObjectsAndKeys:@"Male",@"placeHolder",@"Female",@"placeHolderFemale",@"",@"TypingText",@"",@"TypingTextFemale", nil],
-                                   [NSMutableDictionary dictionaryWithObjectsAndKeys:@"DD / MM / YYYY",@"placeHolder",@"",@"TypingText", nil],
-                                   [NSMutableDictionary dictionaryWithObjectsAndKeys:@"Write something about yourself here.",@"placeHolder",@"",@"TypingText", nil],
-                                   [NSMutableDictionary dictionaryWithObjectsAndKeys:@"Hobbies",@"placeHolder",@"",@"TypingText", nil],
-                                   [NSMutableDictionary dictionaryWithObjectsAndKeys:@"Email",@"placeHolder",@"Password",@"placeHolderPass",@"",@"TypingText",@"",@"TypingTextPass", nil],
-                                   [NSMutableDictionary dictionaryWithObjectsAndKeys:@"switch_on",@"placeHolder",@"",@"TypingText",nil],
-                                   [NSMutableDictionary dictionaryWithObjectsAndKeys:@"TermsOfUse",@"placeHolder",@"",@"TypingText", nil],nil]atIndex:0];
+                                    [NSMutableDictionary dictionaryWithObjectsAndKeys:@"First Name",@"placeHolder",@"",@"TypingText", nil],
+                                    [NSMutableDictionary dictionaryWithObjectsAndKeys:@"Last Name",@"placeHolder",@"",@"TypingText", nil],
+                                    [NSMutableDictionary dictionaryWithObjectsAndKeys:@"Male",@"placeHolder",@"Female",@"placeHolderFemale",@"",@"TypingText",@"",@"TypingTextFemale", nil],
+                                    [NSMutableDictionary dictionaryWithObjectsAndKeys:@"DD / MM / YYYY",@"placeHolder",@"",@"TypingText", nil],
+                                    [NSMutableDictionary dictionaryWithObjectsAndKeys:@"Write something about yourself here.",@"placeHolder",@"",@"TypingText", nil],
+                                    [NSMutableDictionary dictionaryWithObjectsAndKeys:@"Hobbies",@"placeHolder",@"",@"TypingText", nil],
+                                    [NSMutableDictionary dictionaryWithObjectsAndKeys:@"Email",@"placeHolder",@"Password",@"placeHolderPass",@"",@"TypingText",@"",@"TypingTextPass", nil],
+                                    [NSMutableDictionary dictionaryWithObjectsAndKeys:@"switch_on",@"placeHolder",@"",@"NewMessageImage",@"",@"SoundImage",@"",@"VibrationImage",nil],
+                                    [NSMutableDictionary dictionaryWithObjectsAndKeys:@"TermsOfUse",@"placeHolder",@"",@"TypingText", nil],nil]atIndex:0];
     
     titleArray = [[NSArray alloc]initWithObjects:@"Image",@"First Name",@"Last Name",@"male",@"Date of Birth",@"About You",@"Hobbies",@"Email&Password",@"switch_on",@"TermsOfUse",nil];
     
@@ -260,7 +244,16 @@
             return 55;
         }
         if ( indexPath.row ==6) {
-            return 100;
+            if([imageNormalArray count] < 1)
+                return 70;
+            else if([imageNormalArray count] <= 5)
+                return commonHeight + 46;
+            else if([imageNormalArray count] <= 10)
+                return (commonHeight*2)+46;
+            else if([imageNormalArray count] <= 15)
+                return (commonHeight * 3)+48;
+            else if([imageNormalArray count] <= 20)
+                return (commonHeight * 4)+52;
         }
 
        
@@ -284,8 +277,22 @@
         if (indexPath.row == 4) {
             return 70;
         }
-        if ( indexPath.row ==6||  indexPath.row ==8) {
-        return 150;
+        if ( indexPath.row ==6) {
+            if([imageNormalArray count] < 1)
+                return 80;
+            else if([imageNormalArray count] <= 5)
+                return commonHeight + 46;
+            else if([imageNormalArray count] <= 10)
+                return (commonHeight*2)+46;
+            else if([imageNormalArray count] <= 15)
+                return (commonHeight * 3)+57;
+            else if([imageNormalArray count] <= 20)
+                return (commonHeight * 4)+70;
+        }
+    
+        if(indexPath.row ==8)
+        {
+            return 150;
         }
     
         if ( indexPath.row == 7) {
@@ -297,8 +304,6 @@
         }
     
     return 50;
-    
-   
 }
 
 
@@ -310,6 +315,7 @@
     NSString *titleText;
     NSString *placeHolderText,*placeHolderTextPass,*placeHolderFemale;
     NSString *typingText,*typingTextPass,*typingTextFemale;
+    NSString *newMessageImage,*soundImage,*vibrationImage;
     
 
         typingText       = [[[placeHolderArray valueForKey:@"TypingText" ]objectAtIndex:indexPath.section]objectAtIndex:indexPath.row];
@@ -319,6 +325,10 @@
         placeHolderText     =  [[[placeHolderArray valueForKey:@"placeHolder" ]objectAtIndex:indexPath.section]objectAtIndex:indexPath.row];
         placeHolderTextPass =  [[[placeHolderArray valueForKey:@"placeHolderPass" ]objectAtIndex:indexPath.section]objectAtIndex:indexPath.row];
         placeHolderFemale =  [[[placeHolderArray valueForKey:@"placeHolderFemale" ]objectAtIndex:indexPath.section]objectAtIndex:indexPath.row];
+    
+    newMessageImage =  [[[placeHolderArray valueForKey:@"NewMessageImage" ]objectAtIndex:indexPath.section]objectAtIndex:indexPath.row];
+    soundImage =  [[[placeHolderArray valueForKey:@"SoundImage" ]objectAtIndex:indexPath.section]objectAtIndex:indexPath.row];
+    vibrationImage =  [[[placeHolderArray valueForKey:@"VibrationImage" ]objectAtIndex:indexPath.section]objectAtIndex:indexPath.row];
 
 
     
@@ -330,17 +340,26 @@
         {
             [[NSBundle mainBundle] loadNibNamed:@"DSProfileTableViewCell" owner:self options:nil];
             cell = cellProfileImg;
-            
         }
         
         if (IS_IPHONE6 ||IS_IPHONE6_Plus)
         {
             cell.layoutConstraintProfileImageHeight.constant =159;
             cell.layoutConstraintProfileImageWidth.constant =161;
-            
         }
         
-           }
+        if(!profileData)
+            [cell.profileImageview setImage:[UIImage imageNamed:@"profile_noimg"]];
+        else
+            [cell.profileImageview setImage:[UIImage imageWithData:profileData]];
+        
+        cell.profileImageview.layer.cornerRadius = cell.profileImageview.frame.size.height / 2;
+        cell.profileImageview.layer.masksToBounds = YES;
+        cell.cameraButton.userInteractionEnabled = YES;
+        [cell.cameraButton setTag:101];
+        [cell.cameraButton addTarget:self action:@selector(selectCamera:) forControlEvents:UIControlEventTouchUpInside];
+        
+    }
     if (indexPath.row == 1 || indexPath.row == 2)
     {
         if (cell == nil)
@@ -360,8 +379,6 @@
             cell.textFieldPlaceHolder.placeholder = placeHolderText;
         else
             cell.textFieldPlaceHolder.text = typingText;
-        
-        
     }
     if (indexPath.row == 3)
     {
@@ -372,52 +389,72 @@
             
         }
         
+        int labelWidth = 0,labelHeight = 0;
         
-
-       
+        if(IS_IPHONE5){
+            
+            labelWidth =50;
+            labelHeight=14;
+            
+            
+        }
+        if(IS_IPHONE6){
+            labelWidth =75;
+            labelHeight=25;
+            
+        }
+        if(IS_IPHONE6_Plus)
+        {
+            
+            labelWidth =94;
+            labelHeight=25;
+            
+        }
         
-//                if([typingText isEqualToString:@""] || typingText == nil)
-//                {
-//                    [maleLabel setText:placeHolderText];
-//                }
-//                else
-//                {
-//                    cell.emailTextField.text = typingText;
-//        
-//                }
-//        
-//                if([typingTextFemale isEqualToString:@""] || typingTextFemale == nil)
-//                {
-//                    [femaleLabel setText:placeHolderFemale];
-//                }
-//                else
-//                {
-//                    femaleLabel.text = typingTextFemale;
-//                    
-//                }
+        [cell.maleButton setTag:2004];
+        [cell.femaleButton setTag:2005];
         
+        maleLabel =[[UILabel alloc]initWithFrame:CGRectMake(0, 0, labelWidth,labelHeight)];
+        maleLabel.font = [UIFont fontWithName:@"Patron-Regular" size:9.0];
+        maleLabel.textAlignment = NSTextAlignmentCenter;
+        [maleLabel setText:placeHolderText];
+        [cell.labelMale addSubview:maleLabel];
         
+        femaleLabel =[[UILabel alloc]initWithFrame:CGRectMake(0, 0,labelWidth, labelHeight)];
+        femaleLabel.font = [UIFont fontWithName:@"Patron-Regular" size:9.0];
+        femaleLabel.textAlignment = NSTextAlignmentCenter;
+        [femaleLabel setText:placeHolderFemale];
+        [cell.labelFemale addSubview:femaleLabel];
         
+        if([typingText isEqualToString:@""] || typingText == nil)
+        {
+            maleLabel.textColor = [UIColor colorWithRed:(float)161.0/255 green:(float)161.0/255 blue:(float)161.0/255 alpha:1.0f];
+            
+            
+        }
+        else
+        {
+            maleLabel.textColor = [UIColor redColor];
+            
+        }
+        
+        if([typingTextFemale isEqualToString:@""] || typingTextFemale == nil)
+        {
+            femaleLabel.textColor =[UIColor colorWithRed:(float)161.0/255 green:(float)161.0/255 blue:(float)161.0/255 alpha:1.0f];
+        }
+        else
+        {
+            femaleLabel.textColor = [UIColor redColor];
+            
+        }
         
         cell.maleButton.userInteractionEnabled = YES;
         cell.femaleButton.userInteractionEnabled = YES;
         
-        maleLabel =[[UILabel alloc]initWithFrame:CGRectMake(55, 15, 40, 10)];
-        maleLabel.font = [UIFont fontWithName:@"Patron-Regular" size:9.0];
-        maleLabel.textColor =[UIColor colorWithRed:(float)161.0/255 green:(float)161.0/255 blue:(float)161.0/255 alpha:1.0f];
-        [maleLabel setText:placeHolderText];
-        [cell.maleButton addSubview:maleLabel];
         
-        femaleLabel =[[UILabel alloc]initWithFrame:CGRectMake(55, 15, 40, 10)];
-        femaleLabel.font = [UIFont fontWithName:@"Patron-Regular" size:9.0];
-        femaleLabel.textColor =[UIColor colorWithRed:(float)161.0/255 green:(float)161.0/255 blue:(float)161.0/255 alpha:1.0f];
-        [femaleLabel setText:placeHolderFemale];
-        [cell.femaleButton addSubview:femaleLabel];
-  
-        [cell.maleButton addTarget:self action:@selector(maleButtonAction) forControlEvents:UIControlEventTouchUpInside];
-        [cell.femaleButton addTarget:self action:@selector(femaleButtonAction) forControlEvents:UIControlEventTouchUpInside];
-
-
+        [cell.maleButton addTarget:self action:@selector(buttonAction:) forControlEvents:UIControlEventTouchUpInside];
+        [cell.femaleButton addTarget:self action:@selector(buttonAction:) forControlEvents:UIControlEventTouchUpInside];
+        
         
     }
 
@@ -454,166 +491,100 @@
         }
         
         cell.layoutConstraintViewHeight.constant =40;
-
+        
         if (IS_IPHONE6 ||IS_IPHONE6_Plus)
         {
             cell.layoutConstraintViewHeight.constant =50;
             
         }
         
+        if(textviewText == nil)
+            cell.textViewHeaderLabel.hidden = NO;
+        else
+            cell.textViewHeaderLabel.hidden = YES;
+            
+        
+        cell.textViewAboutYou.text = textviewText;
         cell.labelAboutYou.text =titleText;
-        
-//        if([typingText isEqualToString:@""] || typingText == nil)
-//            cell.textViewAboutYou.placeholder = placeHolderText;
-//        else
-//            cell.textFieldPlaceHolder.text = typingText;
-//            cell.labelTitleText.text = titleText;
+        cell.textViewHeaderLabel.text =placeHolderText;
+        cell.textViewAboutYou.delegate = self;
     }
-
     
-    if (indexPath.row == 6)
+    if(indexPath.row == 6)
     {
-        
-        if (cell == nil)
-        {
+        if (cell == nil){
             [[NSBundle mainBundle] loadNibNamed:@"DSProfileTableViewCell" owner:self options:nil];
             cell = cellAddIcon;
             [cell.buttonPushHobbies addTarget:self action:@selector(pushToHobbiesView) forControlEvents:UIControlEventTouchUpInside];
-
-            
         }
         
-       
+        yAxis = 31;
+        space = imageSize / 2;
+        commonHeight = imageSize+15;
         
-        NSString *plusIcon = @"Pluis_icon1.png";
-        if ([imageNormalArray count] >=1) {
+        NSString *plusIcon = @"Plus_icon.png";
+        if ([imageNormalArray count] >=1)
+        {
+            for(NSString *strPlus in imageNormalArray)
+            {
+                if([strPlus isEqualToString:@"Plus_icon.png"])
+                    [imageNormalArray removeObject:strPlus];
+            }
             [imageNormalArray addObject:plusIcon];
-
         }
-       
-
-        UIButton *pushToHobbiesButton =[[UIButton alloc]initWithFrame:CGRectMake(0, 0, 40, 40)];
-
-
+        
+        UIButton *pushToHobbiesButton =[[UIButton alloc]initWithFrame:CGRectMake(0, 0, imageSize, imageSize)];
         for (int i =0; i< [imageNormalArray  count]; i++) {
-            
             cell.plusIconImageView.hidden = YES;
             UIImageView *hobbiesImage;
             
-            if (i<=4) {
-                
-                
-                if(IS_IPHONE5){
-                    
-                    hobbiesImage = [[UIImageView alloc]initWithFrame:CGRectMake(i*58, 22, 50, 40)];
-                }
-                if(IS_IPHONE6){
-                    
-                    hobbiesImage = [[UIImageView alloc]initWithFrame:CGRectMake(i*70, 17, 50, 50)];
-                }
-                if(IS_IPHONE6_Plus)
-                {
-                    hobbiesImage = [[UIImageView alloc]initWithFrame:CGRectMake(i*80, 22, 50, 50)];
-                    
-                }
-               
-            }
-            
+            if(i <= 4)
+                hobbiesImage = [[UIImageView alloc]initWithFrame:CGRectMake((i*(commonWidth + imageSize))+ 10, yAxis, imageSize, imageSize)];
+            else if(i <= 9)
+                hobbiesImage = [[UIImageView alloc]initWithFrame:CGRectMake(((i-5)*(commonWidth + imageSize))+ 10, yAxis+imageSize+space, imageSize, imageSize)];
+            else if(i <= 14)
+                hobbiesImage = [[UIImageView alloc]initWithFrame:CGRectMake(((i-10)*(commonWidth + imageSize))+ 10, yAxis+((imageSize+space) * 2), imageSize, imageSize)];
             else
-            {
-
-            if(IS_IPHONE5){
-            
-            hobbiesImage = [[UIImageView alloc]initWithFrame:CGRectMake((i)%5*58, 85, 50, 40)];
-            }
-            if(IS_IPHONE6){
-                
-                hobbiesImage = [[UIImageView alloc]initWithFrame:CGRectMake((i)%5*70, 80, 50, 50)];
-            }
-            if(IS_IPHONE6_Plus)
-            {
-                hobbiesImage = [[UIImageView alloc]initWithFrame:CGRectMake((i)%5*80, 90, 50, 50)];
-   
-            }
-            }
-             NSString *image =[imageNormalArray objectAtIndex:i];
+                hobbiesImage = [[UIImageView alloc]initWithFrame:CGRectMake(((i-15)*(commonWidth + imageSize))+ 10, yAxis+((imageSize+space) * 3), imageSize, imageSize)];
+            NSString *image =[imageNormalArray objectAtIndex:i];
             
             [hobbiesImage setImage:[UIImage imageNamed:image]];
             
             if (image == plusIcon) {
                 hobbiesImage.userInteractionEnabled = YES;
+                pushToHobbiesButton.imageView.contentMode = UIViewContentModeScaleAspectFit;
                 [hobbiesImage addSubview:pushToHobbiesButton];
-                
-                
-               
-
             }
+            
             [cell addSubview:hobbiesImage];
             [pushToHobbiesButton addTarget:self action:@selector(pushToHobbiesView) forControlEvents:UIControlEventTouchUpInside];
-
-
         }
+        
         for (int i =0; i< [hobbiesNameArray  count]; i++) {
             
             NSString *image =[hobbiesNameArray objectAtIndex:i];
-
             UILabel *hobbiesname;
-           
-                
-                if (i<=4){
-                    
-                   
-           if(IS_IPHONE5){
-         
-                    hobbiesname = [[UILabel alloc]initWithFrame:CGRectMake(i*55, 65, 60, 15)];
-                 }
-                if(IS_IPHONE6){
-                    
-                    hobbiesname = [[UILabel alloc]initWithFrame:CGRectMake(i*70, 65, 55, 15)];
-                }
-               if(IS_IPHONE6_Plus)
-                {
-                    hobbiesname = [[UILabel alloc]initWithFrame:CGRectMake(i*80, 75, 50, 15)];
-                    
-                }
-                }
-
             
-                   else{
-                       if(IS_IPHONE5){
-                           
-                           hobbiesname = [[UILabel alloc]initWithFrame:CGRectMake((i)%5*55, 125, 60, 15)];
-                       }
-                       if(IS_IPHONE6){
-                           
-                           hobbiesname = [[UILabel alloc]initWithFrame:CGRectMake((i)%5*70, 125, 55, 15)];
-                       }
-                       if(IS_IPHONE6_Plus)
-                       {
-                           hobbiesname = [[UILabel alloc]initWithFrame:CGRectMake((i)%5*80, 135, 60, 15)];
-                           
-                       }
-
-                       
-                   }
-                    
+            if(i <= 4)
+                hobbiesname = [[UILabel alloc]initWithFrame:CGRectMake((i*(commonWidth + imageSize)), yAxis + imageSize, imageSize + 20, 15)];
+            else if(i <= 9)
+                hobbiesname = [[UILabel alloc]initWithFrame:CGRectMake(((i-5)*(commonWidth + imageSize)), yAxis+(imageSize * 2)+space, imageSize + 20, 15)];
+            else if(i <= 14)
+                hobbiesname = [[UILabel alloc]initWithFrame:CGRectMake(((i-10)*(commonWidth + imageSize)), yAxis+((imageSize+space) * 2)+imageSize, imageSize + 20, 15)];
+            else
+                hobbiesname = [[UILabel alloc]initWithFrame:CGRectMake(((i-15)*(commonWidth + imageSize)), yAxis+((imageSize+space) * 3)+imageSize, imageSize + 20, 15)];
             
             [hobbiesname setFont:[UIFont fontWithName:@"Patron-Regular" size:7]];
+            hobbiesname.textAlignment = NSTextAlignmentCenter;
             hobbiesname.textColor =[UIColor colorWithRed:(float)102.0/255 green:(float)102.0/255 blue:(float)102.0/255 alpha:1.0f];
-
+            
             
             hobbiesname.text = image;
             [cell addSubview:hobbiesname];
             hobbiesname.textAlignment = NSTextAlignmentCenter;
-
-            
         }
-        
-       
     }
-   
-//    }
-
+    
     if (indexPath.row == 7)
     {
         
@@ -662,26 +633,47 @@
             
         }
         if (IS_IPHONE6 ||IS_IPHONE6_Plus){
-        cell.layoutConstraintNotificationLabelYPos.constant = 40;
-        cell.layoutConstraintNotificationViewHeight.constant=51;
-        cell.layoutConstraintRadioButtonYPos.constant = 18;
+            cell.layoutConstraintNotificationLabelYPos.constant = 40;
+            cell.layoutConstraintNotificationViewHeight.constant=51;
+            cell.layoutConstraintRadioButtonYPos.constant = 18;
+        }
+        cell.messSwitchBtn.userInteractionEnabled = YES;
+        cell.vibrationSwitchBtn.userInteractionEnabled = YES;
+        cell.SoundSwitchBtn.userInteractionEnabled = YES;
+        
+        [cell.messSwitchBtn setTag:2000];
+        [cell.SoundSwitchBtn setTag:2001];
+        [cell.vibrationSwitchBtn setTag:2002];
+        
+        
+        if([newMessageImage isEqualToString:@""] || newMessageImage == nil)
+        {
+            [cell.imageViewNewMessSwitch setImage:[UIImage imageNamed:placeHolderText]];
+        }
+        else
+        {
+            [cell.imageViewNewMessSwitch setImage:[UIImage imageNamed:newMessageImage]];
+        }
+        if([vibrationImage isEqualToString:@""] || vibrationImage == nil)
+        {
+            [cell.imageViewVibrationSwitch setImage:[UIImage imageNamed:placeHolderText]];
+        }
+        else
+        {
+            [cell.imageViewVibrationSwitch setImage:[UIImage imageNamed:vibrationImage]];
+        }
+        if([soundImage isEqualToString:@""] || soundImage == nil)
+        {
+            [cell.imageViewSoundSwitch setImage:[UIImage imageNamed:placeHolderText]];
+        }
+        else
+        {
+            [cell.imageViewSoundSwitch setImage:[UIImage imageNamed:soundImage]];
         }
         
-        
-//        DVSwitch *fifth = [DVSwitch switchWithStringsArray:@[@"", @""]];
-//        fifth.frame = CGRectMake(10,10, self.view.frame.size.width / 2 - 100, 20);
-//        fifth.sliderOffset = 1.0;
-//        fifth.cornerRadius = 10;
-//        fifth.font = [UIFont fontWithName:@"Baskerville-Italic" size:18];
-//        fifth.labelTextColorOutsideSlider = [UIColor colorWithRed:255/255.0 green:30/255.0 blue:30/255.0 alpha:1.0];
-//        fifth.labelTextColorInsideSlider = [UIColor colorWithRed:255 green:255 blue:102 alpha:1.0];
-//        fifth.backgroundColor = [UIColor colorWithRed:255/255.0 green:204/255.0 blue:0/255.0 alpha:1.0];
-//        fifth.sliderColor = [UIColor colorWithRed:255/255.0 green:0/255.0 blue:0/255.0 alpha:1.0];
-//        [cell addSubview:fifth];
-//
-        
-        
-        
+        [cell.vibrationSwitchBtn addTarget:self action:@selector(newMessSwitchBtnAction:) forControlEvents:UIControlEventTouchUpInside];
+        [cell.SoundSwitchBtn addTarget:self action:@selector(newMessSwitchBtnAction:) forControlEvents:UIControlEventTouchUpInside];
+        [cell.messSwitchBtn addTarget:self action:@selector(newMessSwitchBtnAction:) forControlEvents:UIControlEventTouchUpInside];
         
     }
 
@@ -705,6 +697,305 @@
     return cell;
     
 }
+
+- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if(indexPath.row == 6)
+    {
+        commonWidth = (cell.contentView.frame.size.width - 20) / 14;
+        imageSize = commonWidth * 2;
+    }
+}
+
+-(void)newMessSwitchBtnAction:(UIButton *)sender
+{
+    
+    id button = sender;
+    while (![button isKindOfClass:[UITableViewCell class]]) {
+        button = [button superview];
+    }
+    NSIndexPath *indexPath;
+    
+    DSProfileTableViewCell *cell;
+    
+    indexPath = [_tableviewProfile indexPathForCell:(UITableViewCell *)button];
+    cell = (DSProfileTableViewCell *) [_tableviewProfile cellForRowAtIndexPath:[NSIndexPath indexPathForRow:indexPath.row inSection:0]];
+    
+    
+    NSArray *titleArray1  = [[NSArray alloc]initWithObjects:@"switch_on",@"switch_off", nil];
+    NSString *selOptionVal;
+    
+    if([sender tag] == 2000){
+        NSString *place1 =[[[placeHolderArray objectAtIndex:indexPath.section] objectAtIndex:indexPath.row] valueForKey:@"NewMessageImage"];
+        
+        
+        if([place1 isEqualToString:@""] || place1 == nil)
+        {
+            
+            NSString *NewMessageImage =[[[placeHolderArray objectAtIndex:indexPath.section] objectAtIndex:indexPath.row] valueForKey:@"placeHolder"];
+            
+            
+            
+            if (NewMessageImage == [titleArray1 objectAtIndex:0]) {
+                selOptionVal = [titleArray1 objectAtIndex:1];
+            }
+            if (NewMessageImage == [titleArray1 objectAtIndex:1]) {
+                selOptionVal = [titleArray1 objectAtIndex:0];
+            }
+            
+            
+            
+            if(selOptionVal != nil || ![selOptionVal isEqualToString:@""])
+                [[[placeHolderArray objectAtIndex:indexPath.section] objectAtIndex:indexPath.row] setObject:selOptionVal forKey:@"NewMessageImage"];
+        }
+        
+        
+        else
+            
+        {
+            
+            NSString *NewMessageImage =[[[placeHolderArray objectAtIndex:indexPath.section] objectAtIndex:indexPath.row] valueForKey:@"NewMessageImage"];
+            
+            
+            if (NewMessageImage == [titleArray1 objectAtIndex:0]) {
+                selOptionVal = [titleArray1 objectAtIndex:1];
+            }
+            if (NewMessageImage == [titleArray1 objectAtIndex:1]) {
+                selOptionVal = [titleArray1 objectAtIndex:0];
+            }
+            if(selOptionVal != nil || ![selOptionVal isEqualToString:@""])
+                [[[placeHolderArray objectAtIndex:indexPath.section] objectAtIndex:indexPath.row] setObject:selOptionVal forKey:@"NewMessageImage"];
+            
+            
+        }
+    }
+    
+    
+    if([sender tag] == 2001){
+        
+        NSString *place =[[[placeHolderArray objectAtIndex:indexPath.section] objectAtIndex:indexPath.row] valueForKey:@"SoundImage"];
+        
+        
+        if([place isEqualToString:@""] || place == nil)
+        {
+            
+            NSString *SoundImage =[[[placeHolderArray objectAtIndex:indexPath.section] objectAtIndex:indexPath.row] valueForKey:@"placeHolder"];
+            
+            
+            
+            
+            if (SoundImage == [titleArray1 objectAtIndex:0]) {
+                selOptionVal = [titleArray1 objectAtIndex:1];
+            }
+            if (SoundImage == [titleArray1 objectAtIndex:1]) {
+                selOptionVal = [titleArray1 objectAtIndex:0];
+            }
+            
+            
+            if(selOptionVal != nil || ![selOptionVal isEqualToString:@""])
+                [[[placeHolderArray objectAtIndex:indexPath.section] objectAtIndex:indexPath.row] setObject:selOptionVal forKey:@"SoundImage"];
+        }
+        
+        
+        else
+            
+        {
+            
+            NSString *SoundImage =[[[placeHolderArray objectAtIndex:indexPath.section] objectAtIndex:indexPath.row] valueForKey:@"SoundImage"];
+            
+            
+            if (SoundImage == [titleArray1 objectAtIndex:0]) {
+                selOptionVal = [titleArray1 objectAtIndex:1];
+            }
+            if (SoundImage == [titleArray1 objectAtIndex:1]) {
+                selOptionVal = [titleArray1 objectAtIndex:0];
+            }
+            if(selOptionVal != nil || ![selOptionVal isEqualToString:@""])
+                [[[placeHolderArray objectAtIndex:indexPath.section] objectAtIndex:indexPath.row] setObject:selOptionVal forKey:@"SoundImage"];
+            
+            
+        }
+        
+        
+    }
+    
+    
+    if([sender tag] == 2002){
+        
+        NSString *place =[[[placeHolderArray objectAtIndex:indexPath.section] objectAtIndex:indexPath.row] valueForKey:@"VibrationImage"];
+        
+        
+        if([place isEqualToString:@""] || place == nil)
+        {
+            
+            NSString *VibrationImage =[[[placeHolderArray objectAtIndex:indexPath.section] objectAtIndex:indexPath.row] valueForKey:@"placeHolder"];
+            
+            
+            
+            
+            if (VibrationImage == [titleArray1 objectAtIndex:0]) {
+                selOptionVal = [titleArray1 objectAtIndex:1];
+            }
+            if (VibrationImage == [titleArray1 objectAtIndex:1]) {
+                selOptionVal = [titleArray1 objectAtIndex:0];
+            }
+            
+            
+            if(selOptionVal != nil || ![selOptionVal isEqualToString:@""])
+                [[[placeHolderArray objectAtIndex:indexPath.section] objectAtIndex:indexPath.row] setObject:selOptionVal forKey:@"VibrationImage"];
+        }
+        
+        
+        else
+            
+        {
+            
+            NSString *VibrationImage =[[[placeHolderArray objectAtIndex:indexPath.section] objectAtIndex:indexPath.row] valueForKey:@"VibrationImage"];
+            
+            
+            if (VibrationImage == [titleArray1 objectAtIndex:0]) {
+                selOptionVal = [titleArray1 objectAtIndex:1];
+            }
+            if (VibrationImage == [titleArray1 objectAtIndex:1]) {
+                selOptionVal = [titleArray1 objectAtIndex:0];
+            }
+            if(selOptionVal != nil || ![selOptionVal isEqualToString:@""])
+                [[[placeHolderArray objectAtIndex:indexPath.section] objectAtIndex:indexPath.row] setObject:selOptionVal forKey:@"VibrationImage"];
+            
+            
+        }
+        
+        
+    }
+    
+    NSLog(@"placeHolderArray %@",placeHolderArray);
+    [_tableviewProfile reloadData];
+}
+
+-(void)buttonAction:(UIButton *)sender
+{
+    
+    id button = sender;
+    while (![button isKindOfClass:[UITableViewCell class]]) {
+        button = [button superview];
+    }
+    NSIndexPath *indexPath;
+    
+    DSProfileTableViewCell *cell;
+    
+    indexPath = [_tableviewProfile indexPathForCell:(UITableViewCell *)button];
+    cell = (DSProfileTableViewCell *) [_tableviewProfile cellForRowAtIndexPath:[NSIndexPath indexPathForRow:indexPath.row inSection:0]];
+    
+    NSString *selOptionVal1;
+    NSString *selOptionVal;
+    
+    if([sender tag] == 2004){
+        NSString *place1 =[[[placeHolderArray objectAtIndex:indexPath.section] objectAtIndex:indexPath.row] valueForKey:@"TypingText"];
+        
+        
+        if([place1 isEqualToString:@""] || place1 == nil)
+        {
+            
+            NSString *empty =@"";
+            NSString *filterColorCode =  @"[UIColor colorWithRed:(float)255.0/255 green:(float)0.0/255 blue:(float)0.0/255 alpha:1.0f]"; {
+                
+                selOptionVal1 =empty;
+                selOptionVal =filterColorCode;
+                
+                
+                
+                if(selOptionVal != nil || ![selOptionVal isEqualToString:@""])
+                    [[[placeHolderArray objectAtIndex:indexPath.section] objectAtIndex:indexPath.row] setObject:selOptionVal1 forKey:@"TypingTextFemale"];
+                
+                [[[placeHolderArray objectAtIndex:indexPath.section] objectAtIndex:indexPath.row] setObject:selOptionVal forKey:@"TypingText"];
+            }
+            
+        }
+    }
+    
+    if([sender tag] == 2005){
+        NSString *place1 =[[[placeHolderArray objectAtIndex:indexPath.section] objectAtIndex:indexPath.row] valueForKey:@"TypingTextFemale"];
+        
+        
+        if([place1 isEqualToString:@""] || place1 == nil)
+        {
+            
+            
+            
+            NSString *filterColorCode =  @"[UIColor colorWithRed:(float)255.0/255 green:(float)0.0/255 blue:(float)0.0/255 alpha:1.0f]"; {
+                NSString *empty =@"";
+                
+                selOptionVal =filterColorCode;
+                selOptionVal1 =empty;
+                
+                
+                if(selOptionVal != nil || ![selOptionVal isEqualToString:@""])
+                    [[[placeHolderArray objectAtIndex:indexPath.section] objectAtIndex:indexPath.row] setObject:selOptionVal1 forKey:@"TypingText"];
+                [[[placeHolderArray objectAtIndex:indexPath.section] objectAtIndex:indexPath.row] setObject:selOptionVal forKey:@"TypingTextFemale"];
+            }
+            
+        }
+        
+    }
+    [_tableviewProfile reloadData];
+}
+
+#pragma mark - Textview delegate
+
+-(void)textViewDidBeginEditing:(UITextView *)textView
+{
+    CGPoint position = [textView convertPoint:CGPointZero toView: _tableviewProfile ];
+    NSIndexPath *indexPath = [_tableviewProfile indexPathForRowAtPoint: position];
+    DSProfileTableViewCell *cell = (DSProfileTableViewCell *)[_tableviewProfile cellForRowAtIndexPath:indexPath];
+    cell.textViewHeaderLabel.hidden = YES;
+    
+    textviewText = textView.text;
+}
+
+-(void)textViewDidEndEditing:(UITextView *)textView
+{
+    CGPoint position = [textView convertPoint:CGPointZero toView: _tableviewProfile ];
+    NSIndexPath *indexPath = [_tableviewProfile indexPathForRowAtPoint: position];
+    DSProfileTableViewCell *cell = (DSProfileTableViewCell *)[_tableviewProfile cellForRowAtIndexPath:indexPath];
+    cell.textViewHeaderLabel.hidden = YES;
+    
+    textviewText = textView.text;
+}
+
+#pragma mark - Camera Action
+-(void)selectCamera: (UIButton *)sender
+{
+    if([sender tag] == 101)
+    {
+        if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera])
+        {
+            UIImagePickerController *imagePicker = [[UIImagePickerController alloc] init];
+            imagePicker.sourceType =  UIImagePickerControllerSourceTypeCamera;
+            imagePicker.delegate = (id)self;
+            imagePicker.cameraFlashMode = UIImagePickerControllerCameraFlashModeOff;
+            imagePicker.allowsEditing = NO;
+            [self presentViewController:imagePicker animated:YES completion:nil];
+        }
+        else
+        {
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error"message:@"This device doesn't have a camera."delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil];
+            [alert show];
+        }
+    }
+}
+- (void) imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
+{
+    [self dismissViewControllerAnimated:YES completion:nil];
+    profileData = UIImageJPEGRepresentation([info objectForKey:UIImagePickerControllerOriginalImage], 0.1);
+    [_tableviewProfile reloadData];
+}
+- (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker
+{
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+
+
 //- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 //
 //{

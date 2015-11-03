@@ -10,7 +10,7 @@
 #import "DSProfileTableViewCell.h"
 #import "DVSwitch.h"
 
-@interface DSProfileTableViewController : UIViewController<UINavigationControllerDelegate>
+@interface DSProfileTableViewController : UIViewController<UINavigationControllerDelegate, UITextViewDelegate, UIImagePickerControllerDelegate, UIAlertViewDelegate, UITextFieldDelegate>
 {
  IBOutlet DSProfileTableViewCell *cellProfileImg;
  IBOutlet DSProfileTableViewCell *cellButton;
@@ -28,5 +28,9 @@
 @property (strong, nonatomic) IBOutlet NSLayoutConstraint *layoutConstraintDatePickerViewLeadingPos;
 @property (strong, nonatomic) IBOutlet NSLayoutConstraint *layoutConstraintTableViewTraillingPos;
 @property (strong, nonatomic) IBOutlet NSLayoutConstraint *layoutConstraintTableViewBottomPos;
+
+@property (nonatomic, retain) NSMutableArray *placeHolderArray;
+@property (strong, nonatomic) NSData *profileData;
+@property (nonatomic, strong)  NSString *textviewText;
 
 @end

@@ -7,9 +7,7 @@
 //
 
 #define ACTIVE_IMAGE @"ActiveImage"
-
 #define NORMAL_IMAGE @"NormalImage"
-
 #define CAPTION @"Caption"
 
 #import "HomeViewController.h"
@@ -20,6 +18,7 @@
 
 #import "HomeCustomCell.h"
 #import "AppDelegate.h"
+#import <AudioToolbox/AudioToolbox.h>
 
 #define ITEMS_PAGE_SIZE 4
 #define ITEM_CELL_IDENTIFIER @"ItemCell"
@@ -29,6 +28,10 @@
 {
     AppDelegate *appDelegate;
     BOOL isSelectMenu;
+    NSArray *selectedArray;
+    int selectedCellCount;
+    
+    NSMutableArray *selectedItemsArray;
 }
 
 @end
@@ -47,14 +50,42 @@
                  [NSDictionary dictionaryWithObjectsAndKeys:@"meals_InActive.png",NORMAL_IMAGE,@"meals_active.png",ACTIVE_IMAGE,@"MEALS",CAPTION, nil],
                  [NSDictionary dictionaryWithObjectsAndKeys:@"coffee_Inactive.png",NORMAL_IMAGE,@"coffee_active.png",ACTIVE_IMAGE,@"COFFEE",CAPTION, nil],
                  [NSDictionary dictionaryWithObjectsAndKeys:@"shopping_Inactive.png",NORMAL_IMAGE,@"shopping_active.png",ACTIVE_IMAGE,@"SHOPPING",CAPTION, nil],
-                 [NSDictionary dictionaryWithObjectsAndKeys:@"karaoke_Inactive.png",NORMAL_IMAGE,@"karaoke_active.png",ACTIVE_IMAGE,@"KERAOKE",CAPTION, nil],
+                 [NSDictionary dictionaryWithObjectsAndKeys:@"karaoke_Inactive.png",NORMAL_IMAGE,@"karaoke_active.png",ACTIVE_IMAGE,@"KARAOKE",CAPTION, nil],
                  [NSDictionary dictionaryWithObjectsAndKeys:@"gym_Inactive.png",NORMAL_IMAGE,@"gym_active.png",ACTIVE_IMAGE,@"GYM",CAPTION, nil],
                   [NSDictionary dictionaryWithObjectsAndKeys:@"tennis_Inactive.png",NORMAL_IMAGE,@"tennis_active.png",ACTIVE_IMAGE,@"TENNIS",CAPTION, nil],
-                  [NSDictionary dictionaryWithObjectsAndKeys:@"movies_Inactive.png",NORMAL_IMAGE,@"movies_active.png",ACTIVE_IMAGE,@"SOCCER",CAPTION, nil],
+                  [NSDictionary dictionaryWithObjectsAndKeys:@"soocer_Inactive",NORMAL_IMAGE,@"soocer_active",ACTIVE_IMAGE,@"SOCCER",CAPTION, nil],
                  nil];
     
+    CustomNavigationView *customNavigation;
+    customNavigation = [[CustomNavigationView alloc] initWithNibName:@"CustomNavigationView" bundle:nil];
+    customNavigation.view.frame = CGRectMake(0,-20, CGRectGetWidth(self.view.frame), 65);
+    if (IS_IPHONE6 ){
+        customNavigation.view.frame = CGRectMake(0,-20, 375, 83);
+    }
+    if(IS_IPHONE6_Plus)
+    {
+        customNavigation.view.frame = CGRectMake(0,-20, 420, 83);
+    }
+    [customNavigation.menuBtn setHidden:NO];
+    [customNavigation.buttonBack setHidden:YES];
+    [customNavigation.saveBtn setHidden:YES];
+    [self.navigationController.navigationBar addSubview:customNavigation.view];
+//    [customNavigation.saveBtn addTarget:self action:@selector(saveAction) forControlEvents:UIControlEventTouchUpInside];
+//    [customNavigation.buttonBack addTarget:self action:@selector(backAction) forControlEvents:UIControlEventTouchUpInside];
+    
     selectedArray = [[NSMutableArray alloc]init];
-
+    selectedItemsArray = [[NSMutableArray alloc]init];
+    alertBgView.hidden = YES;
+    alertMainBgView.hidden = YES;
+    
+    if(IS_IPHONE5)
+        [self.view addConstraint:[NSLayoutConstraint constraintWithItem:_homeCollectionView
+                                                              attribute:NSLayoutAttributeTop
+                                                              relatedBy:NSLayoutRelationEqual
+                                                                 toItem:self.view
+                                                              attribute:NSLayoutAttributeTop
+                                                             multiplier:1.0
+                                                               constant:75.0]];
 }
 -(void)viewWillAppear:(BOOL)animated
 {
@@ -132,6 +163,7 @@
         {
             if ([indexPath isEqual:collectionIndexPath])
             {
+                cell.MenuTittle.text = [data objectForKey:CAPTION];
                 cell.MenuTittle.textColor = [UIColor colorWithRed:(199/255.0f) green:(65/255.0f) blue:(81/255.0f) alpha:1.0f];
                 NSString * objstr = [NSString stringWithFormat:@"%@",[data valueForKey:ACTIVE_IMAGE]];
                 cell.MenuImg.image = [UIImage imageNamed:objstr];
@@ -140,75 +172,30 @@
         }
     }
     else{
+        cell.MenuTittle.text = [data objectForKey:CAPTION];
         cell.MenuTittle.textColor = [UIColor colorWithRed:(164/255.0f) green:(164/255.0f) blue:(164/255.0f) alpha:1.0f];
         NSString * objstr = [NSString stringWithFormat:@"%@",[data valueForKey:NORMAL_IMAGE]];
         cell.MenuImg.image = [UIImage imageNamed:objstr];
     }
     
+    _homeCollectionView.allowsMultipleSelection = YES;
     cell.layer.shouldRasterize = YES;
     cell.layer.rasterizationScale = [UIScreen mainScreen].scale;
-    
+
     return cell;
 }
 
-/*
--(UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
+- (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout minimumLineSpacingForSectionAtIndex:(NSInteger)section {
     
-    if (indexPath.row < menuArray.count) {
-        
-        if(indexPath.item == (menuArray.count - ITEMS_PAGE_SIZE + 1)){
-            [self fetchMoreItems];
-        }
-        
-        return [self itemCellForIndexPath:indexPath];
-    } else {
-        [self fetchMoreItems];
-        return [self loadingCellForIndexPath:indexPath];
-    }
-}
-
-- (UICollectionViewCell *)itemCellForIndexPath:(NSIndexPath *)indexPath {
-    
-    HomeCustomCell *cell = (HomeCustomCell *)[self.homeCollectionView dequeueReusableCellWithReuseIdentifier:ITEM_CELL_IDENTIFIER forIndexPath:indexPath];
-    NSDictionary *Dic = [menuArray objectAtIndex:indexPath.row];
-    
-    //cell.selectionStyle = UITableViewCellSelectionStyleNone;
-   // cell.backgroundColor=[UIColor colorWithRed:(232/255.0f) green:(232/255.0f) blue:(232/255.0f) alpha:1.0f];
-   
-    
-    if([[NSUserDefaults standardUserDefaults] integerForKey:@"selected_menu"] == indexPath.row)
-    {
-        if(isSelectMenu==YES)
-        {
-        cell.MenuTittle.textColor = [UIColor colorWithRed:(199/255.0f) green:(65/255.0f) blue:(81/255.0f) alpha:1.0f];
-        NSString * objstr = [NSString stringWithFormat:@"%@",[Dic valueForKey:ACTIVE_IMAGE]];
-        cell.MenuImg.image = [UIImage imageNamed:objstr];
-        }
-        else{
-            cell.MenuTittle.textColor = [UIColor colorWithRed:(164/255.0f) green:(164/255.0f) blue:(164/255.0f) alpha:1.0f];
-            
-            NSString * objstr = [NSString stringWithFormat:@"%@",[Dic valueForKey:NORMAL_IMAGE]];
-            cell.MenuImg.image = [UIImage imageNamed:objstr];
-
-        }
-       //[cell.icon_btn setImage:[UIImage imageNamed:[Dic valueForKey:ACTIVE_IMAGE]] forState:UIControlStateNormal];
-    }
+    if(IS_IPHONE6_Plus)
+        return 27.0;
+    else if(IS_IPHONE6)
+        return 8.0;
+    else if(IS_IPHONE5)
+        return 7.0;
     else
-    {
-        cell.MenuTittle.textColor = [UIColor colorWithRed:(164/255.0f) green:(164/255.0f) blue:(164/255.0f) alpha:1.0f];
-        
-        NSString * objstr = [NSString stringWithFormat:@"%@",[Dic valueForKey:NORMAL_IMAGE]];
-        cell.MenuImg.image = [UIImage imageNamed:objstr];
-    }
-        
-    cell.MenuTittle.text = [Dic valueForKey:CAPTION];
-    
-   // [cell setBackgroundColor:[UIColor colorWithRed:(232/255.0f) green:(232/255.0f) blue:(232/255.0f) alpha:1.0f]];
-
-    
-    return cell;
+        return 5.0;
 }
- */
 
 - (UICollectionViewCell *)loadingCellForIndexPath:(NSIndexPath *)indexPath {
     
@@ -220,7 +207,12 @@
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath{
     CGSize returnSize = CGSizeZero;
     
-    returnSize = CGSizeMake((self.view.frame.size.width/4.0), 110);
+    if (IS_IPHONE6)
+        returnSize = CGSizeMake((self.view.frame.size.width/4.0), 110);
+    if(IS_IPHONE6_Plus)
+        returnSize = CGSizeMake((self.view.frame.size.width/4.5), 110);
+    if (IS_IPHONE4 ||IS_IPHONE5 )
+        returnSize = CGSizeMake((self.view.frame.size.width/3.6), 88);
     
     return returnSize;
 }
@@ -228,38 +220,54 @@
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
     isSelectMenu=YES;
-    NSArray *arrSelect = [_homeCollectionView indexPathsForSelectedItems];
-    [selectedArray addObject:arrSelect];
+    AudioServicesPlaySystemSound(kSystemSoundID_Vibrate);
     
-    if([selectedArray count] <= 3)
+    HomeCustomCell *cell = (HomeCustomCell *)[collectionView cellForItemAtIndexPath:indexPath];
+    NSMutableDictionary *data = [menuArray objectAtIndex:indexPath.row];
+    
+    if([selectedItemsArray count] <= 2)
     {
-        HomeCustomCell *cell = (HomeCustomCell *)[collectionView cellForItemAtIndexPath:indexPath];
-        NSMutableDictionary *data = [menuArray objectAtIndex:indexPath.row];
-        
+        [selectedItemsArray addObject:[data valueForKey:@"Caption"]];
         cell.MenuTittle.textColor = [UIColor colorWithRed:(199/255.0f) green:(65/255.0f) blue:(81/255.0f) alpha:1.0f];
         NSString * objstr = [NSString stringWithFormat:@"%@",[data valueForKey:ACTIVE_IMAGE]];
         cell.MenuImg.image = [UIImage imageNamed:objstr];
     }
     else
     {
-        UIAlertView *alert = [[UIAlertView alloc]initWithTitle:nil message:@"ONLY 3 ACTIVITES CAN BE SELECTED" delegate:nil cancelButtonTitle:@"OKAY" otherButtonTitles:nil];
-        alert.backgroundColor = [UIColor redColor];
-        [alert show];
+        alertBgView.hidden = NO;
+        alertMainBgView.hidden = NO;
+        alertCancelButton.hidden = NO;
+        btnYes.hidden = YES;
+        btnNo.hidden = YES;
+        
+        alertMsgLabel.text = @"ONLY 3 ACTIVITIES\nCAN BE SELECTED";
+        alertMsgLabel.textAlignment = NSTextAlignmentCenter;
+        alertMsgLabel.lineBreakMode = NSLineBreakByWordWrapping;
+        alertMsgLabel.numberOfLines = 2;
+        alertMsgLabel.textColor = [UIColor whiteColor];
     }
 }
 
-//-(void)collectionView: (UICollectionView *)collectionView didDeselectItemAtIndexPath:(NSIndexPath *)indexPath
-//{
-//    NSArray *arrSelect = [_homeCollectionView indexPathsForSelectedItems];
-//    [selectedArray removeObject:arrSelect];
-//    
-//    HomeCustomCell *cell = (HomeCustomCell *)[collectionView cellForItemAtIndexPath:indexPath];
-//    NSMutableDictionary *data = [menuArray objectAtIndex:indexPath.row];
-//    
-//    cell.MenuTittle.textColor = [UIColor colorWithRed:(164/255.0f) green:(164/255.0f) blue:(164/255.0f) alpha:1.0f];
-//    NSString * objstr = [NSString stringWithFormat:@"%@",[data valueForKey:NORMAL_IMAGE]];
-//    cell.MenuImg.image = [UIImage imageNamed:objstr];
-//}
+-(void)collectionView: (UICollectionView *)collectionView didDeselectItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    AudioServicesPlaySystemSound(kSystemSoundID_Vibrate);
+    
+    HomeCustomCell *cell = (HomeCustomCell *)[collectionView cellForItemAtIndexPath:indexPath];
+    NSMutableDictionary *data = [menuArray objectAtIndex:indexPath.row];
+    NSArray *selectArray = [[NSArray alloc]init];
+    selectArray = [selectedItemsArray copy];
+    
+    for(NSString *strDeselect in selectArray)
+    {
+        if([[data valueForKey:@"Caption"] isEqualToString:strDeselect])
+        {
+            [selectedItemsArray removeObject:strDeselect];
+            cell.MenuTittle.textColor = [UIColor colorWithRed:(164/255.0f) green:(164/255.0f) blue:(164/255.0f) alpha:1.0f];
+            NSString * objstr = [NSString stringWithFormat:@"%@",[data valueForKey:NORMAL_IMAGE]];
+            cell.MenuImg.image = [UIImage imageNamed:objstr];
+        }
+    }
+}
 
 - (void)fetchMoreItems {
     NSLog(@"FETCHING MORE ITEMS ******************");
@@ -288,4 +296,34 @@
 
 
 
+- (IBAction)pressDosomething:(id)sender {
+    
+    alertBgView.hidden = NO;
+    alertMainBgView.hidden = NO;
+    btnYes.hidden = NO;
+    btnNo.hidden = NO;
+    alertCancelButton.hidden = NO;
+    
+    alertMsgLabel.text = @"AVAILABLE NOW?";
+    alertMsgLabel.textAlignment = NSTextAlignmentCenter;
+    alertMsgLabel.lineBreakMode = NSLineBreakByWordWrapping;
+    alertMsgLabel.textColor = [UIColor whiteColor];
+}
+
+- (IBAction)alertPressCancel:(id)sender {
+    alertBgView.hidden = YES;
+    alertMainBgView.hidden = YES;
+}
+
+- (IBAction)alertPressYes:(id)sender {
+    
+    alertBgView.hidden = YES;
+    alertMainBgView.hidden = YES;
+}
+
+- (IBAction)alertPressNo:(id)sender {
+    
+    alertBgView.hidden = YES;
+    alertMainBgView.hidden = YES;
+}
 @end

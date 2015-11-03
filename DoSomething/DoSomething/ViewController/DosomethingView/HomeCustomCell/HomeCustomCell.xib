@@ -13,14 +13,18 @@
             <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                 <rect key="frame" x="0.0" y="0.0" width="89" height="115"/>
                 <subviews>
-                    <label opaque="NO" userInteractionEnabled="NO" tag="201" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="RUNNING" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="W2T-Ws-Y05">
+                    <label opaque="NO" userInteractionEnabled="NO" tag="201" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="RUNNING" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="W2T-Ws-Y05">
                         <rect key="frame" x="5" y="86" width="80" height="16"/>
-                        <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="13"/>
+                        <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="11"/>
                         <color key="textColor" white="0.66666666666666663" alpha="0.94000000000000006" colorSpace="calibratedWhite"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <imageView userInteractionEnabled="NO" tag="101" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="CDk-AK-Onw">
-                        <rect key="frame" x="11" y="8" width="67" height="69"/>
+                    <imageView userInteractionEnabled="NO" tag="101" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="CDk-AK-Onw">
+                        <rect key="frame" x="11" y="8" width="68" height="68"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="68" id="RRm-Sh-w7S"/>
+                            <constraint firstAttribute="height" constant="68" id="bVE-cj-4c0"/>
+                        </constraints>
                     </imageView>
                 </subviews>
                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -28,20 +32,39 @@
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             <constraints>
                 <constraint firstItem="CDk-AK-Onw" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="11" id="0x4-dm-k5s"/>
+                <constraint firstAttribute="bottom" secondItem="W2T-Ws-Y05" secondAttribute="bottom" constant="2" id="6YV-Lr-EZs"/>
+                <constraint firstItem="W2T-Ws-Y05" firstAttribute="top" secondItem="CDk-AK-Onw" secondAttribute="bottom" constant="8" id="6jZ-a9-jwh"/>
+                <constraint firstItem="W2T-Ws-Y05" firstAttribute="top" secondItem="CDk-AK-Onw" secondAttribute="bottom" constant="5" id="JTQ-nd-7tz"/>
                 <constraint firstItem="W2T-Ws-Y05" firstAttribute="top" secondItem="CDk-AK-Onw" secondAttribute="bottom" constant="9" id="QDJ-eR-PwL"/>
+                <constraint firstItem="CDk-AK-Onw" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="3" id="Sdg-zv-f3a"/>
                 <constraint firstAttribute="trailing" secondItem="W2T-Ws-Y05" secondAttribute="trailing" constant="4" id="Wh9-YW-a14"/>
                 <constraint firstAttribute="bottom" secondItem="W2T-Ws-Y05" secondAttribute="bottom" constant="13" id="XBV-Im-byv"/>
                 <constraint firstItem="CDk-AK-Onw" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="8" id="jA1-SZ-gDg"/>
-                <constraint firstItem="W2T-Ws-Y05" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="5" id="sro-pH-0hj"/>
+                <constraint firstItem="W2T-Ws-Y05" firstAttribute="centerX" secondItem="CDk-AK-Onw" secondAttribute="centerX" id="p4s-Qq-LzH"/>
+                <constraint firstItem="W2T-Ws-Y05" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="2" id="sro-pH-0hj"/>
+                <constraint firstItem="W2T-Ws-Y05" firstAttribute="top" secondItem="CDk-AK-Onw" secondAttribute="bottom" constant="10" id="uDe-iM-C83"/>
                 <constraint firstAttribute="trailing" secondItem="CDk-AK-Onw" secondAttribute="trailing" constant="11" id="uub-OA-4l8"/>
                 <constraint firstItem="W2T-Ws-Y05" firstAttribute="top" secondItem="CDk-AK-Onw" secondAttribute="bottom" constant="9" id="zoK-qc-jO3"/>
             </constraints>
             <size key="customSize" width="100" height="125"/>
+            <variation key="default">
+                <mask key="constraints">
+                    <exclude reference="0x4-dm-k5s"/>
+                    <exclude reference="jA1-SZ-gDg"/>
+                    <exclude reference="uub-OA-4l8"/>
+                    <exclude reference="6YV-Lr-EZs"/>
+                    <exclude reference="6jZ-a9-jwh"/>
+                    <exclude reference="QDJ-eR-PwL"/>
+                    <exclude reference="XBV-Im-byv"/>
+                    <exclude reference="uDe-iM-C83"/>
+                    <exclude reference="zoK-qc-jO3"/>
+                </mask>
+            </variation>
             <connections>
                 <outlet property="MenuImg" destination="CDk-AK-Onw" id="ct5-cU-hmE"/>
                 <outlet property="MenuTittle" destination="W2T-Ws-Y05" id="d6j-PF-7A5"/>
             </connections>
-            <point key="canvasLocation" x="206" y="212.5"/>
+            <point key="canvasLocation" x="463.5" y="248.5"/>
         </collectionViewCell>
     </objects>
 </document>

@@ -35,5 +35,13 @@
 @property UIView *semiTransparentView;
 
 @property UIColor *textColor, *backgroundColor;
+@property (strong, nonatomic) IBOutlet UIButton *chatButton;
+@property (strong, nonatomic) IBOutlet UIImageView *menuImageview;
+@property (strong, nonatomic) IBOutlet UIView *transparentView;
+@property (strong, nonatomic) IBOutlet UIView *backgroundView;
+
+- (IBAction)pressCancel:(id)sender;
+- (IBAction)pressDelete:(id)sender;
+- (IBAction)pressBlock:(id)sender;
 
 @end
