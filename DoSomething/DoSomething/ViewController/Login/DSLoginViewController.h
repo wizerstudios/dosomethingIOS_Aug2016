@@ -9,6 +9,9 @@
 #import <UIKit/UIKit.h>
 
 @interface DSLoginViewController : UIViewController
+{
+    NSString        *facebookStr;
+}
 @property (nonatomic, retain) NSString *temp;
 
 @property (strong, nonatomic) IBOutlet UILabel *labelFacebook;

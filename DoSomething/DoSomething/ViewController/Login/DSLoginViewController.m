@@ -16,19 +16,17 @@
 #import "OpenUDID.h"
 #import <MapKit/MapKit.h>
 #import "NSString+validations.h"
+#import <FacebookSDK/FacebookSDK.h>
 
 @interface DSLoginViewController ()<CLLocationManagerDelegate>
 {
-    DSWebservice * objWebService;
-    bool isSignin;
-    NSString*objSigninType;
-    CLLocationManager       *locationManager;
-    NSString *currentLatitude,*currentLongitude;
-    NSString *deviceUdid;
+    DSWebservice            * objWebService;
+    bool                      isSignin;
+    NSString                * objSigninType;
+    CLLocationManager       * locationManager;
+    NSString                * currentLatitude, * currentLongitude;
+    NSString                * deviceUdid;
 }
-
-
-
 @end
 
 @implementation DSLoginViewController
@@ -54,6 +52,8 @@
     [super viewDidLoad];
     objWebService = [[DSWebservice alloc]init];
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
+    _emailTxt.autocorrectionType =UITextAutocorrectionTypeNo;
+    _passwordTxt.autocorrectionType =UITextAutocorrectionTypeNo;
     if (IS_IPHONE6 ||IS_IPHONE6_Plus){
      self.layoutConstraintTapBarImageHeight.constant =51;
         self.layoutConstraintStatusBarHeight.constant =25;
@@ -73,11 +73,17 @@
          self.layoutConstraintBackButtonHeight.constant =50;
 
      }
-      NSString *string = @"Create an account using Facebook";
-      NSMutableAttributedString *attStr = [[NSMutableAttributedString alloc] initWithString:string ];
-      [attStr addAttribute:NSFontAttributeName value:PATRON_REG(12) range:[string rangeOfString:@"Create an account using"]];
-      [attStr addAttribute:NSFontAttributeName value:PATRON_BOLD(12) range:[string rangeOfString:@"Facebook"]];
-      labelFacebook.attributedText = attStr;
+     NSString *string = @"Create an account using Facebook";
+     NSMutableAttributedString *attStr = [[NSMutableAttributedString alloc] initWithString:string ];
+     [attStr addAttribute:NSFontAttributeName value:PATRON_REG(12) range:[string rangeOfString:@"Create an account using"]];
+     [attStr addAttribute:NSFontAttributeName value:PATRON_BOLD(12) range:[string rangeOfString:@"Facebook"]];
+     labelFacebook.attributedText = attStr;
+     labelFacebook.attributedText = attStr;
+     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(loginByFacebook)];
+     [labelFacebook addGestureRecognizer:tap];
+     labelFacebook.userInteractionEnabled = YES;
+
+     
       labelEmail.text =@"Or sign up with your email";
       labelCreateAnAcc.text =@"Create Your Account";
       labelInstruction.text =@"By selecting this,you agree to our Terms of Use and our Privacy Policy";
@@ -87,7 +93,6 @@
       buttonCreateAnAcc.hidden =YES;
       buttonForgotPass.hidden=YES;
      [buttonSignIn addTarget:self action:@selector(CreateAnAccount) forControlEvents:UIControlEventTouchUpInside];
-
 }
  if ([temp isEqualToString:@"Signin"]){
      if (IS_IPHONE6 ||IS_IPHONE6_Plus){
@@ -115,7 +120,7 @@
      buttonTermsOfUse.hidden =YES;
      buttonSignIn.hidden =NO;
      [buttonSignIn addTarget:self action:@selector(SignButtonAction) forControlEvents:UIControlEventTouchUpInside];
-    }
+ }
 
     
     
@@ -204,6 +209,7 @@
         }
         [self loadCreateAPI];
     }
+   
 }
 #pragma mark - SignButtonAction
 -(void)SignButtonAction
@@ -237,8 +243,78 @@
 {
     objSigninType=@"2";
   //  [self alterMsg:@"FaceBook"];
+    [FBSession.activeSession closeAndClearTokenInformation];
+    
+    // You must ALWAYS ask for public_profile permissions when opening a session
+    [FBSession openActiveSessionWithReadPermissions:@[@"public_profile", @"user_friends",@"user_birthday",@"email"]                                       allowLoginUI:YES
+                                  completionHandler:
+     ^(FBSession *session, FBSessionState state, NSError *error) {
+         
+        [self  sessionStateChanged:session state:state error:error];
+     }];
     
 }
+//temporary code  (have to check and impletement the username and lastname etc)
+#pragma mark Facebook Delegate
+- (void)sessionStateChanged:(FBSession *)session state:(FBSessionState) state error:(NSError *)error
+{
+    // If the session was opened successfully
+    if (!error && state == FBSessionStateOpen){
+        
+        
+        [[FBRequest requestForMe] startWithCompletionHandler:
+         ^(FBRequestConnection *connection, NSDictionary<FBGraphUser> *user, NSError *error) {
+             if (!error) {
+//                 NSMutableDictionary *subdic=[[NSMutableDictionary alloc]init];
+//                 [subdic setValue:user.objectID  forKey:@"UserId"];
+//                 [subdic setValue:[user objectForKey:@"email"] forKey:@"email"];
+//                 [subdic setValue:user.first_name forKey:@"first_name"];
+//                 [subdic setValue:user.last_name forKey:@"last_name"];
+//                 [subdic setValue:user.birthday forKey:@"dob"];
+                // [COMMON saveFBDetails:subdic];
+                 [self loadloginAPI];
+                 
+             }
+         }];
+        return;
+    }
+    if (state == FBSessionStateClosed || state == FBSessionStateClosedLoginFailed){
+    }
+    
+    // Handle errors
+    if (error){
+        NSString *alertText;
+        NSString *alertTitle;
+        // If the error requires people using an app to make an action outside of the app in order to recover
+        if ([FBErrorUtility shouldNotifyUserForError:error] == YES){
+            alertTitle = @"Something went wrong";
+            alertText = [FBErrorUtility userMessageForError:error];
+        } else {
+            
+            // If the user cancelled login, do nothing
+            if ([FBErrorUtility errorCategoryForError:error] == FBErrorCategoryUserCancelled) {
+                
+                // Handle session closures that happen outside of the app
+            } else if ([FBErrorUtility errorCategoryForError:error] == FBErrorCategoryAuthenticationReopenSession){
+                alertTitle = @"Session Error";
+                alertText = @"Your current session is no longer valid. Please log in again.";
+                
+                // For simplicity, here we just show a generic message for all other errors
+                // You can learn how to handle other errors using our guide: https://developers.facebook.com/docs/ios/errors
+            } else {
+                //Get more error information from the error
+                NSDictionary *errorInformation = [[[error.userInfo objectForKey:@"com.facebook.sdk:ParsedJSONResponseKey"] objectForKey:@"body"] objectForKey:@"error"];
+                
+                // Show the user an error message
+                alertTitle = @"Something went wrong";
+                alertText = [NSString stringWithFormat:@"Please retry. \n\n If the problem persists contact us and mention this error code: %@", [errorInformation objectForKey:@"message"]];
+            }
+        }
+        // Clear this token
+        [FBSession.activeSession closeAndClearTokenInformation];
+    }
+}
+
 #pragma mark - gotoProfileView
 -(void)gotoProfileView{
     DSProfileTableViewController *  DSProfileTableView  = [[DSProfileTableViewController alloc]initWithNibName:@"DSProfileTableViewController" bundle:nil];

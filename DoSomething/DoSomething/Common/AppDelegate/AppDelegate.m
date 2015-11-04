@@ -8,6 +8,7 @@
 
 #import "AppDelegate.h"
 #import "DSConfig.h"
+#import <FacebookSDK/FacebookSDK.h>
 
 @interface AppDelegate ()
 

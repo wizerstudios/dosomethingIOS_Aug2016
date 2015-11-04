@@ -18,7 +18,7 @@
 #import "NSString+validations.h"
 
 
-@interface DSProfileTableViewController ()
+@interface DSProfileTableViewController ()<CLLocationManagerDelegate>
 {
     DSWebservice            * objWebService;
     CLLocationManager       *locationManager;
@@ -139,35 +139,6 @@
     currentTextfield.tintColor=[UIColor clearColor];
 }
 
--(void)saveAction
-{
-    [objWebService profileUpdate:ProfileUpdate_API
-                      first_name:@"test"
-                       last_name:@"test"
-                             dob:@""
-                          image1:@""
-                          image2:@""
-                          image3:@""
-                          gender:@""
-                           about:@""
-                         hobbies:@""
-                        latitude:currentLatitude
-                       longitude:currentLongitude
-                    notification:@""
-                       sessionid:@""
-                         success:^(AFHTTPRequestOperation *operation, id responseObject) {
-                             [self gotoHomeView];
-                             
-                         } failure:^(AFHTTPRequestOperation *operation, id error) {
-                             
-                         }];
-}
-#pragma mark - gotoHomeView
--(void)gotoHomeView{
-    HomeViewController * objHomeview = [[HomeViewController alloc]initWithNibName:@"HomeViewController" bundle:nil];
-    [self.navigationController pushViewController:objHomeview animated:NO];
-
-}
 
 - (void)DateSelectionAction:(UIDatePicker *)sender
 {
@@ -1072,6 +1043,42 @@
 - (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker
 {
     [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+#pragma mark - gotoHomeView
+-(void)gotoHomeView{
+    HomeViewController * objHomeview = [[HomeViewController alloc]initWithNibName:@"HomeViewController" bundle:nil];
+    [self.navigationController pushViewController:objHomeview animated:NO];
+    
+}
+#pragma mark - saveAction
+-(void)saveAction
+{
+    NSArray *postPerArray;
+    postPerArray = [[placeHolderArray objectAtIndex:0]valueForKey:@"TypingText"];
+    NSLog(@"last7%@",[postPerArray objectAtIndex:7]);
+     NSLog(@"last8%@",[postPerArray objectAtIndex:8]);
+    NSLog(@"last8%@",[postPerArray objectAtIndex:9]);
+    [objWebService profileUpdate:ProfileUpdate_API
+                      first_name:[postPerArray objectAtIndex:1]
+                       last_name:[postPerArray objectAtIndex:2]
+                             dob:[postPerArray objectAtIndex:4]
+                          image1:@""
+                          image2:@""
+                          image3:@""
+                          gender:@""
+                           about:@""
+                         hobbies:@""
+                        latitude:currentLatitude
+                       longitude:currentLongitude
+                    notification:@""
+                       sessionid:@""
+                         success:^(AFHTTPRequestOperation *operation, id responseObject) {
+                             [self gotoHomeView];
+                             
+                         } failure:^(AFHTTPRequestOperation *operation, id error) {
+                             
+                         }];
 }
 
 
