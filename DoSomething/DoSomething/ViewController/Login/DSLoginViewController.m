@@ -243,10 +243,11 @@
 {
     objSigninType=@"2";
   //  [self alterMsg:@"FaceBook"];
-    [FBSession.activeSession closeAndClearTokenInformation];
+   // [FBSession.activeSession closeAndClearTokenInformation];
     
     // You must ALWAYS ask for public_profile permissions when opening a session
-    [FBSession openActiveSessionWithReadPermissions:@[@"public_profile", @"user_friends",@"user_birthday",@"email"]                                       allowLoginUI:YES
+    [FBSession openActiveSessionWithReadPermissions:@[@"public_profile",@"user_friends",@"user_birthday",@"email"]
+                                       allowLoginUI:YES
                                   completionHandler:
      ^(FBSession *session, FBSessionState state, NSError *error) {
          
@@ -265,6 +266,17 @@
         [[FBRequest requestForMe] startWithCompletionHandler:
          ^(FBRequestConnection *connection, NSDictionary<FBGraphUser> *user, NSError *error) {
              if (!error) {
+                 NSLog(@"accesstoken %@",[NSString stringWithFormat:@"%@",session.accessTokenData]);
+                 NSLog(@"user id %@",user.objectID);
+                 NSLog(@"Email %@",[user objectForKey:@"email"]);
+                 NSLog(@"User Name %@",user.name);
+                 NSLog(@"User Name %@",user.first_name);
+                 NSLog(@"User Name %@",user.last_name);
+                 NSLog(@"user info = %@",user);
+                 NSLog(@"birthday = %@",user.birthday);
+                 NSString *userImageURL = [NSString stringWithFormat:@"https://graph.facebook.com/%@/picture?type=large", [user objectID]];
+                 NSLog(@"string = %@",userImageURL);
+
 //                 NSMutableDictionary *subdic=[[NSMutableDictionary alloc]init];
 //                 [subdic setValue:user.objectID  forKey:@"UserId"];
 //                 [subdic setValue:[user objectForKey:@"email"] forKey:@"email"];
@@ -272,7 +284,7 @@
 //                 [subdic setValue:user.last_name forKey:@"last_name"];
 //                 [subdic setValue:user.birthday forKey:@"dob"];
                 // [COMMON saveFBDetails:subdic];
-                 [self loadloginAPI];
+                // [self loadloginAPI];
                  
              }
          }];
