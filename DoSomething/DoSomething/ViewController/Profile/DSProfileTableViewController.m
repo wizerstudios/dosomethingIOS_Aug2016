@@ -430,7 +430,7 @@
         cell.labelTitleText.text = titleText;
 
         if(typingText == (id)[NSNull null] || [typingText isEqualToString:@""])
-            cell.textFieldPlaceHolder.placeholder = placeHolderText;
+            cell.textFieldPlaceHolder.text = placeHolderText;
         else
             cell.textFieldPlaceHolder.text = typingText;
     }
@@ -486,15 +486,18 @@
             maleLabel.textColor = [UIColor redColor];
             
         }
-        else
+        else if([placeHolderText isEqualToString:@"female"])
         {
             maleLabel.textColor = [UIColor colorWithRed:(float)161.0/255 green:(float)161.0/255 blue:(float)161.0/255 alpha:1.0f];
             femaleLabel.textColor = [UIColor redColor];
             
         }
-        
-
-        
+        else{
+            
+             femaleLabel.textColor = [UIColor colorWithRed:(float)161.0/255 green:(float)161.0/255 blue:(float)161.0/255 alpha:1.0f];
+             maleLabel.textColor = [UIColor colorWithRed:(float)161.0/255 green:(float)161.0/255 blue:(float)161.0/255 alpha:1.0f];
+            
+        }
         cell.maleButton.userInteractionEnabled = YES;
         cell.femaleButton.userInteractionEnabled = YES;
         
@@ -518,7 +521,7 @@
         
         
         if([typingText isEqualToString:@""] || typingText == nil)
-            cell.textFieldDPPlaceHolder.placeholder = placeHolderText;
+            cell.textFieldDPPlaceHolder.text = placeHolderText;
         else
             cell.textFieldDPPlaceHolder.text = typingText;
         
@@ -645,7 +648,7 @@
         
         if([typingText isEqualToString:@""] || typingText == nil)
         {
-           cell.emailTextField.placeholder = placeHolderText;
+           cell.emailTextField.text = placeHolderText;
         }
           else
           {
@@ -655,7 +658,7 @@
         
         if([typingTextPass isEqualToString:@""] || typingTextPass == nil)
         {
-            cell.passwordTextField.placeholder =placeHolderTextPass;
+            cell.passwordTextField.text =@"";
         }
         else
         {

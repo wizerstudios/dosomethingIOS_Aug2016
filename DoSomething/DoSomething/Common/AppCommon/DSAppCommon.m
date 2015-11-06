@@ -104,7 +104,30 @@ DSAppCommon *sharedCommon = nil;
     
 }
 
+#pragma mark User Interaction Loading :
 
+-(void)LoadIcon:(UIView *)view
+{
+    [self removeLoading];
+    loadingView = [[UIView alloc] initWithFrame:CGRectMake((view.frame.size.width-37)/2, (view.frame.size.height-37)/2, 37, 37)];
+    [loadingView.layer setCornerRadius:5.0];
+    
+    [loadingView setBackgroundColor:[UIColor blackColor]];
+    //Enable maskstobound so that corner radius would work.
+    [loadingView.layer setMasksToBounds:YES];
+    //Set the corner radius
+    
+    activityView = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhite];
+    [activityView setFrame:CGRectMake(1, 1, 37, 37)];
+    [activityView setHidesWhenStopped:YES];
+    [activityView startAnimating];
+    [loadingView addSubview:activityView];
+    [view addSubview:loadingView];
+}
+
+-(void)removeLoading{
+    [loadingView removeFromSuperview];
+}
 
 
 

@@ -30,6 +30,7 @@
     NSString                * deviceUdid;
     
     NSMutableDictionary *fbUserDetailsDict;
+    NSString *firstName,*lastName,*email,*dob,*gender,*profileID,*profileImage;
 }
 @end
 
@@ -75,7 +76,7 @@
      UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(loginByFacebook)];
      [labelFacebook addGestureRecognizer:tap];
      labelFacebook.userInteractionEnabled = YES;
-
+     labelFacebook.tag = 10;
      
       labelEmail.text =@"Or sign up with your email";
       labelCreateAnAcc.text =@"Create Your Account";
@@ -102,6 +103,7 @@
      UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(loginByFacebook)];
      [labelFacebook addGestureRecognizer:tap];
      labelFacebook.userInteractionEnabled = YES;
+     labelFacebook.tag = 11;
      
 
         
@@ -215,6 +217,15 @@
             [DSAppCommon showSimpleAlertWithMessage:INVALID_EMAIL];
             return;
         }
+        email = self.emailTxt.text;
+        firstName = @"";
+        lastName = @"";
+        profileImage = @"";
+        profileID = @"";
+        gender = @"";
+        dob = @"";
+        
+        [COMMON LoadIcon:self.view];
         [self loadCreateAPI];
     }
    
@@ -242,6 +253,15 @@
             [DSAppCommon showSimpleAlertWithMessage:INVALID_EMAIL];
             return;
         }
+        email = self.emailTxt.text;
+        firstName = @"";
+        lastName = @"";
+        profileImage = @"";
+        profileID = @"";
+        gender = @"";
+        dob = @"";
+        
+        [COMMON LoadIcon:self.view];
         [self loadloginAPI];
     }
     
@@ -249,6 +269,7 @@
 #pragma mark - loginByFacebook
 -(void)loginByFacebook
 {
+    
     objSigninType=@"2";
     
     FBSDKLoginManager *login = [[FBSDKLoginManager alloc] init];
@@ -265,15 +286,21 @@
              [request startWithCompletionHandler:^(FBSDKGraphRequestConnection *connection, id result, NSError *error) {
                  // handle response
                  NSDictionary *userData = (NSDictionary *)result;
-                 fbUserDetailsDict = [[NSMutableDictionary alloc]init];
-                 fbUserDetailsDict = [userData mutableCopy];
-                
-                  NSString *profileImg = [NSString stringWithFormat:@"https://graph.facebook.com/%@/picture?type=large&return_ssl_resources=1", userData[@"id"]];
+                 firstName = [userData valueForKey:@"first_name"];
+                 lastName = [userData valueForKey:@"last_name"];
+                 email = [userData valueForKey:@"email"];
+                 profileID = [userData valueForKey:@"id"];
+                 gender = [userData valueForKey:@"gender"];
+                 profileImage = [NSString stringWithFormat:@"https://graph.facebook.com/%@/picture?type=large&return_ssl_resources=1", userData[@"id"]];
+                 dob = @""; //[userData valueForKey:@"birthday"]
                  
-                  [fbUserDetailsDict setObject:profileImg forKey:@"profileImage"];
-                  NSLog(@"userData = %@",fbUserDetailsDict);
-                
-                 [self loadCreateAPI];
+                 
+                 [COMMON LoadIcon:self.view];
+                 
+                 if(labelFacebook.tag == 10)
+                    [self loadCreateAPI];
+                 else
+                    [self loadloginAPI];
 
              }];
          }
@@ -298,38 +325,42 @@
 {
     [objWebService getLogin:Login_API
                        type:objSigninType
-                      email:self.emailTxt.text
+                      email:email
                    password:self.passwordTxt.text
-                  profileId:@""
-                        dob:@""
-               profileImage:@""
-                     gender:@""
+                  profileId:profileID
+                        dob:dob
+               profileImage:profileImage
+                     gender:gender
                    latitude:currentLatitude
                   longitude:currentLongitude
                      device:@"iPhone"
                    deviceid:deviceUdid
                     success:^(AFHTTPRequestOperation *operation, id responseObject)
     {
-        NSLog(@"GETLOGIN--->>>%@",responseObject);
-        NSLog(@"Status--->>>%@",[[responseObject objectForKey:@"signin"]objectForKey:@"status"]);
         
-        if (responseObject != NULL) {
+        NSLog(@"responseObject = %@",responseObject);
+        
+        NSMutableDictionary *loginDict = [[NSMutableDictionary alloc]init];
+        
+        loginDict = [responseObject valueForKey:@"signin"];
+        
+        if([[loginDict valueForKey:@"status"]isEqualToString:@"success"]){
+            
+            [COMMON setUserDetails:[[loginDict valueForKey:@"userDetails"]objectAtIndex:0]];
+             NSLog(@"userdetails = %@",[COMMON getUserDetails]);
             [self gotoHomeView];
+            
         }
-        else {
-            [DSAppCommon showSimpleAlertWithMessage:[[responseObject objectForKey:@"signin"]objectForKey:@"Message"]];
+        else{
+            NSLog(@"responseObject = %@",responseObject);
+            [DSAppCommon showSimpleAlertWithMessage:[loginDict valueForKey:@"Message"]];
         }
-        
-//        if ([responseObject objectForKey:@"signin"] != NULL) {
-//            [self gotoHomeView];
-//        }
-//        else if([responseObject objectForKey:@"signin"]!= NULL){
-//            [DSAppCommon showSimpleAlertWithMessage:[[responseObject objectForKey:@"signin"]objectForKey:@"Message"]];
-//        }
+        [COMMON removeLoading];
         
     }
-                    failure:^(AFHTTPRequestOperation *operation, id error){
-                    }];
+    failure:^(AFHTTPRequestOperation *operation, id error){
+        [COMMON removeLoading];
+    }];
 }
 
 #pragma mark - loadCreateAPI
@@ -337,14 +368,14 @@
 {
    [objWebService postRegister:Register_API
                           type:objSigninType
-                    first_name:[fbUserDetailsDict valueForKey:@"first_name"]
-                     last_name:[fbUserDetailsDict valueForKey:@"last_name"]
-                         email:[fbUserDetailsDict valueForKey:@"email"]
+                    first_name:firstName
+                     last_name:lastName
+                         email:email
                       password:self.passwordTxt.text
-                     profileId:[fbUserDetailsDict valueForKey:@"id"]
-                           dob:@""//[fbUserDetailsDict valueForKey:@"birthday"]
-                  profileImage:[fbUserDetailsDict valueForKey:@"profileImage"]
-                        gender:[fbUserDetailsDict valueForKey:@"gender"]
+                     profileId:profileID
+                           dob:dob
+                  profileImage:profileImage
+                        gender:gender
                       latitude:currentLatitude
                      longitude:currentLongitude
                         device:@"iPhone"
@@ -371,8 +402,10 @@
                                 errMsg = [errMsg stringByReplacingOccurrencesOfString:@"}" withString:@""];
                                [DSAppCommon showSimpleAlertWithMessage:errMsg];
                            }
+                           [COMMON removeLoading];
                     }
                    failure:^(AFHTTPRequestOperation *operation, id error) {
+                       [COMMON removeLoading];
                        
                    }];
     

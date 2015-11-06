@@ -22,6 +22,8 @@ typedef enum {
 {
     
     NSArray *permissions;
+    UIView  *loadingView;
+    UIActivityIndicatorView *activityView;
 }
 
 +(DSAppCommon *) common;
@@ -31,6 +33,8 @@ typedef enum {
 - (NSMutableDictionary *)getUserDetails;
 - (NSString *)getUserId;
 
+- (void)LoadIcon:(UIView *)view;
+- (void)removeLoading;
 
 - (currentDevice)getCurrentDevice;
 
