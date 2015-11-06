@@ -164,6 +164,9 @@
 		EAFC97931BD21A1200B3593D /* violin_active.png in Resources */ = {isa = PBXBuildFile; fileRef = EAFC96F81BD21A1200B3593D /* violin_active.png */; };
 		EAFC97971BD21CF800B3593D /* DSInterestAndHobbiesCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = EAFC97951BD21CF800B3593D /* DSInterestAndHobbiesCollectionViewCell.m */; };
 		EAFC97981BD21CF800B3593D /* DSInterestAndHobbiesCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = EAFC97961BD21CF800B3593D /* DSInterestAndHobbiesCollectionViewCell.xib */; };
+		ED78176F1BEC7F6400C7138F /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED78176E1BEC7F6400C7138F /* CoreLocation.framework */; };
+		ED7817781BEC84FE00C7138F /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED7817761BEC84FE00C7138F /* FBSDKCoreKit.framework */; };
+		ED7817791BEC84FE00C7138F /* FBSDKLoginKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED7817771BEC84FE00C7138F /* FBSDKLoginKit.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -385,6 +388,9 @@
 		EAFC97941BD21CF800B3593D /* DSInterestAndHobbiesCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DSInterestAndHobbiesCollectionViewCell.h; sourceTree = "<group>"; };
 		EAFC97951BD21CF800B3593D /* DSInterestAndHobbiesCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DSInterestAndHobbiesCollectionViewCell.m; sourceTree = "<group>"; };
 		EAFC97961BD21CF800B3593D /* DSInterestAndHobbiesCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DSInterestAndHobbiesCollectionViewCell.xib; sourceTree = "<group>"; };
+		ED78176E1BEC7F6400C7138F /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		ED7817761BEC84FE00C7138F /* FBSDKCoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKCoreKit.framework; path = Frameworks/FBSDKCoreKit.framework; sourceTree = "<group>"; };
+		ED7817771BEC84FE00C7138F /* FBSDKLoginKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKLoginKit.framework; path = Frameworks/FBSDKLoginKit.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -392,6 +398,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				ED7817781BEC84FE00C7138F /* FBSDKCoreKit.framework in Frameworks */,
+				ED7817791BEC84FE00C7138F /* FBSDKLoginKit.framework in Frameworks */,
+				ED78176F1BEC7F6400C7138F /* CoreLocation.framework in Frameworks */,
 				51560BC01BE76D53009FCF2A /* AudioToolbox.framework in Frameworks */,
 				2B8AE7171BEA062A00B4438C /* FacebookSDK.framework in Frameworks */,
 			);
@@ -588,6 +597,9 @@
 		51560BBC1BE76AEF009FCF2A /* Framework */ = {
 			isa = PBXGroup;
 			children = (
+				ED7817761BEC84FE00C7138F /* FBSDKCoreKit.framework */,
+				ED7817771BEC84FE00C7138F /* FBSDKLoginKit.framework */,
+				ED78176E1BEC7F6400C7138F /* CoreLocation.framework */,
 				2B8AE7161BEA062A00B4438C /* FacebookSDK.framework */,
 				51560BBF1BE76D53009FCF2A /* AudioToolbox.framework */,
 			);

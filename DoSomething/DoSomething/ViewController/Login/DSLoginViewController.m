@@ -17,39 +17,30 @@
 #import <MapKit/MapKit.h>
 #import "NSString+validations.h"
 #import <FacebookSDK/FacebookSDK.h>
+#import <FBSDKCoreKit/FBSDKCoreKit.h>
+#import <FBSDKLoginKit/FBSDKLoginKit.h>
 
 @interface DSLoginViewController ()<CLLocationManagerDelegate>
 {
     DSWebservice            * objWebService;
     bool                      isSignin;
     NSString                * objSigninType;
-    CLLocationManager       * locationManager;
+   
     NSString                * currentLatitude, * currentLongitude;
     NSString                * deviceUdid;
 }
 @end
 
 @implementation DSLoginViewController
-@synthesize temp,labelFacebook,labelEmail,labelSignIn,buttonTermsOfUse,buttonPrivacyPolicy,buttonSignIn,buttonForgotPass,buttonCreateAnAcc,labelInstruction,labelCreateAnAcc,buttonHaveAnAcc;
+@synthesize temp,labelFacebook,labelEmail,labelSignIn,buttonTermsOfUse,buttonPrivacyPolicy,buttonSignIn,buttonForgotPass,buttonCreateAnAcc,labelInstruction,labelCreateAnAcc,buttonHaveAnAcc,locationManager;
 
--(void)viewWillAppear:(BOOL)animated
-{
-    [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"SelectedItem"];
-    [[NSUserDefaults standardUserDefaults] synchronize];
-    [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"SelectedItemNormal"];
-    [[NSUserDefaults standardUserDefaults] synchronize];
-    [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"SelectedItemName"];
-    [[NSUserDefaults standardUserDefaults] synchronize];
-     self.navigationController.navigationBarHidden=YES;
-    [self.navigationItem setHidesBackButton:YES animated:NO];
-    [self.navigationController.navigationBar setTranslucent:NO];
-    
-    deviceUdid = [OpenUDID value];
-}
+
 
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    locationManager                 = [[CLLocationManager alloc] init];
+    locationManager.delegate        = self;
     objWebService = [[DSWebservice alloc]init];
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
     _emailTxt.autocorrectionType =UITextAutocorrectionTypeNo;
@@ -123,7 +114,23 @@
  }
 
     
+}
+
+-(void)viewWillAppear:(BOOL)animated
+{
+    [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"SelectedItem"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+    [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"SelectedItemNormal"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+    [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"SelectedItemName"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+    self.navigationController.navigationBarHidden=YES;
+    [self.navigationItem setHidesBackButton:YES animated:NO];
+    [self.navigationController.navigationBar setTranslucent:NO];
     
+    deviceUdid = [OpenUDID value];
+    [self getUserCurrenLocation];
+
 }
 #pragma mark get user CurrentLocation
 
@@ -131,8 +138,7 @@
     
     if(!locationManager){
         
-        locationManager                 = [[CLLocationManager alloc] init];
-        locationManager.delegate        = self;
+        
         locationManager.distanceFilter  = kCLLocationAccuracyKilometer;
         locationManager.desiredAccuracy = kCLLocationAccuracyBest;
         locationManager.activityType    = CLActivityTypeAutomotiveNavigation;
@@ -243,18 +249,37 @@
 {
     objSigninType=@"2";
   //  [self alterMsg:@"FaceBook"];
-   // [FBSession.activeSession closeAndClearTokenInformation];
-    
-    // You must ALWAYS ask for public_profile permissions when opening a session
-    [FBSession openActiveSessionWithReadPermissions:@[@"public_profile",@"user_friends",@"user_birthday",@"email"]
-                                       allowLoginUI:YES
-                                  completionHandler:
-     ^(FBSession *session, FBSessionState state, NSError *error) {
-         
-        [self  sessionStateChanged:session state:state error:error];
+    FBSDKLoginManager *login = [[FBSDKLoginManager alloc] init];
+    [login
+     logInWithReadPermissions:@[@"email"]
+     fromViewController:self
+     handler:^(FBSDKLoginManagerLoginResult *result, NSError *error) {
+         if (error) {
+             NSLog(@"Process error");
+             NSLog(@"error = %@",error);
+         } else if (result.isCancelled) {
+             NSLog(@"Cancelled");
+         } else {
+             NSLog(@"Logged in");
+             FBSDKGraphRequest *request = [[FBSDKGraphRequest alloc] initWithGraphPath:@"me" parameters:@{@"fields": @"id,name,email,gender,birthday,first_name,last_name"}];
+             [request startWithCompletionHandler:^(FBSDKGraphRequestConnection *connection, id result, NSError *error) {
+                 // handle response
+                 NSDictionary *userData = (NSDictionary *)result;
+                 NSLog(@"userData = %@",userData);
+                 NSLog(@"id = %@",userData[@"id"]);
+                 NSString *location = userData[@"location"][@"name"];
+                 NSLog(@"location = %@",location);
+                 NSString *birthday = userData[@"birthday"];
+                 NSLog(@"birthday = %@",birthday);
+                 
+                 NSURL *pictureURL = [NSURL URLWithString:[NSString stringWithFormat:@"https://graph.facebook.com/%@/picture?type=large&return_ssl_resources=1", userData[@"id"]]];
+                 NSLog(@"pictureURL = %@",pictureURL);
+
+             }];
+         }
      }];
-    
 }
+
 //temporary code  (have to check and impletement the username and lastname etc)
 #pragma mark Facebook Delegate
 - (void)sessionStateChanged:(FBSession *)session state:(FBSessionState) state error:(NSError *)error

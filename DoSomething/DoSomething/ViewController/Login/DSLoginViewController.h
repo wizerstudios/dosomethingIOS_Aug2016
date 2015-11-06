@@ -7,8 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <CoreLocation/CoreLocation.h>
 
-@interface DSLoginViewController : UIViewController
+
+
+@interface DSLoginViewController : UIViewController<CLLocationManagerDelegate>
 {
     NSString        *facebookStr;
 }
@@ -41,6 +44,8 @@
 @property (strong, nonatomic) IBOutlet UILabel *labelCreateAnAcc;
 
 @property (strong, nonatomic) IBOutlet UIButton *buttonHaveAnAcc;
+
+@property (nonatomic,strong)  CLLocationManager       * locationManager;
 
 @property (strong, nonatomic) IBOutlet NSLayoutConstraint *layoutConstraintTapBarImageHeight;
 
