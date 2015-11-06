@@ -273,7 +273,7 @@
     objSigninType=@"2";
     
     FBSDKLoginManager *login = [[FBSDKLoginManager alloc] init];
-    
+    [login logOut];
     [login logInWithReadPermissions:@[@"email"] fromViewController:self handler:^(FBSDKLoginManagerLoginResult *result, NSError *error) {
          if (error) {
              NSLog(@"Process error");
