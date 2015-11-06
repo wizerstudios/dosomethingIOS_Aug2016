@@ -26,6 +26,11 @@ typedef enum {
 
 +(DSAppCommon *) common;
 
+- (void)setUserDetails:(NSMutableDictionary *)_dicInfo;
+- (void)removeUserDetails;
+- (NSMutableDictionary *)getUserDetails;
+- (NSString *)getUserId;
+
 
 - (currentDevice)getCurrentDevice;
 

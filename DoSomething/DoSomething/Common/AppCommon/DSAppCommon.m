@@ -79,7 +79,30 @@ DSAppCommon *sharedCommon = nil;
     [alert show];
 }
 
+#pragma mark - Userdetails
 
+-(void)setUserDetails:(NSMutableDictionary *)_dicInfo
+{    NSLog(@"setUserDetails = %@",_dicInfo);
+    
+    if([_dicInfo isKindOfClass:[NSMutableDictionary class]]){
+        [[NSUserDefaults standardUserDefaults] setObject:_dicInfo forKey:USERDETAILS];
+        [[NSUserDefaults standardUserDefaults] synchronize];
+        
+    }
+}
+-(void)removeUserDetails
+{
+    [[NSUserDefaults standardUserDefaults] removeObjectForKey:USERDETAILS];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+}
+
+-(NSMutableDictionary *)getUserDetails
+{
+    NSMutableDictionary *dic=[[NSMutableDictionary alloc]init];
+    dic =[[NSUserDefaults standardUserDefaults] valueForKey:USERDETAILS];
+    return dic;
+    
+}
 
 
 

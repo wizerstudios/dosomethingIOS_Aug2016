@@ -34,7 +34,7 @@ typedef void (^WebserviceRequestXMLFailureHandler)(AFHTTPRequestOperation  *oper
         password:(NSString *)password
        profileId:(NSString *)profileId
              dob:(NSString *)dob
-    profileImage:(UIImage *)profileImage
+    profileImage:(NSString *)profileImage
           gender:(NSString *)gender
         latitude:(NSString *)latitude
        longitude:(NSString *)longitude
@@ -53,7 +53,7 @@ typedef void (^WebserviceRequestXMLFailureHandler)(AFHTTPRequestOperation  *oper
             password:(NSString *)password
            profileId:(NSString *)profileId
                  dob:(NSString *)dob
-        profileImage:(UIImage *)profileImage
+        profileImage:(NSString *)profileImage
               gender:(NSString *)gender
             latitude:(NSString *)latitude
            longitude:(NSString *)longitude

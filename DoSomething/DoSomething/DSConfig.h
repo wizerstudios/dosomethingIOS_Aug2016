@@ -94,3 +94,6 @@
 #define DeleteUserChat_API      @"DeleteUserChatHistory"
 
 
+#define USERDETAILS             @"userdetails"
+
+

@@ -28,6 +28,8 @@
    
     NSString                * currentLatitude, * currentLongitude;
     NSString                * deviceUdid;
+    
+    NSMutableDictionary *fbUserDetailsDict;
 }
 @end
 
@@ -248,12 +250,10 @@
 -(void)loginByFacebook
 {
     objSigninType=@"2";
-  //  [self alterMsg:@"FaceBook"];
+    
     FBSDKLoginManager *login = [[FBSDKLoginManager alloc] init];
-    [login
-     logInWithReadPermissions:@[@"email"]
-     fromViewController:self
-     handler:^(FBSDKLoginManagerLoginResult *result, NSError *error) {
+    
+    [login logInWithReadPermissions:@[@"email"] fromViewController:self handler:^(FBSDKLoginManagerLoginResult *result, NSError *error) {
          if (error) {
              NSLog(@"Process error");
              NSLog(@"error = %@",error);
@@ -265,91 +265,19 @@
              [request startWithCompletionHandler:^(FBSDKGraphRequestConnection *connection, id result, NSError *error) {
                  // handle response
                  NSDictionary *userData = (NSDictionary *)result;
-                 NSLog(@"userData = %@",userData);
-                 NSLog(@"id = %@",userData[@"id"]);
-                 NSString *location = userData[@"location"][@"name"];
-                 NSLog(@"location = %@",location);
-                 NSString *birthday = userData[@"birthday"];
-                 NSLog(@"birthday = %@",birthday);
+                 fbUserDetailsDict = [[NSMutableDictionary alloc]init];
+                 fbUserDetailsDict = [userData mutableCopy];
+                
+                  NSString *profileImg = [NSString stringWithFormat:@"https://graph.facebook.com/%@/picture?type=large&return_ssl_resources=1", userData[@"id"]];
                  
-                 NSURL *pictureURL = [NSURL URLWithString:[NSString stringWithFormat:@"https://graph.facebook.com/%@/picture?type=large&return_ssl_resources=1", userData[@"id"]]];
-                 NSLog(@"pictureURL = %@",pictureURL);
+                  [fbUserDetailsDict setObject:profileImg forKey:@"profileImage"];
+                  NSLog(@"userData = %@",fbUserDetailsDict);
+                
+                 [self loadCreateAPI];
 
              }];
          }
      }];
-}
-
-//temporary code  (have to check and impletement the username and lastname etc)
-#pragma mark Facebook Delegate
-- (void)sessionStateChanged:(FBSession *)session state:(FBSessionState) state error:(NSError *)error
-{
-    // If the session was opened successfully
-    if (!error && state == FBSessionStateOpen){
-        
-        
-        [[FBRequest requestForMe] startWithCompletionHandler:
-         ^(FBRequestConnection *connection, NSDictionary<FBGraphUser> *user, NSError *error) {
-             if (!error) {
-                 NSLog(@"accesstoken %@",[NSString stringWithFormat:@"%@",session.accessTokenData]);
-                 NSLog(@"user id %@",user.objectID);
-                 NSLog(@"Email %@",[user objectForKey:@"email"]);
-                 NSLog(@"User Name %@",user.name);
-                 NSLog(@"User Name %@",user.first_name);
-                 NSLog(@"User Name %@",user.last_name);
-                 NSLog(@"user info = %@",user);
-                 NSLog(@"birthday = %@",user.birthday);
-                 NSString *userImageURL = [NSString stringWithFormat:@"https://graph.facebook.com/%@/picture?type=large", [user objectID]];
-                 NSLog(@"string = %@",userImageURL);
-
-//                 NSMutableDictionary *subdic=[[NSMutableDictionary alloc]init];
-//                 [subdic setValue:user.objectID  forKey:@"UserId"];
-//                 [subdic setValue:[user objectForKey:@"email"] forKey:@"email"];
-//                 [subdic setValue:user.first_name forKey:@"first_name"];
-//                 [subdic setValue:user.last_name forKey:@"last_name"];
-//                 [subdic setValue:user.birthday forKey:@"dob"];
-                // [COMMON saveFBDetails:subdic];
-                // [self loadloginAPI];
-                 
-             }
-         }];
-        return;
-    }
-    if (state == FBSessionStateClosed || state == FBSessionStateClosedLoginFailed){
-    }
-    
-    // Handle errors
-    if (error){
-        NSString *alertText;
-        NSString *alertTitle;
-        // If the error requires people using an app to make an action outside of the app in order to recover
-        if ([FBErrorUtility shouldNotifyUserForError:error] == YES){
-            alertTitle = @"Something went wrong";
-            alertText = [FBErrorUtility userMessageForError:error];
-        } else {
-            
-            // If the user cancelled login, do nothing
-            if ([FBErrorUtility errorCategoryForError:error] == FBErrorCategoryUserCancelled) {
-                
-                // Handle session closures that happen outside of the app
-            } else if ([FBErrorUtility errorCategoryForError:error] == FBErrorCategoryAuthenticationReopenSession){
-                alertTitle = @"Session Error";
-                alertText = @"Your current session is no longer valid. Please log in again.";
-                
-                // For simplicity, here we just show a generic message for all other errors
-                // You can learn how to handle other errors using our guide: https://developers.facebook.com/docs/ios/errors
-            } else {
-                //Get more error information from the error
-                NSDictionary *errorInformation = [[[error.userInfo objectForKey:@"com.facebook.sdk:ParsedJSONResponseKey"] objectForKey:@"body"] objectForKey:@"error"];
-                
-                // Show the user an error message
-                alertTitle = @"Something went wrong";
-                alertText = [NSString stringWithFormat:@"Please retry. \n\n If the problem persists contact us and mention this error code: %@", [errorInformation objectForKey:@"message"]];
-            }
-        }
-        // Clear this token
-        [FBSession.activeSession closeAndClearTokenInformation];
-    }
 }
 
 #pragma mark - gotoProfileView
@@ -409,26 +337,44 @@
 {
    [objWebService postRegister:Register_API
                           type:objSigninType
-                    first_name:@""
-                     last_name:@""
-                         email:self.emailTxt.text
+                    first_name:[fbUserDetailsDict valueForKey:@"first_name"]
+                     last_name:[fbUserDetailsDict valueForKey:@"last_name"]
+                         email:[fbUserDetailsDict valueForKey:@"email"]
                       password:self.passwordTxt.text
-                     profileId:@""
-                           dob:@""
-                  profileImage:@""
-                        gender:@""
+                     profileId:[fbUserDetailsDict valueForKey:@"id"]
+                           dob:@""//[fbUserDetailsDict valueForKey:@"birthday"]
+                  profileImage:[fbUserDetailsDict valueForKey:@"profileImage"]
+                        gender:[fbUserDetailsDict valueForKey:@"gender"]
                       latitude:currentLatitude
                      longitude:currentLongitude
                         device:@"iPhone"
                       deviceid:deviceUdid
-                       success:^(AFHTTPRequestOperation *operation, id responseObject)
-    {
-        NSLog(@"Register->%@",responseObject);
-        [self gotoProfileView];
-    }
-                       failure:^(AFHTTPRequestOperation *operation, id error) {
+    
+                       success:^(AFHTTPRequestOperation *operation, id responseObject){
+                        NSLog(@"responseObject = %@",responseObject);
                            
-                       }];
+                           NSMutableDictionary *registerDict = [[NSMutableDictionary alloc]init];
+                           
+                           registerDict = [responseObject valueForKey:@"register"];
+                           
+                           if([[registerDict valueForKey:@"status"]isEqualToString:@"success"]){
+                               
+                              [COMMON setUserDetails:[[registerDict valueForKey:@"userDetails"]objectAtIndex:0]];
+                               NSLog(@"userdetails = %@",[COMMON getUserDetails]);
+                               [self gotoProfileView];
+                               
+                           }
+                           else{
+                               NSLog(@"responseObject = %@",responseObject);
+                               NSString *errMsg = [NSString stringWithFormat:@"%@",[registerDict valueForKey:@"Message"]];
+                               errMsg = [errMsg stringByReplacingOccurrencesOfString:@"{" withString:@""];
+                                errMsg = [errMsg stringByReplacingOccurrencesOfString:@"}" withString:@""];
+                               [DSAppCommon showSimpleAlertWithMessage:errMsg];
+                           }
+                    }
+                   failure:^(AFHTTPRequestOperation *operation, id error) {
+                       
+                   }];
     
 }
 

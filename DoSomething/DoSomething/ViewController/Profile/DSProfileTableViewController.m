@@ -253,15 +253,18 @@
 
    
     placeHolderArray = [[NSMutableArray alloc] initWithCapacity: 1];
+    
+    NSMutableDictionary *detailsDict = [[NSMutableDictionary alloc]init];
+    detailsDict = [[COMMON getUserDetails]mutableCopy];
 
     [placeHolderArray insertObject:[[NSMutableArray alloc]initWithObjects:[NSMutableDictionary dictionaryWithObjectsAndKeys:@"Image",@"placeHolder",@"",@"TypingText", nil],
-                                    [NSMutableDictionary dictionaryWithObjectsAndKeys:@"First Name",@"placeHolder",@"",@"TypingText", nil],
-                                    [NSMutableDictionary dictionaryWithObjectsAndKeys:@"Last Name",@"placeHolder",@"",@"TypingText", nil],
-                                    [NSMutableDictionary dictionaryWithObjectsAndKeys:@"Male",@"placeHolder",@"Female",@"placeHolderFemale",@"",@"TypingText",@"",@"TypingTextFemale", nil],
-                                    [NSMutableDictionary dictionaryWithObjectsAndKeys:@"DD / MM / YYYY",@"placeHolder",@"",@"TypingText", nil],
+                                    [NSMutableDictionary dictionaryWithObjectsAndKeys:[detailsDict valueForKey:@"first_name"],@"placeHolder",@"",@"TypingText", nil],
+                                    [NSMutableDictionary dictionaryWithObjectsAndKeys:[detailsDict valueForKey:@"last_name"],@"placeHolder",@"",@"TypingText", nil],
+                                    [NSMutableDictionary dictionaryWithObjectsAndKeys:[detailsDict valueForKey:@"gender"],@"placeHolder",@"",@"TypingText", nil],
+                                    [NSMutableDictionary dictionaryWithObjectsAndKeys:@"DD/MM/YYYY",@"placeHolder",@"",@"TypingText", nil],
                                     [NSMutableDictionary dictionaryWithObjectsAndKeys:@"Write something about yourself here.",@"placeHolder",@"",@"TypingText", nil],
                                     [NSMutableDictionary dictionaryWithObjectsAndKeys:@"Hobbies",@"placeHolder",@"",@"TypingText", nil],
-                                    [NSMutableDictionary dictionaryWithObjectsAndKeys:@"Email",@"placeHolder",@"Password",@"placeHolderPass",@"",@"TypingText",@"",@"TypingTextPass", nil],
+                                    [NSMutableDictionary dictionaryWithObjectsAndKeys:[detailsDict valueForKey:@"email"],@"placeHolder",@"Password",@"placeHolderPass",@"",@"TypingText",@"",@"TypingTextPass", nil],
                                     [NSMutableDictionary dictionaryWithObjectsAndKeys:@"switch_on",@"placeHolder",@"",@"NewMessageImage",@"",@"SoundImage",@"",@"VibrationImage",nil],
                                     [NSMutableDictionary dictionaryWithObjectsAndKeys:@"TermsOfUse",@"placeHolder",@"",@"TypingText", nil],nil]atIndex:0];
     
@@ -364,18 +367,18 @@
     
     DSProfileTableViewCell *cell = (DSProfileTableViewCell *)[tableView dequeueReusableCellWithIdentifier:cellIdentifier];
     NSString *titleText;
-    NSString *placeHolderText,*placeHolderTextPass,*placeHolderFemale;
-    NSString *typingText,*typingTextPass,*typingTextFemale;
+    NSString *placeHolderText,*placeHolderTextPass;
+    NSString *typingText,*typingTextPass;
     NSString *newMessageImage,*soundImage,*vibrationImage;
     
 
         typingText       = [[[placeHolderArray valueForKey:@"TypingText" ]objectAtIndex:indexPath.section]objectAtIndex:indexPath.row];
         typingTextPass   = [[[placeHolderArray valueForKey:@"TypingTextPass" ]objectAtIndex:indexPath.section]objectAtIndex:indexPath.row];
-        typingTextFemale = [[[placeHolderArray valueForKey:@"TypingTextFemale" ]objectAtIndex:indexPath.section]objectAtIndex:indexPath.row];
+       // typingTextFemale = [[[placeHolderArray valueForKey:@"TypingTextFemale" ]objectAtIndex:indexPath.section]objectAtIndex:indexPath.row];
 
         placeHolderText     =  [[[placeHolderArray valueForKey:@"placeHolder" ]objectAtIndex:indexPath.section]objectAtIndex:indexPath.row];
         placeHolderTextPass =  [[[placeHolderArray valueForKey:@"placeHolderPass" ]objectAtIndex:indexPath.section]objectAtIndex:indexPath.row];
-        placeHolderFemale =  [[[placeHolderArray valueForKey:@"placeHolderFemale" ]objectAtIndex:indexPath.section]objectAtIndex:indexPath.row];
+       // placeHolderFemale =  [[[placeHolderArray valueForKey:@"placeHolderFemale" ]objectAtIndex:indexPath.section]objectAtIndex:indexPath.row];
     
     newMessageImage =  [[[placeHolderArray valueForKey:@"NewMessageImage" ]objectAtIndex:indexPath.section]objectAtIndex:indexPath.row];
     soundImage =  [[[placeHolderArray valueForKey:@"SoundImage" ]objectAtIndex:indexPath.section]objectAtIndex:indexPath.row];
@@ -426,7 +429,7 @@
         }
         cell.labelTitleText.text = titleText;
 
-        if([typingText isEqualToString:@""] || typingText == nil)
+        if(typingText == (id)[NSNull null] || [typingText isEqualToString:@""])
             cell.textFieldPlaceHolder.placeholder = placeHolderText;
         else
             cell.textFieldPlaceHolder.text = typingText;
@@ -468,36 +471,29 @@
         maleLabel =[[UILabel alloc]initWithFrame:CGRectMake(0, 0, labelWidth,labelHeight)];
         maleLabel.font = [UIFont fontWithName:@"Patron-Regular" size:9.0];
         maleLabel.textAlignment = NSTextAlignmentCenter;
-        [maleLabel setText:placeHolderText];
+        [maleLabel setText:@"Male"];
         [cell.labelMale addSubview:maleLabel];
         
         femaleLabel =[[UILabel alloc]initWithFrame:CGRectMake(0, 0,labelWidth, labelHeight)];
         femaleLabel.font = [UIFont fontWithName:@"Patron-Regular" size:9.0];
         femaleLabel.textAlignment = NSTextAlignmentCenter;
-        [femaleLabel setText:placeHolderFemale];
+        [femaleLabel setText:@"Female"];
         [cell.labelFemale addSubview:femaleLabel];
         
-        if([typingText isEqualToString:@""] || typingText == nil)
+         if([placeHolderText isEqualToString:@"Male"])
         {
-            maleLabel.textColor = [UIColor colorWithRed:(float)161.0/255 green:(float)161.0/255 blue:(float)161.0/255 alpha:1.0f];
-            
-            
-        }
-        else
-        {
+            femaleLabel.textColor = [UIColor colorWithRed:(float)161.0/255 green:(float)161.0/255 blue:(float)161.0/255 alpha:1.0f];
             maleLabel.textColor = [UIColor redColor];
             
         }
-        
-        if([typingTextFemale isEqualToString:@""] || typingTextFemale == nil)
-        {
-            femaleLabel.textColor =[UIColor colorWithRed:(float)161.0/255 green:(float)161.0/255 blue:(float)161.0/255 alpha:1.0f];
-        }
         else
         {
+            maleLabel.textColor = [UIColor colorWithRed:(float)161.0/255 green:(float)161.0/255 blue:(float)161.0/255 alpha:1.0f];
             femaleLabel.textColor = [UIColor redColor];
             
         }
+        
+
         
         cell.maleButton.userInteractionEnabled = YES;
         cell.femaleButton.userInteractionEnabled = YES;
