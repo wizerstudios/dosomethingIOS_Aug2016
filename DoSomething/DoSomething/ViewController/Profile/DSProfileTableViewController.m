@@ -46,6 +46,7 @@
     [super viewDidLoad];
     objWebService = [[DSWebservice alloc]init];
 
+    [self initializeArray];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -76,7 +77,18 @@
     [self.navigationController.navigationBar addSubview:customNavigation.view];
     [customNavigation.saveBtn addTarget:self action:@selector(saveAction) forControlEvents:UIControlEventTouchUpInside];
     [customNavigation.buttonBack addTarget:self action:@selector(backAction) forControlEvents:UIControlEventTouchUpInside];
-    [self initializeArray];
+    
+    
+    imageNormalArray =[[NSMutableArray alloc]init];
+    
+    
+    interstAndHobbiesArray =[[[NSUserDefaults standardUserDefaults] valueForKey:@"SelectedItem"]mutableCopy];
+    imageNormalArray =[[[NSUserDefaults standardUserDefaults] valueForKey:@"SelectedItemNormal"]mutableCopy];
+    
+    hobbiesNameArray =[[[NSUserDefaults standardUserDefaults] valueForKey:@"SelectedItemName"]mutableCopy];
+    
+    
+
     [_tableviewProfile reloadData];
 
 }
@@ -242,16 +254,7 @@
 }
 
 -(void)initializeArray{
-    imageNormalArray =[[NSMutableArray alloc]init];
-
-
-    interstAndHobbiesArray =[[[NSUserDefaults standardUserDefaults] valueForKey:@"SelectedItem"]mutableCopy];
-    imageNormalArray =[[[NSUserDefaults standardUserDefaults] valueForKey:@"SelectedItemNormal"]mutableCopy];
     
-    hobbiesNameArray =[[[NSUserDefaults standardUserDefaults] valueForKey:@"SelectedItemName"]mutableCopy];
-   
-
-   
     placeHolderArray = [[NSMutableArray alloc] initWithCapacity: 1];
     
     NSMutableDictionary *detailsDict = [[NSMutableDictionary alloc]init];
@@ -271,7 +274,7 @@
     titleArray = [[NSArray alloc]initWithObjects:@"Image",@"First Name",@"Last Name",@"male",@"Date of Birth",@"About You",@"Hobbies",@"Email&Password",@"switch_on",@"TermsOfUse",nil];
     
     NSLog(@"PlaceHolder %@",placeHolderArray);
-    [self.tableviewProfile reloadData];
+   // [self.tableviewProfile reloadData];
    
 }
 
