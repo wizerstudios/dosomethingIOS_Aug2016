@@ -939,57 +939,20 @@
     indexPath = [_tableviewProfile indexPathForCell:(UITableViewCell *)button];
     cell = (DSProfileTableViewCell *) [_tableviewProfile cellForRowAtIndexPath:[NSIndexPath indexPathForRow:indexPath.row inSection:0]];
     
-    NSString *selOptionVal1;
     NSString *selOptionVal;
     
     if([sender tag] == 2004){
-        NSString *place1 =[[[placeHolderArray objectAtIndex:indexPath.section] objectAtIndex:indexPath.row] valueForKey:@"TypingText"];
-        
-        
-        if([place1 isEqualToString:@""] || place1 == nil)
-        {
-            
-            NSString *empty =@"";
-            NSString *filterColorCode =  @"[UIColor colorWithRed:(float)255.0/255 green:(float)0.0/255 blue:(float)0.0/255 alpha:1.0f]"; {
-                
-                selOptionVal1 =empty;
-                selOptionVal =filterColorCode;
-                
-                
-                
-                if(selOptionVal != nil || ![selOptionVal isEqualToString:@""])
-                    [[[placeHolderArray objectAtIndex:indexPath.section] objectAtIndex:indexPath.row] setObject:selOptionVal1 forKey:@"TypingTextFemale"];
-                
-                [[[placeHolderArray objectAtIndex:indexPath.section] objectAtIndex:indexPath.row] setObject:selOptionVal forKey:@"TypingText"];
-            }
-            
-        }
+        selOptionVal = @"Male";
     }
     
     if([sender tag] == 2005){
-        NSString *place1 =[[[placeHolderArray objectAtIndex:indexPath.section] objectAtIndex:indexPath.row] valueForKey:@"TypingTextFemale"];
-        
-        
-        if([place1 isEqualToString:@""] || place1 == nil)
-        {
-            
-            
-            
-            NSString *filterColorCode =  @"[UIColor colorWithRed:(float)255.0/255 green:(float)0.0/255 blue:(float)0.0/255 alpha:1.0f]"; {
-                NSString *empty =@"";
-                
-                selOptionVal =filterColorCode;
-                selOptionVal1 =empty;
-                
-                
-                if(selOptionVal != nil || ![selOptionVal isEqualToString:@""])
-                    [[[placeHolderArray objectAtIndex:indexPath.section] objectAtIndex:indexPath.row] setObject:selOptionVal1 forKey:@"TypingText"];
-                [[[placeHolderArray objectAtIndex:indexPath.section] objectAtIndex:indexPath.row] setObject:selOptionVal forKey:@"TypingTextFemale"];
-            }
-            
-        }
-        
+       selOptionVal = @"female";
     }
+    
+                if(selOptionVal != nil || ![selOptionVal isEqualToString:@""])
+                    [[[placeHolderArray objectAtIndex:indexPath.section] objectAtIndex:indexPath.row] setObject:selOptionVal forKey:@"placeHolder"];
+    
+    
     [_tableviewProfile reloadData];
 }
 
