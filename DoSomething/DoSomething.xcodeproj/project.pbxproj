@@ -167,6 +167,8 @@
 		ED78176F1BEC7F6400C7138F /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED78176E1BEC7F6400C7138F /* CoreLocation.framework */; };
 		ED7817781BEC84FE00C7138F /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED7817761BEC84FE00C7138F /* FBSDKCoreKit.framework */; };
 		ED7817791BEC84FE00C7138F /* FBSDKLoginKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED7817771BEC84FE00C7138F /* FBSDKLoginKit.framework */; };
+		EDAE16261BF3869A0061E99D /* button-16.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = EDAE16251BF3869A0061E99D /* button-16.mp3 */; settings = {ASSET_TAGS = (); }; };
+		EDAE16281BF3873B0061E99D /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EDAE16271BF3873B0061E99D /* AVFoundation.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -391,6 +393,8 @@
 		ED78176E1BEC7F6400C7138F /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		ED7817761BEC84FE00C7138F /* FBSDKCoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKCoreKit.framework; path = Frameworks/FBSDKCoreKit.framework; sourceTree = "<group>"; };
 		ED7817771BEC84FE00C7138F /* FBSDKLoginKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKLoginKit.framework; path = Frameworks/FBSDKLoginKit.framework; sourceTree = "<group>"; };
+		EDAE16251BF3869A0061E99D /* button-16.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "button-16.mp3"; sourceTree = "<group>"; };
+		EDAE16271BF3873B0061E99D /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -398,6 +402,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EDAE16281BF3873B0061E99D /* AVFoundation.framework in Frameworks */,
 				ED7817781BEC84FE00C7138F /* FBSDKCoreKit.framework in Frameworks */,
 				ED7817791BEC84FE00C7138F /* FBSDKLoginKit.framework in Frameworks */,
 				ED78176F1BEC7F6400C7138F /* CoreLocation.framework in Frameworks */,
@@ -439,6 +444,7 @@
 		065BAC501BC7A135005AF493 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				EDAE16241BF3869A0061E99D /* Audio */,
 				C6D5F67B1BC7EC440050C1AE /* Images.xcassets */,
 				2B83CABE1BE895AB0064EC7F /* Defaults */,
 				51560BBC1BE76AEF009FCF2A /* Framework */,
@@ -597,6 +603,7 @@
 		51560BBC1BE76AEF009FCF2A /* Framework */ = {
 			isa = PBXGroup;
 			children = (
+				EDAE16271BF3873B0061E99D /* AVFoundation.framework */,
 				ED7817761BEC84FE00C7138F /* FBSDKCoreKit.framework */,
 				ED7817771BEC84FE00C7138F /* FBSDKLoginKit.framework */,
 				ED78176E1BEC7F6400C7138F /* CoreLocation.framework */,
@@ -976,6 +983,14 @@
 			path = "Interest And Hobbies Images/@3x";
 			sourceTree = "<group>";
 		};
+		EDAE16241BF3869A0061E99D /* Audio */ = {
+			isa = PBXGroup;
+			children = (
+				EDAE16251BF3869A0061E99D /* button-16.mp3 */,
+			);
+			path = Audio;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -1110,6 +1125,7 @@
 				EAFC976B1BD21A1200B3593D /* fastfood.png in Resources */,
 				EAF16E401BDE1EBE00E6E5CE /* Pluis_icon1.png in Resources */,
 				6A8D15D41BCC059B000F1FB4 /* DSProfileTableViewController.xib in Resources */,
+				EDAE16261BF3869A0061E99D /* button-16.mp3 in Resources */,
 				EAFC97931BD21A1200B3593D /* violin_active.png in Resources */,
 				51ED4E621BE08EDF0079E030 /* 18-Chats.png in Resources */,
 				C6D5F6441BC7B52C0050C1AE /* Patron-Thin.ttf in Resources */,

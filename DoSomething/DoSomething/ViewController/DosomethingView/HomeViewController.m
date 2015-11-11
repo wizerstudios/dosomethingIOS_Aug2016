@@ -19,6 +19,7 @@
 #import "HomeCustomCell.h"
 #import "AppDelegate.h"
 #import <AudioToolbox/AudioToolbox.h>
+#import <AVFoundation/AVFoundation.h>
 
 #define ITEMS_PAGE_SIZE 4
 #define ITEM_CELL_IDENTIFIER @"ItemCell"
@@ -32,6 +33,9 @@
     int selectedCellCount;
     
     NSMutableArray *selectedItemsArray;
+    
+    AVAudioPlayer *audioPlayer;
+
 }
 
 @end
@@ -220,32 +224,44 @@
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
     isSelectMenu=YES;
-    AudioServicesPlaySystemSound(kSystemSoundID_Vibrate);
+   // AudioServicesPlaySystemSound(kSystemSoundID_Vibrate);
     
     HomeCustomCell *cell = (HomeCustomCell *)[collectionView cellForItemAtIndexPath:indexPath];
     NSMutableDictionary *data = [menuArray objectAtIndex:indexPath.row];
+    NSString *path = [[NSBundle mainBundle]
+                      pathForResource:@"button-16" ofType:@"mp3"];
+    audioPlayer = [[AVAudioPlayer alloc]initWithContentsOfURL:
+                   [NSURL fileURLWithPath:path] error:NULL];
     
     if([selectedItemsArray count] <= 2)
     {
+        
+        [audioPlayer play];
+        
+        
         [selectedItemsArray addObject:[data valueForKey:@"Caption"]];
         cell.MenuTittle.textColor = [UIColor colorWithRed:(199/255.0f) green:(65/255.0f) blue:(81/255.0f) alpha:1.0f];
         NSString * objstr = [NSString stringWithFormat:@"%@",[data valueForKey:ACTIVE_IMAGE]];
         cell.MenuImg.image = [UIImage imageNamed:objstr];
+        
     }
     else
     {
+        AudioServicesPlaySystemSound(kSystemSoundID_Vibrate);
         alertBgView.hidden = NO;
         alertMainBgView.hidden = NO;
         alertCancelButton.hidden = NO;
         btnYes.hidden = YES;
         btnNo.hidden = YES;
         
-        alertMsgLabel.text = @"ONLY 3 ACTIVITIES\nCAN BE SELECTED";
+        alertMsgLabel.text = @"ONLY 3 ACTIVIES\nCAN BE SELECTED";
         alertMsgLabel.textAlignment = NSTextAlignmentCenter;
         alertMsgLabel.lineBreakMode = NSLineBreakByWordWrapping;
         alertMsgLabel.numberOfLines = 2;
         alertMsgLabel.textColor = [UIColor whiteColor];
     }
+
+
 }
 
 -(void)collectionView: (UICollectionView *)collectionView didDeselectItemAtIndexPath:(NSIndexPath *)indexPath
