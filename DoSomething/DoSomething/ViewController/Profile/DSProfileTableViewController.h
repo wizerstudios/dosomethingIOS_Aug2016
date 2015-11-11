@@ -21,6 +21,7 @@
  IBOutlet DSProfileTableViewCell *CellSwitchOn;
  IBOutlet DSProfileTableViewCell *CellTermsOfUse;
  IBOutlet DSProfileTableViewCell *cellTextView;
+  UIImagePickerController  *imagepickerController;
 }
 @property (strong, nonatomic) DVSwitch *switcher;
 @property (strong, nonatomic) IBOutlet UITableView *tableviewProfile;
@@ -32,5 +33,8 @@
 @property (nonatomic, retain) NSMutableArray *placeHolderArray;
 @property (strong, nonatomic) NSData *profileData;
 @property (nonatomic, strong)  NSString *textviewText;
+
+@property (nonatomic,strong) NSMutableDictionary *userDetailsDict;
+
 
 @end

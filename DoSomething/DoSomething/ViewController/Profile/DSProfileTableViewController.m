@@ -35,12 +35,15 @@
     float yAxis;
     float imageSize;
     float space;
+    
+    UIImage *profileImage;
 
 }
 @end
 
 @implementation DSProfileTableViewController
 @synthesize profileData, textviewText, placeHolderArray;
+@synthesize userDetailsDict;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -257,17 +260,17 @@
     
     placeHolderArray = [[NSMutableArray alloc] initWithCapacity: 1];
     
-    NSMutableDictionary *detailsDict = [[NSMutableDictionary alloc]init];
-    detailsDict = [[COMMON getUserDetails]mutableCopy];
+   // NSMutableDictionary *detailsDict = [[NSMutableDictionary alloc]init];
+   // detailsDict = [[COMMON getUserDetails]mutableCopy];
 
     [placeHolderArray insertObject:[[NSMutableArray alloc]initWithObjects:[NSMutableDictionary dictionaryWithObjectsAndKeys:@"Image",@"placeHolder",@"",@"TypingText", nil],
-                                    [NSMutableDictionary dictionaryWithObjectsAndKeys:[detailsDict valueForKey:@"first_name"],@"placeHolder",@"",@"TypingText", nil],
-                                    [NSMutableDictionary dictionaryWithObjectsAndKeys:[detailsDict valueForKey:@"last_name"],@"placeHolder",@"",@"TypingText", nil],
-                                    [NSMutableDictionary dictionaryWithObjectsAndKeys:[detailsDict valueForKey:@"gender"],@"placeHolder",@"",@"TypingText", nil],
+                                    [NSMutableDictionary dictionaryWithObjectsAndKeys:[userDetailsDict valueForKey:@"first_name"],@"placeHolder",@"",@"TypingText", nil],
+                                    [NSMutableDictionary dictionaryWithObjectsAndKeys:[userDetailsDict valueForKey:@"last_name"],@"placeHolder",@"",@"TypingText", nil],
+                                    [NSMutableDictionary dictionaryWithObjectsAndKeys:[userDetailsDict valueForKey:@"gender"],@"placeHolder",@"",@"TypingText", nil],
                                     [NSMutableDictionary dictionaryWithObjectsAndKeys:@"DD/MM/YYYY",@"placeHolder",@"",@"TypingText", nil],
                                     [NSMutableDictionary dictionaryWithObjectsAndKeys:@"Write something about yourself here.",@"placeHolder",@"",@"TypingText", nil],
                                     [NSMutableDictionary dictionaryWithObjectsAndKeys:@"Hobbies",@"placeHolder",@"",@"TypingText", nil],
-                                    [NSMutableDictionary dictionaryWithObjectsAndKeys:[detailsDict valueForKey:@"email"],@"placeHolder",@"Password",@"placeHolderPass",@"",@"TypingText",@"",@"TypingTextPass", nil],
+                                    [NSMutableDictionary dictionaryWithObjectsAndKeys:[userDetailsDict valueForKey:@"email"],@"placeHolder",@"Password",@"placeHolderPass",@"",@"TypingText",@"",@"TypingTextPass", nil],
                                     [NSMutableDictionary dictionaryWithObjectsAndKeys:@"switch_on",@"placeHolder",@"",@"NewMessageImage",@"",@"SoundImage",@"",@"VibrationImage",nil],
                                     [NSMutableDictionary dictionaryWithObjectsAndKeys:@"TermsOfUse",@"placeHolder",@"",@"TypingText", nil],nil]atIndex:0];
     
@@ -405,16 +408,17 @@
             cell.layoutConstraintProfileImageWidth.constant =161;
         }
         
-        if(!profileData)
+        if(!profileImage)
             [cell.profileImageview setImage:[UIImage imageNamed:@"profile_noimg"]];
         else
-            [cell.profileImageview setImage:[UIImage imageWithData:profileData]];
+            [cell.profileImageview setImage:profileImage];
         
         cell.profileImageview.layer.cornerRadius = cell.profileImageview.frame.size.height / 2;
         cell.profileImageview.layer.masksToBounds = YES;
         cell.cameraButton.userInteractionEnabled = YES;
         [cell.cameraButton setTag:101];
         [cell.cameraButton addTarget:self action:@selector(selectCamera:) forControlEvents:UIControlEventTouchUpInside];
+         [cell.uploadButton addTarget:self action:@selector(selectCamera:) forControlEvents:UIControlEventTouchUpInside];
         
     }
     if (indexPath.row == 1 || indexPath.row == 2)
@@ -981,33 +985,53 @@
 #pragma mark - Camera Action
 -(void)selectCamera: (UIButton *)sender
 {
-    if([sender tag] == 101)
-    {
-        if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera])
-        {
-            UIImagePickerController *imagePicker = [[UIImagePickerController alloc] init];
-            imagePicker.sourceType =  UIImagePickerControllerSourceTypeCamera;
-            imagePicker.delegate = (id)self;
-            imagePicker.cameraFlashMode = UIImagePickerControllerCameraFlashModeOff;
-            imagePicker.allowsEditing = NO;
-            [self presentViewController:imagePicker animated:YES completion:nil];
-        }
-        else
-        {
-            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error"message:@"This device doesn't have a camera."delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil];
-            [alert show];
-        }
+    UIActionSheet *actionSheet1 = [[UIActionSheet alloc] initWithTitle:@"" delegate:self cancelButtonTitle:NSLocalizedString(@"CANCEL",@"") destructiveButtonTitle:NSLocalizedString(@"CAMERA",@"") otherButtonTitles:NSLocalizedString(@"PHOTO LIBRARY",@""), nil];
+    [actionSheet1 showInView:self.view];
+    [actionSheet1 sizeToFit];
+}
+
+-(void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    imagepickerController = [[UIImagePickerController alloc] init];
+    imagepickerController.delegate = self;
+    [imagepickerController setAllowsEditing:YES];
+    
+    switch (buttonIndex) {
+        case 0:
+            if (![UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera])
+            {
+                UIAlertView *altView = [[UIAlertView alloc]initWithTitle:[[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleName"]
+                                                                 message:NSLocalizedString(@"Sorry, you do not have a camera",@"")
+                                                                delegate:nil
+                                                       cancelButtonTitle:NSLocalizedString(@"OK",@"")
+                                                       otherButtonTitles:nil];
+                [altView show];
+                return;
+            }else{
+                imagepickerController.sourceType = UIImagePickerControllerSourceTypeCamera;
+                [self presentViewController:imagepickerController animated:YES completion:nil];
+            }
+            break;
+            
+        case 1:
+            
+            imagepickerController.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+            [self presentViewController:imagepickerController animated:YES completion:nil];
+            break;
+            
+        default:
+            break;
     }
 }
-- (void) imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
+
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
 {
-    [self dismissViewControllerAnimated:YES completion:nil];
-    profileData = UIImageJPEGRepresentation([info objectForKey:UIImagePickerControllerOriginalImage], 0.1);
+    UIImage *image = nil;
+    image = [info valueForKey:UIImagePickerControllerEditedImage];
+     profileImage = image;
+    NSLog(@"uploadImg=%@",image);
     [_tableviewProfile reloadData];
-}
-- (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker
-{
-    [self dismissViewControllerAnimated:YES completion:nil];
+    [imagepickerController dismissViewControllerAnimated:YES completion:nil];
 }
 
 #pragma mark - gotoHomeView

@@ -51,7 +51,9 @@
 @property (weak, nonatomic) IBOutlet UILabel *labelMale;
 @property (weak, nonatomic) IBOutlet UILabel *labelFemale;
 @property (weak, nonatomic) IBOutlet UILabel *textViewHeaderLabel;
-@property (strong, nonatomic) IBOutlet UIButton *cameraButton;
+@property (strong, nonatomic) IBOutlet UIButton *cameraButton,*uploadButton;
 @property (strong, nonatomic) IBOutlet UIImageView *profileImageview;
+
+
 
 @end

@@ -42,6 +42,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    fbUserDetailsDict = [[NSMutableDictionary alloc]init];
     locationManager                 = [[CLLocationManager alloc] init];
     locationManager.delegate        = self;
     objWebService = [[DSWebservice alloc]init];
@@ -286,6 +287,8 @@
              [request startWithCompletionHandler:^(FBSDKGraphRequestConnection *connection, id result, NSError *error) {
                  // handle response
                  NSDictionary *userData = (NSDictionary *)result;
+                 fbUserDetailsDict = [userData mutableCopy];
+                 
                  firstName = [userData valueForKey:@"first_name"];
                  lastName = [userData valueForKey:@"last_name"];
                  email = [userData valueForKey:@"email"];
@@ -293,7 +296,8 @@
                  gender = [userData valueForKey:@"gender"];
                  profileImage = [NSString stringWithFormat:@"https://graph.facebook.com/%@/picture?type=large&return_ssl_resources=1", userData[@"id"]];
                  dob = @""; //[userData valueForKey:@"birthday"]
-                 
+                 [fbUserDetailsDict setObject:profileImage forKey:@"profileImage"];
+                 NSLog(@"fbUserDetailsDict = %@",fbUserDetailsDict);
                  
                  [COMMON LoadIcon:self.view];
                  
@@ -309,8 +313,9 @@
 
 #pragma mark - gotoProfileView
 -(void)gotoProfileView{
-    DSProfileTableViewController *  DSProfileTableView  = [[DSProfileTableViewController alloc]initWithNibName:@"DSProfileTableViewController" bundle:nil];
-    [self.navigationController pushViewController: DSProfileTableView animated:YES];
+    DSProfileTableViewController *profileVC  = [[DSProfileTableViewController alloc]initWithNibName:@"DSProfileTableViewController" bundle:nil];
+    profileVC.userDetailsDict = [fbUserDetailsDict mutableCopy];
+    [self.navigationController pushViewController:profileVC animated:YES];
 }
 
 #pragma mark - gotoHomeView
@@ -390,8 +395,8 @@
                            
                            if([[registerDict valueForKey:@"status"]isEqualToString:@"success"]){
                                
-                              [COMMON setUserDetails:[[registerDict valueForKey:@"userDetails"]objectAtIndex:0]];
-                               NSLog(@"userdetails = %@",[COMMON getUserDetails]);
+                              //[COMMON setUserDetails:[[registerDict valueForKey:@"userDetails"]objectAtIndex:0]];
+                              // NSLog(@"userdetails = %@",[COMMON getUserDetails]);
                                [self gotoProfileView];
                                
                            }
