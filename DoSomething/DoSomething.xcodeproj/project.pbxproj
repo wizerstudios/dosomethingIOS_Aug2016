@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		065433161BF38B0400DABBFC /* button-16.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 065433151BF38B0400DABBFC /* button-16.mp3 */; };
 		065BAC521BC7A135005AF493 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 065BAC511BC7A135005AF493 /* main.m */; };
 		2B83CA9A1BE873F80064EC7F /* AFNetworkActivityLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B83CA731BE873F80064EC7F /* AFNetworkActivityLogger.m */; };
 		2B83CA9B1BE873F80064EC7F /* AFHTTPRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B83CA761BE873F80064EC7F /* AFHTTPRequestOperation.m */; };
@@ -168,10 +169,10 @@
 		ED7817781BEC84FE00C7138F /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED7817761BEC84FE00C7138F /* FBSDKCoreKit.framework */; };
 		ED7817791BEC84FE00C7138F /* FBSDKLoginKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED7817771BEC84FE00C7138F /* FBSDKLoginKit.framework */; };
 		EDAE16281BF3873B0061E99D /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EDAE16271BF3873B0061E99D /* AVFoundation.framework */; };
-		EDAE162B1BF388590061E99D /* button-16.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = EDAE162A1BF388590061E99D /* button-16.mp3 */; settings = {ASSET_TAGS = (); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		065433151BF38B0400DABBFC /* button-16.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "button-16.mp3"; sourceTree = "<group>"; };
 		065BAC4D1BC7A135005AF493 /* DoSomething.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DoSomething.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		065BAC511BC7A135005AF493 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		065BAC611BC7A135005AF493 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -394,7 +395,6 @@
 		ED7817761BEC84FE00C7138F /* FBSDKCoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKCoreKit.framework; path = Frameworks/FBSDKCoreKit.framework; sourceTree = "<group>"; };
 		ED7817771BEC84FE00C7138F /* FBSDKLoginKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKLoginKit.framework; path = Frameworks/FBSDKLoginKit.framework; sourceTree = "<group>"; };
 		EDAE16271BF3873B0061E99D /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
-		EDAE162A1BF388590061E99D /* button-16.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "button-16.mp3"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -414,6 +414,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		065433141BF38B0400DABBFC /* Audio */ = {
+			isa = PBXGroup;
+			children = (
+				065433151BF38B0400DABBFC /* button-16.mp3 */,
+			);
+			path = Audio;
+			sourceTree = "<group>";
+		};
 		065BAC441BC7A134005AF493 = {
 			isa = PBXGroup;
 			children = (
@@ -444,6 +452,7 @@
 		065BAC501BC7A135005AF493 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				065433141BF38B0400DABBFC /* Audio */,
 				C6D5F67B1BC7EC440050C1AE /* Images.xcassets */,
 				2B83CABE1BE895AB0064EC7F /* Defaults */,
 				51560BBC1BE76AEF009FCF2A /* Framework */,
@@ -676,7 +685,6 @@
 		C6D5F6081BC7A4340050C1AE /* Common */ = {
 			isa = PBXGroup;
 			children = (
-				EDAE16291BF388590061E99D /* Audio */,
 				2B83CACB1BE8D4FD0064EC7F /* LoginValidations */,
 				2B83CAB91BE8915A0064EC7F /* OpenUDID */,
 				2B83CA701BE873F80064EC7F /* Helpers */,
@@ -983,15 +991,6 @@
 			path = "Interest And Hobbies Images/@3x";
 			sourceTree = "<group>";
 		};
-		EDAE16291BF388590061E99D /* Audio */ = {
-			isa = PBXGroup;
-			children = (
-				EDAE162A1BF388590061E99D /* button-16.mp3 */,
-			);
-			name = Audio;
-			path = Common/Audio;
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -1087,7 +1086,7 @@
 				2B83CAC61BE895AB0064EC7F /* Default-568h@2x.png in Resources */,
 				51322A271BDFBFAA00418216 /* request_send.png in Resources */,
 				EAFC976A1BD21A1200B3593D /* dog_active.png in Resources */,
-				EDAE162B1BF388590061E99D /* button-16.mp3 in Resources */,
+				065433161BF38B0400DABBFC /* button-16.mp3 in Resources */,
 				EAFC977C1BD21A1200B3593D /* italianfood_active.png in Resources */,
 				51322A261BDFBFAA00418216 /* menu_icon.png in Resources */,
 				EAFC977A1BD21A1200B3593D /* guitar_active.png in Resources */,
