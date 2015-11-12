@@ -6,5 +6,6 @@
 target 'DoSomething' do
 
 pod 'JBKenBurnsView'
+
 end
 
