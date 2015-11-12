@@ -265,25 +265,50 @@
 }
 
 -(void)collectionView: (UICollectionView *)collectionView didDeselectItemAtIndexPath:(NSIndexPath *)indexPath
+
 {
-    AudioServicesPlaySystemSound(kSystemSoundID_Vibrate);
     
     HomeCustomCell *cell = (HomeCustomCell *)[collectionView cellForItemAtIndexPath:indexPath];
+    
     NSMutableDictionary *data = [menuArray objectAtIndex:indexPath.row];
+    
     NSArray *selectArray = [[NSArray alloc]init];
+    
     selectArray = [selectedItemsArray copy];
     
+    NSString *path = [[NSBundle mainBundle]
+                      
+                      pathForResource:@"button-16" ofType:@"mp3"];
+    
+    audioPlayer = [[AVAudioPlayer alloc]initWithContentsOfURL:
+                   
+                   [NSURL fileURLWithPath:path] error:NULL];
+    
+    [audioPlayer play];
+    
     for(NSString *strDeselect in selectArray)
+        
     {
+        
         if([[data valueForKey:@"Caption"] isEqualToString:strDeselect])
+            
         {
+            
             [selectedItemsArray removeObject:strDeselect];
+            
             cell.MenuTittle.textColor = [UIColor colorWithRed:(164/255.0f) green:(164/255.0f) blue:(164/255.0f) alpha:1.0f];
+            
             NSString * objstr = [NSString stringWithFormat:@"%@",[data valueForKey:NORMAL_IMAGE]];
+            
             cell.MenuImg.image = [UIImage imageNamed:objstr];
+            
         }
+        
     }
+    
 }
+
+
 
 - (void)fetchMoreItems {
     NSLog(@"FETCHING MORE ITEMS ******************");
