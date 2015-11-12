@@ -90,6 +90,7 @@
                                                               attribute:NSLayoutAttributeTop
                                                              multiplier:1.0
                                                                constant:75.0]];
+    [self audioplayMethod];
 }
 -(void)viewWillAppear:(BOOL)animated
 {
@@ -97,7 +98,14 @@
     appDelegate.buttonsView.hidden=NO;
     [self setupCollectionView];
 }
-
+-(void)audioplayMethod
+{
+    NSString *path = [[NSBundle mainBundle]
+                      pathForResource:@"button-16" ofType:@"mp3"];
+    audioPlayer = [[AVAudioPlayer alloc]initWithContentsOfURL:
+                   [NSURL fileURLWithPath:path] error:NULL];
+    [audioPlayer prepareToPlay];
+}
 -(void)setupCollectionView {
     [self.homeCollectionView registerClass:[HomeCustomCell class] forCellWithReuseIdentifier:ITEM_CELL_IDENTIFIER];
     [self.homeCollectionView registerClass:[UICollectionViewCell class] forCellWithReuseIdentifier:LOADING_CELL_IDENTIFIER];
@@ -228,13 +236,11 @@
     
     HomeCustomCell *cell = (HomeCustomCell *)[collectionView cellForItemAtIndexPath:indexPath];
     NSMutableDictionary *data = [menuArray objectAtIndex:indexPath.row];
-    NSString *path = [[NSBundle mainBundle]
-                      pathForResource:@"button-16" ofType:@"mp3"];
-    audioPlayer = [[AVAudioPlayer alloc]initWithContentsOfURL:
-                   [NSURL fileURLWithPath:path] error:NULL];
+    
     
     if([selectedItemsArray count] <= 2)
     {
+        
         
         [audioPlayer play];
         
@@ -276,15 +282,6 @@
     
     selectArray = [selectedItemsArray copy];
     
-    NSString *path = [[NSBundle mainBundle]
-                      
-                      pathForResource:@"button-16" ofType:@"mp3"];
-    
-    audioPlayer = [[AVAudioPlayer alloc]initWithContentsOfURL:
-                   
-                   [NSURL fileURLWithPath:path] error:NULL];
-    
-    [audioPlayer play];
     
     for(NSString *strDeselect in selectArray)
         
@@ -294,6 +291,8 @@
             
         {
             
+            [audioPlayer play];
+
             [selectedItemsArray removeObject:strDeselect];
             
             cell.MenuTittle.textColor = [UIColor colorWithRed:(164/255.0f) green:(164/255.0f) blue:(164/255.0f) alpha:1.0f];
