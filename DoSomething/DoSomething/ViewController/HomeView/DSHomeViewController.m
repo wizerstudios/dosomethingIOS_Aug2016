@@ -17,10 +17,12 @@
     int frameWt;
     BOOL imageView;
     BOOL isTimerStop;
+    NSArray *bannerImage;
 }
 @end
 @implementation DSHomeViewController
 @synthesize delegate,timer1;
+@synthesize kenView;
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -34,36 +36,47 @@
 {
     [super viewDidLoad];    
     isTimerStop=NO;
-    
-    if(IS_IPHONE6_Plus ) {
-        frameHt=674;
-        frameWt= 414;
-             bannerImageArr=[[NSMutableArray alloc]initWithObjects:@"splashImage_one",@"splashImage_two" ,@"splashImage_three",@"splashImage_four" ,@"splashImage_five", nil];
-        
-    }
-    
-    if(IS_IPHONE6 ) {
-        frameHt=609;
-        frameWt= 375;
-        bannerImageArr=[[NSMutableArray alloc]initWithObjects:@"splashImage_one",@"splashImage_two" ,@"splashImage_three",@"splashImage_four" ,@"splashImage_five", nil];
-
-    }
-      if(IS_IPHONE5)
-    {
-        frameHt=518;
-        frameWt=320;
-        bannerImageArr=[[NSMutableArray alloc]initWithObjects:@"splashImage_one",@"splashImage_two" ,@"splashImage_three",@"splashImage_four" ,@"splashImage_five", nil];
-    }
-    if(IS_IPHONE4 )
-    {
-        frameHt=438;
-        frameWt=320;
-        bannerImageArr=[[NSMutableArray alloc]initWithObjects:@"splashImage_one",@"splashImage_two" ,@"splashImage_three",@"splashImage_four" ,@"splashImage_five", nil];
-    }
-
-    [self loadSlideScroll];
+    self.kenView.delegate = self;
+   // [self loadSlideScroll];
     _scrollViewImage.userInteractionEnabled = NO;
 }
+
+- (void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    bannerImage= @[[UIImage imageNamed:@"splashImage_one"],
+                   [UIImage imageNamed:@"splashImage_two"],
+                   [UIImage imageNamed:@"splashImage_three"],
+                   [UIImage imageNamed:@"splashImage_four"],
+                   [UIImage imageNamed:@"splashImage_five"]];
+    [self.kenView animateWithImages:bannerImage
+                 transitionDuration:6
+                       initialDelay:0
+                               loop:YES
+                        isLandscape:YES];
+    
+}
+- (void)viewDidUnload
+{
+    [self.kenView stopAnimation];
+    [self setKenView:nil];
+    
+    [super viewDidUnload];
+}
+- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
+{
+    // Return YES for supported orientations
+    return YES;
+}
+
+
+#pragma mark - KenBurnsViewDelegate
+
+- (void)kenBurns:(JBKenBurnsView *)kenBurns didFinishAllImages:(NSArray *)images
+{
+    NSLog(@"Yay all done!");
+}
+
 
 - (void)viewWillAppear:(BOOL)animated{
     

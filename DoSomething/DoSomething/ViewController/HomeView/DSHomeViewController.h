@@ -7,10 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "JBKenBurnsView.h"
 @protocol HelpViewDelegate <NSObject>
 -(IBAction)cancelBtnAction:(id)sender;
 @end
-@interface DSHomeViewController : UIViewController
+@interface DSHomeViewController : UIViewController <KenBurnsViewDelegate>
 {
     
     
@@ -34,5 +35,6 @@
 @property(nonatomic,retain)id<HelpViewDelegate> delegate;
 @property (nonatomic,retain) NSLayoutConstraint *pagerConstraint;
 //@property (nonatomic) CGFloat scrollPointsPerSecond;
+@property (strong, nonatomic) IBOutlet JBKenBurnsView *kenView;
 
 @end

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="8191" systemVersion="15B42" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9060" systemVersion="15B42" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9051"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
     </dependencies>
     <objects>
@@ -11,6 +11,7 @@
                 <outlet property="InfoPageControl" destination="Iix-eG-ilF" id="tzz-g9-ugH"/>
                 <outlet property="createAnAccBtn" destination="obK-6O-h3w" id="EEx-sS-EAp"/>
                 <outlet property="infoPageControl" destination="Iix-eG-ilF" id="X38-hH-nfW"/>
+                <outlet property="kenView" destination="FoU-No-A5W" id="cyH-Jb-Zbn"/>
                 <outlet property="scrollViewImage" destination="SGC-db-wfP" id="6el-5A-X2e"/>
                 <outlet property="signInBtn" destination="8DB-X2-n7l" id="KAA-CB-U4o"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
@@ -26,16 +27,32 @@
                     <animations/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                 </view>
-                <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SGC-db-wfP">
+                <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SGC-db-wfP">
                     <rect key="frame" x="0.0" y="0.0" width="320" height="518"/>
                     <subviews>
                         <pageControl opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="3" translatesAutoresizingMaskIntoConstraints="NO" id="Iix-eG-ilF">
                             <rect key="frame" x="135" y="264" width="49" height="37"/>
                             <animations/>
                         </pageControl>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FoU-No-A5W" customClass="JBKenBurnsView">
+                            <rect key="frame" x="0.0" y="0.0" width="320" height="518"/>
+                            <animations/>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="320" id="bew-zM-zS5"/>
+                            </constraints>
+                        </view>
                     </subviews>
                     <animations/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="bottom" secondItem="FoU-No-A5W" secondAttribute="bottom" id="1Gj-Xg-x5e"/>
+                        <constraint firstItem="FoU-No-A5W" firstAttribute="centerY" secondItem="SGC-db-wfP" secondAttribute="centerY" id="Pqn-bs-PK4"/>
+                        <constraint firstItem="FoU-No-A5W" firstAttribute="leading" secondItem="SGC-db-wfP" secondAttribute="leading" id="PsH-u0-UVV"/>
+                        <constraint firstItem="FoU-No-A5W" firstAttribute="top" secondItem="SGC-db-wfP" secondAttribute="top" id="Zli-ZN-Ccb"/>
+                        <constraint firstAttribute="trailing" secondItem="FoU-No-A5W" secondAttribute="trailing" id="t1o-TD-dWu"/>
+                        <constraint firstItem="FoU-No-A5W" firstAttribute="centerX" secondItem="SGC-db-wfP" secondAttribute="centerX" id="w8A-oX-his"/>
+                    </constraints>
                     <connections>
                         <outlet property="delegate" destination="-1" id="qFC-Mw-BYh"/>
                     </connections>

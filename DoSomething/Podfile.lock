@@ -1,1 +1,10 @@
+PODS:
+  - JBKenBurnsView (1.0)
+
+DEPENDENCIES:
+  - JBKenBurnsView
+
+SPEC CHECKSUMS:
+  JBKenBurnsView: e40d10fcd4fbeb652c29fa431d4748780a4672ff
+
 COCOAPODS: 0.39.0

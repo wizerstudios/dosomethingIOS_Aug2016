@@ -6,43 +6,205 @@
 	objectVersion = 46;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		05E3BD3600E6E2449CB5EB450D2C324D /* JBKenBurnsView-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A6A2AD2223349564996A30DC6FD68B6 /* JBKenBurnsView-dummy.m */; };
+		172BB311F8AC4901A1D7D424B41E9882 /* JBKenBurnsView.m in Sources */ = {isa = PBXBuildFile; fileRef = B4BF75921804188755663283F4471935 /* JBKenBurnsView.m */; };
+		288D8DDA65FD79E6E7D3843994AA00B2 /* Pods-DoSomething-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = BE6057A1D5B6CE7157FFF0C8D93B9458 /* Pods-DoSomething-dummy.m */; };
+		5B53F2130E48BE5B4604FD14185AD109 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 258B0C8029B3982F03A30ED9FB271283 /* Foundation.framework */; };
+		80077D07B06CD2F0B23872D6A243832D /* JBKenBurnsView.h in Headers */ = {isa = PBXBuildFile; fileRef = E969DBC0CB76B1282782CD4166F0BCBA /* JBKenBurnsView.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		C068D47786446F0E5C27FD6C79289533 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 258B0C8029B3982F03A30ED9FB271283 /* Foundation.framework */; };
+		D0016FFE744BBD91B729A4A9B7F93E79 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B18F24645AA4D651DFC7B69A3A0833DB /* QuartzCore.framework */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		49CF8582D8BE619581144F59670B2BC9 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = DE84CC96D835F0BF12312A55E7A6C5C7;
+			remoteInfo = JBKenBurnsView;
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXFileReference section */
+		017DA7913A9096D50EC9267B29D337D3 /* libJBKenBurnsView.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libJBKenBurnsView.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		1AB9F5BDBC4699F7D73DC45E343D550A /* Pods-DoSomething.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-DoSomething.release.xcconfig"; sourceTree = "<group>"; };
+		258B0C8029B3982F03A30ED9FB271283 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS9.0.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
+		2B9B11FE03D5BDD1D8FCA687AB8F36DF /* JBKenBurnsView.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = JBKenBurnsView.xcconfig; sourceTree = "<group>"; };
+		39C12D22E39C24BD4988FF4223807BBC /* Pods-DoSomething-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-DoSomething-acknowledgements.plist"; sourceTree = "<group>"; };
+		6A6A2AD2223349564996A30DC6FD68B6 /* JBKenBurnsView-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "JBKenBurnsView-dummy.m"; sourceTree = "<group>"; };
+		76D3FE4CB29AF62BC5D1B82A8AB1D38C /* Pods-DoSomething-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-DoSomething-acknowledgements.markdown"; sourceTree = "<group>"; };
+		9B02A8210DEB4A0D102724F105E9D206 /* Pods-DoSomething-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-DoSomething-frameworks.sh"; sourceTree = "<group>"; };
+		B18F24645AA4D651DFC7B69A3A0833DB /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS9.0.sdk/System/Library/Frameworks/QuartzCore.framework; sourceTree = DEVELOPER_DIR; };
+		B4BF75921804188755663283F4471935 /* JBKenBurnsView.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = JBKenBurnsView.m; path = KenBurns/JBKenBurnsView.m; sourceTree = "<group>"; };
 		BA6428E9F66FD5A23C0A2E06ED26CD2F /* Podfile */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		BD4D2DDA6D6986389805241F08207985 /* Pods-DoSomething-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-DoSomething-resources.sh"; sourceTree = "<group>"; };
+		BE6057A1D5B6CE7157FFF0C8D93B9458 /* Pods-DoSomething-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-DoSomething-dummy.m"; sourceTree = "<group>"; };
+		D0638ABF4D5B2CAD4AA0DAE24DD9A9D7 /* JBKenBurnsView-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "JBKenBurnsView-prefix.pch"; sourceTree = "<group>"; };
+		D77EFE8A61BF6EE132A96EC93FB50391 /* Pods-DoSomething.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-DoSomething.debug.xcconfig"; sourceTree = "<group>"; };
+		E6D8202EDC96FC8953BFC8232E962F8F /* libPods-DoSomething.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-DoSomething.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		E969DBC0CB76B1282782CD4166F0BCBA /* JBKenBurnsView.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = JBKenBurnsView.h; path = KenBurns/JBKenBurnsView.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
+/* Begin PBXFrameworksBuildPhase section */
+		560A38564F74614847F56BE15276B568 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5B53F2130E48BE5B4604FD14185AD109 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		574D5588A378DB9CF471204FE4BB5257 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C068D47786446F0E5C27FD6C79289533 /* Foundation.framework in Frameworks */,
+				D0016FFE744BBD91B729A4A9B7F93E79 /* QuartzCore.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
 /* Begin PBXGroup section */
-		09C5E90726D2521A760312DBF50D9358 /* Products */ = {
+		269BB59A9454701ADF2CB884E2035B21 /* Products */ = {
 			isa = PBXGroup;
 			children = (
+				017DA7913A9096D50EC9267B29D337D3 /* libJBKenBurnsView.a */,
+				E6D8202EDC96FC8953BFC8232E962F8F /* libPods-DoSomething.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		0F8D2E47FE03D3B91B51069F7C273AF4 /* Frameworks */ = {
+		3926C638AD0708942C88C2BC89261735 /* iOS */ = {
 			isa = PBXGroup;
 			children = (
+				258B0C8029B3982F03A30ED9FB271283 /* Foundation.framework */,
+				B18F24645AA4D651DFC7B69A3A0833DB /* QuartzCore.framework */,
+			);
+			name = iOS;
+			sourceTree = "<group>";
+		};
+		433CD3331B6C3787F473C941B61FC68F /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				3926C638AD0708942C88C2BC89261735 /* iOS */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		45C2E6B081F1D3C332E63F7003089115 /* Targets Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				546C0B9A414383AB14C247A16E8DD691 /* Pods-DoSomething */,
+			);
+			name = "Targets Support Files";
+			sourceTree = "<group>";
+		};
+		546C0B9A414383AB14C247A16E8DD691 /* Pods-DoSomething */ = {
+			isa = PBXGroup;
+			children = (
+				76D3FE4CB29AF62BC5D1B82A8AB1D38C /* Pods-DoSomething-acknowledgements.markdown */,
+				39C12D22E39C24BD4988FF4223807BBC /* Pods-DoSomething-acknowledgements.plist */,
+				BE6057A1D5B6CE7157FFF0C8D93B9458 /* Pods-DoSomething-dummy.m */,
+				9B02A8210DEB4A0D102724F105E9D206 /* Pods-DoSomething-frameworks.sh */,
+				BD4D2DDA6D6986389805241F08207985 /* Pods-DoSomething-resources.sh */,
+				D77EFE8A61BF6EE132A96EC93FB50391 /* Pods-DoSomething.debug.xcconfig */,
+				1AB9F5BDBC4699F7D73DC45E343D550A /* Pods-DoSomething.release.xcconfig */,
+			);
+			name = "Pods-DoSomething";
+			path = "Target Support Files/Pods-DoSomething";
+			sourceTree = "<group>";
+		};
+		7A6AE11F70DFC6F3C9A4A8354B6001CC /* Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				2B9B11FE03D5BDD1D8FCA687AB8F36DF /* JBKenBurnsView.xcconfig */,
+				6A6A2AD2223349564996A30DC6FD68B6 /* JBKenBurnsView-dummy.m */,
+				D0638ABF4D5B2CAD4AA0DAE24DD9A9D7 /* JBKenBurnsView-prefix.pch */,
+			);
+			name = "Support Files";
+			path = "../Target Support Files/JBKenBurnsView";
 			sourceTree = "<group>";
 		};
 		7DB346D0F39D3F0E887471402A8071AB = {
 			isa = PBXGroup;
 			children = (
 				BA6428E9F66FD5A23C0A2E06ED26CD2F /* Podfile */,
-				0F8D2E47FE03D3B91B51069F7C273AF4 /* Frameworks */,
-				09C5E90726D2521A760312DBF50D9358 /* Products */,
-				F6CCA5D896907CE7506C37FD31FC265A /* Targets Support Files */,
+				433CD3331B6C3787F473C941B61FC68F /* Frameworks */,
+				8D79DCCF668C9918C614BDD89D9F7279 /* Pods */,
+				269BB59A9454701ADF2CB884E2035B21 /* Products */,
+				45C2E6B081F1D3C332E63F7003089115 /* Targets Support Files */,
 			);
 			sourceTree = "<group>";
 		};
-		F6CCA5D896907CE7506C37FD31FC265A /* Targets Support Files */ = {
+		8D79DCCF668C9918C614BDD89D9F7279 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
+				F89E839C48025992DEDCCBAD22327C25 /* JBKenBurnsView */,
 			);
-			name = "Targets Support Files";
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		F89E839C48025992DEDCCBAD22327C25 /* JBKenBurnsView */ = {
+			isa = PBXGroup;
+			children = (
+				E969DBC0CB76B1282782CD4166F0BCBA /* JBKenBurnsView.h */,
+				B4BF75921804188755663283F4471935 /* JBKenBurnsView.m */,
+				7A6AE11F70DFC6F3C9A4A8354B6001CC /* Support Files */,
+			);
+			path = JBKenBurnsView;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		E379DD0474346587AD527E7F4212D11D /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				80077D07B06CD2F0B23872D6A243832D /* JBKenBurnsView.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
+/* Begin PBXNativeTarget section */
+		537674EF28F16EA039E988963DD73397 /* Pods-DoSomething */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 994B44D9FF1CF6A8E897E821FB83CF0B /* Build configuration list for PBXNativeTarget "Pods-DoSomething" */;
+			buildPhases = (
+				8893336878A5CD336C502FBE84CC90DE /* Sources */,
+				560A38564F74614847F56BE15276B568 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				41D96CA708B3A374B4EC7447088CE26B /* PBXTargetDependency */,
+			);
+			name = "Pods-DoSomething";
+			productName = "Pods-DoSomething";
+			productReference = E6D8202EDC96FC8953BFC8232E962F8F /* libPods-DoSomething.a */;
+			productType = "com.apple.product-type.library.static";
+		};
+		DE84CC96D835F0BF12312A55E7A6C5C7 /* JBKenBurnsView */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 00A5BB7BC695B3F06BAE854A8F691FA7 /* Build configuration list for PBXNativeTarget "JBKenBurnsView" */;
+			buildPhases = (
+				34FD28B984941DC32C646B3437FA64F5 /* Sources */,
+				574D5588A378DB9CF471204FE4BB5257 /* Frameworks */,
+				E379DD0474346587AD527E7F4212D11D /* Headers */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = JBKenBurnsView;
+			productName = JBKenBurnsView;
+			productReference = 017DA7913A9096D50EC9267B29D337D3 /* libJBKenBurnsView.a */;
+			productType = "com.apple.product-type.library.static";
+		};
+/* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
 		D41D8CD98F00B204E9800998ECF8427E /* Project object */ = {
@@ -59,13 +221,44 @@
 				en,
 			);
 			mainGroup = 7DB346D0F39D3F0E887471402A8071AB;
-			productRefGroup = 09C5E90726D2521A760312DBF50D9358 /* Products */;
+			productRefGroup = 269BB59A9454701ADF2CB884E2035B21 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
+				DE84CC96D835F0BF12312A55E7A6C5C7 /* JBKenBurnsView */,
+				537674EF28F16EA039E988963DD73397 /* Pods-DoSomething */,
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXSourcesBuildPhase section */
+		34FD28B984941DC32C646B3437FA64F5 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				05E3BD3600E6E2449CB5EB450D2C324D /* JBKenBurnsView-dummy.m in Sources */,
+				172BB311F8AC4901A1D7D424B41E9882 /* JBKenBurnsView.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		8893336878A5CD336C502FBE84CC90DE /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				288D8DDA65FD79E6E7D3843994AA00B2 /* Pods-DoSomething-dummy.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		41D96CA708B3A374B4EC7447088CE26B /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = JBKenBurnsView;
+			target = DE84CC96D835F0BF12312A55E7A6C5C7 /* JBKenBurnsView */;
+			targetProxy = 49CF8582D8BE619581144F59670B2BC9 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		052A17875CB827423D627183396CEB60 /* Release */ = {
@@ -101,6 +294,23 @@
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
+		};
+		78ADCF7667C3C93CC337985D48B6528F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = D77EFE8A61BF6EE132A96EC93FB50391 /* Pods-DoSomething.debug.xcconfig */;
+			buildSettings = {
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				MACH_O_TYPE = staticlib;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
 		};
 		B37F0F91F85060E28F1DAAB522DC7EC1 /* Debug */ = {
 			isa = XCBuildConfiguration;
@@ -141,14 +351,85 @@
 			};
 			name = Debug;
 		};
+		B888D49D57017AD8E2641BD850FDD0EC /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 2B9B11FE03D5BDD1D8FCA687AB8F36DF /* JBKenBurnsView.xcconfig */;
+			buildSettings = {
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_PREFIX_HEADER = "Target Support Files/JBKenBurnsView/JBKenBurnsView-prefix.pch";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PRIVATE_HEADERS_FOLDER_PATH = "";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PUBLIC_HEADERS_FOLDER_PATH = "";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		C501EB561B9E0B56C541E127ED1F6CD5 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 1AB9F5BDBC4699F7D73DC45E343D550A /* Pods-DoSomething.release.xcconfig */;
+			buildSettings = {
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				MACH_O_TYPE = staticlib;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
+		FB5D9DEE3266B2098732EC66A08B679D /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 2B9B11FE03D5BDD1D8FCA687AB8F36DF /* JBKenBurnsView.xcconfig */;
+			buildSettings = {
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_PREFIX_HEADER = "Target Support Files/JBKenBurnsView/JBKenBurnsView-prefix.pch";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PRIVATE_HEADERS_FOLDER_PATH = "";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PUBLIC_HEADERS_FOLDER_PATH = "";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		00A5BB7BC695B3F06BAE854A8F691FA7 /* Build configuration list for PBXNativeTarget "JBKenBurnsView" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B888D49D57017AD8E2641BD850FDD0EC /* Debug */,
+				FB5D9DEE3266B2098732EC66A08B679D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		2D8E8EC45A3A1A1D94AE762CB5028504 /* Build configuration list for PBXProject "Pods" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				B37F0F91F85060E28F1DAAB522DC7EC1 /* Debug */,
 				052A17875CB827423D627183396CEB60 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		994B44D9FF1CF6A8E897E821FB83CF0B /* Build configuration list for PBXNativeTarget "Pods-DoSomething" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				78ADCF7667C3C93CC337985D48B6528F /* Debug */,
+				C501EB561B9E0B56C541E127ED1F6CD5 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
