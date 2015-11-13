@@ -25,7 +25,7 @@
 #define ITEM_CELL_IDENTIFIER @"ItemCell"
 #define LOADING_CELL_IDENTIFIER @"LoadingItemCell"
 
-@interface HomeViewController ()
+@interface HomeViewController ()<UICollectionViewDataSource,UICollectionViewDelegate>
 {
     AppDelegate *appDelegate;
     BOOL isSelectMenu;
@@ -35,6 +35,7 @@
     NSMutableArray *selectedItemsArray;
     
     AVAudioPlayer *audioPlayer;
+    BOOL isSelect;
 
 }
 
@@ -90,12 +91,12 @@
                                                               attribute:NSLayoutAttributeTop
                                                              multiplier:1.0
                                                                constant:75.0]];
-    [self audioplayMethod];
 }
 -(void)viewWillAppear:(BOOL)animated
 {
     appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
     appDelegate.buttonsView.hidden=NO;
+    [self audioplayMethod];
     [self setupCollectionView];
 }
 -(void)audioplayMethod
@@ -231,7 +232,7 @@
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    isSelectMenu=YES;
+    //isSelectMenu=YES;
    // AudioServicesPlaySystemSound(kSystemSoundID_Vibrate);
     
     HomeCustomCell *cell = (HomeCustomCell *)[collectionView cellForItemAtIndexPath:indexPath];
@@ -241,7 +242,11 @@
     if([selectedItemsArray count] <= 2)
     {
         
-        
+        NSString *path = [[NSBundle mainBundle]
+                          pathForResource:@"button-16" ofType:@"mp3"];
+        audioPlayer = [[AVAudioPlayer alloc]initWithContentsOfURL:
+                       [NSURL fileURLWithPath:path] error:NULL];
+        [audioPlayer prepareToPlay];
         [audioPlayer play];
         
         
@@ -253,6 +258,7 @@
     }
     else
     {
+        
         AudioServicesPlaySystemSound(kSystemSoundID_Vibrate);
         alertBgView.hidden = NO;
         alertMainBgView.hidden = NO;
@@ -265,6 +271,8 @@
         alertMsgLabel.lineBreakMode = NSLineBreakByWordWrapping;
         alertMsgLabel.numberOfLines = 2;
         alertMsgLabel.textColor = [UIColor whiteColor];
+        
+        
     }
 
 
@@ -274,6 +282,7 @@
 
 {
     
+    
     HomeCustomCell *cell = (HomeCustomCell *)[collectionView cellForItemAtIndexPath:indexPath];
     
     NSMutableDictionary *data = [menuArray objectAtIndex:indexPath.row];
@@ -282,7 +291,29 @@
     
     selectArray = [selectedItemsArray copy];
     
-    
+    if(isSelect ==YES){
+        if([selectArray count ]== 3)
+        {
+            for(NSString *strDeselect in selectArray)
+                
+            {
+                
+                if([[data valueForKey:@"Caption"] isEqualToString:strDeselect])
+                    
+                {
+                    [selectedItemsArray removeObject:strDeselect];
+                }
+            }
+             [self collectionView:(collectionView) didSelectItemAtIndexPath:indexPath];
+        }
+        //isSelect =NO;
+        else
+        {
+       
+        }
+        
+    }
+ 
     for(NSString *strDeselect in selectArray)
         
     {
@@ -290,10 +321,17 @@
         if([[data valueForKey:@"Caption"] isEqualToString:strDeselect])
             
         {
-            
-            [audioPlayer play];
 
+            NSString *path = [[NSBundle mainBundle]
+                              pathForResource:@"button-16" ofType:@"mp3"];
+            audioPlayer = [[AVAudioPlayer alloc]initWithContentsOfURL:
+                           [NSURL fileURLWithPath:path] error:NULL];
+            [audioPlayer prepareToPlay];
+            [audioPlayer play];
+       
+        
             [selectedItemsArray removeObject:strDeselect];
+            
             
             cell.MenuTittle.textColor = [UIColor colorWithRed:(164/255.0f) green:(164/255.0f) blue:(164/255.0f) alpha:1.0f];
             
@@ -301,11 +339,12 @@
             
             cell.MenuImg.image = [UIImage imageNamed:objstr];
             
+            
         }
         
-    }
-    
-}
+        }
+
+   }
 
 
 
@@ -353,6 +392,7 @@
 - (IBAction)alertPressCancel:(id)sender {
     alertBgView.hidden = YES;
     alertMainBgView.hidden = YES;
+    isSelect =YES;
 }
 
 - (IBAction)alertPressYes:(id)sender {
