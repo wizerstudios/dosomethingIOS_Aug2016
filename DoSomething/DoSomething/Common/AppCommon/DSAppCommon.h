@@ -31,7 +31,7 @@ typedef enum {
 - (void)setUserDetails:(NSMutableDictionary *)_dicInfo;
 - (void)removeUserDetails;
 - (NSMutableDictionary *)getUserDetails;
-- (NSString *)getUserId;
+//- (NSString *)getUserId;
 
 - (void)LoadIcon:(UIView *)view;
 - (void)removeLoading;

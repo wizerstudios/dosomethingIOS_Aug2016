@@ -37,6 +37,8 @@
     [super viewDidLoad];    
     isTimerStop=NO;
     self.kenView.delegate = self;
+   // self.kenView.backgroundColor= [[UIColor blackColor] colorWithAlphaComponent:0.5f];
+    //view.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:0.5f];
    // [self loadSlideScroll];
     _scrollViewImage.userInteractionEnabled = NO;
 }
@@ -50,7 +52,7 @@
                    [UIImage imageNamed:@"splashImage_four"],
                    [UIImage imageNamed:@"splashImage_five"]];
     [self.kenView animateWithImages:bannerImage
-                 transitionDuration:6
+                 transitionDuration:5
                        initialDelay:0
                                loop:YES
                         isLandscape:YES];
