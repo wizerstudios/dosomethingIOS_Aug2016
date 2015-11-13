@@ -313,7 +313,8 @@
     NSLog(@"FETCHING MORE ITEMS ******************");
     
     NSMutableArray *newData = [NSMutableArray array];
-    NSInteger pageSize = ITEMS_PAGE_SIZE;
+    NSInteger pageSize;
+    pageSize= ITEMS_PAGE_SIZE;
     
     double delayInSeconds =1.0;
     dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delayInSeconds * NSEC_PER_SEC);

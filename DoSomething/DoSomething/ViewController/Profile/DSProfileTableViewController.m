@@ -1052,9 +1052,9 @@
                       first_name:[postPerArray objectAtIndex:1]
                        last_name:[postPerArray objectAtIndex:2]
                              dob:[postPerArray objectAtIndex:4]
-                          image1:@""
-                          image2:@""
-                          image3:@""
+                          image1:NULL
+                          image2:NULL
+                          image3:NULL
                           gender:@""
                            about:@""
                          hobbies:@""
