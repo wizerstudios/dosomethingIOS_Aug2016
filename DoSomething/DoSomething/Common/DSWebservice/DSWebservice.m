@@ -39,6 +39,34 @@ static NSString       *ServiceMimeType    = @"image/jpeg";
     return [[DSWebservice alloc] init];
 }
 
+#pragma mark - POST checkUser
+
+- (void)checkUser:(NSString *)checkUserURL
+                email:(NSString *)email
+                 type:(NSString *)type
+         password:(NSString*)password
+              success:(WebserviceRequestSuccessHandler)success
+              failure:(WebserviceRequestFailureHandler)failure
+{
+    urlString = [URL_FOR_RESOURCE(@"") stringByAppendingString:[NSString stringWithFormat:@"%@?",checkUserURL]];
+    
+    NSMutableDictionary *checkUserDetails = [[NSMutableDictionary alloc] init];
+    
+    if(type)               [checkUserDetails    setObject:type             forKey:@"type"];
+    if(email)              [checkUserDetails    setObject:email            forKey:@"email"];
+    
+    NSLog(@"urlString = %@",urlString);
+    NSLog(@"checkUserDetails = %@",checkUserDetails);
+    
+    [self sendRequestWithURLString:urlString
+                     andParameters:checkUserDetails
+                            method:ServicePost
+           completionSucessHandler:success
+          completionFailureHandler:failure];
+    
+}
+
+
 #pragma mark - GET Login
 
 - (void)getLogin:(NSString *)loginURL
