@@ -33,10 +33,13 @@
     int selectedCellCount;
     
     NSMutableArray *selectedItemsArray;
+    NSMutableArray * selectItemImageActiveArray;
     
     AVAudioPlayer *audioPlayer;
     BOOL isSelect;
-
+    BOOL isdeSelect;
+    NSInteger selectindexpath;
+    NSMutableArray * paths;
 }
 
 @end
@@ -80,6 +83,8 @@
     
     selectedArray = [[NSMutableArray alloc]init];
     selectedItemsArray = [[NSMutableArray alloc]init];
+    selectItemImageActiveArray =[[NSMutableArray alloc]init];
+    paths = [NSMutableArray new];
     alertBgView.hidden = YES;
     alertMainBgView.hidden = YES;
     
@@ -232,9 +237,9 @@
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    //isSelectMenu=YES;
+    isSelectMenu=YES;
    // AudioServicesPlaySystemSound(kSystemSoundID_Vibrate);
-    
+  
     HomeCustomCell *cell = (HomeCustomCell *)[collectionView cellForItemAtIndexPath:indexPath];
     NSMutableDictionary *data = [menuArray objectAtIndex:indexPath.row];
     
@@ -249,16 +254,18 @@
         [audioPlayer prepareToPlay];
         [audioPlayer play];
         
-        
         [selectedItemsArray addObject:[data valueForKey:@"Caption"]];
         cell.MenuTittle.textColor = [UIColor colorWithRed:(199/255.0f) green:(65/255.0f) blue:(81/255.0f) alpha:1.0f];
         NSString * objstr = [NSString stringWithFormat:@"%@",[data valueForKey:ACTIVE_IMAGE]];
+       
+        NSLog(@"selectImage:%@",objstr);
         cell.MenuImg.image = [UIImage imageNamed:objstr];
         
     }
     else
     {
         
+        isSelect =YES;
         AudioServicesPlaySystemSound(kSystemSoundID_Vibrate);
         alertBgView.hidden = NO;
         alertMainBgView.hidden = NO;
@@ -272,17 +279,16 @@
         alertMsgLabel.numberOfLines = 2;
         alertMsgLabel.textColor = [UIColor whiteColor];
         
-        
-    }
-
+      [collectionView deselectItemAtIndexPath:indexPath animated:NO];
+        }
+    //}
 
 }
 
 -(void)collectionView: (UICollectionView *)collectionView didDeselectItemAtIndexPath:(NSIndexPath *)indexPath
 
 {
-    
-    
+   
     HomeCustomCell *cell = (HomeCustomCell *)[collectionView cellForItemAtIndexPath:indexPath];
     
     NSMutableDictionary *data = [menuArray objectAtIndex:indexPath.row];
@@ -290,37 +296,20 @@
     NSArray *selectArray = [[NSArray alloc]init];
     
     selectArray = [selectedItemsArray copy];
-    
-    if(isSelect ==YES){
-        if([selectArray count ]== 3)
-        {
-            for(NSString *strDeselect in selectArray)
-                
-            {
-                
-                if([[data valueForKey:@"Caption"] isEqualToString:strDeselect])
-                    
-                {
-                    [selectedItemsArray removeObject:strDeselect];
-                }
-            }
-             [self collectionView:(collectionView) didSelectItemAtIndexPath:indexPath];
-        }
-        //isSelect =NO;
-        else
-        {
-       
-        }
-        
-    }
- 
+//    if(isSelect == YES)
+//    {
+//        [self]
+//    }
+
+//    if([selectArray count ]!=0)
+//    {
     for(NSString *strDeselect in selectArray)
-        
+
     {
-        
+
         if([[data valueForKey:@"Caption"] isEqualToString:strDeselect])
-            
-        {
+
+       {
 
             NSString *path = [[NSBundle mainBundle]
                               pathForResource:@"button-16" ofType:@"mp3"];
@@ -328,24 +317,22 @@
                            [NSURL fileURLWithPath:path] error:NULL];
             [audioPlayer prepareToPlay];
             [audioPlayer play];
-       
-        
-            [selectedItemsArray removeObject:strDeselect];
-            
-            
+
+
+           [selectedItemsArray removeObject:strDeselect];
+           //isdeSelect=YES;
+
             cell.MenuTittle.textColor = [UIColor colorWithRed:(164/255.0f) green:(164/255.0f) blue:(164/255.0f) alpha:1.0f];
-            
+
             NSString * objstr = [NSString stringWithFormat:@"%@",[data valueForKey:NORMAL_IMAGE]];
-            
+
             cell.MenuImg.image = [UIImage imageNamed:objstr];
-            
-            
+         }
+       // [self collectionView:(collectionView) didSelectItemAtIndexPath:indexPath];
         }
         
-        }
-
-   }
-
+            }
+ // }
 
 
 - (void)fetchMoreItems {
@@ -392,7 +379,8 @@
 - (IBAction)alertPressCancel:(id)sender {
     alertBgView.hidden = YES;
     alertMainBgView.hidden = YES;
-    isSelect =YES;
+    //isSelect =YES;
+    isdeSelect = YES;
 }
 
 - (IBAction)alertPressYes:(id)sender {

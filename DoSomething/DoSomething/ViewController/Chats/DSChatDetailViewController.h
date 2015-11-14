@@ -10,7 +10,7 @@
 #import <QuartzCore/QuartzCore.h>
 #import "IBActionSheet.h"
 
-@interface DSChatDetailViewController : UIViewController <IBActionSheetDelegate, UIActionSheetDelegate>
+@interface DSChatDetailViewController : UIViewController < UIActionSheetDelegate>
 
 {
     IBOutlet UILabel *OnlineLabel;

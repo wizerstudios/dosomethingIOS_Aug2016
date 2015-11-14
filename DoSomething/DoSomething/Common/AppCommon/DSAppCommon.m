@@ -70,7 +70,7 @@ DSAppCommon *sharedCommon = nil;
 #pragma mark Show alert
 
 +(void)showSimpleAlertWithMessage:(NSString *)message{
-    UIAlertView *alert = [[UIAlertView alloc]initWithTitle: APP_TITLE
+    UIAlertView *alert = [[UIAlertView  alloc]initWithTitle: APP_TITLE
                                                    message: message
                                                   delegate: nil
                                          cancelButtonTitle:@"OK"
