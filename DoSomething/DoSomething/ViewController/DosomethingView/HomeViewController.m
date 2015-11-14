@@ -36,10 +36,7 @@
     NSMutableArray * selectItemImageActiveArray;
     
     AVAudioPlayer *audioPlayer;
-    BOOL isSelect;
-    BOOL isdeSelect;
-    NSInteger selectindexpath;
-    NSMutableArray * paths;
+    
 }
 
 @end
@@ -83,8 +80,8 @@
     
     selectedArray = [[NSMutableArray alloc]init];
     selectedItemsArray = [[NSMutableArray alloc]init];
-    selectItemImageActiveArray =[[NSMutableArray alloc]init];
-    paths = [NSMutableArray new];
+   
+   
     alertBgView.hidden = YES;
     alertMainBgView.hidden = YES;
     
@@ -238,8 +235,7 @@
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
     isSelectMenu=YES;
-   // AudioServicesPlaySystemSound(kSystemSoundID_Vibrate);
-  
+   
     HomeCustomCell *cell = (HomeCustomCell *)[collectionView cellForItemAtIndexPath:indexPath];
     NSMutableDictionary *data = [menuArray objectAtIndex:indexPath.row];
     
@@ -264,8 +260,6 @@
     }
     else
     {
-        
-        isSelect =YES;
         AudioServicesPlaySystemSound(kSystemSoundID_Vibrate);
         alertBgView.hidden = NO;
         alertMainBgView.hidden = NO;
@@ -281,7 +275,7 @@
         
       [collectionView deselectItemAtIndexPath:indexPath animated:NO];
         }
-    //}
+   
 
 }
 
@@ -296,13 +290,6 @@
     NSArray *selectArray = [[NSArray alloc]init];
     
     selectArray = [selectedItemsArray copy];
-//    if(isSelect == YES)
-//    {
-//        [self]
-//    }
-
-//    if([selectArray count ]!=0)
-//    {
     for(NSString *strDeselect in selectArray)
 
     {
@@ -328,13 +315,9 @@
 
             cell.MenuImg.image = [UIImage imageNamed:objstr];
          }
-       // [self collectionView:(collectionView) didSelectItemAtIndexPath:indexPath];
+      
         }
-        
-            }
- // }
-
-
+}
 - (void)fetchMoreItems {
     NSLog(@"FETCHING MORE ITEMS ******************");
     
@@ -379,8 +362,7 @@
 - (IBAction)alertPressCancel:(id)sender {
     alertBgView.hidden = YES;
     alertMainBgView.hidden = YES;
-    //isSelect =YES;
-    isdeSelect = YES;
+   
 }
 
 - (IBAction)alertPressYes:(id)sender {
