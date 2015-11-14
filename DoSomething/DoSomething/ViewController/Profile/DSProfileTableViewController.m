@@ -1095,7 +1095,9 @@
 {
     if(selectEmail==YES)
     {
-        
+        //here register API have to call.
+//        [objWebService postRegister:<#(NSString *)#> type:<#(NSString *)#>
+//                         first_name:<#(NSString *)#> last_name:<#(NSString *)#> email:<#(NSString *)#> password:<#(NSString *)#> profileId:<#(NSString *)#> dob:<#(NSString *)#> profileImage:<#(NSString *)#> gender:<#(NSString *)#> latitude:<#(NSString *)#> longitude:<#(NSString *)#> device:<#(NSString *)#> deviceid:<#(NSString *)#> success:<#^(AFHTTPRequestOperation *operation, id responseObject)success#> failure:<#^(AFHTTPRequestOperation *operation, id error)failure#>]
     }
     else{
         
