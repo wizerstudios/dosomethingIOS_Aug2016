@@ -10,7 +10,7 @@
 #import "DSProfileTableViewCell.h"
 #import "DVSwitch.h"
 
-@interface DSProfileTableViewController : UIViewController<UINavigationControllerDelegate, UITextViewDelegate, UIImagePickerControllerDelegate, UIAlertViewDelegate, UITextFieldDelegate>
+@interface DSProfileTableViewController : UIViewController<UINavigationControllerDelegate, UITextViewDelegate, UIImagePickerControllerDelegate, UIAlertViewDelegate, UITextFieldDelegate,UIActionSheetDelegate>
 {
  IBOutlet DSProfileTableViewCell *cellProfileImg;
  IBOutlet DSProfileTableViewCell *cellButton;
