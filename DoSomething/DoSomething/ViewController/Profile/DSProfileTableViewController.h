@@ -35,6 +35,11 @@
 @property (nonatomic, strong)  NSString *textviewText;
 
 @property (nonatomic,strong) NSMutableDictionary *userDetailsDict;
+@property (nonatomic, retain) NSString *emailAddressToRegister;
+@property (nonatomic, retain) NSString *emailPasswordToRegister;
+
+@property (assign) BOOL selectEmail;
+
 
 
 @end
