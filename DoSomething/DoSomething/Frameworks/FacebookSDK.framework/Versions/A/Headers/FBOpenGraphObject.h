@@ -73,6 +73,7 @@
 /*!
  @deprecated use objectDescription instead
  */
+
 @property (retain, nonatomic) id                     __attribute__ ((deprecated("use objectDescription instead")));
 
 /*!

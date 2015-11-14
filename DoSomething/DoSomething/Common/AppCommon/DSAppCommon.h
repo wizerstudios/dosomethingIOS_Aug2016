@@ -18,7 +18,7 @@ typedef enum {
     iPad
 }currentDevice ;
 
-@interface DSAppCommon : NSObject
+@interface DSAppCommon : NSObject <UIActionSheetDelegate>
 {
     
     NSArray *permissions;
@@ -41,6 +41,7 @@ typedef enum {
 // ResizeableFont
 - (UIFont *)getResizeableFont:(UIFont *)currentFont;
 +(void)showSimpleAlertWithMessage:(NSString *)message;
++(UIAlertController*)alertWithTitle: (NSString *) title withMessage: (NSString*) message preferredStyle:(UIAlertControllerStyle)preferredStyle;
 
 @end
 extern DSAppCommon *sharedCommon;

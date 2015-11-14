@@ -202,20 +202,25 @@
 {
     objSigninType=@"1";
     if([NSString isEmpty:self.emailTxt.text] && [NSString isEmpty:self.passwordTxt.text]){
-        [DSAppCommon showSimpleAlertWithMessage:FILL_DETAILS];
+       // [DSAppCommon showSimpleAlertWithMessage:FILL_DETAILS];
+        [self presentViewController:[ DSAppCommon alertWithTitle:@"Title" withMessage:FILL_DETAILS preferredStyle:UIAlertControllerStyleAlert] animated:YES completion:NULL];
+
         return;
     }
     if([NSString isEmpty:self.emailTxt.text] && ![NSString isEmpty:self.passwordTxt.text]){
-        [DSAppCommon showSimpleAlertWithMessage:EMAIL_REQUIRED];
+        //[DSAppCommon showSimpleAlertWithMessage:EMAIL_REQUIRED];
+        [self presentViewController:[ DSAppCommon alertWithTitle:@"Title" withMessage:EMAIL_REQUIRED preferredStyle:UIAlertControllerStyleAlert] animated:YES completion:NULL];
         return;
     }
     if(![NSString isEmpty:self.emailTxt.text] && [NSString isEmpty:self.passwordTxt.text]){
-        [DSAppCommon showSimpleAlertWithMessage:PASSWORD_REQUIRED];
+        //[DSAppCommon showSimpleAlertWithMessage:PASSWORD_REQUIRED];
+        [self presentViewController:[ DSAppCommon alertWithTitle:@"Title" withMessage:PASSWORD_REQUIRED preferredStyle:UIAlertControllerStyleAlert] animated:YES completion:NULL];
         return;
     }
     if(![NSString isEmpty:self.emailTxt.text] && ![NSString isEmpty:self.passwordTxt.text]){
         if(![NSString validateEmail:self.emailTxt.text]){
-            [DSAppCommon showSimpleAlertWithMessage:INVALID_EMAIL];
+            //[DSAppCommon showSimpleAlertWithMessage:INVALID_EMAIL];
+            [self presentViewController:[ DSAppCommon alertWithTitle:@"Title" withMessage:INVALID_EMAIL preferredStyle:UIAlertControllerStyleAlert] animated:YES completion:NULL];
             return;
         }
         email = self.emailTxt.text;
@@ -238,20 +243,24 @@
     
     objSigninType=@"1";
     if([NSString isEmpty:self.emailTxt.text] && [NSString isEmpty:self.passwordTxt.text]){
-        [DSAppCommon showSimpleAlertWithMessage:FILL_DETAILS];
+        //[DSAppCommon showSimpleAlertWithMessage:FILL_DETAILS];
+         [self presentViewController:[ DSAppCommon alertWithTitle:@"Title" withMessage:FILL_DETAILS preferredStyle:UIAlertControllerStyleAlert] animated:YES completion:NULL];
         return;
     }
     if([NSString isEmpty:self.emailTxt.text] && ![NSString isEmpty:self.passwordTxt.text]){
-        [DSAppCommon showSimpleAlertWithMessage:EMAIL_REQUIRED];
+        //[DSAppCommon showSimpleAlertWithMessage:EMAIL_REQUIRED];
+        [self presentViewController:[ DSAppCommon alertWithTitle:@"Title" withMessage:EMAIL_REQUIRED preferredStyle:UIAlertControllerStyleAlert] animated:YES completion:NULL];
         return;
     }
     if(![NSString isEmpty:self.emailTxt.text] && [NSString isEmpty:self.passwordTxt.text]){
-        [DSAppCommon showSimpleAlertWithMessage:PASSWORD_REQUIRED];
+        //[DSAppCommon showSimpleAlertWithMessage:PASSWORD_REQUIRED];
+        [self presentViewController:[ DSAppCommon alertWithTitle:@"Title" withMessage:PASSWORD_REQUIRED preferredStyle:UIAlertControllerStyleAlert] animated:YES completion:NULL];
         return;
     }
     if(![NSString isEmpty:self.emailTxt.text] && ![NSString isEmpty:self.passwordTxt.text]){
         if(![NSString validateEmail:self.emailTxt.text]){
-            [DSAppCommon showSimpleAlertWithMessage:INVALID_EMAIL];
+           // [DSAppCommon showSimpleAlertWithMessage:INVALID_EMAIL];
+            [self presentViewController:[ DSAppCommon alertWithTitle:@"Title" withMessage:INVALID_EMAIL preferredStyle:UIAlertControllerStyleAlert] animated:YES completion:NULL];
             return;
         }
         email = self.emailTxt.text;
@@ -418,8 +427,14 @@
 
 -(void)alterMsg:(NSString*)msgStr
 {
-    UIAlertView * objalterMsg =[[UIAlertView alloc]initWithTitle:nil message:msgStr delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
-    [objalterMsg show];
+//    UIAlertView * objalterMsg =[[UIAlertView alloc]initWithTitle:nil message:msgStr delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+//    [objalterMsg show];
+    UIAlertController * alert=   [UIAlertController
+                                  alertControllerWithTitle:nil
+                                  message:msgStr
+                                  preferredStyle:UIAlertControllerStyleAlert];
+    
+    [self presentViewController:alert animated:YES completion:nil];
     
 }
 #pragma mark - BackAction

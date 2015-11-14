@@ -985,9 +985,33 @@
 #pragma mark - Camera Action
 -(void)selectCamera: (UIButton *)sender
 {
-    UIActionSheet *actionSheet1 = [[UIActionSheet alloc] initWithTitle:@"" delegate:self cancelButtonTitle:NSLocalizedString(@"CANCEL",@"") destructiveButtonTitle:NSLocalizedString(@"CAMERA",@"") otherButtonTitles:NSLocalizedString(@"PHOTO LIBRARY",@""), nil];
-    [actionSheet1 showInView:self.view];
-    [actionSheet1 sizeToFit];
+//    UIActionSheet *actionSheet1 = [[UIActionSheet alloc] initWithTitle:@"" delegate:self cancelButtonTitle:NSLocalizedString(@"CANCEL",@"") destructiveButtonTitle:NSLocalizedString(@"CAMERA",@"") otherButtonTitles:NSLocalizedString(@"PHOTO LIBRARY",@""), nil];
+//    [actionSheet1 showInView:self.view];
+//    [actionSheet1 sizeToFit];
+    
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@""
+                                                                   message:@""
+                                                            preferredStyle:UIAlertControllerStyleAlert];
+    
+    UIAlertAction *camera = [UIAlertAction actionWithTitle:NSLocalizedString(@"CANCEL",@"") style:UIAlertActionStyleDefault
+                                                   handler:^(UIAlertAction * action) {
+                                                       //[self promptForCamera];
+                                                   }];
+    
+    UIAlertAction *photoRoll = [UIAlertAction actionWithTitle:NSLocalizedString(@"CAMERA",@"") style:UIAlertActionStyleDefault
+                                                      handler:^(UIAlertAction * action) {
+                                                          //[self promptForPhotoRoll];
+                                                      }];
+    
+    UIAlertAction *cancel = [UIAlertAction actionWithTitle:NSLocalizedString(@"PHOTO LIBRARY",@"") style:UIAlertActionStyleDefault
+                                                   handler:^(UIAlertAction * action) {
+                                                       [self.presentedViewController dismissViewControllerAnimated:NO completion:nil];
+                                                   }];
+    
+    [alert addAction:camera];
+    [alert addAction:photoRoll];
+    [alert addAction:cancel];
+    [self presentViewController:alert animated:YES completion:nil];
 }
 
 -(void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex

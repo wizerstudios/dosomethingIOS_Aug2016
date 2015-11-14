@@ -48,7 +48,7 @@ static void AFGetAlertViewTitleAndMessageFromError(NSError *error, NSString * __
     }
 }
 
-@implementation UIAlertView (AFNetworking)
+@implementation UIAlertController (AFNetworking)
 
 #if __IPHONE_OS_VERSION_MIN_REQUIRED >= 70000
 + (void)showAlertViewForTaskWithErrorOnCompletion:(NSURLSessionTask *)task

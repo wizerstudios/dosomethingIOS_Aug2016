@@ -70,13 +70,28 @@ DSAppCommon *sharedCommon = nil;
 #pragma mark Show alert
 
 +(void)showSimpleAlertWithMessage:(NSString *)message{
-    UIAlertView *alert = [[UIAlertView  alloc]initWithTitle: APP_TITLE
-                                                   message: message
-                                                  delegate: nil
-                                         cancelButtonTitle:@"OK"
-                                         otherButtonTitles:nil];
+//    UIAlertView *alert = [[UIAlertView  alloc]initWithTitle: APP_TITLE
+//                                                   message: message
+//                                                  delegate: nil
+//                                         cancelButtonTitle:@"OK"
+//                                         otherButtonTitles:nil];
+//    
+//    [alert show];
     
-    [alert show];
+//    UIAlertController *alert = [UIAlertController alertControllerWithTitle:APP_TITLE message:message preferredStyle:UIAlertControllerStyleAlert];
+//    UIAlertAction *ok =[UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action){NSLog(@"ok action");}];
+//    [alert addAction:ok];
+    
+
+}
++(UIAlertController*)alertWithTitle: (NSString *) title withMessage: (NSString*) message preferredStyle:(UIAlertControllerStyle)preferredStyle
+{
+    
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:APP_TITLE message:message preferredStyle: preferredStyle];
+    UIAlertAction *ok =[UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action){NSLog(@"ok action");}];
+    [alert addAction:ok];
+    return alert;
+
 }
 
 #pragma mark - Userdetails
