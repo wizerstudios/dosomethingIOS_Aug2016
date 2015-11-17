@@ -303,7 +303,7 @@
                                  [COMMON removeLoading];
                              }
                              else {
-                                 [self gotoProfileView:email:password];//[self gotoProfileView];
+                                 [self gotoProfileView:email :password:YES];//[self gotoProfileView];
                                  [COMMON removeLoading];
                              }
                          
@@ -314,7 +314,7 @@
                                  [COMMON removeLoading];
                              }
                              else{
-                                 [self gotoProfileView];//[self gotoProfileView];
+                                 [self gotoProfileView:profileID];//[self gotoProfileView];
                                  [COMMON removeLoading];
                              }
                          }
@@ -372,20 +372,20 @@
 }
 
 #pragma mark - gotoProfileView
--(void)gotoProfileView:(NSString *)strEmailId :(NSString *)strPassword{
+-(void)gotoProfileView:(NSString *)strEmailId :(NSString *)strPassword :(BOOL)selectMail{
     DSProfileTableViewController *profileVC  = [[DSProfileTableViewController alloc]initWithNibName:@"DSProfileTableViewController" bundle:nil];
     profileVC.userDetailsDict = [fbUserDetailsDict mutableCopy];
-    profileVC.emailAddressToRegister = strEmailId;
+    profileVC.emailAddressToRegister  = strEmailId;
     profileVC.emailPasswordToRegister = strPassword;
-   // profileVC.selectEmail             =selectEmail;
+    profileVC.selectEmail             = selectMail;
     [self.navigationController pushViewController:profileVC animated:YES];
 }
 //-------temp code
 #pragma mark - gotoProfileView
--(void)gotoProfileView{
+-(void)gotoProfileView:(NSString*)FBProfileID{
     DSProfileTableViewController *profileVC  = [[DSProfileTableViewController alloc]initWithNibName:@"DSProfileTableViewController" bundle:nil];
     profileVC.userDetailsDict = [fbUserDetailsDict mutableCopy];
-    // profileVC.selectEmail=selectFB;
+     profileVC.FBprofileID=FBProfileID;
     [self.navigationController pushViewController:profileVC animated:YES];
 }
 
@@ -459,6 +459,10 @@
                      longitude:currentLongitude
                         device:@"iPhone"
                       deviceid:deviceUdid
+          notification_message:YES
+          notification_sound  :YES
+        notification_vibration:YES
+    
     
                        success:^(AFHTTPRequestOperation *operation, id responseObject){
                         NSLog(@"responseObject = %@",responseObject);
