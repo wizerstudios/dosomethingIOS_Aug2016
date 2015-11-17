@@ -76,10 +76,11 @@
      [attStr addAttribute:NSFontAttributeName value:PATRON_BOLD(12) range:[string rangeOfString:@"Facebook"]];
      labelFacebook.attributedText = attStr;
      labelFacebook.attributedText = attStr;
-     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(loginByFacebook)];
-     [labelFacebook addGestureRecognizer:tap];
-     labelFacebook.userInteractionEnabled = YES;
-     labelFacebook.tag = 10;
+     [_createAnAcountFB addTarget:self action:@selector(loginByFacebook) forControlEvents:UIControlEventTouchUpInside];
+//     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(loginByFacebook)];
+//     [labelFacebook addGestureRecognizer:tap];
+//     labelFacebook.userInteractionEnabled = YES;
+//     labelFacebook.tag = 10;
      
       labelEmail.text =@"Or sign up with your email";
       labelCreateAnAcc.text =@"Create Your Account";
@@ -103,10 +104,11 @@
      [attStr addAttribute:NSFontAttributeName value:PATRON_REG(12) range:[string rangeOfString:@"Log in with"]];
      [attStr addAttribute:NSFontAttributeName value:PATRON_BOLD(12) range:[string rangeOfString:@"Facebook"]];
      labelFacebook.attributedText = attStr;
-     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(loginByFacebook)];
-     [labelFacebook addGestureRecognizer:tap];
-     labelFacebook.userInteractionEnabled = YES;
-     labelFacebook.tag = 11;
+     [_createAnAcountFB addTarget:self action:@selector(loginByFacebook) forControlEvents:UIControlEventTouchUpInside];
+//     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(loginByFacebook)];
+//     [labelFacebook addGestureRecognizer:tap];
+//     labelFacebook.userInteractionEnabled = YES;
+//     labelFacebook.tag = 11;
      
 
         
@@ -412,7 +414,7 @@
                     success:^(AFHTTPRequestOperation *operation, id responseObject)
     {
         
-        NSLog(@"responseObject = %@",responseObject);
+        NSLog(@"responseObjectLogin = %@",responseObject);
         
         NSMutableDictionary *loginDict = [[NSMutableDictionary alloc]init];
         
@@ -434,6 +436,8 @@
         
     }
     failure:^(AFHTTPRequestOperation *operation, id error){
+        
+         NSLog(@"ERROR = %@",error);
         [COMMON removeLoading];
     }];
 }
