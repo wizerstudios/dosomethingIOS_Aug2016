@@ -38,13 +38,22 @@
     
     UIImage *profileImage;
     
-    BOOL isHobby;
+    DSProfileTableViewCell *cell;
+    
+    NSString * deviceUdid;
+    NSString * selectGender;
+    NSString * strFirstName;
+    NSString * strLastName;
+    
+    BOOL isNotification_message;
+    BOOL isNotification_sound;
+    BOOL isNotification_vibration;
 
 }
 @end
 
 @implementation DSProfileTableViewController
-@synthesize profileData, textviewText, placeHolderArray;
+@synthesize profileData, textviewText, placeHolderArray,FBprofileID;
 @synthesize userDetailsDict,emailAddressToRegister,emailPasswordToRegister,selectEmail;
 
 - (void)viewDidLoad {
@@ -57,6 +66,7 @@
 //    
 //    hobbiesNameArray =[[[NSUserDefaults standardUserDefaults] valueForKey:@"SelectedItemName"]mutableCopy];
     [self initializeArray];
+    deviceUdid = [OpenUDID value];
    
     
 }
@@ -214,7 +224,7 @@
     }
     NSIndexPath *indexPath ;
     
-    DSProfileTableViewCell *cell;
+    //DSProfileTableViewCell *cell;
     
     indexPath = [self.tableviewProfile indexPathForCell:(DSProfileTableViewCell *)textFieldSuper];
     
@@ -222,7 +232,7 @@
     
     NSLog(@"row = %ld section = %ld",(long)indexPath.row,(long)indexPath.section);
     
-    NSString *selOptionVal;
+   NSString *selOptionVal;
     if (indexPath.row ==1 ||indexPath.row ==2||indexPath.row ==5) {
         selOptionVal = cell.textFieldPlaceHolder.text;
         
@@ -275,7 +285,7 @@
 }
 
 - (void)pushToHobbiesView {
-    isHobby =YES;
+    
     DSInterestAndHobbiesViewController * DSHobbiesView  = [[DSInterestAndHobbiesViewController alloc]initWithNibName:@"DSInterestAndHobbiesViewController" bundle:nil];
     DSHobbiesView.profileDetailsArray = placeHolderArray;
     [self.navigationController pushViewController:DSHobbiesView animated:YES];
@@ -397,10 +407,10 @@
     
     static NSString *cellIdentifier = @"Cell";
     
-    DSProfileTableViewCell *cell = (DSProfileTableViewCell *)[tableView dequeueReusableCellWithIdentifier:cellIdentifier];
+    cell = (DSProfileTableViewCell *)[tableView dequeueReusableCellWithIdentifier:cellIdentifier];
     NSString *titleText;
     NSString *placeHolderText,*placeHolderTextPass;
-    NSString *typingText,*typingTextPass;
+   NSString *typingText,*typingTextPass;
     NSString *newMessageImage,*soundImage,*vibrationImage;
     
 
@@ -468,7 +478,7 @@
         if(typingText == (id)[NSNull null] || [typingText isEqualToString:@""])//|| [typingText  isEqual: @"NULL"])
         {
             if(placeHolderText ==(id) [NSNull null])
-                cell.textFieldPlaceHolder.text = titleText;
+                cell.textFieldPlaceHolder.placeholder = titleText;
             else
                 cell.textFieldPlaceHolder.text = placeHolderText;
             
@@ -821,11 +831,11 @@
     
 }
 
-- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
+- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)Tablecell forRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if(indexPath.row == 6)
     {
-        commonWidth = (cell.contentView.frame.size.width - 20) / 14;
+        commonWidth = (Tablecell.contentView.frame.size.width - 20) / 14;
         imageSize = commonWidth * 2;
     }
 }
@@ -839,7 +849,7 @@
     }
     NSIndexPath *indexPath;
     
-    DSProfileTableViewCell *cell;
+    //DSProfileTableViewCell *cell;
     
     indexPath = [_tableviewProfile indexPathForCell:(UITableViewCell *)button];
     cell = (DSProfileTableViewCell *) [_tableviewProfile cellForRowAtIndexPath:[NSIndexPath indexPathForRow:indexPath.row inSection:0]];
@@ -861,9 +871,11 @@
             
             if (NewMessageImage == [titleArray1 objectAtIndex:0]) {
                 selOptionVal = [titleArray1 objectAtIndex:1];
+                isNotification_message = NO;
             }
             if (NewMessageImage == [titleArray1 objectAtIndex:1]) {
                 selOptionVal = [titleArray1 objectAtIndex:0];
+                isNotification_message = YES;
             }
             
             
@@ -882,9 +894,11 @@
             
             if (NewMessageImage == [titleArray1 objectAtIndex:0]) {
                 selOptionVal = [titleArray1 objectAtIndex:1];
+                isNotification_message = NO;
             }
             if (NewMessageImage == [titleArray1 objectAtIndex:1]) {
                 selOptionVal = [titleArray1 objectAtIndex:0];
+                isNotification_message = YES;
             }
             if(selOptionVal != nil || ![selOptionVal isEqualToString:@""])
                 [[[placeHolderArray objectAtIndex:indexPath.section] objectAtIndex:indexPath.row] setObject:selOptionVal forKey:@"NewMessageImage"];
@@ -909,9 +923,11 @@
             
             if (SoundImage == [titleArray1 objectAtIndex:0]) {
                 selOptionVal = [titleArray1 objectAtIndex:1];
+                isNotification_sound = NO;
             }
             if (SoundImage == [titleArray1 objectAtIndex:1]) {
                 selOptionVal = [titleArray1 objectAtIndex:0];
+                isNotification_sound = YES;
             }
             
             
@@ -929,9 +945,11 @@
             
             if (SoundImage == [titleArray1 objectAtIndex:0]) {
                 selOptionVal = [titleArray1 objectAtIndex:1];
+                isNotification_sound = NO;
             }
             if (SoundImage == [titleArray1 objectAtIndex:1]) {
                 selOptionVal = [titleArray1 objectAtIndex:0];
+                isNotification_sound =YES;
             }
             if(selOptionVal != nil || ![selOptionVal isEqualToString:@""])
                 [[[placeHolderArray objectAtIndex:indexPath.section] objectAtIndex:indexPath.row] setObject:selOptionVal forKey:@"SoundImage"];
@@ -958,9 +976,11 @@
             
             if (VibrationImage == [titleArray1 objectAtIndex:0]) {
                 selOptionVal = [titleArray1 objectAtIndex:1];
+                isNotification_vibration = NO;
             }
             if (VibrationImage == [titleArray1 objectAtIndex:1]) {
                 selOptionVal = [titleArray1 objectAtIndex:0];
+                isNotification_vibration = YES;
             }
             
             
@@ -978,9 +998,11 @@
             
             if (VibrationImage == [titleArray1 objectAtIndex:0]) {
                 selOptionVal = [titleArray1 objectAtIndex:1];
+                isNotification_vibration = NO;
             }
             if (VibrationImage == [titleArray1 objectAtIndex:1]) {
                 selOptionVal = [titleArray1 objectAtIndex:0];
+                isNotification_vibration = YES;
             }
             if(selOptionVal != nil || ![selOptionVal isEqualToString:@""])
                 [[[placeHolderArray objectAtIndex:indexPath.section] objectAtIndex:indexPath.row] setObject:selOptionVal forKey:@"VibrationImage"];
@@ -1003,13 +1025,11 @@
         button = [button superview];
     }
     NSIndexPath *indexPath;
-    
-    DSProfileTableViewCell *cell;
+     NSString *selOptionVal;
+    //DSProfileTableViewCell *cell;
     
     indexPath = [_tableviewProfile indexPathForCell:(UITableViewCell *)button];
     cell = (DSProfileTableViewCell *) [_tableviewProfile cellForRowAtIndexPath:[NSIndexPath indexPathForRow:indexPath.row inSection:0]];
-    
-    NSString *selOptionVal;
     
     if([sender tag] == 2004){
         selOptionVal = @"Male";
@@ -1024,6 +1044,7 @@
     [_tableviewProfile beginUpdates];
     [_tableviewProfile reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
     [_tableviewProfile endUpdates];
+    selectGender =selOptionVal;
     
     //[_tableviewProfile reloadData];
 }
@@ -1034,7 +1055,8 @@
 {
     CGPoint position = [textView convertPoint:CGPointZero toView: _tableviewProfile ];
     NSIndexPath *indexPath = [_tableviewProfile indexPathForRowAtPoint: position];
-    DSProfileTableViewCell *cell = (DSProfileTableViewCell *)[_tableviewProfile cellForRowAtIndexPath:indexPath];
+    //DSProfileTableViewCell *cell = (DSProfileTableViewCell *)[_tableviewProfile cellForRowAtIndexPath:indexPath];
+    cell = (DSProfileTableViewCell *)[_tableviewProfile cellForRowAtIndexPath:indexPath];
     cell.textViewHeaderLabel.hidden = YES;
     
     textviewText = textView.text;
@@ -1044,7 +1066,8 @@
 {
     CGPoint position = [textView convertPoint:CGPointZero toView: _tableviewProfile ];
     NSIndexPath *indexPath = [_tableviewProfile indexPathForRowAtPoint: position];
-    DSProfileTableViewCell *cell = (DSProfileTableViewCell *)[_tableviewProfile cellForRowAtIndexPath:indexPath];
+    //DSProfileTableViewCell *cell = (DSProfileTableViewCell *)[_tableviewProfile cellForRowAtIndexPath:indexPath];
+    cell = (DSProfileTableViewCell *)[_tableviewProfile cellForRowAtIndexPath:indexPath];
     cell.textViewHeaderLabel.hidden = YES;
     
     textviewText = textView.text;
@@ -1146,85 +1169,97 @@
 {
     NSArray *postPerArray;
     postPerArray = [[placeHolderArray objectAtIndex:0]valueForKey:@"TypingText"];
-    NSString *strEmail = @"";
-    NSString *strPassword = @"";
-    NSString *strType = @"1";
-    NSString *strProfileID = @"";
-    NSString *strProfileImage = @"";
-    NSString *strGender = @"";
-    NSString *strLatitude = currentLatitude;
-    NSString *strLongitude = currentLongitude;
-    NSString *strDevice = @"";
-    NSString *strDeviceID = @"";
-    
-    
-    NSString *strFirstName = [postPerArray objectAtIndex:1];
-    NSString *strLastName = [postPerArray objectAtIndex:2];
-    NSString *strDOB = [postPerArray objectAtIndex:2];
+    NSString *strType,*strProfileID,*strProfileImage,*strGender,*FirstName,*LastName,*strDOB;
+    strFirstName = [postPerArray objectAtIndex:1];
+    strLastName  = [postPerArray objectAtIndex:2];
+    strType      = (selectEmail== YES)?@"1":@"2";
+    strProfileID = (FBprofileID!=nil)?FBprofileID:@"";
+    strGender    = (selectGender!=nil)?selectGender:@"";
+    FirstName = (strFirstName!=nil)? strFirstName:@"";
+    LastName  = (strLastName!=nil)?strLastName:@"";
+    strDOB       = (currentTextfield.text !=nil)?currentTextfield.text :@"";
+//    if(cell.emailTextField.text == nil)
+//    {
+//       [self presentViewController:[ DSAppCommon alertWithTitle:@"Title" withMessage:INVALID_EMAIL preferredStyle:UIAlertControllerStyleAlert] animated:YES completion:NULL];
+//    }
+//    else if (cell.passwordTextField.text == nil)
+//    {
+//        [self presentViewController:[ DSAppCommon alertWithTitle:@"Title" withMessage:PASSWORD_REQUIRED preferredStyle:UIAlertControllerStyleAlert] animated:YES completion:NULL];
+//    }
+//    
    
-    
+//    NSString *strFirstName = [postPerArray objectAtIndex:1];
+//    NSString *strLastName = [postPerArray objectAtIndex:2];
+//    NSString *strDOB = [postPerArray objectAtIndex:2];
+   
     
             [objWebService postRegister:Register_API
                                    type:strType
-                             first_name:strFirstName
-                              last_name:strLastName
-                                  email:strEmail
-                               password:strPassword
+                             first_name:FirstName
+                              last_name:LastName
+                                  email:cell.emailTextField.text
+                               password:cell.passwordTextField.text
                               profileId:strProfileID
                                     dob:strDOB
                            profileImage:strProfileImage
                                  gender:strGender
-                               latitude:strLatitude
-                              longitude:strLongitude
-                                 device:strDevice
-                               deviceid:strDeviceID
+                               latitude:currentLatitude
+                              longitude:currentLongitude
+                                 device:Device
+                               deviceid:deviceUdid
+                   notification_message:isNotification_message
+                   notification_sound  :isNotification_sound
+                 notification_vibration:isNotification_vibration
                                 success:^(AFHTTPRequestOperation *operation, id responseObject) {
-    
+                                    [self gotoHomeView];
+          
                                 }
                                 failure:^(AFHTTPRequestOperation *operation, id error) {
                                     
                                 }];
-
-    if(selectEmail==YES)
-    {
-    }
-    else{
-        
-    
-    NSArray *postPerArray;
-    postPerArray = [[placeHolderArray objectAtIndex:0]valueForKey:@"TypingText"];
-        NSLog(@"last7%@",[postPerArray objectAtIndex:0]);
-        NSLog(@"last7%@",[postPerArray objectAtIndex:1]);
-        NSLog(@"last7%@",[postPerArray objectAtIndex:2]);
-        NSLog(@"last7%@",[postPerArray objectAtIndex:3]);
-        NSLog(@"last7%@",[postPerArray objectAtIndex:4]);
-        NSLog(@"last7%@",[postPerArray objectAtIndex:5]);
-        NSLog(@"last7%@",[postPerArray objectAtIndex:6]);
-    NSLog(@"last7%@",[postPerArray objectAtIndex:7]);
-     NSLog(@"last8%@",[postPerArray objectAtIndex:8]);
-    NSLog(@"last8%@",[postPerArray objectAtIndex:9]);
-    [objWebService profileUpdate:ProfileUpdate_API
-                      first_name:[postPerArray objectAtIndex:1]
-                       last_name:[postPerArray objectAtIndex:2]
-                             dob:[postPerArray objectAtIndex:4]
-                          image1:NULL
-                          image2:NULL
-                          image3:NULL
-                          gender:@""
-                           about:@""
-                         hobbies:@""
-                        latitude:currentLatitude
-                       longitude:currentLongitude
-                    notification:@""
-                       sessionid:@""
-                         success:^(AFHTTPRequestOperation *operation, id responseObject) {
-                             [self gotoHomeView];
-                             
-                         } failure:^(AFHTTPRequestOperation *operation, id error) {
-                             
-                         }];
-    }
 }
+
+//    if(selectEmail==YES)
+//    {
+//    }
+//    
+//    else{
+//        
+//    
+//    NSArray *postPerArray;
+//    postPerArray = [[placeHolderArray objectAtIndex:0]valueForKey:@"TypingText"];
+//        NSLog(@"last7%@",[postPerArray objectAtIndex:0]);
+//        NSLog(@"last7%@",[postPerArray objectAtIndex:1]);
+//        NSLog(@"last7%@",[postPerArray objectAtIndex:2]);
+//        NSLog(@"last7%@",[postPerArray objectAtIndex:3]);
+//        NSLog(@"last7%@",[postPerArray objectAtIndex:4]);
+//        NSLog(@"last7%@",[postPerArray objectAtIndex:5]);
+//        NSLog(@"last7%@",[postPerArray objectAtIndex:6]);
+//    NSLog(@"last7%@",[postPerArray objectAtIndex:7]);
+//     NSLog(@"last8%@",[postPerArray objectAtIndex:8]);
+//    NSLog(@"last8%@",[postPerArray objectAtIndex:9]);
+//    [objWebService profileUpdate:ProfileUpdate_API
+//                      first_name:[postPerArray objectAtIndex:1]
+//                       last_name:[postPerArray objectAtIndex:2]
+//                             dob:[postPerArray objectAtIndex:4]
+//                          image1:NULL
+//                          image2:NULL
+//                          image3:NULL
+//                          gender:@""
+//                           about:@""
+//                         hobbies:@""
+//                        latitude:currentLatitude
+//                       longitude:currentLongitude
+//                    notification:@""
+//                       sessionid:@""
+//                         success:^(AFHTTPRequestOperation *operation, id responseObject) {
+//                             [self gotoHomeView];
+//                             
+//                         } failure:^(AFHTTPRequestOperation *operation, id error) {
+//                             
+//                         }];
+//    }
+//}
 
 
 

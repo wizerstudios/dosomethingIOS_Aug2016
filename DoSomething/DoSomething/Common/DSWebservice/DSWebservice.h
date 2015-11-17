@@ -67,6 +67,9 @@ typedef void (^WebserviceRequestXMLFailureHandler)(AFHTTPRequestOperation  *oper
            longitude:(NSString *)longitude
               device:(NSString *)device
             deviceid:(NSString *)deviceid
+notification_message:(BOOL)isnotification_message
+notification_sound  :(BOOL)isnotification_sound
+notification_vibration:(BOOL)isnotification_vibration
             success:(WebserviceRequestSuccessHandler)success
              failure:(WebserviceRequestFailureHandler)failure;
 

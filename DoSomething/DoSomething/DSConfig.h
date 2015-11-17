@@ -93,6 +93,7 @@
 #define BlockUser_API           @"blockUser"
 #define DeleteUserChat_API      @"DeleteUserChatHistory"
 
+#define Device                  @"iPhone"
 
 #define USERDETAILS             @"userdetails"
 

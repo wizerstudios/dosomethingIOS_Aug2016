@@ -112,6 +112,9 @@ static NSString       *ServiceMimeType    = @"image/jpeg";
            longitude:(NSString *)longitude
               device:(NSString *)device
             deviceid:(NSString *)deviceid
+notification_message:(BOOL)isnotification_message
+notification_sound  :(BOOL)isnotification_sound
+notification_vibration:(BOOL)isnotification_vibration
              success:(WebserviceRequestSuccessHandler)success
              failure:(WebserviceRequestFailureHandler)failure
 {
@@ -132,6 +135,11 @@ static NSString       *ServiceMimeType    = @"image/jpeg";
     if(longitude)               [registerDetails    setObject:longitude             forKey:@"longitude"];
     if(device)                  [registerDetails    setObject:device                forKey:@"device"];
     if(deviceid)                [registerDetails    setObject:deviceid              forKey:@"deviceid"];
+    if(isnotification_message)  [registerDetails    setObject:[NSNumber numberWithBool:isnotification_message]  forKey:@"isnotification_message"];
+    if(isnotification_sound)    [registerDetails    setObject:[NSNumber numberWithBool:isnotification_sound]  forKey:@"isnotification_sound"];
+    if(isnotification_vibration)[registerDetails    setObject:[NSNumber numberWithBool:isnotification_vibration]  forKey:@"isnotification_vibration"];
+    
+    
     
     NSLog(@"urlString = %@",urlString);
     NSLog(@"Register Details = %@",registerDetails);
