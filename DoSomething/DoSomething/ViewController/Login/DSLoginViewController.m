@@ -338,13 +338,14 @@
                  profileImage = [NSString stringWithFormat:@"https://graph.facebook.com/%@/picture?type=large&return_ssl_resources=1", userData[@"id"]];
                  dob = @""; //[userData valueForKey:@"birthday"]
                  [fbUserDetailsDict setObject:profileImage forKey:@"profileImage"];
-                 NSLog(@"fbUserDetailsDict = %@",fbUserDetailsDict);
+                 NSLog(@"fbUserDetailsDictt = %@",fbUserDetailsDict);
                  
                  [COMMON LoadIcon:self.view];
                  
                  if(labelFacebook.tag == 10)
                  {
-                   [self loadCreateAPI];  
+                   [self loadCreateAPI];
+                    // [self checkUserEmail];
                  }
                  
                  else
@@ -452,7 +453,7 @@
                                
                               //[COMMON setUserDetails:[[registerDict valueForKey:@"userDetails"]objectAtIndex:0]];
                               // NSLog(@"userdetails = %@",[COMMON getUserDetails]);
-                              [self gotoProfileView:NO];
+                              [self gotoHomeView];
                                
                            }
                            else{

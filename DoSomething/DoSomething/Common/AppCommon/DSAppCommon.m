@@ -119,6 +119,15 @@ DSAppCommon *sharedCommon = nil;
     
 }
 
+- (BOOL) isUserLoggedIn {
+    NSDictionary *userDetails = [self getUserDetails];
+    if (userDetails != NULL) {
+        return YES;
+    }
+    return NO;
+}
+
+
 #pragma mark User Interaction Loading :
 
 -(void)LoadIcon:(UIView *)view
