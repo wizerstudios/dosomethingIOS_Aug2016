@@ -290,24 +290,31 @@
                      success:^(AFHTTPRequestOperation *operation, id responseObject){
                          NSLog(@"checkuser = %@",responseObject);
                          NSLog(@"checkuser = %@",[[responseObject objectForKey:@"checkuser"]objectForKey:@"status"]);
-                         
-                         if([[[responseObject objectForKey:@"checkuser"]objectForKey:@"status"]  isEqual: @"error"]){
-                             [DSAppCommon showSimpleAlertWithMessage:[[responseObject objectForKey:@"checkuser"]objectForKey:@"Message"]];
-                             [COMMON removeLoading];
+                         if(([[[responseObject objectForKey:@"checkuser"]objectForKey:@"RegisterType"]  isEqual: @"1"])){
+                             if([[[responseObject objectForKey:@"checkuser"]objectForKey:@"status"]  isEqual: @"error"]){
+                                 [DSAppCommon showSimpleAlertWithMessage:[[responseObject objectForKey:@"checkuser"]objectForKey:@"Message"]];
+                                 [COMMON removeLoading];
+                             }
+                             else {
+                                 [self gotoProfileView:email:password:YES];//[self gotoProfileView];
+                                 [COMMON removeLoading];
+                             }
                          }
                          else {
-                             [self gotoProfileView:email:password:YES];
-                              //[self gotoProfileView];
-                             [COMMON removeLoading];
+                             if([[[responseObject objectForKey:@"checkuser"]objectForKey:@"status"]  isEqual: @"error"]){
+                                 [self loadCreateAPI];
+                                 [COMMON removeLoading];
+                             }
+                             else{
+                                 [self gotoProfileView];//[self gotoProfileView];
+                                 [COMMON removeLoading];
+                             }
                          }
                      }
                      failure:^(AFHTTPRequestOperation *operation, id error) {
                          
                      }];
-    
 }
-
-
 #pragma mark - loginByFacebook
 -(void)loginByFacebook
 {
@@ -344,8 +351,8 @@
                  
                  if(labelFacebook.tag == 10)
                  {
-                   [self loadCreateAPI];
-                    // [self checkUserEmail];
+                  // [self loadCreateAPI];
+                     [self checkUserEmail];
                  }
                  
                  else
@@ -367,10 +374,10 @@
 }
 //-------temp code
 #pragma mark - gotoProfileView
--(void)gotoProfileView:(BOOL)selectFB{
+-(void)gotoProfileView{
     DSProfileTableViewController *profileVC  = [[DSProfileTableViewController alloc]initWithNibName:@"DSProfileTableViewController" bundle:nil];
     profileVC.userDetailsDict = [fbUserDetailsDict mutableCopy];
-    profileVC.selectEmail=selectFB;
+    // profileVC.selectEmail=selectFB;
     [self.navigationController pushViewController:profileVC animated:YES];
 }
 
