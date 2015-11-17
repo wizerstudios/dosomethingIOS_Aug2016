@@ -18,7 +18,7 @@
 #import "NSString+validations.h"
 
 
-@interface DSProfileTableViewController ()<CLLocationManagerDelegate>
+@interface DSProfileTableViewController ()<CLLocationManagerDelegate,UIAlertViewDelegate>
 {
     DSWebservice            * objWebService;
     CLLocationManager       *locationManager;
@@ -1039,6 +1039,11 @@
 //    [actionSheet1 showInView:self.view];
 //    [actionSheet1 sizeToFit];
     
+    
+    imagepickerController = [[UIImagePickerController alloc] init];
+    imagepickerController.delegate = self;
+    [imagepickerController setAllowsEditing:YES];
+    
     UIAlertController *alert = [UIAlertController alertControllerWithTitle:@""
                                                                    message:@""
                                                             preferredStyle:UIAlertControllerStyleAlert];
@@ -1046,16 +1051,20 @@
     UIAlertAction *camera = [UIAlertAction actionWithTitle:NSLocalizedString(@"CANCEL",@"") style:UIAlertActionStyleDefault
                                                    handler:^(UIAlertAction * action) {
                                                        //[self promptForCamera];
+                                                        [self.presentedViewController dismissViewControllerAnimated:NO completion:nil];
                                                    }];
     
     UIAlertAction *photoRoll = [UIAlertAction actionWithTitle:NSLocalizedString(@"CAMERA",@"") style:UIAlertActionStyleDefault
                                                       handler:^(UIAlertAction * action) {
-                                                          //[self promptForPhotoRoll];
+                                                          imagepickerController.sourceType = UIImagePickerControllerSourceTypeCamera;
+                                                          [self presentViewController:imagepickerController animated:YES completion:nil];
                                                       }];
     
     UIAlertAction *cancel = [UIAlertAction actionWithTitle:NSLocalizedString(@"PHOTO LIBRARY",@"") style:UIAlertActionStyleDefault
                                                    handler:^(UIAlertAction * action) {
-                                                       [self.presentedViewController dismissViewControllerAnimated:NO completion:nil];
+                                                      // [self.presentedViewController dismissViewControllerAnimated:NO completion:nil];
+                                                        imagepickerController.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+                                                        [self presentViewController:imagepickerController animated:YES completion:nil];
                                                    }];
     
     [alert addAction:camera];
@@ -1063,40 +1072,40 @@
     [alert addAction:cancel];
     [self presentViewController:alert animated:YES completion:nil];
 }
-
--(void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
-{
-    imagepickerController = [[UIImagePickerController alloc] init];
-    imagepickerController.delegate = self;
-    [imagepickerController setAllowsEditing:YES];
-    
-    switch (buttonIndex) {
-        case 0:
-            if (![UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera])
-            {
-                UIAlertView *altView = [[UIAlertView alloc]initWithTitle:[[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleName"]
-                                                                 message:NSLocalizedString(@"Sorry, you do not have a camera",@"")
-                                                                delegate:nil
-                                                       cancelButtonTitle:NSLocalizedString(@"OK",@"")
-                                                       otherButtonTitles:nil];
-                [altView show];
-                return;
-            }else{
-                imagepickerController.sourceType = UIImagePickerControllerSourceTypeCamera;
-                [self presentViewController:imagepickerController animated:YES completion:nil];
-            }
-            break;
-            
-        case 1:
-            
-            imagepickerController.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
-            [self presentViewController:imagepickerController animated:YES completion:nil];
-            break;
-            
-        default:
-            break;
-    }
-}
+//-(void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
+////- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+//{
+//    imagepickerController = [[UIImagePickerController alloc] init];
+//    imagepickerController.delegate = self;
+//    [imagepickerController setAllowsEditing:YES];
+//    
+//    switch (buttonIndex) {
+//        case 0:
+//            if (![UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera])
+//            {
+//                UIAlertView *altView = [[UIAlertView alloc]initWithTitle:[[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleName"]
+//                                                                 message:NSLocalizedString(@"Sorry, you do not have a camera",@"")
+//                                                                delegate:nil
+//                                                       cancelButtonTitle:NSLocalizedString(@"OK",@"")
+//                                                       otherButtonTitles:nil];
+//                [altView show];
+//                return;
+//            }else{
+//                imagepickerController.sourceType = UIImagePickerControllerSourceTypeCamera;
+//                [self presentViewController:imagepickerController animated:YES completion:nil];
+//            }
+//            break;
+//            
+//        case 1:
+//            
+//            imagepickerController.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+//            [self presentViewController:imagepickerController animated:YES completion:nil];
+//            break;
+//            
+//        default:
+//            break;
+//    }
+//}
 
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
 {
@@ -1119,11 +1128,11 @@
 {
     if(selectEmail==YES)
     {
-        NSString *strEmail;
-        NSString *strPassword;
-        NSString *strFirstName;
-        NSString *strLastName;
-        NSString *Year;
+//        NSString *strEmail;
+//        NSString *strPassword;
+//        NSString *strFirstName;
+//        NSString *strLastName;
+//        NSString *Year;
        // strEmail = [self.em]
       //  [objWebService postRegister:<#(NSString *)#>
 //                               type:(NSString *)
