@@ -297,7 +297,7 @@
     titleArray = [[NSArray alloc]initWithObjects:@"Image",@"First Name",@"Last Name",@"male",@"Date of Birth",@"About You",@"Hobbies",@"Email&Password",@"switch_on",@"TermsOfUse",nil];
     
     NSLog(@"PlaceHolder %@",placeHolderArray);
-   // [self.tableviewProfile reloadData];
+    [self.tableviewProfile reloadData];
    
 }
 
@@ -462,7 +462,7 @@
         if(typingText == (id)[NSNull null] || [typingText isEqualToString:@""])//|| [typingText  isEqual: @"NULL"])
         {
             if(placeHolderText ==(id) [NSNull null])
-                cell.textFieldPlaceHolder.placeholder = titleText;
+                cell.textFieldPlaceHolder.text = titleText;
             else
                 cell.textFieldPlaceHolder.text = placeHolderText;
         
@@ -1126,34 +1126,49 @@
 #pragma mark - saveAction
 -(void)saveAction:(id)sender
 {
+    NSArray *postPerArray;
+    postPerArray = [[placeHolderArray objectAtIndex:0]valueForKey:@"TypingText"];
+    NSString *strEmail = @"";
+    NSString *strPassword = @"";
+    NSString *strType = @"1";
+    NSString *strProfileID = @"";
+    NSString *strProfileImage = @"";
+    NSString *strGender = @"";
+    NSString *strLatitude = currentLatitude;
+    NSString *strLongitude = currentLongitude;
+    NSString *strDevice = @"";
+    NSString *strDeviceID = @"";
+    
+    
+    NSString *strFirstName = [postPerArray objectAtIndex:1];
+    NSString *strLastName = [postPerArray objectAtIndex:2];
+    NSString *strDOB = [postPerArray objectAtIndex:2];
+   
+    
+    
+            [objWebService postRegister:Register_API
+                                   type:strType
+                             first_name:strFirstName
+                              last_name:strLastName
+                                  email:strEmail
+                               password:strPassword
+                              profileId:strProfileID
+                                    dob:strDOB
+                           profileImage:strProfileImage
+                                 gender:strGender
+                               latitude:strLatitude
+                              longitude:strLongitude
+                                 device:strDevice
+                               deviceid:strDeviceID
+                                success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    
+                                }
+                                failure:^(AFHTTPRequestOperation *operation, id error) {
+                                    
+                                }];
+
     if(selectEmail==YES)
     {
-//        NSString *strEmail;
-//        NSString *strPassword;
-//        NSString *strFirstName;
-//        NSString *strLastName;
-//        NSString *Year;
-       // strEmail = [self.em]
-      //  [objWebService postRegister:<#(NSString *)#>
-//                               type:(NSString *)
-//                         first_name:<#(NSString *)#>
-//                          last_name:<#(NSString *)#>
-//                              email:<#(NSString *)#>
-//                           password:<#(NSString *)#>
-//                          profileId:<#(NSString *)#>
-//                                dob:<#(NSString *)#>
-//                       profileImage:<#(NSString *)#>
-//                             gender:<#(NSString *)#>
-//                           latitude:<#(NSString *)#>
-//                          longitude:<#(NSString *)#>
-//                             device:<#(NSString *)#>
-//                           deviceid:<#(NSString *)#>
-//                            success:^(AFHTTPRequestOperation *operation, id responseObject) {
-//                                
-//                            }
-//                            failure:^(AFHTTPRequestOperation *operation, id error) {
-//                                
-//                            }];
     }
     else{
         

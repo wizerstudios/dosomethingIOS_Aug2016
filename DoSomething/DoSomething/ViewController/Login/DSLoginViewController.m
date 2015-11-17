@@ -297,13 +297,14 @@
                          NSLog(@"checkuser = %@",[[responseObject objectForKey:@"checkuser"]objectForKey:@"status"]);
                          if(([[[responseObject objectForKey:@"checkuser"]objectForKey:@"RegisterType"]  isEqual: @"1"])){
                              if([[[responseObject objectForKey:@"checkuser"]objectForKey:@"status"]  isEqual: @"error"]){
-                                 [DSAppCommon showSimpleAlertWithMessage:[[responseObject objectForKey:@"checkuser"]objectForKey:@"Message"]];
+                                 [self presentViewController:[ DSAppCommon alertWithTitle:@"Title" withMessage:[[responseObject objectForKey:@"checkuser"]objectForKey:@"Message"] preferredStyle:UIAlertControllerStyleAlert] animated:YES completion:NULL];
                                  [COMMON removeLoading];
                              }
                              else {
-                                 [self gotoProfileView:email:password:YES];//[self gotoProfileView];
+                                 [self gotoProfileView:email:password];//[self gotoProfileView];
                                  [COMMON removeLoading];
                              }
+                         
                          }
                          else {
                              if([[[responseObject objectForKey:@"checkuser"]objectForKey:@"status"]  isEqual: @"error"]){
@@ -369,12 +370,12 @@
 }
 
 #pragma mark - gotoProfileView
--(void)gotoProfileView:(NSString *)strEmailId :(NSString *)strPassword :(BOOL)selectEmail{
+-(void)gotoProfileView:(NSString *)strEmailId :(NSString *)strPassword{
     DSProfileTableViewController *profileVC  = [[DSProfileTableViewController alloc]initWithNibName:@"DSProfileTableViewController" bundle:nil];
     profileVC.userDetailsDict = [fbUserDetailsDict mutableCopy];
     profileVC.emailAddressToRegister = strEmailId;
     profileVC.emailPasswordToRegister = strPassword;
-    profileVC.selectEmail             =selectEmail;
+   // profileVC.selectEmail             =selectEmail;
     [self.navigationController pushViewController:profileVC animated:YES];
 }
 //-------temp code

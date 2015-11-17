@@ -99,10 +99,19 @@
 }
 - (IBAction)Signin:(id)sender{
     
-    DSLoginViewController *DSLoginView  = [[DSLoginViewController alloc]initWithNibName:@"DSLoginViewController" bundle:nil];
-    DSLoginView.temp = @"Signin";
-    
-    [self.navigationController pushViewController:DSLoginView animated:YES];
+    if ([COMMON isUserLoggedIn]) {
+        HomeViewController * objHomeview = [[HomeViewController alloc]initWithNibName:@"HomeViewController" bundle:nil];
+        [self.navigationController pushViewController:objHomeview animated:NO];
+    }
+    else {
+        DSLoginViewController *DSLoginView  = [[DSLoginViewController alloc]initWithNibName:@"DSLoginViewController" bundle:nil];
+        DSLoginView.temp = @"Signin";
+        
+        [self.navigationController pushViewController:DSLoginView animated:YES];
+        
+    }
+
+   
 }
 
 
