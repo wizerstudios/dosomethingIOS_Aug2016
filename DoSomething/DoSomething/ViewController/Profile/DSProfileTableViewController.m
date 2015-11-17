@@ -1128,11 +1128,11 @@
 {
     if(selectEmail==YES)
     {
-        NSString *strEmail;
-        NSString *strPassword;
-        NSString *strFirstName;
-        NSString *strLastName;
-        NSString *Year;
+//        NSString *strEmail;
+//        NSString *strPassword;
+//        NSString *strFirstName;
+//        NSString *strLastName;
+//        NSString *Year;
        // strEmail = [self.em]
       //  [objWebService postRegister:<#(NSString *)#>
 //                               type:(NSString *)
