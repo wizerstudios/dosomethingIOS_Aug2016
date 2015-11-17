@@ -37,6 +37,7 @@ typedef enum {
 - (void)removeLoading;
 
 - (currentDevice)getCurrentDevice;
+- (BOOL) isUserLoggedIn;
 
 // ResizeableFont
 - (UIFont *)getResizeableFont:(UIFont *)currentFont;

@@ -79,7 +79,7 @@
     [customNavigation.buttonBack setHidden:NO];
     [customNavigation.saveBtn setHidden:NO];
     [self.navigationController.navigationBar addSubview:customNavigation.view];
-    [customNavigation.saveBtn addTarget:self action:@selector(saveAction) forControlEvents:UIControlEventTouchUpInside];
+    [customNavigation.saveBtn addTarget:self action:@selector(saveAction:) forControlEvents:UIControlEventTouchUpInside];
     [customNavigation.buttonBack addTarget:self action:@selector(backAction) forControlEvents:UIControlEventTouchUpInside];
     
     
@@ -1124,19 +1124,49 @@
     
 }
 #pragma mark - saveAction
--(void)saveAction
+-(void)saveAction:(id)sender
 {
     if(selectEmail==YES)
     {
-        //here register API have to call.
-//        [objWebService postRegister:<#(NSString *)#> type:<#(NSString *)#>
-//                         first_name:<#(NSString *)#> last_name:<#(NSString *)#> email:<#(NSString *)#> password:<#(NSString *)#> profileId:<#(NSString *)#> dob:<#(NSString *)#> profileImage:<#(NSString *)#> gender:<#(NSString *)#> latitude:<#(NSString *)#> longitude:<#(NSString *)#> device:<#(NSString *)#> deviceid:<#(NSString *)#> success:<#^(AFHTTPRequestOperation *operation, id responseObject)success#> failure:<#^(AFHTTPRequestOperation *operation, id error)failure#>]
+        NSString *strEmail;
+        NSString *strPassword;
+        NSString *strFirstName;
+        NSString *strLastName;
+        NSString *Year;
+       // strEmail = [self.em]
+      //  [objWebService postRegister:<#(NSString *)#>
+//                               type:(NSString *)
+//                         first_name:<#(NSString *)#>
+//                          last_name:<#(NSString *)#>
+//                              email:<#(NSString *)#>
+//                           password:<#(NSString *)#>
+//                          profileId:<#(NSString *)#>
+//                                dob:<#(NSString *)#>
+//                       profileImage:<#(NSString *)#>
+//                             gender:<#(NSString *)#>
+//                           latitude:<#(NSString *)#>
+//                          longitude:<#(NSString *)#>
+//                             device:<#(NSString *)#>
+//                           deviceid:<#(NSString *)#>
+//                            success:^(AFHTTPRequestOperation *operation, id responseObject) {
+//                                
+//                            }
+//                            failure:^(AFHTTPRequestOperation *operation, id error) {
+//                                
+//                            }];
     }
     else{
         
     
     NSArray *postPerArray;
     postPerArray = [[placeHolderArray objectAtIndex:0]valueForKey:@"TypingText"];
+        NSLog(@"last7%@",[postPerArray objectAtIndex:0]);
+        NSLog(@"last7%@",[postPerArray objectAtIndex:1]);
+        NSLog(@"last7%@",[postPerArray objectAtIndex:2]);
+        NSLog(@"last7%@",[postPerArray objectAtIndex:3]);
+        NSLog(@"last7%@",[postPerArray objectAtIndex:4]);
+        NSLog(@"last7%@",[postPerArray objectAtIndex:5]);
+        NSLog(@"last7%@",[postPerArray objectAtIndex:6]);
     NSLog(@"last7%@",[postPerArray objectAtIndex:7]);
      NSLog(@"last8%@",[postPerArray objectAtIndex:8]);
     NSLog(@"last8%@",[postPerArray objectAtIndex:9]);
