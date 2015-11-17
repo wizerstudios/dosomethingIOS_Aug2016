@@ -46,7 +46,9 @@
     locationManager                 = [[CLLocationManager alloc] init];
     locationManager.delegate        = self;
     objWebService = [[DSWebservice alloc]init];
-    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
+    //[[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
+    [self preferredStatusBarStyle];
+    
     _emailTxt.autocorrectionType =UITextAutocorrectionTypeNo;
     _passwordTxt.autocorrectionType =UITextAutocorrectionTypeNo;
     if (IS_IPHONE6 ||IS_IPHONE6_Plus){
@@ -120,7 +122,10 @@
 
     
 }
-
+- (UIStatusBarStyle)preferredStatusBarStyle
+{
+    return UIStatusBarStyleLightContent;
+}
 -(void)viewWillAppear:(BOOL)animated
 {
     [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"SelectedItem"];
@@ -292,7 +297,8 @@
                          NSLog(@"checkuser = %@",[[responseObject objectForKey:@"checkuser"]objectForKey:@"status"]);
                          
                          if([[[responseObject objectForKey:@"checkuser"]objectForKey:@"status"]  isEqual: @"error"]){
-                             [DSAppCommon showSimpleAlertWithMessage:[[responseObject objectForKey:@"checkuser"]objectForKey:@"Message"]];
+                             //[DSAppCommon showSimpleAlertWithMessage:[[responseObject objectForKey:@"checkuser"]objectForKey:@"Message"]];
+                             [self presentViewController:[ DSAppCommon alertWithTitle:@"Title" withMessage:[[responseObject objectForKey:@"checkuser"]objectForKey:@"Message"] preferredStyle:UIAlertControllerStyleAlert] animated:YES completion:NULL];
                              [COMMON removeLoading];
                          }
                          else {
@@ -413,7 +419,8 @@
         }
         else{
             NSLog(@"responseObject = %@",responseObject);
-            [DSAppCommon showSimpleAlertWithMessage:[loginDict valueForKey:@"Message"]];
+            //[DSAppCommon showSimpleAlertWithMessage:[loginDict valueForKey:@"Message"]];
+            [self presentViewController:[ DSAppCommon alertWithTitle:@"Title" withMessage:[loginDict valueForKey:@"Message"] preferredStyle:UIAlertControllerStyleAlert] animated:YES completion:NULL];
         }
         [COMMON removeLoading];
         
@@ -460,7 +467,8 @@
                                NSString *errMsg = [NSString stringWithFormat:@"%@",[registerDict valueForKey:@"Message"]];
                                errMsg = [errMsg stringByReplacingOccurrencesOfString:@"{" withString:@""];
                                 errMsg = [errMsg stringByReplacingOccurrencesOfString:@"}" withString:@""];
-                               [DSAppCommon showSimpleAlertWithMessage:errMsg];
+                               //[DSAppCommon showSimpleAlertWithMessage:errMsg];
+                               [self presentViewController:[ DSAppCommon alertWithTitle:@"Title" withMessage:errMsg preferredStyle:UIAlertControllerStyleAlert] animated:YES completion:NULL];
                            }
                            [COMMON removeLoading];
                     }

@@ -36,6 +36,7 @@
     [self.window setRootViewController:self.navigationController];
     self.window.backgroundColor=[UIColor whiteColor];
     [self.window makeKeyAndVisible];
+  
     
     [self TabBarViews];
     
