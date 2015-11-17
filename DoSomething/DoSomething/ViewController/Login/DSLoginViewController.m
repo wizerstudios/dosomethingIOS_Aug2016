@@ -30,7 +30,7 @@
     NSString                * deviceUdid;
     
     NSMutableDictionary *fbUserDetailsDict;
-    NSString *firstName,*lastName,*email,*dob,*gender,*profileID,*profileImage;
+    NSString *firstName,*lastName,*email,*dob,*gender,*profileID,*profileImage,*password;
 }
 @end
 
@@ -202,23 +202,29 @@
 {
     objSigninType=@"1";
     if([NSString isEmpty:self.emailTxt.text] && [NSString isEmpty:self.passwordTxt.text]){
-        [DSAppCommon showSimpleAlertWithMessage:FILL_DETAILS];
+       // [DSAppCommon showSimpleAlertWithMessage:FILL_DETAILS];
+        [self presentViewController:[ DSAppCommon alertWithTitle:@"Title" withMessage:FILL_DETAILS preferredStyle:UIAlertControllerStyleAlert] animated:YES completion:NULL];
+
         return;
     }
     if([NSString isEmpty:self.emailTxt.text] && ![NSString isEmpty:self.passwordTxt.text]){
-        [DSAppCommon showSimpleAlertWithMessage:EMAIL_REQUIRED];
+        //[DSAppCommon showSimpleAlertWithMessage:EMAIL_REQUIRED];
+        [self presentViewController:[ DSAppCommon alertWithTitle:@"Title" withMessage:EMAIL_REQUIRED preferredStyle:UIAlertControllerStyleAlert] animated:YES completion:NULL];
         return;
     }
     if(![NSString isEmpty:self.emailTxt.text] && [NSString isEmpty:self.passwordTxt.text]){
-        [DSAppCommon showSimpleAlertWithMessage:PASSWORD_REQUIRED];
+        //[DSAppCommon showSimpleAlertWithMessage:PASSWORD_REQUIRED];
+        [self presentViewController:[ DSAppCommon alertWithTitle:@"Title" withMessage:PASSWORD_REQUIRED preferredStyle:UIAlertControllerStyleAlert] animated:YES completion:NULL];
         return;
     }
     if(![NSString isEmpty:self.emailTxt.text] && ![NSString isEmpty:self.passwordTxt.text]){
         if(![NSString validateEmail:self.emailTxt.text]){
-            [DSAppCommon showSimpleAlertWithMessage:INVALID_EMAIL];
+            //[DSAppCommon showSimpleAlertWithMessage:INVALID_EMAIL];
+            [self presentViewController:[ DSAppCommon alertWithTitle:@"Title" withMessage:INVALID_EMAIL preferredStyle:UIAlertControllerStyleAlert] animated:YES completion:NULL];
             return;
         }
         email = self.emailTxt.text;
+        password=self.passwordTxt.text;
         firstName = @"";
         lastName = @"";
         profileImage = @"";
@@ -227,7 +233,8 @@
         dob = @"";
         
         [COMMON LoadIcon:self.view];
-        [self loadCreateAPI];
+        //[self loadCreateAPI];
+        [self checkUserEmail];
     }
    
 }
@@ -238,20 +245,24 @@
     
     objSigninType=@"1";
     if([NSString isEmpty:self.emailTxt.text] && [NSString isEmpty:self.passwordTxt.text]){
-        [DSAppCommon showSimpleAlertWithMessage:FILL_DETAILS];
+        //[DSAppCommon showSimpleAlertWithMessage:FILL_DETAILS];
+         [self presentViewController:[ DSAppCommon alertWithTitle:@"Title" withMessage:FILL_DETAILS preferredStyle:UIAlertControllerStyleAlert] animated:YES completion:NULL];
         return;
     }
     if([NSString isEmpty:self.emailTxt.text] && ![NSString isEmpty:self.passwordTxt.text]){
-        [DSAppCommon showSimpleAlertWithMessage:EMAIL_REQUIRED];
+        //[DSAppCommon showSimpleAlertWithMessage:EMAIL_REQUIRED];
+        [self presentViewController:[ DSAppCommon alertWithTitle:@"Title" withMessage:EMAIL_REQUIRED preferredStyle:UIAlertControllerStyleAlert] animated:YES completion:NULL];
         return;
     }
     if(![NSString isEmpty:self.emailTxt.text] && [NSString isEmpty:self.passwordTxt.text]){
-        [DSAppCommon showSimpleAlertWithMessage:PASSWORD_REQUIRED];
+        //[DSAppCommon showSimpleAlertWithMessage:PASSWORD_REQUIRED];
+        [self presentViewController:[ DSAppCommon alertWithTitle:@"Title" withMessage:PASSWORD_REQUIRED preferredStyle:UIAlertControllerStyleAlert] animated:YES completion:NULL];
         return;
     }
     if(![NSString isEmpty:self.emailTxt.text] && ![NSString isEmpty:self.passwordTxt.text]){
         if(![NSString validateEmail:self.emailTxt.text]){
-            [DSAppCommon showSimpleAlertWithMessage:INVALID_EMAIL];
+           // [DSAppCommon showSimpleAlertWithMessage:INVALID_EMAIL];
+            [self presentViewController:[ DSAppCommon alertWithTitle:@"Title" withMessage:INVALID_EMAIL preferredStyle:UIAlertControllerStyleAlert] animated:YES completion:NULL];
             return;
         }
         email = self.emailTxt.text;
@@ -264,9 +275,39 @@
         
         [COMMON LoadIcon:self.view];
         [self loadloginAPI];
+        
+        
     }
     
 }
+
+#pragma mark - check user Email
+- (void)checkUserEmail{
+    [objWebService checkUser:CheckUser_API
+                       email:email
+                        type:objSigninType
+                     password: password
+                     success:^(AFHTTPRequestOperation *operation, id responseObject){
+                         NSLog(@"checkuser = %@",responseObject);
+                         NSLog(@"checkuser = %@",[[responseObject objectForKey:@"checkuser"]objectForKey:@"status"]);
+                         
+                         if([[[responseObject objectForKey:@"checkuser"]objectForKey:@"status"]  isEqual: @"error"]){
+                             [DSAppCommon showSimpleAlertWithMessage:[[responseObject objectForKey:@"checkuser"]objectForKey:@"Message"]];
+                             [COMMON removeLoading];
+                         }
+                         else {
+                             [self gotoProfileView:email:password:YES];
+                              //[self gotoProfileView];
+                             [COMMON removeLoading];
+                         }
+                     }
+                     failure:^(AFHTTPRequestOperation *operation, id error) {
+                         
+                     }];
+    
+}
+
+
 #pragma mark - loginByFacebook
 -(void)loginByFacebook
 {
@@ -302,7 +343,10 @@
                  [COMMON LoadIcon:self.view];
                  
                  if(labelFacebook.tag == 10)
-                    [self loadCreateAPI];
+                 {
+                   [self loadCreateAPI];  
+                 }
+                 
                  else
                     [self loadloginAPI];
 
@@ -312,9 +356,20 @@
 }
 
 #pragma mark - gotoProfileView
--(void)gotoProfileView{
+-(void)gotoProfileView:(NSString *)strEmailId :(NSString *)strPassword :(BOOL)selectEmail{
     DSProfileTableViewController *profileVC  = [[DSProfileTableViewController alloc]initWithNibName:@"DSProfileTableViewController" bundle:nil];
     profileVC.userDetailsDict = [fbUserDetailsDict mutableCopy];
+    profileVC.emailAddressToRegister = strEmailId;
+    profileVC.emailPasswordToRegister = strPassword;
+    profileVC.selectEmail             =selectEmail;
+    [self.navigationController pushViewController:profileVC animated:YES];
+}
+//-------temp code
+#pragma mark - gotoProfileView
+-(void)gotoProfileView:(BOOL)selectFB{
+    DSProfileTableViewController *profileVC  = [[DSProfileTableViewController alloc]initWithNibName:@"DSProfileTableViewController" bundle:nil];
+    profileVC.userDetailsDict = [fbUserDetailsDict mutableCopy];
+    profileVC.selectEmail=selectFB;
     [self.navigationController pushViewController:profileVC animated:YES];
 }
 
@@ -397,7 +452,7 @@
                                
                               //[COMMON setUserDetails:[[registerDict valueForKey:@"userDetails"]objectAtIndex:0]];
                               // NSLog(@"userdetails = %@",[COMMON getUserDetails]);
-                               [self gotoProfileView];
+                              [self gotoProfileView:NO];
                                
                            }
                            else{
@@ -418,8 +473,14 @@
 
 -(void)alterMsg:(NSString*)msgStr
 {
-    UIAlertView * objalterMsg =[[UIAlertView alloc]initWithTitle:nil message:msgStr delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
-    [objalterMsg show];
+//    UIAlertView * objalterMsg =[[UIAlertView alloc]initWithTitle:nil message:msgStr delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+//    [objalterMsg show];
+    UIAlertController * alert=   [UIAlertController
+                                  alertControllerWithTitle:nil
+                                  message:msgStr
+                                  preferredStyle:UIAlertControllerStyleAlert];
+    
+    [self presentViewController:alert animated:YES completion:nil];
     
 }
 #pragma mark - BackAction

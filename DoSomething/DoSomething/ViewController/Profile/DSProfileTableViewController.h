@@ -10,7 +10,7 @@
 #import "DSProfileTableViewCell.h"
 #import "DVSwitch.h"
 
-@interface DSProfileTableViewController : UIViewController<UINavigationControllerDelegate, UITextViewDelegate, UIImagePickerControllerDelegate, UIAlertViewDelegate, UITextFieldDelegate>
+@interface DSProfileTableViewController : UIViewController<UINavigationControllerDelegate, UITextViewDelegate, UIImagePickerControllerDelegate, UIAlertViewDelegate, UITextFieldDelegate,UIActionSheetDelegate>
 {
  IBOutlet DSProfileTableViewCell *cellProfileImg;
  IBOutlet DSProfileTableViewCell *cellButton;
@@ -35,6 +35,11 @@
 @property (nonatomic, strong)  NSString *textviewText;
 
 @property (nonatomic,strong) NSMutableDictionary *userDetailsDict;
+@property (nonatomic, retain) NSString *emailAddressToRegister;
+@property (nonatomic, retain) NSString *emailPasswordToRegister;
+
+@property (assign) BOOL selectEmail;
+
 
 
 @end

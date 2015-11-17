@@ -13,24 +13,12 @@
 @end
 @interface DSHomeViewController : UIViewController <KenBurnsViewDelegate>
 {
-    
-    
-    UIImageView                 *infoImage;
-    UIView                      *pgDtView;
-    UIImageView                 *imageViewActive;
-    UIImageView                 *imageViewDot;
-    NSUInteger jslider;
-    
-    float xslider;
-    NSInteger                   IndexVal;
-
     NSMutableArray *bannerImageArr;
-   IBOutlet UIButton *scrollpauseBtn;
+    IBOutlet UIButton *scrollpauseBtn;
 }
 @property (strong, nonatomic) IBOutlet UIScrollView *scrollViewImage;
 @property (strong, nonatomic) IBOutlet UIButton *signInBtn;
 @property (strong, nonatomic) IBOutlet UIButton *createAnAccBtn;
-@property(nonatomic,retain)NSTimer *timer1;
 @property (strong, nonatomic) IBOutlet UIPageControl *infoPageControl;
 @property(nonatomic,retain)id<HelpViewDelegate> delegate;
 @property (nonatomic,retain) NSLayoutConstraint *pagerConstraint;

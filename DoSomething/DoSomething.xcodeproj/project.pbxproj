@@ -1049,7 +1049,6 @@
 				TargetAttributes = {
 					065BAC4C1BC7A135005AF493 = {
 						CreatedOnToolsVersion = 7.0.1;
-						DevelopmentTeam = 384S95M8XQ;
 					};
 				};
 			};
@@ -1335,6 +1334,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
+				PROVISIONING_PROFILE = "67e2ce20-db95-48e7-95fd-3f6c1f7a332c";
 				SDKROOT = iphoneos;
 			};
 			name = Debug;
@@ -1371,6 +1371,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
+				PROVISIONING_PROFILE = "67e2ce20-db95-48e7-95fd-3f6c1f7a332c";
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 			};
@@ -1391,7 +1392,7 @@
 					"$(PROJECT_DIR)/DoSomething/Frameworks",
 				);
 				INFOPLIST_FILE = DoSomething/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.oclockapps.DoSomething;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1414,7 +1415,7 @@
 					"$(PROJECT_DIR)/DoSomething/Frameworks",
 				);
 				INFOPLIST_FILE = DoSomething/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.oclockapps.DoSomething;
 				PRODUCT_NAME = "$(TARGET_NAME)";

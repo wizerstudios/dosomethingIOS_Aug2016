@@ -25,7 +25,7 @@
 #define ITEM_CELL_IDENTIFIER @"ItemCell"
 #define LOADING_CELL_IDENTIFIER @"LoadingItemCell"
 
-@interface HomeViewController ()
+@interface HomeViewController ()<UICollectionViewDataSource,UICollectionViewDelegate>
 {
     AppDelegate *appDelegate;
     BOOL isSelectMenu;
@@ -33,9 +33,10 @@
     int selectedCellCount;
     
     NSMutableArray *selectedItemsArray;
+    NSMutableArray * selectItemImageActiveArray;
     
     AVAudioPlayer *audioPlayer;
-
+    
 }
 
 @end
@@ -79,6 +80,8 @@
     
     selectedArray = [[NSMutableArray alloc]init];
     selectedItemsArray = [[NSMutableArray alloc]init];
+   
+   
     alertBgView.hidden = YES;
     alertMainBgView.hidden = YES;
     
@@ -90,12 +93,12 @@
                                                               attribute:NSLayoutAttributeTop
                                                              multiplier:1.0
                                                                constant:75.0]];
-    [self audioplayMethod];
 }
 -(void)viewWillAppear:(BOOL)animated
 {
     appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
     appDelegate.buttonsView.hidden=NO;
+    [self audioplayMethod];
     [self setupCollectionView];
 }
 -(void)audioplayMethod
@@ -232,8 +235,7 @@
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
     isSelectMenu=YES;
-   // AudioServicesPlaySystemSound(kSystemSoundID_Vibrate);
-    
+   
     HomeCustomCell *cell = (HomeCustomCell *)[collectionView cellForItemAtIndexPath:indexPath];
     NSMutableDictionary *data = [menuArray objectAtIndex:indexPath.row];
     
@@ -241,13 +243,18 @@
     if([selectedItemsArray count] <= 2)
     {
         
-        
+        NSString *path = [[NSBundle mainBundle]
+                          pathForResource:@"button-16" ofType:@"mp3"];
+        audioPlayer = [[AVAudioPlayer alloc]initWithContentsOfURL:
+                       [NSURL fileURLWithPath:path] error:NULL];
+        [audioPlayer prepareToPlay];
         [audioPlayer play];
-        
         
         [selectedItemsArray addObject:[data valueForKey:@"Caption"]];
         cell.MenuTittle.textColor = [UIColor colorWithRed:(199/255.0f) green:(65/255.0f) blue:(81/255.0f) alpha:1.0f];
         NSString * objstr = [NSString stringWithFormat:@"%@",[data valueForKey:ACTIVE_IMAGE]];
+       
+        NSLog(@"selectImage:%@",objstr);
         cell.MenuImg.image = [UIImage imageNamed:objstr];
         
     }
@@ -265,15 +272,17 @@
         alertMsgLabel.lineBreakMode = NSLineBreakByWordWrapping;
         alertMsgLabel.numberOfLines = 2;
         alertMsgLabel.textColor = [UIColor whiteColor];
-    }
-
+        
+      [collectionView deselectItemAtIndexPath:indexPath animated:NO];
+        }
+   
 
 }
 
 -(void)collectionView: (UICollectionView *)collectionView didDeselectItemAtIndexPath:(NSIndexPath *)indexPath
 
 {
-    
+   
     HomeCustomCell *cell = (HomeCustomCell *)[collectionView cellForItemAtIndexPath:indexPath];
     
     NSMutableDictionary *data = [menuArray objectAtIndex:indexPath.row];
@@ -281,39 +290,40 @@
     NSArray *selectArray = [[NSArray alloc]init];
     
     selectArray = [selectedItemsArray copy];
-    
-    
     for(NSString *strDeselect in selectArray)
-        
+
     {
-        
+
         if([[data valueForKey:@"Caption"] isEqualToString:strDeselect])
-            
-        {
-            
+
+       {
+
+            NSString *path = [[NSBundle mainBundle]
+                              pathForResource:@"button-16" ofType:@"mp3"];
+            audioPlayer = [[AVAudioPlayer alloc]initWithContentsOfURL:
+                           [NSURL fileURLWithPath:path] error:NULL];
+            [audioPlayer prepareToPlay];
             [audioPlayer play];
 
-            [selectedItemsArray removeObject:strDeselect];
-            
+
+           [selectedItemsArray removeObject:strDeselect];
+           //isdeSelect=YES;
+
             cell.MenuTittle.textColor = [UIColor colorWithRed:(164/255.0f) green:(164/255.0f) blue:(164/255.0f) alpha:1.0f];
-            
+
             NSString * objstr = [NSString stringWithFormat:@"%@",[data valueForKey:NORMAL_IMAGE]];
-            
+
             cell.MenuImg.image = [UIImage imageNamed:objstr];
-            
+         }
+      
         }
-        
-    }
-    
 }
-
-
-
 - (void)fetchMoreItems {
     NSLog(@"FETCHING MORE ITEMS ******************");
     
     NSMutableArray *newData = [NSMutableArray array];
-    NSInteger pageSize = ITEMS_PAGE_SIZE;
+    NSInteger pageSize;
+    pageSize= ITEMS_PAGE_SIZE;
     
     double delayInSeconds =1.0;
     dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delayInSeconds * NSEC_PER_SEC);
@@ -353,6 +363,7 @@
 - (IBAction)alertPressCancel:(id)sender {
     alertBgView.hidden = YES;
     alertMainBgView.hidden = YES;
+   
 }
 
 - (IBAction)alertPressYes:(id)sender {

@@ -71,7 +71,7 @@
         label.text = string;
         label.font = self.font;
         label.adjustsFontSizeToFitWidth = YES;
-        label.adjustsLetterSpacingToFitWidth = YES;
+        label.adjustsFontSizeToFitWidth = YES;
         label.textAlignment = NSTextAlignmentCenter;
         label.textColor = self.labelTextColorOutsideSlider;
         [self.backgroundView addSubview:label];
@@ -95,7 +95,7 @@
         label.text = string;
         label.font = self.font;
         label.adjustsFontSizeToFitWidth = YES;
-        label.adjustsLetterSpacingToFitWidth = YES;
+        label.adjustsFontSizeToFitWidth = YES;
         label.textAlignment = NSTextAlignmentCenter;
         label.textColor = self.labelTextColorInsideSlider;
         [self.sliderView addSubview:label];

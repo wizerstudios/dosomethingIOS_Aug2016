@@ -43,12 +43,13 @@
 
 @implementation DSProfileTableViewController
 @synthesize profileData, textviewText, placeHolderArray;
-@synthesize userDetailsDict;
+@synthesize userDetailsDict,emailAddressToRegister,emailPasswordToRegister,selectEmail;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     objWebService = [[DSWebservice alloc]init];
 
+    
     [self initializeArray];
 }
 
@@ -92,9 +93,28 @@
     
     
 
-    [_tableviewProfile reloadData];
+   [_tableviewProfile reloadData];
 
 }
+- (NSString *) getEmail {
+    
+    if (emailAddressToRegister == NULL) {
+        emailAddressToRegister = @"";
+    }
+    NSString *emailAddress = emailAddressToRegister;
+    NSLog(@"email = %@",emailAddress);
+    return emailAddress;
+}
+- (NSString *) getPassword {
+    
+    if (emailPasswordToRegister == NULL) {
+        emailPasswordToRegister = @"";
+    }
+    NSString *emailPassword = emailPasswordToRegister;
+    NSLog(@"email = %@",emailPassword);
+    return emailPassword;
+}
+
 #pragma mark get user CurrentLocation
 
 - (void)getUserCurrenLocation{
@@ -435,12 +455,23 @@
 
         }
         cell.labelTitleText.text = titleText;
+        NSLog(@"typingText%@",typingText);
+        NSLog(@"titleText%@",titleText);
+        NSLog(@"placeHolderText%@",placeHolderText);
 
-        if(typingText == (id)[NSNull null] || [typingText isEqualToString:@""])
-            cell.textFieldPlaceHolder.text = placeHolderText;
-        else
-            cell.textFieldPlaceHolder.text = typingText;
+        if(typingText == (id)[NSNull null] || [typingText isEqualToString:@""])//|| [typingText  isEqual: @"NULL"])
+        {
+            if(placeHolderText ==(id) [NSNull null])
+                cell.textFieldPlaceHolder.placeholder = titleText;
+            else
+                cell.textFieldPlaceHolder.text = placeHolderText;
+        
+        }
+        
+//        else
+//            cell.textFieldPlaceHolder.text = titleText;
     }
+    
     if (indexPath.row == 3)
     {
         if (cell == nil)
@@ -487,6 +518,14 @@
         [femaleLabel setText:@"Female"];
         [cell.labelFemale addSubview:femaleLabel];
         
+        if(placeHolderText == (id)[NSNull null]){
+            
+            femaleLabel.textColor = [UIColor colorWithRed:(float)161.0/255 green:(float)161.0/255 blue:(float)161.0/255 alpha:1.0f];
+            maleLabel.textColor = [UIColor colorWithRed:(float)161.0/255 green:(float)161.0/255 blue:(float)161.0/255 alpha:1.0f];
+            
+        }
+        
+        else{
          if([placeHolderText isEqualToString:@"Male"])
         {
             femaleLabel.textColor = [UIColor colorWithRed:(float)161.0/255 green:(float)161.0/255 blue:(float)161.0/255 alpha:1.0f];
@@ -499,12 +538,8 @@
             femaleLabel.textColor = [UIColor redColor];
             
         }
-        else{
-            
-             femaleLabel.textColor = [UIColor colorWithRed:(float)161.0/255 green:(float)161.0/255 blue:(float)161.0/255 alpha:1.0f];
-             maleLabel.textColor = [UIColor colorWithRed:(float)161.0/255 green:(float)161.0/255 blue:(float)161.0/255 alpha:1.0f];
-            
         }
+        
         cell.maleButton.userInteractionEnabled = YES;
         cell.femaleButton.userInteractionEnabled = YES;
         
@@ -644,36 +679,51 @@
     
     if (indexPath.row == 7)
     {
-        
         if (cell == nil)
         {
             [[NSBundle mainBundle] loadNibNamed:@"DSProfileTableViewCell" owner:self options:nil];
             cell = cellEmailPassword;
             
         }
+        NSLog(@"typingText%@",typingText);
+        NSLog(@"titleText%@",titleText);
+        NSLog(@"placeHolderText%@",placeHolderText);
         
-        
-        if([typingText isEqualToString:@""] || typingText == nil)
+        if(typingText == (id)[NSNull null] || [typingText isEqualToString:@""]  || typingText == nil)//|| [typingText  isEqual: @"NULL"])
         {
-           cell.emailTextField.text = placeHolderText;
-        }
-          else
-          {
-            cell.emailTextField.text = typingText;
-
-          }
-        
-        if([typingTextPass isEqualToString:@""] || typingTextPass == nil)
-        {
-            cell.passwordTextField.text =@"";
-        }
-        else
-        {
-            cell.passwordTextField.text = typingTextPass;
+            if(placeHolderText ==(id) [NSNull null])
+                cell.emailTextField.text = [self getEmail];
+            else
+                cell.emailTextField.text = placeHolderText;
             
         }
-        
-        
+        if(typingTextPass == (id)[NSNull null] || [typingTextPass isEqualToString:@""]  || typingTextPass == nil)//|| [typingText  isEqual: @"NULL"])
+        {
+            if(placeHolderText ==(id) [NSNull null])
+                cell.passwordTextField.text =[self getPassword];
+            else
+                cell.passwordTextField.text =@"";
+            
+        }
+//        if([typingText isEqualToString:@""] || typingText == nil)
+//        {
+//           cell.emailTextField.text = placeHolderText;
+//        }
+//          else
+//          {
+//            cell.emailTextField.text = typingText;
+//
+//          }
+//        
+//        if([typingTextPass isEqualToString:@""] || typingTextPass == nil)
+//        {
+//            cell.passwordTextField.text =@"";
+//        }
+//        else
+//        {
+//            cell.passwordTextField.text = typingTextPass;
+//            
+//        }
         
         if (IS_IPHONE6 ||IS_IPHONE6_Plus){
         cell.layoutConstraintAccLabelYPos.constant =42;
@@ -985,9 +1035,33 @@
 #pragma mark - Camera Action
 -(void)selectCamera: (UIButton *)sender
 {
-    UIActionSheet *actionSheet1 = [[UIActionSheet alloc] initWithTitle:@"" delegate:self cancelButtonTitle:NSLocalizedString(@"CANCEL",@"") destructiveButtonTitle:NSLocalizedString(@"CAMERA",@"") otherButtonTitles:NSLocalizedString(@"PHOTO LIBRARY",@""), nil];
-    [actionSheet1 showInView:self.view];
-    [actionSheet1 sizeToFit];
+//    UIActionSheet *actionSheet1 = [[UIActionSheet alloc] initWithTitle:@"" delegate:self cancelButtonTitle:NSLocalizedString(@"CANCEL",@"") destructiveButtonTitle:NSLocalizedString(@"CAMERA",@"") otherButtonTitles:NSLocalizedString(@"PHOTO LIBRARY",@""), nil];
+//    [actionSheet1 showInView:self.view];
+//    [actionSheet1 sizeToFit];
+    
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@""
+                                                                   message:@""
+                                                            preferredStyle:UIAlertControllerStyleAlert];
+    
+    UIAlertAction *camera = [UIAlertAction actionWithTitle:NSLocalizedString(@"CANCEL",@"") style:UIAlertActionStyleDefault
+                                                   handler:^(UIAlertAction * action) {
+                                                       //[self promptForCamera];
+                                                   }];
+    
+    UIAlertAction *photoRoll = [UIAlertAction actionWithTitle:NSLocalizedString(@"CAMERA",@"") style:UIAlertActionStyleDefault
+                                                      handler:^(UIAlertAction * action) {
+                                                          //[self promptForPhotoRoll];
+                                                      }];
+    
+    UIAlertAction *cancel = [UIAlertAction actionWithTitle:NSLocalizedString(@"PHOTO LIBRARY",@"") style:UIAlertActionStyleDefault
+                                                   handler:^(UIAlertAction * action) {
+                                                       [self.presentedViewController dismissViewControllerAnimated:NO completion:nil];
+                                                   }];
+    
+    [alert addAction:camera];
+    [alert addAction:photoRoll];
+    [alert addAction:cancel];
+    [self presentViewController:alert animated:YES completion:nil];
 }
 
 -(void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
@@ -1043,6 +1117,15 @@
 #pragma mark - saveAction
 -(void)saveAction
 {
+    if(selectEmail==YES)
+    {
+        //here register API have to call.
+//        [objWebService postRegister:<#(NSString *)#> type:<#(NSString *)#>
+//                         first_name:<#(NSString *)#> last_name:<#(NSString *)#> email:<#(NSString *)#> password:<#(NSString *)#> profileId:<#(NSString *)#> dob:<#(NSString *)#> profileImage:<#(NSString *)#> gender:<#(NSString *)#> latitude:<#(NSString *)#> longitude:<#(NSString *)#> device:<#(NSString *)#> deviceid:<#(NSString *)#> success:<#^(AFHTTPRequestOperation *operation, id responseObject)success#> failure:<#^(AFHTTPRequestOperation *operation, id error)failure#>]
+    }
+    else{
+        
+    
     NSArray *postPerArray;
     postPerArray = [[placeHolderArray objectAtIndex:0]valueForKey:@"TypingText"];
     NSLog(@"last7%@",[postPerArray objectAtIndex:7]);
@@ -1052,9 +1135,9 @@
                       first_name:[postPerArray objectAtIndex:1]
                        last_name:[postPerArray objectAtIndex:2]
                              dob:[postPerArray objectAtIndex:4]
-                          image1:@""
-                          image2:@""
-                          image3:@""
+                          image1:NULL
+                          image2:NULL
+                          image3:NULL
                           gender:@""
                            about:@""
                          hobbies:@""
@@ -1068,6 +1151,7 @@
                          } failure:^(AFHTTPRequestOperation *operation, id error) {
                              
                          }];
+    }
 }
 
 

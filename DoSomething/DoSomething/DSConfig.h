@@ -76,7 +76,7 @@
 #define PASSWORD_REQUIRED           @"Password Required"
 
 //API Keys
-
+#define CheckUser_API           @"checkuser"
 #define Login_API               @"signin"
 #define Register_API             @"register"
 #define ProfileUpdate_API       @"updateprofile"
