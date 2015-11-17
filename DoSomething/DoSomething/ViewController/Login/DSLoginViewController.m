@@ -465,8 +465,8 @@
                            
                            if([[registerDict valueForKey:@"status"]isEqualToString:@"success"]){
                                
-                              //[COMMON setUserDetails:[[registerDict valueForKey:@"userDetails"]objectAtIndex:0]];
-                              // NSLog(@"userdetails = %@",[COMMON getUserDetails]);
+                              [COMMON setUserDetails:[[registerDict valueForKey:@"userDetails"]objectAtIndex:0]];
+                               NSLog(@"userdetails = %@",[COMMON getUserDetails]);
                               [self gotoHomeView];
                                
                            }

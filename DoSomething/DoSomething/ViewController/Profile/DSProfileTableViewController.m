@@ -37,6 +37,8 @@
     float space;
     
     UIImage *profileImage;
+    
+    BOOL isHobby;
 
 }
 @end
@@ -49,8 +51,14 @@
     [super viewDidLoad];
     objWebService = [[DSWebservice alloc]init];
 
-    
+//    imageNormalArray =[[NSMutableArray alloc]init];
+//    interstAndHobbiesArray =[[[NSUserDefaults standardUserDefaults] valueForKey:@"SelectedItem"]mutableCopy];
+//    imageNormalArray =[[[NSUserDefaults standardUserDefaults] valueForKey:@"SelectedItemNormal"]mutableCopy];
+//    
+//    hobbiesNameArray =[[[NSUserDefaults standardUserDefaults] valueForKey:@"SelectedItemName"]mutableCopy];
     [self initializeArray];
+   
+    
 }
 
 - (void)didReceiveMemoryWarning {
@@ -82,18 +90,15 @@
     [customNavigation.saveBtn addTarget:self action:@selector(saveAction:) forControlEvents:UIControlEventTouchUpInside];
     [customNavigation.buttonBack addTarget:self action:@selector(backAction) forControlEvents:UIControlEventTouchUpInside];
     
-    
     imageNormalArray =[[NSMutableArray alloc]init];
     
-    
     interstAndHobbiesArray =[[[NSUserDefaults standardUserDefaults] valueForKey:@"SelectedItem"]mutableCopy];
+    
     imageNormalArray =[[[NSUserDefaults standardUserDefaults] valueForKey:@"SelectedItemNormal"]mutableCopy];
     
     hobbiesNameArray =[[[NSUserDefaults standardUserDefaults] valueForKey:@"SelectedItemName"]mutableCopy];
     
-    
-
-   [_tableviewProfile reloadData];
+    [_tableviewProfile reloadData];
 
 }
 - (NSString *) getEmail {
@@ -270,6 +275,7 @@
 }
 
 - (void)pushToHobbiesView {
+    isHobby =YES;
     DSInterestAndHobbiesViewController * DSHobbiesView  = [[DSInterestAndHobbiesViewController alloc]initWithNibName:@"DSInterestAndHobbiesViewController" bundle:nil];
     DSHobbiesView.profileDetailsArray = placeHolderArray;
     [self.navigationController pushViewController:DSHobbiesView animated:YES];
@@ -465,11 +471,12 @@
                 cell.textFieldPlaceHolder.text = titleText;
             else
                 cell.textFieldPlaceHolder.text = placeHolderText;
+            
         
         }
         
-//        else
-//            cell.textFieldPlaceHolder.text = titleText;
+        else
+           cell.textFieldPlaceHolder.text = typingText;
     }
     
     if (indexPath.row == 3)
@@ -697,6 +704,11 @@
                 cell.emailTextField.text = placeHolderText;
             
         }
+        
+        else if (typingText!=nil)
+        {
+            cell.emailTextField.text=typingText;
+        }
         if(typingTextPass == (id)[NSNull null] || [typingTextPass isEqualToString:@""]  || typingTextPass == nil)//|| [typingText  isEqual: @"NULL"])
         {
             if(placeHolderText ==(id) [NSNull null])
@@ -704,6 +716,10 @@
             else
                 cell.passwordTextField.text =@"";
             
+        }
+        else if (typingTextPass != nil)
+        {
+            cell.passwordTextField.text=typingTextPass;
         }
 //        if([typingText isEqualToString:@""] || typingText == nil)
 //        {
@@ -1005,9 +1021,11 @@
     
                 if(selOptionVal != nil || ![selOptionVal isEqualToString:@""])
                     [[[placeHolderArray objectAtIndex:indexPath.section] objectAtIndex:indexPath.row] setObject:selOptionVal forKey:@"placeHolder"];
+    [_tableviewProfile beginUpdates];
+    [_tableviewProfile reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
+    [_tableviewProfile endUpdates];
     
-    
-    [_tableviewProfile reloadData];
+    //[_tableviewProfile reloadData];
 }
 
 #pragma mark - Textview delegate
