@@ -16,7 +16,6 @@
 #import "OpenUDID.h"
 #import <MapKit/MapKit.h>
 #import "NSString+validations.h"
-#import <FacebookSDK/FacebookSDK.h>
 #import <FBSDKCoreKit/FBSDKCoreKit.h>
 #import <FBSDKLoginKit/FBSDKLoginKit.h>
 

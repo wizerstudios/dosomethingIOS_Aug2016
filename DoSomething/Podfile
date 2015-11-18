@@ -6,6 +6,7 @@
 target 'DoSomething' do
 
 pod 'JBKenBurnsView'
+pod 'FBSDKLoginKit'
 
 end
 
