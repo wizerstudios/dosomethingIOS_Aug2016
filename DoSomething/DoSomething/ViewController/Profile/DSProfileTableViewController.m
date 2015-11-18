@@ -451,6 +451,8 @@
         {
             [[NSBundle mainBundle] loadNibNamed:@"DSProfileTableViewCell" owner:self options:nil];
             cell = cellProfileImg;
+            [self initControl];
+            [self SetImageArray];
         }
         
         if (IS_IPHONE6 ||IS_IPHONE6_Plus)
@@ -1130,17 +1132,18 @@
     image = [info valueForKey:UIImagePickerControllerEditedImage];
      profileImage = image;
     NSLog(@"uploadImg=%@",image);
-    [_tableviewProfile reloadData];
+    
     if(profileImage != nil)
     {
         [self uploadNextImageMethod];
     }
+    //[_tableviewProfile reloadData];
     [imagepickerController dismissViewControllerAnimated:YES completion:nil];
 }
 -(void)uploadNextImageMethod
 {
-    [self initControl];
-    [self SetImageArray];
+    //[self initControl];
+    //[self SetImageArray];
 }
 -(void)SetImageArray
 {
@@ -1327,8 +1330,8 @@
     [self.scrollView setBackgroundColor:[UIColor greenColor]];
     self.scrollView.isdifferSpeed = YES;
     
-    _scrollView.foregroundScreenEdgeInsets = UIEdgeInsetsMake(0, 0, 0, 0);
-    [self.view insertSubview:_scrollView atIndex:0];
+    _scrollView.foregroundScreenEdgeInsets = UIEdgeInsetsMake(0, 0,0,0);
+    [cell.profileScrollview insertSubview:_scrollView atIndex:0];
 }
 
 - (void)reloadData
