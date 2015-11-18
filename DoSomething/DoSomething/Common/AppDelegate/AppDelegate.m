@@ -10,6 +10,9 @@
 #import "DSConfig.h"
 #import <FacebookSDK/FacebookSDK.h>
 #import <FBSDKCoreKit/FBSDKCoreKit.h>
+#import "DSHomeViewController.h"
+#import "DSAppCommon.h"
+#import "HomeViewController.h"
 
 
 @interface AppDelegate ()
@@ -27,17 +30,21 @@
       NSLog(@"### Running FB SDK Version: %@", [FBSDKSettings sdkVersion]);
     [[FBSDKApplicationDelegate sharedInstance] application:application
                              didFinishLaunchingWithOptions:launchOptions];
+    if ([COMMON isUserLoggedIn]) {
+        userHomeView = [[HomeViewController alloc]initWithNibName:@"HomeViewController" bundle:nil];
+        self.window.rootViewController = userHomeView;
+        self.navigationController = [[UINavigationController alloc] initWithRootViewController:userHomeView];
+    }
+    else {
+        splashViewController = [[DSHomeViewController alloc] initWithNibName:@"DSHomeViewController" bundle:nil];
+        self.window.rootViewController = splashViewController;
+        self.navigationController = [[UINavigationController alloc] initWithRootViewController:splashViewController];
+    }
 
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
-
-    splashViewController = [[DSHomeViewController alloc] initWithNibName:@"DSHomeViewController" bundle:nil];
-    self.window.rootViewController = splashViewController;
-    self.navigationController = [[UINavigationController alloc] initWithRootViewController:splashViewController];
     [self.window setRootViewController:self.navigationController];
     self.window.backgroundColor=[UIColor whiteColor];
     [self.window makeKeyAndVisible];
-  
-    
     [self TabBarViews];
     
     return YES;

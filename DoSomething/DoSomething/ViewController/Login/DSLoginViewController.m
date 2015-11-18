@@ -76,12 +76,7 @@
      [attStr addAttribute:NSFontAttributeName value:PATRON_BOLD(12) range:[string rangeOfString:@"Facebook"]];
      labelFacebook.attributedText = attStr;
      labelFacebook.attributedText = attStr;
-     [_createAnAcountFB addTarget:self action:@selector(loginByFacebook) forControlEvents:UIControlEventTouchUpInside];
-//     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(loginByFacebook)];
-//     [labelFacebook addGestureRecognizer:tap];
-//     labelFacebook.userInteractionEnabled = YES;
-//     labelFacebook.tag = 10;
-     
+     labelFacebook.tag = 10;
       labelEmail.text =@"Or sign up with your email";
       labelCreateAnAcc.text =@"Create Your Account";
       labelInstruction.text =@"By selecting this,you agree to our Terms of Use and our Privacy Policy";
@@ -104,14 +99,7 @@
      [attStr addAttribute:NSFontAttributeName value:PATRON_REG(12) range:[string rangeOfString:@"Log in with"]];
      [attStr addAttribute:NSFontAttributeName value:PATRON_BOLD(12) range:[string rangeOfString:@"Facebook"]];
      labelFacebook.attributedText = attStr;
-     [_createAnAcountFB addTarget:self action:@selector(loginByFacebook) forControlEvents:UIControlEventTouchUpInside];
-//     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(loginByFacebook)];
-//     [labelFacebook addGestureRecognizer:tap];
-//     labelFacebook.userInteractionEnabled = YES;
-//     labelFacebook.tag = 11;
-     
-
-        
+     labelFacebook.tag = 11;
      labelEmail.text =@"Or log in with your email";
      labelSignIn.text =@"Sign in";
      [buttonForgotPass setTitle:@"Forgot password?" forState:UIControlStateNormal];
@@ -204,7 +192,7 @@
     
     
 }
-#pragma mark - CreateButtonAction
+#pragma mark - Create and Sign Button Action
 -(void)CreateAnAccount
 {
     objSigninType=@"1";
@@ -245,7 +233,6 @@
     }
    
 }
-#pragma mark - SignButtonAction
 -(void)SignButtonAction
 {
     //isSignin =YES;
@@ -282,13 +269,9 @@
         
         [COMMON LoadIcon:self.view];
         [self loadloginAPI];
-        
-        
     }
-    
 }
-
-#pragma mark - check user Email
+#pragma mark - checkuserEmailAPI
 - (void)checkUserEmail{
     [objWebService checkUser:CheckUser_API
                        email:email
@@ -306,7 +289,6 @@
                                  [self gotoProfileView:email :password:YES];//[self gotoProfileView];
                                  [COMMON removeLoading];
                              }
-                         
                          }
                          else {
                              if([[[responseObject objectForKey:@"checkuser"]objectForKey:@"status"]  isEqual: @"error"]){
@@ -326,7 +308,6 @@
 #pragma mark - loginByFacebook
 -(void)loginByFacebook
 {
-    
     objSigninType=@"2";
     
     FBSDKLoginManager *login = [[FBSDKLoginManager alloc] init];
@@ -372,6 +353,7 @@
 }
 
 #pragma mark - gotoProfileView
+
 -(void)gotoProfileView:(NSString *)strEmailId :(NSString *)strPassword :(BOOL)selectMail{
     DSProfileTableViewController *profileVC  = [[DSProfileTableViewController alloc]initWithNibName:@"DSProfileTableViewController" bundle:nil];
     profileVC.userDetailsDict = [fbUserDetailsDict mutableCopy];
@@ -380,8 +362,7 @@
     profileVC.selectEmail             = selectMail;
     [self.navigationController pushViewController:profileVC animated:YES];
 }
-//-------temp code
-#pragma mark - gotoProfileView
+   //----Profile View With FacebookProfileID
 -(void)gotoProfileView:(NSString*)FBProfileID{
     DSProfileTableViewController *profileVC  = [[DSProfileTableViewController alloc]initWithNibName:@"DSProfileTableViewController" bundle:nil];
     profileVC.userDetailsDict = [fbUserDetailsDict mutableCopy];
@@ -391,10 +372,8 @@
 
 #pragma mark - gotoHomeView
 -(void)gotoHomeView{
-    
     HomeViewController * objHomeview = [[HomeViewController alloc]initWithNibName:@"HomeViewController" bundle:nil];
     [self.navigationController pushViewController:objHomeview animated:NO];
-    
 }
 #pragma mark - loadloginAPI
 -(void)loadloginAPI
@@ -429,7 +408,6 @@
         }
         else{
             NSLog(@"responseObject = %@",responseObject);
-            //[DSAppCommon showSimpleAlertWithMessage:[loginDict valueForKey:@"Message"]];
             [self presentViewController:[ DSAppCommon alertWithTitle:@"Title" withMessage:[loginDict valueForKey:@"Message"] preferredStyle:UIAlertControllerStyleAlert] animated:YES completion:NULL];
         }
         [COMMON removeLoading];
@@ -497,8 +475,6 @@
 
 -(void)alterMsg:(NSString*)msgStr
 {
-//    UIAlertView * objalterMsg =[[UIAlertView alloc]initWithTitle:nil message:msgStr delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
-//    [objalterMsg show];
     UIAlertController * alert=   [UIAlertController
                                   alertControllerWithTitle:nil
                                   message:msgStr
@@ -507,9 +483,12 @@
     [self presentViewController:alert animated:YES completion:nil];
     
 }
-#pragma mark - BackAction
+#pragma mark - ButtonActions
 - (IBAction)Back:(id)sender {
     [self.navigationController popViewControllerAnimated:YES];
 }
 
+- (IBAction)createAnAccountFB:(id)sender {
+    [self loginByFacebook];
+}
 @end
