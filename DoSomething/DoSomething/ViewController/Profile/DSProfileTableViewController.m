@@ -244,10 +244,16 @@
     
     
     else if (indexPath.row ==4 ) {
-        selOptionVal = cell.textFieldDPPlaceHolder.text;
-        
+       // selOptionVal = cell.textFieldDPPlaceHolder.text;
+       
+        NSDate *date = datePicker.date;
+        NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+        [formatter setDateFormat:@"dd/MM/yyyy"];
+        selOptionVal = [formatter stringFromDate:date];
+       
         if(selOptionVal != nil || ![selOptionVal isEqualToString:@""]){
-            [[[placeHolderArray objectAtIndex:indexPath.section] objectAtIndex:indexPath.row] setObject:selOptionVal forKey:@"TypingText"];
+            //[[[placeHolderArray objectAtIndex:indexPath.section] objectAtIndex:indexPath.row] setObject:selOptionVal forKey:@"TypingText"];
+            currentTextfield.text =selOptionVal;
         }
         
         
@@ -1113,40 +1119,6 @@
     [alert addAction:cancel];
     [self presentViewController:alert animated:YES completion:nil];
 }
-//-(void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
-////- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
-//{
-//    imagepickerController = [[UIImagePickerController alloc] init];
-//    imagepickerController.delegate = self;
-//    [imagepickerController setAllowsEditing:YES];
-//    
-//    switch (buttonIndex) {
-//        case 0:
-//            if (![UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera])
-//            {
-//                UIAlertView *altView = [[UIAlertView alloc]initWithTitle:[[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleName"]
-//                                                                 message:NSLocalizedString(@"Sorry, you do not have a camera",@"")
-//                                                                delegate:nil
-//                                                       cancelButtonTitle:NSLocalizedString(@"OK",@"")
-//                                                       otherButtonTitles:nil];
-//                [altView show];
-//                return;
-//            }else{
-//                imagepickerController.sourceType = UIImagePickerControllerSourceTypeCamera;
-//                [self presentViewController:imagepickerController animated:YES completion:nil];
-//            }
-//            break;
-//            
-//        case 1:
-//            
-//            imagepickerController.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
-//            [self presentViewController:imagepickerController animated:YES completion:nil];
-//            break;
-//            
-//        default:
-//            break;
-//    }
-//}
 
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
 {
@@ -1195,10 +1167,10 @@
     
             [objWebService postRegister:Register_API
                                    type:strType
-                             first_name:FirstName
-                              last_name:LastName
-                                  email:cell.emailTextField.text
-                               password:cell.passwordTextField.text
+                             first_name:[NSString stringWithFormat:@"%@",FirstName]
+                              last_name:[NSString stringWithFormat:@"%@",LastName]
+                                  email:emailAddressToRegister
+                               password:emailPasswordToRegister
                               profileId:strProfileID
                                     dob:strDOB
                            profileImage:strProfileImage
@@ -1207,10 +1179,12 @@
                               longitude:currentLongitude
                                  device:Device
                                deviceid:deviceUdid
-                   notification_message:isNotification_message
-                   notification_sound  :isNotification_sound
-                 notification_vibration:isNotification_vibration
-                                success:^(AFHTTPRequestOperation *operation, id responseObject) {
+                   notification_message:YES
+                   notification_sound  :YES
+                 notification_vibration:YES
+                                success:^(AFHTTPRequestOperation *operation, id responseObject)
+             {
+                                   
                                     [self gotoHomeView];
           
                                 }
