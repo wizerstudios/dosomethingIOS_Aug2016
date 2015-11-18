@@ -311,15 +311,12 @@
     objSigninType=@"2";
     
     FBSDKLoginManager *login = [[FBSDKLoginManager alloc] init];
-    [login logOut];
+    login.loginBehavior = FBSDKLoginBehaviorNative;
     [login logInWithReadPermissions:@[@"email"] fromViewController:self handler:^(FBSDKLoginManagerLoginResult *result, NSError *error) {
          if (error) {
-             NSLog(@"Process error");
-             NSLog(@"error = %@",error);
+
          } else if (result.isCancelled) {
-             NSLog(@"Cancelled");
          } else {
-             NSLog(@"Logged in");
              FBSDKGraphRequest *request = [[FBSDKGraphRequest alloc] initWithGraphPath:@"me" parameters:@{@"fields": @"id,name,email,gender,birthday,first_name,last_name"}];
              [request startWithCompletionHandler:^(FBSDKGraphRequestConnection *connection, id result, NSError *error) {
                  // handle response
