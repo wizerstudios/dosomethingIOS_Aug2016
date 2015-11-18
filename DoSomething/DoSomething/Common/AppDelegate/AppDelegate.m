@@ -8,7 +8,6 @@
 
 #import "AppDelegate.h"
 #import "DSConfig.h"
-#import <FacebookSDK/FacebookSDK.h>
 #import <FBSDKCoreKit/FBSDKCoreKit.h>
 #import "DSHomeViewController.h"
 #import "DSAppCommon.h"
@@ -184,8 +183,6 @@
 
 - (void)applicationWillTerminate:(UIApplication *)application {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
-    [FBSession.activeSession closeAndClearTokenInformation];
-    [FBSession.activeSession close];
 
 }
 
