@@ -32,7 +32,6 @@
                 <outlet property="buttonSignIn" destination="UCk-i4-sP1" id="AgQ-Z0-jdo"/>
                 <outlet property="buttonSignInHeightConstraint" destination="u0V-VH-kJA" id="JxS-Fn-0jh"/>
                 <outlet property="buttonTermsOfUse" destination="TrV-dd-2rk" id="jRB-dd-Sti"/>
-                <outlet property="createAnAcountFB" destination="fHu-JF-COM" id="MkU-6O-tTM"/>
                 <outlet property="emailTxt" destination="c7o-Yq-ofS" id="iCb-Gz-hlm"/>
                 <outlet property="labelCreateAnAcc" destination="zTU-Oo-6WB" id="pMM-J5-jlF"/>
                 <outlet property="labelEmail" destination="sR7-yr-HZB" id="dTx-x4-7Ee"/>
@@ -82,6 +81,9 @@
                                         <constraint firstAttribute="width" constant="320" id="Q3M-gA-Te2"/>
                                         <constraint firstAttribute="height" constant="47" id="SzM-uk-GVF"/>
                                     </constraints>
+                                    <connections>
+                                        <action selector="createAnAccountFB:" destination="-1" eventType="touchUpInside" id="Ne7-wk-Eza"/>
+                                    </connections>
                                 </button>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ocI-oM-Rhj">
                                     <rect key="frame" x="32" y="10" width="270" height="21"/>
@@ -111,7 +113,7 @@
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ciY-M6-6s7">
                             <rect key="frame" x="0.0" y="60" width="320" height="126"/>
                             <subviews>
-                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Email" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="c7o-Yq-ofS">
+                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Email" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="c7o-Yq-ofS">
                                     <rect key="frame" x="32" y="43" width="283" height="40"/>
                                     <animations/>
                                     <constraints>
@@ -120,7 +122,7 @@
                                     <fontDescription key="fontDescription" name="Patron-Regular" family="Patron" pointSize="13"/>
                                     <textInputTraits key="textInputTraits" keyboardType="emailAddress"/>
                                 </textField>
-                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Password" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="rXR-Rw-64v">
+                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Password" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="rXR-Rw-64v">
                                     <rect key="frame" x="32" y="86" width="283" height="40"/>
                                     <animations/>
                                     <constraints>

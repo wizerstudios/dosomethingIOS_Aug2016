@@ -73,6 +73,6 @@
 @property (strong, nonatomic) IBOutlet NSLayoutConstraint *layoutConstraintTextFieldCenterLabelYPos;
 
 @property (strong, nonatomic) IBOutlet NSLayoutConstraint *layoutConstraintPassTextFieldlYPos;
-@property (strong, nonatomic) IBOutlet UIButton *createAnAcountFB;
+- (IBAction)createAnAccountFB:(id)sender;
 
 @end
