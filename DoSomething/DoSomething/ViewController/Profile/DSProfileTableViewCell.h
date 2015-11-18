@@ -53,6 +53,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *textViewHeaderLabel;
 @property (strong, nonatomic) IBOutlet UIButton *cameraButton,*uploadButton;
 @property (strong, nonatomic) IBOutlet UIImageView *profileImageview;
+@property (strong,nonatomic) IBOutlet UIScrollView * profileScrollview;
 
 
 
