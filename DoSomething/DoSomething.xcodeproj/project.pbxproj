@@ -16,7 +16,6 @@
 		2B83CAC81BE895AB0064EC7F /* Default-667h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2B83CAC31BE895AB0064EC7F /* Default-667h@2x.png */; };
 		2B83CACA1BE8975F0064EC7F /* Default-736h@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2B83CAC91BE8975F0064EC7F /* Default-736h@3x.png */; };
 		2B83CACE1BE8D4FD0064EC7F /* NSString+validations.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B83CACD1BE8D4FD0064EC7F /* NSString+validations.m */; };
-		2BD72ACE1BFCC228003846E9 /* OpenUDID.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BD72AAD1BFCC228003846E9 /* OpenUDID.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		2BD72ADC1BFCC28A003846E9 /* PWParallaxScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BD72ADB1BFCC28A003846E9 /* PWParallaxScrollView.m */; };
 		2BD72ADF1BFCC2BF003846E9 /* DAAutoScroll.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BD72ADE1BFCC2BF003846E9 /* DAAutoScroll.m */; };
 		2BD72AE21BFCC584003846E9 /* AFNetworkActivityLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BD72AE11BFCC584003846E9 /* AFNetworkActivityLogger.m */; };
@@ -37,6 +36,7 @@
 		2BD72B151BFCC5D4003846E9 /* UIProgressView+AFNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BD72B0B1BFCC5D4003846E9 /* UIProgressView+AFNetworking.m */; };
 		2BD72B161BFCC5D4003846E9 /* UIRefreshControl+AFNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BD72B0D1BFCC5D4003846E9 /* UIRefreshControl+AFNetworking.m */; };
 		2BD72B171BFCC5D4003846E9 /* UIWebView+AFNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BD72B0F1BFCC5D4003846E9 /* UIWebView+AFNetworking.m */; };
+		2BD72B1A1BFCC713003846E9 /* OpenUDID.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BD72B191BFCC713003846E9 /* OpenUDID.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		511C735D1BE3801100D3D61D /* ChatTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 511C73581BE3801100D3D61D /* ChatTableViewCell.m */; };
 		511C735E1BE3801100D3D61D /* ChatTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 511C73591BE3801100D3D61D /* ChatTableViewCell.xib */; };
 		511C735F1BE3801100D3D61D /* DSChatDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 511C735B1BE3801100D3D61D /* DSChatDetailViewController.m */; };
@@ -185,8 +185,6 @@
 		2B83CAC91BE8975F0064EC7F /* Default-736h@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-736h@3x.png"; sourceTree = "<group>"; };
 		2B83CACC1BE8D4FD0064EC7F /* NSString+validations.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+validations.h"; sourceTree = "<group>"; };
 		2B83CACD1BE8D4FD0064EC7F /* NSString+validations.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+validations.m"; sourceTree = "<group>"; };
-		2BD72AAC1BFCC228003846E9 /* OpenUDID.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OpenUDID.h; sourceTree = "<group>"; };
-		2BD72AAD1BFCC228003846E9 /* OpenUDID.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OpenUDID.m; sourceTree = "<group>"; };
 		2BD72ADA1BFCC28A003846E9 /* PWParallaxScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PWParallaxScrollView.h; path = Helpers/ParallaxScroll/PWParallaxScrollView.h; sourceTree = "<group>"; };
 		2BD72ADB1BFCC28A003846E9 /* PWParallaxScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PWParallaxScrollView.m; path = Helpers/ParallaxScroll/PWParallaxScrollView.m; sourceTree = "<group>"; };
 		2BD72ADD1BFCC2BF003846E9 /* DAAutoScroll.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DAAutoScroll.h; sourceTree = "<group>"; };
@@ -229,6 +227,8 @@
 		2BD72B0D1BFCC5D4003846E9 /* UIRefreshControl+AFNetworking.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIRefreshControl+AFNetworking.m"; sourceTree = "<group>"; };
 		2BD72B0E1BFCC5D4003846E9 /* UIWebView+AFNetworking.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIWebView+AFNetworking.h"; sourceTree = "<group>"; };
 		2BD72B0F1BFCC5D4003846E9 /* UIWebView+AFNetworking.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIWebView+AFNetworking.m"; sourceTree = "<group>"; };
+		2BD72B181BFCC713003846E9 /* OpenUDID.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OpenUDID.h; sourceTree = "<group>"; };
+		2BD72B191BFCC713003846E9 /* OpenUDID.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OpenUDID.m; sourceTree = "<group>"; };
 		511C73571BE3801100D3D61D /* ChatTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChatTableViewCell.h; sourceTree = "<group>"; };
 		511C73581BE3801100D3D61D /* ChatTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChatTableViewCell.m; sourceTree = "<group>"; };
 		511C73591BE3801100D3D61D /* ChatTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ChatTableViewCell.xib; sourceTree = "<group>"; };
@@ -561,8 +561,8 @@
 		2BD72AAB1BFCC228003846E9 /* OpenUDID */ = {
 			isa = PBXGroup;
 			children = (
-				2BD72AAC1BFCC228003846E9 /* OpenUDID.h */,
-				2BD72AAD1BFCC228003846E9 /* OpenUDID.m */,
+				2BD72B181BFCC713003846E9 /* OpenUDID.h */,
+				2BD72B191BFCC713003846E9 /* OpenUDID.m */,
 			);
 			name = OpenUDID;
 			path = Helpers/OpenUDID;
@@ -1263,6 +1263,7 @@
 				065BAC521BC7A135005AF493 /* main.m in Sources */,
 				2BD72B151BFCC5D4003846E9 /* UIProgressView+AFNetworking.m in Sources */,
 				2BD72B101BFCC5D4003846E9 /* AFNetworkActivityIndicatorManager.m in Sources */,
+				2BD72B1A1BFCC713003846E9 /* OpenUDID.m in Sources */,
 				6A50C21C1BCCBB8C002B11AC /* DSProfileTableViewCell.m in Sources */,
 				EAEF25241BCF9EF600F83E82 /* IQSegmentedNextPrevious.m in Sources */,
 				2B83CACE1BE8D4FD0064EC7F /* NSString+validations.m in Sources */,
@@ -1273,7 +1274,6 @@
 				EAEF25351BCFEBF400F83E82 /* CustomNavigationView.m in Sources */,
 				EAEF25251BCF9EF600F83E82 /* IQTextView.m in Sources */,
 				EADB949C1BDF566C00512374 /* HomeCustomCell.m in Sources */,
-				2BD72ACE1BFCC228003846E9 /* OpenUDID.m in Sources */,
 				EAEF25211BCF9EF600F83E82 /* IQUIWindow+Hierarchy.m in Sources */,
 				EAFC96581BD20FD400B3593D /* DSInterestAndHobbiesViewController.m in Sources */,
 				2BD72ADF1BFCC2BF003846E9 /* DAAutoScroll.m in Sources */,
