@@ -1150,25 +1150,11 @@
     FirstName = (strFirstName!=nil)? strFirstName:@"";
     LastName  = (strLastName!=nil)?strLastName:@"";
     strDOB       = (currentTextfield.text !=nil)?currentTextfield.text :@"";
-//    if(cell.emailTextField.text == nil)
-//    {
-//       [self presentViewController:[ DSAppCommon alertWithTitle:@"Title" withMessage:INVALID_EMAIL preferredStyle:UIAlertControllerStyleAlert] animated:YES completion:NULL];
-//    }
-//    else if (cell.passwordTextField.text == nil)
-//    {
-//        [self presentViewController:[ DSAppCommon alertWithTitle:@"Title" withMessage:PASSWORD_REQUIRED preferredStyle:UIAlertControllerStyleAlert] animated:YES completion:NULL];
-//    }
-//    
-   
-//    NSString *strFirstName = [postPerArray objectAtIndex:1];
-//    NSString *strLastName = [postPerArray objectAtIndex:2];
-//    NSString *strDOB = [postPerArray objectAtIndex:2];
-   
-    
-            [objWebService postRegister:Register_API
+    NSLog(@"isNotification_vibration:%@",isNotification_vibration);
+    [objWebService postRegister:Register_API
                                    type:strType
-                             first_name:[NSString stringWithFormat:@"%@",FirstName]
-                              last_name:[NSString stringWithFormat:@"%@",LastName]
+                             first_name:FirstName
+                              last_name:LastName
                                   email:emailAddressToRegister
                                password:emailPasswordToRegister
                               profileId:strProfileID
@@ -1181,13 +1167,20 @@
                                deviceid:deviceUdid
                    notification_message:YES
                    notification_sound  :YES
-                 notification_vibration:YES
+                 notification_vibration:isNotification_vibration
                                 success:^(AFHTTPRequestOperation *operation, id responseObject)
-             {
-                                   
-                                    [self gotoHomeView];
-          
-                                }
+                                        {
+                                            NSLog(@"rsponse:%@",responseObject);
+                 
+                                            NSMutableDictionary *registerDict = [[NSMutableDictionary alloc]init];
+                 
+                                            registerDict = [responseObject valueForKey:@"register"];
+                 
+                                            if([[registerDict valueForKey:@"status"]isEqualToString:@"success"]){
+                                                    [self gotoHomeView];
+                                                }
+                                        }
+             
                                 failure:^(AFHTTPRequestOperation *operation, id error) {
                                     
                                 }];

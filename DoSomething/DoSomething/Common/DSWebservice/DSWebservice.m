@@ -135,9 +135,9 @@ notification_vibration:(BOOL)isnotification_vibration
     if(longitude)               [registerDetails    setObject:longitude             forKey:@"longitude"];
     if(device)                  [registerDetails    setObject:device                forKey:@"device"];
     if(deviceid)                [registerDetails    setObject:deviceid              forKey:@"deviceid"];
-    if(isnotification_message)  [registerDetails    setObject:[NSNumber numberWithBool:isnotification_message]  forKey:@"isnotification_message"];
-    if(isnotification_sound)    [registerDetails    setObject:[NSNumber numberWithBool:isnotification_sound]  forKey:@"isnotification_sound"];
-    if(isnotification_vibration)[registerDetails    setObject:[NSNumber numberWithBool:isnotification_vibration]  forKey:@"isnotification_vibration"];
+    if(isnotification_message)  [registerDetails    setObject:[NSNumber numberWithBool:isnotification_message]  forKey:@"notification_message"];
+    if(isnotification_sound)    [registerDetails    setObject:[NSNumber numberWithBool:isnotification_sound]  forKey:@"notification_sound"];
+    if(isnotification_vibration)[registerDetails    setObject:[NSNumber numberWithBool:isnotification_vibration]  forKey:@"notification_vibration"];
     
     
     
