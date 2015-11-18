@@ -58,10 +58,13 @@
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="R2K-2f-wgq">
                         <rect key="frame" x="0.0" y="0.0" width="300" height="200"/>
                         <subviews>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="U02-po-bf5">
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="U02-po-bf5">
                                 <rect key="frame" x="0.0" y="36" width="300" height="128"/>
                                 <animations/>
                                 <color key="backgroundColor" red="0.90196078430000004" green="0.2470588235" blue="0.32156862749999998" alpha="1" colorSpace="deviceRGB"/>
+                                <connections>
+                                    <outlet property="delegate" destination="R2K-2f-wgq" id="HRZ-pQ-P48"/>
+                                </connections>
                             </scrollView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="profile_noimg" translatesAutoresizingMaskIntoConstraints="NO" id="bAy-v9-r7J">
                                 <rect key="frame" x="88" y="40" width="125" height="125"/>
@@ -120,13 +123,17 @@
                         <color key="backgroundColor" red="0.90980392156862744" green="0.90980392156862744" blue="0.90980392156862744" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="U2t-y1-clf" firstAttribute="centerX" secondItem="R2K-2f-wgq" secondAttribute="centerX" id="3PD-Z0-fZz"/>
+                            <constraint firstItem="U02-po-bf5" firstAttribute="centerX" secondItem="R2K-2f-wgq" secondAttribute="centerX" id="41T-C1-7bf"/>
                             <constraint firstItem="MDZ-Us-VGR" firstAttribute="leading" secondItem="R2K-2f-wgq" secondAttribute="leading" constant="2" id="5xx-Dd-yD1"/>
                             <constraint firstAttribute="height" constant="200" id="7F0-fM-zw1"/>
                             <constraint firstItem="L4l-gD-IHh" firstAttribute="top" secondItem="U2t-y1-clf" secondAttribute="bottom" constant="1" id="B45-3F-bDc"/>
+                            <constraint firstItem="U02-po-bf5" firstAttribute="leading" secondItem="R2K-2f-wgq" secondAttribute="leading" id="BSM-oY-WTq"/>
+                            <constraint firstItem="L4l-gD-IHh" firstAttribute="top" secondItem="U02-po-bf5" secondAttribute="bottom" constant="2" id="Dj4-ic-RLY"/>
                             <constraint firstItem="bAy-v9-r7J" firstAttribute="centerY" secondItem="L4l-gD-IHh" secondAttribute="centerY" constant="-78.5" id="W8e-GP-TpU"/>
                             <constraint firstItem="bAy-v9-r7J" firstAttribute="centerX" secondItem="L4l-gD-IHh" secondAttribute="centerX" id="X6e-UC-e0Z"/>
                             <constraint firstAttribute="centerX" secondItem="L4l-gD-IHh" secondAttribute="centerX" constant="-0.5" id="Yzw-MV-6rI"/>
                             <constraint firstItem="bAy-v9-r7J" firstAttribute="centerX" secondItem="R2K-2f-wgq" secondAttribute="centerX" id="cJa-XE-af6"/>
+                            <constraint firstItem="U02-po-bf5" firstAttribute="top" secondItem="MDZ-Us-VGR" secondAttribute="bottom" constant="5" id="esi-nr-g7f"/>
                             <constraint firstItem="U2t-y1-clf" firstAttribute="top" secondItem="R2K-2f-wgq" secondAttribute="top" constant="40" id="f7a-rV-vxf"/>
                             <constraint firstItem="MDZ-Us-VGR" firstAttribute="top" secondItem="R2K-2f-wgq" secondAttribute="top" constant="10" id="hQE-mh-1iI"/>
                             <constraint firstAttribute="bottom" secondItem="L4l-gD-IHh" secondAttribute="bottom" constant="3" id="hTw-Ml-OYo"/>

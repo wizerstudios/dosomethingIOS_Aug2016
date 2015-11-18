@@ -19,7 +19,7 @@
 #import "PWParallaxScrollView.h"
 
 
-@interface DSProfileTableViewController ()<CLLocationManagerDelegate,UIAlertViewDelegate,PWParallaxScrollViewDataSource,PWParallaxScrollViewDelegate>
+@interface DSProfileTableViewController ()<CLLocationManagerDelegate,UIAlertViewDelegate,PWParallaxScrollViewDataSource,PWParallaxScrollViewDelegate,UIScrollViewDelegate>
 {
     DSWebservice            * objWebService;
     CLLocationManager       *locationManager;
@@ -68,12 +68,6 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     objWebService = [[DSWebservice alloc]init];
-
-//    imageNormalArray =[[NSMutableArray alloc]init];
-//    interstAndHobbiesArray =[[[NSUserDefaults standardUserDefaults] valueForKey:@"SelectedItem"]mutableCopy];
-//    imageNormalArray =[[[NSUserDefaults standardUserDefaults] valueForKey:@"SelectedItemNormal"]mutableCopy];
-//    
-//    hobbiesNameArray =[[[NSUserDefaults standardUserDefaults] valueForKey:@"SelectedItemName"]mutableCopy];
     [self initializeArray];
     deviceUdid = [OpenUDID value];
    
@@ -451,8 +445,8 @@
         {
             [[NSBundle mainBundle] loadNibNamed:@"DSProfileTableViewCell" owner:self options:nil];
             cell = cellProfileImg;
-            [self initControl];
-            [self SetImageArray];
+           // [self initControl];
+            //[self SetImageArray];
         }
         
         if (IS_IPHONE6 ||IS_IPHONE6_Plus)
@@ -1142,8 +1136,18 @@
 }
 -(void)uploadNextImageMethod
 {
-    //[self initControl];
-    //[self SetImageArray];
+    [self scrollViewDidScroll:cell.profileScrollview];
+}
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView;
+{
+    if (scrollView == cell.profileScrollview) {
+        //IndexVal = scrollView.contentOffset.x/SCREEN_WIDTH;
+        //[topSliderScrollView setNeedsDisplay];
+        //pageController.currentPage = IndexVal;
+        [cell.profileImageview setFrame:CGRectMake(300, 0,cell.profileScrollview.frame.size.width,cell.profileScrollview.frame.size.height)];
+    }
+
+    NSLog(@"scroll");
 }
 -(void)SetImageArray
 {
@@ -1207,138 +1211,6 @@
                                 }];
 }
 
-#pragma mark - PWParallaxScrollViewSource
-
-- (NSInteger)numberOfItemsInScrollView:(PWParallaxScrollView *)scrollView
-{
-    UIView *pgDtView = [[UIView alloc] initWithFrame:CGRectMake((self.view.frame.size.width/2) - (([BGimageArray count] * 30)/2) + 18 ,40, [BGimageArray count] * 20, 15)];
-    
-    pgDtView.backgroundColor = [UIColor clearColor];
-    
-    for(int i=0;i<[BGimageArray count];i++){
-        
-        UIButton *blkdot = [[UIButton alloc]init];
-        
-        [blkdot setFrame:CGRectMake(i*20, 0, 10, 10)];
-        
-        [blkdot setTag:i];
-        
-        [blkdot setBackgroundColor:[UIColor clearColor]];
-        
-        [blkdot setImage:[UIImage imageNamed:@"tuto_dot_Inactive.png"] forState:UIControlStateNormal];
-        
-        [pgDtView addSubview:blkdot];
-    }
-    
-    pageControllBtn = [[UIButton alloc]init];
-    
-    pageControllBtn.backgroundColor = [UIColor clearColor];
-    [pageControllBtn setFrame:CGRectMake(0, 0, 10, 10)];
-    [pageControllBtn setImage:[UIImage imageNamed:@"tuto_dot"] forState:UIControlStateNormal];
-    
-    
-    
-    [pgDtView addSubview:pageControllBtn];
-    
-    [self.view addSubview: pgDtView];
-    
-    
-    
-    return [BGimageArray count];
-}
-
-- (UIView *)backgroundViewAtIndex:(NSInteger)index scrollView:(PWParallaxScrollView *)scrollView
-{
-    
-    UIImageView *imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:BGimageArray[index]]];
-    imageView.contentMode = UIViewContentModeScaleAspectFill;
-    //[imageView setBackgroundColor:[UIColor redColor]];
-    return imageView;
-}
-
-- (UIView *)foregroundViewAtIndex:(NSInteger)index scrollView:(PWParallaxScrollView *)scrollView
-{
-    foregroundView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 120, self.view.frame.size.width, self.view.frame.size.height-40)];
-    
-    UILabel *labelTitle;
-    // CGFloat yPosition = 0;
-    
-    mainview=[[UIView alloc]initWithFrame:CGRectMake(self.view.frame.origin.x,-60,self.view.frame.size.width,self.view.frame.size.height)];
-    [mainview setBackgroundColor:[UIColor clearColor]];
-    [foregroundView addSubview:mainview];
-    
-    if(IS_IPHONE4)
-    {
-        labelTitle = [[UILabel alloc] initWithFrame:CGRectMake(self.view.frame.origin.x+45, 0,self.view.frame.size.width,35)];
-        objImag=[[UIImageView alloc]initWithFrame:CGRectMake(self.view.frame.origin.x+50,labelTitle.frame.origin.y+labelTitle.frame.size.height+15,self.view.frame.size.width-105,self.view.frame.size.height-110)];
-       // [labelTitle setFont:HELVETICA_NEUE(18.0)];
-    }
-    else
-    {
-        labelTitle = [[UILabel alloc] initWithFrame:CGRectMake(self.view.frame.origin.x+30, 0,self.view.frame.size.width-50, 41)];
-        objImag=[[UIImageView alloc]initWithFrame:CGRectMake(self.view.frame.origin.x+30,labelTitle.frame.origin.y+labelTitle.frame.size.height+15,self.view.frame.size.width-60,self.view.frame.size.height-115)];
-        //[labelTitle setFont:HELVETICA_NEUE(20.0)];
-        
-        
-    }
-    [labelTitle setTextColor:[UIColor whiteColor]];
-    labelTitle.text=[titleArray objectAtIndex:index];
-    labelTitle.textAlignment=NSTextAlignmentCenter;
-    
-    
-    [labelTitle setNumberOfLines:0];
-    [labelTitle sizeToFit];
-    [mainview addSubview:labelTitle];
-    
-    objImag.image=[UIImage imageNamed:FGimageArray[index]];
-    [mainview addSubview:objImag];
-    return foregroundView;
-}
-#pragma mark - PWParallaxScrollViewDelegate
-
-- (void)parallaxScrollView:(PWParallaxScrollView *)scrollView didChangeIndex:(NSInteger)index
-{
-    [pageControllBtn setFrame:CGRectMake(20*index, 0, 10, 10)];
-    Currentindex = index;
-}
-
-- (void)parallaxScrollView:(PWParallaxScrollView *)scrollView didEndDeceleratingAtIndex:(NSInteger)index
-{
-    
-    Currentindex = index;
-    
-    if (index == [BGimageArray count] - 1) {
-        [[NSUserDefaults standardUserDefaults] setObject:@"NO" forKey:@"first_launch"];
-        [[NSUserDefaults standardUserDefaults] synchronize];
-        //tutoriallastPage=YES;
-        
-        //flag = 0;
-        
-    }
-    else{
-       // tutoriallastPage=NO;
-       // flag = 0;
-        
-    }
-    
-}
-#pragma mark - view's life cycle
-
-- (void)initControl
-{
-    self.scrollView = [[PWParallaxScrollView alloc] initWithFrame:cell.profileScrollview.bounds];
-    [self.scrollView setBackgroundColor:[UIColor greenColor]];
-    self.scrollView.isdifferSpeed = YES;
-    
-    _scrollView.foregroundScreenEdgeInsets = UIEdgeInsetsMake(0, 0,0,0);
-    [cell.profileScrollview insertSubview:_scrollView atIndex:0];
-}
-
-- (void)reloadData
-{
-    _scrollView.delegate = self;
-    _scrollView.dataSource = self;
-}
 
 
 

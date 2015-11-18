@@ -10,6 +10,16 @@
 
 
 @interface DSProfileTableViewCell : UITableViewCell
+{
+    NSMutableArray *BGimageArray;
+    NSMutableArray *FGimageArray;
+    UIButton *pageControllBtn;
+    UIImageView *foregroundView;
+    UIView * mainview;
+    UIImageView * objImag;
+    NSInteger Currentindex;
+
+}
 
 @property (weak, nonatomic) IBOutlet UITextField *textFieldPlaceHolder;
 @property (weak, nonatomic) IBOutlet UILabel *labelTitleText;
@@ -56,6 +66,8 @@
 @property (strong, nonatomic) IBOutlet UIButton *cameraButton,*uploadButton;
 @property (strong, nonatomic) IBOutlet UIImageView *profileImageview;
 @property (strong,nonatomic) IBOutlet UIScrollView * profileScrollview;
+
+
 
 
 
