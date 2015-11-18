@@ -64,6 +64,7 @@
 		6A50C21D1BCCBB8C002B11AC /* DSProfileTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6A50C21B1BCCBB8C002B11AC /* DSProfileTableViewCell.xib */; };
 		6A8D15D31BCC059B000F1FB4 /* DSProfileTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A8D15D11BCC059B000F1FB4 /* DSProfileTableViewController.m */; };
 		6A8D15D41BCC059B000F1FB4 /* DSProfileTableViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6A8D15D21BCC059B000F1FB4 /* DSProfileTableViewController.xib */; };
+		6A9498311BFC996E0027E776 /* PWParallaxScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A9498301BFC996E0027E776 /* PWParallaxScrollView.m */; };
 		ABF8DF93B82C6FE210057F55 /* libPods-DoSomething.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 60244D170FD7494CCFDD04A4 /* libPods-DoSomething.a */; };
 		C6D5F60C1BC7AF500050C1AE /* Launch Screen.xib in Resources */ = {isa = PBXBuildFile; fileRef = C6D5F60B1BC7AF500050C1AE /* Launch Screen.xib */; };
 		C6D5F6151BC7B0970050C1AE /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = C6D5F6141BC7B0970050C1AE /* AppDelegate.m */; };
@@ -262,6 +263,8 @@
 		6A8D15D01BCC059B000F1FB4 /* DSProfileTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DSProfileTableViewController.h; sourceTree = "<group>"; };
 		6A8D15D11BCC059B000F1FB4 /* DSProfileTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DSProfileTableViewController.m; sourceTree = "<group>"; };
 		6A8D15D21BCC059B000F1FB4 /* DSProfileTableViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DSProfileTableViewController.xib; sourceTree = "<group>"; };
+		6A94982F1BFC996E0027E776 /* PWParallaxScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PWParallaxScrollView.h; sourceTree = "<group>"; };
+		6A9498301BFC996E0027E776 /* PWParallaxScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PWParallaxScrollView.m; sourceTree = "<group>"; };
 		C6D5F60B1BC7AF500050C1AE /* Launch Screen.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "Launch Screen.xib"; sourceTree = "<group>"; };
 		C6D5F6131BC7B0970050C1AE /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		C6D5F6141BC7B0970050C1AE /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -466,6 +469,7 @@
 		2B83CA701BE873F80064EC7F /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
+				6A94982E1BFC996E0027E776 /* ParallaxScroll */,
 				EAF187171BDA352B004C25EA /* DAAutoScroll */,
 				2B83CAB91BE8915A0064EC7F /* OpenUDID */,
 				2B83CA711BE873F80064EC7F /* AFNetworkActivityLogger */,
@@ -686,6 +690,15 @@
 			);
 			name = Profile;
 			path = ViewController/Profile;
+			sourceTree = "<group>";
+		};
+		6A94982E1BFC996E0027E776 /* ParallaxScroll */ = {
+			isa = PBXGroup;
+			children = (
+				6A94982F1BFC996E0027E776 /* PWParallaxScrollView.h */,
+				6A9498301BFC996E0027E776 /* PWParallaxScrollView.m */,
+			);
+			path = ParallaxScroll;
 			sourceTree = "<group>";
 		};
 		8756DC85FEAEF5DAB0609B11 /* Pods */ = {
@@ -1239,6 +1252,7 @@
 				511C735F1BE3801100D3D61D /* DSChatDetailViewController.m in Sources */,
 				EAEF251E1BCF9EF600F83E82 /* IQUITextFieldView+Additions.m in Sources */,
 				511C73641BE3804E00D3D61D /* DSChatsTableViewController.m in Sources */,
+				6A9498311BFC996E0027E776 /* PWParallaxScrollView.m in Sources */,
 				EAEF25261BCF9EF600F83E82 /* IQBarButtonItem.m in Sources */,
 				EAF1DC511BD8B2AF00D51354 /* DSHomeViewController.m in Sources */,
 				EAEF25271BCF9EF600F83E82 /* IQTitleBarButtonItem.m in Sources */,

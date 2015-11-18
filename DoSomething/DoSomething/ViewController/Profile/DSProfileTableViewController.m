@@ -16,9 +16,10 @@
 #import "OpenUDID.h"
 #import <MapKit/MapKit.h>
 #import "NSString+validations.h"
+#import "PWParallaxScrollView.h"
 
 
-@interface DSProfileTableViewController ()<CLLocationManagerDelegate,UIAlertViewDelegate>
+@interface DSProfileTableViewController ()<CLLocationManagerDelegate,UIAlertViewDelegate,PWParallaxScrollViewDataSource,PWParallaxScrollViewDelegate>
 {
     DSWebservice            * objWebService;
     CLLocationManager       *locationManager;
@@ -45,11 +46,19 @@
     NSString * strFirstName;
     NSString * strLastName;
     
-    BOOL isNotification_message;
-    BOOL isNotification_sound;
-    BOOL isNotification_vibration;
+    NSString * isNotification_message;
+    NSString * isNotification_sound;
+    NSString * isNotification_vibration;
+    NSMutableArray *BGimageArray;
+    NSMutableArray *FGimageArray;
+    UIButton *pageControllBtn;
+    UIImageView *foregroundView;
+     UIView * mainview;
+    UIImageView * objImag;
+    NSInteger Currentindex;
 
 }
+@property (nonatomic, strong) PWParallaxScrollView *scrollView;
 @end
 
 @implementation DSProfileTableViewController
@@ -861,7 +870,8 @@
     cell = (DSProfileTableViewCell *) [_tableviewProfile cellForRowAtIndexPath:[NSIndexPath indexPathForRow:indexPath.row inSection:0]];
     
     
-    NSArray *titleArray1  = [[NSArray alloc]initWithObjects:@"switch_on",@"switch_off", nil];
+    NSArray *titleArray1        = [[NSArray alloc]initWithObjects:@"switch_on",@"switch_off", nil];
+    NSArray *notificationArray  = [[NSArray alloc]initWithObjects:@"YES",@"NO", nil];
     NSString *selOptionVal;
     
     if([sender tag] == 2000){
@@ -873,21 +883,21 @@
             
             NSString *NewMessageImage =[[[placeHolderArray objectAtIndex:indexPath.section] objectAtIndex:indexPath.row] valueForKey:@"placeHolder"];
             
-            
-            
             if (NewMessageImage == [titleArray1 objectAtIndex:0]) {
                 selOptionVal = [titleArray1 objectAtIndex:1];
-                isNotification_message = NO;
+                isNotification_message =[notificationArray objectAtIndex:1];
+                
             }
             if (NewMessageImage == [titleArray1 objectAtIndex:1]) {
                 selOptionVal = [titleArray1 objectAtIndex:0];
-                isNotification_message = YES;
+                isNotification_message =[notificationArray objectAtIndex:0];
             }
             
             
             
             if(selOptionVal != nil || ![selOptionVal isEqualToString:@""])
                 [[[placeHolderArray objectAtIndex:indexPath.section] objectAtIndex:indexPath.row] setObject:selOptionVal forKey:@"NewMessageImage"];
+            
         }
         
         
@@ -900,11 +910,12 @@
             
             if (NewMessageImage == [titleArray1 objectAtIndex:0]) {
                 selOptionVal = [titleArray1 objectAtIndex:1];
-                isNotification_message = NO;
+               isNotification_message =[notificationArray objectAtIndex:1];
             }
             if (NewMessageImage == [titleArray1 objectAtIndex:1]) {
                 selOptionVal = [titleArray1 objectAtIndex:0];
-                isNotification_message = YES;
+                isNotification_message =[notificationArray objectAtIndex:0];
+               // isNotification_message = YES;
             }
             if(selOptionVal != nil || ![selOptionVal isEqualToString:@""])
                 [[[placeHolderArray objectAtIndex:indexPath.section] objectAtIndex:indexPath.row] setObject:selOptionVal forKey:@"NewMessageImage"];
@@ -929,11 +940,11 @@
             
             if (SoundImage == [titleArray1 objectAtIndex:0]) {
                 selOptionVal = [titleArray1 objectAtIndex:1];
-                isNotification_sound = NO;
+                isNotification_sound =[notificationArray objectAtIndex:1];
             }
             if (SoundImage == [titleArray1 objectAtIndex:1]) {
                 selOptionVal = [titleArray1 objectAtIndex:0];
-                isNotification_sound = YES;
+               isNotification_sound = [notificationArray objectAtIndex:0];
             }
             
             
@@ -951,11 +962,11 @@
             
             if (SoundImage == [titleArray1 objectAtIndex:0]) {
                 selOptionVal = [titleArray1 objectAtIndex:1];
-                isNotification_sound = NO;
+                isNotification_sound = [notificationArray objectAtIndex:1];
             }
             if (SoundImage == [titleArray1 objectAtIndex:1]) {
                 selOptionVal = [titleArray1 objectAtIndex:0];
-                isNotification_sound =YES;
+                isNotification_sound = [notificationArray objectAtIndex:0];
             }
             if(selOptionVal != nil || ![selOptionVal isEqualToString:@""])
                 [[[placeHolderArray objectAtIndex:indexPath.section] objectAtIndex:indexPath.row] setObject:selOptionVal forKey:@"SoundImage"];
@@ -977,16 +988,13 @@
             
             NSString *VibrationImage =[[[placeHolderArray objectAtIndex:indexPath.section] objectAtIndex:indexPath.row] valueForKey:@"placeHolder"];
             
-            
-            
-            
             if (VibrationImage == [titleArray1 objectAtIndex:0]) {
                 selOptionVal = [titleArray1 objectAtIndex:1];
-                isNotification_vibration = NO;
+               isNotification_vibration = [notificationArray objectAtIndex:1];
             }
             if (VibrationImage == [titleArray1 objectAtIndex:1]) {
                 selOptionVal = [titleArray1 objectAtIndex:0];
-                isNotification_vibration = YES;
+                isNotification_vibration = [notificationArray objectAtIndex:0];
             }
             
             
@@ -1004,11 +1012,11 @@
             
             if (VibrationImage == [titleArray1 objectAtIndex:0]) {
                 selOptionVal = [titleArray1 objectAtIndex:1];
-                isNotification_vibration = NO;
+                isNotification_vibration = [notificationArray objectAtIndex:1];
             }
             if (VibrationImage == [titleArray1 objectAtIndex:1]) {
                 selOptionVal = [titleArray1 objectAtIndex:0];
-                isNotification_vibration = YES;
+                isNotification_vibration = [notificationArray objectAtIndex:0];;
             }
             if(selOptionVal != nil || ![selOptionVal isEqualToString:@""])
                 [[[placeHolderArray objectAtIndex:indexPath.section] objectAtIndex:indexPath.row] setObject:selOptionVal forKey:@"VibrationImage"];
@@ -1082,11 +1090,7 @@
 #pragma mark - Camera Action
 -(void)selectCamera: (UIButton *)sender
 {
-//    UIActionSheet *actionSheet1 = [[UIActionSheet alloc] initWithTitle:@"" delegate:self cancelButtonTitle:NSLocalizedString(@"CANCEL",@"") destructiveButtonTitle:NSLocalizedString(@"CAMERA",@"") otherButtonTitles:NSLocalizedString(@"PHOTO LIBRARY",@""), nil];
-//    [actionSheet1 showInView:self.view];
-//    [actionSheet1 sizeToFit];
-    
-    
+ 
     imagepickerController = [[UIImagePickerController alloc] init];
     imagepickerController.delegate = self;
     [imagepickerController setAllowsEditing:YES];
@@ -1127,9 +1131,23 @@
      profileImage = image;
     NSLog(@"uploadImg=%@",image);
     [_tableviewProfile reloadData];
+    if(profileImage != nil)
+    {
+        [self uploadNextImageMethod];
+    }
     [imagepickerController dismissViewControllerAnimated:YES completion:nil];
 }
-
+-(void)uploadNextImageMethod
+{
+    [self initControl];
+    [self SetImageArray];
+}
+-(void)SetImageArray
+{
+    
+    BGimageArray = [[NSMutableArray alloc] initWithObjects:@"",@"",@"",@"",nil];
+    FGimageArray = [[NSMutableArray alloc] initWithObjects:@"profile_noimg",@"profile_noimg",@"profile_noimg",@"profile_noimg",nil];
+}
 #pragma mark - gotoHomeView
 -(void)gotoHomeView{
     HomeViewController * objHomeview = [[HomeViewController alloc]initWithNibName:@"HomeViewController" bundle:nil];
@@ -1167,7 +1185,7 @@
                                deviceid:deviceUdid
                    notification_message:YES
                    notification_sound  :YES
-                 notification_vibration:isNotification_vibration
+                 notification_vibration:YES
                                 success:^(AFHTTPRequestOperation *operation, id responseObject)
                                         {
                                             NSLog(@"rsponse:%@",responseObject);
@@ -1185,6 +1203,146 @@
                                     
                                 }];
 }
+
+#pragma mark - PWParallaxScrollViewSource
+
+- (NSInteger)numberOfItemsInScrollView:(PWParallaxScrollView *)scrollView
+{
+    UIView *pgDtView = [[UIView alloc] initWithFrame:CGRectMake((self.view.frame.size.width/2) - (([BGimageArray count] * 30)/2) + 18 ,40, [BGimageArray count] * 20, 15)];
+    
+    pgDtView.backgroundColor = [UIColor clearColor];
+    
+    for(int i=0;i<[BGimageArray count];i++){
+        
+        UIButton *blkdot = [[UIButton alloc]init];
+        
+        [blkdot setFrame:CGRectMake(i*20, 0, 10, 10)];
+        
+        [blkdot setTag:i];
+        
+        [blkdot setBackgroundColor:[UIColor clearColor]];
+        
+        [blkdot setImage:[UIImage imageNamed:@"tuto_dot_Inactive.png"] forState:UIControlStateNormal];
+        
+        [pgDtView addSubview:blkdot];
+    }
+    
+    pageControllBtn = [[UIButton alloc]init];
+    
+    pageControllBtn.backgroundColor = [UIColor clearColor];
+    [pageControllBtn setFrame:CGRectMake(0, 0, 10, 10)];
+    [pageControllBtn setImage:[UIImage imageNamed:@"tuto_dot"] forState:UIControlStateNormal];
+    
+    
+    
+    [pgDtView addSubview:pageControllBtn];
+    
+    [self.view addSubview: pgDtView];
+    
+    
+    
+    return [BGimageArray count];
+}
+
+- (UIView *)backgroundViewAtIndex:(NSInteger)index scrollView:(PWParallaxScrollView *)scrollView
+{
+    
+    UIImageView *imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:BGimageArray[index]]];
+    imageView.contentMode = UIViewContentModeScaleAspectFill;
+    //[imageView setBackgroundColor:[UIColor redColor]];
+    return imageView;
+}
+
+- (UIView *)foregroundViewAtIndex:(NSInteger)index scrollView:(PWParallaxScrollView *)scrollView
+{
+    foregroundView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 120, self.view.frame.size.width, self.view.frame.size.height-40)];
+    
+    UILabel *labelTitle;
+    // CGFloat yPosition = 0;
+    
+    mainview=[[UIView alloc]initWithFrame:CGRectMake(self.view.frame.origin.x,-60,self.view.frame.size.width,self.view.frame.size.height)];
+    [mainview setBackgroundColor:[UIColor clearColor]];
+    [foregroundView addSubview:mainview];
+    
+    if(IS_IPHONE4)
+    {
+        labelTitle = [[UILabel alloc] initWithFrame:CGRectMake(self.view.frame.origin.x+45, 0,self.view.frame.size.width,35)];
+        objImag=[[UIImageView alloc]initWithFrame:CGRectMake(self.view.frame.origin.x+50,labelTitle.frame.origin.y+labelTitle.frame.size.height+15,self.view.frame.size.width-105,self.view.frame.size.height-110)];
+       // [labelTitle setFont:HELVETICA_NEUE(18.0)];
+    }
+    else
+    {
+        labelTitle = [[UILabel alloc] initWithFrame:CGRectMake(self.view.frame.origin.x+30, 0,self.view.frame.size.width-50, 41)];
+        objImag=[[UIImageView alloc]initWithFrame:CGRectMake(self.view.frame.origin.x+30,labelTitle.frame.origin.y+labelTitle.frame.size.height+15,self.view.frame.size.width-60,self.view.frame.size.height-115)];
+        //[labelTitle setFont:HELVETICA_NEUE(20.0)];
+        
+        
+    }
+    [labelTitle setTextColor:[UIColor whiteColor]];
+    labelTitle.text=[titleArray objectAtIndex:index];
+    labelTitle.textAlignment=NSTextAlignmentCenter;
+    
+    
+    [labelTitle setNumberOfLines:0];
+    [labelTitle sizeToFit];
+    [mainview addSubview:labelTitle];
+    
+    objImag.image=[UIImage imageNamed:FGimageArray[index]];
+    [mainview addSubview:objImag];
+    return foregroundView;
+}
+#pragma mark - PWParallaxScrollViewDelegate
+
+- (void)parallaxScrollView:(PWParallaxScrollView *)scrollView didChangeIndex:(NSInteger)index
+{
+    [pageControllBtn setFrame:CGRectMake(20*index, 0, 10, 10)];
+    Currentindex = index;
+}
+
+- (void)parallaxScrollView:(PWParallaxScrollView *)scrollView didEndDeceleratingAtIndex:(NSInteger)index
+{
+    
+    Currentindex = index;
+    
+    if (index == [BGimageArray count] - 1) {
+        [[NSUserDefaults standardUserDefaults] setObject:@"NO" forKey:@"first_launch"];
+        [[NSUserDefaults standardUserDefaults] synchronize];
+        //tutoriallastPage=YES;
+        
+        //flag = 0;
+        
+    }
+    else{
+       // tutoriallastPage=NO;
+       // flag = 0;
+        
+    }
+    
+}
+#pragma mark - view's life cycle
+
+- (void)initControl
+{
+    self.scrollView = [[PWParallaxScrollView alloc] initWithFrame:cell.profileScrollview.bounds];
+    [self.scrollView setBackgroundColor:[UIColor greenColor]];
+    self.scrollView.isdifferSpeed = YES;
+    
+    _scrollView.foregroundScreenEdgeInsets = UIEdgeInsetsMake(0, 0, 0, 0);
+    [self.view insertSubview:_scrollView atIndex:0];
+}
+
+- (void)reloadData
+{
+    _scrollView.delegate = self;
+    _scrollView.dataSource = self;
+}
+
+
+
+
+
+
+
 
 //    if(selectEmail==YES)
 //    {
