@@ -46,7 +46,9 @@
     locationManager                 = [[CLLocationManager alloc] init];
     locationManager.delegate        = self;
     objWebService = [[DSWebservice alloc]init];
-    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
+    //[[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
+    [self preferredStatusBarStyle];
+    
     _emailTxt.autocorrectionType =UITextAutocorrectionTypeNo;
     _passwordTxt.autocorrectionType =UITextAutocorrectionTypeNo;
     if (IS_IPHONE6 ||IS_IPHONE6_Plus){
@@ -74,10 +76,11 @@
      [attStr addAttribute:NSFontAttributeName value:PATRON_BOLD(12) range:[string rangeOfString:@"Facebook"]];
      labelFacebook.attributedText = attStr;
      labelFacebook.attributedText = attStr;
-     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(loginByFacebook)];
-     [labelFacebook addGestureRecognizer:tap];
-     labelFacebook.userInteractionEnabled = YES;
-     labelFacebook.tag = 10;
+     [_createAnAcountFB addTarget:self action:@selector(loginByFacebook) forControlEvents:UIControlEventTouchUpInside];
+//     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(loginByFacebook)];
+//     [labelFacebook addGestureRecognizer:tap];
+//     labelFacebook.userInteractionEnabled = YES;
+//     labelFacebook.tag = 10;
      
       labelEmail.text =@"Or sign up with your email";
       labelCreateAnAcc.text =@"Create Your Account";
@@ -101,10 +104,11 @@
      [attStr addAttribute:NSFontAttributeName value:PATRON_REG(12) range:[string rangeOfString:@"Log in with"]];
      [attStr addAttribute:NSFontAttributeName value:PATRON_BOLD(12) range:[string rangeOfString:@"Facebook"]];
      labelFacebook.attributedText = attStr;
-     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(loginByFacebook)];
-     [labelFacebook addGestureRecognizer:tap];
-     labelFacebook.userInteractionEnabled = YES;
-     labelFacebook.tag = 11;
+     [_createAnAcountFB addTarget:self action:@selector(loginByFacebook) forControlEvents:UIControlEventTouchUpInside];
+//     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(loginByFacebook)];
+//     [labelFacebook addGestureRecognizer:tap];
+//     labelFacebook.userInteractionEnabled = YES;
+//     labelFacebook.tag = 11;
      
 
         
@@ -120,7 +124,10 @@
 
     
 }
-
+- (UIStatusBarStyle)preferredStatusBarStyle
+{
+    return UIStatusBarStyleLightContent;
+}
 -(void)viewWillAppear:(BOOL)animated
 {
     [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"SelectedItem"];
@@ -290,24 +297,32 @@
                      success:^(AFHTTPRequestOperation *operation, id responseObject){
                          NSLog(@"checkuser = %@",responseObject);
                          NSLog(@"checkuser = %@",[[responseObject objectForKey:@"checkuser"]objectForKey:@"status"]);
+                         if(([[[responseObject objectForKey:@"checkuser"]objectForKey:@"RegisterType"]  isEqual: @"1"])){
+                             if([[[responseObject objectForKey:@"checkuser"]objectForKey:@"status"]  isEqual: @"error"]){
+                                 [self presentViewController:[ DSAppCommon alertWithTitle:@"Title" withMessage:[[responseObject objectForKey:@"checkuser"]objectForKey:@"Message"] preferredStyle:UIAlertControllerStyleAlert] animated:YES completion:NULL];
+                                 [COMMON removeLoading];
+                             }
+                             else {
+                                 [self gotoProfileView:email :password:YES];//[self gotoProfileView];
+                                 [COMMON removeLoading];
+                             }
                          
-                         if([[[responseObject objectForKey:@"checkuser"]objectForKey:@"status"]  isEqual: @"error"]){
-                             [DSAppCommon showSimpleAlertWithMessage:[[responseObject objectForKey:@"checkuser"]objectForKey:@"Message"]];
-                             [COMMON removeLoading];
                          }
                          else {
-                             [self gotoProfileView:email:password:YES];
-                              //[self gotoProfileView];
-                             [COMMON removeLoading];
+                             if([[[responseObject objectForKey:@"checkuser"]objectForKey:@"status"]  isEqual: @"error"]){
+                                 [self loadCreateAPI];
+                                 [COMMON removeLoading];
+                             }
+                             else{
+                                 [self gotoProfileView:profileID];//[self gotoProfileView];
+                                 [COMMON removeLoading];
+                             }
                          }
                      }
                      failure:^(AFHTTPRequestOperation *operation, id error) {
                          
                      }];
-    
 }
-
-
 #pragma mark - loginByFacebook
 -(void)loginByFacebook
 {
@@ -338,13 +353,14 @@
                  profileImage = [NSString stringWithFormat:@"https://graph.facebook.com/%@/picture?type=large&return_ssl_resources=1", userData[@"id"]];
                  dob = @""; //[userData valueForKey:@"birthday"]
                  [fbUserDetailsDict setObject:profileImage forKey:@"profileImage"];
-                 NSLog(@"fbUserDetailsDict = %@",fbUserDetailsDict);
+                 NSLog(@"fbUserDetailsDictt = %@",fbUserDetailsDict);
                  
                  [COMMON LoadIcon:self.view];
                  
                  if(labelFacebook.tag == 10)
                  {
-                   [self loadCreateAPI];  
+                  // [self loadCreateAPI];
+                     [self checkUserEmail];
                  }
                  
                  else
@@ -356,20 +372,20 @@
 }
 
 #pragma mark - gotoProfileView
--(void)gotoProfileView:(NSString *)strEmailId :(NSString *)strPassword :(BOOL)selectEmail{
+-(void)gotoProfileView:(NSString *)strEmailId :(NSString *)strPassword :(BOOL)selectMail{
     DSProfileTableViewController *profileVC  = [[DSProfileTableViewController alloc]initWithNibName:@"DSProfileTableViewController" bundle:nil];
     profileVC.userDetailsDict = [fbUserDetailsDict mutableCopy];
-    profileVC.emailAddressToRegister = strEmailId;
+    profileVC.emailAddressToRegister  = strEmailId;
     profileVC.emailPasswordToRegister = strPassword;
-    profileVC.selectEmail             =selectEmail;
+    profileVC.selectEmail             = selectMail;
     [self.navigationController pushViewController:profileVC animated:YES];
 }
 //-------temp code
 #pragma mark - gotoProfileView
--(void)gotoProfileView:(BOOL)selectFB{
+-(void)gotoProfileView:(NSString*)FBProfileID{
     DSProfileTableViewController *profileVC  = [[DSProfileTableViewController alloc]initWithNibName:@"DSProfileTableViewController" bundle:nil];
     profileVC.userDetailsDict = [fbUserDetailsDict mutableCopy];
-    profileVC.selectEmail=selectFB;
+     profileVC.FBprofileID=FBProfileID;
     [self.navigationController pushViewController:profileVC animated:YES];
 }
 
@@ -398,7 +414,7 @@
                     success:^(AFHTTPRequestOperation *operation, id responseObject)
     {
         
-        NSLog(@"responseObject = %@",responseObject);
+        NSLog(@"responseObjectLogin = %@",responseObject);
         
         NSMutableDictionary *loginDict = [[NSMutableDictionary alloc]init];
         
@@ -413,12 +429,15 @@
         }
         else{
             NSLog(@"responseObject = %@",responseObject);
-            [DSAppCommon showSimpleAlertWithMessage:[loginDict valueForKey:@"Message"]];
+            //[DSAppCommon showSimpleAlertWithMessage:[loginDict valueForKey:@"Message"]];
+            [self presentViewController:[ DSAppCommon alertWithTitle:@"Title" withMessage:[loginDict valueForKey:@"Message"] preferredStyle:UIAlertControllerStyleAlert] animated:YES completion:NULL];
         }
         [COMMON removeLoading];
         
     }
     failure:^(AFHTTPRequestOperation *operation, id error){
+        
+         NSLog(@"ERROR = %@",error);
         [COMMON removeLoading];
     }];
 }
@@ -440,6 +459,10 @@
                      longitude:currentLongitude
                         device:@"iPhone"
                       deviceid:deviceUdid
+          notification_message:YES
+          notification_sound  :YES
+        notification_vibration:YES
+    
     
                        success:^(AFHTTPRequestOperation *operation, id responseObject){
                         NSLog(@"responseObject = %@",responseObject);
@@ -450,9 +473,9 @@
                            
                            if([[registerDict valueForKey:@"status"]isEqualToString:@"success"]){
                                
-                              //[COMMON setUserDetails:[[registerDict valueForKey:@"userDetails"]objectAtIndex:0]];
-                              // NSLog(@"userdetails = %@",[COMMON getUserDetails]);
-                              [self gotoProfileView:NO];
+                              [COMMON setUserDetails:[[registerDict valueForKey:@"userDetails"]objectAtIndex:0]];
+                               NSLog(@"userdetails = %@",[COMMON getUserDetails]);
+                              [self gotoHomeView];
                                
                            }
                            else{
@@ -460,7 +483,8 @@
                                NSString *errMsg = [NSString stringWithFormat:@"%@",[registerDict valueForKey:@"Message"]];
                                errMsg = [errMsg stringByReplacingOccurrencesOfString:@"{" withString:@""];
                                 errMsg = [errMsg stringByReplacingOccurrencesOfString:@"}" withString:@""];
-                               [DSAppCommon showSimpleAlertWithMessage:errMsg];
+                               //[DSAppCommon showSimpleAlertWithMessage:errMsg];
+                               [self presentViewController:[ DSAppCommon alertWithTitle:@"Title" withMessage:errMsg preferredStyle:UIAlertControllerStyleAlert] animated:YES completion:NULL];
                            }
                            [COMMON removeLoading];
                     }

@@ -32,6 +32,7 @@
                 <outlet property="buttonSignIn" destination="UCk-i4-sP1" id="AgQ-Z0-jdo"/>
                 <outlet property="buttonSignInHeightConstraint" destination="u0V-VH-kJA" id="JxS-Fn-0jh"/>
                 <outlet property="buttonTermsOfUse" destination="TrV-dd-2rk" id="jRB-dd-Sti"/>
+                <outlet property="createAnAcountFB" destination="fHu-JF-COM" id="MkU-6O-tTM"/>
                 <outlet property="emailTxt" destination="c7o-Yq-ofS" id="iCb-Gz-hlm"/>
                 <outlet property="labelCreateAnAcc" destination="zTU-Oo-6WB" id="pMM-J5-jlF"/>
                 <outlet property="labelEmail" destination="sR7-yr-HZB" id="dTx-x4-7Ee"/>
@@ -74,6 +75,14 @@
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="DsB-lT-SIw">
                             <rect key="frame" x="0.0" y="20" width="320" height="40"/>
                             <subviews>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fHu-JF-COM">
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="47"/>
+                                    <animations/>
+                                    <constraints>
+                                        <constraint firstAttribute="width" constant="320" id="Q3M-gA-Te2"/>
+                                        <constraint firstAttribute="height" constant="47" id="SzM-uk-GVF"/>
+                                    </constraints>
+                                </button>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ocI-oM-Rhj">
                                     <rect key="frame" x="32" y="10" width="270" height="21"/>
                                     <animations/>
@@ -89,8 +98,13 @@
                             <animations/>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <constraints>
+                                <constraint firstAttribute="bottom" secondItem="fHu-JF-COM" secondAttribute="bottom" constant="-7" id="CqK-f5-tId"/>
                                 <constraint firstItem="ocI-oM-Rhj" firstAttribute="leading" secondItem="DsB-lT-SIw" secondAttribute="leading" constant="32" id="E99-Uf-JKf"/>
+                                <constraint firstAttribute="trailing" secondItem="fHu-JF-COM" secondAttribute="trailing" id="HZn-Pw-Zxe"/>
+                                <constraint firstItem="fHu-JF-COM" firstAttribute="leading" secondItem="DsB-lT-SIw" secondAttribute="leading" id="a03-HK-51h"/>
                                 <constraint firstAttribute="height" constant="40" id="aNM-ED-6nj"/>
+                                <constraint firstItem="fHu-JF-COM" firstAttribute="top" secondItem="DsB-lT-SIw" secondAttribute="top" id="hM2-68-2Wn"/>
+                                <constraint firstItem="fHu-JF-COM" firstAttribute="centerX" secondItem="DsB-lT-SIw" secondAttribute="centerX" id="rIp-vh-4j8"/>
                                 <constraint firstItem="ocI-oM-Rhj" firstAttribute="top" secondItem="DsB-lT-SIw" secondAttribute="top" constant="10" id="uBg-Hh-9f0"/>
                             </constraints>
                         </view>

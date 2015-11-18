@@ -32,7 +32,8 @@
 
 @property (nonatomic, retain) NSMutableArray *placeHolderArray;
 @property (strong, nonatomic) NSData *profileData;
-@property (nonatomic, strong)  NSString *textviewText;
+@property (nonatomic, strong) NSString *textviewText;
+@property (nonatomic,strong)  NSString * FBprofileID;
 
 @property (nonatomic,strong) NSMutableDictionary *userDetailsDict;
 @property (nonatomic, retain) NSString *emailAddressToRegister;

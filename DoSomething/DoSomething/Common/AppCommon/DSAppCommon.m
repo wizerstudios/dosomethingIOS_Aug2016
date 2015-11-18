@@ -70,13 +70,7 @@ DSAppCommon *sharedCommon = nil;
 #pragma mark Show alert
 
 +(void)showSimpleAlertWithMessage:(NSString *)message{
-//    UIAlertView *alert = [[UIAlertView  alloc]initWithTitle: APP_TITLE
-//                                                   message: message
-//                                                  delegate: nil
-//                                         cancelButtonTitle:@"OK"
-//                                         otherButtonTitles:nil];
-//    
-//    [alert show];
+
     
 //    UIAlertController *alert = [UIAlertController alertControllerWithTitle:APP_TITLE message:message preferredStyle:UIAlertControllerStyleAlert];
 //    UIAlertAction *ok =[UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action){NSLog(@"ok action");}];
@@ -118,6 +112,15 @@ DSAppCommon *sharedCommon = nil;
     return dic;
     
 }
+
+- (BOOL) isUserLoggedIn {
+    NSDictionary *userDetails = [self getUserDetails];
+    if (userDetails != NULL) {
+        return YES;
+    }
+    return NO;
+}
+
 
 #pragma mark User Interaction Loading :
 
