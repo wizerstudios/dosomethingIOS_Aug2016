@@ -81,38 +81,19 @@
     [self.navigationItem setHidesBackButton:YES];
     
 }
-
+#pragma mark - ButtonAction
 - (IBAction)createAnAccount:(id)sender{
     
-    if ([COMMON isUserLoggedIn]) {
-        HomeViewController * objHomeview = [[HomeViewController alloc]initWithNibName:@"HomeViewController" bundle:nil];
-        [self.navigationController pushViewController:objHomeview animated:NO];
-    }
-    else {
-        
         DSLoginViewController *DSLoginView  = [[DSLoginViewController alloc]initWithNibName:@"DSLoginViewController" bundle:nil];
         DSLoginView.temp = @"createAnAccount";
         [self.navigationController pushViewController:DSLoginView animated:YES];
-
-    }
-
 }
 - (IBAction)Signin:(id)sender{
-    
-    if ([COMMON isUserLoggedIn]) {
-        HomeViewController * objHomeview = [[HomeViewController alloc]initWithNibName:@"HomeViewController" bundle:nil];
-        [self.navigationController pushViewController:objHomeview animated:NO];
-    }
-    else {
+   
         DSLoginViewController *DSLoginView  = [[DSLoginViewController alloc]initWithNibName:@"DSLoginViewController" bundle:nil];
         DSLoginView.temp = @"Signin";
-        
         [self.navigationController pushViewController:DSLoginView animated:YES];
-        
-    }
-
-   
-}
+ }
 
 
 

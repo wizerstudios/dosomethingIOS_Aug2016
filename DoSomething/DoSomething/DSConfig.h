@@ -67,7 +67,7 @@
 
 #define APP_TITLE                   @"DoSomething"
 
-#define FILL_DETAILS                @"Please enter Email and Password"
+#define FILL_DETAILS                @"Please Enter Email and Password"
 
 #define INVALID_EMAIL               @"Enter Valid Email ID"
 
@@ -76,25 +76,25 @@
 #define PASSWORD_REQUIRED           @"Password Required"
 
 //API Keys
-#define CheckUser_API           @"checkuser"
-#define Login_API               @"signin"
-#define Register_API             @"register"
-#define ProfileUpdate_API       @"updateprofile"
-#define LocationUpdate_API      @"updatelocation"
-#define GetHobbies_API          @"gethobbies"
-#define DoSomething_API         @"dosomethinglist"
-#define UpdateDoSomething_API   @"updatedosomething"
-#define NearestUsers_API        @"nearestusers"
-#define UserDetails_API         @"getuserdetails"
-#define SendRequest_API         @"sendrequest"
-#define ChatHistory_API         @"getChatHistory"
-#define UserChatHistory_API     @"getUserChatHistory"
-#define SendMessage_API         @"sendMessage"
-#define BlockUser_API           @"blockUser"
-#define DeleteUserChat_API      @"DeleteUserChatHistory"
+#define CheckUser_API               @"checkuser"
+#define Login_API                   @"signin"
+#define Register_API                @"register"
+#define ProfileUpdate_API           @"updateprofile"
+#define LocationUpdate_API          @"updatelocation"
+#define GetHobbies_API              @"gethobbies"
+#define DoSomething_API             @"dosomethinglist"
+#define UpdateDoSomething_API       @"updatedosomething"
+#define NearestUsers_API            @"nearestusers"
+#define UserDetails_API             @"getuserdetails"
+#define SendRequest_API             @"sendrequest"
+#define ChatHistory_API             @"getChatHistory"
+#define UserChatHistory_API         @"getUserChatHistory"
+#define SendMessage_API             @"sendMessage"
+#define BlockUser_API               @"blockUser"
+#define DeleteUserChat_API          @"DeleteUserChatHistory"
 
-#define Device                  @"iPhone"
+#define Device                      @"iPhone"
 
-#define USERDETAILS             @"userdetails"
+#define USERDETAILS                 @"userdetails"
 
 

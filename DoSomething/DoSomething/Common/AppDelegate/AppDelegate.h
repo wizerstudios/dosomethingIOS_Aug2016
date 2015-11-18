@@ -17,6 +17,7 @@
     DSHomeViewController *splashViewController;
     UIWindow *window;
     UITabBarController *tabBarController;
+    HomeViewController * userHomeView ;
 
 }
 @property (strong, nonatomic) UIWindow *window;
