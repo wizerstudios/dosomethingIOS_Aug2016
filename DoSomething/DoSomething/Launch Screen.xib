@@ -3,7 +3,6 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9051"/>
-        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
@@ -12,45 +11,16 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="SplashImage" translatesAutoresizingMaskIntoConstraints="NO" id="DjP-5C-SLf">
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="SplashImage" translatesAutoresizingMaskIntoConstraints="NO" id="DjP-5C-SLf">
                     <rect key="frame" x="0.0" y="0.0" width="320" height="518"/>
                     <animations/>
                 </imageView>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cXz-tk-IP4">
-                    <rect key="frame" x="160" y="518" width="160" height="50"/>
-                    <animations/>
-                    <color key="backgroundColor" red="0.8784313725490196" green="0.24313725490196078" blue="0.30980392156862746" alpha="1" colorSpace="calibratedRGB"/>
-                    <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
-                    <state key="normal" title="Sign In">
-                        <color key="titleColor" red="0.94509803921568625" green="0.94509803921568625" blue="0.94509803921568625" alpha="1" colorSpace="calibratedRGB"/>
-                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                    </state>
-                </button>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PsP-nl-PFk">
-                    <rect key="frame" x="0.0" y="518" width="160" height="50"/>
-                    <animations/>
-                    <color key="backgroundColor" red="0.94509803921568625" green="0.94509803921568625" blue="0.94509803921568625" alpha="1" colorSpace="calibratedRGB"/>
-                    <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
-                    <state key="normal" title="Create an Account">
-                        <color key="titleColor" red="0.8784313725490196" green="0.24313725490196078" blue="0.30980392156862746" alpha="1" colorSpace="calibratedRGB"/>
-                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                    </state>
-                </button>
             </subviews>
             <animations/>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
-                <constraint firstItem="cXz-tk-IP4" firstAttribute="height" secondItem="DjP-5C-SLf" secondAttribute="height" multiplier="50:518" id="8iS-Ey-xxp"/>
                 <constraint firstAttribute="trailing" secondItem="DjP-5C-SLf" secondAttribute="trailing" id="CRV-5m-rxO"/>
-                <constraint firstAttribute="trailing" secondItem="cXz-tk-IP4" secondAttribute="trailing" id="DDU-tq-WoF"/>
-                <constraint firstItem="PsP-nl-PFk" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="Pwr-sg-KTR"/>
-                <constraint firstAttribute="bottom" secondItem="cXz-tk-IP4" secondAttribute="bottom" id="TJT-iO-VnP"/>
-                <constraint firstItem="cXz-tk-IP4" firstAttribute="leading" secondItem="PsP-nl-PFk" secondAttribute="trailing" id="Uvt-St-Uov"/>
                 <constraint firstItem="DjP-5C-SLf" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="Xmq-ZV-PgM"/>
-                <constraint firstItem="cXz-tk-IP4" firstAttribute="width" secondItem="PsP-nl-PFk" secondAttribute="width" id="bZk-rY-XCE"/>
-                <constraint firstAttribute="bottom" secondItem="PsP-nl-PFk" secondAttribute="bottom" id="e9x-3X-HO4"/>
-                <constraint firstItem="cXz-tk-IP4" firstAttribute="height" secondItem="PsP-nl-PFk" secondAttribute="height" id="qdP-fX-SOu"/>
-                <constraint firstItem="PsP-nl-PFk" firstAttribute="top" secondItem="DjP-5C-SLf" secondAttribute="bottom" id="shw-7q-PHj"/>
                 <constraint firstItem="DjP-5C-SLf" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="xZn-vE-rcP"/>
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>
