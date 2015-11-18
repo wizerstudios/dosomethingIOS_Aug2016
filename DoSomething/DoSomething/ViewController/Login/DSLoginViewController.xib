@@ -117,6 +117,7 @@
                                     <constraints>
                                         <constraint firstAttribute="height" constant="40" id="B4a-0D-dzG"/>
                                     </constraints>
+                                    <color key="textColor" red="0.78039215689999997" green="0.76078431369999999" blue="0.74509803919999995" alpha="1" colorSpace="calibratedRGB"/>
                                     <fontDescription key="fontDescription" name="Patron-Regular" family="Patron" pointSize="13"/>
                                     <textInputTraits key="textInputTraits" keyboardType="emailAddress"/>
                                 </textField>
@@ -126,6 +127,7 @@
                                     <constraints>
                                         <constraint firstAttribute="height" constant="40" id="yGS-Ss-T9h"/>
                                     </constraints>
+                                    <color key="textColor" red="0.59999999999999998" green="0.59999999999999998" blue="0.59999999999999998" alpha="1" colorSpace="calibratedRGB"/>
                                     <fontDescription key="fontDescription" name="Patron-Regular" family="Patron" pointSize="13"/>
                                     <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
                                 </textField>
