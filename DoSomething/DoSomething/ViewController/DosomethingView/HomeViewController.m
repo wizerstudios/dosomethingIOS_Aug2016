@@ -49,7 +49,7 @@
     [super viewDidLoad];
     [self loadNavigation];
     objWebService = [[DSWebservice alloc]init];
-   // menuArray=[NSMutableArray alloc];
+    menuArray=[NSMutableArray alloc];
    // [self loadhomeviewListWebservice];
     menuArray = [[NSMutableArray alloc]initWithObjects:
                  [NSDictionary dictionaryWithObjectsAndKeys:@"running_Inactive.png",NORMAL_IMAGE,@"running_active.png",ACTIVE_IMAGE,@"RUNNING",CAPTION, nil],
@@ -83,16 +83,22 @@
     [self loadnavigationview];
     [self audioplayMethod];
     [self setupCollectionView];
+    
 }
 
 -(void)loadhomeviewListWebservice
 {
     [COMMON LoadIcon:self.view];
-     [objWebService HomeviewList:DoSomething_API success:^(AFHTTPRequestOperation *operation, id responseObject) {
+     [objWebService HomeviewList:DoSomething_API success:^(AFHTTPRequestOperation *operation, id responseObject)
+      {
          NSLog(@"response:%@",responseObject);
-         if(([[responseObject objectForKey:@"status"] isEqualToString:@"list"])){
+          NSMutableDictionary *homeviewlist = [[NSMutableDictionary alloc]init];
+          homeviewlist = [responseObject valueForKey:@"dosomethinglist"];
+          menuArray =[homeviewlist valueForKey:@"list"];
+         
              [COMMON removeLoading];
-         }
+             [self.homeCollectionView reloadData];
+         
          
         
      } failure:^(AFHTTPRequestOperation *operation, id error) {

@@ -43,7 +43,7 @@ static NSString       *ServiceMimeType    = @"image/jpeg";
             success:(WebserviceRequestSuccessHandler)success
             failure:(WebserviceRequestFailureHandler)failure
 {
-     urlString = [URL_FOR_RESOURCE(@"") stringByAppendingString:[NSString stringWithFormat:@"%@?",homelist]];
+     urlString = [URL_FOR_RESOURCE(@"") stringByAppendingString:[NSString stringWithFormat:@"%@",homelist]];
     NSLog(@"urlString = %@",urlString);
    
     
