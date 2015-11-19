@@ -445,6 +445,7 @@
         {
             [[NSBundle mainBundle] loadNibNamed:@"DSProfileTableViewCell" owner:self options:nil];
             cell = cellProfileImg;
+            cell.profileScrollview.contentSize = CGSizeMake(1200,cell.frame.size.height);
            // [self initControl];
             //[self SetImageArray];
         }
@@ -483,6 +484,7 @@
         }
         cell.labelTitleText.text = titleText;
         NSLog(@"typingText%@",typingText);
+        
         NSLog(@"titleText%@",titleText);
         NSLog(@"placeHolderText%@",placeHolderText);
 
@@ -1144,7 +1146,7 @@
         //IndexVal = scrollView.contentOffset.x/SCREEN_WIDTH;
         //[topSliderScrollView setNeedsDisplay];
         //pageController.currentPage = IndexVal;
-        [cell.profileImageview setFrame:CGRectMake(300, 0,cell.profileScrollview.frame.size.width,cell.profileScrollview.frame.size.height)];
+        [cell.profileScrollview setFrame:CGRectMake(300, 0,cell.profileScrollview.frame.size.width,cell.profileScrollview.frame.size.height)];
     }
 
     NSLog(@"scroll");

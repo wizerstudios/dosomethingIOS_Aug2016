@@ -15,11 +15,12 @@
 #import "CustomNavigationView.h"
 
 #import "DSConfig.h"
-
+#import "DSWebservice.h"
 #import "HomeCustomCell.h"
 #import "AppDelegate.h"
 #import <AudioToolbox/AudioToolbox.h>
 #import <AVFoundation/AVFoundation.h>
+#import "DSAppCommon.h"
 
 #define ITEMS_PAGE_SIZE 4
 #define ITEM_CELL_IDENTIFIER @"ItemCell"
@@ -28,6 +29,7 @@
 @interface HomeViewController ()<UICollectionViewDataSource,UICollectionViewDelegate>
 {
     AppDelegate *appDelegate;
+    DSWebservice            * objWebService;
     BOOL isSelectMenu;
     NSArray *selectedArray;
     int selectedCellCount;
@@ -46,6 +48,9 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self loadNavigation];
+    objWebService = [[DSWebservice alloc]init];
+   // menuArray=[NSMutableArray alloc];
+   // [self loadhomeviewListWebservice];
     menuArray = [[NSMutableArray alloc]initWithObjects:
                  [NSDictionary dictionaryWithObjectsAndKeys:@"running_Inactive.png",NORMAL_IMAGE,@"running_active.png",ACTIVE_IMAGE,@"RUNNING",CAPTION, nil],
                  [NSDictionary dictionaryWithObjectsAndKeys:@"beach_Inactive.png",NORMAL_IMAGE,@"beach_active.png",ACTIVE_IMAGE,@"BEACH",CAPTION, nil],
@@ -61,29 +66,6 @@
                   [NSDictionary dictionaryWithObjectsAndKeys:@"soocer_Inactive",NORMAL_IMAGE,@"soocer_active",ACTIVE_IMAGE,@"SOCCER",CAPTION, nil],
                  nil];
     
-    CustomNavigationView *customNavigation;
-    customNavigation = [[CustomNavigationView alloc] initWithNibName:@"CustomNavigationView" bundle:nil];
-    customNavigation.view.frame = CGRectMake(0,-20, CGRectGetWidth(self.view.frame), 65);
-    if (IS_IPHONE6 ){
-        customNavigation.view.frame = CGRectMake(0,-20, 375, 83);
-    }
-    if(IS_IPHONE6_Plus)
-    {
-        customNavigation.view.frame = CGRectMake(0,-20, 420, 83);
-    }
-    [customNavigation.menuBtn setHidden:NO];
-    [customNavigation.buttonBack setHidden:YES];
-    [customNavigation.saveBtn setHidden:YES];
-    [self.navigationController.navigationBar addSubview:customNavigation.view];
-//    [customNavigation.saveBtn addTarget:self action:@selector(saveAction) forControlEvents:UIControlEventTouchUpInside];
-//    [customNavigation.buttonBack addTarget:self action:@selector(backAction) forControlEvents:UIControlEventTouchUpInside];
-    
-    selectedArray = [[NSMutableArray alloc]init];
-    selectedItemsArray = [[NSMutableArray alloc]init];
-   
-   
-    alertBgView.hidden = YES;
-    alertMainBgView.hidden = YES;
     
     if(IS_IPHONE5)
         [self.view addConstraint:[NSLayoutConstraint constraintWithItem:_homeCollectionView
@@ -98,8 +80,52 @@
 {
     appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
     appDelegate.buttonsView.hidden=NO;
+    [self loadnavigationview];
     [self audioplayMethod];
     [self setupCollectionView];
+}
+
+-(void)loadhomeviewListWebservice
+{
+    [COMMON LoadIcon:self.view];
+     [objWebService HomeviewList:DoSomething_API success:^(AFHTTPRequestOperation *operation, id responseObject) {
+         NSLog(@"response:%@",responseObject);
+         if(([[responseObject objectForKey:@"status"] isEqualToString:@"list"])){
+             [COMMON removeLoading];
+         }
+         
+        
+     } failure:^(AFHTTPRequestOperation *operation, id error) {
+        
+     }];
+}
+
+-(void)loadnavigationview
+{
+    CustomNavigationView *customNavigation;
+    customNavigation = [[CustomNavigationView alloc] initWithNibName:@"CustomNavigationView" bundle:nil];
+    customNavigation.view.frame = CGRectMake(0,-20, CGRectGetWidth(self.view.frame), 65);
+    if (IS_IPHONE6 ){
+        customNavigation.view.frame = CGRectMake(0,-20, 375, 83);
+    }
+    if(IS_IPHONE6_Plus)
+    {
+        customNavigation.view.frame = CGRectMake(0,-20, 420, 83);
+    }
+    [customNavigation.menuBtn setHidden:NO];
+    [customNavigation.buttonBack setHidden:YES];
+    [customNavigation.saveBtn setHidden:YES];
+    [self.navigationController.navigationBar addSubview:customNavigation.view];
+    //    [customNavigation.saveBtn addTarget:self action:@selector(saveAction) forControlEvents:UIControlEventTouchUpInside];
+    //    [customNavigation.buttonBack addTarget:self action:@selector(backAction) forControlEvents:UIControlEventTouchUpInside];
+    
+    selectedArray = [[NSMutableArray alloc]init];
+    selectedItemsArray = [[NSMutableArray alloc]init];
+    
+    
+    alertBgView.hidden = YES;
+    alertMainBgView.hidden = YES;
+
 }
 -(void)audioplayMethod
 {

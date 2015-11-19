@@ -12,7 +12,7 @@
 
 - (void)awakeFromNib {
     // Initialization code
-    self.profileScrollview.contentSize = CGSizeMake(600,self.frame.size.height);
+   // self.profileScrollview.contentSize = CGSizeMake(1200,self.frame.size.height);
 
 }
 
