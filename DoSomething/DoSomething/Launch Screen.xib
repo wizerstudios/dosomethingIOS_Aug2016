@@ -11,17 +11,22 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="SplashImage" translatesAutoresizingMaskIntoConstraints="NO" id="DjP-5C-SLf">
-                    <rect key="frame" x="0.0" y="0.0" width="320" height="518"/>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="SplashImage" translatesAutoresizingMaskIntoConstraints="NO" id="DjP-5C-SLf">
+                    <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                     <animations/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="320" id="Dac-K2-GFI"/>
+                        <constraint firstAttribute="height" constant="568" id="HBv-Jf-ur9"/>
+                    </constraints>
                 </imageView>
             </subviews>
             <animations/>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
-                <constraint firstAttribute="trailing" secondItem="DjP-5C-SLf" secondAttribute="trailing" id="CRV-5m-rxO"/>
-                <constraint firstItem="DjP-5C-SLf" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="Xmq-ZV-PgM"/>
-                <constraint firstItem="DjP-5C-SLf" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="xZn-vE-rcP"/>
+                <constraint firstItem="DjP-5C-SLf" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="4Uv-0m-0xT"/>
+                <constraint firstAttribute="trailing" secondItem="DjP-5C-SLf" secondAttribute="trailing" id="RKq-69-7Sa"/>
+                <constraint firstItem="DjP-5C-SLf" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="a1i-Lv-8CV"/>
+                <constraint firstAttribute="bottom" secondItem="DjP-5C-SLf" secondAttribute="bottom" id="dPc-sq-n0T"/>
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
