@@ -22,11 +22,11 @@
                         <rect key="frame" x="0.0" y="0.0" width="60" height="70"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Fpn-uL-VPb">
-                                <rect key="frame" x="6" y="0.0" width="52" height="44"/>
+                                <rect key="frame" x="6" y="0.0" width="46" height="45"/>
                                 <animations/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="52" id="S9N-55-Plc"/>
-                                    <constraint firstAttribute="height" constant="44" id="SiS-r3-VI6"/>
+                                    <constraint firstAttribute="width" constant="46" id="S9N-55-Plc"/>
+                                    <constraint firstAttribute="height" constant="45" id="SiS-r3-VI6"/>
                                 </constraints>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="veP-mT-gce">
@@ -44,11 +44,11 @@
                         <animations/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstAttribute="trailing" secondItem="Fpn-uL-VPb" secondAttribute="trailing" constant="2" id="AMh-d5-X0f"/>
+                            <constraint firstAttribute="trailing" secondItem="Fpn-uL-VPb" secondAttribute="trailing" constant="8" id="AMh-d5-X0f"/>
                             <constraint firstItem="veP-mT-gce" firstAttribute="leading" secondItem="HeF-YN-pV0" secondAttribute="leading" id="Br3-hP-ygs"/>
-                            <constraint firstItem="veP-mT-gce" firstAttribute="top" secondItem="Fpn-uL-VPb" secondAttribute="bottom" constant="-4" id="arC-Pc-ndP"/>
+                            <constraint firstItem="veP-mT-gce" firstAttribute="top" secondItem="Fpn-uL-VPb" secondAttribute="bottom" constant="-5" id="arC-Pc-ndP"/>
                             <constraint firstAttribute="bottom" secondItem="veP-mT-gce" secondAttribute="bottom" constant="20" id="cnq-po-upF"/>
-                            <constraint firstItem="veP-mT-gce" firstAttribute="top" secondItem="Fpn-uL-VPb" secondAttribute="bottom" constant="-4" id="crt-8j-bhL"/>
+                            <constraint firstItem="veP-mT-gce" firstAttribute="top" secondItem="Fpn-uL-VPb" secondAttribute="bottom" constant="-5" id="crt-8j-bhL"/>
                             <constraint firstItem="Fpn-uL-VPb" firstAttribute="top" secondItem="HeF-YN-pV0" secondAttribute="top" id="tGb-LB-FpL"/>
                             <constraint firstAttribute="trailing" secondItem="veP-mT-gce" secondAttribute="trailing" id="tg5-b5-K0l"/>
                             <constraint firstItem="Fpn-uL-VPb" firstAttribute="leading" secondItem="HeF-YN-pV0" secondAttribute="leading" constant="6" id="zwX-hs-bGe"/>
