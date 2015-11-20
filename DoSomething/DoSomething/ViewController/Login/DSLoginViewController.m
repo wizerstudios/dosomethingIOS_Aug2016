@@ -292,7 +292,7 @@
                          else {
                              if([[[responseObject objectForKey:@"checkuser"]objectForKey:@"status"]  isEqual: @"error"]){
                                  [self loadCreateAPI];
-                                 [COMMON removeLoading];
+                                 
                              }
                              else{
                                  [self gotoProfileView:profileID];//[self gotoProfileView];
@@ -451,6 +451,7 @@
                               [COMMON setUserDetails:[[registerDict valueForKey:@"userDetails"]objectAtIndex:0]];
                                NSLog(@"userdetails = %@",[COMMON getUserDetails]);
                               [self gotoHomeView];
+                               [COMMON removeLoading]; 
                                
                            }
                            else{

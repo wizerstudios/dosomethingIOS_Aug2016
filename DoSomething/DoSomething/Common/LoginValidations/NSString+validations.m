@@ -47,6 +47,13 @@
         return FALSE;
 }
 
++(BOOL)isNull:(NSString *)string{
+    if([[string stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]] isEqual:[NSNull null]])
+        return YES;
+    else
+        return NO;
+}
+
 
 
 @end

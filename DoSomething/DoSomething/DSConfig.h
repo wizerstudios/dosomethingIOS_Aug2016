@@ -69,11 +69,21 @@
 
 #define FILL_DETAILS                @"Please Enter Email and Password"
 
+#define FILL_ALL_DETAILS            @"Please Enter All Details"
+
 #define INVALID_EMAIL               @"Enter Valid Email ID"
 
 #define EMAIL_REQUIRED              @"Email Required"
 
 #define PASSWORD_REQUIRED           @"Password Required"
+
+#define FIRSTNAME_REQUIRED          @"FirstName Required"
+
+#define LASTNAME_REQUIRED           @"LastName Required"
+
+#define GENDER_REQUIRED             @"Gender Required"
+
+#define DOB_REQUIRED                @"Date OF Birth Required"
 
 //API Keys
 #define CheckUser_API               @"checkuser"

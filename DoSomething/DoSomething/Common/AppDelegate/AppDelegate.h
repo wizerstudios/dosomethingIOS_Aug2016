@@ -33,6 +33,8 @@
 @property(nonatomic,retain)UIButton *locationButton;
 @property(nonatomic,retain)UIButton *menuButton;
 @property(nonatomic,retain)UIButton *chatsButton;
+@property(nonatomic,retain)UIButton *profileButton;
+@property(nonatomic,retain)UIButton *settingButton;
 @property(nonatomic,retain)NSMutableArray *buttons_array;
 @end
 
