@@ -45,6 +45,10 @@
                 <outlet property="cellProfileImg" destination="KGk-i7-Jjw" id="U1r-DQ-mAX"/>
                 <outlet property="cellTextField" destination="Vd7-lK-9ag" id="iaC-bq-dBn"/>
                 <outlet property="cellTextView" destination="fgc-Db-ZpK" id="nqk-XJ-vMr"/>
+                <outlet property="profileImageViewCell" destination="bAy-v9-r7J" id="dAd-28-MEf"/>
+                <outlet property="profilePageInfoControl" destination="LRb-lA-1vW" id="mgj-hQ-qGa"/>
+                <outlet property="profileScrollCell" destination="U02-po-bf5" id="AU9-67-raE"/>
+                <outlet property="topViewCell" destination="uey-h2-iAy" id="0Hn-r3-J4X"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
@@ -58,15 +62,29 @@
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="R2K-2f-wgq">
                         <rect key="frame" x="0.0" y="0.0" width="300" height="200"/>
                         <subviews>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="U02-po-bf5">
-                                <rect key="frame" x="0.0" y="36" width="300" height="128"/>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="U02-po-bf5">
+                                <rect key="frame" x="0.0" y="25" width="300" height="164"/>
+                                <subviews>
+                                    <pageControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="3" translatesAutoresizingMaskIntoConstraints="NO" id="LRb-lA-1vW">
+                                        <rect key="frame" x="130" y="99" width="38" height="37"/>
+                                        <animations/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="38" id="Ouf-I5-0wW"/>
+                                        </constraints>
+                                    </pageControl>
+                                </subviews>
                                 <animations/>
-                                <color key="backgroundColor" red="0.90196078430000004" green="0.2470588235" blue="0.32156862749999998" alpha="1" colorSpace="deviceRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="LRb-lA-1vW" secondAttribute="trailing" constant="132" id="6Qf-6E-3zj"/>
+                                    <constraint firstAttribute="bottom" secondItem="LRb-lA-1vW" secondAttribute="bottom" constant="28" id="GNe-MC-lma"/>
+                                    <constraint firstItem="LRb-lA-1vW" firstAttribute="top" secondItem="U02-po-bf5" secondAttribute="top" constant="99" id="LSD-se-XOi"/>
+                                    <constraint firstItem="LRb-lA-1vW" firstAttribute="leading" secondItem="U02-po-bf5" secondAttribute="leading" constant="130" id="eFB-iU-nQC"/>
+                                </constraints>
                                 <connections>
-                                    <outlet property="delegate" destination="R2K-2f-wgq" id="HRZ-pQ-P48"/>
+                                    <outlet property="delegate" destination="-1" id="v01-p1-4gU"/>
                                 </connections>
                             </scrollView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="profile_noimg" translatesAutoresizingMaskIntoConstraints="NO" id="bAy-v9-r7J">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="bAy-v9-r7J">
                                 <rect key="frame" x="88" y="40" width="125" height="125"/>
                                 <animations/>
                                 <constraints>
@@ -118,27 +136,35 @@
                                     <constraint firstAttribute="width" constant="125" id="YYv-TO-wHi"/>
                                 </constraints>
                             </button>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uey-h2-iAy">
+                                <rect key="frame" x="113" y="189" width="79" height="11"/>
+                                <animations/>
+                            </view>
                         </subviews>
                         <animations/>
                         <color key="backgroundColor" red="0.90980392156862744" green="0.90980392156862744" blue="0.90980392156862744" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
+                            <constraint firstAttribute="trailing" secondItem="uey-h2-iAy" secondAttribute="trailing" constant="108" id="331-k9-lsi"/>
                             <constraint firstItem="U2t-y1-clf" firstAttribute="centerX" secondItem="R2K-2f-wgq" secondAttribute="centerX" id="3PD-Z0-fZz"/>
-                            <constraint firstItem="U02-po-bf5" firstAttribute="centerX" secondItem="R2K-2f-wgq" secondAttribute="centerX" id="41T-C1-7bf"/>
+                            <constraint firstAttribute="bottom" secondItem="U02-po-bf5" secondAttribute="bottom" constant="11" id="4We-1R-i88"/>
                             <constraint firstItem="MDZ-Us-VGR" firstAttribute="leading" secondItem="R2K-2f-wgq" secondAttribute="leading" constant="2" id="5xx-Dd-yD1"/>
                             <constraint firstAttribute="height" constant="200" id="7F0-fM-zw1"/>
                             <constraint firstItem="L4l-gD-IHh" firstAttribute="top" secondItem="U2t-y1-clf" secondAttribute="bottom" constant="1" id="B45-3F-bDc"/>
-                            <constraint firstItem="U02-po-bf5" firstAttribute="leading" secondItem="R2K-2f-wgq" secondAttribute="leading" id="BSM-oY-WTq"/>
-                            <constraint firstItem="L4l-gD-IHh" firstAttribute="top" secondItem="U02-po-bf5" secondAttribute="bottom" constant="2" id="Dj4-ic-RLY"/>
+                            <constraint firstItem="U02-po-bf5" firstAttribute="leading" secondItem="R2K-2f-wgq" secondAttribute="leading" id="EUu-jm-M4H"/>
+                            <constraint firstItem="uey-h2-iAy" firstAttribute="leading" secondItem="R2K-2f-wgq" secondAttribute="leading" constant="113" id="JQj-of-a8Q"/>
                             <constraint firstItem="bAy-v9-r7J" firstAttribute="centerY" secondItem="L4l-gD-IHh" secondAttribute="centerY" constant="-78.5" id="W8e-GP-TpU"/>
                             <constraint firstItem="bAy-v9-r7J" firstAttribute="centerX" secondItem="L4l-gD-IHh" secondAttribute="centerX" id="X6e-UC-e0Z"/>
                             <constraint firstAttribute="centerX" secondItem="L4l-gD-IHh" secondAttribute="centerX" constant="-0.5" id="Yzw-MV-6rI"/>
                             <constraint firstItem="bAy-v9-r7J" firstAttribute="centerX" secondItem="R2K-2f-wgq" secondAttribute="centerX" id="cJa-XE-af6"/>
-                            <constraint firstItem="U02-po-bf5" firstAttribute="top" secondItem="MDZ-Us-VGR" secondAttribute="bottom" constant="5" id="esi-nr-g7f"/>
+                            <constraint firstItem="U02-po-bf5" firstAttribute="top" secondItem="R2K-2f-wgq" secondAttribute="top" constant="25" id="dwh-WF-Mhi"/>
                             <constraint firstItem="U2t-y1-clf" firstAttribute="top" secondItem="R2K-2f-wgq" secondAttribute="top" constant="40" id="f7a-rV-vxf"/>
                             <constraint firstItem="MDZ-Us-VGR" firstAttribute="top" secondItem="R2K-2f-wgq" secondAttribute="top" constant="10" id="hQE-mh-1iI"/>
                             <constraint firstAttribute="bottom" secondItem="L4l-gD-IHh" secondAttribute="bottom" constant="3" id="hTw-Ml-OYo"/>
                             <constraint firstItem="bAy-v9-r7J" firstAttribute="top" secondItem="R2K-2f-wgq" secondAttribute="top" constant="40" id="jaz-HU-Hu3"/>
+                            <constraint firstItem="U02-po-bf5" firstAttribute="centerX" secondItem="bAy-v9-r7J" secondAttribute="centerX" id="qXL-Ff-N7j"/>
+                            <constraint firstItem="uey-h2-iAy" firstAttribute="top" secondItem="U02-po-bf5" secondAttribute="bottom" id="xzC-i1-hsZ"/>
                             <constraint firstAttribute="centerX" secondItem="L4l-gD-IHh" secondAttribute="centerX" constant="-0.5" id="yFK-dy-zGY"/>
+                            <constraint firstAttribute="bottom" secondItem="uey-h2-iAy" secondAttribute="bottom" id="zIv-zZ-Pux"/>
                             <constraint firstItem="bAy-v9-r7J" firstAttribute="centerX" secondItem="L4l-gD-IHh" secondAttribute="centerX" constant="-2" id="za9-gY-jQy"/>
                             <constraint firstItem="L4l-gD-IHh" firstAttribute="top" secondItem="bAy-v9-r7J" secondAttribute="bottom" constant="1" id="zt9-v9-BVB"/>
                         </constraints>
@@ -166,8 +192,6 @@
                 <outlet property="cameraButton" destination="L4l-gD-IHh" id="Utw-3t-AWx"/>
                 <outlet property="hobbiesLabel" destination="CBw-9W-xH2" id="LLK-iC-TSe"/>
                 <outlet property="messSwitchBtn" destination="PI4-If-qxu" id="AqB-OW-fUt"/>
-                <outlet property="profileImageview" destination="bAy-v9-r7J" id="Gbd-JG-Yl5"/>
-                <outlet property="profileScrollview" destination="U02-po-bf5" id="BIa-q4-qpa"/>
                 <outlet property="uploadButton" destination="U2t-y1-clf" id="1NF-mv-gtv"/>
                 <outlet property="vibrationSwitchBtn" destination="Lnh-6T-lN0" id="UBo-YO-Kmr"/>
             </connections>
@@ -979,6 +1003,5 @@
     <resources>
         <image name="Plus_icon" width="37" height="37"/>
         <image name="camera_icon" width="37" height="37"/>
-        <image name="profile_noimg" width="163" height="163"/>
     </resources>
 </document>

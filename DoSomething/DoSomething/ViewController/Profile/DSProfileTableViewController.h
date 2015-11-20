@@ -21,7 +21,27 @@
  IBOutlet DSProfileTableViewCell *CellSwitchOn;
  IBOutlet DSProfileTableViewCell *CellTermsOfUse;
  IBOutlet DSProfileTableViewCell *cellTextView;
-  UIImagePickerController  *imagepickerController;
+ UIImagePickerController  *imagepickerController;
+ NSString *strType,*strProfileID,*strProfileImage,*strGender,*FirstName,*LastName,*strDOB,*strEmail,*strPassword;
+    
+    IBOutlet UIScrollView *profileScrollCell;
+    
+    IBOutlet UIPageControl *profilePageInfoControl;
+    
+    UIImageView            *infoImage;
+    UIView                 *pgDtView;
+    UIImageView            *pageImageView;
+    UIImageView            *blkdot;
+    NSMutableArray         *ImageArray;
+    NSString               *pull;
+    
+    float xslider;
+    NSInteger jslider;
+    
+    BOOL isTapping;
+    NSString *scrolldragging;
+    NSMutableArray *infoArray;
+    
 }
 @property (strong, nonatomic) DVSwitch *switcher;
 @property (strong, nonatomic) IBOutlet UITableView *tableviewProfile;
@@ -41,6 +61,7 @@
 
 @property (assign) BOOL selectEmail;
 
-
+@property (strong, nonatomic) IBOutlet UIImageView *profileImageViewCell;
+@property (strong, nonatomic) IBOutlet UIView *topViewCell;
 
 @end

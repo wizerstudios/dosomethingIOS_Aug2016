@@ -20,7 +20,7 @@
 
 @implementation AppDelegate
 
-@synthesize locationButton,menuButton,chatsButton,buttonsView,buttons_array;
+@synthesize locationButton,menuButton,chatsButton,buttonsView,buttons_array,profileButton,settingButton;
 @synthesize homePage,chatPage,window, locationPage;
 
 
@@ -86,9 +86,11 @@
         buttonsView.frame=CGRectMake(0,hVal-hVal/15,wVal,hVal/15);
         buttonsView.hidden=YES;
     }
-    locationButton=[[UIButton alloc]init];
-    menuButton=[[UIButton alloc]init];
-    chatsButton=[[UIButton alloc]init];
+    locationButton  =[[UIButton alloc]init];
+    menuButton      =[[UIButton alloc]init];
+    chatsButton     =[[UIButton alloc]init];
+    profileButton   =[[UIButton alloc]init];
+    settingButton   =[[UIButton alloc]init];
     
     [locationButton setBackgroundImage:[UIImage imageNamed:@"loaction_normal.png"] forState:UIControlStateNormal];
     UIImage *locationActive = [UIImage imageNamed:@"loaction_active.png"];
@@ -112,6 +114,7 @@
     locationButton.frame=CGRectMake(30,3,50,50);
     menuButton.frame=CGRectMake(140,3,45,45);
     chatsButton.frame=CGRectMake(240,3,50,50);
+    //chatsButton.frame=CGRectMake(240,3,50,50);
     
     if(IS_IPHONE6)
     {

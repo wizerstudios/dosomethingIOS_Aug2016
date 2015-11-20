@@ -17,6 +17,7 @@
 #import <MapKit/MapKit.h>
 #import "NSString+validations.h"
 #import "PWParallaxScrollView.h"
+#import "NSString+validations.h"
 
 
 @interface DSProfileTableViewController ()<CLLocationManagerDelegate,UIAlertViewDelegate,PWParallaxScrollViewDataSource,PWParallaxScrollViewDelegate,UIScrollViewDelegate>
@@ -56,6 +57,7 @@
      UIView * mainview;
     UIImageView * objImag;
     NSInteger Currentindex;
+    
 
 }
 @property (nonatomic, strong) PWParallaxScrollView *scrollView;
@@ -63,13 +65,14 @@
 
 @implementation DSProfileTableViewController
 @synthesize profileData, textviewText, placeHolderArray,FBprofileID;
-@synthesize userDetailsDict,emailAddressToRegister,emailPasswordToRegister,selectEmail;
+@synthesize userDetailsDict,emailAddressToRegister,emailPasswordToRegister,selectEmail,topViewCell;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     objWebService = [[DSWebservice alloc]init];
     [self initializeArray];
     deviceUdid = [OpenUDID value];
+    infoArray=[[NSMutableArray alloc]initWithObjects:@"profile_noimg",@"profile_noimg",@"profile_noimg", nil];
    
     
 }
@@ -325,6 +328,102 @@
     [self.tableviewProfile reloadData];
    
 }
+#pragma mark - cellScroll
+-(void) cellScroll
+{
+    for( UIView *subView in [profileScrollCell subviews]) {
+        [subView removeFromSuperview];
+    }
+    for(int i=0;i<infoArray.count;i++)
+    {
+        NSLog(@"%d",i);
+        NSLog(@"%lu",(unsigned long)infoArray.count);
+        int yPosition=-60;
+        infoImage = [[UIImageView alloc] initWithFrame:CGRectMake(i*(self.view.frame.size.width)+0, yPosition, self.view.frame.size.width, self.view.frame.size.height)];
+        infoImage.tag = i+1;
+        UIImageView *image=[[UIImageView alloc] init];
+        image.frame=CGRectMake(90, 90, 100, 100);
+        //  image.image=[UIImage imageNamed:[infoArray objectAtIndex:i]];
+        [infoImage addSubview:image];
+        [profileScrollCell addSubview:infoImage];
+        
+        if(!profileImage){
+            image.image=[UIImage imageNamed:[infoArray objectAtIndex:i]];
+            //[cell.profileImageview setImage:profileImage];
+            [topViewCell setHidden:YES];
+            [profileScrollCell setScrollEnabled:NO];
+        }
+        else{
+            if(i==0){
+                UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
+                [button addTarget:self
+                           action:@selector(selectCamera:)
+                 forControlEvents:UIControlEventTouchUpInside];
+                UIImage *buttonImage = [UIImage imageNamed:@"camera_icon"];
+                [button setBackgroundImage:buttonImage forState:UIControlStateNormal];
+                button.frame = CGRectMake(37, 65, 32, 32);
+                [image addSubview:button];
+                [cell.cameraButton setHidden:YES];
+                image.layer.cornerRadius = image.frame.size.width / 2;
+                image.clipsToBounds = YES;
+                [image setImage:profileImage];
+                
+            }
+    
+            else{
+                UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
+                [button addTarget:self
+                           action:@selector(selectCamera:)
+                 forControlEvents:UIControlEventTouchUpInside];
+                UIImage *buttonImage = [UIImage imageNamed:@"camera_icon"];
+                [button setBackgroundImage:buttonImage forState:UIControlStateNormal];
+                button.frame = CGRectMake(37, 65, 32, 32);
+                [image addSubview:button];
+                image.image=[UIImage imageNamed:[infoArray objectAtIndex:i]];
+                
+            }
+           
+                    }
+}
+    
+    [profileScrollCell setContentSize:CGSizeMake((infoArray.count * self.view.frame.size.width), 50)];
+    
+    xslider=0;
+    pgDtView=[[UIView alloc]init];
+    pgDtView.backgroundColor=[UIColor clearColor];
+    pageImageView =[[UIImageView alloc]init];
+    profilePageInfoControl.numberOfPages=infoArray.count;
+    
+    for(int i=0;i<profilePageInfoControl.numberOfPages;i++)
+    {
+        blkdot=[[UIImageView alloc]init];
+        [blkdot setFrame:CGRectMake(i*13, 0, 7, 7 )];
+        [blkdot setImage:[UIImage imageNamed:@"dot_normal"]];
+        [pgDtView addSubview:blkdot];
+        [pageImageView setFrame:CGRectMake(0, 0,7, 7)];
+        [pageImageView setImage:[UIImage imageNamed:@"dot_active_gray"]];
+        [pgDtView addSubview:pageImageView];
+        [topViewCell addSubview:pgDtView];
+        if(IS_IPHONE5) {
+        [pgDtView setFrame:CGRectMake(20, -5, profilePageInfoControl.numberOfPages*13, 10)];
+        }
+        
+    }
+    
+}
+
+-(void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView2
+{
+    if (scrollView2==profileScrollCell) {    }
+    pull=@"";
+    jslider = scrollView2.contentOffset.x/320;
+    [profileScrollCell setNeedsDisplay];
+    profilePageInfoControl.currentPage=jslider;
+    [pageImageView setFrame:CGRectMake(jslider*13, 0, 7, 7)];
+    
+    isTapping=NO;
+    scrolldragging=@"YES";
+}
 
 #pragma mark - TableView Datasource & Delegate
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
@@ -445,8 +544,8 @@
         {
             [[NSBundle mainBundle] loadNibNamed:@"DSProfileTableViewCell" owner:self options:nil];
             cell = cellProfileImg;
-           // [self initControl];
-            //[self SetImageArray];
+            [self cellScroll];
+           
         }
         
         if (IS_IPHONE6 ||IS_IPHONE6_Plus)
@@ -455,10 +554,12 @@
             cell.layoutConstraintProfileImageWidth.constant =161;
         }
         
-        if(!profileImage)
-            [cell.profileImageview setImage:[UIImage imageNamed:@"profile_noimg"]];
-        else
-            [cell.profileImageview setImage:profileImage];
+//        if(!profileImage){
+//            [cell.profileImageview setImage:[UIImage imageNamed:@"profile_noimg"]];
+//        }
+//        else{
+//             [cell.profileImageview setImage:profileImage];
+//        }
         
         cell.profileImageview.layer.cornerRadius = cell.profileImageview.frame.size.height / 2;
         cell.profileImageview.layer.masksToBounds = YES;
@@ -1136,29 +1237,65 @@
 }
 -(void)uploadNextImageMethod
 {
-    [self scrollViewDidScroll:cell.profileScrollview];
+   // [self scrollViewDidScroll:cell.profileScrollview];
+    [self cellScroll];
 }
-- (void)scrollViewDidScroll:(UIScrollView *)scrollView;
-{
-    if (scrollView == cell.profileScrollview) {
-        //IndexVal = scrollView.contentOffset.x/SCREEN_WIDTH;
-        //[topSliderScrollView setNeedsDisplay];
-        //pageController.currentPage = IndexVal;
-        [cell.profileImageview setFrame:CGRectMake(300, 0,cell.profileScrollview.frame.size.width,cell.profileScrollview.frame.size.height)];
-    }
-
-    NSLog(@"scroll");
-}
--(void)SetImageArray
-{
-    
-    BGimageArray = [[NSMutableArray alloc] initWithObjects:@"",@"",@"",@"",nil];
-    FGimageArray = [[NSMutableArray alloc] initWithObjects:@"profile_noimg",@"profile_noimg",@"profile_noimg",@"profile_noimg",nil];
-}
+//- (void)scrollViewDidScroll:(UIScrollView *)scrollView;
+//{
+//    if (scrollView == cell.profileScrollview) {
+//        //IndexVal = scrollView.contentOffset.x/SCREEN_WIDTH;
+//        //[topSliderScrollView setNeedsDisplay];
+//        //pageController.currentPage = IndexVal;
+//        [cell.profileImageview setFrame:CGRectMake(300, 0,cell.profileScrollview.frame.size.width,cell.profileScrollview.frame.size.height)];
+//    }
+//
+//    NSLog(@"scroll");
+//}
 #pragma mark - gotoHomeView
 -(void)gotoHomeView{
     HomeViewController * objHomeview = [[HomeViewController alloc]initWithNibName:@"HomeViewController" bundle:nil];
     [self.navigationController pushViewController:objHomeview animated:NO];
+    
+}
+#pragma mark - registerAPI
+-(void) registerAPI{
+    
+    [objWebService postRegister:Register_API
+                           type:strType
+                     first_name:FirstName
+                      last_name:LastName
+                          email:emailAddressToRegister
+                       password:emailPasswordToRegister
+                      profileId:strProfileID
+                            dob:strDOB
+                   profileImage:strProfileImage
+                         gender:strGender
+                       latitude:currentLatitude
+                      longitude:currentLongitude
+                         device:Device
+                       deviceid:deviceUdid
+           notification_message:YES
+           notification_sound  :YES
+         notification_vibration:YES
+                        success:^(AFHTTPRequestOperation *operation, id responseObject)
+     {
+         NSLog(@"rsponse:%@",responseObject);
+         
+         NSMutableDictionary *registerDict = [[NSMutableDictionary alloc]init];
+         
+         registerDict = [responseObject valueForKey:@"register"];
+         
+         if([[registerDict valueForKey:@"status"]isEqualToString:@"success"]){
+             [COMMON setUserDetails:[[registerDict valueForKey:@"userDetails"]objectAtIndex:0]];
+             NSLog(@"userdetails = %@",[COMMON getUserDetails]);
+             [self gotoHomeView];
+         }
+     }
+     
+                        failure:^(AFHTTPRequestOperation *operation, id error) {
+                            
+                        }];
+
     
 }
 #pragma mark - saveAction
@@ -1166,106 +1303,27 @@
 {
     NSArray *postPerArray;
     postPerArray = [[placeHolderArray objectAtIndex:0]valueForKey:@"TypingText"];
-    NSString *strType,*strProfileID,*strProfileImage,*strGender,*FirstName,*LastName,*strDOB;
+    
     strFirstName = [postPerArray objectAtIndex:1];
     strLastName  = [postPerArray objectAtIndex:2];
     strType      = (selectEmail== YES)?@"1":@"2";
     strProfileID = (FBprofileID!=nil)?FBprofileID:@"";
     strGender    = (selectGender!=nil)?selectGender:@"";
-    FirstName = (strFirstName!=nil)? strFirstName:@"";
-    LastName  = (strLastName!=nil)?strLastName:@"";
+    FirstName    = (strFirstName!=nil)? strFirstName:@"";
+    LastName     = (strLastName!=nil)?strLastName:@"";
     strDOB       = (currentTextfield.text !=nil)?currentTextfield.text :@"";
+    
     NSLog(@"isNotification_vibration:%@",isNotification_vibration);
-    [objWebService postRegister:Register_API
-                                   type:strType
-                             first_name:FirstName
-                              last_name:LastName
-                                  email:emailAddressToRegister
-                               password:emailPasswordToRegister
-                              profileId:strProfileID
-                                    dob:strDOB
-                           profileImage:strProfileImage
-                                 gender:strGender
-                               latitude:currentLatitude
-                              longitude:currentLongitude
-                                 device:Device
-                               deviceid:deviceUdid
-                   notification_message:YES
-                   notification_sound  :YES
-                 notification_vibration:YES
-                                success:^(AFHTTPRequestOperation *operation, id responseObject)
-                                        {
-                                            NSLog(@"rsponse:%@",responseObject);
-                 
-                                            NSMutableDictionary *registerDict = [[NSMutableDictionary alloc]init];
-                 
-                                            registerDict = [responseObject valueForKey:@"register"];
-                 
-                                            if([[registerDict valueForKey:@"status"]isEqualToString:@"success"]){
-                                                    [self gotoHomeView];
-                                                }
-                                        }
-             
-                                failure:^(AFHTTPRequestOperation *operation, id error) {
-                                    
-                                }];
+    
+        if(![FirstName isEqual:[NSNull null]]&&![LastName isEqual:[NSNull null]]&&![strDOB isEqual:[NSNull null]]&&![strGender isEqual:[NSNull null]]&&![emailAddressToRegister isEqual:[NSNull null]]&&![emailPasswordToRegister isEqual:[NSNull null]]){
+            [self registerAPI];
+        }
+    else{
+        [self presentViewController:[ DSAppCommon alertWithTitle:@"Title" withMessage:FILL_ALL_DETAILS preferredStyle:UIAlertControllerStyleAlert] animated:YES completion:NULL];
+        [COMMON removeLoading];
+        return;
+    }
+
 }
 
-
-
-
-
-
-
-
-
-//    if(selectEmail==YES)
-//    {
-//    }
-//    
-//    else{
-//        
-//    
-//    NSArray *postPerArray;
-//    postPerArray = [[placeHolderArray objectAtIndex:0]valueForKey:@"TypingText"];
-//        NSLog(@"last7%@",[postPerArray objectAtIndex:0]);
-//        NSLog(@"last7%@",[postPerArray objectAtIndex:1]);
-//        NSLog(@"last7%@",[postPerArray objectAtIndex:2]);
-//        NSLog(@"last7%@",[postPerArray objectAtIndex:3]);
-//        NSLog(@"last7%@",[postPerArray objectAtIndex:4]);
-//        NSLog(@"last7%@",[postPerArray objectAtIndex:5]);
-//        NSLog(@"last7%@",[postPerArray objectAtIndex:6]);
-//    NSLog(@"last7%@",[postPerArray objectAtIndex:7]);
-//     NSLog(@"last8%@",[postPerArray objectAtIndex:8]);
-//    NSLog(@"last8%@",[postPerArray objectAtIndex:9]);
-//    [objWebService profileUpdate:ProfileUpdate_API
-//                      first_name:[postPerArray objectAtIndex:1]
-//                       last_name:[postPerArray objectAtIndex:2]
-//                             dob:[postPerArray objectAtIndex:4]
-//                          image1:NULL
-//                          image2:NULL
-//                          image3:NULL
-//                          gender:@""
-//                           about:@""
-//                         hobbies:@""
-//                        latitude:currentLatitude
-//                       longitude:currentLongitude
-//                    notification:@""
-//                       sessionid:@""
-//                         success:^(AFHTTPRequestOperation *operation, id responseObject) {
-//                             [self gotoHomeView];
-//                             
-//                         } failure:^(AFHTTPRequestOperation *operation, id error) {
-//                             
-//                         }];
-//    }
-//}
-
-
-
-//- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
-//
-//{
-//    DSProfileTableViewCell *cell ;
-//   }
 @end
