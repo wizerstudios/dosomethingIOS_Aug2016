@@ -17,6 +17,7 @@
 #import <MapKit/MapKit.h>
 #import "NSString+validations.h"
 #import "PWParallaxScrollView.h"
+#import "NSString+validations.h"
 #import "UIImageView+AFNetworking.h"
 
 @interface DSProfileTableViewController ()<CLLocationManagerDelegate,UIAlertViewDelegate,PWParallaxScrollViewDataSource,PWParallaxScrollViewDelegate,UIScrollViewDelegate>
