@@ -584,6 +584,7 @@
         }
         cell.labelTitleText.text = titleText;
         NSLog(@"typingText%@",typingText);
+        
         NSLog(@"titleText%@",titleText);
         NSLog(@"placeHolderText%@",placeHolderText);
 

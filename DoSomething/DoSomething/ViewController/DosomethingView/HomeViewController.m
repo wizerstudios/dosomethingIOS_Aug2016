@@ -6,20 +6,19 @@
 //  Copyright (c) 2015 OClock Apps. All rights reserved.
 //
 
-#define ACTIVE_IMAGE @"ActiveImage"
-#define NORMAL_IMAGE @"NormalImage"
-#define CAPTION @"Caption"
 
 #import "HomeViewController.h"
 
 #import "CustomNavigationView.h"
 
 #import "DSConfig.h"
-
+#import "DSWebservice.h"
 #import "HomeCustomCell.h"
 #import "AppDelegate.h"
 #import <AudioToolbox/AudioToolbox.h>
 #import <AVFoundation/AVFoundation.h>
+#import "DSAppCommon.h"
+#import "UIImageView+AFNetworking.h"
 
 #define ITEMS_PAGE_SIZE 4
 #define ITEM_CELL_IDENTIFIER @"ItemCell"
@@ -28,6 +27,7 @@
 @interface HomeViewController ()<UICollectionViewDataSource,UICollectionViewDelegate>
 {
     AppDelegate *appDelegate;
+    DSWebservice            * objWebService;
     BOOL isSelectMenu;
     NSArray *selectedArray;
     int selectedCellCount;
@@ -46,21 +46,55 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self loadNavigation];
-    menuArray = [[NSMutableArray alloc]initWithObjects:
-                 [NSDictionary dictionaryWithObjectsAndKeys:@"running_Inactive.png",NORMAL_IMAGE,@"running_active.png",ACTIVE_IMAGE,@"RUNNING",CAPTION, nil],
-                 [NSDictionary dictionaryWithObjectsAndKeys:@"beach_Inactive.png",NORMAL_IMAGE,@"beach_active.png",ACTIVE_IMAGE,@"BEACH",CAPTION, nil],
-                 [NSDictionary dictionaryWithObjectsAndKeys:@"cycling_Inactive.png",NORMAL_IMAGE,@"cycling_active.png",ACTIVE_IMAGE,@"CYCLING",CAPTION,nil],
-                 [NSDictionary dictionaryWithObjectsAndKeys:@"movies_Inactive.png",NORMAL_IMAGE,@"movies_active.png",ACTIVE_IMAGE,@"MOVIES",CAPTION, nil],
-                 [NSDictionary dictionaryWithObjectsAndKeys:@"alchol_Inactive.png",NORMAL_IMAGE,@"alchol_active.png",ACTIVE_IMAGE,@"ALCOHOL",CAPTION, nil],
-                 [NSDictionary dictionaryWithObjectsAndKeys:@"meals_InActive.png",NORMAL_IMAGE,@"meals_active.png",ACTIVE_IMAGE,@"MEALS",CAPTION, nil],
-                 [NSDictionary dictionaryWithObjectsAndKeys:@"coffee_Inactive.png",NORMAL_IMAGE,@"coffee_active.png",ACTIVE_IMAGE,@"COFFEE",CAPTION, nil],
-                 [NSDictionary dictionaryWithObjectsAndKeys:@"shopping_Inactive.png",NORMAL_IMAGE,@"shopping_active.png",ACTIVE_IMAGE,@"SHOPPING",CAPTION, nil],
-                 [NSDictionary dictionaryWithObjectsAndKeys:@"karaoke_Inactive.png",NORMAL_IMAGE,@"karaoke_active.png",ACTIVE_IMAGE,@"KARAOKE",CAPTION, nil],
-                 [NSDictionary dictionaryWithObjectsAndKeys:@"gym_Inactive.png",NORMAL_IMAGE,@"gym_active.png",ACTIVE_IMAGE,@"GYM",CAPTION, nil],
-                  [NSDictionary dictionaryWithObjectsAndKeys:@"tennis_Inactive.png",NORMAL_IMAGE,@"tennis_active.png",ACTIVE_IMAGE,@"TENNIS",CAPTION, nil],
-                  [NSDictionary dictionaryWithObjectsAndKeys:@"soocer_Inactive",NORMAL_IMAGE,@"soocer_active",ACTIVE_IMAGE,@"SOCCER",CAPTION, nil],
-                 nil];
+    objWebService = [[DSWebservice alloc]init];
+    [COMMON LoadIcon:self.view];
+    [self loadhomeviewListWebservice];
+    if(IS_IPHONE5)
+        [self.view addConstraint:[NSLayoutConstraint constraintWithItem:_homeCollectionView
+                                                              attribute:NSLayoutAttributeTop
+                                                              relatedBy:NSLayoutRelationEqual
+                                                                 toItem:self.view
+                                                              attribute:NSLayoutAttributeTop
+                                                             multiplier:1.0
+                                                               constant:75.0]];
     
+}
+-(void)viewWillAppear:(BOOL)animated
+{
+    appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+    appDelegate.buttonsView.hidden=NO;
+    [self loadnavigationview];
+     [self setupCollectionView];
+    [self audioplayMethod];
+    
+    
+}
+
+-(void)loadhomeviewListWebservice
+{
+    
+     [objWebService HomeviewList:DoSomething_API success:^(AFHTTPRequestOperation *operation, id responseObject)
+      {
+          if(responseObject!=nil)
+          {
+          NSLog(@"response:%@",responseObject);
+          NSMutableDictionary *homeviewlist = [[NSMutableDictionary alloc]init];
+          menuArray=[NSMutableArray alloc];
+          homeviewlist = [responseObject valueForKey:@"dosomethinglist"];
+          menuArray =[homeviewlist valueForKey:@"list"];
+         
+             [COMMON removeLoading];
+             [self.homeCollectionView reloadData];
+          }
+         
+        
+     } failure:^(AFHTTPRequestOperation *operation, id error) {
+        
+     }];
+}
+
+-(void)loadnavigationview
+{
     CustomNavigationView *customNavigation;
     customNavigation = [[CustomNavigationView alloc] initWithNibName:@"CustomNavigationView" bundle:nil];
     customNavigation.view.frame = CGRectMake(0,-20, CGRectGetWidth(self.view.frame), 65);
@@ -75,31 +109,16 @@
     [customNavigation.buttonBack setHidden:YES];
     [customNavigation.saveBtn setHidden:YES];
     [self.navigationController.navigationBar addSubview:customNavigation.view];
-//    [customNavigation.saveBtn addTarget:self action:@selector(saveAction) forControlEvents:UIControlEventTouchUpInside];
-//    [customNavigation.buttonBack addTarget:self action:@selector(backAction) forControlEvents:UIControlEventTouchUpInside];
+    //    [customNavigation.saveBtn addTarget:self action:@selector(saveAction) forControlEvents:UIControlEventTouchUpInside];
+    //    [customNavigation.buttonBack addTarget:self action:@selector(backAction) forControlEvents:UIControlEventTouchUpInside];
     
     selectedArray = [[NSMutableArray alloc]init];
     selectedItemsArray = [[NSMutableArray alloc]init];
-   
-   
+    
+    
     alertBgView.hidden = YES;
     alertMainBgView.hidden = YES;
-    
-    if(IS_IPHONE5)
-        [self.view addConstraint:[NSLayoutConstraint constraintWithItem:_homeCollectionView
-                                                              attribute:NSLayoutAttributeTop
-                                                              relatedBy:NSLayoutRelationEqual
-                                                                 toItem:self.view
-                                                              attribute:NSLayoutAttributeTop
-                                                             multiplier:1.0
-                                                               constant:75.0]];
-}
--(void)viewWillAppear:(BOOL)animated
-{
-    appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
-    appDelegate.buttonsView.hidden=NO;
-    [self audioplayMethod];
-    [self setupCollectionView];
+
 }
 -(void)audioplayMethod
 {
@@ -178,19 +197,24 @@
         {
             if ([indexPath isEqual:collectionIndexPath])
             {
-                cell.MenuTittle.text = [data objectForKey:CAPTION];
+                cell.MenuTittle.text = [data objectForKey:@"name"];
                 cell.MenuTittle.textColor = [UIColor colorWithRed:(199/255.0f) green:(65/255.0f) blue:(81/255.0f) alpha:1.0f];
-                NSString * objstr = [NSString stringWithFormat:@"%@",[data valueForKey:ACTIVE_IMAGE]];
-                cell.MenuImg.image = [UIImage imageNamed:objstr];
+                NSString * objstr = [NSString stringWithFormat:@"%@",[data valueForKey:@"ActiveImage"]];
+                objstr= [objstr stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+                [cell.MenuImg setImageWithURL:[NSURL URLWithString:objstr]];
+                //cell.MenuImg.image = [UIImage imageNamed:objstr];
                 break;
             }
         }
     }
     else{
-        cell.MenuTittle.text = [data objectForKey:CAPTION];
+        cell.MenuTittle.text = [data objectForKey:@"name"];
         cell.MenuTittle.textColor = [UIColor colorWithRed:(164/255.0f) green:(164/255.0f) blue:(164/255.0f) alpha:1.0f];
-        NSString * objstr = [NSString stringWithFormat:@"%@",[data valueForKey:NORMAL_IMAGE]];
-        cell.MenuImg.image = [UIImage imageNamed:objstr];
+        NSString * objstr = [NSString stringWithFormat:@"%@",[data valueForKey:@"InactiveImage"]];
+        objstr= [objstr stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+        [cell.MenuImg setImageWithURL:[NSURL URLWithString:objstr]];
+
+        //cell.MenuImg.image = [UIImage imageNamed:objstr];
     }
     
     _homeCollectionView.allowsMultipleSelection = YES;
@@ -250,12 +274,14 @@
         [audioPlayer prepareToPlay];
         [audioPlayer play];
         
-        [selectedItemsArray addObject:[data valueForKey:@"Caption"]];
+        [selectedItemsArray addObject:[data valueForKey:@"name"]];
         cell.MenuTittle.textColor = [UIColor colorWithRed:(199/255.0f) green:(65/255.0f) blue:(81/255.0f) alpha:1.0f];
-        NSString * objstr = [NSString stringWithFormat:@"%@",[data valueForKey:ACTIVE_IMAGE]];
-       
+        NSString * objstr = [NSString stringWithFormat:@"%@",[data valueForKey:@"ActiveImage"]];
+        objstr= [objstr stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+        [cell.MenuImg setImageWithURL:[NSURL URLWithString:objstr]];
+
         NSLog(@"selectImage:%@",objstr);
-        cell.MenuImg.image = [UIImage imageNamed:objstr];
+        //cell.MenuImg.image = [UIImage imageNamed:objstr];
         
     }
     else
@@ -294,7 +320,7 @@
 
     {
 
-        if([[data valueForKey:@"Caption"] isEqualToString:strDeselect])
+        if([[data valueForKey:@"name"] isEqualToString:strDeselect])
 
        {
 
@@ -311,9 +337,11 @@
 
             cell.MenuTittle.textColor = [UIColor colorWithRed:(164/255.0f) green:(164/255.0f) blue:(164/255.0f) alpha:1.0f];
 
-            NSString * objstr = [NSString stringWithFormat:@"%@",[data valueForKey:NORMAL_IMAGE]];
+            NSString * objstr = [NSString stringWithFormat:@"%@",[data valueForKey:@"InactiveImage"]];
+           objstr= [objstr stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+           [cell.MenuImg setImageWithURL:[NSURL URLWithString:objstr]];
 
-            cell.MenuImg.image = [UIImage imageNamed:objstr];
+            //cell.MenuImg.image = [UIImage imageNamed:objstr];
          }
       
         }

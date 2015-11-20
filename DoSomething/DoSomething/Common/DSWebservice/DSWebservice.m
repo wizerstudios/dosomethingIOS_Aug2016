@@ -38,6 +38,21 @@ static NSString       *ServiceMimeType    = @"image/jpeg";
 + (DSWebservice *)service {
     return [[DSWebservice alloc] init];
 }
+#pragma mark - get homelist
+-(void)HomeviewList:(NSString *)homelist
+            success:(WebserviceRequestSuccessHandler)success
+            failure:(WebserviceRequestFailureHandler)failure
+{
+     urlString = [URL_FOR_RESOURCE(@"") stringByAppendingString:[NSString stringWithFormat:@"%@",homelist]];
+    NSLog(@"urlString = %@",urlString);
+   
+    
+    [self sendRequestWithURLString:urlString
+                     andParameters:nil
+                            method:ServiceGet
+           completionSucessHandler:success
+          completionFailureHandler:failure];
+}
 
 #pragma mark - POST checkUser
 
