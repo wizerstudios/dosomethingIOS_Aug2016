@@ -19,6 +19,7 @@
 #import <AVFoundation/AVFoundation.h>
 #import "DSAppCommon.h"
 #import "UIImageView+AFNetworking.h"
+#import "OpenUDID.h"
 
 #define ITEMS_PAGE_SIZE 4
 #define ITEM_CELL_IDENTIFIER @"ItemCell"
@@ -37,6 +38,8 @@
     
     AVAudioPlayer *audioPlayer;
     
+    NSString                * deviceUdid;
+    
 }
 
 @end
@@ -49,6 +52,7 @@
     objWebService = [[DSWebservice alloc]init];
     [COMMON LoadIcon:self.view];
     [self loadhomeviewListWebservice];
+     deviceUdid = [OpenUDID value];
     if(IS_IPHONE5)
         [self.view addConstraint:[NSLayoutConstraint constraintWithItem:_homeCollectionView
                                                               attribute:NSLayoutAttributeTop
@@ -274,7 +278,7 @@
         [audioPlayer prepareToPlay];
         [audioPlayer play];
         
-        [selectedItemsArray addObject:[data valueForKey:@"name"]];
+        [selectedItemsArray addObject:[data valueForKey:@"Id"]];
         cell.MenuTittle.textColor = [UIColor colorWithRed:(199/255.0f) green:(65/255.0f) blue:(81/255.0f) alpha:1.0f];
         NSString * objstr = [NSString stringWithFormat:@"%@",[data valueForKey:@"ActiveImage"]];
         objstr= [objstr stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
@@ -320,7 +324,7 @@
 
     {
 
-        if([[data valueForKey:@"name"] isEqualToString:strDeselect])
+        if([[data valueForKey:@"Id"] isEqualToString:strDeselect])
 
        {
 
@@ -398,11 +402,26 @@
     
     alertBgView.hidden = YES;
     alertMainBgView.hidden = YES;
+    
+    NSLog(@"selectedItemsArray:%@",selectedItemsArray);
+    [self loadupdateDosomethingWebService:selectedItemsArray :@"Yes"];
 }
 
 - (IBAction)alertPressNo:(id)sender {
     
     alertBgView.hidden = YES;
     alertMainBgView.hidden = YES;
+    [self loadupdateDosomethingWebService:selectedArray :@"No"];
 }
+-(void)loadupdateDosomethingWebService:(NSArray *)selectItemID :(NSString*)selectOption
+{
+    [objWebService updateDosomething:UpdateDoSomething_API sessionid:deviceUdid dosomething_id:selectItemID available_now:selectOption success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSLog(@"response:%@",responseObject);
+        
+    } failure:^(AFHTTPRequestOperation *operation, id error) {
+        
+    }];
+}
+
+
 @end

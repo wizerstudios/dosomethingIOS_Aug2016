@@ -126,7 +126,8 @@ notification_vibration:(BOOL)isnotification_vibration
 
 -(void)updateDosomething:(NSString *)updatedosomethingURL
                sessionid:(NSString *)sessionid
-           dosomething_id:(NSString *)dosomething_id
+           dosomething_id:(NSArray *)dosomething_id
+           available_now:(NSString *)available_now
                  success:(WebserviceRequestSuccessHandler)success
                  failure:(WebserviceRequestFailureHandler)failure;
 

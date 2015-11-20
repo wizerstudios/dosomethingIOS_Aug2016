@@ -282,7 +282,8 @@ notification_vibration:(BOOL)isnotification_vibration
 
 - (void) updateDosomething:(NSString *)updatedosomethingURL
                  sessionid:(NSString *)sessionid
-            dosomething_id:(NSString *)dosomething_id
+            dosomething_id:(NSArray *)dosomething_id
+            available_now :(NSString *)available_now
                    success:(WebserviceRequestSuccessHandler)success
                    failure:(WebserviceRequestFailureHandler)failure
 {
@@ -292,6 +293,7 @@ notification_vibration:(BOOL)isnotification_vibration
     
     if(sessionid)         [updateDosomething    setObject:sessionid                 forKey:@"sessionid"];
     if(dosomething_id)    [updateDosomething    setObject:dosomething_id            forKey:@"dosomething_id"];
+    if(available_now)     [updateDosomething    setObject:available_now  forKey:@"available_now"];
     
     NSLog(@"urlString = %@",urlString);
     NSLog(@"UpdateDoSomething = %@",updateDosomething);

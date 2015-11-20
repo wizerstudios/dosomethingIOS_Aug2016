@@ -17,7 +17,7 @@
 #import <MapKit/MapKit.h>
 #import "NSString+validations.h"
 #import "PWParallaxScrollView.h"
-
+#import "UIImageView+AFNetworking.h"
 
 @interface DSProfileTableViewController ()<CLLocationManagerDelegate,UIAlertViewDelegate,PWParallaxScrollViewDataSource,PWParallaxScrollViewDelegate,UIScrollViewDelegate>
 {
@@ -669,8 +669,17 @@
             else
                 hobbiesImage = [[UIImageView alloc]initWithFrame:CGRectMake(((i-15)*(commonWidth + imageSize))+ 10, yAxis+((imageSize+space) * 3), imageSize, imageSize)];
             NSString *image =[imageNormalArray objectAtIndex:i];
-            
-            [hobbiesImage setImage:[UIImage imageNamed:image]];
+           //[imageNormalArray lastObject];
+            NSLog(@"lastObject:%@",[imageNormalArray lastObject]);
+            if([image isEqualToString:@"Plus_icon.png"])
+            {
+                [hobbiesImage setImage:[UIImage imageNamed:image]];
+            }
+            else
+            {
+               image= [image stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+               [hobbiesImage setImageWithURL:[NSURL URLWithString:image]];
+            }
             
             if (image == plusIcon) {
                 hobbiesImage.userInteractionEnabled = YES;

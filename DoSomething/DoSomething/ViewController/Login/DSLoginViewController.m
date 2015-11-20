@@ -302,6 +302,7 @@
                      }
                      failure:^(AFHTTPRequestOperation *operation, id error) {
                          
+
                      }];
 }
 #pragma mark - loginByFacebook
