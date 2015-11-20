@@ -36,6 +36,7 @@
     [super viewDidLoad];    
     self.kenView.delegate = self;
     _scrollViewImage.userInteractionEnabled = NO;
+     
 }
 
 - (void)viewDidAppear:(BOOL)animated

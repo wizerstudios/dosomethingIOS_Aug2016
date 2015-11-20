@@ -122,12 +122,13 @@ DSAppCommon *sharedCommon = nil;
 }
 
 
+
 #pragma mark User Interaction Loading :
 
 -(void)LoadIcon:(UIView *)view
 {
     [self removeLoading];
-    loadingView = [[UIView alloc] initWithFrame:CGRectMake((view.frame.size.width-37)/2, (view.frame.size.height-37)/2, 37, 37)];
+    loadingView = [[UIView alloc] initWithFrame:CGRectMake((view.frame.size.width)/2, (view.frame.size.height-37)/2, 37, 37)];
     [loadingView.layer setCornerRadius:5.0];
     
     [loadingView setBackgroundColor:[UIColor blackColor]];

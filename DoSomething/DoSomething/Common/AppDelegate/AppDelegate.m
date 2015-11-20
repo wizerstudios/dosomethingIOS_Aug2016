@@ -29,7 +29,9 @@
       NSLog(@"### Running FB SDK Version: %@", [FBSDKSettings sdkVersion]);
     [[FBSDKApplicationDelegate sharedInstance] application:application
                              didFinishLaunchingWithOptions:launchOptions];
+   
     if ([COMMON isUserLoggedIn]) {
+        
         userHomeView = [[HomeViewController alloc]initWithNibName:@"HomeViewController" bundle:nil];
         self.window.rootViewController = userHomeView;
         self.navigationController = [[UINavigationController alloc] initWithRootViewController:userHomeView];
