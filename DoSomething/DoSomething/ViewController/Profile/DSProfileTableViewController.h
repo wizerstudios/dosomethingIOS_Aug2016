@@ -24,9 +24,9 @@
  UIImagePickerController  *imagepickerController;
  NSString *strType,*strProfileID,*strProfileImage,*strGender,*FirstName,*LastName,*strDOB,*strEmail,*strPassword;
     
-    IBOutlet UIScrollView *profileScrollCell;
+    IBOutlet UIScrollView *profileImageScroll;
     
-    IBOutlet UIPageControl *profilePageInfoControl;
+    IBOutlet UIPageControl *profileImagePageControl;
     
     UIImageView            *infoImage;
     UIView                 *pgDtView;
@@ -61,7 +61,12 @@
 
 @property (assign) BOOL selectEmail;
 
-@property (strong, nonatomic) IBOutlet UIImageView *profileImageViewCell;
+@property (strong, nonatomic) IBOutlet UIImageView *profileImageView;
 @property (strong, nonatomic) IBOutlet UIView *topViewCell;
+
+@property (strong, nonatomic) IBOutlet UIScrollView *scrView;
+@property (strong, nonatomic) IBOutlet UIPageControl *pageControl;
+- (IBAction)pageChanged:(id)sender;
+@property (strong, nonatomic) IBOutlet UITableView *tbView;
 
 @end

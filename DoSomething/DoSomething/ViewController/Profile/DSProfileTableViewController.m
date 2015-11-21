@@ -5,7 +5,7 @@
 //  Created by Sha on 10/12/15.
 //  Copyright (c) 2015 OClock Apps. All rights reserved.
 //
-
+#define pageWidth           380
 #import "DSProfileTableViewController.h"
 #import "DSInterestAndHobbiesViewController.h"
 #import "CustomNavigationView.h"
@@ -115,8 +115,59 @@
     hobbiesNameArray =[[[NSUserDefaults standardUserDefaults] valueForKey:@"SelectedItemName"]mutableCopy];
     
     [_tableviewProfile reloadData];
+   
 
 }
+#pragma mark - scroll
+-(void)scroll{
+//    for( UIView *subView in [_scrView subviews]) {
+//        [subView removeFromSuperview];
+//    }
+    self.scrView.pagingEnabled=YES;
+   // self.scrView.showsHorizontalScrollIndicator=YES;
+    self.scrView.delegate=self;
+    
+ //   _profileImageView.image=[UIImage imageNamed:@"profile_noimg"];
+  //  [self.scrView addSubview:_profileImageView];
+    
+    UIImageView *page1=[[UIImageView alloc] initWithFrame:CGRectMake(0, 0, self.profileImageView.frame.size.width, self.profileImageView.frame.size.height)];
+     page1.image=[UIImage imageNamed:@"profile_noimg"];
+    UIImageView *page2=[[UIImageView alloc] initWithFrame:CGRectMake(2*self.profileImageView.frame.size.width, 0, self.profileImageView.frame.size.width, self.profileImageView.frame.size.height)];
+    page2.image=[UIImage imageNamed:@"profile_noimg"];
+    UIImageView *page3=[[UIImageView alloc] initWithFrame:CGRectMake(4*self.profileImageView.frame.size.width, 0, self.profileImageView.frame.size.width, self.profileImageView.frame.size.height)];
+    page3.image=[UIImage imageNamed:@"profile_noimg"];
+    
+    
+    [self.scrView addSubview:page1];
+    [self.scrView addSubview:page2];
+    [self.scrView addSubview:page3];
+    
+    
+    
+    _pageControl.pageIndicatorTintColor = [UIColor lightGrayColor];
+    _pageControl.currentPageIndicatorTintColor = [UIColor blackColor];
+    _pageControl.backgroundColor = [UIColor whiteColor];
+    self.scrView.contentSize=CGSizeMake(self.scrView.frame.size.width*3, self.scrView.frame.size.height);
+    self.pageControl.backgroundColor=[UIColor clearColor];
+
+}
+
+- (IBAction)pageChanged:(id)sender {
+    
+    CGFloat x = self.pageControl.currentPage * self.scrView.frame.size.width;
+    [self.scrView setContentOffset:CGPointMake(x, 0) animated:YES];
+}
+
+
+#pragma mark - UIScrollViewDelegate
+- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView {
+    NSLog(@"called");
+    int contentOffset=scrollView.contentOffset.x;
+    NSInteger currentPage=contentOffset/pageWidth;
+    self.pageControl.currentPage=currentPage;
+    NSLog(@"offset x: %d",contentOffset);
+}
+
 - (NSString *) getEmail {
     
     if (emailAddressToRegister == NULL) {
@@ -328,120 +379,16 @@
     [self.tableviewProfile reloadData];
    
 }
-#pragma mark - cellScroll
--(void) cellScroll
-{
-    for( UIView *subView in [profileScrollCell subviews]) {
-        [subView removeFromSuperview];
-    }
-    for(int i=0;i<infoArray.count;i++)
-    {
-        NSLog(@"%d",i);
-        NSLog(@"%lu",(unsigned long)infoArray.count);
-        int yPosition=-60;
-        infoImage = [[UIImageView alloc] initWithFrame:CGRectMake(i*(self.view.frame.size.width)+0, yPosition, self.view.frame.size.width, self.view.frame.size.height)];
-        infoImage.tag = i+1;
-        UIImageView *image=[[UIImageView alloc] init];
-        image.frame=CGRectMake(90, 90, 100, 100);
-        //  image.image=[UIImage imageNamed:[infoArray objectAtIndex:i]];
-        [infoImage addSubview:image];
-        [profileScrollCell addSubview:infoImage];
-        
-        if(!profileImage){
-            image.image=[UIImage imageNamed:[infoArray objectAtIndex:i]];
-            //[cell.profileImageview setImage:profileImage];
-            [topViewCell setHidden:YES];
-            [profileScrollCell setScrollEnabled:NO];
-        }
-        else{
-            UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
-            [button addTarget:self
-                       action:@selector(selectCamera:)
-             forControlEvents:UIControlEventTouchUpInside];
-            UIImage *buttonImage = [UIImage imageNamed:@"camera_icon"];
-            [button setBackgroundImage:buttonImage forState:UIControlStateNormal];
-            button.frame = CGRectMake(37, 65, 32, 32);
-            if(i==0){
-                
-                [image addSubview:button];
-                [cell.cameraButton setHidden:YES];
-                image.layer.cornerRadius = image.frame.size.width / 2;
-                image.clipsToBounds = YES;
-                [image setImage:profileImage];
-               // [self nextPage];
 
-            }
-    
-            else{
-                
-                [image addSubview:button];
-                image.image=[UIImage imageNamed:[infoArray objectAtIndex:i]];
-                
-            }
-        }
-}
-    
-    
-    [profileScrollCell setContentSize:CGSizeMake((infoArray.count * self.view.frame.size.width), 50)];
-    
-    xslider=0;
-    pgDtView=[[UIView alloc]init];
-    pgDtView.backgroundColor=[UIColor clearColor];
-    pageImageView =[[UIImageView alloc]init];
-    profilePageInfoControl.numberOfPages=infoArray.count;
-    
-    for(int i=0;i<profilePageInfoControl.numberOfPages;i++)
-    {
-        blkdot=[[UIImageView alloc]init];
-        [blkdot setFrame:CGRectMake(i*13, 0, 7, 7 )];
-        [blkdot setImage:[UIImage imageNamed:@"dot_normal"]];
-        [pgDtView addSubview:blkdot];
-        [pageImageView setFrame:CGRectMake(0, 0,7, 7)];
-        [pageImageView setImage:[UIImage imageNamed:@"dot_active_gray"]];
-        [pgDtView addSubview:pageImageView];
-        [topViewCell addSubview:pgDtView];
-        if(IS_IPHONE5) {
-        [pgDtView setFrame:CGRectMake(20, -5, profilePageInfoControl.numberOfPages*13, 10)];
-        }
-        
-    }
-    
-}
-
--(void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView2
-{
-    if (scrollView2==profileScrollCell) {    }
-    pull=@"";
-    jslider = scrollView2.contentOffset.x/320;
-    [profileScrollCell setNeedsDisplay];
-    profilePageInfoControl.currentPage=jslider;
-    [pageImageView setFrame:CGRectMake(jslider*13, 0, 7, 7)];
-    
-    isTapping=NO;
-    scrolldragging=@"YES";
-}
-
--(void)nextPage
-{
-    CGRect newRect ;
-    if(jslider < infoArray.count)
-    {
-        xslider += 320;
-        newRect = CGRectMake(xslider, 0,320,140);
-        [pageImageView setImage:[UIImage imageNamed:@"dot_active.png"]];
-        [profileScrollCell scrollRectToVisible:newRect animated:YES];
-        [pageImageView setFrame:CGRectMake(jslider*13, 0, 7, 7)];
-        jslider++;
-    }
-    else
-    {
-        xslider=0-320;
-        jslider=0;
-        [profileScrollCell setContentOffset:CGPointMake(0, 0)];
-        [pageImageView setFrame:CGRectMake(jslider*13, 0, 7, 7)];
-    }
-}
-
+//- (IBAction)changePage:(id)sender {
+//    CGFloat x = profileImagePageControl.currentPage * profileImageScroll.frame.size.width;
+//    [profileImageScroll setContentOffset:CGPointMake(x, 0) animated:YES];
+//}
+//
+//-(void) scrollViewDidEndDecelerating:(UIScrollView *)scrollView  {
+//    NSInteger pageNumber = roundf(scrollView.contentOffset.x / (scrollView.frame.size.width));
+//    profileImagePageControl.currentPage = pageNumber;
+//}
 
 #pragma mark - TableView Datasource & Delegate
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
@@ -562,7 +509,7 @@
         {
             [[NSBundle mainBundle] loadNibNamed:@"DSProfileTableViewCell" owner:self options:nil];
             cell = cellProfileImg;
-            [self cellScroll];
+           [self scroll];
            
         }
         
@@ -1266,7 +1213,7 @@
 -(void)uploadNextImageMethod
 {
    // [self scrollViewDidScroll:cell.profileScrollview];
-    [self cellScroll];
+   // [self cellScroll];
 }
 //- (void)scrollViewDidScroll:(UIScrollView *)scrollView;
 //{
