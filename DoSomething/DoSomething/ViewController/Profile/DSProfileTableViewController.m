@@ -368,7 +368,7 @@
                 image.layer.cornerRadius = image.frame.size.width / 2;
                 image.clipsToBounds = YES;
                 [image setImage:profileImage];
-                [self nextPage];
+               // [self nextPage];
 
             }
     
