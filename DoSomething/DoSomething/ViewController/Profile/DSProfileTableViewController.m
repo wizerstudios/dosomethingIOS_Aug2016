@@ -130,11 +130,11 @@
  //   _profileImageView.image=[UIImage imageNamed:@"profile_noimg"];
   //  [self.scrView addSubview:_profileImageView];
     
-    UIImageView *page1=[[UIImageView alloc] initWithFrame:CGRectMake(0, 0, self.profileImageView.frame.size.width, self.profileImageView.frame.size.height)];
+    UIImageView *page1=[[UIImageView alloc] initWithFrame:CGRectMake(15, 15, self.profileImageView.frame.size.width, self.profileImageView.frame.size.height)];
      page1.image=[UIImage imageNamed:@"profile_noimg"];
-    UIImageView *page2=[[UIImageView alloc] initWithFrame:CGRectMake(2*self.profileImageView.frame.size.width, 0, self.profileImageView.frame.size.width, self.profileImageView.frame.size.height)];
+    UIImageView *page2=[[UIImageView alloc] initWithFrame:CGRectMake(1.5*self.profileImageView.frame.size.width, 0, self.profileImageView.frame.size.width, self.profileImageView.frame.size.height)];
     page2.image=[UIImage imageNamed:@"profile_noimg"];
-    UIImageView *page3=[[UIImageView alloc] initWithFrame:CGRectMake(4*self.profileImageView.frame.size.width, 0, self.profileImageView.frame.size.width, self.profileImageView.frame.size.height)];
+    UIImageView *page3=[[UIImageView alloc] initWithFrame:CGRectMake(3*self.profileImageView.frame.size.width, 0, self.profileImageView.frame.size.width, self.profileImageView.frame.size.height)];
     page3.image=[UIImage imageNamed:@"profile_noimg"];
     
     
