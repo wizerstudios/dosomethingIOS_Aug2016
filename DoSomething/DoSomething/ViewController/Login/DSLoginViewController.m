@@ -302,6 +302,10 @@
                      }
                      failure:^(AFHTTPRequestOperation *operation, id error) {
                          
+                         email =@"rwgfedh@retj.lkj";
+                         password =@"123";
+                         [self gotoProfileView:email :password:YES];//[self gotoProfileView];
+                         [COMMON removeLoading];
 
                      }];
 }

@@ -38,7 +38,7 @@
     
     AVAudioPlayer *audioPlayer;
     
-    NSString                * deviceUdid;
+    NSString                *loginUserSessionID;
     
 }
 
@@ -52,7 +52,7 @@
     objWebService = [[DSWebservice alloc]init];
     [COMMON LoadIcon:self.view];
     [self loadhomeviewListWebservice];
-     deviceUdid = [OpenUDID value];
+     //deviceUdid = [OpenUDID value];
     if(IS_IPHONE5)
         [self.view addConstraint:[NSLayoutConstraint constraintWithItem:_homeCollectionView
                                                               attribute:NSLayoutAttributeTop
@@ -390,6 +390,10 @@
     alertMsgLabel.textAlignment = NSTextAlignmentCenter;
     alertMsgLabel.lineBreakMode = NSLineBreakByWordWrapping;
     alertMsgLabel.textColor = [UIColor whiteColor];
+    NSMutableDictionary *dic=[[NSMutableDictionary alloc]init];
+    dic =[[NSUserDefaults standardUserDefaults] valueForKey:USERDETAILS];
+    NSString * strsessionID =[dic valueForKey:@"SessionId"];
+    loginUserSessionID=strsessionID;
 }
 
 - (IBAction)alertPressCancel:(id)sender {
@@ -415,8 +419,15 @@
 }
 -(void)loadupdateDosomethingWebService:(NSArray *)selectItemID :(NSString*)selectOption
 {
-    [objWebService updateDosomething:UpdateDoSomething_API sessionid:deviceUdid dosomething_id:selectItemID available_now:selectOption success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        NSLog(@"response:%@",responseObject);
+    [objWebService updateDosomething:UpdateDoSomething_API sessionid:loginUserSessionID dosomething_id:selectItemID available_now:selectOption success:^(AFHTTPRequestOperation *operation, id responseObject)
+    {
+        NSString * responseMsg=[[responseObject valueForKey:@"updatedosomething"]valueForKey:@"Message"];
+        if(![responseMsg isEqualToString:@""])
+        {
+           NSLog(@"responseMsg:%@",responseMsg);
+             [self presentViewController:[ DSAppCommon alertWithTitle:@"Title" withMessage:responseMsg preferredStyle:UIAlertControllerStyleAlert] animated:YES completion:NULL];
+        }
+       
         
     } failure:^(AFHTTPRequestOperation *operation, id error) {
         

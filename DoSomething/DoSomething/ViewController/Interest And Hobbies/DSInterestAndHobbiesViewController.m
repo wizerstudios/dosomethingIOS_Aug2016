@@ -17,9 +17,10 @@
 
 @interface DSInterestAndHobbiesViewController ()<UICollectionViewDataSource,UICollectionViewDelegate>
 {
-    
+    NSMutableArray*sectionNameArray;
+    NSMutableArray * hobbiesArry;
     NSMutableArray *interstAndHobbiesArray,*interestArray;
-    NSMutableArray *sectionArray;
+    NSArray *sectionArray;
     NSMutableArray *imageNormalImageArray,*hobbiesNameArray;
     DSWebservice * objWebservice;
     NSString                * deviceUdid;
@@ -37,7 +38,7 @@
     
     [self.interestAndHobbiesCollectionView registerClass:[UICollectionReusableView class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"HeaderView"];
     UICollectionViewFlowLayout *flowLayout = [[UICollectionViewFlowLayout alloc] init];
-    flowLayout.headerReferenceSize = CGSizeMake(self.interestAndHobbiesCollectionView.bounds.size.width, 48);
+    flowLayout.headerReferenceSize = CGSizeMake(self.interestAndHobbiesCollectionView.bounds.size.width,40);
     [self.interestAndHobbiesCollectionView setCollectionViewLayout:flowLayout];
 //    UINib *cellNib = [UINib nibWithNibName:@"DSInterestAndHobbiesCollectionViewCell" bundle:nil];
 //    [self.interestAndHobbiesCollectionView registerNib:cellNib forCellWithReuseIdentifier:@"InterestAndHobbiesCollectionViewCell"];
@@ -48,11 +49,12 @@
     
     // interstAndHobbiesArray = [[[NSUserDefaults standardUserDefaults] valueForKey:@"SelectedItem"] mutableCopy];
     [self initializeArray];
-    //[self localArray];
+    
+    
+    
 }
 
 -(void)viewWillAppear:(BOOL)animated{
-    
     self.navigationController.navigationBarHidden=NO;
     [self.navigationItem setHidesBackButton:YES animated:NO];
     [self.navigationController.navigationBar setTranslucent:YES];
@@ -70,8 +72,9 @@
     customNavigation = [[CustomNavigationView alloc] initWithNibName:@"CustomNavigationView" bundle:nil];
     customNavigation.view.frame = CGRectMake(0,-20, (self.view.frame.size.width), 65);
     if (IS_IPHONE5 ){
-        self.layoutConstraintCollectionviewYPos.constant =35;
-        self.layoutConstraintTapLabelYPos.constant = 4;
+        self.layoutConstraintinterestAndHobbiesLabelYPos.constant =68;
+        self.layoutConstraintCollectionviewYPos.constant =25;
+        self.layoutConstraintTapLabelYPos.constant =0;
     }
     if (IS_IPHONE6 ){
         customNavigation.view.frame = CGRectMake(0,-20, 375, 83);
@@ -100,21 +103,24 @@
     [objWebservice getHobbies:GetHobbies_API sessionid:deviceUdid success:^(AFHTTPRequestOperation *operation, id responseObject)
      {
          NSLog(@"response:%@",responseObject);
-        interstAndHobbiesArray = [[NSMutableArray alloc]init];
-         sectionArray=[[NSMutableArray alloc]init];
+        
+        hobbiesArry=[[NSMutableArray alloc]init];
+        sectionNameArray=[[NSMutableArray alloc]init];
         
          NSMutableDictionary *loginDict = [[NSMutableDictionary alloc]init];
         NSDictionary *objselectionname=[[NSDictionary alloc]init];
          loginDict = [responseObject valueForKey:@"gethobbies"];
         objselectionname =[loginDict valueForKey:@"list"];
-         sectionArray  = [objselectionname valueForKey:@"name"];
-         interstAndHobbiesArray=[objselectionname valueForKey:@"hobbieslist"];
+         sectionNameArray  = [objselectionname valueForKey:@"name"];
+         hobbiesArry=[objselectionname valueForKey:@"hobbieslist"];
          
-         NSLog(@"responsesectionArray:%@",interstAndHobbiesArray);
+        // NSLog(@"responsesectionArray:%@",interstAndHobbiesArray);
          
          
          [COMMON removeLoading];
         [interestAndHobbiesCollectionView reloadData];
+         [self localArray];
+
     } failure:^(AFHTTPRequestOperation *operation, id error) {
 
     }];
@@ -132,36 +138,17 @@
 }
 -(void)localArray
 {
-    sectionArray = [[NSArray alloc]initWithObjects:@"ARTS",@"FOOD",@"PETS",@"RECREATION",nil];
-    
+    sectionArray =[[NSArray alloc]init];
+    sectionArray=sectionNameArray;
     interestArray = [[NSMutableArray alloc] initWithCapacity: 4];
-
-[interestArray insertObject:[[NSMutableArray alloc]initWithObjects:[NSMutableDictionary dictionaryWithObjectsAndKeys:@"guitar.png",@"imageNormal",@"guitar_active.png",@"imageActive",@"GUITAR",@"name", nil],
-                                      [NSMutableDictionary dictionaryWithObjectsAndKeys:@"paint.png",@"imageNormal",@"paint_active.png",@"imageActive",@"PAINTING",@"name", nil],
-                             
-                                      [NSMutableDictionary dictionaryWithObjectsAndKeys:@"photography.png",@"imageNormal",@"photography_active.png",@"imageActive",@"PHOTOGRAPHY",@"name", nil],
-                                      [NSMutableDictionary dictionaryWithObjectsAndKeys:@"piano.png",@"imageNormal",@"piano_active.png",@"imageActive",@"PIANO",@"name", nil],
-                                      [NSMutableDictionary dictionaryWithObjectsAndKeys:@"violin.png",@"imageNormal",@"violin_active.png",@"imageActive",@"VIOLIN",@"name", nil]
-                                      ,nil]atIndex:0];
-[interestArray insertObject:[[NSMutableArray alloc]initWithObjects:[NSMutableDictionary dictionaryWithObjectsAndKeys:@"bbq.png",@"imageNormal",@"bbq_active.png",@"imageActive",@"BBQ",@"name", nil],
-                                      [NSMutableDictionary dictionaryWithObjectsAndKeys:@"cooking.png",@"imageNormal",@"cooking_active.png",@"imageActive",@"COOKING",@"name", nil],
-                                      [NSMutableDictionary dictionaryWithObjectsAndKeys:@"fastfood.png",@"imageNormal",@"fastfood_active.png",@"imageActive",@"FASTFOOD",@"name", nil],
-                                      [NSMutableDictionary dictionaryWithObjectsAndKeys:@"italianfood.png",@"imageNormal",@"italianfood_active.png",@"imageActive",@"ITALIANFOOD",@"name", nil],
-                                      [NSMutableDictionary dictionaryWithObjectsAndKeys:@"",@"imageNormal",@"",@"imageActive",@"",@"name", nil],
-                                      [NSMutableDictionary dictionaryWithObjectsAndKeys:@"japanesefood.png",@"imageNormal",@"japanesefood_active.png",@"imageActive",@"JAPANESEFOOD",@"name", nil],
-                                      [NSMutableDictionary dictionaryWithObjectsAndKeys:@"food.png",@"imageNormal",@"food_active.png",@"imageActive",@"KOREANFOOD",@"name", nil]
-                                      
-                                      ,nil]atIndex:1];
-[interestArray insertObject:[[NSMutableArray alloc]initWithObjects:[NSMutableDictionary dictionaryWithObjectsAndKeys:@"cat.png",@"imageNormal",@"cat_active.png",@"imageActive",@"CAT",@"name", nil],
-                                      [NSMutableDictionary dictionaryWithObjectsAndKeys:@"dog.png",@"imageNormal",@"dog_active.png",@"imageActive",@"DOG",@"name", nil],
-                                      nil]atIndex:2];
-[interestArray insertObject:[[NSMutableArray alloc]initWithObjects:[NSMutableDictionary dictionaryWithObjectsAndKeys:@"Boardgames.png",@"imageNormal",@"Boardgames_active.png",@"imageActive",@"BOARDGAMES",@"name", nil],
-                                      [NSMutableDictionary dictionaryWithObjectsAndKeys:@"fishing.png",@"imageNormal",@"fishing_active.png",@"imageActive",@"FISHING",@"name", nil],
-                                      [NSMutableDictionary dictionaryWithObjectsAndKeys:@"game.png",@"imageNormal",@"game_active.png",@"imageActive",@"GAMING",@"name", nil],
-                                      [NSMutableDictionary dictionaryWithObjectsAndKeys:@"gardening.png",@"imageNormal",@"gardening_active.png",@"imageActive",@"GARDENING",@"name", nil],
-                                      [NSMutableDictionary dictionaryWithObjectsAndKeys:@"finance.png",@"imageNormal",@"finance_active.png",@"imageActive",@"FINANCE",@"name", nil]
-                                      
-                                      ,nil]atIndex:3];
+    interestArray =[hobbiesArry mutableCopy];
+    NSLog(@"interestArray:%@",interestArray);
+   
+    if(interstAndHobbiesArray== nil)
+    {
+    interstAndHobbiesArray = [[NSMutableArray alloc] initWithCapacity: 4];
+    interstAndHobbiesArray=[interestArray mutableCopy];
+    }
 }
 
 -(void)initializeArray{
@@ -174,50 +161,23 @@
     imageNormalImageArray =[[NSMutableArray alloc]init];
 
     interstAndHobbiesArray = [[[NSUserDefaults standardUserDefaults] valueForKey:@"SelectedItem"] mutableCopy];
-     //interstAndHobbiesArray =[[[NSUserDefaults standardUserDefaults] valueForKey:@"SelectedItemNormal"]mutableCopy];
-    //sectionArray = [[NSArray alloc]initWithObjects:@"ARTS",@"FOOD",@"PETS",@"RECREATION",nil];
+
+    sectionArray = sectionNameArray;  //[[NSArray alloc]initWithObjects:@"ARTS",@"FOOD",@"PETS",@"RECREATION",nil];
 
     
     if(interstAndHobbiesArray == nil){
     
-    [self loadHobbiesWebserviceMethod];
-    
-//    interstAndHobbiesArray = [[NSMutableArray alloc] initWithCapacity: 4];
-//    
-//
-       
+         [self loadHobbiesWebserviceMethod];
         
-//    [interstAndHobbiesArray insertObject:[[NSMutableArray alloc]initWithObjects:[NSMutableDictionary dictionaryWithObjectsAndKeys:@"guitar.png",@"imageNormal",@"guitar_active.png",@"imageActive",@"GUITAR",@"name", nil],
-//                                          [NSMutableDictionary dictionaryWithObjectsAndKeys:@"paint.png",@"imageNormal",@"paint_active.png",@"imageActive",@"PAINTING",@"name", nil],
-//
-//                                          [NSMutableDictionary dictionaryWithObjectsAndKeys:@"photography.png",@"imageNormal",@"photography_active.png",@"imageActive",@"PHOTOGRAPHY",@"name", nil],
-//                             [NSMutableDictionary dictionaryWithObjectsAndKeys:@"piano.png",@"imageNormal",@"piano_active.png",@"imageActive",@"PIANO",@"name", nil],
-//                                          [NSMutableDictionary dictionaryWithObjectsAndKeys:@"violin.png",@"imageNormal",@"violin_active.png",@"imageActive",@"VIOLIN",@"name", nil]
-//                            ,nil]atIndex:0];
-//    [interstAndHobbiesArray insertObject:[[NSMutableArray alloc]initWithObjects:[NSMutableDictionary dictionaryWithObjectsAndKeys:@"bbq.png",@"imageNormal",@"bbq_active.png",@"imageActive",@"BBQ",@"name", nil],
-//                                          [NSMutableDictionary dictionaryWithObjectsAndKeys:@"cooking.png",@"imageNormal",@"cooking_active.png",@"imageActive",@"COOKING",@"name", nil],
-//                                          [NSMutableDictionary dictionaryWithObjectsAndKeys:@"fastfood.png",@"imageNormal",@"fastfood_active.png",@"imageActive",@"FASTFOOD",@"name", nil],
-//                                          [NSMutableDictionary dictionaryWithObjectsAndKeys:@"italianfood.png",@"imageNormal",@"italianfood_active.png",@"imageActive",@"ITALIANFOOD",@"name", nil],
-//                                          [NSMutableDictionary dictionaryWithObjectsAndKeys:@"",@"imageNormal",@"",@"imageActive",@"",@"name", nil],
-//                                          [NSMutableDictionary dictionaryWithObjectsAndKeys:@"japanesefood.png",@"imageNormal",@"japanesefood_active.png",@"imageActive",@"JAPANESEFOOD",@"name", nil],
-//                                          [NSMutableDictionary dictionaryWithObjectsAndKeys:@"food.png",@"imageNormal",@"food_active.png",@"imageActive",@"KOREANFOOD",@"name", nil]
-//
-//                                          ,nil]atIndex:1];
-//    [interstAndHobbiesArray insertObject:[[NSMutableArray alloc]initWithObjects:[NSMutableDictionary dictionaryWithObjectsAndKeys:@"cat.png",@"imageNormal",@"cat_active.png",@"imageActive",@"CAT",@"name", nil],
-//                                          [NSMutableDictionary dictionaryWithObjectsAndKeys:@"dog.png",@"imageNormal",@"dog_active.png",@"imageActive",@"DOG",@"name", nil],
-//                                          nil]atIndex:2];
-//    [interstAndHobbiesArray insertObject:[[NSMutableArray alloc]initWithObjects:[NSMutableDictionary dictionaryWithObjectsAndKeys:@"Boardgames.png",@"imageNormal",@"Boardgames_active.png",@"imageActive",@"BOARDGAMES",@"name", nil],
-//                                          [NSMutableDictionary dictionaryWithObjectsAndKeys:@"fishing.png",@"imageNormal",@"fishing_active.png",@"imageActive",@"FISHING",@"name", nil],
-//                                          [NSMutableDictionary dictionaryWithObjectsAndKeys:@"game.png",@"imageNormal",@"game_active.png",@"imageActive",@"GAMING",@"name", nil],
-//                                          [NSMutableDictionary dictionaryWithObjectsAndKeys:@"gardening.png",@"imageNormal",@"gardening_active.png",@"imageActive",@"GARDENING",@"name", nil],
-//                                          [NSMutableDictionary dictionaryWithObjectsAndKeys:@"finance.png",@"imageNormal",@"finance_active.png",@"imageActive",@"FINANCE",@"name", nil]
-//
-//                                          ,nil]atIndex:3];
+        }
+   
+    [interestAndHobbiesCollectionView reloadData];
+     if (interestArray==nil)
+    {
+        [self loadHobbiesWebserviceMethod];
     }
-    //[interestAndHobbiesCollectionView reloadData];
-    
-    
-}
+
+   }
 
 
 -(NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView{
@@ -302,13 +262,12 @@
     
         [cell.nameLabel setText:[[[interstAndHobbiesArray valueForKey:@"name"]objectAtIndex:indexPath.section]objectAtIndex:indexPath.row]];
         NSString *image =[[[interstAndHobbiesArray valueForKey:@"image"]objectAtIndex:indexPath.section]objectAtIndex:indexPath.row];
+    
         image= [image stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+    
         [cell.interestAndHobbiesImageView setImageWithURL:[NSURL URLWithString:image]];
     
-    
-    
-   
-    
+
     return cell;
 }
 
@@ -321,7 +280,7 @@
         
         if(IS_IPHONE6_Plus)
         {
-        int numberOfCellInRow = 5;
+        int numberOfCellInRow = 6;
         int padding = 1;
         collectionCellWidth =  [[UIScreen mainScreen] bounds].size.width/numberOfCellInRow;
         finalWidthWithPadding = collectionCellWidth - (padding);
@@ -339,7 +298,7 @@
         
              else if(IS_IPHONE5)
         {
-            int numberOfCellInRow = 6;
+            int numberOfCellInRow = 6.5;
             int padding = 1;
             collectionCellWidth =  [[UIScreen mainScreen] bounds].size.width/numberOfCellInRow;
             finalWidthWithPadding = collectionCellWidth - (padding);
@@ -387,7 +346,7 @@
         
         if(IS_IPHONE6_Plus)
         {
-            int numberOfCellInRow = 8;
+            int numberOfCellInRow =8;
             int padding = 1;
             collectionCellWidth =  [[UIScreen mainScreen] bounds].size.width/numberOfCellInRow;
             finalWidthWithPadding = collectionCellWidth - (padding);
@@ -427,168 +386,139 @@
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath;
 
 {
-    //iscollectiviewreload=YES;
     
-
+    NSLog(@"interstAndHobbiesArray:%@",interstAndHobbiesArray);
     
-    DSInterestAndHobbiesCollectionViewCell *dataselCell = (DSInterestAndHobbiesCollectionViewCell *)[collectionView cellForItemAtIndexPath:indexPath];    
-
+    DSInterestAndHobbiesCollectionViewCell *dataselCell = (DSInterestAndHobbiesCollectionViewCell *)[collectionView cellForItemAtIndexPath:indexPath];
+    
+    
+    
     NSString *imageActive =[[[interstAndHobbiesArray valueForKey:@"image_active"]objectAtIndex:indexPath.section]objectAtIndex:indexPath.row];
-    NSString *imageNormal =[[[interstAndHobbiesArray valueForKey:@"image"]objectAtIndex:indexPath.section]objectAtIndex:indexPath.row];
-    NSString *name =[[[interstAndHobbiesArray valueForKey:@"name"]objectAtIndex:indexPath.section]objectAtIndex:indexPath.row];
-    NSString * hobbies =[[[interstAndHobbiesArray valueForKey:@"hobbies_id"]objectAtIndex:indexPath.section]objectAtIndex:indexPath.row];
-   
     
-    if (imageNormalImageArray.count == 0)                //(imageActive != imageNormal)
-    {
-        if (imageActive != imageNormal)
-        {
+    NSString *imageNormal =[[[interstAndHobbiesArray valueForKey:@"image"]objectAtIndex:indexPath.section]objectAtIndex:indexPath.row];
+    
+    NSString *name =[[[interstAndHobbiesArray valueForKey:@"name"]objectAtIndex:indexPath.section]objectAtIndex:indexPath.row];
+    
+    if (imageActive != imageNormal) {
+        
         [imageNormalImageArray addObject:imageNormal];
+        
         [hobbiesNameArray addObject:name];
         
-       
-        imageActive= [imageActive stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-        [dataselCell.interestAndHobbiesImageView setImageWithURL:[NSURL URLWithString:imageActive]];
-         NSMutableArray *tempselectedSection = [[interstAndHobbiesArray objectAtIndex:indexPath.section] mutableCopy];
-         NSMutableDictionary *tempselectedDict = [[tempselectedSection objectAtIndex:indexPath.row] mutableCopy];
-        [tempselectedDict setObject:imageActive forKey:@"image"];
-        [imageNormalImageArray addObject:[tempselectedDict valueForKey:@"image_active"]];
+        
+        
         [[NSUserDefaults standardUserDefaults] setObject:imageNormalImageArray forKey:@"SelectedItemNormal"];
+        
         [[NSUserDefaults standardUserDefaults] synchronize];
-        //[tempselectedSection replaceObjectAtIndex:indexPath.row withObject:tempselectedDict];
-        //[interstAndHobbiesArray[indexPath.section] replaceObjectAtIndex:indexPath.row withObject:tempselectedSection];
-         dataselCell.nameLabel.textColor=[UIColor colorWithRed:(float)224.0/255 green:(float)62.0/255 blue:(float)79.0/255 alpha:1.0f];
+        
+        imageActive= [imageActive stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+        
+        [dataselCell.interestAndHobbiesImageView setImageWithURL:[NSURL URLWithString:imageActive]];
+        
+    
+        NSMutableArray *tempselectedSection = [[interstAndHobbiesArray objectAtIndex:indexPath.section] mutableCopy];
+        
+        NSMutableDictionary *tempselectedDict = [[tempselectedSection objectAtIndex:indexPath.row] mutableCopy];
+        
+        [tempselectedDict setObject:imageActive forKey:@"image"];
+        
+       
+        [tempselectedSection replaceObjectAtIndex:indexPath.row withObject:tempselectedDict];
+        
+        [interstAndHobbiesArray replaceObjectAtIndex:indexPath.section withObject:tempselectedSection];
+        
+        
+        dataselCell.nameLabel.textColor=[UIColor colorWithRed:(224.0f/255) green:(62.0f/255) blue:(79.0f/255) alpha:1.0f];
+        
+        
+        [[NSUserDefaults standardUserDefaults] setObject:hobbiesNameArray forKey:@"SelectedItemName"];
+        
+        [[NSUserDefaults standardUserDefaults] synchronize];
+        
+        NSMutableArray *tempselectedSection1 = [[interstAndHobbiesArray objectAtIndex:indexPath.section] mutableCopy];
+        
+        NSMutableDictionary *tempselectedDict1 = [[tempselectedSection1 objectAtIndex:indexPath.row] mutableCopy];
+        
+        [tempselectedDict1 setObject:name forKey:@"name"];
+        
+        [tempselectedSection1 replaceObjectAtIndex:indexPath.row withObject:tempselectedDict1];
+        
+        [interstAndHobbiesArray replaceObjectAtIndex:indexPath.section withObject:tempselectedSection1];
+        
+        
+        
+        dataselCell.nameLabel.textColor=[UIColor colorWithRed:(224.0f/255) green:(62.0f/255) blue:(79.0f/255) alpha:1.0f];
+        
+        [[NSUserDefaults standardUserDefaults] setObject:interstAndHobbiesArray forKey:@"SelectedItem"];
+        
+        [[NSUserDefaults standardUserDefaults] synchronize];
+        
+        
+    }
+    
+    
+    
+    if (imageActive == imageNormal) {
+        
+        NSString *image =[[[interestArray valueForKey:@"image"]objectAtIndex:indexPath.section]objectAtIndex:indexPath.row];
+        
+        NSString *name =[[[interstAndHobbiesArray valueForKey:@"name"]objectAtIndex:indexPath.section]objectAtIndex:indexPath.row];
+        
+        
+        [imageNormalImageArray removeObject:image];
+        
+        [hobbiesNameArray removeObject:name];
+    
+        
+        NSMutableArray *tempselectedSection1 = [[interstAndHobbiesArray objectAtIndex:indexPath.section] mutableCopy];
+        
+        NSMutableDictionary *tempselectedDict1 = [[tempselectedSection1 objectAtIndex:indexPath.row] mutableCopy];
+        
+        [tempselectedDict1 setObject:name forKey:@"name"];
+        
+        [tempselectedSection1 replaceObjectAtIndex:indexPath.row withObject:tempselectedDict1];
+        
+        [interstAndHobbiesArray replaceObjectAtIndex:indexPath.section withObject:tempselectedSection1];
         
         
         
         [[NSUserDefaults standardUserDefaults] setObject:hobbiesNameArray forKey:@"SelectedItemName"];
-        [[NSUserDefaults standardUserDefaults] synchronize];
-         NSMutableArray *tempselectedSection1 = [[interstAndHobbiesArray objectAtIndex:indexPath.section] mutableCopy];
-         NSMutableDictionary *tempselectedDict1 = [[tempselectedSection1 objectAtIndex:indexPath.row] mutableCopy];
-        [tempselectedDict1 setObject:name forKey:@"name"];
-        //[tempselectedSection1 replaceObjectAtIndex:indexPath.row withObject:tempselectedDict1];
-        //[interstAndHobbiesArray replaceObjectAtIndex:indexPath.section withObject:tempselectedSection1];
         
-         dataselCell.nameLabel.textColor=[UIColor colorWithRed:(float)224.0/255 green:(float)62.0/255 blue:(float)79.0/255 alpha:1.0f];
+        [[NSUserDefaults standardUserDefaults] synchronize];
+        
+        imageActive= [imageActive stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+        
+        [dataselCell.interestAndHobbiesImageView setImageWithURL:[NSURL URLWithString:image]];
+        
+        NSMutableArray *tempselectedSection = [[interstAndHobbiesArray objectAtIndex:indexPath.section] mutableCopy];
+        
+        NSMutableDictionary *tempselectedDict = [[tempselectedSection objectAtIndex:indexPath.row] mutableCopy];
+        
+        [tempselectedDict setObject:image forKey:@"image"];
+        
+        
+        [tempselectedSection replaceObjectAtIndex:indexPath.row withObject:tempselectedDict];
+        
+        [interstAndHobbiesArray replaceObjectAtIndex:indexPath.section withObject:tempselectedSection];
+        
+        [[NSUserDefaults standardUserDefaults] setObject:imageNormalImageArray forKey:@"SelectedItemNormal"];
+        
+        [[NSUserDefaults standardUserDefaults] synchronize];
+        
+        
+        
+        dataselCell.nameLabel.textColor=[UIColor colorWithRed:(135.0f/255) green:(135.0f/255) blue:(135.0f/255) alpha:1.0f];
+        
         [[NSUserDefaults standardUserDefaults] setObject:interstAndHobbiesArray forKey:@"SelectedItem"];
+        
         [[NSUserDefaults standardUserDefaults] synchronize];
-        }
         
+    
         
     }
-   else
-    {
-       
-        NSArray *selectArray = [[NSArray alloc]init];
-        NSMutableArray *tempselectedSection1 = [[interstAndHobbiesArray objectAtIndex:indexPath.section] mutableCopy];
-        NSMutableDictionary *tempselectedDict1 = [[tempselectedSection1 objectAtIndex:indexPath.row] mutableCopy];
-
-        
-        selectArray = [imageNormalImageArray copy];
-        for(NSString *strDeselect in selectArray)
-            
-        {
-            
-            if([tempselectedDict1 valueForKey:@"image_active"] == strDeselect)
-                
-            {
-                
-                [imageNormalImageArray removeObject:strDeselect];
-                [tempselectedDict1 setObject:name forKey:@"name"];
-                [[NSUserDefaults standardUserDefaults] setObject:hobbiesNameArray forKey:@"SelectedItemName"];
-                [[NSUserDefaults standardUserDefaults] synchronize];
-
-                dataselCell.nameLabel.textColor = [UIColor colorWithRed:(164/255.0f) green:(164/255.0f) blue:(164/255.0f) alpha:1.0f];
-                
-                NSString * objstr = [NSString stringWithFormat:@"%@",[tempselectedDict1 valueForKey:@"image"]];
-                objstr= [objstr stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-                [dataselCell.interestAndHobbiesImageView setImageWithURL:[NSURL URLWithString:objstr]];
-               // [[NSUserDefaults standardUserDefaults] setObject:imageNormalImageArray forKey:@"SelectedItemNormal"];
-                 //[[NSUserDefaults standardUserDefaults] synchronize];
-                
-            }
-            else if ([tempselectedDict1 valueForKey:@"image_active"] != strDeselect) {
-                
-                imageActive= [imageActive stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-                [dataselCell.interestAndHobbiesImageView setImageWithURL:[NSURL URLWithString:imageActive]];
-                NSMutableArray *tempselectedSection = [[interstAndHobbiesArray objectAtIndex:indexPath.section] mutableCopy];
-                NSMutableDictionary *tempselectedDict = [[tempselectedSection objectAtIndex:indexPath.row] mutableCopy];
-               // [tempselectedDict setObject:imageActive forKey:@"image"];
-                [imageNormalImageArray addObject:[tempselectedDict valueForKey:@"image_active"]];
-                [[NSUserDefaults standardUserDefaults] setObject:imageNormalImageArray forKey:@"SelectedItemNormal"];
-                [[NSUserDefaults standardUserDefaults] synchronize];
-                // [tempselectedSection replaceObjectAtIndex:indexPath.row withObject:tempselectedDict];
-                //[interstAndHobbiesArray replaceObjectAtIndex:indexPath.section withObject:tempselectedSection];
-                dataselCell.nameLabel.textColor=[UIColor colorWithRed:(float)224.0/255 green:(float)62.0/255 blue:(float)79.0/255 alpha:1.0f];
-                
-                
-                
-                [[NSUserDefaults standardUserDefaults] setObject:hobbiesNameArray forKey:@"SelectedItemName"];
-                [[NSUserDefaults standardUserDefaults] synchronize];
-                NSMutableArray *tempselectedSection1 = [[interstAndHobbiesArray objectAtIndex:indexPath.section] mutableCopy];
-                NSMutableDictionary *tempselectedDict1 = [[tempselectedSection1 objectAtIndex:indexPath.row] mutableCopy];
-                [tempselectedDict1 setObject:name forKey:@"name"];
-                //[tempselectedSection1 replaceObjectAtIndex:indexPath.row withObject:tempselectedDict1];
-                //[interstAndHobbiesArray replaceObjectAtIndex:indexPath.section withObject:tempselectedSection1];
-                
-                dataselCell.nameLabel.textColor=[UIColor colorWithRed:(float)224.0/255 green:(float)62.0/255 blue:(float)79.0/255 alpha:1.0f];
-//                NSUserDefaults *userDefaults=[NSUserDefaults standardUserDefaults];
-//              [userDefaults setObject:interstAndHobbiesArray forKey:@"SelectedItem"];
-                //[[NSUserDefaults standardUserDefaults] synchronize];
-                // NSLog(@"userdefault:%@",userDefaults);
-               }
-
-            
-            
-        }
+    
 
     }
     
-   
-    
-    
-    
-//     if (imageActive == imageNormal) {
-//     NSString *image =[[[interestArray valueForKey:@"image"]objectAtIndex:indexPath.section]objectAtIndex:indexPath.row];
-//     NSString *name =[[[interstAndHobbiesArray valueForKey:@"name"]objectAtIndex:indexPath.section]objectAtIndex:indexPath.row];
-//
-//     [imageNormalImageArray removeObject:image];
-//     [hobbiesNameArray removeObject:name];
-//         
-//         
-//         
-//         
-//         
-//         NSMutableArray *tempselectedSection1 = [[interstAndHobbiesArray objectAtIndex:indexPath.section] mutableCopy];
-//         NSMutableDictionary *tempselectedDict1 = [[tempselectedSection1 objectAtIndex:indexPath.row] mutableCopy];
-//         [tempselectedDict1 setObject:name forKey:@"name"];
-//         [tempselectedSection1 replaceObjectAtIndex:indexPath.row withObject:tempselectedDict1];
-//         [interstAndHobbiesArray replaceObjectAtIndex:indexPath.section withObject:tempselectedSection1];
-//
-//         [[NSUserDefaults standardUserDefaults] setObject:hobbiesNameArray forKey:@"SelectedItemName"];
-//         [[NSUserDefaults standardUserDefaults] synchronize];
-//
-//         
-//         
-//         image= [image stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-//         [dataselCell.interestAndHobbiesImageView setImageWithURL:[NSURL URLWithString:image]];
-//    //[dataselCell.interestAndHobbiesImageView setImage:[UIImage imageNamed:image]];
-//    NSMutableArray *tempselectedSection = [[interstAndHobbiesArray objectAtIndex:indexPath.section] mutableCopy];
-//    NSMutableDictionary *tempselectedDict = [[tempselectedSection objectAtIndex:indexPath.row] mutableCopy];
-//    
-//   [tempselectedDict setObject:image forKey:@"image"];
-//   [tempselectedSection replaceObjectAtIndex:indexPath.row withObject:tempselectedDict];
-//   [interstAndHobbiesArray replaceObjectAtIndex:indexPath.section withObject:tempselectedSection];
-//   [[NSUserDefaults standardUserDefaults] setObject:imageNormalImageArray forKey:@"SelectedItemNormal"];
-//   [[NSUserDefaults standardUserDefaults] synchronize];
-//         
-//   dataselCell.nameLabel.textColor=[UIColor colorWithRed:(float)135.0/255 green:(float)135.0/255 blue:(float)135.0/255 alpha:1.0f];
-//  [[NSUserDefaults standardUserDefaults] setObject:interstAndHobbiesArray forKey:@"SelectedItem"];
-//  [[NSUserDefaults standardUserDefaults] synchronize];
-    
-         
-    // }
-}
-
 
 @end

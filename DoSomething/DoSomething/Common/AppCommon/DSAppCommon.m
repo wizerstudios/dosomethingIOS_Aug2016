@@ -109,6 +109,7 @@ DSAppCommon *sharedCommon = nil;
 {
     NSMutableDictionary *dic=[[NSMutableDictionary alloc]init];
     dic =[[NSUserDefaults standardUserDefaults] valueForKey:USERDETAILS];
+   
     return dic;
     
 }
