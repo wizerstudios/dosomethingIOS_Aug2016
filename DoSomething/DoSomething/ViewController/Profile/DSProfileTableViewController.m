@@ -354,37 +354,33 @@
             [profileScrollCell setScrollEnabled:NO];
         }
         else{
+            UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
+            [button addTarget:self
+                       action:@selector(selectCamera:)
+             forControlEvents:UIControlEventTouchUpInside];
+            UIImage *buttonImage = [UIImage imageNamed:@"camera_icon"];
+            [button setBackgroundImage:buttonImage forState:UIControlStateNormal];
+            button.frame = CGRectMake(37, 65, 32, 32);
             if(i==0){
-                UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
-                [button addTarget:self
-                           action:@selector(selectCamera:)
-                 forControlEvents:UIControlEventTouchUpInside];
-                UIImage *buttonImage = [UIImage imageNamed:@"camera_icon"];
-                [button setBackgroundImage:buttonImage forState:UIControlStateNormal];
-                button.frame = CGRectMake(37, 65, 32, 32);
+                
                 [image addSubview:button];
                 [cell.cameraButton setHidden:YES];
                 image.layer.cornerRadius = image.frame.size.width / 2;
                 image.clipsToBounds = YES;
                 [image setImage:profileImage];
-                
+                [self nextPage];
+
             }
     
             else{
-                UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
-                [button addTarget:self
-                           action:@selector(selectCamera:)
-                 forControlEvents:UIControlEventTouchUpInside];
-                UIImage *buttonImage = [UIImage imageNamed:@"camera_icon"];
-                [button setBackgroundImage:buttonImage forState:UIControlStateNormal];
-                button.frame = CGRectMake(37, 65, 32, 32);
+                
                 [image addSubview:button];
                 image.image=[UIImage imageNamed:[infoArray objectAtIndex:i]];
                 
             }
-           
-                    }
+        }
 }
+    
     
     [profileScrollCell setContentSize:CGSizeMake((infoArray.count * self.view.frame.size.width), 50)];
     
@@ -424,6 +420,28 @@
     isTapping=NO;
     scrolldragging=@"YES";
 }
+
+-(void)nextPage
+{
+    CGRect newRect ;
+    if(jslider < infoArray.count)
+    {
+        xslider += 320;
+        newRect = CGRectMake(xslider, 0,320,140);
+        [pageImageView setImage:[UIImage imageNamed:@"dot_active.png"]];
+        [profileScrollCell scrollRectToVisible:newRect animated:YES];
+        [pageImageView setFrame:CGRectMake(jslider*13, 0, 7, 7)];
+        jslider++;
+    }
+    else
+    {
+        xslider=0-320;
+        jslider=0;
+        [profileScrollCell setContentOffset:CGPointMake(0, 0)];
+        [pageImageView setFrame:CGRectMake(jslider*13, 0, 7, 7)];
+    }
+}
+
 
 #pragma mark - TableView Datasource & Delegate
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
