@@ -80,6 +80,58 @@ static NSString       *ServiceMimeType    = @"image/jpeg";
           completionFailureHandler:failure];
     
 }
+#pragma mark - POST LogoutUser
+
+- (void)logoutUser:(NSString *)logoutURL
+         sessionId:(NSString *)sessionId
+                op:(NSString *)op
+          success:(WebserviceRequestSuccessHandler)success
+          failure:(WebserviceRequestFailureHandler)failure
+{
+    urlString = [URL_FOR_RESOURCE(@"") stringByAppendingString:[NSString stringWithFormat:@"%@?",logoutURL]];
+    
+    NSMutableDictionary *userLogout = [[NSMutableDictionary alloc] init];
+    
+    if(sessionId)       [userLogout    setObject:sessionId     forKey:@"sessionId"];
+    if(op)              [userLogout    setObject:op            forKey:@"op"];
+    
+    NSLog(@"urlString = %@",urlString);
+    NSLog(@"userlogout = %@",userLogout);
+    
+    [self sendRequestWithURLString:urlString
+                     andParameters:userLogout
+                            method:ServicePost
+           completionSucessHandler:success
+          completionFailureHandler:failure];
+    
+}
+#pragma mark - POST DeleteUser
+
+- (void)deleteUser:(NSString *)deleteURL
+         sessionId:(NSString *)sessionId
+                op:(NSString *)op
+           success:(WebserviceRequestSuccessHandler)success
+           failure:(WebserviceRequestFailureHandler)failure
+{
+    urlString = [URL_FOR_RESOURCE(@"") stringByAppendingString:[NSString stringWithFormat:@"%@?",deleteURL]];
+    
+    NSMutableDictionary *userAccountDetele = [[NSMutableDictionary alloc] init];
+    
+    if(sessionId)       [userAccountDetele    setObject:sessionId     forKey:@"sessionId"];
+    if(op)              [userAccountDetele    setObject:op            forKey:@"op"];
+    
+    NSLog(@"urlString = %@",urlString);
+    NSLog(@"userlogout = %@",userAccountDetele);
+    
+    [self sendRequestWithURLString:urlString
+                     andParameters:userAccountDetele
+                            method:ServicePost
+           completionSucessHandler:success
+          completionFailureHandler:failure];
+    
+}
+
+
 
 
 #pragma mark - GET Login

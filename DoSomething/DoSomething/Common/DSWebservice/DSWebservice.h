@@ -40,6 +40,22 @@ typedef void (^WebserviceRequestXMLFailureHandler)(AFHTTPRequestOperation  *oper
               success:(WebserviceRequestSuccessHandler)success
               failure:(WebserviceRequestFailureHandler)failure;
 
+// User Logout API
+- (void)logoutUser:(NSString *)logoutURL
+         sessionId:(NSString *)sessionId
+                op:(NSString *)op
+           success:(WebserviceRequestSuccessHandler)success
+           failure:(WebserviceRequestFailureHandler)failure;
+
+// User AccountDelete API
+
+- (void)deleteUser:(NSString *)deleteURL
+         sessionId:(NSString *)sessionId
+                op:(NSString *)op
+           success:(WebserviceRequestSuccessHandler)success
+           failure:(WebserviceRequestFailureHandler)failure;
+
+
 //GET Login API
 
 - (void)getLogin:(NSString *)loginURL

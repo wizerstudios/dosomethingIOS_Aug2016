@@ -28,7 +28,7 @@
     
     IBOutlet UIPageControl *profileImagePageControl;
     
-    UIImageView            *infoImage;
+    UIImageView            *profilePic;
     UIView                 *pgDtView;
     UIImageView            *pageImageView;
     UIImageView            *blkdot;
@@ -41,6 +41,7 @@
     BOOL isTapping;
     NSString *scrolldragging;
     NSMutableArray *infoArray;
+    UIImageView *page1,*page2,*page3;
     
 }
 @property (strong, nonatomic) DVSwitch *switcher;
@@ -65,8 +66,8 @@
 @property (strong, nonatomic) IBOutlet UIView *topViewCell;
 
 @property (strong, nonatomic) IBOutlet UIScrollView *scrView;
-@property (strong, nonatomic) IBOutlet UIPageControl *pageControl;
 - (IBAction)pageChanged:(id)sender;
-@property (strong, nonatomic) IBOutlet UITableView *tbView;
+
+
 
 @end
