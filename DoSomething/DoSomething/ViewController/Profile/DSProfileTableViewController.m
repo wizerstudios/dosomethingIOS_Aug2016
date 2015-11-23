@@ -152,7 +152,7 @@
      forControlEvents:UIControlEventTouchUpInside];
     UIImage *buttonImage = [UIImage imageNamed:@"photography"];
     [button setBackgroundImage:buttonImage forState:UIControlStateNormal];
-    button.frame = CGRectMake(65, 110, 25, 25);
+    button.frame = CGRectMake(75, 110, 25, 25);
     
     [self.scrView addSubview:page1];
     [self.scrView addSubview:page2];
