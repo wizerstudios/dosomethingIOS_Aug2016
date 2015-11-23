@@ -58,6 +58,10 @@
     UIImageView * objImag;
     NSInteger Currentindex;
     
+    BOOL isSetProfileimage;
+    
+    NSString                *loginUserSessionID;
+    
 
 }
 
@@ -72,7 +76,11 @@
     objWebService = [[DSWebservice alloc]init];
     [self initializeArray];
     deviceUdid = [OpenUDID value];
-    infoArray=[[NSMutableArray alloc]initWithObjects:@"profile_noimg",@"profile_noimg",@"profile_noimg", nil];
+    NSMutableDictionary *dic=[[NSMutableDictionary alloc]init];
+    dic =[[NSUserDefaults standardUserDefaults] valueForKey:USERDETAILS];
+    NSString * strsessionID =[dic valueForKey:@"SessionId"];
+    loginUserSessionID=strsessionID;
+
    
     
 }
@@ -115,46 +123,56 @@
     hobbiesNameArray =[[[NSUserDefaults standardUserDefaults] valueForKey:@"SelectedItemName"]mutableCopy];
     
     [_tableviewProfile reloadData];
-   
+    
+    infoArray=[[NSMutableArray alloc]initWithObjects:@"profile_noimg",@"profile_noimg",@"profile_noimg", nil];
+    
 
 }
+
 #pragma mark - scroll
--(void)scroll{
-//    for( UIView *subView in [_scrView subviews]) {
-//        [subView removeFromSuperview];
-//    }
+-(void)profileScroll{
+  
     self.scrView.pagingEnabled=YES;
-   // self.scrView.showsHorizontalScrollIndicator=YES;
     self.scrView.delegate=self;
     
- //   _profileImageView.image=[UIImage imageNamed:@"profile_noimg"];
-  //  [self.scrView addSubview:_profileImageView];
+//    _profileImageView.image=[UIImage imageNamed:@"profile_noimg"];
+//    [self.scrView addSubview:_profileImageView];
     
-    UIImageView *page1=[[UIImageView alloc] initWithFrame:CGRectMake(15, 15, self.profileImageView.frame.size.width, self.profileImageView.frame.size.height)];
+    page1=[[UIImageView alloc] initWithFrame:CGRectMake(20, 20, self.profileImageView.frame.size.width, self.profileImageView.frame.size.height)];
      page1.image=[UIImage imageNamed:@"profile_noimg"];
-    UIImageView *page2=[[UIImageView alloc] initWithFrame:CGRectMake(1.5*self.profileImageView.frame.size.width, 0, self.profileImageView.frame.size.width, self.profileImageView.frame.size.height)];
+    
+   page2=[[UIImageView alloc] initWithFrame:CGRectMake(1.5*self.profileImageView.frame.size.width, 20, self.profileImageView.frame.size.width, self.profileImageView.frame.size.height)];
     page2.image=[UIImage imageNamed:@"profile_noimg"];
-    UIImageView *page3=[[UIImageView alloc] initWithFrame:CGRectMake(3*self.profileImageView.frame.size.width, 0, self.profileImageView.frame.size.width, self.profileImageView.frame.size.height)];
+    page3=[[UIImageView alloc] initWithFrame:CGRectMake(3*self.profileImageView.frame.size.width, 20, self.profileImageView.frame.size.width, self.profileImageView.frame.size.height)];
     page3.image=[UIImage imageNamed:@"profile_noimg"];
     
+    UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
+    [button addTarget:self
+               action:@selector(selectCamera:)
+     forControlEvents:UIControlEventTouchUpInside];
+    UIImage *buttonImage = [UIImage imageNamed:@"photography"];
+    [button setBackgroundImage:buttonImage forState:UIControlStateNormal];
+    button.frame = CGRectMake(65, 110, 25, 25);
     
     [self.scrView addSubview:page1];
     [self.scrView addSubview:page2];
     [self.scrView addSubview:page3];
+     [self.scrView addSubview:button];
     
+     [cell.cameraButton addTarget:self action:@selector(selectCamera:) forControlEvents:UIControlEventTouchUpInside];
+   // [cell.uploadButton addTarget:self action:@selector(selectCamera:) forControlEvents:UIControlEventTouchUpInside];
     
-    
-    _pageControl.pageIndicatorTintColor = [UIColor lightGrayColor];
-    _pageControl.currentPageIndicatorTintColor = [UIColor blackColor];
-    _pageControl.backgroundColor = [UIColor whiteColor];
+    profileImagePageControl.pageIndicatorTintColor = [UIColor lightGrayColor];
+    profileImagePageControl.currentPageIndicatorTintColor = [UIColor blackColor];
+    profileImagePageControl.backgroundColor = [UIColor whiteColor];
     self.scrView.contentSize=CGSizeMake(self.scrView.frame.size.width*3, self.scrView.frame.size.height);
-    self.pageControl.backgroundColor=[UIColor clearColor];
-
+    profileImagePageControl.backgroundColor=[UIColor clearColor];
+    
 }
 
 - (IBAction)pageChanged:(id)sender {
     
-    CGFloat x = self.pageControl.currentPage * self.scrView.frame.size.width;
+    CGFloat x = profileImagePageControl.currentPage * self.scrView.frame.size.width;
     [self.scrView setContentOffset:CGPointMake(x, 0) animated:YES];
 }
 
@@ -164,8 +182,8 @@
     NSLog(@"called");
     int contentOffset=scrollView.contentOffset.x;
     NSInteger currentPage=contentOffset/pageWidth;
-    self.pageControl.currentPage=currentPage;
-    NSLog(@"offset x: %d",contentOffset);
+    profileImagePageControl.currentPage=currentPage;
+   // NSLog(@"offset x: %d",contentOffset);
 }
 
 - (NSString *) getEmail {
@@ -371,9 +389,11 @@
                                     [NSMutableDictionary dictionaryWithObjectsAndKeys:@"Hobbies",@"placeHolder",@"",@"TypingText", nil],
                                     [NSMutableDictionary dictionaryWithObjectsAndKeys:[userDetailsDict valueForKey:@"email"],@"placeHolder",@"Password",@"placeHolderPass",@"",@"TypingText",@"",@"TypingTextPass", nil],
                                     [NSMutableDictionary dictionaryWithObjectsAndKeys:@"switch_on",@"placeHolder",@"",@"NewMessageImage",@"",@"SoundImage",@"",@"VibrationImage",nil],
-                                    [NSMutableDictionary dictionaryWithObjectsAndKeys:@"TermsOfUse",@"placeHolder",@"",@"TypingText", nil],nil]atIndex:0];
+                                    [NSMutableDictionary dictionaryWithObjectsAndKeys:@"TermsOfUse",@"placeHolder",@"",@"TypingText", nil],
+                                    [NSMutableDictionary dictionaryWithObjectsAndKeys:@"Logout",@"placeHolder",@"",@"TypingText", nil],
+                                    [NSMutableDictionary dictionaryWithObjectsAndKeys:@"Delete",@"placeHolder",@"",@"TypingText", nil],nil]atIndex:0];
     
-    titleArray = [[NSArray alloc]initWithObjects:@"Image",@"First Name",@"Last Name",@"male",@"Date of Birth",@"About You",@"Hobbies",@"Email&Password",@"switch_on",@"TermsOfUse",nil];
+    titleArray = [[NSArray alloc]initWithObjects:@"Image",@"First Name",@"Last Name",@"male",@"Date of Birth",@"About You",@"Hobbies",@"Email&Password",@"switch_on",@"TermsOfUse",@"Logout",@"Delete",nil];
     
     NSLog(@"PlaceHolder %@",placeHolderArray);
     [self.tableviewProfile reloadData];
@@ -437,6 +457,12 @@
         if (indexPath.row == 9) {
             return 80;
         }
+        if (indexPath.row == 10) {
+            return 80;
+        }
+        if (indexPath.row == 11) {
+            return 80;
+        }
 
     return 40;
     }
@@ -471,6 +497,13 @@
         if (indexPath.row == 9) {
             return 98;
         }
+    if (indexPath.row == 10) {
+        return 98;
+    }
+    
+    if (indexPath.row == 11) {
+        return 98;
+    }
     
     return 50;
 }
@@ -509,8 +542,13 @@
         {
             [[NSBundle mainBundle] loadNibNamed:@"DSProfileTableViewCell" owner:self options:nil];
             cell = cellProfileImg;
-           [self scroll];
-           
+//            if(isSetProfileimage==NO)
+//            {
+//           [self profileScroll];
+//            isSetProfileimage=YES;
+//                
+//            }
+              [self profileScroll];
         }
         
         if (IS_IPHONE6 ||IS_IPHONE6_Plus)
@@ -519,13 +557,17 @@
             cell.layoutConstraintProfileImageWidth.constant =161;
         }
         
-//        if(!profileImage){
-//            [cell.profileImageview setImage:[UIImage imageNamed:@"profile_noimg"]];
-//        }
-//        else{
-//             [cell.profileImageview setImage:profileImage];
-//        }
-        
+        if(!page1){
+            [page1 setImage:[UIImage imageNamed:@"profile_noimg"]];
+        }
+        else{
+            page1=[[UIImageView alloc] initWithFrame:CGRectMake(20, 20, self.profileImageView.frame.size.width, self.profileImageView.frame.size.height)];
+            [self.scrView addSubview:page1];
+          // page1.frame=CGRectMake(-100,20,300,100);
+             [page1 setImage:profileImage];
+            page1.layer.cornerRadius = page1.frame.size.width / 2;
+            page1.clipsToBounds = YES;
+        }
         cell.profileImageview.layer.cornerRadius = cell.profileImageview.frame.size.height / 2;
         cell.profileImageview.layer.masksToBounds = YES;
         cell.cameraButton.userInteractionEnabled = YES;
@@ -912,11 +954,36 @@
         }
        
     }
-    
+    if (indexPath.row == 10)
+    {
+        
+        if (cell == nil)
+        {
+            [[NSBundle mainBundle] loadNibNamed:@"DSProfileTableViewCell" owner:self options:nil];
+            cell = cellLogout;
+
+        }
+        [cell.logoutButton addTarget:self action:@selector(logoutAction:) forControlEvents:UIControlEventTouchUpInside];
+       
+        
+    }
+    if (indexPath.row == 11)
+    {
+        
+        if (cell == nil)
+        {
+            [[NSBundle mainBundle] loadNibNamed:@"DSProfileTableViewCell" owner:self options:nil];
+            cell = cellDelete;
+
+        }
+        [cell.deleteButton addTarget:self action:@selector(deleteAction:) forControlEvents:UIControlEventTouchUpInside];
+    }
+
     [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
     return cell;
     
 }
+
 
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)Tablecell forRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -1199,15 +1266,16 @@
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
 {
     UIImage *image = nil;
-    image = [info valueForKey:UIImagePickerControllerEditedImage];
-     profileImage = image;
-    NSLog(@"uploadImg=%@",image);
+   image = [info valueForKey:UIImagePickerControllerEditedImage];
     
-    if(profileImage != nil)
-    {
-        [self uploadNextImageMethod];
-    }
-    //[_tableviewProfile reloadData];
+     profileImage = image;
+    
+    
+//    if(profileImage != nil)
+//    {
+//        [self uploadNextImageMethod];
+//    }
+   // [_tableviewProfile reloadData];
     [imagepickerController dismissViewControllerAnimated:YES completion:nil];
 }
 -(void)uploadNextImageMethod
@@ -1215,17 +1283,6 @@
    // [self scrollViewDidScroll:cell.profileScrollview];
    // [self cellScroll];
 }
-//- (void)scrollViewDidScroll:(UIScrollView *)scrollView;
-//{
-//    if (scrollView == cell.profileScrollview) {
-//        //IndexVal = scrollView.contentOffset.x/SCREEN_WIDTH;
-//        //[topSliderScrollView setNeedsDisplay];
-//        //pageController.currentPage = IndexVal;
-//        [cell.profileImageview setFrame:CGRectMake(300, 0,cell.profileScrollview.frame.size.width,cell.profileScrollview.frame.size.height)];
-//    }
-//
-//    NSLog(@"scroll");
-//}
 #pragma mark - gotoHomeView
 -(void)gotoHomeView{
     HomeViewController * objHomeview = [[HomeViewController alloc]initWithNibName:@"HomeViewController" bundle:nil];
@@ -1300,5 +1357,36 @@
     }
 
 }
+#pragma mark - LogoutAction
+-(void)logoutAction:(id)sender
+{
+    NSString *optionLogout;
+    optionLogout = @"logout";
+    [objWebService logoutUser:User_Logout_Delete_API
+                    sessionId:loginUserSessionID
+                           op:optionLogout
+                      success:^(AFHTTPRequestOperation *operation, id responseObject) {
+                        
+                      }
+                      failure:^(AFHTTPRequestOperation *operation, id error) {
+                        
+                      }];
+}
+#pragma mark - DeleteAction
+-(void)deleteAction:(id)sender
+{
+    NSString *optionDetele;
+    optionDetele = @"delete";
+    [objWebService deleteUser:User_Logout_Delete_API
+                    sessionId:loginUserSessionID
+                           op:optionDetele
+                      success:^(AFHTTPRequestOperation *operation, id responseObject) {
+                          
+                      } failure:^(AFHTTPRequestOperation *operation, id error) {
+                          
+                      }];
+}
+
+
 
 @end

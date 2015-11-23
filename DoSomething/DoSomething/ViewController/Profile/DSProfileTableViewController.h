@@ -12,23 +12,26 @@
 
 @interface DSProfileTableViewController : UIViewController<UINavigationControllerDelegate, UITextViewDelegate, UIImagePickerControllerDelegate, UIAlertViewDelegate, UITextFieldDelegate,UIActionSheetDelegate>
 {
- IBOutlet DSProfileTableViewCell *cellProfileImg;
- IBOutlet DSProfileTableViewCell *cellButton;
- IBOutlet DSProfileTableViewCell *cellAddIcon;
- IBOutlet DSProfileTableViewCell *cellTextField;
- IBOutlet DSProfileTableViewCell *cellDatePicker;
- IBOutlet DSProfileTableViewCell *cellEmailPassword;
- IBOutlet DSProfileTableViewCell *CellSwitchOn;
- IBOutlet DSProfileTableViewCell *CellTermsOfUse;
- IBOutlet DSProfileTableViewCell *cellTextView;
- UIImagePickerController  *imagepickerController;
- NSString *strType,*strProfileID,*strProfileImage,*strGender,*FirstName,*LastName,*strDOB,*strEmail,*strPassword;
+    IBOutlet DSProfileTableViewCell *cellProfileImg;
+    IBOutlet DSProfileTableViewCell *cellButton;
+    IBOutlet DSProfileTableViewCell *cellAddIcon;
+    IBOutlet DSProfileTableViewCell *cellTextField;
+    IBOutlet DSProfileTableViewCell *cellDatePicker;
+    IBOutlet DSProfileTableViewCell *cellEmailPassword;
+    IBOutlet DSProfileTableViewCell *CellSwitchOn;
+    IBOutlet DSProfileTableViewCell *CellTermsOfUse;
+    IBOutlet DSProfileTableViewCell *cellTextView;
+    IBOutlet DSProfileTableViewCell *cellLogout;
+    IBOutlet DSProfileTableViewCell *cellDelete;
+    
+    UIImagePickerController  *imagepickerController;
+    NSString *strType,*strProfileID,*strProfileImage,*strGender,*FirstName,*LastName,*strDOB,*strEmail,*strPassword;
     
     IBOutlet UIScrollView *profileImageScroll;
     
     IBOutlet UIPageControl *profileImagePageControl;
     
-    UIImageView            *infoImage;
+    UIImageView            *profilePic;
     UIView                 *pgDtView;
     UIImageView            *pageImageView;
     UIImageView            *blkdot;
@@ -41,6 +44,7 @@
     BOOL isTapping;
     NSString *scrolldragging;
     NSMutableArray *infoArray;
+    UIImageView *page1,*page2,*page3;
     
 }
 @property (strong, nonatomic) DVSwitch *switcher;
@@ -65,8 +69,8 @@
 @property (strong, nonatomic) IBOutlet UIView *topViewCell;
 
 @property (strong, nonatomic) IBOutlet UIScrollView *scrView;
-@property (strong, nonatomic) IBOutlet UIPageControl *pageControl;
 - (IBAction)pageChanged:(id)sender;
-@property (strong, nonatomic) IBOutlet UITableView *tbView;
+
+
 
 @end
