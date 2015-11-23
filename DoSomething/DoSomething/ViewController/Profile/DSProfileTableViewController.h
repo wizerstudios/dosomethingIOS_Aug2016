@@ -12,17 +12,20 @@
 
 @interface DSProfileTableViewController : UIViewController<UINavigationControllerDelegate, UITextViewDelegate, UIImagePickerControllerDelegate, UIAlertViewDelegate, UITextFieldDelegate,UIActionSheetDelegate>
 {
- IBOutlet DSProfileTableViewCell *cellProfileImg;
- IBOutlet DSProfileTableViewCell *cellButton;
- IBOutlet DSProfileTableViewCell *cellAddIcon;
- IBOutlet DSProfileTableViewCell *cellTextField;
- IBOutlet DSProfileTableViewCell *cellDatePicker;
- IBOutlet DSProfileTableViewCell *cellEmailPassword;
- IBOutlet DSProfileTableViewCell *CellSwitchOn;
- IBOutlet DSProfileTableViewCell *CellTermsOfUse;
- IBOutlet DSProfileTableViewCell *cellTextView;
- UIImagePickerController  *imagepickerController;
- NSString *strType,*strProfileID,*strProfileImage,*strProfileImage2,*strProfileImage3,*strGender,*FirstName,*LastName,*strDOB,*strEmail,*strPassword;
+    IBOutlet DSProfileTableViewCell *cellProfileImg;
+    IBOutlet DSProfileTableViewCell *cellButton;
+    IBOutlet DSProfileTableViewCell *cellAddIcon;
+    IBOutlet DSProfileTableViewCell *cellTextField;
+    IBOutlet DSProfileTableViewCell *cellDatePicker;
+    IBOutlet DSProfileTableViewCell *cellEmailPassword;
+    IBOutlet DSProfileTableViewCell *CellSwitchOn;
+    IBOutlet DSProfileTableViewCell *CellTermsOfUse;
+    IBOutlet DSProfileTableViewCell *cellTextView;
+    IBOutlet DSProfileTableViewCell *cellLogout;
+    IBOutlet DSProfileTableViewCell *cellDelete;
+    
+    UIImagePickerController  *imagepickerController;
+    NSString *strType,*strProfileID,*strProfileImage,*strGender,*FirstName,*LastName,*strDOB,*strEmail,*strPassword;
     
     IBOutlet UIScrollView *profileImageScroll;
     

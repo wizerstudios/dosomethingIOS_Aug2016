@@ -39,6 +39,8 @@
     float space;
     
     UIImage *profileImage;
+    UIImage *strProfileImage2;
+    UIImage *strProfileImage3;
     
     DSProfileTableViewCell *cell;
     
@@ -58,6 +60,11 @@
     UIImageView * objImag;
     NSInteger Currentindex;
     NSString *strInterestHobbies;
+    
+    BOOL isSetProfileimage;
+    
+    NSString                *loginUserSessionID;
+    
 
 }
 
