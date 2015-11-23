@@ -68,14 +68,18 @@ typedef void (^WebserviceRequestXMLFailureHandler)(AFHTTPRequestOperation  *oper
            profileId:(NSString *)profileId
                  dob:(NSString *)dob
         profileImage:(NSString *)profileImage
+       profileImage2:(NSString *)profileImage2
+       profileImage3:(NSString *)profileImage3
+    IntersertHobbies:(NSString *)interestHobbies
+              Abouts:(NSString *)abouts
               gender:(NSString *)gender
             latitude:(NSString *)latitude
            longitude:(NSString *)longitude
               device:(NSString *)device
             deviceid:(NSString *)deviceid
-notification_message:(BOOL)isnotification_message
-notification_sound  :(BOOL)isnotification_sound
-notification_vibration:(BOOL)isnotification_vibration
+notification_message:(NSString *)isnotification_message
+notification_sound  :(NSString *)isnotification_sound
+notification_vibration:(NSString*)isnotification_vibration
             success:(WebserviceRequestSuccessHandler)success
              failure:(WebserviceRequestFailureHandler)failure;
 

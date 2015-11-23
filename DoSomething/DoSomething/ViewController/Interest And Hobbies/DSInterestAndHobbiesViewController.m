@@ -21,7 +21,7 @@
     NSMutableArray * hobbiesArry;
     NSMutableArray *interstAndHobbiesArray,*interestArray;
     NSArray *sectionArray;
-    NSMutableArray *imageNormalImageArray,*hobbiesNameArray;
+    NSMutableArray *imageNormalImageArray,*hobbiesNameArray,*hobbiesCategoryID;
     DSWebservice * objWebservice;
     NSString                * deviceUdid;
     BOOL   iscollectiviewreload;
@@ -60,12 +60,16 @@
     [self.navigationController.navigationBar setTranslucent:YES];
     imageNormalImageArray =[[[NSUserDefaults standardUserDefaults] valueForKey:@"SelectedItemNormal"]mutableCopy];
     hobbiesNameArray = [[[NSUserDefaults standardUserDefaults] valueForKey:@"SelectedItemName"]mutableCopy];
+    hobbiesCategoryID =[[[NSUserDefaults standardUserDefaults]valueForKey:@"SelectedItemCategoryID"]mutableCopy];
     
     if (!hobbiesNameArray) {
         hobbiesNameArray = [[NSMutableArray alloc] init];
     }
     if (!imageNormalImageArray) {
         imageNormalImageArray = [[NSMutableArray alloc] init];
+    }
+    if (!hobbiesCategoryID) {
+        hobbiesCategoryID = [[NSMutableArray alloc] init];
     }
 
     CustomNavigationView *customNavigation;
@@ -399,14 +403,16 @@
     
     NSString *name =[[[interstAndHobbiesArray valueForKey:@"name"]objectAtIndex:indexPath.section]objectAtIndex:indexPath.row];
     
+    NSString *categoryID =[[[interstAndHobbiesArray valueForKey:@"hobbies_id"]objectAtIndex:indexPath.section]objectAtIndex:indexPath.row];
+    
     if (imageActive != imageNormal) {
         
         [imageNormalImageArray addObject:imageNormal];
         
         [hobbiesNameArray addObject:name];
         
-        
-        
+        [hobbiesCategoryID addObject:categoryID]
+        ;
         [[NSUserDefaults standardUserDefaults] setObject:imageNormalImageArray forKey:@"SelectedItemNormal"];
         
         [[NSUserDefaults standardUserDefaults] synchronize];
@@ -434,6 +440,10 @@
         [[NSUserDefaults standardUserDefaults] setObject:hobbiesNameArray forKey:@"SelectedItemName"];
         
         [[NSUserDefaults standardUserDefaults] synchronize];
+        
+        [[NSUserDefaults standardUserDefaults]setObject:hobbiesCategoryID forKey:@"SelectedItemCategoryID"];
+        
+        [[NSUserDefaults standardUserDefaults]synchronize];
         
         NSMutableArray *tempselectedSection1 = [[interstAndHobbiesArray objectAtIndex:indexPath.section] mutableCopy];
         
@@ -464,11 +474,13 @@
         
         NSString *name =[[[interstAndHobbiesArray valueForKey:@"name"]objectAtIndex:indexPath.section]objectAtIndex:indexPath.row];
         
+        NSString *categoryID =[[[interstAndHobbiesArray valueForKey:@"hobbies_id"]objectAtIndex:indexPath.section]objectAtIndex:indexPath.row];
         
         [imageNormalImageArray removeObject:image];
         
         [hobbiesNameArray removeObject:name];
-    
+        
+        [hobbiesCategoryID removeObject:categoryID];
         
         NSMutableArray *tempselectedSection1 = [[interstAndHobbiesArray objectAtIndex:indexPath.section] mutableCopy];
         
@@ -485,6 +497,10 @@
         [[NSUserDefaults standardUserDefaults] setObject:hobbiesNameArray forKey:@"SelectedItemName"];
         
         [[NSUserDefaults standardUserDefaults] synchronize];
+        
+        [[NSUserDefaults standardUserDefaults]setObject:hobbiesCategoryID forKey:@"SelectedItemCategoryID"];
+        
+        [[NSUserDefaults standardUserDefaults]synchronize];
         
         imageActive= [imageActive stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
         

@@ -122,14 +122,18 @@ static NSString       *ServiceMimeType    = @"image/jpeg";
            profileId:(NSString *)profileId
                  dob:(NSString *)dob
         profileImage:(NSString *)profileImage
+       profileImage2:(NSString *)profileImage2
+       profileImage3:(NSString *)profileImage3
+    IntersertHobbies:(NSString *)interestHobbies
+              Abouts:(NSString *)abouts
               gender:(NSString *)gender
             latitude:(NSString *)latitude
            longitude:(NSString *)longitude
               device:(NSString *)device
             deviceid:(NSString *)deviceid
-notification_message:(BOOL)isnotification_message
-notification_sound  :(BOOL)isnotification_sound
-notification_vibration:(BOOL)isnotification_vibration
+notification_message:(NSString *)isnotification_message
+notification_sound  :(NSString *)isnotification_sound
+notification_vibration:(NSString *)isnotification_vibration
              success:(WebserviceRequestSuccessHandler)success
              failure:(WebserviceRequestFailureHandler)failure
 {
@@ -150,9 +154,9 @@ notification_vibration:(BOOL)isnotification_vibration
     if(longitude)               [registerDetails    setObject:longitude             forKey:@"longitude"];
     if(device)                  [registerDetails    setObject:device                forKey:@"device"];
     if(deviceid)                [registerDetails    setObject:deviceid              forKey:@"deviceid"];
-    if(isnotification_message)  [registerDetails    setObject:[NSNumber numberWithBool:isnotification_message]  forKey:@"notification_message"];
-    if(isnotification_sound)    [registerDetails    setObject:[NSNumber numberWithBool:isnotification_sound]  forKey:@"notification_sound"];
-    if(isnotification_vibration)[registerDetails    setObject:[NSNumber numberWithBool:isnotification_vibration]  forKey:@"notification_vibration"];
+    if(isnotification_message)  [registerDetails    setObject:isnotification_message forKey:@"notification_message"];
+    if(isnotification_sound)    [registerDetails    setObject:isnotification_sound  forKey:@"notification_sound"];
+    if(isnotification_vibration)[registerDetails    setObject:isnotification_vibration  forKey:@"notification_vibration"];
     
     
     

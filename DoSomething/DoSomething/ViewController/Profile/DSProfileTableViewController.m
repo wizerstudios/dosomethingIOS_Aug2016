@@ -25,7 +25,7 @@
     DSWebservice            * objWebService;
     CLLocationManager       *locationManager;
     NSString                *currentLatitude,*currentLongitude;
-    NSMutableArray          *imageNormalArray,*hobbiesNameArray;
+    NSMutableArray          *imageNormalArray,*hobbiesNameArray,*hobbiesCategoryIDArray;
     NSArray                 *titleArray;
     NSMutableArray          *interstAndHobbiesArray;
     UIDatePicker            *datePicker;
@@ -45,7 +45,7 @@
     NSString * deviceUdid;
     NSString * selectGender;
     NSString * strFirstName;
-    NSString * strLastName;
+    NSString * strLastName,*strAbout;
     
     NSString * isNotification_message;
     NSString * isNotification_sound;
@@ -57,7 +57,7 @@
      UIView * mainview;
     UIImageView * objImag;
     NSInteger Currentindex;
-    
+    NSString *strInterestHobbies;
 
 }
 
@@ -74,7 +74,7 @@
     deviceUdid = [OpenUDID value];
     infoArray=[[NSMutableArray alloc]initWithObjects:@"profile_noimg",@"profile_noimg",@"profile_noimg", nil];
    
-    
+    [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"SelectedItemCategoryID"];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -113,6 +113,13 @@
     imageNormalArray =[[[NSUserDefaults standardUserDefaults] valueForKey:@"SelectedItemNormal"]mutableCopy];
     
     hobbiesNameArray =[[[NSUserDefaults standardUserDefaults] valueForKey:@"SelectedItemName"]mutableCopy];
+    
+    hobbiesCategoryIDArray =[[[NSUserDefaults standardUserDefaults] valueForKey:@"SelectedItemCategoryID"]mutableCopy];
+
+    
+    strInterestHobbies = [hobbiesCategoryIDArray componentsJoinedByString:@","];
+    
+    NSLog(@"joinedString:%@",strInterestHobbies);
     
     [_tableviewProfile reloadData];
    
@@ -319,12 +326,14 @@
     else if (indexPath.row ==7 ) {
         if ((selOptionVal = cell.emailTextField.text)) {
             if(selOptionVal != nil || ![selOptionVal isEqualToString:@""]){
+                emailAddressToRegister=cell.emailTextField.text;
                 [[[placeHolderArray objectAtIndex:indexPath.section] objectAtIndex:indexPath.row] setObject:selOptionVal forKey:@"TypingText"];
                 
             }
             
         }
         selOptionVal = cell.passwordTextField.text;
+        emailPasswordToRegister=cell.passwordTextField.text;
         
         if(selOptionVal != nil || ![selOptionVal isEqualToString:@""]){
             [[[placeHolderArray objectAtIndex:indexPath.section] objectAtIndex:indexPath.row] setObject:selOptionVal forKey:@"TypingTextPass"];
@@ -693,6 +702,7 @@
         
         cell.textViewAboutYou.text = textviewText;
         cell.labelAboutYou.text =titleText;
+        strAbout =cell.labelAboutYou.text;
         cell.textViewHeaderLabel.text =placeHolderText;
         cell.textViewAboutYou.delegate = self;
     }
@@ -943,7 +953,7 @@
     
     
     NSArray *titleArray1        = [[NSArray alloc]initWithObjects:@"switch_on",@"switch_off", nil];
-    NSArray *notificationArray  = [[NSArray alloc]initWithObjects:@"YES",@"NO", nil];
+  
     NSString *selOptionVal;
     
     if([sender tag] == 2000){
@@ -957,12 +967,12 @@
             
             if (NewMessageImage == [titleArray1 objectAtIndex:0]) {
                 selOptionVal = [titleArray1 objectAtIndex:1];
-                isNotification_message =[notificationArray objectAtIndex:1];
+                isNotification_message =@"No";
                 
             }
             if (NewMessageImage == [titleArray1 objectAtIndex:1]) {
                 selOptionVal = [titleArray1 objectAtIndex:0];
-                isNotification_message =[notificationArray objectAtIndex:0];
+                isNotification_message =@"Yes";
             }
             
             
@@ -982,12 +992,12 @@
             
             if (NewMessageImage == [titleArray1 objectAtIndex:0]) {
                 selOptionVal = [titleArray1 objectAtIndex:1];
-               isNotification_message =[notificationArray objectAtIndex:1];
+               isNotification_message =@"No";
             }
             if (NewMessageImage == [titleArray1 objectAtIndex:1]) {
                 selOptionVal = [titleArray1 objectAtIndex:0];
-                isNotification_message =[notificationArray objectAtIndex:0];
-               // isNotification_message = YES;
+                //isNotification_message =[notificationArray objectAtIndex:0];
+                isNotification_message = @"YES";
             }
             if(selOptionVal != nil || ![selOptionVal isEqualToString:@""])
                 [[[placeHolderArray objectAtIndex:indexPath.section] objectAtIndex:indexPath.row] setObject:selOptionVal forKey:@"NewMessageImage"];
@@ -1012,11 +1022,11 @@
             
             if (SoundImage == [titleArray1 objectAtIndex:0]) {
                 selOptionVal = [titleArray1 objectAtIndex:1];
-                isNotification_sound =[notificationArray objectAtIndex:1];
+                isNotification_sound =@"No";
             }
             if (SoundImage == [titleArray1 objectAtIndex:1]) {
                 selOptionVal = [titleArray1 objectAtIndex:0];
-               isNotification_sound = [notificationArray objectAtIndex:0];
+               isNotification_sound = @"Yes";
             }
             
             
@@ -1034,11 +1044,11 @@
             
             if (SoundImage == [titleArray1 objectAtIndex:0]) {
                 selOptionVal = [titleArray1 objectAtIndex:1];
-                isNotification_sound = [notificationArray objectAtIndex:1];
+                isNotification_sound = @"No";
             }
             if (SoundImage == [titleArray1 objectAtIndex:1]) {
                 selOptionVal = [titleArray1 objectAtIndex:0];
-                isNotification_sound = [notificationArray objectAtIndex:0];
+                isNotification_sound = @"Yes";
             }
             if(selOptionVal != nil || ![selOptionVal isEqualToString:@""])
                 [[[placeHolderArray objectAtIndex:indexPath.section] objectAtIndex:indexPath.row] setObject:selOptionVal forKey:@"SoundImage"];
@@ -1062,11 +1072,11 @@
             
             if (VibrationImage == [titleArray1 objectAtIndex:0]) {
                 selOptionVal = [titleArray1 objectAtIndex:1];
-               isNotification_vibration = [notificationArray objectAtIndex:1];
+               isNotification_vibration = @"No";
             }
             if (VibrationImage == [titleArray1 objectAtIndex:1]) {
                 selOptionVal = [titleArray1 objectAtIndex:0];
-                isNotification_vibration = [notificationArray objectAtIndex:0];
+                isNotification_vibration = @"Yes";
             }
             
             
@@ -1084,11 +1094,11 @@
             
             if (VibrationImage == [titleArray1 objectAtIndex:0]) {
                 selOptionVal = [titleArray1 objectAtIndex:1];
-                isNotification_vibration = [notificationArray objectAtIndex:1];
+                isNotification_vibration = @"No";
             }
             if (VibrationImage == [titleArray1 objectAtIndex:1]) {
                 selOptionVal = [titleArray1 objectAtIndex:0];
-                isNotification_vibration = [notificationArray objectAtIndex:0];;
+                isNotification_vibration = @"Yes";
             }
             if(selOptionVal != nil || ![selOptionVal isEqualToString:@""])
                 [[[placeHolderArray objectAtIndex:indexPath.section] objectAtIndex:indexPath.row] setObject:selOptionVal forKey:@"VibrationImage"];
@@ -1203,29 +1213,10 @@
      profileImage = image;
     NSLog(@"uploadImg=%@",image);
     
-    if(profileImage != nil)
-    {
-        [self uploadNextImageMethod];
-    }
     //[_tableviewProfile reloadData];
     [imagepickerController dismissViewControllerAnimated:YES completion:nil];
 }
--(void)uploadNextImageMethod
-{
-   // [self scrollViewDidScroll:cell.profileScrollview];
-   // [self cellScroll];
-}
-//- (void)scrollViewDidScroll:(UIScrollView *)scrollView;
-//{
-//    if (scrollView == cell.profileScrollview) {
-//        //IndexVal = scrollView.contentOffset.x/SCREEN_WIDTH;
-//        //[topSliderScrollView setNeedsDisplay];
-//        //pageController.currentPage = IndexVal;
-//        [cell.profileImageview setFrame:CGRectMake(300, 0,cell.profileScrollview.frame.size.width,cell.profileScrollview.frame.size.height)];
-//    }
-//
-//    NSLog(@"scroll");
-//}
+
 #pragma mark - gotoHomeView
 -(void)gotoHomeView{
     HomeViewController * objHomeview = [[HomeViewController alloc]initWithNibName:@"HomeViewController" bundle:nil];
@@ -1244,28 +1235,32 @@
                       profileId:strProfileID
                             dob:strDOB
                    profileImage:strProfileImage
+                  profileImage2:strProfileImage2
+                  profileImage3:strProfileImage3
+               IntersertHobbies:strInterestHobbies
+                         Abouts:strAbout
                          gender:strGender
                        latitude:currentLatitude
                       longitude:currentLongitude
                          device:Device
                        deviceid:deviceUdid
-           notification_message:YES
-           notification_sound  :YES
-         notification_vibration:YES
+           notification_message:isNotification_message
+           notification_sound  :isNotification_sound
+         notification_vibration:isNotification_vibration
                         success:^(AFHTTPRequestOperation *operation, id responseObject)
-     {
-         NSLog(@"rsponse:%@",responseObject);
+                                {
+                                        NSLog(@"rsponse:%@",responseObject);
          
-         NSMutableDictionary *registerDict = [[NSMutableDictionary alloc]init];
+                                        NSMutableDictionary *registerDict = [[NSMutableDictionary alloc]init];
          
-         registerDict = [responseObject valueForKey:@"register"];
+                                        registerDict = [responseObject valueForKey:@"register"];
          
-         if([[registerDict valueForKey:@"status"]isEqualToString:@"success"]){
-             [COMMON setUserDetails:[[registerDict valueForKey:@"userDetails"]objectAtIndex:0]];
-             NSLog(@"userdetails = %@",[COMMON getUserDetails]);
-             [self gotoHomeView];
-         }
-     }
+                                        if([[registerDict valueForKey:@"status"]isEqualToString:@"success"]){
+                                            [COMMON setUserDetails:[[registerDict valueForKey:@"userDetails"]objectAtIndex:0]];
+                                            NSLog(@"userdetails = %@",[COMMON getUserDetails]);
+                                            [self gotoHomeView];
+                                        }
+                                }
      
                         failure:^(AFHTTPRequestOperation *operation, id error) {
                             
@@ -1286,11 +1281,12 @@
     strGender    = (selectGender!=nil)?selectGender:@"";
     FirstName    = (strFirstName!=nil)? strFirstName:@"";
     LastName     = (strLastName!=nil)?strLastName:@"";
+
     strDOB       = (currentTextfield.text !=nil)?currentTextfield.text :@"";
     
     NSLog(@"isNotification_vibration:%@",isNotification_vibration);
     
-        if(![FirstName isEqual:[NSNull null]]&&![LastName isEqual:[NSNull null]]&&![strDOB isEqual:[NSNull null]]&&![strGender isEqual:[NSNull null]]&&![emailAddressToRegister isEqual:[NSNull null]]&&![emailPasswordToRegister isEqual:[NSNull null]]){
+        if(![FirstName isEqual:[NSNull null]]&& ![FirstName isEqualToString:@""]&&![LastName isEqual:[NSNull null]]&& ![LastName isEqualToString:@""] &&![strDOB isEqual:[NSNull null]]&&![strGender isEqual:[NSNull null]]&& ![strGender isEqualToString:@""] &&![emailAddressToRegister isEqual:[NSNull null]] &&![emailAddressToRegister isEqualToString:@""] &&![emailPasswordToRegister isEqual:[NSNull null]] && ![emailPasswordToRegister isEqualToString:@""]){
             [self registerAPI];
         }
     else{

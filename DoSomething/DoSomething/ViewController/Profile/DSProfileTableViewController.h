@@ -22,7 +22,7 @@
  IBOutlet DSProfileTableViewCell *CellTermsOfUse;
  IBOutlet DSProfileTableViewCell *cellTextView;
  UIImagePickerController  *imagepickerController;
- NSString *strType,*strProfileID,*strProfileImage,*strGender,*FirstName,*LastName,*strDOB,*strEmail,*strPassword;
+ NSString *strType,*strProfileID,*strProfileImage,*strProfileImage2,*strProfileImage3,*strGender,*FirstName,*LastName,*strDOB,*strEmail,*strPassword;
     
     IBOutlet UIScrollView *profileImageScroll;
     

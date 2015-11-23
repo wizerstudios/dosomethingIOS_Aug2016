@@ -433,14 +433,18 @@
                      profileId:profileID
                            dob:dob
                   profileImage:profileImage
+                 profileImage2:nil
+                 profileImage3:nil
+              IntersertHobbies:nil
+                        Abouts:@""
                         gender:gender
                       latitude:currentLatitude
                      longitude:currentLongitude
                         device:@"iPhone"
                       deviceid:deviceUdid
-          notification_message:YES
-          notification_sound  :YES
-        notification_vibration:YES
+          notification_message:@"Yes"
+          notification_sound  :@"Yes"
+        notification_vibration:@"Yes"
     
     
                        success:^(AFHTTPRequestOperation *operation, id responseObject){
