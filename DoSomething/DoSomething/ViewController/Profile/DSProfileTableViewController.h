@@ -45,6 +45,7 @@
     NSString *scrolldragging;
     NSMutableArray *infoArray;
     UIImageView *page1,*page2,*page3;
+    NSInteger CurrentImage;
     
 }
 @property (strong, nonatomic) DVSwitch *switcher;
@@ -55,7 +56,7 @@
 @property (strong, nonatomic) IBOutlet NSLayoutConstraint *layoutConstraintTableViewBottomPos;
 
 @property (nonatomic, retain) NSMutableArray *placeHolderArray;
-@property (strong, nonatomic) NSData *profileData;
+@property (strong, nonatomic) NSData *profileData,*profileData1,*profileData2,*profileData3;
 @property (nonatomic, strong) NSString *textviewText;
 @property (nonatomic,strong)  NSString * FBprofileID;
 
