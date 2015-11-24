@@ -69,7 +69,7 @@
 
 #define FILL_DETAILS                @"Please Enter Email and Password"
 
-#define FILL_ALL_DETAILS            @"Please Enter All Details"
+#define FILL_ALL_DETAILS            @"Please Enter FirstName, LastName , Date Of Birth , Email , Password"
 
 #define INVALID_EMAIL               @"Enter Valid Email ID"
 

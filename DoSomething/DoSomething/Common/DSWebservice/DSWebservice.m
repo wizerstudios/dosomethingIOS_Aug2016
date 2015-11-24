@@ -57,9 +57,14 @@ static NSString       *ServiceMimeType    = @"image/jpeg";
 #pragma mark - POST checkUser
 
 - (void)checkUser:(NSString *)checkUserURL
-                email:(NSString *)email
-                 type:(NSString *)type
+            email:(NSString *)email
+             type:(NSString *)type
          password:(NSString*)password
+       first_name:(NSString*)first_name
+        last_name:(NSString*)last_name
+              dob:(NSString*)dob
+           gender:(NSString*)gender
+     profileImage:(NSString *)profileImage
               success:(WebserviceRequestSuccessHandler)success
               failure:(WebserviceRequestFailureHandler)failure
 {
@@ -69,6 +74,13 @@ static NSString       *ServiceMimeType    = @"image/jpeg";
     
     if(type)               [checkUserDetails    setObject:type             forKey:@"type"];
     if(email)              [checkUserDetails    setObject:email            forKey:@"email"];
+    if(first_name)         [checkUserDetails    setObject:first_name       forKey:@"first_name"];
+    if(last_name)          [checkUserDetails    setObject:last_name        forKey:@"last_name"];
+    if(dob)                [checkUserDetails    setObject:dob              forKey:@"dob"];
+    if(gender)             [checkUserDetails    setObject:gender           forKey:@"gender"];
+    if(profileImage)       [checkUserDetails    setObject:profileImage     forKey:@"profileImage"];
+
+    
     
     NSLog(@"urlString = %@",urlString);
     NSLog(@"checkUserDetails = %@",checkUserDetails);

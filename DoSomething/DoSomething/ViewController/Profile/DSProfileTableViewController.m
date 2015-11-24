@@ -65,6 +65,7 @@
     
     NSString                *loginUserSessionID;
     NSString *optionLogoutDelete;
+    NSString *dateChange;
     
 
 }
@@ -87,6 +88,9 @@
 
    
     [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"SelectedItemCategoryID"];
+    isNotification_message = @"Yes";
+    isNotification_sound = @"Yes";
+    isNotification_vibration = @"Yes";
 }
 
 - (void)didReceiveMemoryWarning {
@@ -281,7 +285,7 @@
     currentTextfield=(UITextField *)[self.view viewWithTag:[sender tag]];
     NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
     [dateFormat setTimeZone:[NSTimeZone systemTimeZone]];
-    [dateFormat setDateFormat:@"dd-MM-YYYY"];
+    [dateFormat setDateFormat:@"dd/MM/YYYY"];
     NSString *dateString =  [dateFormat stringFromDate:sender.date];
     currentTextfield.text = dateString;
 
@@ -334,7 +338,7 @@
        
         NSDate *date = datePicker.date;
         NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-        [formatter setDateFormat:@"dd-MM-yyyy"];
+        [formatter setDateFormat:@"dd/MM/yyyy"];
         selOptionVal = [formatter stringFromDate:date];
        
         if(selOptionVal != nil || ![selOptionVal isEqualToString:@""]){
@@ -402,11 +406,9 @@
                                     [NSMutableDictionary dictionaryWithObjectsAndKeys:@"Hobbies",@"placeHolder",@"",@"TypingText", nil],
                                     [NSMutableDictionary dictionaryWithObjectsAndKeys:[userDetailsDict valueForKey:@"email"],@"placeHolder",@"Password",@"placeHolderPass",@"",@"TypingText",@"",@"TypingTextPass", nil],
                                     [NSMutableDictionary dictionaryWithObjectsAndKeys:@"switch_on",@"placeHolder",@"",@"NewMessageImage",@"",@"SoundImage",@"",@"VibrationImage",nil],
-                                    [NSMutableDictionary dictionaryWithObjectsAndKeys:@"TermsOfUse",@"placeHolder",@"",@"TypingText", nil],
-                                    [NSMutableDictionary dictionaryWithObjectsAndKeys:@"Logout",@"placeHolder",@"",@"TypingText", nil],
-                                    [NSMutableDictionary dictionaryWithObjectsAndKeys:@"Delete",@"placeHolder",@"",@"TypingText", nil],nil]atIndex:0];
+                                    [NSMutableDictionary dictionaryWithObjectsAndKeys:@"TermsOfUse",@"placeHolder",@"",@"TypingText", nil], nil]atIndex:0];
     
-    titleArray = [[NSArray alloc]initWithObjects:@"Image",@"First Name",@"Last Name",@"male",@"Date of Birth",@"About You",@"Hobbies",@"Email&Password",@"switch_on",@"TermsOfUse",@"Logout",@"Delete",nil];
+    titleArray = [[NSArray alloc]initWithObjects:@"Image",@"First Name",@"Last Name",@"male",@"Date of Birth",@"About You",@"Hobbies",@"Email&Password",@"switch_on",@"TermsOfUse",nil];
     
     NSLog(@"PlaceHolder %@",placeHolderArray);
     //[self.tableviewProfile reloadData];
@@ -470,12 +472,12 @@
         if (indexPath.row == 9) {
             return 80;
         }
-        if (indexPath.row == 10) {
-            return 80;
-        }
-        if (indexPath.row == 11) {
-            return 90;
-        }
+//        if (indexPath.row == 10) {
+//            return 80;
+//        }
+//        if (indexPath.row == 11) {
+//            return 90;
+//        }
 
     return 40;
     }
@@ -510,13 +512,13 @@
         if (indexPath.row == 9) {
             return 98;
         }
-    if (indexPath.row == 10) {
-        return 98;
-    }
-    
-    if (indexPath.row == 11) {
-        return 120;
-    }
+//    if (indexPath.row == 10) {
+//        return 98;
+//    }
+//    
+//    if (indexPath.row == 11) {
+//        return 120;
+//    }
     
     return 50;
 }
@@ -969,30 +971,30 @@
         }
        
     }
-    if (indexPath.row == 10)
-    {
-        
-        if (cell == nil)
-        {
-            [[NSBundle mainBundle] loadNibNamed:@"DSProfileTableViewCell" owner:self options:nil];
-            cell = cellLogout;
-
-        }
-        [cell.logoutButton addTarget:self action:@selector(logoutAction:) forControlEvents:UIControlEventTouchUpInside];
-       
-        
-    }
-    if (indexPath.row == 11)
-    {
-        
-        if (cell == nil)
-        {
-            [[NSBundle mainBundle] loadNibNamed:@"DSProfileTableViewCell" owner:self options:nil];
-            cell = cellDelete;
-
-        }
-        [cell.deleteButton addTarget:self action:@selector(deleteAction:) forControlEvents:UIControlEventTouchUpInside];
-    }
+//    if (indexPath.row == 10)
+//    {
+//        
+//        if (cell == nil)
+//        {
+//            [[NSBundle mainBundle] loadNibNamed:@"DSProfileTableViewCell" owner:self options:nil];
+//            cell = cellLogout;
+//
+//        }
+//        [cell.logoutButton addTarget:self action:@selector(logoutAction:) forControlEvents:UIControlEventTouchUpInside];
+//       
+//        
+//    }
+//    if (indexPath.row == 11)
+//    {
+//        
+//        if (cell == nil)
+//        {
+//            [[NSBundle mainBundle] loadNibNamed:@"DSProfileTableViewCell" owner:self options:nil];
+//            cell = cellDelete;
+//
+//        }
+//        [cell.deleteButton addTarget:self action:@selector(deleteAction:) forControlEvents:UIControlEventTouchUpInside];
+//    }
 
     [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
     return cell;
@@ -1305,7 +1307,7 @@
                           email:emailAddressToRegister
                        password:emailPasswordToRegister
                       profileId:strProfileID
-                            dob:strDOB
+                            dob:dateChange
                    profileImage:strProfileImage
                   profileImage2:strProfileImage2
                   profileImage3:strProfileImage3
@@ -1335,6 +1337,8 @@
                                 }
      
                         failure:^(AFHTTPRequestOperation *operation, id error) {
+                            NSLog(@"Error = %@",error);
+                            [self presentViewController:[ DSAppCommon alertWithTitle:@"Title" withMessage:@"ERROR" preferredStyle:UIAlertControllerStyleAlert] animated:YES completion:NULL];
                             
                         }];
 
@@ -1343,6 +1347,7 @@
 #pragma mark - saveAction
 -(void)saveAction:(id)sender
 {
+    
     NSArray *postPerArray;
     postPerArray = [[placeHolderArray objectAtIndex:0]valueForKey:@"TypingText"];
     
@@ -1356,12 +1361,67 @@
 
     strDOB       = (currentTextfield.text !=nil)?currentTextfield.text :@"";
     
+    dateChange = strDOB;
+    
+    dateChange = [dateChange stringByReplacingOccurrencesOfString:@"/"
+                                                       withString:@"-"];
+    
     NSLog(@"isNotification_vibration:%@",isNotification_vibration);
     
-        if(![FirstName isEqual:[NSNull null]]&& ![FirstName isEqualToString:@""]&&![LastName isEqual:[NSNull null]]&& ![LastName isEqualToString:@""] &&![strDOB isEqual:[NSNull null]]&&![strGender isEqual:[NSNull null]]&& ![strGender isEqualToString:@""] &&![emailAddressToRegister isEqual:[NSNull null]] &&![emailAddressToRegister isEqualToString:@""] &&![emailPasswordToRegister isEqual:[NSNull null]] && ![emailPasswordToRegister isEqualToString:@""]){
+    
+    if([FirstName isEqual:[NSNull null]] && [FirstName isEqual:@""])
+    {
+        [self presentViewController:[ DSAppCommon alertWithTitle:@"Title" withMessage:LASTNAME_REQUIRED preferredStyle:UIAlertControllerStyleAlert] animated:YES completion:NULL];
+        [COMMON removeLoading];
+        return;
+    }
+    if ( [dateChange isEqual:[NSNull null]] && [dateChange isEqual:@""] )
+    {
+        [self presentViewController:[ DSAppCommon alertWithTitle:@"Title" withMessage:DOB_REQUIRED preferredStyle:UIAlertControllerStyleAlert] animated:YES completion:NULL];
+        [COMMON removeLoading];
+        return;
+    }
+    
+    if ( [strGender isEqual:[NSNull null]] && [strGender isEqual:@""])
+    {
+        [self presentViewController:[ DSAppCommon alertWithTitle:@"Title" withMessage:GENDER_REQUIRED preferredStyle:UIAlertControllerStyleAlert] animated:YES completion:NULL];
+        [COMMON removeLoading];
+        return;
+    }
+    
+    if ( [emailAddressToRegister isEqual:[NSNull null]] && [emailAddressToRegister isEqual:@""])
+    {
+        [self presentViewController:[ DSAppCommon alertWithTitle:@"Title" withMessage:EMAIL_REQUIRED preferredStyle:UIAlertControllerStyleAlert] animated:YES completion:NULL];
+        [COMMON removeLoading];
+        return;
+    }
+    if ( [emailPasswordToRegister isEqual:[NSNull null]] && [emailPasswordToRegister isEqual:@""])
+    {
+        [self presentViewController:[ DSAppCommon alertWithTitle:@"Title" withMessage:PASSWORD_REQUIRED preferredStyle:UIAlertControllerStyleAlert] animated:YES completion:NULL];
+        [COMMON removeLoading];
+        return;
+    }
+
+    
+    if(![FirstName isEqual:[NSNull null]]&& ![FirstName isEqualToString:@""]&&![LastName isEqual:[NSNull null]]&& ![LastName isEqualToString:@""] &&![dateChange isEqual:[NSNull null]]&&![strGender isEqual:[NSNull null]]&& ![strGender isEqualToString:@""] &&![emailAddressToRegister isEqual:[NSNull null]] &&![emailAddressToRegister isEqualToString:@""] &&![emailPasswordToRegister isEqual:[NSNull null]] && ![emailPasswordToRegister isEqualToString:@""]){
+            if(![NSString validateEmail:emailAddressToRegister]){
+                [self presentViewController:[ DSAppCommon alertWithTitle:@"Title" withMessage:INVALID_EMAIL preferredStyle:UIAlertControllerStyleAlert] animated:YES completion:NULL];
+                [COMMON removeLoading];
+                return;
+            }
+           if([dateChange isEqual:@"DD-MM-YYYY"]){
+            [self presentViewController:[ DSAppCommon alertWithTitle:@"Title" withMessage:@"ENTER DATE" preferredStyle:UIAlertControllerStyleAlert] animated:YES completion:NULL];
+            [COMMON removeLoading];
+            return;
+           }
+        
             [self registerAPI];
-        }
+    }
+    
     else{
+        
+        
+        
         [self presentViewController:[ DSAppCommon alertWithTitle:@"Title" withMessage:FILL_ALL_DETAILS preferredStyle:UIAlertControllerStyleAlert] animated:YES completion:NULL];
         [COMMON removeLoading];
         return;

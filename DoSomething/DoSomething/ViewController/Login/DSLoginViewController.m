@@ -275,7 +275,12 @@
     [objWebService checkUser:CheckUser_API
                        email:email
                         type:objSigninType
-                     password: password
+                    password:password
+                  first_name:firstName
+                   last_name:lastName
+                         dob:dob
+                      gender:gender
+                profileImage:profileImage
                      success:^(AFHTTPRequestOperation *operation, id responseObject){
                          NSLog(@"checkuser = %@",responseObject);
                          NSLog(@"checkuser = %@",[[responseObject objectForKey:@"checkuser"]objectForKey:@"status"]);
@@ -301,10 +306,9 @@
                          }
                      }
                      failure:^(AFHTTPRequestOperation *operation, id error) {
-                         
-                         email =@"rwgfedh@retj.lkj";
-                         password =@"123";
-                         [self gotoProfileView:email :password:YES];//[self gotoProfileView];
+                          NSLog(@"Error = %@",error);
+                         [self presentViewController:[ DSAppCommon alertWithTitle:@"Title" withMessage:@"ERROR" preferredStyle:UIAlertControllerStyleAlert] animated:YES completion:NULL];
+
                          [COMMON removeLoading];
 
                      }];
@@ -345,8 +349,9 @@
                      [self checkUserEmail];
                  }
                  
-                 else
-                    [self loadloginAPI];
+                 else{
+                    [COMMON LoadIcon:self.view];
+                     [self loadloginAPI];}
 
              }];
          }
@@ -410,8 +415,9 @@
         else{
             NSLog(@"responseObject = %@",responseObject);
             [self presentViewController:[ DSAppCommon alertWithTitle:@"Title" withMessage:[loginDict valueForKey:@"Message"] preferredStyle:UIAlertControllerStyleAlert] animated:YES completion:NULL];
+            [COMMON removeLoading];
         }
-        [COMMON removeLoading];
+        
         
     }
     failure:^(AFHTTPRequestOperation *operation, id error){

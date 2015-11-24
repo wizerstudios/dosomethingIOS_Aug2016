@@ -34,9 +34,14 @@ typedef void (^WebserviceRequestXMLFailureHandler)(AFHTTPRequestOperation  *oper
 
 // Check User Email API
 - (void)checkUser:(NSString *)checkUserURL
-                email:(NSString *)email
-                 type:(NSString *)type
+            email:(NSString *)email
+             type:(NSString *)type
          password:(NSString*)password
+       first_name:(NSString*)first_name
+        last_name:(NSString*)last_name
+              dob:(NSString*)dob
+           gender:(NSString*)gender
+     profileImage:(NSString *)profileImage
               success:(WebserviceRequestSuccessHandler)success
               failure:(WebserviceRequestFailureHandler)failure;
 
