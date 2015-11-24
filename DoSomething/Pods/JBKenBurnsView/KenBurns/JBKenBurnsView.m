@@ -37,6 +37,7 @@ enum JBSourceMode {
 
 @property (nonatomic, strong) NSMutableArray *imagesArray;
 @property (nonatomic, strong) NSMutableArray *textArray;
+@property (nonatomic  ,strong) NSMutableArray * pagenationCount;
 @property (nonatomic, strong) NSTimer *nextImageTimer;
 
 @property (nonatomic, assign) CGFloat showImageDuration;
@@ -74,18 +75,19 @@ enum JBSourceMode {
 - (void)animateWithImagePaths:(NSArray *)imagePaths transitionDuration:(float)duration initialDelay:(float)delay loop:(BOOL)shouldLoop isLandscape:(BOOL)isLandscape
 {
     _sourceMode = JBSourceModePaths;
-    [self startAnimationsWithData:imagePaths DataText:nil transitionDuration:duration initialDelay:delay loop:shouldLoop isLandscape:isLandscape];
+    [self startAnimationsWithData:imagePaths DataText:nil pagenation:nil transitionDuration:duration initialDelay:delay loop:shouldLoop isLandscape:isLandscape];
 }
 
-- (void)animateWithImages:(NSArray *)images BannerText:(NSArray*)bannerText transitionDuration:(float)duration initialDelay:(float)delay loop:(BOOL)shouldLoop isLandscape:(BOOL)isLandscape {
+- (void)animateWithImages:(NSArray *)images BannerText:(NSArray*)bannerText Pagenation:(NSArray *)pagecount transitionDuration:(float)duration initialDelay:(float)delay loop:(BOOL)shouldLoop isLandscape:(BOOL)isLandscape {
     _sourceMode = JBSourceModeImages;
-    [self startAnimationsWithData:images DataText:bannerText transitionDuration:duration initialDelay:delay loop:shouldLoop isLandscape:isLandscape];
+    [self startAnimationsWithData:images DataText:bannerText pagenation:pagecount transitionDuration:duration initialDelay:delay loop:shouldLoop isLandscape:isLandscape];
 }
 
-- (void)startAnimationsWithData:(NSArray *)Imagedata DataText:(NSArray *)dataText transitionDuration:(float)duration initialDelay:(float)delay loop:(BOOL)shouldLoop isLandscape:(BOOL)isLandscape
+- (void)startAnimationsWithData:(NSArray *)Imagedata DataText:(NSArray *)dataText pagenation:(NSArray *)pageCount transitionDuration:(float)duration initialDelay:(float)delay loop:(BOOL)shouldLoop isLandscape:(BOOL)isLandscape
 {
     _imagesArray        = [Imagedata mutableCopy];
     _textArray          = [dataText mutableCopy];
+    _pagenationCount    = [pageCount mutableCopy];
     _showImageDuration  = duration;
     _shouldLoop         = shouldLoop;
     _isLandscape        = isLandscape;
@@ -112,7 +114,7 @@ enum JBSourceMode {
     }
 }
 
-- (void)addImage:(UIImage *)image addTextlbl:(UILabel *)textLbl
+- (void)addImage:(UIImage *)image addTextlbl:(UIImage *)textLbl
 {
     [_imagesArray addObject:image];
     [_textArray addObject:textLbl];
@@ -147,34 +149,58 @@ enum JBSourceMode {
     
     return image;
 }
--(NSString*)currentText
+-(NSString*)currentPage
 {
-    
-    NSString * StrText=nil;
+    NSString * currentPage=nil;
     switch (_sourceMode)
     {
         case JBSourceModeImages:
-           
-            StrText =_textArray [MAX(self.currentImageIndex, 0)];
+            
+            currentPage =_pagenationCount [MAX(self.currentImageIndex, 0)];
             break;
             
         case JBSourceModePaths:
-           // image = [UIImage imageWithContentsOfFile:_imagesArray[MAX(self.currentImageIndex, 0)]];
+            //imageText = [UIImage imageWithContentsOfFile:_imagesArray[MAX(self.currentImageIndex, 0)]];
             //textlbl=[UILabel]
             break;
     }
     
-    return StrText;
+    return currentPage;
+  
+}
+
+
+-(UIImage*)currentText
+{
+    
+    UIImage * imageText=nil;
+    switch (_sourceMode)
+    {
+        case JBSourceModeImages:
+           
+            imageText =_textArray [MAX(self.currentImageIndex, 0)];
+            break;
+            
+        case JBSourceModePaths:
+            imageText = [UIImage imageWithContentsOfFile:_imagesArray[MAX(self.currentImageIndex, 0)]];
+            //textlbl=[UILabel]
+            break;
+    }
+    
+    return imageText;
 
 }
+
 - (void)nextImage
 {
     _currentImageIndex++;
 
     UIImage *image = self.currentImage;
-    NSString * StrText =self.currentText;
+    UIImage *imageText =self.currentText;
+    NSString * pageCount =self.currentPage;
     UIImageView *imageView = nil;
-    UILabel    * textlbl   =nil;
+    UIImageView    * textImageview   =nil;
+    UIPageControl * pageControllBtn =nil;
     
     float originX       = -1;
     float originY       = -1;
@@ -192,13 +218,39 @@ enum JBSourceMode {
     float optimusWidth  = (image.size.width * resizeRatio) * enlargeRatio;
     float optimusHeight = (image.size.height * resizeRatio) * enlargeRatio;
     imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, optimusWidth, optimusHeight)];
-    textlbl   =[[UILabel alloc]initWithFrame:CGRectMake(self.frame.origin.x+20,self.center.y-50,280,100)];
-    textlbl.text   = [NSString stringWithFormat:@"%@",StrText];
-    textlbl.font   =[UIFont fontWithName:@"Patron_Medium" size:12];
-    textlbl.textAlignment = NSTextAlignmentCenter;
-    textlbl.numberOfLines =6;
-    textlbl.textColor =[UIColor colorWithRed:(196/255.0f) green:(65/255.0f) blue:(81/255.0f) alpha:1.0f];
-    textlbl.backgroundColor =[UIColor clearColor];
+    textImageview  =[[UIImageView alloc] initWithFrame:CGRectMake(self.frame.origin.x+50,self.center.y-30,227,67)];
+    textImageview.image =imageText;
+    [textImageview setBackgroundColor:[UIColor clearColor]];
+    pageControllBtn = [[UIPageControl alloc]init];
+    
+    pageControllBtn.backgroundColor = [UIColor clearColor];
+    [pageControllBtn setFrame:CGRectMake(self.frame.origin.x+50,self.frame.size.height-60,227,67)];
+   pageControllBtn.numberOfPages = 5;
+   pageControllBtn.currentPage = 0;
+    int current =[pageCount intValue];
+    for (int i=0; i<self.pagenationCount.count; i++)
+    {
+        //CGRect circleRect = CGRectMake(0, 0, 20, 20);
+        if (i == current)
+        {
+        
+           // CGContextSetFillColorWithColor(context, self.dotColorCurrentPage.CGColor);
+        }
+        else
+        {
+            //CGContextSetFillColorWithColor(context, self.dotColorOtherPage.CGColor);
+        }
+        
+    }
+    
+    //    textlbl   =[[UILabel alloc]initWithFrame:CGRectMake(self.frame.origin.x+20,self.center.y-50,280,100)];
+//    textlbl.text   = [NSString stringWithFormat:@"%@",StrText];
+//    textlbl.font   =[UIFont fontWithName:@"Patron_Medium" size:12];
+//    textlbl.textAlignment = NSTextAlignmentCenter;
+//    textlbl.numberOfLines =6;
+//    textlbl.textColor =[UIColor colorWithRed:(196/255.0f) green:(65/255.0f) blue:(81/255.0f) alpha:1.0f];
+//    textlbl.backgroundColor =[UIColor clearColor];
+   
     imageView.backgroundColor = [UIColor blackColor];
     
     // Calcule the maximum move allowed.
@@ -275,7 +327,8 @@ enum JBSourceMode {
     }
     
     [self addSubview:imageView];
-    [self addSubview:textlbl];
+    [self addSubview:textImageview];
+    [self addSubview:pageControllBtn];
     
     // Generates the animation  //before: UIViewAnimationCurveEaseInOut
     [UIView animateWithDuration:_showImageDuration + 2 delay:0 options:UIViewAnimationOptionCurveEaseOut animations:^

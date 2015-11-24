@@ -11,6 +11,8 @@
 #import "HomeViewController.h"
 #import "DSChatsTableViewController.h"
 #import "DSLocationViewController.h"
+#import "DSProfileTableViewController.h"
+
 
 @interface AppDelegate : UIResponder <UIApplicationDelegate>
 {
@@ -27,6 +29,7 @@
 @property (strong, nonatomic) HomeViewController *homePage;
 @property (strong, nonatomic) DSLocationViewController *locationPage;
 @property (strong, nonatomic) DSChatsTableViewController *chatPage;
+@property (strong, nonatomic) DSProfileTableViewController *profilePage;
 
 
 @property(nonatomic,retain)UIView *buttonsView;

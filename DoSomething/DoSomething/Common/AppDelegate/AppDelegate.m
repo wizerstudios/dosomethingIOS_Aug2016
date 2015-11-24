@@ -14,6 +14,7 @@
 #import "HomeViewController.h"
 
 
+
 @interface AppDelegate ()
 
 @end
@@ -21,7 +22,7 @@
 @implementation AppDelegate
 
 @synthesize locationButton,menuButton,chatsButton,buttonsView,buttons_array,profileButton,settingButton;
-@synthesize homePage,chatPage,window, locationPage;
+@synthesize homePage,chatPage,window, locationPage,profilePage;
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
@@ -124,9 +125,9 @@
     
     [settingButton addTarget:self action:@selector(settingView) forControlEvents:UIControlEventTouchUpInside];
     
-    locationButton.frame=CGRectMake(30,3,50,50);
-    menuButton.frame=CGRectMake(140,3,45,45);
-    chatsButton.frame=CGRectMake(240,3,50,50);
+    locationButton.frame=CGRectMake(20,3,45,45);
+    menuButton.frame=CGRectMake(buttonsView.center.x-18,3,45,45);
+    chatsButton.frame=CGRectMake(menuButton.frame.origin.x+menuButton.frame.size.width+15,3,45,45);
        if(IS_IPHONE6)
     {
         locationButton.frame=CGRectMake(50,3,50,50);
@@ -139,8 +140,8 @@
         menuButton.frame=CGRectMake(190,3,45,45);
         chatsButton.frame=CGRectMake(320,3,50,50);
     }
-    profileButton.frame=CGRectMake(locationButton.frame.origin.x+locationButton.frame.size.width+5,locationButton.frame.origin.y,50,50);
-    settingButton.frame =CGRectMake(chatsButton.frame.origin.x+chatsButton.frame.size.width+5,chatsButton.frame.origin.y,50,50);
+    profileButton.frame=CGRectMake(locationButton.frame.origin.x+locationButton.frame.size.width+17,locationButton.frame.origin.y+8,28,28);
+    settingButton.frame =CGRectMake(chatsButton.frame.origin.x+chatsButton.frame.size.width+15,chatsButton.frame.origin.y+10,28,28);
     
 
     [self.window.rootViewController.view addSubview:buttonsView];
@@ -149,7 +150,7 @@
     [buttonsView addSubview:menuButton];
     [buttonsView addSubview:chatsButton];
     [buttonsView addSubview:profileButton];
-    [buttonsView addSubview:chatsButton];
+    [buttonsView addSubview:settingButton];
     
     buttons_array=[[NSMutableArray alloc]init];
     [buttons_array addObject:locationButton];
@@ -163,14 +164,16 @@
 {
     [locationButton setBackgroundImage:[UIImage imageNamed:@"loaction_active.png"] forState:UIControlStateNormal];
     [chatsButton setBackgroundImage:[UIImage imageNamed:@"chats.png"] forState:UIControlStateNormal];
-    
+    [settingButton setBackgroundImage:[UIImage imageNamed:@"setting_icon.png"] forState:UIControlStateNormal];
+    [profileButton setBackgroundImage:[UIImage imageNamed:@"profile_icon.png"] forState:UIControlStateNormal];
     locationPage =[[DSLocationViewController alloc]initWithNibName:@"DSLocationViewController" bundle:nil];
     [self.navigationController pushViewController:locationPage animated:NO];
 }
 -(void)menuView{
     [chatsButton setBackgroundImage:[UIImage imageNamed:@"chats.png"] forState:UIControlStateNormal];
     [locationButton setBackgroundImage:[UIImage imageNamed:@"loaction_normal.png"] forState:UIControlStateNormal];
-    
+    [settingButton setBackgroundImage:[UIImage imageNamed:@"setting_icon.png"] forState:UIControlStateNormal];
+    [profileButton setBackgroundImage:[UIImage imageNamed:@"profile_icon.png"] forState:UIControlStateNormal];
     homePage =[[HomeViewController alloc]initWithNibName:@"HomeViewController" bundle:nil];
     [self.navigationController pushViewController:homePage animated:NO];
 }
@@ -178,23 +181,27 @@
 {
     [chatsButton setBackgroundImage:[UIImage imageNamed:@"chats_active.png"] forState:UIControlStateNormal];
     [locationButton setBackgroundImage:[UIImage imageNamed:@"loaction_normal.png"] forState:UIControlStateNormal];
-    
+    [settingButton setBackgroundImage:[UIImage imageNamed:@"setting_icon.png"] forState:UIControlStateNormal];
+    [profileButton setBackgroundImage:[UIImage imageNamed:@"profile_icon.png"] forState:UIControlStateNormal];
     chatPage =[[DSChatsTableViewController alloc]initWithNibName:@"DSChatsTableViewController" bundle:nil];
     [self.navigationController pushViewController:chatPage animated:NO];
 }
 -(void)profileView
 {
     [profileButton setBackgroundImage:[UIImage imageNamed:@"profile_active.png"] forState:UIControlStateNormal];
-    [locationButton setBackgroundImage:[UIImage imageNamed:@"profile_icon.png"] forState:UIControlStateNormal];
-    
-    
+    [locationButton setBackgroundImage:[UIImage imageNamed:@"loaction_normal.png"] forState:UIControlStateNormal];
+    [settingButton setBackgroundImage:[UIImage imageNamed:@"setting_icon.png"] forState:UIControlStateNormal];
+    [chatsButton setBackgroundImage:[UIImage imageNamed:@"chats.png"] forState:UIControlStateNormal];
+    profilePage =[[DSProfileTableViewController alloc]initWithNibName:@"DSProfileTableViewController" bundle:nil];
+    [self.navigationController pushViewController:profilePage animated:NO];
 }
 
 -(void)settingView
 {
     [settingButton setBackgroundImage:[UIImage imageNamed:@"setting_active.png"] forState:UIControlStateNormal];
-    [locationButton setBackgroundImage:[UIImage imageNamed:@"profile_icon.png"] forState:UIControlStateNormal];
-    
+    [locationButton setBackgroundImage:[UIImage imageNamed:@"loaction_normal.png"] forState:UIControlStateNormal];
+    [chatsButton setBackgroundImage:[UIImage imageNamed:@"chats.png"] forState:UIControlStateNormal];
+    [profileButton setBackgroundImage:[UIImage imageNamed:@"profile_icon.png"] forState:UIControlStateNormal];
 
 }
 

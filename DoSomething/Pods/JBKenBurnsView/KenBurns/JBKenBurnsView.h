@@ -70,6 +70,7 @@
  */
 - (void)animateWithImages:(NSArray *)images
                BannerText:(NSArray*)bannerText
+              Pagenation :(NSArray *)pagecount
        transitionDuration:(float)time
              initialDelay:(float)delay
                      loop:(BOOL)isLoop
@@ -91,7 +92,7 @@
  @param image A UIImage to add to the animation playback.
  @since 0.3
  */
-- (void)addImage:(UIImage *)image addTextlbl:(UILabel*)textLbl;
+- (void)addImage:(UIImage *)image addTextlbl:(UIImage*)textLbl;
 
 
 ///----------------------------------
@@ -113,6 +114,8 @@
  */
 - (UIImage *)currentImage ;
 
-- (NSString *) currentText;
+- (UIImage *) currentText;
+
+- (NSString*) currentPage;
 
 @end

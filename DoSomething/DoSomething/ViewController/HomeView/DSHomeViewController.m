@@ -18,6 +18,7 @@
     int frameWt;
     NSArray *bannerImage;
     NSArray * bannerText;
+    NSArray * pageController;
 }
 @end
 @implementation DSHomeViewController
@@ -48,14 +49,16 @@
                    [UIImage imageNamed:@"bg2"],
                    [UIImage imageNamed:@"bg3"],
                    [UIImage imageNamed:@"bg4"]];
-    bannerText  =@[[NSString stringWithFormat:@"DOSOMETHING"],
-                   [NSString stringWithFormat:@"Shared Moments Do Something that connects you with people"],
-                   [NSString stringWithFormat:@"Active lifestyle Do Something that stimulates Your mind and body"],
-                   [NSString stringWithFormat:@"New Interactions Do Something that broadens your social network"],
-                   [NSString stringWithFormat:@"Unexpected Experiences Do Something that frees you from You comfort zone"]];
+    bannerText  =@[[UIImage imageNamed:@"bgText5"],
+                   [UIImage imageNamed:@"bgText1"],
+                   [UIImage imageNamed:@"bgText2"],
+                   [UIImage imageNamed:@"bgText3"],
+                   [UIImage imageNamed:@"bgText4"]];
+    pageController =@[@"1",@"2",@"3",@"4",@"5"];
     
     [self.kenView animateWithImages:bannerImage
                          BannerText:bannerText
+                        Pagenation :pageController
                  transitionDuration:5
                        initialDelay:0
                                loop:YES
