@@ -281,7 +281,7 @@
     currentTextfield=(UITextField *)[self.view viewWithTag:[sender tag]];
     NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
     [dateFormat setTimeZone:[NSTimeZone systemTimeZone]];
-    [dateFormat setDateFormat:@"dd/MM/YYYY"];
+    [dateFormat setDateFormat:@"dd-MM-YYYY"];
     NSString *dateString =  [dateFormat stringFromDate:sender.date];
     currentTextfield.text = dateString;
 
@@ -334,7 +334,7 @@
        
         NSDate *date = datePicker.date;
         NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-        [formatter setDateFormat:@"dd/MM/yyyy"];
+        [formatter setDateFormat:@"dd-MM-yyyy"];
         selOptionVal = [formatter stringFromDate:date];
        
         if(selOptionVal != nil || ![selOptionVal isEqualToString:@""]){
@@ -409,7 +409,7 @@
     titleArray = [[NSArray alloc]initWithObjects:@"Image",@"First Name",@"Last Name",@"male",@"Date of Birth",@"About You",@"Hobbies",@"Email&Password",@"switch_on",@"TermsOfUse",@"Logout",@"Delete",nil];
     
     NSLog(@"PlaceHolder %@",placeHolderArray);
-    [self.tableviewProfile reloadData];
+    //[self.tableviewProfile reloadData];
    
 }
 
@@ -712,10 +712,11 @@
         }
         
         
-        if([typingText isEqualToString:@""] || typingText == nil)
+        if([currentTextfield.text isEqualToString:@""] || currentTextfield.text == nil)
             cell.textFieldDPPlaceHolder.text = placeHolderText;
         else
-            cell.textFieldDPPlaceHolder.text = typingText;
+            cell.textFieldDPPlaceHolder.text = currentTextfield.text;
+       
         
             cell.labelDPTitleText.text = titleText;
             [cell.textFieldDPPlaceHolder setTag:1000];
