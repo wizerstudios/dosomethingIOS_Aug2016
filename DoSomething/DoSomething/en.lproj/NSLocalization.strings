@@ -1,0 +1,16 @@
+/* 
+  NSLocalization.strings
+  DoSomething
+
+  Created by Sha on 11/24/15.
+  Copyright © 2015 OClock Apps. All rights reserved.
+*/
+"Text1"      =    "DOSOMETHING";
+
+"Text2"      =    "Shared Moments \nDo Something that connects \nyou with people";
+
+"Text3"      =    "Active lifestyle \nDo Something that stimulates \nYour mind and body";
+
+"Text4"      =    "New Interactions \nDo Something that broadens \nyour social network";
+
+"Text5"      =    "Unexpected Experiences \nDo Something that frees you from \nYou comfort zone";

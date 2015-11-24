@@ -17,6 +17,7 @@
     int frameHt;
     int frameWt;
     NSArray *bannerImage;
+    NSArray * bannerText;
 }
 @end
 @implementation DSHomeViewController
@@ -42,12 +43,19 @@
 - (void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
-    bannerImage= @[[UIImage imageNamed:@"splashImage_one"],
-                   [UIImage imageNamed:@"splashImage_two"],
-                   [UIImage imageNamed:@"splashImage_three"],
-                   [UIImage imageNamed:@"splashImage_four"],
-                   [UIImage imageNamed:@"splashImage_five"]];
+    bannerImage= @[[UIImage imageNamed:@"splash_bg"],
+                   [UIImage imageNamed:@"bg1"],
+                   [UIImage imageNamed:@"bg2"],
+                   [UIImage imageNamed:@"bg3"],
+                   [UIImage imageNamed:@"bg4"]];
+    bannerText  =@[[NSString stringWithFormat:@"DOSOMETHING"],
+                   [NSString stringWithFormat:@"Shared Moments Do Something that connects you with people"],
+                   [NSString stringWithFormat:@"Active lifestyle Do Something that stimulates Your mind and body"],
+                   [NSString stringWithFormat:@"New Interactions Do Something that broadens your social network"],
+                   [NSString stringWithFormat:@"Unexpected Experiences Do Something that frees you from You comfort zone"]];
+    
     [self.kenView animateWithImages:bannerImage
+                         BannerText:bannerText
                  transitionDuration:5
                        initialDelay:0
                                loop:YES
