@@ -63,9 +63,10 @@
     
     BOOL isSetProfileimage;
     
-    NSString                *loginUserSessionID;
+    NSString *loginUserSessionID;
     NSString *optionLogoutDelete;
     NSString *dateChange;
+    
     
 
 }
@@ -73,7 +74,7 @@
 @end
 
 @implementation DSProfileTableViewController
-@synthesize profileData, textviewText, placeHolderArray,FBprofileID;
+@synthesize  profileData1, profileData2,profileData3,textviewText, placeHolderArray,FBprofileID;
 @synthesize userDetailsDict,emailAddressToRegister,emailPasswordToRegister,selectEmail,topViewCell;
 
 - (void)viewDidLoad {
@@ -145,44 +146,64 @@
 }
 
 #pragma mark - scroll
+
 -(void)profileScroll{
-  
+    
     self.scrView.pagingEnabled=YES;
     self.scrView.delegate=self;
     
-//    _profileImageView.image=[UIImage imageNamed:@"profile_noimg"];
-//    [self.scrView addSubview:_profileImageView];
-    
     page1=[[UIImageView alloc] initWithFrame:CGRectMake(20, 20, self.profileImageView.frame.size.width, self.profileImageView.frame.size.height)];
-     page1.image=[UIImage imageNamed:@"profile_noimg"];
+    page1.layer.cornerRadius = page1.frame.size.height / 2;
+    [page1 addGestureRecognizer:[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(tapGesture:)]];
+    if(!profileData1)
+    {
+        [page1 setImage:[UIImage imageNamed:@"profile_noimg"]];
+    }
+    else
+    {
+        [page1 setImage:[UIImage imageWithData:profileData1]];
+    }
     
-   page2=[[UIImageView alloc] initWithFrame:CGRectMake(1.5*self.profileImageView.frame.size.width, 20, self.profileImageView.frame.size.width, self.profileImageView.frame.size.height)];
-    page2.image=[UIImage imageNamed:@"profile_noimg"];
+    page2=[[UIImageView alloc] initWithFrame:CGRectMake(1.5*self.profileImageView.frame.size.width, 20, self.profileImageView.frame.size.width, self.profileImageView.frame.size.height)];
+    [page2 addGestureRecognizer:[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(tapGesture:)]];
+    page2.layer.cornerRadius = page2.frame.size.height / 2;
+    if(!profileData2)
+        [page2 setImage:[UIImage imageNamed:@"profile_noimg"]];
+    else
+        [page2 setImage:[UIImage imageWithData:profileData2]];
+    
     page3=[[UIImageView alloc] initWithFrame:CGRectMake(3*self.profileImageView.frame.size.width, 20, self.profileImageView.frame.size.width, self.profileImageView.frame.size.height)];
-    page3.image=[UIImage imageNamed:@"profile_noimg"];
-    
-    UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
-    [button addTarget:self
-               action:@selector(selectCamera:)
-     forControlEvents:UIControlEventTouchUpInside];
-    UIImage *buttonImage = [UIImage imageNamed:@"photography"];
-    [button setBackgroundImage:buttonImage forState:UIControlStateNormal];
-    button.frame = CGRectMake(75, 110, 25, 25);
+    [page3 addGestureRecognizer:[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(tapGesture:)]];
+    page3.layer.cornerRadius = page3.frame.size.height / 2;
+    if(!profileData3)
+        [page3 setImage:[UIImage imageNamed:@"profile_noimg"]];
+    else
+        [page3 setImage:[UIImage imageWithData:profileData3]];
     
     [self.scrView addSubview:page1];
     [self.scrView addSubview:page2];
     [self.scrView addSubview:page3];
-     [self.scrView addSubview:button];
     
-     [cell.cameraButton addTarget:self action:@selector(selectCamera:) forControlEvents:UIControlEventTouchUpInside];
-   // [cell.uploadButton addTarget:self action:@selector(selectCamera:) forControlEvents:UIControlEventTouchUpInside];
+    self.scrView.contentSize=CGSizeMake(self.scrView.frame.size.width*3, self.scrView.frame.size.height);
+    
+    if(CurrentImage == 1)
+        [self.scrView setContentOffset:CGPointMake(0, 0)animated:NO];
+    else if(CurrentImage == 2)
+        [self.scrView setContentOffset:CGPointMake(1.5*self.profileImageView.frame.size.width - 15, 0)animated:NO];
+    else if(CurrentImage == 3)
+        [self.scrView setContentOffset:CGPointMake((3*self.profileImageView.frame.size.width - 15), 0)animated:NO];
+    
     
     profileImagePageControl.pageIndicatorTintColor = [UIColor lightGrayColor];
     profileImagePageControl.currentPageIndicatorTintColor = [UIColor blackColor];
     profileImagePageControl.backgroundColor = [UIColor whiteColor];
-    self.scrView.contentSize=CGSizeMake(self.scrView.frame.size.width*3, self.scrView.frame.size.height);
     profileImagePageControl.backgroundColor=[UIColor clearColor];
     
+    
+    UIImageView *image = [[UIImageView alloc]initWithFrame:CGRectMake(80, 100, 30, 30)];
+    [image setImage:[UIImage imageNamed:@"camera_icon"]];
+    [self.scrView addSubview:image];
+    [image bringSubviewToFront:self.scrView];
 }
 
 - (IBAction)pageChanged:(id)sender {
@@ -194,11 +215,11 @@
 
 #pragma mark - UIScrollViewDelegate
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView {
-    NSLog(@"called");
+   
     int contentOffset=scrollView.contentOffset.x;
     NSInteger currentPage=contentOffset/pageWidth;
     profileImagePageControl.currentPage=currentPage;
-   // NSLog(@"offset x: %d",contentOffset);
+   
 }
 
 - (NSString *) getEmail {
@@ -415,15 +436,6 @@
    
 }
 
-//- (IBAction)changePage:(id)sender {
-//    CGFloat x = profileImagePageControl.currentPage * profileImageScroll.frame.size.width;
-//    [profileImageScroll setContentOffset:CGPointMake(x, 0) animated:YES];
-//}
-//
-//-(void) scrollViewDidEndDecelerating:(UIScrollView *)scrollView  {
-//    NSInteger pageNumber = roundf(scrollView.contentOffset.x / (scrollView.frame.size.width));
-//    profileImagePageControl.currentPage = pageNumber;
-//}
 
 #pragma mark - TableView Datasource & Delegate
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
@@ -552,18 +564,10 @@
         titleText       =  [titleArray objectAtIndex:indexPath.row];
     if (indexPath.row == 0)
     {
-        
         if (cell == nil)
         {
             [[NSBundle mainBundle] loadNibNamed:@"DSProfileTableViewCell" owner:self options:nil];
             cell = cellProfileImg;
-//            if(isSetProfileimage==NO)
-//            {
-//           [self profileScroll];
-//            isSetProfileimage=YES;
-//                
-//            }
-              [self profileScroll];
         }
         
         if (IS_IPHONE6 ||IS_IPHONE6_Plus)
@@ -572,25 +576,27 @@
             cell.layoutConstraintProfileImageWidth.constant =161;
         }
         
-        if(!page1){
-            [page1 setImage:[UIImage imageNamed:@"profile_noimg"]];
-        }
-        else{
-            page1=[[UIImageView alloc] initWithFrame:CGRectMake(20, 20, self.profileImageView.frame.size.width, self.profileImageView.frame.size.height)];
-            [self.scrView addSubview:page1];
-          // page1.frame=CGRectMake(-100,20,300,100);
-             [page1 setImage:profileImage];
-            page1.layer.cornerRadius = page1.frame.size.width / 2;
-            page1.clipsToBounds = YES;
-        }
-        cell.profileImageview.layer.cornerRadius = cell.profileImageview.frame.size.height / 2;
-        cell.profileImageview.layer.masksToBounds = YES;
-        cell.cameraButton.userInteractionEnabled = YES;
+        
+        [self profileScroll];
+        
+        if(!profileData1)
+            [profileImagePageControl setHidden:YES];
+        else
+            [profileImagePageControl setHidden:NO];
+        
         [cell.cameraButton setTag:101];
         [cell.cameraButton addTarget:self action:@selector(selectCamera:) forControlEvents:UIControlEventTouchUpInside];
-         [cell.uploadButton addTarget:self action:@selector(selectCamera:) forControlEvents:UIControlEventTouchUpInside];
         
+        //        UIButton *cameraButton = [[UIButton alloc]initWithFrame:CGRectMake(30, 30, cell.frame.size.width - 60, cell.frame.size.height - 60)];
+        //        [cameraButton addTarget:self action:@selector(selectCamera:) forControlEvents:UIControlEventTouchUpInside];
+        //        [cell addSubview:cameraButton];
+        
+        page1.layer.masksToBounds = YES;
+        page2.layer.masksToBounds = YES;
+        page3.layer.masksToBounds = YES;
     }
+
+    
     if (indexPath.row == 1 || indexPath.row == 2)
     {
         if (cell == nil)
@@ -1243,6 +1249,41 @@
     textviewText = textView.text;
 }
 
+- (void) tapGesture: (UITapGestureRecognizer*)sender
+{
+    imagepickerController = [[UIImagePickerController alloc] init];
+    imagepickerController.delegate = self;
+    [imagepickerController setAllowsEditing:YES];
+    
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@""
+                                                                   message:@""
+                                                            preferredStyle:UIAlertControllerStyleAlert];
+    
+    UIAlertAction *camera = [UIAlertAction actionWithTitle:NSLocalizedString(@"CANCEL",@"") style:UIAlertActionStyleDefault
+                                                   handler:^(UIAlertAction * action) {
+                                                       //[self promptForCamera];
+                                                       [self.presentedViewController dismissViewControllerAnimated:NO completion:nil];
+                                                   }];
+    
+    UIAlertAction *photoRoll = [UIAlertAction actionWithTitle:NSLocalizedString(@"CAMERA",@"") style:UIAlertActionStyleDefault
+                                                      handler:^(UIAlertAction * action) {
+                                                          imagepickerController.sourceType = UIImagePickerControllerSourceTypeCamera;
+                                                          [self presentViewController:imagepickerController animated:YES completion:nil];
+                                                      }];
+    
+    UIAlertAction *cancel = [UIAlertAction actionWithTitle:NSLocalizedString(@"PHOTO LIBRARY",@"") style:UIAlertActionStyleDefault
+                                                   handler:^(UIAlertAction * action) {
+                                                       // [self.presentedViewController dismissViewControllerAnimated:NO completion:nil];
+                                                       imagepickerController.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+                                                       [self presentViewController:imagepickerController animated:YES completion:nil];
+                                                   }];
+    
+    [alert addAction:camera];
+    [alert addAction:photoRoll];
+    [alert addAction:cancel];
+    [self presentViewController:alert animated:YES completion:nil];
+}
+
 #pragma mark - Camera Action
 -(void)selectCamera: (UIButton *)sender
 {
@@ -1283,9 +1324,24 @@
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
 {
     UIImage *image = nil;
-   image = [info valueForKey:UIImagePickerControllerEditedImage];
+    image = [info valueForKey:UIImagePickerControllerEditedImage];
     
-     profileImage = image;
+    if(!profileData1)
+    {
+        profileData1 = UIImageJPEGRepresentation([info objectForKey:UIImagePickerControllerOriginalImage], 0.1);
+        CurrentImage = 1;
+    }
+    else if(!profileData2)
+    {
+        profileData2 = UIImageJPEGRepresentation([info objectForKey:UIImagePickerControllerOriginalImage], 0.1);
+        CurrentImage = 2;
+    }
+    else if(!profileData3)
+    {
+        profileData3 = UIImageJPEGRepresentation([info objectForKey:UIImagePickerControllerOriginalImage], 0.1);
+        CurrentImage = 3;
+    }
+    
     
     //[_tableviewProfile reloadData];
     [imagepickerController dismissViewControllerAnimated:YES completion:nil];
@@ -1300,6 +1356,9 @@
 #pragma mark - registerAPI
 -(void) registerAPI{
     
+   // strProfileImage = [Base64 encode:profileData1];
+  //  strProfileImage2 = [Base64 encode:profileData2];
+   // strProfileImage3 = [Base64 encode:profileData3];
     [objWebService postRegister:Register_API
                            type:strType
                      first_name:FirstName
