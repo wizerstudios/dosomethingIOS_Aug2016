@@ -80,60 +80,31 @@ static NSString       *ServiceMimeType    = @"image/jpeg";
           completionFailureHandler:failure];
     
 }
-#pragma mark - POST LogoutUser
+#pragma mark - POST LogoutDeleteUser
 
-- (void)logoutUser:(NSString *)logoutURL
-         sessionId:(NSString *)sessionId
-                op:(NSString *)op
-          success:(WebserviceRequestSuccessHandler)success
-          failure:(WebserviceRequestFailureHandler)failure
+- (void)logoutDeleteUser:(NSString *)logoutDeleteURL
+               sessionId:(NSString *)sessionId
+                      op:(NSString *)op
+                 success:(WebserviceRequestSuccessHandler)success
+                 failure:(WebserviceRequestFailureHandler)failure
 {
-    urlString = [URL_FOR_RESOURCE(@"") stringByAppendingString:[NSString stringWithFormat:@"%@?",logoutURL]];
+    urlString = [URL_FOR_RESOURCE(@"") stringByAppendingString:[NSString stringWithFormat:@"%@?",logoutDeleteURL]];
     
-    NSMutableDictionary *userLogout = [[NSMutableDictionary alloc] init];
+    NSMutableDictionary *userLogoutDelete = [[NSMutableDictionary alloc] init];
     
-    if(sessionId)       [userLogout    setObject:sessionId     forKey:@"sessionId"];
-    if(op)              [userLogout    setObject:op            forKey:@"op"];
+    if(sessionId)       [userLogoutDelete    setObject:sessionId     forKey:@"sessionId"];
+    if(op)              [userLogoutDelete    setObject:op            forKey:@"op"];
     
     NSLog(@"urlString = %@",urlString);
-    NSLog(@"userlogout = %@",userLogout);
+    NSLog(@"userlogout = %@",userLogoutDelete);
     
     [self sendRequestWithURLString:urlString
-                     andParameters:userLogout
+                     andParameters:userLogoutDelete
                             method:ServicePost
            completionSucessHandler:success
           completionFailureHandler:failure];
     
 }
-#pragma mark - POST DeleteUser
-
-- (void)deleteUser:(NSString *)deleteURL
-         sessionId:(NSString *)sessionId
-                op:(NSString *)op
-           success:(WebserviceRequestSuccessHandler)success
-           failure:(WebserviceRequestFailureHandler)failure
-{
-    urlString = [URL_FOR_RESOURCE(@"") stringByAppendingString:[NSString stringWithFormat:@"%@?",deleteURL]];
-    
-    NSMutableDictionary *userAccountDetele = [[NSMutableDictionary alloc] init];
-    
-    if(sessionId)       [userAccountDetele    setObject:sessionId     forKey:@"sessionId"];
-    if(op)              [userAccountDetele    setObject:op            forKey:@"op"];
-    
-    NSLog(@"urlString = %@",urlString);
-    NSLog(@"userlogout = %@",userAccountDetele);
-    
-    [self sendRequestWithURLString:urlString
-                     andParameters:userAccountDetele
-                            method:ServicePost
-           completionSucessHandler:success
-          completionFailureHandler:failure];
-    
-}
-
-
-
-
 #pragma mark - GET Login
 
 - (void)getLogin:(NSString *)loginURL

@@ -87,8 +87,7 @@
 
 //API Keys
 #define CheckUser_API               @"checkuser"
-#define User_Logout_Delete_API     @"useraction"
-#define UserDeleteAccount_API       @"checkuser"
+#define User_Logout_Delete_API      @"useraction"
 #define Login_API                   @"signin"
 #define Register_API                @"register"
 #define ProfileUpdate_API           @"updateprofile"

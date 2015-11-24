@@ -64,6 +64,7 @@
     BOOL isSetProfileimage;
     
     NSString                *loginUserSessionID;
+    NSString *optionLogoutDelete;
     
 
 }
@@ -473,7 +474,7 @@
             return 80;
         }
         if (indexPath.row == 11) {
-            return 80;
+            return 90;
         }
 
     return 40;
@@ -514,7 +515,7 @@
     }
     
     if (indexPath.row == 11) {
-        return 98;
+        return 120;
     }
     
     return 50;
@@ -1366,34 +1367,32 @@
     }
 
 }
-#pragma mark - LogoutAction
+#pragma mark - Logout_Delete_Action_API
+-(void)logoutDeleteAction{
+    
+    [objWebService logoutDeleteUser:User_Logout_Delete_API
+                          sessionId:loginUserSessionID
+                                 op:optionLogoutDelete
+                            success:^(AFHTTPRequestOperation *operation, id responseObject) {
+                          
+                      }
+                            failure:^(AFHTTPRequestOperation *operation, id error) {
+                          
+                      }];
+
+}
+#pragma mark - Logout and Delete Actions
 -(void)logoutAction:(id)sender
 {
-    NSString *optionLogout;
-    optionLogout = @"logout";
-    [objWebService logoutUser:User_Logout_Delete_API
-                    sessionId:loginUserSessionID
-                           op:optionLogout
-                      success:^(AFHTTPRequestOperation *operation, id responseObject) {
-                        
-                      }
-                      failure:^(AFHTTPRequestOperation *operation, id error) {
-                        
-                      }];
+    optionLogoutDelete = @"logout";
+    [self logoutDeleteAction];
 }
-#pragma mark - DeleteAction
+
 -(void)deleteAction:(id)sender
 {
-    NSString *optionDetele;
-    optionDetele = @"delete";
-    [objWebService deleteUser:User_Logout_Delete_API
-                    sessionId:loginUserSessionID
-                           op:optionDetele
-                      success:^(AFHTTPRequestOperation *operation, id responseObject) {
-                          
-                      } failure:^(AFHTTPRequestOperation *operation, id error) {
-                          
-                      }];
+    optionLogoutDelete = @"delete";
+    [self logoutDeleteAction];
+    
 }
 
 

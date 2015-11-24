@@ -1020,8 +1020,8 @@
                                     <constraint firstAttribute="width" constant="320" id="6Ro-yV-8nf"/>
                                     <constraint firstAttribute="height" constant="45" id="Y5L-Rp-fbV"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" name="Patron-Regular" family="Patron" pointSize="18"/>
-                                <state key="normal" title="Logout">
+                                <fontDescription key="fontDescription" name="Patron-Regular" family="Patron" pointSize="13"/>
+                                <state key="normal" title="LOGOUT">
                                     <color key="titleColor" red="0.90196078430000004" green="0.2470588235" blue="0.32156862749999998" alpha="1" colorSpace="deviceRGB"/>
                                 </state>
                             </button>
@@ -1066,8 +1066,8 @@
                                 <constraints>
                                     <constraint firstAttribute="height" constant="37" id="IPW-Vv-l6j"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" name="Patron-Regular" family="Patron" pointSize="16"/>
-                                <state key="normal" title="Delete Account">
+                                <fontDescription key="fontDescription" name="Patron-Regular" family="Patron" pointSize="13"/>
+                                <state key="normal" title="DELETE ACCOUNT">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                             </button>
