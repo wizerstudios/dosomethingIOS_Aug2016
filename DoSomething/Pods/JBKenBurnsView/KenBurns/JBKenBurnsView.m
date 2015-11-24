@@ -197,7 +197,7 @@ enum JBSourceMode {
     textlbl.font   =[UIFont fontWithName:@"Patron_Medium" size:12];
     textlbl.textAlignment = NSTextAlignmentCenter;
     textlbl.numberOfLines =6;
-    textlbl.textColor =[UIColor redColor];
+    textlbl.textColor =[UIColor colorWithRed:(196/255.0f) green:(65/255.0f) blue:(81/255.0f) alpha:1.0f];
     textlbl.backgroundColor =[UIColor clearColor];
     imageView.backgroundColor = [UIColor blackColor];
     
