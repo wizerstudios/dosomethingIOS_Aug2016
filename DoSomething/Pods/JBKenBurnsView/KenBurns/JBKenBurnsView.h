@@ -69,6 +69,7 @@
  @since 0.3
  */
 - (void)animateWithImages:(NSArray *)images
+               BannerText:(NSArray*)bannerText
        transitionDuration:(float)time
              initialDelay:(float)delay
                      loop:(BOOL)isLoop
@@ -90,7 +91,7 @@
  @param image A UIImage to add to the animation playback.
  @since 0.3
  */
-- (void)addImage:(UIImage *)image;
+- (void)addImage:(UIImage *)image addTextlbl:(UILabel*)textLbl;
 
 
 ///----------------------------------
@@ -103,12 +104,15 @@
  @since 0.3
  */
 - (NSArray *)images;
+- (NSArray *)text;
 
 /**
  Return the current image on the animation.
  @return A UIImage with the image on top of the animation.
  @since 0.3
  */
-- (UIImage *)currentImage;
+- (UIImage *)currentImage ;
+
+- (NSString *) currentText;
 
 @end

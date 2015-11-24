@@ -106,6 +106,13 @@
     UIImage *chatActive = [UIImage imageNamed:@"chats_active.png"];
     [chatsButton setBackgroundImage:chatActive forState:UIControlStateSelected];
     
+    [profileButton setBackgroundImage:[UIImage imageNamed:@"profile_icon.png"] forState:UIControlStateNormal];
+    UIImage *profileActive = [UIImage imageNamed:@"profile_active.png"];
+    [chatsButton setBackgroundImage:profileActive forState:UIControlStateSelected];
+    
+    [settingButton setBackgroundImage:[UIImage imageNamed:@"setting_icon.png"] forState:UIControlStateNormal];
+    UIImage *settingActive = [UIImage imageNamed:@"setting_active.png"];
+    [chatsButton setBackgroundImage:settingActive forState:UIControlStateSelected];
     
     [locationButton addTarget:self action:@selector(locationView) forControlEvents:UIControlEventTouchUpInside];
     
@@ -113,12 +120,14 @@
     
     [chatsButton addTarget:self action:@selector(chatView) forControlEvents:UIControlEventTouchUpInside];
     
+    [profileButton addTarget:self action:@selector(profileView) forControlEvents:UIControlEventTouchUpInside];
+    
+    [settingButton addTarget:self action:@selector(settingView) forControlEvents:UIControlEventTouchUpInside];
+    
     locationButton.frame=CGRectMake(30,3,50,50);
     menuButton.frame=CGRectMake(140,3,45,45);
     chatsButton.frame=CGRectMake(240,3,50,50);
-    //chatsButton.frame=CGRectMake(240,3,50,50);
-    
-    if(IS_IPHONE6)
+       if(IS_IPHONE6)
     {
         locationButton.frame=CGRectMake(50,3,50,50);
         menuButton.frame=CGRectMake(170,3,45,45);
@@ -130,15 +139,23 @@
         menuButton.frame=CGRectMake(190,3,45,45);
         chatsButton.frame=CGRectMake(320,3,50,50);
     }
+    profileButton.frame=CGRectMake(locationButton.frame.origin.x+locationButton.frame.size.width+5,locationButton.frame.origin.y,50,50);
+    settingButton.frame =CGRectMake(chatsButton.frame.origin.x+chatsButton.frame.size.width+5,chatsButton.frame.origin.y,50,50);
+    
+
     [self.window.rootViewController.view addSubview:buttonsView];
     
     [buttonsView addSubview:locationButton];
     [buttonsView addSubview:menuButton];
     [buttonsView addSubview:chatsButton];
+    [buttonsView addSubview:profileButton];
+    [buttonsView addSubview:chatsButton];
     
     buttons_array=[[NSMutableArray alloc]init];
     [buttons_array addObject:locationButton];
     [buttons_array addObject:menuButton];
+    [buttons_array addObject:chatsButton];
+    [buttons_array addObject:profileButton];
     [buttons_array addObject:chatsButton];
 }
 
@@ -165,7 +182,21 @@
     chatPage =[[DSChatsTableViewController alloc]initWithNibName:@"DSChatsTableViewController" bundle:nil];
     [self.navigationController pushViewController:chatPage animated:NO];
 }
+-(void)profileView
+{
+    [profileButton setBackgroundImage:[UIImage imageNamed:@"profile_active.png"] forState:UIControlStateNormal];
+    [locationButton setBackgroundImage:[UIImage imageNamed:@"profile_icon.png"] forState:UIControlStateNormal];
+    
+    
+}
 
+-(void)settingView
+{
+    [settingButton setBackgroundImage:[UIImage imageNamed:@"setting_active.png"] forState:UIControlStateNormal];
+    [locationButton setBackgroundImage:[UIImage imageNamed:@"profile_icon.png"] forState:UIControlStateNormal];
+    
+
+}
 
 - (void)applicationWillResignActive:(UIApplication *)application {
     // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.

@@ -109,7 +109,7 @@
     {
         customNavigation.view.frame = CGRectMake(0,-20, 420, 83);
     }
-    [customNavigation.menuBtn setHidden:NO];
+    [customNavigation.menuBtn setHidden:YES];
     [customNavigation.buttonBack setHidden:YES];
     [customNavigation.saveBtn setHidden:YES];
     [self.navigationController.navigationBar addSubview:customNavigation.view];

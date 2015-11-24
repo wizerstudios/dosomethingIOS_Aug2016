@@ -39,8 +39,8 @@
     float space;
     
     UIImage *profileImage;
-    UIImage *strProfileImage2;
-    UIImage *strProfileImage3;
+    NSString *strProfileImage2;
+    NSString *strProfileImage3;
     
     DSProfileTableViewCell *cell;
     

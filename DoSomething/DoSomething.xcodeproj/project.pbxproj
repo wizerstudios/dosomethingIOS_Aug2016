@@ -64,6 +64,7 @@
 		51F3C2F61BE75D40001E1FEC /* LocationCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 51F3C2F21BE75D40001E1FEC /* LocationCollectionViewCell.xib */; };
 		6A50C21C1BCCBB8C002B11AC /* DSProfileTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A50C21A1BCCBB8C002B11AC /* DSProfileTableViewCell.m */; };
 		6A50C21D1BCCBB8C002B11AC /* DSProfileTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6A50C21B1BCCBB8C002B11AC /* DSProfileTableViewCell.xib */; };
+		6A71A9381C0471F900D6D5F4 /* NSLocalization.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6A71A93A1C0471F900D6D5F4 /* NSLocalization.strings */; };
 		6A8D15D31BCC059B000F1FB4 /* DSProfileTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A8D15D11BCC059B000F1FB4 /* DSProfileTableViewController.m */; };
 		6A8D15D41BCC059B000F1FB4 /* DSProfileTableViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6A8D15D21BCC059B000F1FB4 /* DSProfileTableViewController.xib */; };
 		ABF8DF93B82C6FE210057F55 /* libPods-DoSomething.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 60244D170FD7494CCFDD04A4 /* libPods-DoSomething.a */; };
@@ -264,6 +265,7 @@
 		6A50C2191BCCBB8C002B11AC /* DSProfileTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DSProfileTableViewCell.h; sourceTree = "<group>"; };
 		6A50C21A1BCCBB8C002B11AC /* DSProfileTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DSProfileTableViewCell.m; sourceTree = "<group>"; };
 		6A50C21B1BCCBB8C002B11AC /* DSProfileTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DSProfileTableViewCell.xib; sourceTree = "<group>"; };
+		6A71A93B1C0471FF00D6D5F4 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/NSLocalization.strings; sourceTree = "<group>"; };
 		6A8D15D01BCC059B000F1FB4 /* DSProfileTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DSProfileTableViewController.h; sourceTree = "<group>"; };
 		6A8D15D11BCC059B000F1FB4 /* DSProfileTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DSProfileTableViewController.m; sourceTree = "<group>"; };
 		6A8D15D21BCC059B000F1FB4 /* DSProfileTableViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DSProfileTableViewController.xib; sourceTree = "<group>"; };
@@ -454,6 +456,7 @@
 		065BAC501BC7A135005AF493 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				6A71A92E1C046FB200D6D5F4 /* Resourse */,
 				065433141BF38B0400DABBFC /* Audio */,
 				C6D5F67B1BC7EC440050C1AE /* Images.xcassets */,
 				2B83CABE1BE895AB0064EC7F /* Defaults */,
@@ -697,6 +700,14 @@
 			);
 			name = Chats;
 			path = ViewController/Chats;
+			sourceTree = "<group>";
+		};
+		6A71A92E1C046FB200D6D5F4 /* Resourse */ = {
+			isa = PBXGroup;
+			children = (
+				6A71A93A1C0471F900D6D5F4 /* NSLocalization.strings */,
+			);
+			name = Resourse;
 			sourceTree = "<group>";
 		};
 		6A8D15CF1BCC059B000F1FB4 /* Profile */ = {
@@ -1052,7 +1063,7 @@
 				TargetAttributes = {
 					065BAC4C1BC7A135005AF493 = {
 						CreatedOnToolsVersion = 7.0.1;
-						DevelopmentTeam = RDW437X8U3;
+						DevelopmentTeam = 384S95M8XQ;
 					};
 				};
 			};
@@ -1179,6 +1190,7 @@
 				51322A2A1BDFBFAA00418216 /* yuna.png in Resources */,
 				C6D5F63C1BC7B52C0050C1AE /* Patron-Bold.ttf in Resources */,
 				EAFC97911BD21A1200B3593D /* travell_active.png in Resources */,
+				6A71A9381C0471F900D6D5F4 /* NSLocalization.strings in Resources */,
 				EAFC97671BD21A1200B3593D /* cooking.png in Resources */,
 				2B83CACA1BE8975F0064EC7F /* Default-736h@3x.png in Resources */,
 			);
@@ -1299,6 +1311,17 @@
 		};
 /* End PBXSourcesBuildPhase section */
 
+/* Begin PBXVariantGroup section */
+		6A71A93A1C0471F900D6D5F4 /* NSLocalization.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				6A71A93B1C0471FF00D6D5F4 /* en */,
+			);
+			name = NSLocalization.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
 /* Begin XCBuildConfiguration section */
 		065BAC621BC7A135005AF493 /* Debug */ = {
 			isa = XCBuildConfiguration;
@@ -1390,8 +1413,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_OBJC_ARC = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Loganathan Venkatesh (RNTZRSZ4TL)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Loganathan Venkatesh (RNTZRSZ4TL)";
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1403,7 +1426,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.oclockapps.DoSomething;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "346a3fa5-7bd8-4d0e-998e-dd7f55c36569";
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
@@ -1414,8 +1437,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_OBJC_ARC = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: O Clock Software Pvt Ltd (384S95M8XQ)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: O Clock Software Pvt Ltd (384S95M8XQ)";
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1427,7 +1450,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.oclockapps.DoSomething;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "e8c0be5c-1c55-4238-aa6b-181308ddb714";
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
