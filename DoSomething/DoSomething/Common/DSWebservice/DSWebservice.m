@@ -227,8 +227,6 @@ notification_vibration:(NSString *)isnotification_vibration
              NSLog(@"formData = %@",formData);
          }
      }
-
-    
 //    NSLog(@"urlString = %@",urlString);
 //    NSLog(@"Register Details = %@",registerDetails);
 //    
@@ -239,23 +237,21 @@ notification_vibration:(NSString *)isnotification_vibration
 //          completionFailureHandler:failure];
        success:^(AFHTTPRequestOperation *operation, id responseObject)
      {
-                                                 NSLog(@"rsponse:%@",responseObject);
-         
-//                                                 NSMutableDictionary *registerDict = [[NSMutableDictionary alloc]init];
-//         
-//                                                 registerDict = [responseObject valueForKey:@"register"];
-//         
-//                                                 if([[registerDict valueForKey:@"status"]isEqualToString:@"success"]){
-//                                                     [COMMON setUserDetails:[[registerDict valueForKey:@"userDetails"]objectAtIndex:0]];
-//                                                     NSLog(@"userdetails = %@",[COMMON getUserDetails]);
-//                                                    // [self gotoHomeView];
-                                                 //}
-
-        
+         NSLog(@"rsponse:%@",responseObject);
+         NSMutableDictionary *registerDict = [[NSMutableDictionary alloc]init];
+         registerDict = [responseObject valueForKey:@"register"];
+         if([[registerDict valueForKey:@"status"]isEqualToString:@"success"]){
+             [COMMON setUserDetails:[[registerDict valueForKey:@"userDetails"]objectAtIndex:0]];
+             NSLog(@"userdetails = %@",[COMMON getUserDetails]);
+             [[NSNotificationCenter defaultCenter] postNotificationName:@"registerform"
+                                                                 object:self
+                                                               userInfo:responseObject];
          }
+     }
      
        failure:^(AFHTTPRequestOperation *operation, NSError *error){
-           
+           NSLog(@"Error = %@",error);
+
        }];
     
 

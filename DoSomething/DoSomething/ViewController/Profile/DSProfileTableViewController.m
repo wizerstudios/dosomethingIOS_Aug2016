@@ -1364,6 +1364,7 @@
    // strProfileImage = [Base64 encode:profileData1];
   //  strProfileImage2 = [Base64 encode:profileData2];
    // strProfileImage3 = [Base64 encode:profileData3];
+    
     [objWebService postRegister:Register_API
                            type:strType
                      first_name:FirstName
@@ -1385,29 +1386,35 @@
            notification_message:isNotification_message
            notification_sound  :isNotification_sound
          notification_vibration:isNotification_vibration
-                        success:^(AFHTTPRequestOperation *operation, id responseObject)
-                                {
-//                                        NSLog(@"rsponse:%@",responseObject);
-//         
-//                                        NSMutableDictionary *registerDict = [[NSMutableDictionary alloc]init];
-//         
-//                                        registerDict = [responseObject valueForKey:@"register"];
-//         
-//                                        if([[registerDict valueForKey:@"status"]isEqualToString:@"success"]){
-//                                            [COMMON setUserDetails:[[registerDict valueForKey:@"userDetails"]objectAtIndex:0]];
-//                                            NSLog(@"userdetails = %@",[COMMON getUserDetails]);
-//                                            [self gotoHomeView];
-                                        //}
-                                }
+                        success:^(AFHTTPRequestOperation *operation, id responseObject){
+                        }
      
                         failure:^(AFHTTPRequestOperation *operation, id error) {
-                            NSLog(@"Error = %@",error);
-                            [self presentViewController:[ DSAppCommon alertWithTitle:@"Title" withMessage:@"ERROR" preferredStyle:UIAlertControllerStyleAlert] animated:YES completion:NULL];
                             
                         }];
 
     
 }
+#pragma mark - loadRegisterNotification
+-(void)loadRegister{
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(loadRegisterView:)
+                                                 name:@"registerform"
+                                               object:nil];
+    [self registerAPI];
+
+    
+}
+-(void)loadRegisterView:(NSNotification *)notification{
+    
+    
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+    
+    [self gotoHomeView];
+    
+}
+
 #pragma mark - saveAction
 -(void)saveAction:(id)sender
 {
@@ -1479,7 +1486,8 @@
             [COMMON removeLoading];
             return;
            }
-        [self registerAPI];
+        [self loadRegister];
+        
 
     }
     
