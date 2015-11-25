@@ -57,6 +57,8 @@ enum JBSourceMode {
     self = [super init];
     if (self) {
         [self setup];
+        activeImage = [UIImage imageNamed:@"dot_active"];
+        inactiveImage = [UIImage imageNamed:@"dot_Image"];
     }
     return self;
 }
@@ -191,13 +193,14 @@ enum JBSourceMode {
 
 }
 
+
 - (void)nextImage
 {
     _currentImageIndex++;
 
     UIImage *image = self.currentImage;
     UIImage *imageText =self.currentText;
-    NSString * pageCount =self.currentPage;
+    
     UIImageView *imageView = nil;
     UIImageView    * textImageview   =nil;
     UIPageControl * pageControllBtn =nil;
@@ -218,38 +221,38 @@ enum JBSourceMode {
     float optimusWidth  = (image.size.width * resizeRatio) * enlargeRatio;
     float optimusHeight = (image.size.height * resizeRatio) * enlargeRatio;
     imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, optimusWidth, optimusHeight)];
+    if(_currentImageIndex == 0)
+    {
+         textImageview  =[[UIImageView alloc] initWithFrame:CGRectMake(self.frame.origin.x+70,self.center.y-30,180,70)];
+    }
+    else{
     textImageview  =[[UIImageView alloc] initWithFrame:CGRectMake(self.frame.origin.x+50,self.center.y-30,227,67)];
+    }
     textImageview.image =imageText;
     [textImageview setBackgroundColor:[UIColor clearColor]];
     pageControllBtn = [[UIPageControl alloc]init];
     
     pageControllBtn.backgroundColor = [UIColor clearColor];
-    [pageControllBtn setFrame:CGRectMake(self.frame.origin.x+50,self.frame.size.height-60,227,67)];
+    [pageControllBtn setFrame:CGRectMake(self.center.x-50,self.frame.size.height-40,120,40)];
    pageControllBtn.numberOfPages = 5;
-   pageControllBtn.currentPage = 0;
-    int current =[pageCount intValue];
-    for (int i=0; i<self.pagenationCount.count; i++)
+   pageControllBtn.currentPage = _currentImageIndex;
+
+    pageControllBtn.pageIndicatorTintColor=[UIColor redColor];
+       //pageControllBtn.currentPageIndicatorTintColor =[UIColor whiteColor];
+   // int current =_currentImageIndex;
+    
+    [pageControllBtn setCurrentPage:_currentImageIndex];
+    
+    UIImageView*pageImageView =[[UIImageView alloc]init];
+    if(pageControllBtn.currentPage)
     {
-        //CGRect circleRect = CGRectMake(0, 0, 20, 20);
-        if (i == current)
-        {
-        
-           // CGContextSetFillColorWithColor(context, self.dotColorCurrentPage.CGColor);
-        }
-        else
-        {
-            //CGContextSetFillColorWithColor(context, self.dotColorOtherPage.CGColor);
-        }
-        
+        [pageImageView setFrame:CGRectMake(_currentImageIndex*10,10,20,20)];
+        pageImageView.image =[UIImage imageNamed:@"dot_active"];
     }
     
-    //    textlbl   =[[UILabel alloc]initWithFrame:CGRectMake(self.frame.origin.x+20,self.center.y-50,280,100)];
-//    textlbl.text   = [NSString stringWithFormat:@"%@",StrText];
-//    textlbl.font   =[UIFont fontWithName:@"Patron_Medium" size:12];
-//    textlbl.textAlignment = NSTextAlignmentCenter;
-//    textlbl.numberOfLines =6;
-//    textlbl.textColor =[UIColor colorWithRed:(196/255.0f) green:(65/255.0f) blue:(81/255.0f) alpha:1.0f];
-//    textlbl.backgroundColor =[UIColor clearColor];
+    [pageImageView setBackgroundColor:[UIColor clearColor]];
+    //[pageControllBtn addSubview:pageImageView];
+
    
     imageView.backgroundColor = [UIColor blackColor];
     
