@@ -80,9 +80,9 @@ typedef void (^WebserviceRequestXMLFailureHandler)(AFHTTPRequestOperation  *oper
             password:(NSString *)password
            profileId:(NSString *)profileId
                  dob:(NSString *)dob
-        profileImage:(NSString *)profileImage
-       profileImage2:(NSString *)profileImage2
-       profileImage3:(NSString *)profileImage3
+       profileImage1:(UIImage *)profileImage1
+       profileImage2:(UIImage *)profileImage2
+       profileImage3:(UIImage *)profileImage3
     IntersertHobbies:(NSString *)interestHobbies
               Abouts:(NSString *)abouts
               gender:(NSString *)gender

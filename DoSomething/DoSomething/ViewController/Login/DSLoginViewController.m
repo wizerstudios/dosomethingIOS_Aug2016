@@ -30,6 +30,13 @@
     
     NSMutableDictionary *fbUserDetailsDict;
     NSString *firstName,*lastName,*email,*dob,*gender,*profileID,*profileImage,*password;
+    UIImage *fbProfileImage;
+    
+    
+    UIImage *profileImage1;
+    UIImage *profileImage2;
+    UIImage *profileImage3;
+
 }
 @end
 
@@ -430,6 +437,10 @@
 #pragma mark - loadCreateAPI
 -(void)loadCreateAPI
 {
+    NSURL *profileImageFBUrl = [NSURL URLWithString:profileImage];
+    NSData *profileImageData = [[NSData alloc] initWithContentsOfURL:profileImageFBUrl];
+    profileImage1 = [UIImage imageWithData:profileImageData];
+    
    [objWebService postRegister:Register_API
                           type:objSigninType
                     first_name:firstName
@@ -438,9 +449,9 @@
                       password:self.passwordTxt.text
                      profileId:profileID
                            dob:dob
-                  profileImage:profileImage
-                 profileImage2:nil
-                 profileImage3:nil
+                 profileImage1:profileImage1
+                 profileImage2:profileImage2
+                 profileImage3:profileImage3
               IntersertHobbies:nil
                         Abouts:@""
                         gender:gender

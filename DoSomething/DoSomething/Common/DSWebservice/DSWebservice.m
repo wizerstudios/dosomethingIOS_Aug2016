@@ -8,6 +8,9 @@
 
 #import "DSWebservice.h"
 #import "AFNetworking.h"
+#import "DSConfig.h"
+#import "HomeViewController.h"
+#import "DSAppCommon.h"
 
 static const NSString *ServicePost   = @"POST";
 static const NSString *ServiceGet    = @"GET";
@@ -156,9 +159,9 @@ static NSString       *ServiceMimeType    = @"image/jpeg";
             password:(NSString *)password
            profileId:(NSString *)profileId
                  dob:(NSString *)dob
-        profileImage:(NSString *)profileImage
-       profileImage2:(NSString *)profileImage2
-       profileImage3:(NSString *)profileImage3
+       profileImage1:(UIImage *)profileImage1
+       profileImage2:(UIImage *)profileImage2
+       profileImage3:(UIImage *)profileImage3
     IntersertHobbies:(NSString *)interestHobbies
               Abouts:(NSString *)abouts
               gender:(NSString *)gender
@@ -183,26 +186,76 @@ notification_vibration:(NSString *)isnotification_vibration
     if(password)                [registerDetails    setObject:password              forKey:@"password"];
     if(profileId)               [registerDetails    setObject:profileId             forKey:@"profileId"];
     if(dob)                     [registerDetails    setObject:dob                   forKey:@"dob"];
-    if(profileImage)            [registerDetails    setObject:profileImage          forKey:@"profileImage"];
     if(gender)                  [registerDetails    setObject:gender                forKey:@"gender"];
-    if(latitude)                [registerDetails    setObject:latitude              forKey:@"latitude"];
-    if(longitude)               [registerDetails    setObject:longitude             forKey:@"longitude"];
+                                [registerDetails    setObject:latitude              forKey:@"latitude"];
+                                [registerDetails    setObject:longitude             forKey:@"longitude"];
     if(device)                  [registerDetails    setObject:device                forKey:@"device"];
     if(deviceid)                [registerDetails    setObject:deviceid              forKey:@"deviceid"];
     if(isnotification_message)  [registerDetails    setObject:isnotification_message forKey:@"notification_message"];
     if(isnotification_sound)    [registerDetails    setObject:isnotification_sound  forKey:@"notification_sound"];
     if(isnotification_vibration)[registerDetails    setObject:isnotification_vibration  forKey:@"notification_vibration"];
     
+    NSDateFormatter *formatter = [[NSDateFormatter alloc]init];
+    [formatter setDateFormat:@"yyyyMMddhhmmssSSS"];
+    NSString *imageNameStr = [NSString stringWithFormat:@"%@.png",[formatter stringFromDate:[NSDate date]]];
+    NSLog(@"Registerdeteils%@",registerDetails);
+    [self POST:urlString parameters:registerDetails constructingBodyWithBlock:^(id<AFMultipartFormData> formData)
+     {
+         
+         if(profileImage1){
+             [formData appendPartWithFileData:UIImagePNGRepresentation(profileImage1)
+                                         name:@"profileImage1"
+                                     fileName:imageNameStr
+                                     mimeType:@"image/png"];
+             
+             NSLog(@"formData = %@",formData);
+         }
+         if(profileImage2){
+             [formData appendPartWithFileData:UIImagePNGRepresentation(profileImage2)
+                                         name:@"profileImage2"
+                                     fileName:imageNameStr
+                                     mimeType:@"image/png"];
+             
+             NSLog(@"formData = %@",formData);
+         }
+         if(profileImage3){
+             [formData appendPartWithFileData:UIImagePNGRepresentation(profileImage3)
+                                         name:@"profileImage3"
+                                     fileName:imageNameStr
+                                     mimeType:@"image/png"];
+             
+             NSLog(@"formData = %@",formData);
+         }
+     }
+//    NSLog(@"urlString = %@",urlString);
+//    NSLog(@"Register Details = %@",registerDetails);
+//    
+//    [self sendRequestWithURLString:urlString
+//                     andParameters:registerDetails
+//                            method:ServicePost
+//           completionSucessHandler:success
+//          completionFailureHandler:failure];
+       success:^(AFHTTPRequestOperation *operation, id responseObject)
+     {
+         NSLog(@"rsponse:%@",responseObject);
+         NSMutableDictionary *registerDict = [[NSMutableDictionary alloc]init];
+         registerDict = [responseObject valueForKey:@"register"];
+         if([[registerDict valueForKey:@"status"]isEqualToString:@"success"]){
+             [COMMON setUserDetails:[[registerDict valueForKey:@"userDetails"]objectAtIndex:0]];
+             NSLog(@"userdetails = %@",[COMMON getUserDetails]);
+             [[NSNotificationCenter defaultCenter] postNotificationName:@"registerform"
+                                                                 object:self
+                                                               userInfo:responseObject];
+         }
+     }
+     
+       failure:^(AFHTTPRequestOperation *operation, NSError *error){
+           NSLog(@"Error = %@",error);
+
+       }];
     
-    
-    NSLog(@"urlString = %@",urlString);
-    NSLog(@"Register Details = %@",registerDetails);
-    
-    [self sendRequestWithURLString:urlString
-                     andParameters:registerDetails
-                            method:ServicePost
-           completionSucessHandler:success
-          completionFailureHandler:failure];
+
+
     
 }
 

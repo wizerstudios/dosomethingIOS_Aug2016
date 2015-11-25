@@ -72,6 +72,10 @@
     UIImageView *cameraImage;
     
     NSMutableArray *profileDataArray;
+    
+    UIImage *profileImage1;
+    UIImage *profileImage2;
+    UIImage *profileImage3;
 
     
     
@@ -190,7 +194,7 @@
         
         cameraImage = [[UIImageView alloc]initWithFrame:CGRectMake(userProfileImage.frame.size.width / 2 - 15, self.scrView.frame.size.height - 55, 30, 30)];
         [cameraImage setTag:i+200];
-        [cameraImage setImage:[UIImage imageNamed:@"camera_icon"]];
+        [cameraImage setImage:[UIImage imageNamed:@"profile_camera_icon"]];
         cameraImage.userInteractionEnabled = YES;
         
         [cameraImage setUserInteractionEnabled:YES];
@@ -209,6 +213,7 @@
 }
 
 - (IBAction)pageChanged:(id)sender {
+    NSLog(@"current page = %ld",(long)profileImagePageControl.currentPage);
     
     CGFloat x = profileImagePageControl.currentPage * self.scrView.frame.size.width;
     [self.scrView setContentOffset:CGPointMake(x, 0) animated:YES];
@@ -1317,12 +1322,25 @@
 
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
 {
+    UIImage *image = nil;
+    
+    image = [info valueForKey:UIImagePickerControllerEditedImage];
+    
+    if(CurrentImage==0)
+        profileImage1 = image;
+    else if(CurrentImage == 1)
+        profileImage2 = image;
+    else if(CurrentImage == 2)
+        profileImage3 = image;
+    
     NSData *profileData = UIImageJPEGRepresentation([info objectForKey:UIImagePickerControllerOriginalImage], 0.1);
     [profileDataArray replaceObjectAtIndex:CurrentImage withObject:profileData];
-    
     [imagepickerController dismissViewControllerAnimated:YES completion:nil];
-    NSLog(@"%@",profileDataArray);
-    NSLog(@"%@",profileData);
+    
+//    NSLog(@"profileDataArray%@",profileDataArray);
+//    NSLog(@"profileDataArray0%@",[profileDataArray objectAtIndex:0]);
+//    NSLog(@"profileData%@",profileData);
+
 }
 
 #pragma mark - gotoHomeView
@@ -1334,9 +1352,19 @@
 #pragma mark - registerAPI
 -(void) registerAPI{
     
+    
+    if(currentLatitude == nil)
+        currentLatitude = @"";
+    if(currentLongitude == nil)
+        currentLongitude = @"";
+//     profileImage1=[profileDataArray objectAtIndex:0];
+//     profileImage2=[profileDataArray objectAtIndex:1];
+//     profileImage3=[profileDataArray objectAtIndex:2];
+    
    // strProfileImage = [Base64 encode:profileData1];
   //  strProfileImage2 = [Base64 encode:profileData2];
    // strProfileImage3 = [Base64 encode:profileData3];
+    
     [objWebService postRegister:Register_API
                            type:strType
                      first_name:FirstName
@@ -1345,9 +1373,9 @@
                        password:emailPasswordToRegister
                       profileId:strProfileID
                             dob:dateChange
-                   profileImage:strProfileImage
-                  profileImage2:strProfileImage2
-                  profileImage3:strProfileImage3
+                  profileImage1:profileImage1
+                  profileImage2:profileImage2
+                  profileImage3:profileImage3
                IntersertHobbies:strInterestHobbies
                          Abouts:strAbout
                          gender:strGender
@@ -1358,29 +1386,35 @@
            notification_message:isNotification_message
            notification_sound  :isNotification_sound
          notification_vibration:isNotification_vibration
-                        success:^(AFHTTPRequestOperation *operation, id responseObject)
-                                {
-                                        NSLog(@"rsponse:%@",responseObject);
-         
-                                        NSMutableDictionary *registerDict = [[NSMutableDictionary alloc]init];
-         
-                                        registerDict = [responseObject valueForKey:@"register"];
-         
-                                        if([[registerDict valueForKey:@"status"]isEqualToString:@"success"]){
-                                            [COMMON setUserDetails:[[registerDict valueForKey:@"userDetails"]objectAtIndex:0]];
-                                            NSLog(@"userdetails = %@",[COMMON getUserDetails]);
-                                            [self gotoHomeView];
-                                        }
-                                }
+                        success:^(AFHTTPRequestOperation *operation, id responseObject){
+                        }
      
                         failure:^(AFHTTPRequestOperation *operation, id error) {
-                            NSLog(@"Error = %@",error);
-                            [self presentViewController:[ DSAppCommon alertWithTitle:@"Title" withMessage:@"ERROR" preferredStyle:UIAlertControllerStyleAlert] animated:YES completion:NULL];
                             
                         }];
 
     
 }
+#pragma mark - loadRegisterNotification
+-(void)loadRegister{
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(loadRegisterView:)
+                                                 name:@"registerform"
+                                               object:nil];
+    [self registerAPI];
+
+    
+}
+-(void)loadRegisterView:(NSNotification *)notification{
+    
+    
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+    
+    [self gotoHomeView];
+    
+}
+
 #pragma mark - saveAction
 -(void)saveAction:(id)sender
 {
@@ -1440,28 +1474,27 @@
     }
 
     
-//    if(![FirstName isEqual:[NSNull null]]&& ![FirstName isEqualToString:@""]&&![LastName isEqual:[NSNull null]]&& ![LastName isEqualToString:@""] &&![dateChange isEqual:[NSNull null]]&&![strGender isEqual:[NSNull null]]&& ![strGender isEqualToString:@""] &&![emailAddressToRegister isEqual:[NSNull null]] &&![emailAddressToRegister isEqualToString:@""] &&![emailPasswordToRegister isEqual:[NSNull null]] && ![emailPasswordToRegister isEqualToString:@""]){
-//            if(![NSString validateEmail:emailAddressToRegister]){
-//                [self presentViewController:[ DSAppCommon alertWithTitle:@"Title" withMessage:INVALID_EMAIL preferredStyle:UIAlertControllerStyleAlert] animated:YES completion:NULL];
-//                [COMMON removeLoading];
-//                return;
-//            }
-//           if([dateChange isEqual:@"DD-MM-YYYY"]){
-//            [self presentViewController:[ DSAppCommon alertWithTitle:@"Title" withMessage:@"ENTER DATE" preferredStyle:UIAlertControllerStyleAlert] animated:YES completion:NULL];
-//            [COMMON removeLoading];
-//            return;
-//           }
-//        
-//
-//    }
+    if(![FirstName isEqual:[NSNull null]]&& ![FirstName isEqualToString:@""]&&![LastName isEqual:[NSNull null]]&& ![LastName isEqualToString:@""] &&![dateChange isEqual:[NSNull null]]&&![strGender isEqual:[NSNull null]]&& ![strGender isEqualToString:@""] &&![emailAddressToRegister isEqual:[NSNull null]] &&![emailAddressToRegister isEqualToString:@""] &&![emailPasswordToRegister isEqual:[NSNull null]] && ![emailPasswordToRegister isEqualToString:@""]){
+            if(![NSString validateEmail:emailAddressToRegister]){
+                [self presentViewController:[ DSAppCommon alertWithTitle:@"Title" withMessage:INVALID_EMAIL preferredStyle:UIAlertControllerStyleAlert] animated:YES completion:NULL];
+                [COMMON removeLoading];
+                
+                return;
+            }
+           if([dateChange isEqual:@"DD-MM-YYYY"]){
+            [self presentViewController:[ DSAppCommon alertWithTitle:@"Title" withMessage:@"ENTER DATE" preferredStyle:UIAlertControllerStyleAlert] animated:YES completion:NULL];
+            [COMMON removeLoading];
+            return;
+           }
+        [self loadRegister];
+        
+
+    }
     
     else{
-        
-        [self registerAPI];
-        
-//        [self presentViewController:[ DSAppCommon alertWithTitle:@"Title" withMessage:FILL_ALL_DETAILS preferredStyle:UIAlertControllerStyleAlert] animated:YES completion:NULL];
-//        [COMMON removeLoading];
-//        return;
+        [self presentViewController:[ DSAppCommon alertWithTitle:@"Title" withMessage:FILL_ALL_DETAILS preferredStyle:UIAlertControllerStyleAlert] animated:YES completion:NULL];
+        [COMMON removeLoading];
+        return;
     }
 
 }
