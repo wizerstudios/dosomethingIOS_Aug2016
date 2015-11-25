@@ -67,6 +67,13 @@
     NSString *optionLogoutDelete;
     NSString *dateChange;
     
+    /* Profile Image */
+    UIImageView *userProfileImage;
+    UIImageView *cameraImage;
+    
+    NSMutableArray *profileDataArray;
+
+    
     
 
 }
@@ -86,12 +93,20 @@
     dic =[[NSUserDefaults standardUserDefaults] valueForKey:USERDETAILS];
     NSString * strsessionID =[dic valueForKey:@"SessionId"];
     loginUserSessionID=strsessionID;
-
    
     [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"SelectedItemCategoryID"];
     isNotification_message = @"Yes";
     isNotification_sound = @"Yes";
     isNotification_vibration = @"Yes";
+    
+    profileDataArray = [NSMutableArray new];
+    
+    for(int i = 0; i < 3; i++)
+    {
+        NSData *data = [NSData new];
+        [profileDataArray addObject:data];
+    }
+
 }
 
 - (void)didReceiveMemoryWarning {
@@ -152,58 +167,45 @@
     self.scrView.pagingEnabled=YES;
     self.scrView.delegate=self;
     
-    page1=[[UIImageView alloc] initWithFrame:CGRectMake(20, 20, self.profileImageView.frame.size.width, self.profileImageView.frame.size.height)];
-    page1.layer.cornerRadius = page1.frame.size.height / 2;
-    [page1 addGestureRecognizer:[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(tapGesture:)]];
-    if(!profileData1)
+    int spacing = 20;
+    for(int i = 0; i < 3; i++)
     {
-        [page1 setImage:[UIImage imageNamed:@"profile_noimg"]];
+        NSData *profileData = [profileDataArray objectAtIndex:i];
+        userProfileImage = [[UIImageView alloc]initWithFrame:CGRectMake((i*self.scrView.frame.size.width) + spacing, 20,self.profileImageView.frame.size.width, self.profileImageView.frame.size.height)];
+        [userProfileImage setTag:i+100];
+        if([profileData length] == 0)
+            [userProfileImage setImage:[UIImage imageNamed:@"profile_noimg"]];
+        
+        else{
+            [userProfileImage setImage:[UIImage imageWithData:profileData]];
+            [cell.cameraButton setHidden:YES];
+        }
+        userProfileImage.layer.cornerRadius = userProfileImage.frame.size.height / 2;
+        userProfileImage.layer.masksToBounds = YES;
+        [userProfileImage setUserInteractionEnabled:YES];
+        UITapGestureRecognizer *singleTap =  [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(selectCamera:)];
+        [singleTap setNumberOfTapsRequired:1];
+        [userProfileImage addGestureRecognizer:singleTap];
+        [self.scrView addSubview:userProfileImage];
+        
+        cameraImage = [[UIImageView alloc]initWithFrame:CGRectMake(userProfileImage.frame.size.width / 2 - 15, self.scrView.frame.size.height - 55, 30, 30)];
+        [cameraImage setTag:i+200];
+        [cameraImage setImage:[UIImage imageNamed:@"camera_icon"]];
+        cameraImage.userInteractionEnabled = YES;
+        
+        [cameraImage setUserInteractionEnabled:YES];
+        [userProfileImage addSubview:cameraImage];
+       
     }
-    else
-    {
-        [page1 setImage:[UIImage imageWithData:profileData1]];
-    }
-    
-    page2=[[UIImageView alloc] initWithFrame:CGRectMake(1.5*self.profileImageView.frame.size.width, 20, self.profileImageView.frame.size.width, self.profileImageView.frame.size.height)];
-    [page2 addGestureRecognizer:[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(tapGesture:)]];
-    page2.layer.cornerRadius = page2.frame.size.height / 2;
-    if(!profileData2)
-        [page2 setImage:[UIImage imageNamed:@"profile_noimg"]];
-    else
-        [page2 setImage:[UIImage imageWithData:profileData2]];
-    
-    page3=[[UIImageView alloc] initWithFrame:CGRectMake(3*self.profileImageView.frame.size.width, 20, self.profileImageView.frame.size.width, self.profileImageView.frame.size.height)];
-    [page3 addGestureRecognizer:[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(tapGesture:)]];
-    page3.layer.cornerRadius = page3.frame.size.height / 2;
-    if(!profileData3)
-        [page3 setImage:[UIImage imageNamed:@"profile_noimg"]];
-    else
-        [page3 setImage:[UIImage imageWithData:profileData3]];
-    
-    [self.scrView addSubview:page1];
-    [self.scrView addSubview:page2];
-    [self.scrView addSubview:page3];
     
     self.scrView.contentSize=CGSizeMake(self.scrView.frame.size.width*3, self.scrView.frame.size.height);
     
-    if(CurrentImage == 1)
+    if(CurrentImage == 0)
         [self.scrView setContentOffset:CGPointMake(0, 0)animated:NO];
-    else if(CurrentImage == 2)
+    else if(CurrentImage == 1)
         [self.scrView setContentOffset:CGPointMake(1.5*self.profileImageView.frame.size.width - 15, 0)animated:NO];
-    else if(CurrentImage == 3)
+    else if(CurrentImage == 2)
         [self.scrView setContentOffset:CGPointMake((3*self.profileImageView.frame.size.width - 15), 0)animated:NO];
-    
-    
-    profileImagePageControl.pageIndicatorTintColor = [UIColor lightGrayColor];
-    profileImagePageControl.currentPageIndicatorTintColor = [UIColor blackColor];
-    profileImagePageControl.backgroundColor = [UIColor whiteColor];
-    profileImagePageControl.backgroundColor=[UIColor clearColor];
-    
-    
-    UIImageView *image = [[UIImageView alloc]initWithFrame:CGRectMake(80, 100, 30, 30)];
-    [image setImage:[UIImage imageNamed:@"camera_icon"]];
-    [self.scrView addSubview:image];
-    [image bringSubviewToFront:self.scrView];
 }
 
 - (IBAction)pageChanged:(id)sender {
@@ -214,12 +216,9 @@
 
 
 #pragma mark - UIScrollViewDelegate
-- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView {
-   
-    int contentOffset=scrollView.contentOffset.x;
-    NSInteger currentPage=contentOffset/pageWidth;
-    profileImagePageControl.currentPage=currentPage;
-   
+- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView
+{
+    CurrentImage = scrollView.contentOffset.x / scrollView.frame.size.width;
 }
 
 - (NSString *) getEmail {
@@ -587,13 +586,8 @@
         [cell.cameraButton setTag:101];
         [cell.cameraButton addTarget:self action:@selector(selectCamera:) forControlEvents:UIControlEventTouchUpInside];
         
-        //        UIButton *cameraButton = [[UIButton alloc]initWithFrame:CGRectMake(30, 30, cell.frame.size.width - 60, cell.frame.size.height - 60)];
-        //        [cameraButton addTarget:self action:@selector(selectCamera:) forControlEvents:UIControlEventTouchUpInside];
-        //        [cell addSubview:cameraButton];
+        userProfileImage.layer.masksToBounds = YES;
         
-        page1.layer.masksToBounds = YES;
-        page2.layer.masksToBounds = YES;
-        page3.layer.masksToBounds = YES;
     }
 
     
@@ -1323,28 +1317,12 @@
 
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
 {
-    UIImage *image = nil;
-    image = [info valueForKey:UIImagePickerControllerEditedImage];
+    NSData *profileData = UIImageJPEGRepresentation([info objectForKey:UIImagePickerControllerOriginalImage], 0.1);
+    [profileDataArray replaceObjectAtIndex:CurrentImage withObject:profileData];
     
-    if(!profileData1)
-    {
-        profileData1 = UIImageJPEGRepresentation([info objectForKey:UIImagePickerControllerOriginalImage], 0.1);
-        CurrentImage = 1;
-    }
-    else if(!profileData2)
-    {
-        profileData2 = UIImageJPEGRepresentation([info objectForKey:UIImagePickerControllerOriginalImage], 0.1);
-        CurrentImage = 2;
-    }
-    else if(!profileData3)
-    {
-        profileData3 = UIImageJPEGRepresentation([info objectForKey:UIImagePickerControllerOriginalImage], 0.1);
-        CurrentImage = 3;
-    }
-    
-    
-    //[_tableviewProfile reloadData];
     [imagepickerController dismissViewControllerAnimated:YES completion:nil];
+    NSLog(@"%@",profileDataArray);
+    NSLog(@"%@",profileData);
 }
 
 #pragma mark - gotoHomeView
