@@ -12,6 +12,7 @@
 #import "DSChatsTableViewController.h"
 #import "DSLocationViewController.h"
 #import "DSProfileTableViewController.h"
+#import "SettingView.h"
 
 
 @interface AppDelegate : UIResponder <UIApplicationDelegate>
@@ -20,6 +21,7 @@
     UIWindow *window;
     UITabBarController *tabBarController;
     HomeViewController * userHomeView ;
+    SettingView        *objSettingView;
 
 }
 @property (strong, nonatomic) UIWindow *window;
@@ -30,7 +32,7 @@
 @property (strong, nonatomic) DSLocationViewController *locationPage;
 @property (strong, nonatomic) DSChatsTableViewController *chatPage;
 @property (strong, nonatomic) DSProfileTableViewController *profilePage;
-
+@property (strong, nonatomic) SettingView                  *objSettingView;
 
 @property(nonatomic,retain)UIView *buttonsView;
 @property(nonatomic,retain)UIButton *locationButton;

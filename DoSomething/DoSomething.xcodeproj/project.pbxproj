@@ -67,6 +67,8 @@
 		6A71A9381C0471F900D6D5F4 /* NSLocalization.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6A71A93A1C0471F900D6D5F4 /* NSLocalization.strings */; };
 		6A8D15D31BCC059B000F1FB4 /* DSProfileTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A8D15D11BCC059B000F1FB4 /* DSProfileTableViewController.m */; };
 		6A8D15D41BCC059B000F1FB4 /* DSProfileTableViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6A8D15D21BCC059B000F1FB4 /* DSProfileTableViewController.xib */; };
+		6AE7361E1C05AA5D00C7DCF0 /* SettingView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6AE7361C1C05AA5D00C7DCF0 /* SettingView.m */; };
+		6AE7361F1C05AA5D00C7DCF0 /* SettingView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6AE7361D1C05AA5D00C7DCF0 /* SettingView.xib */; };
 		ABF8DF93B82C6FE210057F55 /* libPods-DoSomething.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 60244D170FD7494CCFDD04A4 /* libPods-DoSomething.a */; };
 		C6D5F60C1BC7AF500050C1AE /* Launch Screen.xib in Resources */ = {isa = PBXBuildFile; fileRef = C6D5F60B1BC7AF500050C1AE /* Launch Screen.xib */; };
 		C6D5F6151BC7B0970050C1AE /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = C6D5F6141BC7B0970050C1AE /* AppDelegate.m */; };
@@ -269,6 +271,9 @@
 		6A8D15D01BCC059B000F1FB4 /* DSProfileTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DSProfileTableViewController.h; sourceTree = "<group>"; };
 		6A8D15D11BCC059B000F1FB4 /* DSProfileTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DSProfileTableViewController.m; sourceTree = "<group>"; };
 		6A8D15D21BCC059B000F1FB4 /* DSProfileTableViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DSProfileTableViewController.xib; sourceTree = "<group>"; };
+		6AE7361B1C05AA5D00C7DCF0 /* SettingView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingView.h; sourceTree = "<group>"; };
+		6AE7361C1C05AA5D00C7DCF0 /* SettingView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingView.m; sourceTree = "<group>"; };
+		6AE7361D1C05AA5D00C7DCF0 /* SettingView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SettingView.xib; sourceTree = "<group>"; };
 		C6D5F60B1BC7AF500050C1AE /* Launch Screen.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "Launch Screen.xib"; sourceTree = "<group>"; };
 		C6D5F6131BC7B0970050C1AE /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		C6D5F6141BC7B0970050C1AE /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -724,6 +729,17 @@
 			path = ViewController/Profile;
 			sourceTree = "<group>";
 		};
+		6AE7361A1C05AA1400C7DCF0 /* SettingView */ = {
+			isa = PBXGroup;
+			children = (
+				6AE7361B1C05AA5D00C7DCF0 /* SettingView.h */,
+				6AE7361C1C05AA5D00C7DCF0 /* SettingView.m */,
+				6AE7361D1C05AA5D00C7DCF0 /* SettingView.xib */,
+			);
+			name = SettingView;
+			path = ViewController/SettingView;
+			sourceTree = "<group>";
+		};
 		8756DC85FEAEF5DAB0609B11 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -752,6 +768,7 @@
 		C6D5F60A1BC7A4560050C1AE /* ViewController */ = {
 			isa = PBXGroup;
 			children = (
+				6AE7361A1C05AA1400C7DCF0 /* SettingView */,
 				EADB94941BDF566C00512374 /* DosomethingView */,
 				EAF1DC4D1BD8B2AF00D51354 /* HomeView */,
 				EACB22B71BC7C7F7002FAD54 /* Login */,
@@ -1139,6 +1156,7 @@
 				C6D5F6391BC7B52C0050C1AE /* FutworaPro-Regular.otf in Resources */,
 				C6D5F6401BC7B52C0050C1AE /* Patron-Italic.ttf in Resources */,
 				EAFC97711BD21A1200B3593D /* food.png in Resources */,
+				6AE7361F1C05AA5D00C7DCF0 /* SettingView.xib in Resources */,
 				EAFC97851BD21A1200B3593D /* radio.png in Resources */,
 				EAFC97871BD21A1200B3593D /* shopping_active.png in Resources */,
 				EAFC97811BD21A1200B3593D /* photography.png in Resources */,
@@ -1260,6 +1278,7 @@
 				EACB22BB1BC7C7F7002FAD54 /* DSLoginViewController.m in Sources */,
 				EA784F001BE0950500863A6D /* DVSwitch.m in Sources */,
 				511C735F1BE3801100D3D61D /* DSChatDetailViewController.m in Sources */,
+				6AE7361E1C05AA5D00C7DCF0 /* SettingView.m in Sources */,
 				EAEF251E1BCF9EF600F83E82 /* IQUITextFieldView+Additions.m in Sources */,
 				2BD72AFC1BFCC5AD003846E9 /* AFURLRequestSerialization.m in Sources */,
 				511C73641BE3804E00D3D61D /* DSChatsTableViewController.m in Sources */,
