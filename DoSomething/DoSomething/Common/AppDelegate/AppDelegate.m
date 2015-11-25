@@ -22,7 +22,7 @@
 @implementation AppDelegate
 
 @synthesize locationButton,menuButton,chatsButton,buttonsView,buttons_array,profileButton,settingButton;
-@synthesize homePage,chatPage,window, locationPage,profilePage;
+@synthesize homePage,chatPage,window, locationPage,profilePage,objSettingView;
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
@@ -202,6 +202,8 @@
     [locationButton setBackgroundImage:[UIImage imageNamed:@"loaction_normal.png"] forState:UIControlStateNormal];
     [chatsButton setBackgroundImage:[UIImage imageNamed:@"chats.png"] forState:UIControlStateNormal];
     [profileButton setBackgroundImage:[UIImage imageNamed:@"profile_icon.png"] forState:UIControlStateNormal];
+    objSettingView =[[SettingView alloc]initWithNibName:@"SettingView" bundle:nil];
+    [self.navigationController pushViewController:objSettingView animated:NO];
 
 }
 
