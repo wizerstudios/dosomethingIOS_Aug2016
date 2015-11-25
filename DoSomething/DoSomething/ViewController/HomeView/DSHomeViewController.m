@@ -12,6 +12,7 @@
 #import "DSLoginViewController.h"
 #import "DAAutoScroll.h"
 #import "HomeViewController.h"
+#import "AppDelegate.h"
 @interface DSHomeViewController ()
 {
     int frameHt;
@@ -19,6 +20,7 @@
     NSArray *bannerImage;
     NSArray * bannerText;
     NSArray * pageController;
+     AppDelegate *appDelegate;
 }
 @end
 @implementation DSHomeViewController
@@ -91,6 +93,9 @@
     [super viewWillAppear:animated];
     [self.navigationController setNavigationBarHidden:YES];
     [self.navigationItem setHidesBackButton:YES];
+    
+}
+-(void)viewDidDisappear:(BOOL)animated{
     
 }
 #pragma mark - ButtonAction
