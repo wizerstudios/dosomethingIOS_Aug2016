@@ -234,7 +234,7 @@
         dob = @"";
         
         [COMMON LoadIcon:self.view];
-        //[self loadCreateAPI];
+        
         [self checkUserEmail];
     }
    
@@ -303,7 +303,9 @@
                          }
                          else {
                              if([[[responseObject objectForKey:@"checkuser"]objectForKey:@"status"]  isEqual: @"error"]){
-                                 [self loadCreateAPI];
+                                // [self loadCreateAPI];
+                                 [self loadRegister];
+                                 NSLog(@"checkuser = %@",responseObject);
                                  
                              }
                              else{
@@ -352,7 +354,7 @@
                  
                  if(labelFacebook.tag == 10)
                  {
-                  // [self loadCreateAPI];
+                  // before used CreateAPI;
                      [self checkUserEmail];
                  }
                  
@@ -461,38 +463,33 @@
                       deviceid:deviceUdid
           notification_message:@"Yes"
           notification_sound  :@"Yes"
-        notification_vibration:@"Yes"
-    
-    
+        notification_vibration:@"Yes"    
                        success:^(AFHTTPRequestOperation *operation, id responseObject){
-                        NSLog(@"responseObject = %@",responseObject);
-                           
-                           NSMutableDictionary *registerDict = [[NSMutableDictionary alloc]init];
-                           
-                           registerDict = [responseObject valueForKey:@"register"];
-                           
-                           if([[registerDict valueForKey:@"status"]isEqualToString:@"success"]){
-                               
-                              [COMMON setUserDetails:[[registerDict valueForKey:@"userDetails"]objectAtIndex:0]];
-                               NSLog(@"userdetails = %@",[COMMON getUserDetails]);
-                              [self gotoHomeView];
-                               [COMMON removeLoading]; 
-                               
-                           }
-                           else{
-                               NSLog(@"responseObject = %@",responseObject);
-                               NSString *errMsg = [NSString stringWithFormat:@"%@",[registerDict valueForKey:@"Message"]];
-                               errMsg = [errMsg stringByReplacingOccurrencesOfString:@"{" withString:@""];
-                                errMsg = [errMsg stringByReplacingOccurrencesOfString:@"}" withString:@""];
-                               //[DSAppCommon showSimpleAlertWithMessage:errMsg];
-                               [self presentViewController:[ DSAppCommon alertWithTitle:@"Title" withMessage:errMsg preferredStyle:UIAlertControllerStyleAlert] animated:YES completion:NULL];
-                           }
                            [COMMON removeLoading];
                     }
                    failure:^(AFHTTPRequestOperation *operation, id error) {
                        [COMMON removeLoading];
                        
                    }];
+    
+}
+#pragma mark - loadRegisterNotification
+-(void)loadRegister{
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(loadRegisterView:)
+                                                 name:@"fbregisterform"
+                                               object:nil];
+    [self loadCreateAPI];
+    
+    
+}
+-(void)loadRegisterView:(NSNotification *)notification{
+    
+    
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+    
+    [self gotoHomeView];
     
 }
 

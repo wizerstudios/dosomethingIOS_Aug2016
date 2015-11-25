@@ -187,6 +187,7 @@ notification_vibration:(NSString *)isnotification_vibration
     if(profileId)               [registerDetails    setObject:profileId             forKey:@"profileId"];
     if(dob)                     [registerDetails    setObject:dob                   forKey:@"dob"];
     if(gender)                  [registerDetails    setObject:gender                forKey:@"gender"];
+    if(abouts)                  [registerDetails    setObject:abouts                forKey:@"about"];
                                 [registerDetails    setObject:latitude              forKey:@"latitude"];
                                 [registerDetails    setObject:longitude             forKey:@"longitude"];
     if(device)                  [registerDetails    setObject:device                forKey:@"device"];
@@ -227,16 +228,36 @@ notification_vibration:(NSString *)isnotification_vibration
              NSLog(@"formData = %@",formData);
          }
      }
-//    NSLog(@"urlString = %@",urlString);
-//    NSLog(@"Register Details = %@",registerDetails);
-//    
-//    [self sendRequestWithURLString:urlString
-//                     andParameters:registerDetails
-//                            method:ServicePost
-//           completionSucessHandler:success
-//          completionFailureHandler:failure];
+     
        success:^(AFHTTPRequestOperation *operation, id responseObject)
      {
+         if([type  isEqual: @"2"]){
+             NSLog(@"responseObject = %@",responseObject);
+             
+             NSMutableDictionary *registerDict = [[NSMutableDictionary alloc]init];
+             
+             registerDict = [responseObject valueForKey:@"register"];
+             
+             if([[registerDict valueForKey:@"status"]isEqualToString:@"success"]){
+                 
+                 [COMMON setUserDetails:[[registerDict valueForKey:@"userDetails"]objectAtIndex:0]];
+                 NSLog(@"userdetails = %@",[COMMON getUserDetails]);
+                 [[NSNotificationCenter defaultCenter] postNotificationName:@"fbregisterform"
+                                                                     object:self
+                                                                   userInfo:responseObject];
+                // [self gotoHomeView];
+             }
+             else{
+                 NSLog(@"responseObject = %@",responseObject);
+                 NSString *errMsg = [NSString stringWithFormat:@"%@",[registerDict valueForKey:@"Message"]];
+                 errMsg = [errMsg stringByReplacingOccurrencesOfString:@"{" withString:@""];
+                 errMsg = [errMsg stringByReplacingOccurrencesOfString:@"}" withString:@""];
+                
+                 
+             }
+             
+         }
+         else{
          NSLog(@"rsponse:%@",responseObject);
          NSMutableDictionary *registerDict = [[NSMutableDictionary alloc]init];
          registerDict = [responseObject valueForKey:@"register"];
@@ -246,6 +267,7 @@ notification_vibration:(NSString *)isnotification_vibration
              [[NSNotificationCenter defaultCenter] postNotificationName:@"registerform"
                                                                  object:self
                                                                userInfo:responseObject];
+         }
          }
      }
      

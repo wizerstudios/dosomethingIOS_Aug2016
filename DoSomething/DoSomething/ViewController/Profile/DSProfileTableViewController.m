@@ -92,6 +92,7 @@
     [super viewDidLoad];
     objWebService = [[DSWebservice alloc]init];
     [self initializeArray];
+    [self getUserCurrenLocation];
     deviceUdid = [OpenUDID value];
     NSMutableDictionary *dic=[[NSMutableDictionary alloc]init];
     dic =[[NSUserDefaults standardUserDefaults] valueForKey:USERDETAILS];
@@ -1387,10 +1388,11 @@
            notification_sound  :isNotification_sound
          notification_vibration:isNotification_vibration
                         success:^(AFHTTPRequestOperation *operation, id responseObject){
+                            [COMMON removeLoading];
                         }
      
                         failure:^(AFHTTPRequestOperation *operation, id error) {
-                            
+                            [COMMON removeLoading];
                         }];
 
     
@@ -1398,6 +1400,7 @@
 #pragma mark - loadRegisterNotification
 -(void)loadRegister{
     
+    [COMMON LoadIcon:self.view];
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(loadRegisterView:)
                                                  name:@"registerform"
@@ -1418,9 +1421,10 @@
 #pragma mark - saveAction
 -(void)saveAction:(id)sender
 {
-    
+    [COMMON LoadIcon:self.view];
     NSArray *postPerArray;
     postPerArray = [[placeHolderArray objectAtIndex:0]valueForKey:@"TypingText"];
+    NSLog(@"hobby:%@",hobbiesNameArray);
     
     strFirstName = [postPerArray objectAtIndex:1];
     strLastName  = [postPerArray objectAtIndex:2];
