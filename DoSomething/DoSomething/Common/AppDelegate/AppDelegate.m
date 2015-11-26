@@ -12,8 +12,8 @@
 #import "DSHomeViewController.h"
 #import "DSAppCommon.h"
 #import "HomeViewController.h"
-//#import <Fabric/Fabric.h>
-//#import <Crashlytics/Crashlytics.h>
+#import <Fabric/Fabric.h>
+#import <Crashlytics/Crashlytics.h>
 
 
 
@@ -51,7 +51,7 @@
     [self.window makeKeyAndVisible];
     [self TabBarViews];
     
-    //[Fabric with:@[[Crashlytics class]]];
+    [Fabric with:@[[Crashlytics class]]];
     return YES;
     
 }
