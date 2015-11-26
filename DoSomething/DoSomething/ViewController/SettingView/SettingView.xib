@@ -10,6 +10,7 @@
             <string>Patron-Bold</string>
             <string>Patron-Bold</string>
             <string>Patron-Bold</string>
+            <string>Patron-Bold</string>
         </mutableArray>
         <mutableArray key="Patron-Medium.ttf">
             <string>Patron-Medium</string>
@@ -270,8 +271,8 @@
                                 <constraint firstAttribute="width" constant="220" id="1mJ-ce-Tbi"/>
                                 <constraint firstAttribute="height" constant="90" id="a5r-SI-EIo"/>
                             </constraints>
-                            <fontDescription key="fontDescription" type="system" weight="black" pointSize="14"/>
-                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                            <fontDescription key="fontDescription" name="Patron-Bold" family="Patron" pointSize="14"/>
+                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lS3-N0-NMh">
