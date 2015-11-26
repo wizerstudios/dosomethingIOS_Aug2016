@@ -150,21 +150,20 @@
 
 #pragma mark - Logout_Delete_Action_API
 -(void)logoutDeleteAction{
+    [COMMON LoadIcon:self.view];
         [objWebService logoutDeleteUser:User_Logout_Delete_API
                           sessionId:loginUserSessionID
                                  op:optionLogoutDelete
                             success:^(AFHTTPRequestOperation *operation, id responseObject) {
                                 NSLog(@"logout");
-                                 [COMMON removeUserDetails];
-                                appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
-                                appDelegate.buttonsView.hidden=YES;
                                 DSHomeViewController*objSplashView =[[DSHomeViewController alloc]initWithNibName:@"DSHomeViewController" bundle:nil];
-                                
-                                
-                               
                                 [self.navigationController pushViewController:objSplashView animated:NO];
                                 
-                                
+                                [COMMON removeUserDetails];
+                                appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+                                appDelegate.buttonsView.hidden=YES;
+                                [appDelegate.settingButton setBackgroundImage:[UIImage imageNamed:@"setting_icon.png"] forState:UIControlStateNormal];
+                                [COMMON removeLoading];
                                 
                             }
                             failure:^(AFHTTPRequestOperation *operation, id error) {
