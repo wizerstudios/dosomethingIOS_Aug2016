@@ -1446,33 +1446,66 @@
     
     if([FirstName isEqual:[NSNull null]] && [FirstName isEqual:@""])
     {
+        if(IS_GREATER_IOS7)
+        {
         [self presentViewController:[ DSAppCommon alertWithTitle:@"Title" withMessage:LASTNAME_REQUIRED preferredStyle:UIAlertControllerStyleAlert] animated:YES completion:NULL];
+        }
+        else
+        {
+            [DSAppCommon showSimpleAlertWithMessage:LASTNAME_REQUIRED];
+        }
         [COMMON removeLoading];
         return;
     }
     if ( [dateChange isEqual:[NSNull null]] && [dateChange isEqual:@""] )
     {
+        if(IS_GREATER_IOS7)
+        {
         [self presentViewController:[ DSAppCommon alertWithTitle:@"Title" withMessage:DOB_REQUIRED preferredStyle:UIAlertControllerStyleAlert] animated:YES completion:NULL];
+        }
+        else
+        {
+            [DSAppCommon showSimpleAlertWithMessage:DOB_REQUIRED];
+        }
         [COMMON removeLoading];
         return;
     }
     
     if ( [strGender isEqual:[NSNull null]] && [strGender isEqual:@""])
     {
+        if(IS_GREATER_IOS7)
+        {
         [self presentViewController:[ DSAppCommon alertWithTitle:@"Title" withMessage:GENDER_REQUIRED preferredStyle:UIAlertControllerStyleAlert] animated:YES completion:NULL];
+        }
+        else
+        {
+            [DSAppCommon showSimpleAlertWithMessage:GENDER_REQUIRED];
+        }
         [COMMON removeLoading];
         return;
     }
     
     if ( [emailAddressToRegister isEqual:[NSNull null]] && [emailAddressToRegister isEqual:@""])
     {
+        if(IS_GREATER_IOS7)
+        {
         [self presentViewController:[ DSAppCommon alertWithTitle:@"Title" withMessage:EMAIL_REQUIRED preferredStyle:UIAlertControllerStyleAlert] animated:YES completion:NULL];
+        }
+        else
+        {
+            [DSAppCommon showSimpleAlertWithMessage:EMAIL_REQUIRED];
+        }
         [COMMON removeLoading];
         return;
     }
     if ( [emailPasswordToRegister isEqual:[NSNull null]] && [emailPasswordToRegister isEqual:@""])
     {
+        if(IS_GREATER_IOS7){
         [self presentViewController:[ DSAppCommon alertWithTitle:@"Title" withMessage:PASSWORD_REQUIRED preferredStyle:UIAlertControllerStyleAlert] animated:YES completion:NULL];
+        }
+        else{
+            [DSAppCommon showSimpleAlertWithMessage:PASSWORD_REQUIRED];
+        }
         [COMMON removeLoading];
         return;
     }
@@ -1480,13 +1513,25 @@
     
     if(![FirstName isEqual:[NSNull null]]&& ![FirstName isEqualToString:@""]&&![LastName isEqual:[NSNull null]]&& ![LastName isEqualToString:@""] &&![dateChange isEqual:[NSNull null]]&&![strGender isEqual:[NSNull null]]&& ![strGender isEqualToString:@""] &&![emailAddressToRegister isEqual:[NSNull null]] &&![emailAddressToRegister isEqualToString:@""] &&![emailPasswordToRegister isEqual:[NSNull null]] && ![emailPasswordToRegister isEqualToString:@""]){
             if(![NSString validateEmail:emailAddressToRegister]){
+                if(IS_GREATER_IOS7){
                 [self presentViewController:[ DSAppCommon alertWithTitle:@"Title" withMessage:INVALID_EMAIL preferredStyle:UIAlertControllerStyleAlert] animated:YES completion:NULL];
+                }
+                else
+                {
+                    [DSAppCommon showSimpleAlertWithMessage:INVALID_EMAIL];
+                }
                 [COMMON removeLoading];
                 
                 return;
             }
            if([dateChange isEqual:@"DD-MM-YYYY"]){
+               if(IS_GREATER_IOS7)
+               {
             [self presentViewController:[ DSAppCommon alertWithTitle:@"Title" withMessage:@"ENTER DATE" preferredStyle:UIAlertControllerStyleAlert] animated:YES completion:NULL];
+               }
+               else{
+                   [DSAppCommon showSimpleAlertWithMessage:@"ENTER DATE"];
+               }
             [COMMON removeLoading];
             return;
            }
@@ -1496,7 +1541,14 @@
     }
     
     else{
+        if(IS_GREATER_IOS7)
+        {
         [self presentViewController:[ DSAppCommon alertWithTitle:@"Title" withMessage:FILL_ALL_DETAILS preferredStyle:UIAlertControllerStyleAlert] animated:YES completion:NULL];
+        }
+        else
+        {
+            [DSAppCommon showSimpleAlertWithMessage:FILL_ALL_DETAILS];
+        }
         [COMMON removeLoading];
         return;
     }

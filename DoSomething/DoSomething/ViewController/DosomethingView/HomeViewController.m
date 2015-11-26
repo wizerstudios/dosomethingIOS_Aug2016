@@ -51,6 +51,7 @@
     [self loadNavigation];
     objWebService = [[DSWebservice alloc]init];
     [COMMON LoadIcon:self.view];
+    
     [self loadhomeviewListWebservice];
      //deviceUdid = [OpenUDID value];
     if(IS_IPHONE5)
@@ -77,17 +78,19 @@
 
 -(void)loadhomeviewListWebservice
 {
-    
+   
      [objWebService HomeviewList:DoSomething_API success:^(AFHTTPRequestOperation *operation, id responseObject)
       {
           if(responseObject!=nil)
           {
           NSLog(@"response:%@",responseObject);
           NSMutableDictionary *homeviewlist = [[NSMutableDictionary alloc]init];
+          //NSMutableArray* homeListcommArray=[[NSMutableArray alloc]init];
           menuArray=[NSMutableArray alloc];
           homeviewlist = [responseObject valueForKey:@"dosomethinglist"];
           menuArray =[homeviewlist valueForKey:@"list"];
          
+              
              [COMMON removeLoading];
              [self.homeCollectionView reloadData];
           }
@@ -426,7 +429,14 @@
         if(![responseMsg isEqualToString:@""])
         {
            NSLog(@"responseMsg:%@",responseMsg);
+            if(IS_GREATER_IOS7)
+            {
              [self presentViewController:[ DSAppCommon alertWithTitle:@"Title" withMessage:responseMsg preferredStyle:UIAlertControllerStyleAlert] animated:YES completion:NULL];
+            }
+            else
+            {
+                [DSAppCommon showSimpleAlertWithMessage:responseMsg];
+            }
         }
        
         
