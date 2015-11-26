@@ -61,8 +61,8 @@
     [self.kenView animateWithImages:bannerImage
                          BannerText:bannerText
                         Pagenation :pageController
-                 transitionDuration:15
-                       initialDelay:0.5
+                 transitionDuration:8
+                       initialDelay:0
                                loop:YES
                         isLandscape:YES];
     
