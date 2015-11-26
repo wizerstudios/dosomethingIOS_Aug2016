@@ -622,8 +622,6 @@
                 cell.textFieldPlaceHolder.placeholder = titleText;
             else
                 cell.textFieldPlaceHolder.text = placeHolderText;
-            
-        
         }
         
         else
@@ -757,9 +755,40 @@
         
         cell.textViewAboutYou.text = textviewText;
         cell.labelAboutYou.text =titleText;
-        strAbout =cell.labelAboutYou.text;
+        //strAbout =cell.labelAboutYou.text;
+        strAbout = cell.textViewAboutYou.text;
         cell.textViewHeaderLabel.text =placeHolderText;
         cell.textViewAboutYou.delegate = self;
+        
+        
+        
+        NSLog(@"typingText%@",typingText);
+        NSLog(@"titleText%@",titleText);
+        NSLog(@"placeHolderText%@",placeHolderText);
+         NSLog(@"placeHolderText%@",placeHolderArray);
+         NSLog(@"placeHolderText%@",titleArray);
+        NSLog(@" cell.textViewHeaderLabel.text%@", cell.textViewHeaderLabel.text);
+        NSLog(@"cell.textViewAboutYou%@",cell.textViewAboutYou.text);
+        NSLog(@"cell.labelAboutYou.text%@",cell.labelAboutYou.text);
+        NSLog(@"textviewText%@",textviewText);
+        
+        
+        if(typingText == (id)[NSNull null] || [typingText isEqualToString:@""])//|| [typingText  isEqual: @"NULL"])
+        {
+            if((placeHolderText = @"Write something about yourself here.")){
+                
+                cell.textViewAboutYou.text = placeHolderText;
+            }
+            else
+                cell.textViewAboutYou.text = placeHolderText;
+            
+        }
+        
+        else
+            cell.textFieldPlaceHolder.text = typingText;
+        
+
+       
     }
     
     if(indexPath.row == 6)
@@ -854,9 +883,7 @@
             cell = cellEmailPassword;
             
         }
-        NSLog(@"typingText%@",typingText);
-        NSLog(@"titleText%@",titleText);
-        NSLog(@"placeHolderText%@",placeHolderText);
+        
         
         if(typingText == (id)[NSNull null] || [typingText isEqualToString:@""]  || typingText == nil)//|| [typingText  isEqual: @"NULL"])
         {
@@ -1354,6 +1381,15 @@
 -(void) registerAPI{
     
     
+   // NSLog(@"typingText%@",typingText);
+   // NSLog(@"titleText%@",titleText);
+   // NSLog(@"placeHolderText%@",placeHolderText);
+    NSLog(@" cell.textViewHeaderLabel.text%@", cell.textViewHeaderLabel.text);
+    NSLog(@"cell.textViewAboutYou%@",cell.textViewAboutYou);
+    NSLog(@"cell.labelAboutYou.text%@",cell.labelAboutYou.text);
+    NSLog(@"textviewText%@",textviewText);
+
+    
     if(currentLatitude == nil)
         currentLatitude = @"";
     if(currentLongitude == nil)
@@ -1425,6 +1461,7 @@
     NSArray *postPerArray;
     postPerArray = [[placeHolderArray objectAtIndex:0]valueForKey:@"TypingText"];
     NSLog(@"hobby:%@",hobbiesNameArray);
+     NSLog(@"about:%@",[postPerArray objectAtIndex:5]);
     
     strFirstName = [postPerArray objectAtIndex:1];
     strLastName  = [postPerArray objectAtIndex:2];
