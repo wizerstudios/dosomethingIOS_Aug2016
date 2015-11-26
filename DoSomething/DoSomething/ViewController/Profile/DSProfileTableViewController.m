@@ -76,6 +76,7 @@
     UIImage *profileImage1;
     UIImage *profileImage2;
     UIImage *profileImage3;
+    NSMutableDictionary *profileDict;
 
     
     
@@ -94,11 +95,19 @@
     [self initializeArray];
     [self getUserCurrenLocation];
     deviceUdid = [OpenUDID value];
-    NSMutableDictionary *dic=[[NSMutableDictionary alloc]init];
-    dic =[[NSUserDefaults standardUserDefaults] valueForKey:USERDETAILS];
-    NSLog(@"DICT%@",dic);
-    FirstName =[dic valueForKey:@"first_name"];
-    LastName  =[dic valueForKey:@"last_name"];
+    
+    profileDict=[[NSMutableDictionary alloc]init];
+    profileDict =[[NSUserDefaults standardUserDefaults] valueForKey:USERDETAILS];
+    NSString * strsessionID =[profileDict valueForKey:@"SessionId"];
+    loginUserSessionID = strsessionID;
+    if(profileDict == NULL)
+        [self initializeArray];
+    else{
+        [self initializeArrayRegister];
+        [_tableviewProfile reloadData];}
+    
+    
+    NSLog(@"DICT%@",profileDict);
     
     
    
@@ -427,6 +436,7 @@
    // detailsDict = [[COMMON getUserDetails]mutableCopy];
 
     [placeHolderArray insertObject:[[NSMutableArray alloc]initWithObjects:[NSMutableDictionary dictionaryWithObjectsAndKeys:@"Image",@"placeHolder",@"",@"TypingText", nil],
+                                    
                                     [NSMutableDictionary dictionaryWithObjectsAndKeys:[userDetailsDict valueForKey:@"first_name"],@"placeHolder",@"",@"TypingText", nil],
                                     [NSMutableDictionary dictionaryWithObjectsAndKeys:[userDetailsDict valueForKey:@"last_name"],@"placeHolder",@"",@"TypingText", nil],
                                     [NSMutableDictionary dictionaryWithObjectsAndKeys:[userDetailsDict valueForKey:@"gender"],@"placeHolder",@"",@"TypingText", nil],
@@ -443,6 +453,30 @@
     //[self.tableviewProfile reloadData];
    
 }
+-(void)initializeArrayRegister{
+    
+    placeHolderArray = [[NSMutableArray alloc] initWithCapacity: 1];
+    
+    // NSMutableDictionary *detailsDict = [[NSMutableDictionary alloc]init];
+    // detailsDict = [[COMMON getUserDetails]mutableCopy];
+    
+    [placeHolderArray insertObject:[[NSMutableArray alloc]initWithObjects:[NSMutableDictionary dictionaryWithObjectsAndKeys:@"Image",@"placeHolder",@"",@"TypingText", nil],
+                                    
+                                    [NSMutableDictionary dictionaryWithObjectsAndKeys:[profileDict valueForKey:@"first_name"],@"placeHolder",@"",@"TypingText", nil],
+                                    [NSMutableDictionary dictionaryWithObjectsAndKeys:[profileDict valueForKey:@"last_name"],@"placeHolder",@"",@"TypingText", nil],
+                                    [NSMutableDictionary dictionaryWithObjectsAndKeys:[profileDict valueForKey:@"gender"],@"placeHolder",@"",@"TypingText", nil],
+                                    [NSMutableDictionary dictionaryWithObjectsAndKeys:[profileDict valueForKey:@"date_of_birth"],@"placeHolder",@"",@"TypingText", nil],
+                                    [NSMutableDictionary dictionaryWithObjectsAndKeys:@"Write something about yourself here.",@"placeHolder",@"",@"TypingText", nil],
+                                    [NSMutableDictionary dictionaryWithObjectsAndKeys:@"Hobbies",@"placeHolder",@"",@"TypingText", nil],
+                                    [NSMutableDictionary dictionaryWithObjectsAndKeys:[profileDict valueForKey:@"email"],@"placeHolder",@"Password",@"placeHolderPass",@"",@"TypingText",@"",@"TypingTextPass", nil], nil]atIndex:0];
+    
+    titleArray = [[NSArray alloc]initWithObjects:@"Image",@"First Name",@"Last Name",@"male",@"Date of Birth",@"About You",@"Hobbies",@"Email&Password",@"switch_on",@"TermsOfUse",nil];
+    
+    NSLog(@"PlaceHolder %@",placeHolderArray);
+    //[self.tableviewProfile reloadData];
+    
+}
+
 
 
 #pragma mark - TableView Datasource & Delegate
@@ -482,6 +516,7 @@
 
        
         if ( indexPath.row == 7) {
+            
             return 120;
         }
         if (indexPath.row ==8) {
@@ -492,12 +527,7 @@
         if (indexPath.row == 9) {
             return 80;
         }
-//        if (indexPath.row == 10) {
-//            return 80;
-//        }
-//        if (indexPath.row == 11) {
-//            return 90;
-//        }
+
 
     return 40;
     }
@@ -532,13 +562,6 @@
         if (indexPath.row == 9) {
             return 98;
         }
-//    if (indexPath.row == 10) {
-//        return 98;
-//    }
-//    
-//    if (indexPath.row == 11) {
-//        return 120;
-//    }
     
     return 50;
 }
@@ -572,6 +595,7 @@
         titleText       =  [titleArray objectAtIndex:indexPath.row];
     if (indexPath.row == 0)
     {
+        
         if (cell == nil)
         {
             [[NSBundle mainBundle] loadNibNamed:@"DSProfileTableViewCell" owner:self options:nil];
@@ -602,12 +626,14 @@
     
     if (indexPath.row == 1 || indexPath.row == 2)
     {
+        
         if (cell == nil)
         {
             [[NSBundle mainBundle] loadNibNamed:@"DSProfileTableViewCell" owner:self options:nil];
             cell = cellTextField;
             
         }
+        
         if (IS_IPHONE6 ||IS_IPHONE6_Plus)
         {
             cell.layoutConstraintViewHeight.constant =49;
@@ -624,6 +650,11 @@
             if(placeHolderText ==(id) [NSNull null])
                 cell.textFieldPlaceHolder.placeholder = titleText;
             else
+                if(profileDict !=NULL){
+                    [cell.textFieldPlaceHolder setEnabled:NO];
+                    cell.textFieldPlaceHolder.text = placeHolderText;
+                }
+            else
                 cell.textFieldPlaceHolder.text = placeHolderText;
         }
         
@@ -633,6 +664,7 @@
     
     if (indexPath.row == 3)
     {
+        
         if (cell == nil)
         {
             [[NSBundle mainBundle] loadNibNamed:@"DSProfileTableViewCell" owner:self  options:nil];
@@ -699,10 +731,9 @@
         }
         }
         
+        
         cell.maleButton.userInteractionEnabled = YES;
         cell.femaleButton.userInteractionEnabled = YES;
-        
-        
         [cell.maleButton addTarget:self action:@selector(buttonAction:) forControlEvents:UIControlEventTouchUpInside];
         [cell.femaleButton addTarget:self action:@selector(buttonAction:) forControlEvents:UIControlEventTouchUpInside];
         
@@ -806,7 +837,7 @@
                 hobbiesImage = [[UIImageView alloc]initWithFrame:CGRectMake(((i-15)*(commonWidth + imageSize))+ 10, yAxis+((imageSize+space) * 3), imageSize, imageSize)];
             NSString *image =[imageNormalArray objectAtIndex:i];
            //[imageNormalArray lastObject];
-            NSLog(@"lastObject:%@",[imageNormalArray lastObject]);
+           // NSLog(@"lastObject:%@",[imageNormalArray lastObject]);
             if([image isEqualToString:@"Plus_icon.png"])
             {
                 [hobbiesImage setImage:[UIImage imageNamed:image]];
@@ -981,30 +1012,6 @@
         }
        
     }
-//    if (indexPath.row == 10)
-//    {
-//        
-//        if (cell == nil)
-//        {
-//            [[NSBundle mainBundle] loadNibNamed:@"DSProfileTableViewCell" owner:self options:nil];
-//            cell = cellLogout;
-//
-//        }
-//        [cell.logoutButton addTarget:self action:@selector(logoutAction:) forControlEvents:UIControlEventTouchUpInside];
-//       
-//        
-//    }
-//    if (indexPath.row == 11)
-//    {
-//        
-//        if (cell == nil)
-//        {
-//            [[NSBundle mainBundle] loadNibNamed:@"DSProfileTableViewCell" owner:self options:nil];
-//            cell = cellDelete;
-//
-//        }
-//        [cell.deleteButton addTarget:self action:@selector(deleteAction:) forControlEvents:UIControlEventTouchUpInside];
-//    }
 
     [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
     return cell;
@@ -1393,6 +1400,31 @@
 
     
 }
+#pragma mark - updateAPI
+-(void) updateAPI{
+    [objWebService profileUpdate:ProfileUpdate_API
+                      first_name:FirstName
+                       last_name:LastName
+                             dob:dateChange
+                   profileImage1:profileImage1
+                   profileImage2:profileImage2
+                   profileImage3:profileImage3
+                          gender:strGender
+                           about:strAbout
+                         hobbies:strInterestHobbies
+                        latitude:currentLatitude
+                       longitude:currentLongitude
+                    notification:@""
+                       sessionid:loginUserSessionID
+                         success:^(AFHTTPRequestOperation *operation, id responseObject) {
+                             NSLog(@"profileUpdate%@",responseObject);
+                             [COMMON removeLoading];
+                         }
+                         failure:^(AFHTTPRequestOperation *operation, id error) {
+                             
+                         }
+     ];
+}
 #pragma mark - loadRegisterNotification
 -(void)loadRegister{
     
@@ -1418,7 +1450,31 @@
 #pragma mark - saveAction
 -(void)saveAction:(id)sender
 {
-    
+    [COMMON LoadIcon:self.view];
+    if(profileDict !=NULL){
+        [COMMON LoadIcon:self.view];
+        NSArray *postPerArray;
+        postPerArray = [[placeHolderArray objectAtIndex:0]valueForKey:@"TypingText"];
+        
+        strDOB       = (currentTextfield.text !=nil)?currentTextfield.text :@"";
+        
+        NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+        [dateFormatter setDateFormat:@"dd/MM/yyyy"];
+        NSDate *date = [dateFormatter dateFromString: strDOB];
+        dateFormatter = [[NSDateFormatter alloc] init];
+        [dateFormatter setDateFormat:@"yyyy-MM-dd"];
+        dateChange = [dateFormatter stringFromDate:date];
+        NSLog(@"Converted String : %@",dateChange);
+
+        [self updateAPI];
+    }
+    else
+        [self loadValidations];
+}
+
+#pragma mark - saveAction
+-(void)loadValidations
+{
     
     [COMMON LoadIcon:self.view];
     NSArray *postPerArray;
@@ -1562,33 +1618,6 @@
         return;
     }
 
-}
-#pragma mark - Logout_Delete_Action_API
--(void)logoutDeleteAction{
-    
-    [objWebService logoutDeleteUser:User_Logout_Delete_API
-                          sessionId:loginUserSessionID
-                                 op:optionLogoutDelete
-                            success:^(AFHTTPRequestOperation *operation, id responseObject) {
-                          
-                      }
-                            failure:^(AFHTTPRequestOperation *operation, id error) {
-                          
-                      }];
-
-}
-#pragma mark - Logout and Delete Actions
--(void)logoutAction:(id)sender
-{
-    optionLogoutDelete = @"logout";
-    [self logoutDeleteAction];
-}
-
--(void)deleteAction:(id)sender
-{
-    optionLogoutDelete = @"delete";
-    [self logoutDeleteAction];
-    
 }
 
 

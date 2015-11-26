@@ -21,8 +21,7 @@
     IBOutlet DSProfileTableViewCell *CellSwitchOn;
     IBOutlet DSProfileTableViewCell *CellTermsOfUse;
     IBOutlet DSProfileTableViewCell *cellTextView;
-    IBOutlet DSProfileTableViewCell *cellLogout;
-    IBOutlet DSProfileTableViewCell *cellDelete;
+   
     
     UIImagePickerController  *imagepickerController;
     NSString *strType,*strProfileID,*strProfileImage,*strGender,*FirstName,*LastName,*strDOB,*strEmail,*strPassword;

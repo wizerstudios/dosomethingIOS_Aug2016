@@ -102,9 +102,9 @@ notification_vibration:(NSString*)isnotification_vibration
            first_name:(NSString *)first_name
             last_name:(NSString *)last_name
                   dob:(NSString *)dob
-               image1:(UIImage *)image1
-               image2:(UIImage *)image2
-               image3:(UIImage *)image3
+        profileImage1:(UIImage *)profileImage1
+        profileImage2:(UIImage *)profileImage2
+        profileImage3:(UIImage *)profileImage3
                gender:(NSString *)gender
                 about:(NSString *)about
               hobbies:(NSString *)hobbies

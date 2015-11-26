@@ -31,8 +31,6 @@
             <string>Patron-Regular</string>
             <string>Patron-Regular</string>
             <string>Patron-Regular</string>
-            <string>Patron-Regular</string>
-            <string>Patron-Regular</string>
         </mutableArray>
     </customFonts>
     <objects>
@@ -43,9 +41,7 @@
                 <outlet property="cellAddIcon" destination="5Fu-f3-SQN" id="Sg8-4z-pxE"/>
                 <outlet property="cellButton" destination="fi2-qG-tV9" id="ml8-21-oRj"/>
                 <outlet property="cellDatePicker" destination="jaf-ij-gGi" id="1Ro-Do-NHV"/>
-                <outlet property="cellDelete" destination="jRi-ix-6a3" id="WAA-Nl-ovb"/>
                 <outlet property="cellEmailPassword" destination="Cjl-HK-Sie" id="cQK-PV-9W9"/>
-                <outlet property="cellLogout" destination="mSP-C8-Nch" id="wPM-CS-nzw"/>
                 <outlet property="cellProfileImg" destination="KGk-i7-Jjw" id="U1r-DQ-mAX"/>
                 <outlet property="cellTextField" destination="Vd7-lK-9ag" id="iaC-bq-dBn"/>
                 <outlet property="cellTextView" destination="fgc-Db-ZpK" id="nqk-XJ-vMr"/>
@@ -179,9 +175,7 @@
             <connections>
                 <outlet property="SoundSwitchBtn" destination="AGY-3d-BBY" id="ajE-uN-nSa"/>
                 <outlet property="cameraButton" destination="L4l-gD-IHh" id="Utw-3t-AWx"/>
-                <outlet property="deleteButton" destination="3vL-vE-3wb" id="e2m-cL-Jgb"/>
                 <outlet property="hobbiesLabel" destination="CBw-9W-xH2" id="LLK-iC-TSe"/>
-                <outlet property="logoutButton" destination="p2m-pM-ORg" id="X9X-fW-8wz"/>
                 <outlet property="messSwitchBtn" destination="PI4-If-qxu" id="AqB-OW-fUt"/>
                 <outlet property="vibrationSwitchBtn" destination="Lnh-6T-lN0" id="UBo-YO-Kmr"/>
             </connections>
@@ -988,100 +982,6 @@
                 <outlet property="textViewHeaderLabel" destination="TdZ-JL-zPm" id="Ynd-BY-bex"/>
             </connections>
             <point key="canvasLocation" x="751" y="568"/>
-        </tableViewCell>
-        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="112" id="mSP-C8-Nch" customClass="DSProfileTableViewCell">
-            <rect key="frame" x="0.0" y="0.0" width="320" height="112"/>
-            <autoresizingMask key="autoresizingMask"/>
-            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="mSP-C8-Nch" id="fYL-ik-NHn">
-                <rect key="frame" x="0.0" y="0.0" width="320" height="111"/>
-                <autoresizingMask key="autoresizingMask"/>
-                <subviews>
-                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0bx-t4-Oeu">
-                        <rect key="frame" x="0.0" y="11" width="320" height="61"/>
-                        <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="p2m-pM-ORg">
-                                <rect key="frame" x="0.0" y="8" width="320" height="45"/>
-                                <animations/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="320" id="6Ro-yV-8nf"/>
-                                    <constraint firstAttribute="height" constant="45" id="Y5L-Rp-fbV"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" name="Patron-Regular" family="Patron" pointSize="13"/>
-                                <state key="normal" title="LOGOUT">
-                                    <color key="titleColor" red="0.90196078430000004" green="0.2470588235" blue="0.32156862749999998" alpha="1" colorSpace="deviceRGB"/>
-                                </state>
-                            </button>
-                        </subviews>
-                        <animations/>
-                        <color key="backgroundColor" red="0.90980392160000001" green="0.90980392160000001" blue="0.90980392160000001" alpha="1" colorSpace="calibratedRGB"/>
-                        <constraints>
-                            <constraint firstItem="p2m-pM-ORg" firstAttribute="top" secondItem="0bx-t4-Oeu" secondAttribute="top" constant="8" id="Cpa-T8-8IV"/>
-                            <constraint firstItem="p2m-pM-ORg" firstAttribute="leading" secondItem="0bx-t4-Oeu" secondAttribute="leading" id="ntW-sg-hxa"/>
-                            <constraint firstAttribute="bottom" secondItem="p2m-pM-ORg" secondAttribute="bottom" constant="8" id="oy9-ra-Gs0"/>
-                        </constraints>
-                    </view>
-                </subviews>
-                <animations/>
-                <color key="backgroundColor" red="0.90980392156862744" green="0.90980392156862744" blue="0.90980392156862744" alpha="1" colorSpace="calibratedRGB"/>
-                <constraints>
-                    <constraint firstItem="0bx-t4-Oeu" firstAttribute="leading" secondItem="fYL-ik-NHn" secondAttribute="leadingMargin" constant="-8" id="1fl-ds-gN3"/>
-                    <constraint firstItem="0bx-t4-Oeu" firstAttribute="top" secondItem="fYL-ik-NHn" secondAttribute="topMargin" constant="3" id="jJg-Dt-Kf8"/>
-                    <constraint firstAttribute="trailingMargin" secondItem="0bx-t4-Oeu" secondAttribute="trailing" constant="-8" id="y7x-ZW-NbU"/>
-                </constraints>
-            </tableViewCellContentView>
-            <animations/>
-            <connections>
-                <outlet property="logoutButton" destination="p2m-pM-ORg" id="QrE-9y-bSK"/>
-            </connections>
-            <point key="canvasLocation" x="756" y="915"/>
-        </tableViewCell>
-        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="121" id="jRi-ix-6a3" customClass="DSProfileTableViewCell">
-            <rect key="frame" x="0.0" y="0.0" width="320" height="121"/>
-            <autoresizingMask key="autoresizingMask"/>
-            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="jRi-ix-6a3" id="FtP-Aw-f7X">
-                <rect key="frame" x="0.0" y="0.0" width="320" height="120"/>
-                <autoresizingMask key="autoresizingMask"/>
-                <subviews>
-                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="t2f-Zd-g24">
-                        <rect key="frame" x="0.0" y="39" width="320" height="37"/>
-                        <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3vL-vE-3wb">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="37"/>
-                                <animations/>
-                                <color key="backgroundColor" red="0.59999999999999998" green="0.59999999999999998" blue="0.59999999999999998" alpha="1" colorSpace="calibratedRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="37" id="IPW-Vv-l6j"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" name="Patron-Regular" family="Patron" pointSize="13"/>
-                                <state key="normal" title="DELETE ACCOUNT">
-                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                            </button>
-                        </subviews>
-                        <animations/>
-                        <color key="backgroundColor" red="0.90980392160000001" green="0.90980392160000001" blue="0.90980392160000001" alpha="1" colorSpace="calibratedRGB"/>
-                        <constraints>
-                            <constraint firstItem="3vL-vE-3wb" firstAttribute="top" secondItem="t2f-Zd-g24" secondAttribute="top" id="6Oc-l4-dgd"/>
-                            <constraint firstItem="3vL-vE-3wb" firstAttribute="leading" secondItem="t2f-Zd-g24" secondAttribute="leading" id="oOs-OR-c9G"/>
-                            <constraint firstAttribute="bottom" secondItem="3vL-vE-3wb" secondAttribute="bottom" id="wHN-uO-8fj"/>
-                            <constraint firstAttribute="trailing" secondItem="3vL-vE-3wb" secondAttribute="trailing" id="x79-2t-Na4"/>
-                        </constraints>
-                    </view>
-                </subviews>
-                <animations/>
-                <color key="backgroundColor" red="0.90980392156862744" green="0.90980392156862744" blue="0.90980392156862744" alpha="1" colorSpace="calibratedRGB"/>
-                <constraints>
-                    <constraint firstAttribute="trailingMargin" secondItem="t2f-Zd-g24" secondAttribute="trailing" constant="-8" id="5nq-dE-W3h"/>
-                    <constraint firstItem="t2f-Zd-g24" firstAttribute="leading" secondItem="FtP-Aw-f7X" secondAttribute="leadingMargin" constant="-8" id="MBd-fn-lZF"/>
-                    <constraint firstItem="t2f-Zd-g24" firstAttribute="top" secondItem="FtP-Aw-f7X" secondAttribute="topMargin" constant="31" id="fjW-Hz-uv9"/>
-                </constraints>
-            </tableViewCellContentView>
-            <animations/>
-            <connections>
-                <outlet property="deleteButton" destination="3vL-vE-3wb" id="xsO-4K-lKa"/>
-            </connections>
-            <point key="canvasLocation" x="756" y="1157.5"/>
         </tableViewCell>
     </objects>
     <resources>

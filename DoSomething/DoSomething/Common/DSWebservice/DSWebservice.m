@@ -285,9 +285,9 @@ notification_vibration:(NSString *)isnotification_vibration
            first_name:(NSString *)first_name
             last_name:(NSString *)last_name
                   dob:(NSString *)dob
-               image1:(UIImage *)image1
-               image2:(UIImage *)image2
-               image3:(UIImage *)image3
+        profileImage1:(UIImage *)profileImage1
+        profileImage2:(UIImage *)profileImage2
+        profileImage3:(UIImage *)profileImage3
                gender:(NSString *)gender
                 about:(NSString *)about
               hobbies:(NSString *)hobbies
@@ -305,9 +305,9 @@ notification_vibration:(NSString *)isnotification_vibration
     if(first_name)         [profileUpdate    setObject:first_name                 forKey:@"first_name"];
     if(last_name)          [profileUpdate    setObject:last_name                  forKey:@"last_name"];
     if(dob)                [profileUpdate    setObject:dob                        forKey:@"dob"];
-    if(image1)             [profileUpdate    setObject:image1                     forKey:@"image1"];
-    if(image2)             [profileUpdate    setObject:image2                     forKey:@"image2"];
-    if(image3)             [profileUpdate    setObject:image3                     forKey:@"image3"];
+    if(profileImage1)      [profileUpdate    setObject:profileImage1              forKey:@"profileImage1"];
+    if(profileImage2)      [profileUpdate    setObject:profileImage2              forKey:@"profileImage2"];
+    if(profileImage2)      [profileUpdate    setObject:profileImage3              forKey:@"profileImage3"];
     if(gender)             [profileUpdate    setObject:gender                     forKey:@"gender"];
     if(about)              [profileUpdate    setObject:about                      forKey:@"about"];
     if(hobbies)            [profileUpdate    setObject:hobbies                    forKey:@"hobbies"];
