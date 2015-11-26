@@ -163,7 +163,7 @@ static NSString       *ServiceMimeType    = @"image/jpeg";
        profileImage2:(UIImage *)profileImage2
        profileImage3:(UIImage *)profileImage3
     IntersertHobbies:(NSString *)interestHobbies
-              Abouts:(NSString *)abouts
+               About:(NSString *)about
               gender:(NSString *)gender
             latitude:(NSString *)latitude
            longitude:(NSString *)longitude
@@ -187,7 +187,8 @@ notification_vibration:(NSString *)isnotification_vibration
     if(profileId)               [registerDetails    setObject:profileId             forKey:@"profileId"];
     if(dob)                     [registerDetails    setObject:dob                   forKey:@"dob"];
     if(gender)                  [registerDetails    setObject:gender                forKey:@"gender"];
-    if(abouts)                  [registerDetails    setObject:abouts                forKey:@"about"];
+    if(interestHobbies)         [registerDetails    setObject:interestHobbies       forKey:@"hobbies"];
+    if(about)                   [registerDetails    setObject:about                 forKey:@"about"];
                                 [registerDetails    setObject:latitude              forKey:@"latitude"];
                                 [registerDetails    setObject:longitude             forKey:@"longitude"];
     if(device)                  [registerDetails    setObject:device                forKey:@"device"];
@@ -275,10 +276,7 @@ notification_vibration:(NSString *)isnotification_vibration
            NSLog(@"Error = %@",error);
 
        }];
-    
-
-
-    
+        
 }
 
 #pragma mark - POST profile update

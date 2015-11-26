@@ -84,7 +84,7 @@ typedef void (^WebserviceRequestXMLFailureHandler)(AFHTTPRequestOperation  *oper
        profileImage2:(UIImage *)profileImage2
        profileImage3:(UIImage *)profileImage3
     IntersertHobbies:(NSString *)interestHobbies
-              Abouts:(NSString *)abouts
+               About:(NSString *)about
               gender:(NSString *)gender
             latitude:(NSString *)latitude
            longitude:(NSString *)longitude
