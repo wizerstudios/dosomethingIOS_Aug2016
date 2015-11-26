@@ -8,6 +8,9 @@
         <mutableArray key="HelveticaNeue.ttc">
             <string>HelveticaNeue-Bold</string>
         </mutableArray>
+        <mutableArray key="Patron-Bold.ttf">
+            <string>Patron-Bold</string>
+        </mutableArray>
     </customFonts>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="HomeViewController">
@@ -100,8 +103,8 @@
                                 <constraint firstAttribute="height" constant="90" id="qdo-9O-fYK"/>
                                 <constraint firstAttribute="height" constant="90" id="veJ-HY-KFJ"/>
                             </constraints>
-                            <fontDescription key="fontDescription" type="system" weight="black" pointSize="14"/>
-                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                            <fontDescription key="fontDescription" name="Patron-Bold" family="Patron" pointSize="14"/>
+                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <nil key="highlightedColor"/>
                             <variation key="default">
                                 <mask key="constraints">
