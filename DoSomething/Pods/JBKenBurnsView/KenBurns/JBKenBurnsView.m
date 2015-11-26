@@ -223,7 +223,7 @@ enum JBSourceMode {
     imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, optimusWidth, optimusHeight)];
     if(_currentImageIndex == 0)
     {
-         textImageview  =[[UIImageView alloc] initWithFrame:CGRectMake(self.frame.origin.x+70,self.center.y-30,180,70)];
+         textImageview  =[[UIImageView alloc] initWithFrame:CGRectMake(self.center.x-60,self.center.y-30,145,63)];
     }
     else{
     textImageview  =[[UIImageView alloc] initWithFrame:CGRectMake(self.frame.origin.x+50,self.center.y-30,227,67)];
