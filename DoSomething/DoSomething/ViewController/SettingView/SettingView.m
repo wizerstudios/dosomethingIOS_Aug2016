@@ -222,17 +222,37 @@
 }
 
 - (IBAction)alertPressYes:(id)sender {
-    
-   alertBgView.hidden = YES;
-   alertMainBgView.hidden = YES;
-     [self logoutDeleteAction];
+    [UIView animateWithDuration:1.0 animations:^{
+        
+        alertBgView.alpha = 0;
+        
+        alertMainBgView.alpha = 0;
+        
+    } completion:^(BOOL b){
+        
+        alertBgView.hidden = YES;
+        alertMainBgView.hidden = YES;
+         [self logoutDeleteAction];
+        
+    }];
     
    }
 
 - (IBAction)alertPressNo:(id)sender {
     
-    alertBgView.hidden = YES;
-    alertMainBgView.hidden = YES;
+    [UIView animateWithDuration:1.0 animations:^{
+        
+        alertBgView.alpha = 0;
+        
+        alertMainBgView.alpha = 0;
+      
+    } completion:^(BOOL b){
+        
+        alertBgView.hidden = YES;
+        
+        alertMainBgView.hidden = YES;
+      
+    }];
     
 }
 

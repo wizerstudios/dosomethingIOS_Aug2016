@@ -401,25 +401,58 @@
 }
 
 - (IBAction)alertPressCancel:(id)sender {
-    alertBgView.hidden = YES;
-    alertMainBgView.hidden = YES;
-   
+    [UIView animateWithDuration:1.0 animations:^{
+        
+        alertBgView.alpha = 0;
+        
+        alertMainBgView.alpha = 0;
+              
+    } completion:^(BOOL b){
+        
+
+        alertBgView.hidden = YES;
+        
+        alertMainBgView.hidden = YES;
+    }];
 }
 
 - (IBAction)alertPressYes:(id)sender {
     
-    alertBgView.hidden = YES;
-    alertMainBgView.hidden = YES;
+    [UIView animateWithDuration:1.0 animations:^{
+        
+        alertBgView.alpha = 0;
+        
+        alertMainBgView.alpha = 0;
+           }
+        completion:^(BOOL b){
+        
+        alertBgView.hidden = YES;
+        
+        alertMainBgView.hidden = YES;
+        [self loadupdateDosomethingWebService:selectedItemsArray :@"Yes"];
+      
+    }];
     
-    NSLog(@"selectedItemsArray:%@",selectedItemsArray);
-    [self loadupdateDosomethingWebService:selectedItemsArray :@"Yes"];
 }
 
 - (IBAction)alertPressNo:(id)sender {
+    [UIView animateWithDuration:1.0 animations:^{
+        
+        alertBgView.alpha = 0;
+        
+        alertMainBgView.alpha = 0;
+        
+    } completion:^(BOOL b){
+        
+        
+        alertBgView.hidden = YES;
+        
+        alertMainBgView.hidden = YES;
+        [self loadupdateDosomethingWebService:selectedArray :@"No"];
+     
+    }];
+   
     
-    alertBgView.hidden = YES;
-    alertMainBgView.hidden = YES;
-    [self loadupdateDosomethingWebService:selectedArray :@"No"];
 }
 -(void)loadupdateDosomethingWebService:(NSArray *)selectItemID :(NSString*)selectOption
 {
