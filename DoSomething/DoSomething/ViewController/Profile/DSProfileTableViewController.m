@@ -156,7 +156,15 @@
     [customNavigation.buttonBack addTarget:self action:@selector(backAction) forControlEvents:UIControlEventTouchUpInside];
     
     imageNormalArray =[[NSMutableArray alloc]init];
+    if([profileDict valueForKey:@"hobbieslist"]!=NULL)
+    {
+        interstAndHobbiesArray = [[profileDict valueForKey:@"hobbieslist"]mutableCopy];
+        hobbiesNameArray       =[[interstAndHobbiesArray valueForKey:@"name"]mutableCopy];
+        imageNormalArray     = [[interstAndHobbiesArray valueForKey:@"image"]mutableCopy];
+    }
     
+    else
+    {
     interstAndHobbiesArray =[[[NSUserDefaults standardUserDefaults] valueForKey:@"SelectedItem"]mutableCopy];
     
     imageNormalArray =[[[NSUserDefaults standardUserDefaults] valueForKey:@"SelectedItemNormal"]mutableCopy];
@@ -167,6 +175,7 @@
 
     
     strInterestHobbies = [hobbiesCategoryIDArray componentsJoinedByString:@","];
+    }
     
     NSLog(@"joinedString:%@",strInterestHobbies);
     
