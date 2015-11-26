@@ -16,7 +16,7 @@
 
 @interface SettingView ()
 {
-    CustomNavigationView *customNavigation;
+   
     DSWebservice *objWebService;
     NSString *loginUserSessionID;
     NSString *optionLogoutDelete;
@@ -60,18 +60,17 @@
     [self.navigationItem setHidesBackButton:YES animated:NO];
     [self.navigationController.navigationBar setTranslucent:YES];
    
-    //CustomNavigationView *customNavigation;
+    CustomNavigationView *customNavigation;
     customNavigation = [[CustomNavigationView alloc] initWithNibName:@"CustomNavigationView" bundle:nil];
     customNavigation.view.frame = CGRectMake(0,-20, CGRectGetWidth(self.view.frame), 65);
-    if (IS_IPHONE6 ){
-        customNavigation.view.frame = CGRectMake(0,-20, 375, 83);
-        //self.layoutConstraintTableViewYPos.constant= 20;
-    }
-    if(IS_IPHONE6_Plus)
+    if (IS_IPHONE4 ||IS_IPHONE5)
     {
-        customNavigation.view.frame = CGRectMake(0,-20, 420, 83);
-        //self.layoutConstraintTableViewYPos.constant= 20;
+        customNavigation.view.frame = CGRectMake(0,-20, CGRectGetWidth(self.view.frame), 65);
     }
+    else    {
+        customNavigation.view.frame = CGRectMake(0,-20,420, 75);
+    }
+
     [customNavigation.menuBtn setHidden:YES];
     [customNavigation.buttonBack setHidden:YES];
     [customNavigation.saveBtn setHidden:YES];
@@ -125,9 +124,9 @@
   
     
     
-    [self.vibrationSwitchBtn addTarget:self action:@selector(newMessSwitchBtnAction:) forControlEvents:UIControlEventTouchUpInside];
-    [self.SoundSwitchBtn addTarget:self action:@selector(newMessSwitchBtnAction:) forControlEvents:UIControlEventTouchUpInside];
-    [self.messSwitchBtn addTarget:self action:@selector(newMessSwitchBtnAction:) forControlEvents:UIControlEventTouchUpInside];
+    //[self.vibrationSwitchBtn addTarget:self action:@selector(newMessSwitchBtnAction:) forControlEvents:UIControlEventTouchUpInside];
+    //[self.SoundSwitchBtn addTarget:self action:@selector(newMessSwitchBtnAction:) forControlEvents:UIControlEventTouchUpInside];
+   // [self.messSwitchBtn addTarget:self action:@selector(newMessSwitchBtnAction:) forControlEvents:UIControlEventTouchUpInside];
     
 
 }

@@ -3,8 +3,6 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9051"/>
-        <capability name="Alignment constraints to the first baseline" minToolsVersion="6.0"/>
-        <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
     </dependencies>
     <customFonts key="customFonts">
         <mutableArray key="Patron-Bold.ttf">
@@ -219,6 +217,10 @@
                             <rect key="frame" x="175" y="165" width="135" height="30"/>
                             <animations/>
                             <color key="backgroundColor" red="0.59607843137254901" green="0.59607843137254901" blue="0.59607843137254901" alpha="1" colorSpace="calibratedRGB"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="135" id="Q50-Cc-bGZ"/>
+                                <constraint firstAttribute="height" constant="30" id="l8l-l9-s7O"/>
+                            </constraints>
                             <fontDescription key="fontDescription" name="Patron-Medium" family="Patron" pointSize="10"/>
                             <state key="normal" title="Privacy Policy">
                                 <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -233,25 +235,22 @@
                     <constraints>
                         <constraint firstItem="8Qn-UM-IQM" firstAttribute="centerX" secondItem="xEE-yJ-RYa" secondAttribute="centerX" id="0bu-Gu-0hk"/>
                         <constraint firstAttribute="bottom" secondItem="8Qn-UM-IQM" secondAttribute="bottom" constant="472" id="2VM-3g-Uz1"/>
-                        <constraint firstItem="mVq-wo-sUe" firstAttribute="baseline" secondItem="VcQ-5f-k8S" secondAttribute="firstBaseline" id="5Lz-OP-OpV"/>
                         <constraint firstItem="foH-is-yaE" firstAttribute="top" secondItem="8Qn-UM-IQM" secondAttribute="bottom" constant="5" id="7w7-nd-FBM"/>
                         <constraint firstItem="8Qn-UM-IQM" firstAttribute="leading" secondItem="mVq-wo-sUe" secondAttribute="leading" id="9Rl-YG-bxv"/>
                         <constraint firstItem="8Qn-UM-IQM" firstAttribute="leading" secondItem="foH-is-yaE" secondAttribute="leading" id="Ezx-4I-ZWz"/>
                         <constraint firstItem="8Qn-UM-IQM" firstAttribute="trailing" secondItem="foH-is-yaE" secondAttribute="trailing" id="GJ0-9Z-gvr"/>
-                        <constraint firstItem="VcQ-5f-k8S" firstAttribute="leading" secondItem="mVq-wo-sUe" secondAttribute="trailing" constant="30" id="I4K-bq-MmY"/>
                         <constraint firstItem="mVq-wo-sUe" firstAttribute="top" secondItem="xEE-yJ-RYa" secondAttribute="top" constant="165" id="IC6-wT-rNl"/>
                         <constraint firstItem="Old-oT-b7M" firstAttribute="leading" secondItem="xEE-yJ-RYa" secondAttribute="leading" constant="10" id="OZc-AI-UTW"/>
-                        <constraint firstItem="Old-oT-b7M" firstAttribute="top" secondItem="VcQ-5f-k8S" secondAttribute="bottom" constant="30" id="RkD-D0-Nix"/>
+                        <constraint firstItem="VcQ-5f-k8S" firstAttribute="top" secondItem="foH-is-yaE" secondAttribute="bottom" constant="27" id="Y4P-RE-n6K"/>
                         <constraint firstItem="2EP-Qb-quU" firstAttribute="leading" secondItem="xEE-yJ-RYa" secondAttribute="leading" constant="10" id="YBP-nu-vt5"/>
+                        <constraint firstAttribute="trailing" secondItem="VcQ-5f-k8S" secondAttribute="trailing" constant="10" id="ZT4-FI-J8O"/>
                         <constraint firstAttribute="trailing" secondItem="2EP-Qb-quU" secondAttribute="trailing" constant="10" id="Zgf-E9-cGx"/>
-                        <constraint firstItem="mVq-wo-sUe" firstAttribute="top" secondItem="VcQ-5f-k8S" secondAttribute="top" id="bwq-nQ-mkx"/>
                         <constraint firstItem="8Qn-UM-IQM" firstAttribute="leading" secondItem="xEE-yJ-RYa" secondAttribute="leading" constant="10" id="dpl-ED-RZh"/>
-                        <constraint firstItem="mVq-wo-sUe" firstAttribute="firstBaseline" secondItem="VcQ-5f-k8S" secondAttribute="baseline" id="kZb-QD-LA6"/>
+                        <constraint firstItem="Old-oT-b7M" firstAttribute="top" secondItem="VcQ-5f-k8S" secondAttribute="bottom" constant="30" id="qH9-SC-duX"/>
                         <constraint firstItem="8Qn-UM-IQM" firstAttribute="top" secondItem="xEE-yJ-RYa" secondAttribute="top" constant="10" id="rtz-mB-wfT"/>
                         <constraint firstAttribute="trailing" secondItem="8Qn-UM-IQM" secondAttribute="trailing" constant="10" id="uki-ED-1MZ"/>
                         <constraint firstAttribute="bottom" secondItem="2EP-Qb-quU" secondAttribute="bottom" constant="62" id="xA2-ar-81j"/>
                         <constraint firstItem="mVq-wo-sUe" firstAttribute="top" secondItem="foH-is-yaE" secondAttribute="bottom" constant="27" id="ynd-9I-udV"/>
-                        <constraint firstItem="8Qn-UM-IQM" firstAttribute="trailing" secondItem="VcQ-5f-k8S" secondAttribute="trailing" id="yzf-u1-B6V"/>
                         <constraint firstAttribute="trailing" secondItem="Old-oT-b7M" secondAttribute="trailing" constant="10" id="zUT-ud-SyO"/>
                     </constraints>
                 </scrollView>
