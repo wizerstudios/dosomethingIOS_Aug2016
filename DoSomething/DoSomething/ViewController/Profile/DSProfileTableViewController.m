@@ -96,8 +96,11 @@
     deviceUdid = [OpenUDID value];
     NSMutableDictionary *dic=[[NSMutableDictionary alloc]init];
     dic =[[NSUserDefaults standardUserDefaults] valueForKey:USERDETAILS];
-    NSString * strsessionID =[dic valueForKey:@"SessionId"];
-    loginUserSessionID=strsessionID;
+    NSLog(@"DICT%@",dic);
+    FirstName =[dic valueForKey:@"first_name"];
+    LastName  =[dic valueForKey:@"last_name"];
+    
+    
    
     [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"SelectedItemCategoryID"];
     isNotification_message = @"Yes";
@@ -755,37 +758,11 @@
         
         cell.textViewAboutYou.text = textviewText;
         cell.labelAboutYou.text =titleText;
-        //strAbout =cell.labelAboutYou.text;
-        strAbout = cell.textViewAboutYou.text;
+        strAbout =cell.textViewAboutYou.text;
         cell.textViewHeaderLabel.text =placeHolderText;
         cell.textViewAboutYou.delegate = self;
         
         
-        
-        NSLog(@"typingText%@",typingText);
-        NSLog(@"titleText%@",titleText);
-        NSLog(@"placeHolderText%@",placeHolderText);
-         NSLog(@"placeHolderText%@",placeHolderArray);
-         NSLog(@"placeHolderText%@",titleArray);
-        NSLog(@" cell.textViewHeaderLabel.text%@", cell.textViewHeaderLabel.text);
-        NSLog(@"cell.textViewAboutYou%@",cell.textViewAboutYou.text);
-        NSLog(@"cell.labelAboutYou.text%@",cell.labelAboutYou.text);
-        NSLog(@"textviewText%@",textviewText);
-        
-        
-        if(typingText == (id)[NSNull null] || [typingText isEqualToString:@""])//|| [typingText  isEqual: @"NULL"])
-        {
-            if((placeHolderText = @"Write something about yourself here.")){
-                
-                cell.textViewAboutYou.text = placeHolderText;
-            }
-            else
-                cell.textViewAboutYou.text = placeHolderText;
-            
-        }
-        
-        else
-            cell.textFieldPlaceHolder.text = typingText;
         
 
        
@@ -1361,7 +1338,7 @@
     else if(CurrentImage == 2)
         profileImage3 = image;
     
-    NSData *profileData = UIImageJPEGRepresentation([info objectForKey:UIImagePickerControllerOriginalImage], 0.1);
+    NSData *profileData = UIImageJPEGRepresentation([info objectForKey:UIImagePickerControllerEditedImage], 0.1);
     [profileDataArray replaceObjectAtIndex:CurrentImage withObject:profileData];
     [imagepickerController dismissViewControllerAnimated:YES completion:nil];
     
@@ -1380,27 +1357,10 @@
 #pragma mark - registerAPI
 -(void) registerAPI{
     
-    
-   // NSLog(@"typingText%@",typingText);
-   // NSLog(@"titleText%@",titleText);
-   // NSLog(@"placeHolderText%@",placeHolderText);
-    NSLog(@" cell.textViewHeaderLabel.text%@", cell.textViewHeaderLabel.text);
-    NSLog(@"cell.textViewAboutYou%@",cell.textViewAboutYou);
-    NSLog(@"cell.labelAboutYou.text%@",cell.labelAboutYou.text);
-    NSLog(@"textviewText%@",textviewText);
-
-    
     if(currentLatitude == nil)
         currentLatitude = @"";
     if(currentLongitude == nil)
         currentLongitude = @"";
-//     profileImage1=[profileDataArray objectAtIndex:0];
-//     profileImage2=[profileDataArray objectAtIndex:1];
-//     profileImage3=[profileDataArray objectAtIndex:2];
-    
-   // strProfileImage = [Base64 encode:profileData1];
-  //  strProfileImage2 = [Base64 encode:profileData2];
-   // strProfileImage3 = [Base64 encode:profileData3];
     
     [objWebService postRegister:Register_API
                            type:strType
@@ -1414,7 +1374,7 @@
                   profileImage2:profileImage2
                   profileImage3:profileImage3
                IntersertHobbies:strInterestHobbies
-                         Abouts:strAbout
+                          About:strAbout
                          gender:strGender
                        latitude:currentLatitude
                       longitude:currentLongitude
@@ -1437,6 +1397,7 @@
 -(void)loadRegister{
     
     [COMMON LoadIcon:self.view];
+    
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(loadRegisterView:)
                                                  name:@"registerform"
@@ -1457,11 +1418,14 @@
 #pragma mark - saveAction
 -(void)saveAction:(id)sender
 {
+    
+    
     [COMMON LoadIcon:self.view];
     NSArray *postPerArray;
     postPerArray = [[placeHolderArray objectAtIndex:0]valueForKey:@"TypingText"];
     NSLog(@"hobby:%@",hobbiesNameArray);
      NSLog(@"about:%@",[postPerArray objectAtIndex:5]);
+    //strAbout= textviewText;
     
     strFirstName = [postPerArray objectAtIndex:1];
     strLastName  = [postPerArray objectAtIndex:2];
@@ -1473,10 +1437,18 @@
 
     strDOB       = (currentTextfield.text !=nil)?currentTextfield.text :@"";
     
-    dateChange = strDOB;
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateFormat:@"dd/MM/yyyy"];
+    NSDate *date = [dateFormatter dateFromString: strDOB];
+    dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateFormat:@"yyyy-MM-dd"];
+    dateChange = [dateFormatter stringFromDate:date];
+    NSLog(@"Converted String : %@",dateChange);
+
     
-    dateChange = [dateChange stringByReplacingOccurrencesOfString:@"/"
-                                                       withString:@"-"];
+    
+//    dateChange = [dateChange stringByReplacingOccurrencesOfString:@"/"
+//                                                       withString:@"-"];
     
     NSLog(@"isNotification_vibration:%@",isNotification_vibration);
     
@@ -1522,7 +1494,7 @@
                 
                 return;
             }
-           if([dateChange isEqual:@"DD-MM-YYYY"]){
+           if([dateChange isEqual:@"DD/MM/YYYY"]){
             [self presentViewController:[ DSAppCommon alertWithTitle:@"Title" withMessage:@"ENTER DATE" preferredStyle:UIAlertControllerStyleAlert] animated:YES completion:NULL];
             [COMMON removeLoading];
             return;
