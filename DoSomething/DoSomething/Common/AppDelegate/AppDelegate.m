@@ -12,6 +12,8 @@
 #import "DSHomeViewController.h"
 #import "DSAppCommon.h"
 #import "HomeViewController.h"
+#import <Fabric/Fabric.h>
+#import <Crashlytics/Crashlytics.h>
 
 
 
@@ -49,7 +51,9 @@
     [self.window makeKeyAndVisible];
     [self TabBarViews];
     
+    [Fabric with:@[[Crashlytics class]]];
     return YES;
+    
 }
 - (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation {
     return [[FBSDKApplicationDelegate sharedInstance] application:application
