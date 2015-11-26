@@ -709,26 +709,31 @@
         [femaleLabel setText:@"Female"];
         [cell.labelFemale addSubview:femaleLabel];
         
-        if(placeHolderText == (id)[NSNull null]){
+        if( profileDict !=NULL){
             
-            femaleLabel.textColor = [UIColor colorWithRed:(float)161.0/255 green:(float)161.0/255 blue:(float)161.0/255 alpha:1.0f];
-            maleLabel.textColor = [UIColor colorWithRed:(float)161.0/255 green:(float)161.0/255 blue:(float)161.0/255 alpha:1.0f];
-            
+            profileGenderValueLabel.text = placeHolderText;
         }
-        
         else{
-         if([placeHolderText isEqualToString:@"Male"])
-        {
+            [profileGenderView setHidden:YES];
+            [profileGenderLabel setHidden:YES];
+            [profileGenderValueLabel setHidden:YES];
+            if(placeHolderText == (id)[NSNull null]){
+            
             femaleLabel.textColor = [UIColor colorWithRed:(float)161.0/255 green:(float)161.0/255 blue:(float)161.0/255 alpha:1.0f];
-            maleLabel.textColor = [UIColor redColor];
-            
-        }
-        else if([placeHolderText isEqualToString:@"female"])
-        {
             maleLabel.textColor = [UIColor colorWithRed:(float)161.0/255 green:(float)161.0/255 blue:(float)161.0/255 alpha:1.0f];
-            femaleLabel.textColor = [UIColor redColor];
-            
-        }
+            }
+            else{
+                if([placeHolderText isEqualToString:@"Male"])
+                {
+                femaleLabel.textColor = [UIColor colorWithRed:(float)161.0/255 green:(float)161.0/255 blue:(float)161.0/255 alpha:1.0f];
+                maleLabel.textColor = [UIColor redColor];
+                }
+                else if([placeHolderText isEqualToString:@"female"])
+                {
+                maleLabel.textColor = [UIColor colorWithRed:(float)161.0/255 green:(float)161.0/255 blue:(float)161.0/255 alpha:1.0f];
+                femaleLabel.textColor = [UIColor redColor];
+                }
+            }
         }
         
         

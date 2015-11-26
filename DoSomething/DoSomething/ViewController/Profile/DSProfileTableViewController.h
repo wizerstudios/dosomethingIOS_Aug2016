@@ -22,6 +22,11 @@
     IBOutlet DSProfileTableViewCell *CellTermsOfUse;
     IBOutlet DSProfileTableViewCell *cellTextView;
    
+    IBOutlet UIView *profileGenderView;
+    
+    IBOutlet UILabel *profileGenderLabel;
+    
+    IBOutlet UILabel *profileGenderValueLabel;
     
     UIImagePickerController  *imagepickerController;
     NSString *strType,*strProfileID,*strProfileImage,*strGender,*FirstName,*LastName,*strDOB,*strEmail,*strPassword;
