@@ -36,8 +36,11 @@
     objWebService =[[DSWebservice alloc]init];
     settingScroll.scrollEnabled =NO;
     NSMutableDictionary *dic=[[NSMutableDictionary alloc]init];
+    
     dic =[[NSUserDefaults standardUserDefaults] valueForKey:USERDETAILS];
+    
     NSString * strsessionID =[dic valueForKey:@"SessionId"];
+    NSLog(@"usersessionID:%@",strsessionID);
     notificationMsg=[dic valueForKey:@"notification_message"];
     notificationSound=[dic valueForKey:@"notification_sound"];
     notificationvibration=[dic valueForKey:@"notification_vibration"];
@@ -155,13 +158,24 @@
                                  op:optionLogoutDelete
                             success:^(AFHTTPRequestOperation *operation, id responseObject) {
                                 NSLog(@"logout");
+                                if([[[responseObject valueForKey:@"useraction"]valueForKey:@"status"] isEqualToString:@"success"])
+                                {
                                 DSHomeViewController*objSplashView =[[DSHomeViewController alloc]initWithNibName:@"DSHomeViewController" bundle:nil];
                                 [self.navigationController pushViewController:objSplashView animated:NO];
                                 
-                                [COMMON removeUserDetails];
-                                appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
-                                appDelegate.buttonsView.hidden=YES;
-                                [appDelegate.settingButton setBackgroundImage:[UIImage imageNamed:@"setting_icon.png"] forState:UIControlStateNormal];
+                                dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
+                                    [COMMON removeUserDetails];
+                                    appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+                                    appDelegate.buttonsView.hidden=YES;
+                                    [appDelegate.settingButton setBackgroundImage:[UIImage imageNamed:@"setting_icon.png"] forState:UIControlStateNormal];
+                                });
+                                }
+                                
+                                else
+                                {
+                                      NSLog(@"delete failure");
+                                }
+                               
                                 
                                 
                             }
