@@ -65,34 +65,36 @@
 
 -(void)TabBarViews
 {
-    int wVal=self.window.bounds.size.width;
-    int hVal=self.window.bounds.size.height;
+    //int wVal=self.window.bounds.size.width;
+   // int hVal=self.window.bounds.size.height;
     buttonsView=[[UIView alloc]init];
     [buttonsView setBackgroundColor:[UIColor whiteColor]];
 //    [buttonsView setBackgroundColor:[UIColor colorWithRed:(float)239.0/255 green:(float)239.0/255 blue:(float)239.0/255 alpha:1.0f]];
     
-    if (IS_IPHONE4) {
-        buttonsView.frame=CGRectMake(0,hVal-hVal/10,wVal,hVal/10);
-        buttonsView.hidden=YES;
-        
-    }
-    else if (IS_IPHONE5)
-    {
-        buttonsView.frame=CGRectMake(0,hVal-hVal/11,wVal,hVal/11);
-        buttonsView.hidden=YES;
-        
-    }
-    else if (IS_IPHONE6)
-    {
-        buttonsView.frame=CGRectMake(0,hVal-hVal/13,wVal,hVal/13);
-        buttonsView.hidden=YES;
-        
-    }
-    else if (IS_IPHONE6_Plus)
-    {
-        buttonsView.frame=CGRectMake(0,hVal-hVal/15,wVal,hVal/15);
-        buttonsView.hidden=YES;
-    }
+//    if (IS_IPHONE4) {
+//        buttonsView.frame=CGRectMake(0,hVal-hVal/10,wVal,hVal/10);
+//        buttonsView.hidden=YES;
+//        
+//    }
+//    else if (IS_IPHONE5)
+//    {
+//        buttonsView.frame=CGRectMake(0,hVal-hVal/11,wVal,hVal/11);
+//        buttonsView.hidden=YES;
+//        
+//    }
+//    else if (IS_IPHONE6)
+//    {
+//        buttonsView.frame=CGRectMake(0,hVal-hVal/13,wVal,hVal/13);
+//        buttonsView.hidden=YES;
+//        
+//    }
+//    else if (IS_IPHONE6_Plus)
+//    {
+//        buttonsView.frame=CGRectMake(0,hVal-hVal/15,wVal,hVal/15);
+//        buttonsView.hidden=YES;
+//    }
+    buttonsView.frame=CGRectMake(self.window.frame.origin.x,self.window.frame.size.height-50,self.window.frame.size.width,50);
+     buttonsView.hidden=YES;
     locationButton  =[[UIButton alloc]init];
     menuButton      =[[UIButton alloc]init];
     chatsButton     =[[UIButton alloc]init];
@@ -129,23 +131,28 @@
     
     [settingButton addTarget:self action:@selector(settingView) forControlEvents:UIControlEventTouchUpInside];
     
-    locationButton.frame=CGRectMake(20,3,45,45);
+    locationButton.frame=CGRectMake(buttonsView.frame.origin.x+20,3,45,45);
     menuButton.frame=CGRectMake(buttonsView.center.x-18,3,45,45);
     chatsButton.frame=CGRectMake(menuButton.frame.origin.x+menuButton.frame.size.width+20,3,45,45);
+    profileButton.frame=CGRectMake(menuButton.frame.origin.x-55,locationButton.frame.origin.y+8,29,28);
+    settingButton.frame =CGRectMake(chatsButton.frame.origin.x+chatsButton.frame.size.width+20,chatsButton.frame.origin.y+10,29,25);
        if(IS_IPHONE6)
     {
-        locationButton.frame=CGRectMake(50,3,50,50);
-        menuButton.frame=CGRectMake(170,3,45,45);
-        chatsButton.frame=CGRectMake(280,3,50,50);
+        locationButton.frame=CGRectMake(buttonsView.frame.origin.x+20,3,50,50);
+        menuButton.frame=CGRectMake(self.window.frame.size.width/2-18,3,45,45);
+        chatsButton.frame=CGRectMake(menuButton.frame.origin.x+menuButton.frame.size.width+25,3,50,50);
+        profileButton.frame=CGRectMake(locationButton.frame.origin.x+locationButton.frame.size.width+25,locationButton.frame.origin.y+10,29,28);
+        settingButton.frame =CGRectMake(chatsButton.frame.origin.x+chatsButton.frame.size.width+25,chatsButton.frame.origin.y+10,29,28);
     }
     else if   (IS_IPHONE6_Plus)
     {
-        locationButton.frame=CGRectMake(60,3,50,50);
-        menuButton.frame=CGRectMake(190,3,45,45);
-        chatsButton.frame=CGRectMake(320,3,50,50);
+        locationButton.frame=CGRectMake(buttonsView.frame.origin.x+20,3,50,50);
+        menuButton.frame=CGRectMake(self.window.frame.size.width/2-18,3,45,45);
+        chatsButton.frame=CGRectMake(menuButton.frame.origin.x+menuButton.frame.size.width+30,3,50,50);
+        profileButton.frame=CGRectMake(locationButton.frame.origin.x+locationButton.frame.size.width+30,locationButton.frame.origin.y+10,29,28);
+        settingButton.frame =CGRectMake(chatsButton.frame.origin.x+chatsButton.frame.size.width+30,chatsButton.frame.origin.y+10,29,28);
     }
-    profileButton.frame=CGRectMake(locationButton.frame.origin.x+locationButton.frame.size.width+20,locationButton.frame.origin.y+8,29,28);
-    settingButton.frame =CGRectMake(chatsButton.frame.origin.x+chatsButton.frame.size.width+20,chatsButton.frame.origin.y+10,29,25);
+
     
 
     [self.window.rootViewController.view addSubview:buttonsView];
