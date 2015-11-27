@@ -503,8 +503,7 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-//    if(profileDict == NULL)
-//    {
+    
     if (IS_IPHONE4 ||IS_IPHONE5)
     {
            if (indexPath.row == 0 ){
@@ -577,18 +576,9 @@
     
             if (indexPath.row == 9) {
                 return 98;
-           // }
+            }
         return 50;
     }
-//    else{
-//        if (IS_IPHONE4 ||IS_IPHONE5)
-//        {
-//            return 40;
-//        }
-//    }
-    return 50;
-    
-}
 
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -850,6 +840,16 @@
         }
         
         yAxis = 31;
+        if(profileDict ==NULL)
+        {
+       
+        }
+        else
+        {
+            imageSize =39;
+            commonWidth=19.5;
+            
+        }
         space = imageSize / 2;
         commonHeight = imageSize+15;
         
@@ -1553,7 +1553,7 @@
     
     if([FirstName isEqual:[NSNull null]] && [FirstName isEqual:@""])
     {
-        if(IS_GREATER_IOS7)
+        if(IS_GREATER_IOS8)
         {
         [self presentViewController:[ DSAppCommon alertWithTitle:@"Title" withMessage:LASTNAME_REQUIRED preferredStyle:UIAlertControllerStyleAlert] animated:YES completion:NULL];
         }
@@ -1566,7 +1566,7 @@
     }
     if ( [dateChange isEqual:[NSNull null]] && [dateChange isEqual:@""] )
     {
-        if(IS_GREATER_IOS7)
+        if(IS_GREATER_IOS8)
         {
         [self presentViewController:[ DSAppCommon alertWithTitle:@"Title" withMessage:DOB_REQUIRED preferredStyle:UIAlertControllerStyleAlert] animated:YES completion:NULL];
         }
@@ -1580,7 +1580,7 @@
     
     if ( [strGender isEqual:[NSNull null]] && [strGender isEqual:@""])
     {
-        if(IS_GREATER_IOS7)
+        if(IS_GREATER_IOS8)
         {
         [self presentViewController:[ DSAppCommon alertWithTitle:@"Title" withMessage:GENDER_REQUIRED preferredStyle:UIAlertControllerStyleAlert] animated:YES completion:NULL];
         }
@@ -1594,7 +1594,7 @@
     
     if ( [emailAddressToRegister isEqual:[NSNull null]] && [emailAddressToRegister isEqual:@""])
     {
-        if(IS_GREATER_IOS7)
+        if(IS_GREATER_IOS8)
         {
         [self presentViewController:[ DSAppCommon alertWithTitle:@"Title" withMessage:EMAIL_REQUIRED preferredStyle:UIAlertControllerStyleAlert] animated:YES completion:NULL];
         }
@@ -1607,7 +1607,7 @@
     }
     if ( [emailPasswordToRegister isEqual:[NSNull null]] && [emailPasswordToRegister isEqual:@""])
     {
-        if(IS_GREATER_IOS7){
+        if(IS_GREATER_IOS8){
         [self presentViewController:[ DSAppCommon alertWithTitle:@"Title" withMessage:PASSWORD_REQUIRED preferredStyle:UIAlertControllerStyleAlert] animated:YES completion:NULL];
         }
         else{
@@ -1620,7 +1620,7 @@
     
     if(![FirstName isEqual:[NSNull null]]&& ![FirstName isEqualToString:@""]&&![LastName isEqual:[NSNull null]]&& ![LastName isEqualToString:@""] &&![dateChange isEqual:[NSNull null]]&&![strGender isEqual:[NSNull null]]&& ![strGender isEqualToString:@""] &&![emailAddressToRegister isEqual:[NSNull null]] &&![emailAddressToRegister isEqualToString:@""] &&![emailPasswordToRegister isEqual:[NSNull null]] && ![emailPasswordToRegister isEqualToString:@""]){
             if(![NSString validateEmail:emailAddressToRegister]){
-                if(IS_GREATER_IOS7){
+                if(IS_GREATER_IOS8){
                 [self presentViewController:[ DSAppCommon alertWithTitle:@"Title" withMessage:INVALID_EMAIL preferredStyle:UIAlertControllerStyleAlert] animated:YES completion:NULL];
                 }
                 else
@@ -1632,7 +1632,7 @@
                 return;
             }
            if([dateChange isEqual:@"DD-MM-YYYY"]){
-               if(IS_GREATER_IOS7)
+               if(IS_GREATER_IOS8)
                {
             [self presentViewController:[ DSAppCommon alertWithTitle:@"Title" withMessage:@"ENTER DATE" preferredStyle:UIAlertControllerStyleAlert] animated:YES completion:NULL];
                }
@@ -1648,7 +1648,7 @@
     }
     
     else{
-        if(IS_GREATER_IOS7)
+        if(IS_GREATER_IOS8)
         {
         [self presentViewController:[ DSAppCommon alertWithTitle:@"Title" withMessage:FILL_ALL_DETAILS preferredStyle:UIAlertControllerStyleAlert] animated:YES completion:NULL];
         }

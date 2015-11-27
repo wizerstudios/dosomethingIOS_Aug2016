@@ -204,7 +204,7 @@
     objSigninType=@"1";
     if([NSString isEmpty:self.emailTxt.text] && [NSString isEmpty:self.passwordTxt.text]){
        
-        if(IS_GREATER_IOS7)
+        if(IS_GREATER_IOS8)
         {
         [self presentViewController:[ DSAppCommon alertWithTitle:@"Title" withMessage:FILL_DETAILS preferredStyle:UIAlertControllerStyleAlert] animated:YES completion:NULL];
         }
@@ -216,7 +216,7 @@
     }
     if([NSString isEmpty:self.emailTxt.text] && ![NSString isEmpty:self.passwordTxt.text]){
        
-        if(IS_GREATER_IOS7)
+        if(IS_GREATER_IOS8)
         {
         [self presentViewController:[ DSAppCommon alertWithTitle:@"Title" withMessage:EMAIL_REQUIRED preferredStyle:UIAlertControllerStyleAlert] animated:YES completion:NULL];
         }
@@ -227,7 +227,7 @@
     }
     if(![NSString isEmpty:self.emailTxt.text] && [NSString isEmpty:self.passwordTxt.text]){
         
-        if(IS_GREATER_IOS7)
+        if(IS_GREATER_IOS8)
         {
         [self presentViewController:[ DSAppCommon alertWithTitle:@"Title" withMessage:PASSWORD_REQUIRED preferredStyle:UIAlertControllerStyleAlert] animated:YES completion:NULL];
         }
@@ -239,7 +239,7 @@
     if(![NSString isEmpty:self.emailTxt.text] && ![NSString isEmpty:self.passwordTxt.text]){
         if(![NSString validateEmail:self.emailTxt.text]){
             
-            if(IS_GREATER_IOS7)
+            if(IS_GREATER_IOS8)
             {
             [self presentViewController:[ DSAppCommon alertWithTitle:@"Title" withMessage:INVALID_EMAIL preferredStyle:UIAlertControllerStyleAlert] animated:YES completion:NULL];
             }
@@ -270,7 +270,7 @@
     
     objSigninType=@"1";
     if([NSString isEmpty:self.emailTxt.text] && [NSString isEmpty:self.passwordTxt.text]){
-        if(IS_GREATER_IOS7)
+        if(IS_GREATER_IOS8)
         {
        
          [self presentViewController:[ DSAppCommon alertWithTitle:@"Title" withMessage:FILL_DETAILS preferredStyle:UIAlertControllerStyleAlert] animated:YES completion:NULL];
@@ -283,7 +283,7 @@
     }
     if([NSString isEmpty:self.emailTxt.text] && ![NSString isEmpty:self.passwordTxt.text]){
        
-        if(IS_GREATER_IOS7)
+        if(IS_GREATER_IOS8)
         {
         [self presentViewController:[ DSAppCommon alertWithTitle:@"Title" withMessage:EMAIL_REQUIRED preferredStyle:UIAlertControllerStyleAlert] animated:YES completion:NULL];
         }
@@ -294,7 +294,7 @@
     }
     if(![NSString isEmpty:self.emailTxt.text] && [NSString isEmpty:self.passwordTxt.text]){
         
-        if(IS_GREATER_IOS7)
+        if(IS_GREATER_IOS8)
         {
         [self presentViewController:[ DSAppCommon alertWithTitle:@"Title" withMessage:PASSWORD_REQUIRED preferredStyle:UIAlertControllerStyleAlert] animated:YES completion:NULL];
         }
@@ -306,7 +306,7 @@
     if(![NSString isEmpty:self.emailTxt.text] && ![NSString isEmpty:self.passwordTxt.text]){
         if(![NSString validateEmail:self.emailTxt.text]){
           
-            if(IS_GREATER_IOS7)
+            if(IS_GREATER_IOS8)
             {
             [self presentViewController:[ DSAppCommon alertWithTitle:@"Title" withMessage:INVALID_EMAIL preferredStyle:UIAlertControllerStyleAlert] animated:YES completion:NULL];
             }
@@ -486,7 +486,7 @@
         }
         else{
             NSLog(@"responseObject = %@",responseObject);
-            if(IS_GREATER_IOS7)
+            if(IS_GREATER_IOS8)
             {
             [self presentViewController:[ DSAppCommon alertWithTitle:@"Title" withMessage:[loginDict valueForKey:@"Message"] preferredStyle:UIAlertControllerStyleAlert] animated:YES completion:NULL];
             }
