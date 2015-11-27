@@ -77,6 +77,7 @@
     UIImage *profileImage2;
     UIImage *profileImage3;
     NSMutableDictionary *profileDict;
+    NSMutableArray *profileImageArray;
 
     
     
@@ -113,15 +114,33 @@
    
     [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"SelectedItemCategoryID"];
     isNotification_message = @"Yes";
-    isNotification_sound = @"Yes";
     isNotification_vibration = @"Yes";
+    isNotification_sound = @"Yes";
     
-    profileDataArray = [NSMutableArray new];
+   
+    if(profileDict != NULL){
+        
+        NSString *ImageURL1 = [profileDict valueForKey:@"image1"];
+        NSData *imageData1 = [NSData dataWithContentsOfURL:[NSURL URLWithString:ImageURL1]];
+        
+        NSString *ImageURL2 = [profileDict valueForKey:@"image2"];
+        NSData *imageData2 = [NSData dataWithContentsOfURL:[NSURL URLWithString:ImageURL2]];
+        
+        NSString *ImageURL3 = [profileDict valueForKey:@"image3"];
+        NSData *imageData3 = [NSData dataWithContentsOfURL:[NSURL URLWithString:ImageURL3]];
+        
+        profileDataArray = [[NSMutableArray alloc]initWithObjects:imageData1,imageData2,imageData3, nil];
+
+    }
+    else{
+        profileDataArray = [NSMutableArray new];
+
     
     for(int i = 0; i < 3; i++)
     {
         NSData *data = [NSData new];
         [profileDataArray addObject:data];
+    }
     }
 
 }
@@ -196,32 +215,35 @@
     int spacing = 20;
     for(int i = 0; i < 3; i++)
     {
-        NSData *profileData = [profileDataArray objectAtIndex:i];
-        userProfileImage = [[UIImageView alloc]initWithFrame:CGRectMake((i*self.scrView.frame.size.width) + spacing, 20,self.profileImageView.frame.size.width, self.profileImageView.frame.size.height)];
-        [userProfileImage setTag:i+100];
-        if([profileData length] == 0)
-            [userProfileImage setImage:[UIImage imageNamed:@"profile_noimg"]];
+    
+            NSData *profileData = [profileDataArray objectAtIndex:i];
+            userProfileImage = [[UIImageView alloc]initWithFrame:CGRectMake((i*self.scrView.frame.size.width) + spacing, 20,self.profileImageView.frame.size.width, self.profileImageView.frame.size.height)];
+            [userProfileImage setTag:i+100];
+            if([profileData length] == 0)
+                [userProfileImage setImage:[UIImage imageNamed:@"profile_noimg"]];
+            
+            else{
+                [userProfileImage setImage:[UIImage imageWithData:profileData]];
+                [cell.cameraButton setHidden:YES];
+            }
+            
+            userProfileImage.layer.cornerRadius = userProfileImage.frame.size.height / 2;
+            userProfileImage.layer.masksToBounds = YES;
+            [userProfileImage setUserInteractionEnabled:YES];
+            UITapGestureRecognizer *singleTap =  [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(selectCamera:)];
+            [singleTap setNumberOfTapsRequired:1];
+            [userProfileImage addGestureRecognizer:singleTap];
+            [self.scrView addSubview:userProfileImage];
+            
+            cameraImage = [[UIImageView alloc]initWithFrame:CGRectMake(userProfileImage.frame.size.width / 2 - 15, self.scrView.frame.size.height - 55, 30, 30)];
+            [cameraImage setTag:i+200];
+            [cameraImage setImage:[UIImage imageNamed:@"profile_camera_icon"]];
+            cameraImage.userInteractionEnabled = YES;
+            
+            [cameraImage setUserInteractionEnabled:YES];
+            [userProfileImage addSubview:cameraImage];
+
         
-        else{
-            [userProfileImage setImage:[UIImage imageWithData:profileData]];
-            [cell.cameraButton setHidden:YES];
-        }
-        userProfileImage.layer.cornerRadius = userProfileImage.frame.size.height / 2;
-        userProfileImage.layer.masksToBounds = YES;
-        [userProfileImage setUserInteractionEnabled:YES];
-        UITapGestureRecognizer *singleTap =  [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(selectCamera:)];
-        [singleTap setNumberOfTapsRequired:1];
-        [userProfileImage addGestureRecognizer:singleTap];
-        [self.scrView addSubview:userProfileImage];
-        
-        cameraImage = [[UIImageView alloc]initWithFrame:CGRectMake(userProfileImage.frame.size.width / 2 - 15, self.scrView.frame.size.height - 55, 30, 30)];
-        [cameraImage setTag:i+200];
-        [cameraImage setImage:[UIImage imageNamed:@"profile_camera_icon"]];
-        cameraImage.userInteractionEnabled = YES;
-        
-        [cameraImage setUserInteractionEnabled:YES];
-        [userProfileImage addSubview:cameraImage];
-       
     }
     
     self.scrView.contentSize=CGSizeMake(self.scrView.frame.size.width*3, self.scrView.frame.size.height);
@@ -616,9 +638,15 @@
             cell.layoutConstraintProfileImageHeight.constant =159;
             cell.layoutConstraintProfileImageWidth.constant =161;
         }
-        
+        if( profileDict == NULL){
         
         [self profileScroll];
+        }
+        if( profileDict != NULL){
+            
+            [self profileScroll];
+        }
+
         
         if(!profileData1)
             [profileImagePageControl setHidden:YES];
@@ -824,13 +852,6 @@
             cell.textViewAboutYou.delegate = self;
         }
         
-        
-        
-        
-        
-        
-
-       
     }
     
     if(indexPath.row == 6)
@@ -1381,6 +1402,7 @@
     
     NSData *profileData = UIImageJPEGRepresentation([info objectForKey:UIImagePickerControllerEditedImage], 0.1);
     [profileDataArray replaceObjectAtIndex:CurrentImage withObject:profileData];
+    
     [imagepickerController dismissViewControllerAnimated:YES completion:nil];
     
 //    NSLog(@"profileDataArray%@",profileDataArray);
