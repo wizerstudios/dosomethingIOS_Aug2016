@@ -107,7 +107,7 @@ static NSString       *ServiceMimeType    = @"image/jpeg";
     
     NSMutableDictionary *userLogoutDelete = [[NSMutableDictionary alloc] init];
     
-    if(sessionId)       [userLogoutDelete    setObject:sessionId     forKey:@"sessionId"];
+    if(sessionId)       [userLogoutDelete    setObject:sessionId     forKey:@"sessionid"];
     if(op)              [userLogoutDelete    setObject:op            forKey:@"op"];
     
     NSLog(@"urlString = %@",urlString);

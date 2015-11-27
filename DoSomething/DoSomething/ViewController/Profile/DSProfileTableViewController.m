@@ -79,7 +79,7 @@
     NSMutableDictionary *profileDict;
     NSMutableArray *profileImageArray;
 
-    
+    CGSize dataSize;
     
 
 }
@@ -159,7 +159,7 @@
     customNavigation = [[CustomNavigationView alloc] initWithNibName:@"CustomNavigationView" bundle:nil];
     customNavigation.view.frame = CGRectMake(0,-20, CGRectGetWidth(self.view.frame), 65);
     if (IS_IPHONE6 ){
-        customNavigation.view.frame = CGRectMake(0,-20, 375, 83);
+        customNavigation.view.frame = CGRectMake(0,-20, 375, 76);
         self.layoutConstraintTableViewYPos.constant= 20;
     }
     if(IS_IPHONE6_Plus)
@@ -525,14 +525,23 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (IS_IPHONE4 ||IS_IPHONE5){
-    if (indexPath.row == 0 ){
-        return 200;
-        }
-        if (indexPath.row == 4) {
+    
+    if (IS_IPHONE4 ||IS_IPHONE5)
+    {
+           if (indexPath.row == 0 ){
+               return 200;
+            }
+            if(indexPath.row == 5)
+             {
+                 dataSize = [COMMON getControlHeight:strAbout withFontName:@"Patron-Regular" ofSize:14.0 withSize:CGSizeMake(tableView.frame.size.width-20,tableView.frame.size.height)];
+                 
+                 return dataSize.height;
+             }
+            if (indexPath.row == 4) {
             return 55;
-        }
-        if ( indexPath.row ==6) {
+            }
+            if ( indexPath.row ==6)
+            {
             if([imageNormalArray count] < 1)
                 return 70;
             else if([imageNormalArray count] <= 5)
@@ -543,32 +552,41 @@
                 return (commonHeight * 3)+48;
             else if([imageNormalArray count] <= 20)
                 return (commonHeight * 4)+52;
-        }
+            }
 
        
-        if ( indexPath.row == 7) {
+            if ( indexPath.row == 7) {
             
-            return 120;
-        }
-        if (indexPath.row ==8) {
-            return 150;
-        }
+                return 120;
+            }
+            if (indexPath.row ==8) {
+                return 150;
+            }
 
         
-        if (indexPath.row == 9) {
-            return 80;
-        }
+            if (indexPath.row == 9) {
+                return 80;
+            }
 
 
     return 40;
     }
-        if (indexPath.row == 0 ){
-            return 258;
-        }
-        if (indexPath.row == 4) {
-            return 70;
-        }
-        if ( indexPath.row ==6) {
+            if (indexPath.row == 0 )
+            {
+                return 258;
+             }
+            if (indexPath.row == 4)
+            {
+                return 70;
+            }
+           if(indexPath.row == 5)
+           {
+               dataSize = [COMMON getControlHeight:strAbout withFontName:@"Patron-Regular" ofSize:14.0 withSize:CGSizeMake(tableView.frame.size.width-20,tableView.frame.size.height)];
+               
+               return dataSize.height;
+             }
+            if ( indexPath.row ==6)
+            {
             if([imageNormalArray count] < 1)
                 return 80;
             else if([imageNormalArray count] <= 5)
@@ -579,23 +597,22 @@
                 return (commonHeight * 3)+57;
             else if([imageNormalArray count] <= 20)
                 return (commonHeight * 4)+70;
-        }
+            }
     
-        if(indexPath.row ==8)
-        {
-            return 150;
-        }
+            if(indexPath.row ==8)
+            {
+                return 150;
+            }
     
-        if ( indexPath.row == 7) {
-            return 160;
-        }
+            if ( indexPath.row == 7) {
+                return 160;
+            }
     
-        if (indexPath.row == 9) {
-            return 98;
-        }
-    
-    return 50;
-}
+            if (indexPath.row == 9) {
+                return 98;
+            }
+        return 50;
+    }
 
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -815,14 +832,6 @@
             
         }
         
-        cell.layoutConstraintViewHeight.constant =40;
-        
-        if (IS_IPHONE6 ||IS_IPHONE6_Plus)
-        {
-            cell.layoutConstraintViewHeight.constant =50;
-            
-        }
-        
         if(profileDict !=NULL){
             
             if([[profileDict valueForKey:@"about"] isEqual:@""]){
@@ -836,9 +845,7 @@
             }
             cell.labelAboutYou.text =titleText;
             cell.textViewAboutYou.delegate = self;
-            
-
-        }
+            }
         else{
         
         if(textviewText == nil)
@@ -863,6 +870,16 @@
         }
         
         yAxis = 31;
+        if(profileDict ==NULL)
+        {
+       
+        }
+        else
+        {
+            imageSize =39;
+            commonWidth=19.5;
+            
+        }
         space = imageSize / 2;
         commonHeight = imageSize+15;
         
@@ -1567,7 +1584,7 @@
     
     if([FirstName isEqual:[NSNull null]] && [FirstName isEqual:@""])
     {
-        if(IS_GREATER_IOS7)
+        if(IS_GREATER_IOS8)
         {
         [self presentViewController:[ DSAppCommon alertWithTitle:@"Title" withMessage:LASTNAME_REQUIRED preferredStyle:UIAlertControllerStyleAlert] animated:YES completion:NULL];
         }
@@ -1580,7 +1597,7 @@
     }
     if ( [dateChange isEqual:[NSNull null]] && [dateChange isEqual:@""] )
     {
-        if(IS_GREATER_IOS7)
+        if(IS_GREATER_IOS8)
         {
         [self presentViewController:[ DSAppCommon alertWithTitle:@"Title" withMessage:DOB_REQUIRED preferredStyle:UIAlertControllerStyleAlert] animated:YES completion:NULL];
         }
@@ -1594,7 +1611,7 @@
     
     if ( [strGender isEqual:[NSNull null]] && [strGender isEqual:@""])
     {
-        if(IS_GREATER_IOS7)
+        if(IS_GREATER_IOS8)
         {
         [self presentViewController:[ DSAppCommon alertWithTitle:@"Title" withMessage:GENDER_REQUIRED preferredStyle:UIAlertControllerStyleAlert] animated:YES completion:NULL];
         }
@@ -1608,7 +1625,7 @@
     
     if ( [emailAddressToRegister isEqual:[NSNull null]] && [emailAddressToRegister isEqual:@""])
     {
-        if(IS_GREATER_IOS7)
+        if(IS_GREATER_IOS8)
         {
         [self presentViewController:[ DSAppCommon alertWithTitle:@"Title" withMessage:EMAIL_REQUIRED preferredStyle:UIAlertControllerStyleAlert] animated:YES completion:NULL];
         }
@@ -1621,7 +1638,7 @@
     }
     if ( [emailPasswordToRegister isEqual:[NSNull null]] && [emailPasswordToRegister isEqual:@""])
     {
-        if(IS_GREATER_IOS7){
+        if(IS_GREATER_IOS8){
         [self presentViewController:[ DSAppCommon alertWithTitle:@"Title" withMessage:PASSWORD_REQUIRED preferredStyle:UIAlertControllerStyleAlert] animated:YES completion:NULL];
         }
         else{
@@ -1634,7 +1651,7 @@
     
     if(![FirstName isEqual:[NSNull null]]&& ![FirstName isEqualToString:@""]&&![LastName isEqual:[NSNull null]]&& ![LastName isEqualToString:@""] &&![dateChange isEqual:[NSNull null]]&&![strGender isEqual:[NSNull null]]&& ![strGender isEqualToString:@""] &&![emailAddressToRegister isEqual:[NSNull null]] &&![emailAddressToRegister isEqualToString:@""] &&![emailPasswordToRegister isEqual:[NSNull null]] && ![emailPasswordToRegister isEqualToString:@""]){
             if(![NSString validateEmail:emailAddressToRegister]){
-                if(IS_GREATER_IOS7){
+                if(IS_GREATER_IOS8){
                 [self presentViewController:[ DSAppCommon alertWithTitle:@"Title" withMessage:INVALID_EMAIL preferredStyle:UIAlertControllerStyleAlert] animated:YES completion:NULL];
                 }
                 else
@@ -1646,7 +1663,7 @@
                 return;
             }
            if([dateChange isEqual:@"DD-MM-YYYY"]){
-               if(IS_GREATER_IOS7)
+               if(IS_GREATER_IOS8)
                {
             [self presentViewController:[ DSAppCommon alertWithTitle:@"Title" withMessage:@"ENTER DATE" preferredStyle:UIAlertControllerStyleAlert] animated:YES completion:NULL];
                }
@@ -1662,7 +1679,7 @@
     }
     
     else{
-        if(IS_GREATER_IOS7)
+        if(IS_GREATER_IOS8)
         {
         [self presentViewController:[ DSAppCommon alertWithTitle:@"Title" withMessage:FILL_ALL_DETAILS preferredStyle:UIAlertControllerStyleAlert] animated:YES completion:NULL];
         }

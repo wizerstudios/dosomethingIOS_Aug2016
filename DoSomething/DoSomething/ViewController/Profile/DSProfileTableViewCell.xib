@@ -950,6 +950,9 @@
                                 <rect key="frame" x="98" y="0.0" width="202" height="40"/>
                                 <animations/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="1Xu-VL-UDu"/>
+                                </constraints>
                                 <color key="textColor" red="0.59999999999999998" green="0.59999999999999998" blue="0.59999999999999998" alpha="1" colorSpace="calibratedRGB"/>
                                 <fontDescription key="fontDescription" name="Patron-Regular" family="Patron" pointSize="10"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
@@ -1027,6 +1030,7 @@
             <animations/>
             <connections>
                 <outlet property="labelAboutYou" destination="Mvl-SM-bdc" id="iim-O9-U9x"/>
+                <outlet property="layoutConstraintViewHeight" destination="1Xu-VL-UDu" id="zE3-2f-3Ko"/>
                 <outlet property="textViewAboutYou" destination="d6I-S9-MzF" id="clv-p4-OFl"/>
                 <outlet property="textViewHeaderLabel" destination="TdZ-JL-zPm" id="Ynd-BY-bex"/>
             </connections>

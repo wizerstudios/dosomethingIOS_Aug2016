@@ -91,6 +91,33 @@ DSAppCommon *sharedCommon = nil;
 
 }
 
+
+#pragma mark - Get Height of Control
+
+- (CGSize)getControlHeight:(NSString *)string withFontName:(NSString *)fontName ofSize:(NSInteger)size withSize:(CGSize)LabelWidth {
+    CGSize maxSize = LabelWidth;
+    CGSize dataHeight;
+    
+    UIFont *font = [UIFont fontWithName:fontName size:size];
+    //    NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc] init];
+    //    paragraphStyle.paragraphSpacing = 50 * font.lineHeight;
+    NSString *version = [[UIDevice currentDevice] systemVersion];
+    
+    if ([version floatValue]>=7.0) {
+        CGRect textRect = [string boundingRectWithSize:maxSize
+                                               options:NSStringDrawingUsesLineFragmentOrigin| NSStringDrawingUsesFontLeading
+                                            attributes:@{NSFontAttributeName:font}
+                                               context:nil];
+        
+        
+        dataHeight = CGSizeMake(textRect.size.width , textRect.size.height);
+        
+    }
+    
+    return CGSizeMake(dataHeight.width, dataHeight.height+10);
+}
+
+
 #pragma mark - Userdetails
 
 -(void)setUserDetails:(NSMutableDictionary *)_dicInfo
