@@ -78,7 +78,7 @@
     UIImage *profileImage3;
     NSMutableDictionary *profileDict;
 
-    
+    CGSize dataSize;
     
 
 }
@@ -509,6 +509,12 @@
            if (indexPath.row == 0 ){
                return 200;
             }
+            if(indexPath.row == 5)
+             {
+                 dataSize = [COMMON getControlHeight:strAbout withFontName:@"Patron-Regular" ofSize:14.0 withSize:CGSizeMake(tableView.frame.size.width-20,tableView.frame.size.height)];
+                 
+                 return dataSize.height;
+             }
             if (indexPath.row == 4) {
             return 55;
             }
@@ -551,6 +557,12 @@
             {
                 return 70;
             }
+           if(indexPath.row == 5)
+           {
+               dataSize = [COMMON getControlHeight:strAbout withFontName:@"Patron-Regular" ofSize:14.0 withSize:CGSizeMake(tableView.frame.size.width-20,tableView.frame.size.height)];
+               
+               return dataSize.height;
+             }
             if ( indexPath.row ==6)
             {
             if([imageNormalArray count] < 1)
@@ -792,14 +804,6 @@
             
         }
         
-        cell.layoutConstraintViewHeight.constant =40;
-        
-        if (IS_IPHONE6 ||IS_IPHONE6_Plus)
-        {
-            cell.layoutConstraintViewHeight.constant =50;
-            
-        }
-        
         if(profileDict !=NULL){
             
             if([[profileDict valueForKey:@"about"] isEqual:@""]){
@@ -813,9 +817,7 @@
             }
             cell.labelAboutYou.text =titleText;
             cell.textViewAboutYou.delegate = self;
-            
-
-        }
+            }
         else{
         
         if(textviewText == nil)
@@ -828,7 +830,13 @@
             cell.textViewHeaderLabel.text =placeHolderText;
             cell.textViewAboutYou.delegate = self;
         }
-               
+        
+         cell.layoutConstraintViewHeight.constant = cell.textViewAboutYou.frame.size.height;
+        if (IS_IPHONE6 ||IS_IPHONE6_Plus)
+        {
+            cell.layoutConstraintViewHeight.constant =cell.textViewAboutYou.frame.size.height;
+            
+        }
     }
     
     if(indexPath.row == 6)

@@ -44,6 +44,8 @@ typedef enum {
 +(void)showSimpleAlertWithMessage:(NSString *)message;
 +(UIAlertController*)alertWithTitle: (NSString *) title withMessage: (NSString*) message preferredStyle:(UIAlertControllerStyle)preferredStyle;
 
+- (CGSize)getControlHeight:(NSString *)string withFontName:(NSString *)fontName ofSize:(NSInteger)size withSize:(CGSize)LabelWidth;
+
 @end
 extern DSAppCommon *sharedCommon;
 #define COMMON (sharedCommon? sharedCommon:[DSAppCommon common])
