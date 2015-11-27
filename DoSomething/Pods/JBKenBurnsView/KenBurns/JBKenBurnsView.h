@@ -46,8 +46,7 @@
 @property (nonatomic,weak) id<KenBurnsViewDelegate> delegate;
 @property (nonatomic,assign,readonly) NSInteger currentImageIndex;
 
-@property(nonatomic, retain) UIImage* activeImage;
-@property(nonatomic, retain) UIImage* inactiveImage;
+
 
 ///----------------------------------
 /// @name Initialization

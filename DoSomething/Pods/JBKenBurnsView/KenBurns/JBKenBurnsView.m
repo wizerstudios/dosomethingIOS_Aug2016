@@ -57,8 +57,8 @@ enum JBSourceMode {
     self = [super init];
     if (self) {
         [self setup];
-        activeImage = [UIImage imageNamed:@"dot_active"];
-        inactiveImage = [UIImage imageNamed:@"dot_Image"];
+       // activeImage = [UIImage imageNamed:@"dot_active"];
+        //inactiveImage = [UIImage imageNamed:@"dot_Image"];
     }
     return self;
 }
