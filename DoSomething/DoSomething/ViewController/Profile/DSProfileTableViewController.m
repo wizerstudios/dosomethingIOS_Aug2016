@@ -80,6 +80,7 @@
     NSMutableArray *profileImageArray;
 
     CGSize dataSize;
+    BOOL isLogin;
     
 
 }
@@ -104,32 +105,54 @@
     if(profileDict == NULL)
         [self initializeArray];
     else{
+        
         [self initializeArrayRegister];
-        [_tableviewProfile reloadData];}
+        [_tableviewProfile reloadData];
+    }
+        NSLog(@"DICT%@",profileDict);
     
-    
-    NSLog(@"DICT%@",profileDict);
-    
-    
-   
     [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"SelectedItemCategoryID"];
     isNotification_message = @"Yes";
     isNotification_vibration = @"Yes";
     isNotification_sound = @"Yes";
-    
-   
     if(profileDict != NULL){
+        if([[profileDict valueForKey:@"image1"] isEqual:@""]&&[[profileDict valueForKey:@"image2"] isEqual:@""] && [[profileDict valueForKey:@"image3"] isEqual:@""]){
+            profileDataArray = [NSMutableArray new];
+            
+            
+            for(int i = 0; i < 3; i++)
+            {
+                NSData *data = [NSData new];
+                [profileDataArray addObject:data];
+            }
+        }
+            else if(![[profileDict valueForKey:@"image1"] isEqual:@""]&&[[profileDict valueForKey:@"image2"] isEqual:@""] && [[profileDict valueForKey:@"image3"] isEqual:@""]){
+                profileDataArray = [NSMutableArray new];
+                
+                
+                for(int i = 0; i < 3; i++)
+                {
+                    NSData *data = [NSData new];
+                    [profileDataArray addObject:data];
+                }
+            }
+
         
-        NSString *ImageURL1 = [profileDict valueForKey:@"image1"];
-        NSData *imageData1 = [NSData dataWithContentsOfURL:[NSURL URLWithString:ImageURL1]];
         
-        NSString *ImageURL2 = [profileDict valueForKey:@"image2"];
-        NSData *imageData2 = [NSData dataWithContentsOfURL:[NSURL URLWithString:ImageURL2]];
-        
-        NSString *ImageURL3 = [profileDict valueForKey:@"image3"];
-        NSData *imageData3 = [NSData dataWithContentsOfURL:[NSURL URLWithString:ImageURL3]];
-        
-        profileDataArray = [[NSMutableArray alloc]initWithObjects:imageData1,imageData2,imageData3, nil];
+        else{
+            NSString *ImageURL1 = [profileDict valueForKey:@"image1"];
+            NSData *imageData1 = [NSData dataWithContentsOfURL:[NSURL URLWithString:ImageURL1]];
+            
+            NSString *ImageURL2 = [profileDict valueForKey:@"image2"];
+            NSData *imageData2 = [NSData dataWithContentsOfURL:[NSURL URLWithString:ImageURL2]];
+            
+            NSString *ImageURL3 = [profileDict valueForKey:@"image3"];
+            NSData *imageData3 = [NSData dataWithContentsOfURL:[NSURL URLWithString:ImageURL3]];
+            
+            profileDataArray = [[NSMutableArray alloc]initWithObjects:imageData1,imageData2,imageData3, nil];
+            
+            
+        }
 
     }
     else{
@@ -175,11 +198,27 @@
     [customNavigation.buttonBack addTarget:self action:@selector(backAction) forControlEvents:UIControlEventTouchUpInside];
     
     imageNormalArray =[[NSMutableArray alloc]init];
+    
     if([profileDict valueForKey:@"hobbieslist"]!=NULL)
     {
+        if(isLogin == YES){
+            interstAndHobbiesArray =[[[NSUserDefaults standardUserDefaults] valueForKey:@"SelectedItem"]mutableCopy];
+            
+            imageNormalArray =[[[NSUserDefaults standardUserDefaults] valueForKey:@"SelectedItemNormal"]mutableCopy];
+            
+            hobbiesNameArray =[[[NSUserDefaults standardUserDefaults] valueForKey:@"SelectedItemName"]mutableCopy];
+            
+            hobbiesCategoryIDArray =[[[NSUserDefaults standardUserDefaults] valueForKey:@"SelectedItemCategoryID"]mutableCopy];
+            
+            
+            strInterestHobbies = [hobbiesCategoryIDArray componentsJoinedByString:@","];
+        }
+        else{
         interstAndHobbiesArray = [[profileDict valueForKey:@"hobbieslist"]mutableCopy];
         hobbiesNameArray       =[[interstAndHobbiesArray valueForKey:@"name"]mutableCopy];
         imageNormalArray     = [[interstAndHobbiesArray valueForKey:@"image"]mutableCopy];
+        isLogin = YES;
+    }
     }
     
     else
@@ -694,11 +733,6 @@
 
         }
         cell.labelTitleText.text = titleText;
-        NSLog(@"typingText%@",typingText);
-        
-        NSLog(@"titleText%@",titleText);
-        NSLog(@"placeHolderText%@",placeHolderText);
-
         if(typingText == (id)[NSNull null] || [typingText isEqualToString:@""])//|| [typingText  isEqual: @"NULL"])
         {
             if(placeHolderText ==(id) [NSNull null])
@@ -834,18 +868,31 @@
         
         if(profileDict !=NULL){
             
-            if([[profileDict valueForKey:@"about"] isEqual:@""]){
-                cell.textViewHeaderLabel.hidden = NO;
+            if(isLogin ==NO){
+                cell.textViewHeaderLabel.hidden = YES;
+                cell.textViewAboutYou.text = textviewText;
+                cell.labelAboutYou.text =titleText;
+                strAbout =cell.textViewAboutYou.text;
                 cell.textViewHeaderLabel.text =placeHolderText;
+                cell.textViewAboutYou.delegate = self;
+                
             }
             else{
-            cell.textViewAboutYou.text = [[profileDict valueForKey:@"about"]mutableCopy];
-            strAbout =cell.textViewAboutYou.text;
-            cell.textViewHeaderLabel.hidden = YES;
+                if([[profileDict valueForKey:@"about"] isEqual:@""]){
+                    cell.textViewHeaderLabel.hidden = NO;
+                    cell.textViewHeaderLabel.text =placeHolderText;
+                }
+                else{
+                    cell.textViewAboutYou.text = [[profileDict valueForKey:@"about"]mutableCopy];
+                    strAbout =cell.textViewAboutYou.text;
+                    cell.textViewHeaderLabel.hidden = YES;
+                }
+                isLogin = NO;
             }
             cell.labelAboutYou.text =titleText;
             cell.textViewAboutYou.delegate = self;
             }
+        
         else{
         
         if(textviewText == nil)
@@ -1523,14 +1570,15 @@
 #pragma mark - saveAction
 -(void)saveAction:(id)sender
 {
+    
     [COMMON LoadIcon:self.view];
     if(profileDict !=NULL){
-        [COMMON LoadIcon:self.view];
+        
         NSArray *postPerArray;
         postPerArray = [[placeHolderArray objectAtIndex:0]valueForKey:@"TypingText"];
         
         strDOB       = (currentTextfield.text !=nil)?currentTextfield.text :@"";
-        
+                
         NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
         [dateFormatter setDateFormat:@"dd/MM/yyyy"];
         NSDate *date = [dateFormatter dateFromString: strDOB];
@@ -1650,18 +1698,18 @@
 
     
     if(![FirstName isEqual:[NSNull null]]&& ![FirstName isEqualToString:@""]&&![LastName isEqual:[NSNull null]]&& ![LastName isEqualToString:@""] &&![dateChange isEqual:[NSNull null]]&&![strGender isEqual:[NSNull null]]&& ![strGender isEqualToString:@""] &&![emailAddressToRegister isEqual:[NSNull null]] &&![emailAddressToRegister isEqualToString:@""] &&![emailPasswordToRegister isEqual:[NSNull null]] && ![emailPasswordToRegister isEqualToString:@""]){
-            if(![NSString validateEmail:emailAddressToRegister]){
-                if(IS_GREATER_IOS8){
-                [self presentViewController:[ DSAppCommon alertWithTitle:@"Title" withMessage:INVALID_EMAIL preferredStyle:UIAlertControllerStyleAlert] animated:YES completion:NULL];
-                }
-                else
-                {
-                    [DSAppCommon showSimpleAlertWithMessage:INVALID_EMAIL];
-                }
-                [COMMON removeLoading];
-                
-                return;
-            }
+//            if(![NSString validateEmail:emailAddressToRegister]){
+//                if(IS_GREATER_IOS8){
+//                [self presentViewController:[ DSAppCommon alertWithTitle:@"Title" withMessage:INVALID_EMAIL preferredStyle:UIAlertControllerStyleAlert] animated:YES completion:NULL];
+//                }
+//                else
+//                {
+//                    [DSAppCommon showSimpleAlertWithMessage:INVALID_EMAIL];
+//                }
+//                [COMMON removeLoading];
+//                
+//                return;
+//            }
            if([dateChange isEqual:@"DD-MM-YYYY"]){
                if(IS_GREATER_IOS8)
                {
