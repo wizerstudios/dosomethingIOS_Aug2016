@@ -140,7 +140,7 @@
     customNavigation = [[CustomNavigationView alloc] initWithNibName:@"CustomNavigationView" bundle:nil];
     customNavigation.view.frame = CGRectMake(0,-20, CGRectGetWidth(self.view.frame), 65);
     if (IS_IPHONE6 ){
-        customNavigation.view.frame = CGRectMake(0,-20, 375, 83);
+        customNavigation.view.frame = CGRectMake(0,-20, 375, 76);
         self.layoutConstraintTableViewYPos.constant= 20;
     }
     if(IS_IPHONE6_Plus)

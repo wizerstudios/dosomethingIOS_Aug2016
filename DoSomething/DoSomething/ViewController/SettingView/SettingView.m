@@ -149,7 +149,7 @@
 
 #pragma mark - Logout_Delete_Action_API
 -(void)logoutDeleteAction{
-    [COMMON LoadIcon:self.view];
+   
         [objWebService logoutDeleteUser:User_Logout_Delete_API
                           sessionId:loginUserSessionID
                                  op:optionLogoutDelete
@@ -162,7 +162,7 @@
                                 appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
                                 appDelegate.buttonsView.hidden=YES;
                                 [appDelegate.settingButton setBackgroundImage:[UIImage imageNamed:@"setting_icon.png"] forState:UIControlStateNormal];
-                                [COMMON removeLoading];
+                                
                                 
                             }
                             failure:^(AFHTTPRequestOperation *operation, id error) {
