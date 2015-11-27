@@ -51,7 +51,10 @@
     [self.window makeKeyAndVisible];
     [self TabBarViews];
     
-    [Fabric with:@[[Crashlytics class]]];
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
+        [Fabric with:@[[Crashlytics class]]];
+    });
+    
     return YES;
     
 }
