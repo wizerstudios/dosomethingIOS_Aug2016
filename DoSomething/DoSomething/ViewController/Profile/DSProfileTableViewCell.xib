@@ -19,9 +19,9 @@
             <string>Patron-Bold</string>
             <string>Patron-Bold</string>
             <string>Patron-Bold</string>
+            <string>Patron-Bold</string>
         </mutableArray>
         <mutableArray key="Patron-Regular.ttf">
-            <string>Patron-Regular</string>
             <string>Patron-Regular</string>
             <string>Patron-Regular</string>
             <string>Patron-Regular</string>
@@ -837,26 +837,45 @@
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="TYu-zj-QOQ">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TYu-zj-QOQ">
                                 <rect key="frame" x="0.0" y="0.0" width="300" height="40"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Gender" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Aq5-3I-doL">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Gender" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Aq5-3I-doL">
                                         <rect key="frame" x="7" y="11" width="57" height="21"/>
                                         <animations/>
-                                        <fontDescription key="fontDescription" name="Patron-Regular" family="Patron" pointSize="10"/>
-                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="21" id="Uh1-Fg-dLu"/>
+                                            <constraint firstAttribute="width" constant="57" id="vOC-ix-Pqw"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="Patron-Bold" family="Patron" pointSize="10"/>
+                                        <color key="textColor" red="0.40000000000000002" green="0.40000000000000002" blue="0.40000000000000002" alpha="1" colorSpace="deviceRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" enabled="NO" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QOA-QP-Ciw">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" enabled="NO" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QOA-QP-Ciw">
                                         <rect key="frame" x="103" y="9" width="42" height="21"/>
                                         <animations/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="21" id="0da-Rd-UpD"/>
+                                            <constraint firstAttribute="width" constant="42" id="5kS-ak-zhq"/>
+                                        </constraints>
                                         <fontDescription key="fontDescription" name="Patron-Regular" family="Patron" pointSize="10"/>
-                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <color key="textColor" red="0.59999999999999998" green="0.59999999999999998" blue="0.59999999999999998" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>
                                 <animations/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="bottom" secondItem="QOA-QP-Ciw" secondAttribute="bottom" constant="10" id="3go-4C-JiC"/>
+                                    <constraint firstAttribute="bottom" secondItem="Aq5-3I-doL" secondAttribute="bottom" constant="8" id="HcP-CE-6k9"/>
+                                    <constraint firstItem="Aq5-3I-doL" firstAttribute="leading" secondItem="TYu-zj-QOQ" secondAttribute="leading" constant="7" id="Wmd-dx-NmB"/>
+                                    <constraint firstAttribute="width" constant="300" id="aXG-gq-few"/>
+                                    <constraint firstItem="QOA-QP-Ciw" firstAttribute="leading" secondItem="Aq5-3I-doL" secondAttribute="trailing" constant="39" id="fvv-qL-32f"/>
+                                    <constraint firstItem="QOA-QP-Ciw" firstAttribute="leading" secondItem="Aq5-3I-doL" secondAttribute="trailing" constant="39" id="sH3-3T-sbl"/>
+                                    <constraint firstItem="Aq5-3I-doL" firstAttribute="top" secondItem="TYu-zj-QOQ" secondAttribute="top" constant="11" id="tW2-Ds-iF7"/>
+                                    <constraint firstAttribute="height" constant="40" id="uK8-Uq-Xzo"/>
+                                    <constraint firstItem="QOA-QP-Ciw" firstAttribute="top" secondItem="TYu-zj-QOQ" secondAttribute="top" constant="9" id="wAi-Hc-b39"/>
+                                </constraints>
                             </view>
                         </subviews>
                         <animations/>
@@ -865,15 +884,18 @@
                             <constraint firstAttribute="bottom" secondItem="aBg-qT-omL" secondAttribute="bottom" constant="13" id="05x-Fs-GwW"/>
                             <constraint firstItem="dXG-8e-0iA" firstAttribute="top" secondItem="93p-bb-VE8" secondAttribute="top" constant="13" id="0Jp-pQ-KAc"/>
                             <constraint firstItem="xdu-ca-sOe" firstAttribute="leading" secondItem="opx-cS-yfc" secondAttribute="trailing" constant="1" id="24F-ZH-0rJ"/>
+                            <constraint firstAttribute="bottom" secondItem="TYu-zj-QOQ" secondAttribute="bottom" id="4I4-0s-hjb"/>
                             <constraint firstItem="aBg-qT-omL" firstAttribute="top" secondItem="93p-bb-VE8" secondAttribute="top" constant="13" id="5bh-xc-gyh"/>
                             <constraint firstItem="opx-cS-yfc" firstAttribute="width" secondItem="xdu-ca-sOe" secondAttribute="width" constant="1" id="7XJ-2M-rbn"/>
                             <constraint firstItem="xdu-ca-sOe" firstAttribute="leading" secondItem="aBg-qT-omL" secondAttribute="trailing" constant="51" id="8DR-tL-Onv"/>
+                            <constraint firstItem="TYu-zj-QOQ" firstAttribute="leading" secondItem="93p-bb-VE8" secondAttribute="leading" id="CUQ-V6-ny4"/>
                             <constraint firstItem="opx-cS-yfc" firstAttribute="leading" secondItem="93p-bb-VE8" secondAttribute="leading" id="EaX-GY-er0"/>
                             <constraint firstAttribute="bottom" secondItem="opx-cS-yfc" secondAttribute="bottom" id="FZt-sW-rfp"/>
                             <constraint firstItem="aBg-qT-omL" firstAttribute="leading" secondItem="93p-bb-VE8" secondAttribute="leading" constant="50" id="FeR-DC-NKh"/>
                             <constraint firstItem="xdu-ca-sOe" firstAttribute="top" secondItem="93p-bb-VE8" secondAttribute="top" id="GUT-LV-cGV"/>
                             <constraint firstAttribute="bottom" secondItem="xdu-ca-sOe" secondAttribute="bottom" id="N4W-PB-B41"/>
                             <constraint firstItem="xdu-ca-sOe" firstAttribute="leading" secondItem="opx-cS-yfc" secondAttribute="trailing" constant="1" id="NA7-mX-3Js"/>
+                            <constraint firstItem="TYu-zj-QOQ" firstAttribute="top" secondItem="93p-bb-VE8" secondAttribute="top" id="OyM-t9-Vej"/>
                             <constraint firstAttribute="trailing" secondItem="dXG-8e-0iA" secondAttribute="trailing" constant="50" id="S6c-JH-J3o"/>
                             <constraint firstItem="opx-cS-yfc" firstAttribute="height" secondItem="xdu-ca-sOe" secondAttribute="height" id="UoS-iV-DCG"/>
                             <constraint firstAttribute="height" constant="40" id="Wb7-nv-8V8"/>
@@ -881,6 +903,7 @@
                             <constraint firstItem="opx-cS-yfc" firstAttribute="top" secondItem="93p-bb-VE8" secondAttribute="top" id="eiF-RL-R61"/>
                             <constraint firstAttribute="trailing" secondItem="xdu-ca-sOe" secondAttribute="trailing" id="nAK-h7-doX"/>
                             <constraint firstItem="dXG-8e-0iA" firstAttribute="leading" secondItem="opx-cS-yfc" secondAttribute="trailing" constant="50" id="sEc-8m-n0o"/>
+                            <constraint firstAttribute="trailing" secondItem="TYu-zj-QOQ" secondAttribute="trailing" id="sh3-wV-vbo"/>
                         </constraints>
                     </view>
                 </subviews>

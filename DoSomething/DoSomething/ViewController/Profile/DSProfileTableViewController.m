@@ -795,17 +795,37 @@
             
         }
         
+        if(profileDict !=NULL){
+            
+            if([[profileDict valueForKey:@"about"] isEqual:@""]){
+                cell.textViewHeaderLabel.hidden = NO;
+                cell.textViewHeaderLabel.text =placeHolderText;
+            }
+            else{
+            cell.textViewAboutYou.text = [[profileDict valueForKey:@"about"]mutableCopy];
+            strAbout =cell.textViewAboutYou.text;
+            cell.textViewHeaderLabel.hidden = YES;
+            }
+            cell.labelAboutYou.text =titleText;
+            cell.textViewAboutYou.delegate = self;
+            
+
+        }
+        else{
+        
         if(textviewText == nil)
             cell.textViewHeaderLabel.hidden = NO;
         else
             cell.textViewHeaderLabel.hidden = YES;
-            
+            cell.textViewAboutYou.text = textviewText;
+            cell.labelAboutYou.text =titleText;
+            strAbout =cell.textViewAboutYou.text;
+            cell.textViewHeaderLabel.text =placeHolderText;
+            cell.textViewAboutYou.delegate = self;
+        }
         
-        cell.textViewAboutYou.text = textviewText;
-        cell.labelAboutYou.text =titleText;
-        strAbout =cell.textViewAboutYou.text;
-        cell.textViewHeaderLabel.text =placeHolderText;
-        cell.textViewAboutYou.delegate = self;
+        
+        
         
         
         
