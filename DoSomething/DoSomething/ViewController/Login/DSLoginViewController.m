@@ -344,7 +344,7 @@
                          NSLog(@"checkuser = %@",[[responseObject objectForKey:@"checkuser"]objectForKey:@"status"]);
                          if(([[[responseObject objectForKey:@"checkuser"]objectForKey:@"RegisterType"]  isEqual: @"1"])){
                              if([[[responseObject objectForKey:@"checkuser"]objectForKey:@"status"]  isEqual: @"error"]){
-                                 if(IS_GREATER_IOS7)
+                                 if(IS_GREATER_IOS8)
                                  {
                                  [self presentViewController:[ DSAppCommon alertWithTitle:@"Title" withMessage:[[responseObject objectForKey:@"checkuser"]objectForKey:@"Message"] preferredStyle:UIAlertControllerStyleAlert] animated:YES completion:NULL];
                                  }
@@ -373,7 +373,7 @@
                      }
                      failure:^(AFHTTPRequestOperation *operation, id error) {
                           NSLog(@"Error = %@",error);
-                         if(IS_GREATER_IOS7)
+                         if(IS_GREATER_IOS8)
                          {
                          [self presentViewController:[ DSAppCommon alertWithTitle:@"Title" withMessage:@"ERROR" preferredStyle:UIAlertControllerStyleAlert] animated:YES completion:NULL];
                          }

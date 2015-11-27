@@ -503,14 +503,18 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (IS_IPHONE4 ||IS_IPHONE5){
-    if (indexPath.row == 0 ){
-        return 200;
-        }
-        if (indexPath.row == 4) {
+//    if(profileDict == NULL)
+//    {
+    if (IS_IPHONE4 ||IS_IPHONE5)
+    {
+           if (indexPath.row == 0 ){
+               return 200;
+            }
+            if (indexPath.row == 4) {
             return 55;
-        }
-        if ( indexPath.row ==6) {
+            }
+            if ( indexPath.row ==6)
+            {
             if([imageNormalArray count] < 1)
                 return 70;
             else if([imageNormalArray count] <= 5)
@@ -521,32 +525,35 @@
                 return (commonHeight * 3)+48;
             else if([imageNormalArray count] <= 20)
                 return (commonHeight * 4)+52;
-        }
+            }
 
        
-        if ( indexPath.row == 7) {
+            if ( indexPath.row == 7) {
             
-            return 120;
-        }
-        if (indexPath.row ==8) {
-            return 150;
-        }
+                return 120;
+            }
+            if (indexPath.row ==8) {
+                return 150;
+            }
 
         
-        if (indexPath.row == 9) {
-            return 80;
-        }
+            if (indexPath.row == 9) {
+                return 80;
+            }
 
 
     return 40;
     }
-        if (indexPath.row == 0 ){
-            return 258;
-        }
-        if (indexPath.row == 4) {
-            return 70;
-        }
-        if ( indexPath.row ==6) {
+            if (indexPath.row == 0 )
+            {
+                return 258;
+             }
+            if (indexPath.row == 4)
+            {
+                return 70;
+            }
+            if ( indexPath.row ==6)
+            {
             if([imageNormalArray count] < 1)
                 return 80;
             else if([imageNormalArray count] <= 5)
@@ -557,22 +564,30 @@
                 return (commonHeight * 3)+57;
             else if([imageNormalArray count] <= 20)
                 return (commonHeight * 4)+70;
-        }
+            }
     
-        if(indexPath.row ==8)
-        {
-            return 150;
-        }
+            if(indexPath.row ==8)
+            {
+                return 150;
+            }
     
-        if ( indexPath.row == 7) {
-            return 160;
-        }
+            if ( indexPath.row == 7) {
+                return 160;
+            }
     
-        if (indexPath.row == 9) {
-            return 98;
-        }
-    
+            if (indexPath.row == 9) {
+                return 98;
+           // }
+        return 50;
+    }
+//    else{
+//        if (IS_IPHONE4 ||IS_IPHONE5)
+//        {
+//            return 40;
+//        }
+//    }
     return 50;
+    
 }
 
 
@@ -823,14 +838,7 @@
             cell.textViewHeaderLabel.text =placeHolderText;
             cell.textViewAboutYou.delegate = self;
         }
-        
-        
-        
-        
-        
-        
-
-       
+               
     }
     
     if(indexPath.row == 6)
