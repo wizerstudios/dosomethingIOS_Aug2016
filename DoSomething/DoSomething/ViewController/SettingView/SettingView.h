@@ -16,6 +16,9 @@
     IBOutlet UIButton *btnYes;
     IBOutlet UIButton *btnNo;
     IBOutlet UIView *alertMainBgView;
+    IBOutlet UILabel * messLbl;
+    IBOutlet UILabel *soundLbl;
+    IBOutlet UILabel *vibrationLbl;
 }
 
 @property (strong,nonatomic) IBOutlet UIScrollView *settingScroll;
