@@ -420,15 +420,14 @@
                          NSLog(@"checkuser = %@",[[responseObject objectForKey:@"checkuser"]objectForKey:@"status"]);
                          if(([[[responseObject objectForKey:@"checkuser"]objectForKey:@"RegisterType"]  isEqual: @"1"])){
                              if([[[responseObject objectForKey:@"checkuser"]objectForKey:@"status"]  isEqual: @"error"]){
-                                 if(IS_GREATER_IOS8)
-                                 {
-                                 [self presentViewController:[ DSAppCommon alertWithTitle:@"Title" withMessage:[[responseObject objectForKey:@"checkuser"]objectForKey:@"Message"] preferredStyle:UIAlertControllerStyleAlert] animated:YES completion:NULL];
-                                 [COMMON removeLoading];
-                                 }
-                                 else{
-                                     [DSAppCommon showSimpleAlertWithMessage:[[responseObject objectForKey:@"checkuser"]objectForKey:@"Message"]];
-                                     [COMMON removeLoading];
-                                 }
+//                                 if(IS_GREATER_IOS8)
+//                                 {
+//                                 [self presentViewController:[ DSAppCommon alertWithTitle:@"Title" withMessage:[[responseObject objectForKey:@"checkuser"]objectForKey:@"Message"] preferredStyle:UIAlertControllerStyleAlert] animated:YES completion:NULL];
+//                                 }
+//                                 else{
+//                                     [DSAppCommon showSimpleAlertWithMessage:[[responseObject objectForKey:@"checkuser"]objectForKey:@"Message"]];
+//                                 }
+                                 [self showAltermessage:[[responseObject objectForKey:@"checkuser"]objectForKey:@"Message"]];
                                  [COMMON removeLoading];
                              }
                              else {
@@ -592,6 +591,16 @@
                 [COMMON removeLoading];
             }
             
+            [self showAltermessage:[loginDict valueForKey:@"Message"]];
+//            if(IS_GREATER_IOS8)
+//            {
+//            [self presentViewController:[ DSAppCommon alertWithTitle:@"Title" withMessage:[loginDict valueForKey:@"Message"] preferredStyle:UIAlertControllerStyleAlert] animated:YES completion:NULL];
+//            }
+//            else
+//            {
+//                [DSAppCommon showSimpleAlertWithMessage:[loginDict valueForKey:@"Message"]];
+//            }
+            [COMMON removeLoading];
         }
         
         

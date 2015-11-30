@@ -1557,7 +1557,43 @@
     NSLog(@"isNotification_vibration:%@",isNotification_vibration);
     
     
-        
+    if([FirstName isEqual:[NSNull null]] && [FirstName isEqual:@""])
+    {
+
+        [self showAltermessage:LASTNAME_REQUIRED];
+        [COMMON removeLoading];
+        return;
+    }
+    if ( [dateChange isEqual:[NSNull null]] && [dateChange isEqual:@""] )
+    {
+
+         [self showAltermessage:DOB_REQUIRED];
+        [COMMON removeLoading];
+        return;
+    }
+    
+    if ( [strGender isEqual:[NSNull null]] && [strGender isEqual:@""])
+    {
+        [self showAltermessage:GENDER_REQUIRED];
+
+        [COMMON removeLoading];
+        return;
+    }
+    
+    if ( [emailAddressToRegister isEqual:[NSNull null]] && [emailAddressToRegister isEqual:@""])
+    {
+        [self showAltermessage:EMAIL_REQUIRED];
+        [COMMON removeLoading];
+        return;
+    }
+    if ( [emailPasswordToRegister isEqual:[NSNull null]] && [emailPasswordToRegister isEqual:@""])
+    {
+
+        [self showAltermessage:PASSWORD_REQUIRED];
+        [COMMON removeLoading];
+        return;
+    }
+
     
     if(![FirstName isEqual:[NSNull null]]&& ![FirstName isEqualToString:@""]&&![LastName isEqual:[NSNull null]]&& ![LastName isEqualToString:@""] &&![dateChange isEqual:[NSNull null]]&&![strGender isEqual:[NSNull null]]&& ![strGender isEqualToString:@""] &&![emailAddressToRegister isEqual:[NSNull null]] &&![emailAddressToRegister isEqualToString:@""] &&![emailPasswordToRegister isEqual:[NSNull null]] && ![emailPasswordToRegister isEqualToString:@""]){
 //            if(![NSString validateEmail:emailAddressToRegister]){
