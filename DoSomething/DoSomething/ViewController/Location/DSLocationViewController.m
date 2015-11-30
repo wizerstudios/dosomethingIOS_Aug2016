@@ -10,10 +10,15 @@
 #import "LocationCollectionViewCell.h"
 #import "CustomNavigationView.h"
 #import "DSConfig.h"
-
+#import "DSWebservice.h"
 
 @interface DSLocationViewController ()
-{}
+{
+    DSWebservice *objWebservice;
+    NSString * strsessionID;
+    NSString * longitude;
+    NSString * laditude;
+}
 @end
 
 @implementation DSLocationViewController
@@ -22,6 +27,17 @@
 @synthesize profileImages,profileNames,kiloMeterlabel;
 - (void)viewDidLoad {
     
+    NSMutableDictionary *dic=[[NSMutableDictionary alloc]init];
+    
+    dic =[[NSUserDefaults standardUserDefaults] valueForKey:USERDETAILS];
+    
+     strsessionID =[dic valueForKey:@"SessionId"];
+     longitude    =[dic valueForKey:@"longitude"];
+     laditude     =[dic valueForKey:@"latitude"];
+    NSLog(@"usersessionID:%@",strsessionID);
+
+    objWebservice =[[DSWebservice alloc]init];
+    [self nearestLocationWebservice];
     CustomNavigationView *customNavigation;
     customNavigation = [[CustomNavigationView alloc] initWithNibName:@"CustomNavigationView" bundle:nil];
     customNavigation.view.frame = CGRectMake(0,-20, CGRectGetWidth(self.view.frame), 65);
@@ -66,6 +82,16 @@
     // Do any additional setup after loading the view from its nib.
 }
 
+-(void)nearestLocationWebservice
+{
+    [objWebservice nearestUsers:NearestUsers_API sessionid:strsessionID latitude:laditude longitude:longitude filter_status:@"" filter_gender:@"" filter_agerange:@"" filter_distance:@"" success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    
+        NSLog(@"%@",responseObject);
+        
+    } failure:^(AFHTTPRequestOperation *operation, id error) {
+    
+    }];
+}
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.

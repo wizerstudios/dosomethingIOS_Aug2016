@@ -359,16 +359,29 @@
                              }
                          }
                          else {
-                             if([[[responseObject objectForKey:@"checkuser"]objectForKey:@"status"]  isEqual: @"error"]){
-                                // [self loadCreateAPI];
-                                 [self loadRegister];
-                                 NSLog(@"checkuser = %@",responseObject);
+                             if(([[[responseObject objectForKey:@"checkuser"]objectForKey:@"RegisterType"]  isEqual: @"2"])){
+                                 if([[[responseObject objectForKey:@"checkuser"]objectForKey:@"status"]  isEqual: @"success"]){
+                                     NSLog(@"checkuser = %@",responseObject);
+                                     [self gotoProfileView:profileID];
+                                 }
+                                 else{
+                                     NSLog(@"checkuser = %@",responseObject);
+                                     [self loadloginAPI];
+                                 }
                                  
                              }
-                             else{
-                                 [self gotoProfileView:profileID];//[self gotoProfileView];
-                                 [COMMON removeLoading];
-                             }
+//                             else{
+//                             if([[[responseObject objectForKey:@"checkuser"]objectForKey:@"status"]  isEqual: @"error"]){
+//                                // [self loadCreateAPI];
+//                                 [self loadRegister];
+//                                 NSLog(@"checkuser = %@",responseObject);
+//                                 
+//                             }
+//                             else{
+//                                 [self gotoProfileView:profileID];//[self gotoProfileView];
+//                                 [COMMON removeLoading];
+//                             }
+//                             }
                          }
                      }
                      failure:^(AFHTTPRequestOperation *operation, id error) {
@@ -423,7 +436,9 @@
                  
                  else{
                     [COMMON LoadIcon:self.view];
-                     [self loadloginAPI];}
+                    // [self loadloginAPI];
+                     [self checkUserEmail];
+                 }
 
              }];
          }

@@ -16,15 +16,18 @@
     IBOutlet UIButton *btnYes;
     IBOutlet UIButton *btnNo;
     IBOutlet UIView *alertMainBgView;
+    IBOutlet UILabel * messLbl;
+    IBOutlet UILabel *soundLbl;
+    IBOutlet UILabel *vibrationLbl;
 }
 
 @property (strong,nonatomic) IBOutlet UIScrollView *settingScroll;
 
 @property (nonatomic ,strong) IBOutlet UIView * notificationview;
 
-@property (nonatomic ,strong) IBOutlet UIButton *messSwitchBtn;
-@property (nonatomic,strong)  IBOutlet UIButton * SoundSwitchBtn ;
-@property(nonatomic,strong) IBOutlet UIButton *vibrationSwitchBtn;
+//@property (nonatomic ,strong) IBOutlet UISwitch *messSwitchBtn;
+//@property (nonatomic,strong)  IBOutlet UISwitch * SoundSwitchBtn ;
+//@property(nonatomic,strong) IBOutlet UISwitch*vibrationSwitchBtn;
 
 @property (weak, nonatomic) IBOutlet UIImageView *imageViewNewMsg;
 
