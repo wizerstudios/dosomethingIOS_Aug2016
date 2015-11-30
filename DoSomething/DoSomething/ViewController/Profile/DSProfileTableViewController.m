@@ -296,6 +296,28 @@
         [self.scrView setContentOffset:CGPointMake(1.5*self.profileImageView.frame.size.width - 15, 0)animated:NO];
     else if(CurrentImage == 2)
         [self.scrView setContentOffset:CGPointMake((3*self.profileImageView.frame.size.width - 15), 0)animated:NO];
+    
+    
+    xslider=0;
+    pgDtView=[[UIView alloc]init];
+    pgDtView.backgroundColor=[UIColor clearColor];
+    pageImageView =[[UIImageView alloc]init];
+    profileImagePageControl.numberOfPages=infoArray.count;
+    
+    for(int i=0;i<profileImagePageControl.numberOfPages;i++)
+    {
+        blkdot=[[UIImageView alloc]init];
+        [blkdot setFrame:CGRectMake(i*17, 0, 7, 7 )];
+        [blkdot setImage:[UIImage imageNamed:@"dot_normal"]];
+        [pgDtView addSubview:blkdot];
+        [pageImageView setFrame:CGRectMake(0, 0, 7, 7)];
+        [pageImageView setImage:[UIImage imageNamed:@"dot_active_gray"]];
+        [pgDtView addSubview:pageImageView];
+        [topViewCell addSubview:pgDtView];
+        [pgDtView setFrame:CGRectMake(15, -5, profileImagePageControl.numberOfPages*17, 10)];
+        
+    }
+
 }
 
 - (IBAction)pageChanged:(id)sender {
@@ -310,6 +332,16 @@
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView
 {
     CurrentImage = scrollView.contentOffset.x / scrollView.frame.size.width;
+    
+    if (scrollView==self.scrView) {    }
+    pull=@"";
+    jslider = scrollView.contentOffset.x / scrollView.frame.size.width;
+    [self.scrView setNeedsDisplay];
+    profileImagePageControl.currentPage=jslider;
+    [pageImageView setFrame:CGRectMake(jslider*17, 0, 7, 7)];
+    
+    isTapping=NO;
+    scrolldragging=@"YES";
 }
 
 - (NSString *) getEmail {
