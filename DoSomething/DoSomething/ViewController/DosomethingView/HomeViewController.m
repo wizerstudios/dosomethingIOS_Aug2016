@@ -20,6 +20,7 @@
 #import "DSAppCommon.h"
 #import "UIImageView+AFNetworking.h"
 #import "OpenUDID.h"
+#import "CustomAlterview.h"
 
 #define ITEMS_PAGE_SIZE 4
 #define ITEM_CELL_IDENTIFIER @"ItemCell"
@@ -39,6 +40,7 @@
     AVAudioPlayer *audioPlayer;
     
     NSString                *loginUserSessionID;
+    CustomAlterview * objCustomAlterview;
     
 }
 
@@ -48,7 +50,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [self loadNavigation];
+   
     objWebService = [[DSWebservice alloc]init];
     [COMMON LoadIcon:self.view];
     
@@ -69,6 +71,7 @@
     appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
     appDelegate.buttonsView.hidden=NO;
     [self loadnavigationview];
+   
      [self setupCollectionView];
     [self audioplayMethod];
     
@@ -103,6 +106,9 @@
 
 -(void)loadnavigationview
 {
+    self.navigationController.navigationBarHidden=NO;
+    [self.navigationItem setHidesBackButton:YES animated:NO];
+    [self.navigationController.navigationBar setTranslucent:YES];
     CustomNavigationView *customNavigation;
     customNavigation = [[CustomNavigationView alloc] initWithNibName:@"CustomNavigationView" bundle:nil];
     customNavigation.view.frame = CGRectMake(0,-20, CGRectGetWidth(self.view.frame), 65);
@@ -124,10 +130,26 @@
     selectedItemsArray = [[NSMutableArray alloc]init];
     
     
-    alertBgView.hidden = YES;
-    alertMainBgView.hidden = YES;
+     [self CustomAlterviewload];
+   // alertBgView.hidden = YES;
+    //alertMainBgView.hidden = YES;
 
 }
+
+-(void)CustomAlterviewload
+{
+    
+    objCustomAlterview = [[CustomAlterview alloc] initWithNibName:@"CustomAlterview" bundle:nil];
+//    objCustomAlterview.view.frame = CGRectMake(self.view.frame.origin.x,self.view.frame.origin.y, CGRectGetWidth(self.view.frame),self.);
+    [objCustomAlterview.alertBgView setHidden:YES];
+    [objCustomAlterview.alertMainBgView setHidden:YES];
+    [objCustomAlterview.view setHidden:YES];
+    [objCustomAlterview.alertCancelButton addTarget:self action:@selector(alertPressCancel:) forControlEvents:UIControlEventTouchUpInside];
+    [objCustomAlterview.btnNo addTarget:self action:@selector(alertPressNo:) forControlEvents:UIControlEventTouchUpInside];
+    [objCustomAlterview.btnYes addTarget:self action:@selector(alertPressYes:) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:objCustomAlterview.view];
+}
+
 -(void)audioplayMethod
 {
     NSString *path = [[NSBundle mainBundle]
@@ -149,28 +171,6 @@
     [self.homeCollectionView setCollectionViewLayout:flowLayout];
 }
 
--(void)loadNavigation{
-    
-    self.navigationController.navigationBarHidden=NO;
-    [self.navigationItem setHidesBackButton:YES animated:NO];
-    [self.navigationController.navigationBar setTranslucent:YES];
-    
-    CustomNavigationView *customNavigation;
-    customNavigation = [[CustomNavigationView alloc] initWithNibName:@"CustomNavigationView" bundle:nil];
-    if (IS_IPHONE4 ||IS_IPHONE5)
-    {
-        customNavigation.view.frame = CGRectMake(0,-20, CGRectGetWidth(self.view.frame), 65);
-    }
-    else    {
-        customNavigation.view.frame = CGRectMake(0,-20,420, 75);
-    }
-    [customNavigation.menuBtn setHidden:NO];
-    [customNavigation.buttonBack setHidden:YES];
-    [customNavigation.saveBtn setHidden:YES];
-    [self.navigationController.navigationBar addSubview:customNavigation.view];
-    
-    //[customNavigation.buttonBack addTarget:self action:@selector(backAction) forControlEvents:UIControlEventTouchUpInside];
-}
 
 #pragma mark collectionview delegate method
 
@@ -295,17 +295,18 @@
     else
     {
         AudioServicesPlaySystemSound(kSystemSoundID_Vibrate);
-        alertBgView.hidden = NO;
-        alertMainBgView.hidden = NO;
-        alertCancelButton.hidden = NO;
-        btnYes.hidden = YES;
-        btnNo.hidden = YES;
+        objCustomAlterview.view.hidden =NO;
+        objCustomAlterview.alertBgView.hidden = NO;
+        objCustomAlterview.alertMainBgView.hidden = NO;
+        objCustomAlterview.alertCancelButton.hidden = NO;
+        objCustomAlterview.btnYes.hidden = YES;
+        objCustomAlterview.btnNo.hidden = YES;
         
-        alertMsgLabel.text = @"ONLY 3 ACTIVIES\nCAN BE SELECTED";
-        alertMsgLabel.textAlignment = NSTextAlignmentCenter;
-        alertMsgLabel.lineBreakMode = NSLineBreakByWordWrapping;
-        alertMsgLabel.numberOfLines = 2;
-        [alertMsgLabel setTextColor:[UIColor colorWithRed:(255/255.0f) green:(255/255.0f) blue:(255/255.0f) alpha:1.0f]];
+        objCustomAlterview.alertMsgLabel.text = @"ONLY 3 ACTIVIES\nCAN BE SELECTED";
+        objCustomAlterview.alertMsgLabel.textAlignment = NSTextAlignmentCenter;
+        objCustomAlterview.alertMsgLabel.lineBreakMode = NSLineBreakByWordWrapping;
+        objCustomAlterview.alertMsgLabel.numberOfLines = 2;
+        [objCustomAlterview.alertMsgLabel setTextColor:[UIColor colorWithRed:(255/255.0f) green:(255/255.0f) blue:(255/255.0f) alpha:1.0f]];
         
       [collectionView deselectItemAtIndexPath:indexPath animated:NO];
         }
@@ -384,16 +385,17 @@
 
 - (IBAction)pressDosomething:(id)sender {
     
-    alertBgView.hidden = NO;
-    alertMainBgView.hidden = NO;
-    btnYes.hidden = NO;
-    btnNo.hidden = NO;
-    alertCancelButton.hidden = NO;
+    objCustomAlterview.view .hidden  = NO;
+    objCustomAlterview.alertBgView.hidden = NO;
+    objCustomAlterview.alertMainBgView.hidden = NO;
+    objCustomAlterview.btnYes.hidden = NO;
+    objCustomAlterview.btnNo.hidden = NO;
+    objCustomAlterview.alertCancelButton.hidden = NO;
     
-    alertMsgLabel.text = @"AVAILABLE NOW?";
-    alertMsgLabel.textAlignment = NSTextAlignmentCenter;
-    alertMsgLabel.lineBreakMode = NSLineBreakByWordWrapping;
-    alertMsgLabel.textColor = [UIColor whiteColor];
+    objCustomAlterview.alertMsgLabel.text = @"AVAILABLE NOW?";
+    objCustomAlterview.alertMsgLabel.textAlignment = NSTextAlignmentCenter;
+   objCustomAlterview. alertMsgLabel.lineBreakMode = NSLineBreakByWordWrapping;
+    objCustomAlterview.alertMsgLabel.textColor = [UIColor whiteColor];
     NSMutableDictionary *dic=[[NSMutableDictionary alloc]init];
     dic =[[NSUserDefaults standardUserDefaults] valueForKey:USERDETAILS];
     NSString * strsessionID =[dic valueForKey:@"SessionId"];
@@ -403,16 +405,17 @@
 - (IBAction)alertPressCancel:(id)sender {
     [UIView animateWithDuration:1.0 animations:^{
         
-        alertBgView.alpha = 0;
+        objCustomAlterview.alertBgView.alpha = 0;
         
-        alertMainBgView.alpha = 0;
+        objCustomAlterview.alertMainBgView.alpha = 0;
               
     } completion:^(BOOL b){
         
 
-        alertBgView.hidden = YES;
+       objCustomAlterview. alertBgView.hidden = YES;
         
-        alertMainBgView.hidden = YES;
+        objCustomAlterview.alertMainBgView.hidden = YES;
+        objCustomAlterview.view .hidden  = YES;
     }];
 }
 
@@ -420,15 +423,16 @@
     
     [UIView animateWithDuration:1.0 animations:^{
         
-        alertBgView.alpha = 0;
+        objCustomAlterview.alertBgView.alpha = 0;
         
-        alertMainBgView.alpha = 0;
+        objCustomAlterview.alertMainBgView.alpha = 0;
            }
         completion:^(BOOL b){
         
-        alertBgView.hidden = YES;
+        objCustomAlterview.alertBgView.hidden = YES;
         
-        alertMainBgView.hidden = YES;
+        objCustomAlterview.alertMainBgView.hidden = YES;
+            [objCustomAlterview.view setHidden:YES];
         [self loadupdateDosomethingWebService:selectedItemsArray :@"Yes"];
       
     }];
@@ -438,16 +442,17 @@
 - (IBAction)alertPressNo:(id)sender {
     [UIView animateWithDuration:1.0 animations:^{
         
-        alertBgView.alpha = 0;
+        objCustomAlterview.alertBgView.alpha = 0;
         
-        alertMainBgView.alpha = 0;
+        objCustomAlterview.alertMainBgView.alpha = 0;
         
     } completion:^(BOOL b){
         
         
-        alertBgView.hidden = YES;
+        objCustomAlterview.alertBgView.hidden = YES;
         
-        alertMainBgView.hidden = YES;
+        objCustomAlterview.alertMainBgView.hidden = YES;
+        [objCustomAlterview.view setHidden:YES];
         [self loadupdateDosomethingWebService:selectedArray :@"No"];
      
     }];

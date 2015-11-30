@@ -143,7 +143,7 @@
             }
             else{
                 ImageURL2 = [profileDict valueForKey:@"image2"];
-                imageData2 = [NSData dataWithContentsOfURL:[NSURL URLWithString:ImageURL1]];
+                imageData2 = [NSData dataWithContentsOfURL:[NSURL URLWithString:ImageURL2]];
             }
 
             if([[profileDict valueForKey:@"image3"] isEqual:@""]){
@@ -151,7 +151,7 @@
             }
             else{
                 ImageURL3 = [profileDict valueForKey:@"image3"];
-                imageData3 = [NSData dataWithContentsOfURL:[NSURL URLWithString:ImageURL1]];
+                imageData3 = [NSData dataWithContentsOfURL:[NSURL URLWithString:ImageURL3]];
             }
             
             profileDataArray = [[NSMutableArray alloc]initWithObjects:imageData1,imageData2,imageData3, nil];
@@ -296,6 +296,28 @@
         [self.scrView setContentOffset:CGPointMake(1.5*self.profileImageView.frame.size.width - 15, 0)animated:NO];
     else if(CurrentImage == 2)
         [self.scrView setContentOffset:CGPointMake((3*self.profileImageView.frame.size.width - 15), 0)animated:NO];
+    
+    
+    xslider=0;
+    pgDtView=[[UIView alloc]init];
+    pgDtView.backgroundColor=[UIColor clearColor];
+    pageImageView =[[UIImageView alloc]init];
+    profileImagePageControl.numberOfPages=infoArray.count;
+    
+    for(int i=0;i<profileImagePageControl.numberOfPages;i++)
+    {
+        blkdot=[[UIImageView alloc]init];
+        [blkdot setFrame:CGRectMake(i*17, 0, 7, 7 )];
+        [blkdot setImage:[UIImage imageNamed:@"dot_normal"]];
+        [pgDtView addSubview:blkdot];
+        [pageImageView setFrame:CGRectMake(0, 0, 7, 7)];
+        [pageImageView setImage:[UIImage imageNamed:@"dot_active_gray"]];
+        [pgDtView addSubview:pageImageView];
+        [topViewCell addSubview:pgDtView];
+        [pgDtView setFrame:CGRectMake(15, -5, profileImagePageControl.numberOfPages*17, 10)];
+        
+    }
+
 }
 
 - (IBAction)pageChanged:(id)sender {
@@ -310,6 +332,16 @@
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView
 {
     CurrentImage = scrollView.contentOffset.x / scrollView.frame.size.width;
+    
+    if (scrollView==self.scrView) {    }
+    pull=@"";
+    jslider = scrollView.contentOffset.x / scrollView.frame.size.width;
+    [self.scrView setNeedsDisplay];
+    profileImagePageControl.currentPage=jslider;
+    [pageImageView setFrame:CGRectMake(jslider*17, 0, 7, 7)];
+    
+    isTapping=NO;
+    scrolldragging=@"YES";
 }
 
 - (NSString *) getEmail {
@@ -871,43 +903,51 @@
         
         if(profileDict !=NULL){
             
-            if(isLogin ==NO){
-                cell.textViewHeaderLabel.hidden = YES;
-                cell.textViewAboutYou.text = textviewText;
-                cell.labelAboutYou.text =titleText;
-                strAbout =cell.textViewAboutYou.text;
-                cell.textViewHeaderLabel.text =placeHolderText;
-                cell.textViewAboutYou.delegate = self;
-                
-            }
-            else{
+//            if(isLogin ==NO){
+//                cell.textViewHeaderLabel.hidden = YES;
+//                cell.textViewAboutYou.text = textviewText;
+//                cell.labelAboutYou.text =titleText;
+//                strAbout =cell.textViewAboutYou.text;
+//                cell.textViewHeaderLabel.text =placeHolderText;
+//                cell.textViewAboutYou.delegate = self;
+//                
+//            }
+            
                 if([[profileDict valueForKey:@"about"] isEqual:@""]){
-                    cell.textViewHeaderLabel.hidden = NO;
+                    if(textviewText == nil)
+                        cell.textViewHeaderLabel.hidden = NO;
+                    else
+                        cell.textViewHeaderLabel.hidden = YES;
+                    
+                    cell.textViewAboutYou.text = textviewText;
+                    cell.labelAboutYou.text =titleText;
+                    strAbout =cell.textViewAboutYou.text;
                     cell.textViewHeaderLabel.text =placeHolderText;
+                    cell.textViewAboutYou.delegate = self;
                 }
                 else{
                     cell.textViewAboutYou.text = [[profileDict valueForKey:@"about"]mutableCopy];
                     strAbout =cell.textViewAboutYou.text;
                     cell.textViewHeaderLabel.hidden = YES;
+                    cell.textViewHeaderLabel.text =placeHolderText;
+                    cell.labelAboutYou.text =titleText;
+                    cell.textViewAboutYou.delegate = self;
                 }
-                isLogin = NO;
-            }
-            cell.labelAboutYou.text =titleText;
-            cell.textViewAboutYou.delegate = self;
-            }
-        
+                
+                        }
         else{
-        
-        if(textviewText == nil)
-            cell.textViewHeaderLabel.hidden = NO;
-        else
-            cell.textViewHeaderLabel.hidden = YES;
-            cell.textViewAboutYou.text = textviewText;
-            cell.labelAboutYou.text =titleText;
-            strAbout =cell.textViewAboutYou.text;
-            cell.textViewHeaderLabel.text =placeHolderText;
-            cell.textViewAboutYou.delegate = self;
+            if(textviewText == nil)
+                cell.textViewHeaderLabel.hidden = NO;
+            else
+                cell.textViewHeaderLabel.hidden = YES;
+                
+                cell.textViewAboutYou.text = textviewText;
+                cell.labelAboutYou.text =titleText;
+                strAbout =cell.textViewAboutYou.text;
+                cell.textViewHeaderLabel.text =placeHolderText;
+                cell.textViewAboutYou.delegate = self;
         }
+        
         
     }
     
@@ -1491,6 +1531,11 @@
 }
 #pragma mark - updateAPI
 -(void) updateAPI{
+    if(currentLatitude == nil)
+        currentLatitude = @"";
+    if(currentLongitude == nil)
+        currentLongitude = @"";
+    
     [objWebService profileUpdate:ProfileUpdate_API
                       first_name:FirstName
                        last_name:LastName
@@ -1510,7 +1555,8 @@
                              [COMMON removeLoading];
                          }
                          failure:^(AFHTTPRequestOperation *operation, id error) {
-                             
+                             [COMMON removeLoading];
+
                          }
      ];
 }
@@ -1546,22 +1592,29 @@
         NSArray *postPerArray;
         postPerArray = [[placeHolderArray objectAtIndex:0]valueForKey:@"TypingText"];
         
+        FirstName = [profileDict valueForKey:@"first_name"];
+        LastName  = [profileDict valueForKey:@"last_name"];
+        strGender = [profileDict valueForKey:@"gender"];
         strDOB       = (currentTextfield.text !=nil)?currentTextfield.text :@"";
-                
-        NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-        [dateFormatter setDateFormat:@"dd/MM/yyyy"];
-        NSDate *date = [dateFormatter dateFromString: strDOB];
-        dateFormatter = [[NSDateFormatter alloc] init];
-        [dateFormatter setDateFormat:@"yyyy-MM-dd"];
-        dateChange = [dateFormatter stringFromDate:date];
-        NSLog(@"Converted String : %@",dateChange);
-
+       // strAbout;
+        [self dateConverter];
         [self updateAPI];
     }
     else
         [self loadValidations];
 }
+#pragma mark - dateConverter
+-(void)dateConverter{
+    
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateFormat:@"dd/MM/yyyy"];
+    NSDate *date = [dateFormatter dateFromString: strDOB];
+    dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateFormat:@"yyyy-MM-dd"];
+    dateChange = [dateFormatter stringFromDate:date];
+    NSLog(@"Converted String : %@",dateChange);
 
+}
 #pragma mark - saveAction
 -(void)loadValidations
 {
@@ -1570,8 +1623,6 @@
     NSArray *postPerArray;
     postPerArray = [[placeHolderArray objectAtIndex:0]valueForKey:@"TypingText"];
     NSLog(@"hobby:%@",hobbiesNameArray);
-     NSLog(@"about:%@",[postPerArray objectAtIndex:5]);
-    //strAbout= textviewText;
     
     strFirstName = [postPerArray objectAtIndex:1];
     strLastName  = [postPerArray objectAtIndex:2];
@@ -1582,19 +1633,7 @@
     LastName     = (strLastName!=nil)?strLastName:@"";
 
     strDOB       = (currentTextfield.text !=nil)?currentTextfield.text :@"";
-    
-    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-    [dateFormatter setDateFormat:@"dd/MM/yyyy"];
-    NSDate *date = [dateFormatter dateFromString: strDOB];
-    dateFormatter = [[NSDateFormatter alloc] init];
-    [dateFormatter setDateFormat:@"yyyy-MM-dd"];
-    dateChange = [dateFormatter stringFromDate:date];
-    NSLog(@"Converted String : %@",dateChange);
-
-    
-    
-//    dateChange = [dateChange stringByReplacingOccurrencesOfString:@"/"
-//                                                       withString:@"-"];
+    [self dateConverter];
     
     NSLog(@"isNotification_vibration:%@",isNotification_vibration);
     

@@ -13,6 +13,7 @@
 #import "DSWebservice.h"
 #import "DSHomeViewController.h"
 #import "AppDelegate.h"
+#import "CustomAlterview.h"
 
 @interface SettingView ()
 {
@@ -27,6 +28,7 @@
     UISwitch * messSwith;
     UISwitch * soundSwitch;
     UISwitch *vibrationSwitch;
+    CustomAlterview * objCustomAlterview;
 }
 
 @property (nonatomic,strong) IBOutlet NSLayoutConstraint * deletebuttonBottomoposition;
@@ -56,6 +58,8 @@
     
    
     [self loadNavigationview];
+    
+    [self CustomAlterviewload];
     
     [self notificationMethod];
     
@@ -95,37 +99,44 @@
     [customNavigation.buttonBack setHidden:YES];
     [customNavigation.saveBtn setHidden:NO];
     [self.navigationController.navigationBar addSubview:customNavigation.view];
-    alertMainBgView.hidden = YES;
-    alertBgView .hidden =YES;
+   
     
      messSwith =[[UISwitch alloc]initWithFrame:CGRectMake(messLbl.frame.origin.x+messLbl.frame.size.width+24,messLbl.frame.origin.y-3,20,0)];
     [messSwith addTarget: self action: @selector(messSwithAction:) forControlEvents:UIControlEventValueChanged];
    messSwith.transform = CGAffineTransformMakeScale(0.50, 0.50);
-     messSwith.layer.cornerRadius = 16.0;
-    [messSwith setOnTintColor:[UIColor greenColor]];
+    messSwith.layer.cornerRadius = 16.0;
+    
     
     soundSwitch =[[UISwitch alloc]initWithFrame:CGRectMake(soundLbl.frame.origin.x+soundLbl.frame.size.width+24,soundLbl.frame.origin.y-3,20,0)];
     soundSwitch.transform = CGAffineTransformMakeScale(0.50, 0.50);
     [soundSwitch addTarget: self action: @selector(soundSwithAction:) forControlEvents:UIControlEventValueChanged];
-    
+     soundSwitch.layer.cornerRadius = 16.0;
    vibrationSwitch =[[UISwitch alloc]initWithFrame:CGRectMake(vibrationLbl.frame.origin.x+vibrationLbl.frame.size.width+24,vibrationLbl.frame.origin.y-5,20,0)];
      vibrationSwitch.transform = CGAffineTransformMakeScale(0.50, 0.50);
     [vibrationSwitch addTarget: self action: @selector(vibrationSwithAction:) forControlEvents:UIControlEventValueChanged];
-    
+     vibrationSwitch.layer.cornerRadius = 16.0;
     [self.notificationview addSubview:messSwith];
     [self.notificationview addSubview:soundSwitch];
     [self.notificationview addSubview:vibrationSwitch];
   
 }
+
+-(void)CustomAlterviewload
+{
+    
+    objCustomAlterview = [[CustomAlterview alloc] initWithNibName:@"CustomAlterview" bundle:nil];
+    objCustomAlterview.view.frame = CGRectMake(self.view.frame.origin.x,self.view.frame.origin.y, CGRectGetWidth(self.view.frame), self.view.frame.size.height);
+    [objCustomAlterview.alertBgView setHidden:YES];
+    [objCustomAlterview.alertMainBgView setHidden:YES];
+
+    [objCustomAlterview.btnNo addTarget:self action:@selector(alertPressNo:) forControlEvents:UIControlEventTouchUpInside];
+    [objCustomAlterview.btnYes addTarget:self action:@selector(alertPressYes:) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:objCustomAlterview.view];
+   
+}
+
 -(void)notificationMethod
 {
-//    self.messSwitchBtn.userInteractionEnabled = YES;
-//    self.vibrationSwitchBtn.userInteractionEnabled = YES;
-//    self.SoundSwitchBtn.userInteractionEnabled = YES;
-//    
-//    [self.messSwitchBtn setTag:200];
-//    [self.SoundSwitchBtn setTag:201];
-//    [self.vibrationSwitchBtn setTag:202];
     
     
     NSString * objMsg =[notificationMsg isEqualToString:@"Yes"]? @"switch_on":@"switch_off";
@@ -136,14 +147,14 @@
     {
         [messSwith setThumbTintColor:[UIColor greenColor]];
         
-        [messSwith setBackgroundColor:[UIColor whiteColor]];
+        [messSwith setBackgroundColor:[UIColor lightGrayColor]];
         [messSwith setOnTintColor:[UIColor lightGrayColor]];
         }
     if([objSound isEqualToString:@"switch_on"])
     {
         [soundSwitch setThumbTintColor:[UIColor greenColor]];
         
-        [soundSwitch setBackgroundColor:[UIColor whiteColor]];
+        [soundSwitch setBackgroundColor:[UIColor lightGrayColor]];
         [soundSwitch setOnTintColor:[UIColor lightGrayColor]];
     }
     
@@ -151,37 +162,30 @@
     {
         [vibrationSwitch setThumbTintColor:[UIColor greenColor]];
         
-        [vibrationSwitch setBackgroundColor:[UIColor whiteColor]];
+        [vibrationSwitch setBackgroundColor:[UIColor lightGrayColor]];
         [vibrationSwitch setOnTintColor:[UIColor lightGrayColor]];
     }
 
     if([objMsg isEqualToString:@"switch_off"])
     {
-        [messSwith setTintColor:[UIColor grayColor]];
+        [messSwith setTintColor:[UIColor whiteColor]];
         [messSwith setBackgroundColor:[UIColor lightGrayColor]];
         [messSwith setThumbTintColor:[UIColor redColor]];
     }
     if([objSound isEqualToString:@"switch_off"])
     {
-        [soundSwitch setTintColor:[UIColor grayColor]];
+        [soundSwitch setTintColor:[UIColor whiteColor]];
         [soundSwitch setBackgroundColor:[UIColor lightGrayColor]];
         [soundSwitch setThumbTintColor:[UIColor redColor]];
     }
     
     if([objVibration isEqualToString:@"switch_off"])
     {
-        [vibrationSwitch setTintColor:[UIColor grayColor]];
+        [vibrationSwitch setTintColor:[UIColor whiteColor]];
         [vibrationSwitch setBackgroundColor:[UIColor lightGrayColor]];
         [vibrationSwitch setThumbTintColor:[UIColor redColor]];
     }
   
-    
-    
-    //[self.vibrationSwitchBtn addTarget:self action:@selector(newMessSwitchBtnAction:) forControlEvents:UIControlEventTouchUpInside];
-    //[self.SoundSwitchBtn addTarget:self action:@selector(newMessSwitchBtnAction:) forControlEvents:UIControlEventTouchUpInside];
-   // [self.messSwitchBtn addTarget:self action:@selector(newMessSwitchBtnAction:) forControlEvents:UIControlEventTouchUpInside];
-    
-
 }
 - (IBAction)messSwithAction:(UISwitch *)sender
 {
@@ -201,7 +205,6 @@
         [sender setBackgroundColor:[UIColor lightGrayColor]];
         [sender setThumbTintColor:[UIColor redColor]];
         
-       // [sender setBackgroundColor:[UIColor colorWithRed:138/256.0 green:9/256.0 blue:18/256.0 alpha:1]];
     }
 }
 
@@ -223,7 +226,7 @@
         [sender setBackgroundColor:[UIColor lightGrayColor]];
         [sender setThumbTintColor:[UIColor redColor]];
         
-        // [sender setBackgroundColor:[UIColor colorWithRed:138/256.0 green:9/256.0 blue:18/256.0 alpha:1]];
+
     }
 }
 
@@ -244,8 +247,7 @@
         [sender setTintColor:[UIColor grayColor]];
         [sender setBackgroundColor:[UIColor lightGrayColor]];
         [sender setThumbTintColor:[UIColor redColor]];
-        
-        // [sender setBackgroundColor:[UIColor colorWithRed:138/256.0 green:9/256.0 blue:18/256.0 alpha:1]];
+    
     }
 }
 
@@ -266,6 +268,7 @@
         
     }
 }
+
 
 #pragma mark - Logout_Delete_Action_API
 -(void)logoutDeleteAction{
@@ -310,17 +313,18 @@
 {
     
     optionLogoutDelete = @"logout";
-    alertBgView.hidden = NO;
-    alertMainBgView.hidden = NO;
-    alertCancelButton.hidden = NO;
-    btnYes.hidden = NO;
-    btnNo.hidden = NO;
+    [objCustomAlterview.view setHidden:NO];
+    objCustomAlterview.alertBgView.hidden = NO;
+    objCustomAlterview.alertMainBgView.hidden = NO;
+    objCustomAlterview.alertCancelButton.hidden = NO;
+    objCustomAlterview.btnYes.hidden = NO;
+    objCustomAlterview.btnNo.hidden = NO;
     
-    alertMsgLabel.text = @"ARE YOU SURE YOU WANT \nTO LOG OUT?";
-    alertMsgLabel.textAlignment = NSTextAlignmentCenter;
-    alertMsgLabel.lineBreakMode = NSLineBreakByWordWrapping;
-    alertMsgLabel.numberOfLines = 2;
-    alertMsgLabel.textColor = [UIColor whiteColor];
+    objCustomAlterview.alertMsgLabel.text = @"ARE YOU SURE YOU WANT \nTO LOG OUT?";
+    objCustomAlterview.alertMsgLabel.textAlignment = NSTextAlignmentCenter;
+    objCustomAlterview.alertMsgLabel.lineBreakMode = NSLineBreakByWordWrapping;
+    objCustomAlterview.alertMsgLabel.numberOfLines = 2;
+    objCustomAlterview.alertMsgLabel.textColor = [UIColor whiteColor];
 
     
     //[self logoutDeleteAction];
@@ -329,17 +333,17 @@
 {
     
     optionLogoutDelete = @"delete";
-    alertBgView.hidden = NO;
-    alertMainBgView.hidden = NO;
-    alertCancelButton.hidden = NO;
-    btnYes.hidden = NO;
-    btnNo.hidden = NO;
+    objCustomAlterview.alertBgView.hidden = NO;
+    objCustomAlterview.alertMainBgView.hidden = NO;
+    objCustomAlterview.alertCancelButton.hidden = NO;
+    objCustomAlterview.btnYes.hidden = NO;
+    objCustomAlterview.btnNo.hidden = NO;
     
-    alertMsgLabel.text = @"ARE YOU SURE YOU WANT \nTO DELETE ACCOUNT?";
-    alertMsgLabel.textAlignment = NSTextAlignmentCenter;
-    alertMsgLabel.lineBreakMode = NSLineBreakByWordWrapping;
-    alertMsgLabel.numberOfLines = 2;
-    [alertMsgLabel setTextColor:[UIColor colorWithRed:(255/255.0f) green:(255/255.0f) blue:(255/255.0f) alpha:1.0f]];
+    objCustomAlterview.alertMsgLabel.text = @"ARE YOU SURE YOU WANT \nTO DELETE ACCOUNT?";
+    objCustomAlterview.alertMsgLabel.textAlignment = NSTextAlignmentCenter;
+    objCustomAlterview.alertMsgLabel.lineBreakMode = NSLineBreakByWordWrapping;
+    objCustomAlterview.alertMsgLabel.numberOfLines = 2;
+    [objCustomAlterview.alertMsgLabel setTextColor:[UIColor colorWithRed:(255/255.0f) green:(255/255.0f) blue:(255/255.0f) alpha:1.0f]];
 
      
    
@@ -353,6 +357,7 @@
     
 }
 
+
 - (IBAction)alertPressYes:(id)sender {
 //    [UIView animateWithDuration:1.0 animations:^{
 //        
@@ -361,9 +366,9 @@
 //        alertMainBgView.alpha = 0;
 //        
 //    } completion:^(BOOL b){
-    
-        alertBgView.hidden = YES;
-        alertMainBgView.hidden = YES;
+     objCustomAlterview.view.hidden =YES;
+       objCustomAlterview. alertBgView.hidden = YES;
+        objCustomAlterview.alertMainBgView.hidden = YES;
          [self logoutDeleteAction];
         
    // }];
@@ -380,9 +385,10 @@
 //      
 //    } completion:^(BOOL b){
     
-        alertBgView.hidden = YES;
+        objCustomAlterview.alertBgView.hidden = YES;
         
-        alertMainBgView.hidden = YES;
+        objCustomAlterview.alertMainBgView.hidden = YES;
+        objCustomAlterview.view.hidden =YES;
       
    // }];
     
