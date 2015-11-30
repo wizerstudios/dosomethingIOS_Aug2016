@@ -10,12 +10,7 @@
 
 @interface SettingView : UIViewController
 {
-    IBOutlet UIView *alertBgView;
-    IBOutlet UILabel *alertMsgLabel;
-    IBOutlet UIButton *alertCancelButton;
-    IBOutlet UIButton *btnYes;
-    IBOutlet UIButton *btnNo;
-    IBOutlet UIView *alertMainBgView;
+    
     IBOutlet UILabel * messLbl;
     IBOutlet UILabel *soundLbl;
     IBOutlet UILabel *vibrationLbl;
@@ -25,12 +20,4 @@
 
 @property (nonatomic ,strong) IBOutlet UIView * notificationview;
 
-//@property (nonatomic ,strong) IBOutlet UISwitch *messSwitchBtn;
-//@property (nonatomic,strong)  IBOutlet UISwitch * SoundSwitchBtn ;
-//@property(nonatomic,strong) IBOutlet UISwitch*vibrationSwitchBtn;
-
-@property (weak, nonatomic) IBOutlet UIImageView *imageViewNewMsg;
-
-@property (weak, nonatomic) IBOutlet UIImageView *imageViewSound;
-@property (weak, nonatomic) IBOutlet UIImageView *imageViewVibration;
 @end
