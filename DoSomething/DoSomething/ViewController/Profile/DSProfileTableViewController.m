@@ -1119,43 +1119,47 @@
             cell.layoutConstraintNotificationViewHeight.constant=51;
             cell.layoutConstraintRadioButtonYPos.constant = 18;
         }
-        cell.messSwitchBtn.userInteractionEnabled = YES;
-        cell.vibrationSwitchBtn.userInteractionEnabled = YES;
-        cell.SoundSwitchBtn.userInteractionEnabled = YES;
+//        cell.messSwitchBtn.userInteractionEnabled = YES;
+//        cell.vibrationSwitchBtn.userInteractionEnabled = YES;
+//        cell.SoundSwitchBtn.userInteractionEnabled = YES;
         
-        [cell.messSwitchBtn setTag:2000];
-        [cell.SoundSwitchBtn setTag:2001];
-        [cell.vibrationSwitchBtn setTag:2002];
+        cell.messSwitchBtn.transform = CGAffineTransformMakeScale(0.50, 0.50);
+        cell.SoundSwitchBtn.transform = CGAffineTransformMakeScale(0.50, 0.50);
+        cell.vibrationSwitchBtn.transform = CGAffineTransformMakeScale(0.50, 0.50);
+        
+//        [cell.messSwitchBtn setTag:2000];
+//        [cell.SoundSwitchBtn setTag:2001];
+//        [cell.vibrationSwitchBtn setTag:2002];
         
         
-        if([newMessageImage isEqualToString:@""] || newMessageImage == nil)
-        {
-            [cell.imageViewNewMessSwitch setImage:[UIImage imageNamed:placeHolderText]];
-        }
-        else
-        {
-            [cell.imageViewNewMessSwitch setImage:[UIImage imageNamed:newMessageImage]];
-        }
-        if([vibrationImage isEqualToString:@""] || vibrationImage == nil)
-        {
-            [cell.imageViewVibrationSwitch setImage:[UIImage imageNamed:placeHolderText]];
-        }
-        else
-        {
-            [cell.imageViewVibrationSwitch setImage:[UIImage imageNamed:vibrationImage]];
-        }
-        if([soundImage isEqualToString:@""] || soundImage == nil)
-        {
-            [cell.imageViewSoundSwitch setImage:[UIImage imageNamed:placeHolderText]];
-        }
-        else
-        {
-            [cell.imageViewSoundSwitch setImage:[UIImage imageNamed:soundImage]];
-        }
+//        if([newMessageImage isEqualToString:@""] || newMessageImage == nil)
+//        {
+//            [cell.imageViewNewMessSwitch setImage:[UIImage imageNamed:placeHolderText]];
+//        }
+//        else
+//        {
+//            [cell.imageViewNewMessSwitch setImage:[UIImage imageNamed:newMessageImage]];
+//        }
+//        if([vibrationImage isEqualToString:@""] || vibrationImage == nil)
+//        {
+//            [cell.imageViewVibrationSwitch setImage:[UIImage imageNamed:placeHolderText]];
+//        }
+//        else
+//        {
+//            [cell.imageViewVibrationSwitch setImage:[UIImage imageNamed:vibrationImage]];
+//        }
+//        if([soundImage isEqualToString:@""] || soundImage == nil)
+//        {
+//            [cell.imageViewSoundSwitch setImage:[UIImage imageNamed:placeHolderText]];
+//        }
+//        else
+//        {
+//            [cell.imageViewSoundSwitch setImage:[UIImage imageNamed:soundImage]];
+//        }
         
-        [cell.vibrationSwitchBtn addTarget:self action:@selector(newMessSwitchBtnAction:) forControlEvents:UIControlEventTouchUpInside];
-        [cell.SoundSwitchBtn addTarget:self action:@selector(newMessSwitchBtnAction:) forControlEvents:UIControlEventTouchUpInside];
-        [cell.messSwitchBtn addTarget:self action:@selector(newMessSwitchBtnAction:) forControlEvents:UIControlEventTouchUpInside];
+        [cell.vibrationSwitchBtn addTarget:self action:@selector(vibrationSwithAction:) forControlEvents:UIControlEventTouchUpInside];
+        [cell.SoundSwitchBtn addTarget:self action:@selector(soundSwithAction:) forControlEvents:UIControlEventTouchUpInside];
+        [cell.messSwitchBtn addTarget:self action:@selector(messSwithAction:) forControlEvents:UIControlEventTouchUpInside];
         
     }
 
@@ -1190,181 +1194,250 @@
     }
 }
 
--(void)newMessSwitchBtnAction:(UIButton *)sender
+- (IBAction)messSwithAction:(UISwitch *)sender
 {
-    
-    id button = sender;
-    while (![button isKindOfClass:[UITableViewCell class]]) {
-        button = [button superview];
+    sender.layer.cornerRadius = 16.0;
+    if (sender.on) {
+       
+        [sender setThumbTintColor:[UIColor greenColor]];
+        
+        [sender setBackgroundColor:[UIColor whiteColor]];
+        [sender setOnTintColor:[UIColor lightGrayColor]];
+        isNotification_message =@"Yes";
+        
+    }else{
+       
+        
+        [sender setTintColor:[UIColor grayColor]];
+        [sender setBackgroundColor:[UIColor lightGrayColor]];
+        [sender setThumbTintColor:[UIColor redColor]];
+        isNotification_message =@"No";
     }
-    NSIndexPath *indexPath;
-    
-    //DSProfileTableViewCell *cell;
-    
-    indexPath = [_tableviewProfile indexPathForCell:(UITableViewCell *)button];
-    cell = (DSProfileTableViewCell *) [_tableviewProfile cellForRowAtIndexPath:[NSIndexPath indexPathForRow:indexPath.row inSection:0]];
-    
-    
-    NSArray *titleArray1        = [[NSArray alloc]initWithObjects:@"switch_on",@"switch_off", nil];
-  
-    NSString *selOptionVal;
-    
-    if([sender tag] == 2000){
-        NSString *place1 =[[[placeHolderArray objectAtIndex:indexPath.section] objectAtIndex:indexPath.row] valueForKey:@"NewMessageImage"];
-        
-        
-        if([place1 isEqualToString:@""] || place1 == nil)
-        {
-            
-            NSString *NewMessageImage =[[[placeHolderArray objectAtIndex:indexPath.section] objectAtIndex:indexPath.row] valueForKey:@"placeHolder"];
-            
-            if (NewMessageImage == [titleArray1 objectAtIndex:0]) {
-                selOptionVal = [titleArray1 objectAtIndex:1];
-                isNotification_message =@"No";
-                
-            }
-            if (NewMessageImage == [titleArray1 objectAtIndex:1]) {
-                selOptionVal = [titleArray1 objectAtIndex:0];
-                isNotification_message =@"Yes";
-            }
-            
-            
-            
-            if(selOptionVal != nil || ![selOptionVal isEqualToString:@""])
-                [[[placeHolderArray objectAtIndex:indexPath.section] objectAtIndex:indexPath.row] setObject:selOptionVal forKey:@"NewMessageImage"];
-            
-        }
-        
-        
-        else
-            
-        {
-            
-            NSString *NewMessageImage =[[[placeHolderArray objectAtIndex:indexPath.section] objectAtIndex:indexPath.row] valueForKey:@"NewMessageImage"];
-            
-            
-            if (NewMessageImage == [titleArray1 objectAtIndex:0]) {
-                selOptionVal = [titleArray1 objectAtIndex:1];
-               isNotification_message =@"No";
-            }
-            if (NewMessageImage == [titleArray1 objectAtIndex:1]) {
-                selOptionVal = [titleArray1 objectAtIndex:0];
-                //isNotification_message =[notificationArray objectAtIndex:0];
-                isNotification_message = @"YES";
-            }
-            if(selOptionVal != nil || ![selOptionVal isEqualToString:@""])
-                [[[placeHolderArray objectAtIndex:indexPath.section] objectAtIndex:indexPath.row] setObject:selOptionVal forKey:@"NewMessageImage"];
-            
-            
-        }
-    }
-    
-    
-    if([sender tag] == 2001){
-        
-        NSString *place =[[[placeHolderArray objectAtIndex:indexPath.section] objectAtIndex:indexPath.row] valueForKey:@"SoundImage"];
-        
-        
-        if([place isEqualToString:@""] || place == nil)
-        {
-            
-            NSString *SoundImage =[[[placeHolderArray objectAtIndex:indexPath.section] objectAtIndex:indexPath.row] valueForKey:@"placeHolder"];
-            
-            
-            
-            
-            if (SoundImage == [titleArray1 objectAtIndex:0]) {
-                selOptionVal = [titleArray1 objectAtIndex:1];
-                isNotification_sound =@"No";
-            }
-            if (SoundImage == [titleArray1 objectAtIndex:1]) {
-                selOptionVal = [titleArray1 objectAtIndex:0];
-               isNotification_sound = @"Yes";
-            }
-            
-            
-            if(selOptionVal != nil || ![selOptionVal isEqualToString:@""])
-                [[[placeHolderArray objectAtIndex:indexPath.section] objectAtIndex:indexPath.row] setObject:selOptionVal forKey:@"SoundImage"];
-        }
-        
-        
-        else
-            
-        {
-            
-            NSString *SoundImage =[[[placeHolderArray objectAtIndex:indexPath.section] objectAtIndex:indexPath.row] valueForKey:@"SoundImage"];
-            
-            
-            if (SoundImage == [titleArray1 objectAtIndex:0]) {
-                selOptionVal = [titleArray1 objectAtIndex:1];
-                isNotification_sound = @"No";
-            }
-            if (SoundImage == [titleArray1 objectAtIndex:1]) {
-                selOptionVal = [titleArray1 objectAtIndex:0];
-                isNotification_sound = @"Yes";
-            }
-            if(selOptionVal != nil || ![selOptionVal isEqualToString:@""])
-                [[[placeHolderArray objectAtIndex:indexPath.section] objectAtIndex:indexPath.row] setObject:selOptionVal forKey:@"SoundImage"];
-            
-            
-        }
-        
-        
-    }
-    
-    
-    if([sender tag] == 2002){
-        
-        NSString *place =[[[placeHolderArray objectAtIndex:indexPath.section] objectAtIndex:indexPath.row] valueForKey:@"VibrationImage"];
-        
-        
-        if([place isEqualToString:@""] || place == nil)
-        {
-            
-            NSString *VibrationImage =[[[placeHolderArray objectAtIndex:indexPath.section] objectAtIndex:indexPath.row] valueForKey:@"placeHolder"];
-            
-            if (VibrationImage == [titleArray1 objectAtIndex:0]) {
-                selOptionVal = [titleArray1 objectAtIndex:1];
-               isNotification_vibration = @"No";
-            }
-            if (VibrationImage == [titleArray1 objectAtIndex:1]) {
-                selOptionVal = [titleArray1 objectAtIndex:0];
-                isNotification_vibration = @"Yes";
-            }
-            
-            
-            if(selOptionVal != nil || ![selOptionVal isEqualToString:@""])
-                [[[placeHolderArray objectAtIndex:indexPath.section] objectAtIndex:indexPath.row] setObject:selOptionVal forKey:@"VibrationImage"];
-        }
-        
-        
-        else
-            
-        {
-            
-            NSString *VibrationImage =[[[placeHolderArray objectAtIndex:indexPath.section] objectAtIndex:indexPath.row] valueForKey:@"VibrationImage"];
-            
-            
-            if (VibrationImage == [titleArray1 objectAtIndex:0]) {
-                selOptionVal = [titleArray1 objectAtIndex:1];
-                isNotification_vibration = @"No";
-            }
-            if (VibrationImage == [titleArray1 objectAtIndex:1]) {
-                selOptionVal = [titleArray1 objectAtIndex:0];
-                isNotification_vibration = @"Yes";
-            }
-            if(selOptionVal != nil || ![selOptionVal isEqualToString:@""])
-                [[[placeHolderArray objectAtIndex:indexPath.section] objectAtIndex:indexPath.row] setObject:selOptionVal forKey:@"VibrationImage"];
-            
-            
-        }
-        
-        
-    }
-    
-    NSLog(@"placeHolderArray %@",placeHolderArray);
-    [_tableviewProfile reloadData];
 }
+
+- (IBAction)soundSwithAction:(UISwitch *)sender
+{
+    sender.layer.cornerRadius = 16.0;
+    if (sender.on) {
+       
+        [sender setThumbTintColor:[UIColor greenColor]];
+        
+        [sender setBackgroundColor:[UIColor whiteColor]];
+        [sender setOnTintColor:[UIColor lightGrayColor]];
+        isNotification_message =@"Yes";
+        
+    }else{
+       
+        
+        [sender setTintColor:[UIColor grayColor]];
+        [sender setBackgroundColor:[UIColor lightGrayColor]];
+        [sender setThumbTintColor:[UIColor redColor]];
+        isNotification_message =@"No";
+        
+    }
+}
+
+- (IBAction)vibrationSwithAction:(UISwitch *)sender
+{
+    sender.layer.cornerRadius = 16.0;
+    if (sender.on) {
+        
+        [sender setThumbTintColor:[UIColor greenColor]];
+        
+        [sender setBackgroundColor:[UIColor whiteColor]];
+        [sender setOnTintColor:[UIColor lightGrayColor]];
+        isNotification_message =@"Yes";
+        
+    }else{
+       
+        
+        [sender setTintColor:[UIColor grayColor]];
+        [sender setBackgroundColor:[UIColor lightGrayColor]];
+        [sender setThumbTintColor:[UIColor redColor]];
+        isNotification_message =@"No";
+    }
+}
+
+
+
+
+
+
+//-(void)newMessSwitchBtnAction:(UIButton *)sender
+//{
+//    
+//    id button = sender;
+//    while (![button isKindOfClass:[UITableViewCell class]]) {
+//        button = [button superview];
+//    }
+//    NSIndexPath *indexPath;
+//    
+//    //DSProfileTableViewCell *cell;
+//    
+//    indexPath = [_tableviewProfile indexPathForCell:(UITableViewCell *)button];
+//    cell = (DSProfileTableViewCell *) [_tableviewProfile cellForRowAtIndexPath:[NSIndexPath indexPathForRow:indexPath.row inSection:0]];
+//    
+//    
+//    NSArray *titleArray1        = [[NSArray alloc]initWithObjects:@"switch_on",@"switch_off", nil];
+//  
+//    NSString *selOptionVal;
+//    
+//    if([sender tag] == 2000){
+//        NSString *place1 =[[[placeHolderArray objectAtIndex:indexPath.section] objectAtIndex:indexPath.row] valueForKey:@"NewMessageImage"];
+//        
+//        
+//        if([place1 isEqualToString:@""] || place1 == nil)
+//        {
+//            
+//            NSString *NewMessageImage =[[[placeHolderArray objectAtIndex:indexPath.section] objectAtIndex:indexPath.row] valueForKey:@"placeHolder"];
+//            
+//            if (NewMessageImage == [titleArray1 objectAtIndex:0]) {
+//                selOptionVal = [titleArray1 objectAtIndex:1];
+//                isNotification_message =@"No";
+//                
+//            }
+//            if (NewMessageImage == [titleArray1 objectAtIndex:1]) {
+//                selOptionVal = [titleArray1 objectAtIndex:0];
+//                isNotification_message =@"Yes";
+//            }
+//            
+//            
+//            
+//            if(selOptionVal != nil || ![selOptionVal isEqualToString:@""])
+//                [[[placeHolderArray objectAtIndex:indexPath.section] objectAtIndex:indexPath.row] setObject:selOptionVal forKey:@"NewMessageImage"];
+//            
+//        }
+//        
+//        
+//        else
+//            
+//        {
+//            
+//            NSString *NewMessageImage =[[[placeHolderArray objectAtIndex:indexPath.section] objectAtIndex:indexPath.row] valueForKey:@"NewMessageImage"];
+//            
+//            
+//            if (NewMessageImage == [titleArray1 objectAtIndex:0]) {
+//                selOptionVal = [titleArray1 objectAtIndex:1];
+//               isNotification_message =@"No";
+//            }
+//            if (NewMessageImage == [titleArray1 objectAtIndex:1]) {
+//                selOptionVal = [titleArray1 objectAtIndex:0];
+//                //isNotification_message =[notificationArray objectAtIndex:0];
+//                isNotification_message = @"YES";
+//            }
+//            if(selOptionVal != nil || ![selOptionVal isEqualToString:@""])
+//                [[[placeHolderArray objectAtIndex:indexPath.section] objectAtIndex:indexPath.row] setObject:selOptionVal forKey:@"NewMessageImage"];
+//            
+//            
+//        }
+//    }
+//    
+//    
+//    if([sender tag] == 2001){
+//        
+//        NSString *place =[[[placeHolderArray objectAtIndex:indexPath.section] objectAtIndex:indexPath.row] valueForKey:@"SoundImage"];
+//        
+//        
+//        if([place isEqualToString:@""] || place == nil)
+//        {
+//            
+//            NSString *SoundImage =[[[placeHolderArray objectAtIndex:indexPath.section] objectAtIndex:indexPath.row] valueForKey:@"placeHolder"];
+//            
+//            
+//            
+//            
+//            if (SoundImage == [titleArray1 objectAtIndex:0]) {
+//                selOptionVal = [titleArray1 objectAtIndex:1];
+//                isNotification_sound =@"No";
+//            }
+//            if (SoundImage == [titleArray1 objectAtIndex:1]) {
+//                selOptionVal = [titleArray1 objectAtIndex:0];
+//               isNotification_sound = @"Yes";
+//            }
+//            
+//            
+//            if(selOptionVal != nil || ![selOptionVal isEqualToString:@""])
+//                [[[placeHolderArray objectAtIndex:indexPath.section] objectAtIndex:indexPath.row] setObject:selOptionVal forKey:@"SoundImage"];
+//        }
+//        
+//        
+//        else
+//            
+//        {
+//            
+//            NSString *SoundImage =[[[placeHolderArray objectAtIndex:indexPath.section] objectAtIndex:indexPath.row] valueForKey:@"SoundImage"];
+//            
+//            
+//            if (SoundImage == [titleArray1 objectAtIndex:0]) {
+//                selOptionVal = [titleArray1 objectAtIndex:1];
+//                isNotification_sound = @"No";
+//            }
+//            if (SoundImage == [titleArray1 objectAtIndex:1]) {
+//                selOptionVal = [titleArray1 objectAtIndex:0];
+//                isNotification_sound = @"Yes";
+//            }
+//            if(selOptionVal != nil || ![selOptionVal isEqualToString:@""])
+//                [[[placeHolderArray objectAtIndex:indexPath.section] objectAtIndex:indexPath.row] setObject:selOptionVal forKey:@"SoundImage"];
+//            
+//            
+//        }
+//        
+//        
+//    }
+//    
+//    
+//    if([sender tag] == 2002){
+//        
+//        NSString *place =[[[placeHolderArray objectAtIndex:indexPath.section] objectAtIndex:indexPath.row] valueForKey:@"VibrationImage"];
+//        
+//        
+//        if([place isEqualToString:@""] || place == nil)
+//        {
+//            
+//            NSString *VibrationImage =[[[placeHolderArray objectAtIndex:indexPath.section] objectAtIndex:indexPath.row] valueForKey:@"placeHolder"];
+//            
+//            if (VibrationImage == [titleArray1 objectAtIndex:0]) {
+//                selOptionVal = [titleArray1 objectAtIndex:1];
+//               isNotification_vibration = @"No";
+//            }
+//            if (VibrationImage == [titleArray1 objectAtIndex:1]) {
+//                selOptionVal = [titleArray1 objectAtIndex:0];
+//                isNotification_vibration = @"Yes";
+//            }
+//            
+//            
+//            if(selOptionVal != nil || ![selOptionVal isEqualToString:@""])
+//                [[[placeHolderArray objectAtIndex:indexPath.section] objectAtIndex:indexPath.row] setObject:selOptionVal forKey:@"VibrationImage"];
+//        }
+//        
+//        
+//        else
+//            
+//        {
+//            
+//            NSString *VibrationImage =[[[placeHolderArray objectAtIndex:indexPath.section] objectAtIndex:indexPath.row] valueForKey:@"VibrationImage"];
+//            
+//            
+//            if (VibrationImage == [titleArray1 objectAtIndex:0]) {
+//                selOptionVal = [titleArray1 objectAtIndex:1];
+//                isNotification_vibration = @"No";
+//            }
+//            if (VibrationImage == [titleArray1 objectAtIndex:1]) {
+//                selOptionVal = [titleArray1 objectAtIndex:0];
+//                isNotification_vibration = @"Yes";
+//            }
+//            if(selOptionVal != nil || ![selOptionVal isEqualToString:@""])
+//                [[[placeHolderArray objectAtIndex:indexPath.section] objectAtIndex:indexPath.row] setObject:selOptionVal forKey:@"VibrationImage"];
+//            
+//            
+//        }
+//        
+//        
+//    }
+//    
+//    NSLog(@"placeHolderArray %@",placeHolderArray);
+//    [_tableviewProfile reloadData];
+//}
 
 -(void)buttonAction:(UIButton *)sender
 {

@@ -252,24 +252,6 @@
 }
 
 
--(void)newMessSwitchBtnAction:(UIButton *)sender
-{
-    UIButton * button = sender;
-    if(button.tag == 200)
-    {
-        
-    }
-    else if (button.tag==201)
-    {
-        
-    }
-    else if (button.tag == 202)
-    {
-        
-    }
-}
-
-
 #pragma mark - Logout_Delete_Action_API
 -(void)logoutDeleteAction{
    
