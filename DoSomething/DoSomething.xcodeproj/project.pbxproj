@@ -62,6 +62,8 @@
 		51F3C2F41BE75D40001E1FEC /* DSLocationViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 51F3C2EF1BE75D40001E1FEC /* DSLocationViewController.xib */; };
 		51F3C2F51BE75D40001E1FEC /* LocationCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 51F3C2F11BE75D40001E1FEC /* LocationCollectionViewCell.m */; };
 		51F3C2F61BE75D40001E1FEC /* LocationCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 51F3C2F21BE75D40001E1FEC /* LocationCollectionViewCell.xib */; };
+		6A0C8D8A1C0C25510056DA81 /* CustomAlterview.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A0C8D881C0C25510056DA81 /* CustomAlterview.m */; };
+		6A0C8D8B1C0C25510056DA81 /* CustomAlterview.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6A0C8D891C0C25510056DA81 /* CustomAlterview.xib */; };
 		6A50C21C1BCCBB8C002B11AC /* DSProfileTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A50C21A1BCCBB8C002B11AC /* DSProfileTableViewCell.m */; };
 		6A50C21D1BCCBB8C002B11AC /* DSProfileTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6A50C21B1BCCBB8C002B11AC /* DSProfileTableViewCell.xib */; };
 		6A71A9381C0471F900D6D5F4 /* NSLocalization.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6A71A93A1C0471F900D6D5F4 /* NSLocalization.strings */; };
@@ -211,6 +213,9 @@
 		51F3C2F11BE75D40001E1FEC /* LocationCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocationCollectionViewCell.m; sourceTree = "<group>"; };
 		51F3C2F21BE75D40001E1FEC /* LocationCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LocationCollectionViewCell.xib; sourceTree = "<group>"; };
 		60244D170FD7494CCFDD04A4 /* libPods-DoSomething.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-DoSomething.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		6A0C8D871C0C25510056DA81 /* CustomAlterview.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomAlterview.h; sourceTree = "<group>"; };
+		6A0C8D881C0C25510056DA81 /* CustomAlterview.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomAlterview.m; sourceTree = "<group>"; };
+		6A0C8D891C0C25510056DA81 /* CustomAlterview.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CustomAlterview.xib; sourceTree = "<group>"; };
 		6A50C2191BCCBB8C002B11AC /* DSProfileTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DSProfileTableViewCell.h; sourceTree = "<group>"; };
 		6A50C21A1BCCBB8C002B11AC /* DSProfileTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DSProfileTableViewCell.m; sourceTree = "<group>"; };
 		6A50C21B1BCCBB8C002B11AC /* DSProfileTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DSProfileTableViewCell.xib; sourceTree = "<group>"; };
@@ -589,6 +594,17 @@
 			path = ViewController/Location;
 			sourceTree = "<group>";
 		};
+		6A0C8D861C0C251C0056DA81 /* CustomAlterview */ = {
+			isa = PBXGroup;
+			children = (
+				6A0C8D871C0C25510056DA81 /* CustomAlterview.h */,
+				6A0C8D881C0C25510056DA81 /* CustomAlterview.m */,
+				6A0C8D891C0C25510056DA81 /* CustomAlterview.xib */,
+			);
+			name = CustomAlterview;
+			path = Common/CustomAlterview;
+			sourceTree = "<group>";
+		};
 		6A50C2231BCCC310002B11AC /* Chats */ = {
 			isa = PBXGroup;
 			children = (
@@ -646,6 +662,7 @@
 		C6D5F6081BC7A4340050C1AE /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				6A0C8D861C0C251C0056DA81 /* CustomAlterview */,
 				2B83CACB1BE8D4FD0064EC7F /* LoginValidations */,
 				2B83CAAC1BE8744E0064EC7F /* DSWebservice */,
 				EA784EFD1BE0950500863A6D /* Switcher */,
@@ -991,6 +1008,7 @@
 				C6D5F6431BC7B52C0050C1AE /* Patron-Regular.ttf in Resources */,
 				C6D5F67C1BC7EC440050C1AE /* Images.xcassets in Resources */,
 				EAFC96591BD20FD400B3593D /* DSInterestAndHobbiesViewController.xib in Resources */,
+				6A0C8D8B1C0C25510056DA81 /* CustomAlterview.xib in Resources */,
 				C6D5F6451BC7B52C0050C1AE /* Patron-ThinItalic.ttf in Resources */,
 				EADB949F1BDF566C00512374 /* HomeViewController.xib in Resources */,
 				C6D5F63E1BC7B52C0050C1AE /* Patron-ExtraLight.ttf in Resources */,
@@ -1119,6 +1137,7 @@
 				2BD72AF81BFCC5AD003846E9 /* AFHTTPSessionManager.m in Sources */,
 				2BD72AE21BFCC584003846E9 /* AFNetworkActivityLogger.m in Sources */,
 				2BD72AFA1BFCC5AD003846E9 /* AFSecurityPolicy.m in Sources */,
+				6A0C8D8A1C0C25510056DA81 /* CustomAlterview.m in Sources */,
 				2BD72AFD1BFCC5AD003846E9 /* AFURLResponseSerialization.m in Sources */,
 				EAFC97971BD21CF800B3593D /* DSInterestAndHobbiesCollectionViewCell.m in Sources */,
 				2BD72B121BFCC5D4003846E9 /* UIAlertView+AFNetworking.m in Sources */,

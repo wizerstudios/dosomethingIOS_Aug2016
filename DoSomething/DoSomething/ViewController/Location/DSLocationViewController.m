@@ -84,9 +84,15 @@
 
 -(void)nearestLocationWebservice
 {
-    [objWebservice nearestUsers:NearestUsers_API sessionid:strsessionID latitude:laditude longitude:longitude filter_status:@"" filter_gender:@"" filter_agerange:@"" filter_distance:@"" success:^(AFHTTPRequestOperation *operation, id responseObject) {
-    
-        NSLog(@"%@",responseObject);
+    [objWebservice nearestUsers:NearestUsers_API sessionid:strsessionID latitude:@"13.0827" longitude:@"80.2707" filter_status:@"" filter_gender:@"" filter_agerange:@"" filter_distance:@"" success:^(AFHTTPRequestOperation *operation, id responseObject) {
+
+        if([[[responseObject valueForKey:@"nearestusers"]valueForKey:@"status"] isEqualToString:@"success"])
+        {
+            NSMutableArray * nearestUserdetaile =[[NSMutableArray alloc]init];
+            nearestUserdetaile =[[responseObject valueForKey:@"nearestusers"] valueForKey:@"UserList"];
+           // profileNames     =[nearestUserdetaile valueForKey:@"""]
+             NSLog(@"%@",nearestUserdetaile);
+        }
         
     } failure:^(AFHTTPRequestOperation *operation, id error) {
     
