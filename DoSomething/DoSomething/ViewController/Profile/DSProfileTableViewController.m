@@ -126,32 +126,35 @@
                 [profileDataArray addObject:data];
             }
         }
-            else if(![[profileDict valueForKey:@"image1"] isEqual:@""]&&[[profileDict valueForKey:@"image2"] isEqual:@""] && [[profileDict valueForKey:@"image3"] isEqual:@""]){
-                profileDataArray = [NSMutableArray new];
-                
-                
-                for(int i = 0; i < 3; i++)
-                {
-                    NSData *data = [NSData new];
-                    [profileDataArray addObject:data];
-                }
-            }
-
         
         
         else{
-            NSString *ImageURL1 = [profileDict valueForKey:@"image1"];
-            NSData *imageData1 = [NSData dataWithContentsOfURL:[NSURL URLWithString:ImageURL1]];
-            
-            NSString *ImageURL2 = [profileDict valueForKey:@"image2"];
-            NSData *imageData2 = [NSData dataWithContentsOfURL:[NSURL URLWithString:ImageURL2]];
-            
-            NSString *ImageURL3 = [profileDict valueForKey:@"image3"];
-            NSData *imageData3 = [NSData dataWithContentsOfURL:[NSURL URLWithString:ImageURL3]];
+            NSString *ImageURL1 , *ImageURL2, *ImageURL3 ;
+            NSData *imageData1, *imageData2, *imageData3;
+            if([[profileDict valueForKey:@"image1"] isEqual:@""]){
+                imageData1 = [profileDict valueForKey:@"image1"];
+            }
+            else{
+                ImageURL1 = [profileDict valueForKey:@"image1"];
+                imageData1 = [NSData dataWithContentsOfURL:[NSURL URLWithString:ImageURL1]];
+            }
+            if([[profileDict valueForKey:@"image2"] isEqual:@""]){
+                imageData2 = [profileDict valueForKey:@"image2"];
+            }
+            else{
+                ImageURL2 = [profileDict valueForKey:@"image2"];
+                imageData2 = [NSData dataWithContentsOfURL:[NSURL URLWithString:ImageURL1]];
+            }
+
+            if([[profileDict valueForKey:@"image3"] isEqual:@""]){
+                imageData3 = [profileDict valueForKey:@"image3"];
+            }
+            else{
+                ImageURL3 = [profileDict valueForKey:@"image3"];
+                imageData3 = [NSData dataWithContentsOfURL:[NSURL URLWithString:ImageURL1]];
+            }
             
             profileDataArray = [[NSMutableArray alloc]initWithObjects:imageData1,imageData2,imageData3, nil];
-            
-            
         }
 
     }
@@ -1379,40 +1382,6 @@
     textviewText = textView.text;
 }
 
-- (void) tapGesture: (UITapGestureRecognizer*)sender
-{
-    imagepickerController = [[UIImagePickerController alloc] init];
-    imagepickerController.delegate = self;
-    [imagepickerController setAllowsEditing:YES];
-    
-    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@""
-                                                                   message:@""
-                                                            preferredStyle:UIAlertControllerStyleAlert];
-    
-    UIAlertAction *camera = [UIAlertAction actionWithTitle:NSLocalizedString(@"CANCEL",@"") style:UIAlertActionStyleDefault
-                                                   handler:^(UIAlertAction * action) {
-                                                       //[self promptForCamera];
-                                                       [self.presentedViewController dismissViewControllerAnimated:NO completion:nil];
-                                                   }];
-    
-    UIAlertAction *photoRoll = [UIAlertAction actionWithTitle:NSLocalizedString(@"CAMERA",@"") style:UIAlertActionStyleDefault
-                                                      handler:^(UIAlertAction * action) {
-                                                          imagepickerController.sourceType = UIImagePickerControllerSourceTypeCamera;
-                                                          [self presentViewController:imagepickerController animated:YES completion:nil];
-                                                      }];
-    
-    UIAlertAction *cancel = [UIAlertAction actionWithTitle:NSLocalizedString(@"PHOTO LIBRARY",@"") style:UIAlertActionStyleDefault
-                                                   handler:^(UIAlertAction * action) {
-                                                       // [self.presentedViewController dismissViewControllerAnimated:NO completion:nil];
-                                                       imagepickerController.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
-                                                       [self presentViewController:imagepickerController animated:YES completion:nil];
-                                                   }];
-    
-    [alert addAction:camera];
-    [alert addAction:photoRoll];
-    [alert addAction:cancel];
-    [self presentViewController:alert animated:YES completion:nil];
-}
 
 #pragma mark - Camera Action
 -(void)selectCamera: (UIButton *)sender
