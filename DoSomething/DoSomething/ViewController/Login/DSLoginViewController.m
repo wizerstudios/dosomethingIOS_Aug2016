@@ -330,6 +330,7 @@
 }
 #pragma mark - checkuserEmailAPI
 - (void)checkUserEmail{
+    [COMMON LoadIcon:self.view];
     [objWebService checkUser:CheckUser_API
                        email:email
                         type:objSigninType
@@ -347,9 +348,11 @@
                                  if(IS_GREATER_IOS8)
                                  {
                                  [self presentViewController:[ DSAppCommon alertWithTitle:@"Title" withMessage:[[responseObject objectForKey:@"checkuser"]objectForKey:@"Message"] preferredStyle:UIAlertControllerStyleAlert] animated:YES completion:NULL];
+                                 [COMMON removeLoading];
                                  }
                                  else{
                                      [DSAppCommon showSimpleAlertWithMessage:[[responseObject objectForKey:@"checkuser"]objectForKey:@"Message"]];
+                                     [COMMON removeLoading];
                                  }
                                  [COMMON removeLoading];
                              }
@@ -363,6 +366,7 @@
                                  if([[[responseObject objectForKey:@"checkuser"]objectForKey:@"status"]  isEqual: @"success"]){
                                      NSLog(@"checkuser = %@",responseObject);
                                      [self gotoProfileView:profileID];
+                                     
                                  }
                                  else{
                                      NSLog(@"checkuser = %@",responseObject);
@@ -497,6 +501,7 @@
             [COMMON setUserDetails:[[loginDict valueForKey:@"userDetails"]objectAtIndex:0]];
              NSLog(@"userdetails = %@",[COMMON getUserDetails]);
             [self gotoHomeView];
+            [COMMON removeLoading];
             
         }
         else{
@@ -504,12 +509,14 @@
             if(IS_GREATER_IOS8)
             {
             [self presentViewController:[ DSAppCommon alertWithTitle:@"Title" withMessage:[loginDict valueForKey:@"Message"] preferredStyle:UIAlertControllerStyleAlert] animated:YES completion:NULL];
+                [COMMON removeLoading];
             }
             else
             {
                 [DSAppCommon showSimpleAlertWithMessage:[loginDict valueForKey:@"Message"]];
+                [COMMON removeLoading];
             }
-            [COMMON removeLoading];
+            
         }
         
         

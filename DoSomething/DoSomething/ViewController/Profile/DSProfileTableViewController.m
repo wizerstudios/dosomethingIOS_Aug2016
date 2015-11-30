@@ -115,6 +115,8 @@
     isNotification_message = @"Yes";
     isNotification_vibration = @"Yes";
     isNotification_sound = @"Yes";
+    
+    
     if(profileDict != NULL){
         if([[profileDict valueForKey:@"image1"] isEqual:@""]&&[[profileDict valueForKey:@"image2"] isEqual:@""] && [[profileDict valueForKey:@"image3"] isEqual:@""]){
             profileDataArray = [NSMutableArray new];
@@ -159,14 +161,35 @@
 
     }
     else{
-        profileDataArray = [NSMutableArray new];
+        if(userDetailsDict !=NULL){
+            
+            NSString  *ImageURL1 ,*ImageURL2 ,*ImageURL3 ;
+            NSData *imageData1, *imageData2, *imageData3;
+            if([[userDetailsDict valueForKey:@"profileImage"] isEqual:@""]){
+                imageData1 = [userDetailsDict valueForKey:@"profileImage"];
+            }
+            else{
+                ImageURL1 = [userDetailsDict valueForKey:@"profileImage"];
+                imageData1 = [NSData dataWithContentsOfURL:[NSURL URLWithString:ImageURL1]];
+            }
+            ImageURL2 = @"";
+            imageData2 = [ImageURL2 dataUsingEncoding:NSUTF8StringEncoding];
+            ImageURL3 = @"";
+            imageData3 = [ImageURL3 dataUsingEncoding:NSUTF8StringEncoding];
+                        
+            profileDataArray = [[NSMutableArray alloc]initWithObjects:imageData1,imageData2,imageData3, nil];
+
+        }
+        else{
+           profileDataArray = [NSMutableArray new];
 
     
-    for(int i = 0; i < 3; i++)
-    {
-        NSData *data = [NSData new];
-        [profileDataArray addObject:data];
-    }
+            for(int i = 0; i < 3; i++)
+            {
+                NSData *data = [NSData new];
+                [profileDataArray addObject:data];
+            }
+        }
     }
 
 }
@@ -1060,9 +1083,16 @@
             if(placeHolderText ==(id) [NSNull null])
                 cell.emailTextField.text = [self getEmail];
             else
+                if(profileDict !=NULL){
+                    [cell.emailTextField setEnabled:NO];
+                    cell.emailTextField.text = placeHolderText;
+                }
+                else
+
                 cell.emailTextField.text = placeHolderText;
             
         }
+        
         
         else if (typingText!=nil)
         {
@@ -1540,6 +1570,7 @@
                       first_name:FirstName
                        last_name:LastName
                              dob:dateChange
+                        password:emailPasswordToRegister
                    profileImage1:profileImage1
                    profileImage2:profileImage2
                    profileImage3:profileImage3
@@ -1621,6 +1652,10 @@
     
     [COMMON LoadIcon:self.view];
     NSArray *postPerArray;
+    if(userDetailsDict !=NULL){
+    postPerArray = [[placeHolderArray objectAtIndex:0]valueForKey:@"placeHolder"];
+    }
+    else
     postPerArray = [[placeHolderArray objectAtIndex:0]valueForKey:@"TypingText"];
     NSLog(@"hobby:%@",hobbiesNameArray);
     
@@ -1638,72 +1673,7 @@
     NSLog(@"isNotification_vibration:%@",isNotification_vibration);
     
     
-    if([FirstName isEqual:[NSNull null]] && [FirstName isEqual:@""])
-    {
-        if(IS_GREATER_IOS8)
-        {
-        [self presentViewController:[ DSAppCommon alertWithTitle:@"Title" withMessage:LASTNAME_REQUIRED preferredStyle:UIAlertControllerStyleAlert] animated:YES completion:NULL];
-        }
-        else
-        {
-            [DSAppCommon showSimpleAlertWithMessage:LASTNAME_REQUIRED];
-        }
-        [COMMON removeLoading];
-        return;
-    }
-    if ( [dateChange isEqual:[NSNull null]] && [dateChange isEqual:@""] )
-    {
-        if(IS_GREATER_IOS8)
-        {
-        [self presentViewController:[ DSAppCommon alertWithTitle:@"Title" withMessage:DOB_REQUIRED preferredStyle:UIAlertControllerStyleAlert] animated:YES completion:NULL];
-        }
-        else
-        {
-            [DSAppCommon showSimpleAlertWithMessage:DOB_REQUIRED];
-        }
-        [COMMON removeLoading];
-        return;
-    }
-    
-    if ( [strGender isEqual:[NSNull null]] && [strGender isEqual:@""])
-    {
-        if(IS_GREATER_IOS8)
-        {
-        [self presentViewController:[ DSAppCommon alertWithTitle:@"Title" withMessage:GENDER_REQUIRED preferredStyle:UIAlertControllerStyleAlert] animated:YES completion:NULL];
-        }
-        else
-        {
-            [DSAppCommon showSimpleAlertWithMessage:GENDER_REQUIRED];
-        }
-        [COMMON removeLoading];
-        return;
-    }
-    
-    if ( [emailAddressToRegister isEqual:[NSNull null]] && [emailAddressToRegister isEqual:@""])
-    {
-        if(IS_GREATER_IOS8)
-        {
-        [self presentViewController:[ DSAppCommon alertWithTitle:@"Title" withMessage:EMAIL_REQUIRED preferredStyle:UIAlertControllerStyleAlert] animated:YES completion:NULL];
-        }
-        else
-        {
-            [DSAppCommon showSimpleAlertWithMessage:EMAIL_REQUIRED];
-        }
-        [COMMON removeLoading];
-        return;
-    }
-    if ( [emailPasswordToRegister isEqual:[NSNull null]] && [emailPasswordToRegister isEqual:@""])
-    {
-        if(IS_GREATER_IOS8){
-        [self presentViewController:[ DSAppCommon alertWithTitle:@"Title" withMessage:PASSWORD_REQUIRED preferredStyle:UIAlertControllerStyleAlert] animated:YES completion:NULL];
-        }
-        else{
-            [DSAppCommon showSimpleAlertWithMessage:PASSWORD_REQUIRED];
-        }
-        [COMMON removeLoading];
-        return;
-    }
-
+        
     
     if(![FirstName isEqual:[NSNull null]]&& ![FirstName isEqualToString:@""]&&![LastName isEqual:[NSNull null]]&& ![LastName isEqualToString:@""] &&![dateChange isEqual:[NSNull null]]&&![strGender isEqual:[NSNull null]]&& ![strGender isEqualToString:@""] &&![emailAddressToRegister isEqual:[NSNull null]] &&![emailAddressToRegister isEqualToString:@""] &&![emailPasswordToRegister isEqual:[NSNull null]] && ![emailPasswordToRegister isEqualToString:@""]){
 //            if(![NSString validateEmail:emailAddressToRegister]){

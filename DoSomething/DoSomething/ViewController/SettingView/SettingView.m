@@ -333,6 +333,7 @@
 {
     
     optionLogoutDelete = @"delete";
+    [objCustomAlterview.view setHidden:NO];
     objCustomAlterview.alertBgView.hidden = NO;
     objCustomAlterview.alertMainBgView.hidden = NO;
     objCustomAlterview.alertCancelButton.hidden = NO;
@@ -344,7 +345,7 @@
     objCustomAlterview.alertMsgLabel.lineBreakMode = NSLineBreakByWordWrapping;
     objCustomAlterview.alertMsgLabel.numberOfLines = 2;
     [objCustomAlterview.alertMsgLabel setTextColor:[UIColor colorWithRed:(255/255.0f) green:(255/255.0f) blue:(255/255.0f) alpha:1.0f]];
-
+   
      
    
 }
