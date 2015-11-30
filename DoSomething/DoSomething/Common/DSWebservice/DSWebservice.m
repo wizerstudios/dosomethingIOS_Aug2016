@@ -305,25 +305,82 @@ notification_vibration:(NSString *)isnotification_vibration
     if(first_name)         [profileUpdate    setObject:first_name                 forKey:@"first_name"];
     if(last_name)          [profileUpdate    setObject:last_name                  forKey:@"last_name"];
     if(dob)                [profileUpdate    setObject:dob                        forKey:@"dob"];
-    if(profileImage1)      [profileUpdate    setObject:profileImage1              forKey:@"profileImage1"];
-    if(profileImage2)      [profileUpdate    setObject:profileImage2              forKey:@"profileImage2"];
-    if(profileImage2)      [profileUpdate    setObject:profileImage3              forKey:@"profileImage3"];
     if(gender)             [profileUpdate    setObject:gender                     forKey:@"gender"];
     if(about)              [profileUpdate    setObject:about                      forKey:@"about"];
     if(hobbies)            [profileUpdate    setObject:hobbies                    forKey:@"hobbies"];
-    if(latitude)           [profileUpdate    setObject:latitude                   forKey:@"latitude"];
-    if(longitude)          [profileUpdate    setObject:longitude                  forKey:@"longitude"];
+                           [profileUpdate    setObject:latitude                   forKey:@"latitude"];
+                           [profileUpdate    setObject:longitude                  forKey:@"longitude"];
     if(notification)       [profileUpdate    setObject:notification               forKey:@"notification"];
     if(sessionid)          [profileUpdate    setObject:sessionid                  forKey:@"sessionid"];
     
     NSLog(@"urlString = %@",urlString);
     NSLog(@"Profile Update = %@",profileUpdate);
     
-    [self sendRequestWithURLString:urlString
-                     andParameters:profileUpdate
-                            method:ServicePost
-           completionSucessHandler:success
-          completionFailureHandler:failure];
+//    [self sendRequestWithURLString:urlString
+//                     andParameters:profileUpdate
+//                            method:ServicePost
+//           completionSucessHandler:success
+//          completionFailureHandler:failure];
+    NSDateFormatter *formatter = [[NSDateFormatter alloc]init];
+    [formatter setDateFormat:@"yyyyMMddhhmmssSSS"];
+    NSString *imageNameStr = [NSString stringWithFormat:@"%@.png",[formatter stringFromDate:[NSDate date]]];
+    NSLog(@"ProfileUpdatedetails%@",profileUpdate);
+    [self POST:urlString parameters:profileUpdate constructingBodyWithBlock:^(id<AFMultipartFormData> formData)
+     {
+         
+         if(profileImage1){
+             [formData appendPartWithFileData:UIImagePNGRepresentation(profileImage1)
+                                         name:@"profileImage1"
+                                     fileName:imageNameStr
+                                     mimeType:@"image/png"];
+             
+             NSLog(@"formData = %@",formData);
+         }
+         if(profileImage2){
+             [formData appendPartWithFileData:UIImagePNGRepresentation(profileImage2)
+                                         name:@"profileImage2"
+                                     fileName:imageNameStr
+                                     mimeType:@"image/png"];
+             
+             NSLog(@"formData = %@",formData);
+         }
+         if(profileImage3){
+             [formData appendPartWithFileData:UIImagePNGRepresentation(profileImage3)
+                                         name:@"profileImage3"
+                                     fileName:imageNameStr
+                                     mimeType:@"image/png"];
+             
+             NSLog(@"formData = %@",formData);
+         }
+     }
+
+       success:^(AFHTTPRequestOperation *operation, id responseObject)
+     {
+         NSLog(@"UPDATEresponseObject = %@",responseObject);
+         
+//         NSMutableDictionary *profileUpdateDict = [[NSMutableDictionary alloc]init];
+//         
+//         profileUpdateDict = [responseObject valueForKey:@"updateprofile"];
+         
+         if([[responseObject objectForKey:@"updateprofile"]objectForKey:@"status"]){
+             
+             [DSAppCommon showSimpleAlertWithMessage:[[responseObject objectForKey:@"updateprofile"]objectForKey:@"Message"]];
+             [COMMON removeLoading];
+
+            
+         }
+         
+         else{
+             [DSAppCommon showSimpleAlertWithMessage:[responseObject objectForKey:@"error"]];
+             [COMMON removeLoading];
+         }
+     }
+     
+       failure:^(AFHTTPRequestOperation *operation, NSError *error){
+           NSLog(@"Error = %@",error);
+           [DSAppCommon showSimpleAlertWithMessage:@"FAILURE"];
+           
+       }];
 
 
 }
