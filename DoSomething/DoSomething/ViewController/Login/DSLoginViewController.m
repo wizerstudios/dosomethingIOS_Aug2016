@@ -18,6 +18,8 @@
 #import "NSString+validations.h"
 #import <FBSDKCoreKit/FBSDKCoreKit.h>
 #import <FBSDKLoginKit/FBSDKLoginKit.h>
+#import "CustomAlterview.h"
+
 
 @interface DSLoginViewController ()<CLLocationManagerDelegate>
 {
@@ -36,6 +38,8 @@
     UIImage *profileImage1;
     UIImage *profileImage2;
     UIImage *profileImage3;
+    
+    CustomAlterview *objCustomAlterview;
 
 }
 @end
@@ -136,6 +140,8 @@
     
     deviceUdid = [OpenUDID value];
     [self getUserCurrenLocation];
+    
+    [self CustomAlterview];
 
 }
 #pragma mark get user CurrentLocation
@@ -196,57 +202,119 @@
     DSLoginView.temp = @"createAnAccount";
     [self.navigationController pushViewController:DSLoginView animated:YES];
     
-    
 }
+#pragma mark - CustomalterviewMethod
+
+-(void)CustomAlterview
+{
+    objCustomAlterview = [[CustomAlterview alloc] initWithNibName:@"CustomAlterview" bundle:nil];
+    objCustomAlterview.view.frame = CGRectMake(self.view.frame.origin.x,self.view.frame.origin.y, CGRectGetWidth(self.view.frame),self.view.frame.size.height);
+    [objCustomAlterview.alertBgView setHidden:YES];
+    [objCustomAlterview.alertMainBgView setHidden:YES];
+    [objCustomAlterview.view setHidden:YES];
+    [objCustomAlterview.btnYes setHidden:YES];
+    [objCustomAlterview.btnNo setHidden:YES];
+    [objCustomAlterview.alertCancelButton setHidden:NO];
+    [objCustomAlterview.alertCancelButton addTarget:self action:@selector(alertPressCancel:) forControlEvents:UIControlEventTouchUpInside];
+
+    [self.view addSubview:objCustomAlterview.view];
+}
+
+- (IBAction)alertPressCancel:(id)sender {
+    [UIView animateWithDuration:1.0 animations:^{
+        
+        objCustomAlterview.alertBgView.alpha = 0;
+        
+        objCustomAlterview.alertMainBgView.alpha = 0;
+        
+    } completion:^(BOOL b){
+        
+        
+        objCustomAlterview. alertBgView.hidden = YES;
+        
+        objCustomAlterview.alertMainBgView.hidden = YES;
+        objCustomAlterview.view .hidden  = YES;
+    }];
+}
+
+-(void)showAltermessage:(NSString*)msg
+{
+    objCustomAlterview.view.hidden =NO;
+    //objCustomAlterview.view.alpha=0.0;
+    objCustomAlterview.alertBgView.hidden = NO;
+    objCustomAlterview.alertMainBgView.hidden = NO;
+    objCustomAlterview.alertCancelButton.hidden = NO;
+    objCustomAlterview.btnYes.hidden = YES;
+    objCustomAlterview.btnNo.hidden = YES;
+    
+    objCustomAlterview.alertMsgLabel.text = msg;
+    objCustomAlterview.alertMsgLabel.textAlignment = NSTextAlignmentCenter;
+    objCustomAlterview.alertMsgLabel.lineBreakMode = NSLineBreakByWordWrapping;
+    objCustomAlterview.alertMsgLabel.numberOfLines = 2;
+    [objCustomAlterview.alertMsgLabel setTextColor:[UIColor colorWithRed:(255/255.0f) green:(255/255.0f) blue:(255/255.0f) alpha:1.0f]];
+
+}
+
+
 #pragma mark - Create and Sign Button Action
 -(void)CreateAnAccount
 {
     objSigninType=@"1";
     if([NSString isEmpty:self.emailTxt.text] && [NSString isEmpty:self.passwordTxt.text]){
        
-        if(IS_GREATER_IOS8)
-        {
-        [self presentViewController:[ DSAppCommon alertWithTitle:@"Title" withMessage:FILL_DETAILS preferredStyle:UIAlertControllerStyleAlert] animated:YES completion:NULL];
-        }
-        else{
-            [DSAppCommon showSimpleAlertWithMessage:FILL_DETAILS];
-        }
+        
+        [self showAltermessage:FILL_DETAILS];
+        
+//        if(IS_GREATER_IOS8)
+//        {
+//        [self presentViewController:[ DSAppCommon alertWithTitle:@"Title" withMessage:FILL_DETAILS preferredStyle:UIAlertControllerStyleAlert] animated:YES completion:NULL];
+//        }
+//        else{
+//            [DSAppCommon showSimpleAlertWithMessage:FILL_DETAILS];
+//        }
 
         return;
     }
     if([NSString isEmpty:self.emailTxt.text] && ![NSString isEmpty:self.passwordTxt.text]){
+        
+        [self showAltermessage:EMAIL_REQUIRED];
        
-        if(IS_GREATER_IOS8)
-        {
-        [self presentViewController:[ DSAppCommon alertWithTitle:@"Title" withMessage:EMAIL_REQUIRED preferredStyle:UIAlertControllerStyleAlert] animated:YES completion:NULL];
-        }
-        else{
-             [DSAppCommon showSimpleAlertWithMessage:EMAIL_REQUIRED];
-        }
+//        if(IS_GREATER_IOS8)
+//        {
+//        [self presentViewController:[ DSAppCommon alertWithTitle:@"Title" withMessage:EMAIL_REQUIRED preferredStyle:UIAlertControllerStyleAlert] animated:YES completion:NULL];
+//        }
+//        else{
+//             [DSAppCommon showSimpleAlertWithMessage:EMAIL_REQUIRED];
+//        }
         return;
     }
     if(![NSString isEmpty:self.emailTxt.text] && [NSString isEmpty:self.passwordTxt.text]){
         
-        if(IS_GREATER_IOS8)
-        {
-        [self presentViewController:[ DSAppCommon alertWithTitle:@"Title" withMessage:PASSWORD_REQUIRED preferredStyle:UIAlertControllerStyleAlert] animated:YES completion:NULL];
-        }
-        else{
-            [DSAppCommon showSimpleAlertWithMessage:PASSWORD_REQUIRED];
-        }
+        [self showAltermessage:PASSWORD_REQUIRED];
+        
+        
+//        if(IS_GREATER_IOS8)
+//        {
+//        [self presentViewController:[ DSAppCommon alertWithTitle:@"Title" withMessage:PASSWORD_REQUIRED preferredStyle:UIAlertControllerStyleAlert] animated:YES completion:NULL];
+//        }
+//        else{
+//            [DSAppCommon showSimpleAlertWithMessage:PASSWORD_REQUIRED];
+//        }
         return;
     }
     if(![NSString isEmpty:self.emailTxt.text] && ![NSString isEmpty:self.passwordTxt.text]){
         if(![NSString validateEmail:self.emailTxt.text]){
             
-            if(IS_GREATER_IOS8)
-            {
-            [self presentViewController:[ DSAppCommon alertWithTitle:@"Title" withMessage:INVALID_EMAIL preferredStyle:UIAlertControllerStyleAlert] animated:YES completion:NULL];
-            }
-            else
-            {
-                [DSAppCommon showSimpleAlertWithMessage:INVALID_EMAIL];
-            }
+            [self showAltermessage:INVALID_EMAIL];
+            
+//            if(IS_GREATER_IOS8)
+//            {
+//            [self presentViewController:[ DSAppCommon alertWithTitle:@"Title" withMessage:INVALID_EMAIL preferredStyle:UIAlertControllerStyleAlert] animated:YES completion:NULL];
+//            }
+//            else
+//            {
+//                [DSAppCommon showSimpleAlertWithMessage:INVALID_EMAIL];
+//            }
             return;
         }
         email = self.emailTxt.text;
@@ -270,50 +338,57 @@
     
     objSigninType=@"1";
     if([NSString isEmpty:self.emailTxt.text] && [NSString isEmpty:self.passwordTxt.text]){
-        if(IS_GREATER_IOS8)
-        {
-       
-         [self presentViewController:[ DSAppCommon alertWithTitle:@"Title" withMessage:FILL_DETAILS preferredStyle:UIAlertControllerStyleAlert] animated:YES completion:NULL];
-        }
-        else
-        {
-            [DSAppCommon showSimpleAlertWithMessage:FILL_DETAILS];
-        }
+        
+        [self showAltermessage:FILL_DETAILS];
+//        if(IS_GREATER_IOS8)
+//        {
+//       
+//         [self presentViewController:[ DSAppCommon alertWithTitle:@"Title" withMessage:FILL_DETAILS preferredStyle:UIAlertControllerStyleAlert] animated:YES completion:NULL];
+//        }
+//        else
+//        {
+//            [DSAppCommon showSimpleAlertWithMessage:FILL_DETAILS];
+//        }
         return;
     }
     if([NSString isEmpty:self.emailTxt.text] && ![NSString isEmpty:self.passwordTxt.text]){
+        
+        [self showAltermessage:EMAIL_REQUIRED];
        
-        if(IS_GREATER_IOS8)
-        {
-        [self presentViewController:[ DSAppCommon alertWithTitle:@"Title" withMessage:EMAIL_REQUIRED preferredStyle:UIAlertControllerStyleAlert] animated:YES completion:NULL];
-        }
-        else{
-             [DSAppCommon showSimpleAlertWithMessage:EMAIL_REQUIRED];
-        }
+//        if(IS_GREATER_IOS8)
+//        {
+//        [self presentViewController:[ DSAppCommon alertWithTitle:@"Title" withMessage:EMAIL_REQUIRED preferredStyle:UIAlertControllerStyleAlert] animated:YES completion:NULL];
+//        }
+//        else{
+//             [DSAppCommon showSimpleAlertWithMessage:EMAIL_REQUIRED];
+//        }
         return;
     }
     if(![NSString isEmpty:self.emailTxt.text] && [NSString isEmpty:self.passwordTxt.text]){
         
-        if(IS_GREATER_IOS8)
-        {
-        [self presentViewController:[ DSAppCommon alertWithTitle:@"Title" withMessage:PASSWORD_REQUIRED preferredStyle:UIAlertControllerStyleAlert] animated:YES completion:NULL];
-        }
-        else{
-            [DSAppCommon showSimpleAlertWithMessage:PASSWORD_REQUIRED];
-        }
+        
+        [self showAltermessage:PASSWORD_REQUIRED];
+//        if(IS_GREATER_IOS8)
+//        {
+//        [self presentViewController:[ DSAppCommon alertWithTitle:@"Title" withMessage:PASSWORD_REQUIRED preferredStyle:UIAlertControllerStyleAlert] animated:YES completion:NULL];
+//        }
+//        else{
+//            [DSAppCommon showSimpleAlertWithMessage:PASSWORD_REQUIRED];
+//        }
         return;
     }
     if(![NSString isEmpty:self.emailTxt.text] && ![NSString isEmpty:self.passwordTxt.text]){
         if(![NSString validateEmail:self.emailTxt.text]){
           
-            if(IS_GREATER_IOS8)
-            {
-            [self presentViewController:[ DSAppCommon alertWithTitle:@"Title" withMessage:INVALID_EMAIL preferredStyle:UIAlertControllerStyleAlert] animated:YES completion:NULL];
-            }
-            else
-            {
-                 [DSAppCommon showSimpleAlertWithMessage:INVALID_EMAIL];
-            }
+            [self showAltermessage:INVALID_EMAIL];
+//            if(IS_GREATER_IOS8)
+//            {
+//            [self presentViewController:[ DSAppCommon alertWithTitle:@"Title" withMessage:INVALID_EMAIL preferredStyle:UIAlertControllerStyleAlert] animated:YES completion:NULL];
+//            }
+//            else
+//            {
+//                 [DSAppCommon showSimpleAlertWithMessage:INVALID_EMAIL];
+//            }
             return;
         }
         email = self.emailTxt.text;
@@ -390,14 +465,14 @@
                      }
                      failure:^(AFHTTPRequestOperation *operation, id error) {
                           NSLog(@"Error = %@",error);
-                         if(IS_GREATER_IOS8)
-                         {
-                         [self presentViewController:[ DSAppCommon alertWithTitle:@"Title" withMessage:@"ERROR" preferredStyle:UIAlertControllerStyleAlert] animated:YES completion:NULL];
-                         }
-                         else{
-                             [DSAppCommon showSimpleAlertWithMessage:@"ERROR"];
-                         }
-
+//                         if(IS_GREATER_IOS8)
+//                         {
+//                         [self presentViewController:[ DSAppCommon alertWithTitle:@"Title" withMessage:@"ERROR" preferredStyle:UIAlertControllerStyleAlert] animated:YES completion:NULL];
+//                         }
+//                         else{
+//                             [DSAppCommon showSimpleAlertWithMessage:@"ERROR"];
+//                         }
+                         [self showAltermessage:@"ERROR"];
                          [COMMON removeLoading];
 
                      }];

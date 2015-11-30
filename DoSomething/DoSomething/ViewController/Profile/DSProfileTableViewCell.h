@@ -57,9 +57,9 @@
 @property (weak, nonatomic) IBOutlet UITextField *emailTextField;
 @property (weak, nonatomic) IBOutlet UITextField *passwordTextField;
 
-@property (weak, nonatomic) IBOutlet UIButton *messSwitchBtn;
-@property (weak, nonatomic) IBOutlet UIButton *SoundSwitchBtn;
-@property (weak, nonatomic) IBOutlet UIButton *vibrationSwitchBtn;
+@property (weak, nonatomic) IBOutlet UISwitch *messSwitchBtn;
+@property (weak, nonatomic) IBOutlet UISwitch *SoundSwitchBtn;
+@property (weak, nonatomic) IBOutlet UISwitch *vibrationSwitchBtn;
 @property (weak, nonatomic) IBOutlet UILabel *labelMale;
 @property (weak, nonatomic) IBOutlet UILabel *labelFemale;
 @property (weak, nonatomic) IBOutlet UILabel *textViewHeaderLabel;

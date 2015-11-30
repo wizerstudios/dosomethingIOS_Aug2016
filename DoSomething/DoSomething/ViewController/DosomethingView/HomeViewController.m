@@ -376,18 +376,15 @@
 }
 
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
-
 
 
 - (IBAction)pressDosomething:(id)sender {
     
     objCustomAlterview.view .hidden  = NO;
     objCustomAlterview.alertBgView.hidden = NO;
+    
     objCustomAlterview.alertMainBgView.hidden = NO;
+    
     objCustomAlterview.btnYes.hidden = NO;
     objCustomAlterview.btnNo.hidden = NO;
     objCustomAlterview.alertCancelButton.hidden = NO;
@@ -482,6 +479,12 @@
         
     }];
 }
+
+- (void)didReceiveMemoryWarning {
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
+}
+
 
 
 @end
