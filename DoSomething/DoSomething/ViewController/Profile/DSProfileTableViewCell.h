@@ -69,7 +69,8 @@
 @property (strong,nonatomic) IBOutlet UIScrollView * profileScrollview;
 
 
-
+@property(nonatomic,strong)IBOutlet UITextField *firstnameTxt;
+@property(nonatomic,strong) IBOutlet UITextField *lastNameTxt;
 
 
 @end

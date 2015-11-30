@@ -112,7 +112,7 @@
     }
     else{
         
-        [self initializeArrayRegister];
+        [self initializeArrayProfile];
         
     //self.tableViewHeightConstraint.constant=568;
     }
@@ -168,7 +168,7 @@
 
     }
     else{
-        if(userDetailsDict !=NULL){
+        if(userDetailsDict.count > 0){
             
             NSString  *ImageURL1 ,*ImageURL2 ,*ImageURL3 ;
             NSData *imageData1, *imageData2, *imageData3;
@@ -273,7 +273,7 @@
     [_tableviewProfile reloadData];
     
     infoArray=[[NSMutableArray alloc]initWithObjects:@"profile_noimg",@"profile_noimg",@"profile_noimg", nil];
-    
+    [self CustomAlterview];
 
 }
 
@@ -588,7 +588,7 @@
     //[self.tableviewProfile reloadData];
    
 }
--(void)initializeArrayRegister{
+-(void)initializeArrayProfile{
     
     placeHolderArray = [[NSMutableArray alloc] initWithCapacity: 1];
     
@@ -626,7 +626,7 @@
     [objCustomAlterview.alertCancelButton setHidden:NO];
     [objCustomAlterview.alertCancelButton addTarget:self action:@selector(alertPressCancel:) forControlEvents:UIControlEventTouchUpInside];
     
-    [self.view addSubview:objCustomAlterview.view];
+    [self.tableviewProfile addSubview:objCustomAlterview.view];
 }
 
 - (IBAction)alertPressCancel:(id)sender {
@@ -1536,7 +1536,7 @@
     
     [COMMON LoadIcon:self.view];
     NSArray *postPerArray;
-    if(userDetailsDict !=NULL){
+    if(userDetailsDict.count >0){
     postPerArray = [[placeHolderArray objectAtIndex:0]valueForKey:@"placeHolder"];
     }
     else
