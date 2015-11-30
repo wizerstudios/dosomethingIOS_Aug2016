@@ -24,6 +24,9 @@
     NSString * notificationSound;
     NSString * notificationvibration;
     AppDelegate *appDelegate;
+    UISwitch * messSwith;
+    UISwitch * soundSwitch;
+    UISwitch *vibrationSwitch;
 }
 
 @property (nonatomic,strong) IBOutlet NSLayoutConstraint * deletebuttonBottomoposition;
@@ -51,13 +54,13 @@
 }
 -(void)viewWillAppear:(BOOL)animated{
     
-    //[self NotificationMethod];
+   
     [self loadNavigationview];
     
     [self notificationMethod];
     
    
-        self.deletebuttonBottomoposition.constant =45;
+    self.deletebuttonBottomoposition.constant =45;
     
     if(IS_IPHONE6)
     {
@@ -95,17 +98,17 @@
     alertMainBgView.hidden = YES;
     alertBgView .hidden =YES;
     
-    UISwitch * messSwith =[[UISwitch alloc]initWithFrame:CGRectMake(messLbl.frame.origin.x+messLbl.frame.size.width+24,messLbl.frame.origin.y-3,20,0)];
+     messSwith =[[UISwitch alloc]initWithFrame:CGRectMake(messLbl.frame.origin.x+messLbl.frame.size.width+24,messLbl.frame.origin.y-3,20,0)];
     [messSwith addTarget: self action: @selector(messSwithAction:) forControlEvents:UIControlEventValueChanged];
    messSwith.transform = CGAffineTransformMakeScale(0.50, 0.50);
      messSwith.layer.cornerRadius = 16.0;
     [messSwith setOnTintColor:[UIColor greenColor]];
     
-    UISwitch * soundSwitch =[[UISwitch alloc]initWithFrame:CGRectMake(soundLbl.frame.origin.x+soundLbl.frame.size.width+24,soundLbl.frame.origin.y-3,20,0)];
+    soundSwitch =[[UISwitch alloc]initWithFrame:CGRectMake(soundLbl.frame.origin.x+soundLbl.frame.size.width+24,soundLbl.frame.origin.y-3,20,0)];
     soundSwitch.transform = CGAffineTransformMakeScale(0.50, 0.50);
     [soundSwitch addTarget: self action: @selector(soundSwithAction:) forControlEvents:UIControlEventValueChanged];
     
-    UISwitch *vibrationSwitch =[[UISwitch alloc]initWithFrame:CGRectMake(vibrationLbl.frame.origin.x+vibrationLbl.frame.size.width+24,vibrationLbl.frame.origin.y-5,20,0)];
+   vibrationSwitch =[[UISwitch alloc]initWithFrame:CGRectMake(vibrationLbl.frame.origin.x+vibrationLbl.frame.size.width+24,vibrationLbl.frame.origin.y-5,20,0)];
      vibrationSwitch.transform = CGAffineTransformMakeScale(0.50, 0.50);
     [vibrationSwitch addTarget: self action: @selector(vibrationSwithAction:) forControlEvents:UIControlEventValueChanged];
     
@@ -116,13 +119,13 @@
 }
 -(void)notificationMethod
 {
-    self.messSwitchBtn.userInteractionEnabled = YES;
-    self.vibrationSwitchBtn.userInteractionEnabled = YES;
-    self.SoundSwitchBtn.userInteractionEnabled = YES;
-    
-    [self.messSwitchBtn setTag:200];
-    [self.SoundSwitchBtn setTag:201];
-    [self.vibrationSwitchBtn setTag:202];
+//    self.messSwitchBtn.userInteractionEnabled = YES;
+//    self.vibrationSwitchBtn.userInteractionEnabled = YES;
+//    self.SoundSwitchBtn.userInteractionEnabled = YES;
+//    
+//    [self.messSwitchBtn setTag:200];
+//    [self.SoundSwitchBtn setTag:201];
+//    [self.vibrationSwitchBtn setTag:202];
     
     
     NSString * objMsg =[notificationMsg isEqualToString:@"Yes"]? @"switch_on":@"switch_off";
@@ -131,30 +134,45 @@
     
     if([objMsg isEqualToString:@"switch_on"])
     {
-         self.imageViewNewMsg.image =[UIImage imageNamed:@"switch_on"];
-    }
+        [messSwith setThumbTintColor:[UIColor greenColor]];
+        
+        [messSwith setBackgroundColor:[UIColor whiteColor]];
+        [messSwith setOnTintColor:[UIColor lightGrayColor]];
+        }
     if([objSound isEqualToString:@"switch_on"])
     {
-        self.imageViewSound.image =[UIImage imageNamed:@"switch_on"];
+        [soundSwitch setThumbTintColor:[UIColor greenColor]];
+        
+        [soundSwitch setBackgroundColor:[UIColor whiteColor]];
+        [soundSwitch setOnTintColor:[UIColor lightGrayColor]];
     }
     
     if([objVibration isEqualToString:@"switch_on"])
     {
-        self.imageViewVibration.image =[UIImage imageNamed:@"switch_on"];
+        [vibrationSwitch setThumbTintColor:[UIColor greenColor]];
+        
+        [vibrationSwitch setBackgroundColor:[UIColor whiteColor]];
+        [vibrationSwitch setOnTintColor:[UIColor lightGrayColor]];
     }
 
     if([objMsg isEqualToString:@"switch_off"])
     {
-        self.imageViewNewMsg.image =[UIImage imageNamed:@"switch_off"];
+        [messSwith setTintColor:[UIColor grayColor]];
+        [messSwith setBackgroundColor:[UIColor lightGrayColor]];
+        [messSwith setThumbTintColor:[UIColor redColor]];
     }
     if([objSound isEqualToString:@"switch_off"])
     {
-        self.imageViewSound.image =[UIImage imageNamed:@"switch_off"];
+        [soundSwitch setTintColor:[UIColor grayColor]];
+        [soundSwitch setBackgroundColor:[UIColor lightGrayColor]];
+        [soundSwitch setThumbTintColor:[UIColor redColor]];
     }
     
     if([objVibration isEqualToString:@"switch_off"])
     {
-        self.imageViewVibration.image =[UIImage imageNamed:@"switch_off"];
+        [vibrationSwitch setTintColor:[UIColor grayColor]];
+        [vibrationSwitch setBackgroundColor:[UIColor lightGrayColor]];
+        [vibrationSwitch setThumbTintColor:[UIColor redColor]];
     }
   
     
