@@ -29,7 +29,7 @@
                 <view alpha="0.89999997615814209" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ncR-8s-4mb">
                     <rect key="frame" x="0.0" y="0.0" width="320" height="518"/>
                     <animations/>
-                    <color key="backgroundColor" red="0.97601792899999995" green="0.97601792899999995" blue="0.97601792899999995" alpha="1" colorSpace="calibratedRGB"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NDw-10-Gsc">
                     <rect key="frame" x="0.0" y="0.0" width="320" height="518"/>
@@ -89,7 +89,7 @@
                         </button>
                     </subviews>
                     <animations/>
-                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <color key="backgroundColor" white="1" alpha="0.75077885352760731" colorSpace="calibratedWhite"/>
                     <constraints>
                         <constraint firstItem="lxX-pM-LnH" firstAttribute="leading" secondItem="iao-6D-sEt" secondAttribute="leading" constant="1" id="2DN-c2-bda"/>
                         <constraint firstItem="iao-6D-sEt" firstAttribute="centerX" secondItem="DIv-M8-NVW" secondAttribute="centerX" constant="-1" id="5lb-QC-wVQ"/>
@@ -105,7 +105,7 @@
                 </view>
             </subviews>
             <animations/>
-            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <color key="backgroundColor" white="1" alpha="0.24900546395705522" colorSpace="calibratedWhite"/>
             <constraints>
                 <constraint firstItem="NDw-10-Gsc" firstAttribute="trailing" secondItem="ncR-8s-4mb" secondAttribute="trailing" id="7LF-Vh-QbT"/>
                 <constraint firstItem="NDw-10-Gsc" firstAttribute="top" secondItem="ncR-8s-4mb" secondAttribute="top" id="9I6-Ua-Czc"/>
