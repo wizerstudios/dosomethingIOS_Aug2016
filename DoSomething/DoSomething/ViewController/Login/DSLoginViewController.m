@@ -119,6 +119,7 @@
      buttonSignIn.hidden =NO;
      [buttonSignIn addTarget:self action:@selector(SignButtonAction) forControlEvents:UIControlEventTouchUpInside];
  }
+     [self CustomAlterview];
 
     
 }
@@ -141,7 +142,7 @@
     deviceUdid = [OpenUDID value];
     [self getUserCurrenLocation];
     
-    [self CustomAlterview];
+   
 
 }
 #pragma mark get user CurrentLocation
@@ -209,49 +210,39 @@
 {
     objCustomAlterview = [[CustomAlterview alloc] initWithNibName:@"CustomAlterview" bundle:nil];
     objCustomAlterview.view.frame = CGRectMake(self.view.frame.origin.x,self.view.frame.origin.y, CGRectGetWidth(self.view.frame),self.view.frame.size.height);
-    [objCustomAlterview.alertBgView setHidden:YES];
-    [objCustomAlterview.alertMainBgView setHidden:YES];
+    [objCustomAlterview.alertBgView setHidden:NO];
+    [objCustomAlterview.alertMainBgView setHidden:NO];
     [objCustomAlterview.view setHidden:YES];
     [objCustomAlterview.btnYes setHidden:YES];
     [objCustomAlterview.btnNo setHidden:YES];
     [objCustomAlterview.alertCancelButton setHidden:NO];
     [objCustomAlterview.alertCancelButton addTarget:self action:@selector(alertPressCancel:) forControlEvents:UIControlEventTouchUpInside];
+    objCustomAlterview.alertMsgLabel.textAlignment = NSTextAlignmentCenter;
+    objCustomAlterview.alertMsgLabel.lineBreakMode = NSLineBreakByWordWrapping;
+    objCustomAlterview.alertMsgLabel.numberOfLines = 2;
+    [objCustomAlterview.alertMsgLabel setTextColor:[UIColor colorWithRed:(255/255.0f) green:(255/255.0f) blue:(255/255.0f) alpha:1.0f]];
 
     [self.view addSubview:objCustomAlterview.view];
 }
 
 - (IBAction)alertPressCancel:(id)sender {
-    [UIView animateWithDuration:1.0 animations:^{
-        
-        objCustomAlterview.alertBgView.alpha = 0;
-        
-        objCustomAlterview.alertMainBgView.alpha = 0;
-        
-    } completion:^(BOOL b){
-        
-        
+   
         objCustomAlterview. alertBgView.hidden = YES;
         
         objCustomAlterview.alertMainBgView.hidden = YES;
         objCustomAlterview.view .hidden  = YES;
-    }];
+ 
 }
 
 -(void)showAltermessage:(NSString*)msg
 {
     objCustomAlterview.view.hidden =NO;
-    //objCustomAlterview.view.alpha=0.0;
     objCustomAlterview.alertBgView.hidden = NO;
     objCustomAlterview.alertMainBgView.hidden = NO;
-    objCustomAlterview.alertCancelButton.hidden = NO;
-    objCustomAlterview.btnYes.hidden = YES;
-    objCustomAlterview.btnNo.hidden = YES;
+   
     
     objCustomAlterview.alertMsgLabel.text = msg;
-    objCustomAlterview.alertMsgLabel.textAlignment = NSTextAlignmentCenter;
-    objCustomAlterview.alertMsgLabel.lineBreakMode = NSLineBreakByWordWrapping;
-    objCustomAlterview.alertMsgLabel.numberOfLines = 2;
-    [objCustomAlterview.alertMsgLabel setTextColor:[UIColor colorWithRed:(255/255.0f) green:(255/255.0f) blue:(255/255.0f) alpha:1.0f]];
+   
 
 }
 

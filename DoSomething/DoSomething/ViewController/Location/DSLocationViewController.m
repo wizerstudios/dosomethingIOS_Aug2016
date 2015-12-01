@@ -11,6 +11,8 @@
 #import "CustomNavigationView.h"
 #import "DSConfig.h"
 #import "DSWebservice.h"
+#import "UIImageView+AFNetworking.h"
+#import "DSAppCommon.h"
 
 @interface DSLocationViewController ()
 {
@@ -52,18 +54,17 @@
     [customNavigation.buttonBack setHidden:YES];
     [customNavigation.saveBtn setHidden:YES];
     [self.navigationController.navigationBar addSubview:customNavigation.view];
-//    [customNavigation.saveBtn addTarget:self action:@selector(saveAction) forControlEvents:UIControlEventTouchUpInside];
-//    [customNavigation.buttonBack addTarget:self action:@selector(backAction) forControlEvents:UIControlEventTouchUpInside];
-    
+
     UINib *cellNib = [UINib nibWithNibName:@"LocationCollectionViewCell" bundle:nil];
     [self.locationCollectionView registerNib:cellNib forCellWithReuseIdentifier:@"LocationCell"];
     
     locationCollectionView.delegate=self;
     locationCollectionView.dataSource=self;
+    profileImages =[[NSArray alloc]init];
+    profileNames =[[NSArray alloc]init];
+    kiloMeterlabel =[[NSArray alloc]init];
     
-    profileNames=[[NSArray alloc]initWithObjects:@"Michelle Chong",@"Zoe Tay ",@"Felicia Chin",@"Yuna",@"TAylor Schilling",@"Gal Gadot", nil];
-    profileImages=[[NSArray alloc]initWithObjects:@"chong.png",@"zoe_tay.png",@"felicin.png",@"yuna.png",@"taylor.png",@"Galglot.png", nil];
-     kiloMeterlabel=[[NSArray alloc]initWithObjects:@"20km",@"1km",@"200km",@"2km",@"10km",@"1.6km", nil];
+   
   
     UICollectionViewFlowLayout *flowLayout1 = [[UICollectionViewFlowLayout alloc] init];
     flowLayout1.headerReferenceSize = CGSizeMake(locationCollectionView.bounds.size.width, 55);
@@ -84,15 +85,22 @@
 
 -(void)nearestLocationWebservice
 {
+    [COMMON LoadIcon:self.view];
     [objWebservice nearestUsers:NearestUsers_API sessionid:strsessionID latitude:@"13.0827" longitude:@"80.2707" filter_status:@"" filter_gender:@"" filter_agerange:@"" filter_distance:@"" success:^(AFHTTPRequestOperation *operation, id responseObject) {
 
         if([[[responseObject valueForKey:@"nearestusers"]valueForKey:@"status"] isEqualToString:@"success"])
         {
             NSMutableArray * nearestUserdetaile =[[NSMutableArray alloc]init];
             nearestUserdetaile =[[responseObject valueForKey:@"nearestusers"] valueForKey:@"UserList"];
-           // profileNames     =[nearestUserdetaile valueForKey:@"""]
+            profileNames     =[nearestUserdetaile valueForKey:@"first_name"];
+            kiloMeterlabel   =[nearestUserdetaile valueForKey:@"distance"];
+            profileImages   =[nearestUserdetaile valueForKey:@"image1"];
+            
+            [locationCollectionView reloadData];
              NSLog(@"%@",nearestUserdetaile);
         }
+        [COMMON removeLoading];
+        
         
     } failure:^(AFHTTPRequestOperation *operation, id error) {
     
@@ -111,7 +119,7 @@
 
 -(NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView{
     
-    return [profileNames count];
+    return 1;
 }
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
@@ -129,10 +137,12 @@
     
     NSString *MyPatternString = [profileImages objectAtIndex:indexPath.row];
     
-    locationCellView.imageProfile.image =[UIImage imageNamed:MyPatternString ];
+    //locationCellView.imageProfile.image =[UIImage imageNamed:MyPatternString ];
+    
     locationCellView.nameProfile.text =[profileNames objectAtIndex:indexPath.row];
     locationCellView.kiloMeter.text=[kiloMeterlabel objectAtIndex:indexPath.row];
-    
+    MyPatternString= [MyPatternString stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+    [locationCellView.imageProfile setImageWithURL:[NSURL URLWithString:MyPatternString]];
     locationCollectionView.backgroundColor = [UIColor clearColor];
     return locationCellView;
 }
