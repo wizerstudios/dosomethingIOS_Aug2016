@@ -342,38 +342,24 @@
 
 
 - (IBAction)alertPressYes:(id)sender {
-//    [UIView animateWithDuration:1.0 animations:^{
-//        
-//        alertBgView.alpha = 0;
-//        
-//        alertMainBgView.alpha = 0;
-//        
-//    } completion:^(BOOL b){
      objCustomAlterview.view.hidden =YES;
        objCustomAlterview. alertBgView.hidden = YES;
         objCustomAlterview.alertMainBgView.hidden = YES;
          [self logoutDeleteAction];
         
-   // }];
-    
+
    }
 
 - (IBAction)alertPressNo:(id)sender {
     
-//    [UIView animateWithDuration:1.0 animations:^{
-//        
-//        alertBgView.alpha = 0;
-//        
-//        alertMainBgView.alpha = 0;
-//      
-//    } completion:^(BOOL b){
+
     
         objCustomAlterview.alertBgView.hidden = YES;
         
         objCustomAlterview.alertMainBgView.hidden = YES;
         objCustomAlterview.view.hidden =YES;
       
-   // }];
+ 
     
 }
 

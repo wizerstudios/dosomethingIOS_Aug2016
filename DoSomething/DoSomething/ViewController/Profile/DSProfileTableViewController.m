@@ -293,6 +293,8 @@
             [userProfileImage setTag:i+100];
             if([profileData length] == 0)
                 [userProfileImage setImage:[UIImage imageNamed:@"profile_noimg"]];
+        
+        
             
             else{
                 [userProfileImage setImage:[UIImage imageWithData:profileData]];
@@ -310,6 +312,7 @@
             cameraImage = [[UIImageView alloc]initWithFrame:CGRectMake(userProfileImage.frame.size.width / 2 - 15, self.scrView.frame.size.height - 55, 30, 30)];
             [cameraImage setTag:i+200];
             [cameraImage setImage:[UIImage imageNamed:@"profile_camera_icon"]];
+        [topViewCell setHidden:YES];
             cameraImage.userInteractionEnabled = YES;
             
             [cameraImage setUserInteractionEnabled:YES];
@@ -465,13 +468,49 @@
     
 }
 
+#pragma mark - textfiled delegate
+
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
+{
+    NSString *strSearchLetters;
+    if (string.length !=0)
+    {
+        if(textField.text.length > 1)
+        {
+            strSearchLetters =[textField.text stringByAppendingString:string];
+            if(textField.tag ==11)
+            {
+                FirstName =strSearchLetters;
+            }
+            else if (textField.tag == 12)
+            {
+                LastName =strSearchLetters;
+            }
+
+        }
+        
+    }
+
+        return YES;
+}
+-(BOOL)textFieldShouldReturn:(UITextField*)textField {
+    if (textField.tag == 11) {
+       
+    }
+    else if (textField.tag ==12)
+    {
+        
+    }
+    return YES;
+}
+
 -(BOOL)textFieldShouldBeginEditing:(UITextField *)textField{
     
     NSInteger tag = [textField tag];
     if(textField.tag >= 1000){
         [self loadDatePicker:tag];
     }
-    return YES;
+        return YES;
     
 }
 
@@ -496,17 +535,17 @@
     NSLog(@"row = %ld section = %ld",(long)indexPath.row,(long)indexPath.section);
     
    NSString *selOptionVal;
-    if (indexPath.row ==1 ||indexPath.row ==2||indexPath.row ==5) {
-        selOptionVal = cell.textFieldPlaceHolder.text;
-        
-        if(selOptionVal != nil || ![selOptionVal isEqualToString:@""]){
-            [[[placeHolderArray objectAtIndex:indexPath.section] objectAtIndex:indexPath.row] setObject:selOptionVal forKey:@"TypingText"];
-            
-        }
-    }
+//    if (indexPath.row ==1 ||indexPath.row ==5) {
+//        //selOptionVal = cell.textFieldPlaceHolder.text;
+//        
+//        if(selOptionVal != nil || ![selOptionVal isEqualToString:@""]){
+//            [[[placeHolderArray objectAtIndex:indexPath.section] objectAtIndex:indexPath.row] setObject:selOptionVal forKey:@"TypingText"];
+//            
+//        }
+//    }
     
     
-    else if (indexPath.row ==4 ) {
+    if (indexPath.row ==4 ) {
        // selOptionVal = cell.textFieldDPPlaceHolder.text;
        
         NSDate *date = datePicker.date;
@@ -626,24 +665,24 @@
     [objCustomAlterview.alertCancelButton setHidden:NO];
     [objCustomAlterview.alertCancelButton addTarget:self action:@selector(alertPressCancel:) forControlEvents:UIControlEventTouchUpInside];
     
-    [self.tableviewProfile addSubview:objCustomAlterview.view];
+    [self.view addSubview:objCustomAlterview.view];
 }
 
 - (IBAction)alertPressCancel:(id)sender {
-    [UIView animateWithDuration:1.0 animations:^{
-        
-        objCustomAlterview.alertBgView.alpha = 0;
-        
-        objCustomAlterview.alertMainBgView.alpha = 0;
-        
-    } completion:^(BOOL b){
-        
+//    [UIView animateWithDuration:1.0 animations:^{
+//        
+//        objCustomAlterview.alertBgView.alpha = 0;
+//        
+//        objCustomAlterview.alertMainBgView.alpha = 0;
+//        
+//    } completion:^(BOOL b){
+    
         
         objCustomAlterview. alertBgView.hidden = YES;
         
         objCustomAlterview.alertMainBgView.hidden = YES;
         objCustomAlterview.view .hidden  = YES;
-    }];
+    //}];
 }
 
 -(void)showAltermessage:(NSString*)msg
@@ -682,16 +721,30 @@
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     
+    
     if (IS_IPHONE4 ||IS_IPHONE5)
     {
            if (indexPath.row == 0 ){
                return 200;
             }
+        if(indexPath.row ==1)
+        {
+            return 80;
+        }
+        if(indexPath.row ==2)
+        {
+            return 0;
+        }
+        if(indexPath.row ==3)
+        {
+            return 40;
+        }
             if(indexPath.row == 5)
              {
                  dataSize = [COMMON getControlHeight:strAbout withFontName:@"Patron-Regular" ofSize:14.0 withSize:CGSizeMake(tableView.frame.size.width-20,tableView.frame.size.height)];
                  
-                 return dataSize.height;
+                 return dataSize.height+10;
+                 
              }
             if (indexPath.row == 4) {
             return 55;
@@ -731,6 +784,8 @@
             {
                 return 258;
              }
+    
+  
             if (indexPath.row == 4)
             {
                 return 70;
@@ -782,19 +837,19 @@
    
     
 
-        typingText       = [[[placeHolderArray valueForKey:@"TypingText" ]objectAtIndex:indexPath.section]objectAtIndex:indexPath.row];
-        typingTextPass   = [[[placeHolderArray valueForKey:@"TypingTextPass" ]objectAtIndex:indexPath.section]objectAtIndex:indexPath.row];
-    
-
-        placeHolderText     =  [[[placeHolderArray valueForKey:@"placeHolder" ]objectAtIndex:indexPath.section]objectAtIndex:indexPath.row];
-        placeHolderTextPass =  [[[placeHolderArray valueForKey:@"placeHolderPass" ]objectAtIndex:indexPath.section]objectAtIndex:indexPath.row];
+//        typingText       = [[[placeHolderArray valueForKey:@"TypingText" ]objectAtIndex:indexPath.section]objectAtIndex:indexPath.row];
+//        typingTextPass   = [[[placeHolderArray valueForKey:@"TypingTextPass" ]objectAtIndex:indexPath.section]objectAtIndex:indexPath.row];
+//    
+//
+//        placeHolderText     =  [[[placeHolderArray valueForKey:@"placeHolder" ]objectAtIndex:indexPath.section]objectAtIndex:indexPath.row];
+//        placeHolderTextPass =  [[[placeHolderArray valueForKey:@"placeHolderPass" ]objectAtIndex:indexPath.section]objectAtIndex:indexPath.row];
     
     
    
 
 
     
-        titleText       =  [titleArray objectAtIndex:indexPath.row];
+       // titleText       =  [titleArray objectAtIndex:indexPath.row];
     if (indexPath.row == 0)
     {
         
@@ -826,7 +881,7 @@
     }
 
     
-    if (indexPath.row == 1 || indexPath.row == 2)
+    if (indexPath.row == 1 )
     {
         
         if (cell == nil)
@@ -836,29 +891,66 @@
             
         }
         
+        
+        
         if (IS_IPHONE6 ||IS_IPHONE6_Plus)
         {
             cell.layoutConstraintViewHeight.constant =49;
 
         }
-        cell.labelTitleText.text = titleText;
-        if(typingText == (id)[NSNull null] || [typingText isEqualToString:@""])//|| [typingText  isEqual: @"NULL"])
-        {
-            if(placeHolderText ==(id) [NSNull null])
-                cell.textFieldPlaceHolder.placeholder = titleText;
-            else
+//        cell.labelTitleText.text = titleText;
+//        if(typingText == (id)[NSNull null] || [typingText isEqualToString:@""])//|| [typingText  isEqual: @"NULL"])
+//        {
+//            if(placeHolderText ==(id) [NSNull null])
+//                cell.textFieldPlaceHolder.placeholder = titleText;
+//            else
                 if(profileDict !=NULL){
                     [cell.textFieldPlaceHolder setEnabled:NO];
-                    cell.textFieldPlaceHolder.text = placeHolderText;
+                   // cell.textFieldPlaceHolder.text = placeHolderText;
+                    cell.firstnameTxt.text =[profileDict valueForKey:@"first_name"];
+                    cell.lastNameTxt.text  =[profileDict valueForKey:@"last_name"];
                 }
-            else
-                cell.textFieldPlaceHolder.text = placeHolderText;
-        }
-        
-        else
-           cell.textFieldPlaceHolder.text = typingText;
+           else
+               cell.firstnameTxt.text = FirstName;
+              cell.lastNameTxt.text   =LastName;
+//        }
+//
+//        else
+//           cell.textFieldPlaceHolder.text = typingText;
     }
     
+    if(indexPath.row ==2)
+    {
+        if (cell == nil)
+        {
+            [[NSBundle mainBundle] loadNibNamed:@"DSProfileTableViewCell" owner:self options:nil];
+            cell = cellTextField;
+           
+            
+        }
+         cellTextField.hidden =YES;
+//        if (IS_IPHONE6 ||IS_IPHONE6_Plus)
+//        {
+//            cell.layoutConstraintViewHeight.constant =49;
+//            
+//        }
+//        cell.labelTitleText.text = titleText;
+//        if(typingText == (id)[NSNull null] || [typingText isEqualToString:@""])//|| [typingText  isEqual: @"NULL"])
+//        {
+//            if(placeHolderText ==(id) [NSNull null])
+//                cell.textFieldPlaceHolder.placeholder = titleText;
+//            else
+//                if(profileDict !=NULL){
+//                    [cell.textFieldPlaceHolder setEnabled:NO];
+//                    cell.textFieldPlaceHolder.text = placeHolderText;
+//                }
+//                else
+//                    cell.textFieldPlaceHolder.text = placeHolderText;
+//        }
+//        
+//        else
+//            cell.textFieldPlaceHolder.text = typingText;
+    }
     if (indexPath.row == 3)
     {
         
@@ -908,29 +1000,30 @@
         
         if( profileDict !=NULL){
             
-            profileGenderValueLabel.text = placeHolderText;
+            profileGenderValueLabel.text =[profileDict valueForKey:@"gender"];
+            
         }
         else{
             [profileGenderView setHidden:YES];
             [profileGenderLabel setHidden:YES];
             [profileGenderValueLabel setHidden:YES];
-            if(placeHolderText == (id)[NSNull null]){
+//            if(placeHolderText == (id)[NSNull null]){
             
             femaleLabel.textColor = [UIColor colorWithRed:(float)161.0/255 green:(float)161.0/255 blue:(float)161.0/255 alpha:1.0f];
             maleLabel.textColor = [UIColor colorWithRed:(float)161.0/255 green:(float)161.0/255 blue:(float)161.0/255 alpha:1.0f];
-            }
-            else{
-                if([placeHolderText isEqualToString:@"Male"])
-                {
-                femaleLabel.textColor = [UIColor colorWithRed:(float)161.0/255 green:(float)161.0/255 blue:(float)161.0/255 alpha:1.0f];
-                maleLabel.textColor = [UIColor redColor];
-                }
-                else if([placeHolderText isEqualToString:@"female"])
-                {
-                maleLabel.textColor = [UIColor colorWithRed:(float)161.0/255 green:(float)161.0/255 blue:(float)161.0/255 alpha:1.0f];
-                femaleLabel.textColor = [UIColor redColor];
-                }
-            }
+            //}
+//            else{
+////                if([placeHolderText isEqualToString:@"Male"])
+////                {
+//                femaleLabel.textColor = [UIColor colorWithRed:(float)161.0/255 green:(float)161.0/255 blue:(float)161.0/255 alpha:1.0f];
+//                maleLabel.textColor = [UIColor redColor];
+//                }
+//                else if([placeHolderText isEqualToString:@"female"])
+//                {
+//                maleLabel.textColor = [UIColor colorWithRed:(float)161.0/255 green:(float)161.0/255 blue:(float)161.0/255 alpha:1.0f];
+//                femaleLabel.textColor = [UIColor redColor];
+//                }
+//            }
         }
         
         
@@ -953,14 +1046,19 @@
             
         }
         
-        
+        if(profileDict != NULL)
+        {
+            cell.textFieldDPPlaceHolder.text =[profileDict valueForKey:@"date_of_birth"];
+        }
+        else
+        {
         if([currentTextfield.text isEqualToString:@""] || currentTextfield.text == nil)
             cell.textFieldDPPlaceHolder.text = placeHolderText;
         else
             cell.textFieldDPPlaceHolder.text = currentTextfield.text;
        
-        
-            cell.labelDPTitleText.text = titleText;
+        }
+           // cell.labelDPTitleText.text = titleText;
             [cell.textFieldDPPlaceHolder setTag:1000];
 
         
@@ -975,6 +1073,7 @@
             
         }
         
+        
         if(profileDict !=NULL){
         
             
@@ -985,17 +1084,17 @@
                         cell.textViewHeaderLabel.hidden = YES;
                     
                     cell.textViewAboutYou.text = textviewText;
-                    cell.labelAboutYou.text =titleText;
+                    //cell.labelAboutYou.text =titleText;
                     strAbout =cell.textViewAboutYou.text;
-                    cell.textViewHeaderLabel.text =placeHolderText;
+                    //cell.textViewHeaderLabel.text =placeHolderText;
                     cell.textViewAboutYou.delegate = self;
                 }
                 else{
                     cell.textViewAboutYou.text = [[profileDict valueForKey:@"about"]mutableCopy];
                     strAbout =cell.textViewAboutYou.text;
                     cell.textViewHeaderLabel.hidden = YES;
-                    cell.textViewHeaderLabel.text =placeHolderText;
-                    cell.labelAboutYou.text =titleText;
+                    //cell.textViewHeaderLabel.text =placeHolderText;
+                    //cell.labelAboutYou.text =titleText;
                     cell.textViewAboutYou.delegate = self;
                 }
                 
@@ -1007,9 +1106,9 @@
                 cell.textViewHeaderLabel.hidden = YES;
                 
                 cell.textViewAboutYou.text = textviewText;
-                cell.labelAboutYou.text =titleText;
+               // cell.labelAboutYou.text =titleText;
                 strAbout =cell.textViewAboutYou.text;
-                cell.textViewHeaderLabel.text =placeHolderText;
+               // cell.textViewHeaderLabel.text =placeHolderText;
                 cell.textViewAboutYou.delegate = self;
         }
         
@@ -1119,40 +1218,47 @@
             
         }
         
-        
-        if(typingText == (id)[NSNull null] || [typingText isEqualToString:@""]  || typingText == nil)//|| [typingText  isEqual: @"NULL"])
+        if(profileDict != NULL)
         {
-            if(placeHolderText ==(id) [NSNull null])
-                cell.emailTextField.text = [self getEmail];
-            else
-                if(profileDict !=NULL){
-                    [cell.emailTextField setEnabled:NO];
-                    cell.emailTextField.text = placeHolderText;
-                }
-                else
+            cell.emailTextField.text = [profileDict valueForKey:@"email"];
+            //cell.passwordTextField.text =[self getPassword];
 
-                cell.emailTextField.text = placeHolderText;
-            
         }
+      else
+      {
+          cell.emailTextField.text = [self getEmail];
+          cell.passwordTextField.text =[self getPassword];
+
+      }
+            //if(placeHolderText ==(id) [NSNull null])
+          //            else
+//                if(profileDict !=NULL){
+//                    [cell.emailTextField setEnabled:NO];
+//                    cell.emailTextField.text = placeHolderText;
+//                }
+//                else
+//
+//                cell.emailTextField.text = placeHolderText;
+     
         
         
-        else if (typingText!=nil)
-        {
-            cell.emailTextField.text=typingText;
-        }
-        if(typingTextPass == (id)[NSNull null] || [typingTextPass isEqualToString:@""]  || typingTextPass == nil)//|| [typingText  isEqual: @"NULL"])
-        {
-            if(placeHolderText ==(id) [NSNull null])
-                cell.passwordTextField.text =[self getPassword];
-            else
-                cell.passwordTextField.text =@"";
-            
-        }
-        else if (typingTextPass != nil)
-        {
-            cell.passwordTextField.text=typingTextPass;
-        }
+//        else if (typingText!=nil)
+//        {
+//            cell.emailTextField.text=typingText;
+//        }
+//        if(typingTextPass == (id)[NSNull null] || [typingTextPass isEqualToString:@""]  || typingTextPass == nil)//|| [typingText  isEqual: @"NULL"])
+//        {
+//            if(placeHolderText ==(id) [NSNull null])
         
+//            else
+//                cell.passwordTextField.text =@"";
+//            
+//        }
+//        else if (typingTextPass != nil)
+//        {
+//            cell.passwordTextField.text=typingTextPass;
+//        }
+    
         if (IS_IPHONE6 ||IS_IPHONE6_Plus){
         cell.layoutConstraintAccLabelYPos.constant =42;
         cell.layoutConstraintEmailPassViewHeight.constant =50;
@@ -1298,17 +1404,22 @@
     
     if([sender tag] == 2004){
         selOptionVal = @"Male";
+        maleLabel.textColor =  [UIColor redColor];    //[UIColor colorWithRed:(161.0/255.0f) green:(161.0/255.0f) blue:(161.0/255.0f) alpha:1.0f];
     }
     
     if([sender tag] == 2005){
        selOptionVal = @"female";
+        femaleLabel.textColor = [UIColor redColor];   //[UIColor colorWithRed:(161.0/255.0f) green:(161.0/255.0f) blue:(161.0/255.0f) alpha:1.0f];
     }
     
-                if(selOptionVal != nil || ![selOptionVal isEqualToString:@""])
-                    [[[placeHolderArray objectAtIndex:indexPath.section] objectAtIndex:indexPath.row] setObject:selOptionVal forKey:@"placeHolder"];
-    [_tableviewProfile beginUpdates];
-    [_tableviewProfile reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
-    [_tableviewProfile endUpdates];
+    
+    
+    
+//                if(selOptionVal != nil || ![selOptionVal isEqualToString:@""])
+//                    [[[placeHolderArray objectAtIndex:indexPath.section] objectAtIndex:indexPath.row] setObject:selOptionVal forKey:@"placeHolder"];
+//    [_tableviewProfile beginUpdates];
+//    [_tableviewProfile reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
+//    [_tableviewProfile endUpdates];
     selectGender =selOptionVal;
     
     //[_tableviewProfile reloadData];
@@ -1337,6 +1448,9 @@
     
     textviewText = textView.text;
 }
+
+
+
 
 
 #pragma mark - Camera Action
@@ -1379,7 +1493,7 @@
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
 {
     UIImage *image = nil;
-    
+    [topViewCell setHidden:NO];
     image = [info valueForKey:UIImagePickerControllerEditedImage];
     
     if(CurrentImage==0)
@@ -1548,8 +1662,8 @@
     strType      = (selectEmail== YES)?@"1":@"2";
     strProfileID = (FBprofileID!=nil)?FBprofileID:@"";
     strGender    = (selectGender!=nil)?selectGender:@"";
-    FirstName    = (strFirstName!=nil)? strFirstName:@"";
-    LastName     = (strLastName!=nil)?strLastName:@"";
+    //FirstName    = (strFirstName!=nil)? strFirstName:@"";
+   // LastName     = (strLastName!=nil)?strLastName:@"";
 
     strDOB       = (currentTextfield.text !=nil)?currentTextfield.text :@"";
     [self dateConverter];
@@ -1557,14 +1671,22 @@
     NSLog(@"isNotification_vibration:%@",isNotification_vibration);
     
     
-    if([FirstName isEqual:[NSNull null]] && [FirstName isEqual:@""])
+    if(FirstName == nil)
     {
 
-        [self showAltermessage:LASTNAME_REQUIRED];
+        [self showAltermessage:FIRSTNAME_REQUIRED];
         [COMMON removeLoading];
         return;
     }
-    if ( [dateChange isEqual:[NSNull null]] && [dateChange isEqual:@""] )
+   else if(LastName ==nil)
+    {
+        [self showAltermessage:LASTNAME_REQUIRED];
+        [COMMON removeLoading];
+        return;
+        
+    }
+    
+   else if ( [dateChange isEqualToString:@""] || dateChange == NULL )
     {
 
          [self showAltermessage:DOB_REQUIRED];
@@ -1572,7 +1694,7 @@
         return;
     }
     
-    if ( [strGender isEqual:[NSNull null]] && [strGender isEqual:@""])
+   else if ( [strGender isEqualToString:@""] || strGender == NULL)
     {
         [self showAltermessage:GENDER_REQUIRED];
 
@@ -1580,49 +1702,54 @@
         return;
     }
     
-    if ( [emailAddressToRegister isEqual:[NSNull null]] && [emailAddressToRegister isEqual:@""])
+   else if ( [emailAddressToRegister isEqualToString:@""] || emailAddressToRegister == nil)
     {
         [self showAltermessage:EMAIL_REQUIRED];
         [COMMON removeLoading];
         return;
     }
-    if ( [emailPasswordToRegister isEqual:[NSNull null]] && [emailPasswordToRegister isEqual:@""])
+   else if ( [emailPasswordToRegister isEqualToString:@""] || emailPasswordToRegister == nil)
     {
 
         [self showAltermessage:PASSWORD_REQUIRED];
         [COMMON removeLoading];
         return;
     }
-
+  else
+  {
+      [COMMON removeLoading];
+      [self loadRegister];
+  }
     
-    if(![FirstName isEqual:[NSNull null]]&& ![FirstName isEqualToString:@""]&&![LastName isEqual:[NSNull null]]&& ![LastName isEqualToString:@""] &&![dateChange isEqual:[NSNull null]]&&![strGender isEqual:[NSNull null]]&& ![strGender isEqualToString:@""] &&![emailAddressToRegister isEqual:[NSNull null]] &&![emailAddressToRegister isEqualToString:@""] &&![emailPasswordToRegister isEqual:[NSNull null]] && ![emailPasswordToRegister isEqualToString:@""]){
-//            if(![NSString validateEmail:emailAddressToRegister]){
-//                if(IS_GREATER_IOS8){
-//                [self presentViewController:[ DSAppCommon alertWithTitle:@"Title" withMessage:INVALID_EMAIL preferredStyle:UIAlertControllerStyleAlert] animated:YES completion:NULL];
-//                }
-//                else
-//                {
-//                    [DSAppCommon showSimpleAlertWithMessage:INVALID_EMAIL];
-//                }
-//                [COMMON removeLoading];
-//                
-//                return;
-//            }
-           if([dateChange isEqual:@"DD-MM-YYYY"]){
-               [self showAltermessage:@"ENTER DATE"];
-               [COMMON removeLoading];
-               return;
-           }
-        [self loadRegister];
-        
-
-    }
     
-    else{
-        [self showAltermessage:FILL_ALL_DETAILS];
-        [COMMON removeLoading];
-        return;
-    }
+//    if(![FirstName isEqual:[NSNull null]]&& ![FirstName isEqualToString:@""]&&![LastName isEqual:[NSNull null]]&& ![LastName isEqualToString:@""] &&![dateChange isEqual:[NSNull null]]&&![strGender isEqual:[NSNull null]]&& ![strGender isEqualToString:@""] &&![emailAddressToRegister isEqual:[NSNull null]] &&![emailAddressToRegister isEqualToString:@""] &&![emailPasswordToRegister isEqual:[NSNull null]] && ![emailPasswordToRegister isEqualToString:@""]){
+////            if(![NSString validateEmail:emailAddressToRegister]){
+////                if(IS_GREATER_IOS8){
+////                [self presentViewController:[ DSAppCommon alertWithTitle:@"Title" withMessage:INVALID_EMAIL preferredStyle:UIAlertControllerStyleAlert] animated:YES completion:NULL];
+////                }
+////                else
+////                {
+////                    [DSAppCommon showSimpleAlertWithMessage:INVALID_EMAIL];
+////                }
+////                [COMMON removeLoading];
+////                
+////                return;
+////            }
+//           if([dateChange isEqual:@"DD-MM-YYYY"]){
+//               [self showAltermessage:@"ENTER DATE"];
+//               [COMMON removeLoading];
+//               return;
+//           }
+//        [self loadRegister];
+//        
+//
+//    }
+//    
+//    else{
+//        [self showAltermessage:FILL_ALL_DETAILS];
+//        [COMMON removeLoading];
+//        return;
+//    }
 
 }
 

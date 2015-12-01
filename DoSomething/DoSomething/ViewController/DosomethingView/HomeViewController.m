@@ -123,8 +123,6 @@
     [customNavigation.buttonBack setHidden:YES];
     [customNavigation.saveBtn setHidden:YES];
     [self.navigationController.navigationBar addSubview:customNavigation.view];
-    //    [customNavigation.saveBtn addTarget:self action:@selector(saveAction) forControlEvents:UIControlEventTouchUpInside];
-    //    [customNavigation.buttonBack addTarget:self action:@selector(backAction) forControlEvents:UIControlEventTouchUpInside];
     
     selectedArray = [[NSMutableArray alloc]init];
     selectedItemsArray = [[NSMutableArray alloc]init];
@@ -400,51 +398,37 @@
 }
 
 - (IBAction)alertPressCancel:(id)sender {
-    [UIView animateWithDuration:1.0 animations:^{
-        
-        objCustomAlterview.alertBgView.alpha = 0;
-        
-        objCustomAlterview.alertMainBgView.alpha = 0;
-              
-    } completion:^(BOOL b){
-        
+    
 
        objCustomAlterview. alertBgView.hidden = YES;
         
         objCustomAlterview.alertMainBgView.hidden = YES;
         objCustomAlterview.view .hidden  = YES;
-    }];
+   
 }
 
 - (IBAction)alertPressYes:(id)sender {
     
-    [UIView animateWithDuration:1.0 animations:^{
-        
-        objCustomAlterview.alertBgView.alpha = 0;
-        
-        objCustomAlterview.alertMainBgView.alpha = 0;
-           }
-        completion:^(BOOL b){
-        
+    
         objCustomAlterview.alertBgView.hidden = YES;
         
         objCustomAlterview.alertMainBgView.hidden = YES;
             [objCustomAlterview.view setHidden:YES];
         [self loadupdateDosomethingWebService:selectedItemsArray :@"Yes"];
       
-    }];
+  
     
 }
 
 - (IBAction)alertPressNo:(id)sender {
-    [UIView animateWithDuration:1.0 animations:^{
-        
-        objCustomAlterview.alertBgView.alpha = 0;
-        
-        objCustomAlterview.alertMainBgView.alpha = 0;
-        
-    } completion:^(BOOL b){
-        
+//    [UIView animateWithDuration:1.0 animations:^{
+//        
+//        objCustomAlterview.alertBgView.alpha = 0;
+//        
+//        objCustomAlterview.alertMainBgView.alpha = 0;
+//        
+//    } completion:^(BOOL b){
+    
         
         objCustomAlterview.alertBgView.hidden = YES;
         
@@ -452,7 +436,7 @@
         [objCustomAlterview.view setHidden:YES];
         [self loadupdateDosomethingWebService:selectedArray :@"No"];
      
-    }];
+    //}];
    
     
 }
