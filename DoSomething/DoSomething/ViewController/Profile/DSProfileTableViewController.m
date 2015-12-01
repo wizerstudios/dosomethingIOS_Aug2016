@@ -20,6 +20,8 @@
 #import "NSString+validations.h"
 #import "UIImageView+AFNetworking.h"
 
+#import "CustomAlterview.h"
+
 @interface DSProfileTableViewController ()<CLLocationManagerDelegate,UIAlertViewDelegate,UIScrollViewDelegate>
 {
     DSWebservice            * objWebService;
@@ -81,6 +83,7 @@
 
     CGSize dataSize;
     BOOL isLogin;
+    CustomAlterview *objCustomAlterview;
     
 
 }
@@ -103,11 +106,15 @@
     NSString * strsessionID =[profileDict valueForKey:@"SessionId"];
     loginUserSessionID = strsessionID;
     if(profileDict == NULL)
+    {
         [self initializeArray];
+    
+    }
     else{
         
-        [self initializeArrayRegister];
-        [_tableviewProfile reloadData];
+        [self initializeArrayProfile];
+        
+    //self.tableViewHeightConstraint.constant=568;
     }
         NSLog(@"DICT%@",profileDict);
     
@@ -115,6 +122,8 @@
     isNotification_message = @"Yes";
     isNotification_vibration = @"Yes";
     isNotification_sound = @"Yes";
+    
+    
     if(profileDict != NULL){
         if([[profileDict valueForKey:@"image1"] isEqual:@""]&&[[profileDict valueForKey:@"image2"] isEqual:@""] && [[profileDict valueForKey:@"image3"] isEqual:@""]){
             profileDataArray = [NSMutableArray new];
@@ -159,14 +168,35 @@
 
     }
     else{
-        profileDataArray = [NSMutableArray new];
+        if(userDetailsDict.count > 0){
+            
+            NSString  *ImageURL1 ,*ImageURL2 ,*ImageURL3 ;
+            NSData *imageData1, *imageData2, *imageData3;
+            if([[userDetailsDict valueForKey:@"profileImage"] isEqual:@""]){
+                imageData1 = [userDetailsDict valueForKey:@"profileImage"];
+            }
+            else{
+                ImageURL1 = [userDetailsDict valueForKey:@"profileImage"];
+                imageData1 = [NSData dataWithContentsOfURL:[NSURL URLWithString:ImageURL1]];
+            }
+            ImageURL2 = @"";
+            imageData2 = [ImageURL2 dataUsingEncoding:NSUTF8StringEncoding];
+            ImageURL3 = @"";
+            imageData3 = [ImageURL3 dataUsingEncoding:NSUTF8StringEncoding];
+                        
+            profileDataArray = [[NSMutableArray alloc]initWithObjects:imageData1,imageData2,imageData3, nil];
+
+        }
+        else{
+           profileDataArray = [NSMutableArray new];
 
     
-    for(int i = 0; i < 3; i++)
-    {
-        NSData *data = [NSData new];
-        [profileDataArray addObject:data];
-    }
+            for(int i = 0; i < 3; i++)
+            {
+                NSData *data = [NSData new];
+                [profileDataArray addObject:data];
+            }
+        }
     }
 
 }
@@ -243,7 +273,7 @@
     [_tableviewProfile reloadData];
     
     infoArray=[[NSMutableArray alloc]initWithObjects:@"profile_noimg",@"profile_noimg",@"profile_noimg", nil];
-    
+    [self CustomAlterview];
 
 }
 
@@ -558,7 +588,7 @@
     //[self.tableviewProfile reloadData];
    
 }
--(void)initializeArrayRegister{
+-(void)initializeArrayProfile{
     
     placeHolderArray = [[NSMutableArray alloc] initWithCapacity: 1];
     
@@ -579,6 +609,58 @@
     
     NSLog(@"PlaceHolder %@",placeHolderArray);
     //[self.tableviewProfile reloadData];
+    
+}
+
+#pragma mark - CustomalterviewMethod
+
+-(void)CustomAlterview
+{
+    objCustomAlterview = [[CustomAlterview alloc] initWithNibName:@"CustomAlterview" bundle:nil];
+    objCustomAlterview.view.frame = CGRectMake(self.view.frame.origin.x,self.view.frame.origin.y, CGRectGetWidth(self.view.frame),self.view.frame.size.height);
+    [objCustomAlterview.alertBgView setHidden:YES];
+    [objCustomAlterview.alertMainBgView setHidden:YES];
+    [objCustomAlterview.view setHidden:YES];
+    [objCustomAlterview.btnYes setHidden:YES];
+    [objCustomAlterview.btnNo setHidden:YES];
+    [objCustomAlterview.alertCancelButton setHidden:NO];
+    [objCustomAlterview.alertCancelButton addTarget:self action:@selector(alertPressCancel:) forControlEvents:UIControlEventTouchUpInside];
+    
+    [self.tableviewProfile addSubview:objCustomAlterview.view];
+}
+
+- (IBAction)alertPressCancel:(id)sender {
+    [UIView animateWithDuration:1.0 animations:^{
+        
+        objCustomAlterview.alertBgView.alpha = 0;
+        
+        objCustomAlterview.alertMainBgView.alpha = 0;
+        
+    } completion:^(BOOL b){
+        
+        
+        objCustomAlterview. alertBgView.hidden = YES;
+        
+        objCustomAlterview.alertMainBgView.hidden = YES;
+        objCustomAlterview.view .hidden  = YES;
+    }];
+}
+
+-(void)showAltermessage:(NSString*)msg
+{
+    objCustomAlterview.view.hidden =NO;
+    //objCustomAlterview.view.alpha=0.0;
+    objCustomAlterview.alertBgView.hidden = NO;
+    objCustomAlterview.alertMainBgView.hidden = NO;
+    objCustomAlterview.alertCancelButton.hidden = NO;
+    objCustomAlterview.btnYes.hidden = YES;
+    objCustomAlterview.btnNo.hidden = YES;
+    
+    objCustomAlterview.alertMsgLabel.text = msg;
+    objCustomAlterview.alertMsgLabel.textAlignment = NSTextAlignmentCenter;
+    objCustomAlterview.alertMsgLabel.lineBreakMode = NSLineBreakByWordWrapping;
+    objCustomAlterview.alertMsgLabel.numberOfLines = 2;
+    [objCustomAlterview.alertMsgLabel setTextColor:[UIColor colorWithRed:(255/255.0f) green:(255/255.0f) blue:(255/255.0f) alpha:1.0f]];
     
 }
 
@@ -697,20 +779,18 @@
     NSString *titleText;
     NSString *placeHolderText,*placeHolderTextPass;
    NSString *typingText,*typingTextPass;
-    NSString *newMessageImage,*soundImage,*vibrationImage;
+   
     
 
         typingText       = [[[placeHolderArray valueForKey:@"TypingText" ]objectAtIndex:indexPath.section]objectAtIndex:indexPath.row];
         typingTextPass   = [[[placeHolderArray valueForKey:@"TypingTextPass" ]objectAtIndex:indexPath.section]objectAtIndex:indexPath.row];
-       // typingTextFemale = [[[placeHolderArray valueForKey:@"TypingTextFemale" ]objectAtIndex:indexPath.section]objectAtIndex:indexPath.row];
+    
 
         placeHolderText     =  [[[placeHolderArray valueForKey:@"placeHolder" ]objectAtIndex:indexPath.section]objectAtIndex:indexPath.row];
         placeHolderTextPass =  [[[placeHolderArray valueForKey:@"placeHolderPass" ]objectAtIndex:indexPath.section]objectAtIndex:indexPath.row];
-       // placeHolderFemale =  [[[placeHolderArray valueForKey:@"placeHolderFemale" ]objectAtIndex:indexPath.section]objectAtIndex:indexPath.row];
     
-    newMessageImage =  [[[placeHolderArray valueForKey:@"NewMessageImage" ]objectAtIndex:indexPath.section]objectAtIndex:indexPath.row];
-    soundImage =  [[[placeHolderArray valueForKey:@"SoundImage" ]objectAtIndex:indexPath.section]objectAtIndex:indexPath.row];
-    vibrationImage =  [[[placeHolderArray valueForKey:@"VibrationImage" ]objectAtIndex:indexPath.section]objectAtIndex:indexPath.row];
+    
+   
 
 
     
@@ -729,14 +809,8 @@
             cell.layoutConstraintProfileImageHeight.constant =159;
             cell.layoutConstraintProfileImageWidth.constant =161;
         }
-        if( profileDict == NULL){
-        
         [self profileScroll];
-        }
-        if( profileDict != NULL){
-            
-            [self profileScroll];
-        }
+    
 
         
         if(!profileData1)
@@ -902,16 +976,7 @@
         }
         
         if(profileDict !=NULL){
-            
-//            if(isLogin ==NO){
-//                cell.textViewHeaderLabel.hidden = YES;
-//                cell.textViewAboutYou.text = textviewText;
-//                cell.labelAboutYou.text =titleText;
-//                strAbout =cell.textViewAboutYou.text;
-//                cell.textViewHeaderLabel.text =placeHolderText;
-//                cell.textViewAboutYou.delegate = self;
-//                
-//            }
+        
             
                 if([[profileDict valueForKey:@"about"] isEqual:@""]){
                     if(textviewText == nil)
@@ -1060,9 +1125,16 @@
             if(placeHolderText ==(id) [NSNull null])
                 cell.emailTextField.text = [self getEmail];
             else
+                if(profileDict !=NULL){
+                    [cell.emailTextField setEnabled:NO];
+                    cell.emailTextField.text = placeHolderText;
+                }
+                else
+
                 cell.emailTextField.text = placeHolderText;
             
         }
+        
         
         else if (typingText!=nil)
         {
@@ -1080,25 +1152,6 @@
         {
             cell.passwordTextField.text=typingTextPass;
         }
-//        if([typingText isEqualToString:@""] || typingText == nil)
-//        {
-//           cell.emailTextField.text = placeHolderText;
-//        }
-//          else
-//          {
-//            cell.emailTextField.text = typingText;
-//
-//          }
-//        
-//        if([typingTextPass isEqualToString:@""] || typingTextPass == nil)
-//        {
-//            cell.passwordTextField.text =@"";
-//        }
-//        else
-//        {
-//            cell.passwordTextField.text = typingTextPass;
-//            
-//        }
         
         if (IS_IPHONE6 ||IS_IPHONE6_Plus){
         cell.layoutConstraintAccLabelYPos.constant =42;
@@ -1119,43 +1172,16 @@
             cell.layoutConstraintNotificationViewHeight.constant=51;
             cell.layoutConstraintRadioButtonYPos.constant = 18;
         }
-        cell.messSwitchBtn.userInteractionEnabled = YES;
-        cell.vibrationSwitchBtn.userInteractionEnabled = YES;
-        cell.SoundSwitchBtn.userInteractionEnabled = YES;
         
-        [cell.messSwitchBtn setTag:2000];
-        [cell.SoundSwitchBtn setTag:2001];
-        [cell.vibrationSwitchBtn setTag:2002];
+        cell.messSwitchBtn.transform = CGAffineTransformMakeScale(0.50, 0.50);
+        cell.SoundSwitchBtn.transform = CGAffineTransformMakeScale(0.50, 0.50);
+        cell.vibrationSwitchBtn.transform = CGAffineTransformMakeScale(0.50, 0.50);
         
+
         
-        if([newMessageImage isEqualToString:@""] || newMessageImage == nil)
-        {
-            [cell.imageViewNewMessSwitch setImage:[UIImage imageNamed:placeHolderText]];
-        }
-        else
-        {
-            [cell.imageViewNewMessSwitch setImage:[UIImage imageNamed:newMessageImage]];
-        }
-        if([vibrationImage isEqualToString:@""] || vibrationImage == nil)
-        {
-            [cell.imageViewVibrationSwitch setImage:[UIImage imageNamed:placeHolderText]];
-        }
-        else
-        {
-            [cell.imageViewVibrationSwitch setImage:[UIImage imageNamed:vibrationImage]];
-        }
-        if([soundImage isEqualToString:@""] || soundImage == nil)
-        {
-            [cell.imageViewSoundSwitch setImage:[UIImage imageNamed:placeHolderText]];
-        }
-        else
-        {
-            [cell.imageViewSoundSwitch setImage:[UIImage imageNamed:soundImage]];
-        }
-        
-        [cell.vibrationSwitchBtn addTarget:self action:@selector(newMessSwitchBtnAction:) forControlEvents:UIControlEventTouchUpInside];
-        [cell.SoundSwitchBtn addTarget:self action:@selector(newMessSwitchBtnAction:) forControlEvents:UIControlEventTouchUpInside];
-        [cell.messSwitchBtn addTarget:self action:@selector(newMessSwitchBtnAction:) forControlEvents:UIControlEventTouchUpInside];
+        [cell.vibrationSwitchBtn addTarget:self action:@selector(vibrationSwithAction:) forControlEvents:UIControlEventTouchUpInside];
+        [cell.SoundSwitchBtn addTarget:self action:@selector(soundSwithAction:) forControlEvents:UIControlEventTouchUpInside];
+        [cell.messSwitchBtn addTarget:self action:@selector(messSwithAction:) forControlEvents:UIControlEventTouchUpInside];
         
     }
 
@@ -1190,181 +1216,71 @@
     }
 }
 
--(void)newMessSwitchBtnAction:(UIButton *)sender
+- (IBAction)messSwithAction:(UISwitch *)sender
 {
-    
-    id button = sender;
-    while (![button isKindOfClass:[UITableViewCell class]]) {
-        button = [button superview];
+    sender.layer.cornerRadius = 16.0;
+    if (sender.on) {
+       
+        [sender setThumbTintColor:[UIColor greenColor]];
+        
+        [sender setBackgroundColor:[UIColor whiteColor]];
+        [sender setOnTintColor:[UIColor lightGrayColor]];
+        isNotification_message =@"Yes";
+        
+    }else{
+       
+        
+        [sender setTintColor:[UIColor grayColor]];
+        [sender setBackgroundColor:[UIColor lightGrayColor]];
+        [sender setThumbTintColor:[UIColor redColor]];
+        isNotification_message =@"No";
     }
-    NSIndexPath *indexPath;
-    
-    //DSProfileTableViewCell *cell;
-    
-    indexPath = [_tableviewProfile indexPathForCell:(UITableViewCell *)button];
-    cell = (DSProfileTableViewCell *) [_tableviewProfile cellForRowAtIndexPath:[NSIndexPath indexPathForRow:indexPath.row inSection:0]];
-    
-    
-    NSArray *titleArray1        = [[NSArray alloc]initWithObjects:@"switch_on",@"switch_off", nil];
-  
-    NSString *selOptionVal;
-    
-    if([sender tag] == 2000){
-        NSString *place1 =[[[placeHolderArray objectAtIndex:indexPath.section] objectAtIndex:indexPath.row] valueForKey:@"NewMessageImage"];
-        
-        
-        if([place1 isEqualToString:@""] || place1 == nil)
-        {
-            
-            NSString *NewMessageImage =[[[placeHolderArray objectAtIndex:indexPath.section] objectAtIndex:indexPath.row] valueForKey:@"placeHolder"];
-            
-            if (NewMessageImage == [titleArray1 objectAtIndex:0]) {
-                selOptionVal = [titleArray1 objectAtIndex:1];
-                isNotification_message =@"No";
-                
-            }
-            if (NewMessageImage == [titleArray1 objectAtIndex:1]) {
-                selOptionVal = [titleArray1 objectAtIndex:0];
-                isNotification_message =@"Yes";
-            }
-            
-            
-            
-            if(selOptionVal != nil || ![selOptionVal isEqualToString:@""])
-                [[[placeHolderArray objectAtIndex:indexPath.section] objectAtIndex:indexPath.row] setObject:selOptionVal forKey:@"NewMessageImage"];
-            
-        }
-        
-        
-        else
-            
-        {
-            
-            NSString *NewMessageImage =[[[placeHolderArray objectAtIndex:indexPath.section] objectAtIndex:indexPath.row] valueForKey:@"NewMessageImage"];
-            
-            
-            if (NewMessageImage == [titleArray1 objectAtIndex:0]) {
-                selOptionVal = [titleArray1 objectAtIndex:1];
-               isNotification_message =@"No";
-            }
-            if (NewMessageImage == [titleArray1 objectAtIndex:1]) {
-                selOptionVal = [titleArray1 objectAtIndex:0];
-                //isNotification_message =[notificationArray objectAtIndex:0];
-                isNotification_message = @"YES";
-            }
-            if(selOptionVal != nil || ![selOptionVal isEqualToString:@""])
-                [[[placeHolderArray objectAtIndex:indexPath.section] objectAtIndex:indexPath.row] setObject:selOptionVal forKey:@"NewMessageImage"];
-            
-            
-        }
-    }
-    
-    
-    if([sender tag] == 2001){
-        
-        NSString *place =[[[placeHolderArray objectAtIndex:indexPath.section] objectAtIndex:indexPath.row] valueForKey:@"SoundImage"];
-        
-        
-        if([place isEqualToString:@""] || place == nil)
-        {
-            
-            NSString *SoundImage =[[[placeHolderArray objectAtIndex:indexPath.section] objectAtIndex:indexPath.row] valueForKey:@"placeHolder"];
-            
-            
-            
-            
-            if (SoundImage == [titleArray1 objectAtIndex:0]) {
-                selOptionVal = [titleArray1 objectAtIndex:1];
-                isNotification_sound =@"No";
-            }
-            if (SoundImage == [titleArray1 objectAtIndex:1]) {
-                selOptionVal = [titleArray1 objectAtIndex:0];
-               isNotification_sound = @"Yes";
-            }
-            
-            
-            if(selOptionVal != nil || ![selOptionVal isEqualToString:@""])
-                [[[placeHolderArray objectAtIndex:indexPath.section] objectAtIndex:indexPath.row] setObject:selOptionVal forKey:@"SoundImage"];
-        }
-        
-        
-        else
-            
-        {
-            
-            NSString *SoundImage =[[[placeHolderArray objectAtIndex:indexPath.section] objectAtIndex:indexPath.row] valueForKey:@"SoundImage"];
-            
-            
-            if (SoundImage == [titleArray1 objectAtIndex:0]) {
-                selOptionVal = [titleArray1 objectAtIndex:1];
-                isNotification_sound = @"No";
-            }
-            if (SoundImage == [titleArray1 objectAtIndex:1]) {
-                selOptionVal = [titleArray1 objectAtIndex:0];
-                isNotification_sound = @"Yes";
-            }
-            if(selOptionVal != nil || ![selOptionVal isEqualToString:@""])
-                [[[placeHolderArray objectAtIndex:indexPath.section] objectAtIndex:indexPath.row] setObject:selOptionVal forKey:@"SoundImage"];
-            
-            
-        }
-        
-        
-    }
-    
-    
-    if([sender tag] == 2002){
-        
-        NSString *place =[[[placeHolderArray objectAtIndex:indexPath.section] objectAtIndex:indexPath.row] valueForKey:@"VibrationImage"];
-        
-        
-        if([place isEqualToString:@""] || place == nil)
-        {
-            
-            NSString *VibrationImage =[[[placeHolderArray objectAtIndex:indexPath.section] objectAtIndex:indexPath.row] valueForKey:@"placeHolder"];
-            
-            if (VibrationImage == [titleArray1 objectAtIndex:0]) {
-                selOptionVal = [titleArray1 objectAtIndex:1];
-               isNotification_vibration = @"No";
-            }
-            if (VibrationImage == [titleArray1 objectAtIndex:1]) {
-                selOptionVal = [titleArray1 objectAtIndex:0];
-                isNotification_vibration = @"Yes";
-            }
-            
-            
-            if(selOptionVal != nil || ![selOptionVal isEqualToString:@""])
-                [[[placeHolderArray objectAtIndex:indexPath.section] objectAtIndex:indexPath.row] setObject:selOptionVal forKey:@"VibrationImage"];
-        }
-        
-        
-        else
-            
-        {
-            
-            NSString *VibrationImage =[[[placeHolderArray objectAtIndex:indexPath.section] objectAtIndex:indexPath.row] valueForKey:@"VibrationImage"];
-            
-            
-            if (VibrationImage == [titleArray1 objectAtIndex:0]) {
-                selOptionVal = [titleArray1 objectAtIndex:1];
-                isNotification_vibration = @"No";
-            }
-            if (VibrationImage == [titleArray1 objectAtIndex:1]) {
-                selOptionVal = [titleArray1 objectAtIndex:0];
-                isNotification_vibration = @"Yes";
-            }
-            if(selOptionVal != nil || ![selOptionVal isEqualToString:@""])
-                [[[placeHolderArray objectAtIndex:indexPath.section] objectAtIndex:indexPath.row] setObject:selOptionVal forKey:@"VibrationImage"];
-            
-            
-        }
-        
-        
-    }
-    
-    NSLog(@"placeHolderArray %@",placeHolderArray);
-    [_tableviewProfile reloadData];
 }
+
+- (IBAction)soundSwithAction:(UISwitch *)sender
+{
+    sender.layer.cornerRadius = 16.0;
+    if (sender.on) {
+       
+        [sender setThumbTintColor:[UIColor greenColor]];
+        
+        [sender setBackgroundColor:[UIColor whiteColor]];
+        [sender setOnTintColor:[UIColor lightGrayColor]];
+        isNotification_message =@"Yes";
+        
+    }else{
+       
+        
+        [sender setTintColor:[UIColor grayColor]];
+        [sender setBackgroundColor:[UIColor lightGrayColor]];
+        [sender setThumbTintColor:[UIColor redColor]];
+        isNotification_message =@"No";
+        
+    }
+}
+
+- (IBAction)vibrationSwithAction:(UISwitch *)sender
+{
+    sender.layer.cornerRadius = 16.0;
+    if (sender.on) {
+        
+        [sender setThumbTintColor:[UIColor greenColor]];
+        
+        [sender setBackgroundColor:[UIColor whiteColor]];
+        [sender setOnTintColor:[UIColor lightGrayColor]];
+        isNotification_message =@"Yes";
+        
+    }else{
+       
+        
+        [sender setTintColor:[UIColor grayColor]];
+        [sender setBackgroundColor:[UIColor lightGrayColor]];
+        [sender setThumbTintColor:[UIColor redColor]];
+        isNotification_message =@"No";
+    }
+}
+
+
 
 -(void)buttonAction:(UIButton *)sender
 {
@@ -1478,9 +1394,7 @@
     
     [imagepickerController dismissViewControllerAnimated:YES completion:nil];
     
-//    NSLog(@"profileDataArray%@",profileDataArray);
-//    NSLog(@"profileDataArray0%@",[profileDataArray objectAtIndex:0]);
-//    NSLog(@"profileData%@",profileData);
+
 
 }
 
@@ -1540,6 +1454,7 @@
                       first_name:FirstName
                        last_name:LastName
                              dob:dateChange
+                        password:emailPasswordToRegister
                    profileImage1:profileImage1
                    profileImage2:profileImage2
                    profileImage3:profileImage3
@@ -1621,6 +1536,10 @@
     
     [COMMON LoadIcon:self.view];
     NSArray *postPerArray;
+    if(userDetailsDict.count >0){
+    postPerArray = [[placeHolderArray objectAtIndex:0]valueForKey:@"placeHolder"];
+    }
+    else
     postPerArray = [[placeHolderArray objectAtIndex:0]valueForKey:@"TypingText"];
     NSLog(@"hobby:%@",hobbiesNameArray);
     
@@ -1640,66 +1559,37 @@
     
     if([FirstName isEqual:[NSNull null]] && [FirstName isEqual:@""])
     {
-        if(IS_GREATER_IOS8)
-        {
-        [self presentViewController:[ DSAppCommon alertWithTitle:@"Title" withMessage:LASTNAME_REQUIRED preferredStyle:UIAlertControllerStyleAlert] animated:YES completion:NULL];
-        }
-        else
-        {
-            [DSAppCommon showSimpleAlertWithMessage:LASTNAME_REQUIRED];
-        }
+
+        [self showAltermessage:LASTNAME_REQUIRED];
         [COMMON removeLoading];
         return;
     }
     if ( [dateChange isEqual:[NSNull null]] && [dateChange isEqual:@""] )
     {
-        if(IS_GREATER_IOS8)
-        {
-        [self presentViewController:[ DSAppCommon alertWithTitle:@"Title" withMessage:DOB_REQUIRED preferredStyle:UIAlertControllerStyleAlert] animated:YES completion:NULL];
-        }
-        else
-        {
-            [DSAppCommon showSimpleAlertWithMessage:DOB_REQUIRED];
-        }
+
+         [self showAltermessage:DOB_REQUIRED];
         [COMMON removeLoading];
         return;
     }
     
     if ( [strGender isEqual:[NSNull null]] && [strGender isEqual:@""])
     {
-        if(IS_GREATER_IOS8)
-        {
-        [self presentViewController:[ DSAppCommon alertWithTitle:@"Title" withMessage:GENDER_REQUIRED preferredStyle:UIAlertControllerStyleAlert] animated:YES completion:NULL];
-        }
-        else
-        {
-            [DSAppCommon showSimpleAlertWithMessage:GENDER_REQUIRED];
-        }
+        [self showAltermessage:GENDER_REQUIRED];
+
         [COMMON removeLoading];
         return;
     }
     
     if ( [emailAddressToRegister isEqual:[NSNull null]] && [emailAddressToRegister isEqual:@""])
     {
-        if(IS_GREATER_IOS8)
-        {
-        [self presentViewController:[ DSAppCommon alertWithTitle:@"Title" withMessage:EMAIL_REQUIRED preferredStyle:UIAlertControllerStyleAlert] animated:YES completion:NULL];
-        }
-        else
-        {
-            [DSAppCommon showSimpleAlertWithMessage:EMAIL_REQUIRED];
-        }
+        [self showAltermessage:EMAIL_REQUIRED];
         [COMMON removeLoading];
         return;
     }
     if ( [emailPasswordToRegister isEqual:[NSNull null]] && [emailPasswordToRegister isEqual:@""])
     {
-        if(IS_GREATER_IOS8){
-        [self presentViewController:[ DSAppCommon alertWithTitle:@"Title" withMessage:PASSWORD_REQUIRED preferredStyle:UIAlertControllerStyleAlert] animated:YES completion:NULL];
-        }
-        else{
-            [DSAppCommon showSimpleAlertWithMessage:PASSWORD_REQUIRED];
-        }
+
+        [self showAltermessage:PASSWORD_REQUIRED];
         [COMMON removeLoading];
         return;
     }
@@ -1719,15 +1609,9 @@
 //                return;
 //            }
            if([dateChange isEqual:@"DD-MM-YYYY"]){
-               if(IS_GREATER_IOS8)
-               {
-            [self presentViewController:[ DSAppCommon alertWithTitle:@"Title" withMessage:@"ENTER DATE" preferredStyle:UIAlertControllerStyleAlert] animated:YES completion:NULL];
-               }
-               else{
-                   [DSAppCommon showSimpleAlertWithMessage:@"ENTER DATE"];
-               }
-            [COMMON removeLoading];
-            return;
+               [self showAltermessage:@"ENTER DATE"];
+               [COMMON removeLoading];
+               return;
            }
         [self loadRegister];
         
@@ -1735,14 +1619,7 @@
     }
     
     else{
-        if(IS_GREATER_IOS8)
-        {
-        [self presentViewController:[ DSAppCommon alertWithTitle:@"Title" withMessage:FILL_ALL_DETAILS preferredStyle:UIAlertControllerStyleAlert] animated:YES completion:NULL];
-        }
-        else
-        {
-            [DSAppCommon showSimpleAlertWithMessage:FILL_ALL_DETAILS];
-        }
+        [self showAltermessage:FILL_ALL_DETAILS];
         [COMMON removeLoading];
         return;
     }

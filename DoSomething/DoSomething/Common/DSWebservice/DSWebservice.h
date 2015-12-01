@@ -102,6 +102,7 @@ notification_vibration:(NSString*)isnotification_vibration
            first_name:(NSString *)first_name
             last_name:(NSString *)last_name
                   dob:(NSString *)dob
+             password:(NSString *)password
         profileImage1:(UIImage *)profileImage1
         profileImage2:(UIImage *)profileImage2
         profileImage3:(UIImage *)profileImage3
