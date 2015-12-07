@@ -574,16 +574,17 @@
         if ((selOptionVal = cell.emailTextField.text)) {
             if(selOptionVal != nil || ![selOptionVal isEqualToString:@""]){
                 emailAddressToRegister=cell.emailTextField.text;
-                [[[placeHolderArray objectAtIndex:indexPath.section] objectAtIndex:indexPath.row] setObject:selOptionVal forKey:@"TypingText"];
+//                [[[placeHolderArray objectAtIndex:indexPath.section] objectAtIndex:indexPath.row] setObject:selOptionVal forKey:@"TypingText"];
                 
             }
             
         }
-        selOptionVal = cell.passwordTextField.text;
-        emailPasswordToRegister=cell.passwordTextField.text;
         
+        else if ((selOptionVal = cell.passwordTextField.text))
         if(selOptionVal != nil || ![selOptionVal isEqualToString:@""]){
-            [[[placeHolderArray objectAtIndex:indexPath.section] objectAtIndex:indexPath.row] setObject:selOptionVal forKey:@"TypingTextPass"];
+            
+            emailPasswordToRegister=cell.passwordTextField.text;
+//            [[[placeHolderArray objectAtIndex:indexPath.section] objectAtIndex:indexPath.row] setObject:selOptionVal forKey:@"TypingTextPass"];
         }
         
     }
@@ -1699,15 +1700,12 @@
 {
     [COMMON LoadIcon:self.view];
     
-        strType      = (selectEmail== YES)?@"1":@"2";
-        strProfileID = (FBprofileID!=nil)?FBprofileID:@"";
     
-    NSLog(@"hobby:%@",hobbiesNameArray);
     
     NSLog(@"hobby:%@",hobbiesNameArray);
     strType      = (selectEmail== YES)?@"1":@"2";
     strProfileID = (FBprofileID!=nil)?FBprofileID:@"";
-    emailPasswordToRegister = cell.passwordTextField.text;
+    //emailPasswordToRegister = cell.passwordTextField.text;
     strDOB       = (currentTextfield.text !=nil)?currentTextfield.text :@"";
     [self dateConverter];
     
