@@ -315,7 +315,7 @@
             cameraImage = [[UIImageView alloc]initWithFrame:CGRectMake(userProfileImage.frame.size.width / 2 - 15, self.scrView.frame.size.height - 55, 30, 30)];
             [cameraImage setTag:i+200];
             [cameraImage setImage:[UIImage imageNamed:@"profile_camera_icon"]];
-        [topViewCell setHidden:YES];
+            [topViewCell setHidden:YES];
             cameraImage.userInteractionEnabled = YES;
             
             [cameraImage setUserInteractionEnabled:YES];
@@ -708,7 +708,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-         return [placeHolderArray[section] count];
+   return [placeHolderArray[section] count];
     
 }
 
@@ -827,7 +827,7 @@
     cell = (DSProfileTableViewCell *)[tableView dequeueReusableCellWithIdentifier:cellIdentifier];
     NSString *titleText;
     NSString *placeHolderText,*placeHolderTextPass;
-   NSString *typingText,*typingTextPass;
+    NSString *typingText,*typingTextPass;
    
     
 
@@ -1679,6 +1679,14 @@
         return;
         
     }
+   else if ( [strGender isEqualToString:@""] || strGender == NULL)
+   {
+       [self showAltermessage:GENDER_REQUIRED];
+       
+       [COMMON removeLoading];
+       return;
+   }
+
     
    else if ( [dateChange isEqualToString:@""] || dateChange == NULL )
     {
@@ -1688,13 +1696,6 @@
         return;
     }
     
-   else if ( [strGender isEqualToString:@""] || strGender == NULL)
-    {
-        [self showAltermessage:GENDER_REQUIRED];
-
-        [COMMON removeLoading];
-        return;
-    }
     
    else if ( [emailAddressToRegister isEqualToString:@""] || emailAddressToRegister == nil)
     {
