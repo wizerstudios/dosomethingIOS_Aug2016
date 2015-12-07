@@ -907,6 +907,8 @@
         else if(userDetailsDict.count > 0){
             cell.firstnameTxt.text =[userDetailsDict valueForKey:@"first_name"];
             cell.lastNameTxt.text  =[userDetailsDict valueForKey:@"last_name"];
+            FirstName = cell.firstnameTxt.text;
+            LastName  = cell.lastNameTxt.text;
             
         }
         else
@@ -983,6 +985,7 @@
         }
         else if(userDetailsDict.count > 0){
             profileGenderValueLabel.text =[userDetailsDict valueForKey:@"gender"];
+            
         }
 
         
@@ -1031,7 +1034,7 @@
             cell.textFieldDPPlaceHolder.text =[profileDict valueForKey:@"date_of_birth"];
         }
         else if(userDetailsDict.count > 0){
-            profileGenderValueLabel.text =[userDetailsDict valueForKey:@"gender"];
+            cell.textFieldDPPlaceHolder.text =[userDetailsDict valueForKey:@"dob"];
         }
         
         else
@@ -1640,29 +1643,19 @@
 #pragma mark - saveAction
 -(void)loadValidations
 {
-    
     [COMMON LoadIcon:self.view];
-    NSArray *postPerArray;
     if(userDetailsDict.count >0){
-    //postPerArray = [[placeHolderArray objectAtIndex:0]valueForKey:@"placeHolder"];
-        strFirstName = [postPerArray objectAtIndex:1];
-        strLastName  = [postPerArray objectAtIndex:2];
-        strType      = (selectEmail== YES)?@"1":@"2";
-        strProfileID = (FBprofileID!=nil)?FBprofileID:@"";
-        strGender =   [userDetailsDict valueForKey:@"gender"];
+        strGender    = [userDetailsDict valueForKey:@"gender"];
+        
     }
-    else
-    postPerArray = [[placeHolderArray objectAtIndex:0]valueForKey:@"TypingText"];
-    NSLog(@"hobby:%@",hobbiesNameArray);
+    else{
+        strGender    = (selectGender!=nil)?selectGender:@"";
+    }
     
-    strFirstName = [postPerArray objectAtIndex:1];
-    strLastName  = [postPerArray objectAtIndex:2];
+    NSLog(@"hobby:%@",hobbiesNameArray);
     strType      = (selectEmail== YES)?@"1":@"2";
     strProfileID = (FBprofileID!=nil)?FBprofileID:@"";
-    strGender    = (selectGender!=nil)?selectGender:@"";
-    //FirstName    = (strFirstName!=nil)? strFirstName:@"";
-   // LastName     = (strLastName!=nil)?strLastName:@"";
-
+    emailPasswordToRegister = cell.passwordTextField.text;
     strDOB       = (currentTextfield.text !=nil)?currentTextfield.text :@"";
     [self dateConverter];
     
@@ -1683,7 +1676,7 @@
         return;
         
     }
-   else if ( [strGender isEqualToString:@""] || strGender == NULL)
+   else if ([strGender isEqualToString:@""] || strGender == NULL)
    {
        [self showAltermessage:GENDER_REQUIRED];
        
@@ -1692,7 +1685,7 @@
    }
 
     
-   else if ( [dateChange isEqualToString:@""] || dateChange == NULL )
+   else if ([dateChange isEqualToString:@""] || dateChange == NULL )
     {
 
          [self showAltermessage:DOB_REQUIRED];
@@ -1701,13 +1694,13 @@
     }
     
     
-   else if ( [emailAddressToRegister isEqualToString:@""] || emailAddressToRegister == nil)
+   else if ([emailAddressToRegister isEqualToString:@""] || emailAddressToRegister == nil)
     {
         [self showAltermessage:EMAIL_REQUIRED];
         [COMMON removeLoading];
         return;
     }
-   else if ( [emailPasswordToRegister isEqualToString:@""] || emailPasswordToRegister == nil)
+   else if ([emailPasswordToRegister isEqualToString:@""] || emailPasswordToRegister == nil)
     {
 
         [self showAltermessage:PASSWORD_REQUIRED];
