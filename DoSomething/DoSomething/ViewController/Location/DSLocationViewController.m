@@ -144,6 +144,9 @@
     MyPatternString= [MyPatternString stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
     [locationCellView.imageProfile setImageWithURL:[NSURL URLWithString:MyPatternString]];
     locationCollectionView.backgroundColor = [UIColor clearColor];
+    locationCellView.imageProfile.layer.cornerRadius = locationCellView.imageProfile.frame.size.height/2;
+     locationCellView.imageProfile.layer.masksToBounds = YES;
+    
     return locationCellView;
 }
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
