@@ -22,6 +22,8 @@
 
 #import "CustomAlterview.h"
 
+
+
 @interface DSProfileTableViewController ()<CLLocationManagerDelegate,UIAlertViewDelegate,UIScrollViewDelegate>
 {
     DSWebservice            * objWebService;
@@ -84,6 +86,8 @@
     CGSize dataSize;
     BOOL isLogin;
     CustomAlterview *objCustomAlterview;
+    
+    BOOL isSelectMale,isSelectFemale;
     
 
 }
@@ -270,11 +274,14 @@
     
     NSLog(@"joinedString:%@",strInterestHobbies);
     
-    [_tableviewProfile reloadData];
+   
     
     infoArray=[[NSMutableArray alloc]initWithObjects:@"profile_noimg",@"profile_noimg",@"profile_noimg", nil];
     [self CustomAlterview];
+    isSelectMale=NO;
+    isSelectFemale=NO;
 
+     [_tableviewProfile reloadData];
 }
 
 #pragma mark - scroll
@@ -627,7 +634,7 @@
     titleArray = [[NSArray alloc]initWithObjects:@"Image",@"First Name",@"Last Name",@"male",@"Date of Birth",@"About You",@"Hobbies",@"Email&Password",@"switch_on",@"TermsOfUse",nil];
     
     NSLog(@"PlaceHolder %@",placeHolderArray);
-    //[self.tableviewProfile reloadData];
+   
    
 }
 -(void)initializeArrayProfile{
@@ -650,7 +657,7 @@
     titleArray = [[NSArray alloc]initWithObjects:@"Image",@"First Name",@"Last Name",@"male",@"Date of Birth",@"About You",@"Hobbies",@"Email&Password",@"switch_on",@"TermsOfUse",nil];
     
     NSLog(@"PlaceHolder %@",placeHolderArray);
-    //[self.tableviewProfile reloadData];
+    
     
 }
 
@@ -936,17 +943,17 @@
         [cell.maleButton setTag:2004];
         [cell.femaleButton setTag:2005];
         
-        maleLabel =[[UILabel alloc]initWithFrame:CGRectMake(0, 0, labelWidth,labelHeight)];
-        maleLabel.font = [UIFont fontWithName:@"Patron-Regular" size:9.0];
-        maleLabel.textAlignment = NSTextAlignmentCenter;
-        [maleLabel setText:@"Male"];
-        [cell.labelMale addSubview:maleLabel];
-        
-        femaleLabel =[[UILabel alloc]initWithFrame:CGRectMake(0, 0,labelWidth, labelHeight)];
-        femaleLabel.font = [UIFont fontWithName:@"Patron-Regular" size:9.0];
-        femaleLabel.textAlignment = NSTextAlignmentCenter;
-        [femaleLabel setText:@"Female"];
-        [cell.labelFemale addSubview:femaleLabel];
+//        maleLabel =[[UILabel alloc]initWithFrame:CGRectMake(0, 0, labelWidth,labelHeight)];
+//        maleLabel.font = [UIFont fontWithName:@"Patron-Regular" size:9.0];
+//        maleLabel.textAlignment = NSTextAlignmentCenter;
+//        [maleLabel setText:@"Male"];
+//        [cell.labelMale addSubview:maleLabel];
+//        
+//        femaleLabel =[[UILabel alloc]initWithFrame:CGRectMake(0, 0,labelWidth, labelHeight)];
+//        femaleLabel.font = [UIFont fontWithName:@"Patron-Regular" size:9.0];
+//        femaleLabel.textAlignment = NSTextAlignmentCenter;
+//        [femaleLabel setText:@"Female"];
+//        [cell.labelFemale addSubview:femaleLabel];
         
         if( profileDict !=NULL){
             
@@ -958,9 +965,19 @@
             [profileGenderLabel setHidden:YES];
             [profileGenderValueLabel setHidden:YES];
             
-            femaleLabel.textColor = [UIColor colorWithRed:(float)161.0/255 green:(float)161.0/255 blue:(float)161.0/255 alpha:1.0f];
-            maleLabel.textColor = [UIColor colorWithRed:(float)161.0/255 green:(float)161.0/255 blue:(float)161.0/255 alpha:1.0f];
-
+            if(isSelectFemale ==YES)
+            {
+                
+                [cell.femaleButton setTitleColor:[UIColor redColor] forState:UIControlStateNormal];
+            }
+            else if (isSelectMale==YES)
+            {
+                [cell.maleButton setTitleColor:[UIColor redColor] forState:UIControlStateNormal];
+            }
+            
+//            femaleLabel.textColor = [UIColor colorWithRed:(float)161.0/255 green:(float)161.0/255 blue:(float)161.0/255 alpha:1.0f];
+//            maleLabel.textColor = [UIColor colorWithRed:(float)161.0/255 green:(float)161.0/255 blue:(float)161.0/255 alpha:1.0f];
+            
         }
         
         
@@ -990,10 +1007,11 @@
         else
         {
         if([currentTextfield.text isEqualToString:@""] || currentTextfield.text == nil)
-            cell.textFieldDPPlaceHolder.text = currentTextfield.text;
-       
+            
+               [cell.textFieldDPPlaceHolder setTag:1000];
         }
-            [cell.textFieldDPPlaceHolder setTag:1000];
+        cell.textFieldDPPlaceHolder.text = currentTextfield.text;
+        
 
         
         
@@ -1026,6 +1044,8 @@
                 else{
                     cell.textViewAboutYou.text = [[profileDict valueForKey:@"about"]mutableCopy];
                     strAbout =cell.textViewAboutYou.text;
+                    
+                    
                     cell.textViewHeaderLabel.hidden = YES;
                     //cell.textViewHeaderLabel.text =placeHolderText;
                     //cell.labelAboutYou.text =titleText;
@@ -1035,11 +1055,11 @@
                         }
         else{
             if(textviewText == nil)
-                cell.textViewHeaderLabel.hidden = NO;
-            else
-                cell.textViewHeaderLabel.hidden = YES;
+               // cell.textViewHeaderLabel.hidden = NO;
+            //else
+                //cell.textViewHeaderLabel.hidden = YES;
                 
-                cell.textViewAboutYou.text = textviewText;
+                cell.textViewAboutYou.text = @"Write something about yourself here.";
                // cell.labelAboutYou.text =titleText;
                 strAbout =cell.textViewAboutYou.text;
                // cell.textViewHeaderLabel.text =placeHolderText;
@@ -1302,6 +1322,7 @@
     while (![button isKindOfClass:[UITableViewCell class]]) {
         button = [button superview];
     }
+    
     NSIndexPath *indexPath;
      NSString *selOptionVal;
     //DSProfileTableViewCell *cell;
@@ -1311,38 +1332,40 @@
     
     if([sender tag] == 2004){
         selOptionVal = @"Male";
-        maleLabel.textColor =  [UIColor redColor];    //[UIColor colorWithRed:(161.0/255.0f) green:(161.0/255.0f) blue:(161.0/255.0f) alpha:1.0f];
+        [cell.maleButton setTitleColor:[UIColor redColor] forState:UIControlStateNormal];
+        //maleLabel.textColor =  [UIColor redColor];    //[UIColor colorWithRed:(161.0/255.0f) green:(161.0/255.0f) blue:(161.0/255.0f) alpha:1.0f];
+        isSelectMale =YES;
     }
     
     if([sender tag] == 2005){
        selOptionVal = @"female";
-        femaleLabel.textColor = [UIColor redColor];   //[UIColor colorWithRed:(161.0/255.0f) green:(161.0/255.0f) blue:(161.0/255.0f) alpha:1.0f];
+       // femaleLabel.textColor = [UIColor redColor];   //[UIColor colorWithRed:(161.0/255.0f) green:(161.0/255.0f) blue:(161.0/255.0f) alpha:1.0f];
+        [cell.femaleButton setTitleColor:[UIColor redColor] forState:UIControlStateNormal];
+        isSelectFemale=YES;
     }
     
     
-    
-    
-//                if(selOptionVal != nil || ![selOptionVal isEqualToString:@""])
-//                    [[[placeHolderArray objectAtIndex:indexPath.section] objectAtIndex:indexPath.row] setObject:selOptionVal forKey:@"placeHolder"];
-//    [_tableviewProfile beginUpdates];
-//    [_tableviewProfile reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
-//    [_tableviewProfile endUpdates];
     selectGender =selOptionVal;
     
-    //[_tableviewProfile reloadData];
-}
+   }
 
 #pragma mark - Textview delegate
 
--(void)textViewDidBeginEditing:(UITextView *)textView
+-(BOOL)textViewShouldBeginEditing:(UITextView *)textView
 {
     CGPoint position = [textView convertPoint:CGPointZero toView: _tableviewProfile ];
     NSIndexPath *indexPath = [_tableviewProfile indexPathForRowAtPoint: position];
     //DSProfileTableViewCell *cell = (DSProfileTableViewCell *)[_tableviewProfile cellForRowAtIndexPath:indexPath];
     cell = (DSProfileTableViewCell *)[_tableviewProfile cellForRowAtIndexPath:indexPath];
     cell.textViewHeaderLabel.hidden = YES;
-    
-    textviewText = textView.text;
+    if(textView.tag == 0) {
+        textView.text = @"";
+        //textView.textColor = [UIColor blackColor];
+        textView.tag = 1;
+    }
+    return YES;
+
+    //textviewText = textView.text;
 }
 
 -(void)textViewDidEndEditing:(UITextView *)textView
@@ -1352,8 +1375,14 @@
     //DSProfileTableViewCell *cell = (DSProfileTableViewCell *)[_tableviewProfile cellForRowAtIndexPath:indexPath];
     cell = (DSProfileTableViewCell *)[_tableviewProfile cellForRowAtIndexPath:indexPath];
     cell.textViewHeaderLabel.hidden = YES;
-    
-    textviewText = textView.text;
+    if([textView.text length] == 0)
+    {
+        //textView.text = @"Foobar placeholder";
+        //textView.textColor = [UIColor lightGrayColor];
+        textView.tag = 0;
+    }
+
+    //textviewText = textView.text;
 }
 
 
