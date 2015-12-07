@@ -363,13 +363,6 @@
                          NSLog(@"checkuser = %@",[[responseObject objectForKey:@"checkuser"]objectForKey:@"status"]);
                          if(([[[responseObject objectForKey:@"checkuser"]objectForKey:@"RegisterType"]  isEqual: @"1"])){
                              if([[[responseObject objectForKey:@"checkuser"]objectForKey:@"status"]  isEqual: @"error"]){
-//                                 if(IS_GREATER_IOS8)
-//                                 {
-//                                 [self presentViewController:[ DSAppCommon alertWithTitle:@"Title" withMessage:[[responseObject objectForKey:@"checkuser"]objectForKey:@"Message"] preferredStyle:UIAlertControllerStyleAlert] animated:YES completion:NULL];
-//                                 }
-//                                 else{
-                                     [DSAppCommon showSimpleAlertWithMessage:[[responseObject objectForKey:@"checkuser"]objectForKey:@"Message"]];
-//                                 }
                                  [self showAltermessage:[[responseObject objectForKey:@"checkuser"]objectForKey:@"Message"]];
                                  [COMMON removeLoading];
                              }
@@ -407,13 +400,7 @@
                      }
                      failure:^(AFHTTPRequestOperation *operation, id error) {
                           NSLog(@"Error = %@",error);
-//                         if(IS_GREATER_IOS8)
-//                         {
-//                         [self presentViewController:[ DSAppCommon alertWithTitle:@"Title" withMessage:@"ERROR" preferredStyle:UIAlertControllerStyleAlert] animated:YES completion:NULL];
-//                         }
-//                         else{
-//                             [DSAppCommon showSimpleAlertWithMessage:@"ERROR"];
-//                         }
+
                          [self showAltermessage:@"ERROR"];
                          [COMMON removeLoading];
 
@@ -524,15 +511,6 @@
             NSLog(@"responseObject = %@",responseObject);
             [self showAltermessage:[loginDict valueForKey:@"Message"]];
             [COMMON removeLoading];
-            
-//            if(IS_GREATER_IOS8)
-//            {
-//            [self presentViewController:[ DSAppCommon alertWithTitle:@"Title" withMessage:[loginDict valueForKey:@"Message"] preferredStyle:UIAlertControllerStyleAlert] animated:YES completion:NULL];
-//            }
-//            else
-//            {
-//                [DSAppCommon showSimpleAlertWithMessage:[loginDict valueForKey:@"Message"]];
-//            }
             
         }
         

@@ -892,18 +892,20 @@
             cell.layoutConstraintViewHeight.constant =49;
 
         }
-
-                if(profileDict !=NULL){
-                    [cell.textFieldPlaceHolder setEnabled:NO];
-                    cell.firstnameTxt.text =[profileDict valueForKey:@"first_name"];
-                    cell.lastNameTxt.text  =[profileDict valueForKey:@"last_name"];
-                    
-                    
-                }
-           else
+        if(profileDict !=NULL){
+            [cell.textFieldPlaceHolder setEnabled:NO];
+            cell.firstnameTxt.text =[profileDict valueForKey:@"first_name"];
+            cell.lastNameTxt.text  =[profileDict valueForKey:@"last_name"];
+        }
+        else if(userDetailsDict.count > 0){
+            cell.firstnameTxt.text =[userDetailsDict valueForKey:@"first_name"];
+            cell.lastNameTxt.text  =[userDetailsDict valueForKey:@"last_name"];
+            
+        }
+        else
            {
-               cell.firstnameTxt.text = FirstName;
-              cell.lastNameTxt.text   =LastName;
+            cell.firstnameTxt.text = FirstName;
+            cell.lastNameTxt.text   =LastName;
            }
 
     }
@@ -972,6 +974,11 @@
             profileGenderValueLabel.text =[profileDict valueForKey:@"gender"];
             
         }
+        else if(userDetailsDict.count > 0){
+            profileGenderValueLabel.text =[userDetailsDict valueForKey:@"gender"];
+        }
+
+        
         else{
             [profileGenderView setHidden:YES];
             [profileGenderLabel setHidden:YES];
@@ -1006,6 +1013,10 @@
         {
             cell.textFieldDPPlaceHolder.text =[profileDict valueForKey:@"date_of_birth"];
         }
+        else if(userDetailsDict.count > 0){
+            profileGenderValueLabel.text =[userDetailsDict valueForKey:@"gender"];
+        }
+        
         else
         {
         if([currentTextfield.text isEqualToString:@""] || currentTextfield.text == nil)
@@ -1177,14 +1188,15 @@
             //cell.passwordTextField.text =[self getPassword];
 
         }
-      else
-      {
+        else if(userDetailsDict.count > 0){
+            cell.emailTextField.text = [userDetailsDict valueForKey:@"email"];
+        }
+        else
+        {
           cell.emailTextField.text = [self getEmail];
           cell.passwordTextField.text =[self getPassword];
-
-      }
+        }
         
-    
         if (IS_IPHONE6 ||IS_IPHONE6_Plus){
         cell.layoutConstraintAccLabelYPos.constant =42;
         cell.layoutConstraintEmailPassViewHeight.constant =50;
@@ -1507,7 +1519,7 @@
                        sessionid:loginUserSessionID
                          success:^(AFHTTPRequestOperation *operation, id responseObject) {
                              NSLog(@"profileUpdate%@",responseObject);
-                             [self showAltermessage:[[responseObject objectForKey:@"updateprofile"]objectForKey:@"Message"]];
+                             
                              [COMMON removeLoading];
                          }
                          failure:^(AFHTTPRequestOperation *operation, id error) {
@@ -1537,12 +1549,35 @@
     [self gotoHomeView];
     
 }
+#pragma mark - loadUpdateNotification
+-(void)loadUpdate{
+    
+    [COMMON LoadIcon:self.view];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(loadUpdateView:)
+                                                 name:@"updateprofile"
+                                               object:nil];
+    
+   [self updateAPI];
+    
+    
+}
+-(void)loadUpdateView:(NSNotification *)notification{
+    
+    
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+    
+    [self showAltermessage:@"Profile Updated Successfully"];
+    [COMMON removeLoading];
+    
+}
 
 
 #pragma mark - saveAction
 -(void)saveAction:(id)sender
 {
-    
+    [self.view endEditing:YES];
     [COMMON LoadIcon:self.view];
     if(profileDict !=NULL){
         
@@ -1553,9 +1588,10 @@
         LastName  = [profileDict valueForKey:@"last_name"];
         strGender = [profileDict valueForKey:@"gender"];
         strDOB       = (currentTextfield.text !=nil)?currentTextfield.text :@"";
+        emailPasswordToRegister = cell.passwordTextField.text;
        // strAbout;
         [self dateConverter];
-        [self updateAPI];
+        [self loadUpdate];
     }
     else
         [self loadValidations];
@@ -1579,7 +1615,12 @@
     [COMMON LoadIcon:self.view];
     NSArray *postPerArray;
     if(userDetailsDict.count >0){
-    postPerArray = [[placeHolderArray objectAtIndex:0]valueForKey:@"placeHolder"];
+    //postPerArray = [[placeHolderArray objectAtIndex:0]valueForKey:@"placeHolder"];
+        strFirstName = [postPerArray objectAtIndex:1];
+        strLastName  = [postPerArray objectAtIndex:2];
+        strType      = (selectEmail== YES)?@"1":@"2";
+        strProfileID = (FBprofileID!=nil)?FBprofileID:@"";
+        strGender =   [userDetailsDict valueForKey:@"gender"];
     }
     else
     postPerArray = [[placeHolderArray objectAtIndex:0]valueForKey:@"TypingText"];

@@ -309,6 +309,7 @@ notification_vibration:(NSString *)isnotification_vibration
     if(gender)             [profileUpdate    setObject:gender                     forKey:@"gender"];
     if(about)              [profileUpdate    setObject:about                      forKey:@"about"];
     if(hobbies)            [profileUpdate    setObject:hobbies                    forKey:@"hobbies"];
+    if(password)           [profileUpdate    setObject:password                   forKey:@"password"];
                            [profileUpdate    setObject:latitude                   forKey:@"latitude"];
                            [profileUpdate    setObject:longitude                  forKey:@"longitude"];
     if(notification)       [profileUpdate    setObject:notification               forKey:@"notification"];
@@ -317,11 +318,6 @@ notification_vibration:(NSString *)isnotification_vibration
     NSLog(@"urlString = %@",urlString);
     NSLog(@"Profile Update = %@",profileUpdate);
     
-//    [self sendRequestWithURLString:urlString
-//                     andParameters:profileUpdate
-//                            method:ServicePost
-//           completionSucessHandler:success
-//          completionFailureHandler:failure];
     NSDateFormatter *formatter = [[NSDateFormatter alloc]init];
     [formatter setDateFormat:@"yyyyMMddhhmmssSSS"];
     NSString *imageNameStr = [NSString stringWithFormat:@"%@.png",[formatter stringFromDate:[NSDate date]]];
@@ -363,24 +359,15 @@ notification_vibration:(NSString *)isnotification_vibration
 //         
 //         profileUpdateDict = [responseObject valueForKey:@"updateprofile"];
          
-         if([[responseObject objectForKey:@"updateprofile"]objectForKey:@"status"]){
              
-            // [DSAppCommon showSimpleAlertWithMessage:[[responseObject objectForKey:@"updateprofile"]objectForKey:@"Message"]];
-             //[COMMON removeLoading];
-             
-
-            
-         }
-         
-         else{
-             //[DSAppCommon showSimpleAlertWithMessage:[responseObject objectForKey:@"error"]];
-             //[COMMON removeLoading];
-         }
+             [[NSNotificationCenter defaultCenter] postNotificationName:@"updateprofile"
+                                                                 object:self
+                                                               userInfo:responseObject];
      }
      
        failure:^(AFHTTPRequestOperation *operation, NSError *error){
            NSLog(@"Error = %@",error);
-           //[DSAppCommon showSimpleAlertWithMessage:@"FAILURE"];
+           
            
        }];
 
