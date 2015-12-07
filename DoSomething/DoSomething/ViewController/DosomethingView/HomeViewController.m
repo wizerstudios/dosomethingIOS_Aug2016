@@ -402,9 +402,9 @@
 - (IBAction)alertPressCancel:(id)sender {
     [UIView animateWithDuration:1.0 animations:^{
         
-        objCustomAlterview.alertBgView.alpha = 0;
+    //    objCustomAlterview.alertBgView.alpha = 0;
         
-        objCustomAlterview.alertMainBgView.alpha = 0;
+    //    objCustomAlterview.alertMainBgView.alpha = 0;
               
     } completion:^(BOOL b){
         
@@ -420,9 +420,9 @@
     
     [UIView animateWithDuration:1.0 animations:^{
         
-        objCustomAlterview.alertBgView.alpha = 0;
+   //     objCustomAlterview.alertBgView.alpha = 0;
         
-        objCustomAlterview.alertMainBgView.alpha = 0;
+  //      objCustomAlterview.alertMainBgView.alpha = 0;
            }
         completion:^(BOOL b){
         
@@ -439,9 +439,9 @@
 - (IBAction)alertPressNo:(id)sender {
     [UIView animateWithDuration:1.0 animations:^{
         
-        objCustomAlterview.alertBgView.alpha = 0;
+    //    objCustomAlterview.alertBgView.alpha = 0;
         
-        objCustomAlterview.alertMainBgView.alpha = 0;
+   //     objCustomAlterview.alertMainBgView.alpha = 0;
         
     } completion:^(BOOL b){
         

@@ -17,20 +17,19 @@
 @synthesize alertMainBgView,alertBgView,alertCancelButton,alertMsgLabel;
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [super viewDidLoad];
     [self.view setFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, CGRectGetHeight(self.view.frame))];
     alertBgView.hidden =YES;
     alertMainBgView.hidden =YES;
-     [self.view setHidden:YES];
+    [self.view setHidden:YES];
     
 }
 
 - (IBAction)alertPressCancel:(id)sender {
     [UIView animateWithDuration:0.5 animations:^{
         
-        alertBgView.alpha = 0;
+       // alertBgView.alpha = 0;
         
-        alertMainBgView.alpha = 0;
+     //   alertMainBgView.alpha = 0;
         
     } completion:^(BOOL b){
         
@@ -46,9 +45,9 @@
     
     [UIView animateWithDuration:0.5 animations:^{
         
-        alertBgView.alpha = 0;
+       /// alertBgView.alpha = 0;
         
-        alertMainBgView.alpha = 0;
+     //   alertMainBgView.alpha = 0;
     }
                      completion:^(BOOL b){
                          
@@ -65,9 +64,9 @@
 - (IBAction)alertPressNo:(id)sender {
     [UIView animateWithDuration:0.5 animations:^{
         
-        alertBgView.alpha = 0;
+     //   alertBgView.alpha = 0;
         
-        alertMainBgView.alpha = 0;
+    //    alertMainBgView.alpha = 0;
         
     } completion:^(BOOL b){
         

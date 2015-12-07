@@ -223,9 +223,9 @@
 - (IBAction)alertPressCancel:(id)sender {
     [UIView animateWithDuration:1.0 animations:^{
         
-        objCustomAlterview.alertBgView.alpha = 0;
+      //  objCustomAlterview.alertBgView.alpha = 0;
         
-        objCustomAlterview.alertMainBgView.alpha = 0;
+     //   objCustomAlterview.alertMainBgView.alpha = 0;
         
     } completion:^(BOOL b){
         
@@ -255,10 +255,28 @@
 
 }
 
+#pragma mark- hide keyboard
+- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event{
+    //hides keyboard when another part of layout was touched
+    [self.view endEditing:YES];
+    [super touchesBegan:touches withEvent:event];
+}
+- (BOOL)textFieldShouldReturn:(UITextField *)textField {
+    
+    [textField resignFirstResponder];
+    
+    return YES;
+}
+- (BOOL)textFieldShouldEndEditing:(UITextField *)textField
+{
+    [textField resignFirstResponder];
+    return YES;
+}
 
 #pragma mark - Create and Sign Button Action
 -(void)CreateAnAccount
 {
+     [[[UIApplication sharedApplication] keyWindow] endEditing:YES];
     objSigninType=@"1";
     if([NSString isEmpty:self.emailTxt.text] && [NSString isEmpty:self.passwordTxt.text]){
        
@@ -334,6 +352,7 @@
 }
 -(void)SignButtonAction
 {
+    [self.view endEditing:YES];
     //isSignin =YES;
     
     objSigninType=@"1";
@@ -425,7 +444,7 @@
 //                                 [self presentViewController:[ DSAppCommon alertWithTitle:@"Title" withMessage:[[responseObject objectForKey:@"checkuser"]objectForKey:@"Message"] preferredStyle:UIAlertControllerStyleAlert] animated:YES completion:NULL];
 //                                 }
 //                                 else{
-//                                     [DSAppCommon showSimpleAlertWithMessage:[[responseObject objectForKey:@"checkuser"]objectForKey:@"Message"]];
+                                     [DSAppCommon showSimpleAlertWithMessage:[[responseObject objectForKey:@"checkuser"]objectForKey:@"Message"]];
 //                                 }
                                  [self showAltermessage:[[responseObject objectForKey:@"checkuser"]objectForKey:@"Message"]];
                                  [COMMON removeLoading];
@@ -527,7 +546,6 @@
 
 -(void)gotoProfileView:(NSString *)strEmailId :(NSString *)strPassword :(BOOL)selectMail{
     DSProfileTableViewController *profileVC  = [[DSProfileTableViewController alloc]initWithNibName:@"DSProfileTableViewController" bundle:nil];
-    profileVC.userDetailsDict = [fbUserDetailsDict mutableCopy];
     profileVC.emailAddressToRegister  = strEmailId;
     profileVC.emailPasswordToRegister = strPassword;
     profileVC.selectEmail             = selectMail;
@@ -537,7 +555,7 @@
 -(void)gotoProfileView:(NSString*)FBProfileID{
     DSProfileTableViewController *profileVC  = [[DSProfileTableViewController alloc]initWithNibName:@"DSProfileTableViewController" bundle:nil];
     profileVC.userDetailsDict = [fbUserDetailsDict mutableCopy];
-     profileVC.FBprofileID=FBProfileID;
+    profileVC.FBprofileID=FBProfileID;
     [self.navigationController pushViewController:profileVC animated:YES];
 }
 
@@ -580,18 +598,9 @@
         }
         else{
             NSLog(@"responseObject = %@",responseObject);
-            if(IS_GREATER_IOS8)
-            {
-            [self presentViewController:[ DSAppCommon alertWithTitle:@"Title" withMessage:[loginDict valueForKey:@"Message"] preferredStyle:UIAlertControllerStyleAlert] animated:YES completion:NULL];
-                [COMMON removeLoading];
-            }
-            else
-            {
-                [DSAppCommon showSimpleAlertWithMessage:[loginDict valueForKey:@"Message"]];
-                [COMMON removeLoading];
-            }
-            
             [self showAltermessage:[loginDict valueForKey:@"Message"]];
+            [COMMON removeLoading];
+            
 //            if(IS_GREATER_IOS8)
 //            {
 //            [self presentViewController:[ DSAppCommon alertWithTitle:@"Title" withMessage:[loginDict valueForKey:@"Message"] preferredStyle:UIAlertControllerStyleAlert] animated:YES completion:NULL];
@@ -600,7 +609,7 @@
 //            {
 //                [DSAppCommon showSimpleAlertWithMessage:[loginDict valueForKey:@"Message"]];
 //            }
-            [COMMON removeLoading];
+            
         }
         
         
