@@ -231,7 +231,7 @@
                                     <outlet property="delegate" destination="-1" id="nFh-KG-BU8"/>
                                 </connections>
                             </textField>
-                            <textField opaque="NO" clipsSubviews="YES" tag="12" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="LastName" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="eOr-9O-Pzu">
+                            <textField opaque="NO" clipsSubviews="YES" tag="12" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="LastName" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="eOr-9O-Pzu">
                                 <rect key="frame" x="100" y="40" width="200" height="33"/>
                                 <animations/>
                                 <constraints>

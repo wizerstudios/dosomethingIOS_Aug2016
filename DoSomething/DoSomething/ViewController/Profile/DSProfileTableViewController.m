@@ -114,7 +114,7 @@
         
         [self initializeArrayProfile];
         
-    //self.tableViewHeightConstraint.constant=568;
+    self.tableViewHeightConstraint.constant=80;
     }
         NSLog(@"DICT%@",profileDict);
     
@@ -825,25 +825,6 @@
     static NSString *cellIdentifier = @"Cell";
     
     cell = (DSProfileTableViewCell *)[tableView dequeueReusableCellWithIdentifier:cellIdentifier];
-    NSString *titleText;
-    NSString *placeHolderText,*placeHolderTextPass;
-   NSString *typingText,*typingTextPass;
-   
-    
-
-//        typingText       = [[[placeHolderArray valueForKey:@"TypingText" ]objectAtIndex:indexPath.section]objectAtIndex:indexPath.row];
-//        typingTextPass   = [[[placeHolderArray valueForKey:@"TypingTextPass" ]objectAtIndex:indexPath.section]objectAtIndex:indexPath.row];
-//    
-//
-//        placeHolderText     =  [[[placeHolderArray valueForKey:@"placeHolder" ]objectAtIndex:indexPath.section]objectAtIndex:indexPath.row];
-//        placeHolderTextPass =  [[[placeHolderArray valueForKey:@"placeHolderPass" ]objectAtIndex:indexPath.section]objectAtIndex:indexPath.row];
-    
-    
-   
-
-
-    
-       // titleText       =  [titleArray objectAtIndex:indexPath.row];
     if (indexPath.row == 0)
     {
         
@@ -892,25 +873,20 @@
             cell.layoutConstraintViewHeight.constant =49;
 
         }
-//        cell.labelTitleText.text = titleText;
-//        if(typingText == (id)[NSNull null] || [typingText isEqualToString:@""])//|| [typingText  isEqual: @"NULL"])
-//        {
-//            if(placeHolderText ==(id) [NSNull null])
-//                cell.textFieldPlaceHolder.placeholder = titleText;
-//            else
+
                 if(profileDict !=NULL){
                     [cell.textFieldPlaceHolder setEnabled:NO];
-                   // cell.textFieldPlaceHolder.text = placeHolderText;
                     cell.firstnameTxt.text =[profileDict valueForKey:@"first_name"];
                     cell.lastNameTxt.text  =[profileDict valueForKey:@"last_name"];
+                    
+                    
                 }
            else
+           {
                cell.firstnameTxt.text = FirstName;
               cell.lastNameTxt.text   =LastName;
-//        }
-//
-//        else
-//           cell.textFieldPlaceHolder.text = typingText;
+           }
+
     }
     
     if(indexPath.row ==2)
@@ -923,27 +899,7 @@
             
         }
          cellTextField.hidden =YES;
-//        if (IS_IPHONE6 ||IS_IPHONE6_Plus)
-//        {
-//            cell.layoutConstraintViewHeight.constant =49;
-//            
-//        }
-//        cell.labelTitleText.text = titleText;
-//        if(typingText == (id)[NSNull null] || [typingText isEqualToString:@""])//|| [typingText  isEqual: @"NULL"])
-//        {
-//            if(placeHolderText ==(id) [NSNull null])
-//                cell.textFieldPlaceHolder.placeholder = titleText;
-//            else
-//                if(profileDict !=NULL){
-//                    [cell.textFieldPlaceHolder setEnabled:NO];
-//                    cell.textFieldPlaceHolder.text = placeHolderText;
-//                }
-//                else
-//                    cell.textFieldPlaceHolder.text = placeHolderText;
-//        }
-//        
-//        else
-//            cell.textFieldPlaceHolder.text = typingText;
+
     }
     if (indexPath.row == 3)
     {
@@ -1001,23 +957,10 @@
             [profileGenderView setHidden:YES];
             [profileGenderLabel setHidden:YES];
             [profileGenderValueLabel setHidden:YES];
-//            if(placeHolderText == (id)[NSNull null]){
             
             femaleLabel.textColor = [UIColor colorWithRed:(float)161.0/255 green:(float)161.0/255 blue:(float)161.0/255 alpha:1.0f];
             maleLabel.textColor = [UIColor colorWithRed:(float)161.0/255 green:(float)161.0/255 blue:(float)161.0/255 alpha:1.0f];
-            //}
-//            else{
-////                if([placeHolderText isEqualToString:@"Male"])
-////                {
-//                femaleLabel.textColor = [UIColor colorWithRed:(float)161.0/255 green:(float)161.0/255 blue:(float)161.0/255 alpha:1.0f];
-//                maleLabel.textColor = [UIColor redColor];
-//                }
-//                else if([placeHolderText isEqualToString:@"female"])
-//                {
-//                maleLabel.textColor = [UIColor colorWithRed:(float)161.0/255 green:(float)161.0/255 blue:(float)161.0/255 alpha:1.0f];
-//                femaleLabel.textColor = [UIColor redColor];
-//                }
-//            }
+
         }
         
         
@@ -1047,12 +990,9 @@
         else
         {
         if([currentTextfield.text isEqualToString:@""] || currentTextfield.text == nil)
-            cell.textFieldDPPlaceHolder.text = placeHolderText;
-        else
             cell.textFieldDPPlaceHolder.text = currentTextfield.text;
        
         }
-           // cell.labelDPTitleText.text = titleText;
             [cell.textFieldDPPlaceHolder setTag:1000];
 
         
@@ -1224,34 +1164,7 @@
           cell.passwordTextField.text =[self getPassword];
 
       }
-            //if(placeHolderText ==(id) [NSNull null])
-          //            else
-//                if(profileDict !=NULL){
-//                    [cell.emailTextField setEnabled:NO];
-//                    cell.emailTextField.text = placeHolderText;
-//                }
-//                else
-//
-//                cell.emailTextField.text = placeHolderText;
-     
         
-        
-//        else if (typingText!=nil)
-//        {
-//            cell.emailTextField.text=typingText;
-//        }
-//        if(typingTextPass == (id)[NSNull null] || [typingTextPass isEqualToString:@""]  || typingTextPass == nil)//|| [typingText  isEqual: @"NULL"])
-//        {
-//            if(placeHolderText ==(id) [NSNull null])
-        
-//            else
-//                cell.passwordTextField.text =@"";
-//            
-//        }
-//        else if (typingTextPass != nil)
-//        {
-//            cell.passwordTextField.text=typingTextPass;
-//        }
     
         if (IS_IPHONE6 ||IS_IPHONE6_Plus){
         cell.layoutConstraintAccLabelYPos.constant =42;
@@ -1575,6 +1488,7 @@
                        sessionid:loginUserSessionID
                          success:^(AFHTTPRequestOperation *operation, id responseObject) {
                              NSLog(@"profileUpdate%@",responseObject);
+                             [self showAltermessage:[[responseObject objectForKey:@"updateprofile"]objectForKey:@"Message"]];
                              [COMMON removeLoading];
                          }
                          failure:^(AFHTTPRequestOperation *operation, id error) {
@@ -1604,6 +1518,7 @@
     [self gotoHomeView];
     
 }
+
 
 #pragma mark - saveAction
 -(void)saveAction:(id)sender
