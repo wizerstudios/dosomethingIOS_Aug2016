@@ -831,9 +831,9 @@
     static NSString *cellIdentifier = @"Cell";
     
     cell = (DSProfileTableViewCell *)[tableView dequeueReusableCellWithIdentifier:cellIdentifier];
-    NSString *titleText;
-    NSString *placeHolderText,*placeHolderTextPass;
-   NSString *typingText,*typingTextPass;
+//    NSString *titleText;
+//    NSString *placeHolderText,*placeHolderTextPass;
+//   NSString *typingText,*typingTextPass;
    
     
 
@@ -1053,8 +1053,8 @@
         else
         {
         if([currentTextfield.text isEqualToString:@""] || currentTextfield.text == nil)
-            cell.textFieldDPPlaceHolder.text = placeHolderText;
-        else
+            //cell.textFieldDPPlaceHolder.text = placeHolderText;
+       // else
             cell.textFieldDPPlaceHolder.text = currentTextfield.text;
        
         }
