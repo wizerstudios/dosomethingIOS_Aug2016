@@ -37,6 +37,7 @@
 		2BD72B161BFCC5D4003846E9 /* UIRefreshControl+AFNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BD72B0D1BFCC5D4003846E9 /* UIRefreshControl+AFNetworking.m */; };
 		2BD72B171BFCC5D4003846E9 /* UIWebView+AFNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BD72B0F1BFCC5D4003846E9 /* UIWebView+AFNetworking.m */; };
 		2BD72B1A1BFCC713003846E9 /* OpenUDID.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BD72B191BFCC713003846E9 /* OpenUDID.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		2BEA3FC81C15ADEF00237D12 /* DSTermsOfUseView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BEA3FC71C15ADEF00237D12 /* DSTermsOfUseView.m */; };
 		511C735D1BE3801100D3D61D /* ChatTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 511C73581BE3801100D3D61D /* ChatTableViewCell.m */; };
 		511C735E1BE3801100D3D61D /* ChatTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 511C73591BE3801100D3D61D /* ChatTableViewCell.xib */; };
 		511C735F1BE3801100D3D61D /* DSChatDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 511C735B1BE3801100D3D61D /* DSChatDetailViewController.m */; };
@@ -181,6 +182,8 @@
 		2BD72B0F1BFCC5D4003846E9 /* UIWebView+AFNetworking.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIWebView+AFNetworking.m"; sourceTree = "<group>"; };
 		2BD72B181BFCC713003846E9 /* OpenUDID.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OpenUDID.h; sourceTree = "<group>"; };
 		2BD72B191BFCC713003846E9 /* OpenUDID.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OpenUDID.m; sourceTree = "<group>"; };
+		2BEA3FC61C15ADEF00237D12 /* DSTermsOfUseView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DSTermsOfUseView.h; path = ViewController/TermsOfUse/DSTermsOfUseView.h; sourceTree = "<group>"; };
+		2BEA3FC71C15ADEF00237D12 /* DSTermsOfUseView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DSTermsOfUseView.m; path = ViewController/TermsOfUse/DSTermsOfUseView.m; sourceTree = "<group>"; };
 		511C73571BE3801100D3D61D /* ChatTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChatTableViewCell.h; sourceTree = "<group>"; };
 		511C73581BE3801100D3D61D /* ChatTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChatTableViewCell.m; sourceTree = "<group>"; };
 		511C73591BE3801100D3D61D /* ChatTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ChatTableViewCell.xib; sourceTree = "<group>"; };
@@ -509,6 +512,15 @@
 			name = ParallexScroll;
 			sourceTree = "<group>";
 		};
+		2BEA3FC51C15AD7100237D12 /* TermsOfUse */ = {
+			isa = PBXGroup;
+			children = (
+				2BEA3FC61C15ADEF00237D12 /* DSTermsOfUseView.h */,
+				2BEA3FC71C15ADEF00237D12 /* DSTermsOfUseView.m */,
+			);
+			name = TermsOfUse;
+			sourceTree = "<group>";
+		};
 		3D9284336DE9EF0F3BACE1DA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -679,6 +691,7 @@
 		C6D5F60A1BC7A4560050C1AE /* ViewController */ = {
 			isa = PBXGroup;
 			children = (
+				2BEA3FC51C15AD7100237D12 /* TermsOfUse */,
 				6AE7361A1C05AA1400C7DCF0 /* SettingView */,
 				EADB94941BDF566C00512374 /* DosomethingView */,
 				EAF1DC4D1BD8B2AF00D51354 /* HomeView */,
@@ -1095,6 +1108,7 @@
 				EAEF25201BCF9EF600F83E82 /* IQUIViewController+Additions.m in Sources */,
 				C6D5F61C1BC7B3E60050C1AE /* DSAppCommon.m in Sources */,
 				51ED4E6C1BE0C5D50079E030 /* IBActionSheet.m in Sources */,
+				2BEA3FC81C15ADEF00237D12 /* DSTermsOfUseView.m in Sources */,
 				EACB22BB1BC7C7F7002FAD54 /* DSLoginViewController.m in Sources */,
 				EA784F001BE0950500863A6D /* DVSwitch.m in Sources */,
 				511C735F1BE3801100D3D61D /* DSChatDetailViewController.m in Sources */,

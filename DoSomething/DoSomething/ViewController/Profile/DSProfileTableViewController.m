@@ -22,6 +22,8 @@
 
 #import "CustomAlterview.h"
 
+
+
 @interface DSProfileTableViewController ()<CLLocationManagerDelegate,UIAlertViewDelegate,UIScrollViewDelegate>
 {
     DSWebservice            * objWebService;
@@ -85,6 +87,8 @@
     BOOL isLogin;
     CustomAlterview *objCustomAlterview;
     
+    BOOL isSelectMale,isSelectFemale;
+    
 
 }
 
@@ -107,7 +111,7 @@
     loginUserSessionID = strsessionID;
     if(profileDict == NULL)
     {
-        [self initializeArray];
+       // [self initializeArray];
     
     }
     else{
@@ -141,14 +145,20 @@
             NSString *ImageURL1 , *ImageURL2, *ImageURL3 ;
             NSData *imageData1, *imageData2, *imageData3;
             if([[profileDict valueForKey:@"image1"] isEqual:@""]){
-                imageData1 = [profileDict valueForKey:@"image1"];
+             //   imageData1 = [profileDict valueForKey:@"image1"];
+                
+                ImageURL1 = @"";
+                imageData1 = [ImageURL1 dataUsingEncoding:NSUTF8StringEncoding];
             }
             else{
                 ImageURL1 = [profileDict valueForKey:@"image1"];
                 imageData1 = [NSData dataWithContentsOfURL:[NSURL URLWithString:ImageURL1]];
             }
             if([[profileDict valueForKey:@"image2"] isEqual:@""]){
-                imageData2 = [profileDict valueForKey:@"image2"];
+              //  imageData2 = [profileDict valueForKey:@"image2"];
+                
+                ImageURL2 = @"";
+                imageData2 = [ImageURL2 dataUsingEncoding:NSUTF8StringEncoding];
             }
             else{
                 ImageURL2 = [profileDict valueForKey:@"image2"];
@@ -156,7 +166,10 @@
             }
 
             if([[profileDict valueForKey:@"image3"] isEqual:@""]){
-                imageData3 = [profileDict valueForKey:@"image3"];
+              //  imageData3 = [profileDict valueForKey:@"image3"];
+                
+                ImageURL3 = @"";
+                imageData3 = [ImageURL3 dataUsingEncoding:NSUTF8StringEncoding];
             }
             else{
                 ImageURL3 = [profileDict valueForKey:@"image3"];
@@ -270,11 +283,13 @@
     
     NSLog(@"joinedString:%@",strInterestHobbies);
     
-    [_tableviewProfile reloadData];
+   
     
     infoArray=[[NSMutableArray alloc]initWithObjects:@"profile_noimg",@"profile_noimg",@"profile_noimg", nil];
     [self CustomAlterview];
+   
 
+     [_tableviewProfile reloadData];
 }
 
 #pragma mark - scroll
@@ -315,7 +330,7 @@
             cameraImage = [[UIImageView alloc]initWithFrame:CGRectMake(userProfileImage.frame.size.width / 2 - 15, self.scrView.frame.size.height - 55, 30, 30)];
             [cameraImage setTag:i+200];
             [cameraImage setImage:[UIImage imageNamed:@"profile_camera_icon"]];
-        [topViewCell setHidden:YES];
+            [topViewCell setHidden:YES];
             cameraImage.userInteractionEnabled = YES;
             
             [cameraImage setUserInteractionEnabled:YES];
@@ -568,16 +583,17 @@
         if ((selOptionVal = cell.emailTextField.text)) {
             if(selOptionVal != nil || ![selOptionVal isEqualToString:@""]){
                 emailAddressToRegister=cell.emailTextField.text;
-                [[[placeHolderArray objectAtIndex:indexPath.section] objectAtIndex:indexPath.row] setObject:selOptionVal forKey:@"TypingText"];
+//                [[[placeHolderArray objectAtIndex:indexPath.section] objectAtIndex:indexPath.row] setObject:selOptionVal forKey:@"TypingText"];
                 
             }
             
         }
-        selOptionVal = cell.passwordTextField.text;
-        emailPasswordToRegister=cell.passwordTextField.text;
         
+        else if ((selOptionVal = cell.passwordTextField.text))
         if(selOptionVal != nil || ![selOptionVal isEqualToString:@""]){
-            [[[placeHolderArray objectAtIndex:indexPath.section] objectAtIndex:indexPath.row] setObject:selOptionVal forKey:@"TypingTextPass"];
+            
+            emailPasswordToRegister=cell.passwordTextField.text;
+//            [[[placeHolderArray objectAtIndex:indexPath.section] objectAtIndex:indexPath.row] setObject:selOptionVal forKey:@"TypingTextPass"];
         }
         
     }
@@ -627,7 +643,7 @@
     titleArray = [[NSArray alloc]initWithObjects:@"Image",@"First Name",@"Last Name",@"male",@"Date of Birth",@"About You",@"Hobbies",@"Email&Password",@"switch_on",@"TermsOfUse",nil];
     
     NSLog(@"PlaceHolder %@",placeHolderArray);
-    //[self.tableviewProfile reloadData];
+   
    
 }
 -(void)initializeArrayProfile{
@@ -650,7 +666,7 @@
     titleArray = [[NSArray alloc]initWithObjects:@"Image",@"First Name",@"Last Name",@"male",@"Date of Birth",@"About You",@"Hobbies",@"Email&Password",@"switch_on",@"TermsOfUse",nil];
     
     NSLog(@"PlaceHolder %@",placeHolderArray);
-    //[self.tableviewProfile reloadData];
+    
     
 }
 
@@ -708,7 +724,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-         return [placeHolderArray[section] count];
+   return [placeHolderArray[section] count];
     
 }
 
@@ -873,18 +889,26 @@
             cell.layoutConstraintViewHeight.constant =49;
 
         }
-
-                if(profileDict !=NULL){
-                    [cell.textFieldPlaceHolder setEnabled:NO];
-                    cell.firstnameTxt.text =[profileDict valueForKey:@"first_name"];
-                    cell.lastNameTxt.text  =[profileDict valueForKey:@"last_name"];
-                    
-                    
-                }
-           else
+        if(profileDict !=NULL){
+            [cell.textFieldPlaceHolder setEnabled:NO];
+            cell.firstnameTxt.text =[profileDict valueForKey:@"first_name"];
+            cell.lastNameTxt.text  =[profileDict valueForKey:@"last_name"];
+            
+        }
+        else if(userDetailsDict.count > 0){
+            cell.firstnameTxt.text =[userDetailsDict valueForKey:@"first_name"];
+            cell.lastNameTxt.text  =[userDetailsDict valueForKey:@"last_name"];
+            FirstName = cell.firstnameTxt.text;
+            LastName  = cell.lastNameTxt.text;
+            
+            FirstName= cell.firstnameTxt.text;
+            LastName  =cell.lastNameTxt.text;
+            
+        }
+        else
            {
-               cell.firstnameTxt.text = FirstName;
-              cell.lastNameTxt.text   =LastName;
+            cell.firstnameTxt.text = FirstName;
+            cell.lastNameTxt.text   =LastName;
            }
 
     }
@@ -936,36 +960,35 @@
         [cell.maleButton setTag:2004];
         [cell.femaleButton setTag:2005];
         
-        maleLabel =[[UILabel alloc]initWithFrame:CGRectMake(0, 0, labelWidth,labelHeight)];
-        maleLabel.font = [UIFont fontWithName:@"Patron-Regular" size:9.0];
-        maleLabel.textAlignment = NSTextAlignmentCenter;
-        [maleLabel setText:@"Male"];
-        [cell.labelMale addSubview:maleLabel];
-        
-        femaleLabel =[[UILabel alloc]initWithFrame:CGRectMake(0, 0,labelWidth, labelHeight)];
-        femaleLabel.font = [UIFont fontWithName:@"Patron-Regular" size:9.0];
-        femaleLabel.textAlignment = NSTextAlignmentCenter;
-        [femaleLabel setText:@"Female"];
-        [cell.labelFemale addSubview:femaleLabel];
         
         if( profileDict !=NULL){
             
             profileGenderValueLabel.text =[profileDict valueForKey:@"gender"];
             
         }
+        else if(userDetailsDict.count > 0){
+            profileGenderValueLabel.text =[userDetailsDict valueForKey:@"gender"];
+            strGender =profileGenderValueLabel.text;
+        }
+
+        
         else{
             [profileGenderView setHidden:YES];
             [profileGenderLabel setHidden:YES];
             [profileGenderValueLabel setHidden:YES];
             
-            femaleLabel.textColor = [UIColor colorWithRed:(float)161.0/255 green:(float)161.0/255 blue:(float)161.0/255 alpha:1.0f];
-            maleLabel.textColor = [UIColor colorWithRed:(float)161.0/255 green:(float)161.0/255 blue:(float)161.0/255 alpha:1.0f];
-
+            if(isSelectFemale ==YES)
+            {
+                
+                [cell.femaleButton setTitleColor:[UIColor redColor] forState:UIControlStateNormal];
+            }
+            else if (isSelectMale==YES)
+            {
+                [cell.maleButton setTitleColor:[UIColor redColor] forState:UIControlStateNormal];
+            }
+            
         }
         
-        
-        cell.maleButton.userInteractionEnabled = YES;
-        cell.femaleButton.userInteractionEnabled = YES;
         [cell.maleButton addTarget:self action:@selector(buttonAction:) forControlEvents:UIControlEventTouchUpInside];
         [cell.femaleButton addTarget:self action:@selector(buttonAction:) forControlEvents:UIControlEventTouchUpInside];
         
@@ -986,15 +1009,21 @@
         if(profileDict != NULL)
         {
             cell.textFieldDPPlaceHolder.text =[profileDict valueForKey:@"date_of_birth"];
+             [cell.textFieldDPPlaceHolder setTag:1000];
         }
+        else if(userDetailsDict.count > 0){
+            cell.textFieldDPPlaceHolder.text =[userDetailsDict valueForKey:@"dob"];
+            [cell.textFieldDPPlaceHolder setTag:1000];
+
+        }
+        
         else
         {
         if([currentTextfield.text isEqualToString:@""] || currentTextfield.text == nil)
+            
+               [cell.textFieldDPPlaceHolder setTag:1000];
             cell.textFieldDPPlaceHolder.text = currentTextfield.text;
-       
         }
-            [cell.textFieldDPPlaceHolder setTag:1000];
-
         
         
     }
@@ -1009,41 +1038,70 @@
         
         
         if(profileDict !=NULL){
-        
             
-                if([[profileDict valueForKey:@"about"] isEqual:@""]){
-                    if(textviewText == nil)
-                        cell.textViewHeaderLabel.hidden = NO;
-                    else
-                        cell.textViewHeaderLabel.hidden = YES;
-                    
-                    cell.textViewAboutYou.text = textviewText;
-                    //cell.labelAboutYou.text =titleText;
-                    strAbout =cell.textViewAboutYou.text;
-                    //cell.textViewHeaderLabel.text =placeHolderText;
-                    cell.textViewAboutYou.delegate = self;
-                }
-                else{
-                    cell.textViewAboutYou.text = [[profileDict valueForKey:@"about"]mutableCopy];
-                    strAbout =cell.textViewAboutYou.text;
-                    cell.textViewHeaderLabel.hidden = YES;
-                    //cell.textViewHeaderLabel.text =placeHolderText;
-                    //cell.labelAboutYou.text =titleText;
-                    cell.textViewAboutYou.delegate = self;
-                }
+            
+            if([[profileDict valueForKey:@"about"] isEqual:@""]){
                 
-                        }
-        else{
-            if(textviewText == nil)
-                cell.textViewHeaderLabel.hidden = NO;
-            else
-                cell.textViewHeaderLabel.hidden = YES;
+                if(textviewText == nil)
+                    
+                    cell.textViewHeaderLabel.hidden = NO;
+                
+                else
+                    
+                    cell.textViewHeaderLabel.hidden = YES;
+                
+                
                 
                 cell.textViewAboutYou.text = textviewText;
-               // cell.labelAboutYou.text =titleText;
+                
+                //cell.labelAboutYou.text =titleText;
+                
                 strAbout =cell.textViewAboutYou.text;
-               // cell.textViewHeaderLabel.text =placeHolderText;
+                
+                //cell.textViewHeaderLabel.text =placeHolderText;
+                
                 cell.textViewAboutYou.delegate = self;
+                
+            }
+            
+            else{
+                
+                cell.textViewAboutYou.text = [[profileDict valueForKey:@"about"]mutableCopy];
+                
+                strAbout =cell.textViewAboutYou.text;
+                
+                
+                cell.textViewHeaderLabel.hidden = YES;
+                
+                //cell.textViewHeaderLabel.text =placeHolderText;
+                
+                //cell.labelAboutYou.text =titleText;
+                
+                cell.textViewAboutYou.delegate = self;
+                
+            }
+            
+            
+            
+        }
+       
+        else{
+            if(textviewText == nil){
+                
+                if([strAbout isEqualToString:@""] ||strAbout == nil)
+                {
+                cell.textViewHeaderLabel.hidden = NO;
+               cell.textViewAboutYou.text = @"Write something about yourself here.";
+                }
+                else
+                {
+                    cell.textViewHeaderLabel.hidden = YES;
+                    cell.textViewAboutYou.text =strAbout;
+                }
+            }
+            
+                         cell.textViewAboutYou.delegate = self;
+            
         }
         
         
@@ -1158,14 +1216,16 @@
             //cell.passwordTextField.text =[self getPassword];
 
         }
-      else
-      {
+        else if(userDetailsDict.count > 0){
+            cell.emailTextField.text = [userDetailsDict valueForKey:@"email"];
+            emailAddressToRegister=cell.emailTextField.text;
+        }
+        else
+        {
           cell.emailTextField.text = [self getEmail];
           cell.passwordTextField.text =[self getPassword];
-
-      }
+        }
         
-    
         if (IS_IPHONE6 ||IS_IPHONE6_Plus){
         cell.layoutConstraintAccLabelYPos.constant =42;
         cell.layoutConstraintEmailPassViewHeight.constant =50;
@@ -1189,9 +1249,11 @@
         cell.messSwitchBtn.transform = CGAffineTransformMakeScale(0.50, 0.50);
         cell.SoundSwitchBtn.transform = CGAffineTransformMakeScale(0.50, 0.50);
         cell.vibrationSwitchBtn.transform = CGAffineTransformMakeScale(0.50, 0.50);
+        cell.vibrationSwitchBtn.layer.cornerRadius = 16.0;
+        cell.SoundSwitchBtn.layer.cornerRadius = 16.0;
+         cell.messSwitchBtn.layer.cornerRadius = 16.0;
         
-
-        
+        [self notificationMethod];
         [cell.vibrationSwitchBtn addTarget:self action:@selector(vibrationSwithAction:) forControlEvents:UIControlEventTouchUpInside];
         [cell.SoundSwitchBtn addTarget:self action:@selector(soundSwithAction:) forControlEvents:UIControlEventTouchUpInside];
         [cell.messSwitchBtn addTarget:self action:@selector(messSwithAction:) forControlEvents:UIControlEventTouchUpInside];
@@ -1229,6 +1291,59 @@
     }
 }
 
+-(void)notificationMethod
+{
+    
+    
+    NSString * objMsg =[isNotification_message isEqualToString:@"Yes"]? @"switch_on":@"switch_off";
+    NSString * objSound =[isNotification_sound isEqualToString:@"Yes"]? @"switch_on":@"switch_off";
+    NSString * objVibration =[isNotification_vibration isEqualToString:@"Yes"]? @"switch_on":@"switch_off";
+    
+    if([objMsg isEqualToString:@"switch_on"])
+    {
+        [cell.messSwitchBtn setThumbTintColor:[UIColor greenColor]];
+        
+        [cell.messSwitchBtn setBackgroundColor:[UIColor lightGrayColor]];
+        [cell.messSwitchBtn setOnTintColor:[UIColor lightGrayColor]];
+    }
+    if([objSound isEqualToString:@"switch_on"])
+    {
+        [cell.SoundSwitchBtn setThumbTintColor:[UIColor greenColor]];
+        
+        [cell.SoundSwitchBtn setBackgroundColor:[UIColor lightGrayColor]];
+        [cell.SoundSwitchBtn setOnTintColor:[UIColor lightGrayColor]];
+    }
+    
+    if([objVibration isEqualToString:@"switch_on"])
+    {
+        [cell.vibrationSwitchBtn setThumbTintColor:[UIColor greenColor]];
+        
+        [cell.vibrationSwitchBtn setBackgroundColor:[UIColor lightGrayColor]];
+        [cell.vibrationSwitchBtn setOnTintColor:[UIColor lightGrayColor]];
+    }
+    
+    if([objMsg isEqualToString:@"switch_off"])
+    {
+        [cell.messSwitchBtn setTintColor:[UIColor whiteColor]];
+        [cell.messSwitchBtn setBackgroundColor:[UIColor lightGrayColor]];
+        [cell.messSwitchBtn setThumbTintColor:[UIColor redColor]];
+    }
+    if([objSound isEqualToString:@"switch_off"])
+    {
+        [cell.SoundSwitchBtn setTintColor:[UIColor whiteColor]];
+        [cell.SoundSwitchBtn setBackgroundColor:[UIColor lightGrayColor]];
+        [cell.SoundSwitchBtn setThumbTintColor:[UIColor redColor]];
+    }
+    
+    if([objVibration isEqualToString:@"switch_off"])
+    {
+        [cell.vibrationSwitchBtn setTintColor:[UIColor whiteColor]];
+        [cell.vibrationSwitchBtn setBackgroundColor:[UIColor lightGrayColor]];
+        [cell.vibrationSwitchBtn setThumbTintColor:[UIColor redColor]];
+    }
+    
+}
+
 - (IBAction)messSwithAction:(UISwitch *)sender
 {
     sender.layer.cornerRadius = 16.0;
@@ -1259,7 +1374,7 @@
         
         [sender setBackgroundColor:[UIColor whiteColor]];
         [sender setOnTintColor:[UIColor lightGrayColor]];
-        isNotification_message =@"Yes";
+        isNotification_sound =@"Yes";
         
     }else{
        
@@ -1267,7 +1382,7 @@
         [sender setTintColor:[UIColor grayColor]];
         [sender setBackgroundColor:[UIColor lightGrayColor]];
         [sender setThumbTintColor:[UIColor redColor]];
-        isNotification_message =@"No";
+        isNotification_sound =@"No";
         
     }
 }
@@ -1281,7 +1396,7 @@
         
         [sender setBackgroundColor:[UIColor whiteColor]];
         [sender setOnTintColor:[UIColor lightGrayColor]];
-        isNotification_message =@"Yes";
+        isNotification_vibration =@"Yes";
         
     }else{
        
@@ -1289,7 +1404,7 @@
         [sender setTintColor:[UIColor grayColor]];
         [sender setBackgroundColor:[UIColor lightGrayColor]];
         [sender setThumbTintColor:[UIColor redColor]];
-        isNotification_message =@"No";
+        isNotification_vibration =@"No";
     }
 }
 
@@ -1302,6 +1417,7 @@
     while (![button isKindOfClass:[UITableViewCell class]]) {
         button = [button superview];
     }
+    
     NSIndexPath *indexPath;
      NSString *selOptionVal;
     //DSProfileTableViewCell *cell;
@@ -1311,26 +1427,26 @@
     
     if([sender tag] == 2004){
         selOptionVal = @"Male";
-        maleLabel.textColor =  [UIColor redColor];    //[UIColor colorWithRed:(161.0/255.0f) green:(161.0/255.0f) blue:(161.0/255.0f) alpha:1.0f];
+        [cell.maleButton setTitleColor:[UIColor redColor] forState:UIControlStateNormal];
+       [cell.femaleButton setTitleColor:[UIColor colorWithRed:(161.0/255.0f) green:(161.0/255.0f) blue:(161.0/255.0f) alpha:1.0f] forState:UIControlStateNormal];
+        isSelectMale =YES;
+        isSelectFemale=NO;
+        
     }
     
     if([sender tag] == 2005){
        selOptionVal = @"female";
-        femaleLabel.textColor = [UIColor redColor];   //[UIColor colorWithRed:(161.0/255.0f) green:(161.0/255.0f) blue:(161.0/255.0f) alpha:1.0f];
+       // femaleLabel.textColor = [UIColor redColor];   //[UIColor colorWithRed:(161.0/255.0f) green:(161.0/255.0f) blue:(161.0/255.0f) alpha:1.0f];
+        [cell.femaleButton setTitleColor:[UIColor redColor] forState:UIControlStateNormal];
+         [cell.maleButton setTitleColor:[UIColor colorWithRed:(161.0/255.0f) green:(161.0/255.0f) blue:(161.0/255.0f) alpha:1.0f] forState:UIControlStateNormal];
+        isSelectFemale=YES;
+         isSelectMale =NO;
     }
+    //strGender =profileGenderValueLabel.text;
     
+    strGender =selOptionVal;
     
-    
-    
-//                if(selOptionVal != nil || ![selOptionVal isEqualToString:@""])
-//                    [[[placeHolderArray objectAtIndex:indexPath.section] objectAtIndex:indexPath.row] setObject:selOptionVal forKey:@"placeHolder"];
-//    [_tableviewProfile beginUpdates];
-//    [_tableviewProfile reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
-//    [_tableviewProfile endUpdates];
-    selectGender =selOptionVal;
-    
-    //[_tableviewProfile reloadData];
-}
+   }
 
 #pragma mark - Textview delegate
 
@@ -1341,8 +1457,15 @@
     //DSProfileTableViewCell *cell = (DSProfileTableViewCell *)[_tableviewProfile cellForRowAtIndexPath:indexPath];
     cell = (DSProfileTableViewCell *)[_tableviewProfile cellForRowAtIndexPath:indexPath];
     cell.textViewHeaderLabel.hidden = YES;
+    if(textView.tag == 0) {
+        textView.text = @"";
+        //textView.textColor = [UIColor blackColor];
+        textView.tag = 1;
+        strAbout = textView.text;
+    }
     
-    textviewText = textView.text;
+
+    
 }
 
 -(void)textViewDidEndEditing:(UITextView *)textView
@@ -1352,8 +1475,14 @@
     //DSProfileTableViewCell *cell = (DSProfileTableViewCell *)[_tableviewProfile cellForRowAtIndexPath:indexPath];
     cell = (DSProfileTableViewCell *)[_tableviewProfile cellForRowAtIndexPath:indexPath];
     cell.textViewHeaderLabel.hidden = YES;
-    
-    textviewText = textView.text;
+    if([textView.text length] == 0)
+    {
+        //textView.text = @"Foobar placeholder";
+        //textView.textColor = [UIColor lightGrayColor];
+        textView.tag = 0;
+    }
+
+    strAbout = textView.text;
 }
 
 
@@ -1432,7 +1561,21 @@
         currentLatitude = @"";
     if(currentLongitude == nil)
         currentLongitude = @"";
-    
+    if(userDetailsDict.count > 0)
+    {
+        if(profileImage1 == nil)
+        {
+            NSString *fbProfile = [userDetailsDict valueForKey:@"profileImage"];
+            NSURL *profileImageFBUrl = [NSURL URLWithString:fbProfile];
+            NSData *profileImageData = [[NSData alloc] initWithContentsOfURL:profileImageFBUrl];
+            profileImage1 = [UIImage imageWithData:profileImageData];
+
+        }
+//        else{
+//            
+//        }
+
+    }
     [objWebService postRegister:Register_API
                            type:strType
                      first_name:FirstName
@@ -1488,7 +1631,7 @@
                        sessionid:loginUserSessionID
                          success:^(AFHTTPRequestOperation *operation, id responseObject) {
                              NSLog(@"profileUpdate%@",responseObject);
-                             [self showAltermessage:[[responseObject objectForKey:@"updateprofile"]objectForKey:@"Message"]];
+                             
                              [COMMON removeLoading];
                          }
                          failure:^(AFHTTPRequestOperation *operation, id error) {
@@ -1518,12 +1661,35 @@
     [self gotoHomeView];
     
 }
+#pragma mark - loadUpdateNotification
+-(void)loadUpdate{
+    
+    [COMMON LoadIcon:self.view];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(loadUpdateView:)
+                                                 name:@"updateprofile"
+                                               object:nil];
+    
+   [self updateAPI];
+    
+    
+}
+-(void)loadUpdateView:(NSNotification *)notification{
+    
+    
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+    
+    [self showAltermessage:@"Profile Updated Successfully"];
+    [COMMON removeLoading];
+    
+}
 
 
 #pragma mark - saveAction
 -(void)saveAction:(id)sender
 {
-    
+    [self.view endEditing:YES];
     [COMMON LoadIcon:self.view];
     if(profileDict !=NULL){
         
@@ -1533,10 +1699,11 @@
         FirstName = [profileDict valueForKey:@"first_name"];
         LastName  = [profileDict valueForKey:@"last_name"];
         strGender = [profileDict valueForKey:@"gender"];
-        strDOB       = (currentTextfield.text !=nil)?currentTextfield.text :@"";
+        strDOB    = (currentTextfield.text !=nil)?currentTextfield.text :@"";
+        emailPasswordToRegister = cell.passwordTextField.text;
        // strAbout;
         [self dateConverter];
-        [self updateAPI];
+        [self loadUpdate];
     }
     else
         [self loadValidations];
@@ -1556,24 +1723,14 @@
 #pragma mark - saveAction
 -(void)loadValidations
 {
-    
     [COMMON LoadIcon:self.view];
-    NSArray *postPerArray;
-    if(userDetailsDict.count >0){
-    postPerArray = [[placeHolderArray objectAtIndex:0]valueForKey:@"placeHolder"];
-    }
-    else
-    postPerArray = [[placeHolderArray objectAtIndex:0]valueForKey:@"TypingText"];
-    NSLog(@"hobby:%@",hobbiesNameArray);
     
-    strFirstName = [postPerArray objectAtIndex:1];
-    strLastName  = [postPerArray objectAtIndex:2];
+    
+    
+    NSLog(@"hobby:%@",hobbiesNameArray);
     strType      = (selectEmail== YES)?@"1":@"2";
     strProfileID = (FBprofileID!=nil)?FBprofileID:@"";
-    strGender    = (selectGender!=nil)?selectGender:@"";
-    //FirstName    = (strFirstName!=nil)? strFirstName:@"";
-   // LastName     = (strLastName!=nil)?strLastName:@"";
-
+    //emailPasswordToRegister = cell.passwordTextField.text;
     strDOB       = (currentTextfield.text !=nil)?currentTextfield.text :@"";
     [self dateConverter];
     
@@ -1594,8 +1751,16 @@
         return;
         
     }
+   else if ([strGender isEqualToString:@""] || strGender == NULL)
+   {
+       [self showAltermessage:GENDER_REQUIRED];
+       
+       [COMMON removeLoading];
+       return;
+   }
+
     
-   else if ( [dateChange isEqualToString:@""] || dateChange == NULL )
+   else if ([dateChange isEqualToString:@""] || dateChange == NULL )
     {
 
          [self showAltermessage:DOB_REQUIRED];
@@ -1603,21 +1768,14 @@
         return;
     }
     
-   else if ( [strGender isEqualToString:@""] || strGender == NULL)
-    {
-        [self showAltermessage:GENDER_REQUIRED];
-
-        [COMMON removeLoading];
-        return;
-    }
     
-   else if ( [emailAddressToRegister isEqualToString:@""] || emailAddressToRegister == nil)
+   else if ([emailAddressToRegister isEqualToString:@""] || emailAddressToRegister == nil)
     {
         [self showAltermessage:EMAIL_REQUIRED];
         [COMMON removeLoading];
         return;
     }
-   else if ( [emailPasswordToRegister isEqualToString:@""] || emailPasswordToRegister == nil)
+   else if ([emailPasswordToRegister isEqualToString:@""] || emailPasswordToRegister == nil)
     {
 
         [self showAltermessage:PASSWORD_REQUIRED];
@@ -1630,35 +1788,6 @@
       [self loadRegister];
   }
     
-    
-//    if(![FirstName isEqual:[NSNull null]]&& ![FirstName isEqualToString:@""]&&![LastName isEqual:[NSNull null]]&& ![LastName isEqualToString:@""] &&![dateChange isEqual:[NSNull null]]&&![strGender isEqual:[NSNull null]]&& ![strGender isEqualToString:@""] &&![emailAddressToRegister isEqual:[NSNull null]] &&![emailAddressToRegister isEqualToString:@""] &&![emailPasswordToRegister isEqual:[NSNull null]] && ![emailPasswordToRegister isEqualToString:@""]){
-////            if(![NSString validateEmail:emailAddressToRegister]){
-////                if(IS_GREATER_IOS8){
-////                [self presentViewController:[ DSAppCommon alertWithTitle:@"Title" withMessage:INVALID_EMAIL preferredStyle:UIAlertControllerStyleAlert] animated:YES completion:NULL];
-////                }
-////                else
-////                {
-////                    [DSAppCommon showSimpleAlertWithMessage:INVALID_EMAIL];
-////                }
-////                [COMMON removeLoading];
-////                
-////                return;
-////            }
-//           if([dateChange isEqual:@"DD-MM-YYYY"]){
-//               [self showAltermessage:@"ENTER DATE"];
-//               [COMMON removeLoading];
-//               return;
-//           }
-//        [self loadRegister];
-//        
-//
-//    }
-//    
-//    else{
-//        [self showAltermessage:FILL_ALL_DETAILS];
-//        [COMMON removeLoading];
-//        return;
-//    }
 
 }
 

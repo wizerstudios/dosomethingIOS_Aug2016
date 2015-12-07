@@ -14,6 +14,7 @@
 #import "DSHomeViewController.h"
 #import "AppDelegate.h"
 #import "CustomAlterview.h"
+#import "DSTermsOfUseView.h"
 
 @interface SettingView ()
 {
@@ -29,9 +30,11 @@
     UISwitch * soundSwitch;
     UISwitch *vibrationSwitch;
     CustomAlterview * objCustomAlterview;
+    UIWindow *windowInfo;
 }
 
 @property (nonatomic,strong) IBOutlet NSLayoutConstraint * deletebuttonBottomoposition;
+@property(nonatomic,retain) DSTermsOfUseView *termsOfUseView;
 
 @end
 @implementation SettingView
@@ -43,6 +46,7 @@
     objWebService =[[DSWebservice alloc]init];
     settingScroll.scrollEnabled =NO;
     NSMutableDictionary *dic=[[NSMutableDictionary alloc]init];
+   
     
     dic =[[NSUserDefaults standardUserDefaults] valueForKey:USERDETAILS];
     
@@ -53,6 +57,7 @@
     notificationvibration=[dic valueForKey:@"notification_vibration"];
     
     loginUserSessionID=strsessionID;
+    // AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
 }
 -(void)viewWillAppear:(BOOL)animated{
     
@@ -333,11 +338,11 @@
 }
 -(IBAction)didClickTearmofuseAction:(id)sender
 {
-    
+   // [self loadTermsOfUseView];
 }
 -(IBAction)didClickprivacypolicyAction:(id)sender
 {
-    
+    // [self loadTermsOfUseView];
 }
 
 
@@ -352,16 +357,39 @@
 
 - (IBAction)alertPressNo:(id)sender {
     
-
-    
         objCustomAlterview.alertBgView.hidden = YES;
         
         objCustomAlterview.alertMainBgView.hidden = YES;
         objCustomAlterview.view.hidden =YES;
       
- 
+
+}
+
+#pragma mark TermsOfUse
+
+-(void)loadTermsOfUseView
+{
+    windowInfo = [[[UIApplication sharedApplication] delegate] window];
+    
+    DSTermsOfUseView *termsOfUseView = [[DSTermsOfUseView alloc] init];
+    
+    [windowInfo addSubview:termsOfUseView];
+    
+    [termsOfUseView.closeButton addTarget:self action:@selector(closeButtonAction:) forControlEvents:UIControlEventTouchUpInside];
+   
+    [self setTermsOfUseView:termsOfUseView];
+    
     
 }
+
+-(IBAction)closeButtonAction:(id)sender
+{
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        [self.termsOfUseView removeFromSuperview];
+        
+    });
+}
+
 
 
 - (void)didReceiveMemoryWarning {
