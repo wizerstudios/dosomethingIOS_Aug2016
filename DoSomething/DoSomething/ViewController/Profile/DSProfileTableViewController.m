@@ -278,8 +278,7 @@
     
     infoArray=[[NSMutableArray alloc]initWithObjects:@"profile_noimg",@"profile_noimg",@"profile_noimg", nil];
     [self CustomAlterview];
-    isSelectMale=NO;
-    isSelectFemale=NO;
+   
 
      [_tableviewProfile reloadData];
 }
@@ -977,6 +976,7 @@
             {
                 [cell.maleButton setTitleColor:[UIColor redColor] forState:UIControlStateNormal];
             }
+            
         }
         
         [cell.maleButton addTarget:self action:@selector(buttonAction:) forControlEvents:UIControlEventTouchUpInside];
@@ -1059,11 +1059,6 @@
                 cell.textViewAboutYou.text = [[profileDict valueForKey:@"about"]mutableCopy];
                 
                 strAbout =cell.textViewAboutYou.text;
-                
-                
-                
-                
-                
                 cell.textViewHeaderLabel.hidden = YES;
                 
                 //cell.textViewHeaderLabel.text =placeHolderText;
@@ -1079,12 +1074,21 @@
         }
        
         else{
-            if(textviewText == nil)
+            if(textviewText == nil){
                 
-                cell.textViewAboutYou.text = @"Write something about yourself here.";
+                if([strAbout isEqualToString:@""] ||strAbout == nil)
+                {
+                cell.textViewHeaderLabel.hidden = NO;
+               cell.textViewAboutYou.text = @"Write something about yourself here.";
+                }
+                else
+                {
+                    cell.textViewHeaderLabel.hidden = YES;
+                    cell.textViewAboutYou.text =strAbout;
+                }
+            }
             
-                strAbout =cell.textViewAboutYou.text;
-             cell.textViewAboutYou.delegate = self;
+                         cell.textViewAboutYou.delegate = self;
             
         }
         
@@ -1233,9 +1237,11 @@
         cell.messSwitchBtn.transform = CGAffineTransformMakeScale(0.50, 0.50);
         cell.SoundSwitchBtn.transform = CGAffineTransformMakeScale(0.50, 0.50);
         cell.vibrationSwitchBtn.transform = CGAffineTransformMakeScale(0.50, 0.50);
+        cell.vibrationSwitchBtn.layer.cornerRadius = 16.0;
+        cell.SoundSwitchBtn.layer.cornerRadius = 16.0;
+         cell.messSwitchBtn.layer.cornerRadius = 16.0;
         
-
-        
+        [self notificationMethod];
         [cell.vibrationSwitchBtn addTarget:self action:@selector(vibrationSwithAction:) forControlEvents:UIControlEventTouchUpInside];
         [cell.SoundSwitchBtn addTarget:self action:@selector(soundSwithAction:) forControlEvents:UIControlEventTouchUpInside];
         [cell.messSwitchBtn addTarget:self action:@selector(messSwithAction:) forControlEvents:UIControlEventTouchUpInside];
@@ -1273,6 +1279,59 @@
     }
 }
 
+-(void)notificationMethod
+{
+    
+    
+    NSString * objMsg =[isNotification_message isEqualToString:@"Yes"]? @"switch_on":@"switch_off";
+    NSString * objSound =[isNotification_sound isEqualToString:@"Yes"]? @"switch_on":@"switch_off";
+    NSString * objVibration =[isNotification_vibration isEqualToString:@"Yes"]? @"switch_on":@"switch_off";
+    
+    if([objMsg isEqualToString:@"switch_on"])
+    {
+        [cell.messSwitchBtn setThumbTintColor:[UIColor greenColor]];
+        
+        [cell.messSwitchBtn setBackgroundColor:[UIColor lightGrayColor]];
+        [cell.messSwitchBtn setOnTintColor:[UIColor lightGrayColor]];
+    }
+    if([objSound isEqualToString:@"switch_on"])
+    {
+        [cell.SoundSwitchBtn setThumbTintColor:[UIColor greenColor]];
+        
+        [cell.SoundSwitchBtn setBackgroundColor:[UIColor lightGrayColor]];
+        [cell.SoundSwitchBtn setOnTintColor:[UIColor lightGrayColor]];
+    }
+    
+    if([objVibration isEqualToString:@"switch_on"])
+    {
+        [cell.vibrationSwitchBtn setThumbTintColor:[UIColor greenColor]];
+        
+        [cell.vibrationSwitchBtn setBackgroundColor:[UIColor lightGrayColor]];
+        [cell.vibrationSwitchBtn setOnTintColor:[UIColor lightGrayColor]];
+    }
+    
+    if([objMsg isEqualToString:@"switch_off"])
+    {
+        [cell.messSwitchBtn setTintColor:[UIColor whiteColor]];
+        [cell.messSwitchBtn setBackgroundColor:[UIColor lightGrayColor]];
+        [cell.messSwitchBtn setThumbTintColor:[UIColor redColor]];
+    }
+    if([objSound isEqualToString:@"switch_off"])
+    {
+        [cell.SoundSwitchBtn setTintColor:[UIColor whiteColor]];
+        [cell.SoundSwitchBtn setBackgroundColor:[UIColor lightGrayColor]];
+        [cell.SoundSwitchBtn setThumbTintColor:[UIColor redColor]];
+    }
+    
+    if([objVibration isEqualToString:@"switch_off"])
+    {
+        [cell.vibrationSwitchBtn setTintColor:[UIColor whiteColor]];
+        [cell.vibrationSwitchBtn setBackgroundColor:[UIColor lightGrayColor]];
+        [cell.vibrationSwitchBtn setThumbTintColor:[UIColor redColor]];
+    }
+    
+}
+
 - (IBAction)messSwithAction:(UISwitch *)sender
 {
     sender.layer.cornerRadius = 16.0;
@@ -1303,7 +1362,7 @@
         
         [sender setBackgroundColor:[UIColor whiteColor]];
         [sender setOnTintColor:[UIColor lightGrayColor]];
-        isNotification_message =@"Yes";
+        isNotification_sound =@"Yes";
         
     }else{
        
@@ -1311,7 +1370,7 @@
         [sender setTintColor:[UIColor grayColor]];
         [sender setBackgroundColor:[UIColor lightGrayColor]];
         [sender setThumbTintColor:[UIColor redColor]];
-        isNotification_message =@"No";
+        isNotification_sound =@"No";
         
     }
 }
@@ -1325,7 +1384,7 @@
         
         [sender setBackgroundColor:[UIColor whiteColor]];
         [sender setOnTintColor:[UIColor lightGrayColor]];
-        isNotification_message =@"Yes";
+        isNotification_vibration =@"Yes";
         
     }else{
        
@@ -1333,7 +1392,7 @@
         [sender setTintColor:[UIColor grayColor]];
         [sender setBackgroundColor:[UIColor lightGrayColor]];
         [sender setThumbTintColor:[UIColor redColor]];
-        isNotification_message =@"No";
+        isNotification_vibration =@"No";
     }
 }
 
@@ -1367,15 +1426,15 @@
         [cell.femaleButton setTitleColor:[UIColor redColor] forState:UIControlStateNormal];
         isSelectFemale=YES;
     }
+    //strGender =profileGenderValueLabel.text;
     
-    
-    selectGender =selOptionVal;
+    strGender =selOptionVal;
     
    }
 
 #pragma mark - Textview delegate
 
--(BOOL)textViewShouldBeginEditing:(UITextView *)textView
+-(void)textViewDidBeginEditing:(UITextView *)textView
 {
     CGPoint position = [textView convertPoint:CGPointZero toView: _tableviewProfile ];
     NSIndexPath *indexPath = [_tableviewProfile indexPathForRowAtPoint: position];
@@ -1386,10 +1445,11 @@
         textView.text = @"";
         //textView.textColor = [UIColor blackColor];
         textView.tag = 1;
+        strAbout = textView.text;
     }
-    return YES;
+    
 
-    //textviewText = textView.text;
+    
 }
 
 -(void)textViewDidEndEditing:(UITextView *)textView
@@ -1406,7 +1466,7 @@
         textView.tag = 0;
     }
 
-    //textviewText = textView.text;
+    strAbout = textView.text;
 }
 
 
@@ -1640,6 +1700,10 @@
     
     NSLog(@"hobby:%@",hobbiesNameArray);
     
+    NSLog(@"hobby:%@",hobbiesNameArray);
+    strType      = (selectEmail== YES)?@"1":@"2";
+    strProfileID = (FBprofileID!=nil)?FBprofileID:@"";
+    emailPasswordToRegister = cell.passwordTextField.text;
     strDOB       = (currentTextfield.text !=nil)?currentTextfield.text :@"";
     [self dateConverter];
     
