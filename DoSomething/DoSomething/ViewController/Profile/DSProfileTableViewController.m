@@ -1416,15 +1416,19 @@
     if([sender tag] == 2004){
         selOptionVal = @"Male";
         [cell.maleButton setTitleColor:[UIColor redColor] forState:UIControlStateNormal];
-        //maleLabel.textColor =  [UIColor redColor];    //[UIColor colorWithRed:(161.0/255.0f) green:(161.0/255.0f) blue:(161.0/255.0f) alpha:1.0f];
+       [cell.femaleButton setTitleColor:[UIColor colorWithRed:(161.0/255.0f) green:(161.0/255.0f) blue:(161.0/255.0f) alpha:1.0f] forState:UIControlStateNormal];
         isSelectMale =YES;
+        isSelectFemale=NO;
+        
     }
     
     if([sender tag] == 2005){
        selOptionVal = @"female";
        // femaleLabel.textColor = [UIColor redColor];   //[UIColor colorWithRed:(161.0/255.0f) green:(161.0/255.0f) blue:(161.0/255.0f) alpha:1.0f];
         [cell.femaleButton setTitleColor:[UIColor redColor] forState:UIControlStateNormal];
+         [cell.maleButton setTitleColor:[UIColor colorWithRed:(161.0/255.0f) green:(161.0/255.0f) blue:(161.0/255.0f) alpha:1.0f] forState:UIControlStateNormal];
         isSelectFemale=YES;
+         isSelectMale =NO;
     }
     //strGender =profileGenderValueLabel.text;
     
