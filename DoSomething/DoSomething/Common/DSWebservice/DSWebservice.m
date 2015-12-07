@@ -365,21 +365,22 @@ notification_vibration:(NSString *)isnotification_vibration
          
          if([[responseObject objectForKey:@"updateprofile"]objectForKey:@"status"]){
              
-             [DSAppCommon showSimpleAlertWithMessage:[[responseObject objectForKey:@"updateprofile"]objectForKey:@"Message"]];
-             [COMMON removeLoading];
+            // [DSAppCommon showSimpleAlertWithMessage:[[responseObject objectForKey:@"updateprofile"]objectForKey:@"Message"]];
+             //[COMMON removeLoading];
+             
 
             
          }
          
          else{
-             [DSAppCommon showSimpleAlertWithMessage:[responseObject objectForKey:@"error"]];
-             [COMMON removeLoading];
+             //[DSAppCommon showSimpleAlertWithMessage:[responseObject objectForKey:@"error"]];
+             //[COMMON removeLoading];
          }
      }
      
        failure:^(AFHTTPRequestOperation *operation, NSError *error){
            NSLog(@"Error = %@",error);
-           [DSAppCommon showSimpleAlertWithMessage:@"FAILURE"];
+           //[DSAppCommon showSimpleAlertWithMessage:@"FAILURE"];
            
        }];
 
@@ -680,6 +681,8 @@ message_send_user_id:(NSString *)message_send_user_id
          }];
     }
 }
+
+
 
 
 @end
