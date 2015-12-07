@@ -123,8 +123,6 @@
     [customNavigation.buttonBack setHidden:YES];
     [customNavigation.saveBtn setHidden:YES];
     [self.navigationController.navigationBar addSubview:customNavigation.view];
-    //    [customNavigation.saveBtn addTarget:self action:@selector(saveAction) forControlEvents:UIControlEventTouchUpInside];
-    //    [customNavigation.buttonBack addTarget:self action:@selector(backAction) forControlEvents:UIControlEventTouchUpInside];
     
     selectedArray = [[NSMutableArray alloc]init];
     selectedItemsArray = [[NSMutableArray alloc]init];
@@ -413,7 +411,7 @@
         
         objCustomAlterview.alertMainBgView.hidden = YES;
         objCustomAlterview.view .hidden  = YES;
-    }];
+   
 }
 
 - (IBAction)alertPressYes:(id)sender {
@@ -432,7 +430,7 @@
             [objCustomAlterview.view setHidden:YES];
         [self loadupdateDosomethingWebService:selectedItemsArray :@"Yes"];
       
-    }];
+  
     
 }
 
@@ -452,7 +450,7 @@
         [objCustomAlterview.view setHidden:YES];
         [self loadupdateDosomethingWebService:selectedArray :@"No"];
      
-    }];
+    //}];
    
     
 }
