@@ -243,7 +243,7 @@ notification_vibration:(NSString *)isnotification_vibration
                  
                  [COMMON setUserDetails:[[registerDict valueForKey:@"userDetails"]objectAtIndex:0]];
                  NSLog(@"userdetails = %@",[COMMON getUserDetails]);
-                 [[NSNotificationCenter defaultCenter] postNotificationName:@"fbregisterform"
+                 [[NSNotificationCenter defaultCenter] postNotificationName:@"registerform"
                                                                      object:self
                                                                    userInfo:responseObject];
                 // [self gotoHomeView];

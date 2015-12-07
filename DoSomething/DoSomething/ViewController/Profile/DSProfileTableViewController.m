@@ -111,7 +111,7 @@
     loginUserSessionID = strsessionID;
     if(profileDict == NULL)
     {
-        [self initializeArray];
+       // [self initializeArray];
     
     }
     else{
@@ -832,25 +832,6 @@
     static NSString *cellIdentifier = @"Cell";
     
     cell = (DSProfileTableViewCell *)[tableView dequeueReusableCellWithIdentifier:cellIdentifier];
-    NSString *titleText;
-    NSString *placeHolderText,*placeHolderTextPass;
-    NSString *typingText,*typingTextPass;
-   
-    
-
-//        typingText       = [[[placeHolderArray valueForKey:@"TypingText" ]objectAtIndex:indexPath.section]objectAtIndex:indexPath.row];
-//        typingTextPass   = [[[placeHolderArray valueForKey:@"TypingTextPass" ]objectAtIndex:indexPath.section]objectAtIndex:indexPath.row];
-//    
-//
-//        placeHolderText     =  [[[placeHolderArray valueForKey:@"placeHolder" ]objectAtIndex:indexPath.section]objectAtIndex:indexPath.row];
-//        placeHolderTextPass =  [[[placeHolderArray valueForKey:@"placeHolderPass" ]objectAtIndex:indexPath.section]objectAtIndex:indexPath.row];
-    
-    
-   
-
-
-    
-       // titleText       =  [titleArray objectAtIndex:indexPath.row];
     if (indexPath.row == 0)
     {
         
@@ -903,10 +884,14 @@
             [cell.textFieldPlaceHolder setEnabled:NO];
             cell.firstnameTxt.text =[profileDict valueForKey:@"first_name"];
             cell.lastNameTxt.text  =[profileDict valueForKey:@"last_name"];
+            
         }
         else if(userDetailsDict.count > 0){
             cell.firstnameTxt.text =[userDetailsDict valueForKey:@"first_name"];
             cell.lastNameTxt.text  =[userDetailsDict valueForKey:@"last_name"];
+            
+            FirstName= cell.firstnameTxt.text;
+            LastName  =cell.lastNameTxt.text;
             
         }
         else
@@ -964,17 +949,6 @@
         [cell.maleButton setTag:2004];
         [cell.femaleButton setTag:2005];
         
-//        maleLabel =[[UILabel alloc]initWithFrame:CGRectMake(0, 0, labelWidth,labelHeight)];
-//        maleLabel.font = [UIFont fontWithName:@"Patron-Regular" size:9.0];
-//        maleLabel.textAlignment = NSTextAlignmentCenter;
-//        [maleLabel setText:@"Male"];
-//        [cell.labelMale addSubview:maleLabel];
-//        
-//        femaleLabel =[[UILabel alloc]initWithFrame:CGRectMake(0, 0,labelWidth, labelHeight)];
-//        femaleLabel.font = [UIFont fontWithName:@"Patron-Regular" size:9.0];
-//        femaleLabel.textAlignment = NSTextAlignmentCenter;
-//        [femaleLabel setText:@"Female"];
-//        [cell.labelFemale addSubview:femaleLabel];
         
         if( profileDict !=NULL){
             
@@ -983,6 +957,7 @@
         }
         else if(userDetailsDict.count > 0){
             profileGenderValueLabel.text =[userDetailsDict valueForKey:@"gender"];
+            strGender =profileGenderValueLabel.text;
         }
 
         
@@ -1000,15 +975,8 @@
             {
                 [cell.maleButton setTitleColor:[UIColor redColor] forState:UIControlStateNormal];
             }
-            
-//            femaleLabel.textColor = [UIColor colorWithRed:(float)161.0/255 green:(float)161.0/255 blue:(float)161.0/255 alpha:1.0f];
-//            maleLabel.textColor = [UIColor colorWithRed:(float)161.0/255 green:(float)161.0/255 blue:(float)161.0/255 alpha:1.0f];
-            
         }
         
-        
-        cell.maleButton.userInteractionEnabled = YES;
-        cell.femaleButton.userInteractionEnabled = YES;
         [cell.maleButton addTarget:self action:@selector(buttonAction:) forControlEvents:UIControlEventTouchUpInside];
         [cell.femaleButton addTarget:self action:@selector(buttonAction:) forControlEvents:UIControlEventTouchUpInside];
         
@@ -1029,9 +997,12 @@
         if(profileDict != NULL)
         {
             cell.textFieldDPPlaceHolder.text =[profileDict valueForKey:@"date_of_birth"];
+             [cell.textFieldDPPlaceHolder setTag:1000];
         }
         else if(userDetailsDict.count > 0){
-            profileGenderValueLabel.text =[userDetailsDict valueForKey:@"gender"];
+            cell.textFieldDPPlaceHolder.text =[userDetailsDict valueForKey:@"dob"];
+            [cell.textFieldDPPlaceHolder setTag:1000];
+
         }
         
         else
@@ -1039,10 +1010,8 @@
         if([currentTextfield.text isEqualToString:@""] || currentTextfield.text == nil)
             
                [cell.textFieldDPPlaceHolder setTag:1000];
+            cell.textFieldDPPlaceHolder.text = currentTextfield.text;
         }
-        cell.textFieldDPPlaceHolder.text = currentTextfield.text;
-        
-
         
         
     }
@@ -1057,43 +1026,64 @@
         
         
         if(profileDict !=NULL){
-        
             
-                if([[profileDict valueForKey:@"about"] isEqual:@""]){
-                    if(textviewText == nil)
-                        cell.textViewHeaderLabel.hidden = NO;
-                    else
-                        cell.textViewHeaderLabel.hidden = YES;
+            
+            if([[profileDict valueForKey:@"about"] isEqual:@""]){
+                
+                if(textviewText == nil)
                     
-                    cell.textViewAboutYou.text = textviewText;
-                    //cell.labelAboutYou.text =titleText;
-                    strAbout =cell.textViewAboutYou.text;
-                    //cell.textViewHeaderLabel.text =placeHolderText;
-                    cell.textViewAboutYou.delegate = self;
-                }
-                else{
-                    cell.textViewAboutYou.text = [[profileDict valueForKey:@"about"]mutableCopy];
-                    strAbout =cell.textViewAboutYou.text;
-                    
+                    cell.textViewHeaderLabel.hidden = NO;
+                
+                else
                     
                     cell.textViewHeaderLabel.hidden = YES;
-                    //cell.textViewHeaderLabel.text =placeHolderText;
-                    //cell.labelAboutYou.text =titleText;
-                    cell.textViewAboutYou.delegate = self;
-                }
                 
-                        }
+                
+                
+                cell.textViewAboutYou.text = textviewText;
+                
+                //cell.labelAboutYou.text =titleText;
+                
+                strAbout =cell.textViewAboutYou.text;
+                
+                //cell.textViewHeaderLabel.text =placeHolderText;
+                
+                cell.textViewAboutYou.delegate = self;
+                
+            }
+            
+            else{
+                
+                cell.textViewAboutYou.text = [[profileDict valueForKey:@"about"]mutableCopy];
+                
+                strAbout =cell.textViewAboutYou.text;
+                
+                
+                
+                
+                
+                cell.textViewHeaderLabel.hidden = YES;
+                
+                //cell.textViewHeaderLabel.text =placeHolderText;
+                
+                //cell.labelAboutYou.text =titleText;
+                
+                cell.textViewAboutYou.delegate = self;
+                
+            }
+            
+            
+            
+        }
+       
         else{
             if(textviewText == nil)
-               // cell.textViewHeaderLabel.hidden = NO;
-            //else
-                //cell.textViewHeaderLabel.hidden = YES;
                 
                 cell.textViewAboutYou.text = @"Write something about yourself here.";
-               // cell.labelAboutYou.text =titleText;
+            
                 strAbout =cell.textViewAboutYou.text;
-               // cell.textViewHeaderLabel.text =placeHolderText;
-                cell.textViewAboutYou.delegate = self;
+             cell.textViewAboutYou.delegate = self;
+            
         }
         
         
@@ -1210,6 +1200,7 @@
         }
         else if(userDetailsDict.count > 0){
             cell.emailTextField.text = [userDetailsDict valueForKey:@"email"];
+            emailAddressToRegister=cell.emailTextField.text;
         }
         else
         {
@@ -1642,27 +1633,12 @@
 {
     
     [COMMON LoadIcon:self.view];
-    NSArray *postPerArray;
-    if(userDetailsDict.count >0){
-    //postPerArray = [[placeHolderArray objectAtIndex:0]valueForKey:@"placeHolder"];
-        strFirstName = [postPerArray objectAtIndex:1];
-        strLastName  = [postPerArray objectAtIndex:2];
+    
         strType      = (selectEmail== YES)?@"1":@"2";
         strProfileID = (FBprofileID!=nil)?FBprofileID:@"";
-        strGender =   [userDetailsDict valueForKey:@"gender"];
-    }
-    else
-    postPerArray = [[placeHolderArray objectAtIndex:0]valueForKey:@"TypingText"];
+    
     NSLog(@"hobby:%@",hobbiesNameArray);
     
-    strFirstName = [postPerArray objectAtIndex:1];
-    strLastName  = [postPerArray objectAtIndex:2];
-    strType      = (selectEmail== YES)?@"1":@"2";
-    strProfileID = (FBprofileID!=nil)?FBprofileID:@"";
-    strGender    = (selectGender!=nil)?selectGender:@"";
-    //FirstName    = (strFirstName!=nil)? strFirstName:@"";
-   // LastName     = (strLastName!=nil)?strLastName:@"";
-
     strDOB       = (currentTextfield.text !=nil)?currentTextfield.text :@"";
     [self dateConverter];
     
@@ -1683,7 +1659,7 @@
         return;
         
     }
-   else if ( [strGender isEqualToString:@""] || strGender == NULL)
+   else if ([strGender isEqualToString:@""] || strGender == NULL)
    {
        [self showAltermessage:GENDER_REQUIRED];
        
@@ -1701,7 +1677,7 @@
     }
     
     
-   else if ( [emailAddressToRegister isEqualToString:@""] || emailAddressToRegister == nil)
+   else if ([emailAddressToRegister isEqualToString:@""] || emailAddressToRegister == nil)
     {
         [self showAltermessage:EMAIL_REQUIRED];
         [COMMON removeLoading];
@@ -1720,35 +1696,6 @@
       [self loadRegister];
   }
     
-    
-//    if(![FirstName isEqual:[NSNull null]]&& ![FirstName isEqualToString:@""]&&![LastName isEqual:[NSNull null]]&& ![LastName isEqualToString:@""] &&![dateChange isEqual:[NSNull null]]&&![strGender isEqual:[NSNull null]]&& ![strGender isEqualToString:@""] &&![emailAddressToRegister isEqual:[NSNull null]] &&![emailAddressToRegister isEqualToString:@""] &&![emailPasswordToRegister isEqual:[NSNull null]] && ![emailPasswordToRegister isEqualToString:@""]){
-////            if(![NSString validateEmail:emailAddressToRegister]){
-////                if(IS_GREATER_IOS8){
-////                [self presentViewController:[ DSAppCommon alertWithTitle:@"Title" withMessage:INVALID_EMAIL preferredStyle:UIAlertControllerStyleAlert] animated:YES completion:NULL];
-////                }
-////                else
-////                {
-////                    [DSAppCommon showSimpleAlertWithMessage:INVALID_EMAIL];
-////                }
-////                [COMMON removeLoading];
-////                
-////                return;
-////            }
-//           if([dateChange isEqual:@"DD-MM-YYYY"]){
-//               [self showAltermessage:@"ENTER DATE"];
-//               [COMMON removeLoading];
-//               return;
-//           }
-//        [self loadRegister];
-//        
-//
-//    }
-//    
-//    else{
-//        [self showAltermessage:FILL_ALL_DETAILS];
-//        [COMMON removeLoading];
-//        return;
-//    }
 
 }
 
