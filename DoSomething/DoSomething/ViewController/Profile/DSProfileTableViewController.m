@@ -672,24 +672,15 @@
 }
 
 - (IBAction)alertPressCancel:(id)sender {
-    [UIView animateWithDuration:1.0 animations:^{
-        
-     //   objCustomAlterview.alertBgView.alpha = 0;
-        
-     //   objCustomAlterview.alertMainBgView.alpha = 0;
-        
-    } completion:^(BOOL b){
-        
-        
+    
         objCustomAlterview. alertBgView.hidden = YES;
-        
         objCustomAlterview.alertMainBgView.hidden = YES;
         objCustomAlterview.view .hidden  = YES;
-    //}];
+   
 }
-
 -(void)showAltermessage:(NSString*)msg
 {
+
     objCustomAlterview.view.hidden =NO;
     //objCustomAlterview.view.alpha=0.0;
     objCustomAlterview.alertBgView.hidden = NO;
@@ -1756,6 +1747,5 @@
 
 }
 
-
-
+     
 @end

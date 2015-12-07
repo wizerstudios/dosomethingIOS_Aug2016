@@ -225,20 +225,11 @@
     [self.view addSubview:objCustomAlterview.view];
 }
 
-- (IBAction)alertPressCancel:(id)sender {
-    [UIView animateWithDuration:1.0 animations:^{
-        
-      //  objCustomAlterview.alertBgView.alpha = 0;
-        
-     //   objCustomAlterview.alertMainBgView.alpha = 0;
-        
-    } completion:^(BOOL b){
-        
-        
-        objCustomAlterview. alertBgView.hidden = YES;
-        
-        objCustomAlterview.alertMainBgView.hidden = YES;
-        objCustomAlterview.view .hidden  = YES;
+- (IBAction)alertPressCancel:(id)sender
+{
+    objCustomAlterview. alertBgView.hidden = YES;
+    objCustomAlterview.alertMainBgView.hidden = YES;
+    objCustomAlterview.view .hidden  = YES;
  
 }
 
@@ -247,11 +238,7 @@
     objCustomAlterview.view.hidden =NO;
     objCustomAlterview.alertBgView.hidden = NO;
     objCustomAlterview.alertMainBgView.hidden = NO;
-   
-    
     objCustomAlterview.alertMsgLabel.text = msg;
-   
-
 }
 
 #pragma mark- hide keyboard

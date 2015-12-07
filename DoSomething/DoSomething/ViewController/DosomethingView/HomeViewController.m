@@ -398,61 +398,24 @@
 }
 
 - (IBAction)alertPressCancel:(id)sender {
-    [UIView animateWithDuration:1.0 animations:^{
-        
-    //    objCustomAlterview.alertBgView.alpha = 0;
-        
-    //    objCustomAlterview.alertMainBgView.alpha = 0;
-              
-    } completion:^(BOOL b){
-        
-
-       objCustomAlterview. alertBgView.hidden = YES;
-        
-        objCustomAlterview.alertMainBgView.hidden = YES;
-        objCustomAlterview.view .hidden  = YES;
-   
+    objCustomAlterview. alertBgView.hidden = YES;
+    objCustomAlterview.alertMainBgView.hidden = YES;
+    objCustomAlterview.view .hidden  = YES;
 }
 
 - (IBAction)alertPressYes:(id)sender {
-    
-    [UIView animateWithDuration:1.0 animations:^{
-        
-   //     objCustomAlterview.alertBgView.alpha = 0;
-        
-  //      objCustomAlterview.alertMainBgView.alpha = 0;
-           }
-        completion:^(BOOL b){
-        
-        objCustomAlterview.alertBgView.hidden = YES;
-        
-        objCustomAlterview.alertMainBgView.hidden = YES;
-            [objCustomAlterview.view setHidden:YES];
-        [self loadupdateDosomethingWebService:selectedItemsArray :@"Yes"];
-      
-  
-    
+    objCustomAlterview.alertBgView.hidden = YES;
+    objCustomAlterview.alertMainBgView.hidden = YES;
+    [objCustomAlterview.view setHidden:YES];
+    [self loadupdateDosomethingWebService:selectedItemsArray :@"Yes"];
+
 }
 
 - (IBAction)alertPressNo:(id)sender {
-    [UIView animateWithDuration:1.0 animations:^{
-        
-    //    objCustomAlterview.alertBgView.alpha = 0;
-        
-   //     objCustomAlterview.alertMainBgView.alpha = 0;
-        
-    } completion:^(BOOL b){
-        
-        
-        objCustomAlterview.alertBgView.hidden = YES;
-        
-        objCustomAlterview.alertMainBgView.hidden = YES;
-        [objCustomAlterview.view setHidden:YES];
-        [self loadupdateDosomethingWebService:selectedArray :@"No"];
-     
-    //}];
-   
-    
+    objCustomAlterview.alertBgView.hidden = YES;
+    objCustomAlterview.alertMainBgView.hidden = YES;
+    [objCustomAlterview.view setHidden:YES];
+    [self loadupdateDosomethingWebService:selectedArray :@"No"];
 }
 -(void)loadupdateDosomethingWebService:(NSArray *)selectItemID :(NSString*)selectOption
 {
