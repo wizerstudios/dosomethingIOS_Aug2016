@@ -291,14 +291,17 @@
             NSData *profileData = [profileDataArray objectAtIndex:i];
             userProfileImage = [[UIImageView alloc]initWithFrame:CGRectMake((i*self.scrView.frame.size.width) + spacing, 20,self.profileImageView.frame.size.width, self.profileImageView.frame.size.height)];
             [userProfileImage setTag:i+100];
-            if([profileData length] == 0)
+            if([profileData length] == 0){
                 [userProfileImage setImage:[UIImage imageNamed:@"profile_noimg"]];
+                [topViewCell setHidden:YES];
+                
+            }
         
-        
-            
             else{
                 [userProfileImage setImage:[UIImage imageWithData:profileData]];
                 [cell.cameraButton setHidden:YES];
+                [topViewCell setHidden:NO];
+                
             }
             
             userProfileImage.layer.cornerRadius = userProfileImage.frame.size.height / 2;
@@ -669,24 +672,15 @@
 }
 
 - (IBAction)alertPressCancel:(id)sender {
-//    [UIView animateWithDuration:1.0 animations:^{
-//        
-//        objCustomAlterview.alertBgView.alpha = 0;
-//        
-//        objCustomAlterview.alertMainBgView.alpha = 0;
-//        
-//    } completion:^(BOOL b){
     
-        
         objCustomAlterview. alertBgView.hidden = YES;
-        
         objCustomAlterview.alertMainBgView.hidden = YES;
         objCustomAlterview.view .hidden  = YES;
-    //}];
+   
 }
-
 -(void)showAltermessage:(NSString*)msg
 {
+
     objCustomAlterview.view.hidden =NO;
     //objCustomAlterview.view.alpha=0.0;
     objCustomAlterview.alertBgView.hidden = NO;
@@ -1753,6 +1747,5 @@
 
 }
 
-
-
+     
 @end
