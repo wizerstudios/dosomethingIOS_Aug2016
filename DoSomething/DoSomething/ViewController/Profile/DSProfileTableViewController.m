@@ -145,14 +145,20 @@
             NSString *ImageURL1 , *ImageURL2, *ImageURL3 ;
             NSData *imageData1, *imageData2, *imageData3;
             if([[profileDict valueForKey:@"image1"] isEqual:@""]){
-                imageData1 = [profileDict valueForKey:@"image1"];
+             //   imageData1 = [profileDict valueForKey:@"image1"];
+                
+                ImageURL1 = @"";
+                imageData1 = [ImageURL1 dataUsingEncoding:NSUTF8StringEncoding];
             }
             else{
                 ImageURL1 = [profileDict valueForKey:@"image1"];
                 imageData1 = [NSData dataWithContentsOfURL:[NSURL URLWithString:ImageURL1]];
             }
             if([[profileDict valueForKey:@"image2"] isEqual:@""]){
-                imageData2 = [profileDict valueForKey:@"image2"];
+              //  imageData2 = [profileDict valueForKey:@"image2"];
+                
+                ImageURL2 = @"";
+                imageData2 = [ImageURL2 dataUsingEncoding:NSUTF8StringEncoding];
             }
             else{
                 ImageURL2 = [profileDict valueForKey:@"image2"];
@@ -160,7 +166,10 @@
             }
 
             if([[profileDict valueForKey:@"image3"] isEqual:@""]){
-                imageData3 = [profileDict valueForKey:@"image3"];
+              //  imageData3 = [profileDict valueForKey:@"image3"];
+                
+                ImageURL3 = @"";
+                imageData3 = [ImageURL3 dataUsingEncoding:NSUTF8StringEncoding];
             }
             else{
                 ImageURL3 = [profileDict valueForKey:@"image3"];
@@ -1561,9 +1570,9 @@
             profileImage1 = [UIImage imageWithData:profileImageData];
 
         }
-        else{
-            
-        }
+//        else{
+//            
+//        }
 
     }
     [objWebService postRegister:Register_API
