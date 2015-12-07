@@ -889,6 +889,8 @@
         else if(userDetailsDict.count > 0){
             cell.firstnameTxt.text =[userDetailsDict valueForKey:@"first_name"];
             cell.lastNameTxt.text  =[userDetailsDict valueForKey:@"last_name"];
+            FirstName = cell.firstnameTxt.text;
+            LastName  = cell.lastNameTxt.text;
             
             FirstName= cell.firstnameTxt.text;
             LastName  =cell.lastNameTxt.text;
@@ -1631,7 +1633,6 @@
 #pragma mark - saveAction
 -(void)loadValidations
 {
-    
     [COMMON LoadIcon:self.view];
     
         strType      = (selectEmail== YES)?@"1":@"2";
@@ -1668,7 +1669,7 @@
    }
 
     
-   else if ( [dateChange isEqualToString:@""] || dateChange == NULL )
+   else if ([dateChange isEqualToString:@""] || dateChange == NULL )
     {
 
          [self showAltermessage:DOB_REQUIRED];
@@ -1683,7 +1684,7 @@
         [COMMON removeLoading];
         return;
     }
-   else if ( [emailPasswordToRegister isEqualToString:@""] || emailPasswordToRegister == nil)
+   else if ([emailPasswordToRegister isEqualToString:@""] || emailPasswordToRegister == nil)
     {
 
         [self showAltermessage:PASSWORD_REQUIRED];
