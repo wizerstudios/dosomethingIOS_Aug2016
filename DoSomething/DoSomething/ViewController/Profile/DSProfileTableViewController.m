@@ -1061,9 +1061,6 @@
                 strAbout =cell.textViewAboutYou.text;
                 
                 
-                
-                
-                
                 cell.textViewHeaderLabel.hidden = YES;
                 
                 //cell.textViewHeaderLabel.text =placeHolderText;
@@ -1485,7 +1482,21 @@
         currentLatitude = @"";
     if(currentLongitude == nil)
         currentLongitude = @"";
-    
+    if(userDetailsDict.count > 0)
+    {
+        if(profileImage1 == nil)
+        {
+            NSString *fbProfile = [userDetailsDict valueForKey:@"profileImage"];
+            NSURL *profileImageFBUrl = [NSURL URLWithString:fbProfile];
+            NSData *profileImageData = [[NSData alloc] initWithContentsOfURL:profileImageFBUrl];
+            profileImage1 = [UIImage imageWithData:profileImageData];
+
+        }
+        else{
+            
+        }
+
+    }
     [objWebService postRegister:Register_API
                            type:strType
                      first_name:FirstName
@@ -1609,7 +1620,7 @@
         FirstName = [profileDict valueForKey:@"first_name"];
         LastName  = [profileDict valueForKey:@"last_name"];
         strGender = [profileDict valueForKey:@"gender"];
-        strDOB       = (currentTextfield.text !=nil)?currentTextfield.text :@"";
+        strDOB    = (currentTextfield.text !=nil)?currentTextfield.text :@"";
         emailPasswordToRegister = cell.passwordTextField.text;
        // strAbout;
         [self dateConverter];
