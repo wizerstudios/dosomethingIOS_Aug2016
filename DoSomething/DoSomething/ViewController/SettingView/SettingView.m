@@ -109,15 +109,15 @@
     
      messSwith =[[UISwitch alloc]initWithFrame:CGRectMake(messLbl.frame.origin.x+messLbl.frame.size.width+24,messLbl.frame.origin.y-3,20,0)];
     [messSwith addTarget: self action: @selector(messSwithAction:) forControlEvents:UIControlEventValueChanged];
-   messSwith.transform = CGAffineTransformMakeScale(0.50, 0.50);
+    messSwith.transform = CGAffineTransformMakeScale(0.50, 0.50);
     messSwith.layer.cornerRadius = 16.0;
-    
     
     soundSwitch =[[UISwitch alloc]initWithFrame:CGRectMake(soundLbl.frame.origin.x+soundLbl.frame.size.width+24,soundLbl.frame.origin.y-3,20,0)];
     soundSwitch.transform = CGAffineTransformMakeScale(0.50, 0.50);
     [soundSwitch addTarget: self action: @selector(soundSwithAction:) forControlEvents:UIControlEventValueChanged];
-     soundSwitch.layer.cornerRadius = 16.0;
-   vibrationSwitch =[[UISwitch alloc]initWithFrame:CGRectMake(vibrationLbl.frame.origin.x+vibrationLbl.frame.size.width+24,vibrationLbl.frame.origin.y-5,20,0)];
+    soundSwitch.layer.cornerRadius = 16.0;
+    
+    vibrationSwitch =[[UISwitch alloc]initWithFrame:CGRectMake(vibrationLbl.frame.origin.x+vibrationLbl.frame.size.width+24,vibrationLbl.frame.origin.y-5,20,0)];
      vibrationSwitch.transform = CGAffineTransformMakeScale(0.50, 0.50);
     [vibrationSwitch addTarget: self action: @selector(vibrationSwithAction:) forControlEvents:UIControlEventValueChanged];
      vibrationSwitch.layer.cornerRadius = 16.0;
@@ -200,7 +200,7 @@
         NSLog(@"If body ");
         [sender setThumbTintColor:[UIColor greenColor]];
         
-        [sender setBackgroundColor:[UIColor whiteColor]];
+        [sender setBackgroundColor:[UIColor clearColor]];
         [sender setOnTintColor:[UIColor colorWithRed:232.0f/255.0f green:232.0f/255.0f blue:232.0f/255.0f alpha:1.0f]];
         
         
@@ -221,7 +221,7 @@
         NSLog(@"If body ");
         [sender setThumbTintColor:[UIColor greenColor]];
         
-        [sender setBackgroundColor:[UIColor whiteColor]];
+        [sender setBackgroundColor:[UIColor clearColor]];
         [sender setOnTintColor:[UIColor colorWithRed:232.0f/255.0f green:232.0f/255.0f blue:232.0f/255.0f alpha:1.0f]];
         
         
@@ -243,7 +243,7 @@
         NSLog(@"If body ");
         [sender setThumbTintColor:[UIColor greenColor]];
         
-        [sender setBackgroundColor:[UIColor whiteColor]];
+        [sender setBackgroundColor:[UIColor clearColor]];
         [sender setOnTintColor:[UIColor colorWithRed:232.0f/255.0f green:232.0f/255.0f blue:232.0f/255.0f alpha:1.0f]];
         
         
@@ -269,22 +269,23 @@
                                 NSLog(@"logoutDeleteUser %@ =" , responseObject);
                                 if([[[responseObject valueForKey:@"useraction"]valueForKey:@"status"] isEqualToString:@"success"])
                                 {
-                                DSHomeViewController*objSplashView =[[DSHomeViewController alloc]initWithNibName:@"DSHomeViewController" bundle:nil];
-                                [self.navigationController pushViewController:objSplashView animated:NO];
+                                    DSHomeViewController*objSplashView =[[DSHomeViewController alloc]initWithNibName:@"DSHomeViewController" bundle:nil];
+                                    [self.navigationController pushViewController:objSplashView animated:NO];
                                 
                                     [COMMON removeUserDetails];
                                     appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
                                     appDelegate.buttonsView.hidden=YES;
-                                    [appDelegate.settingButton setBackgroundImage:[UIImage imageNamed:@"setting_icon.png"] forState:UIControlStateNormal];
-                                dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
-                                    
-                                });
+                                    [appDelegate.settingButton setBackgroundImage:[UIImage imageNamed:@"setting_icon.png"]
+                                                                         forState:UIControlStateNormal];
+                                    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
+                                    });
                                 }
                                 else if([responseObject valueForKey:@"error"])
                                 {
                                     if([optionLogoutDelete isEqual:@"logout"]){
                                     
                                     [COMMON removeUserDetails];
+                                    }
                                    
                                     DSHomeViewController*objSplashView =[[DSHomeViewController alloc]initWithNibName:@"DSHomeViewController" bundle:nil];
                                     [self.navigationController pushViewController:objSplashView animated:NO];
@@ -292,12 +293,9 @@
                                     appDelegate.buttonsView.hidden=YES;
                                     [appDelegate.settingButton setBackgroundImage:[UIImage imageNamed:@"setting_icon.png"] forState:UIControlStateNormal];
                                     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
-                                        
                                     });
-                                    }
-                                    else{
-                                        [DSAppCommon showSimpleAlertWithMessage:[responseObject valueForKey:@"error"]];
-                                    }
+                                    
+                                    
                                 }
                                 else
                                 {
@@ -311,11 +309,7 @@
                                 NSLog(@"logout failure");
 
                             }];
-    
-    
 }
-
-
 -(IBAction)didClickLogoutButtonAction:(id)sender
 {
     
@@ -333,7 +327,6 @@
     objCustomAlterview.alertMsgLabel.numberOfLines = 2;
     objCustomAlterview.alertMsgLabel.textColor = [UIColor whiteColor];
 
-    
     //[self logoutDeleteAction];
 }
 -(IBAction)didClickdeleteAccountButtonAction:(id)sender
