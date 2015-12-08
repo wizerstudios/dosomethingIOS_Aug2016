@@ -239,7 +239,7 @@
                                 <constraints>
                                     <constraint firstAttribute="height" constant="33" id="GmK-K6-3X2"/>
                                 </constraints>
-                                <color key="textColor" red="0.40000000000000002" green="0.40000000000000002" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="textColor" red="0.59999999999999998" green="0.59999999999999998" blue="0.59999999999999998" alpha="1" colorSpace="calibratedRGB"/>
                                 <fontDescription key="fontDescription" name="Patron-Regular" family="Patron" pointSize="10"/>
                                 <textInputTraits key="textInputTraits"/>
                                 <connections>

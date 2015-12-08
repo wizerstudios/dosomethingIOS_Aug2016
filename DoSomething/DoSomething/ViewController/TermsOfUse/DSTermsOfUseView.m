@@ -75,7 +75,7 @@
     [closeButton setTranslatesAutoresizingMaskIntoConstraints:NO];
     [closeButton setBackgroundColor:[UIColor whiteColor]];
     
-    [closeButton setBackgroundImage:[UIImage imageNamed:@"closeButtonImage"]
+    [closeButton setBackgroundImage:[UIImage imageNamed:@"close_button"]
                            forState:UIControlStateNormal];
     [closeButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
    

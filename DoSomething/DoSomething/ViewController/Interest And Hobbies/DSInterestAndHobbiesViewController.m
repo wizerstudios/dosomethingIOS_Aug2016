@@ -31,6 +31,7 @@
 @implementation DSInterestAndHobbiesViewController
 @synthesize interestAndHobbiesCollectionView, profileDetailsArray;
 - (void)viewDidLoad {
+    [COMMON LoadIcon:self.view];
     [super viewDidLoad];
     objWebservice =[[DSWebservice alloc]init];
         deviceUdid = [OpenUDID value];
@@ -156,6 +157,7 @@
 }
 
 -(void)initializeArray{
+    [COMMON LoadIcon:self.view];
     UINib *cellNib = [UINib nibWithNibName:@"DSInterestAndHobbiesCollectionViewCell" bundle:nil];
     [self.interestAndHobbiesCollectionView registerNib:cellNib forCellWithReuseIdentifier:@"InterestAndHobbiesCollectionViewCell"];
     
