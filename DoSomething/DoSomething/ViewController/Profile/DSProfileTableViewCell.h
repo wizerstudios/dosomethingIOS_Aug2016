@@ -72,5 +72,9 @@
 @property(nonatomic,strong)IBOutlet UITextField *firstnameTxt;
 @property(nonatomic,strong) IBOutlet UITextField *lastNameTxt;
 
+@property (weak, nonatomic) IBOutlet UIButton *termsOfUse;
+
+@property (weak, nonatomic) IBOutlet UIButton *privacyPolicy;
+
 
 @end

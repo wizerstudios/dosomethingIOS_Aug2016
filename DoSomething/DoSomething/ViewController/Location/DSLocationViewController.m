@@ -52,7 +52,7 @@
     }
     [customNavigation.menuBtn setHidden:NO];
     [customNavigation.buttonBack setHidden:YES];
-    [customNavigation.saveBtn setHidden:YES];
+    [customNavigation.saveBtn setHidden:NO];
     [self.navigationController.navigationBar addSubview:customNavigation.view];
 
     UINib *cellNib = [UINib nibWithNibName:@"LocationCollectionViewCell" bundle:nil];
