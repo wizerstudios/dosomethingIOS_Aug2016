@@ -970,22 +970,28 @@
             
         }
         else if(userDetailsDict.count > 0){
-//            profileGenderValueLabel.text =[userDetailsDict valueForKey:@"gender"];
-//            strGender =profileGenderValueLabel.text;
-            
-            [profileGenderView setHidden:YES];
-            [profileGenderLabel setHidden:YES];
-            [profileGenderValueLabel setHidden:YES];
-            
-            if(isSelectFemale ==YES)
-            {
-                
-                [cell.femaleButton setTitleColor:[UIColor redColor] forState:UIControlStateNormal];
-            }
-            else if (isSelectMale==YES)
-            {
-                [cell.maleButton setTitleColor:[UIColor redColor] forState:UIControlStateNormal];
-            }
+            profileGenderValueLabel.text =[userDetailsDict valueForKey:@"gender"];
+            strGender =profileGenderValueLabel.text;
+//            if([[userDetailsDict valueForKey:@"gender"]isEqual:@"male"]){
+//                [cell.maleButton setTag:2004];
+//            }
+//            else if([[userDetailsDict valueForKey:@"gender"]isEqual:@"female"]){
+//                [cell.femaleButton setTag:2005];
+//            }
+//            
+//            [profileGenderView setHidden:YES];
+//            [profileGenderLabel setHidden:YES];
+//            [profileGenderValueLabel setHidden:YES];
+//            
+//            if(isSelectFemale ==YES)
+//            {
+//                
+//                [cell.femaleButton setTitleColor:[UIColor redColor] forState:UIControlStateNormal];
+//            }
+//            else if (isSelectMale==YES)
+//            {
+//                [cell.maleButton setTitleColor:[UIColor redColor] forState:UIControlStateNormal];
+//            }
 
             
         }
