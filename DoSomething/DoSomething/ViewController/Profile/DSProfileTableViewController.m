@@ -305,40 +305,40 @@
     int spacing = 20;
     for(int i = 0; i < 3; i++)
     {
-    
-            NSData *profileData = [profileDataArray objectAtIndex:i];
-            userProfileImage = [[UIImageView alloc]initWithFrame:CGRectMake((i*self.scrView.frame.size.width) + spacing, 20,self.profileImageView.frame.size.width, self.profileImageView.frame.size.height)];
-            [userProfileImage setTag:i+100];
-            if([profileData length] == 0){
+        NSData *profileData = [profileDataArray objectAtIndex:i];
+        userProfileImage = [[UIImageView alloc]initWithFrame:CGRectMake((i*self.scrView.frame.size.width) + spacing, 20,self.profileImageView.frame.size.width, self.profileImageView.frame.size.height)];
+        [userProfileImage setTag:i+100];
+        if([profileData length] == 0){
                 [userProfileImage setImage:[UIImage imageNamed:@"profile_noimg"]];
+               // [topViewCell setHidden:YES];
+            
+            NSLog(@"data : %d",i);
+            if(i==0){
                 [topViewCell setHidden:YES];
-                
-            }
-        
-            else{
-                [userProfileImage setImage:[UIImage imageWithData:profileData]];
-                [cell.cameraButton setHidden:YES];
-                [topViewCell setHidden:NO];
-                
+                self.scrView.scrollEnabled = NO;
             }
             
-            userProfileImage.layer.cornerRadius = userProfileImage.frame.size.height / 2;
-            userProfileImage.layer.masksToBounds = YES;
-            [userProfileImage setUserInteractionEnabled:YES];
-            UITapGestureRecognizer *singleTap =  [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(selectCamera:)];
-            [singleTap setNumberOfTapsRequired:1];
-            [userProfileImage addGestureRecognizer:singleTap];
-            [self.scrView addSubview:userProfileImage];
+        }
+        else{
+            [userProfileImage setImage:[UIImage imageWithData:profileData]];
+            [cell.cameraButton setHidden:YES];
+            [topViewCell setHidden:NO];
+        }
+        userProfileImage.layer.cornerRadius = userProfileImage.frame.size.height / 2;
+        userProfileImage.layer.masksToBounds = YES;
+        [userProfileImage setUserInteractionEnabled:YES];
+        UITapGestureRecognizer *singleTap =  [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(selectCamera:)];
+        [singleTap setNumberOfTapsRequired:1];
+        [userProfileImage addGestureRecognizer:singleTap];
+        [self.scrView addSubview:userProfileImage];
             
-            cameraImage = [[UIImageView alloc]initWithFrame:CGRectMake(userProfileImage.frame.size.width / 2 - 15, self.scrView.frame.size.height - 55, 30, 30)];
-            [cameraImage setTag:i+200];
-            [cameraImage setImage:[UIImage imageNamed:@"profile_camera_icon"]];
-           // [topViewCell setHidden:YES];
-            cameraImage.userInteractionEnabled = YES;
-            
-            [cameraImage setUserInteractionEnabled:YES];
-            [userProfileImage addSubview:cameraImage];
-
+        cameraImage = [[UIImageView alloc]initWithFrame:CGRectMake(userProfileImage.frame.size.width / 2 - 15, self.scrView.frame.size.height - 55, 30, 30)];
+        [cameraImage setTag:i+200];
+        [cameraImage setImage:[UIImage imageNamed:@"profile_camera_icon"]];
+        // [topViewCell setHidden:YES];
+        cameraImage.userInteractionEnabled = YES;
+        [cameraImage setUserInteractionEnabled:YES];
+        [userProfileImage addSubview:cameraImage];
         
     }
     
@@ -362,10 +362,16 @@
     {
         blkdot=[[UIImageView alloc]init];
         [blkdot setFrame:CGRectMake(i*17, 0, 7, 7 )];
-        [blkdot setImage:[UIImage imageNamed:@"dot_normal"]];
+    //    [blkdot setImage:[UIImage imageNamed:@"dot_normal"]];
+        [blkdot setBackgroundColor:[UIColor colorWithRed:83.0f/255.0f green:83.0f/255.0f blue:83.0f/255.0f alpha:1.0f]];
+        blkdot.layer.cornerRadius = blkdot.frame.size.height / 2;
+        blkdot.layer.masksToBounds = YES;
         [pgDtView addSubview:blkdot];
         [pageImageView setFrame:CGRectMake(0, 0, 7, 7)];
-        [pageImageView setImage:[UIImage imageNamed:@"dot_active_gray"]];
+       // [pageImageView setImage:[UIImage imageNamed:@"dot_active_gray"]];
+        [pageImageView setBackgroundColor:[UIColor colorWithRed:218.0f/255.0f green:40.0f/255.0f blue:64.0f/255.0f alpha:1.0f]];
+        pageImageView.layer.cornerRadius = pageImageView.frame.size.height / 2;
+        pageImageView.layer.masksToBounds = YES;
         [pgDtView addSubview:pageImageView];
         [topViewCell addSubview:pgDtView];
         [pgDtView setFrame:CGRectMake(15, -5, profileImagePageControl.numberOfPages*17, 10)];
