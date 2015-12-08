@@ -333,7 +333,7 @@
             cameraImage = [[UIImageView alloc]initWithFrame:CGRectMake(userProfileImage.frame.size.width / 2 - 15, self.scrView.frame.size.height - 55, 30, 30)];
             [cameraImage setTag:i+200];
             [cameraImage setImage:[UIImage imageNamed:@"profile_camera_icon"]];
-            [topViewCell setHidden:YES];
+           // [topViewCell setHidden:YES];
             cameraImage.userInteractionEnabled = YES;
             
             [cameraImage setUserInteractionEnabled:YES];
@@ -756,7 +756,7 @@
              {
                  dataSize = [COMMON getControlHeight:strAbout withFontName:@"Patron-Regular" ofSize:14.0 withSize:CGSizeMake(tableView.frame.size.width-20,tableView.frame.size.height)];
                  
-                 return dataSize.height+10;
+                 return dataSize.height+22;
                  
              }
             if (indexPath.row == 4) {
@@ -765,7 +765,7 @@
             if ( indexPath.row ==6)
             {
             if([imageNormalArray count] < 1)
-                return 70;
+                return 80;
             else if([imageNormalArray count] <= 5)
                 return commonHeight + 46;
             else if([imageNormalArray count] <= 10)
@@ -970,8 +970,24 @@
             
         }
         else if(userDetailsDict.count > 0){
-            profileGenderValueLabel.text =[userDetailsDict valueForKey:@"gender"];
-            strGender =profileGenderValueLabel.text;
+//            profileGenderValueLabel.text =[userDetailsDict valueForKey:@"gender"];
+//            strGender =profileGenderValueLabel.text;
+            
+            [profileGenderView setHidden:YES];
+            [profileGenderLabel setHidden:YES];
+            [profileGenderValueLabel setHidden:YES];
+            
+            if(isSelectFemale ==YES)
+            {
+                
+                [cell.femaleButton setTitleColor:[UIColor redColor] forState:UIControlStateNormal];
+            }
+            else if (isSelectMale==YES)
+            {
+                [cell.maleButton setTitleColor:[UIColor redColor] forState:UIControlStateNormal];
+            }
+
+            
         }
 
         
@@ -1217,11 +1233,13 @@
         {
             cell.emailTextField.text = [profileDict valueForKey:@"email"];
             //cell.passwordTextField.text =[self getPassword];
+            emailPasswordToRegister = cell.passwordTextField.text;
 
         }
         else if(userDetailsDict.count > 0){
             cell.emailTextField.text = [userDetailsDict valueForKey:@"email"];
-            emailAddressToRegister=cell.emailTextField.text;
+            emailAddressToRegister   = cell.emailTextField.text;
+            emailPasswordToRegister  = cell.passwordTextField.text;
         }
         else
         {
@@ -1254,7 +1272,7 @@
         cell.vibrationSwitchBtn.transform = CGAffineTransformMakeScale(0.50, 0.50);
         cell.vibrationSwitchBtn.layer.cornerRadius = 16.0;
         cell.SoundSwitchBtn.layer.cornerRadius = 16.0;
-         cell.messSwitchBtn.layer.cornerRadius = 16.0;
+        cell.messSwitchBtn.layer.cornerRadius = 16.0;
         
         [self notificationMethod];
         [cell.vibrationSwitchBtn addTarget:self action:@selector(vibrationSwithAction:) forControlEvents:UIControlEventTouchUpInside];
@@ -1281,6 +1299,8 @@
     }
 
     [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
+    //_tableviewProfile.scrollEnabled = NO;
+    [_tableviewProfile setBounces:NO];
     return cell;
     
 }
@@ -1348,42 +1368,43 @@
     {
         [cell.messSwitchBtn setThumbTintColor:[UIColor greenColor]];
         
-        [cell.messSwitchBtn setBackgroundColor:[UIColor lightGrayColor]];
-        [cell.messSwitchBtn setOnTintColor:[UIColor lightGrayColor]];
+        [cell.messSwitchBtn setBackgroundColor:[UIColor colorWithRed:232.0f/255.0f green:232.0f/255.0f blue:232.0f/255.0f alpha:1.0f]];
+        [cell.messSwitchBtn setOnTintColor:[UIColor colorWithRed:232.0f/255.0f green:232.0f/255.0f blue:232.0f/255.0f alpha:1.0f]];
+        
     }
     if([objSound isEqualToString:@"switch_on"])
     {
         [cell.SoundSwitchBtn setThumbTintColor:[UIColor greenColor]];
         
-        [cell.SoundSwitchBtn setBackgroundColor:[UIColor lightGrayColor]];
-        [cell.SoundSwitchBtn setOnTintColor:[UIColor lightGrayColor]];
+        [cell.SoundSwitchBtn setBackgroundColor:[UIColor colorWithRed:232.0f/255.0f green:232.0f/255.0f blue:232.0f/255.0f alpha:1.0f]];
+        [cell.SoundSwitchBtn setOnTintColor:[UIColor colorWithRed:232.0f/255.0f green:232.0f/255.0f blue:232.0f/255.0f alpha:1.0f]];
     }
     
     if([objVibration isEqualToString:@"switch_on"])
     {
         [cell.vibrationSwitchBtn setThumbTintColor:[UIColor greenColor]];
         
-        [cell.vibrationSwitchBtn setBackgroundColor:[UIColor lightGrayColor]];
-        [cell.vibrationSwitchBtn setOnTintColor:[UIColor lightGrayColor]];
+        [cell.vibrationSwitchBtn setBackgroundColor:[UIColor colorWithRed:232.0f/255.0f green:232.0f/255.0f blue:232.0f/255.0f alpha:1.0f]];
+        [cell.vibrationSwitchBtn setOnTintColor:[UIColor colorWithRed:232.0f/255.0f green:232.0f/255.0f blue:232.0f/255.0f alpha:1.0f]];
     }
     
     if([objMsg isEqualToString:@"switch_off"])
     {
-        [cell.messSwitchBtn setTintColor:[UIColor whiteColor]];
-        [cell.messSwitchBtn setBackgroundColor:[UIColor lightGrayColor]];
+        [cell.messSwitchBtn setTintColor:[UIColor redColor]];
+        [cell.messSwitchBtn setBackgroundColor:[UIColor colorWithRed:232.0f/255.0f green:232.0f/255.0f blue:232.0f/255.0f alpha:1.0f]];
         [cell.messSwitchBtn setThumbTintColor:[UIColor redColor]];
     }
     if([objSound isEqualToString:@"switch_off"])
     {
         [cell.SoundSwitchBtn setTintColor:[UIColor whiteColor]];
-        [cell.SoundSwitchBtn setBackgroundColor:[UIColor lightGrayColor]];
+        [cell.SoundSwitchBtn setBackgroundColor:[UIColor colorWithRed:232.0f/255.0f green:232.0f/255.0f blue:232.0f/255.0f alpha:1.0f]];
         [cell.SoundSwitchBtn setThumbTintColor:[UIColor redColor]];
     }
     
     if([objVibration isEqualToString:@"switch_off"])
     {
         [cell.vibrationSwitchBtn setTintColor:[UIColor whiteColor]];
-        [cell.vibrationSwitchBtn setBackgroundColor:[UIColor lightGrayColor]];
+        [cell.vibrationSwitchBtn setBackgroundColor:[UIColor colorWithRed:232.0f/255.0f green:232.0f/255.0f blue:232.0f/255.0f alpha:1.0f]];
         [cell.vibrationSwitchBtn setThumbTintColor:[UIColor redColor]];
     }
     
@@ -1397,14 +1418,14 @@
         [sender setThumbTintColor:[UIColor greenColor]];
         
         [sender setBackgroundColor:[UIColor whiteColor]];
-        [sender setOnTintColor:[UIColor lightGrayColor]];
+        [sender setOnTintColor:[UIColor colorWithRed:232.0f/255.0f green:232.0f/255.0f blue:232.0f/255.0f alpha:1.0f]];
         isNotification_message =@"Yes";
         
     }else{
        
         
-        [sender setTintColor:[UIColor grayColor]];
-        [sender setBackgroundColor:[UIColor lightGrayColor]];
+        [sender setTintColor:[UIColor clearColor]];
+        [sender setBackgroundColor:[UIColor colorWithRed:232.0f/255.0f green:232.0f/255.0f blue:232.0f/255.0f alpha:1.0f]];
         [sender setThumbTintColor:[UIColor redColor]];
         isNotification_message =@"No";
     }
@@ -1418,14 +1439,14 @@
         [sender setThumbTintColor:[UIColor greenColor]];
         
         [sender setBackgroundColor:[UIColor whiteColor]];
-        [sender setOnTintColor:[UIColor lightGrayColor]];
+        [sender setOnTintColor:[UIColor colorWithRed:232.0f/255.0f green:232.0f/255.0f blue:232.0f/255.0f alpha:1.0f]];
         isNotification_sound =@"Yes";
         
     }else{
        
         
-        [sender setTintColor:[UIColor grayColor]];
-        [sender setBackgroundColor:[UIColor lightGrayColor]];
+        [sender setTintColor:[UIColor clearColor]];
+        [sender setBackgroundColor:[UIColor colorWithRed:232.0f/255.0f green:232.0f/255.0f blue:232.0f/255.0f alpha:1.0f]];
         [sender setThumbTintColor:[UIColor redColor]];
         isNotification_sound =@"No";
         
@@ -1440,14 +1461,14 @@
         [sender setThumbTintColor:[UIColor greenColor]];
         
         [sender setBackgroundColor:[UIColor whiteColor]];
-        [sender setOnTintColor:[UIColor lightGrayColor]];
+        [sender setOnTintColor:[UIColor colorWithRed:232.0f/255.0f green:232.0f/255.0f blue:232.0f/255.0f alpha:1.0f]];
         isNotification_vibration =@"Yes";
         
     }else{
        
         
-        [sender setTintColor:[UIColor grayColor]];
-        [sender setBackgroundColor:[UIColor lightGrayColor]];
+        [sender setTintColor:[UIColor clearColor]];
+        [sender setBackgroundColor:[UIColor colorWithRed:232.0f/255.0f green:232.0f/255.0f blue:232.0f/255.0f alpha:1.0f]];
         [sender setThumbTintColor:[UIColor redColor]];
         isNotification_vibration =@"No";
     }

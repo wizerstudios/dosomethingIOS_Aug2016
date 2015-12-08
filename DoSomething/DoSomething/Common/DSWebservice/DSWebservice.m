@@ -356,7 +356,6 @@ notification_vibration:(NSString *)isnotification_vibration
          NSLog(@"UPDATEresponseObject = %@",responseObject);
          
 //         NSMutableDictionary *profileUpdateDict = [[NSMutableDictionary alloc]init];
-//         
 //         profileUpdateDict = [responseObject valueForKey:@"updateprofile"];
 //         [COMMON setUserDetails:[[profileUpdateDict valueForKey:@"userUpdateDetails"]objectAtIndex:0]];
 //         NSLog(@"userdetails = %@",[COMMON getUserDetails]);

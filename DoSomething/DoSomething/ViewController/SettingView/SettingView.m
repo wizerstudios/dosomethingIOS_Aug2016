@@ -16,6 +16,7 @@
 #import "CustomAlterview.h"
 #import "DSTermsOfUseView.h"
 
+
 @interface SettingView ()
 {
    
@@ -57,7 +58,7 @@
     notificationvibration=[dic valueForKey:@"notification_vibration"];
     
     loginUserSessionID=strsessionID;
-    // AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+    
 }
 -(void)viewWillAppear:(BOOL)animated{
     
@@ -152,42 +153,42 @@
     {
         [messSwith setThumbTintColor:[UIColor greenColor]];
         
-        [messSwith setBackgroundColor:[UIColor lightGrayColor]];
-        [messSwith setOnTintColor:[UIColor lightGrayColor]];
+        [messSwith setBackgroundColor:[UIColor colorWithRed:232.0f/255.0f green:232.0f/255.0f blue:232.0f/255.0f alpha:1.0f]];
+        [messSwith setOnTintColor:[UIColor colorWithRed:232.0f/255.0f green:232.0f/255.0f blue:232.0f/255.0f alpha:1.0f]];
         }
     if([objSound isEqualToString:@"switch_on"])
     {
         [soundSwitch setThumbTintColor:[UIColor greenColor]];
         
-        [soundSwitch setBackgroundColor:[UIColor lightGrayColor]];
-        [soundSwitch setOnTintColor:[UIColor lightGrayColor]];
+        [soundSwitch setBackgroundColor:[UIColor colorWithRed:232.0f/255.0f green:232.0f/255.0f blue:232.0f/255.0f alpha:1.0f]];
+        [soundSwitch setOnTintColor:[UIColor colorWithRed:232.0f/255.0f green:232.0f/255.0f blue:232.0f/255.0f alpha:1.0f]];
     }
     
     if([objVibration isEqualToString:@"switch_on"])
     {
         [vibrationSwitch setThumbTintColor:[UIColor greenColor]];
         
-        [vibrationSwitch setBackgroundColor:[UIColor lightGrayColor]];
-        [vibrationSwitch setOnTintColor:[UIColor lightGrayColor]];
+        [vibrationSwitch setBackgroundColor:[UIColor colorWithRed:232.0f/255.0f green:232.0f/255.0f blue:232.0f/255.0f alpha:1.0f]];
+        [vibrationSwitch setOnTintColor:[UIColor colorWithRed:232.0f/255.0f green:232.0f/255.0f blue:232.0f/255.0f alpha:1.0f]];
     }
 
     if([objMsg isEqualToString:@"switch_off"])
     {
         [messSwith setTintColor:[UIColor whiteColor]];
-        [messSwith setBackgroundColor:[UIColor lightGrayColor]];
+        [messSwith setBackgroundColor:[UIColor colorWithRed:232.0f/255.0f green:232.0f/255.0f blue:232.0f/255.0f alpha:1.0f]];
         [messSwith setThumbTintColor:[UIColor redColor]];
     }
     if([objSound isEqualToString:@"switch_off"])
     {
         [soundSwitch setTintColor:[UIColor whiteColor]];
-        [soundSwitch setBackgroundColor:[UIColor lightGrayColor]];
+        [soundSwitch setBackgroundColor:[UIColor colorWithRed:232.0f/255.0f green:232.0f/255.0f blue:232.0f/255.0f alpha:1.0f]];
         [soundSwitch setThumbTintColor:[UIColor redColor]];
     }
     
     if([objVibration isEqualToString:@"switch_off"])
     {
         [vibrationSwitch setTintColor:[UIColor whiteColor]];
-        [vibrationSwitch setBackgroundColor:[UIColor lightGrayColor]];
+        [vibrationSwitch setBackgroundColor:[UIColor colorWithRed:232.0f/255.0f green:232.0f/255.0f blue:232.0f/255.0f alpha:1.0f]];
         [vibrationSwitch setThumbTintColor:[UIColor redColor]];
     }
   
@@ -200,14 +201,14 @@
         [sender setThumbTintColor:[UIColor greenColor]];
         
         [sender setBackgroundColor:[UIColor whiteColor]];
-        [sender setOnTintColor:[UIColor lightGrayColor]];
+        [sender setOnTintColor:[UIColor colorWithRed:232.0f/255.0f green:232.0f/255.0f blue:232.0f/255.0f alpha:1.0f]];
         
         
     }else{
         NSLog(@"Else body ");
         
-        [sender setTintColor:[UIColor grayColor]];
-        [sender setBackgroundColor:[UIColor lightGrayColor]];
+        [sender setTintColor:[UIColor clearColor]];
+        [sender setBackgroundColor:[UIColor colorWithRed:232.0f/255.0f green:232.0f/255.0f blue:232.0f/255.0f alpha:1.0f]];
         [sender setThumbTintColor:[UIColor redColor]];
         
     }
@@ -221,14 +222,14 @@
         [sender setThumbTintColor:[UIColor greenColor]];
         
         [sender setBackgroundColor:[UIColor whiteColor]];
-        [sender setOnTintColor:[UIColor lightGrayColor]];
+        [sender setOnTintColor:[UIColor colorWithRed:232.0f/255.0f green:232.0f/255.0f blue:232.0f/255.0f alpha:1.0f]];
         
         
     }else{
         NSLog(@"Else body ");
         
-        [sender setTintColor:[UIColor grayColor]];
-        [sender setBackgroundColor:[UIColor lightGrayColor]];
+        [sender setTintColor:[UIColor clearColor]];
+        [sender setBackgroundColor:[UIColor colorWithRed:232.0f/255.0f green:232.0f/255.0f blue:232.0f/255.0f alpha:1.0f]];
         [sender setThumbTintColor:[UIColor redColor]];
         
 
@@ -243,14 +244,14 @@
         [sender setThumbTintColor:[UIColor greenColor]];
         
         [sender setBackgroundColor:[UIColor whiteColor]];
-        [sender setOnTintColor:[UIColor lightGrayColor]];
+        [sender setOnTintColor:[UIColor colorWithRed:232.0f/255.0f green:232.0f/255.0f blue:232.0f/255.0f alpha:1.0f]];
         
         
     }else{
         NSLog(@"Else body ");
         
-        [sender setTintColor:[UIColor grayColor]];
-        [sender setBackgroundColor:[UIColor lightGrayColor]];
+        [sender setTintColor:[UIColor clearColor]];
+        [sender setBackgroundColor:[UIColor colorWithRed:232.0f/255.0f green:232.0f/255.0f blue:232.0f/255.0f alpha:1.0f]];
         [sender setThumbTintColor:[UIColor redColor]];
     
     }
@@ -265,6 +266,7 @@
                                  op:optionLogoutDelete
                             success:^(AFHTTPRequestOperation *operation, id responseObject) {
                                 NSLog(@"logout");
+                                NSLog(@"logoutDeleteUser %@ =" , responseObject);
                                 if([[[responseObject valueForKey:@"useraction"]valueForKey:@"status"] isEqualToString:@"success"])
                                 {
                                 DSHomeViewController*objSplashView =[[DSHomeViewController alloc]initWithNibName:@"DSHomeViewController" bundle:nil];
@@ -278,7 +280,25 @@
                                     
                                 });
                                 }
-                                
+                                else if([responseObject valueForKey:@"error"])
+                                {
+                                    if([optionLogoutDelete isEqual:@"logout"]){
+                                    
+                                    [COMMON removeUserDetails];
+                                   
+                                    DSHomeViewController*objSplashView =[[DSHomeViewController alloc]initWithNibName:@"DSHomeViewController" bundle:nil];
+                                    [self.navigationController pushViewController:objSplashView animated:NO];
+                                    appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+                                    appDelegate.buttonsView.hidden=YES;
+                                    [appDelegate.settingButton setBackgroundImage:[UIImage imageNamed:@"setting_icon.png"] forState:UIControlStateNormal];
+                                    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
+                                        
+                                    });
+                                    }
+                                    else{
+                                        [DSAppCommon showSimpleAlertWithMessage:[responseObject valueForKey:@"error"]];
+                                    }
+                                }
                                 else
                                 {
                                       NSLog(@"delete failure");
