@@ -338,11 +338,11 @@
 }
 -(IBAction)didClickTearmofuseAction:(id)sender
 {
-   // [self loadTermsOfUseView];
+    [self loadTermsOfUseView];
 }
 -(IBAction)didClickprivacypolicyAction:(id)sender
 {
-    // [self loadTermsOfUseView];
+     [self loadTermsOfUseView];
 }
 
 
@@ -378,6 +378,21 @@
     [termsOfUseView.closeButton addTarget:self action:@selector(closeButtonAction:) forControlEvents:UIControlEventTouchUpInside];
    
     [self setTermsOfUseView:termsOfUseView];
+    
+    NSDictionary *dictView = @{@"_terms":termsOfUseView};
+    
+    [windowInfo addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[_terms]|"
+                                
+                                                                       options:0
+                                
+                                                                       metrics:nil views:dictView]];
+    
+    [windowInfo addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[_terms]|"
+                                
+                                                                       options:0
+                                
+                                                                       metrics:nil views:dictView]];
+
     
     
 }

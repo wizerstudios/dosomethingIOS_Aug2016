@@ -21,6 +21,7 @@
 #import "UIImageView+AFNetworking.h"
 
 #import "CustomAlterview.h"
+#import "DSTermsOfUseView.h"
 
 
 
@@ -88,11 +89,13 @@
     CustomAlterview *objCustomAlterview;
     
     BOOL isSelectMale,isSelectFemale;
+    UIWindow *windowInfo;
     
 
 }
-
+@property(nonatomic,retain) DSTermsOfUseView *termsOfUseView;
 @end
+
 
 @implementation DSProfileTableViewController
 @synthesize  profileData1, profileData2,profileData3,textviewText, placeHolderArray,FBprofileID;
@@ -1273,6 +1276,7 @@
         if (IS_IPHONE6 ||IS_IPHONE6_Plus){
         cell.layoutConstraintTermsOfUseBtnDependViewHeight.constant =50;
         }
+        
        
     }
 
@@ -1280,7 +1284,6 @@
     return cell;
     
 }
-
 
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)Tablecell forRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -1291,6 +1294,48 @@
     }
 }
 
+#pragma mark -loadTermsOfUseView
+
+-(IBAction)loadTermsOfUseViewAction:(id)sender
+{
+    [self loadTermsOfUseView];
+}
+
+-(void)loadTermsOfUseView
+{
+    windowInfo = [[[UIApplication sharedApplication] delegate] window];
+    
+    DSTermsOfUseView *termsOfUseView = [[DSTermsOfUseView alloc] init];
+    
+    [windowInfo addSubview:termsOfUseView];
+    
+    [termsOfUseView.closeButton addTarget:self action:@selector(closeButtonAction:) forControlEvents:UIControlEventTouchUpInside];
+    
+    [self setTermsOfUseView:termsOfUseView];
+    
+    NSDictionary *dictView = @{@"_terms":termsOfUseView};
+    
+    [windowInfo addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[_terms]|"
+                                
+                                                                       options:0
+                                
+                                                                       metrics:nil views:dictView]];
+    
+    [windowInfo addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[_terms]|"
+                                
+                                                                       options:0
+                                
+                                                                       metrics:nil views:dictView]];
+}
+
+-(IBAction)closeButtonAction:(id)sender
+{
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        [self.termsOfUseView removeFromSuperview];
+        
+    });
+}
+#pragma mark -notificationMethod
 -(void)notificationMethod
 {
     
