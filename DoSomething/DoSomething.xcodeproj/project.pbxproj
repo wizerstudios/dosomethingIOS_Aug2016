@@ -45,15 +45,9 @@
 		511C73641BE3804E00D3D61D /* DSChatsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 511C73621BE3804E00D3D61D /* DSChatsTableViewController.m */; };
 		511C73651BE3804E00D3D61D /* DSChatsTableViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 511C73631BE3804E00D3D61D /* DSChatsTableViewController.xib */; };
 		51322A221BDFBFAA00418216 /* chaton.png in Resources */ = {isa = PBXBuildFile; fileRef = 51322A181BDFBFAA00418216 /* chaton.png */; };
-		51322A231BDFBFAA00418216 /* chong.png in Resources */ = {isa = PBXBuildFile; fileRef = 51322A191BDFBFAA00418216 /* chong.png */; };
-		51322A241BDFBFAA00418216 /* felicin.png in Resources */ = {isa = PBXBuildFile; fileRef = 51322A1A1BDFBFAA00418216 /* felicin.png */; };
-		51322A251BDFBFAA00418216 /* Galglot.png in Resources */ = {isa = PBXBuildFile; fileRef = 51322A1B1BDFBFAA00418216 /* Galglot.png */; };
 		51322A261BDFBFAA00418216 /* menu_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 51322A1C1BDFBFAA00418216 /* menu_icon.png */; };
 		51322A271BDFBFAA00418216 /* request_send.png in Resources */ = {isa = PBXBuildFile; fileRef = 51322A1D1BDFBFAA00418216 /* request_send.png */; };
 		51322A281BDFBFAA00418216 /* request_send1.png in Resources */ = {isa = PBXBuildFile; fileRef = 51322A1E1BDFBFAA00418216 /* request_send1.png */; };
-		51322A291BDFBFAA00418216 /* taylor.png in Resources */ = {isa = PBXBuildFile; fileRef = 51322A1F1BDFBFAA00418216 /* taylor.png */; };
-		51322A2A1BDFBFAA00418216 /* yuna.png in Resources */ = {isa = PBXBuildFile; fileRef = 51322A201BDFBFAA00418216 /* yuna.png */; };
-		51322A2B1BDFBFAA00418216 /* zoe_tay.png in Resources */ = {isa = PBXBuildFile; fileRef = 51322A211BDFBFAA00418216 /* zoe_tay.png */; };
 		51560BC01BE76D53009FCF2A /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 51560BBF1BE76D53009FCF2A /* AudioToolbox.framework */; };
 		51ED4E621BE08EDF0079E030 /* 18-Chats.png in Resources */ = {isa = PBXBuildFile; fileRef = 51ED4E5F1BE08EDF0079E030 /* 18-Chats.png */; };
 		51ED4E631BE08EDF0079E030 /* 12-Chats.png in Resources */ = {isa = PBXBuildFile; fileRef = 51ED4E601BE08EDF0079E030 /* 12-Chats.png */; };
@@ -194,15 +188,9 @@
 		511C73621BE3804E00D3D61D /* DSChatsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DSChatsTableViewController.m; sourceTree = "<group>"; };
 		511C73631BE3804E00D3D61D /* DSChatsTableViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DSChatsTableViewController.xib; sourceTree = "<group>"; };
 		51322A181BDFBFAA00418216 /* chaton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = chaton.png; sourceTree = "<group>"; };
-		51322A191BDFBFAA00418216 /* chong.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = chong.png; sourceTree = "<group>"; };
-		51322A1A1BDFBFAA00418216 /* felicin.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = felicin.png; sourceTree = "<group>"; };
-		51322A1B1BDFBFAA00418216 /* Galglot.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Galglot.png; sourceTree = "<group>"; };
 		51322A1C1BDFBFAA00418216 /* menu_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = menu_icon.png; sourceTree = "<group>"; };
 		51322A1D1BDFBFAA00418216 /* request_send.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = request_send.png; sourceTree = "<group>"; };
 		51322A1E1BDFBFAA00418216 /* request_send1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = request_send1.png; sourceTree = "<group>"; };
-		51322A1F1BDFBFAA00418216 /* taylor.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = taylor.png; sourceTree = "<group>"; };
-		51322A201BDFBFAA00418216 /* yuna.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = yuna.png; sourceTree = "<group>"; };
-		51322A211BDFBFAA00418216 /* zoe_tay.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = zoe_tay.png; sourceTree = "<group>"; };
 		51560BBF1BE76D53009FCF2A /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		51ED4E5F1BE08EDF0079E030 /* 18-Chats.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "18-Chats.png"; sourceTree = "<group>"; };
 		51ED4E601BE08EDF0079E030 /* 12-Chats.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "12-Chats.png"; sourceTree = "<group>"; };
@@ -547,15 +535,9 @@
 			isa = PBXGroup;
 			children = (
 				51322A181BDFBFAA00418216 /* chaton.png */,
-				51322A191BDFBFAA00418216 /* chong.png */,
-				51322A1A1BDFBFAA00418216 /* felicin.png */,
-				51322A1B1BDFBFAA00418216 /* Galglot.png */,
 				51322A1C1BDFBFAA00418216 /* menu_icon.png */,
 				51322A1D1BDFBFAA00418216 /* request_send.png */,
 				51322A1E1BDFBFAA00418216 /* request_send1.png */,
-				51322A1F1BDFBFAA00418216 /* taylor.png */,
-				51322A201BDFBFAA00418216 /* yuna.png */,
-				51322A211BDFBFAA00418216 /* zoe_tay.png */,
 			);
 			name = Images;
 			path = ../Chats;
@@ -985,20 +967,17 @@
 				2B83CAC81BE895AB0064EC7F /* Default-667h@2x.png in Resources */,
 				EADB949D1BDF566C00512374 /* HomeCustomCell.xib in Resources */,
 				2B83CAC71BE895AB0064EC7F /* Default@2x.png in Resources */,
-				51322A251BDFBFAA00418216 /* Galglot.png in Resources */,
 				C6D5F63F1BC7B52C0050C1AE /* Patron-ExtraLightItalic.ttf in Resources */,
 				EAEF25361BCFEBF400F83E82 /* CustomNavigationView.xib in Resources */,
 				51322A221BDFBFAA00418216 /* chaton.png in Resources */,
 				C6D5F63D1BC7B52C0050C1AE /* Patron-BoldItalic.ttf in Resources */,
 				6A50C21D1BCCBB8C002B11AC /* DSProfileTableViewCell.xib in Resources */,
-				51322A2B1BDFBFAA00418216 /* zoe_tay.png in Resources */,
 				51F3C2F61BE75D40001E1FEC /* LocationCollectionViewCell.xib in Resources */,
 				511C735E1BE3801100D3D61D /* ChatTableViewCell.xib in Resources */,
 				2B83CAC61BE895AB0064EC7F /* Default-568h@2x.png in Resources */,
 				51322A271BDFBFAA00418216 /* request_send.png in Resources */,
 				065433161BF38B0400DABBFC /* button-16.mp3 in Resources */,
 				51322A261BDFBFAA00418216 /* menu_icon.png in Resources */,
-				51322A291BDFBFAA00418216 /* taylor.png in Resources */,
 				C6D5F6391BC7B52C0050C1AE /* FutworaPro-Regular.otf in Resources */,
 				C6D5F6401BC7B52C0050C1AE /* Patron-Italic.ttf in Resources */,
 				6AE7361F1C05AA5D00C7DCF0 /* SettingView.xib in Resources */,
@@ -1008,11 +987,9 @@
 				51322A281BDFBFAA00418216 /* request_send1.png in Resources */,
 				51F3C2F41BE75D40001E1FEC /* DSLocationViewController.xib in Resources */,
 				51ED4E641BE08EDF0079E030 /* 19-ChatWindow.png in Resources */,
-				51322A231BDFBFAA00418216 /* chong.png in Resources */,
 				51ED4E631BE08EDF0079E030 /* 12-Chats.png in Resources */,
 				511C73651BE3804E00D3D61D /* DSChatsTableViewController.xib in Resources */,
 				C6D5F6421BC7B52C0050C1AE /* Patron-MediumItalic.ttf in Resources */,
-				51322A241BDFBFAA00418216 /* felicin.png in Resources */,
 				C6D5F60C1BC7AF500050C1AE /* Launch Screen.xib in Resources */,
 				6A8D15D41BCC059B000F1FB4 /* DSProfileTableViewController.xib in Resources */,
 				51ED4E621BE08EDF0079E030 /* 18-Chats.png in Resources */,
@@ -1027,7 +1004,6 @@
 				C6D5F63E1BC7B52C0050C1AE /* Patron-ExtraLight.ttf in Resources */,
 				EAFC97981BD21CF800B3593D /* DSInterestAndHobbiesCollectionViewCell.xib in Resources */,
 				C6D5F63B1BC7B52C0050C1AE /* Patron-BlackItalic.ttf in Resources */,
-				51322A2A1BDFBFAA00418216 /* yuna.png in Resources */,
 				C6D5F63C1BC7B52C0050C1AE /* Patron-Bold.ttf in Resources */,
 				6A71A9381C0471F900D6D5F4 /* NSLocalization.strings in Resources */,
 				2B83CACA1BE8975F0064EC7F /* Default-736h@3x.png in Resources */,
