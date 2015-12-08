@@ -183,6 +183,8 @@
             <connections>
                 <outlet property="cameraButton" destination="L4l-gD-IHh" id="Utw-3t-AWx"/>
                 <outlet property="hobbiesLabel" destination="CBw-9W-xH2" id="LLK-iC-TSe"/>
+                <outlet property="privacyPolicy" destination="bzZ-MU-7QJ" id="WEp-EF-oPJ"/>
+                <outlet property="termsOfUse" destination="VtB-GW-ldJ" id="UE6-RD-C9L"/>
             </connections>
             <point key="canvasLocation" x="286" y="158"/>
         </tableViewCell>
@@ -651,6 +653,9 @@
                                     <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <action selector="loadTermsOfUseViewAction:" destination="-1" eventType="touchUpInside" id="Y9U-4C-D5M"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bzZ-MU-7QJ">
                                 <rect key="frame" x="152" y="0.0" width="148" height="40"/>
@@ -661,6 +666,9 @@
                                     <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <action selector="loadTermsOfUseViewAction:" destination="-1" eventType="touchUpInside" id="MI4-ny-Gf0"/>
+                                </connections>
                             </button>
                         </subviews>
                         <animations/>
