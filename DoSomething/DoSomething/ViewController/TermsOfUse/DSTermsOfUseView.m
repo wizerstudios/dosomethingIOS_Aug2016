@@ -87,7 +87,7 @@
     label.textColor=[UIColor blackColor];
     [label setFont:[UIFont fontWithName:@"patron-regular" size:10]];
     [self.viewContainer addSubview:label];
-    label.text= @"TERMS OF USE AND PRIVATE POLICY";
+    label.text= @"TERMS OF USE AND PRIVACY POLICY";
     
 }
 
