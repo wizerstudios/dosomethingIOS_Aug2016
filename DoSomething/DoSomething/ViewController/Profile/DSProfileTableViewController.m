@@ -311,8 +311,6 @@
         if([profileData length] == 0){
                 [userProfileImage setImage:[UIImage imageNamed:@"profile_noimg"]];
                // [topViewCell setHidden:YES];
-            
-            NSLog(@"data : %d",i);
             if(i==0){
                 [topViewCell setHidden:YES];
                 self.scrView.scrollEnabled = NO;
@@ -976,8 +974,6 @@
             
         }
         else if(userDetailsDict.count > 0){
-//            profileGenderValueLabel.text =[userDetailsDict valueForKey:@"gender"];
-//            strGender =profileGenderValueLabel.text;
             if([[userDetailsDict valueForKey:@"gender"]isEqual:@"male"]){
                 [cell.maleButton setTitleColor:[UIColor redColor] forState:UIControlStateNormal];
                 strGender=[userDetailsDict valueForKey:@"gender"];
@@ -1000,11 +996,7 @@
             {
                 [cell.maleButton setTitleColor:[UIColor redColor] forState:UIControlStateNormal];
             }
-
-            
         }
-
-        
         else{
             [profileGenderView setHidden:YES];
             [profileGenderLabel setHidden:YES];
@@ -1026,8 +1018,6 @@
         
         
     }
-
-
     if (indexPath.row == 4)
     {
         
@@ -1537,8 +1527,8 @@
     cell = (DSProfileTableViewCell *)[_tableviewProfile cellForRowAtIndexPath:indexPath];
     cell.textViewHeaderLabel.hidden = YES;
     if(textView.tag == 0) {
-        textView.text = @"";
-        //textView.textColor = [UIColor blackColor];
+       // textView.text = @"";
+        
         textView.tag = 1;
         strAbout = textView.text;
     }
@@ -1563,10 +1553,6 @@
 
     strAbout = textView.text;
 }
-
-
-
-
 
 #pragma mark - Camera Action
 -(void)selectCamera: (UIButton *)sender
