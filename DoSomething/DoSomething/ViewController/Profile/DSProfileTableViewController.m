@@ -156,6 +156,7 @@
             else{
                 ImageURL1 = [profileDict valueForKey:@"image1"];
                 imageData1 = [NSData dataWithContentsOfURL:[NSURL URLWithString:ImageURL1]];
+               
             }
             if([[profileDict valueForKey:@"image2"] isEqual:@""]){
               //  imageData2 = [profileDict valueForKey:@"image2"];
@@ -194,6 +195,7 @@
             else{
                 ImageURL1 = [userDetailsDict valueForKey:@"profileImage"];
                 imageData1 = [NSData dataWithContentsOfURL:[NSURL URLWithString:ImageURL1]];
+                
             }
             ImageURL2 = @"";
             imageData2 = [ImageURL2 dataUsingEncoding:NSUTF8StringEncoding];
@@ -311,10 +313,10 @@
         if([profileData length] == 0){
                 [userProfileImage setImage:[UIImage imageNamed:@"profile_noimg"]];
                // [topViewCell setHidden:YES];
-            if(i==0){
-                [topViewCell setHidden:YES];
-                self.scrView.scrollEnabled = NO;
-            }
+//            if(i==0){
+//                [topViewCell setHidden:YES];
+//                self.scrView.scrollEnabled = NO;
+//            }
             
         }
         else{
@@ -1754,7 +1756,7 @@
             
             NSString *fbProfile = [userDetailsDict valueForKey:@"profileImage"];
             NSData *profileImageData = [NSData dataWithContentsOfURL:[NSURL URLWithString:fbProfile]];
-            profileImage1 = [UIImage imageWithData:profileImageData];;
+            profileImage1 = [UIImage imageWithData:profileImageData];
 
 
         }
