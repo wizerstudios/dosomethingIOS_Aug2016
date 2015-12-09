@@ -355,14 +355,19 @@ notification_vibration:(NSString *)isnotification_vibration
      {
          NSLog(@"UPDATEresponseObject = %@",responseObject);
          
+         
 //         NSMutableDictionary *profileUpdateDict = [[NSMutableDictionary alloc]init];
 //         profileUpdateDict = [responseObject valueForKey:@"updateprofile"];
-//         [COMMON setUserDetails:[[profileUpdateDict valueForKey:@"userUpdateDetails"]objectAtIndex:0]];
-//         NSLog(@"userdetails = %@",[COMMON getUserDetails]);
-         
-             [[NSNotificationCenter defaultCenter] postNotificationName:@"updateprofile"
-                                                                 object:self
-                                                               userInfo:responseObject];
+//         if([[profileUpdateDict valueForKey:@"status"]isEqualToString:@"success"]){
+//             [COMMON setUserDetails:[[profileUpdateDict valueForKey:@"userUpdateDetails"]objectAtIndex:0]];
+//             NSLog(@"userdetails = %@",[COMMON getUserDetails]);
+//             
+//
+//         }
+         [[NSNotificationCenter defaultCenter] postNotificationName:@"updateprofile"
+                                                             object:self
+                                                           userInfo:responseObject];
+
      }
      
        failure:^(AFHTTPRequestOperation *operation, NSError *error){

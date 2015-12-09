@@ -1344,9 +1344,17 @@
 //            cell.emailTextField.text = [userDetailsDict valueForKey:@"email"];
 //            emailAddressToRegister   = cell.emailTextField.text;
 //            emailPasswordToRegister  = cell.passwordTextField.text;
-            
+            NSLog(@"cell.emailTextField.text%@",cell.emailTextField.text);
+            NSLog(@"cell.emailTextField.text%@",emailAddressToRegister);
+           
             cell.emailTextField.text =(emailAddressToRegister==0)?[userDetailsDict valueForKey:@"email"]:emailAddressToRegister;
             cell.passwordTextField.text  =(emailPasswordToRegister==0)? @"":emailPasswordToRegister;
+            emailAddressToRegister   = cell.emailTextField.text;
+                       
+            NSLog(@"cell.emailTextField.text%@",cell.emailTextField.text);
+            NSLog(@"cell.emailTextField.text%@",emailAddressToRegister);
+
+            
         }
         else
         {
@@ -1731,14 +1739,23 @@
         currentLatitude = @"";
     if(currentLongitude == nil)
         currentLongitude = @"";
+    
+    NSLog(@"%@",profileDataArray);
+    NSLog(@"%@",profileImage1);
+    
     if(userDetailsDict.count > 0)
     {
         if(profileImage1 == nil)
         {
+//            NSString *fbProfile = [userDetailsDict valueForKey:@"profileImage"];
+//            NSURL *profileImageFBUrl = [NSURL URLWithString:fbProfile];
+//            NSData *profileImageData = [NSData dataWithContentsOfURL:[NSURL URLWithString:ImageURL1]];
+//            profileImage1 = [UIImage imageWithData:profileImageData];
+            
             NSString *fbProfile = [userDetailsDict valueForKey:@"profileImage"];
-            NSURL *profileImageFBUrl = [NSURL URLWithString:fbProfile];
-            NSData *profileImageData = [[NSData alloc] initWithContentsOfURL:profileImageFBUrl];
-            profileImage1 = [UIImage imageWithData:profileImageData];
+            NSData *profileImageData = [NSData dataWithContentsOfURL:[NSURL URLWithString:fbProfile]];
+            profileImage1 = [UIImage imageWithData:profileImageData];;
+
 
         }
 //        else{
