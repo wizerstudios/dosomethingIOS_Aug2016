@@ -516,16 +516,12 @@
            
             else if (textField.tag ==14)
             {
-                if(cell.emailTextField.text == 0){
-                emailAddressToRegister =[emailAddressToRegister stringByAppendingString:strSearchLetters];
-                }
-                else{
-                    
-                }
+                emailAddressToRegister =strSearchLetters;
+              
             }
             else if (textField.tag == 15)
             {
-               emailPasswordToRegister  =[cell.passwordTextField.text stringByAppendingString:strSearchLetters];
+               emailPasswordToRegister  =strSearchLetters;
             }
         }
         
@@ -556,75 +552,75 @@
 
 - (void)textFieldDidEndEditing:(UITextField *)textField{
     
-    id textFieldSuper = textField;
-    textField.textColor =[UIColor colorWithRed:(float)161.0/255 green:(float)161.0/255 blue:(float)161.0/255 alpha:1.0f];
-    
-    while (![textFieldSuper isKindOfClass:[UITableViewCell class]]) {
-        
-        textFieldSuper = [textFieldSuper superview];
-        
-    }
-    NSIndexPath *indexPath ;
-    
-    //DSProfileTableViewCell *cell;
-    
-    indexPath = [self.tableviewProfile indexPathForCell:(DSProfileTableViewCell *)textFieldSuper];
-    
-    cell = (DSProfileTableViewCell *) [self.tableviewProfile cellForRowAtIndexPath:[NSIndexPath indexPathForRow:indexPath.row inSection:indexPath.section]];
-    
-    NSLog(@"row = %ld section = %ld",(long)indexPath.row,(long)indexPath.section);
-    
-   NSString *selOptionVal;
-//    if (indexPath.row ==1 ||indexPath.row ==5) {
-//        //selOptionVal = cell.textFieldPlaceHolder.text;
+//    id textFieldSuper = textField;
+//    textField.textColor =[UIColor colorWithRed:(float)161.0/255 green:(float)161.0/255 blue:(float)161.0/255 alpha:1.0f];
+//    
+//    while (![textFieldSuper isKindOfClass:[UITableViewCell class]]) {
 //        
+//        textFieldSuper = [textFieldSuper superview];
+//        
+//    }
+//    NSIndexPath *indexPath ;
+//    
+//    //DSProfileTableViewCell *cell;
+//    
+//    indexPath = [self.tableviewProfile indexPathForCell:(DSProfileTableViewCell *)textFieldSuper];
+//    
+//    cell = (DSProfileTableViewCell *) [self.tableviewProfile cellForRowAtIndexPath:[NSIndexPath indexPathForRow:indexPath.row inSection:indexPath.section]];
+//    
+//    NSLog(@"row = %ld section = %ld",(long)indexPath.row,(long)indexPath.section);
+//    
+//   NSString *selOptionVal;
+////    if (indexPath.row ==1 ||indexPath.row ==5) {
+////        //selOptionVal = cell.textFieldPlaceHolder.text;
+////        
+////        if(selOptionVal != nil || ![selOptionVal isEqualToString:@""]){
+////            [[[placeHolderArray objectAtIndex:indexPath.section] objectAtIndex:indexPath.row] setObject:selOptionVal forKey:@"TypingText"];
+////            
+////        }
+////    }
+//    
+//    
+//    if (indexPath.row ==4 ) {
+//       // selOptionVal = cell.textFieldDPPlaceHolder.text;
+//       
+//        NSDate *date = datePicker.date;
+//        NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+//        [formatter setDateFormat:@"dd/MM/yyyy"];
+//        selOptionVal = [formatter stringFromDate:date];
+//       
 //        if(selOptionVal != nil || ![selOptionVal isEqualToString:@""]){
-//            [[[placeHolderArray objectAtIndex:indexPath.section] objectAtIndex:indexPath.row] setObject:selOptionVal forKey:@"TypingText"];
+//            //[[[placeHolderArray objectAtIndex:indexPath.section] objectAtIndex:indexPath.row] setObject:selOptionVal forKey:@"TypingText"];
+//            currentTextfield.text =selOptionVal;
+//        }
+//        
+//        
+//    }
+//    
+//    else if (indexPath.row ==7 ) {
+//        if ((selOptionVal = cell.emailTextField.text)) {
+//            if(selOptionVal != nil || ![selOptionVal isEqualToString:@""]){
+//                emailAddressToRegister=cell.emailTextField.text;
+////                [[[placeHolderArray objectAtIndex:indexPath.section] objectAtIndex:indexPath.row] setObject:selOptionVal forKey:@"TypingText"];
+//                
+//            }
 //            
 //        }
+//        
+//        else if ((selOptionVal = cell.passwordTextField.text))
+//        if(selOptionVal != nil || ![selOptionVal isEqualToString:@""]){
+//            
+//            emailPasswordToRegister=cell.passwordTextField.text;
+////            [[[placeHolderArray objectAtIndex:indexPath.section] objectAtIndex:indexPath.row] setObject:selOptionVal forKey:@"TypingTextPass"];
+//        }
+//        
 //    }
-    
-    
-    if (indexPath.row ==4 ) {
-       // selOptionVal = cell.textFieldDPPlaceHolder.text;
-       
-        NSDate *date = datePicker.date;
-        NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-        [formatter setDateFormat:@"dd/MM/yyyy"];
-        selOptionVal = [formatter stringFromDate:date];
-       
-        if(selOptionVal != nil || ![selOptionVal isEqualToString:@""]){
-            //[[[placeHolderArray objectAtIndex:indexPath.section] objectAtIndex:indexPath.row] setObject:selOptionVal forKey:@"TypingText"];
-            currentTextfield.text =selOptionVal;
-        }
-        
-        
-    }
-    
-    else if (indexPath.row ==7 ) {
-        if ((selOptionVal = cell.emailTextField.text)) {
-            if(selOptionVal != nil || ![selOptionVal isEqualToString:@""]){
-                emailAddressToRegister=cell.emailTextField.text;
-//                [[[placeHolderArray objectAtIndex:indexPath.section] objectAtIndex:indexPath.row] setObject:selOptionVal forKey:@"TypingText"];
-                
-            }
-            
-        }
-        
-        else if ((selOptionVal = cell.passwordTextField.text))
-        if(selOptionVal != nil || ![selOptionVal isEqualToString:@""]){
-            
-            emailPasswordToRegister=cell.passwordTextField.text;
-//            [[[placeHolderArray objectAtIndex:indexPath.section] objectAtIndex:indexPath.row] setObject:selOptionVal forKey:@"TypingTextPass"];
-        }
-        
-    }
-    
-    NSLog(@"personalArray =%@", placeHolderArray);
-    
-    [cell.textFieldPlaceHolder   resignFirstResponder];
-    
-    [textField resignFirstResponder];
+//    
+//    NSLog(@"personalArray =%@", placeHolderArray);
+//    
+//    [cell.textFieldPlaceHolder   resignFirstResponder];
+//    
+//    [textField resignFirstResponder];
     
 }
 
@@ -913,8 +909,10 @@
         }
         if(profileDict !=NULL){
             [cell.textFieldPlaceHolder setEnabled:NO];
-            cell.firstnameTxt.text =[profileDict valueForKey:@"first_name"];
-            cell.lastNameTxt.text  =[profileDict valueForKey:@"last_name"];
+            
+                cell.firstnameTxt.text =(FirstName==0)?[profileDict valueForKey:@"first_name"]:FirstName;
+                cell.lastNameTxt.text  =(LastName==0)? [profileDict valueForKey:@"last_name"]:LastName;
+            
             
         }
         else if(userDetailsDict.count > 0){
@@ -1326,7 +1324,7 @@
 
     [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
     //_tableviewProfile.scrollEnabled = NO;
-    [_tableviewProfile setBounces:NO];
+    //[_tableviewProfile setBounces:NO];
     return cell;
     
 }
@@ -1550,7 +1548,7 @@
     cell = (DSProfileTableViewCell *)[_tableviewProfile cellForRowAtIndexPath:indexPath];
     cell.textViewHeaderLabel.hidden = YES;
     if(textView.tag == 0) {
-        textView.text = @"";
+        //textView.text = @"";
         //textView.textColor = [UIColor blackColor];
         textView.tag = 1;
         strAbout = textView.text;
