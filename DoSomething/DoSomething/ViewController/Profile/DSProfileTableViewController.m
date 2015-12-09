@@ -917,6 +917,8 @@
             [cell.textFieldPlaceHolder setEnabled:NO];
             cell.firstnameTxt.text =(FirstName==0)?[profileDict valueForKey:@"first_name"]:FirstName;
             cell.lastNameTxt.text  =(LastName==0)? [profileDict valueForKey:@"last_name"]:LastName;
+            FirstName = cell.firstnameTxt.text;
+            LastName  = cell.lastNameTxt.text;
         }
         else if(userDetailsDict.count > 0){
 //            cell.firstnameTxt.text =[userDetailsDict valueForKey:@"first_name"];
@@ -1892,8 +1894,6 @@
 -(void)loadValidations
 {
     [COMMON LoadIcon:self.view];
-    
-    
     
     NSLog(@"hobby:%@",hobbiesNameArray);
     strType      = (selectEmail== YES)?@"1":@"2";
