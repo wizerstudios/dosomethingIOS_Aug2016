@@ -511,19 +511,17 @@
             {
                 LastName =strSearchLetters;
             }
-           
+            else if (textField.tag ==13)
+            {
+                strDOB = strSearchLetters;
+            }
             else if (textField.tag ==14)
             {
-                if(cell.emailTextField.text == 0){
-                emailAddressToRegister =[emailAddressToRegister stringByAppendingString:strSearchLetters];
-                }
-                else{
-                    
-                }
+                emailAddressToRegister = strSearchLetters;
             }
             else if (textField.tag == 15)
             {
-               emailPasswordToRegister  =[cell.passwordTextField.text stringByAppendingString:strSearchLetters];
+                emailPasswordToRegister = strSearchLetters;
             }
         }
         
