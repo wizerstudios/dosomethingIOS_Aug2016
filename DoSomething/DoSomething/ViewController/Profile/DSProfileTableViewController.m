@@ -502,7 +502,7 @@
     NSString *strSearchLetters;
     if (string.length !=0)
     {
-        if(textField.text.length > 1)
+        if(textField.text.length > 0)
         {
             strSearchLetters =[textField.text stringByAppendingString:string];
             if(textField.tag ==11)
@@ -513,7 +513,20 @@
             {
                 LastName =strSearchLetters;
             }
-
+           
+            else if (textField.tag ==14)
+            {
+                if(cell.emailTextField.text == 0){
+                emailAddressToRegister =[emailAddressToRegister stringByAppendingString:strSearchLetters];
+                }
+                else{
+                    
+                }
+            }
+            else if (textField.tag == 15)
+            {
+               emailPasswordToRegister  =[cell.passwordTextField.text stringByAppendingString:strSearchLetters];
+            }
         }
         
     }
@@ -1246,7 +1259,7 @@
         {
             cell.emailTextField.text = [profileDict valueForKey:@"email"];
             //cell.passwordTextField.text =[self getPassword];
-            emailPasswordToRegister = cell.passwordTextField.text;
+            //emailPasswordToRegister = cell.passwordTextField.text;
 
         }
         else if(userDetailsDict.count > 0){
