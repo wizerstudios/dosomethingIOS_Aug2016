@@ -108,8 +108,7 @@
     [self getUserCurrenLocation];
     deviceUdid = [OpenUDID value];
    
-    
-    
+    [self profileImageDisplayMethod];
 }
 
 
@@ -182,7 +181,7 @@
     
     infoArray=[[NSMutableArray alloc]initWithObjects:@"profile_noimg",@"profile_noimg",@"profile_noimg", nil];
     [self CustomAlterview];
-    [self profileImageDisplayMethod];
+   
 
      [_tableviewProfile reloadData];
 }
@@ -311,7 +310,14 @@
     {
         
         NSData *profileData = [profileDataArray objectAtIndex:i];
+        if(IS_IPHONE6_Plus)
+        {
+            userProfileImage = [[UIImageView alloc]initWithFrame:CGRectMake((self.view.frame.size.width/4) + spacing, 20,self.profileImageView.frame.size.width, self.profileImageView.frame.size.height)];
+        }
+        else
+        {
         userProfileImage = [[UIImageView alloc]initWithFrame:CGRectMake((i*self.scrView.frame.size.width) + spacing, 20,self.profileImageView.frame.size.width, self.profileImageView.frame.size.height)];
+        }
         [userProfileImage setTag:i+100];
         if([profileData length] == 0){
                 [userProfileImage setImage:[UIImage imageNamed:@"profile_noimg"]];
@@ -323,8 +329,13 @@
             
         }
         else{
-            
+           
+            dispatch_async(dispatch_get_main_queue(), ^{
                 [userProfileImage setImage:[UIImage imageWithData:profileData]];
+            });
+       
+            
+                //[userProfileImage setImage:[UIImage imageWithData:profileData]];
                 [userProfileImage setContentMode:UIViewContentModeScaleAspectFill];
                 [cell.cameraButton setHidden:YES];
                 [topViewCell setHidden:NO];
@@ -556,11 +567,6 @@
     if(textField.tag >= 1000){
         [self loadDatePicker:tag];
     }
-    
-//    else if (textField.tag == 1000)
-//    {
-//        currentTextfield.text = strSearchLetters;
-//    }
         return YES;
     
 }
@@ -568,36 +574,12 @@
 - (void)textFieldDidEndEditing:(UITextField *)textField{
     
     NSLog(@"texttag:%ld",(long)textField.tag);
-    
-    //id textFieldSuper = textField;
+
     textField.textColor =[UIColor colorWithRed:(float)161.0/255 green:(float)161.0/255 blue:(float)161.0/255 alpha:1.0f];
     
-//    while (![textFieldSuper isKindOfClass:[UITableViewCell class]]) {
-//        
-//        textFieldSuper = [textFieldSuper superview];
-//        
-//    }
-//    NSIndexPath *indexPath ;
-//    
-//    //DSProfileTableViewCell *cell;
-//    
-//    indexPath = [self.tableviewProfile indexPathForCell:(DSProfileTableViewCell *)textFieldSuper];
-//    
-//    cell = (DSProfileTableViewCell *) [self.tableviewProfile cellForRowAtIndexPath:[NSIndexPath indexPathForRow:indexPath.row inSection:indexPath.section]];
-//    
-//    NSLog(@"row = %ld section = %ld",(long)indexPath.row,(long)indexPath.section);
-//    
+
+    
   NSString *selOptionVal;
-////    if (indexPath.row ==1 ||indexPath.row ==5) {
-////        //selOptionVal = cell.textFieldPlaceHolder.text;
-////        
-////        if(selOptionVal != nil || ![selOptionVal isEqualToString:@""]){
-////            [[[placeHolderArray objectAtIndex:indexPath.section] objectAtIndex:indexPath.row] setObject:selOptionVal forKey:@"TypingText"];
-////            
-////        }
-////    }
-//    
-//    
     if (textField.tag ==1000) {
         selOptionVal = cell.textFieldDPPlaceHolder.text;
        
@@ -613,31 +595,7 @@
         
         
     }
-//    13
-//    else if (indexPath.row ==7 ) {
-//        if ((selOptionVal = cell.emailTextField.text)) {
-//            if(selOptionVal != nil || ![selOptionVal isEqualToString:@""]){
-//                emailAddressToRegister=cell.emailTextField.text;
-////                [[[placeHolderArray objectAtIndex:indexPath.section] objectAtIndex:indexPath.row] setObject:selOptionVal forKey:@"TypingText"];
-//                
-//            }
-//            
-//        }
-//        
-//        else if ((selOptionVal = cell.passwordTextField.text))
-//        if(selOptionVal != nil || ![selOptionVal isEqualToString:@""]){
-//            
-//            emailPasswordToRegister=cell.passwordTextField.text;
-////            [[[placeHolderArray objectAtIndex:indexPath.section] objectAtIndex:indexPath.row] setObject:selOptionVal forKey:@"TypingTextPass"];
-//        }
-//        
-//    }
-//    
-//    NSLog(@"personalArray =%@", placeHolderArray);
-//    
-//    [cell.textFieldPlaceHolder   resignFirstResponder];
-//    
-//    [textField resignFirstResponder];
+
     
 }
 
@@ -829,13 +787,21 @@
     }
             if (indexPath.row == 0 )
             {
-                return 258;
+                return 200;
              }
+          if(indexPath.row ==1)
+        {
+           return 80;
+       }
+           if(indexPath.row ==2)
+         {
+               return 0;
+           }
+
     
-  
             if (indexPath.row == 4)
             {
-                return 70;
+                return 50;
             }
            if(indexPath.row == 5)
            {
@@ -863,13 +829,13 @@
             }
     
             if ( indexPath.row == 7) {
-                return 160;
+                return 130;
             }
     
             if (indexPath.row == 9) {
                 return 98;
             }
-        return 50;
+        return 40;
     }
 
 
@@ -923,7 +889,7 @@
         
         if (IS_IPHONE6 ||IS_IPHONE6_Plus)
         {
-            cell.layoutConstraintViewHeight.constant =49;
+            //cell.layoutConstraintViewHeight.constant =49;
 
         }
         if(profileDict !=NULL){
@@ -934,10 +900,7 @@
             LastName  = cell.lastNameTxt.text;
         }
         else if(userDetailsDict.count > 0){
-//            cell.firstnameTxt.text =[userDetailsDict valueForKey:@"first_name"];
-//            cell.lastNameTxt.text  =[userDetailsDict valueForKey:@"last_name"];
-//            FirstName = cell.firstnameTxt.text;
-//            LastName  = cell.lastNameTxt.text;
+
             cell.firstnameTxt.text =(FirstName==0)?[userDetailsDict valueForKey:@"first_name"]:FirstName;
             cell.lastNameTxt.text  =(LastName==0)? [userDetailsDict valueForKey:@"last_name"]:LastName;
             FirstName = cell.firstnameTxt.text;
@@ -1158,11 +1121,10 @@
                 
                 cell.textViewAboutYou.text = textviewText;
                 
-                //cell.labelAboutYou.text =titleText;
                 
                 strAbout =cell.textViewAboutYou.text;
                 
-                //cell.textViewHeaderLabel.text =placeHolderText;
+             
                 
                 cell.textViewAboutYou.delegate = self;
                 
@@ -1178,7 +1140,7 @@
                 
                 if(![[profileDict valueForKey:@"about"] isEqual:strAbout]){
                     
-                   // cell.textViewAboutYou.text = [[profileDict valueForKey:@"about"]mutableCopy];
+                  
                     if(strAbout == NULL){
                         cell.textViewAboutYou.text = [[profileDict valueForKey:@"about"]mutableCopy];
                         strAbout =cell.textViewAboutYou.text;
@@ -1202,9 +1164,6 @@
                 
                 cell.textViewHeaderLabel.hidden = YES;
                 
-                //cell.textViewHeaderLabel.text =placeHolderText;
-                
-                //cell.labelAboutYou.text =titleText;
                 
                 cell.textViewAboutYou.delegate = self;
                 
@@ -1282,8 +1241,7 @@
             else
                 hobbiesImage = [[UIImageView alloc]initWithFrame:CGRectMake(((i-15)*(commonWidth + imageSize))+ 10, yAxis+((imageSize+space) * 3), imageSize, imageSize)];
             NSString *image =[imageNormalArray objectAtIndex:i];
-           //[imageNormalArray lastObject];
-           // NSLog(@"lastObject:%@",[imageNormalArray lastObject]);
+           
             if([image isEqualToString:@"Plus_icon.png"])
             {
                 [hobbiesImage setImage:[UIImage imageNamed:image]];
@@ -1340,18 +1298,14 @@
         
         if(profileDict != NULL)
         {
-           // cell.emailTextField.text = [profileDict valueForKey:@"email"];
-            //cell.passwordTextField.text =[self getPassword];
-            //emailPasswordToRegister = cell.passwordTextField.text;
+          
             [cell.emailTextField setEnabled:NO];
             cell.emailTextField.text =(emailAddressToRegister==0)?[profileDict valueForKey:@"email"]:emailAddressToRegister;
             cell.passwordTextField.text  =(emailPasswordToRegister==0)? @"":emailPasswordToRegister;
 
         }
         else if(userDetailsDict.count > 0){
-//            cell.emailTextField.text = [userDetailsDict valueForKey:@"email"];
-//            emailAddressToRegister   = cell.emailTextField.text;
-//            emailPasswordToRegister  = cell.passwordTextField.text;
+
             NSLog(@"cell.emailTextField.text%@",cell.emailTextField.text);
             NSLog(@"cell.emailTextField.text%@",emailAddressToRegister);
            
@@ -1388,11 +1342,17 @@
             cell.layoutConstraintNotificationLabelYPos.constant = 40;
             cell.layoutConstraintNotificationViewHeight.constant=51;
             cell.layoutConstraintRadioButtonYPos.constant = 18;
+            cell.messSwitchBtn.transform = CGAffineTransformMakeScale(0.65, 0.65);
+            cell.SoundSwitchBtn.transform = CGAffineTransformMakeScale(0.65, 0.65);
+            cell.vibrationSwitchBtn.transform = CGAffineTransformMakeScale(0.65, 0.65);
         }
-        
-        cell.messSwitchBtn.transform = CGAffineTransformMakeScale(0.50, 0.50);
-        cell.SoundSwitchBtn.transform = CGAffineTransformMakeScale(0.50, 0.50);
-        cell.vibrationSwitchBtn.transform = CGAffineTransformMakeScale(0.50, 0.50);
+        else
+        {
+            
+        cell.messSwitchBtn.transform = CGAffineTransformMakeScale(0.70, 0.70);
+        cell.SoundSwitchBtn.transform = CGAffineTransformMakeScale(0.70, 0.70);
+        cell.vibrationSwitchBtn.transform = CGAffineTransformMakeScale(0.70, 0.70);
+        }
         cell.vibrationSwitchBtn.layer.cornerRadius = 16.0;
         cell.SoundSwitchBtn.layer.cornerRadius = 16.0;
         cell.messSwitchBtn.layer.cornerRadius = 16.0;
@@ -1724,7 +1684,9 @@
     else if(CurrentImage == 2)
         profileImage3 = image;
     
-    NSData *profileData = UIImageJPEGRepresentation([info objectForKey:UIImagePickerControllerEditedImage], 0.1);
+    NSData *profileData = UIImagePNGRepresentation([info objectForKey:UIImagePickerControllerEditedImage]);
+    
+    NSLog(@"Image Size = %lu",[profileData length]);
     
     [profileDataArray replaceObjectAtIndex:CurrentImage withObject:profileData];
     
