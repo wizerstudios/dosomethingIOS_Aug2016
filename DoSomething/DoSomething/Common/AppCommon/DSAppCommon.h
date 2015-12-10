@@ -40,6 +40,9 @@ typedef enum {
 - (currentDevice)getCurrentDevice;
 - (BOOL) isUserLoggedIn;
 
+
+void downloadImageFromUrl(NSString* urlString, UIImageView * imageview);
+
 // ResizeableFont
 - (UIFont *)getResizeableFont:(UIFont *)currentFont;
 +(void)showSimpleAlertWithMessage:(NSString *)message;
