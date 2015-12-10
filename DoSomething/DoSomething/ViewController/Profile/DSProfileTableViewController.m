@@ -107,12 +107,9 @@
     [self initializeArray];
     [self getUserCurrenLocation];
     deviceUdid = [OpenUDID value];
-   
-    
+    [self profileImageDisplayMethod];
     
 }
-
-
 -(void)viewWillAppear:(BOOL)animated
 {
     self.navigationController.navigationBarHidden=NO;
@@ -175,14 +172,9 @@
     
     strInterestHobbies = [hobbiesCategoryIDArray componentsJoinedByString:@","];
     }
-    
-    NSLog(@"joinedString:%@",strInterestHobbies);
-    
-   
-    
     infoArray=[[NSMutableArray alloc]initWithObjects:@"profile_noimg",@"profile_noimg",@"profile_noimg", nil];
     [self CustomAlterview];
-    [self profileImageDisplayMethod];
+    
 
      [_tableviewProfile reloadData];
 }
@@ -199,7 +191,7 @@
     }
     else{
         
-        [self initializeArrayProfile];
+       // [self initializeArrayProfile];
         
         self.tableViewHeightConstraint.constant=80;
     }
@@ -366,20 +358,15 @@
     for(int i=0;i<profileImagePageControl.numberOfPages;i++)
     {
         blkdot=[[UIImageView alloc]init];
-        [blkdot setFrame:CGRectMake(i*17, 0, 7, 7 )];
-    //    [blkdot setImage:[UIImage imageNamed:@"dot_normal"]];
-        [blkdot setBackgroundColor:[UIColor colorWithRed:83.0f/255.0f green:83.0f/255.0f blue:83.0f/255.0f alpha:1.0f]];
-        blkdot.layer.cornerRadius = blkdot.frame.size.height / 2;
-        blkdot.layer.masksToBounds = YES;
+        [blkdot setFrame:CGRectMake(i*18, 0, 8, 8 )];
+        [blkdot setImage:[UIImage imageNamed:@"dot_normal"]];
+
         [pgDtView addSubview:blkdot];
-        [pageImageView setFrame:CGRectMake(0, 0, 7, 7)];
-       // [pageImageView setImage:[UIImage imageNamed:@"dot_active_gray"]];
-        [pageImageView setBackgroundColor:[UIColor colorWithRed:218.0f/255.0f green:40.0f/255.0f blue:64.0f/255.0f alpha:1.0f]];
-        pageImageView.layer.cornerRadius = pageImageView.frame.size.height / 2;
-        pageImageView.layer.masksToBounds = YES;
+        [pageImageView setFrame:CGRectMake(0, 0, 8, 8)];
+        [pageImageView setImage:[UIImage imageNamed:@"dot_active_gray"]];
         [pgDtView addSubview:pageImageView];
         [topViewCell addSubview:pgDtView];
-        [pgDtView setFrame:CGRectMake(15, -5, profileImagePageControl.numberOfPages*17, 10)];
+        [pgDtView setFrame:CGRectMake(15, -5, profileImagePageControl.numberOfPages*18, 10)];
         
     }
 
@@ -403,7 +390,7 @@
     jslider = scrollView.contentOffset.x / scrollView.frame.size.width;
     [self.scrView setNeedsDisplay];
     profileImagePageControl.currentPage=jslider;
-    [pageImageView setFrame:CGRectMake(jslider*17, 0, 7, 7)];
+    [pageImageView setFrame:CGRectMake(jslider*18, 0, 8, 8)];
     
     isTapping=NO;
     scrolldragging=@"YES";
@@ -556,10 +543,7 @@
         [self loadDatePicker:tag];
     }
     
-//    else if (textField.tag == 1000)
-//    {
-//        currentTextfield.text = strSearchLetters;
-//    }
+
         return YES;
     
 }
@@ -571,32 +555,8 @@
     //id textFieldSuper = textField;
     textField.textColor =[UIColor colorWithRed:(float)161.0/255 green:(float)161.0/255 blue:(float)161.0/255 alpha:1.0f];
     
-//    while (![textFieldSuper isKindOfClass:[UITableViewCell class]]) {
-//        
-//        textFieldSuper = [textFieldSuper superview];
-//        
-//    }
-//    NSIndexPath *indexPath ;
-//    
-//    //DSProfileTableViewCell *cell;
-//    
-//    indexPath = [self.tableviewProfile indexPathForCell:(DSProfileTableViewCell *)textFieldSuper];
-//    
-//    cell = (DSProfileTableViewCell *) [self.tableviewProfile cellForRowAtIndexPath:[NSIndexPath indexPathForRow:indexPath.row inSection:indexPath.section]];
-//    
-//    NSLog(@"row = %ld section = %ld",(long)indexPath.row,(long)indexPath.section);
-//    
   NSString *selOptionVal;
-////    if (indexPath.row ==1 ||indexPath.row ==5) {
-////        //selOptionVal = cell.textFieldPlaceHolder.text;
-////        
-////        if(selOptionVal != nil || ![selOptionVal isEqualToString:@""]){
-////            [[[placeHolderArray objectAtIndex:indexPath.section] objectAtIndex:indexPath.row] setObject:selOptionVal forKey:@"TypingText"];
-////            
-////        }
-////    }
-//    
-//    
+
     if (textField.tag ==1000) {
         selOptionVal = cell.textFieldDPPlaceHolder.text;
        
@@ -606,37 +566,12 @@
         selOptionVal = [formatter stringFromDate:date];
        
         if(selOptionVal != nil || ![selOptionVal isEqualToString:@""]){
-            //[[[placeHolderArray objectAtIndex:indexPath.section] objectAtIndex:indexPath.row] setObject:selOptionVal forKey:@"TypingText"];
+          
             currentTextfield.text =selOptionVal;
         }
         
         
     }
-//    13
-//    else if (indexPath.row ==7 ) {
-//        if ((selOptionVal = cell.emailTextField.text)) {
-//            if(selOptionVal != nil || ![selOptionVal isEqualToString:@""]){
-//                emailAddressToRegister=cell.emailTextField.text;
-////                [[[placeHolderArray objectAtIndex:indexPath.section] objectAtIndex:indexPath.row] setObject:selOptionVal forKey:@"TypingText"];
-//                
-//            }
-//            
-//        }
-//        
-//        else if ((selOptionVal = cell.passwordTextField.text))
-//        if(selOptionVal != nil || ![selOptionVal isEqualToString:@""]){
-//            
-//            emailPasswordToRegister=cell.passwordTextField.text;
-////            [[[placeHolderArray objectAtIndex:indexPath.section] objectAtIndex:indexPath.row] setObject:selOptionVal forKey:@"TypingTextPass"];
-//        }
-//        
-//    }
-//    
-//    NSLog(@"personalArray =%@", placeHolderArray);
-//    
-//    [cell.textFieldPlaceHolder   resignFirstResponder];
-//    
-//    [textField resignFirstResponder];
     
 }
 
@@ -918,8 +853,6 @@
             
         }
         
-        
-        
         if (IS_IPHONE6 ||IS_IPHONE6_Plus)
         {
             cell.layoutConstraintViewHeight.constant =49;
@@ -933,10 +866,6 @@
             LastName  = cell.lastNameTxt.text;
         }
         else if(userDetailsDict.count > 0){
-//            cell.firstnameTxt.text =[userDetailsDict valueForKey:@"first_name"];
-//            cell.lastNameTxt.text  =[userDetailsDict valueForKey:@"last_name"];
-//            FirstName = cell.firstnameTxt.text;
-//            LastName  = cell.lastNameTxt.text;
             cell.firstnameTxt.text =(FirstName==0)?[userDetailsDict valueForKey:@"first_name"]:FirstName;
             cell.lastNameTxt.text  =(LastName==0)? [userDetailsDict valueForKey:@"last_name"]:LastName;
             FirstName = cell.firstnameTxt.text;
@@ -948,6 +877,9 @@
             cell.firstnameTxt.text = FirstName;
             cell.lastNameTxt.text   =LastName;
            }
+        cell.firstnameTxt.autocapitalizationType = UITextAutocapitalizationTypeSentences;
+        cell.lastNameTxt.autocapitalizationType = UITextAutocapitalizationTypeSentences;
+        cell.lastNameTxt.autocorrectionType = UITextAutocorrectionTypeNo;
 
     }
     
@@ -1267,8 +1199,7 @@
             else
                 hobbiesImage = [[UIImageView alloc]initWithFrame:CGRectMake(((i-15)*(commonWidth + imageSize))+ 10, yAxis+((imageSize+space) * 3), imageSize, imageSize)];
             NSString *image =[imageNormalArray objectAtIndex:i];
-           //[imageNormalArray lastObject];
-           // NSLog(@"lastObject:%@",[imageNormalArray lastObject]);
+           
             if([image isEqualToString:@"Plus_icon.png"])
             {
                 [hobbiesImage setImage:[UIImage imageNamed:image]];
@@ -1325,19 +1256,12 @@
         
         if(profileDict != NULL)
         {
-           // cell.emailTextField.text = [profileDict valueForKey:@"email"];
-            //cell.passwordTextField.text =[self getPassword];
-            //emailPasswordToRegister = cell.passwordTextField.text;
             [cell.emailTextField setEnabled:NO];
             cell.emailTextField.text =(emailAddressToRegister==0)?[profileDict valueForKey:@"email"]:emailAddressToRegister;
             cell.passwordTextField.text  =(emailPasswordToRegister==0)? @"":emailPasswordToRegister;
 
         }
         else if(userDetailsDict.count > 0){
-//            cell.emailTextField.text = [userDetailsDict valueForKey:@"email"];
-//            emailAddressToRegister   = cell.emailTextField.text;
-//            emailPasswordToRegister  = cell.passwordTextField.text;
-           
            
             cell.emailTextField.text =(emailAddressToRegister==0)?[userDetailsDict valueForKey:@"email"]:emailAddressToRegister;
             cell.passwordTextField.text  =(emailPasswordToRegister==0)? @"":emailPasswordToRegister;
