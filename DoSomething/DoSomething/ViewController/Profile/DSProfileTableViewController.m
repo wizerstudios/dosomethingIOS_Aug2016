@@ -1064,11 +1064,6 @@
         if(profileDict != NULL)
         {
             
-            NSLog(@"strDOB%@",strDOB);
-            NSLog(@"textFieldDPPlaceHolder%@",cell.textFieldDPPlaceHolder.text);
-            NSLog(@"cell%@",currentTextfield.text);
-            
-            
             if(![[profileDict valueForKey:@"date_of_birth"] isEqual:currentTextfield.text]){
                 
                 
@@ -1749,20 +1744,11 @@
     {
         if(profileImage1 == nil)
         {
-//            NSString *fbProfile = [userDetailsDict valueForKey:@"profileImage"];
-//            NSURL *profileImageFBUrl = [NSURL URLWithString:fbProfile];
-//            NSData *profileImageData = [NSData dataWithContentsOfURL:[NSURL URLWithString:ImageURL1]];
-//            profileImage1 = [UIImage imageWithData:profileImageData];
-            
             NSString *fbProfile = [userDetailsDict valueForKey:@"profileImage"];
             NSData *profileImageData = [NSData dataWithContentsOfURL:[NSURL URLWithString:fbProfile]];
             profileImage1 = [UIImage imageWithData:profileImageData];
 
-
         }
-//        else{
-//            
-//        }
 
     }
     [objWebService postRegister:Register_API
