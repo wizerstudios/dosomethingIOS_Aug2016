@@ -650,6 +650,8 @@
     DSHobbiesView.profileDetailsArray = placeHolderArray;
     [self.navigationController pushViewController:DSHobbiesView animated:YES];
 
+    
+
 }
 
 -(void)initializeArray{
@@ -1069,11 +1071,6 @@
         if(profileDict != NULL)
         {
             
-            NSLog(@"strDOB%@",strDOB);
-            NSLog(@"textFieldDPPlaceHolder%@",cell.textFieldDPPlaceHolder.text);
-            NSLog(@"cell%@",currentTextfield.text);
-            
-            
             if(![[profileDict valueForKey:@"date_of_birth"] isEqual:currentTextfield.text]){
                 
                 
@@ -1305,7 +1302,7 @@
         
         for (int i =0; i< [hobbiesNameArray  count]; i++) {
             
-            NSString *image =[hobbiesNameArray objectAtIndex:i];
+            NSString *image =[[hobbiesNameArray objectAtIndex:i]uppercaseString];
             UILabel *hobbiesname;
             
             if(i <= 4)
