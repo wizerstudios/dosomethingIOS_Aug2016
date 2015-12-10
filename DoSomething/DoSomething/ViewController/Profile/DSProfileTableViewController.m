@@ -110,8 +110,6 @@
    
     [self profileImageDisplayMethod];
 }
-
-
 -(void)viewWillAppear:(BOOL)animated
 {
     self.navigationController.navigationBarHidden=NO;
@@ -174,11 +172,6 @@
     
     strInterestHobbies = [hobbiesCategoryIDArray componentsJoinedByString:@","];
     }
-    
-    NSLog(@"joinedString:%@",strInterestHobbies);
-    
-   
-    
     infoArray=[[NSMutableArray alloc]initWithObjects:@"profile_noimg",@"profile_noimg",@"profile_noimg", nil];
     [self CustomAlterview];
    
@@ -198,7 +191,7 @@
     }
     else{
         
-        [self initializeArrayProfile];
+       // [self initializeArrayProfile];
         
         self.tableViewHeightConstraint.constant=80;
     }
@@ -308,7 +301,6 @@
     int spacing = 20;
     for(int i = 0; i < 3; i++)
     {
-        
         NSData *profileData = [profileDataArray objectAtIndex:i];
         if(IS_IPHONE6_Plus)
         {
@@ -378,20 +370,15 @@
     for(int i=0;i<profileImagePageControl.numberOfPages;i++)
     {
         blkdot=[[UIImageView alloc]init];
-        [blkdot setFrame:CGRectMake(i*17, 0, 7, 7 )];
-    //    [blkdot setImage:[UIImage imageNamed:@"dot_normal"]];
-        [blkdot setBackgroundColor:[UIColor colorWithRed:83.0f/255.0f green:83.0f/255.0f blue:83.0f/255.0f alpha:1.0f]];
-        blkdot.layer.cornerRadius = blkdot.frame.size.height / 2;
-        blkdot.layer.masksToBounds = YES;
+        [blkdot setFrame:CGRectMake(i*18, 0, 8, 8 )];
+        [blkdot setImage:[UIImage imageNamed:@"dot_normal"]];
+
         [pgDtView addSubview:blkdot];
-        [pageImageView setFrame:CGRectMake(0, 0, 7, 7)];
-       // [pageImageView setImage:[UIImage imageNamed:@"dot_active_gray"]];
-        [pageImageView setBackgroundColor:[UIColor colorWithRed:218.0f/255.0f green:40.0f/255.0f blue:64.0f/255.0f alpha:1.0f]];
-        pageImageView.layer.cornerRadius = pageImageView.frame.size.height / 2;
-        pageImageView.layer.masksToBounds = YES;
+        [pageImageView setFrame:CGRectMake(0, 0, 8, 8)];
+        [pageImageView setImage:[UIImage imageNamed:@"dot_active_gray"]];
         [pgDtView addSubview:pageImageView];
         [topViewCell addSubview:pgDtView];
-        [pgDtView setFrame:CGRectMake(15, -5, profileImagePageControl.numberOfPages*17, 10)];
+        [pgDtView setFrame:CGRectMake(15, -5, profileImagePageControl.numberOfPages*18, 10)];
         
     }
 
@@ -415,7 +402,7 @@
     jslider = scrollView.contentOffset.x / scrollView.frame.size.width;
     [self.scrView setNeedsDisplay];
     profileImagePageControl.currentPage=jslider;
-    [pageImageView setFrame:CGRectMake(jslider*17, 0, 7, 7)];
+    [pageImageView setFrame:CGRectMake(jslider*18, 0, 8, 8)];
     
     isTapping=NO;
     scrolldragging=@"YES";
@@ -589,7 +576,7 @@
         selOptionVal = [formatter stringFromDate:date];
        
         if(selOptionVal != nil || ![selOptionVal isEqualToString:@""]){
-            //[[[placeHolderArray objectAtIndex:indexPath.section] objectAtIndex:indexPath.row] setObject:selOptionVal forKey:@"TypingText"];
+          
             currentTextfield.text =selOptionVal;
         }
         
@@ -885,8 +872,6 @@
             
         }
         
-        
-        
         if (IS_IPHONE6 ||IS_IPHONE6_Plus)
         {
             //cell.layoutConstraintViewHeight.constant =49;
@@ -912,6 +897,9 @@
             cell.firstnameTxt.text = FirstName;
             cell.lastNameTxt.text   =LastName;
            }
+        cell.firstnameTxt.autocapitalizationType = UITextAutocapitalizationTypeSentences;
+        cell.lastNameTxt.autocapitalizationType = UITextAutocapitalizationTypeSentences;
+        cell.lastNameTxt.autocorrectionType = UITextAutocorrectionTypeNo;
 
     }
     
@@ -969,7 +957,7 @@
             
         }
         else if(userDetailsDict.count > 0){
-            NSLog(@"strDOB%@",strGender);
+            
             
             if(strGender==NULL){
                 if([[userDetailsDict valueForKey:@"gender"]isEqual:@"male"]){
@@ -1131,13 +1119,6 @@
             }
             
             else{
-                
-                    
-                NSLog(@"strAbout%@",strAbout);
-                NSLog(@"textviewText%@",textviewText);
-                NSLog(@"cell%@",cell.textViewAboutYou.text);
-                
-                
                 if(![[profileDict valueForKey:@"about"] isEqual:strAbout]){
                     
                   
@@ -1155,13 +1136,6 @@
                     strAbout =cell.textViewAboutYou.text;
                     
                 }
-                
-                
-                NSLog(@"strAbout%@",strAbout);
-                NSLog(@"textviewText%@",textviewText);
-                NSLog(@"cell%@",cell.textViewAboutYou.text);
-
-                
                 cell.textViewHeaderLabel.hidden = YES;
                 
                 
@@ -1313,8 +1287,7 @@
             cell.passwordTextField.text  =(emailPasswordToRegister==0)? @"":emailPasswordToRegister;
             emailAddressToRegister   = cell.emailTextField.text;
                        
-            NSLog(@"cell.emailTextField.text%@",cell.emailTextField.text);
-            NSLog(@"cell.emailTextField.text%@",emailAddressToRegister);
+          
 
             
         }
@@ -1710,8 +1683,6 @@
     if(currentLongitude == nil)
         currentLongitude = @"";
     
-    NSLog(@"%@",profileDataArray);
-    NSLog(@"%@",profileImage1);
     NSString *fbProfileStr;
     if([strType isEqualToString:@"2"])
         fbProfileStr = [userDetailsDict valueForKey:@"profileImage"];

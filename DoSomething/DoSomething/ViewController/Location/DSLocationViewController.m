@@ -53,6 +53,17 @@
     NSLog(@"usersessionID:%@",strsessionID);
 
     objWebservice =[[DSWebservice alloc]init];
+    
+
+    [super viewDidLoad];
+    // Do any additional setup after loading the view from its nib.
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    [self.navigationItem setHidesBackButton:YES animated:NO];
+    
     [self nearestLocationWebservice];
     CustomNavigationView *customNavigation;
     customNavigation = [[CustomNavigationView alloc] initWithNibName:@"CustomNavigationView" bundle:nil];
@@ -69,7 +80,7 @@
     [customNavigation.saveBtn setHidden:NO];
     [customNavigation.saveBtn addTarget:self action:@selector(filterAction:) forControlEvents:UIControlEventTouchUpInside];
     [self.navigationController.navigationBar addSubview:customNavigation.view];
-
+    
     UINib *cellNib = [UINib nibWithNibName:@"LocationCollectionViewCell" bundle:nil];
     [self.locationCollectionView registerNib:cellNib forCellWithReuseIdentifier:@"LocationCell"];
     
@@ -79,8 +90,8 @@
     profileNames =[[NSArray alloc]init];
     kiloMeterlabel =[[NSArray alloc]init];
     
-   
-  
+    
+    
     UICollectionViewFlowLayout *flowLayout1 = [[UICollectionViewFlowLayout alloc] init];
     flowLayout1.headerReferenceSize = CGSizeMake(locationCollectionView.bounds.size.width, 55);
     [locationCollectionView setCollectionViewLayout:flowLayout1];
@@ -123,11 +134,9 @@
     self.avablebothBtn.layer.masksToBounds = YES;
     self.avablebothBtn.layer.borderWidth =4;
     [self.avablebothBtn.layer setBorderColor:[[UIColor whiteColor] CGColor]];
-        
-
-    [super viewDidLoad];
-    // Do any additional setup after loading the view from its nib.
+    
 }
+
 
 -(void)nearestLocationWebservice
 {
@@ -158,11 +167,6 @@
     // Dispose of any resources that can be recreated.
 }
 
-- (void)viewWillAppear:(BOOL)animated
-{
-    [super viewWillAppear:animated];
-    [self.navigationItem setHidesBackButton:YES animated:NO];
-}
 
 -(NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView{
     
