@@ -213,7 +213,7 @@
     
     if(profileDict != NULL){
         if([[profileDict valueForKey:@"image1"] isEqual:@""]&&[[profileDict valueForKey:@"image2"] isEqual:@""] && [[profileDict valueForKey:@"image3"] isEqual:@""]){
-            profileDataArray = [NSMutableArray new];
+            profileDataArray = [[NSMutableArray alloc] init];
             
             
             for(int i = 0; i < 3; i++)
@@ -325,6 +325,7 @@
         else{
             
                 [userProfileImage setImage:[UIImage imageWithData:profileData]];
+                [userProfileImage setContentMode:UIViewContentModeScaleAspectFill];
                 [cell.cameraButton setHidden:YES];
                 [topViewCell setHidden:NO];
             
