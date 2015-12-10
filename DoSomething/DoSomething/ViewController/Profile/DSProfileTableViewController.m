@@ -307,7 +307,6 @@
     int spacing = 20;
     for(int i = 0; i < 3; i++)
     {
-        NSLog(@"profileDataArray = %@",profileDataArray);
         NSData *profileData = [profileDataArray objectAtIndex:i];
         userProfileImage = [[UIImageView alloc]initWithFrame:CGRectMake((i*self.scrView.frame.size.width) + spacing, 20,self.profileImageView.frame.size.width, self.profileImageView.frame.size.height)];
         [userProfileImage setTag:i+100];
@@ -1002,7 +1001,7 @@
             
         }
         else if(userDetailsDict.count > 0){
-            NSLog(@"strDOB%@",strGender);
+            
             
             if(strGender==NULL){
                 if([[userDetailsDict valueForKey:@"gender"]isEqual:@"male"]){
@@ -1165,13 +1164,6 @@
             }
             
             else{
-                
-                    
-                NSLog(@"strAbout%@",strAbout);
-                NSLog(@"textviewText%@",textviewText);
-                NSLog(@"cell%@",cell.textViewAboutYou.text);
-                
-                
                 if(![[profileDict valueForKey:@"about"] isEqual:strAbout]){
                     
                    // cell.textViewAboutYou.text = [[profileDict valueForKey:@"about"]mutableCopy];
@@ -1189,13 +1181,6 @@
                     strAbout =cell.textViewAboutYou.text;
                     
                 }
-                
-                
-                NSLog(@"strAbout%@",strAbout);
-                NSLog(@"textviewText%@",textviewText);
-                NSLog(@"cell%@",cell.textViewAboutYou.text);
-
-                
                 cell.textViewHeaderLabel.hidden = YES;
                 
                 //cell.textViewHeaderLabel.text =placeHolderText;
@@ -1348,15 +1333,13 @@
 //            cell.emailTextField.text = [userDetailsDict valueForKey:@"email"];
 //            emailAddressToRegister   = cell.emailTextField.text;
 //            emailPasswordToRegister  = cell.passwordTextField.text;
-            NSLog(@"cell.emailTextField.text%@",cell.emailTextField.text);
-            NSLog(@"cell.emailTextField.text%@",emailAddressToRegister);
+           
            
             cell.emailTextField.text =(emailAddressToRegister==0)?[userDetailsDict valueForKey:@"email"]:emailAddressToRegister;
             cell.passwordTextField.text  =(emailPasswordToRegister==0)? @"":emailPasswordToRegister;
             emailAddressToRegister   = cell.emailTextField.text;
                        
-            NSLog(@"cell.emailTextField.text%@",cell.emailTextField.text);
-            NSLog(@"cell.emailTextField.text%@",emailAddressToRegister);
+          
 
             
         }
@@ -1744,8 +1727,6 @@
     if(currentLongitude == nil)
         currentLongitude = @"";
     
-    NSLog(@"%@",profileDataArray);
-    NSLog(@"%@",profileImage1);
     NSString *fbProfileStr;
     if([strType isEqualToString:@"2"])
         fbProfileStr = [userDetailsDict valueForKey:@"profileImage"];
