@@ -548,6 +548,7 @@
                      longitude:currentLongitude
                         device:@"iPhone"
                       deviceid:deviceUdid
+                fbprofileImage:@"" 
           notification_message:@"Yes"
           notification_sound  :@"Yes"
         notification_vibration:@"Yes"    

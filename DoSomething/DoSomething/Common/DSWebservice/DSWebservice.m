@@ -169,6 +169,7 @@ static NSString       *ServiceMimeType    = @"image/jpeg";
            longitude:(NSString *)longitude
               device:(NSString *)device
             deviceid:(NSString *)deviceid
+      fbprofileImage:(NSString *)fbProfile
 notification_message:(NSString *)isnotification_message
 notification_sound  :(NSString *)isnotification_sound
 notification_vibration:(NSString *)isnotification_vibration
@@ -176,6 +177,8 @@ notification_vibration:(NSString *)isnotification_vibration
              failure:(WebserviceRequestFailureHandler)failure
 {
     urlString = [URL_FOR_RESOURCE(@"") stringByAppendingString:[NSString stringWithFormat:@"%@?",registerURL]];
+    
+    NSLog(@"urlString = %@",urlString);
     
     NSMutableDictionary *registerDetails = [[NSMutableDictionary alloc] init];
     
@@ -196,6 +199,7 @@ notification_vibration:(NSString *)isnotification_vibration
     if(isnotification_message)  [registerDetails    setObject:isnotification_message forKey:@"notification_message"];
     if(isnotification_sound)    [registerDetails    setObject:isnotification_sound  forKey:@"notification_sound"];
     if(isnotification_vibration)[registerDetails    setObject:isnotification_vibration  forKey:@"notification_vibration"];
+    if(fbProfile)  [registerDetails setObject:fbProfile forKey:@"profileImage1"];
     
     NSDateFormatter *formatter = [[NSDateFormatter alloc]init];
     [formatter setDateFormat:@"yyyyMMddhhmmssSSS"];
@@ -356,17 +360,17 @@ notification_vibration:(NSString *)isnotification_vibration
          NSLog(@"UPDATEresponseObject = %@",responseObject);
          
          
-//         NSMutableDictionary *profileUpdateDict = [[NSMutableDictionary alloc]init];
-//         profileUpdateDict = [responseObject valueForKey:@"updateprofile"];
-//         if([[profileUpdateDict valueForKey:@"status"]isEqualToString:@"success"]){
-//             [COMMON setUserDetails:[[profileUpdateDict valueForKey:@"userUpdateDetails"]objectAtIndex:0]];
-//             NSLog(@"userdetails = %@",[COMMON getUserDetails]);
-//             
-//
-//         }
-         [[NSNotificationCenter defaultCenter] postNotificationName:@"updateprofile"
-                                                             object:self
-                                                           userInfo:responseObject];
+         NSMutableDictionary *profileUpdateDict = [[NSMutableDictionary alloc]init];
+         profileUpdateDict = [responseObject valueForKey:@"updateprofile"];
+         if([[profileUpdateDict valueForKey:@"status"]isEqualToString:@"success"]){
+             [COMMON setUserDetails:[[profileUpdateDict valueForKey:@"userDetails"]objectAtIndex:0]];
+             NSLog(@"userdetails = %@",[COMMON getUserDetails]);
+             [[NSNotificationCenter defaultCenter] postNotificationName:@"updateprofile"
+                                                                 object:self
+                                                               userInfo:responseObject];
+
+         }
+        
 
      }
      
