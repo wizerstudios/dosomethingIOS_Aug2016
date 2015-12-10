@@ -29,8 +29,8 @@
                                     <constraint firstAttribute="height" constant="45" id="SiS-r3-VI6"/>
                                 </constraints>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="veP-mT-gce">
-                                <rect key="frame" x="-2" y="42" width="63" height="13"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="veP-mT-gce">
+                                <rect key="frame" x="0.0" y="42" width="64" height="13"/>
                                 <animations/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="63" id="KuV-gt-PN8"/>
