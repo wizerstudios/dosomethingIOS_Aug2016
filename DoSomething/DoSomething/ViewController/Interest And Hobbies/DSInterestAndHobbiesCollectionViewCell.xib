@@ -29,14 +29,14 @@
                                     <constraint firstAttribute="height" constant="45" id="SiS-r3-VI6"/>
                                 </constraints>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="veP-mT-gce">
-                                <rect key="frame" x="0.0" y="42" width="61" height="13"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="veP-mT-gce">
+                                <rect key="frame" x="-2" y="42" width="63" height="13"/>
                                 <animations/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="61" id="KuV-gt-PN8"/>
+                                    <constraint firstAttribute="width" constant="63" id="KuV-gt-PN8"/>
                                     <constraint firstAttribute="height" constant="13" id="wAb-Ht-b93"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" name="Patron-Bold" family="Patron" pointSize="8"/>
+                                <fontDescription key="fontDescription" name="Patron-Bold" family="Patron" pointSize="7"/>
                                 <color key="textColor" red="0.52941176470588236" green="0.52941176470588236" blue="0.52941176470588236" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
@@ -45,7 +45,7 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="Fpn-uL-VPb" secondAttribute="trailing" constant="8" id="AMh-d5-X0f"/>
-                            <constraint firstItem="veP-mT-gce" firstAttribute="leading" secondItem="HeF-YN-pV0" secondAttribute="leading" id="Br3-hP-ygs"/>
+                            <constraint firstItem="veP-mT-gce" firstAttribute="leading" secondItem="HeF-YN-pV0" secondAttribute="leading" constant="-2" id="Br3-hP-ygs"/>
                             <constraint firstItem="veP-mT-gce" firstAttribute="top" secondItem="Fpn-uL-VPb" secondAttribute="bottom" constant="-3" id="arC-Pc-ndP"/>
                             <constraint firstAttribute="bottom" secondItem="veP-mT-gce" secondAttribute="bottom" constant="15" id="cnq-po-upF"/>
                             <constraint firstItem="veP-mT-gce" firstAttribute="top" secondItem="Fpn-uL-VPb" secondAttribute="bottom" constant="-3" id="crt-8j-bhL"/>

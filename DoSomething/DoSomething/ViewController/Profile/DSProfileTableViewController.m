@@ -313,10 +313,10 @@
         if([profileData length] == 0){
                 [userProfileImage setImage:[UIImage imageNamed:@"profile_noimg"]];
                // [topViewCell setHidden:YES];
-//            if(i==0){
-//                [topViewCell setHidden:YES];
-//                self.scrView.scrollEnabled = NO;
-//            }
+            if(i==0){
+                [topViewCell setHidden:YES];
+                self.scrView.scrollEnabled = NO;
+            }
             
         }
         else{
@@ -644,6 +644,8 @@
     DSInterestAndHobbiesViewController * DSHobbiesView  = [[DSInterestAndHobbiesViewController alloc]initWithNibName:@"DSInterestAndHobbiesViewController" bundle:nil];
     DSHobbiesView.profileDetailsArray = placeHolderArray;
     [self.navigationController pushViewController:DSHobbiesView animated:YES];
+
+    
 
 }
 
@@ -1295,7 +1297,7 @@
         
         for (int i =0; i< [hobbiesNameArray  count]; i++) {
             
-            NSString *image =[hobbiesNameArray objectAtIndex:i];
+            NSString *image =[[hobbiesNameArray objectAtIndex:i]uppercaseString];
             UILabel *hobbiesname;
             
             if(i <= 4)
