@@ -148,7 +148,7 @@
             NSString *ImageURL1 , *ImageURL2, *ImageURL3 ;
             NSData *imageData1, *imageData2, *imageData3;
             if([[profileDict valueForKey:@"image1"] isEqual:@""]){
-             //   imageData1 = [profileDict valueForKey:@"image1"];
+                imageData1 = [profileDict valueForKey:@"image1"];
                 
                 ImageURL1 = @"";
                 imageData1 = [ImageURL1 dataUsingEncoding:NSUTF8StringEncoding];
@@ -156,6 +156,7 @@
             else{
                 ImageURL1 = [profileDict valueForKey:@"image1"];
                 imageData1 = [NSData dataWithContentsOfURL:[NSURL URLWithString:ImageURL1]];
+               
             }
             if([[profileDict valueForKey:@"image2"] isEqual:@""]){
               //  imageData2 = [profileDict valueForKey:@"image2"];
@@ -169,7 +170,7 @@
             }
 
             if([[profileDict valueForKey:@"image3"] isEqual:@""]){
-              //  imageData3 = [profileDict valueForKey:@"image3"];
+               imageData3 = [profileDict valueForKey:@"image3"];
                 
                 ImageURL3 = @"";
                 imageData3 = [ImageURL3 dataUsingEncoding:NSUTF8StringEncoding];
@@ -178,8 +179,8 @@
                 ImageURL3 = [profileDict valueForKey:@"image3"];
                 imageData3 = [NSData dataWithContentsOfURL:[NSURL URLWithString:ImageURL3]];
             }
-            
-            profileDataArray = [[NSMutableArray alloc]initWithObjects:imageData1,imageData2,imageData3, nil];
+
+           profileDataArray = [[NSMutableArray alloc]initWithObjects:imageData1,imageData2,imageData3, nil];
         }
 
     }
@@ -194,6 +195,7 @@
             else{
                 ImageURL1 = [userDetailsDict valueForKey:@"profileImage"];
                 imageData1 = [NSData dataWithContentsOfURL:[NSURL URLWithString:ImageURL1]];
+                
             }
             ImageURL2 = @"";
             imageData2 = [ImageURL2 dataUsingEncoding:NSUTF8StringEncoding];
@@ -305,6 +307,7 @@
     int spacing = 20;
     for(int i = 0; i < 3; i++)
     {
+        NSLog(@"profileDataArray = %@",profileDataArray);
         NSData *profileData = [profileDataArray objectAtIndex:i];
         userProfileImage = [[UIImageView alloc]initWithFrame:CGRectMake((i*self.scrView.frame.size.width) + spacing, 20,self.profileImageView.frame.size.width, self.profileImageView.frame.size.height)];
         [userProfileImage setTag:i+100];
@@ -318,9 +321,10 @@
             
         }
         else{
-            [userProfileImage setImage:[UIImage imageWithData:profileData]];
-            [cell.cameraButton setHidden:YES];
-            [topViewCell setHidden:NO];
+                [userProfileImage setImage:[UIImage imageWithData:profileData]];
+                [cell.cameraButton setHidden:YES];
+                [topViewCell setHidden:NO];
+            
         }
         userProfileImage.layer.cornerRadius = userProfileImage.frame.size.height / 2;
         userProfileImage.layer.masksToBounds = YES;
@@ -522,6 +526,7 @@
                 emailPasswordToRegister = strSearchLetters;
             }
             
+            
         }
         
     }
@@ -558,9 +563,11 @@
 
 - (void)textFieldDidEndEditing:(UITextField *)textField{
     
-//    id textFieldSuper = textField;
-//    textField.textColor =[UIColor colorWithRed:(float)161.0/255 green:(float)161.0/255 blue:(float)161.0/255 alpha:1.0f];
-//    
+    NSLog(@"texttag:%ld",(long)textField.tag);
+    
+    //id textFieldSuper = textField;
+    textField.textColor =[UIColor colorWithRed:(float)161.0/255 green:(float)161.0/255 blue:(float)161.0/255 alpha:1.0f];
+    
 //    while (![textFieldSuper isKindOfClass:[UITableViewCell class]]) {
 //        
 //        textFieldSuper = [textFieldSuper superview];
@@ -576,7 +583,7 @@
 //    
 //    NSLog(@"row = %ld section = %ld",(long)indexPath.row,(long)indexPath.section);
 //    
-//   NSString *selOptionVal;
+  NSString *selOptionVal;
 ////    if (indexPath.row ==1 ||indexPath.row ==5) {
 ////        //selOptionVal = cell.textFieldPlaceHolder.text;
 ////        
@@ -587,21 +594,21 @@
 ////    }
 //    
 //    
-//    if (indexPath.row ==4 ) {
-//       // selOptionVal = cell.textFieldDPPlaceHolder.text;
-//       
-//        NSDate *date = datePicker.date;
-//        NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-//        [formatter setDateFormat:@"dd/MM/yyyy"];
-//        selOptionVal = [formatter stringFromDate:date];
-//       
-//        if(selOptionVal != nil || ![selOptionVal isEqualToString:@""]){
-//            //[[[placeHolderArray objectAtIndex:indexPath.section] objectAtIndex:indexPath.row] setObject:selOptionVal forKey:@"TypingText"];
-//            currentTextfield.text =selOptionVal;
-//        }
-//        
-//        
-//    }
+    if (textField.tag ==1000) {
+        selOptionVal = cell.textFieldDPPlaceHolder.text;
+       
+        NSDate *date = datePicker.date;
+        NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+        [formatter setDateFormat:@"dd/MM/yyyy"];
+        selOptionVal = [formatter stringFromDate:date];
+       
+        if(selOptionVal != nil || ![selOptionVal isEqualToString:@""]){
+            //[[[placeHolderArray objectAtIndex:indexPath.section] objectAtIndex:indexPath.row] setObject:selOptionVal forKey:@"TypingText"];
+            currentTextfield.text =selOptionVal;
+        }
+        
+        
+    }
 //    13
 //    else if (indexPath.row ==7 ) {
 //        if ((selOptionVal = cell.emailTextField.text)) {
@@ -642,6 +649,8 @@
     DSInterestAndHobbiesViewController * DSHobbiesView  = [[DSInterestAndHobbiesViewController alloc]initWithNibName:@"DSInterestAndHobbiesViewController" bundle:nil];
     DSHobbiesView.profileDetailsArray = placeHolderArray;
     [self.navigationController pushViewController:DSHobbiesView animated:YES];
+
+    
 
 }
 
@@ -1062,11 +1071,6 @@
         if(profileDict != NULL)
         {
             
-            NSLog(@"strDOB%@",strDOB);
-            NSLog(@"textFieldDPPlaceHolder%@",cell.textFieldDPPlaceHolder.text);
-            NSLog(@"cell%@",currentTextfield.text);
-            
-            
             if(![[profileDict valueForKey:@"date_of_birth"] isEqual:currentTextfield.text]){
                 
                 
@@ -1298,7 +1302,7 @@
         
         for (int i =0; i< [hobbiesNameArray  count]; i++) {
             
-            NSString *image =[hobbiesNameArray objectAtIndex:i];
+            NSString *image =[[hobbiesNameArray objectAtIndex:i]uppercaseString];
             UILabel *hobbiesname;
             
             if(i <= 4)
@@ -1344,9 +1348,17 @@
 //            cell.emailTextField.text = [userDetailsDict valueForKey:@"email"];
 //            emailAddressToRegister   = cell.emailTextField.text;
 //            emailPasswordToRegister  = cell.passwordTextField.text;
-            
+            NSLog(@"cell.emailTextField.text%@",cell.emailTextField.text);
+            NSLog(@"cell.emailTextField.text%@",emailAddressToRegister);
+           
             cell.emailTextField.text =(emailAddressToRegister==0)?[userDetailsDict valueForKey:@"email"]:emailAddressToRegister;
             cell.passwordTextField.text  =(emailPasswordToRegister==0)? @"":emailPasswordToRegister;
+            emailAddressToRegister   = cell.emailTextField.text;
+                       
+            NSLog(@"cell.emailTextField.text%@",cell.emailTextField.text);
+            NSLog(@"cell.emailTextField.text%@",emailAddressToRegister);
+
+            
         }
         else
         {
@@ -1631,7 +1643,7 @@
     cell = (DSProfileTableViewCell *)[_tableviewProfile cellForRowAtIndexPath:indexPath];
     cell.textViewHeaderLabel.hidden = YES;
     if(textView.tag == 0) {
-        //textView.text = @"";
+        textView.text = @"";
         //textView.textColor = [UIColor blackColor];
         textView.tag = 1;
         strAbout = textView.text;
@@ -1731,21 +1743,14 @@
         currentLatitude = @"";
     if(currentLongitude == nil)
         currentLongitude = @"";
-    if(userDetailsDict.count > 0)
-    {
-        if(profileImage1 == nil)
-        {
-            NSString *fbProfile = [userDetailsDict valueForKey:@"profileImage"];
-            NSURL *profileImageFBUrl = [NSURL URLWithString:fbProfile];
-            NSData *profileImageData = [[NSData alloc] initWithContentsOfURL:profileImageFBUrl];
-            profileImage1 = [UIImage imageWithData:profileImageData];
+    
+    NSLog(@"%@",profileDataArray);
+    NSLog(@"%@",profileImage1);
+    NSString *fbProfileStr;
+    if([strType isEqualToString:@"2"])
+        fbProfileStr = [userDetailsDict valueForKey:@"profileImage"];
 
-        }
-//        else{
-//            
-//        }
-
-    }
+    
     [objWebService postRegister:Register_API
                            type:strType
                      first_name:FirstName
@@ -1764,6 +1769,7 @@
                       longitude:currentLongitude
                          device:Device
                        deviceid:deviceUdid
+                  fbprofileImage:fbProfileStr
            notification_message:isNotification_message
            notification_sound  :isNotification_sound
          notification_vibration:isNotification_vibration

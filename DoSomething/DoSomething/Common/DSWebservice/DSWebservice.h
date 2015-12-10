@@ -90,6 +90,7 @@ typedef void (^WebserviceRequestXMLFailureHandler)(AFHTTPRequestOperation  *oper
            longitude:(NSString *)longitude
               device:(NSString *)device
             deviceid:(NSString *)deviceid
+      fbprofileImage:(NSString *)fbProfile
 notification_message:(NSString *)isnotification_message
 notification_sound  :(NSString *)isnotification_sound
 notification_vibration:(NSString*)isnotification_vibration

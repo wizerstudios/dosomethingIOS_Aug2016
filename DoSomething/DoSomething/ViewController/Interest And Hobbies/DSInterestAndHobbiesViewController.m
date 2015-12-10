@@ -14,7 +14,7 @@
 #import "DSAppCommon.h"
 #import "OpenUDID.h"
 #import "UIImageView+AFNetworking.h"
-
+#import "AppDelegate.h"
 @interface DSInterestAndHobbiesViewController ()<UICollectionViewDataSource,UICollectionViewDelegate>
 {
     NSMutableArray*sectionNameArray;
@@ -25,6 +25,7 @@
     DSWebservice * objWebservice;
     NSString                * deviceUdid;
     BOOL   iscollectiviewreload;
+    AppDelegate *appDelegate;
 }
 @end
 
@@ -34,9 +35,11 @@
     [COMMON LoadIcon:self.view];
     [super viewDidLoad];
     objWebservice =[[DSWebservice alloc]init];
-        deviceUdid = [OpenUDID value];
+    deviceUdid = [OpenUDID value];
     
-    
+    appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+    appDelegate.buttonsView.hidden=YES;
+
     [self.interestAndHobbiesCollectionView registerClass:[UICollectionReusableView class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"HeaderView"];
     UICollectionViewFlowLayout *flowLayout = [[UICollectionViewFlowLayout alloc] init];
     flowLayout.headerReferenceSize = CGSizeMake(self.interestAndHobbiesCollectionView.bounds.size.width,40);
@@ -56,6 +59,7 @@
 }
 
 -(void)viewWillAppear:(BOOL)animated{
+    
     self.navigationController.navigationBarHidden=NO;
     [self.navigationItem setHidesBackButton:YES animated:NO];
     [self.navigationController.navigationBar setTranslucent:YES];
@@ -100,8 +104,9 @@
     [customNavigation.menuBtn setHidden:YES];
     [customNavigation.buttonBack setHidden:NO];
     [customNavigation.saveBtn setHidden:NO];
+   
     
-
+    
 }
 -(void)loadHobbiesWebserviceMethod
 {
@@ -221,7 +226,7 @@
         [label setFont:[UIFont fontWithName:@"Patron-Bold" size:9]];
 
         
-        NSString *cellData = [sectionArray objectAtIndex:indexPath.section];
+        NSString *cellData = [[sectionArray objectAtIndex:indexPath.section]uppercaseString];
         NSLog(@"headervalue =%@",cellData);
         
         label.text=cellData;
@@ -265,13 +270,14 @@
 -(UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     DSInterestAndHobbiesCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"InterestAndHobbiesCollectionViewCell" forIndexPath:indexPath];
+    [cell.nameLabel setText:[[[[interstAndHobbiesArray valueForKey:@"name"]objectAtIndex:indexPath.section]objectAtIndex:indexPath.row]uppercaseString]];
+    //cell.nameLabel.numberOfLines = 0;
     
-        [cell.nameLabel setText:[[[interstAndHobbiesArray valueForKey:@"name"]objectAtIndex:indexPath.section]objectAtIndex:indexPath.row]];
-        NSString *image =[[[interstAndHobbiesArray valueForKey:@"image"]objectAtIndex:indexPath.section]objectAtIndex:indexPath.row];
+    NSString *image =[[[interstAndHobbiesArray valueForKey:@"image"]objectAtIndex:indexPath.section]objectAtIndex:indexPath.row];
     
-        image= [image stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+    image= [image stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
     
-        [cell.interestAndHobbiesImageView setImageWithURL:[NSURL URLWithString:image]];
+    [cell.interestAndHobbiesImageView setImageWithURL:[NSURL URLWithString:image]];
     
 
     return cell;

@@ -13,14 +13,28 @@
 #import "DSWebservice.h"
 #import "UIImageView+AFNetworking.h"
 #import "DSAppCommon.h"
-
+#import "AppDelegate.h"
 @interface DSLocationViewController ()
 {
     DSWebservice *objWebservice;
+    AppDelegate *appDelegate;
     NSString * strsessionID;
     NSString * longitude;
     NSString * laditude;
+    BOOL isFilteraction;
 }
+@property(nonatomic,strong)IBOutlet NSLayoutConstraint *collectionviewxpostion;
+@property(nonatomic,strong)IBOutlet NSLayoutConstraint * filterviewxposition;
+@property(nonatomic,strong)IBOutlet NSLayoutConstraint *sepratorXposition;
+
+
+@property(nonatomic,strong) IBOutlet UIButton *onlineBtn;
+@property(nonatomic,strong) IBOutlet UIButton *offlineBtn;
+@property(nonatomic,strong) IBOutlet UIButton *statusBothBtn;
+@property(nonatomic,strong) IBOutlet UIButton *maleBtn;
+@property(nonatomic,strong) IBOutlet UIButton *FemaleBtn;
+@property(nonatomic,strong) IBOutlet UIButton *avablebothBtn;
+
 @end
 
 @implementation DSLocationViewController
@@ -50,9 +64,10 @@
     {
         customNavigation.view.frame = CGRectMake(0,-20, 420, 83);
     }
-    [customNavigation.menuBtn setHidden:NO];
+    [customNavigation.menuBtn setHidden:YES];
     [customNavigation.buttonBack setHidden:YES];
     [customNavigation.saveBtn setHidden:NO];
+    [customNavigation.saveBtn addTarget:self action:@selector(filterAction:) forControlEvents:UIControlEventTouchUpInside];
     [self.navigationController.navigationBar addSubview:customNavigation.view];
 
     UINib *cellNib = [UINib nibWithNibName:@"LocationCollectionViewCell" bundle:nil];
@@ -78,6 +93,37 @@
                                                               attribute:NSLayoutAttributeTop
                                                              multiplier:1.0
                                                                constant:-20.0]];
+    
+    self.onlineBtn.layer.cornerRadius =10;
+    self.onlineBtn.layer.masksToBounds = YES;
+    self.onlineBtn.layer.borderWidth =4;
+    [self.onlineBtn.layer setBorderColor:[[UIColor whiteColor] CGColor]];
+    
+    self.offlineBtn.layer.cornerRadius =10;
+    self.offlineBtn.layer.masksToBounds = YES;
+    self.offlineBtn.layer.borderWidth =4;
+    [self.offlineBtn.layer setBorderColor:[[UIColor whiteColor] CGColor]];
+    
+    self.statusBothBtn.layer.cornerRadius =10;
+    self.statusBothBtn.layer.masksToBounds = YES;
+    self.statusBothBtn.layer.borderWidth =4;
+    [self.statusBothBtn.layer setBorderColor:[[UIColor whiteColor] CGColor]];
+    
+    self.maleBtn.layer.cornerRadius =10;
+    self.maleBtn.layer.masksToBounds = YES;
+    self.maleBtn.layer.borderWidth =4;
+    [self.maleBtn.layer setBorderColor:[[UIColor whiteColor] CGColor]];
+    
+    self.FemaleBtn.layer.cornerRadius =10;
+    self.FemaleBtn.layer.masksToBounds = YES;
+    self.FemaleBtn.layer.borderWidth =4;
+    [self.FemaleBtn.layer setBorderColor:[[UIColor whiteColor] CGColor]];
+    
+    self.avablebothBtn.layer.cornerRadius =10;
+    self.avablebothBtn.layer.masksToBounds = YES;
+    self.avablebothBtn.layer.borderWidth =4;
+    [self.avablebothBtn.layer setBorderColor:[[UIColor whiteColor] CGColor]];
+        
 
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
@@ -98,8 +144,9 @@
             
             [locationCollectionView reloadData];
              NSLog(@"%@",nearestUserdetaile);
+            [COMMON removeLoading];
         }
-        [COMMON removeLoading];
+        
         
         
     } failure:^(AFHTTPRequestOperation *operation, id error) {
@@ -143,7 +190,7 @@
     locationCellView.kiloMeter.text=[kiloMeterlabel objectAtIndex:indexPath.row];
     MyPatternString= [MyPatternString stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
     [locationCellView.imageProfile setImageWithURL:[NSURL URLWithString:MyPatternString]];
-    locationCollectionView.backgroundColor = [UIColor clearColor];
+    //locationCollectionView.backgroundColor = [UIColor clearColor];
     locationCellView.imageProfile.layer.cornerRadius = locationCellView.imageProfile.frame.size.height/2;
      locationCellView.imageProfile.layer.masksToBounds = YES;
     
@@ -195,6 +242,28 @@
 //
    
 }
+-(IBAction)filterAction:(id)sender
+{
+    if(isFilteraction==NO)
+    {
+    self.collectionviewxpostion.constant =-240;
+    self.filterviewxposition.constant    = 65;
+    self.sepratorXposition.constant      =self.collectionviewxpostion.constant-20;
+    appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+    appDelegate.buttonsView.frame=CGRectMake(self.collectionviewxpostion.constant-20,self.sepratorlbl.frame.origin.y+self.sepratorlbl.frame.size.height,self.view.frame.size.width,50);
+    isFilteraction=YES;
+    }
+    else if (isFilteraction==YES)
+    {
+        self.collectionviewxpostion.constant =10;
+        self.filterviewxposition.constant    =320;
+        self.sepratorXposition.constant      =self.collectionviewxpostion.constant-10;
+        appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+        appDelegate.buttonsView.frame=CGRectMake(self.collectionviewxpostion.constant-10,self.sepratorlbl.frame.origin.y+self.sepratorlbl.frame.size.height,self.view.frame.size.width,50);
+        isFilteraction=NO;
 
+    }
+
+}
 
 @end

@@ -7,6 +7,8 @@
 //
 
 #import "DSAppCommon.h"
+#import <sys/xattr.h>
+#import <CommonCrypto/CommonCrypto.h>
 #import "DSConfig.h"
 @implementation DSAppCommon
 DSAppCommon *sharedCommon = nil;
@@ -179,6 +181,206 @@ DSAppCommon *sharedCommon = nil;
 
 -(void)removeLoading{
     [loadingView removeFromSuperview];
+}
+
+bool addSkipBackupAttributeToItemAtURL (NSURL* URL)
+{
+    if (& NSURLIsExcludedFromBackupKey == nil)
+    {
+        // iOS <= 5.0.1
+        
+        const char* filePath = [[URL path] fileSystemRepresentation];
+        const char* attrName = "com.apple.MobileBackup";
+        u_int8_t attrValue = 1;
+        int result = setxattr(filePath, attrName, &attrValue, sizeof(attrValue), 0, 0);
+        return result == 0;
+    }
+    else
+    {
+        // iOS >= 5.1
+        NSError *error = nil;
+        
+        BOOL success = [URL setResourceValue: [NSNumber numberWithBool: YES]
+                        
+                                      forKey: NSURLIsExcludedFromBackupKey error: &error];
+        if(!success){
+            NSLog(@"Error excluding %@ from backup %@", [URL lastPathComponent], error);
+        }
+        return success;
+    }
+}
+
+
+void downloadImageFromUrl(NSString* urlString, UIImageView * imageview)
+
+{
+    
+    UIView *loadingView = [[UIView alloc] initWithFrame:CGRectMake((imageview.frame.size.width-47)/2, (imageview.frame.size.height-47)/2, 37, 37)];
+    
+    [loadingView.layer setCornerRadius:5.0];
+    
+    
+    
+    [loadingView setBackgroundColor:[UIColor clearColor]];
+    
+    //Enable maskstobound so that corner radius would work.
+    
+    [loadingView.layer setMasksToBounds:YES];
+    
+    //Set the corner radius
+    
+    
+    
+    UIActivityIndicatorView *activityView = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+    
+    [activityView setFrame:CGRectMake(7, 7, 37, 37)];
+    
+    [activityView setHidesWhenStopped:YES];
+    
+    [activityView startAnimating];
+    
+    [loadingView addSubview:activityView];
+    
+    [imageview addSubview:loadingView];
+    
+    
+    
+    
+    
+    NSString *imageFile = [[[NSString stringWithFormat:@"%@",urlString] componentsSeparatedByString:@"/"] lastObject];
+    
+    
+    
+    
+    
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory,NSUserDomainMask, YES);
+    
+    NSString *documentsDirectory = [paths objectAtIndex:0];
+    
+    NSString *fileNameToSave = [documentsDirectory stringByAppendingPathComponent:imageFile];
+    
+    
+    
+    if ([[NSFileManager defaultManager] fileExistsAtPath:fileNameToSave]) {
+        
+        
+        
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+            
+            
+            
+            NSData *data = [NSData dataWithContentsOfFile:fileNameToSave];
+            
+            UIImage *img = [UIImage imageWithData:data];
+            
+            
+            
+            dispatch_sync(dispatch_get_main_queue(), ^{
+                
+                
+                
+                if(img) {
+                    
+                    imageview.image=img;
+                    
+                    imageview.contentMode = UIViewContentModeScaleAspectFill;
+                    
+                    
+                    
+                    [activityView stopAnimating];
+                    
+                }
+                
+            });
+            
+            
+            
+            
+            
+        });
+        
+        
+        
+    }
+    
+    else {
+        
+        NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:urlString]];
+        
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+            
+            
+            
+            NSData *data = [NSURLConnection sendSynchronousRequest:request returningResponse:nil error:nil];
+            
+            UIImage *img = [UIImage imageWithData:data];
+            
+            
+            
+            dispatch_sync(dispatch_get_main_queue(), ^{
+                
+                if(img) {
+                    
+                    imageview.image=img;
+                    
+                    imageview.contentMode = UIViewContentModeScaleAspectFill;
+                    
+                    saveContentsToFile(data,imageFile);
+                    
+                }
+                
+                [activityView stopAnimating];
+                
+            });
+            
+            
+            
+        });
+        
+    }
+    
+}
+
+
+
+
+void saveContentsToFile (id data, NSString* filename) {
+    
+    NSArray *namesArray = [filename componentsSeparatedByString:@"/"];
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory,NSUserDomainMask, YES);
+    
+    NSString *documentsDirectory = [paths objectAtIndex:0];
+    NSString *fileNameToSave;
+    
+    if ([namesArray count]>1) {
+        NSString *dirNameToSave=[documentsDirectory stringByAppendingPathComponent:[namesArray objectAtIndex:0]];
+        if (![[NSFileManager defaultManager] fileExistsAtPath:dirNameToSave])
+            [[NSFileManager defaultManager] createDirectoryAtPath:dirNameToSave withIntermediateDirectories:YES attributes:nil error:nil];
+        
+        
+        
+        for (int i=1; i<[namesArray count]-1; i++) {
+            
+            dirNameToSave = [dirNameToSave stringByAppendingPathComponent:[namesArray objectAtIndex:i]];
+            
+            if (![[NSFileManager defaultManager] fileExistsAtPath:dirNameToSave])
+                
+                [[NSFileManager defaultManager] createDirectoryAtPath:dirNameToSave withIntermediateDirectories:YES attributes:nil error:nil];
+            
+        }
+        
+    }
+    
+    fileNameToSave = [documentsDirectory stringByAppendingPathComponent:filename];
+    
+    //NSLog(@"fileNameToSave = %@",fileNameToSave);
+    
+    [data writeToFile:fileNameToSave atomically:YES];
+    
+    // NSLog(@"data = %@",data);
+    
+    // NSLog(@"url = %@",[NSURL fileURLWithPath:fileNameToSave]);
+    addSkipBackupAttributeToItemAtURL([NSURL fileURLWithPath:fileNameToSave]);
 }
 
 

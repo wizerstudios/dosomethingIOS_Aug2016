@@ -203,7 +203,7 @@
         {
             if ([indexPath isEqual:collectionIndexPath])
             {
-                cell.MenuTittle.text = [data objectForKey:@"name"];
+                cell.MenuTittle.text = [[data objectForKey:@"name"]uppercaseString];
                 cell.MenuTittle.textColor = [UIColor colorWithRed:(199/255.0f) green:(65/255.0f) blue:(81/255.0f) alpha:1.0f];
                 NSString * objstr = [NSString stringWithFormat:@"%@",[data valueForKey:@"ActiveImage"]];
                 objstr= [objstr stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
@@ -214,7 +214,7 @@
         }
     }
     else{
-        cell.MenuTittle.text = [data objectForKey:@"name"];
+        cell.MenuTittle.text = [[data objectForKey:@"name"]uppercaseString];
         cell.MenuTittle.textColor = [UIColor colorWithRed:(164/255.0f) green:(164/255.0f) blue:(164/255.0f) alpha:1.0f];
         NSString * objstr = [NSString stringWithFormat:@"%@",[data valueForKey:@"InactiveImage"]];
         objstr= [objstr stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
