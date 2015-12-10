@@ -133,7 +133,7 @@
     
     if(profileDict != NULL){
         if([[profileDict valueForKey:@"image1"] isEqual:@""]&&[[profileDict valueForKey:@"image2"] isEqual:@""] && [[profileDict valueForKey:@"image3"] isEqual:@""]){
-            profileDataArray = [NSMutableArray new];
+            profileDataArray = [[NSMutableArray alloc] init];
             
             
             for(int i = 0; i < 3; i++)
@@ -307,7 +307,6 @@
     int spacing = 20;
     for(int i = 0; i < 3; i++)
     {
-        NSLog(@"profileDataArray = %@",profileDataArray);
         NSData *profileData = [profileDataArray objectAtIndex:i];
         userProfileImage = [[UIImageView alloc]initWithFrame:CGRectMake((i*self.scrView.frame.size.width) + spacing, 20,self.profileImageView.frame.size.width, self.profileImageView.frame.size.height)];
         [userProfileImage setTag:i+100];
@@ -322,6 +321,7 @@
         }
         else{
                 [userProfileImage setImage:[UIImage imageWithData:profileData]];
+                [userProfileImage setContentMode:UIViewContentModeScaleAspectFill];
                 [cell.cameraButton setHidden:YES];
                 [topViewCell setHidden:NO];
             
@@ -1721,7 +1721,10 @@
     else if(CurrentImage == 2)
         profileImage3 = image;
     
-    NSData *profileData = UIImageJPEGRepresentation([info objectForKey:UIImagePickerControllerEditedImage], 0.1);
+    NSData *profileData = UIImagePNGRepresentation([info objectForKey:UIImagePickerControllerEditedImage]);
+    
+    NSLog(@"Image Size = %lu",[profileData length]);
+    
     [profileDataArray replaceObjectAtIndex:CurrentImage withObject:profileData];
     
     [imagepickerController dismissViewControllerAnimated:YES completion:nil];
