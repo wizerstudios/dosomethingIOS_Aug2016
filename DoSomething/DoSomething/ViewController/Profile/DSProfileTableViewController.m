@@ -109,6 +109,7 @@
     deviceUdid = [OpenUDID value];
    
     [self profileImageDisplayMethod];
+    
 }
 -(void)viewWillAppear:(BOOL)animated
 {
@@ -554,6 +555,8 @@
     if(textField.tag >= 1000){
         [self loadDatePicker:tag];
     }
+    
+
         return YES;
     
 }
@@ -567,6 +570,7 @@
 
     
   NSString *selOptionVal;
+
     if (textField.tag ==1000) {
         selOptionVal = cell.textFieldDPPlaceHolder.text;
        
