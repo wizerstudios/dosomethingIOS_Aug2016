@@ -107,122 +107,12 @@
     [self initializeArray];
     [self getUserCurrenLocation];
     deviceUdid = [OpenUDID value];
-    
-    profileDict=[[NSMutableDictionary alloc]init];
-    profileDict =[[NSUserDefaults standardUserDefaults] valueForKey:USERDETAILS];
-    NSString * strsessionID =[profileDict valueForKey:@"SessionId"];
-    loginUserSessionID = strsessionID;
-    if(profileDict == NULL)
-    {
-       // [self initializeArray];
-    
-    }
-    else{
-        
-        [self initializeArrayProfile];
-        
-    self.tableViewHeightConstraint.constant=80;
-    }
-        NSLog(@"DICT%@",profileDict);
-    
-    [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"SelectedItemCategoryID"];
-    isNotification_message = @"Yes";
-    isNotification_vibration = @"Yes";
-    isNotification_sound = @"Yes";
+   
     
     
-    if(profileDict != NULL){
-        if([[profileDict valueForKey:@"image1"] isEqual:@""]&&[[profileDict valueForKey:@"image2"] isEqual:@""] && [[profileDict valueForKey:@"image3"] isEqual:@""]){
-            profileDataArray = [NSMutableArray new];
-            
-            
-            for(int i = 0; i < 3; i++)
-            {
-                NSData *data = [NSData new];
-                [profileDataArray addObject:data];
-            }
-        }
-        
-        
-        else{
-            NSString *ImageURL1 , *ImageURL2, *ImageURL3 ;
-            NSData *imageData1, *imageData2, *imageData3;
-            if([[profileDict valueForKey:@"image1"] isEqual:@""]){
-                imageData1 = [profileDict valueForKey:@"image1"];
-                
-                ImageURL1 = @"";
-                imageData1 = [ImageURL1 dataUsingEncoding:NSUTF8StringEncoding];
-            }
-            else{
-                ImageURL1 = [profileDict valueForKey:@"image1"];
-                imageData1 = [NSData dataWithContentsOfURL:[NSURL URLWithString:ImageURL1]];
-               
-            }
-            if([[profileDict valueForKey:@"image2"] isEqual:@""]){
-              //  imageData2 = [profileDict valueForKey:@"image2"];
-                
-                ImageURL2 = @"";
-                imageData2 = [ImageURL2 dataUsingEncoding:NSUTF8StringEncoding];
-            }
-            else{
-                ImageURL2 = [profileDict valueForKey:@"image2"];
-                imageData2 = [NSData dataWithContentsOfURL:[NSURL URLWithString:ImageURL2]];
-            }
-
-            if([[profileDict valueForKey:@"image3"] isEqual:@""]){
-               imageData3 = [profileDict valueForKey:@"image3"];
-                
-                ImageURL3 = @"";
-                imageData3 = [ImageURL3 dataUsingEncoding:NSUTF8StringEncoding];
-            }
-            else{
-                ImageURL3 = [profileDict valueForKey:@"image3"];
-                imageData3 = [NSData dataWithContentsOfURL:[NSURL URLWithString:ImageURL3]];
-            }
-
-           profileDataArray = [[NSMutableArray alloc]initWithObjects:imageData1,imageData2,imageData3, nil];
-        }
-
-    }
-    else{
-        if(userDetailsDict.count > 0){
-            
-            NSString  *ImageURL1 ,*ImageURL2 ,*ImageURL3 ;
-            NSData *imageData1, *imageData2, *imageData3;
-            if([[userDetailsDict valueForKey:@"profileImage"] isEqual:@""]){
-                imageData1 = [userDetailsDict valueForKey:@"profileImage"];
-            }
-            else{
-                ImageURL1 = [userDetailsDict valueForKey:@"profileImage"];
-                imageData1 = [NSData dataWithContentsOfURL:[NSURL URLWithString:ImageURL1]];
-                
-            }
-            ImageURL2 = @"";
-            imageData2 = [ImageURL2 dataUsingEncoding:NSUTF8StringEncoding];
-            ImageURL3 = @"";
-            imageData3 = [ImageURL3 dataUsingEncoding:NSUTF8StringEncoding];
-                        
-            profileDataArray = [[NSMutableArray alloc]initWithObjects:imageData1,imageData2,imageData3, nil];
-
-        }
-        else{
-           profileDataArray = [NSMutableArray new];
-
-    
-            for(int i = 0; i < 3; i++)
-            {
-                NSData *data = [NSData new];
-                [profileDataArray addObject:data];
-            }
-        }
-    }
-
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
+
 -(void)viewWillAppear:(BOOL)animated
 {
     self.navigationController.navigationBarHidden=NO;
@@ -292,9 +182,121 @@
     
     infoArray=[[NSMutableArray alloc]initWithObjects:@"profile_noimg",@"profile_noimg",@"profile_noimg", nil];
     [self CustomAlterview];
-   
+    [self profileImageDisplayMethod];
 
      [_tableviewProfile reloadData];
+}
+-(void)profileImageDisplayMethod
+{
+    profileDict=[[NSMutableDictionary alloc]init];
+    profileDict =[[NSUserDefaults standardUserDefaults] valueForKey:USERDETAILS];
+    NSString * strsessionID =[profileDict valueForKey:@"SessionId"];
+    loginUserSessionID = strsessionID;
+    if(profileDict == NULL)
+    {
+        // [self initializeArray];
+        
+    }
+    else{
+        
+        [self initializeArrayProfile];
+        
+        self.tableViewHeightConstraint.constant=80;
+    }
+    NSLog(@"DICT%@",profileDict);
+    
+    [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"SelectedItemCategoryID"];
+    isNotification_message = @"Yes";
+    isNotification_vibration = @"Yes";
+    isNotification_sound = @"Yes";
+    
+    
+    if(profileDict != NULL){
+        if([[profileDict valueForKey:@"image1"] isEqual:@""]&&[[profileDict valueForKey:@"image2"] isEqual:@""] && [[profileDict valueForKey:@"image3"] isEqual:@""]){
+            profileDataArray = [[NSMutableArray alloc] init];
+            
+            
+            for(int i = 0; i < 3; i++)
+            {
+                NSData *data = [NSData new];
+                [profileDataArray addObject:data];
+            }
+        }
+        
+        
+        else{
+            NSString *ImageURL1 , *ImageURL2, *ImageURL3 ;
+            NSData *imageData1, *imageData2, *imageData3;
+            if([[profileDict valueForKey:@"image1"] isEqual:@""]){
+                imageData1 = [profileDict valueForKey:@"image1"];
+                
+                ImageURL1 = @"";
+                imageData1 = [ImageURL1 dataUsingEncoding:NSUTF8StringEncoding];
+            }
+            else{
+                ImageURL1 = [profileDict valueForKey:@"image1"];
+                imageData1 = [NSData dataWithContentsOfURL:[NSURL URLWithString:ImageURL1]];
+                
+            }
+            if([[profileDict valueForKey:@"image2"] isEqual:@""]){
+                //  imageData2 = [profileDict valueForKey:@"image2"];
+                
+                ImageURL2 = @"";
+                imageData2 = [ImageURL2 dataUsingEncoding:NSUTF8StringEncoding];
+            }
+            else{
+                ImageURL2 = [profileDict valueForKey:@"image2"];
+                imageData2 = [NSData dataWithContentsOfURL:[NSURL URLWithString:ImageURL2]];
+            }
+            
+            if([[profileDict valueForKey:@"image3"] isEqual:@""]){
+                imageData3 = [profileDict valueForKey:@"image3"];
+                
+                ImageURL3 = @"";
+                imageData3 = [ImageURL3 dataUsingEncoding:NSUTF8StringEncoding];
+            }
+            else{
+                ImageURL3 = [profileDict valueForKey:@"image3"];
+                imageData3 = [NSData dataWithContentsOfURL:[NSURL URLWithString:ImageURL3]];
+            }
+            
+            profileDataArray = [[NSMutableArray alloc]initWithObjects:imageData1,imageData2,imageData3, nil];
+        }
+        
+    }
+    else{
+        if(userDetailsDict.count > 0){
+            
+            NSString  *ImageURL1 ,*ImageURL2 ,*ImageURL3 ;
+            NSData *imageData1, *imageData2, *imageData3;
+            if([[userDetailsDict valueForKey:@"profileImage"] isEqual:@""]){
+                imageData1 = [userDetailsDict valueForKey:@"profileImage"];
+            }
+            else{
+                ImageURL1 = [userDetailsDict valueForKey:@"profileImage"];
+                imageData1 = [NSData dataWithContentsOfURL:[NSURL URLWithString:ImageURL1]];
+                
+            }
+            ImageURL2 = @"";
+            imageData2 = [ImageURL2 dataUsingEncoding:NSUTF8StringEncoding];
+            ImageURL3 = @"";
+            imageData3 = [ImageURL3 dataUsingEncoding:NSUTF8StringEncoding];
+            
+            profileDataArray = [[NSMutableArray alloc]initWithObjects:imageData1,imageData2,imageData3, nil];
+            
+        }
+        else{
+            profileDataArray = [NSMutableArray new];
+            
+            
+            for(int i = 0; i < 3; i++)
+            {
+                NSData *data = [NSData new];
+                [profileDataArray addObject:data];
+            }
+        }
+    }
+    
 }
 
 #pragma mark - scroll
@@ -320,7 +322,9 @@
             
         }
         else{
+            
                 [userProfileImage setImage:[UIImage imageWithData:profileData]];
+                [userProfileImage setContentMode:UIViewContentModeScaleAspectFill];
                 [cell.cameraButton setHidden:YES];
                 [topViewCell setHidden:NO];
             
@@ -1622,12 +1626,11 @@
 {
     CGPoint position = [textView convertPoint:CGPointZero toView: _tableviewProfile ];
     NSIndexPath *indexPath = [_tableviewProfile indexPathForRowAtPoint: position];
-    //DSProfileTableViewCell *cell = (DSProfileTableViewCell *)[_tableviewProfile cellForRowAtIndexPath:indexPath];
+    
     cell = (DSProfileTableViewCell *)[_tableviewProfile cellForRowAtIndexPath:indexPath];
     cell.textViewHeaderLabel.hidden = YES;
     if(textView.tag == 0) {
         textView.text = @"";
-        //textView.textColor = [UIColor blackColor];
         textView.tag = 1;
         strAbout = textView.text;
     }
@@ -1641,7 +1644,7 @@
 {
     CGPoint position = [textView convertPoint:CGPointZero toView: _tableviewProfile ];
     NSIndexPath *indexPath = [_tableviewProfile indexPathForRowAtPoint: position];
-    //DSProfileTableViewCell *cell = (DSProfileTableViewCell *)[_tableviewProfile cellForRowAtIndexPath:indexPath];
+   
     cell = (DSProfileTableViewCell *)[_tableviewProfile cellForRowAtIndexPath:indexPath];
     cell.textViewHeaderLabel.hidden = YES;
     if([textView.text length] == 0)
@@ -1705,6 +1708,7 @@
         profileImage3 = image;
     
     NSData *profileData = UIImageJPEGRepresentation([info objectForKey:UIImagePickerControllerEditedImage], 0.1);
+    
     [profileDataArray replaceObjectAtIndex:CurrentImage withObject:profileData];
     
     [imagepickerController dismissViewControllerAnimated:YES completion:nil];
@@ -1946,5 +1950,9 @@
 
 }
 
-     
+- (void)didReceiveMemoryWarning {
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
+}
+
 @end

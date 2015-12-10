@@ -178,8 +178,7 @@ notification_vibration:(NSString *)isnotification_vibration
 {
     urlString = [URL_FOR_RESOURCE(@"") stringByAppendingString:[NSString stringWithFormat:@"%@?",registerURL]];
     
-    NSLog(@"urlString = %@",urlString);
-    
+       
     NSMutableDictionary *registerDetails = [[NSMutableDictionary alloc] init];
     
     if(type)                    [registerDetails    setObject:type                  forKey:@"type"];
