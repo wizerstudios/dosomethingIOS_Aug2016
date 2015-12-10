@@ -1631,7 +1631,7 @@
     else if(CurrentImage == 2)
         profileImage3 = image;
     
-    NSData *profileData = UIImageJPEGRepresentation([info objectForKey:UIImagePickerControllerEditedImage], 0.1);
+    NSData *profileData = UIImagePNGRepresentation([info objectForKey:UIImagePickerControllerEditedImage]);
     
     [profileDataArray replaceObjectAtIndex:CurrentImage withObject:profileData];
     
