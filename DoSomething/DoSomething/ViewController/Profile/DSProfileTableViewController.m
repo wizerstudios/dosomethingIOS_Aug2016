@@ -88,7 +88,7 @@
     BOOL isLogin;
     CustomAlterview *objCustomAlterview;
     
-    BOOL isSelectMale,isSelectFemale;
+    BOOL isSelectMale,isSelectFemale,isSave;
     UIWindow *windowInfo;
     
 
@@ -1833,22 +1833,22 @@
 {
     [self.view endEditing:YES];
     [COMMON LoadIcon:self.view];
+    
+    if(isSave==NO)
+    {
     if(profileDict !=NULL){
         
-//        NSArray *postPerArray;
-//        postPerArray = [[placeHolderArray objectAtIndex:0]valueForKey:@"TypingText"];
-//        
-//        FirstName = [profileDict valueForKey:@"first_name"];
-//        LastName  = [profileDict valueForKey:@"last_name"];
+
           strGender = [profileDict valueForKey:@"gender"];
           strDOB    = (currentTextfield.text !=nil)?currentTextfield.text :@"";
-//        emailPasswordToRegister = cell.passwordTextField.text;
 
         [self dateConverter];
         [self loadUpdate];
+        isSave =YES;
     }
     else
         [self loadValidations];
+    }
 }
 #pragma mark - dateConverter
 -(void)dateConverter{
