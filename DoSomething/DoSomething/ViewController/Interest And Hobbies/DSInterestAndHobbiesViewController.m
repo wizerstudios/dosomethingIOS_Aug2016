@@ -32,26 +32,18 @@
 @implementation DSInterestAndHobbiesViewController
 @synthesize interestAndHobbiesCollectionView, profileDetailsArray;
 - (void)viewDidLoad {
-    [COMMON LoadIcon:self.view];
+    
     [super viewDidLoad];
     objWebservice =[[DSWebservice alloc]init];
     deviceUdid = [OpenUDID value];
     
-    appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
-    appDelegate.buttonsView.hidden=YES;
+    
 
     [self.interestAndHobbiesCollectionView registerClass:[UICollectionReusableView class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"HeaderView"];
     UICollectionViewFlowLayout *flowLayout = [[UICollectionViewFlowLayout alloc] init];
     flowLayout.headerReferenceSize = CGSizeMake(self.interestAndHobbiesCollectionView.bounds.size.width,40);
     [self.interestAndHobbiesCollectionView setCollectionViewLayout:flowLayout];
-//    UINib *cellNib = [UINib nibWithNibName:@"DSInterestAndHobbiesCollectionViewCell" bundle:nil];
-//    [self.interestAndHobbiesCollectionView registerNib:cellNib forCellWithReuseIdentifier:@"InterestAndHobbiesCollectionViewCell"];
-//    
-//    interestAndHobbiesCollectionView.delegate=self;
-//    interestAndHobbiesCollectionView.dataSource=self;
-    
-    
-    // interstAndHobbiesArray = [[[NSUserDefaults standardUserDefaults] valueForKey:@"SelectedItem"] mutableCopy];
+
     [self initializeArray];
     
     
@@ -104,7 +96,8 @@
     [customNavigation.menuBtn setHidden:YES];
     [customNavigation.buttonBack setHidden:NO];
     [customNavigation.saveBtn setHidden:NO];
-   
+    appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+    appDelegate.buttonsView.hidden=YES;
     
     
 }
@@ -122,21 +115,27 @@
          loginDict = [responseObject valueForKey:@"gethobbies"];
         objselectionname =[loginDict valueForKey:@"list"];
          sectionNameArray  = [objselectionname valueForKey:@"name"];
+         [[NSUserDefaults standardUserDefaults] setObject:sectionNameArray forKey:@"ListofsectionNameArray"];
+         [[NSUserDefaults standardUserDefaults] synchronize];
          hobbiesArry=[objselectionname valueForKey:@"hobbieslist"];
-         
-        // NSLog(@"responsesectionArray:%@",interstAndHobbiesArray);
-         
+         [[NSUserDefaults standardUserDefaults] setObject:hobbiesArry forKey:@"ListofinterestArray"];
+         [[NSUserDefaults standardUserDefaults] synchronize];
+         interstAndHobbiesArray=[hobbiesArry mutableCopy];
          
          [COMMON removeLoading];
         [interestAndHobbiesCollectionView reloadData];
          [self localArray];
 
     } failure:^(AFHTTPRequestOperation *operation, id error) {
+        
+        NSLog(@"intersesthobbieseror=%@",error);
 
     }];
 }
 -(void)backAction
 {
+    appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+    appDelegate.buttonsView.hidden=NO;
     [self.navigationController popViewControllerAnimated:YES];
 }
 
@@ -149,20 +148,15 @@
 -(void)localArray
 {
     sectionArray =[[NSArray alloc]init];
-    sectionArray=sectionNameArray;
+    sectionArray=[[[NSUserDefaults standardUserDefaults] valueForKey:@"ListofsectionNameArray"] mutableCopy];
     interestArray = [[NSMutableArray alloc] initWithCapacity: 4];
     interestArray =[hobbiesArry mutableCopy];
     NSLog(@"interestArray:%@",interestArray);
-   
-    if(interstAndHobbiesArray== nil)
-    {
-    interstAndHobbiesArray = [[NSMutableArray alloc] initWithCapacity: 4];
-    interstAndHobbiesArray=[interestArray mutableCopy];
-    }
+    
 }
 
 -(void)initializeArray{
-    [COMMON LoadIcon:self.view];
+    
     UINib *cellNib = [UINib nibWithNibName:@"DSInterestAndHobbiesCollectionViewCell" bundle:nil];
     [self.interestAndHobbiesCollectionView registerNib:cellNib forCellWithReuseIdentifier:@"InterestAndHobbiesCollectionViewCell"];
     
@@ -172,21 +166,22 @@
     imageNormalImageArray =[[NSMutableArray alloc]init];
 
     interstAndHobbiesArray = [[[NSUserDefaults standardUserDefaults] valueForKey:@"SelectedItem"] mutableCopy];
+    sectionArray = [[[NSUserDefaults standardUserDefaults] valueForKey:@"ListofsectionNameArray"] mutableCopy];
 
-    sectionArray = sectionNameArray;  //[[NSArray alloc]initWithObjects:@"ARTS",@"FOOD",@"PETS",@"RECREATION",nil];
-
-    
-    if(interstAndHobbiesArray == nil){
-    
-         [self loadHobbiesWebserviceMethod];
+    if([[NSUserDefaults standardUserDefaults] valueForKey:@"ListofinterestArray"]==nil){
         
-        }
-   
-    [interestAndHobbiesCollectionView reloadData];
-     if (interestArray==nil)
-    {
+        [COMMON LoadIcon:self.view];
         [self loadHobbiesWebserviceMethod];
+        
+        
     }
+    else{
+        
+        //interstAndHobbiesArray =[[[NSUserDefaults standardUserDefaults] valueForKey:@"ListofinterestArray"] mutableCopy];
+       // [interestAndHobbiesCollectionView reloadData];
+    }
+    
+
 
    }
 
@@ -399,7 +394,6 @@
 
 {
     
-    NSLog(@"interstAndHobbiesArray:%@",interstAndHobbiesArray);
     
     DSInterestAndHobbiesCollectionViewCell *dataselCell = (DSInterestAndHobbiesCollectionViewCell *)[collectionView cellForItemAtIndexPath:indexPath];
     

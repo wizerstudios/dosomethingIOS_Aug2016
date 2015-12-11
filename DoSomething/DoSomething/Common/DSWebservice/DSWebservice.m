@@ -276,6 +276,9 @@ notification_vibration:(NSString *)isnotification_vibration
      }
      
        failure:^(AFHTTPRequestOperation *operation, NSError *error){
+           
+           UIAlertView * objAltert =[[UIAlertView alloc]initWithTitle:nil message:[NSString stringWithFormat:@"%@",error] delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+           [objAltert show];
            NSLog(@"Error = %@",error);
 
        }];

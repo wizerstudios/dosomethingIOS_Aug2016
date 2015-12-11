@@ -31,13 +31,27 @@
                                 <outlet property="delegate" destination="-1" id="gkf-pE-zHf"/>
                             </connections>
                         </tableView>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GzA-8Z-cHf">
+                            <rect key="frame" x="0.0" y="549" width="320" height="3"/>
+                            <animations/>
+                            <color key="backgroundColor" red="0.5450980392" green="0.5450980392" blue="0.5450980392" alpha="1" colorSpace="calibratedRGB"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="3" id="jga-TH-Oz7"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <color key="textColor" red="0.5450980392" green="0.5450980392" blue="0.5450980392" alpha="1" colorSpace="calibratedRGB"/>
+                            <nil key="highlightedColor"/>
+                        </label>
                     </subviews>
                     <animations/>
                     <color key="backgroundColor" red="0.90980392156862744" green="0.90980392156862744" blue="0.90980392156862744" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
                         <constraint firstAttribute="bottom" secondItem="HcG-cC-Fek" secondAttribute="bottom" constant="18" id="FyL-bV-ZzW"/>
+                        <constraint firstItem="GzA-8Z-cHf" firstAttribute="leading" secondItem="ina-fx-Lum" secondAttribute="leading" id="K63-Qr-p0C"/>
                         <constraint firstItem="HcG-cC-Fek" firstAttribute="leading" secondItem="ina-fx-Lum" secondAttribute="leading" constant="13" id="LMH-XW-sUe"/>
+                        <constraint firstAttribute="trailing" secondItem="GzA-8Z-cHf" secondAttribute="trailing" id="mXi-le-y87"/>
                         <constraint firstAttribute="trailing" secondItem="HcG-cC-Fek" secondAttribute="trailing" constant="13" id="qM9-7t-OTR"/>
+                        <constraint firstItem="GzA-8Z-cHf" firstAttribute="top" secondItem="HcG-cC-Fek" secondAttribute="bottom" constant="-1" id="vru-Xo-XxL"/>
                         <constraint firstItem="HcG-cC-Fek" firstAttribute="top" secondItem="ina-fx-Lum" secondAttribute="top" id="yfB-bw-FfR"/>
                     </constraints>
                 </view>

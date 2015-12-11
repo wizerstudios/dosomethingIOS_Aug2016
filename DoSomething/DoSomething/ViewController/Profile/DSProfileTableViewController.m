@@ -194,7 +194,7 @@
         
        // [self initializeArrayProfile];
         
-        self.tableViewHeightConstraint.constant=80;
+        self.tableViewHeightConstraint.constant=70;
     }
     NSLog(@"DICT%@",profileDict);
     
@@ -305,7 +305,7 @@
         NSData *profileData = [profileDataArray objectAtIndex:i];
         if(IS_IPHONE6_Plus)
         {
-            userProfileImage = [[UIImageView alloc]initWithFrame:CGRectMake((self.view.frame.size.width/4) + spacing, 20,self.profileImageView.frame.size.width, self.profileImageView.frame.size.height)];
+            userProfileImage = [[UIImageView alloc]initWithFrame:CGRectMake((self.view.frame.size.width/3.5) + spacing, 20,self.profileImageView.frame.size.width, self.profileImageView.frame.size.height)];
         }
         else
         {
@@ -1657,13 +1657,10 @@
     
     NSData *profileData = UIImagePNGRepresentation([info objectForKey:UIImagePickerControllerEditedImage]);
     
-    NSLog(@"Image Size = %lu",[profileData length]);
-    
-    [profileDataArray replaceObjectAtIndex:CurrentImage withObject:profileData];
+     [profileDataArray replaceObjectAtIndex:CurrentImage withObject:profileData];
     
     [imagepickerController dismissViewControllerAnimated:YES completion:nil];
     
-
 
 }
 
@@ -1747,6 +1744,8 @@
                          }
                          failure:^(AFHTTPRequestOperation *operation, id error) {
                              [COMMON removeLoading];
+                             
+                             
 
                          }
      ];
@@ -1803,12 +1802,10 @@
     [self.view endEditing:YES];
     [COMMON LoadIcon:self.view];
     
-    if(isSave==NO)
-    {
+//    if(isSave==NO)
+//    {
     if(profileDict !=NULL){
-        
-
-          strGender = [profileDict valueForKey:@"gender"];
+        strGender = [profileDict valueForKey:@"gender"];
           strDOB    = (currentTextfield.text !=nil)?currentTextfield.text :@"";
 
         [self dateConverter];
@@ -1817,7 +1814,7 @@
     }
     else
         [self loadValidations];
-    }
+    //}
 }
 #pragma mark - dateConverter
 -(void)dateConverter{

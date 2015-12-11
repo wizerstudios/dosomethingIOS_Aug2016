@@ -96,7 +96,7 @@
     
     
     UICollectionViewFlowLayout *flowLayout1 = [[UICollectionViewFlowLayout alloc] init];
-    flowLayout1.headerReferenceSize = CGSizeMake(locationCollectionView.bounds.size.width, 55);
+    flowLayout1.headerReferenceSize = CGSizeMake(locationCollectionView.bounds.size.width,45);
     [locationCollectionView setCollectionViewLayout:flowLayout1];
     
     if(IS_IPHONE5)
@@ -265,13 +265,13 @@
     if(IS_IPHONE6_Plus)
         returnSize = CGSizeMake((self.view.frame.size.width / 3.800f), 190);
     if (IS_IPHONE4 ||IS_IPHONE5 )
-        returnSize = CGSizeMake((self.view.frame.size.width / 3.300f), 134);
+        returnSize = CGSizeMake((self.view.frame.size.width / 3.300f), 184);
     
     return returnSize;
 }
 
 - (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout minimumLineSpacingForSectionAtIndex:(NSInteger)section {
-    return 55.0;
+    return 15.0;
 }
 
 - (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout minimumInteritemSpacingForSectionAtIndex:(NSInteger)section {

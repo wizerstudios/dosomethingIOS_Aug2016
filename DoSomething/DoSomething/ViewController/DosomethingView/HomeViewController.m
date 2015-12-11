@@ -41,6 +41,7 @@
     
     NSString                *loginUserSessionID;
     CustomAlterview * objCustomAlterview;
+   
     
 }
 
@@ -52,9 +53,15 @@
     [super viewDidLoad];
    
     objWebService = [[DSWebservice alloc]init];
-    [COMMON LoadIcon:self.view];
-    
+   
+    if([[NSUserDefaults standardUserDefaults] valueForKey:@"MenuListArray"]==nil){
+         [COMMON LoadIcon:self.view];
     [self loadhomeviewListWebservice];
+    }
+    else
+    {
+        menuArray =[[[NSUserDefaults standardUserDefaults] valueForKey:@"MenuListArray"] mutableCopy];
+    }
      //deviceUdid = [OpenUDID value];
     if(IS_IPHONE5)
         [self.view addConstraint:[NSLayoutConstraint constraintWithItem:_homeCollectionView
@@ -88,19 +95,19 @@
           {
           NSLog(@"response:%@",responseObject);
           NSMutableDictionary *homeviewlist = [[NSMutableDictionary alloc]init];
-          //NSMutableArray* homeListcommArray=[[NSMutableArray alloc]init];
+          
           menuArray=[NSMutableArray alloc];
           homeviewlist = [responseObject valueForKey:@"dosomethinglist"];
           menuArray =[homeviewlist valueForKey:@"list"];
-         
-              
+          [[NSUserDefaults standardUserDefaults] setObject:menuArray forKey:@"MenuListArray"];
+           [[NSUserDefaults standardUserDefaults] synchronize];
              [COMMON removeLoading];
              [self.homeCollectionView reloadData];
           }
          
         
      } failure:^(AFHTTPRequestOperation *operation, id error) {
-        
+         NSLog(@"error=%@",error);
      }];
 }
 
@@ -129,8 +136,7 @@
     
     
      [self CustomAlterviewload];
-   // alertBgView.hidden = YES;
-    //alertMainBgView.hidden = YES;
+   
 
 }
 
