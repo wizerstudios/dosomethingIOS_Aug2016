@@ -130,11 +130,11 @@
         self.layoutConstraintTableViewYPos.constant= 20;
     }
     [customNavigation.menuBtn setHidden:YES];
-    [customNavigation.buttonBack setHidden:NO];
+    [customNavigation.buttonBack setHidden:YES];
     [customNavigation.saveBtn setHidden:NO];
     [self.navigationController.navigationBar addSubview:customNavigation.view];
     [customNavigation.saveBtn addTarget:self action:@selector(saveAction:) forControlEvents:UIControlEventTouchUpInside];
-    [customNavigation.buttonBack addTarget:self action:@selector(backAction) forControlEvents:UIControlEventTouchUpInside];
+    //[customNavigation.buttonBack addTarget:self action:@selector(backAction) forControlEvents:UIControlEventTouchUpInside];
     
     imageNormalArray =[[NSMutableArray alloc]init];
     
@@ -588,7 +588,7 @@
 
 -(void)backAction
 {
-    [self.navigationController popViewControllerAnimated:YES];
+   // [self.navigationController popViewControllerAnimated:YES];
 }
 
 - (void)pushToHobbiesView {
