@@ -137,7 +137,7 @@
                 <outlet property="nameProfile" destination="QXZ-CJ-AiG" id="1pC-wP-gEf"/>
                 <outlet property="sendRequest" destination="5GA-ta-996" id="XSa-5c-18K"/>
             </connections>
-            <point key="canvasLocation" x="574" y="330"/>
+            <point key="canvasLocation" x="573.5" y="330"/>
         </collectionViewCell>
     </objects>
     <resources>

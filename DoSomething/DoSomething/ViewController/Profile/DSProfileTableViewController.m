@@ -134,7 +134,7 @@
     [customNavigation.saveBtn setHidden:NO];
     [self.navigationController.navigationBar addSubview:customNavigation.view];
     [customNavigation.saveBtn addTarget:self action:@selector(saveAction:) forControlEvents:UIControlEventTouchUpInside];
-    //[customNavigation.buttonBack addTarget:self action:@selector(backAction) forControlEvents:UIControlEventTouchUpInside];
+
     
     imageNormalArray =[[NSMutableArray alloc]init];
     
@@ -194,7 +194,7 @@
         //not using just for reference
        // [self initializeArrayProfile];
         
-        self.tableViewHeightConstraint.constant=80;
+        self.tableViewHeightConstraint.constant=70;
     }
     NSLog(@"DICT%@",profileDict);
     
@@ -204,7 +204,7 @@
     isNotification_sound = @"Yes";
     
     
-    if(profileDict != NULL){
+    if(profileDict.count > 0){
         if([[profileDict valueForKey:@"image1"] isEqual:@""]&&[[profileDict valueForKey:@"image2"] isEqual:@""] && [[profileDict valueForKey:@"image3"] isEqual:@""]){
             profileDataArray = [[NSMutableArray alloc] init];
             
@@ -221,13 +221,14 @@
             NSString *ImageURL1 , *ImageURL2, *ImageURL3 ;
             NSData *imageData1, *imageData2, *imageData3;
             if([[profileDict valueForKey:@"image1"] isEqual:@""]){
-                imageData1 = [profileDict valueForKey:@"image1"];
+                //imageData1 = [profileDict valueForKey:@"image1"];
                 
                 ImageURL1 = @"";
                 imageData1 = [ImageURL1 dataUsingEncoding:NSUTF8StringEncoding];
             }
             else{
                 ImageURL1 = [profileDict valueForKey:@"image1"];
+                
                 imageData1 = [NSData dataWithContentsOfURL:[NSURL URLWithString:ImageURL1]];
                 
             }
@@ -300,12 +301,13 @@
     self.scrView.delegate=self;
     
     int spacing = 20;
+    
     for(int i = 0; i < 3; i++)
     {
         NSData *profileData = [profileDataArray objectAtIndex:i];
         if(IS_IPHONE6_Plus)
         {
-            userProfileImage = [[UIImageView alloc]initWithFrame:CGRectMake((self.view.frame.size.width/4) + spacing, 20,self.profileImageView.frame.size.width, self.profileImageView.frame.size.height)];
+            userProfileImage = [[UIImageView alloc]initWithFrame:CGRectMake((self.view.frame.size.width/3.5) + spacing, 20,self.profileImageView.frame.size.width, self.profileImageView.frame.size.height)];
         }
         else
         {
@@ -848,6 +850,7 @@
             cell.layoutConstraintProfileImageHeight.constant =159;
             cell.layoutConstraintProfileImageWidth.constant =161;
         }
+        
         [self profileScroll];
     
 
@@ -1673,13 +1676,10 @@
     
     NSData *profileData = UIImagePNGRepresentation([info objectForKey:UIImagePickerControllerEditedImage]);
     
-    NSLog(@"Image Size = %lu",[profileData length]);
-    
-    [profileDataArray replaceObjectAtIndex:CurrentImage withObject:profileData];
+     [profileDataArray replaceObjectAtIndex:CurrentImage withObject:profileData];
     
     [imagepickerController dismissViewControllerAnimated:YES completion:nil];
     
-
 
 }
 
@@ -1763,6 +1763,8 @@
                          }
                          failure:^(AFHTTPRequestOperation *operation, id error) {
                              [COMMON removeLoading];
+                             
+                             
 
                          }
      ];
@@ -1819,12 +1821,10 @@
     [self.view endEditing:YES];
     [COMMON LoadIcon:self.view];
     
-    if(isSave==NO)
-    {
+//    if(isSave==NO)
+//    {
     if(profileDict !=NULL){
-        
-
-          strGender = [profileDict valueForKey:@"gender"];
+        strGender = [profileDict valueForKey:@"gender"];
           strDOB    = (currentTextfield.text !=nil)?currentTextfield.text :@"";
 
         [self dateConverter];
@@ -1833,7 +1833,7 @@
     }
     else
         [self loadValidations];
-    }
+    //}
 }
 #pragma mark - dateConverter
 -(void)dateConverter{

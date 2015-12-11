@@ -142,6 +142,17 @@
                                 <action selector="didClickdeleteAccountButtonAction:" destination="-1" eventType="touchUpInside" id="kM0-Wo-stl"/>
                             </connections>
                         </button>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ajQ-3q-Z8H">
+                            <rect key="frame" x="0.0" y="461" width="320" height="3"/>
+                            <animations/>
+                            <color key="backgroundColor" red="0.5450980392" green="0.5450980392" blue="0.5450980392" alpha="1" colorSpace="calibratedRGB"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="3" id="W6x-rg-STi"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VcQ-5f-k8S">
                             <rect key="frame" x="165" y="160" width="145" height="40"/>
                             <animations/>
@@ -165,12 +176,15 @@
                         <constraint firstItem="8Qn-UM-IQM" firstAttribute="centerX" secondItem="xEE-yJ-RYa" secondAttribute="centerX" id="0bu-Gu-0hk"/>
                         <constraint firstAttribute="bottom" secondItem="8Qn-UM-IQM" secondAttribute="bottom" constant="437" id="2VM-3g-Uz1"/>
                         <constraint firstItem="foH-is-yaE" firstAttribute="top" secondItem="8Qn-UM-IQM" secondAttribute="bottom" constant="5" id="7w7-nd-FBM"/>
+                        <constraint firstAttribute="trailing" secondItem="ajQ-3q-Z8H" secondAttribute="trailing" id="9Qg-pb-du5"/>
                         <constraint firstItem="VcQ-5f-k8S" firstAttribute="leading" secondItem="mVq-wo-sUe" secondAttribute="trailing" constant="10" id="E3g-iD-xe5"/>
                         <constraint firstItem="mVq-wo-sUe" firstAttribute="top" secondItem="foH-is-yaE" secondAttribute="bottom" constant="22" id="Egk-Y5-HbM"/>
                         <constraint firstItem="8Qn-UM-IQM" firstAttribute="leading" secondItem="foH-is-yaE" secondAttribute="leading" id="Ezx-4I-ZWz"/>
                         <constraint firstItem="8Qn-UM-IQM" firstAttribute="trailing" secondItem="foH-is-yaE" secondAttribute="trailing" id="GJ0-9Z-gvr"/>
                         <constraint firstItem="Old-oT-b7M" firstAttribute="leading" secondItem="xEE-yJ-RYa" secondAttribute="leading" constant="10" id="OZc-AI-UTW"/>
                         <constraint firstItem="mVq-wo-sUe" firstAttribute="leading" secondItem="xEE-yJ-RYa" secondAttribute="leading" constant="10" id="ObI-Sz-bKW"/>
+                        <constraint firstItem="ajQ-3q-Z8H" firstAttribute="leading" secondItem="xEE-yJ-RYa" secondAttribute="leading" id="WfB-Tc-Wuu"/>
+                        <constraint firstItem="ajQ-3q-Z8H" firstAttribute="top" secondItem="2EP-Qb-quU" secondAttribute="bottom" constant="16" id="XHd-JG-xin"/>
                         <constraint firstItem="VcQ-5f-k8S" firstAttribute="top" secondItem="foH-is-yaE" secondAttribute="bottom" constant="22" id="Y4P-RE-n6K"/>
                         <constraint firstItem="2EP-Qb-quU" firstAttribute="leading" secondItem="xEE-yJ-RYa" secondAttribute="leading" constant="10" id="YBP-nu-vt5"/>
                         <constraint firstAttribute="trailing" secondItem="VcQ-5f-k8S" secondAttribute="trailing" constant="10" id="ZT4-FI-J8O"/>
