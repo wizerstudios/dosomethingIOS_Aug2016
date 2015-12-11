@@ -231,6 +231,7 @@ notification_vibration:(NSString *)isnotification_vibration
              
              NSLog(@"formData = %@",formData);
          }
+         
      }
      
        success:^(AFHTTPRequestOperation *operation, id responseObject)

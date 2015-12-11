@@ -191,7 +191,7 @@
         
     }
     else{
-        
+        //not using just for reference
        // [self initializeArrayProfile];
         
         self.tableViewHeightConstraint.constant=80;
@@ -982,7 +982,6 @@
             
             if(isSelectFemale ==YES)
             {
-                
                 [cell.femaleButton setTitleColor:[UIColor redColor] forState:UIControlStateNormal];
             }
             else if (isSelectMale==YES)
@@ -1578,15 +1577,24 @@
     cell = (DSProfileTableViewCell *)[_tableviewProfile cellForRowAtIndexPath:indexPath];
     cell.textViewHeaderLabel.hidden = YES;
     if(textView.tag == 0) {
-        textView.text = @"";
-        textView.tag = 1;
-        strAbout = textView.text;
+        
+        if(strAbout==nil){
+            
+            textView.text = @"";
+            textView.tag = 1;
+            strAbout = textView.text;
+
+        }
+        
+        else if([strAbout isEqual: @"Write something about yourself here."]) {
+            textView.text = @"";
+            textView.tag = 1;
+            strAbout = textView.text;
+        }
+        
     }
     
-
-    
 }
-
 
 -(void)textViewDidEndEditing:(UITextView *)textView
 {
@@ -1604,6 +1612,9 @@
 
     strAbout = textView.text;
 }
+
+
+
 
 #pragma mark - Camera Action
 -(void)selectCamera: (UIButton *)sender
