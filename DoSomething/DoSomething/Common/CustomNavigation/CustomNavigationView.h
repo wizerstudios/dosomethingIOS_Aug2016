@@ -8,16 +8,17 @@
 
 #import <UIKit/UIKit.h>
 
-@interface CustomNavigationView : UIViewController{
-    
-}
+@interface CustomNavigationView : UIViewController
 
 @property (strong, nonatomic) IBOutlet UIButton *buttonBack;
+
 @property (strong, nonatomic) IBOutlet UIImageView *backButtonImg;
 
-@property (strong,nonatomic)  IBOutlet UIButton * menuBtn;
+@property (strong,nonatomic)  IBOutlet UIButton  * menuBtn;
 
 @property (strong,nonatomic)  IBOutlet UIButton  * saveBtn;
+
+@property (strong,nonatomic)  IBOutlet UIButton  *FilterBtn;
 
 @property (strong, nonatomic) IBOutlet NSLayoutConstraint *layoutConstraintBackBtnYPos;
 

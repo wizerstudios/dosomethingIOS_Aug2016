@@ -71,7 +71,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="300" height="200"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" alwaysBounceVertical="YES" alwaysBounceHorizontal="YES" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="U02-po-bf5">
-                                <rect key="frame" x="80" y="21" width="160" height="150"/>
+                                <rect key="frame" x="70" y="21" width="175" height="150"/>
                                 <animations/>
                                 <connections>
                                     <outlet property="delegate" destination="-1" id="v01-p1-4gU"/>
@@ -143,9 +143,9 @@
                             <constraint firstAttribute="bottom" secondItem="L4l-gD-IHh" secondAttribute="bottom" constant="4" id="PYj-7h-fPE"/>
                             <constraint firstItem="bAy-v9-r7J" firstAttribute="centerX" secondItem="R2K-2f-wgq" secondAttribute="centerX" id="ZNw-jH-SPv"/>
                             <constraint firstItem="LRb-lA-1vW" firstAttribute="top" secondItem="U02-po-bf5" secondAttribute="bottom" constant="2" id="ard-ga-gOg"/>
-                            <constraint firstItem="U02-po-bf5" firstAttribute="leading" secondItem="R2K-2f-wgq" secondAttribute="leading" constant="80" id="dLE-ej-gBp"/>
+                            <constraint firstItem="U02-po-bf5" firstAttribute="leading" secondItem="R2K-2f-wgq" secondAttribute="leading" constant="70" id="dLE-ej-gBp"/>
                             <constraint firstItem="MDZ-Us-VGR" firstAttribute="top" secondItem="R2K-2f-wgq" secondAttribute="top" constant="10" id="hQE-mh-1iI"/>
-                            <constraint firstItem="U02-po-bf5" firstAttribute="centerX" secondItem="bAy-v9-r7J" secondAttribute="centerX" constant="9.5" id="pHF-hx-NdQ"/>
+                            <constraint firstItem="U02-po-bf5" firstAttribute="centerX" secondItem="bAy-v9-r7J" secondAttribute="centerX" constant="7" id="pHF-hx-NdQ"/>
                             <constraint firstAttribute="bottom" secondItem="uey-h2-iAy" secondAttribute="bottom" id="rHN-CI-CnD"/>
                             <constraint firstItem="bAy-v9-r7J" firstAttribute="top" secondItem="R2K-2f-wgq" secondAttribute="top" constant="40" id="tyP-bj-lOc"/>
                             <constraint firstItem="L4l-gD-IHh" firstAttribute="top" secondItem="bAy-v9-r7J" secondAttribute="bottom" constant="1" id="z6X-Rz-jxo"/>

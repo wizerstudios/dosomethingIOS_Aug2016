@@ -138,7 +138,7 @@
 {
     
     objCustomAlterview = [[CustomAlterview alloc] initWithNibName:@"CustomAlterview" bundle:nil];
-//    objCustomAlterview.view.frame = CGRectMake(self.view.frame.origin.x,self.view.frame.origin.y, CGRectGetWidth(self.view.frame),self.);
+
     [objCustomAlterview.alertBgView setHidden:YES];
     [objCustomAlterview.alertMainBgView setHidden:YES];
     [objCustomAlterview.view setHidden:YES];
@@ -163,9 +163,6 @@
     
     UICollectionViewFlowLayout *flowLayout = [[UICollectionViewFlowLayout alloc] init];
     [flowLayout setScrollDirection:UICollectionViewScrollDirectionVertical];
-    //[flowLayout setMinimumInteritemSpacing:10.0f];
-   // [flowLayout setMinimumLineSpacing:10.0f];
-    //[self.objCollectionView setPagingEnabled:YES];
     [self.homeCollectionView setCollectionViewLayout:flowLayout];
 }
 
@@ -208,7 +205,7 @@
                 NSString * objstr = [NSString stringWithFormat:@"%@",[data valueForKey:@"ActiveImage"]];
                 objstr= [objstr stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
                 [cell.MenuImg setImageWithURL:[NSURL URLWithString:objstr]];
-                //cell.MenuImg.image = [UIImage imageNamed:objstr];
+               
                 break;
             }
         }
@@ -220,7 +217,7 @@
         objstr= [objstr stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
         [cell.MenuImg setImageWithURL:[NSURL URLWithString:objstr]];
 
-        //cell.MenuImg.image = [UIImage imageNamed:objstr];
+
     }
     
     _homeCollectionView.allowsMultipleSelection = YES;
@@ -287,8 +284,7 @@
         [cell.MenuImg setImageWithURL:[NSURL URLWithString:objstr]];
 
         NSLog(@"selectImage:%@",objstr);
-        //cell.MenuImg.image = [UIImage imageNamed:objstr];
-        
+               
     }
     else
     {

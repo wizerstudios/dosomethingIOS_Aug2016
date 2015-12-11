@@ -14,7 +14,8 @@
 #import "UIImageView+AFNetworking.h"
 #import "DSAppCommon.h"
 #import "AppDelegate.h"
-@interface DSLocationViewController ()
+#import <MapKit/MapKit.h>
+@interface DSLocationViewController ()<CLLocationManagerDelegate>
 {
     DSWebservice *objWebservice;
     AppDelegate *appDelegate;
@@ -22,11 +23,12 @@
     NSString * longitude;
     NSString * laditude;
     BOOL isFilteraction;
+    NSString  * currentLatitude, * currentLongitude;
 }
 @property(nonatomic,strong)IBOutlet NSLayoutConstraint *collectionviewxpostion;
 @property(nonatomic,strong)IBOutlet NSLayoutConstraint * filterviewxposition;
 @property(nonatomic,strong)IBOutlet NSLayoutConstraint *sepratorXposition;
-
+@property (nonatomic,strong)  CLLocationManager       * locationManager;
 
 @property(nonatomic,strong) IBOutlet UIButton *onlineBtn;
 @property(nonatomic,strong) IBOutlet UIButton *offlineBtn;
@@ -39,7 +41,7 @@
 
 @implementation DSLocationViewController
 @synthesize delegate;
-@synthesize locationCollectionView;
+@synthesize locationCollectionView,locationManager;
 @synthesize profileImages,profileNames,kiloMeterlabel;
 - (void)viewDidLoad {
     
@@ -63,8 +65,8 @@
 {
     [super viewWillAppear:animated];
     [self.navigationItem setHidesBackButton:YES animated:NO];
-    
-    [self nearestLocationWebservice];
+    [self getUserCurrenLocation];
+   
     CustomNavigationView *customNavigation;
     customNavigation = [[CustomNavigationView alloc] initWithNibName:@"CustomNavigationView" bundle:nil];
     customNavigation.view.frame = CGRectMake(0,-20, CGRectGetWidth(self.view.frame), 65);
@@ -77,8 +79,9 @@
     }
     [customNavigation.menuBtn setHidden:YES];
     [customNavigation.buttonBack setHidden:YES];
-    [customNavigation.saveBtn setHidden:NO];
-    [customNavigation.saveBtn addTarget:self action:@selector(filterAction:) forControlEvents:UIControlEventTouchUpInside];
+    [customNavigation.saveBtn setHidden:YES];
+    [customNavigation.FilterBtn setHidden:NO];
+    [customNavigation.FilterBtn addTarget:self action:@selector(filterAction:) forControlEvents:UIControlEventTouchUpInside];
     [self.navigationController.navigationBar addSubview:customNavigation.view];
     
     UINib *cellNib = [UINib nibWithNibName:@"LocationCollectionViewCell" bundle:nil];
@@ -105,6 +108,12 @@
                                                              multiplier:1.0
                                                                constant:-20.0]];
     
+    [self filterPageButtonAction];
+    
+    
+}
+-(void)filterPageButtonAction
+{
     self.onlineBtn.layer.cornerRadius =10;
     self.onlineBtn.layer.masksToBounds = YES;
     self.onlineBtn.layer.borderWidth =4;
@@ -134,14 +143,59 @@
     self.avablebothBtn.layer.masksToBounds = YES;
     self.avablebothBtn.layer.borderWidth =4;
     [self.avablebothBtn.layer setBorderColor:[[UIColor whiteColor] CGColor]];
+}
+#pragma mark get user CurrentLocation
+
+- (void)getUserCurrenLocation{
     
+    if(!locationManager){
+        locationManager                 = [[CLLocationManager alloc] init];
+        locationManager.delegate        = self;
+        locationManager.distanceFilter  = kCLLocationAccuracyKilometer;
+        locationManager.desiredAccuracy = kCLLocationAccuracyBest;
+        locationManager.activityType    = CLActivityTypeAutomotiveNavigation;
+    }
+    if ([locationManager respondsToSelector:@selector(requestAlwaysAuthorization)])
+        [locationManager requestAlwaysAuthorization];
+    
+    if ([locationManager respondsToSelector:@selector(requestWhenInUseAuthorization)])
+        [locationManager requestWhenInUseAuthorization];
+    
+    [locationManager startUpdatingLocation];
+}
+
+-(void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations {
+    
+    
+    CLLocation *newLocation = [locations lastObject];
+    
+    currentLatitude         = [NSString stringWithFormat:@"%@",[NSNumber numberWithDouble:newLocation.coordinate.latitude]];
+    
+    currentLongitude        = [NSString stringWithFormat:@"%@",[NSNumber numberWithDouble:newLocation.coordinate.longitude]];
+    
+    [[NSUserDefaults standardUserDefaults] setObject:currentLatitude  forKey:@"currentLatitude"];
+    [[NSUserDefaults standardUserDefaults] setObject:currentLongitude forKey:@"currentLongitude"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+    
+    // Turn off the location manager to save power.
+    [locationManager stopUpdatingLocation];
+    
+    NSLog(@"current latitude & longitude for main view = %@ & %@",currentLatitude,currentLongitude);
+     [self nearestLocationWebservice];
+    
+}
+
+- (void)locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error
+{
+    
+    NSLog(@"Cannot find the location for main view.");
 }
 
 
 -(void)nearestLocationWebservice
 {
     [COMMON LoadIcon:self.view];
-    [objWebservice nearestUsers:NearestUsers_API sessionid:strsessionID latitude:@"13.0827" longitude:@"80.2707" filter_status:@"" filter_gender:@"" filter_agerange:@"" filter_distance:@"" success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    [objWebservice nearestUsers:NearestUsers_API sessionid:strsessionID latitude:currentLatitude longitude:currentLongitude filter_status:@"" filter_gender:@"" filter_agerange:@"" filter_distance:@"" success:^(AFHTTPRequestOperation *operation, id responseObject) {
 
         if([[[responseObject valueForKey:@"nearestusers"]valueForKey:@"status"] isEqualToString:@"success"])
         {
@@ -162,10 +216,7 @@
     
     }];
 }
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
+
 
 
 -(NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView{
@@ -188,14 +239,20 @@
     
     NSString *MyPatternString = [profileImages objectAtIndex:indexPath.row];
     
-    //locationCellView.imageProfile.image =[UIImage imageNamed:MyPatternString ];
-    
     locationCellView.nameProfile.text =[profileNames objectAtIndex:indexPath.row];
     locationCellView.kiloMeter.text=[kiloMeterlabel objectAtIndex:indexPath.row];
     MyPatternString= [MyPatternString stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-    [locationCellView.imageProfile setImageWithURL:[NSURL URLWithString:MyPatternString]];
-    //locationCollectionView.backgroundColor = [UIColor clearColor];
+    if(MyPatternString == nil || [MyPatternString isEqualToString:@""])
+    {
+        [locationCellView.imageProfile setImage:[UIImage imageNamed:@"profile_noimg"]];
+    }
+    else
+    {
+        [locationCellView.imageProfile setImageWithURL:[NSURL URLWithString:MyPatternString]];
+    }
+    
     locationCellView.imageProfile.layer.cornerRadius = locationCellView.imageProfile.frame.size.height/2;
+    
      locationCellView.imageProfile.layer.masksToBounds = YES;
     
     return locationCellView;
@@ -268,6 +325,11 @@
 
     }
 
+}
+
+- (void)didReceiveMemoryWarning {
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
 }
 
 @end

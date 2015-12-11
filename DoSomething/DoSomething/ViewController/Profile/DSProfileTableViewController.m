@@ -322,13 +322,7 @@
             
         }
         else{
-           
-            dispatch_async(dispatch_get_main_queue(), ^{
                 [userProfileImage setImage:[UIImage imageWithData:profileData]];
-            });
-       
-            
-                //[userProfileImage setImage:[UIImage imageWithData:profileData]];
                 [userProfileImage setContentMode:UIViewContentModeScaleAspectFill];
                 [cell.cameraButton setHidden:YES];
                 [topViewCell setHidden:NO];

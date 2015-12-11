@@ -24,6 +24,7 @@
     self.buttonBack.hidden = YES;
     self.saveBtn .hidden   = YES;
     self.backButtonImg.hidden = YES;
+    self.FilterBtn.hidden    =YES;
     
     if (IS_IPHONE6 ||IS_IPHONE6_Plus){
     self.layoutConstraintLabelYPos.constant =39;

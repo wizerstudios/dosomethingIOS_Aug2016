@@ -68,34 +68,10 @@
 
 -(void)TabBarViews
 {
-    //int wVal=self.window.bounds.size.width;
-   // int hVal=self.window.bounds.size.height;
+  
     buttonsView=[[UIView alloc]init];
     [buttonsView setBackgroundColor:[UIColor whiteColor]];
-//    [buttonsView setBackgroundColor:[UIColor colorWithRed:(float)239.0/255 green:(float)239.0/255 blue:(float)239.0/255 alpha:1.0f]];
-    
-//    if (IS_IPHONE4) {
-//        buttonsView.frame=CGRectMake(0,hVal-hVal/10,wVal,hVal/10);
-//        buttonsView.hidden=YES;
-//        
-//    }
-//    else if (IS_IPHONE5)
-//    {
-//        buttonsView.frame=CGRectMake(0,hVal-hVal/11,wVal,hVal/11);
-//        buttonsView.hidden=YES;
-//        
-//    }
-//    else if (IS_IPHONE6)
-//    {
-//        buttonsView.frame=CGRectMake(0,hVal-hVal/13,wVal,hVal/13);
-//        buttonsView.hidden=YES;
-//        
-//    }
-//    else if (IS_IPHONE6_Plus)
-//    {
-//        buttonsView.frame=CGRectMake(0,hVal-hVal/15,wVal,hVal/15);
-//        buttonsView.hidden=YES;
-//    }
+
     buttonsView.frame=CGRectMake(self.window.frame.origin.x,self.window.frame.size.height-50,self.window.frame.size.width,50);
      buttonsView.hidden=YES;
     locationButton  =[[UIButton alloc]init];
@@ -223,27 +199,23 @@
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application {
-    // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
-    // Use this method to pause ongoing tasks, disable timers, and throttle down OpenGL ES frame rates. Games should use this method to pause the game.
+    
 }
 
 - (void)applicationDidEnterBackground:(UIApplication *)application {
-    // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
-    // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
+   
 }
 
 - (void)applicationWillEnterForeground:(UIApplication *)application {
-    // Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
-}
+    }
 
 - (void)applicationDidBecomeActive:(UIApplication *)application {
-    // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
+ 
    [FBSDKAppEvents activateApp];
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application {
-    // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
-
+  
 }
 
 

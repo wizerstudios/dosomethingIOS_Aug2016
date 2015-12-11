@@ -56,7 +56,6 @@
     locationManager                 = [[CLLocationManager alloc] init];
     locationManager.delegate        = self;
     objWebService = [[DSWebservice alloc]init];
-    //[[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
     [self preferredStatusBarStyle];
     
     _emailTxt.autocorrectionType =UITextAutocorrectionTypeNo;
