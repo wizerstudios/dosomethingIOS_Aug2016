@@ -134,7 +134,7 @@
     [customNavigation.saveBtn setHidden:NO];
     [self.navigationController.navigationBar addSubview:customNavigation.view];
     [customNavigation.saveBtn addTarget:self action:@selector(saveAction:) forControlEvents:UIControlEventTouchUpInside];
-    //[customNavigation.buttonBack addTarget:self action:@selector(backAction) forControlEvents:UIControlEventTouchUpInside];
+
     
     imageNormalArray =[[NSMutableArray alloc]init];
     
@@ -204,7 +204,7 @@
     isNotification_sound = @"Yes";
     
     
-    if(profileDict != NULL){
+    if(profileDict.count > 0){
         if([[profileDict valueForKey:@"image1"] isEqual:@""]&&[[profileDict valueForKey:@"image2"] isEqual:@""] && [[profileDict valueForKey:@"image3"] isEqual:@""]){
             profileDataArray = [[NSMutableArray alloc] init];
             
@@ -221,13 +221,14 @@
             NSString *ImageURL1 , *ImageURL2, *ImageURL3 ;
             NSData *imageData1, *imageData2, *imageData3;
             if([[profileDict valueForKey:@"image1"] isEqual:@""]){
-                imageData1 = [profileDict valueForKey:@"image1"];
+                //imageData1 = [profileDict valueForKey:@"image1"];
                 
                 ImageURL1 = @"";
                 imageData1 = [ImageURL1 dataUsingEncoding:NSUTF8StringEncoding];
             }
             else{
                 ImageURL1 = [profileDict valueForKey:@"image1"];
+                
                 imageData1 = [NSData dataWithContentsOfURL:[NSURL URLWithString:ImageURL1]];
                 
             }
@@ -300,6 +301,7 @@
     self.scrView.delegate=self;
     
     int spacing = 20;
+    
     for(int i = 0; i < 3; i++)
     {
         NSData *profileData = [profileDataArray objectAtIndex:i];
@@ -843,6 +845,7 @@
             cell.layoutConstraintProfileImageHeight.constant =159;
             cell.layoutConstraintProfileImageWidth.constant =161;
         }
+        
         [self profileScroll];
     
 
