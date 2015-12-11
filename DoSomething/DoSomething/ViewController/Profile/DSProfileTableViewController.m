@@ -367,7 +367,7 @@
         blkdot=[[UIImageView alloc]init];
         [blkdot setFrame:CGRectMake(i*18, 0, 8, 8 )];
         [blkdot setImage:[UIImage imageNamed:@"dot_normal"]];
-
+        
         [pgDtView addSubview:blkdot];
         [pageImageView setFrame:CGRectMake(0, 0, 8, 8)];
         [pageImageView setImage:[UIImage imageNamed:@"dot_active_red"]];
@@ -376,7 +376,8 @@
         [pgDtView setFrame:CGRectMake(15, -5, profileImagePageControl.numberOfPages*18, 10)];
         
     }
-
+ 
+    
 }
 
 - (IBAction)pageChanged:(id)sender {
@@ -402,6 +403,10 @@
     isTapping=NO;
     scrolldragging=@"YES";
 }
+#pragma mark - UIScrollViewDelegate
+- (void)pageControl{
+}
+
 
 - (NSString *) getEmail {
     
