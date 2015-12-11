@@ -2,7 +2,7 @@
   "images" : [
     {
       "idiom" : "universal",
-      "filename" : "dot_active.png",
+      "filename" : "dot_active@1x.png",
       "scale" : "1x"
     },
     {

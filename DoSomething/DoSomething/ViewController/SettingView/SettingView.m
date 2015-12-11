@@ -282,10 +282,10 @@
                                 }
                                 else if([responseObject valueForKey:@"error"])
                                 {
-                                    if([optionLogoutDelete isEqual:@"logout"]){
+                                    //if([optionLogoutDelete isEqual:@"logout"]){
                                     
                                     [COMMON removeUserDetails];
-                                    }
+                                   // }
                                    
                                     DSHomeViewController*objSplashView =[[DSHomeViewController alloc]initWithNibName:@"DSHomeViewController" bundle:nil];
                                     [self.navigationController pushViewController:objSplashView animated:NO];

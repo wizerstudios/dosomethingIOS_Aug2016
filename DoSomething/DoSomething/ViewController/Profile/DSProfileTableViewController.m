@@ -130,11 +130,11 @@
         self.layoutConstraintTableViewYPos.constant= 20;
     }
     [customNavigation.menuBtn setHidden:YES];
-    [customNavigation.buttonBack setHidden:NO];
+    [customNavigation.buttonBack setHidden:YES];
     [customNavigation.saveBtn setHidden:NO];
     [self.navigationController.navigationBar addSubview:customNavigation.view];
     [customNavigation.saveBtn addTarget:self action:@selector(saveAction:) forControlEvents:UIControlEventTouchUpInside];
-    [customNavigation.buttonBack addTarget:self action:@selector(backAction) forControlEvents:UIControlEventTouchUpInside];
+    //[customNavigation.buttonBack addTarget:self action:@selector(backAction) forControlEvents:UIControlEventTouchUpInside];
     
     imageNormalArray =[[NSMutableArray alloc]init];
     
@@ -191,7 +191,7 @@
         
     }
     else{
-        
+        //not using just for reference
        // [self initializeArrayProfile];
         
         self.tableViewHeightConstraint.constant=70;
@@ -370,7 +370,7 @@
 
         [pgDtView addSubview:blkdot];
         [pageImageView setFrame:CGRectMake(0, 0, 8, 8)];
-        [pageImageView setImage:[UIImage imageNamed:@"dot_active_gray"]];
+        [pageImageView setImage:[UIImage imageNamed:@"dot_active_red"]];
         [pgDtView addSubview:pageImageView];
         [topViewCell addSubview:pgDtView];
         [pgDtView setFrame:CGRectMake(15, -5, profileImagePageControl.numberOfPages*18, 10)];
@@ -588,7 +588,7 @@
 
 -(void)backAction
 {
-    [self.navigationController popViewControllerAnimated:YES];
+   // [self.navigationController popViewControllerAnimated:YES];
 }
 
 - (void)pushToHobbiesView {
@@ -982,7 +982,6 @@
             
             if(isSelectFemale ==YES)
             {
-                
                 [cell.femaleButton setTitleColor:[UIColor redColor] forState:UIControlStateNormal];
             }
             else if (isSelectMale==YES)
@@ -1578,15 +1577,24 @@
     cell = (DSProfileTableViewCell *)[_tableviewProfile cellForRowAtIndexPath:indexPath];
     cell.textViewHeaderLabel.hidden = YES;
     if(textView.tag == 0) {
-        textView.text = @"";
-        textView.tag = 1;
-        strAbout = textView.text;
+        
+        if(strAbout==nil){
+            
+            textView.text = @"";
+            textView.tag = 1;
+            strAbout = textView.text;
+
+        }
+        
+        else if([strAbout isEqual: @"Write something about yourself here."]) {
+            textView.text = @"";
+            textView.tag = 1;
+            strAbout = textView.text;
+        }
+        
     }
     
-
-    
 }
-
 
 -(void)textViewDidEndEditing:(UITextView *)textView
 {
@@ -1604,6 +1612,9 @@
 
     strAbout = textView.text;
 }
+
+
+
 
 #pragma mark - Camera Action
 -(void)selectCamera: (UIButton *)sender
