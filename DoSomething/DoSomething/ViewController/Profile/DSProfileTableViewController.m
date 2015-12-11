@@ -370,7 +370,7 @@
 
         [pgDtView addSubview:blkdot];
         [pageImageView setFrame:CGRectMake(0, 0, 8, 8)];
-        [pageImageView setImage:[UIImage imageNamed:@"dot_active_gray"]];
+        [pageImageView setImage:[UIImage imageNamed:@"dot_active_red"]];
         [pgDtView addSubview:pageImageView];
         [topViewCell addSubview:pgDtView];
         [pgDtView setFrame:CGRectMake(15, -5, profileImagePageControl.numberOfPages*18, 10)];
