@@ -38,7 +38,7 @@
                     </connections>
                 </button>
                 <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="9eq-ck-Eus">
-                    <rect key="frame" x="15" y="100" width="290" height="371"/>
+                    <rect key="frame" x="15" y="80" width="290" height="390"/>
                     <animations/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     <inset key="scrollIndicatorInsets" minX="20" minY="0.0" maxX="10" maxY="0.0"/>
@@ -81,13 +81,13 @@
                 <constraint firstAttribute="trailing" secondItem="9eq-ck-Eus" secondAttribute="trailing" constant="15" id="47A-q2-Ddk"/>
                 <constraint firstAttribute="trailing" secondItem="XYt-PN-Eqh" secondAttribute="trailing" id="5hy-bE-cJR"/>
                 <constraint firstItem="9eq-ck-Eus" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="15" id="Azf-4t-DLl"/>
-                <constraint firstItem="9eq-ck-Eus" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="100" id="CgO-0T-lNl"/>
+                <constraint firstItem="9eq-ck-Eus" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="80" id="CgO-0T-lNl"/>
                 <constraint firstItem="PHx-F9-heI" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="mDL-9b-LIT"/>
                 <constraint firstAttribute="trailing" secondItem="PHx-F9-heI" secondAttribute="trailing" id="mxM-VH-msK"/>
                 <constraint firstAttribute="bottom" secondItem="PHx-F9-heI" secondAttribute="bottom" constant="51" id="nsR-zJ-Xxc"/>
                 <constraint firstAttribute="bottom" secondItem="XYt-PN-Eqh" secondAttribute="bottom" constant="51" id="pUq-Ay-1m9"/>
                 <constraint firstItem="XYt-PN-Eqh" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="ujJ-Wc-OtW"/>
-                <constraint firstItem="PHx-F9-heI" firstAttribute="top" secondItem="9eq-ck-Eus" secondAttribute="bottom" constant="3" id="zI2-A2-ogG"/>
+                <constraint firstItem="PHx-F9-heI" firstAttribute="top" secondItem="9eq-ck-Eus" secondAttribute="bottom" constant="4" id="zI2-A2-ogG"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <point key="canvasLocation" x="1235" y="426"/>

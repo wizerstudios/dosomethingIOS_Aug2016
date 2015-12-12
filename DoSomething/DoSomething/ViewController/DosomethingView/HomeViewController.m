@@ -63,14 +63,14 @@
         menuArray =[[[NSUserDefaults standardUserDefaults] valueForKey:@"MenuListArray"] mutableCopy];
     }
      //deviceUdid = [OpenUDID value];
-    if(IS_IPHONE5)
-        [self.view addConstraint:[NSLayoutConstraint constraintWithItem:_homeCollectionView
-                                                              attribute:NSLayoutAttributeTop
-                                                              relatedBy:NSLayoutRelationEqual
-                                                                 toItem:self.view
-                                                              attribute:NSLayoutAttributeTop
-                                                             multiplier:1.0
-                                                               constant:75.0]];
+//    if(IS_IPHONE5)
+//        [self.view addConstraint:[NSLayoutConstraint constraintWithItem:_homeCollectionView
+//                                                              attribute:NSLayoutAttributeTop
+//                                                              relatedBy:NSLayoutRelationEqual
+//                                                                 toItem:self.view
+//                                                              attribute:NSLayoutAttributeTop
+//                                                             multiplier:1.0
+//                                                               constant:75.0]];
     
 }
 -(void)viewWillAppear:(BOOL)animated

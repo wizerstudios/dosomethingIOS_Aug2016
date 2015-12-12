@@ -176,8 +176,12 @@
         
     }
     else{
+        if([[NSUserDefaults standardUserDefaults] valueForKey:@"SelectedItem"]==nil)
+        {
         
-        //interstAndHobbiesArray =[[[NSUserDefaults standardUserDefaults] valueForKey:@"ListofinterestArray"] mutableCopy];
+        interstAndHobbiesArray =[[[NSUserDefaults standardUserDefaults] valueForKey:@"ListofinterestArray"] mutableCopy];
+        }
+      
        // [interestAndHobbiesCollectionView reloadData];
     }
     

@@ -49,8 +49,8 @@
 @property (weak, nonatomic) IBOutlet UILabel *hobbiesLabel;
 
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *layoutConstraintRadioButtonYPos;
-@property (weak, nonatomic) IBOutlet UIButton *maleButton;
-@property (weak, nonatomic) IBOutlet UIButton *femaleButton;
+//@property (weak, nonatomic) IBOutlet UIButton *maleButton;
+//@property (weak, nonatomic) IBOutlet UIButton *femaleButton;
 @property (weak, nonatomic) IBOutlet UILabel *labelAboutYou;
 @property (weak, nonatomic) IBOutlet UITextView *textViewAboutYou;
 
@@ -60,13 +60,13 @@
 @property (weak, nonatomic) IBOutlet UISwitch *messSwitchBtn;
 @property (weak, nonatomic) IBOutlet UISwitch *SoundSwitchBtn;
 @property (weak, nonatomic) IBOutlet UISwitch *vibrationSwitchBtn;
-@property (weak, nonatomic) IBOutlet UILabel *labelMale;
-@property (weak, nonatomic) IBOutlet UILabel *labelFemale;
+//@property (weak, nonatomic) IBOutlet UILabel *labelMale;
+//@property (weak, nonatomic) IBOutlet UILabel *labelFemale;
 @property (weak, nonatomic) IBOutlet UILabel *textViewHeaderLabel;
 @property (strong, nonatomic) IBOutlet UIButton *cameraButton,*uploadButton;
 
-@property (strong, nonatomic) IBOutlet UIImageView *profileImageview;
-@property (strong,nonatomic) IBOutlet UIScrollView * profileScrollview;
+//@property (strong, nonatomic) IBOutlet UIImageView *profileImageview;
+//@property (strong,nonatomic) IBOutlet UIScrollView * profileScrollview;
 
 
 @property(nonatomic,strong)IBOutlet UITextField *firstnameTxt;

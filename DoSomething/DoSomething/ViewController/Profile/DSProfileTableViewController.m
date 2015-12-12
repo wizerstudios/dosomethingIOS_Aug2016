@@ -22,7 +22,7 @@
 
 #import "CustomAlterview.h"
 #import "DSTermsOfUseView.h"
-
+#import "AppDelegate.h"
 
 
 @interface DSProfileTableViewController ()<CLLocationManagerDelegate,UIAlertViewDelegate,UIScrollViewDelegate>
@@ -91,6 +91,9 @@
     BOOL isSelectMale,isSelectFemale,isSave;
     UIWindow *windowInfo;
     
+    AppDelegate *appDelegate;
+    BOOL isPick;
+    
 
 }
 @property(nonatomic,retain) DSTermsOfUseView *termsOfUseView;
@@ -104,37 +107,18 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     objWebService = [[DSWebservice alloc]init];
-    [self initializeArray];
-    [self getUserCurrenLocation];
+    
     deviceUdid = [OpenUDID value];
    
     [self profileImageDisplayMethod];
+    isPick=NO;
     
 }
 -(void)viewWillAppear:(BOOL)animated
 {
-    self.navigationController.navigationBarHidden=NO;
-    [self.navigationItem setHidesBackButton:YES animated:NO];
-    [self.navigationController.navigationBar setTranslucent:YES];
     
-    CustomNavigationView *customNavigation;
-    customNavigation = [[CustomNavigationView alloc] initWithNibName:@"CustomNavigationView" bundle:nil];
-    customNavigation.view.frame = CGRectMake(0,-20, CGRectGetWidth(self.view.frame), 65);
-    if (IS_IPHONE6 ){
-        customNavigation.view.frame = CGRectMake(0,-20, 375, 76);
-        self.layoutConstraintTableViewYPos.constant= 20;
-    }
-    if(IS_IPHONE6_Plus)
-    {
-        customNavigation.view.frame = CGRectMake(0,-20, 420, 83);
-        self.layoutConstraintTableViewYPos.constant= 20;
-    }
-    [customNavigation.menuBtn setHidden:YES];
-    [customNavigation.buttonBack setHidden:YES];
-    [customNavigation.saveBtn setHidden:NO];
-    [self.navigationController.navigationBar addSubview:customNavigation.view];
-    [customNavigation.saveBtn addTarget:self action:@selector(saveAction:) forControlEvents:UIControlEventTouchUpInside];
-
+    [self loadNavigationview];
+    
     
     imageNormalArray =[[NSMutableArray alloc]init];
     
@@ -176,8 +160,86 @@
     infoArray=[[NSMutableArray alloc]initWithObjects:@"profile_noimg",@"profile_noimg",@"profile_noimg", nil];
     [self CustomAlterview];
    
+    [self getUserCurrenLocation];
+    [self loadDataMethod];
+    
+}
 
-     [_tableviewProfile reloadData];
+-(void)loadNavigationview
+{
+    self.navigationController.navigationBarHidden=NO;
+    [self.navigationItem setHidesBackButton:YES animated:NO];
+    [self.navigationController.navigationBar setTranslucent:YES];
+    
+    CustomNavigationView *customNavigation;
+    customNavigation = [[CustomNavigationView alloc] initWithNibName:@"CustomNavigationView" bundle:nil];
+    customNavigation.view.frame = CGRectMake(0,-20, CGRectGetWidth(self.view.frame), 65);
+    if (IS_IPHONE6 ){
+        customNavigation.view.frame = CGRectMake(0,-20, 375, 76);
+        self.layoutConstraintTableViewYPos.constant= 20;
+    }
+    if(IS_IPHONE6_Plus)
+    {
+        customNavigation.view.frame = CGRectMake(0,-20, 420, 83);
+        self.layoutConstraintTableViewYPos.constant= 20;
+    }
+    [customNavigation.menuBtn setHidden:YES];
+    [customNavigation.buttonBack setHidden:YES];
+    [customNavigation.saveBtn setHidden:NO];
+    [self.navigationController.navigationBar addSubview:customNavigation.view];
+    [customNavigation.saveBtn addTarget:self action:@selector(saveAction:) forControlEvents:UIControlEventTouchUpInside];
+
+}
+
+-(void)loadDataMethod
+{
+    self.notificationLbl.hidden=YES;
+    self.notificationview.hidden=YES;
+    self.termandprivacyview.hidden=YES;
+    self.profileGenderview.hidden=NO;
+    self.profileMainviewbottomPosition.constant=-130;
+    [self profileScroll];
+    [self scrolltop];
+     [self notificationMethod];
+    [self hobbiesListMethod];
+    if(profileDict!=nil)
+    {
+        self.firstnameTxt.text=[profileDict valueForKey:@"first_name"];
+        self.lastNameTxt.text =[profileDict valueForKey:@"last_name"];
+        self.emailTextField.text=[profileDict valueForKey:@"email"];
+        self.profilegenderLbl.text =[profileDict valueForKey:@"gender"];
+        self.DOBTxt.text          =[profileDict valueForKey:@"date_of_birth"];
+        self.textViewAboutYou.text =[profileDict valueForKey:@"about"];
+       
+        
+    }
+    else if (userDetailsDict!=nil)
+    {
+        self.firstnameTxt.text=[userDetailsDict valueForKey:@"first_name"];
+        self.lastNameTxt.text =[userDetailsDict valueForKey:@"last_name"];
+        self.emailTextField.text=[userDetailsDict valueForKey:@"email"];
+        self.profilegenderLbl.text =[userDetailsDict valueForKey:@"gender"];
+        self.DOBTxt.text          =[userDetailsDict valueForKey:@"date_of_birth"];
+        self.textViewAboutYou.text =[userDetailsDict valueForKey:@"about"];
+    }
+    else
+    {
+        self.notificationview.hidden=NO;
+        self.termandprivacyview.hidden=NO;
+        self.notificationLbl.hidden=NO;
+        self.profileGenderview.hidden=YES;
+        self.profileMainviewbottomPosition.constant=0;
+        self.emailTextField.text=emailAddressToRegister;
+        self.passwordTextField.text=emailPasswordToRegister;
+        appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+        appDelegate.buttonsView.hidden=YES;
+
+    }
+}
+
+-(void)scrolltop
+{
+    
 }
 -(void)profileImageDisplayMethod
 {
@@ -185,17 +247,6 @@
     profileDict =[[NSUserDefaults standardUserDefaults] valueForKey:USERDETAILS];
     NSString * strsessionID =[profileDict valueForKey:@"SessionId"];
     loginUserSessionID = strsessionID;
-    if(profileDict == NULL)
-    {
-        // [self initializeArray];
-        
-    }
-    else{
-        //not using just for reference
-        [self initializeArrayProfile];
-        
-        self.tableViewHeightConstraint.constant=75;
-    }
     NSLog(@"DICT%@",profileDict);
     
     [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"SelectedItemCategoryID"];
@@ -203,7 +254,8 @@
     isNotification_vibration = @"Yes";
     isNotification_sound = @"Yes";
     
-    
+    NSString *ImageURL1 , *ImageURL2, *ImageURL3 ;
+    NSData *imageData1, *imageData2, *imageData3;
     if(profileDict.count > 0){
         if([[profileDict valueForKey:@"image1"] isEqual:@""]&&[[profileDict valueForKey:@"image2"] isEqual:@""] && [[profileDict valueForKey:@"image3"] isEqual:@""]){
             profileDataArray = [[NSMutableArray alloc] init];
@@ -218,63 +270,34 @@
         
         
         else{
-            NSString *ImageURL1 , *ImageURL2, *ImageURL3 ;
-            NSData *imageData1, *imageData2, *imageData3;
-            if([[profileDict valueForKey:@"image1"] isEqual:@""]){
-                //imageData1 = [profileDict valueForKey:@"image1"];
-                
-                ImageURL1 = @"";
-                imageData1 = [ImageURL1 dataUsingEncoding:NSUTF8StringEncoding];
-            }
-            else{
-                ImageURL1 = [profileDict valueForKey:@"image1"];
-                
-                imageData1 = [NSData dataWithContentsOfURL:[NSURL URLWithString:ImageURL1]];
-                
-            }
-            if([[profileDict valueForKey:@"image2"] isEqual:@""]){
-                //  imageData2 = [profileDict valueForKey:@"image2"];
-                
-                ImageURL2 = @"";
-                imageData2 = [ImageURL2 dataUsingEncoding:NSUTF8StringEncoding];
-            }
-            else{
-                ImageURL2 = [profileDict valueForKey:@"image2"];
-                imageData2 = [NSData dataWithContentsOfURL:[NSURL URLWithString:ImageURL2]];
-            }
+           
+            ImageURL1 = [profileDict valueForKey:@"image1"];
             
-            if([[profileDict valueForKey:@"image3"] isEqual:@""]){
-                imageData3 = [profileDict valueForKey:@"image3"];
-                
-                ImageURL3 = @"";
-                imageData3 = [ImageURL3 dataUsingEncoding:NSUTF8StringEncoding];
-            }
-            else{
-                ImageURL3 = [profileDict valueForKey:@"image3"];
-                imageData3 = [NSData dataWithContentsOfURL:[NSURL URLWithString:ImageURL3]];
-            }
+            ImageURL2 = [profileDict valueForKey:@"image2"];
             
-            profileDataArray = [[NSMutableArray alloc]initWithObjects:imageData1,imageData2,imageData3, nil];
-        }
+            ImageURL3 = [profileDict valueForKey:@"image3"];
+            
+            
+            
+            profileDataArray = [[NSMutableArray alloc]initWithObjects:ImageURL1,ImageURL2,ImageURL3, nil];        }
         
     }
     else{
         if(userDetailsDict.count > 0){
             
-            NSString  *ImageURL1 ,*ImageURL2 ,*ImageURL3 ;
-            NSData *imageData1, *imageData2, *imageData3;
+            
             if([[userDetailsDict valueForKey:@"profileImage"] isEqual:@""]){
-                imageData1 = [userDetailsDict valueForKey:@"profileImage"];
+                ImageURL1 = [userDetailsDict valueForKey:@"profileImage"];
             }
             else{
                 ImageURL1 = [userDetailsDict valueForKey:@"profileImage"];
-                imageData1 = [NSData dataWithContentsOfURL:[NSURL URLWithString:ImageURL1]];
+             
                 
             }
             ImageURL2 = @"";
-            imageData2 = [ImageURL2 dataUsingEncoding:NSUTF8StringEncoding];
+           
             ImageURL3 = @"";
-            imageData3 = [ImageURL3 dataUsingEncoding:NSUTF8StringEncoding];
+            
             
             profileDataArray = [[NSMutableArray alloc]initWithObjects:imageData1,imageData2,imageData3, nil];
             
@@ -302,16 +325,18 @@
     
     int spacing = 20;
     
-    for(int i = 0; i < 3; i++)
+    for(int i = 0; i < [profileDataArray count]; i++)
     {
+        NSLog(@"int = %d",i);
         NSData *profileData = [profileDataArray objectAtIndex:i];
+       
         if(IS_IPHONE6_Plus)
         {
-            userProfileImage = [[UIImageView alloc]initWithFrame:CGRectMake((self.view.frame.size.width/3.5) + spacing, 20,self.profileImageView.frame.size.width, self.profileImageView.frame.size.height)];
+            userProfileImage = [[UIImageView alloc]initWithFrame:CGRectMake((self.view.frame.size.width/3.5) + spacing, 20,self.profileImageview.frame.size.width, self.profileImageview.frame.size.height)];
         }
         else
         {
-        userProfileImage = [[UIImageView alloc]initWithFrame:CGRectMake((i*self.scrView.frame.size.width) + spacing, 20,self.profileImageView.frame.size.width, self.profileImageView.frame.size.height)];
+        userProfileImage = [[UIImageView alloc]initWithFrame:CGRectMake((i*self.scrView.frame.size.width) + spacing, 20,self.profileImageview.frame.size.width, self.profileImageview.frame.size.height)];
         }
         [userProfileImage setTag:i+100];
         if([profileData length] == 0){
@@ -324,7 +349,26 @@
             
         }
         else{
+            if(profileDict==nil){
                 [userProfileImage setImage:[UIImage imageWithData:profileData]];
+               
+            }
+            
+            else{
+
+                NSString *image     = [profileDataArray objectAtIndex:CurrentImage];
+                profileData = [profileDataArray objectAtIndex:CurrentImage];
+                if([image isEqualToString:@""] || image == nil)
+                    [userProfileImage setImage:[UIImage imageWithData:profileData]];
+
+                else{
+                    downloadImageFromUrl(image,userProfileImage);
+                    [userProfileImage setImage:[UIImage imageNamed:image]];
+                }
+                
+            }
+            
+        
                 [userProfileImage setContentMode:UIViewContentModeScaleAspectFill];
                 [cell.cameraButton setHidden:YES];
                 [topViewCell setHidden:NO];
@@ -338,13 +382,13 @@
         [userProfileImage addGestureRecognizer:singleTap];
         [self.scrView addSubview:userProfileImage];
             
-        cameraImage = [[UIImageView alloc]initWithFrame:CGRectMake(userProfileImage.frame.size.width / 2 - 15, self.scrView.frame.size.height - 55, 30, 30)];
-        [cameraImage setTag:i+200];
-        [cameraImage setImage:[UIImage imageNamed:@"profile_camera_icon"]];
-        // [topViewCell setHidden:YES];
-        cameraImage.userInteractionEnabled = YES;
-        [cameraImage setUserInteractionEnabled:YES];
-        [userProfileImage addSubview:cameraImage];
+//        cameraImage = [[UIImageView alloc]initWithFrame:CGRectMake(userProfileImage.frame.size.width / 2 - 15, self.scrView.frame.size.height - 55, 30, 30)];
+//        [cameraImage setTag:i+200];
+//        [cameraImage setImage:[UIImage imageNamed:@"profile_camera_icon"]];
+//    
+//        cameraImage.userInteractionEnabled = YES;
+//        [cameraImage setUserInteractionEnabled:YES];
+//        [userProfileImage addSubview:cameraImage];
         
     }
     
@@ -353,31 +397,31 @@
     if(CurrentImage == 0)
         [self.scrView setContentOffset:CGPointMake(0, 0)animated:NO];
     else if(CurrentImage == 1)
-        [self.scrView setContentOffset:CGPointMake(1.5*self.profileImageView.frame.size.width - 15, 0)animated:NO];
+        [self.scrView setContentOffset:CGPointMake(1.5*self.profileImageview.frame.size.width - 15, 0)animated:NO];
     else if(CurrentImage == 2)
-        [self.scrView setContentOffset:CGPointMake((3*self.profileImageView.frame.size.width - 15), 0)animated:NO];
+        [self.scrView setContentOffset:CGPointMake((3*self.profileImageview.frame.size.width - 15), 0)animated:NO];
     
     
-    xslider=0;
-    pgDtView=[[UIView alloc]init];
-    pgDtView.backgroundColor=[UIColor clearColor];
-    pageImageView =[[UIImageView alloc]init];
-    profileImagePageControl.numberOfPages=infoArray.count;
-    
-    for(int i=0;i<profileImagePageControl.numberOfPages;i++)
-    {
-        blkdot=[[UIImageView alloc]init];
-        [blkdot setFrame:CGRectMake(i*18, 0, 8, 8 )];
-        [blkdot setImage:[UIImage imageNamed:@"dot_normal"]];
-
-        [pgDtView addSubview:blkdot];
-        [pageImageView setFrame:CGRectMake(0, 0, 8, 8)];
-        [pageImageView setImage:[UIImage imageNamed:@"dot_active_red"]];
-        [pgDtView addSubview:pageImageView];
-        [topViewCell addSubview:pgDtView];
-        [pgDtView setFrame:CGRectMake(15, -5, profileImagePageControl.numberOfPages*18, 10)];
-        
-    }
+//    xslider=0;
+//    pgDtView=[[UIView alloc]init];
+//    pgDtView.backgroundColor=[UIColor clearColor];
+//    pageImageView =[[UIImageView alloc]init];
+//    profileImagePageControl.numberOfPages=infoArray.count;
+//    
+//    for(int i=0;i<profileImagePageControl.numberOfPages;i++)
+//    {
+//        blkdot=[[UIImageView alloc]init];
+//        [blkdot setFrame:CGRectMake(i*18, 0, 8, 8 )];
+//        [blkdot setImage:[UIImage imageNamed:@"dot_normal"]];
+//
+//        [pgDtView addSubview:blkdot];
+//        [pageImageView setFrame:CGRectMake(0, 0, 8, 8)];
+//        [pageImageView setImage:[UIImage imageNamed:@"dot_active_red"]];
+//        [pgDtView addSubview:pageImageView];
+//        [topViewCell addSubview:pgDtView];
+//        [pgDtView setFrame:CGRectMake(15, -5, profileImagePageControl.numberOfPages*18, 10)];
+//        
+//    }
 
 }
 
@@ -458,7 +502,6 @@
     [[NSUserDefaults standardUserDefaults] setObject:currentLongitude forKey:@"currentLongitude"];
     [[NSUserDefaults standardUserDefaults] synchronize];
     
-    // Turn off the location manager to save power.
     [locationManager stopUpdatingLocation];
     
     NSLog(@"current latitude & longitude for main view = %@ & %@",currentLatitude,currentLongitude);
@@ -587,67 +630,11 @@
 }
 
 
-
--(void)backAction
-{
-   // [self.navigationController popViewControllerAnimated:YES];
-}
-
 - (void)pushToHobbiesView {
     
     DSInterestAndHobbiesViewController * DSHobbiesView  = [[DSInterestAndHobbiesViewController alloc]initWithNibName:@"DSInterestAndHobbiesViewController" bundle:nil];
     DSHobbiesView.profileDetailsArray = placeHolderArray;
     [self.navigationController pushViewController:DSHobbiesView animated:YES];
-
-    
-
-}
-
--(void)initializeArray{
-    
-    placeHolderArray = [[NSMutableArray alloc] initWithCapacity: 1];
-    
-   // NSMutableDictionary *detailsDict = [[NSMutableDictionary alloc]init];
-   // detailsDict = [[COMMON getUserDetails]mutableCopy];
-
-    [placeHolderArray insertObject:[[NSMutableArray alloc]initWithObjects:[NSMutableDictionary dictionaryWithObjectsAndKeys:@"Image",@"placeHolder",@"",@"TypingText", nil],
-                                    
-                                    [NSMutableDictionary dictionaryWithObjectsAndKeys:[userDetailsDict valueForKey:@"first_name"],@"placeHolder",@"",@"TypingText", nil],
-                                    [NSMutableDictionary dictionaryWithObjectsAndKeys:[userDetailsDict valueForKey:@"last_name"],@"placeHolder",@"",@"TypingText", nil],
-                                    [NSMutableDictionary dictionaryWithObjectsAndKeys:[userDetailsDict valueForKey:@"gender"],@"placeHolder",@"",@"TypingText", nil],
-                                    [NSMutableDictionary dictionaryWithObjectsAndKeys:@"DD/MM/YYYY",@"placeHolder",@"",@"TypingText", nil],
-                                    [NSMutableDictionary dictionaryWithObjectsAndKeys:@"Write something about yourself here.",@"placeHolder",@"",@"TypingText", nil],
-                                    [NSMutableDictionary dictionaryWithObjectsAndKeys:@"Hobbies",@"placeHolder",@"",@"TypingText", nil],
-                                    [NSMutableDictionary dictionaryWithObjectsAndKeys:[userDetailsDict valueForKey:@"email"],@"placeHolder",@"Password",@"placeHolderPass",@"",@"TypingText",@"",@"TypingTextPass", nil],
-                                    [NSMutableDictionary dictionaryWithObjectsAndKeys:@"switch_on",@"placeHolder",@"",@"NewMessageImage",@"",@"SoundImage",@"",@"VibrationImage",nil],
-                                    [NSMutableDictionary dictionaryWithObjectsAndKeys:@"TermsOfUse",@"placeHolder",@"",@"TypingText", nil], nil]atIndex:0];
-    
-   
-
-   
-   
-}
--(void)initializeArrayProfile{
-    
-    placeHolderArray = [[NSMutableArray alloc] initWithCapacity: 1];
-    
-    // NSMutableDictionary *detailsDict = [[NSMutableDictionary alloc]init];
-    // detailsDict = [[COMMON getUserDetails]mutableCopy];
-    
-    [placeHolderArray insertObject:[[NSMutableArray alloc]initWithObjects:[NSMutableDictionary dictionaryWithObjectsAndKeys:@"Image",@"placeHolder",@"",@"TypingText", nil],
-                                    
-                                    [NSMutableDictionary dictionaryWithObjectsAndKeys:[profileDict valueForKey:@"first_name"],@"placeHolder",@"",@"TypingText", nil],
-                                    [NSMutableDictionary dictionaryWithObjectsAndKeys:[profileDict valueForKey:@"last_name"],@"placeHolder",@"",@"TypingText", nil],
-                                    [NSMutableDictionary dictionaryWithObjectsAndKeys:[profileDict valueForKey:@"gender"],@"placeHolder",@"",@"TypingText", nil],
-                                    [NSMutableDictionary dictionaryWithObjectsAndKeys:[profileDict valueForKey:@"date_of_birth"],@"placeHolder",@"",@"TypingText", nil],
-                                    [NSMutableDictionary dictionaryWithObjectsAndKeys:@"Write something about yourself here.",@"placeHolder",@"",@"TypingText", nil],
-                                    [NSMutableDictionary dictionaryWithObjectsAndKeys:@"Hobbies",@"placeHolder",@"",@"TypingText", nil],
-                                    [NSMutableDictionary dictionaryWithObjectsAndKeys:[profileDict valueForKey:@"email"],@"placeHolder",@"Password",@"placeHolderPass",@"",@"TypingText",@"",@"TypingTextPass", nil], nil]atIndex:0];
-
-    
-    NSLog(@"PlaceHolder %@",placeHolderArray);
-    
-    
 }
 
 #pragma mark - CustomalterviewMethod
@@ -692,681 +679,96 @@
     [objCustomAlterview.alertMsgLabel setTextColor:[UIColor colorWithRed:(255/255.0f) green:(255/255.0f) blue:(255/255.0f) alpha:1.0f]];
     
 }
-
-
-
-#pragma mark - TableView Datasource & Delegate
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+-(void)hobbiesListMethod
 {
-    return [placeHolderArray count];
-}
-
-
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
-{
-   return [placeHolderArray[section] count];
-    
-}
-
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    
-    
-    if (IS_IPHONE4 ||IS_IPHONE5)
-    {
-           if (indexPath.row == 0 ){
-               return 200;
-            }
-        if(indexPath.row ==1)
-        {
-            return 80;
-        }
-        if(indexPath.row ==2)
-        {
-            return 0;
-        }
-        if(indexPath.row ==3)
-        {
-            return 40;
-        }
-            if(indexPath.row == 5)
-             {
-                 dataSize = [COMMON getControlHeight:strAbout withFontName:@"Patron-Regular" ofSize:14.0 withSize:CGSizeMake(tableView.frame.size.width-20,tableView.frame.size.height)];
-                 
-                 return dataSize.height+22;
-                 
-             }
-            if (indexPath.row == 4) {
-            return 55;
-            }
-            if ( indexPath.row ==6)
+      [self.buttonPushHobbies addTarget:self action:@selector(pushToHobbiesView) forControlEvents:UIControlEventTouchUpInside];
+    yAxis = 31;
+            if(profileDict ==NULL)
             {
-            if([imageNormalArray count] < 1)
-                return 80;
-            else if([imageNormalArray count] <= 5)
-                return commonHeight + 46;
-            else if([imageNormalArray count] <= 10)
-                return (commonHeight*2)+46;
-            else if([imageNormalArray count] <= 15)
-                return (commonHeight * 3)+48;
-            else if([imageNormalArray count] <= 20)
-                return (commonHeight * 4)+52;
+                imageSize =39;
+                commonWidth=19.5;
             }
-
-       
-            if ( indexPath.row == 7) {
-            
-                return 120;
-            }
-            if (indexPath.row ==8) {
-                return 150;
-            }
-
-        
-            if (indexPath.row == 9) {
-                return 80;
-            }
-
-
-    return 40;
-    }
-            if (indexPath.row == 0 )
+            else
             {
-                return 200;
-             }
-          if(indexPath.row ==1)
-        {
-           return 80;
-       }
-           if(indexPath.row ==2)
-         {
-               return 0;
-           }
-
+                imageSize =39;
+                commonWidth=19.5;
     
-            if (indexPath.row == 4)
+            }
+
+    space = imageSize / 2;
+            commonHeight = imageSize+15;
+    
+            NSString *plusIcon = @"Plus_icon.png";
+            if ([imageNormalArray count] >=1)
             {
-                return 50;
-            }
-           if(indexPath.row == 5)
-           {
-               dataSize = [COMMON getControlHeight:strAbout withFontName:@"Patron-Regular" ofSize:14.0 withSize:CGSizeMake(tableView.frame.size.width-20,tableView.frame.size.height)];
-               
-               return dataSize.height;
-             }
-            if ( indexPath.row ==6)
-            {
-            if([imageNormalArray count] < 1)
-                return 80;
-            else if([imageNormalArray count] <= 5)
-                return commonHeight + 46;
-            else if([imageNormalArray count] <= 10)
-                return (commonHeight*2)+46;
-            else if([imageNormalArray count] <= 15)
-                return (commonHeight * 3)+57;
-            else if([imageNormalArray count] <= 20)
-                return (commonHeight * 4)+70;
-            }
-    
-            if(indexPath.row ==8)
-            {
-                return 150;
-            }
-    
-            if ( indexPath.row == 7) {
-                return 130;
-            }
-    
-            if (indexPath.row == 9) {
-                return 98;
-            }
-        return 40;
-    }
-
-
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    
-    static NSString *cellIdentifier = @"Cell";
-    
-    cell = (DSProfileTableViewCell *)[tableView dequeueReusableCellWithIdentifier:cellIdentifier];
-    if (indexPath.row == 0)
-    {
-        
-        if (cell == nil)
-        {
-            [[NSBundle mainBundle] loadNibNamed:@"DSProfileTableViewCell" owner:self options:nil];
-            cell = cellProfileImg;
-        }
-        
-        if (IS_IPHONE6 ||IS_IPHONE6_Plus)
-        {
-            cell.layoutConstraintProfileImageHeight.constant =159;
-            cell.layoutConstraintProfileImageWidth.constant =161;
-        }
-        
-        [self profileScroll];
-    
-
-        
-        if(!profileData1)
-            [profileImagePageControl setHidden:YES];
-        else
-            [profileImagePageControl setHidden:NO];
-        
-        [cell.cameraButton setTag:101];
-        [cell.cameraButton addTarget:self action:@selector(selectCamera:) forControlEvents:UIControlEventTouchUpInside];
-        
-        userProfileImage.layer.masksToBounds = YES;
-        
-    }
-
-    
-    if (indexPath.row == 1 )
-    {
-        
-        if (cell == nil)
-        {
-            [[NSBundle mainBundle] loadNibNamed:@"DSProfileTableViewCell" owner:self options:nil];
-            cell = cellTextField;
-            
-        }
-        
-        if (IS_IPHONE6 ||IS_IPHONE6_Plus)
-        {
-            //cell.layoutConstraintViewHeight.constant =49;
-
-        }
-        if(profileDict !=NULL){
-            [cell.textFieldPlaceHolder setEnabled:NO];
-            cell.firstnameTxt.text =(FirstName==0)?[profileDict valueForKey:@"first_name"]:FirstName;
-            cell.lastNameTxt.text  =(LastName==0)? [profileDict valueForKey:@"last_name"]:LastName;
-            FirstName = cell.firstnameTxt.text;
-            LastName  = cell.lastNameTxt.text;
-        }
-        else if(userDetailsDict.count > 0){
-
-            cell.firstnameTxt.text =(FirstName==0)?[userDetailsDict valueForKey:@"first_name"]:FirstName;
-            cell.lastNameTxt.text  =(LastName==0)? [userDetailsDict valueForKey:@"last_name"]:LastName;
-            FirstName = cell.firstnameTxt.text;
-            LastName  = cell.lastNameTxt.text;
-            
-        }
-        else
-           {
-            cell.firstnameTxt.text = FirstName;
-            cell.lastNameTxt.text   =LastName;
-           }
-        cell.firstnameTxt.autocapitalizationType = UITextAutocapitalizationTypeSentences;
-        cell.lastNameTxt.autocapitalizationType = UITextAutocapitalizationTypeSentences;
-        cell.lastNameTxt.autocorrectionType = UITextAutocorrectionTypeNo;
-
-    }
-    
-    if(indexPath.row ==2)
-    {
-        if (cell == nil)
-        {
-            [[NSBundle mainBundle] loadNibNamed:@"DSProfileTableViewCell" owner:self options:nil];
-            cell = cellTextField;
-           
-            
-        }
-         cellTextField.hidden =YES;
-
-    }
-    if (indexPath.row == 3)
-    {
-        
-        if (cell == nil)
-        {
-            [[NSBundle mainBundle] loadNibNamed:@"DSProfileTableViewCell" owner:self  options:nil];
-            cell = cellButton;
-            
-        }
-        
-        int labelWidth = 0,labelHeight = 0;
-        
-        if(IS_IPHONE5){
-            
-            labelWidth =50;
-            labelHeight=14;
-            
-            
-        }
-        if(IS_IPHONE6){
-            labelWidth =75;
-            labelHeight=25;
-            
-        }
-        if(IS_IPHONE6_Plus)
-        {
-            
-            labelWidth =94;
-            labelHeight=25;
-            
-        }
-        
-        [cell.maleButton setTag:2004];
-        [cell.femaleButton setTag:2005];
-        
-        
-        if( profileDict !=NULL){
-            
-            profileGenderValueLabel.text =[profileDict valueForKey:@"gender"];
-            
-        }
-        else if(userDetailsDict.count > 0){
-            
-            
-            if(strGender==NULL){
-                if([[userDetailsDict valueForKey:@"gender"]isEqual:@"male"]){
-                    [cell.maleButton setTitleColor:[UIColor redColor] forState:UIControlStateNormal];
-                    strGender=[userDetailsDict valueForKey:@"gender"];
-                }
-                else if([[userDetailsDict valueForKey:@"gender"]isEqual:@"female"]){
-                    [cell.femaleButton setTitleColor:[UIColor redColor] forState:UIControlStateNormal];
-                    strGender=[userDetailsDict valueForKey:@"gender"];
-                }
-            }
-            else{
-                if([strGender isEqual:@"male"]){
-                    [cell.maleButton setTitleColor:[UIColor redColor] forState:UIControlStateNormal];
-                }
-                else if([strGender isEqual:@"female"]){
-                    [cell.femaleButton setTitleColor:[UIColor redColor] forState:UIControlStateNormal];
-                }
-            }
-        
-            [profileGenderView setHidden:YES];
-            [profileGenderLabel setHidden:YES];
-            [profileGenderValueLabel setHidden:YES];
-            
-            if(isSelectFemale ==YES)
-            {
-                [cell.femaleButton setTitleColor:[UIColor redColor] forState:UIControlStateNormal];
-            }
-            else if (isSelectMale==YES)
-            {
-                [cell.maleButton setTitleColor:[UIColor redColor] forState:UIControlStateNormal];
-            }
-        }
-        else{
-            [profileGenderView setHidden:YES];
-            [profileGenderLabel setHidden:YES];
-            [profileGenderValueLabel setHidden:YES];
-            
-            if(isSelectFemale ==YES)
-            {
-                [cell.femaleButton setTitleColor:[UIColor redColor] forState:UIControlStateNormal];
-            }
-            else if (isSelectMale==YES)
-            {
-                [cell.maleButton setTitleColor:[UIColor redColor] forState:UIControlStateNormal];
-            }
-            
-        }
-        
-        [cell.maleButton addTarget:self action:@selector(buttonAction:) forControlEvents:UIControlEventTouchUpInside];
-        [cell.femaleButton addTarget:self action:@selector(buttonAction:) forControlEvents:UIControlEventTouchUpInside];
-        
-        
-    }
-    if (indexPath.row == 4)
-    {
-        
-        if (cell == nil)
-        {
-            [[NSBundle mainBundle] loadNibNamed:@"DSProfileTableViewCell" owner:self options:nil];
-            cell = cellDatePicker;
-            
-        }
-        
-        if(profileDict != NULL)
-        {
-            
-            if(![[profileDict valueForKey:@"date_of_birth"] isEqual:currentTextfield.text]){
-                
-                
-                if(currentTextfield.text == NULL){
-                    cell.textFieldDPPlaceHolder.text =[profileDict valueForKey:@"date_of_birth"];
-                    [cell.textFieldDPPlaceHolder setTag:1000];
-
-                }
-                else{
-                    [cell.textFieldDPPlaceHolder setTag:1000];
-                    cell.textFieldDPPlaceHolder.text = currentTextfield.text;
-                }
-            }
-            else{
-                cell.textFieldDPPlaceHolder.text =[profileDict valueForKey:@"date_of_birth"];
-                [cell.textFieldDPPlaceHolder setTag:1000];
-                
-            }
-            
-           
-            
-        }
-        else if(userDetailsDict.count > 0){
-          
-            if(![[userDetailsDict valueForKey:@"dob"] isEqual:currentTextfield.text]){
-                if(currentTextfield.text == NULL){
-                    cell.textFieldDPPlaceHolder.text =[userDetailsDict valueForKey:@"dob"];
-                    [cell.textFieldDPPlaceHolder setTag:1000];
-                    
-                }
-                else{
-                    [cell.textFieldDPPlaceHolder setTag:1000];
-                    cell.textFieldDPPlaceHolder.text = currentTextfield.text;
-                }
-            }
-            else{
-                if(currentTextfield.text == NULL){
-                    cell.textFieldDPPlaceHolder.text =[userDetailsDict valueForKey:@"dob"];
-                    [cell.textFieldDPPlaceHolder setTag:1000];
-                    
-                }
-                else{
-                    [cell.textFieldDPPlaceHolder setTag:1000];
-                    cell.textFieldDPPlaceHolder.text = currentTextfield.text;
-                }
-            }
-        }
-        
-        else
-        {
-        if([currentTextfield.text isEqualToString:@""] || currentTextfield.text == nil)
-            
-            [cell.textFieldDPPlaceHolder setTag:1000];
-            cell.textFieldDPPlaceHolder.text = currentTextfield.text;
-        }
-        
-        
-    }
-    if (indexPath.row == 5)
-    {
-        if (cell == nil)
-        {
-            [[NSBundle mainBundle] loadNibNamed:@"DSProfileTableViewCell" owner:self options:nil];
-            cell = cellTextView;
-            
-        }
-        
-        
-        if(profileDict !=NULL){
-            
-            
-            if([[profileDict valueForKey:@"about"] isEqual:@""]){
-                
-                if(textviewText == nil)
-                    
-                    cell.textViewHeaderLabel.hidden = NO;
-                
-                else
-                    
-                cell.textViewHeaderLabel.hidden = YES;
-                
-                cell.textViewAboutYou.text = textviewText;
-                
-                
-                strAbout =cell.textViewAboutYou.text;
-                
-             
-                
-                cell.textViewAboutYou.delegate = self;
-                
-            }
-            
-            else{
-                if(![[profileDict valueForKey:@"about"] isEqual:strAbout]){
-                    
-                  
-                    if(strAbout == NULL){
-                        cell.textViewAboutYou.text = [[profileDict valueForKey:@"about"]mutableCopy];
-                        strAbout =cell.textViewAboutYou.text;
-                    }
-                    else{
-                         cell.textViewAboutYou.text = strAbout;
-                    }
-                }
-                else{
-                    
-                    cell.textViewAboutYou.text = [[profileDict valueForKey:@"about"]mutableCopy];
-                    strAbout =cell.textViewAboutYou.text;
-                    
-                }
-                cell.textViewHeaderLabel.hidden = YES;
-                
-                
-                cell.textViewAboutYou.delegate = self;
-                
-            }
-            
-            
-            
-        }
-       
-        else{
-            if(textviewText == nil){
-                
-                if([strAbout isEqualToString:@""] ||strAbout == nil)
+                for(NSString *strPlus in imageNormalArray)
                 {
-                cell.textViewHeaderLabel.hidden = NO;
-                cell.textViewAboutYou.text = @"Write something about yourself here.";
+                    if([strPlus isEqualToString:@"Plus_icon.png"])
+                        [imageNormalArray removeObject:strPlus];
+                }
+                [imageNormalArray addObject:plusIcon];
+            }
+    
+            UIButton *pushToHobbiesButton =[[UIButton alloc]initWithFrame:CGRectMake(0, 0, imageSize, imageSize)];
+            for (int i =0; i< [imageNormalArray  count]; i++) {
+                self.plusIconImageView.hidden = YES;
+                UIImageView *hobbiesImage;
+    
+                if(i <= 4)
+                    hobbiesImage = [[UIImageView alloc]initWithFrame:CGRectMake((i*(commonWidth + imageSize))+ 10, yAxis, imageSize, imageSize)];
+                else if(i <= 9)
+                    hobbiesImage = [[UIImageView alloc]initWithFrame:CGRectMake(((i-5)*(commonWidth + imageSize))+ 10, yAxis+imageSize+space, imageSize, imageSize)];
+                else if(i <= 14)
+                    hobbiesImage = [[UIImageView alloc]initWithFrame:CGRectMake(((i-10)*(commonWidth + imageSize))+ 10, yAxis+((imageSize+space) * 2), imageSize, imageSize)];
+                else
+                    hobbiesImage = [[UIImageView alloc]initWithFrame:CGRectMake(((i-15)*(commonWidth + imageSize))+ 10, yAxis+((imageSize+space) * 3), imageSize, imageSize)];
+                NSString *image =[imageNormalArray objectAtIndex:i];
+    
+                if([image isEqualToString:@"Plus_icon.png"])
+                {
+                    [hobbiesImage setImage:[UIImage imageNamed:image]];
                 }
                 else
                 {
-                    cell.textViewHeaderLabel.hidden = YES;
-                    cell.textViewAboutYou.text =strAbout;
+                   image= [image stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+                   [hobbiesImage setImageWithURL:[NSURL URLWithString:image]];
                 }
-            }
-            cell.textViewAboutYou.delegate = self;
-            
-        }
-        
-        
-    }
     
-    if(indexPath.row == 6)
-    {
-        if (cell == nil){
-            [[NSBundle mainBundle] loadNibNamed:@"DSProfileTableViewCell" owner:self options:nil];
-            cell = cellAddIcon;
-            [cell.buttonPushHobbies addTarget:self action:@selector(pushToHobbiesView) forControlEvents:UIControlEventTouchUpInside];
-        }
-        
-        yAxis = 31;
-        if(profileDict ==NULL)
-        {
-       
-        }
-        else
-        {
-            imageSize =39;
-            commonWidth=19.5;
-            
-        }
-        space = imageSize / 2;
-        commonHeight = imageSize+15;
-        
-        NSString *plusIcon = @"Plus_icon.png";
-        if ([imageNormalArray count] >=1)
-        {
-            for(NSString *strPlus in imageNormalArray)
-            {
-                if([strPlus isEqualToString:@"Plus_icon.png"])
-                    [imageNormalArray removeObject:strPlus];
-            }
-            [imageNormalArray addObject:plusIcon];
-        }
-        
-        UIButton *pushToHobbiesButton =[[UIButton alloc]initWithFrame:CGRectMake(0, 0, imageSize, imageSize)];
-        for (int i =0; i< [imageNormalArray  count]; i++) {
-            cell.plusIconImageView.hidden = YES;
-            UIImageView *hobbiesImage;
-            
-            if(i <= 4)
-                hobbiesImage = [[UIImageView alloc]initWithFrame:CGRectMake((i*(commonWidth + imageSize))+ 10, yAxis, imageSize, imageSize)];
-            else if(i <= 9)
-                hobbiesImage = [[UIImageView alloc]initWithFrame:CGRectMake(((i-5)*(commonWidth + imageSize))+ 10, yAxis+imageSize+space, imageSize, imageSize)];
-            else if(i <= 14)
-                hobbiesImage = [[UIImageView alloc]initWithFrame:CGRectMake(((i-10)*(commonWidth + imageSize))+ 10, yAxis+((imageSize+space) * 2), imageSize, imageSize)];
-            else
-                hobbiesImage = [[UIImageView alloc]initWithFrame:CGRectMake(((i-15)*(commonWidth + imageSize))+ 10, yAxis+((imageSize+space) * 3), imageSize, imageSize)];
-            NSString *image =[imageNormalArray objectAtIndex:i];
-           
-            if([image isEqualToString:@"Plus_icon.png"])
-            {
-                [hobbiesImage setImage:[UIImage imageNamed:image]];
-            }
-            else
-            {
-               image= [image stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-               [hobbiesImage setImageWithURL:[NSURL URLWithString:image]];
-            }
-            
-            if (image == plusIcon) {
-                hobbiesImage.userInteractionEnabled = YES;
-                pushToHobbiesButton.imageView.contentMode = UIViewContentModeScaleAspectFit;
-                [hobbiesImage addSubview:pushToHobbiesButton];
-            }
-            
-            [cell addSubview:hobbiesImage];
-            [pushToHobbiesButton addTarget:self action:@selector(pushToHobbiesView) forControlEvents:UIControlEventTouchUpInside];
-        }
-        
-        for (int i =0; i< [hobbiesNameArray  count]; i++) {
-            
-            NSString *image =[[hobbiesNameArray objectAtIndex:i]uppercaseString];
-            UILabel *hobbiesname;
-            
-            if(i <= 4)
-                hobbiesname = [[UILabel alloc]initWithFrame:CGRectMake((i*(commonWidth + imageSize)), yAxis + imageSize, imageSize + 20, 15)];
-            else if(i <= 9)
-                hobbiesname = [[UILabel alloc]initWithFrame:CGRectMake(((i-5)*(commonWidth + imageSize)), yAxis+(imageSize * 2)+space, imageSize + 20, 15)];
-            else if(i <= 14)
-                hobbiesname = [[UILabel alloc]initWithFrame:CGRectMake(((i-10)*(commonWidth + imageSize)), yAxis+((imageSize+space) * 2)+imageSize, imageSize + 20, 15)];
-            else
-                hobbiesname = [[UILabel alloc]initWithFrame:CGRectMake(((i-15)*(commonWidth + imageSize)), yAxis+((imageSize+space) * 3)+imageSize, imageSize + 20, 15)];
-            
-            [hobbiesname setFont:[UIFont fontWithName:@"Patron-Regular" size:7]];
-            hobbiesname.textAlignment = NSTextAlignmentCenter;
-            hobbiesname.textColor =[UIColor colorWithRed:(float)102.0/255 green:(float)102.0/255 blue:(float)102.0/255 alpha:1.0f];
-            
-            
-            hobbiesname.text = image;
-            [cell addSubview:hobbiesname];
-            hobbiesname.textAlignment = NSTextAlignmentCenter;
-        }
-    }
+                if (image == plusIcon) {
+                    hobbiesImage.userInteractionEnabled = YES;
+                    pushToHobbiesButton.imageView.contentMode = UIViewContentModeScaleAspectFit;
+                    [hobbiesImage addSubview:pushToHobbiesButton];
+                }
     
-    if (indexPath.row == 7)
-    {
-        if (cell == nil)
-        {
-            [[NSBundle mainBundle] loadNibNamed:@"DSProfileTableViewCell" owner:self options:nil];
-            cell = cellEmailPassword;
-            
-        }
-        
-        if(profileDict != NULL)
-        {
-          
-            [cell.emailTextField setEnabled:NO];
-            cell.emailTextField.text =(emailAddressToRegister==0)?[profileDict valueForKey:@"email"]:emailAddressToRegister;
-            cell.passwordTextField.text  =(emailPasswordToRegister==0)? @"":emailPasswordToRegister;
-
-        }
-        else if(userDetailsDict.count > 0){
-
-            NSLog(@"cell.emailTextField.text%@",cell.emailTextField.text);
-            NSLog(@"cell.emailTextField.text%@",emailAddressToRegister);
-           
-            cell.emailTextField.text =(emailAddressToRegister==0)?[userDetailsDict valueForKey:@"email"]:emailAddressToRegister;
-            cell.passwordTextField.text  =(emailPasswordToRegister==0)? @"":emailPasswordToRegister;
-            emailAddressToRegister   = cell.emailTextField.text;
-                       
-          
-
-            
-        }
-        else
-        {
-          cell.emailTextField.text = [self getEmail];
-          cell.passwordTextField.text =[self getPassword];
-        }
-        
-        if (IS_IPHONE6 ||IS_IPHONE6_Plus){
-        cell.layoutConstraintAccLabelYPos.constant =42;
-        cell.layoutConstraintEmailPassViewHeight.constant =50;
-        }
-    }
-    if (indexPath.row == 8)
-    {
-        
-        if (cell == nil)
-        {
-            [[NSBundle mainBundle] loadNibNamed:@"DSProfileTableViewCell" owner:self options:nil];
-            cell = CellSwitchOn;
-            
-        }
-        if (IS_IPHONE6 ||IS_IPHONE6_Plus){
-            cell.layoutConstraintNotificationLabelYPos.constant = 40;
-            cell.layoutConstraintNotificationViewHeight.constant=51;
-            cell.layoutConstraintRadioButtonYPos.constant = 18;
-            cell.messSwitchBtn.transform = CGAffineTransformMakeScale(0.65, 0.65);
-            cell.SoundSwitchBtn.transform = CGAffineTransformMakeScale(0.65, 0.65);
-            cell.vibrationSwitchBtn.transform = CGAffineTransformMakeScale(0.65, 0.65);
-        }
-        else
-        {
-            
-        cell.messSwitchBtn.transform = CGAffineTransformMakeScale(0.70, 0.70);
-        cell.SoundSwitchBtn.transform = CGAffineTransformMakeScale(0.70, 0.70);
-        cell.vibrationSwitchBtn.transform = CGAffineTransformMakeScale(0.70, 0.70);
-        }
-        cell.vibrationSwitchBtn.layer.cornerRadius = 16.0;
-        cell.SoundSwitchBtn.layer.cornerRadius = 16.0;
-        cell.messSwitchBtn.layer.cornerRadius = 16.0;
-        
-        [self notificationMethod];
-        [cell.vibrationSwitchBtn addTarget:self action:@selector(vibrationSwithAction:) forControlEvents:UIControlEventTouchUpInside];
-        [cell.SoundSwitchBtn addTarget:self action:@selector(soundSwithAction:) forControlEvents:UIControlEventTouchUpInside];
-        [cell.messSwitchBtn addTarget:self action:@selector(messSwithAction:) forControlEvents:UIControlEventTouchUpInside];
-        
-    }
-
-    if (indexPath.row == 9)
-    {
-        
-        if (cell == nil)
-        {
-            [[NSBundle mainBundle] loadNibNamed:@"DSProfileTableViewCell" owner:self options:nil];
-            cell = CellTermsOfUse;
-            
-        }
-        
-        if (IS_IPHONE6 ||IS_IPHONE6_Plus){
-        cell.layoutConstraintTermsOfUseBtnDependViewHeight.constant =50;
-        }
-        
-       
-    }
-
-    [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
-    //_tableviewProfile.scrollEnabled = NO;
-    //[_tableviewProfile setBounces:NO];
-    return cell;
+                [self.addinteresthobbiesview addSubview:hobbiesImage];
+                [pushToHobbiesButton addTarget:self action:@selector(pushToHobbiesView) forControlEvents:UIControlEventTouchUpInside];
+            }
     
+            for (int i =0; i< [hobbiesNameArray  count]; i++) {
+    
+                NSString *image =[[hobbiesNameArray objectAtIndex:i]uppercaseString];
+                UILabel *hobbiesname;
+    
+                if(i <= 4)
+                    hobbiesname = [[UILabel alloc]initWithFrame:CGRectMake((i*(commonWidth + imageSize)), yAxis + imageSize, imageSize + 20, 15)];
+                else if(i <= 9)
+                    hobbiesname = [[UILabel alloc]initWithFrame:CGRectMake(((i-5)*(commonWidth + imageSize)), yAxis+(imageSize * 2)+space, imageSize + 20, 15)];
+                else if(i <= 14)
+                    hobbiesname = [[UILabel alloc]initWithFrame:CGRectMake(((i-10)*(commonWidth + imageSize)), yAxis+((imageSize+space) * 2)+imageSize, imageSize + 20, 15)];
+                else
+                    hobbiesname = [[UILabel alloc]initWithFrame:CGRectMake(((i-15)*(commonWidth + imageSize)), yAxis+((imageSize+space) * 3)+imageSize, imageSize + 20, 15)];
+    
+                [hobbiesname setFont:[UIFont fontWithName:@"Patron-Regular" size:7]];
+                hobbiesname.textAlignment = NSTextAlignmentCenter;
+                hobbiesname.textColor =[UIColor colorWithRed:(float)102.0/255 green:(float)102.0/255 blue:(float)102.0/255 alpha:1.0f];
+                
+                
+                hobbiesname.text = image;
+                [self.addinteresthobbiesview addSubview:hobbiesname];
+                hobbiesname.textAlignment = NSTextAlignmentCenter;
+            }
 }
 
-- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)Tablecell forRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    if(indexPath.row == 6)
-    {
-        commonWidth = (Tablecell.contentView.frame.size.width - 20) / 14;
-        imageSize = commonWidth * 2;
-    }
-}
 
 #pragma mark -loadTermsOfUseView
 
@@ -1412,7 +814,14 @@
 #pragma mark -notificationMethod
 -(void)notificationMethod
 {
+    self.messSwitchBtn.transform = CGAffineTransformMakeScale(0.70, 0.70);
+    self.SoundSwitchBtn.transform = CGAffineTransformMakeScale(0.70, 0.70);
+    self.vibrationSwitchBtn.transform = CGAffineTransformMakeScale(0.70, 0.70);
     
+            self.vibrationSwitchBtn.layer.cornerRadius = 16.0;
+            self.SoundSwitchBtn.layer.cornerRadius = 16.0;
+            self.messSwitchBtn.layer.cornerRadius = 16.0;
+
     
     NSString * objMsg =[isNotification_message isEqualToString:@"Yes"]? @"switch_on":@"switch_off";
     NSString * objSound =[isNotification_sound isEqualToString:@"Yes"]? @"switch_on":@"switch_off";
@@ -1461,7 +870,9 @@
         [cell.vibrationSwitchBtn setBackgroundColor:[UIColor colorWithRed:232.0f/255.0f green:232.0f/255.0f blue:232.0f/255.0f alpha:1.0f]];
         [cell.vibrationSwitchBtn setThumbTintColor:[UIColor redColor]];
     }
-    
+    [self.vibrationSwitchBtn addTarget:self action:@selector(vibrationSwithAction:) forControlEvents:UIControlEventTouchUpInside];
+        [self.SoundSwitchBtn addTarget:self action:@selector(soundSwithAction:) forControlEvents:UIControlEventTouchUpInside];
+        [self.messSwitchBtn addTarget:self action:@selector(messSwithAction:) forControlEvents:UIControlEventTouchUpInside];
 }
 
 - (IBAction)messSwithAction:(UISwitch *)sender
@@ -1530,25 +941,17 @@
 
 
 
--(void)buttonAction:(UIButton *)sender
+-(IBAction)buttonAction:(UIButton *)sender
 {
-    
-    id button = sender;
-    while (![button isKindOfClass:[UITableViewCell class]]) {
-        button = [button superview];
-    }
-    
-    NSIndexPath *indexPath;
+    NSLog(@"buttontag=%ld",(long)sender.tag);
+ 
      NSString *selOptionVal;
-    //DSProfileTableViewCell *cell;
     
-    indexPath = [_tableviewProfile indexPathForCell:(UITableViewCell *)button];
-    cell = (DSProfileTableViewCell *) [_tableviewProfile cellForRowAtIndexPath:[NSIndexPath indexPathForRow:indexPath.row inSection:0]];
     
     if([sender tag] == 2004){
         selOptionVal = @"male";
-        [cell.maleButton setTitleColor:[UIColor redColor] forState:UIControlStateNormal];
-       [cell.femaleButton setTitleColor:[UIColor colorWithRed:(161.0/255.0f) green:(161.0/255.0f) blue:(161.0/255.0f) alpha:1.0f] forState:UIControlStateNormal];
+        [self.maleButton setTitleColor:[UIColor redColor] forState:UIControlStateNormal];
+       [self.femaleButton setTitleColor:[UIColor colorWithRed:(161.0/255.0f) green:(161.0/255.0f) blue:(161.0/255.0f) alpha:1.0f] forState:UIControlStateNormal];
         isSelectMale =YES;
         isSelectFemale=NO;
         
@@ -1556,13 +959,12 @@
     
     if([sender tag] == 2005){
        selOptionVal = @"female";
-       // femaleLabel.textColor = [UIColor redColor];   //[UIColor colorWithRed:(161.0/255.0f) green:(161.0/255.0f) blue:(161.0/255.0f) alpha:1.0f];
-        [cell.femaleButton setTitleColor:[UIColor redColor] forState:UIControlStateNormal];
-         [cell.maleButton setTitleColor:[UIColor colorWithRed:(161.0/255.0f) green:(161.0/255.0f) blue:(161.0/255.0f) alpha:1.0f] forState:UIControlStateNormal];
+      
+        [self.femaleButton setTitleColor:[UIColor redColor] forState:UIControlStateNormal];
+         [self.maleButton setTitleColor:[UIColor colorWithRed:(161.0/255.0f) green:(161.0/255.0f) blue:(161.0/255.0f) alpha:1.0f] forState:UIControlStateNormal];
         isSelectFemale=YES;
          isSelectMale =NO;
     }
-    //strGender =profileGenderValueLabel.text;
     
     strGender =selOptionVal;
     
@@ -1606,8 +1008,6 @@
     cell.textViewHeaderLabel.hidden = YES;
     if([textView.text length] == 0)
     {
-        //textView.text = @"Foobar placeholder";
-        //textView.textColor = [UIColor lightGrayColor];
         textView.tag = 0;
     }
 
@@ -1631,7 +1031,7 @@
     
     UIAlertAction *camera = [UIAlertAction actionWithTitle:NSLocalizedString(@"CANCEL",@"") style:UIAlertActionStyleDefault
                                                    handler:^(UIAlertAction * action) {
-                                                       //[self promptForCamera];
+                                                       
                                                         [self.presentedViewController dismissViewControllerAnimated:NO completion:nil];
                                                    }];
     
@@ -1643,7 +1043,7 @@
     
     UIAlertAction *cancel = [UIAlertAction actionWithTitle:NSLocalizedString(@"PHOTO LIBRARY",@"") style:UIAlertActionStyleDefault
                                                    handler:^(UIAlertAction * action) {
-                                                      // [self.presentedViewController dismissViewControllerAnimated:NO completion:nil];
+                                                     
                                                         imagepickerController.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
                                                         [self presentViewController:imagepickerController animated:YES completion:nil];
                                                    }];
@@ -1662,8 +1062,10 @@
     
     if(CurrentImage==0)
         profileImage1 = image;
+    
     else if(CurrentImage == 1)
         profileImage2 = image;
+   
     else if(CurrentImage == 2)
         profileImage3 = image;
     
@@ -1672,6 +1074,7 @@
      [profileDataArray replaceObjectAtIndex:CurrentImage withObject:profileData];
     
     [imagepickerController dismissViewControllerAnimated:YES completion:nil];
+    //isPick=YES;
     
 
 }
