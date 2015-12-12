@@ -8,9 +8,7 @@
 
 
 #import "HomeViewController.h"
-
 #import "CustomNavigationView.h"
-
 #import "DSConfig.h"
 #import "DSWebservice.h"
 #import "HomeCustomCell.h"
@@ -26,37 +24,31 @@
 #define ITEM_CELL_IDENTIFIER @"ItemCell"
 #define LOADING_CELL_IDENTIFIER @"LoadingItemCell"
 
+
 @interface HomeViewController ()<UICollectionViewDataSource,UICollectionViewDelegate>
 {
-    AppDelegate *appDelegate;
+    AppDelegate             *appDelegate;
     DSWebservice            * objWebService;
-    BOOL isSelectMenu;
-    NSArray *selectedArray;
-    int selectedCellCount;
-    
-    NSMutableArray *selectedItemsArray;
-    NSMutableArray * selectItemImageActiveArray;
-    
-    AVAudioPlayer *audioPlayer;
-    
+    BOOL                    isSelectMenu;
+    NSArray                 *selectedArray;
+    int                     selectedCellCount;
+    NSMutableArray          *selectedItemsArray;
+    NSMutableArray          * selectItemImageActiveArray;
+    AVAudioPlayer           *audioPlayer;
     NSString                *loginUserSessionID;
-    CustomAlterview * objCustomAlterview;
-   
-    
+    CustomAlterview         * objCustomAlterview;
 }
-
 @end
 
 @implementation HomeViewController
 
-- (void)viewDidLoad {
+- (void)viewDidLoad
+{
     [super viewDidLoad];
-   
     objWebService = [[DSWebservice alloc]init];
-   
     if([[NSUserDefaults standardUserDefaults] valueForKey:@"MenuListArray"]==nil){
-         [COMMON LoadIcon:self.view];
-    [self loadhomeviewListWebservice];
+        [COMMON LoadIcon:self.view];
+        [self loadhomeviewListWebservice];
     }
     else
     {
@@ -71,46 +63,40 @@
                                                               attribute:NSLayoutAttributeTop
                                                              multiplier:1.0
                                                                constant:75.0]];
-    
 }
 -(void)viewWillAppear:(BOOL)animated
 {
     appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
     appDelegate.buttonsView.hidden=NO;
     [self loadnavigationview];
-   
-     [self setupCollectionView];
+    [self setupCollectionView];
     [self audioplayMethod];
-    
-    
 }
 
 
+#pragma mark - loadhomeviewListWebservice
 -(void)loadhomeviewListWebservice
 {
-   
-     [objWebService HomeviewList:DoSomething_API success:^(AFHTTPRequestOperation *operation, id responseObject)
-      {
-          if(responseObject!=nil)
+    [objWebService HomeviewList:DoSomething_API
+                        success:^(AFHTTPRequestOperation *operation, id responseObject)
+    {
+        if(responseObject!=nil)
           {
-          NSLog(@"response:%@",responseObject);
-          NSMutableDictionary *homeviewlist = [[NSMutableDictionary alloc]init];
-          
-          menuArray=[NSMutableArray alloc];
-          homeviewlist = [responseObject valueForKey:@"dosomethinglist"];
-          menuArray =[homeviewlist valueForKey:@"list"];
-          [[NSUserDefaults standardUserDefaults] setObject:menuArray forKey:@"MenuListArray"];
-           [[NSUserDefaults standardUserDefaults] synchronize];
+              NSLog(@"response:%@",responseObject);
+              NSMutableDictionary *homeviewlist = [[NSMutableDictionary alloc]init];
+              menuArray=[NSMutableArray alloc];
+              homeviewlist = [responseObject valueForKey:@"dosomethinglist"];
+              menuArray =[homeviewlist valueForKey:@"list"];
+              [[NSUserDefaults standardUserDefaults] setObject:menuArray forKey:@"MenuListArray"];
+              [[NSUserDefaults standardUserDefaults] synchronize];
              [COMMON removeLoading];
              [self.homeCollectionView reloadData];
           }
-         
-        
-     } failure:^(AFHTTPRequestOperation *operation, id error) {
-         NSLog(@"error=%@",error);
-     }];
+    }
+                        failure:^(AFHTTPRequestOperation *operation, id error) {
+                        }];
 }
-
+#pragma mark - loadnavigationview
 -(void)loadnavigationview
 {
     self.navigationController.navigationBarHidden=NO;
@@ -133,47 +119,47 @@
     
     selectedArray = [[NSMutableArray alloc]init];
     selectedItemsArray = [[NSMutableArray alloc]init];
-    
-    
-     [self CustomAlterviewload];
-   
-
+    [self CustomAlterviewload];
 }
-
+#pragma mark - CustomAlterviewload
 -(void)CustomAlterviewload
 {
-    
     objCustomAlterview = [[CustomAlterview alloc] initWithNibName:@"CustomAlterview" bundle:nil];
-
     [objCustomAlterview.alertBgView setHidden:YES];
     [objCustomAlterview.alertMainBgView setHidden:YES];
     [objCustomAlterview.view setHidden:YES];
-    [objCustomAlterview.alertCancelButton addTarget:self action:@selector(alertPressCancel:) forControlEvents:UIControlEventTouchUpInside];
-    [objCustomAlterview.btnNo addTarget:self action:@selector(alertPressNo:) forControlEvents:UIControlEventTouchUpInside];
-    [objCustomAlterview.btnYes addTarget:self action:@selector(alertPressYes:) forControlEvents:UIControlEventTouchUpInside];
+    [objCustomAlterview.alertCancelButton addTarget:self
+                                             action:@selector(alertPressCancel:)
+                                   forControlEvents:UIControlEventTouchUpInside];
+    [objCustomAlterview.btnNo addTarget:self
+                                 action:@selector(alertPressNo:)
+                       forControlEvents:UIControlEventTouchUpInside];
+    [objCustomAlterview.btnYes addTarget:self
+                                  action:@selector(alertPressYes:)
+                        forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:objCustomAlterview.view];
 }
-
+#pragma mark - audioplayMethod
 -(void)audioplayMethod
 {
-    NSString *path = [[NSBundle mainBundle]
-                      pathForResource:@"button-16" ofType:@"mp3"];
-    audioPlayer = [[AVAudioPlayer alloc]initWithContentsOfURL:
-                   [NSURL fileURLWithPath:path] error:NULL];
+    NSString *path = [[NSBundle mainBundle]pathForResource:@"button-16"
+                                                    ofType:@"mp3"];
+    audioPlayer = [[AVAudioPlayer alloc]initWithContentsOfURL:[NSURL fileURLWithPath:path]
+                                                        error:NULL];
     [audioPlayer prepareToPlay];
 }
+#pragma mark - setupCollectionView
 -(void)setupCollectionView {
-    [self.homeCollectionView registerClass:[HomeCustomCell class] forCellWithReuseIdentifier:ITEM_CELL_IDENTIFIER];
-    [self.homeCollectionView registerClass:[UICollectionViewCell class] forCellWithReuseIdentifier:LOADING_CELL_IDENTIFIER];
+    [self.homeCollectionView registerClass:[HomeCustomCell class]
+                forCellWithReuseIdentifier:ITEM_CELL_IDENTIFIER];
+    [self.homeCollectionView registerClass:[UICollectionViewCell class]
+                forCellWithReuseIdentifier:LOADING_CELL_IDENTIFIER];
     self.automaticallyAdjustsScrollViewInsets = NO;
-    
     UICollectionViewFlowLayout *flowLayout = [[UICollectionViewFlowLayout alloc] init];
     [flowLayout setScrollDirection:UICollectionViewScrollDirectionVertical];
     [self.homeCollectionView setCollectionViewLayout:flowLayout];
 }
-
-
-#pragma mark collectionview delegate method
+#pragma mark Collectionview Delegate Method
 
 -(NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView {
     return 1;
@@ -188,16 +174,13 @@
     static NSString *cellIdentifier = @"ItemCell";
     HomeCustomCell *cell = (HomeCustomCell *)[collectionView dequeueReusableCellWithReuseIdentifier:cellIdentifier forIndexPath:indexPath];
     [cell setNeedsDisplay];
-    
     cell.MenuImg = nil;
     cell.MenuTittle = nil;
-    
     if (cell != nil)
     {
         cell.MenuImg = (UIImageView *)[cell viewWithTag:101];
         cell.MenuTittle = (UILabel *)[cell viewWithTag:201];
     }
-    
     NSDictionary *data = [menuArray objectAtIndex:indexPath.row];
     
     if (isSelectMenu)
@@ -207,33 +190,35 @@
             if ([indexPath isEqual:collectionIndexPath])
             {
                 cell.MenuTittle.text = [[data objectForKey:@"name"]uppercaseString];
-                cell.MenuTittle.textColor = [UIColor colorWithRed:(199/255.0f) green:(65/255.0f) blue:(81/255.0f) alpha:1.0f];
+                cell.MenuTittle.textColor = [UIColor colorWithRed:(199/255.0f)
+                                                            green:(65/255.0f)
+                                                             blue:(81/255.0f)
+                                                            alpha:1.0f];
                 NSString * objstr = [NSString stringWithFormat:@"%@",[data valueForKey:@"ActiveImage"]];
                 objstr= [objstr stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
                 [cell.MenuImg setImageWithURL:[NSURL URLWithString:objstr]];
-               
                 break;
             }
         }
     }
     else{
         cell.MenuTittle.text = [[data objectForKey:@"name"]uppercaseString];
-        cell.MenuTittle.textColor = [UIColor colorWithRed:(164/255.0f) green:(164/255.0f) blue:(164/255.0f) alpha:1.0f];
+        cell.MenuTittle.textColor = [UIColor colorWithRed:(164/255.0f)
+                                                    green:(164/255.0f)
+                                                     blue:(164/255.0f)
+                                                    alpha:1.0f];
         NSString * objstr = [NSString stringWithFormat:@"%@",[data valueForKey:@"InactiveImage"]];
         objstr= [objstr stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
         [cell.MenuImg setImageWithURL:[NSURL URLWithString:objstr]];
-
-
     }
-    
     _homeCollectionView.allowsMultipleSelection = YES;
     cell.layer.shouldRasterize = YES;
     cell.layer.rasterizationScale = [UIScreen mainScreen].scale;
-
     return cell;
 }
 
-- (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout minimumLineSpacingForSectionAtIndex:(NSInteger)section {
+- (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout
+minimumLineSpacingForSectionAtIndex:(NSInteger)section {
     
     if(IS_IPHONE6_Plus)
         return 27.0;
@@ -247,8 +232,8 @@
 
 - (UICollectionViewCell *)loadingCellForIndexPath:(NSIndexPath *)indexPath {
     
-    HomeCustomCell *cell = (HomeCustomCell *)[self.homeCollectionView dequeueReusableCellWithReuseIdentifier:LOADING_CELL_IDENTIFIER forIndexPath:indexPath];
-    
+    HomeCustomCell *cell = (HomeCustomCell *)[self.homeCollectionView dequeueReusableCellWithReuseIdentifier:LOADING_CELL_IDENTIFIER
+                                                                                                forIndexPath:indexPath];
     return cell;
 }
 
@@ -264,7 +249,7 @@
     
     return returnSize;
 }
-
+#pragma mark - didSelectItemAtIndexPath
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
     isSelectMenu=YES;
@@ -272,25 +257,22 @@
     HomeCustomCell *cell = (HomeCustomCell *)[collectionView cellForItemAtIndexPath:indexPath];
     NSMutableDictionary *data = [menuArray objectAtIndex:indexPath.row];
     
-    
     if([selectedItemsArray count] <= 2)
     {
-        
-        NSString *path = [[NSBundle mainBundle]
-                          pathForResource:@"button-16" ofType:@"mp3"];
-        audioPlayer = [[AVAudioPlayer alloc]initWithContentsOfURL:
-                       [NSURL fileURLWithPath:path] error:NULL];
+        NSString *path = [[NSBundle mainBundle]pathForResource:@"button-16"
+                                                        ofType:@"mp3"];
+        audioPlayer = [[AVAudioPlayer alloc]initWithContentsOfURL:[NSURL fileURLWithPath:path]
+                                                            error:NULL];
         [audioPlayer prepareToPlay];
         [audioPlayer play];
-        
         [selectedItemsArray addObject:[data valueForKey:@"Id"]];
-        cell.MenuTittle.textColor = [UIColor colorWithRed:(199/255.0f) green:(65/255.0f) blue:(81/255.0f) alpha:1.0f];
+        cell.MenuTittle.textColor = [UIColor colorWithRed:(199/255.0f)
+                                                    green:(65/255.0f)
+                                                     blue:(81/255.0f)
+                                                    alpha:1.0f];
         NSString * objstr = [NSString stringWithFormat:@"%@",[data valueForKey:@"ActiveImage"]];
         objstr= [objstr stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
         [cell.MenuImg setImageWithURL:[NSURL URLWithString:objstr]];
-
-        NSLog(@"selectImage:%@",objstr);
-               
     }
     else
     {
@@ -301,67 +283,54 @@
         objCustomAlterview.alertCancelButton.hidden = NO;
         objCustomAlterview.btnYes.hidden = YES;
         objCustomAlterview.btnNo.hidden = YES;
-        
         objCustomAlterview.alertMsgLabel.text = @"ONLY 3 ACTIVIES\nCAN BE SELECTED";
         objCustomAlterview.alertMsgLabel.textAlignment = NSTextAlignmentCenter;
         objCustomAlterview.alertMsgLabel.lineBreakMode = NSLineBreakByWordWrapping;
         objCustomAlterview.alertMsgLabel.numberOfLines = 2;
-        [objCustomAlterview.alertMsgLabel setTextColor:[UIColor colorWithRed:(255/255.0f) green:(255/255.0f) blue:(255/255.0f) alpha:1.0f]];
-        
-      [collectionView deselectItemAtIndexPath:indexPath animated:NO];
+        [objCustomAlterview.alertMsgLabel setTextColor:[UIColor colorWithRed:(255/255.0f)
+                                                                       green:(255/255.0f)
+                                                                        blue:(255/255.0f)
+                                                                       alpha:1.0f]];
+        [collectionView deselectItemAtIndexPath:indexPath animated:NO];
         }
-   
-
 }
-
+#pragma mark - didDeselectItemAtIndexPath
 -(void)collectionView: (UICollectionView *)collectionView didDeselectItemAtIndexPath:(NSIndexPath *)indexPath
-
 {
-   
     HomeCustomCell *cell = (HomeCustomCell *)[collectionView cellForItemAtIndexPath:indexPath];
-    
     NSMutableDictionary *data = [menuArray objectAtIndex:indexPath.row];
-    
     NSArray *selectArray = [[NSArray alloc]init];
-    
     selectArray = [selectedItemsArray copy];
     for(NSString *strDeselect in selectArray)
-
     {
-
         if([[data valueForKey:@"Id"] isEqualToString:strDeselect])
 
        {
-
-            NSString *path = [[NSBundle mainBundle]
-                              pathForResource:@"button-16" ofType:@"mp3"];
-            audioPlayer = [[AVAudioPlayer alloc]initWithContentsOfURL:
-                           [NSURL fileURLWithPath:path] error:NULL];
+           NSString *path = [[NSBundle mainBundle]pathForResource:@"button-16"
+                                                           ofType:@"mp3"];
+            audioPlayer = [[AVAudioPlayer alloc]initWithContentsOfURL:[NSURL fileURLWithPath:path]
+                                                                error:NULL];
             [audioPlayer prepareToPlay];
             [audioPlayer play];
-
-
            [selectedItemsArray removeObject:strDeselect];
            //isdeSelect=YES;
-
-            cell.MenuTittle.textColor = [UIColor colorWithRed:(164/255.0f) green:(164/255.0f) blue:(164/255.0f) alpha:1.0f];
-
-            NSString * objstr = [NSString stringWithFormat:@"%@",[data valueForKey:@"InactiveImage"]];
+            cell.MenuTittle.textColor = [UIColor colorWithRed:(164/255.0f)
+                                                        green:(164/255.0f)
+                                                         blue:(164/255.0f)
+                                                        alpha:1.0f];
+           NSString * objstr = [NSString stringWithFormat:@"%@",[data valueForKey:@"InactiveImage"]];
            objstr= [objstr stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
            [cell.MenuImg setImageWithURL:[NSURL URLWithString:objstr]];
-
             //cell.MenuImg.image = [UIImage imageNamed:objstr];
-         }
-      
-        }
+       }
+    }
 }
 - (void)fetchMoreItems {
-    NSLog(@"FETCHING MORE ITEMS ******************");
     
+    NSLog(@"FETCHING MORE ITEMS ******************");
     NSMutableArray *newData = [NSMutableArray array];
     NSInteger pageSize;
     pageSize= ITEMS_PAGE_SIZE;
-    
     double delayInSeconds =1.0;
     dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delayInSeconds * NSEC_PER_SEC);
     dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
@@ -374,21 +343,14 @@
         
     });
 }
-
-
-
-
+#pragma mark - pressDosomethingAction
 - (IBAction)pressDosomething:(id)sender {
-    
     objCustomAlterview.view .hidden  = NO;
     objCustomAlterview.alertBgView.hidden = NO;
-    
     objCustomAlterview.alertMainBgView.hidden = NO;
-    
     objCustomAlterview.btnYes.hidden = NO;
     objCustomAlterview.btnNo.hidden = NO;
     objCustomAlterview.alertCancelButton.hidden = NO;
-    
     objCustomAlterview.alertMsgLabel.text = @"AVAILABLE NOW?";
     objCustomAlterview.alertMsgLabel.textAlignment = NSTextAlignmentCenter;
    objCustomAlterview. alertMsgLabel.lineBreakMode = NSLineBreakByWordWrapping;
@@ -398,13 +360,11 @@
     NSString * strsessionID =[dic valueForKey:@"SessionId"];
     loginUserSessionID=strsessionID;
 }
-
 - (IBAction)alertPressCancel:(id)sender {
     objCustomAlterview. alertBgView.hidden = YES;
     objCustomAlterview.alertMainBgView.hidden = YES;
     objCustomAlterview.view .hidden  = YES;
 }
-
 - (IBAction)alertPressYes:(id)sender {
     objCustomAlterview.alertBgView.hidden = YES;
     objCustomAlterview.alertMainBgView.hidden = YES;
@@ -412,35 +372,42 @@
     [self loadupdateDosomethingWebService:selectedItemsArray :@"Yes"];
 
 }
-
 - (IBAction)alertPressNo:(id)sender {
     objCustomAlterview.alertBgView.hidden = YES;
     objCustomAlterview.alertMainBgView.hidden = YES;
     [objCustomAlterview.view setHidden:YES];
     [self loadupdateDosomethingWebService:selectedArray :@"No"];
 }
+#pragma mark - loadupdateDosomethingWebService
 -(void)loadupdateDosomethingWebService:(NSArray *)selectItemID :(NSString*)selectOption
 {
-    [objWebService updateDosomething:UpdateDoSomething_API sessionid:loginUserSessionID dosomething_id:selectItemID available_now:selectOption success:^(AFHTTPRequestOperation *operation, id responseObject)
+    [objWebService updateDosomething:UpdateDoSomething_API
+                           sessionid:loginUserSessionID
+                      dosomething_id:selectItemID
+                       available_now:selectOption
+                             success:^(AFHTTPRequestOperation *operation, id responseObject)
     {
         NSString * responseMsg=[[responseObject valueForKey:@"updatedosomething"]valueForKey:@"Message"];
+        
         if(![responseMsg isEqualToString:@""])
         {
            NSLog(@"responseMsg:%@",responseMsg);
             if(IS_GREATER_IOS7)
             {
-             [self presentViewController:[ DSAppCommon alertWithTitle:@"Title" withMessage:responseMsg preferredStyle:UIAlertControllerStyleAlert] animated:YES completion:NULL];
+             [self presentViewController:[ DSAppCommon alertWithTitle:@"Title"
+                                                          withMessage:responseMsg
+                                                       preferredStyle:UIAlertControllerStyleAlert] animated:YES completion:NULL];
             }
             else
             {
-                [DSAppCommon showSimpleAlertWithMessage:responseMsg];
+            [self presentViewController:[ DSAppCommon alertWithTitle:@"Title"
+                                                             withMessage:responseMsg
+                                                          preferredStyle:UIAlertControllerStyleAlert] animated:YES completion:NULL];
             }
         }
-       
-        
-    } failure:^(AFHTTPRequestOperation *operation, id error) {
-        
-    }];
+    }
+                             failure:^(AFHTTPRequestOperation *operation, id error) {
+                             }];
 }
 
 - (void)didReceiveMemoryWarning {

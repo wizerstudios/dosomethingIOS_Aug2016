@@ -108,7 +108,7 @@
     [self getUserCurrenLocation];
     deviceUdid = [OpenUDID value];
    
-    [self profileImageDisplayMethod];
+    
     
 }
 -(void)viewWillAppear:(BOOL)animated
@@ -176,7 +176,7 @@
     infoArray=[[NSMutableArray alloc]initWithObjects:@"profile_noimg",@"profile_noimg",@"profile_noimg", nil];
     [self CustomAlterview];
    
-
+    [self profileImageDisplayMethod];
      [_tableviewProfile reloadData];
 }
 -(void)profileImageDisplayMethod

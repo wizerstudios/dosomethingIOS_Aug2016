@@ -9,10 +9,8 @@
 #import <UIKit/UIKit.h>
 
 @interface HomeViewController : UIViewController
-
 {
     NSMutableArray * menuArray;
-    
 }
 @property(nonatomic,strong) IBOutlet UICollectionView * homeCollectionView;
 - (IBAction)pressDosomething:(id)sender;
