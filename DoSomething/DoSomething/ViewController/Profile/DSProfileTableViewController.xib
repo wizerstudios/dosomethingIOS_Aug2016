@@ -47,6 +47,7 @@
                 <outlet property="accountview" destination="ljA-Or-J8C" id="JbP-Zq-pgF"/>
                 <outlet property="addinteresthobbiesview" destination="JZZ-Cy-1mL" id="kLG-uO-awg"/>
                 <outlet property="buttonPushHobbies" destination="XSv-JO-B6Y" id="fMO-cx-lCo"/>
+                <outlet property="cameraActionButton" destination="yEP-AV-rbV" id="Gdf-Iv-QOb"/>
                 <outlet property="datepickerview" destination="eSq-uz-bbk" id="uHr-UV-Ea5"/>
                 <outlet property="emailTextField" destination="Y5k-5L-ppj" id="L0U-7T-Df3"/>
                 <outlet property="femaleButton" destination="FEA-gN-HOx" id="Oaf-Nh-d01"/>
@@ -69,6 +70,7 @@
                 <outlet property="scrView" destination="Jph-wh-oWV" id="2TD-I8-2k3"/>
                 <outlet property="termandprivacyview" destination="nh0-IZ-Cgt" id="NDg-o0-h6o"/>
                 <outlet property="textViewAboutYou" destination="S3a-Zk-Z4K" id="TG1-U0-dzX"/>
+                <outlet property="topViewCell" destination="gQD-n9-fBh" id="xvk-Ce-dg6"/>
                 <outlet property="vibrationSwitchBtn" destination="B2C-EH-MfI" id="chG-gy-KsG"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>

@@ -56,7 +56,6 @@
                 <outlet property="profileImagePageControl" destination="LRb-lA-1vW" id="8hY-0d-Lac"/>
                 <outlet property="profileImageView" destination="bAy-v9-r7J" id="mIh-Jr-y7o"/>
                 <outlet property="scrView" destination="U02-po-bf5" id="U3q-Nv-DTt"/>
-                <outlet property="topViewCell" destination="uey-h2-iAy" id="0Hn-r3-J4X"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>

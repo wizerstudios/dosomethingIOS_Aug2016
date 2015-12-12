@@ -191,6 +191,7 @@
     [customNavigation.saveBtn setHidden:NO];
     [self.navigationController.navigationBar addSubview:customNavigation.view];
     [customNavigation.saveBtn addTarget:self action:@selector(saveAction:) forControlEvents:UIControlEventTouchUpInside];
+    [_cameraActionButton addTarget:self action:@selector(selectCamera:) forControlEvents:UIControlEventTouchUpInside];
 
 }
 
@@ -258,65 +259,52 @@
     isNotification_sound = @"Yes";
     
     NSString *ImageURL1 , *ImageURL2, *ImageURL3 ;
-    NSData *imageData1, *imageData2, *imageData3;
+   
     if(profileDict.count > 0){
+        
         if([[profileDict valueForKey:@"image1"] isEqual:@""]&&[[profileDict valueForKey:@"image2"] isEqual:@""] && [[profileDict valueForKey:@"image3"] isEqual:@""]){
-            profileDataArray = [[NSMutableArray alloc] init];
-            
-            
-            for(int i = 0; i < 3; i++)
-            {
-                NSData *data = [NSData new];
-                [profileDataArray addObject:data];
-            }
+            [self profileDataArrayValue];
         }
         
-        
         else{
-           
             ImageURL1 = [profileDict valueForKey:@"image1"];
-            
             ImageURL2 = [profileDict valueForKey:@"image2"];
-            
             ImageURL3 = [profileDict valueForKey:@"image3"];
             
-            
-            
-            profileDataArray = [[NSMutableArray alloc]initWithObjects:ImageURL1,ImageURL2,ImageURL3, nil];        }
+            profileDataArray = [[NSMutableArray alloc]initWithObjects:ImageURL1,ImageURL2,ImageURL3, nil];
+        }
         
     }
     else{
         if(userDetailsDict.count > 0){
-            
-            
             if([[userDetailsDict valueForKey:@"profileImage"] isEqual:@""]){
                 ImageURL1 = [userDetailsDict valueForKey:@"profileImage"];
             }
             else{
                 ImageURL1 = [userDetailsDict valueForKey:@"profileImage"];
-             
-                
+     
             }
-            ImageURL2 = @"";
-           
-            ImageURL3 = @"";
-            
-            
-            profileDataArray = [[NSMutableArray alloc]initWithObjects:imageData1,imageData2,imageData3, nil];
+            ImageURL2 = @"";ImageURL3 = @"";
+            profileDataArray = [[NSMutableArray alloc]initWithObjects:ImageURL1,ImageURL2,ImageURL3, nil];
             
         }
         else{
-            profileDataArray = [NSMutableArray new];
-            
-            
-            for(int i = 0; i < 3; i++)
-            {
-                NSData *data = [NSData new];
-                [profileDataArray addObject:data];
-            }
+            [self profileDataArrayValue];
         }
     }
     
+}
+#pragma mark - profileDataArray
+
+-(void)profileDataArrayValue{
+    profileDataArray = [NSMutableArray new];
+    
+    
+    for(int i = 0; i < 3; i++)
+    {
+        NSData *data = [NSData new];
+        [profileDataArray addObject:data];
+    }
 }
 
 #pragma mark - scroll
@@ -324,27 +312,32 @@
 -(void)profileScroll{
     
     self.scrView.pagingEnabled=YES;
-   
+    self.scrView.delegate=self;
     
     int spacing = 20;
     
-    for(int i = 0; i < [profileDataArray count]; i++)
+    for(int i = 0; i < 3; i++)
     {
-        NSLog(@"int = %d",i);
-        NSData *profileData = [profileDataArray objectAtIndex:i];
-       
+        
+        
+        //if(profileDict==nil)
+        NSData * profileData = [profileDataArray objectAtIndex:i];
+        
+        NSString *image     = [profileDataArray objectAtIndex:i];
+        
+        
         if(IS_IPHONE6_Plus)
         {
             userProfileImage = [[UIImageView alloc]initWithFrame:CGRectMake((self.view.frame.size.width/3.5) + spacing, 20,self.profileImageview.frame.size.width, self.profileImageview.frame.size.height)];
         }
         else
         {
-        userProfileImage = [[UIImageView alloc]initWithFrame:CGRectMake((i*self.scrView.frame.size.width) + spacing, 20,self.profileImageview.frame.size.width, self.profileImageview.frame.size.height)];
+            userProfileImage = [[UIImageView alloc]initWithFrame:CGRectMake((i*self.scrView.frame.size.width) + spacing, 20,self.profileImageview.frame.size.width, self.profileImageview.frame.size.height)];
         }
         [userProfileImage setTag:i+100];
         if([profileData length] == 0){
-                [userProfileImage setImage:[UIImage imageNamed:@"profile_noimg"]];
-               // [topViewCell setHidden:YES];
+            [userProfileImage setImage:[UIImage imageNamed:@"profile_noimg"]];
+            // [topViewCell setHidden:YES];
             if(i==0){
                 [topViewCell setHidden:YES];
                 self.scrView.scrollEnabled = NO;
@@ -353,37 +346,71 @@
         }
         else{
             if(profileDict==nil){
-                [userProfileImage setImage:[UIImage imageWithData:profileData]];
-               
-            }
-            
-            else{
-
-                if(isPick == YES && i==CurrentImage){
-                    [userProfileImage setImage:[UIImage imageWithData:profileData]];
-                    isPick = NO;
-                    break;
-                }
-                else{
-                    NSString *image     = [profileDataArray objectAtIndex:i];
-                    NSLog(@"image = %@",image);
-                    if([image isEqualToString:@""] || image == nil){
+                if(userDetailsDict.count>0) {
+                    if(isPick==YES){
+                        if([[userDetailsDict valueForKey:@"profileImage"] isEqual:[profileDataArray objectAtIndex:i]])
+                        {
+                            
+                            [userProfileImage setImageWithURL:[NSURL URLWithString:image]];
+                        }
+                        else{
+                            [userProfileImage setImage:[UIImage imageWithData:profileData]];
+                        }
                         
-                        [userProfileImage setImage:[UIImage imageWithData:profileData]];
                     }
-
-                    else{
-                        downloadImageFromUrl(image,userProfileImage);
-                        [userProfileImage setImage:[UIImage imageNamed:image]];
-                    }
+                    else
+                        [userProfileImage setImageWithURL:[NSURL URLWithString:image]];
+                    
+                }
+                
+                
+                else{
+                    [userProfileImage setImage:[UIImage imageWithData:profileData]];
                 }
                 
             }
-            
-        
-                [userProfileImage setContentMode:UIViewContentModeScaleAspectFill];
-                [cell.cameraButton setHidden:YES];
-                [topViewCell setHidden:NO];
+            else{
+                
+                if(isPick==YES){
+                    
+                    if([[profileDict valueForKey:@"image1"] isEqual:[profileDataArray objectAtIndex:i]]){
+                        
+                        [userProfileImage setImageWithURL:[NSURL URLWithString:image]];
+                    }
+                    else if([[profileDict valueForKey:@"image2"] isEqual:[profileDataArray objectAtIndex:i]]){
+                        [userProfileImage setImageWithURL:[NSURL URLWithString:image]];
+                    }
+                    else if([[profileDict valueForKey:@"image3"] isEqual:[profileDataArray objectAtIndex:i]]){
+                        [userProfileImage setImageWithURL:[NSURL URLWithString:image]];
+                        
+                    }
+                    else
+                        
+                        [userProfileImage setImage:[UIImage imageWithData:profileData]];
+                }
+                else{
+                    [userProfileImage setImageWithURL:[NSURL URLWithString:image]];
+                }
+                
+                //                NSURL *url = [NSURL URLWithString:image];
+                //                NSURLRequest *request = [NSURLRequest requestWithURL:url];
+                //                UIImage *placeholderImage = [UIImage imageNamed:@"profile_noimg"];
+                //
+                //                //__weak UITableViewCell *weakCell = cell;
+                //
+                //                [userProfileImage setImageWithURLRequest:request
+                //                                      placeholderImage:placeholderImage
+                //                                               success:^(NSURLRequest *request, NSHTTPURLResponse *response, UIImage *image) {
+                //
+                //                                                   userProfileImage.image = image;
+                //                                                   //[weakCell setNeedsLayout];
+                //
+                //                                               } failure:nil];
+                
+            }
+            [userProfileImage setContentMode:UIViewContentModeScaleAspectFill];
+            [_cameraActionButton setHidden:YES];
+            [topViewCell setHidden:NO];
             
         }
         userProfileImage.layer.cornerRadius = userProfileImage.frame.size.height / 2;
@@ -393,14 +420,14 @@
         [singleTap setNumberOfTapsRequired:1];
         [userProfileImage addGestureRecognizer:singleTap];
         [self.scrView addSubview:userProfileImage];
-            
-//        cameraImage = [[UIImageView alloc]initWithFrame:CGRectMake(userProfileImage.frame.size.width / 2 - 15, self.scrView.frame.size.height - 55, 30, 30)];
-//        [cameraImage setTag:i+200];
-//        [cameraImage setImage:[UIImage imageNamed:@"profile_camera_icon"]];
-//    
-//        cameraImage.userInteractionEnabled = YES;
-//        [cameraImage setUserInteractionEnabled:YES];
-//        [userProfileImage addSubview:cameraImage];
+        
+        cameraImage = [[UIImageView alloc]initWithFrame:CGRectMake(userProfileImage.frame.size.width / 2 - 15, self.scrView.frame.size.height - 55, 30, 30)];
+        [cameraImage setTag:i+200];
+        [cameraImage setImage:[UIImage imageNamed:@"profile_camera_icon"]];
+        // [topViewCell setHidden:YES];
+        cameraImage.userInteractionEnabled = YES;
+        [cameraImage setUserInteractionEnabled:YES];
+        [userProfileImage addSubview:cameraImage];
         
     }
     
@@ -414,27 +441,27 @@
         [self.scrView setContentOffset:CGPointMake((3*self.profileImageview.frame.size.width - 15), 0)animated:NO];
     
     
-//    xslider=0;
-//    pgDtView=[[UIView alloc]init];
-//    pgDtView.backgroundColor=[UIColor clearColor];
-//    pageImageView =[[UIImageView alloc]init];
-//    profileImagePageControl.numberOfPages=infoArray.count;
+    xslider=0;
+    pgDtView=[[UIView alloc]init];
+    pgDtView.backgroundColor=[UIColor clearColor];
+    pageImageView =[[UIImageView alloc]init];
+    profileImagePageControl.numberOfPages=infoArray.count;
     
-//    for(int i=0;i<profileImagePageControl.numberOfPages;i++)
-//    {
-//        blkdot=[[UIImageView alloc]init];
-//        [blkdot setFrame:CGRectMake(i*18, 0, 8, 8 )];
-//        [blkdot setImage:[UIImage imageNamed:@"dot_normal"]];
-//        
-//        [pgDtView addSubview:blkdot];
-//        [pageImageView setFrame:CGRectMake(0, 0, 8, 8)];
-//        [pageImageView setImage:[UIImage imageNamed:@"dot_active_red"]];
-//        [pgDtView addSubview:pageImageView];
-//        [topViewCell addSubview:pgDtView];
-//        [pgDtView setFrame:CGRectMake(15, -5, profileImagePageControl.numberOfPages*18, 10)];
-//        
-//    }
- 
+    for(int i=0;i<profileImagePageControl.numberOfPages;i++)
+    {
+        blkdot=[[UIImageView alloc]init];
+        [blkdot setFrame:CGRectMake(i*18, 0, 8, 8 )];
+        [blkdot setImage:[UIImage imageNamed:@"dot_normal"]];
+        
+        [pgDtView addSubview:blkdot];
+        [pageImageView setFrame:CGRectMake(0, 0, 8, 8)];
+        [pageImageView setImage:[UIImage imageNamed:@"dot_active_red"]];
+        [pgDtView addSubview:pageImageView];
+        [topViewCell addSubview:pgDtView];
+        [pgDtView setFrame:CGRectMake(15, -5, profileImagePageControl.numberOfPages*18, 10)];
+        
+    }
+    
     
 }
 
