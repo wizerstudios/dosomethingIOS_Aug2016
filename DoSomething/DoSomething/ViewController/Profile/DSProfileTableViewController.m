@@ -109,9 +109,12 @@
     objWebService = [[DSWebservice alloc]init];
     
     deviceUdid = [OpenUDID value];
+    
+     self.scrView.delegate=self;
    
     [self profileImageDisplayMethod];
     isPick=NO;
+    
     
 }
 -(void)viewWillAppear:(BOOL)animated
@@ -321,7 +324,7 @@
 -(void)profileScroll{
     
     self.scrView.pagingEnabled=YES;
-    self.scrView.delegate=self;
+   
     
     int spacing = 20;
     
@@ -356,14 +359,23 @@
             
             else{
 
-                NSString *image     = [profileDataArray objectAtIndex:CurrentImage];
-                profileData = [profileDataArray objectAtIndex:CurrentImage];
-                if([image isEqualToString:@""] || image == nil)
+                if(isPick == YES && i==CurrentImage){
                     [userProfileImage setImage:[UIImage imageWithData:profileData]];
-
+                    isPick = NO;
+                    break;
+                }
                 else{
-                    downloadImageFromUrl(image,userProfileImage);
-                    [userProfileImage setImage:[UIImage imageNamed:image]];
+                    NSString *image     = [profileDataArray objectAtIndex:i];
+                    NSLog(@"image = %@",image);
+                    if([image isEqualToString:@""] || image == nil){
+                        
+                        [userProfileImage setImage:[UIImage imageWithData:profileData]];
+                    }
+
+                    else{
+                        downloadImageFromUrl(image,userProfileImage);
+                        [userProfileImage setImage:[UIImage imageNamed:image]];
+                    }
                 }
                 
             }
@@ -407,13 +419,13 @@
 //    pgDtView.backgroundColor=[UIColor clearColor];
 //    pageImageView =[[UIImageView alloc]init];
 //    profileImagePageControl.numberOfPages=infoArray.count;
-//    
+    
 //    for(int i=0;i<profileImagePageControl.numberOfPages;i++)
 //    {
 //        blkdot=[[UIImageView alloc]init];
 //        [blkdot setFrame:CGRectMake(i*18, 0, 8, 8 )];
 //        [blkdot setImage:[UIImage imageNamed:@"dot_normal"]];
-//
+//        
 //        [pgDtView addSubview:blkdot];
 //        [pageImageView setFrame:CGRectMake(0, 0, 8, 8)];
 //        [pageImageView setImage:[UIImage imageNamed:@"dot_active_red"]];
@@ -422,7 +434,8 @@
 //        [pgDtView setFrame:CGRectMake(15, -5, profileImagePageControl.numberOfPages*18, 10)];
 //        
 //    }
-
+ 
+    
 }
 
 - (IBAction)pageChanged:(id)sender {
@@ -444,7 +457,6 @@
     [self.scrView setNeedsDisplay];
     profileImagePageControl.currentPage=jslider;
     [pageImageView setFrame:CGRectMake(jslider*18, 0, 8, 8)];
-    
     isTapping=NO;
     scrolldragging=@"YES";
 }
@@ -1064,21 +1076,31 @@
     [topViewCell setHidden:NO];
     image = [info valueForKey:UIImagePickerControllerEditedImage];
     
-    if(CurrentImage==0)
+    if(CurrentImage==0){
         profileImage1 = image;
+        isPick=YES;
+    }
     
-    else if(CurrentImage == 1)
+    else if(CurrentImage == 1){
         profileImage2 = image;
+        isPick=YES;
+    }
    
-    else if(CurrentImage == 2)
+    else if(CurrentImage == 2){
         profileImage3 = image;
+        isPick=YES;
+    }
     
     NSData *profileData = UIImagePNGRepresentation([info objectForKey:UIImagePickerControllerEditedImage]);
     
      [profileDataArray replaceObjectAtIndex:CurrentImage withObject:profileData];
     
+    [self profileScroll];
+    
     [imagepickerController dismissViewControllerAnimated:YES completion:nil];
-    //isPick=YES;
+    
+    
+    
     
 
 }
