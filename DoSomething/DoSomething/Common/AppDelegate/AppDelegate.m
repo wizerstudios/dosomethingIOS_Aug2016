@@ -15,8 +15,6 @@
 #import <Fabric/Fabric.h>
 #import <Crashlytics/Crashlytics.h>
 
-
-
 @interface AppDelegate ()
 
 @end
@@ -132,11 +130,8 @@
         settingButton.frame =CGRectMake(chatsButton.frame.origin.x+chatsButton.frame.size.width+30,chatsButton.frame.origin.y+10,29,28);
     }
 
-    
-
     [self.window.rootViewController.view addSubview:buttonsView];
     
-
     [buttonsView addSubview:locationButton];
     [buttonsView addSubview:menuButton];
     [buttonsView addSubview:chatsButton];
@@ -207,7 +202,7 @@
 }
 
 - (void)applicationWillEnterForeground:(UIApplication *)application {
-    }
+}
 
 - (void)applicationDidBecomeActive:(UIApplication *)application {
  

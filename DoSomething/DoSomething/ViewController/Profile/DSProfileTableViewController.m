@@ -448,6 +448,10 @@
     isTapping=NO;
     scrolldragging=@"YES";
 }
+#pragma mark - UIScrollViewDelegate
+- (void)pageControl{
+}
+
 
 - (NSString *) getEmail {
     
