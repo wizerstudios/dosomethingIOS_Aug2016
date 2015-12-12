@@ -192,9 +192,9 @@
     }
     else{
         //not using just for reference
-       // [self initializeArrayProfile];
+        [self initializeArrayProfile];
         
-        self.tableViewHeightConstraint.constant=70;
+        self.tableViewHeightConstraint.constant=75;
     }
     NSLog(@"DICT%@",profileDict);
     
@@ -627,9 +627,8 @@
                                     [NSMutableDictionary dictionaryWithObjectsAndKeys:@"switch_on",@"placeHolder",@"",@"NewMessageImage",@"",@"SoundImage",@"",@"VibrationImage",nil],
                                     [NSMutableDictionary dictionaryWithObjectsAndKeys:@"TermsOfUse",@"placeHolder",@"",@"TypingText", nil], nil]atIndex:0];
     
-    titleArray = [[NSArray alloc]initWithObjects:@"Image",@"First Name",@"Last Name",@"male",@"Date of Birth",@"About You",@"Hobbies",@"Email&Password",@"switch_on",@"TermsOfUse",nil];
-    
-    NSLog(@"PlaceHolder %@",placeHolderArray);
+   
+
    
    
 }
@@ -649,8 +648,7 @@
                                     [NSMutableDictionary dictionaryWithObjectsAndKeys:@"Write something about yourself here.",@"placeHolder",@"",@"TypingText", nil],
                                     [NSMutableDictionary dictionaryWithObjectsAndKeys:@"Hobbies",@"placeHolder",@"",@"TypingText", nil],
                                     [NSMutableDictionary dictionaryWithObjectsAndKeys:[profileDict valueForKey:@"email"],@"placeHolder",@"Password",@"placeHolderPass",@"",@"TypingText",@"",@"TypingTextPass", nil], nil]atIndex:0];
-    
-    titleArray = [[NSArray alloc]initWithObjects:@"Image",@"First Name",@"Last Name",@"male",@"Date of Birth",@"About You",@"Hobbies",@"Email&Password",@"switch_on",@"TermsOfUse",nil];
+
     
     NSLog(@"PlaceHolder %@",placeHolderArray);
     
