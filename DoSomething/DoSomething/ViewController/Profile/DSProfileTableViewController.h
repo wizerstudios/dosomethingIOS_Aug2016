@@ -22,9 +22,9 @@
     IBOutlet DSProfileTableViewCell *CellTermsOfUse;
     IBOutlet DSProfileTableViewCell *cellTextView;
    
-    //IBOutlet UIView *profileGenderView;
+    IBOutlet UIView *profileGenderView;
     
-    //IBOutlet UILabel *profileGenderLabel;
+    IBOutlet UILabel *profileGenderLabel;
     
     IBOutlet UILabel *profileGenderValueLabel;
     
@@ -74,85 +74,12 @@
 
 @property (assign) BOOL selectEmail;
 
-//@property (strong, nonatomic) IBOutlet UIImageView *profileImageView;
-
-//@property (strong, nonatomic) IBOutlet UIScrollView *scrView;
-- (IBAction)pageChanged:(id)sender;
-
-
-
-
-
-@property(nonatomic,strong) IBOutlet UIScrollView * profileMainScrollview;
-
-@property(nonatomic,strong) IBOutlet UIView       *profileImageAddview;
-
-@property(nonatomic,strong) IBOutlet UIView       *nameView;
-
-@property(nonatomic,strong) IBOutlet UIView       *genderalview;
-
-@property(nonatomic,strong) IBOutlet UIView       *datepickerview;
-
-@property(nonatomic,strong) IBOutlet UIView       *aboutview;
-
-@property(nonatomic,strong) IBOutlet UIView       *addinteresthobbiesview;
-
-@property(nonatomic,strong) IBOutlet UIView       *accountview;
-
-@property(nonatomic,strong) IBOutlet UIView       *notificationview;
-
-@property(nonatomic,strong) IBOutlet UIView       *termandprivacyview;
-
-@property(nonatomic,strong) IBOutlet UIView       *profileGenderview;
-
-@property(nonatomic,strong) IBOutlet UILabel     *notificationLbl;
-
-@property(nonatomic,strong) IBOutlet NSLayoutConstraint *profileMainviewbottomPosition;
-
-@property (weak, nonatomic) IBOutlet UITextView *textViewAboutYou;
-
-@property (weak, nonatomic) IBOutlet UITextField *emailTextField;
-
-@property (weak, nonatomic) IBOutlet UITextField *passwordTextField;
-
-@property(nonatomic,strong)IBOutlet UITextField *firstnameTxt;
-
-@property(nonatomic,strong) IBOutlet UITextField *lastNameTxt;
-
-@property (weak, nonatomic) IBOutlet UITextField *DOBTxt;
-
-@property (weak, nonatomic) IBOutlet UISwitch *messSwitchBtn;
-
-@property (weak, nonatomic) IBOutlet UISwitch *SoundSwitchBtn;
-
-@property (weak, nonatomic) IBOutlet UISwitch *vibrationSwitchBtn;
-
-@property (weak, nonatomic) IBOutlet UIButton *maleButton;
-
-@property (weak, nonatomic) IBOutlet UIButton *femaleButton;
-
-@property (weak, nonatomic) IBOutlet UILabel *labelAboutYou;
-
-@property (weak, nonatomic) IBOutlet UILabel *labelMale;
-
-@property (weak, nonatomic) IBOutlet UILabel *labelFemale;
-
-@property (weak, nonatomic) IBOutlet UIButton *termsOfUse;
-
-@property (weak, nonatomic) IBOutlet UIButton *privacyPolicy;
-
-@property(nonatomic,strong) IBOutlet UILabel *profilegenderLbl;
-
-@property (weak, nonatomic) IBOutlet UIButton *buttonPushHobbies;
-
-@property (weak, nonatomic) IBOutlet UIImageView *plusIconImageView;
-
-@property (strong, nonatomic) IBOutlet UIImageView *profileImageview;
+@property (strong, nonatomic) IBOutlet UIImageView *profileImageView;
+@property (strong, nonatomic) IBOutlet UIView *topViewCell;
 
 @property (strong, nonatomic) IBOutlet UIScrollView *scrView;
-@property (strong, nonatomic) IBOutlet UIButton *cameraActionButton;
+- (IBAction)pageChanged:(id)sender;
 
-@property (strong, nonatomic) IBOutlet UIView *topViewCell;
 
 
 @end
