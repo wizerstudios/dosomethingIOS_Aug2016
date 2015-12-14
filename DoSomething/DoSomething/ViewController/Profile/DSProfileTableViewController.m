@@ -312,13 +312,15 @@
                 if(isPick==YES){
                     
                     if([[profileDict valueForKey:@"image1"] isEqual:[profileDataArray objectAtIndex:i]]){
-                        
+                        downloadImageFromUrl(image, userProfileImage);
                         [userProfileImage setImageWithURL:[NSURL URLWithString:image]];
                     }
                     else if([[profileDict valueForKey:@"image2"] isEqual:[profileDataArray objectAtIndex:i]]){
+                        downloadImageFromUrl(image, userProfileImage);
                         [userProfileImage setImageWithURL:[NSURL URLWithString:image]];
                     }
                     else if([[profileDict valueForKey:@"image3"] isEqual:[profileDataArray objectAtIndex:i]]){
+                        downloadImageFromUrl(image, userProfileImage);
                         [userProfileImage setImageWithURL:[NSURL URLWithString:image]];
                         
                     }
@@ -326,6 +328,7 @@
                         [userProfileImage setImage:[UIImage imageWithData:profileData]];
                 }
                 else{
+                    downloadImageFromUrl(image, userProfileImage);
                     [userProfileImage setImageWithURL:[NSURL URLWithString:image]];
                 }
             }
@@ -364,7 +367,7 @@
     
 }
 -(void) pageScrollView{
-    if(isPageControl==NO){
+    //if(isPageControl==NO){
         xslider=0;
         pgDtView=[[UIView alloc]init];
         pgDtView.backgroundColor=[UIColor clearColor];
@@ -385,7 +388,7 @@
             [pgDtView setFrame:CGRectMake(15, -5, profileImagePageControl.numberOfPages*18, 10)];
             
         }
-    } isPageControl=YES;
+   // } isPageControl=YES;
     
 }
 
