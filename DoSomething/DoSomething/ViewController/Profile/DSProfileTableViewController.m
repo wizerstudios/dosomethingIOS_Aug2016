@@ -750,7 +750,7 @@
                  
              }
             if (indexPath.row == 4) {
-            return 55;
+            return 49;
             }
             if ( indexPath.row ==6)
             {
