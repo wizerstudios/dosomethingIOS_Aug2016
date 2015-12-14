@@ -26,6 +26,8 @@
     NSString                * deviceUdid;
     BOOL   iscollectiviewreload;
     AppDelegate *appDelegate;
+    NSMutableDictionary *profileDict;
+    
 }
 @end
 
@@ -51,7 +53,8 @@
 }
 
 -(void)viewWillAppear:(BOOL)animated{
-    
+    profileDict=[[NSMutableDictionary alloc]init];
+    profileDict =[[NSUserDefaults standardUserDefaults] valueForKey:USERDETAILS];
     self.navigationController.navigationBarHidden=NO;
     [self.navigationItem setHidesBackButton:YES animated:NO];
     [self.navigationController.navigationBar setTranslucent:YES];
@@ -135,7 +138,9 @@
 -(void)backAction
 {
     appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+    if(profileDict!=NULL){
     appDelegate.buttonsView.hidden=NO;
+    }
     [self.navigationController popViewControllerAnimated:YES];
 }
 
