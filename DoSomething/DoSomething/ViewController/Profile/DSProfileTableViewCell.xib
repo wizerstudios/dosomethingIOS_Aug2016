@@ -855,9 +855,6 @@
                                 <rect key="frame" x="98" y="0.0" width="202" height="40"/>
                                 <animations/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="40" id="1Xu-VL-UDu"/>
-                                </constraints>
                                 <color key="textColor" red="0.59999999999999998" green="0.59999999999999998" blue="0.59999999999999998" alpha="1" colorSpace="calibratedRGB"/>
                                 <fontDescription key="fontDescription" name="Patron-Regular" family="Patron" pointSize="10"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
@@ -869,12 +866,12 @@
                         <animations/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstAttribute="trailing" secondItem="d6I-S9-MzF" secondAttribute="trailing" id="F5g-IC-5l9"/>
+                            <constraint firstAttribute="trailing" secondItem="d6I-S9-MzF" secondAttribute="trailing" id="3ef-22-zca"/>
+                            <constraint firstItem="d6I-S9-MzF" firstAttribute="leading" secondItem="Mvl-SM-bdc" secondAttribute="trailing" constant="18" id="Vfb-c7-V1P"/>
+                            <constraint firstAttribute="bottom" secondItem="d6I-S9-MzF" secondAttribute="bottom" id="ZGh-Se-b5H"/>
                             <constraint firstItem="Mvl-SM-bdc" firstAttribute="top" secondItem="URf-8H-5OS" secondAttribute="top" constant="4" id="lvj-Uf-wGN"/>
                             <constraint firstItem="Mvl-SM-bdc" firstAttribute="leading" secondItem="URf-8H-5OS" secondAttribute="leading" constant="5" id="rxV-uk-cDz"/>
-                            <constraint firstItem="d6I-S9-MzF" firstAttribute="leading" secondItem="Mvl-SM-bdc" secondAttribute="trailing" constant="18" id="u3h-Zk-vMm"/>
-                            <constraint firstItem="d6I-S9-MzF" firstAttribute="top" secondItem="URf-8H-5OS" secondAttribute="top" id="xeU-kd-sif"/>
-                            <constraint firstAttribute="bottom" secondItem="d6I-S9-MzF" secondAttribute="bottom" id="xtK-pF-XbZ"/>
+                            <constraint firstItem="d6I-S9-MzF" firstAttribute="top" secondItem="URf-8H-5OS" secondAttribute="top" id="tBC-aT-d0p"/>
                         </constraints>
                     </view>
                 </subviews>
@@ -889,7 +886,6 @@
             <animations/>
             <connections>
                 <outlet property="labelAboutYou" destination="Mvl-SM-bdc" id="iim-O9-U9x"/>
-                <outlet property="layoutConstraintViewHeight" destination="1Xu-VL-UDu" id="zE3-2f-3Ko"/>
                 <outlet property="textViewAboutYou" destination="d6I-S9-MzF" id="clv-p4-OFl"/>
             </connections>
             <point key="canvasLocation" x="751" y="568"/>
