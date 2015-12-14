@@ -107,7 +107,7 @@
     [super viewDidLoad];
     objWebService = [[DSWebservice alloc]init];
     [self initializeArray];
-    [self getUserCurrenLocation];
+    
     deviceUdid = [OpenUDID value];
     isPick=NO;
     isPageControl=NO;
@@ -179,7 +179,7 @@
     }
     infoArray=[[NSMutableArray alloc]initWithObjects:@"profile_noimg",@"profile_noimg",@"profile_noimg", nil];
     [self CustomAlterview];
-   
+    [self getUserCurrenLocation];
 
      [_tableviewProfile reloadData];
 }
