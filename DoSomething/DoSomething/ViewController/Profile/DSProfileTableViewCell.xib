@@ -53,7 +53,6 @@
                 <outlet property="profileGenderLabel" destination="Aq5-3I-doL" id="EyK-WS-nTI"/>
                 <outlet property="profileGenderValueLabel" destination="QOA-QP-Ciw" id="Hh0-u6-DZk"/>
                 <outlet property="profileGenderView" destination="TYu-zj-QOQ" id="pRu-Tc-J2N"/>
-                <outlet property="profileImagePageControl" destination="LRb-lA-1vW" id="8hY-0d-Lac"/>
                 <outlet property="profileImageView" destination="bAy-v9-r7J" id="mIh-Jr-y7o"/>
                 <outlet property="scrView" destination="U02-po-bf5" id="U3q-Nv-DTt"/>
             </connections>

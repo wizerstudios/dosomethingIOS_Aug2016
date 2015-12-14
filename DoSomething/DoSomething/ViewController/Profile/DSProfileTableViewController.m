@@ -93,6 +93,7 @@
     
     AppDelegate *appDelegate;
     BOOL isPick;
+    BOOL isPageControl;
     
 
 }
@@ -114,8 +115,7 @@
    
     [self profileImageDisplayMethod];
     isPick=NO;
-    
-    
+    isPageControl=NO;
 }
 -(void)viewWillAppear:(BOOL)animated
 {
@@ -308,7 +308,6 @@
 }
 
 #pragma mark - scroll
-
 -(void)profileScroll{
     
     self.scrView.pagingEnabled=YES;
@@ -319,13 +318,8 @@
     for(int i = 0; i < 3; i++)
     {
         
-        
-        //if(profileDict==nil)
         NSData * profileData = [profileDataArray objectAtIndex:i];
-        
         NSString *image     = [profileDataArray objectAtIndex:i];
-        
-        
         if(IS_IPHONE6_Plus)
         {
             userProfileImage = [[UIImageView alloc]initWithFrame:CGRectMake((self.view.frame.size.width/3.5) + spacing, 20,self.profileImageview.frame.size.width, self.profileImageview.frame.size.height)];
@@ -337,10 +331,10 @@
         [userProfileImage setTag:i+100];
         if([profileData length] == 0){
             [userProfileImage setImage:[UIImage imageNamed:@"profile_noimg"]];
-            // [topViewCell setHidden:YES];
             if(i==0){
                 [topViewCell setHidden:YES];
                 self.scrView.scrollEnabled = NO;
+                [profileImagePageControl setHidden:YES];
             }
             
         }
@@ -350,24 +344,18 @@
                     if(isPick==YES){
                         if([[userDetailsDict valueForKey:@"profileImage"] isEqual:[profileDataArray objectAtIndex:i]])
                         {
-                            
                             [userProfileImage setImageWithURL:[NSURL URLWithString:image]];
                         }
                         else{
                             [userProfileImage setImage:[UIImage imageWithData:profileData]];
                         }
-                        
                     }
                     else
                         [userProfileImage setImageWithURL:[NSURL URLWithString:image]];
-                    
                 }
-                
-                
                 else{
                     [userProfileImage setImage:[UIImage imageWithData:profileData]];
                 }
-                
             }
             else{
                 
@@ -385,33 +373,16 @@
                         
                     }
                     else
-                        
                         [userProfileImage setImage:[UIImage imageWithData:profileData]];
                 }
                 else{
                     [userProfileImage setImageWithURL:[NSURL URLWithString:image]];
                 }
-                
-                //                NSURL *url = [NSURL URLWithString:image];
-                //                NSURLRequest *request = [NSURLRequest requestWithURL:url];
-                //                UIImage *placeholderImage = [UIImage imageNamed:@"profile_noimg"];
-                //
-                //                //__weak UITableViewCell *weakCell = cell;
-                //
-                //                [userProfileImage setImageWithURLRequest:request
-                //                                      placeholderImage:placeholderImage
-                //                                               success:^(NSURLRequest *request, NSHTTPURLResponse *response, UIImage *image) {
-                //
-                //                                                   userProfileImage.image = image;
-                //                                                   //[weakCell setNeedsLayout];
-                //
-                //                                               } failure:nil];
-                
             }
             [userProfileImage setContentMode:UIViewContentModeScaleAspectFill];
             [_cameraActionButton setHidden:YES];
             [topViewCell setHidden:NO];
-            
+            self.scrView.scrollEnabled = YES;
         }
         userProfileImage.layer.cornerRadius = userProfileImage.frame.size.height / 2;
         userProfileImage.layer.masksToBounds = YES;
@@ -428,7 +399,6 @@
         cameraImage.userInteractionEnabled = YES;
         [cameraImage setUserInteractionEnabled:YES];
         [userProfileImage addSubview:cameraImage];
-        
     }
     
     self.scrView.contentSize=CGSizeMake(self.scrView.frame.size.width*3, self.scrView.frame.size.height);
@@ -440,7 +410,11 @@
     else if(CurrentImage == 2)
         [self.scrView setContentOffset:CGPointMake((3*self.profileImageview.frame.size.width - 15), 0)animated:NO];
     
+    [self pageScrollView];
     
+}
+-(void) pageScrollView{
+    if(isPageControl==NO){
     xslider=0;
     pgDtView=[[UIView alloc]init];
     pgDtView.backgroundColor=[UIColor clearColor];
@@ -461,8 +435,8 @@
         [pgDtView setFrame:CGRectMake(15, -5, profileImagePageControl.numberOfPages*18, 10)];
         
     }
-    
-    
+    } isPageControl=YES;
+
 }
 
 - (IBAction)pageChanged:(id)sender {
@@ -470,6 +444,8 @@
     
     CGFloat x = profileImagePageControl.currentPage * self.scrView.frame.size.width;
     [self.scrView setContentOffset:CGPointMake(x, 0) animated:YES];
+    
+    
 }
 
 

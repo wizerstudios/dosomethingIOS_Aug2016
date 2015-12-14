@@ -63,6 +63,7 @@
                 <outlet property="plusIconImageView" destination="P7Q-ss-mlA" id="Uet-5M-XV7"/>
                 <outlet property="profileGenderview" destination="lDJ-za-Kr5" id="zvl-gX-g06"/>
                 <outlet property="profileImageAddview" destination="9OY-tf-0nV" id="Jvy-R9-WYM"/>
+                <outlet property="profileImagePageControl" destination="N3p-fI-ltf" id="UU6-br-lpt"/>
                 <outlet property="profileImageview" destination="oYv-8b-cFd" id="kVa-OI-OAt"/>
                 <outlet property="profileMainScrollview" destination="yuo-0J-ugQ" id="KjM-xa-jcq"/>
                 <outlet property="profileMainviewbottomPosition" destination="Ni6-mx-k4o" id="3sk-gO-q8t"/>
@@ -70,7 +71,7 @@
                 <outlet property="scrView" destination="Jph-wh-oWV" id="2TD-I8-2k3"/>
                 <outlet property="termandprivacyview" destination="nh0-IZ-Cgt" id="NDg-o0-h6o"/>
                 <outlet property="textViewAboutYou" destination="S3a-Zk-Z4K" id="TG1-U0-dzX"/>
-                <outlet property="topViewCell" destination="gQD-n9-fBh" id="xvk-Ce-dg6"/>
+                <outlet property="topViewCell" destination="gQD-n9-fBh" id="u7r-3A-lWG"/>
                 <outlet property="vibrationSwitchBtn" destination="B2C-EH-MfI" id="chG-gy-KsG"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
@@ -107,7 +108,7 @@
                                                 <constraint firstAttribute="width" constant="125" id="8ha-2Y-NhB"/>
                                             </constraints>
                                         </imageView>
-                                        <pageControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="3" translatesAutoresizingMaskIntoConstraints="NO" id="N3p-fI-ltf">
+                                        <pageControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="N3p-fI-ltf">
                                             <rect key="frame" x="134" y="173" width="32" height="37"/>
                                             <animations/>
                                             <constraints>
