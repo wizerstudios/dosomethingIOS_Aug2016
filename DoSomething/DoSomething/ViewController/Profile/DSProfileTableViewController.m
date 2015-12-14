@@ -388,8 +388,11 @@
             [pgDtView setFrame:CGRectMake(15, -5, profileImagePageControl.numberOfPages*18, 10)];
             
         }
-    } isPageControl=YES;
-    [topViewCell addSubview:pgDtView];
+        
+    }
+    isPageControl=YES;
+   [topViewCell addSubview:pgDtView];
+    //NSLog(@"%@",pgDtView);
     
 }
 
