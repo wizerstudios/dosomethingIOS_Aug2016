@@ -49,14 +49,14 @@
     
     dic =[[NSUserDefaults standardUserDefaults] valueForKey:USERDETAILS];
     
-     strsessionID =[dic valueForKey:@"SessionId"];
-     longitude    =[dic valueForKey:@"longitude"];
-     laditude     =[dic valueForKey:@"latitude"];
+    strsessionID =[dic valueForKey:@"SessionId"];
+    longitude    =[dic valueForKey:@"longitude"];
+    laditude     =[dic valueForKey:@"latitude"];
     NSLog(@"usersessionID:%@",strsessionID);
-
+    
     objWebservice =[[DSWebservice alloc]init];
     
-
+    
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
 }
@@ -66,7 +66,7 @@
     [super viewWillAppear:animated];
     [self.navigationItem setHidesBackButton:YES animated:NO];
     [self getUserCurrenLocation];
-   
+    
     CustomNavigationView *customNavigation;
     customNavigation = [[CustomNavigationView alloc] initWithNibName:@"CustomNavigationView" bundle:nil];
     customNavigation.view.frame = CGRectMake(0,-20, CGRectGetWidth(self.view.frame), 65);
@@ -181,7 +181,7 @@
     [locationManager stopUpdatingLocation];
     
     NSLog(@"current latitude & longitude for main view = %@ & %@",currentLatitude,currentLongitude);
-     [self nearestLocationWebservice];
+    [self nearestLocationWebservice];
     
 }
 
@@ -196,7 +196,7 @@
 {
     [COMMON LoadIcon:self.view];
     [objWebservice nearestUsers:NearestUsers_API sessionid:strsessionID latitude:currentLatitude longitude:currentLongitude filter_status:@"" filter_gender:@"" filter_agerange:@"" filter_distance:@"" success:^(AFHTTPRequestOperation *operation, id responseObject) {
-
+        
         if([[[responseObject valueForKey:@"nearestusers"]valueForKey:@"status"] isEqualToString:@"success"])
         {
             NSMutableArray * nearestUserdetaile =[[NSMutableArray alloc]init];
@@ -206,14 +206,14 @@
             profileImages   =[nearestUserdetaile valueForKey:@"image1"];
             
             [locationCollectionView reloadData];
-             NSLog(@"%@",nearestUserdetaile);
+            NSLog(@"%@",nearestUserdetaile);
             [COMMON removeLoading];
         }
         
         
         
     } failure:^(AFHTTPRequestOperation *operation, id error) {
-    
+        
     }];
 }
 
@@ -253,7 +253,7 @@
     
     locationCellView.imageProfile.layer.cornerRadius = locationCellView.imageProfile.frame.size.height/2;
     
-     locationCellView.imageProfile.layer.masksToBounds = YES;
+    locationCellView.imageProfile.layer.masksToBounds = YES;
     
     return locationCellView;
 }
@@ -287,32 +287,32 @@
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath;
 {
-//   LocationCollectionViewCell*SelectCell = (LocationCollectionViewCell *)[collectionView cellForItemAtIndexPath:indexPath];
-//    
-//    
-//    NSString *MyPatternString = [profileImages objectAtIndex:indexPath.row];
-//    
-//    SelectCell.imageProfile.image =[UIImage imageNamed:MyPatternString ];
-//    SelectCell.sendRequest.text=@"Request Send";
-//    SelectCell.sendRequest.textColor=[UIColor darkGrayColor];
-//    SelectCell.hobbiesImage.image=[UIImage imageNamed:@"request_send1.png"];
-//    SelectCell.activeNow.text=@"NOW";
-//    SelectCell.activeNow.backgroundColor=[UIColor whiteColor];
+    //   LocationCollectionViewCell*SelectCell = (LocationCollectionViewCell *)[collectionView cellForItemAtIndexPath:indexPath];
+    //
+    //
+    //    NSString *MyPatternString = [profileImages objectAtIndex:indexPath.row];
+    //
+    //    SelectCell.imageProfile.image =[UIImage imageNamed:MyPatternString ];
+    //    SelectCell.sendRequest.text=@"Request Send";
+    //    SelectCell.sendRequest.textColor=[UIColor darkGrayColor];
+    //    SelectCell.hobbiesImage.image=[UIImage imageNamed:@"request_send1.png"];
+    //    SelectCell.activeNow.text=@"NOW";
+    //    SelectCell.activeNow.backgroundColor=[UIColor whiteColor];
     
-//    SelectCell.hobbiesnames.textColor=[UIColor colorWithRed:(float)230.0/255 green:(float)63.0/255 blue:(float)82.0/255 alpha:1.0f];
-//
-   
+    //    SelectCell.hobbiesnames.textColor=[UIColor colorWithRed:(float)230.0/255 green:(float)63.0/255 blue:(float)82.0/255 alpha:1.0f];
+    //
+    
 }
 -(IBAction)filterAction:(id)sender
 {
     if(isFilteraction==NO)
     {
-    self.collectionviewxpostion.constant =-240;
-    self.filterviewxposition.constant    = 65;
-    self.sepratorXposition.constant      =self.collectionviewxpostion.constant-20;
-    appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
-    appDelegate.buttonsView.frame=CGRectMake(self.collectionviewxpostion.constant-20,self.sepratorlbl.frame.origin.y+self.sepratorlbl.frame.size.height,self.view.frame.size.width,50);
-    isFilteraction=YES;
+        self.collectionviewxpostion.constant =-240;
+        self.filterviewxposition.constant    = 65;
+        self.sepratorXposition.constant      =self.collectionviewxpostion.constant-20;
+        appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+        appDelegate.buttonsView.frame=CGRectMake(self.collectionviewxpostion.constant-20,self.sepratorlbl.frame.origin.y+self.sepratorlbl.frame.size.height,self.view.frame.size.width,50);
+        isFilteraction=YES;
     }
     else if (isFilteraction==YES)
     {
@@ -322,14 +322,15 @@
         appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
         appDelegate.buttonsView.frame=CGRectMake(self.collectionviewxpostion.constant-10,self.sepratorlbl.frame.origin.y+self.sepratorlbl.frame.size.height,self.view.frame.size.width,50);
         isFilteraction=NO;
-
+        
     }
-
+    
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
 
 @end
