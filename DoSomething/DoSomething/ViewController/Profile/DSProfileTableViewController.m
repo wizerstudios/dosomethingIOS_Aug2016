@@ -367,7 +367,7 @@
     
 }
 -(void) pageScrollView{
-    //if(isPageControl==NO){
+    if(isPageControl==NO){
         xslider=0;
         pgDtView=[[UIView alloc]init];
         pgDtView.backgroundColor=[UIColor clearColor];
@@ -388,7 +388,8 @@
             [pgDtView setFrame:CGRectMake(15, -5, profileImagePageControl.numberOfPages*18, 10)];
             
         }
-   // } isPageControl=YES;
+    } isPageControl=YES;
+    [topViewCell addSubview:pgDtView];
     
 }
 
