@@ -747,7 +747,7 @@
              {
                  dataSize = [COMMON getControlHeight:strAbout withFontName:@"Patron-Regular" ofSize:14.0 withSize:CGSizeMake(tableView.frame.size.width-20,tableView.frame.size.height)];
                  
-                 return dataSize.height+22;
+                 return dataSize.height+25;
                  
              }
             if (indexPath.row == 4) {
@@ -1110,13 +1110,13 @@
             
             if([[profileDict valueForKey:@"about"] isEqual:@""]){
                 
-                if(textviewText == nil)
+                //if(textviewText == nil)
                     
-                    cell.textViewHeaderLabel.hidden = NO;
+                   // cell.textViewHeaderLabel.hidden = NO;
                 
-                else
+                //else
                     
-                cell.textViewHeaderLabel.hidden = YES;
+               // cell.textViewHeaderLabel.hidden = YES;
                 
                 cell.textViewAboutYou.text = textviewText;
                 
@@ -1147,7 +1147,7 @@
                     strAbout =cell.textViewAboutYou.text;
                     
                 }
-                cell.textViewHeaderLabel.hidden = YES;
+                //cell.textViewHeaderLabel.hidden = YES;
                 
                 
                 cell.textViewAboutYou.delegate = self;
@@ -1163,12 +1163,12 @@
                 
                 if([strAbout isEqualToString:@""] ||strAbout == nil)
                 {
-                cell.textViewHeaderLabel.hidden = NO;
+               // cell.textViewHeaderLabel.hidden = NO;
                 cell.textViewAboutYou.text = @"Write something about yourself here.";
                 }
                 else
                 {
-                    cell.textViewHeaderLabel.hidden = YES;
+                    //cell.textViewHeaderLabel.hidden = YES;
                     cell.textViewAboutYou.text =strAbout;
                 }
             }
@@ -1553,7 +1553,6 @@
     
     NSIndexPath *indexPath;
      NSString *selOptionVal;
-    //DSProfileTableViewCell *cell;
     
     indexPath = [_tableviewProfile indexPathForCell:(UITableViewCell *)button];
     cell = (DSProfileTableViewCell *) [_tableviewProfile cellForRowAtIndexPath:[NSIndexPath indexPathForRow:indexPath.row inSection:0]];
@@ -1569,13 +1568,12 @@
     
     if([sender tag] == 2005){
        selOptionVal = @"female";
-       // femaleLabel.textColor = [UIColor redColor];   //[UIColor colorWithRed:(161.0/255.0f) green:(161.0/255.0f) blue:(161.0/255.0f) alpha:1.0f];
+      
         [cell.femaleButton setTitleColor:[UIColor redColor] forState:UIControlStateNormal];
          [cell.maleButton setTitleColor:[UIColor colorWithRed:(161.0/255.0f) green:(161.0/255.0f) blue:(161.0/255.0f) alpha:1.0f] forState:UIControlStateNormal];
         isSelectFemale=YES;
          isSelectMale =NO;
     }
-    //strGender =profileGenderValueLabel.text;
     
     strGender =selOptionVal;
     
@@ -1589,7 +1587,7 @@
     NSIndexPath *indexPath = [_tableviewProfile indexPathForRowAtPoint: position];
     
     cell = (DSProfileTableViewCell *)[_tableviewProfile cellForRowAtIndexPath:indexPath];
-    cell.textViewHeaderLabel.hidden = YES;
+    //cell.textViewHeaderLabel.hidden = YES;
     if(textView.tag == 0) {
         textView.text = @"";
         textView.tag = 1;
@@ -1607,7 +1605,7 @@
     NSIndexPath *indexPath = [_tableviewProfile indexPathForRowAtPoint: position];
    
     cell = (DSProfileTableViewCell *)[_tableviewProfile cellForRowAtIndexPath:indexPath];
-    cell.textViewHeaderLabel.hidden = YES;
+    //cell.textViewHeaderLabel.hidden = YES;
     if([textView.text length] == 0)
     {
         //textView.text = @"Foobar placeholder";
@@ -1727,7 +1725,11 @@
                         }
      
                         failure:^(AFHTTPRequestOperation *operation, id error) {
+                            
                             [COMMON removeLoading];
+                            UIAlertView *errorAlter =[[UIAlertView alloc]initWithTitle:nil message:[NSString stringWithFormat:@"%@",error] delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+                            [errorAlter show];
+                            
                         }];
 
     
@@ -1761,6 +1763,8 @@
                          }
                          failure:^(AFHTTPRequestOperation *operation, id error) {
                              [COMMON removeLoading];
+                             UIAlertView *errorAlter =[[UIAlertView alloc]initWithTitle:nil message:[NSString stringWithFormat:@"%@",error] delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+                             [errorAlter show];
 
                          }
      ];

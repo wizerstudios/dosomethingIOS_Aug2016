@@ -41,16 +41,13 @@
                 <outlet property="labelSignIn" destination="iq7-kC-sy5" id="ifb-YS-qRr"/>
                 <outlet property="layoutConstraintBackButtonHeight" destination="hJa-aK-l9L" id="No1-2c-GR7"/>
                 <outlet property="layoutConstraintCreateAnACCLabelYPos" destination="Rst-wN-bbe" id="3oO-eA-ZoP"/>
-                <outlet property="layoutConstraintEmailTextFieldlYPos" destination="9Cy-wa-d5A" id="8Xk-Lt-bhD"/>
                 <outlet property="layoutConstraintFBlblHeight" destination="hUU-LT-QNQ" id="tnc-ba-hNw"/>
                 <outlet property="layoutConstraintFBlblViewHeight" destination="aNM-ED-6nj" id="S9N-vZ-fM0"/>
                 <outlet property="layoutConstraintInstructionLabelYPos" destination="8Tf-IN-0pp" id="J3D-lf-qYM"/>
-                <outlet property="layoutConstraintPassTextFieldlYPos" destination="6Sp-Uo-Sox" id="0Eb-Lk-aKm"/>
                 <outlet property="layoutConstraintSignInButtonHeight" destination="u0V-VH-kJA" id="Rt2-F5-MZd"/>
                 <outlet property="layoutConstraintSignInLabelYPos" destination="RRq-gm-fYI" id="Anl-Mj-obF"/>
                 <outlet property="layoutConstraintStatusBarHeight" destination="9Nh-qc-hUd" id="f8f-pc-sTc"/>
                 <outlet property="layoutConstraintTapBarImageHeight" destination="WGH-U3-uXa" id="xFa-kB-Wqu"/>
-                <outlet property="layoutConstraintTextFieldCenterLabelYPos" destination="BpH-Da-kMm" id="8Ao-9t-9oK"/>
                 <outlet property="layoutConstraintTxtFieldViewHeight" destination="y1q-5u-QAL" id="wHQ-pO-6dX"/>
                 <outlet property="passwordTxt" destination="rXR-Rw-64v" id="5Tg-bE-ogj"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
@@ -115,7 +112,7 @@
                                     <rect key="frame" x="32" y="43" width="283" height="40"/>
                                     <animations/>
                                     <constraints>
-                                        <constraint firstAttribute="height" constant="40" id="B4a-0D-dzG"/>
+                                        <constraint firstAttribute="height" constant="40" id="ukT-n2-mmh"/>
                                     </constraints>
                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                     <fontDescription key="fontDescription" name="Patron-Regular" family="Patron" pointSize="13"/>
@@ -125,17 +122,17 @@
                                     <rect key="frame" x="32" y="86" width="283" height="40"/>
                                     <animations/>
                                     <constraints>
-                                        <constraint firstAttribute="height" constant="40" id="yGS-Ss-T9h"/>
+                                        <constraint firstAttribute="height" constant="40" id="dah-fm-gMp"/>
                                     </constraints>
                                     <fontDescription key="fontDescription" name="Patron-Regular" family="Patron" pointSize="13"/>
                                     <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
                                 </textField>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="K9r-v6-kBk">
-                                    <rect key="frame" x="32" y="82" width="260" height="1"/>
+                                    <rect key="frame" x="32" y="84" width="260" height="1"/>
                                     <animations/>
                                     <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                     <constraints>
-                                        <constraint firstAttribute="height" constant="1" id="NPg-48-ncK"/>
+                                        <constraint firstAttribute="height" constant="1" id="w1h-32-cFo"/>
                                     </constraints>
                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -145,8 +142,7 @@
                                     <rect key="frame" x="32" y="10" width="270" height="21"/>
                                     <animations/>
                                     <constraints>
-                                        <constraint firstAttribute="height" constant="21" id="9em-G3-sF6"/>
-                                        <constraint firstAttribute="width" constant="270" id="yci-UK-OfM"/>
+                                        <constraint firstAttribute="height" constant="21" id="3pT-oJ-z8W"/>
                                     </constraints>
                                     <fontDescription key="fontDescription" name="Patron-Regular" family="Patron" pointSize="11"/>
                                     <color key="textColor" red="0.89411764709999997" green="0.1647058824" blue="0.01176470588" alpha="1" colorSpace="calibratedRGB"/>
@@ -156,20 +152,20 @@
                             <animations/>
                             <color key="backgroundColor" red="0.97254901960784312" green="0.97254901960784312" blue="0.97254901960784312" alpha="1" colorSpace="calibratedRGB"/>
                             <constraints>
-                                <constraint firstItem="rXR-Rw-64v" firstAttribute="top" secondItem="K9r-v6-kBk" secondAttribute="bottom" constant="3" id="6Sp-Uo-Sox"/>
-                                <constraint firstItem="c7o-Yq-ofS" firstAttribute="top" secondItem="sR7-yr-HZB" secondAttribute="bottom" constant="12" id="9Cy-wa-d5A"/>
-                                <constraint firstAttribute="bottom" secondItem="rXR-Rw-64v" secondAttribute="bottom" id="B6s-hN-FC6"/>
-                                <constraint firstItem="K9r-v6-kBk" firstAttribute="top" secondItem="sR7-yr-HZB" secondAttribute="bottom" constant="51" id="BpH-Da-kMm"/>
-                                <constraint firstItem="rXR-Rw-64v" firstAttribute="leading" secondItem="ciY-M6-6s7" secondAttribute="leading" constant="32" id="KMe-uF-W7Y"/>
-                                <constraint firstAttribute="bottom" secondItem="rXR-Rw-64v" secondAttribute="bottom" id="LHq-Ab-Npc"/>
-                                <constraint firstAttribute="trailing" secondItem="c7o-Yq-ofS" secondAttribute="trailing" constant="5" id="OAq-q5-d4N"/>
-                                <constraint firstItem="sR7-yr-HZB" firstAttribute="leading" secondItem="ciY-M6-6s7" secondAttribute="leading" constant="32" id="PsX-ug-9Ld"/>
-                                <constraint firstAttribute="trailing" secondItem="rXR-Rw-64v" secondAttribute="trailing" constant="5" id="W7Q-hx-KzO"/>
-                                <constraint firstItem="sR7-yr-HZB" firstAttribute="top" secondItem="ciY-M6-6s7" secondAttribute="top" constant="10" id="hfH-VP-I1f"/>
-                                <constraint firstAttribute="trailing" secondItem="K9r-v6-kBk" secondAttribute="trailing" constant="28" id="nQW-Xx-K6X"/>
-                                <constraint firstItem="c7o-Yq-ofS" firstAttribute="leading" secondItem="ciY-M6-6s7" secondAttribute="leading" constant="32" id="xkj-VH-ai0"/>
+                                <constraint firstItem="rXR-Rw-64v" firstAttribute="leading" secondItem="ciY-M6-6s7" secondAttribute="leading" constant="32" id="1yZ-Tp-zyn"/>
+                                <constraint firstItem="K9r-v6-kBk" firstAttribute="top" secondItem="c7o-Yq-ofS" secondAttribute="bottom" constant="1" id="2x1-eI-MfS"/>
+                                <constraint firstAttribute="trailing" secondItem="sR7-yr-HZB" secondAttribute="trailing" constant="18" id="R1n-2g-38R"/>
+                                <constraint firstItem="K9r-v6-kBk" firstAttribute="leading" secondItem="ciY-M6-6s7" secondAttribute="leading" constant="32" id="TUc-9r-abX"/>
+                                <constraint firstAttribute="bottom" secondItem="rXR-Rw-64v" secondAttribute="bottom" id="b21-2Z-uFC"/>
+                                <constraint firstAttribute="trailing" secondItem="c7o-Yq-ofS" secondAttribute="trailing" constant="5" id="bMS-mH-fbZ"/>
+                                <constraint firstItem="c7o-Yq-ofS" firstAttribute="top" secondItem="sR7-yr-HZB" secondAttribute="bottom" constant="12" id="coG-F7-orP"/>
+                                <constraint firstItem="sR7-yr-HZB" firstAttribute="leading" secondItem="ciY-M6-6s7" secondAttribute="leading" constant="32" id="da2-7D-enw"/>
+                                <constraint firstItem="c7o-Yq-ofS" firstAttribute="leading" secondItem="ciY-M6-6s7" secondAttribute="leading" constant="32" id="jfp-Ra-mJe"/>
+                                <constraint firstAttribute="trailing" secondItem="rXR-Rw-64v" secondAttribute="trailing" constant="5" id="jgP-Qm-RVW"/>
+                                <constraint firstItem="rXR-Rw-64v" firstAttribute="top" secondItem="K9r-v6-kBk" secondAttribute="bottom" constant="1" id="pL7-Mr-5Sq"/>
+                                <constraint firstAttribute="trailing" secondItem="K9r-v6-kBk" secondAttribute="trailing" constant="28" id="rIx-y0-Rva"/>
                                 <constraint firstAttribute="height" constant="126" id="y1q-5u-QAL"/>
-                                <constraint firstItem="K9r-v6-kBk" firstAttribute="leading" secondItem="ciY-M6-6s7" secondAttribute="leading" constant="32" id="ygd-Lb-xg8"/>
+                                <constraint firstItem="sR7-yr-HZB" firstAttribute="top" secondItem="ciY-M6-6s7" secondAttribute="top" constant="10" id="zdj-Rl-UfP"/>
                             </constraints>
                         </view>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WcK-qu-f6Q">

@@ -31,7 +31,7 @@
     UIImagePickerController  *imagepickerController;
     NSString *strType,*strProfileID,*strProfileImage,*strGender,*FirstName,*LastName,*strDOB,*strEmail,*strPassword;
     
-    IBOutlet UIScrollView *profileImageScroll;
+    //IBOutlet UIScrollView *profileImageScroll;
     
     IBOutlet UIPageControl *profileImagePageControl;
     
@@ -59,9 +59,6 @@
 
 @property (strong, nonatomic) IBOutlet NSLayoutConstraint *layoutConstraintTableViewYPos;
 
-@property (strong, nonatomic) IBOutlet NSLayoutConstraint *layoutConstraintDatePickerViewLeadingPos;
-@property (strong, nonatomic) IBOutlet NSLayoutConstraint *layoutConstraintTableViewTraillingPos;
-@property (strong, nonatomic) IBOutlet NSLayoutConstraint *layoutConstraintTableViewBottomPos;
 
 @property (nonatomic, retain) NSMutableArray *placeHolderArray;
 @property (strong, nonatomic) NSData *profileData,*profileData1,*profileData2,*profileData3;
