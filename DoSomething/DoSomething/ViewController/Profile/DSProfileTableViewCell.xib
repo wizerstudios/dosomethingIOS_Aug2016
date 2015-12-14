@@ -188,7 +188,7 @@
                 <rect key="frame" x="0.0" y="0.0" width="300" height="99"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="hoj-aW-4aX">
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hoj-aW-4aX">
                         <rect key="frame" x="0.0" y="0.0" width="300" height="100"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Your Interests and Hobbies" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CBw-9W-xH2">
@@ -216,6 +216,12 @@
                 </subviews>
                 <animations/>
                 <color key="backgroundColor" red="0.90980392156862744" green="0.90980392156862744" blue="0.90980392156862744" alpha="1" colorSpace="calibratedRGB"/>
+                <constraints>
+                    <constraint firstAttribute="bottom" secondItem="hoj-aW-4aX" secondAttribute="bottom" constant="-1" id="XSb-bE-zFi"/>
+                    <constraint firstItem="hoj-aW-4aX" firstAttribute="top" secondItem="d97-4g-Rc2" secondAttribute="top" id="elG-ll-j2f"/>
+                    <constraint firstItem="hoj-aW-4aX" firstAttribute="leading" secondItem="d97-4g-Rc2" secondAttribute="leading" id="gwi-pQ-18Y"/>
+                    <constraint firstAttribute="trailing" secondItem="hoj-aW-4aX" secondAttribute="trailing" id="wnx-s3-mlP"/>
+                </constraints>
             </tableViewCellContentView>
             <animations/>
             <connections>

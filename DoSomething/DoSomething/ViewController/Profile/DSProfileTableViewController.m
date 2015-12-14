@@ -389,7 +389,7 @@
             
         }
     } isPageControl=YES;
-    [topViewCell addSubview:pgDtView];
+    //[topViewCell addSubview:pgDtView];
     
 }
 
