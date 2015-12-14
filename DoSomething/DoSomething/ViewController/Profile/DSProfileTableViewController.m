@@ -189,6 +189,18 @@
     profileDict =[[NSUserDefaults standardUserDefaults] valueForKey:USERDETAILS];
     NSString * strsessionID =[profileDict valueForKey:@"SessionId"];
     loginUserSessionID = strsessionID;
+    if(profileDict == NULL)
+    {
+        // [self initializeArray];
+        
+    }
+    else{
+        //not using just for reference
+        [self initializeArrayProfile];
+        
+        self.tableViewHeightConstraint.constant=75;
+    }
+
     NSLog(@"DICT%@",profileDict);
     
     [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"SelectedItemCategoryID"];
@@ -272,7 +284,7 @@
             if(i==0){
                 [topViewCell setHidden:YES];
                 self.scrView.scrollEnabled = NO;
-                [profileImagePageControl setHidden:YES];
+               
             }
             
         }
@@ -1659,6 +1671,7 @@
     [profileDataArray replaceObjectAtIndex:CurrentImage withObject:profileData];
     
     [imagepickerController dismissViewControllerAnimated:YES completion:nil];
+    isPick=YES;
     
 
 
