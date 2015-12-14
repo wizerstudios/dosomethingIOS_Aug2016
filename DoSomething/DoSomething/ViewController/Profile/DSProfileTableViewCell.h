@@ -76,5 +76,8 @@
 
 @property (weak, nonatomic) IBOutlet UIButton *privacyPolicy;
 
+@property (strong,nonatomic) IBOutlet UIPageControl *pagecontrol;
+
+@property (nonatomic,strong) IBOutlet UIView *pageImageview;
 
 @end

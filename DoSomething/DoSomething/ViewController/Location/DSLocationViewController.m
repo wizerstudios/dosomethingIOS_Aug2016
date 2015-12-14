@@ -143,6 +143,7 @@
     self.avablebothBtn.layer.masksToBounds = YES;
     self.avablebothBtn.layer.borderWidth =4;
     [self.avablebothBtn.layer setBorderColor:[[UIColor whiteColor] CGColor]];
+    
 }
 #pragma mark get user CurrentLocation
 
@@ -325,6 +326,14 @@
         
     }
     
+}
+
+-(IBAction)StatusButtonAction:(id)sender
+{
+//    if(sender.tag == 301)
+//    {
+//        
+//    }
 }
 
 - (void)didReceiveMemoryWarning {
