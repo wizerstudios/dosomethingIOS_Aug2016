@@ -143,6 +143,7 @@
     self.avablebothBtn.layer.masksToBounds = YES;
     self.avablebothBtn.layer.borderWidth =4;
     [self.avablebothBtn.layer setBorderColor:[[UIColor whiteColor] CGColor]];
+    
 }
 #pragma mark get user CurrentLocation
 
@@ -325,6 +326,28 @@
         
     }
     
+}
+
+-(IBAction)StatusButtonAction:(id)sender
+{
+    if([sender tag] == 301)
+    {
+        self.onlineBtn.backgroundColor =[UIColor redColor];
+        self.offlineBtn.backgroundColor =[UIColor whiteColor];
+        self.statusBothBtn.backgroundColor=[UIColor whiteColor];
+    }
+    else if ([sender tag] == 302)
+    {
+        self.onlineBtn.backgroundColor =[UIColor whiteColor];
+        self.offlineBtn.backgroundColor =[UIColor redColor];
+        self.statusBothBtn.backgroundColor=[UIColor whiteColor];
+    }
+    else if ([sender tag] == 303)
+    {
+        self.onlineBtn.backgroundColor =[UIColor whiteColor];
+        self.offlineBtn.backgroundColor =[UIColor whiteColor];
+        self.statusBothBtn.backgroundColor=[UIColor redColor];
+    }
 }
 
 - (void)didReceiveMemoryWarning {

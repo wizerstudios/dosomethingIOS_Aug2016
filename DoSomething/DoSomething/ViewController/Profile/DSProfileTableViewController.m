@@ -266,6 +266,8 @@
     self.scrView.pagingEnabled=YES;
     self.scrView.delegate=self;
     
+    //self.scrView.frame=CGRectMake(self.view.center.x+150,self.view.frame.origin.y+50,self.scrView.frame.size.width,self.scrView.frame.size.height);
+    
     int spacing = 20;
     
     for(int i = 0; i < 3; i++)
@@ -275,7 +277,7 @@
         NSString *image     = [profileDataArray objectAtIndex:i];
         if(IS_IPHONE6_Plus)
         {
-            userProfileImage = [[UIImageView alloc]initWithFrame:CGRectMake((self.view.frame.size.width/3.5) + spacing, 20,self.profileImageView.frame.size.width, self.profileImageView.frame.size.height)];
+            userProfileImage = [[UIImageView alloc]initWithFrame:CGRectMake((self.view.frame.size.width/3.58), 20,self.profileImageView.frame.size.width, self.profileImageView.frame.size.height)];
         }
         else
         {
@@ -348,7 +350,7 @@
         [userProfileImage addGestureRecognizer:singleTap];
         [self.scrView addSubview:userProfileImage];
         
-        cameraImage = [[UIImageView alloc]initWithFrame:CGRectMake(userProfileImage.frame.size.width / 2 - 15, self.scrView.frame.size.height - 55, 30, 30)];
+        cameraImage = [[UIImageView alloc]initWithFrame:CGRectMake(userProfileImage.frame.size.width / 2 -17, self.scrView.frame.size.height - 55, 30, 30)];
         [cameraImage setTag:i+200];
         [cameraImage setImage:[UIImage imageNamed:@"profile_camera_icon"]];
         // [topViewCell setHidden:YES];

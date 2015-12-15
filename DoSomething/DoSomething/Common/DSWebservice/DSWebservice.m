@@ -368,9 +368,7 @@ notification_vibration:(NSString *)isnotification_vibration
          if([[profileUpdateDict valueForKey:@"status"]isEqualToString:@"success"]){
              [COMMON setUserDetails:[[profileUpdateDict valueForKey:@"userDetails"]objectAtIndex:0]];
              NSLog(@"userdetails = %@",[COMMON getUserDetails]);
-             [[NSNotificationCenter defaultCenter] postNotificationName:@"updateprofile"
-                                                                 object:self
-                                                               userInfo:responseObject];
+             [[NSNotificationCenter defaultCenter] postNotificationName:@"updateprofile"object:self userInfo:responseObject];
 
          }
          else {
@@ -383,7 +381,25 @@ notification_vibration:(NSString *)isnotification_vibration
      
        failure:^(AFHTTPRequestOperation *operation, NSError *error){
            NSLog(@"Error = %@",error);
+           [COMMON removeLoading];
+  //[[NSNotificationCenter defaultCenter] postNotificationName:@"updateprofile"object:self userInfo:<#(nullable NSDictionary *)#>
            
+    
+           
+           
+           
+           
+           
+           
+           
+          //  [COMMON removeUserDetails];
+           UIAlertView *errorAlter =[[UIAlertView alloc]initWithTitle:nil message:[NSString stringWithFormat:@"%@",error] delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+           [errorAlter show];
+//           DSHomeViewController*objSplashView =[[DSHomeViewController alloc]initWithNibName:@"DSHomeViewController" bundle:nil];
+//           [self.navigationController pushViewController:objSplashView animated:NO];
+//           appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+//           appDelegate.buttonsView.hidden=YES;
+//           [appDelegate.settingButton setBackgroundImage:[UIImage imageNamed:@"setting_icon.png"] forState:UIControlStateNormal];
            
        }];
 
