@@ -15,6 +15,7 @@
 #import "DSAppCommon.h"
 #import "AppDelegate.h"
 #import <MapKit/MapKit.h>
+#import "CustomAlterview.h"
 @interface DSLocationViewController ()<CLLocationManagerDelegate>
 {
     DSWebservice *objWebservice;
@@ -24,6 +25,8 @@
     NSString * laditude;
     BOOL isFilteraction;
     NSString  * currentLatitude, * currentLongitude;
+    CustomAlterview * objCustomAlterview;
+    UILabel * usernotfoundlbl;
 }
 @property(nonatomic,strong)IBOutlet NSLayoutConstraint *collectionviewxpostion;
 @property(nonatomic,strong)IBOutlet NSLayoutConstraint * filterviewxposition;
@@ -66,24 +69,7 @@
     [super viewWillAppear:animated];
     [self.navigationItem setHidesBackButton:YES animated:NO];
     [self getUserCurrenLocation];
-    
-    CustomNavigationView *customNavigation;
-    customNavigation = [[CustomNavigationView alloc] initWithNibName:@"CustomNavigationView" bundle:nil];
-    customNavigation.view.frame = CGRectMake(0,-20, CGRectGetWidth(self.view.frame), 65);
-    if (IS_IPHONE6 ){
-        customNavigation.view.frame = CGRectMake(0,-20, 375, 83);
-    }
-    if(IS_IPHONE6_Plus)
-    {
-        customNavigation.view.frame = CGRectMake(0,-20, 420, 83);
-    }
-    [customNavigation.menuBtn setHidden:YES];
-    [customNavigation.buttonBack setHidden:YES];
-    [customNavigation.saveBtn setHidden:YES];
-    [customNavigation.FilterBtn setHidden:NO];
-    [customNavigation.FilterBtn addTarget:self action:@selector(filterAction:) forControlEvents:UIControlEventTouchUpInside];
-    [self.navigationController.navigationBar addSubview:customNavigation.view];
-    
+    [self loadCustomNavigationview];
     UINib *cellNib = [UINib nibWithNibName:@"LocationCollectionViewCell" bundle:nil];
     [self.locationCollectionView registerNib:cellNib forCellWithReuseIdentifier:@"LocationCell"];
     
@@ -112,6 +98,34 @@
     
     
 }
+-(void)loadCustomNavigationview
+{
+    CustomNavigationView *customNavigation;
+    customNavigation = [[CustomNavigationView alloc] initWithNibName:@"CustomNavigationView" bundle:nil];
+    customNavigation.view.frame = CGRectMake(0,-20, CGRectGetWidth(self.view.frame), 65);
+    if (IS_IPHONE6 ){
+        customNavigation.view.frame = CGRectMake(0,-20, 375, 83);
+    }
+    if(IS_IPHONE6_Plus)
+    {
+        customNavigation.view.frame = CGRectMake(0,-20, 420, 83);
+    }
+    [customNavigation.menuBtn setHidden:YES];
+    [customNavigation.buttonBack setHidden:YES];
+    [customNavigation.saveBtn setHidden:YES];
+    [customNavigation.FilterBtn setHidden:NO];
+    [customNavigation.FilterBtn addTarget:self action:@selector(filterAction:) forControlEvents:UIControlEventTouchUpInside];
+    [self.navigationController.navigationBar addSubview:customNavigation.view];
+    
+   usernotfoundlbl=[[UILabel alloc]initWithFrame:CGRectMake(self.locationCollectionView.frame.origin.x,self.locationCollectionView.center.y-30,self.locationCollectionView.frame.size.width,30)];
+    usernotfoundlbl.numberOfLines =2;
+    usernotfoundlbl.textAlignment=NSTextAlignmentCenter;
+    usernotfoundlbl.font=Patron_Bold(10);
+    usernotfoundlbl.hidden=YES;
+    [self.locationCollectionView addSubview:usernotfoundlbl];
+
+}
+
 -(void)filterPageButtonAction
 {
     self.onlineBtn.layer.cornerRadius =10;
@@ -198,22 +212,31 @@
     [COMMON LoadIcon:self.view];
     [objWebservice nearestUsers:NearestUsers_API sessionid:strsessionID latitude:currentLatitude longitude:currentLongitude filter_status:@"" filter_gender:@"" filter_agerange:@"" filter_distance:@"" success:^(AFHTTPRequestOperation *operation, id responseObject) {
         
-        if([[[responseObject valueForKey:@"nearestusers"]valueForKey:@"status"] isEqualToString:@"success"])
-        {
-            NSMutableArray * nearestUserdetaile =[[NSMutableArray alloc]init];
-            nearestUserdetaile =[[responseObject valueForKey:@"nearestusers"] valueForKey:@"UserList"];
-            profileNames     =[nearestUserdetaile valueForKey:@"first_name"];
-            kiloMeterlabel   =[nearestUserdetaile valueForKey:@"distance"];
-            profileImages   =[nearestUserdetaile valueForKey:@"image1"];
+             if([[[responseObject valueForKey:@"nearestusers"]valueForKey:@"status"] isEqualToString:@"success"])
+             {
+                    NSMutableArray * nearestUserdetaile =[[NSMutableArray alloc]init];
+                    nearestUserdetaile =[[responseObject valueForKey:@"nearestusers"] valueForKey:@"UserList"];
+                    profileNames     =[nearestUserdetaile valueForKey:@"first_name"];
+                    kiloMeterlabel   =[nearestUserdetaile valueForKey:@"distance"];
+                    profileImages   =[nearestUserdetaile valueForKey:@"image1"];
             
-            [locationCollectionView reloadData];
-            NSLog(@"%@",nearestUserdetaile);
+                    [locationCollectionView reloadData];
+                    NSLog(@"%@",nearestUserdetaile);
+           
+             }
+             else
+             {
+                 usernotfoundlbl.hidden=NO;
+                 usernotfoundlbl.text  =[[responseObject valueForKey:@"nearestusers"]valueForKey:@"Message"];
+             }
+        
             [COMMON removeLoading];
+        
+        
         }
+    failure:^(AFHTTPRequestOperation *operation, id error) {
         
         
-        
-    } failure:^(AFHTTPRequestOperation *operation, id error) {
         
     }];
 }
@@ -249,7 +272,11 @@
     }
     else
     {
-        [locationCellView.imageProfile setImageWithURL:[NSURL URLWithString:MyPatternString]];
+        downloadImageFromUrl(MyPatternString,locationCellView.imageProfile);
+        
+        
+        [locationCellView.imageProfile setImage:[UIImage imageNamed:MyPatternString]];
+   
     }
     
     locationCellView.imageProfile.layer.cornerRadius = locationCellView.imageProfile.frame.size.height/2;
