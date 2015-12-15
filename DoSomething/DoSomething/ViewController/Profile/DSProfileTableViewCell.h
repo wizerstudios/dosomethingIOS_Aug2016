@@ -80,4 +80,6 @@
 
 @property (nonatomic,strong) IBOutlet UIView *pageImageview;
 
+
+
 @end

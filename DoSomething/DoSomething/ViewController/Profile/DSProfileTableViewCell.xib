@@ -42,6 +42,7 @@
             <connections>
                 <outlet property="CellSwitchOn" destination="OpY-gd-Xse" id="TUA-pO-U2v"/>
                 <outlet property="CellTermsOfUse" destination="1cD-va-IDg" id="A6k-KR-AFN"/>
+                <outlet property="aboutTextHeight" destination="HNL-wO-c1x" id="EBX-B6-mBX"/>
                 <outlet property="cellAddIcon" destination="5Fu-f3-SQN" id="Sg8-4z-pxE"/>
                 <outlet property="cellButton" destination="fi2-qG-tV9" id="ml8-21-oRj"/>
                 <outlet property="cellDatePicker" destination="jaf-ij-gGi" id="1Ro-Do-NHV"/>
@@ -649,20 +650,27 @@
                 <rect key="frame" x="0.0" y="0.0" width="300" height="39"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="URf-8H-5OS">
-                        <rect key="frame" x="0.0" y="0.0" width="300" height="40"/>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="URf-8H-5OS">
+                        <rect key="frame" x="0.0" y="0.0" width="300" height="39"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="About You" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Mvl-SM-bdc">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="About You" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Mvl-SM-bdc">
                                 <rect key="frame" x="5" y="4" width="75" height="16"/>
                                 <animations/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="16" id="2Us-J4-HNR"/>
+                                    <constraint firstAttribute="width" constant="75" id="p1p-Ac-vm1"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" name="Patron-Bold" family="Patron" pointSize="10"/>
                                 <color key="textColor" red="0.40000000000000002" green="0.40000000000000002" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="d6I-S9-MzF">
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="d6I-S9-MzF">
                                 <rect key="frame" x="98" y="0.0" width="202" height="40"/>
                                 <animations/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="HNL-wO-c1x"/>
+                                </constraints>
                                 <color key="textColor" red="0.59999999999999998" green="0.59999999999999998" blue="0.59999999999999998" alpha="1" colorSpace="calibratedRGB"/>
                                 <fontDescription key="fontDescription" name="Patron-Regular" family="Patron" pointSize="10"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
@@ -673,9 +681,23 @@
                         </subviews>
                         <animations/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="d6I-S9-MzF" secondAttribute="trailing" id="B5Y-Al-ogT"/>
+                            <constraint firstItem="Mvl-SM-bdc" firstAttribute="leading" secondItem="URf-8H-5OS" secondAttribute="leading" constant="5" id="FKm-dW-5Sl"/>
+                            <constraint firstItem="d6I-S9-MzF" firstAttribute="top" secondItem="URf-8H-5OS" secondAttribute="top" id="QBU-2g-Ftl"/>
+                            <constraint firstItem="d6I-S9-MzF" firstAttribute="leading" secondItem="Mvl-SM-bdc" secondAttribute="trailing" constant="18" id="Wpt-U6-KrB"/>
+                            <constraint firstAttribute="height" constant="39" id="b5p-9w-gGa"/>
+                            <constraint firstItem="Mvl-SM-bdc" firstAttribute="top" secondItem="URf-8H-5OS" secondAttribute="top" constant="4" id="rvu-yT-O4b"/>
+                        </constraints>
                     </view>
                 </subviews>
                 <animations/>
+                <constraints>
+                    <constraint firstItem="URf-8H-5OS" firstAttribute="leading" secondItem="j4x-Ki-SrC" secondAttribute="leading" id="0am-Jf-mKZ"/>
+                    <constraint firstAttribute="trailing" secondItem="URf-8H-5OS" secondAttribute="trailing" id="11a-rG-UGl"/>
+                    <constraint firstItem="URf-8H-5OS" firstAttribute="top" secondItem="j4x-Ki-SrC" secondAttribute="top" id="Wol-R3-e4t"/>
+                    <constraint firstAttribute="bottom" secondItem="URf-8H-5OS" secondAttribute="bottom" id="unN-Sq-O4i"/>
+                </constraints>
             </tableViewCellContentView>
             <animations/>
             <connections>

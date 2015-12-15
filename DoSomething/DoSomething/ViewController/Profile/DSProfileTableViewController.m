@@ -109,7 +109,7 @@
     isPick=NO;
     isPageControl=NO;
     isLoadData=NO;
-    //[COMMON getUserCurrentLocationData];
+  
    
 }
 -(void)viewWillAppear:(BOOL)animated
@@ -141,40 +141,9 @@
     
     if([profileDict valueForKey:@"hobbieslist"]!=NULL)
     {
-        if(isLogin == YES){
-            interstAndHobbiesArray =[[[NSUserDefaults standardUserDefaults] valueForKey:@"SelectedItem"]mutableCopy];
-            
-            imageNormalArray =[[[NSUserDefaults standardUserDefaults] valueForKey:@"SelectedItemNormal"]mutableCopy];
-            
-            hobbiesNameArray =[[[NSUserDefaults standardUserDefaults] valueForKey:@"SelectedItemName"]mutableCopy];
-            
-            hobbiesCategoryIDArray =[[[NSUserDefaults standardUserDefaults] valueForKey:@"SelectedItemCategoryID"]mutableCopy];
-            
-            
-            strInterestHobbies = [hobbiesCategoryIDArray componentsJoinedByString:@","];
-        }
-        else{
-        interstAndHobbiesArray = [[profileDict valueForKey:@"hobbieslist"]mutableCopy];
-        hobbiesNameArray       =[[interstAndHobbiesArray valueForKey:@"name"]mutableCopy];
-        imageNormalArray     = [[interstAndHobbiesArray valueForKey:@"image"]mutableCopy];
-        isLogin = YES;
+        [self selectitemMethod];
     }
-    }
-    
-    else
-    {
-    interstAndHobbiesArray =[[[NSUserDefaults standardUserDefaults] valueForKey:@"SelectedItem"]mutableCopy];
-    
-    imageNormalArray =[[[NSUserDefaults standardUserDefaults] valueForKey:@"SelectedItemNormal"]mutableCopy];
-    
-    hobbiesNameArray =[[[NSUserDefaults standardUserDefaults] valueForKey:@"SelectedItemName"]mutableCopy];
-    
-    hobbiesCategoryIDArray =[[[NSUserDefaults standardUserDefaults] valueForKey:@"SelectedItemCategoryID"]mutableCopy];
-
-    
-    strInterestHobbies = [hobbiesCategoryIDArray componentsJoinedByString:@","];
-    }
-    infoArray=[[NSMutableArray alloc]initWithObjects:@"profile_noimg",@"profile_noimg",@"profile_noimg", nil];
+       infoArray=[[NSMutableArray alloc]initWithObjects:@"profile_noimg",@"profile_noimg",@"profile_noimg", nil];
     [self CustomAlterview];
     if(!isLoadData){
         [self initializeArray];
@@ -182,6 +151,20 @@
         [self profileImageDisplayMethod];
         isLoadData = YES;
     }
+    else if(isLoadData == YES && profileDict ==NULL)
+    {
+        interstAndHobbiesArray =[[[NSUserDefaults standardUserDefaults] valueForKey:@"SelectedItem"]mutableCopy];
+        
+        imageNormalArray =[[[NSUserDefaults standardUserDefaults] valueForKey:@"SelectedItemNormal"]mutableCopy];
+        
+        hobbiesNameArray =[[[NSUserDefaults standardUserDefaults] valueForKey:@"SelectedItemName"]mutableCopy];
+        
+        hobbiesCategoryIDArray =[[[NSUserDefaults standardUserDefaults] valueForKey:@"SelectedItemCategoryID"]mutableCopy];
+        
+        
+        strInterestHobbies = [hobbiesCategoryIDArray componentsJoinedByString:@","];
+    }
+
      [_tableviewProfile reloadData];
         
 }
@@ -192,19 +175,17 @@
     NSString * strsessionID =[profileDict valueForKey:@"SessionId"];
     loginUserSessionID = strsessionID;
     NSLog(@"strsessionID%@",strsessionID);
-    if(profileDict == NULL)
+     NSLog(@"DICT%@",profileDict);
+    if(profileDict != NULL)
     {
-        // [self initializeArray];
-        
-    }
-    else{
-        //not using just for reference
         [self initializeArrayProfile];
-        
+        interstAndHobbiesArray = [[profileDict valueForKey:@"hobbieslist"]mutableCopy];
+        hobbiesNameArray       =[[interstAndHobbiesArray valueForKey:@"name"]mutableCopy];
+        imageNormalArray     = [[interstAndHobbiesArray valueForKey:@"image"]mutableCopy];
         self.tableViewHeightConstraint.constant=75;
     }
 
-    NSLog(@"DICT%@",profileDict);
+   
     
     [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"SelectedItemCategoryID"];
     isNotification_message = @"Yes";
@@ -247,6 +228,43 @@
     }
     
 }
+
+-(void)selectitemMethod
+{
+    if([[NSUserDefaults standardUserDefaults] valueForKey:@"SelectedItem"]!=nil)
+    {
+        
+        interstAndHobbiesArray = [[[NSUserDefaults standardUserDefaults] valueForKey:@"SelectedItem"]mutableCopy];
+    }
+    else
+    {
+        interstAndHobbiesArray = [[profileDict valueForKey:@"hobbieslist"]mutableCopy];
+    }
+    
+    if([[NSUserDefaults standardUserDefaults] valueForKey:@"SelectedItemNormal"]!=nil)
+    {
+        
+        imageNormalArray =[[[NSUserDefaults standardUserDefaults] valueForKey:@"SelectedItemNormal"]mutableCopy];
+    }
+    else
+    {
+        imageNormalArray= [[interstAndHobbiesArray valueForKey:@"image"]mutableCopy];
+    }
+    if([[NSUserDefaults standardUserDefaults] valueForKey:@"SelectedItem"]!=nil)
+    {
+        
+        hobbiesNameArray =[[[NSUserDefaults standardUserDefaults] valueForKey:@"SelectedItemName"]mutableCopy];
+    }
+    else
+    {
+        hobbiesNameArray =[[interstAndHobbiesArray valueForKey:@"name"]mutableCopy];
+    }
+    
+    strInterestHobbies = [hobbiesCategoryIDArray componentsJoinedByString:@","];
+}
+
+
+
 #pragma mark - profileDataArray
 
 -(void)profileDataArrayValue{
@@ -445,25 +463,6 @@
 }
 
 #pragma mark get user CurrentLocation
-
-//- (void)getUserCurrenLocation{
-//    
-//    if(!locationManager){
-//        
-//        locationManager                 = [[CLLocationManager alloc] init];
-//        locationManager.delegate        = self;
-//        locationManager.distanceFilter  = kCLLocationAccuracyKilometer;
-//        locationManager.desiredAccuracy = kCLLocationAccuracyBest;
-//        locationManager.activityType    = CLActivityTypeAutomotiveNavigation;
-//    }
-//    if ([locationManager respondsToSelector:@selector(requestAlwaysAuthorization)])
-//        [locationManager requestAlwaysAuthorization];
-//    
-//    if ([locationManager respondsToSelector:@selector(requestWhenInUseAuthorization)])
-//        [locationManager requestWhenInUseAuthorization];
-//    
-//    [locationManager startUpdatingLocation];
-//}
 
 -(void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations {
     
@@ -755,7 +754,8 @@
              {
                  dataSize = [COMMON getControlHeight:strAbout withFontName:@"Patron-Regular" ofSize:14.0 withSize:CGSizeMake(tableView.frame.size.width-20,tableView.frame.size.height)];
                  
-                 return dataSize.height+25;
+                 self.aboutTextHeight.constant=dataSize.height;
+                 return dataSize.height+5;
                  
              }
             if (indexPath.row == 4) {
@@ -814,7 +814,7 @@
            {
                dataSize = [COMMON getControlHeight:strAbout withFontName:@"Patron-Regular" ofSize:14.0 withSize:CGSizeMake(tableView.frame.size.width-20,tableView.frame.size.height)];
                
-               return dataSize.height;
+               return dataSize.height+10;
              }
             if ( indexPath.row ==6)
             {
@@ -1131,7 +1131,7 @@
                 
                 strAbout =cell.textViewAboutYou.text;
                 
-             
+              dataSize = [COMMON getControlHeight:strAbout withFontName:@"Patron-Regular" ofSize:14.0 withSize:CGSizeMake(cell.frame.size.width-20,tableView.frame.size.height)];
                 
                 cell.textViewAboutYou.delegate = self;
                 
@@ -1144,9 +1144,13 @@
                     if(strAbout == NULL){
                         cell.textViewAboutYou.text = [[profileDict valueForKey:@"about"]mutableCopy];
                         strAbout =cell.textViewAboutYou.text;
+                         dataSize = [COMMON getControlHeight:strAbout withFontName:@"Patron-Regular" ofSize:14.0 withSize:CGSizeMake(cell.frame.size.width-20,tableView.frame.size.height)];
+                        self.aboutTextHeight.constant =dataSize.height;
                     }
                     else{
                          cell.textViewAboutYou.text = strAbout;
+                        dataSize = [COMMON getControlHeight:strAbout withFontName:@"Patron-Regular" ofSize:14.0 withSize:CGSizeMake(cell.frame.size.width-20,tableView.frame.size.height)];
+                        self.aboutTextHeight.constant =dataSize.height;
                     }
                 }
                 else{
@@ -1597,13 +1601,14 @@
     cell = (DSProfileTableViewCell *)[_tableviewProfile cellForRowAtIndexPath:indexPath];
     //cell.textViewHeaderLabel.hidden = YES;
     if(textView.tag == 0) {
+        if([textView.text isEqualToString:@"Write something about yourself here."])
+        {
         textView.text = @"";
+        }
         textView.tag = 1;
         strAbout = textView.text;
+       
     }
-    
-
-    
 }
 
 
@@ -1616,8 +1621,6 @@
     //cell.textViewHeaderLabel.hidden = YES;
     if([textView.text length] == 0)
     {
-        //textView.text = @"Foobar placeholder";
-        //textView.textColor = [UIColor lightGrayColor];
         textView.tag = 0;
     }
 
