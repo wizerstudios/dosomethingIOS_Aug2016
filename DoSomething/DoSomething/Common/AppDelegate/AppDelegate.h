@@ -42,6 +42,7 @@
 @property(nonatomic,retain)UIButton                             *chatsButton;
 @property(nonatomic,retain)UIButton                             *profileButton;
 @property(nonatomic,retain)UIButton                             *settingButton;
+@property (nonatomic,strong) UILabel                            *SepratorLbl;
 @property(nonatomic,retain)NSMutableArray                       *buttons_array;
 @end
 

@@ -77,6 +77,6 @@
 @property (strong, nonatomic) IBOutlet UIScrollView *scrView;
 - (IBAction)pageChanged:(id)sender;
 
-
+@property (nonatomic,strong) IBOutlet NSLayoutConstraint *aboutTextHeight;
 
 @end

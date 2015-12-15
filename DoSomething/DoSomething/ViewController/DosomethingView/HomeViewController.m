@@ -37,6 +37,7 @@
     AVAudioPlayer           *audioPlayer;
     NSString                *loginUserSessionID;
     CustomAlterview         * objCustomAlterview;
+    NSString                *strselectDosomething;
 }
 @end
 
@@ -363,7 +364,7 @@ minimumLineSpacingForSectionAtIndex:(NSInteger)section {
     objCustomAlterview.alertMsgLabel.textColor = [UIColor whiteColor];
     NSMutableDictionary *dic=[[NSMutableDictionary alloc]init];
     dic =[[NSUserDefaults standardUserDefaults] valueForKey:USERDETAILS];
-    NSString * strsessionID =[dic valueForKey:@"sessionId"];
+    NSString * strsessionID =[dic valueForKey:@"SessionId"];
     loginUserSessionID=strsessionID;
 }
 - (IBAction)alertPressCancel:(id)sender {
@@ -375,21 +376,23 @@ minimumLineSpacingForSectionAtIndex:(NSInteger)section {
     objCustomAlterview.alertBgView.hidden = YES;
     objCustomAlterview.alertMainBgView.hidden = YES;
     [objCustomAlterview.view setHidden:YES];
-    [self loadupdateDosomethingWebService:selectedItemsArray :@"Yes"];
+    strselectDosomething = [selectedItemsArray componentsJoinedByString:@","];
+    [self loadupdateDosomethingWebService:strselectDosomething :@"Yes"];
 
 }
 - (IBAction)alertPressNo:(id)sender {
     objCustomAlterview.alertBgView.hidden = YES;
     objCustomAlterview.alertMainBgView.hidden = YES;
     [objCustomAlterview.view setHidden:YES];
-    [self loadupdateDosomethingWebService:selectedArray :@"No"];
+    strselectDosomething = [selectedArray componentsJoinedByString:@","];
+    [self loadupdateDosomethingWebService:strselectDosomething :@"No"];
 }
 #pragma mark - loadupdateDosomethingWebService
--(void)loadupdateDosomethingWebService:(NSArray *)selectItemID :(NSString*)selectOption
+-(void)loadupdateDosomethingWebService:(NSString *)selectItemID :(NSString*)selectOption
 {
     [objWebService updateDosomething:UpdateDoSomething_API
                            sessionid:loginUserSessionID
-                      dosomething_id:selectItemID
+                      dosomething_id:strselectDosomething
                        available_now:selectOption
                              success:^(AFHTTPRequestOperation *operation, id responseObject)
     {
@@ -398,16 +401,9 @@ minimumLineSpacingForSectionAtIndex:(NSInteger)section {
         if(![responseMsg isEqualToString:@""])
         {
            NSLog(@"responseMsg:%@",responseMsg);
-            if(IS_GREATER_IOS7)
-            {
+          [self showAltermessage:responseMsg];
                 
-                [self showAltermessage:responseMsg];
-            }
-            else
-            {
-                [self showAltermessage:responseMsg];
-                
-            }
+    
         }
     }
     failure:^(AFHTTPRequestOperation *operation, id error) {
