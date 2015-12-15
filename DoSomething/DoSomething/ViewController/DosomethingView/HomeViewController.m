@@ -54,16 +54,6 @@
     {
         menuArray =[[[NSUserDefaults standardUserDefaults] valueForKey:@"MenuListArray"] mutableCopy];
     }
-     //deviceUdid = [OpenUDID value];
-//    if(IS_IPHONE5)
-//        [self.view addConstraint:[NSLayoutConstraint constraintWithItem:_homeCollectionView
-//                                                              attribute:NSLayoutAttributeTop
-//                                                              relatedBy:NSLayoutRelationEqual
-//                                                                 toItem:self.view
-//                                                              attribute:NSLayoutAttributeTop
-//                                                             multiplier:1.0
-//                                                               constant:75.0]];
-    
 }
 -(void)viewWillAppear:(BOOL)animated
 {
@@ -140,6 +130,21 @@
                         forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:objCustomAlterview.view];
 }
+
+-(void)showAltermessage:(NSString*)msg
+{
+    objCustomAlterview.view.hidden =NO;
+    objCustomAlterview.alertBgView.hidden = NO;
+    objCustomAlterview.alertMainBgView.hidden = NO;
+    objCustomAlterview.btnYes.hidden = YES;
+    objCustomAlterview.btnNo.hidden = YES;
+    objCustomAlterview.alertCancelButton.hidden=NO;
+    objCustomAlterview.alertMsgLabel.numberOfLines=5;
+    objCustomAlterview.alertMsgLabel.text = msg;
+}
+
+
+
 #pragma mark - audioplayMethod
 -(void)audioplayMethod
 {
@@ -395,19 +400,19 @@ minimumLineSpacingForSectionAtIndex:(NSInteger)section {
            NSLog(@"responseMsg:%@",responseMsg);
             if(IS_GREATER_IOS7)
             {
-             [self presentViewController:[ DSAppCommon alertWithTitle:@"Title"
-                                                          withMessage:responseMsg
-                                                       preferredStyle:UIAlertControllerStyleAlert] animated:YES completion:NULL];
+                
+                [self showAltermessage:responseMsg];
             }
             else
             {
-            [self presentViewController:[ DSAppCommon alertWithTitle:@"Title"
-                                                             withMessage:responseMsg
-                                                          preferredStyle:UIAlertControllerStyleAlert] animated:YES completion:NULL];
+                [self showAltermessage:responseMsg];
+                
             }
         }
     }
-                             failure:^(AFHTTPRequestOperation *operation, id error) {
+    failure:^(AFHTTPRequestOperation *operation, id error) {
+        
+        [self showAltermessage:[NSString stringWithFormat:@"%@",error]];
                              }];
 }
 

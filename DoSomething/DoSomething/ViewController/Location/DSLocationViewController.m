@@ -330,10 +330,24 @@
 
 -(IBAction)StatusButtonAction:(id)sender
 {
-//    if(sender.tag == 301)
-//    {
-//        
-//    }
+    if([sender tag] == 301)
+    {
+        self.onlineBtn.backgroundColor =[UIColor redColor];
+        self.offlineBtn.backgroundColor =[UIColor whiteColor];
+        self.statusBothBtn.backgroundColor=[UIColor whiteColor];
+    }
+    else if ([sender tag] == 302)
+    {
+        self.onlineBtn.backgroundColor =[UIColor whiteColor];
+        self.offlineBtn.backgroundColor =[UIColor redColor];
+        self.statusBothBtn.backgroundColor=[UIColor whiteColor];
+    }
+    else if ([sender tag] == 303)
+    {
+        self.onlineBtn.backgroundColor =[UIColor whiteColor];
+        self.offlineBtn.backgroundColor =[UIColor whiteColor];
+        self.statusBothBtn.backgroundColor=[UIColor redColor];
+    }
 }
 
 - (void)didReceiveMemoryWarning {
