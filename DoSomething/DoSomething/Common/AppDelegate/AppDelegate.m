@@ -21,7 +21,7 @@
 
 @implementation AppDelegate
 
-@synthesize locationButton,menuButton,chatsButton,buttonsView,buttons_array,profileButton,settingButton;
+@synthesize locationButton,menuButton,chatsButton,buttonsView,buttons_array,profileButton,settingButton,SepratorLbl;
 @synthesize homePage,chatPage,window, locationPage,profilePage,objSettingView;
 
 
@@ -77,6 +77,8 @@
     chatsButton     =[[UIButton alloc]init];
     profileButton   =[[UIButton alloc]init];
     settingButton   =[[UIButton alloc]init];
+    SepratorLbl     =[[UILabel alloc]init];
+    
     
     [locationButton setBackgroundImage:[UIImage imageNamed:@"loaction_normal.png"] forState:UIControlStateNormal];
     UIImage *locationActive = [UIImage imageNamed:@"loaction_active.png"];
@@ -97,6 +99,7 @@
     [settingButton setBackgroundImage:[UIImage imageNamed:@"setting_icon.png"] forState:UIControlStateNormal];
     UIImage *settingActive = [UIImage imageNamed:@"setting_active.png"];
     [chatsButton setBackgroundImage:settingActive forState:UIControlStateSelected];
+    [SepratorLbl setBackgroundColor:[UIColor lightGrayColor]];
     
     [locationButton addTarget:self action:@selector(locationView) forControlEvents:UIControlEventTouchUpInside];
     
@@ -113,6 +116,7 @@
     chatsButton.frame=CGRectMake(menuButton.frame.origin.x+menuButton.frame.size.width+20,3,45,45);
     profileButton.frame=CGRectMake(menuButton.frame.origin.x-55,locationButton.frame.origin.y+8,29,28);
     settingButton.frame =CGRectMake(chatsButton.frame.origin.x+chatsButton.frame.size.width+20,chatsButton.frame.origin.y+10,29,25);
+    SepratorLbl.frame =CGRectMake(buttonsView.frame.origin.x,buttonsView.frame.origin.y,buttonsView.frame.size.width,3);
        if(IS_IPHONE6)
     {
         locationButton.frame=CGRectMake(buttonsView.frame.origin.x+20,3,50,50);
@@ -131,7 +135,8 @@
     }
 
     [self.window.rootViewController.view addSubview:buttonsView];
-    
+    [buttonsView addSubview:SepratorLbl];
+    NSLog(@"Septraor=%@",SepratorLbl);
     [buttonsView addSubview:locationButton];
     [buttonsView addSubview:menuButton];
     [buttonsView addSubview:chatsButton];
