@@ -118,7 +118,8 @@
     [self.navigationController.navigationBar addSubview:customNavigation.view];
     
    usernotfoundlbl=[[UILabel alloc]initWithFrame:CGRectMake(self.locationCollectionView.frame.origin.x,self.locationCollectionView.center.y-30,self.locationCollectionView.frame.size.width,30)];
-    usernotfoundlbl.numberOfLines =2;
+    usernotfoundlbl.numberOfLines =0;
+    [usernotfoundlbl sizeToFit];
     usernotfoundlbl.textAlignment=NSTextAlignmentCenter;
     usernotfoundlbl.font=Patron_Bold(10);
     usernotfoundlbl.hidden=YES;
@@ -236,6 +237,9 @@
         }
     failure:^(AFHTTPRequestOperation *operation, id error) {
         
+        [COMMON removeLoading];
+        usernotfoundlbl.hidden=NO;
+        usernotfoundlbl.text  =[NSString stringWithFormat:@"%@",error];
         
         
     }];

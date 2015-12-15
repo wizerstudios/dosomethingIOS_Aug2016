@@ -135,27 +135,12 @@
 
     }];
 }
--(void)backAction
-{
-    appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
-    if(profileDict!=NULL){
-    appDelegate.buttonsView.hidden=NO;
-    }
-    [self.navigationController popViewControllerAnimated:YES];
-}
-
--(void)saveAction
-{
-    DSProfileTableViewController *profile = [[DSProfileTableViewController alloc]init];
-    profile.placeHolderArray = profileDetailsArray;
-    [self.navigationController popViewControllerAnimated:YES];
-}
 -(void)localArray
 {
     sectionArray =[[NSArray alloc]init];
     sectionArray=[[[NSUserDefaults standardUserDefaults] valueForKey:@"ListofsectionNameArray"] mutableCopy];
     interestArray = [[NSMutableArray alloc] initWithCapacity: 4];
-    interestArray =[hobbiesArry mutableCopy];
+    interestArray =[[[NSUserDefaults standardUserDefaults] valueForKey:@"ListofinterestArray"] mutableCopy];
     NSLog(@"interestArray:%@",interestArray);
     
 }
@@ -171,7 +156,7 @@
     imageNormalImageArray =[[NSMutableArray alloc]init];
 
     interstAndHobbiesArray = [[[NSUserDefaults standardUserDefaults] valueForKey:@"SelectedItem"] mutableCopy];
-    sectionArray = [[[NSUserDefaults standardUserDefaults] valueForKey:@"ListofsectionNameArray"] mutableCopy];
+    //sectionArray = [[[NSUserDefaults standardUserDefaults] valueForKey:@"ListofsectionNameArray"] mutableCopy];
 
     if([[NSUserDefaults standardUserDefaults] valueForKey:@"ListofinterestArray"]==nil){
         
@@ -186,7 +171,7 @@
         
         interstAndHobbiesArray =[[[NSUserDefaults standardUserDefaults] valueForKey:@"ListofinterestArray"] mutableCopy];
         }
-      
+        [self localArray];
        // [interestAndHobbiesCollectionView reloadData];
     }
     
@@ -539,13 +524,30 @@
         [[NSUserDefaults standardUserDefaults] setObject:interstAndHobbiesArray forKey:@"SelectedItem"];
         
         [[NSUserDefaults standardUserDefaults] synchronize];
-        
-    
-        
-    }
-    
+        }
 
     }
-    
+
+
+-(void)backAction
+{
+    appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+    if(profileDict!=NULL){
+        appDelegate.buttonsView.hidden=NO;
+    }
+    [self.navigationController popViewControllerAnimated:YES];
+}
+
+-(void)saveAction
+{
+    appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+    if(profileDict!=NULL){
+        appDelegate.buttonsView.hidden=NO;
+    }
+    DSProfileTableViewController *profile = [[DSProfileTableViewController alloc]init];
+    profile.placeHolderArray = profileDetailsArray;
+    [self.navigationController popViewControllerAnimated:YES];
+}
+
 
 @end
