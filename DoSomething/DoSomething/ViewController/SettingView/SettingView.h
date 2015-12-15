@@ -16,8 +16,8 @@
     IBOutlet UILabel *vibrationLbl;
 }
 
-@property (strong,nonatomic) IBOutlet UIScrollView *settingScroll;
+@property (strong,nonatomic) IBOutlet UIScrollView  *settingScroll;
 
-@property (nonatomic ,strong) IBOutlet UIView * notificationview;
+@property (nonatomic ,strong) IBOutlet UIView       * notificationview;
 
 @end

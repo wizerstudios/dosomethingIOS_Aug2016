@@ -183,6 +183,53 @@ DSAppCommon *sharedCommon = nil;
     [loadingView removeFromSuperview];
 }
 
+
+#pragma mark get user CurrentLocation
+
+- (void)getUserCurrenLocation{
+    
+    }
+
+-(void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations {
+    
+}
+
+- (void)locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error
+{
+    
+    NSLog(@"Cannot find the location for main view.");
+}
+
+//checking
+#pragma mark - getUserCurrentLocationData
+- (void)getUserCurrentLocationData{
+  //  [self getUserCurrenLocation];
+    objWebService = [[DSWebservice alloc]init];
+    LocationDict=[[NSMutableDictionary alloc]init];
+    LocationDict =[[NSUserDefaults standardUserDefaults] valueForKey:USERDETAILS];
+    NSString * strsessionID =[LocationDict valueForKey:@"SessionId"];
+    sessionId = strsessionID;
+    NSLog(@"strsessionID%@",strsessionID);
+    NSLog(@"currentLatitude%@",currentLatitude);
+    NSLog(@"currentLongitude%@",currentLongitude);
+    
+    [objWebService locationUpdate:LocationUpdate_API
+                        sessionid:sessionId
+                         latitude:currentLatitude
+                        longitude:currentLongitude
+                          success:^(AFHTTPRequestOperation *operation, id responseObject) {
+                              NSLog(@"LocationUpdate_API%@",responseObject);
+                              
+                              
+                          } failure:^(AFHTTPRequestOperation *operation, id error) {
+                               NSLog(@"LocationUpdateError%@",error);
+                              
+                          }];
+    
+}
+
+
+
 bool addSkipBackupAttributeToItemAtURL (NSURL* URL)
 {
     if (& NSURLIsExcludedFromBackupKey == nil)

@@ -371,6 +371,10 @@ notification_vibration:(NSString *)isnotification_vibration
              [[NSNotificationCenter defaultCenter] postNotificationName:@"updateprofile"object:self userInfo:responseObject];
 
          }
+         else {
+             [DSAppCommon showSimpleAlertWithMessage:@"error"];
+         }
+
         
 
      }
