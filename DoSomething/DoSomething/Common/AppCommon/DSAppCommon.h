@@ -9,6 +9,9 @@
 #import <Foundation/Foundation.h>
 
 #import <UIKit/UIKit.h>
+#import "DSWebservice.h"
+#import "DSConfig.h"
+#import <MapKit/MapKit.h>
 
 typedef enum {
     
@@ -19,12 +22,21 @@ typedef enum {
     iPad
 }currentDevice ;
 
-@interface DSAppCommon : NSObject <UIActionSheetDelegate>
+@interface DSAppCommon : NSObject <UIActionSheetDelegate,CLLocationManagerDelegate>
 {
     
     NSArray *permissions;
     UIView  *loadingView;
     UIActivityIndicatorView *activityView;
+    CLLocationManager       *locationManager;
+    DSWebservice            * objWebService;
+    NSMutableDictionary     *LocationDict;
+    NSString *sessionId;
+    //NSString *latitude;
+   // NSString *longitude;
+    NSString                *currentLatitude,*currentLongitude;
+    
+    
 }
 
 +(DSAppCommon *) common;
@@ -39,6 +51,8 @@ typedef enum {
 
 - (currentDevice)getCurrentDevice;
 - (BOOL) isUserLoggedIn;
+- (void)getUserCurrenLocation;
+//- (void) getUserCurrentLocationData;
 
 
 void downloadImageFromUrl(NSString* urlString, UIImageView * imageview);

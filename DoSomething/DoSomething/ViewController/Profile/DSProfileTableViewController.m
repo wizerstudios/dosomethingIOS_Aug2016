@@ -16,10 +16,7 @@
 #import "OpenUDID.h"
 #import <MapKit/MapKit.h>
 #import "NSString+validations.h"
-
-#import "NSString+validations.h"
 #import "UIImageView+AFNetworking.h"
-
 #import "CustomAlterview.h"
 #import "DSTermsOfUseView.h"
 
@@ -92,6 +89,8 @@
     UIWindow *windowInfo;
     BOOL isPick;
     BOOL isPageControl;
+    BOOL isLoadData;
+    NSString *sessionID;
     
 
 }
@@ -106,14 +105,12 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     objWebService = [[DSWebservice alloc]init];
-    [self initializeArray];
-    
     deviceUdid = [OpenUDID value];
     isPick=NO;
     isPageControl=NO;
+    isLoadData=NO;
+    //[COMMON getUserCurrentLocationData];
    
-    [self profileImageDisplayMethod];
-    
 }
 -(void)viewWillAppear:(BOOL)animated
 {
@@ -179,9 +176,14 @@
     }
     infoArray=[[NSMutableArray alloc]initWithObjects:@"profile_noimg",@"profile_noimg",@"profile_noimg", nil];
     [self CustomAlterview];
-    [self getUserCurrenLocation];
-
+    if(!isLoadData){
+        [self initializeArray];
+        [COMMON getUserCurrenLocation];
+        [self profileImageDisplayMethod];
+        isLoadData = YES;
+    }
      [_tableviewProfile reloadData];
+        
 }
 -(void)profileImageDisplayMethod
 {
@@ -189,6 +191,7 @@
     profileDict =[[NSUserDefaults standardUserDefaults] valueForKey:USERDETAILS];
     NSString * strsessionID =[profileDict valueForKey:@"SessionId"];
     loginUserSessionID = strsessionID;
+    NSLog(@"strsessionID%@",strsessionID);
     if(profileDict == NULL)
     {
         // [self initializeArray];
@@ -441,24 +444,24 @@
 
 #pragma mark get user CurrentLocation
 
-- (void)getUserCurrenLocation{
-    
-    if(!locationManager){
-        
-        locationManager                 = [[CLLocationManager alloc] init];
-        locationManager.delegate        = self;
-        locationManager.distanceFilter  = kCLLocationAccuracyKilometer;
-        locationManager.desiredAccuracy = kCLLocationAccuracyBest;
-        locationManager.activityType    = CLActivityTypeAutomotiveNavigation;
-    }
-    if ([locationManager respondsToSelector:@selector(requestAlwaysAuthorization)])
-        [locationManager requestAlwaysAuthorization];
-    
-    if ([locationManager respondsToSelector:@selector(requestWhenInUseAuthorization)])
-        [locationManager requestWhenInUseAuthorization];
-    
-    [locationManager startUpdatingLocation];
-}
+//- (void)getUserCurrenLocation{
+//    
+//    if(!locationManager){
+//        
+//        locationManager                 = [[CLLocationManager alloc] init];
+//        locationManager.delegate        = self;
+//        locationManager.distanceFilter  = kCLLocationAccuracyKilometer;
+//        locationManager.desiredAccuracy = kCLLocationAccuracyBest;
+//        locationManager.activityType    = CLActivityTypeAutomotiveNavigation;
+//    }
+//    if ([locationManager respondsToSelector:@selector(requestAlwaysAuthorization)])
+//        [locationManager requestAlwaysAuthorization];
+//    
+//    if ([locationManager respondsToSelector:@selector(requestWhenInUseAuthorization)])
+//        [locationManager requestWhenInUseAuthorization];
+//    
+//    [locationManager startUpdatingLocation];
+//}
 
 -(void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations {
     

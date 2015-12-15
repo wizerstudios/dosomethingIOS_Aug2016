@@ -373,6 +373,10 @@ notification_vibration:(NSString *)isnotification_vibration
                                                                userInfo:responseObject];
 
          }
+         else {
+             [DSAppCommon showSimpleAlertWithMessage:@"error"];
+         }
+
         
 
      }

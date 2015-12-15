@@ -358,7 +358,7 @@ minimumLineSpacingForSectionAtIndex:(NSInteger)section {
     objCustomAlterview.alertMsgLabel.textColor = [UIColor whiteColor];
     NSMutableDictionary *dic=[[NSMutableDictionary alloc]init];
     dic =[[NSUserDefaults standardUserDefaults] valueForKey:USERDETAILS];
-    NSString * strsessionID =[dic valueForKey:@"SessionId"];
+    NSString * strsessionID =[dic valueForKey:@"sessionId"];
     loginUserSessionID=strsessionID;
 }
 - (IBAction)alertPressCancel:(id)sender {

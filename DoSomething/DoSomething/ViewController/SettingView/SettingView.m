@@ -20,22 +20,22 @@
 @interface SettingView ()
 {
    
-    DSWebservice *objWebService;
-    NSString *loginUserSessionID;
-    NSString *optionLogoutDelete;
-    NSString * notificationMsg;
-    NSString * notificationSound;
-    NSString * notificationvibration;
-    AppDelegate *appDelegate;
-    UISwitch * messSwith;
-    UISwitch * soundSwitch;
-    UISwitch *vibrationSwitch;
+    DSWebservice    *objWebService;
+    NSString        *loginUserSessionID;
+    NSString        *optionLogoutDelete;
+    NSString        * notificationMsg;
+    NSString        * notificationSound;
+    NSString        * notificationvibration;
+    AppDelegate     *appDelegate;
+    UISwitch        * messSwith;
+    UISwitch        * soundSwitch;
+    UISwitch        *vibrationSwitch;
     CustomAlterview * objCustomAlterview;
-    UIWindow *windowInfo;
+    UIWindow        *windowInfo;
 }
 
-@property (nonatomic,strong) IBOutlet NSLayoutConstraint * deletebuttonBottomoposition;
-@property(nonatomic,retain) DSTermsOfUseView *termsOfUseView;
+@property (nonatomic,strong) IBOutlet NSLayoutConstraint    * deletebuttonBottomoposition;
+@property(nonatomic,retain) DSTermsOfUseView                *termsOfUseView;
 
 @end
 @implementation SettingView
@@ -47,22 +47,17 @@
     objWebService =[[DSWebservice alloc]init];
     settingScroll.scrollEnabled =NO;
     NSMutableDictionary *dic=[[NSMutableDictionary alloc]init];
-   
-    
     dic =[[NSUserDefaults standardUserDefaults] valueForKey:USERDETAILS];
-    
     NSString * strsessionID =[dic valueForKey:@"SessionId"];
     NSLog(@"usersessionID:%@",strsessionID);
     notificationMsg=[dic valueForKey:@"notification_message"];
     notificationSound=[dic valueForKey:@"notification_sound"];
     notificationvibration=[dic valueForKey:@"notification_vibration"];
-    
     loginUserSessionID=strsessionID;
     
 }
 -(void)viewWillAppear:(BOOL)animated{
     
-   
     [self loadNavigationview];
     
     [self CustomAlterviewload];
@@ -269,46 +264,33 @@
                                 NSLog(@"logoutDeleteUser %@ =" , responseObject);
                                 if([[[responseObject valueForKey:@"useraction"]valueForKey:@"status"] isEqualToString:@"success"])
                                 {
-                                    DSHomeViewController*objSplashView =[[DSHomeViewController alloc]initWithNibName:@"DSHomeViewController" bundle:nil];
-                                    [self.navigationController pushViewController:objSplashView animated:NO];
-                                
-                                    [COMMON removeUserDetails];
-                                    appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
-                                    appDelegate.buttonsView.hidden=YES;
-                                    [appDelegate.settingButton setBackgroundImage:[UIImage imageNamed:@"setting_icon.png"]
-                                                                         forState:UIControlStateNormal];
-                                    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
-                                    });
-                                }
+                                                                    }
                                 else if([responseObject valueForKey:@"error"])
                                 {
-                                    //if([optionLogoutDelete isEqual:@"logout"]){
-                                    
-                                    [COMMON removeUserDetails];
-                                   // }
-                                   
-                                    DSHomeViewController*objSplashView =[[DSHomeViewController alloc]initWithNibName:@"DSHomeViewController" bundle:nil];
-                                    [self.navigationController pushViewController:objSplashView animated:NO];
-                                    appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
-                                    appDelegate.buttonsView.hidden=YES;
-                                    [appDelegate.settingButton setBackgroundImage:[UIImage imageNamed:@"setting_icon.png"] forState:UIControlStateNormal];
-                                    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
-                                    });
-                                    
                                     
                                 }
                                 else
                                 {
                                       NSLog(@"delete failure");
                                 }
-                               
-                                
                                 
                             }
                             failure:^(AFHTTPRequestOperation *operation, id error) {
                                 NSLog(@"logout failure");
 
                             }];
+    
+    DSHomeViewController*objSplashView =[[DSHomeViewController alloc]initWithNibName:@"DSHomeViewController" bundle:nil];
+    [self.navigationController pushViewController:objSplashView animated:NO];
+    
+    [COMMON removeUserDetails];
+    appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+    appDelegate.buttonsView.hidden=YES;
+    [appDelegate.settingButton setBackgroundImage:[UIImage imageNamed:@"setting_icon.png"]
+                                         forState:UIControlStateNormal];
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
+    });
+
 }
 -(IBAction)didClickLogoutButtonAction:(id)sender
 {

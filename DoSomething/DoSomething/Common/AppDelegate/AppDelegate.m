@@ -180,6 +180,8 @@
     [chatsButton setBackgroundImage:[UIImage imageNamed:@"chats.png"] forState:UIControlStateNormal];
     profilePage =[[DSProfileTableViewController alloc]initWithNibName:@"DSProfileTableViewController" bundle:nil];
     [self.navigationController pushViewController:profilePage animated:NO];
+        
+    
 }
 
 -(void)settingView

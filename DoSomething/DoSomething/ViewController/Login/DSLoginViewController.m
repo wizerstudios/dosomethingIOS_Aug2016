@@ -222,6 +222,7 @@
     [objCustomAlterview.alertMsgLabel setTextColor:[UIColor colorWithRed:(255/255.0f) green:(255/255.0f) blue:(255/255.0f) alpha:1.0f]];
 
     [self.view addSubview:objCustomAlterview.view];
+    
 }
 
 - (IBAction)alertPressCancel:(id)sender
@@ -343,6 +344,7 @@
         
         [COMMON LoadIcon:self.view];
         [self loadloginAPI];
+        //[self checkUserEmail]
     }
 }
 #pragma mark - checkuserEmailAPI
