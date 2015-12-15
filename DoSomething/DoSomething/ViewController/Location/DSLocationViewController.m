@@ -118,8 +118,8 @@
     [self.navigationController.navigationBar addSubview:customNavigation.view];
     
    usernotfoundlbl=[[UILabel alloc]initWithFrame:CGRectMake(self.locationCollectionView.frame.origin.x,self.locationCollectionView.center.y-30,self.locationCollectionView.frame.size.width,30)];
-    usernotfoundlbl.numberOfLines =0;
-    [usernotfoundlbl sizeToFit];
+    usernotfoundlbl.numberOfLines =10;
+    
     usernotfoundlbl.textAlignment=NSTextAlignmentCenter;
     usernotfoundlbl.font=Patron_Bold(10);
     usernotfoundlbl.hidden=YES;
@@ -212,6 +212,7 @@
 {
     [COMMON LoadIcon:self.view];
     [objWebservice nearestUsers:NearestUsers_API sessionid:strsessionID latitude:currentLatitude longitude:currentLongitude filter_status:@"" filter_gender:@"" filter_agerange:@"" filter_distance:@"" success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSLog(@"responseObject=%@",responseObject);
         
              if([[[responseObject valueForKey:@"nearestusers"]valueForKey:@"status"] isEqualToString:@"success"])
              {
