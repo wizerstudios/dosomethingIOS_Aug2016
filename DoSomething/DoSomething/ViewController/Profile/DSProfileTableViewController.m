@@ -259,7 +259,7 @@
     {
         hobbiesNameArray =[[interstAndHobbiesArray valueForKey:@"name"]mutableCopy];
     }
-    
+     hobbiesCategoryIDArray =[[[NSUserDefaults standardUserDefaults] valueForKey:@"SelectedItemCategoryID"]mutableCopy];
     strInterestHobbies = [hobbiesCategoryIDArray componentsJoinedByString:@","];
 }
 
