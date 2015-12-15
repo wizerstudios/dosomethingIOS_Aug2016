@@ -99,7 +99,7 @@
 
 
 @implementation DSProfileTableViewController
-@synthesize  profileData1, profileData2,profileData3,textviewText, placeHolderArray,FBprofileID;
+@synthesize  profileData1,textviewText, placeHolderArray,FBprofileID;
 @synthesize userDetailsDict,emailAddressToRegister,emailPasswordToRegister,selectEmail,topViewCell;
 
 - (void)viewDidLoad {

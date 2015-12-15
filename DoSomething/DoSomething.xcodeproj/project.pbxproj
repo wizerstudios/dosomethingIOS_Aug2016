@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		065433161BF38B0400DABBFC /* button-16.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 065433151BF38B0400DABBFC /* button-16.mp3 */; };
 		065BAC521BC7A135005AF493 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 065BAC511BC7A135005AF493 /* main.m */; };
+		2B13322B1C1FFD1A000A3081 /* DSDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B1332291C1FFD1A000A3081 /* DSDetailViewController.m */; };
+		2B13322C1C1FFD1A000A3081 /* DSDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2B13322A1C1FFD1A000A3081 /* DSDetailViewController.xib */; };
 		2B83CAAF1BE8744E0064EC7F /* DSWebservice.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B83CAAE1BE8744E0064EC7F /* DSWebservice.m */; };
 		2B83CAC41BE895AB0064EC7F /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 2B83CABF1BE895AB0064EC7F /* Default.png */; };
 		2B83CAC61BE895AB0064EC7F /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2B83CAC11BE895AB0064EC7F /* Default-568h@2x.png */; };
@@ -123,6 +125,9 @@
 		065BAC511BC7A135005AF493 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		065BAC611BC7A135005AF493 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1C75845E698F9F0E3DFC07B6 /* Pods-DoSomething.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DoSomething.release.xcconfig"; path = "Pods/Target Support Files/Pods-DoSomething/Pods-DoSomething.release.xcconfig"; sourceTree = "<group>"; };
+		2B1332281C1FFD1A000A3081 /* DSDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DSDetailViewController.h; path = NearByDetail/DSDetailViewController.h; sourceTree = "<group>"; };
+		2B1332291C1FFD1A000A3081 /* DSDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DSDetailViewController.m; path = NearByDetail/DSDetailViewController.m; sourceTree = "<group>"; };
+		2B13322A1C1FFD1A000A3081 /* DSDetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = DSDetailViewController.xib; path = NearByDetail/DSDetailViewController.xib; sourceTree = "<group>"; };
 		2B83CAAD1BE8744E0064EC7F /* DSWebservice.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DSWebservice.h; sourceTree = "<group>"; };
 		2B83CAAE1BE8744E0064EC7F /* DSWebservice.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DSWebservice.m; sourceTree = "<group>"; };
 		2B83CABF1BE895AB0064EC7F /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
@@ -364,6 +369,16 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		2B1332271C1FF81E000A3081 /* NearByDetail */ = {
+			isa = PBXGroup;
+			children = (
+				2B1332281C1FFD1A000A3081 /* DSDetailViewController.h */,
+				2B1332291C1FFD1A000A3081 /* DSDetailViewController.m */,
+				2B13322A1C1FFD1A000A3081 /* DSDetailViewController.xib */,
+			);
+			name = NearByDetail;
+			sourceTree = "<group>";
+		};
 		2B83CAAC1BE8744E0064EC7F /* DSWebservice */ = {
 			isa = PBXGroup;
 			children = (
@@ -583,6 +598,7 @@
 				51F3C2F01BE75D40001E1FEC /* LocationCollectionViewCell.h */,
 				51F3C2F11BE75D40001E1FEC /* LocationCollectionViewCell.m */,
 				51F3C2F21BE75D40001E1FEC /* LocationCollectionViewCell.xib */,
+				2B1332271C1FF81E000A3081 /* NearByDetail */,
 			);
 			name = Location;
 			path = ViewController/Location;
@@ -968,6 +984,7 @@
 				EADB949D1BDF566C00512374 /* HomeCustomCell.xib in Resources */,
 				2B83CAC71BE895AB0064EC7F /* Default@2x.png in Resources */,
 				C6D5F63F1BC7B52C0050C1AE /* Patron-ExtraLightItalic.ttf in Resources */,
+				2B13322C1C1FFD1A000A3081 /* DSDetailViewController.xib in Resources */,
 				EAEF25361BCFEBF400F83E82 /* CustomNavigationView.xib in Resources */,
 				51322A221BDFBFAA00418216 /* chaton.png in Resources */,
 				C6D5F63D1BC7B52C0050C1AE /* Patron-BoldItalic.ttf in Resources */,
@@ -1106,6 +1123,7 @@
 				2BD72B101BFCC5D4003846E9 /* AFNetworkActivityIndicatorManager.m in Sources */,
 				2BD72B1A1BFCC713003846E9 /* OpenUDID.m in Sources */,
 				6A50C21C1BCCBB8C002B11AC /* DSProfileTableViewCell.m in Sources */,
+				2B13322B1C1FFD1A000A3081 /* DSDetailViewController.m in Sources */,
 				EAEF25241BCF9EF600F83E82 /* IQSegmentedNextPrevious.m in Sources */,
 				2B83CACE1BE8D4FD0064EC7F /* NSString+validations.m in Sources */,
 				2BD72B171BFCC5D4003846E9 /* UIWebView+AFNetworking.m in Sources */,

@@ -15,8 +15,11 @@
 #import "DSAppCommon.h"
 #import "AppDelegate.h"
 #import <MapKit/MapKit.h>
+#import "DSDetailViewController.h"
+#import "CustomAlterview.h"
 @interface DSLocationViewController ()<CLLocationManagerDelegate>
 {
+    CustomAlterview *objCustomAlterview;
     DSWebservice *objWebservice;
     AppDelegate *appDelegate;
     NSString * strsessionID;
@@ -24,6 +27,8 @@
     NSString * laditude;
     BOOL isFilteraction;
     NSString  * currentLatitude, * currentLongitude;
+    BOOL isLoadData;
+    NSString *profileUserID;
 }
 @property(nonatomic,strong)IBOutlet NSLayoutConstraint *collectionviewxpostion;
 @property(nonatomic,strong)IBOutlet NSLayoutConstraint * filterviewxposition;
@@ -42,7 +47,7 @@
 @implementation DSLocationViewController
 @synthesize delegate;
 @synthesize locationCollectionView,locationManager;
-@synthesize profileImages,profileNames,kiloMeterlabel;
+@synthesize profileImages,profileNames,kiloMeterlabel,userID;
 - (void)viewDidLoad {
     
     NSMutableDictionary *dic=[[NSMutableDictionary alloc]init];
@@ -58,6 +63,8 @@
     
     
     [super viewDidLoad];
+    isLoadData=NO;
+    
     // Do any additional setup after loading the view from its nib.
 }
 
@@ -94,7 +101,7 @@
     kiloMeterlabel =[[NSArray alloc]init];
     
     
-    
+    if(!isLoadData){
     UICollectionViewFlowLayout *flowLayout1 = [[UICollectionViewFlowLayout alloc] init];
     flowLayout1.headerReferenceSize = CGSizeMake(locationCollectionView.bounds.size.width,45);
     [locationCollectionView setCollectionViewLayout:flowLayout1];
@@ -107,8 +114,11 @@
                                                               attribute:NSLayoutAttributeTop
                                                              multiplier:1.0
                                                                constant:-20.0]];
+        isLoadData=YES;
     
+    }
     [self filterPageButtonAction];
+
     
     
 }
@@ -204,12 +214,19 @@
             nearestUserdetaile =[[responseObject valueForKey:@"nearestusers"] valueForKey:@"UserList"];
             profileNames     =[nearestUserdetaile valueForKey:@"first_name"];
             kiloMeterlabel   =[nearestUserdetaile valueForKey:@"distance"];
-            profileImages   =[nearestUserdetaile valueForKey:@"image1"];
+            profileImages    =[nearestUserdetaile valueForKey:@"image1"];
+            userID           =[nearestUserdetaile valueForKey:@"user_id"];
             
             [locationCollectionView reloadData];
             NSLog(@"%@",nearestUserdetaile);
             [COMMON removeLoading];
         }
+        else{
+            [self showAltermessage:@"NO USERS FOUND"];//[[responseObject valueForKey:@"nearestusers"]valueForKey:@"Message"]];
+            
+            [COMMON removeLoading];
+        }
+        
         
         
         
@@ -288,22 +305,60 @@
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath;
 {
-    //   LocationCollectionViewCell*SelectCell = (LocationCollectionViewCell *)[collectionView cellForItemAtIndexPath:indexPath];
-    //
-    //
-    //    NSString *MyPatternString = [profileImages objectAtIndex:indexPath.row];
-    //
-    //    SelectCell.imageProfile.image =[UIImage imageNamed:MyPatternString ];
-    //    SelectCell.sendRequest.text=@"Request Send";
-    //    SelectCell.sendRequest.textColor=[UIColor darkGrayColor];
-    //    SelectCell.hobbiesImage.image=[UIImage imageNamed:@"request_send1.png"];
-    //    SelectCell.activeNow.text=@"NOW";
-    //    SelectCell.activeNow.backgroundColor=[UIColor whiteColor];
+     // LocationCollectionViewCell*SelectCell = (LocationCollectionViewCell *)[collectionView cellForItemAtIndexPath:indexPath];
     
-    //    SelectCell.hobbiesnames.textColor=[UIColor colorWithRed:(float)230.0/255 green:(float)63.0/255 blue:(float)82.0/255 alpha:1.0f];
-    //
+    UICollectionViewCell *cell = [collectionView cellForItemAtIndexPath:indexPath];
+    NSLog(@"touched cell %@ at indexPath %@", cell, indexPath);
+    
+    profileUserID=[userID objectAtIndex:indexPath.row];
+    NSLog(@"profileUserID%@",profileUserID);
+    
+    
+    [self getUserDetails];
+    
+    NSLog(@"%ld", (long)indexPath.row);
     
 }
+-(void)getUserDetails{
+    
+    [COMMON LoadIcon:self.view];
+    [objWebservice getUserDetails:UserDetails_API
+                        sessionid:strsessionID
+                  profile_user_id:profileUserID
+                          success:^(AFHTTPRequestOperation *operation, id responseObject) {
+                               NSLog(@"responseObject%@",responseObject);
+                              
+//                              NSMutableDictionary *detailsDict = [[NSMutableDictionary alloc]init];
+//                              
+//                              detailsDict = [responseObject valueForKey:@"getuserdetails"];
+//                              
+//                              if([[detailsDict valueForKey:@"status"]isEqualToString:@"success"]){
+//                                  
+//                                   NSLog(@"profileUse%@",[detailsDict objectForKey:@"userDetails"]);
+//                              }
+                              
+                              if( [responseObject objectForKey:@"getuserdetails"]!=NULL){
+                                  NSLog(@"profileUse%@",[[responseObject objectForKey:@"getuserdetails"]objectForKey:@"userDetails"]);
+                                  
+                                  [self redirectToDetailViewWithDictionary:[[responseObject objectForKey:@"getuserdetails"]objectForKey:@"userDetails"]];
+                                  [COMMON removeLoading];
+                              }
+                              
+                          }
+                          failure:^(AFHTTPRequestOperation *operation, id error) {
+                              
+                          }];
+}
+- (void) redirectToDetailViewWithDictionary:(NSMutableDictionary *) detailsDictionary {
+    
+    DSDetailViewController* detailViewController = [[DSDetailViewController alloc] init];
+    
+    
+    detailViewController.userDetailsDict = detailsDictionary;
+    
+    [self.navigationController pushViewController:detailViewController animated:YES];
+}
+
 -(IBAction)filterAction:(id)sender
 {
     if(isFilteraction==NO)
@@ -348,6 +403,49 @@
         self.offlineBtn.backgroundColor =[UIColor whiteColor];
         self.statusBothBtn.backgroundColor=[UIColor redColor];
     }
+}
+
+#pragma mark - CustomalterviewMethod
+
+-(void)CustomAlterview
+{
+    objCustomAlterview = [[CustomAlterview alloc] initWithNibName:@"CustomAlterview" bundle:nil];
+    objCustomAlterview.view.frame = CGRectMake(self.view.frame.origin.x,self.view.frame.origin.y, CGRectGetWidth(self.view.frame),self.view.frame.size.height);
+    [objCustomAlterview.alertBgView setHidden:YES];
+    [objCustomAlterview.alertMainBgView setHidden:YES];
+    [objCustomAlterview.view setHidden:YES];
+    [objCustomAlterview.btnYes setHidden:YES];
+    [objCustomAlterview.btnNo setHidden:YES];
+    [objCustomAlterview.alertCancelButton setHidden:NO];
+    [objCustomAlterview.alertCancelButton addTarget:self action:@selector(alertPressCancel:) forControlEvents:UIControlEventTouchUpInside];
+    
+    [self.view addSubview:objCustomAlterview.view];
+}
+
+- (IBAction)alertPressCancel:(id)sender {
+    
+    objCustomAlterview. alertBgView.hidden = YES;
+    objCustomAlterview.alertMainBgView.hidden = YES;
+    objCustomAlterview.view .hidden  = YES;
+    
+}
+-(void)showAltermessage:(NSString*)msg
+{
+    
+    objCustomAlterview.view.hidden =NO;
+    //objCustomAlterview.view.alpha=0.0;
+    objCustomAlterview.alertBgView.hidden = NO;
+    objCustomAlterview.alertMainBgView.hidden = NO;
+    objCustomAlterview.alertCancelButton.hidden = NO;
+    objCustomAlterview.btnYes.hidden = YES;
+    objCustomAlterview.btnNo.hidden = YES;
+    
+    objCustomAlterview.alertMsgLabel.text = msg;
+    objCustomAlterview.alertMsgLabel.textAlignment = NSTextAlignmentCenter;
+    objCustomAlterview.alertMsgLabel.lineBreakMode = NSLineBreakByWordWrapping;
+    objCustomAlterview.alertMsgLabel.numberOfLines = 2;
+    [objCustomAlterview.alertMsgLabel setTextColor:[UIColor colorWithRed:(255/255.0f) green:(255/255.0f) blue:(255/255.0f) alpha:1.0f]];
+    
 }
 
 - (void)didReceiveMemoryWarning {
