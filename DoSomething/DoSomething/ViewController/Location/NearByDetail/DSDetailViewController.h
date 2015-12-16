@@ -28,8 +28,16 @@
 
 @property (strong, nonatomic) IBOutlet UITextView *aboutTextBox;
 @property (strong, nonatomic) NSMutableDictionary *userDetailsDict;
+@property (strong, nonatomic) IBOutlet UIView *genderView;
 @property (strong, nonatomic) IBOutlet UILabel *userName;
+@property (strong, nonatomic) IBOutlet UILabel *aboutLabel;
 
+@property (strong, nonatomic) IBOutlet UILabel *thingsLabel;
 
+@property (strong, nonatomic) IBOutlet UILabel *myinterestsLabel;
+@property (strong, nonatomic) IBOutlet UIView *aboutView;
+
+@property (strong, nonatomic) IBOutlet UIView *thingsView;
+@property (strong, nonatomic) IBOutlet UIView *myInterestView;
 
 @end

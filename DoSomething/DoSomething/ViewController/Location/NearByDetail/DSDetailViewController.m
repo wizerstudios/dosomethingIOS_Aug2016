@@ -16,8 +16,19 @@
 
 @interface DSDetailViewController ()
 {
-    NSMutableArray *profileDataArray;
-    UIImageView    *userProfileImage;
+    NSMutableArray  *profileDataArray;
+    UIImageView     *userProfileImage;
+    
+    NSMutableArray  *interstAndHobbiesArray;
+    NSMutableArray  *imageNormalArray,*hobbiesNameArray;
+    
+    NSMutableArray  *doSomethingArray;
+    NSMutableArray  *doSomethingImageArray,*doSomethingNameArray;
+    
+    float commonWidth, commonHeight;
+    float yAxis;
+    float imageSize;
+    float space;
     
 }
 @end
@@ -56,21 +67,88 @@
     [customNavigation.buttonBack addTarget:self action:@selector(backAction) forControlEvents:UIControlEventTouchUpInside];
     
     [self profileImageDisplay];
-    [self profileScroll];
-   // [self profileDetails];
+    [self profileImageScrollView];
+    CGRect buttonFrame = CGRectMake( 167, 35, 122, 35 );
+    UIButton *letsDoButton = [[UIButton alloc] initWithFrame: buttonFrame];
+    [letsDoButton setTitle: @"Let's Do Something!" forState: UIControlStateNormal];
+    //[letsDoButton addTarget:self action:@selector(btnSelected:) forControlEvents:UIControlEventTouchUpInside];
+    [letsDoButton.titleLabel setFont:[UIFont fontWithName:@"Patron-Bold" size:12]];
+    [letsDoButton setTitleColor: [UIColor whiteColor] forState: UIControlStateNormal];
+    letsDoButton.backgroundColor = [UIColor colorWithRed:218.0f/255.0f
+                                                   green:40.0f/255.0f
+                                                    blue:64.0f/255.0f
+                                                   alpha:1.0f];
+    [self.thingsView addSubview:letsDoButton];
+    //genderImage
+    UIImage *genderImage;
+    if([[userDetailsDict objectForKey:@"gender"]isEqualToString:@"Female"]){
+        genderImage = [UIImage imageNamed:@"female_Icon"];
+    }
+    else
+        genderImage = [UIImage imageNamed:@"male_Icon"];
+    
+    UIImageView *genderImageView = [[UIImageView alloc] initWithImage:genderImage];
+    [self.genderView addSubview:genderImageView];
+
+    
+   
     self.aboutTextBox.text = [userDetailsDict valueForKey:@"about"];
-    self.userName.text     = [userDetailsDict valueForKey:@"first_name"];
+    self.userName.text     = [self getData];
+    [self.userName setFont:[UIFont fontWithName:@"Patron-Medium" size:14]];
     self.userName.textColor =[UIColor colorWithRed:218.0f/255.0f
                                              green:40.0f/255.0f
                                               blue:64.0f/255.0f
                                              alpha:1.0f];
-    self.aboutTextBox.textColor =[UIColor colorWithRed:83.0f/255.0f
-                                             green:83.0f/255.0f
-                                              blue:83.0f/255.0f
-                                             alpha:1.0f];
-    NSLog(@"userDetailsDict%@",userDetailsDict);
+    //AboutLabel
+    self.aboutLabel.text = NSLocalizedString(@"About ME", @"");
+    [self.aboutLabel setFont:[UIFont fontWithName:@"Patron-Medium" size:12]];
+    self.aboutLabel.textColor =[UIColor colorWithRed:83.0f/255.0f
+                                               green:83.0f/255.0f
+                                                blue:83.0f/255.0f
+                                               alpha:1.0f];
+    //ThingsLabel
+    [self.thingsLabel setText:NSLocalizedString(@"Things I Wanna Do", @"")];
+    [self.thingsLabel setFont:[UIFont fontWithName:@"Patron-Medium" size:12]];
+    self.thingsLabel.textColor =[UIColor colorWithRed:83.0f/255.0f
+                                                green:83.0f/255.0f
+                                                blue:83.0f/255.0f
+                                                alpha:1.0f];
+    //MyInterestLabel
+    [self.myinterestsLabel setText:NSLocalizedString(@"My Interests and Hobbies", @"")];
+    [self.myinterestsLabel setFont:[UIFont fontWithName:@"Patron-Medium" size:12]];
+    self.myinterestsLabel.textColor =[UIColor colorWithRed:83.0f/255.0f
+                                                     green:83.0f/255.0f
+                                                      blue:83.0f/255.0f
+                                                     alpha:1.0f];
+    
+    interstAndHobbiesArray  = [[userDetailsDict valueForKey:@"hobbieslist"]mutableCopy];
+    hobbiesNameArray        = [[interstAndHobbiesArray valueForKey:@"name"]mutableCopy];
+    imageNormalArray        = [[interstAndHobbiesArray valueForKey:@"image"]mutableCopy];
+    doSomethingArray        = [[userDetailsDict valueForKey:@"dosomething"]mutableCopy];
+    doSomethingNameArray    = [[doSomethingArray valueForKey:@"name"]mutableCopy];
+    doSomethingImageArray   = [[doSomethingArray valueForKey:@"ActiveImage"]mutableCopy];
+    [self profileInterestsDetails];
+    [self profileDoSomethingDetails];
     
 }
+#pragma mark - userAgeName
+-(NSString *) getData{
+    
+    NSString *strUserData= @"";
+    
+    if ([userDetailsDict objectForKey:@"first_name"] != NULL && ![[userDetailsDict objectForKey:@"first_name"] isEqualToString:@""]) {
+        strUserData = [NSString stringWithFormat:@"%@%@",strUserData,[userDetailsDict objectForKey:@"first_name"]];
+    }
+    if ([userDetailsDict objectForKey:@"last_name"] != NULL && ![[userDetailsDict objectForKey:@"last_name"] isEqualToString:@""]) {
+        strUserData = [NSString stringWithFormat:@"%@ %@",strUserData,[userDetailsDict objectForKey:@"last_name"]];
+    }
+    if ([userDetailsDict objectForKey:@"age"] != NULL && ![[userDetailsDict objectForKey:@"age"] isEqualToString:@""]) {
+        strUserData = [NSString stringWithFormat:@"%@, %@",strUserData,[userDetailsDict objectForKey:@"age"]];
+    }
+    return strUserData;
+    
+}
+#pragma mark - profileImageDisplay
 
 -(void)profileImageDisplay{
     
@@ -93,27 +171,17 @@
     else{
         ImageURL3=[userDetailsDict valueForKey:@"image3_thumb"];
     }
-//    ImageURL1=[userDetailsDict valueForKey:@"image1"];
-//    ImageURL2=[userDetailsDict valueForKey:@"image2"];
-//    ImageURL3=[userDetailsDict valueForKey:@"image3"];
-    
     profileDataArray = [[NSMutableArray alloc]initWithObjects:ImageURL1,ImageURL2,ImageURL3, nil];
 
 }
--(void)profileDetails{
-    
-   
-
-}
--(void)profileScroll{
+#pragma mark - profileImageScrollView
+-(void)profileImageScrollView{
     
     self.profileImageScroll.pagingEnabled=YES;
     self.profileImageScroll.delegate=self;
     self.profileImageScroll.scrollEnabled=YES;
     
-    
     int spacing = 20;
-    
     for(int i = 0; i < 3; i++)
     {
         
@@ -126,8 +194,6 @@
         else
         {
             userProfileImage = [[UIImageView alloc]initWithFrame:CGRectMake((i*self.profileImageScroll.frame.size.width) + spacing, 20,self.profileImageView.frame.size.width, self.profileImageView.frame.size.height)];
-            
-            
         }
         [userProfileImage setTag:i+100];
         if([profileData length] == 0){
@@ -137,17 +203,12 @@
             downloadImageFromUrl(image, userProfileImage);
             [userProfileImage setImageWithURL:[NSURL URLWithString:image]];
         }
-            [userProfileImage setContentMode:UIViewContentModeScaleAspectFill];
-        
+        [userProfileImage setContentMode:UIViewContentModeScaleAspectFill];
         userProfileImage.layer.cornerRadius = userProfileImage.frame.size.height / 2;
         userProfileImage.layer.masksToBounds = YES;
         [userProfileImage setUserInteractionEnabled:YES];
-        
         [self.profileImageScroll addSubview:userProfileImage];
-        
     }
-    
-    
     self.profileImageScroll.contentSize=CGSizeMake(self.profileImageScroll.frame.size.width*3, self.profileImageScroll.frame.size.height);
     
     if(CurrentImage == 0)
@@ -156,11 +217,8 @@
         [self.profileImageScroll setContentOffset:CGPointMake(1*self.profileImageView.frame.size.width - 15, 0)animated:NO];
     else if(CurrentImage == 2)
         [self.profileImageScroll setContentOffset:CGPointMake((1.5*self.profileImageView.frame.size.width - 15), 0)animated:NO];
-    
-
-   
-    
 }
+
 #pragma mark - UIScrollViewDelegate
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView
 {
@@ -175,18 +233,128 @@
         
         isTapping=NO;
         scrolldragging=@"YES";
+    }
 }
+
+#pragma mark - profileDoSomethingDetails
+-(void)profileDoSomethingDetails{
+    
+    imageSize =39;
+    commonWidth=19.5;
+    //commonHeight = 54;
+    yAxis = 31;
+    commonWidth=19.5;
+    
+    space = imageSize / 2;
+    commonHeight = imageSize+15;
+    //doSomethingImageArray
+    for (int i =0; i< [doSomethingImageArray  count]; i++) {
+        
+        UIImageView *doSomethingImage;
+        
+        if(i <= 3)
+            doSomethingImage = [[UIImageView alloc]initWithFrame:CGRectMake((i*(commonWidth + imageSize))+ 10, yAxis, imageSize, imageSize)];
+    
+        else
+            doSomethingImage = [[UIImageView alloc]initWithFrame:CGRectMake(((i-15)*(commonWidth + imageSize))+ 10, yAxis+((imageSize+space) * 3), imageSize, imageSize)];
+        NSString *image =[doSomethingImageArray objectAtIndex:i];
+        
+        
+        image= [image stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+        [doSomethingImage setImageWithURL:[NSURL URLWithString:image]];
+        
+        [self.thingsView addSubview:doSomethingImage];
+        
+    }
+    //doSomethingNameArray
+    for (int i =0; i< [doSomethingNameArray  count]; i++) {
+        
+        NSString *image =[[doSomethingNameArray objectAtIndex:i]uppercaseString];
+        UILabel *doSomethingName;
+        
+        if(i <= 3)
+            doSomethingName = [[UILabel alloc]initWithFrame:CGRectMake((i*(commonWidth + imageSize)), yAxis + imageSize, imageSize + 20, 15)];
+       
+        else
+            doSomethingName = [[UILabel alloc]initWithFrame:CGRectMake(((i-15)*(commonWidth + imageSize)), yAxis+((imageSize+space) * 3)+imageSize, imageSize + 20, 15)];
+        
+        [doSomethingName setFont:[UIFont fontWithName:@"Patron-Regular" size:7]];
+        doSomethingName.textAlignment = NSTextAlignmentCenter;
+        doSomethingName.textColor = [UIColor colorWithRed:218.0f/255.0f
+                                                    green:40.0f/255.0f
+                                                     blue:64.0f/255.0f
+                                                    alpha:1.0f];
+        doSomethingName.text = image;
+        [self.thingsView addSubview:doSomethingName];
+        doSomethingName.textAlignment = NSTextAlignmentCenter;
     }
 
+}
+#pragma mark - profileInterestsDetails
+-(void)profileInterestsDetails{
+    imageSize =39;
+    commonWidth=19.5;
+    //commonHeight = 54;
+    yAxis = 31;
+    commonWidth=19.5;
+        
+    
+    space = imageSize / 2;
+    commonHeight = imageSize+15;
+    //imageNormalArray
+    for (int i =0; i< [imageNormalArray  count]; i++) {
+        
+        UIImageView *hobbiesImage;
+        if(i <= 4)
+            hobbiesImage = [[UIImageView alloc]initWithFrame:CGRectMake((i*(commonWidth + imageSize))+ 10, yAxis, imageSize, imageSize)];
+        else if(i <= 9)
+            hobbiesImage = [[UIImageView alloc]initWithFrame:CGRectMake(((i-5)*(commonWidth + imageSize))+ 10, yAxis+imageSize+space, imageSize, imageSize)];
+        else if(i <= 14)
+            hobbiesImage = [[UIImageView alloc]initWithFrame:CGRectMake(((i-10)*(commonWidth + imageSize))+ 10, yAxis+((imageSize+space) * 2), imageSize, imageSize)];
+        else
+            hobbiesImage = [[UIImageView alloc]initWithFrame:CGRectMake(((i-15)*(commonWidth + imageSize))+ 10, yAxis+((imageSize+space) * 3), imageSize, imageSize)];
+        NSString *image =[imageNormalArray objectAtIndex:i];
+        
+        
+            image= [image stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+            [hobbiesImage setImageWithURL:[NSURL URLWithString:image]];
+            [self.myInterestView addSubview:hobbiesImage];
+       
+    }
+    //hobbiesNameArray
+    for (int i =0; i< [hobbiesNameArray  count]; i++) {
+        
+        NSString *image =[[hobbiesNameArray objectAtIndex:i]uppercaseString];
+        UILabel *hobbiesname;
+        
+        if(i <= 4)
+            hobbiesname = [[UILabel alloc]initWithFrame:CGRectMake((i*(commonWidth + imageSize)), yAxis + imageSize, imageSize + 20, 15)];
+        else if(i <= 9)
+            hobbiesname = [[UILabel alloc]initWithFrame:CGRectMake(((i-5)*(commonWidth + imageSize)), yAxis+(imageSize * 2)+space, imageSize + 20, 15)];
+        else if(i <= 14)
+            hobbiesname = [[UILabel alloc]initWithFrame:CGRectMake(((i-10)*(commonWidth + imageSize)), yAxis+((imageSize+space) * 2)+imageSize, imageSize + 20, 15)];
+        else
+            hobbiesname = [[UILabel alloc]initWithFrame:CGRectMake(((i-15)*(commonWidth + imageSize)), yAxis+((imageSize+space) * 3)+imageSize, imageSize + 20, 15)];
+        
+        [hobbiesname setFont:[UIFont fontWithName:@"Patron-Regular" size:7]];
+        hobbiesname.textAlignment = NSTextAlignmentCenter;
+        hobbiesname.textColor =[UIColor colorWithRed:(float)102.0/255
+                                               green:(float)102.0/255
+                                                blue:(float)102.0/255
+                                               alpha:1.0f];
+        
+        hobbiesname.text = image;
+        [self.myInterestView addSubview:hobbiesname];
+        hobbiesname.textAlignment = NSTextAlignmentCenter;
+    }
+}
 
-
-
+#pragma mark - back Action
 - (void)backAction
 {
     [self.navigationController popViewControllerAnimated:YES];
+    [COMMON removeLoading];
     
-//    NSArray *array = [self.navigationController viewControllers];
-//    [self.navigationController popToViewController:[array objectAtIndex:1] animated:YES];
 }
 
 
