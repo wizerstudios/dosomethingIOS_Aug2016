@@ -224,12 +224,41 @@
     }
     self.profileImageScroll.contentSize=CGSizeMake(self.profileImageScroll.frame.size.width*3, self.profileImageScroll.frame.size.height);
     
+//    if(CurrentImage == 0)
+//        [self.profileImageScroll setContentOffset:CGPointMake(0, 0)animated:NO];
+//    else if(CurrentImage == 1)
+//        [self.profileImageScroll setContentOffset:CGPointMake(1*self.profileImageView.frame.size.width - 15, 0)animated:NO];
+//    else if(CurrentImage == 2)
+//        [self.profileImageScroll setContentOffset:CGPointMake((1.5*self.profileImageView.frame.size.width - 15), 0)animated:NO];
+    
     if(CurrentImage == 0)
         [self.profileImageScroll setContentOffset:CGPointMake(0, 0)animated:NO];
     else if(CurrentImage == 1)
-        [self.profileImageScroll setContentOffset:CGPointMake(1*self.profileImageView.frame.size.width - 15, 0)animated:NO];
+    {
+        if(IS_IPHONE6|| IS_IPHONE6_Plus)
+        {
+           // [self.scrView setContentOffset:CGPointMake(4.5*self.profileImageView.frame.size.width - 25  , 0)animated:NO];
+            [self.profileImageScroll setContentOffset:CGPointMake(4*self.profileImageView.frame.size.width - 15, 0)animated:NO];
+        }
+        else
+        {
+            [self.profileImageScroll setContentOffset:CGPointMake(1*self.profileImageView.frame.size.width - 15, 0)animated:NO];
+        }
+    }
     else if(CurrentImage == 2)
-        [self.profileImageScroll setContentOffset:CGPointMake((1.5*self.profileImageView.frame.size.width - 15), 0)animated:NO];
+    {
+        if(IS_IPHONE6|| IS_IPHONE6_Plus)
+        {
+            //[self.scrView setContentOffset:CGPointMake(9*self.profileImageView.frame.size.width - 15, 0)animated:NO];
+            [self.profileImageScroll setContentOffset:CGPointMake((6*self.profileImageView.frame.size.width - 15), 0)animated:NO];
+        }
+        else
+        {
+            
+            [self.profileImageScroll setContentOffset:CGPointMake((1.5*self.profileImageView.frame.size.width - 15), 0)animated:NO];
+        }
+    }
+
 }
 
 #pragma mark - UIScrollViewDelegate
