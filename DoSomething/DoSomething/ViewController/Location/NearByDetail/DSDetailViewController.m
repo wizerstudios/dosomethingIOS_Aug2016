@@ -59,18 +59,52 @@
     [self profileScroll];
    // [self profileDetails];
     self.aboutTextBox.text = [userDetailsDict valueForKey:@"about"];
-    self.userName.text     = [userDetailsDict valueForKey:@"first_name"];
+    self.userName.text     = [self getData];
     self.userName.textColor =[UIColor colorWithRed:218.0f/255.0f
                                              green:40.0f/255.0f
                                               blue:64.0f/255.0f
                                              alpha:1.0f];
-    self.aboutTextBox.textColor =[UIColor colorWithRed:83.0f/255.0f
-                                             green:83.0f/255.0f
-                                              blue:83.0f/255.0f
-                                             alpha:1.0f];
-    NSLog(@"userDetailsDict%@",userDetailsDict);
+    //AboutLabel
+    self.aboutLabel.text = NSLocalizedString(@"About You", @"");
+    self.aboutLabel.textColor =[UIColor colorWithRed:83.0f/255.0f
+                                                 green:83.0f/255.0f
+                                                  blue:83.0f/255.0f
+                                                 alpha:1.0f];
+    //ThingsLabel
+    [self.thingsLabel setText:NSLocalizedString(@"Things I Wanna Do", @"")];
+    self.thingsLabel.textColor =[UIColor colorWithRed:83.0f/255.0f
+                                                 green:83.0f/255.0f
+                                                  blue:83.0f/255.0f
+                                                 alpha:1.0f];
+    //MyInterestLabel
+    [self.myinterestsLabel setText:NSLocalizedString(@"My Interests and Hobbies", @"")];
+    self.myinterestsLabel.textColor =[UIColor colorWithRed:83.0f/255.0f
+                                                green:83.0f/255.0f
+                                                 blue:83.0f/255.0f
+                                                alpha:1.0f];
     
 }
+-(NSString *) getData{
+    
+    NSString *strUserData= @"";
+    
+    if ([userDetailsDict objectForKey:@"first_name"] != NULL && ![[userDetailsDict objectForKey:@"first_name"] isEqualToString:@""]) {
+        strUserData = [NSString stringWithFormat:@"%@%@",strUserData,[userDetailsDict objectForKey:@"first_name"]];
+    }
+    if ([userDetailsDict objectForKey:@"last_name"] != NULL && ![[userDetailsDict objectForKey:@"last_name"] isEqualToString:@""]) {
+        strUserData = [NSString stringWithFormat:@"%@ %@",strUserData,[userDetailsDict objectForKey:@"last_name"]];
+    }
+    if ([userDetailsDict objectForKey:@"age"] != NULL && ![[userDetailsDict objectForKey:@"age"] isEqualToString:@""]) {
+        strUserData = [NSString stringWithFormat:@"%@, %@",strUserData,[userDetailsDict objectForKey:@"age"]];
+    }
+    
+
+    
+    return strUserData;
+    
+}
+
+
 
 -(void)profileImageDisplay{
     
@@ -184,9 +218,9 @@
 - (void)backAction
 {
     [self.navigationController popViewControllerAnimated:YES];
+    [COMMON removeLoading];
     
-//    NSArray *array = [self.navigationController viewControllers];
-//    [self.navigationController popToViewController:[array objectAtIndex:1] animated:YES];
+
 }
 
 

@@ -71,6 +71,7 @@
 
 - (void)viewWillAppear:(BOOL)animated
 {
+    
     [super viewWillAppear:animated];
     [self.navigationItem setHidesBackButton:YES animated:NO];
     [self getUserCurrenLocation];
@@ -219,7 +220,15 @@
 -(void)nearestLocationWebservice
 {
     [COMMON LoadIcon:self.view];
-       [objWebservice nearestUsers:NearestUsers_API sessionid:strsessionID latitude:currentLatitude longitude:currentLongitude filter_status:@"" filter_gender:@"" filter_agerange:@"" filter_distance:@"" success:^(AFHTTPRequestOperation *operation, id responseObject) {
+       [objWebservice nearestUsers:NearestUsers_API
+                         sessionid:strsessionID
+                          latitude:currentLatitude
+                         longitude:currentLongitude
+                     filter_status:@""
+                     filter_gender:@""
+                   filter_agerange:@""
+                   filter_distance:@""
+                           success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSLog(@"responseObject=%@",responseObject);
         
         if([[[responseObject valueForKey:@"nearestusers"]valueForKey:@"status"] isEqualToString:@"success"])
@@ -233,6 +242,7 @@
             
                     [locationCollectionView reloadData];
                     NSLog(@"%@",nearestUserdetaile);
+            
            
              }
              else
@@ -377,10 +387,7 @@
 - (void) redirectToDetailViewWithDictionary:(NSMutableDictionary *) detailsDictionary {
     
     DSDetailViewController* detailViewController = [[DSDetailViewController alloc] init];
-    
-    
     detailViewController.userDetailsDict = detailsDictionary;
-    
     [self.navigationController pushViewController:detailViewController animated:YES];
 }
 
