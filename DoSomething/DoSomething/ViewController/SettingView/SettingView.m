@@ -264,9 +264,10 @@
                                 NSLog(@"logoutDeleteUser %@ =" , responseObject);
                                 if([[[responseObject valueForKey:@"useraction"]valueForKey:@"status"] isEqualToString:@"success"])
                                 {
-                                                                    }
+                                                                   }
                                 else if([responseObject valueForKey:@"error"])
                                 {
+                                    
                                     
                                 }
                                 else
@@ -279,6 +280,10 @@
                                 NSLog(@"logout failure");
 
                             }];
+   
+    
+    [COMMON removeUserDetails];
+ 
     
     DSHomeViewController*objSplashView =[[DSHomeViewController alloc]initWithNibName:@"DSHomeViewController" bundle:nil];
     [self.navigationController pushViewController:objSplashView animated:NO];
@@ -286,10 +291,8 @@
     [COMMON removeUserDetails];
     appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
     appDelegate.buttonsView.hidden=YES;
-    [appDelegate.settingButton setBackgroundImage:[UIImage imageNamed:@"setting_icon.png"]
-                                         forState:UIControlStateNormal];
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
-    });
+    [appDelegate.settingButton setBackgroundImage:[UIImage imageNamed:@"setting_icon.png"] forState:UIControlStateNormal];
+    
 
 }
 -(IBAction)didClickLogoutButtonAction:(id)sender
