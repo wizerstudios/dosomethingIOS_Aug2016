@@ -100,7 +100,7 @@
 
 @implementation DSProfileTableViewController
 @synthesize  profileData1,textviewText, placeHolderArray,FBprofileID;
-@synthesize userDetailsDict,emailAddressToRegister,emailPasswordToRegister,selectEmail,topViewCell;
+@synthesize userDetailsDict,emailAddressToRegister,emailPasswordToRegister,selectEmail;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -141,6 +141,7 @@
     
     if([profileDict valueForKey:@"hobbieslist"]!=NULL)
     {
+        [customNavigation.buttonBack setHidden:YES];
         [self selectitemMethod];
     }
        infoArray=[[NSMutableArray alloc]initWithObjects:@"profile_noimg",@"profile_noimg",@"profile_noimg", nil];
@@ -244,6 +245,16 @@
 
         }
     }
+    else
+    {
+        if(imageNormalArray.count == 0)
+        {
+            interstAndHobbiesArray = [[profileDict valueForKey:@"hobbieslist"]mutableCopy];
+            imageNormalArray= [[interstAndHobbiesArray valueForKey:@"image"]mutableCopy];
+            
+        }
+
+    }
    
     if([[NSUserDefaults standardUserDefaults] valueForKey:@"SelectedItem"]!=nil)
     {
@@ -254,6 +265,15 @@
              interstAndHobbiesArray = [[profileDict valueForKey:@"hobbieslist"]mutableCopy];
              hobbiesNameArray =[[interstAndHobbiesArray valueForKey:@"name"]mutableCopy];
          }
+    }
+    else
+    {
+        if(hobbiesNameArray.count == 0)
+        {
+            interstAndHobbiesArray = [[profileDict valueForKey:@"hobbieslist"]mutableCopy];
+            hobbiesNameArray =[[interstAndHobbiesArray valueForKey:@"name"]mutableCopy];
+        }
+
     }
    
 if([[NSUserDefaults standardUserDefaults] valueForKey:@"SelectedItemCategoryID"]!=nil)
@@ -293,19 +313,23 @@ if([[NSUserDefaults standardUserDefaults] valueForKey:@"SelectedItemCategoryID"]
     self.scrView.pagingEnabled=YES;
     self.scrView.delegate=self;
     
-    //self.scrView.frame=CGRectMake(self.view.center.x+150,self.view.frame.origin.y+50,self.scrView.frame.size.width,self.scrView.frame.size.height);
-    
     int spacing = 20;
+   
     
     for(int i = 0; i < 3; i++)
     {
         
         NSData * profileData = [profileDataArray objectAtIndex:i];
         NSString *image     = [profileDataArray objectAtIndex:i];
-        if(IS_IPHONE6_Plus)
+        if(IS_IPHONE6_Plus || IS_IPHONE6)
         {
-            userProfileImage = [[UIImageView alloc]initWithFrame:CGRectMake((self.view.frame.size.width/3.58), 20,self.profileImageView.frame.size.width, self.profileImageView.frame.size.height)];
+//            self.profileviewimageXposition.constant=(self.view.frame.size.width/3.58)-30;
+           // [userProfileImage setNeedsDisplay];
+            //[userProfileImage setNeedsLayout];
+//            userProfileImage = [[UIImageView alloc]initWithFrame:CGRectMake(self.view.frame.size.width/3.5, 20,self.profileImageView.frame.size.width, self.profileImageView.frame.size.height)];
+            userProfileImage = [[UIImageView alloc]initWithFrame:CGRectMake((i*self.scrView.frame.size.width) + spacing+30, 20,self.profileImageView.frame.size.width, self.profileImageView.frame.size.height)];
         }
+    
         else
         {
             userProfileImage = [[UIImageView alloc]initWithFrame:CGRectMake((i*self.scrView.frame.size.width) + spacing, 20,self.profileImageView.frame.size.width, self.profileImageView.frame.size.height)];
@@ -314,7 +338,7 @@ if([[NSUserDefaults standardUserDefaults] valueForKey:@"SelectedItemCategoryID"]
         if([profileData length] == 0){
             [userProfileImage setImage:[UIImage imageNamed:@"profile_noimg"]];
             if(i==0){
-                [topViewCell setHidden:YES];
+                [cell.topViewCell setHidden:YES];
                 self.scrView.scrollEnabled = NO;
                
             }
@@ -366,7 +390,7 @@ if([[NSUserDefaults standardUserDefaults] valueForKey:@"SelectedItemCategoryID"]
             }
             [userProfileImage setContentMode:UIViewContentModeScaleAspectFill];
             [cell.cameraButton setHidden:YES];
-            [topViewCell setHidden:NO];
+            [cell.topViewCell setHidden:NO];
             self.scrView.scrollEnabled = YES;
         }
         userProfileImage.layer.cornerRadius = userProfileImage.frame.size.height / 2;
@@ -384,6 +408,8 @@ if([[NSUserDefaults standardUserDefaults] valueForKey:@"SelectedItemCategoryID"]
         cameraImage.userInteractionEnabled = YES;
         [cameraImage setUserInteractionEnabled:YES];
         [userProfileImage addSubview:cameraImage];
+      
+
     }
     
     self.scrView.contentSize=CGSizeMake(self.scrView.frame.size.width*3, self.scrView.frame.size.height);
@@ -391,9 +417,28 @@ if([[NSUserDefaults standardUserDefaults] valueForKey:@"SelectedItemCategoryID"]
     if(CurrentImage == 0)
         [self.scrView setContentOffset:CGPointMake(0, 0)animated:NO];
     else if(CurrentImage == 1)
+    {
+        if(IS_IPHONE6|| IS_IPHONE6_Plus)
+        {
+            [self.scrView setContentOffset:CGPointMake(4.5*self.profileImageView.frame.size.width - 25  , 0)animated:NO];
+        }
+    else
+    {
         [self.scrView setContentOffset:CGPointMake(1.5*self.profileImageView.frame.size.width - 15, 0)animated:NO];
+    }
+    }
     else if(CurrentImage == 2)
+    {
+        if(IS_IPHONE6|| IS_IPHONE6_Plus)
+        {
+            [self.scrView setContentOffset:CGPointMake(9*self.profileImageView.frame.size.width - 15, 0)animated:NO];
+        }
+        else
+        {
+
         [self.scrView setContentOffset:CGPointMake((3*self.profileImageView.frame.size.width - 15), 0)animated:NO];
+        }
+    }
     
     [self pageScrollView];
     
@@ -416,14 +461,14 @@ if([[NSUserDefaults standardUserDefaults] valueForKey:@"SelectedItemCategoryID"]
             [pageImageView setFrame:CGRectMake(0, 0, 8, 8)];
             [pageImageView setImage:[UIImage imageNamed:@"dot_active_red"]];
             [pgDtView addSubview:pageImageView];
-            [topViewCell addSubview:pgDtView];
+            [cell.topViewCell addSubview:pgDtView];
             [pgDtView setFrame:CGRectMake(15, -5, profileImagePageControl.numberOfPages*18, 10)];
             
         }
         
     }
     isPageControl=YES;
-   [topViewCell addSubview:pgDtView];
+   [cell.topViewCell addSubview:pgDtView];
     //NSLog(@"%@",pgDtView);
     
 }
@@ -823,10 +868,12 @@ if([[NSUserDefaults standardUserDefaults] valueForKey:@"SelectedItemCategoryID"]
         
         if (IS_IPHONE6 ||IS_IPHONE6_Plus)
         {
-            cell.layoutConstraintProfileImageHeight.constant =159;
-            cell.layoutConstraintProfileImageWidth.constant =161;
+            //cell.layoutConstraintProfileImageHeight.constant =159;
+           // cell.layoutConstraintProfileImageWidth.constant =161;
         }
+       
         [self profileScroll];
+        
     
 
         
@@ -835,7 +882,10 @@ if([[NSUserDefaults standardUserDefaults] valueForKey:@"SelectedItemCategoryID"]
         else
             [profileImagePageControl setHidden:NO];
         
+        
+
         [cell.cameraButton setTag:101];
+        
         [cell.cameraButton addTarget:self action:@selector(selectCamera:) forControlEvents:UIControlEventTouchUpInside];
         
         userProfileImage.layer.masksToBounds = YES;
@@ -1131,6 +1181,9 @@ if([[NSUserDefaults standardUserDefaults] valueForKey:@"SelectedItemCategoryID"]
                 {
                // cell.textViewHeaderLabel.hidden = NO;
                 cell.textViewAboutYou.text = @"Write something about yourself here.";
+
+                    //self.aboutTextHeight.constant =16;
+
                 }
                 else
                 {
@@ -1138,8 +1191,10 @@ if([[NSUserDefaults standardUserDefaults] valueForKey:@"SelectedItemCategoryID"]
                     cell.textViewAboutYou.text =strAbout;
                     dataSize = [COMMON getControlHeight:strAbout withFontName:@"Patron-Regular" ofSize:14.0 withSize:CGSizeMake(cell.frame.size.width-20,tableView.frame.size.height)];
                     self.aboutTextHeight.constant =dataSize.height-12;
+
+                    
                 }
-            }
+                }
             cell.textViewAboutYou.delegate = self;
             
         }
@@ -1626,7 +1681,7 @@ if([[NSUserDefaults standardUserDefaults] valueForKey:@"SelectedItemCategoryID"]
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
 {
     UIImage *image = nil;
-    [topViewCell setHidden:NO];
+    [cell.topViewCell setHidden:NO];
     image = [info valueForKey:UIImagePickerControllerEditedImage];
     
     if(CurrentImage==0)
@@ -1637,8 +1692,6 @@ if([[NSUserDefaults standardUserDefaults] valueForKey:@"SelectedItemCategoryID"]
         profileImage3 = image;
     
     NSData *profileData = UIImagePNGRepresentation([info objectForKey:UIImagePickerControllerEditedImage]);
-    
-    NSLog(@"Image Size = %lu",[profileData length]);
     
     [profileDataArray replaceObjectAtIndex:CurrentImage withObject:profileData];
     

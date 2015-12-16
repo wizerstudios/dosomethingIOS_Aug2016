@@ -13,7 +13,7 @@
 - (void)awakeFromNib {
     // Initialization code
    // self.profileScrollview.contentSize = CGSizeMake(1200,self.frame.size.height);
-
+ 
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

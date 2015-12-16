@@ -34,7 +34,7 @@
                     <rect key="frame" x="0.0" y="0.0" width="320" height="65"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="D O S O M E T H I N G" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dl2-RR-YB9">
-                            <rect key="frame" x="60" y="32" width="200" height="20"/>
+                            <rect key="frame" x="60" y="30" width="200" height="20"/>
                             <animations/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="200" id="6cs-Qu-wvt"/>
@@ -103,7 +103,7 @@
                         <constraint firstItem="gkb-dE-JJh" firstAttribute="top" secondItem="t35-GY-BW2" secondAttribute="top" constant="26" id="aCb-3J-x3s"/>
                         <constraint firstAttribute="centerX" secondItem="dl2-RR-YB9" secondAttribute="centerX" id="gBD-4y-hlc"/>
                         <constraint firstItem="xMx-Qy-VFu" firstAttribute="top" secondItem="t35-GY-BW2" secondAttribute="top" constant="18" id="k9Y-mq-3IH"/>
-                        <constraint firstItem="dl2-RR-YB9" firstAttribute="top" secondItem="t35-GY-BW2" secondAttribute="top" constant="32" id="shb-wQ-1JW"/>
+                        <constraint firstItem="dl2-RR-YB9" firstAttribute="top" secondItem="t35-GY-BW2" secondAttribute="top" constant="30" id="shb-wQ-1JW"/>
                         <constraint firstAttribute="trailing" secondItem="fn4-ol-eRv" secondAttribute="trailing" constant="10" id="x6Z-nV-WID"/>
                         <constraint firstAttribute="bottom" secondItem="gkb-dE-JJh" secondAttribute="bottom" constant="9" id="zDS-5Q-h8u"/>
                     </constraints>
