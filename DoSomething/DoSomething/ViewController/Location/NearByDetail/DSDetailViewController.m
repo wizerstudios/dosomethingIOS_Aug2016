@@ -18,12 +18,12 @@
 {
     NSMutableArray  *profileDataArray;
     UIImageView     *userProfileImage;
+    
     NSMutableArray  *interstAndHobbiesArray;
     NSMutableArray  *imageNormalArray,*hobbiesNameArray;
     
     NSMutableArray  *doSomethingArray;
     NSMutableArray  *doSomethingImageArray,*doSomethingNameArray;
-    
     
     float commonWidth, commonHeight;
     float yAxis;
@@ -224,7 +224,7 @@
     
     space = imageSize / 2;
     commonHeight = imageSize+15;
-    
+    //doSomethingImageArray
     for (int i =0; i< [doSomethingImageArray  count]; i++) {
         
         UIImageView *doSomethingImage;
@@ -243,7 +243,7 @@
         [self.thingsView addSubview:doSomethingImage];
         
     }
-    
+    //doSomethingNameArray
     for (int i =0; i< [doSomethingNameArray  count]; i++) {
         
         NSString *image =[[doSomethingNameArray objectAtIndex:i]uppercaseString];
@@ -258,11 +258,9 @@
         [doSomethingName setFont:[UIFont fontWithName:@"Patron-Regular" size:7]];
         doSomethingName.textAlignment = NSTextAlignmentCenter;
         doSomethingName.textColor = [UIColor colorWithRed:218.0f/255.0f
-                                                   green:40.0f/255.0f
-                                                    blue:64.0f/255.0f
-                                                   alpha:1.0f];
-        
-        
+                                                    green:40.0f/255.0f
+                                                     blue:64.0f/255.0f
+                                                    alpha:1.0f];
         doSomethingName.text = image;
         [self.thingsView addSubview:doSomethingName];
         doSomethingName.textAlignment = NSTextAlignmentCenter;
@@ -280,11 +278,10 @@
     
     space = imageSize / 2;
     commonHeight = imageSize+15;
-    
-        for (int i =0; i< [imageNormalArray  count]; i++) {
+    //imageNormalArray
+    for (int i =0; i< [imageNormalArray  count]; i++) {
         
         UIImageView *hobbiesImage;
-        
         if(i <= 4)
             hobbiesImage = [[UIImageView alloc]initWithFrame:CGRectMake((i*(commonWidth + imageSize))+ 10, yAxis, imageSize, imageSize)];
         else if(i <= 9)
@@ -298,14 +295,10 @@
         
             image= [image stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
             [hobbiesImage setImageWithURL:[NSURL URLWithString:image]];
-        
-        
-        
-        
-        [self.myInterestView addSubview:hobbiesImage];
+            [self.myInterestView addSubview:hobbiesImage];
        
     }
-    
+    //hobbiesNameArray
     for (int i =0; i< [hobbiesNameArray  count]; i++) {
         
         NSString *image =[[hobbiesNameArray objectAtIndex:i]uppercaseString];
@@ -322,18 +315,16 @@
         
         [hobbiesname setFont:[UIFont fontWithName:@"Patron-Regular" size:7]];
         hobbiesname.textAlignment = NSTextAlignmentCenter;
-        hobbiesname.textColor =[UIColor colorWithRed:(float)102.0/255 green:(float)102.0/255 blue:(float)102.0/255 alpha:1.0f];
-        
+        hobbiesname.textColor =[UIColor colorWithRed:(float)102.0/255
+                                               green:(float)102.0/255
+                                                blue:(float)102.0/255
+                                               alpha:1.0f];
         
         hobbiesname.text = image;
         [self.myInterestView addSubview:hobbiesname];
         hobbiesname.textAlignment = NSTextAlignmentCenter;
     }
-
-
 }
-
-
 
 #pragma mark - back Action
 - (void)backAction
@@ -341,7 +332,6 @@
     [self.navigationController popViewControllerAnimated:YES];
     [COMMON removeLoading];
     
-
 }
 
 
