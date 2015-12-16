@@ -94,6 +94,7 @@
     BOOL isLoadData;
     NSString *sessionID;
     CustomNavigationView *customNavigation;
+    UIButton *cameraIcon;
     
     
 
@@ -398,7 +399,7 @@ if([[NSUserDefaults standardUserDefaults] valueForKey:@"SelectedItemCategoryID"]
                 }
             }
             [userProfileImage setContentMode:UIViewContentModeScaleAspectFill];
-            [cell.cameraButton setHidden:YES];
+            [cameraIcon setHidden:YES];
             [cell.topViewCell setHidden:NO];
             self.scrView.scrollEnabled = YES;
         }
@@ -895,25 +896,28 @@ if([[NSUserDefaults standardUserDefaults] valueForKey:@"SelectedItemCategoryID"]
         if(!profileData1){
             [profileImagePageControl setHidden:YES];
             
-        } //frame = CGRectMake(0,-20, 375, 76);customNavigation.view.frame = CGRectMake(0,-20, 375, 76);
+        }
         else
             [profileImagePageControl setHidden:NO];
         
         
-
-        [cell.cameraButton setTag:101];
-        
-        
-        [cell.cameraButton addTarget:self action:@selector(selectCamera:) forControlEvents:UIControlEventTouchUpInside];
-        //[cell.cameraButton setHidden:YES];
+        //[cell.cameraButton addTarget:self action:@selector(selectCamera:) forControlEvents:UIControlEventTouchUpInside];
+       
       
-        UIButton *cameraIcon=[UIButton buttonWithType:UIButtonTypeCustom];
-        [cameraIcon setFrame:CGRectMake(50,60,37,37)];
+        cameraIcon=[UIButton buttonWithType:UIButtonTypeCustom];
+        [cameraIcon setFrame:CGRectMake(cell.contentView.center.x+5,cell.contentView.frame.size.height-36,37,37)];
         [cameraIcon addTarget:self action:@selector(selectCamera:) forControlEvents:UIControlEventTouchUpInside];
         UIImage *cameraIconImg = [UIImage imageNamed:@"camera_icon"];
         [cameraIcon setImage:cameraIconImg forState:UIControlStateNormal];
-        
+         [cameraIcon setTag:101];
         [cell addSubview:cameraIcon];
+        [cameraIcon setHidden:NO];
+        
+        if(profileDict !=NULL || userDetailsDict!=NULL)
+        {
+            [cameraIcon setHidden:YES];
+        }
+        
         
         userProfileImage.layer.masksToBounds = YES;
         
@@ -1886,6 +1890,7 @@ if([[NSUserDefaults standardUserDefaults] valueForKey:@"SelectedItemCategoryID"]
                [self.navigationController pushViewController:objSplashView animated:NO];
                AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
                appDelegate.buttonsView.hidden=YES;
+     appDelegate.SepratorLbl.hidden=YES;
                [appDelegate.settingButton setBackgroundImage:[UIImage imageNamed:@"setting_icon.png"] forState:UIControlStateNormal];
   
 }

@@ -98,14 +98,6 @@
                                 <color key="textColor" red="0.40000000000000002" green="0.40000000000000002" blue="0.40000000000000002" alpha="1" colorSpace="deviceRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="L4l-gD-IHh">
-                                <rect key="frame" x="129" y="165" width="37" height="37"/>
-                                <animations/>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                <state key="normal" image="camera_icon">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                            </button>
                             <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="uey-h2-iAy">
                                 <rect key="frame" x="113" y="189" width="79" height="11"/>
                                 <animations/>
@@ -129,7 +121,6 @@
             </tableViewCellContentView>
             <animations/>
             <connections>
-                <outlet property="cameraButton" destination="L4l-gD-IHh" id="Utw-3t-AWx"/>
                 <outlet property="hobbiesLabel" destination="CBw-9W-xH2" id="LLK-iC-TSe"/>
                 <outlet property="privacyPolicy" destination="bzZ-MU-7QJ" id="WEp-EF-oPJ"/>
                 <outlet property="termsOfUse" destination="VtB-GW-ldJ" id="UE6-RD-C9L"/>
@@ -756,6 +747,5 @@
     </objects>
     <resources>
         <image name="Plus_icon" width="37" height="37"/>
-        <image name="camera_icon" width="37" height="37"/>
     </resources>
 </document>

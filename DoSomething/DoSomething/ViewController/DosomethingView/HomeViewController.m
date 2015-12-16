@@ -60,6 +60,7 @@
 {
     appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
     appDelegate.buttonsView.hidden=NO;
+     appDelegate.SepratorLbl.hidden=NO;
     [self loadnavigationview];
     [self setupCollectionView];
     [self audioplayMethod];

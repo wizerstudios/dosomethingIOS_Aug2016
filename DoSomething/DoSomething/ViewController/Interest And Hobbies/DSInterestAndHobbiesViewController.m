@@ -101,6 +101,7 @@
     [customNavigation.saveBtn setHidden:NO];
     appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
     appDelegate.buttonsView.hidden=YES;
+    appDelegate.SepratorLbl.hidden=YES;
     
     
 }
@@ -534,6 +535,7 @@
     appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
     if(profileDict!=NULL){
         appDelegate.buttonsView.hidden=NO;
+        appDelegate.SepratorLbl.hidden=NO;
     }
     [self.navigationController popViewControllerAnimated:YES];
 }
@@ -543,6 +545,7 @@
     appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
     if(profileDict!=NULL){
         appDelegate.buttonsView.hidden=NO;
+         appDelegate.SepratorLbl.hidden=NO;
     }
     DSProfileTableViewController *profile = [[DSProfileTableViewController alloc]init];
     profile.placeHolderArray = profileDetailsArray;

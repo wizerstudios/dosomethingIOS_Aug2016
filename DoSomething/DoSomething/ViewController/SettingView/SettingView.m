@@ -291,6 +291,7 @@
     [COMMON removeUserDetails];
     appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
     appDelegate.buttonsView.hidden=YES;
+     appDelegate.SepratorLbl.hidden=YES;
     [appDelegate.settingButton setBackgroundImage:[UIImage imageNamed:@"setting_icon.png"] forState:UIControlStateNormal];
     
 
