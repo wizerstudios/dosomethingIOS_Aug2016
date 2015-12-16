@@ -29,6 +29,7 @@
     NSString  * currentLatitude, * currentLongitude;
     BOOL isLoadData;
     NSString *profileUserID;
+    UILabel * usernotfoundlbl;
 }
 @property(nonatomic,strong)IBOutlet NSLayoutConstraint *collectionviewxpostion;
 @property(nonatomic,strong)IBOutlet NSLayoutConstraint * filterviewxposition;
@@ -218,7 +219,7 @@
 -(void)nearestLocationWebservice
 {
     [COMMON LoadIcon:self.view];
-    [objWebservice nearestUsers:NearestUsers_API sessionid:strsessionID latitude:currentLatitude longitude:currentLongitude filter_status:@"" filter_gender:@"" filter_agerange:@"" filter_distance:@"" success:^(AFHTTPRequestOperation *operation, id responseObject) {
+       [objWebservice nearestUsers:NearestUsers_API sessionid:strsessionID latitude:currentLatitude longitude:currentLongitude filter_status:@"" filter_gender:@"" filter_agerange:@"" filter_distance:@"" success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSLog(@"responseObject=%@",responseObject);
         
         if([[[responseObject valueForKey:@"nearestusers"]valueForKey:@"status"] isEqualToString:@"success"])
@@ -241,13 +242,6 @@
              }
         
             [COMMON removeLoading];
-        }
-        else{
-            [self showAltermessage:@"NO USERS FOUND"];//[[responseObject valueForKey:@"nearestusers"]valueForKey:@"Message"]];
-            
-            [COMMON removeLoading];
-        }
-        
         
         
         }
@@ -258,7 +252,8 @@
         usernotfoundlbl.text  =[NSString stringWithFormat:@"%@",error];
         
         
-    }];
+        
+    } ];
 }
 
 
