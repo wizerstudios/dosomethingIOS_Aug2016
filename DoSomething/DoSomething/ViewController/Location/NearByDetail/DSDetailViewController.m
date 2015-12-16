@@ -18,8 +18,12 @@
 {
     NSMutableArray  *profileDataArray;
     UIImageView     *userProfileImage;
-    NSMutableArray  *imageNormalArray,*hobbiesNameArray,*hobbiesCategoryIDArray;
-     NSMutableArray *interstAndHobbiesArray;
+    NSMutableArray  *interstAndHobbiesArray;
+    NSMutableArray  *imageNormalArray,*hobbiesNameArray;
+    
+    NSMutableArray  *doSomethingArray;
+    NSMutableArray  *doSomethingImageArray,*doSomethingNameArray;
+    
     
     float commonWidth, commonHeight;
     float yAxis;
@@ -63,7 +67,7 @@
     [customNavigation.buttonBack addTarget:self action:@selector(backAction) forControlEvents:UIControlEventTouchUpInside];
     
     [self profileImageDisplay];
-    [self profileScroll];
+    [self profileImageScrollView];
    
     self.aboutTextBox.text = [userDetailsDict valueForKey:@"about"];
     self.userName.text     = [self getData];
@@ -94,12 +98,17 @@
                                                       blue:83.0f/255.0f
                                                      alpha:1.0f];
     
-    interstAndHobbiesArray = [[userDetailsDict valueForKey:@"hobbieslist"]mutableCopy];
-    hobbiesNameArray       =[[interstAndHobbiesArray valueForKey:@"name"]mutableCopy];
-    imageNormalArray     = [[interstAndHobbiesArray valueForKey:@"image"]mutableCopy];
-    [self profileDetails];
+    interstAndHobbiesArray  = [[userDetailsDict valueForKey:@"hobbieslist"]mutableCopy];
+    hobbiesNameArray        = [[interstAndHobbiesArray valueForKey:@"name"]mutableCopy];
+    imageNormalArray        = [[interstAndHobbiesArray valueForKey:@"image"]mutableCopy];
+    doSomethingArray        = [[userDetailsDict valueForKey:@"dosomething"]mutableCopy];
+    doSomethingNameArray    = [[doSomethingArray valueForKey:@"name"]mutableCopy];
+    doSomethingImageArray   = [[doSomethingArray valueForKey:@"ActiveImage"]mutableCopy];
+    [self profileInterestsDetails];
+    [self profileDoSomethingDetails];
     
 }
+#pragma mark - userAgeName
 -(NSString *) getData{
     
     NSString *strUserData= @"";
@@ -113,14 +122,10 @@
     if ([userDetailsDict objectForKey:@"age"] != NULL && ![[userDetailsDict objectForKey:@"age"] isEqualToString:@""]) {
         strUserData = [NSString stringWithFormat:@"%@, %@",strUserData,[userDetailsDict objectForKey:@"age"]];
     }
-    
-
-    
     return strUserData;
     
 }
-
-
+#pragma mark - profileImageDisplay
 
 -(void)profileImageDisplay{
     
@@ -146,7 +151,126 @@
     profileDataArray = [[NSMutableArray alloc]initWithObjects:ImageURL1,ImageURL2,ImageURL3, nil];
 
 }
--(void)profileDetails{
+#pragma mark - profileImageScrollView
+-(void)profileImageScrollView{
+    
+    self.profileImageScroll.pagingEnabled=YES;
+    self.profileImageScroll.delegate=self;
+    self.profileImageScroll.scrollEnabled=YES;
+    
+    int spacing = 20;
+    for(int i = 0; i < 3; i++)
+    {
+        
+        NSData * profileData = [profileDataArray objectAtIndex:i];
+        NSString *image     = [profileDataArray objectAtIndex:i];
+        if(IS_IPHONE6_Plus)
+        {
+            userProfileImage = [[UIImageView alloc]initWithFrame:CGRectMake((self.view.frame.size.width/3.5) + spacing, 20,self.profileImageView.frame.size.width, self.profileImageView.frame.size.height)];
+        }
+        else
+        {
+            userProfileImage = [[UIImageView alloc]initWithFrame:CGRectMake((i*self.profileImageScroll.frame.size.width) + spacing, 20,self.profileImageView.frame.size.width, self.profileImageView.frame.size.height)];
+        }
+        [userProfileImage setTag:i+100];
+        if([profileData length] == 0){
+            [userProfileImage setImage:[UIImage imageNamed:@"profile_noimg"]];
+        }
+        else{
+            downloadImageFromUrl(image, userProfileImage);
+            [userProfileImage setImageWithURL:[NSURL URLWithString:image]];
+        }
+        [userProfileImage setContentMode:UIViewContentModeScaleAspectFill];
+        userProfileImage.layer.cornerRadius = userProfileImage.frame.size.height / 2;
+        userProfileImage.layer.masksToBounds = YES;
+        [userProfileImage setUserInteractionEnabled:YES];
+        [self.profileImageScroll addSubview:userProfileImage];
+    }
+    self.profileImageScroll.contentSize=CGSizeMake(self.profileImageScroll.frame.size.width*3, self.profileImageScroll.frame.size.height);
+    
+    if(CurrentImage == 0)
+        [self.profileImageScroll setContentOffset:CGPointMake(0, 0)animated:NO];
+    else if(CurrentImage == 1)
+        [self.profileImageScroll setContentOffset:CGPointMake(1*self.profileImageView.frame.size.width - 15, 0)animated:NO];
+    else if(CurrentImage == 2)
+        [self.profileImageScroll setContentOffset:CGPointMake((1.5*self.profileImageView.frame.size.width - 15), 0)animated:NO];
+}
+
+#pragma mark - UIScrollViewDelegate
+- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView
+{
+    CurrentImage = scrollView.contentOffset.x / scrollView.frame.size.width;
+    
+    if (scrollView==self.profileImageScroll) {
+        pull=@"";
+        jslider = scrollView.contentOffset.x / scrollView.frame.size.width;
+        [self.profileImageScroll setNeedsDisplay];
+        detailPageControl.currentPage=jslider;
+        [pageImageView setFrame:CGRectMake(jslider*18, 0, 8, 8)];
+        
+        isTapping=NO;
+        scrolldragging=@"YES";
+    }
+}
+
+#pragma mark - profileDoSomethingDetails
+-(void)profileDoSomethingDetails{
+    
+    imageSize =39;
+    commonWidth=19.5;
+    //commonHeight = 54;
+    yAxis = 31;
+    commonWidth=19.5;
+    
+    space = imageSize / 2;
+    commonHeight = imageSize+15;
+    
+    for (int i =0; i< [doSomethingImageArray  count]; i++) {
+        
+        UIImageView *doSomethingImage;
+        
+        if(i <= 3)
+            doSomethingImage = [[UIImageView alloc]initWithFrame:CGRectMake((i*(commonWidth + imageSize))+ 10, yAxis, imageSize, imageSize)];
+    
+        else
+            doSomethingImage = [[UIImageView alloc]initWithFrame:CGRectMake(((i-15)*(commonWidth + imageSize))+ 10, yAxis+((imageSize+space) * 3), imageSize, imageSize)];
+        NSString *image =[doSomethingImageArray objectAtIndex:i];
+        
+        
+        image= [image stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+        [doSomethingImage setImageWithURL:[NSURL URLWithString:image]];
+        
+        [self.thingsView addSubview:doSomethingImage];
+        
+    }
+    
+    for (int i =0; i< [doSomethingNameArray  count]; i++) {
+        
+        NSString *image =[[doSomethingNameArray objectAtIndex:i]uppercaseString];
+        UILabel *doSomethingName;
+        
+        if(i <= 3)
+            doSomethingName = [[UILabel alloc]initWithFrame:CGRectMake((i*(commonWidth + imageSize)), yAxis + imageSize, imageSize + 20, 15)];
+       
+        else
+            doSomethingName = [[UILabel alloc]initWithFrame:CGRectMake(((i-15)*(commonWidth + imageSize)), yAxis+((imageSize+space) * 3)+imageSize, imageSize + 20, 15)];
+        
+        [doSomethingName setFont:[UIFont fontWithName:@"Patron-Regular" size:7]];
+        doSomethingName.textAlignment = NSTextAlignmentCenter;
+        doSomethingName.textColor = [UIColor colorWithRed:218.0f/255.0f
+                                                   green:40.0f/255.0f
+                                                    blue:64.0f/255.0f
+                                                   alpha:1.0f];
+        
+        
+        doSomethingName.text = image;
+        [self.thingsView addSubview:doSomethingName];
+        doSomethingName.textAlignment = NSTextAlignmentCenter;
+    }
+
+}
+#pragma mark - profileInterestsDetails
+-(void)profileInterestsDetails{
     imageSize =39;
     commonWidth=19.5;
     //commonHeight = 54;
@@ -208,82 +332,10 @@
 
 
 }
--(void)profileScroll{
-    
-    self.profileImageScroll.pagingEnabled=YES;
-    self.profileImageScroll.delegate=self;
-    self.profileImageScroll.scrollEnabled=YES;
-    
-    
-    int spacing = 20;
-    
-    for(int i = 0; i < 3; i++)
-    {
-        
-        NSData * profileData = [profileDataArray objectAtIndex:i];
-        NSString *image     = [profileDataArray objectAtIndex:i];
-        if(IS_IPHONE6_Plus)
-        {
-            userProfileImage = [[UIImageView alloc]initWithFrame:CGRectMake((self.view.frame.size.width/3.5) + spacing, 20,self.profileImageView.frame.size.width, self.profileImageView.frame.size.height)];
-        }
-        else
-        {
-            userProfileImage = [[UIImageView alloc]initWithFrame:CGRectMake((i*self.profileImageScroll.frame.size.width) + spacing, 20,self.profileImageView.frame.size.width, self.profileImageView.frame.size.height)];
-            
-            
-        }
-        [userProfileImage setTag:i+100];
-        if([profileData length] == 0){
-            [userProfileImage setImage:[UIImage imageNamed:@"profile_noimg"]];
-        }
-        else{
-            downloadImageFromUrl(image, userProfileImage);
-            [userProfileImage setImageWithURL:[NSURL URLWithString:image]];
-        }
-            [userProfileImage setContentMode:UIViewContentModeScaleAspectFill];
-        
-        userProfileImage.layer.cornerRadius = userProfileImage.frame.size.height / 2;
-        userProfileImage.layer.masksToBounds = YES;
-        [userProfileImage setUserInteractionEnabled:YES];
-        
-        [self.profileImageScroll addSubview:userProfileImage];
-        
-    }
-    
-    
-    self.profileImageScroll.contentSize=CGSizeMake(self.profileImageScroll.frame.size.width*3, self.profileImageScroll.frame.size.height);
-    
-    if(CurrentImage == 0)
-        [self.profileImageScroll setContentOffset:CGPointMake(0, 0)animated:NO];
-    else if(CurrentImage == 1)
-        [self.profileImageScroll setContentOffset:CGPointMake(1*self.profileImageView.frame.size.width - 15, 0)animated:NO];
-    else if(CurrentImage == 2)
-        [self.profileImageScroll setContentOffset:CGPointMake((1.5*self.profileImageView.frame.size.width - 15), 0)animated:NO];
-    
-
-   
-    
-}
-#pragma mark - UIScrollViewDelegate
-- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView
-{
-    CurrentImage = scrollView.contentOffset.x / scrollView.frame.size.width;
-    
-    if (scrollView==self.profileImageScroll) {
-        pull=@"";
-        jslider = scrollView.contentOffset.x / scrollView.frame.size.width;
-        [self.profileImageScroll setNeedsDisplay];
-        detailPageControl.currentPage=jslider;
-        [pageImageView setFrame:CGRectMake(jslider*18, 0, 8, 8)];
-        
-        isTapping=NO;
-        scrolldragging=@"YES";
-}
-    }
 
 
 
-
+#pragma mark - back Action
 - (void)backAction
 {
     [self.navigationController popViewControllerAnimated:YES];
