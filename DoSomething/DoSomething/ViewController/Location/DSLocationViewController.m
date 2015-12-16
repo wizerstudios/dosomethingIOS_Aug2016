@@ -381,7 +381,7 @@
                               
                           }
                           failure:^(AFHTTPRequestOperation *operation, id error) {
-                              
+                              NSLog(@"error%@",error);
                           }];
 }
 - (void) redirectToDetailViewWithDictionary:(NSMutableDictionary *) detailsDictionary {

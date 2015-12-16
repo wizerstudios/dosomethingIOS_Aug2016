@@ -34,6 +34,9 @@
 @property (strong, nonatomic) IBOutlet UILabel *thingsLabel;
 
 @property (strong, nonatomic) IBOutlet UILabel *myinterestsLabel;
+@property (strong, nonatomic) IBOutlet UIView *aboutView;
 
+@property (strong, nonatomic) IBOutlet UIView *thingsView;
+@property (strong, nonatomic) IBOutlet UIView *myInterestView;
 
 @end

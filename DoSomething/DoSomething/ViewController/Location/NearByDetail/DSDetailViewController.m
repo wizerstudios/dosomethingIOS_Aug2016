@@ -16,8 +16,15 @@
 
 @interface DSDetailViewController ()
 {
-    NSMutableArray *profileDataArray;
-    UIImageView    *userProfileImage;
+    NSMutableArray  *profileDataArray;
+    UIImageView     *userProfileImage;
+    NSMutableArray  *imageNormalArray,*hobbiesNameArray,*hobbiesCategoryIDArray;
+     NSMutableArray *interstAndHobbiesArray;
+    
+    float commonWidth, commonHeight;
+    float yAxis;
+    float imageSize;
+    float space;
     
 }
 @end
@@ -57,31 +64,40 @@
     
     [self profileImageDisplay];
     [self profileScroll];
-   // [self profileDetails];
+   
     self.aboutTextBox.text = [userDetailsDict valueForKey:@"about"];
     self.userName.text     = [self getData];
+    [self.userName setFont:[UIFont fontWithName:@"Patron-Medium" size:12]];
     self.userName.textColor =[UIColor colorWithRed:218.0f/255.0f
                                              green:40.0f/255.0f
                                               blue:64.0f/255.0f
                                              alpha:1.0f];
     //AboutLabel
     self.aboutLabel.text = NSLocalizedString(@"About You", @"");
+    [self.aboutLabel setFont:[UIFont fontWithName:@"Patron-Medium" size:12]];
     self.aboutLabel.textColor =[UIColor colorWithRed:83.0f/255.0f
-                                                 green:83.0f/255.0f
-                                                  blue:83.0f/255.0f
-                                                 alpha:1.0f];
+                                               green:83.0f/255.0f
+                                                blue:83.0f/255.0f
+                                               alpha:1.0f];
     //ThingsLabel
     [self.thingsLabel setText:NSLocalizedString(@"Things I Wanna Do", @"")];
+    [self.thingsLabel setFont:[UIFont fontWithName:@"Patron-Medium" size:12]];
     self.thingsLabel.textColor =[UIColor colorWithRed:83.0f/255.0f
-                                                 green:83.0f/255.0f
-                                                  blue:83.0f/255.0f
-                                                 alpha:1.0f];
+                                                green:83.0f/255.0f
+                                                blue:83.0f/255.0f
+                                                alpha:1.0f];
     //MyInterestLabel
     [self.myinterestsLabel setText:NSLocalizedString(@"My Interests and Hobbies", @"")];
+    [self.myinterestsLabel setFont:[UIFont fontWithName:@"Patron-Medium" size:12]];
     self.myinterestsLabel.textColor =[UIColor colorWithRed:83.0f/255.0f
-                                                green:83.0f/255.0f
-                                                 blue:83.0f/255.0f
-                                                alpha:1.0f];
+                                                     green:83.0f/255.0f
+                                                      blue:83.0f/255.0f
+                                                     alpha:1.0f];
+    
+    interstAndHobbiesArray = [[userDetailsDict valueForKey:@"hobbieslist"]mutableCopy];
+    hobbiesNameArray       =[[interstAndHobbiesArray valueForKey:@"name"]mutableCopy];
+    imageNormalArray     = [[interstAndHobbiesArray valueForKey:@"image"]mutableCopy];
+    [self profileDetails];
     
 }
 -(NSString *) getData{
@@ -127,16 +143,69 @@
     else{
         ImageURL3=[userDetailsDict valueForKey:@"image3_thumb"];
     }
-//    ImageURL1=[userDetailsDict valueForKey:@"image1"];
-//    ImageURL2=[userDetailsDict valueForKey:@"image2"];
-//    ImageURL3=[userDetailsDict valueForKey:@"image3"];
-    
     profileDataArray = [[NSMutableArray alloc]initWithObjects:ImageURL1,ImageURL2,ImageURL3, nil];
 
 }
 -(void)profileDetails{
+    imageSize =39;
+    commonWidth=19.5;
+    //commonHeight = 54;
+    yAxis = 31;
+    commonWidth=19.5;
+        
     
-   
+    space = imageSize / 2;
+    commonHeight = imageSize+15;
+    
+        for (int i =0; i< [imageNormalArray  count]; i++) {
+        
+        UIImageView *hobbiesImage;
+        
+        if(i <= 4)
+            hobbiesImage = [[UIImageView alloc]initWithFrame:CGRectMake((i*(commonWidth + imageSize))+ 10, yAxis, imageSize, imageSize)];
+        else if(i <= 9)
+            hobbiesImage = [[UIImageView alloc]initWithFrame:CGRectMake(((i-5)*(commonWidth + imageSize))+ 10, yAxis+imageSize+space, imageSize, imageSize)];
+        else if(i <= 14)
+            hobbiesImage = [[UIImageView alloc]initWithFrame:CGRectMake(((i-10)*(commonWidth + imageSize))+ 10, yAxis+((imageSize+space) * 2), imageSize, imageSize)];
+        else
+            hobbiesImage = [[UIImageView alloc]initWithFrame:CGRectMake(((i-15)*(commonWidth + imageSize))+ 10, yAxis+((imageSize+space) * 3), imageSize, imageSize)];
+        NSString *image =[imageNormalArray objectAtIndex:i];
+        
+        
+            image= [image stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+            [hobbiesImage setImageWithURL:[NSURL URLWithString:image]];
+        
+        
+        
+        
+        [self.myInterestView addSubview:hobbiesImage];
+       
+    }
+    
+    for (int i =0; i< [hobbiesNameArray  count]; i++) {
+        
+        NSString *image =[[hobbiesNameArray objectAtIndex:i]uppercaseString];
+        UILabel *hobbiesname;
+        
+        if(i <= 4)
+            hobbiesname = [[UILabel alloc]initWithFrame:CGRectMake((i*(commonWidth + imageSize)), yAxis + imageSize, imageSize + 20, 15)];
+        else if(i <= 9)
+            hobbiesname = [[UILabel alloc]initWithFrame:CGRectMake(((i-5)*(commonWidth + imageSize)), yAxis+(imageSize * 2)+space, imageSize + 20, 15)];
+        else if(i <= 14)
+            hobbiesname = [[UILabel alloc]initWithFrame:CGRectMake(((i-10)*(commonWidth + imageSize)), yAxis+((imageSize+space) * 2)+imageSize, imageSize + 20, 15)];
+        else
+            hobbiesname = [[UILabel alloc]initWithFrame:CGRectMake(((i-15)*(commonWidth + imageSize)), yAxis+((imageSize+space) * 3)+imageSize, imageSize + 20, 15)];
+        
+        [hobbiesname setFont:[UIFont fontWithName:@"Patron-Regular" size:7]];
+        hobbiesname.textAlignment = NSTextAlignmentCenter;
+        hobbiesname.textColor =[UIColor colorWithRed:(float)102.0/255 green:(float)102.0/255 blue:(float)102.0/255 alpha:1.0f];
+        
+        
+        hobbiesname.text = image;
+        [self.myInterestView addSubview:hobbiesname];
+        hobbiesname.textAlignment = NSTextAlignmentCenter;
+    }
+
 
 }
 -(void)profileScroll{
