@@ -372,35 +372,21 @@ notification_vibration:(NSString *)isnotification_vibration
 
          }
          else {
-             [DSAppCommon showSimpleAlertWithMessage:@"error"];
+           
+             [[NSNotificationCenter defaultCenter] postNotificationName:@"updateprofileLogOut"object:self userInfo:nil];
+             
          }
 
-        
+         [[NSNotificationCenter defaultCenter]postNotificationName:@"profilesuccess"object:self userInfo:nil];
+
+         [COMMON removeLoading];
 
      }
      
        failure:^(AFHTTPRequestOperation *operation, NSError *error){
            NSLog(@"Error = %@",error);
            [COMMON removeLoading];
-  //[[NSNotificationCenter defaultCenter] postNotificationName:@"updateprofile"object:self userInfo:<#(nullable NSDictionary *)#>
-           
-    
-           
-           
-           
-           
-           
-           
-           
-          //  [COMMON removeUserDetails];
-           UIAlertView *errorAlter =[[UIAlertView alloc]initWithTitle:nil message:[NSString stringWithFormat:@"%@",error] delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
-           [errorAlter show];
-//           DSHomeViewController*objSplashView =[[DSHomeViewController alloc]initWithNibName:@"DSHomeViewController" bundle:nil];
-//           [self.navigationController pushViewController:objSplashView animated:NO];
-//           appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
-//           appDelegate.buttonsView.hidden=YES;
-//           [appDelegate.settingButton setBackgroundImage:[UIImage imageNamed:@"setting_icon.png"] forState:UIControlStateNormal];
-           
+          
        }];
 
 

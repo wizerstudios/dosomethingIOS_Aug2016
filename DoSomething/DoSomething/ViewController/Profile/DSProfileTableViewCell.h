@@ -82,4 +82,5 @@
 
 @property (strong, nonatomic) IBOutlet UIView *topViewCell;
 
+@property (nonatomic,strong) IBOutlet UILabel *firstaftersepratorlbl;
 @end

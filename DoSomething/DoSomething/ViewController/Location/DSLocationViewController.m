@@ -245,6 +245,15 @@
             
            
              }
+             else if([[[responseObject valueForKey:@"nearestusers"]valueForKey:@"status"] isEqualToString:@"error"])
+             {
+                 [COMMON removeUserDetails];
+                 DSHomeViewController*objSplashView =[[DSHomeViewController alloc]initWithNibName:@"DSHomeViewController" bundle:nil];
+                 [self.navigationController pushViewController:objSplashView animated:NO];
+                appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+                 appDelegate.buttonsView.hidden=YES;
+                 [appDelegate.settingButton setBackgroundImage:[UIImage imageNamed:@"setting_icon.png"] forState:UIControlStateNormal];
+             }
              else
              {
                  usernotfoundlbl.hidden=NO;
@@ -399,7 +408,7 @@
         self.filterviewxposition.constant    = 65;
         self.sepratorXposition.constant      =self.collectionviewxpostion.constant-20;
         appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
-        appDelegate.buttonsView.frame=CGRectMake(self.collectionviewxpostion.constant-20,self.sepratorlbl.frame.origin.y+self.sepratorlbl.frame.size.height,self.view.frame.size.width,50);
+        appDelegate.buttonsView.frame=CGRectMake(self.collectionviewxpostion.constant-20,self.view.frame.origin.y+self.view.frame.size.height,self.view.frame.size.width,50);
         isFilteraction=YES;
     }
     else if (isFilteraction==YES)
@@ -408,7 +417,7 @@
         self.filterviewxposition.constant    =self.locationCollectionView.frame.size.width+10;
         self.sepratorXposition.constant      =self.collectionviewxpostion.constant-10;
         appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
-        appDelegate.buttonsView.frame=CGRectMake(self.collectionviewxpostion.constant-10,self.sepratorlbl.frame.origin.y+self.sepratorlbl.frame.size.height,self.view.frame.size.width,50);
+        appDelegate.buttonsView.frame=CGRectMake(self.collectionviewxpostion.constant-10,self.view.frame.origin.y+self.view.frame.size.height,self.view.frame.size.width,50);
         isFilteraction=NO;
         
     }

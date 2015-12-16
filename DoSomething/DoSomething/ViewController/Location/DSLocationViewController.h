@@ -14,7 +14,7 @@
 @property (nonatomic, assign) id delegate;
 @property (strong, nonatomic) UIWindow *window;
 @property (strong, nonatomic) IBOutlet UICollectionView *locationCollectionView;
-@property(nonatomic,strong) IBOutlet UILabel *sepratorlbl;
+//@property(nonatomic,strong) IBOutlet UILabel *sepratorlbl;
 @property (nonatomic,strong) IBOutlet UIView  * filterview;
 @property(strong,nonatomic)NSArray *profileImages;
 @property(strong,nonatomic)NSArray *profileNames;

@@ -19,6 +19,8 @@
 #import "UIImageView+AFNetworking.h"
 #import "CustomAlterview.h"
 #import "DSTermsOfUseView.h"
+#import "DSHomeViewController.h"
+#import "AppDelegate.h"
 
 
 
@@ -91,6 +93,8 @@
     BOOL isPageControl;
     BOOL isLoadData;
     NSString *sessionID;
+    CustomNavigationView *customNavigation;
+    
     
 
 }
@@ -118,7 +122,7 @@
     [self.navigationItem setHidesBackButton:YES animated:NO];
     [self.navigationController.navigationBar setTranslucent:YES];
     
-    CustomNavigationView *customNavigation;
+    
     customNavigation = [[CustomNavigationView alloc] initWithNibName:@"CustomNavigationView" bundle:nil];
     customNavigation.view.frame = CGRectMake(0,-20, CGRectGetWidth(self.view.frame), 65);
     if (IS_IPHONE6 ){
@@ -137,11 +141,13 @@
     [customNavigation.saveBtn addTarget:self action:@selector(saveAction:) forControlEvents:UIControlEventTouchUpInside];
     [customNavigation.buttonBack addTarget:self action:@selector(backAction) forControlEvents:UIControlEventTouchUpInside];
     
+    
     imageNormalArray =[[NSMutableArray alloc]init];
     
     if([profileDict valueForKey:@"hobbieslist"]!=NULL)
     {
         [customNavigation.buttonBack setHidden:YES];
+      
         [self selectitemMethod];
     }
        infoArray=[[NSMutableArray alloc]initWithObjects:@"profile_noimg",@"profile_noimg",@"profile_noimg", nil];
@@ -154,6 +160,7 @@
     }
     else if(isLoadData == YES && profileDict ==NULL)
     {
+        
         interstAndHobbiesArray =[[[NSUserDefaults standardUserDefaults] valueForKey:@"SelectedItem"]mutableCopy];
         
         imageNormalArray =[[[NSUserDefaults standardUserDefaults] valueForKey:@"SelectedItemNormal"]mutableCopy];
@@ -180,6 +187,8 @@
     if(profileDict != NULL)
     {
         [self initializeArrayProfile];
+        [customNavigation.buttonBack setHidden:YES];
+        
         interstAndHobbiesArray = [[profileDict valueForKey:@"hobbieslist"]mutableCopy];
         hobbiesNameArray       =[[interstAndHobbiesArray valueForKey:@"name"]mutableCopy];
         imageNormalArray     = [[interstAndHobbiesArray valueForKey:@"image"]mutableCopy];
@@ -914,6 +923,7 @@ if([[NSUserDefaults standardUserDefaults] valueForKey:@"SelectedItemCategoryID"]
             cell.lastNameTxt.text  =(LastName==0)? [profileDict valueForKey:@"last_name"]:LastName;
             FirstName = cell.firstnameTxt.text;
             LastName  = cell.lastNameTxt.text;
+            cell.firstaftersepratorlbl.hidden =YES;
         }
         else if(userDetailsDict.count > 0){
 
@@ -921,12 +931,14 @@ if([[NSUserDefaults standardUserDefaults] valueForKey:@"SelectedItemCategoryID"]
             cell.lastNameTxt.text  =(LastName==0)? [userDetailsDict valueForKey:@"last_name"]:LastName;
             FirstName = cell.firstnameTxt.text;
             LastName  = cell.lastNameTxt.text;
+            cell.firstaftersepratorlbl.hidden =YES;
             
         }
         else
            {
             cell.firstnameTxt.text = FirstName;
             cell.lastNameTxt.text   =LastName;
+               cell.firstaftersepratorlbl.hidden =NO;
            }
         cell.firstnameTxt.autocapitalizationType = UITextAutocapitalizationTypeSentences;
         cell.lastNameTxt.autocapitalizationType = UITextAutocapitalizationTypeSentences;
@@ -1823,6 +1835,19 @@ if([[NSUserDefaults standardUserDefaults] valueForKey:@"SelectedItemCategoryID"]
                                                  name:@"updateprofile"
                                                object:nil];
     
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(loadUpdateError:)
+                                                 name:@"updateprofileLogOut"
+                                               object:nil];
+    
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(enableSendButton:)
+                                                 name:@"profilesuccess"
+                                               object:nil];
+    
+    
+    
    [self updateAPI];
     
     
@@ -1836,16 +1861,25 @@ if([[NSUserDefaults standardUserDefaults] valueForKey:@"SelectedItemCategoryID"]
     [COMMON removeLoading];
     
 }
-
+-(void)loadUpdateError:(NSNotification *)notification
+{
+             [COMMON removeUserDetails];
+             DSHomeViewController*objSplashView =[[DSHomeViewController alloc]initWithNibName:@"DSHomeViewController" bundle:nil];
+               [self.navigationController pushViewController:objSplashView animated:NO];
+               AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+               appDelegate.buttonsView.hidden=YES;
+               [appDelegate.settingButton setBackgroundImage:[UIImage imageNamed:@"setting_icon.png"] forState:UIControlStateNormal];
+  
+}
 
 #pragma mark - saveAction
 -(void)saveAction:(id)sender
 {
     [self.view endEditing:YES];
     [COMMON LoadIcon:self.view];
-    
-    if(isSave==NO)
-    {
+    //[customNavigation.saveBtn setUserInteractionEnabled:NO];
+//    if(isSave==NO)
+//    {
     if(profileDict !=NULL){
         
 
@@ -1858,8 +1892,18 @@ if([[NSUserDefaults standardUserDefaults] valueForKey:@"SelectedItemCategoryID"]
     }
     else
         [self loadValidations];
+   
+   
     }
+
+-(void) enableSendButton:(NSNotification*)notification
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+    [customNavigation.saveBtn setUserInteractionEnabled:YES];
 }
+
+
+//}
 #pragma mark - dateConverter
 -(void)dateConverter{
     

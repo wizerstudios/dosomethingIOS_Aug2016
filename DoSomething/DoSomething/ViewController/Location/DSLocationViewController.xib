@@ -33,8 +33,6 @@
                 <outlet property="maleBtn" destination="b0G-N7-6UG" id="fmC-rW-WaV"/>
                 <outlet property="offlineBtn" destination="64U-f9-MAd" id="tOh-U2-9DI"/>
                 <outlet property="onlineBtn" destination="cI1-lw-Ck1" id="Kik-vD-Wsa"/>
-                <outlet property="sepratorXposition" destination="gaL-IS-q8T" id="iT7-8e-Ihg"/>
-                <outlet property="sepratorlbl" destination="6KM-IH-R35" id="fwz-d9-TIv"/>
                 <outlet property="statusBothBtn" destination="8sz-iq-cVT" id="FTw-hw-lAj"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
@@ -57,17 +55,6 @@
                         <outlet property="delegate" destination="i5M-Pr-FkT" id="ELi-we-E9N"/>
                     </connections>
                 </collectionView>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text=" " lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6KM-IH-R35">
-                    <rect key="frame" x="0.0" y="514" width="320" height="3"/>
-                    <animations/>
-                    <color key="backgroundColor" red="0.43531473414986599" green="0.43531473414986599" blue="0.43531473414986599" alpha="1" colorSpace="calibratedRGB"/>
-                    <constraints>
-                        <constraint firstAttribute="height" constant="3" id="XQb-02-QFs"/>
-                        <constraint firstAttribute="width" constant="320" id="pha-6t-DBD"/>
-                    </constraints>
-                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                    <nil key="highlightedColor"/>
-                </label>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="m8H-NP-Mj6">
                     <rect key="frame" x="320" y="0.0" width="255" height="568"/>
                     <subviews>
@@ -379,12 +366,10 @@
             <constraints>
                 <constraint firstItem="m8H-NP-Mj6" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="0pK-aL-X6L"/>
                 <constraint firstAttribute="bottom" secondItem="m8H-NP-Mj6" secondAttribute="bottom" id="1TC-Fi-Cb5"/>
+                <constraint firstItem="m8H-NP-Mj6" firstAttribute="leading" secondItem="x4s-f8-PZR" secondAttribute="trailing" constant="10" id="3wj-cw-H9q"/>
                 <constraint firstItem="x4s-f8-PZR" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="10" id="AK0-aj-zIk"/>
-                <constraint firstItem="6KM-IH-R35" firstAttribute="top" secondItem="x4s-f8-PZR" secondAttribute="bottom" constant="1" id="Pev-WX-gXA"/>
-                <constraint firstAttribute="bottom" secondItem="6KM-IH-R35" secondAttribute="bottom" constant="51" id="Vqm-vW-E5w"/>
-                <constraint firstItem="6KM-IH-R35" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="gaL-IS-q8T"/>
+                <constraint firstAttribute="bottom" secondItem="x4s-f8-PZR" secondAttribute="bottom" constant="55" id="W9s-II-o7O"/>
                 <constraint firstItem="m8H-NP-Mj6" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="320" id="lTm-kY-CQu"/>
-                <constraint firstItem="6KM-IH-R35" firstAttribute="top" secondItem="x4s-f8-PZR" secondAttribute="bottom" constant="1" id="lUS-aj-aUj"/>
                 <constraint firstItem="x4s-f8-PZR" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="piE-PA-qlr"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>

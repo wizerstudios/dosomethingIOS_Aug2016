@@ -79,6 +79,5 @@
 
 @property (nonatomic,strong) IBOutlet NSLayoutConstraint *aboutTextHeight;
 
-@property(nonatomic,strong) IBOutlet NSLayoutConstraint * profileviewimageXposition;
 
 @end
