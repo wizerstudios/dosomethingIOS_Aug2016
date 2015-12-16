@@ -68,6 +68,18 @@
     
     [self profileImageDisplay];
     [self profileImageScrollView];
+    CGRect buttonFrame = CGRectMake( 167, 35, 122, 35 );
+    UIButton *letsDoButton = [[UIButton alloc] initWithFrame: buttonFrame];
+    [letsDoButton setTitle: @"Let's Do Something!" forState: UIControlStateNormal];
+    //[letsDoButton addTarget:self action:@selector(btnSelected:) forControlEvents:UIControlEventTouchUpInside];
+    [letsDoButton.titleLabel setFont:[UIFont fontWithName:@"Patron-Bold" size:12]];
+    [letsDoButton setTitleColor: [UIColor whiteColor] forState: UIControlStateNormal];
+    letsDoButton.backgroundColor = [UIColor colorWithRed:218.0f/255.0f
+                                                   green:40.0f/255.0f
+                                                    blue:64.0f/255.0f
+                                                   alpha:1.0f];
+    [self.thingsView addSubview:letsDoButton];
+    
    
     self.aboutTextBox.text = [userDetailsDict valueForKey:@"about"];
     self.userName.text     = [self getData];
@@ -77,7 +89,7 @@
                                               blue:64.0f/255.0f
                                              alpha:1.0f];
     //AboutLabel
-    self.aboutLabel.text = NSLocalizedString(@"About You", @"");
+    self.aboutLabel.text = NSLocalizedString(@"About ME", @"");
     [self.aboutLabel setFont:[UIFont fontWithName:@"Patron-Medium" size:12]];
     self.aboutLabel.textColor =[UIColor colorWithRed:83.0f/255.0f
                                                green:83.0f/255.0f
