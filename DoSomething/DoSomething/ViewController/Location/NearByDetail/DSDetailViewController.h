@@ -28,6 +28,7 @@
 
 @property (strong, nonatomic) IBOutlet UITextView *aboutTextBox;
 @property (strong, nonatomic) NSMutableDictionary *userDetailsDict;
+@property (strong, nonatomic) IBOutlet UIView *genderView;
 @property (strong, nonatomic) IBOutlet UILabel *userName;
 @property (strong, nonatomic) IBOutlet UILabel *aboutLabel;
 

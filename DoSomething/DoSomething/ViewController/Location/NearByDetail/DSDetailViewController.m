@@ -79,11 +79,22 @@
                                                     blue:64.0f/255.0f
                                                    alpha:1.0f];
     [self.thingsView addSubview:letsDoButton];
+    //genderImage
+    UIImage *genderImage;
+    if([[userDetailsDict objectForKey:@"gender"]isEqualToString:@"Female"]){
+        genderImage = [UIImage imageNamed:@"female_Icon"];
+    }
+    else
+        genderImage = [UIImage imageNamed:@"male_Icon"];
+    
+    UIImageView *genderImageView = [[UIImageView alloc] initWithImage:genderImage];
+    [self.genderView addSubview:genderImageView];
+
     
    
     self.aboutTextBox.text = [userDetailsDict valueForKey:@"about"];
     self.userName.text     = [self getData];
-    [self.userName setFont:[UIFont fontWithName:@"Patron-Medium" size:12]];
+    [self.userName setFont:[UIFont fontWithName:@"Patron-Medium" size:14]];
     self.userName.textColor =[UIColor colorWithRed:218.0f/255.0f
                                              green:40.0f/255.0f
                                               blue:64.0f/255.0f
