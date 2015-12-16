@@ -72,11 +72,13 @@
 @property (assign) BOOL selectEmail;
 
 @property (strong, nonatomic) IBOutlet UIImageView *profileImageView;
-@property (strong, nonatomic) IBOutlet UIView *topViewCell;
+
 
 @property (strong, nonatomic) IBOutlet UIScrollView *scrView;
 - (IBAction)pageChanged:(id)sender;
 
 @property (nonatomic,strong) IBOutlet NSLayoutConstraint *aboutTextHeight;
+
+@property(nonatomic,strong) IBOutlet NSLayoutConstraint * profileviewimageXposition;
 
 @end

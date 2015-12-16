@@ -80,6 +80,6 @@
 
 @property (nonatomic,strong) IBOutlet UIView *pageImageview;
 
-
+@property (strong, nonatomic) IBOutlet UIView *topViewCell;
 
 @end
