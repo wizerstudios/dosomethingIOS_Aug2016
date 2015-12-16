@@ -471,7 +471,13 @@ if([[NSUserDefaults standardUserDefaults] valueForKey:@"SelectedItemCategoryID"]
             [pageImageView setImage:[UIImage imageNamed:@"dot_active_red"]];
             [pgDtView addSubview:pageImageView];
             [cell.topViewCell addSubview:pgDtView];
+            if(IS_IPHONE6||IS_IPHONE6_Plus) {
+            [pgDtView setFrame:CGRectMake(40, -5, profileImagePageControl.numberOfPages*18, 10)];
+            }
+            else{
             [pgDtView setFrame:CGRectMake(15, -5, profileImagePageControl.numberOfPages*18, 10)];
+            }
+            
             
         }
         
@@ -886,8 +892,10 @@ if([[NSUserDefaults standardUserDefaults] valueForKey:@"SelectedItemCategoryID"]
     
 
         
-        if(!profileData1)
+        if(!profileData1){
             [profileImagePageControl setHidden:YES];
+            
+        } //frame = CGRectMake(0,-20, 375, 76);customNavigation.view.frame = CGRectMake(0,-20, 375, 76);
         else
             [profileImagePageControl setHidden:NO];
         
@@ -895,7 +903,17 @@ if([[NSUserDefaults standardUserDefaults] valueForKey:@"SelectedItemCategoryID"]
 
         [cell.cameraButton setTag:101];
         
+        
         [cell.cameraButton addTarget:self action:@selector(selectCamera:) forControlEvents:UIControlEventTouchUpInside];
+        //[cell.cameraButton setHidden:YES];
+      
+        UIButton *cameraIcon=[UIButton buttonWithType:UIButtonTypeCustom];
+        [cameraIcon setFrame:CGRectMake(50,60,37,37)];
+        [cameraIcon addTarget:self action:@selector(selectCamera:) forControlEvents:UIControlEventTouchUpInside];
+        UIImage *cameraIconImg = [UIImage imageNamed:@"camera_icon"];
+        [cameraIcon setImage:cameraIconImg forState:UIControlStateNormal];
+        
+        [cell addSubview:cameraIcon];
         
         userProfileImage.layer.masksToBounds = YES;
         
@@ -1984,6 +2002,8 @@ if([[NSUserDefaults standardUserDefaults] valueForKey:@"SelectedItemCategoryID"]
     
 
 }
+
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

@@ -123,12 +123,8 @@
                                         <constraint firstAttribute="height" constant="258" id="OuF-th-f1E"/>
                                     </constraints>
                                 </view>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yeL-p3-kNS">
-                                    <rect key="frame" x="123" y="189" width="177" height="27"/>
-                                    <constraints>
-                                        <constraint firstAttribute="height" constant="27" id="8WC-xg-kZP"/>
-                                        <constraint firstAttribute="width" constant="177" id="uBc-FI-uTn"/>
-                                    </constraints>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yeL-p3-kNS">
+                                    <rect key="frame" x="123" y="189" width="189" height="27"/>
                                     <fontDescription key="fontDescription" name="Patron-Regular" family="Patron" pointSize="13"/>
                                     <color key="textColor" red="0.90196078430000004" green="0.2470588235" blue="0.32156862749999998" alpha="1" colorSpace="deviceRGB"/>
                                     <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -136,15 +132,12 @@
                             </subviews>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             <constraints>
-                                <constraint firstAttribute="trailing" secondItem="yeL-p3-kNS" secondAttribute="trailing" constant="20" id="1b4-JN-Mnu"/>
                                 <constraint firstAttribute="height" constant="568" id="2iJ-EB-YoC"/>
                                 <constraint firstItem="FAI-7a-HTe" firstAttribute="centerX" secondItem="LBx-ml-3gs" secondAttribute="centerX" id="440-wR-krD"/>
                                 <constraint firstAttribute="width" constant="320" id="5fU-Tk-am4"/>
                                 <constraint firstItem="FAI-7a-HTe" firstAttribute="top" secondItem="Pkn-qs-wqN" secondAttribute="bottom" constant="10" id="AxI-e0-D4i"/>
                                 <constraint firstAttribute="trailing" secondItem="M0S-Nl-IDk" secondAttribute="trailing" constant="72" id="BM2-uf-YDM"/>
                                 <constraint firstItem="M0S-Nl-IDk" firstAttribute="centerX" secondItem="Pkn-qs-wqN" secondAttribute="centerX" constant="55" id="CSc-wW-zL4"/>
-                                <constraint firstItem="yeL-p3-kNS" firstAttribute="top" secondItem="M0S-Nl-IDk" secondAttribute="bottom" constant="16" id="CeK-KZ-dGl"/>
-                                <constraint firstItem="yeL-p3-kNS" firstAttribute="leading" secondItem="LBx-ml-3gs" secondAttribute="leading" constant="123" id="DAe-6z-OjL"/>
                                 <constraint firstItem="Pkn-qs-wqN" firstAttribute="top" secondItem="VOF-EO-70f" secondAttribute="bottom" constant="25" id="DnH-bY-cix"/>
                                 <constraint firstItem="FAI-7a-HTe" firstAttribute="centerX" secondItem="pqL-YV-hqK" secondAttribute="centerX" id="F5a-SL-mfI"/>
                                 <constraint firstAttribute="bottom" secondItem="Pkn-qs-wqN" secondAttribute="bottom" constant="354" id="P0n-Xt-abe"/>
@@ -155,7 +148,6 @@
                                 <constraint firstItem="pqL-YV-hqK" firstAttribute="centerX" secondItem="VOF-EO-70f" secondAttribute="centerX" id="k7X-st-Ssi"/>
                                 <constraint firstItem="FAI-7a-HTe" firstAttribute="leading" secondItem="LBx-ml-3gs" secondAttribute="leading" constant="14" id="kz7-PF-caO"/>
                                 <constraint firstItem="M0S-Nl-IDk" firstAttribute="centerY" secondItem="VOF-EO-70f" secondAttribute="centerY" id="nZ3-ty-b2g"/>
-                                <constraint firstItem="FAI-7a-HTe" firstAttribute="top" secondItem="yeL-p3-kNS" secondAttribute="bottom" constant="8" id="qWs-8C-Wpr"/>
                                 <constraint firstItem="Pkn-qs-wqN" firstAttribute="top" secondItem="M0S-Nl-IDk" secondAttribute="bottom" constant="14" id="sWq-sd-Og7"/>
                             </constraints>
                         </scrollView>

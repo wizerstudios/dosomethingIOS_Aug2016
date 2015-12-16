@@ -16,19 +16,22 @@
 
 @interface DSDetailViewController ()
 {
-    NSMutableArray  *profileDataArray;
-    UIImageView     *userProfileImage;
+    DSWebservice    * objWebService;
+    NSMutableArray  * profileDataArray;
+    UIImageView     * userProfileImage;
     
-    NSMutableArray  *interstAndHobbiesArray;
-    NSMutableArray  *imageNormalArray,*hobbiesNameArray;
+    NSMutableArray  * interstAndHobbiesArray;
+    NSMutableArray  * imageNormalArray,*hobbiesNameArray;
     
-    NSMutableArray  *doSomethingArray;
-    NSMutableArray  *doSomethingImageArray,*doSomethingNameArray;
+    NSMutableArray  * doSomethingArray;
+    NSMutableArray  * doSomethingImageArray,* doSomethingNameArray;
     
     float commonWidth, commonHeight;
     float yAxis;
     float imageSize;
     float space;
+    NSString        * strsessionID;
+    NSString        * requestUserID;
     
 }
 @end
@@ -37,6 +40,12 @@
 @synthesize userDetailsDict;
 - (void)viewDidLoad {
     [super viewDidLoad];
+    objWebService =[[DSWebservice alloc]init];
+    NSMutableDictionary *dic=[[NSMutableDictionary alloc]init];
+    
+    dic =[[NSUserDefaults standardUserDefaults] valueForKey:USERDETAILS];
+    
+    strsessionID =[dic valueForKey:@"SessionId"];
     // Do any additional setup after loading the view from its nib.
    
 }
@@ -68,11 +77,14 @@
     
     [self profileImageDisplay];
     [self profileImageScrollView];
-    CGRect buttonFrame = CGRectMake( 167, 35, 122, 35 );
+    CGRect buttonFrame = CGRectMake( 190, 33, 80, 40 );
     UIButton *letsDoButton = [[UIButton alloc] initWithFrame: buttonFrame];
     [letsDoButton setTitle: @"Let's Do Something!" forState: UIControlStateNormal];
-    //[letsDoButton addTarget:self action:@selector(btnSelected:) forControlEvents:UIControlEventTouchUpInside];
+    [letsDoButton addTarget:self action:@selector(letsDoSomethingAction:) forControlEvents:UIControlEventTouchUpInside];
     [letsDoButton.titleLabel setFont:[UIFont fontWithName:@"Patron-Bold" size:12]];
+    letsDoButton.titleLabel.lineBreakMode = NSLineBreakByTruncatingTail;
+    letsDoButton.titleLabel.numberOfLines = 2;
+    letsDoButton.titleLabel.textAlignment = NSTextAlignmentCenter;
     [letsDoButton setTitleColor: [UIColor whiteColor] forState: UIControlStateNormal];
     letsDoButton.backgroundColor = [UIColor colorWithRed:218.0f/255.0f
                                                    green:40.0f/255.0f
@@ -100,7 +112,7 @@
                                               blue:64.0f/255.0f
                                              alpha:1.0f];
     //AboutLabel
-    self.aboutLabel.text = NSLocalizedString(@"About ME", @"");
+    self.aboutLabel.text = NSLocalizedString(@"About Me", @"");
     [self.aboutLabel setFont:[UIFont fontWithName:@"Patron-Medium" size:12]];
     self.aboutLabel.textColor =[UIColor colorWithRed:83.0f/255.0f
                                                green:83.0f/255.0f
@@ -127,6 +139,7 @@
     doSomethingArray        = [[userDetailsDict valueForKey:@"dosomething"]mutableCopy];
     doSomethingNameArray    = [[doSomethingArray valueForKey:@"name"]mutableCopy];
     doSomethingImageArray   = [[doSomethingArray valueForKey:@"ActiveImage"]mutableCopy];
+    
     [self profileInterestsDetails];
     [self profileDoSomethingDetails];
     
@@ -211,12 +224,41 @@
     }
     self.profileImageScroll.contentSize=CGSizeMake(self.profileImageScroll.frame.size.width*3, self.profileImageScroll.frame.size.height);
     
+//    if(CurrentImage == 0)
+//        [self.profileImageScroll setContentOffset:CGPointMake(0, 0)animated:NO];
+//    else if(CurrentImage == 1)
+//        [self.profileImageScroll setContentOffset:CGPointMake(1*self.profileImageView.frame.size.width - 15, 0)animated:NO];
+//    else if(CurrentImage == 2)
+//        [self.profileImageScroll setContentOffset:CGPointMake((1.5*self.profileImageView.frame.size.width - 15), 0)animated:NO];
+    
     if(CurrentImage == 0)
         [self.profileImageScroll setContentOffset:CGPointMake(0, 0)animated:NO];
     else if(CurrentImage == 1)
-        [self.profileImageScroll setContentOffset:CGPointMake(1*self.profileImageView.frame.size.width - 15, 0)animated:NO];
+    {
+        if(IS_IPHONE6|| IS_IPHONE6_Plus)
+        {
+           // [self.scrView setContentOffset:CGPointMake(4.5*self.profileImageView.frame.size.width - 25  , 0)animated:NO];
+            [self.profileImageScroll setContentOffset:CGPointMake(4*self.profileImageView.frame.size.width - 15, 0)animated:NO];
+        }
+        else
+        {
+            [self.profileImageScroll setContentOffset:CGPointMake(1*self.profileImageView.frame.size.width - 15, 0)animated:NO];
+        }
+    }
     else if(CurrentImage == 2)
-        [self.profileImageScroll setContentOffset:CGPointMake((1.5*self.profileImageView.frame.size.width - 15), 0)animated:NO];
+    {
+        if(IS_IPHONE6|| IS_IPHONE6_Plus)
+        {
+            //[self.scrView setContentOffset:CGPointMake(9*self.profileImageView.frame.size.width - 15, 0)animated:NO];
+            [self.profileImageScroll setContentOffset:CGPointMake((6*self.profileImageView.frame.size.width - 15), 0)animated:NO];
+        }
+        else
+        {
+            
+            [self.profileImageScroll setContentOffset:CGPointMake((1.5*self.profileImageView.frame.size.width - 15), 0)animated:NO];
+        }
+    }
+
 }
 
 #pragma mark - UIScrollViewDelegate
@@ -347,6 +389,24 @@
         [self.myInterestView addSubview:hobbiesname];
         hobbiesname.textAlignment = NSTextAlignmentCenter;
     }
+}
+
+#pragma mark - letsDoSomethingAction
+- (void)letsDoSomethingAction:(id)sender
+{
+    
+    requestUserID = [userDetailsDict valueForKey:@"user_id"];
+    
+   [objWebService sendRequest:SendRequest_API
+                    sessionid:strsessionID
+         request_send_user_id:requestUserID
+                      success:^(AFHTTPRequestOperation *operation, id responseObject) {
+                          NSLog(@"SEND REQ%@",responseObject);
+                          
+                      } failure:^(AFHTTPRequestOperation *operation, id error) {
+                          NSLog(@"SEND REQ ERR%@",error);
+                      }];
+    
 }
 
 #pragma mark - back Action
