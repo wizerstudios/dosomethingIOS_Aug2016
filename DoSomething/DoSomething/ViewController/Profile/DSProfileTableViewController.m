@@ -195,11 +195,10 @@
         imageNormalArray     = [[interstAndHobbiesArray valueForKey:@"image"]mutableCopy];
         self.tableViewHeightConstraint.constant=75;
     }
-
-   
     
     [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"SelectedItemCategoryID"];
-    isNotification_message = @"Yes";
+    
+      isNotification_message = @"Yes";
     isNotification_vibration = @"Yes";
     isNotification_sound = @"Yes";
     
@@ -297,7 +296,7 @@ if([[NSUserDefaults standardUserDefaults] valueForKey:@"SelectedItemCategoryID"]
          hobbiesCategoryIDArray =[[interstAndHobbiesArray valueForKey:@"hobbies_id"]mutableCopy];
     }
 
-    
+     NSLog(@"SelectedItemCategoryID=%@",[[[NSUserDefaults standardUserDefaults] valueForKey:@"SelectedItemCategoryID"]mutableCopy]);
     
     strInterestHobbies = [hobbiesCategoryIDArray componentsJoinedByString:@","];
 }
@@ -333,10 +332,6 @@ if([[NSUserDefaults standardUserDefaults] valueForKey:@"SelectedItemCategoryID"]
         NSString *image     = [profileDataArray objectAtIndex:i];
         if(IS_IPHONE6_Plus || IS_IPHONE6)
         {
-//            self.profileviewimageXposition.constant=(self.view.frame.size.width/3.58)-30;
-           // [userProfileImage setNeedsDisplay];
-            //[userProfileImage setNeedsLayout];
-//            userProfileImage = [[UIImageView alloc]initWithFrame:CGRectMake(self.view.frame.size.width/3.5, 20,self.profileImageView.frame.size.width, self.profileImageView.frame.size.height)];
             userProfileImage = [[UIImageView alloc]initWithFrame:CGRectMake((i*self.scrView.frame.size.width) + spacing+30, 20,self.profileImageView.frame.size.width, self.profileImageView.frame.size.height)];
         }
     
@@ -685,7 +680,7 @@ if([[NSUserDefaults standardUserDefaults] valueForKey:@"SelectedItemCategoryID"]
 - (void)pushToHobbiesView {
     
     DSInterestAndHobbiesViewController * DSHobbiesView  = [[DSInterestAndHobbiesViewController alloc]initWithNibName:@"DSInterestAndHobbiesViewController" bundle:nil];
-    DSHobbiesView.profileDetailsArray = placeHolderArray;
+    DSHobbiesView.profileDetailsArray = interstAndHobbiesArray;   //placeHolderArray
     [self.navigationController pushViewController:DSHobbiesView animated:YES];
 
     
@@ -699,19 +694,19 @@ if([[NSUserDefaults standardUserDefaults] valueForKey:@"SelectedItemCategoryID"]
    // NSMutableDictionary *detailsDict = [[NSMutableDictionary alloc]init];
    // detailsDict = [[COMMON getUserDetails]mutableCopy];
 
-    [placeHolderArray insertObject:[[NSMutableArray alloc]initWithObjects:[NSMutableDictionary dictionaryWithObjectsAndKeys:@"Image",@"placeHolder",@"",@"TypingText", nil],
+    [placeHolderArray insertObject:[[NSMutableArray alloc]initWithObjects:[NSMutableDictionary dictionaryWithObjectsAndKeys:@"Image",@"placeHolder", nil],
                                     
-                                    [NSMutableDictionary dictionaryWithObjectsAndKeys:[userDetailsDict valueForKey:@"first_name"],@"placeHolder",@"",@"TypingText", nil],
-                                    [NSMutableDictionary dictionaryWithObjectsAndKeys:[userDetailsDict valueForKey:@"last_name"],@"placeHolder",@"",@"TypingText", nil],
-                                    [NSMutableDictionary dictionaryWithObjectsAndKeys:[userDetailsDict valueForKey:@"gender"],@"placeHolder",@"",@"TypingText", nil],
-                                    [NSMutableDictionary dictionaryWithObjectsAndKeys:@"DD/MM/YYYY",@"placeHolder",@"",@"TypingText", nil],
-                                    [NSMutableDictionary dictionaryWithObjectsAndKeys:@"Write something about yourself here.",@"placeHolder",@"",@"TypingText", nil],
-                                    [NSMutableDictionary dictionaryWithObjectsAndKeys:@"Hobbies",@"placeHolder",@"",@"TypingText", nil],
-                                    [NSMutableDictionary dictionaryWithObjectsAndKeys:[userDetailsDict valueForKey:@"email"],@"placeHolder",@"Password",@"placeHolderPass",@"",@"TypingText",@"",@"TypingTextPass", nil],
+                                    [NSMutableDictionary dictionaryWithObjectsAndKeys:[userDetailsDict valueForKey:@"first_name"],@"placeHolder", nil],
+                                    [NSMutableDictionary dictionaryWithObjectsAndKeys:[userDetailsDict valueForKey:@"last_name"],@"placeHolder", nil],
+                                    [NSMutableDictionary dictionaryWithObjectsAndKeys:[userDetailsDict valueForKey:@"gender"],@"placeHolder", nil],
+                                    [NSMutableDictionary dictionaryWithObjectsAndKeys:@"DD/MM/YYYY",@"placeHolder", nil],
+                                    [NSMutableDictionary dictionaryWithObjectsAndKeys:@"Write something about yourself here.",@"placeHolder", nil],
+                                    [NSMutableDictionary dictionaryWithObjectsAndKeys:@"Hobbies",@"placeHolder", nil],
+                                    [NSMutableDictionary dictionaryWithObjectsAndKeys:[userDetailsDict valueForKey:@"email"],@"placeHolder",@"Password",@"placeHolderPass",@"",@"TypingTextPass", nil],
                                     [NSMutableDictionary dictionaryWithObjectsAndKeys:@"switch_on",@"placeHolder",@"",@"NewMessageImage",@"",@"SoundImage",@"",@"VibrationImage",nil],
                                     [NSMutableDictionary dictionaryWithObjectsAndKeys:@"TermsOfUse",@"placeHolder",@"",@"TypingText", nil], nil]atIndex:0];
     
-    titleArray = [[NSArray alloc]initWithObjects:@"Image",@"First Name",@"Last Name",@"male",@"Date of Birth",@"About You",@"Hobbies",@"Email&Password",@"switch_on",@"TermsOfUse",nil];
+   // titleArray = [[NSArray alloc]initWithObjects:@"Image",@"First Name",@"Last Name",@"male",@"Date of Birth",@"About You",@"Hobbies",@"Email&Password",@"switch_on",@"TermsOfUse",nil];
     
     NSLog(@"PlaceHolder %@",placeHolderArray);
    
@@ -726,15 +721,15 @@ if([[NSUserDefaults standardUserDefaults] valueForKey:@"SelectedItemCategoryID"]
     
     [placeHolderArray insertObject:[[NSMutableArray alloc]initWithObjects:[NSMutableDictionary dictionaryWithObjectsAndKeys:@"Image",@"placeHolder",@"",@"TypingText", nil],
                                     
-                                    [NSMutableDictionary dictionaryWithObjectsAndKeys:[profileDict valueForKey:@"first_name"],@"placeHolder",@"",@"TypingText", nil],
-                                    [NSMutableDictionary dictionaryWithObjectsAndKeys:[profileDict valueForKey:@"last_name"],@"placeHolder",@"",@"TypingText", nil],
-                                    [NSMutableDictionary dictionaryWithObjectsAndKeys:[profileDict valueForKey:@"gender"],@"placeHolder",@"",@"TypingText", nil],
-                                    [NSMutableDictionary dictionaryWithObjectsAndKeys:[profileDict valueForKey:@"date_of_birth"],@"placeHolder",@"",@"TypingText", nil],
-                                    [NSMutableDictionary dictionaryWithObjectsAndKeys:@"Write something about yourself here.",@"placeHolder",@"",@"TypingText", nil],
-                                    [NSMutableDictionary dictionaryWithObjectsAndKeys:@"Hobbies",@"placeHolder",@"",@"TypingText", nil],
-                                    [NSMutableDictionary dictionaryWithObjectsAndKeys:[profileDict valueForKey:@"email"],@"placeHolder",@"Password",@"placeHolderPass",@"",@"TypingText",@"",@"TypingTextPass", nil], nil]atIndex:0];
+                                    [NSMutableDictionary dictionaryWithObjectsAndKeys:[profileDict valueForKey:@"first_name"],@"placeHolder", nil],
+                                    [NSMutableDictionary dictionaryWithObjectsAndKeys:[profileDict valueForKey:@"last_name"],@"placeHolder", nil],
+                                    [NSMutableDictionary dictionaryWithObjectsAndKeys:[profileDict valueForKey:@"gender"],@"placeHolder", nil],
+                                    [NSMutableDictionary dictionaryWithObjectsAndKeys:[profileDict valueForKey:@"date_of_birth"],@"placeHolder", nil],
+                                    [NSMutableDictionary dictionaryWithObjectsAndKeys:@"Write something about yourself here.",@"placeHolder", nil],
+                                    [NSMutableDictionary dictionaryWithObjectsAndKeys:@"Hobbies",@"placeHolder", nil],
+                                    [NSMutableDictionary dictionaryWithObjectsAndKeys:[profileDict valueForKey:@"email"],@"placeHolder",@"Password",@"placeHolderPass",@"",@"TypingTextPass", nil], nil]atIndex:0];
     
-    titleArray = [[NSArray alloc]initWithObjects:@"Image",@"First Name",@"Last Name",@"male",@"Date of Birth",@"About You",@"Hobbies",@"Email&Password",nil];
+    //titleArray = [[NSArray alloc]initWithObjects:@"Image",@"First Name",@"Last Name",@"male",@"Date of Birth",@"About You",@"Hobbies",@"Email&Password",nil];
     
     NSLog(@"PlaceHolder %@",placeHolderArray);
     
@@ -760,9 +755,20 @@ if([[NSUserDefaults standardUserDefaults] valueForKey:@"SelectedItemCategoryID"]
 
 - (IBAction)alertPressCancel:(id)sender {
     
-        objCustomAlterview. alertBgView.hidden = YES;
-        objCustomAlterview.alertMainBgView.hidden = YES;
-        objCustomAlterview.view .hidden  = YES;
+    NSLog(@"Text Text = %@",objCustomAlterview.alertMsgLabel.text);
+    NSString *msgStr = objCustomAlterview.alertMsgLabel.text;
+    objCustomAlterview. alertBgView.hidden = YES;
+    objCustomAlterview.alertMainBgView.hidden = YES;
+    objCustomAlterview.view .hidden  = YES;
+    if([msgStr isEqualToString:@"InvalidSession"]){
+        [COMMON removeUserDetails];
+        DSHomeViewController*objSplashView =[[DSHomeViewController alloc]initWithNibName:@"DSHomeViewController" bundle:nil];
+        [self.navigationController pushViewController:objSplashView animated:NO];
+        AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+        appDelegate.buttonsView.hidden=YES;
+        appDelegate.SepratorLbl.hidden=YES;
+        [appDelegate.settingButton setBackgroundImage:[UIImage imageNamed:@"setting_icon.png"] forState:UIControlStateNormal];
+    }
    
 }
 -(void)showAltermessage:(NSString*)msg
@@ -1241,7 +1247,7 @@ if([[NSUserDefaults standardUserDefaults] valueForKey:@"SelectedItemCategoryID"]
         yAxis = 31;
         if(profileDict ==NULL)
         {
-       
+            
         }
         else
         {
@@ -1251,6 +1257,23 @@ if([[NSUserDefaults standardUserDefaults] valueForKey:@"SelectedItemCategoryID"]
         }
         space = imageSize / 2;
         commonHeight = imageSize+15;
+        int imageXPos = 0;
+        int textXPos = 0;
+        if(IS_IPHONE6_Plus){
+            imageXPos = 33;
+            textXPos = 23;
+            commonWidth=29.5;
+        }
+        else if (IS_IPHONE6){
+            imageXPos = 18;
+            textXPos = 8;
+            commonWidth=29.5;
+        }
+        else{
+            imageXPos = 10;
+            textXPos = 0;
+            commonWidth=19.5;
+        }
         
         NSString *plusIcon = @"Plus_icon.png";
         if ([imageNormalArray count] >=1)
@@ -1269,23 +1292,23 @@ if([[NSUserDefaults standardUserDefaults] valueForKey:@"SelectedItemCategoryID"]
             UIImageView *hobbiesImage;
             
             if(i <= 4)
-                hobbiesImage = [[UIImageView alloc]initWithFrame:CGRectMake((i*(commonWidth + imageSize))+ 10, yAxis, imageSize, imageSize)];
+                hobbiesImage = [[UIImageView alloc]initWithFrame:CGRectMake((i*(commonWidth + imageSize))+ imageXPos, yAxis, imageSize, imageSize)];
             else if(i <= 9)
-                hobbiesImage = [[UIImageView alloc]initWithFrame:CGRectMake(((i-5)*(commonWidth + imageSize))+ 10, yAxis+imageSize+space, imageSize, imageSize)];
+                hobbiesImage = [[UIImageView alloc]initWithFrame:CGRectMake(((i-5)*(commonWidth + imageSize))+ imageXPos, yAxis+imageSize+space, imageSize, imageSize)];
             else if(i <= 14)
-                hobbiesImage = [[UIImageView alloc]initWithFrame:CGRectMake(((i-10)*(commonWidth + imageSize))+ 10, yAxis+((imageSize+space) * 2), imageSize, imageSize)];
+                hobbiesImage = [[UIImageView alloc]initWithFrame:CGRectMake(((i-10)*(commonWidth + imageSize))+ imageXPos, yAxis+((imageSize+space) * 2), imageSize, imageSize)];
             else
-                hobbiesImage = [[UIImageView alloc]initWithFrame:CGRectMake(((i-15)*(commonWidth + imageSize))+ 10, yAxis+((imageSize+space) * 3), imageSize, imageSize)];
+                hobbiesImage = [[UIImageView alloc]initWithFrame:CGRectMake(((i-15)*(commonWidth + imageSize))+ imageXPos, yAxis+((imageSize+space) * 3), imageSize, imageSize)];
             NSString *image =[imageNormalArray objectAtIndex:i];
-           
+            
             if([image isEqualToString:@"Plus_icon.png"])
             {
                 [hobbiesImage setImage:[UIImage imageNamed:image]];
             }
             else
             {
-               image= [image stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-               [hobbiesImage setImageWithURL:[NSURL URLWithString:image]];
+                image= [image stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+                [hobbiesImage setImageWithURL:[NSURL URLWithString:image]];
             }
             
             if (image == plusIcon) {
@@ -1304,13 +1327,13 @@ if([[NSUserDefaults standardUserDefaults] valueForKey:@"SelectedItemCategoryID"]
             UILabel *hobbiesname;
             
             if(i <= 4)
-                hobbiesname = [[UILabel alloc]initWithFrame:CGRectMake((i*(commonWidth + imageSize)), yAxis + imageSize, imageSize + 20, 15)];
+                hobbiesname = [[UILabel alloc]initWithFrame:CGRectMake((i*(commonWidth + imageSize))+textXPos, yAxis + imageSize, imageSize + 20, 15)];
             else if(i <= 9)
-                hobbiesname = [[UILabel alloc]initWithFrame:CGRectMake(((i-5)*(commonWidth + imageSize)), yAxis+(imageSize * 2)+space, imageSize + 20, 15)];
+                hobbiesname = [[UILabel alloc]initWithFrame:CGRectMake(((i-5)*(commonWidth + imageSize))+textXPos, yAxis+(imageSize * 2)+space, imageSize + 20, 15)];
             else if(i <= 14)
-                hobbiesname = [[UILabel alloc]initWithFrame:CGRectMake(((i-10)*(commonWidth + imageSize)), yAxis+((imageSize+space) * 2)+imageSize, imageSize + 20, 15)];
+                hobbiesname = [[UILabel alloc]initWithFrame:CGRectMake(((i-10)*(commonWidth + imageSize))+textXPos, yAxis+((imageSize+space) * 2)+imageSize, imageSize + 20, 15)];
             else
-                hobbiesname = [[UILabel alloc]initWithFrame:CGRectMake(((i-15)*(commonWidth + imageSize)), yAxis+((imageSize+space) * 3)+imageSize, imageSize + 20, 15)];
+                hobbiesname = [[UILabel alloc]initWithFrame:CGRectMake(((i-15)*(commonWidth + imageSize))+textXPos, yAxis+((imageSize+space) * 3)+imageSize, imageSize + 20, 15)];
             
             [hobbiesname setFont:[UIFont fontWithName:@"Patron-Regular" size:7]];
             hobbiesname.textAlignment = NSTextAlignmentCenter;
@@ -1536,18 +1559,12 @@ if([[NSUserDefaults standardUserDefaults] valueForKey:@"SelectedItemCategoryID"]
     sender.layer.cornerRadius = 16.0;
     if (sender.on) {
        
-        [sender setThumbTintColor:[UIColor greenColor]];
-        
-        [sender setBackgroundColor:[UIColor whiteColor]];
-        [sender setOnTintColor:[UIColor colorWithRed:232.0f/255.0f green:232.0f/255.0f blue:232.0f/255.0f alpha:1.0f]];
+        [self notificationButtonONAction:sender];
         isNotification_message =@"Yes";
         
     }else{
        
-        
-        [sender setTintColor:[UIColor clearColor]];
-        [sender setBackgroundColor:[UIColor colorWithRed:232.0f/255.0f green:232.0f/255.0f blue:232.0f/255.0f alpha:1.0f]];
-        [sender setThumbTintColor:[UIColor redColor]];
+        [self notificationButtonOFFAction:sender];
         isNotification_message =@"No";
     }
 }
@@ -1557,18 +1574,13 @@ if([[NSUserDefaults standardUserDefaults] valueForKey:@"SelectedItemCategoryID"]
     sender.layer.cornerRadius = 16.0;
     if (sender.on) {
        
-        [sender setThumbTintColor:[UIColor greenColor]];
-        
-        [sender setBackgroundColor:[UIColor whiteColor]];
-        [sender setOnTintColor:[UIColor colorWithRed:232.0f/255.0f green:232.0f/255.0f blue:232.0f/255.0f alpha:1.0f]];
+        [self notificationButtonONAction:sender];
         isNotification_sound =@"Yes";
         
     }else{
        
         
-        [sender setTintColor:[UIColor clearColor]];
-        [sender setBackgroundColor:[UIColor colorWithRed:232.0f/255.0f green:232.0f/255.0f blue:232.0f/255.0f alpha:1.0f]];
-        [sender setThumbTintColor:[UIColor redColor]];
+        [self notificationButtonOFFAction:sender];
         isNotification_sound =@"No";
         
     }
@@ -1579,22 +1591,32 @@ if([[NSUserDefaults standardUserDefaults] valueForKey:@"SelectedItemCategoryID"]
     sender.layer.cornerRadius = 16.0;
     if (sender.on) {
         
-        [sender setThumbTintColor:[UIColor greenColor]];
-        
-        [sender setBackgroundColor:[UIColor whiteColor]];
-        [sender setOnTintColor:[UIColor colorWithRed:232.0f/255.0f green:232.0f/255.0f blue:232.0f/255.0f alpha:1.0f]];
-        isNotification_vibration =@"Yes";
+        [self notificationButtonONAction:sender];
+               isNotification_vibration =@"Yes";
         
     }else{
        
+        [self notificationButtonOFFAction:sender];
         
-        [sender setTintColor:[UIColor clearColor]];
-        [sender setBackgroundColor:[UIColor colorWithRed:232.0f/255.0f green:232.0f/255.0f blue:232.0f/255.0f alpha:1.0f]];
-        [sender setThumbTintColor:[UIColor redColor]];
         isNotification_vibration =@"No";
     }
 }
 
+-(void)notificationButtonONAction:(id)sender
+{
+    [sender setThumbTintColor:[UIColor greenColor]];
+    
+    [sender setBackgroundColor:[UIColor whiteColor]];
+    [sender setOnTintColor:[UIColor colorWithRed:232.0f/255.0f green:232.0f/255.0f blue:232.0f/255.0f alpha:1.0f]];
+
+}
+
+-(void)notificationButtonOFFAction:(id)sender
+{
+    [sender setTintColor:[UIColor clearColor]];
+    [sender setBackgroundColor:[UIColor colorWithRed:232.0f/255.0f green:232.0f/255.0f blue:232.0f/255.0f alpha:1.0f]];
+    [sender setThumbTintColor:[UIColor redColor]];
+}
 
 
 -(void)buttonAction:(UIButton *)sender
@@ -1881,16 +1903,10 @@ if([[NSUserDefaults standardUserDefaults] valueForKey:@"SelectedItemCategoryID"]
 }
 -(void)loadUpdateError:(NSNotification *)notification
 {
-    [self showAltermessage:@"Error occurred when registering. Kindly check your network"];
-
-             [COMMON removeUserDetails];
-             DSHomeViewController*objSplashView =[[DSHomeViewController alloc]initWithNibName:@"DSHomeViewController" bundle:nil];
-               [self.navigationController pushViewController:objSplashView animated:NO];
-               AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
-               appDelegate.buttonsView.hidden=YES;
-     appDelegate.SepratorLbl.hidden=YES;
-               [appDelegate.settingButton setBackgroundImage:[UIImage imageNamed:@"setting_icon.png"] forState:UIControlStateNormal];
-  
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+    NSDictionary *profile = [notification userInfo];
+    NSString *alertStr = [profile valueForKey:@"error"];
+    [self showAltermessage:alertStr];
 }
 
 #pragma mark - saveAction
