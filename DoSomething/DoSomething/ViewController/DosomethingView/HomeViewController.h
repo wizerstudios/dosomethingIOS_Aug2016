@@ -11,8 +11,12 @@
 @interface HomeViewController : UIViewController
 {
     NSMutableArray * menuArray;
+    IBOutlet UIView *activatedView;
+    IBOutlet UIButton *bottombutton,*nowButton,*anyTimeButton;
+    IBOutlet UILabel *timeLabel;
 }
 @property(nonatomic,strong) IBOutlet UICollectionView * homeCollectionView;
 - (IBAction)pressDosomething:(id)sender;
+
 
 @end

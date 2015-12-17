@@ -103,6 +103,7 @@
 #define SendMessage_API             @"sendMessage"
 #define BlockUser_API               @"blockUser"
 #define DeleteUserChat_API          @"DeleteUserChatHistory"
+#define Activity                    @"activity"
 
 #define Device                      @"iPhone"
 

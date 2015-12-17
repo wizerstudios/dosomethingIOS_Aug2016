@@ -649,6 +649,31 @@ message_send_user_id:(NSString *)message_send_user_id
 
 }
 
+#pragma mark - Get Activity
+
+-(void)getActivity:(NSString *)getActivity
+      activityName:(NSString *)activityName
+         sessionId:(NSString *)sessionID
+      availableNow:(NSString *)available_now
+     doSomethingId:(NSString *)dosomethingID
+           success:(WebserviceRequestSuccessHandler)success
+           failure:(WebserviceRequestFailureHandler)failure{
+    
+    if([activityName isEqualToString:@"update"])
+        urlString = [URL_FOR_RESOURCE(@"") stringByAppendingString:[NSString stringWithFormat:@"%@?op=%@&sessionid=%@&available_now=%@&dosomething_id=%@",getActivity,activityName,sessionID,available_now,dosomethingID]];
+    else
+        urlString = [URL_FOR_RESOURCE(@"") stringByAppendingString:[NSString stringWithFormat:@"%@?op=%@&sessionid=%@",getActivity,activityName,sessionID]];
+    
+    NSLog(@"urlString = %@",urlString);
+    
+    [self sendRequestWithURLString:urlString
+                     andParameters:nil
+                            method:ServiceGet
+           completionSucessHandler:success
+          completionFailureHandler:failure];
+    
+}
+
 
 #pragma mark - Helpers
 
