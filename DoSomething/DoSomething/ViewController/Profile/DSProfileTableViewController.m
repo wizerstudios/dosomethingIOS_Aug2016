@@ -820,13 +820,13 @@ if([[NSUserDefaults standardUserDefaults] valueForKey:@"SelectedItemCategoryID"]
        if(indexPath.row == 5)
         {
             dataSize = [COMMON getControlHeight:strAbout withFontName:@"Patron-Regular" ofSize:14.0 withSize:CGSizeMake(tableView.frame.size.width-20,tableView.frame.size.height)];
-                 self.aboutTextHeight.constant=dataSize.height;
+            
             if(dataSize.height == 10)
              {
                 return 40 ;
             }
-                 
-                 return dataSize.height+5;
+                 self.aboutTextHeight.constant=dataSize.height-28;
+                 return dataSize.height-18;
                  
              }
             if (indexPath.row == 4) {
@@ -885,13 +885,10 @@ if([[NSUserDefaults standardUserDefaults] valueForKey:@"SelectedItemCategoryID"]
         if (IS_IPHONE6 ||IS_IPHONE6_Plus)
         {
             //cell.layoutConstraintProfileImageHeight.constant =159;
-           // cell.layoutConstraintProfileImageWidth.constant =161;
+            //cell.layoutConstraintProfileImageWidth.constant =161;
         }
        
         [self profileScroll];
-        
-    
-
         
         if(!profileData1){
             [profileImagePageControl setHidden:YES];
@@ -899,11 +896,6 @@ if([[NSUserDefaults standardUserDefaults] valueForKey:@"SelectedItemCategoryID"]
         }
         else
             [profileImagePageControl setHidden:NO];
-        
-        
-        //[cell.cameraButton addTarget:self action:@selector(selectCamera:) forControlEvents:UIControlEventTouchUpInside];
-       
-      
         cameraIcon=[UIButton buttonWithType:UIButtonTypeCustom];
         [cameraIcon setFrame:CGRectMake(cell.contentView.center.x+5,cell.contentView.frame.size.height-36,37,37)];
         [cameraIcon addTarget:self action:@selector(selectCamera:) forControlEvents:UIControlEventTouchUpInside];
