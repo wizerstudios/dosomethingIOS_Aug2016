@@ -219,4 +219,17 @@ message_send_user_id:(NSString *)message_send_user_id
             success:(WebserviceRequestSuccessHandler)success
             failure:(WebserviceRequestFailureHandler)failure;
 
+//GetActivity
+-(void)getActivity:(NSString *)getActivity
+      activityName:(NSString *)activityName
+         sessionId:(NSString *)sessionID
+      availableNow:(NSString *)available_now
+     doSomethingId:(NSString *)dosomethingID
+    success:(WebserviceRequestSuccessHandler)success
+    failure:(WebserviceRequestFailureHandler)failure;
+
+
+
+
+
 @end

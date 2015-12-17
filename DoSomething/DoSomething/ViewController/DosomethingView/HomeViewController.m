@@ -24,6 +24,14 @@
 #define ITEM_CELL_IDENTIFIER @"ItemCell"
 #define LOADING_CELL_IDENTIFIER @"LoadingItemCell"
 
+#define getLast  @"getlast"
+#define Update   @"update"
+#define Cancel   @"cancel"
+
+#define Green_Color [UIColor colorWithRed:50.0f/255.0f green:180.0f/255.0f blue:41.0f/255.0f alpha:1.0f]
+#define Red_Color   [UIColor colorWithRed:227.0f/255.0f green:64.0f/255.0f blue:81.0f/255.0f alpha:1.0f]
+#define Gray_Color  [UIColor colorWithRed:169.0f/255.0f green:169.0f/255.0f blue:169.0f/255.0f alpha:1.0f]
+
 
 @interface HomeViewController ()<UICollectionViewDataSource,UICollectionViewDelegate>
 {
@@ -38,6 +46,10 @@
     NSString                *loginUserSessionID;
     CustomAlterview         * objCustomAlterview;
     NSString                *strselectDosomething;
+    
+    NSMutableDictionary     *activityMainDict;
+    BOOL isInitialLoadingAPI;
+   
 }
 @end
 
@@ -47,6 +59,12 @@
 {
     [super viewDidLoad];
     objWebService = [[DSWebservice alloc]init];
+    activityMainDict = [[NSMutableDictionary alloc]init];
+    NSMutableDictionary *dic=[[NSMutableDictionary alloc]init];
+    dic =[[NSUserDefaults standardUserDefaults] valueForKey:USERDETAILS];
+    NSString * strsessionID =[dic valueForKey:@"SessionId"];
+    loginUserSessionID=strsessionID;
+    [activatedView setHidden:YES];
     if([[NSUserDefaults standardUserDefaults] valueForKey:@"MenuListArray"]==nil){
         [COMMON LoadIcon:self.view];
         [self loadhomeviewListWebservice];
@@ -54,6 +72,8 @@
     else
     {
         menuArray =[[[NSUserDefaults standardUserDefaults] valueForKey:@"MenuListArray"] mutableCopy];
+        isInitialLoadingAPI = YES;
+        [self loadActivityAPI:getLast availableStr:@"" doSomethingId:@""];
     }
 }
 -(void)viewWillAppear:(BOOL)animated
@@ -82,8 +102,10 @@
               menuArray =[homeviewlist valueForKey:@"list"];
               [[NSUserDefaults standardUserDefaults] setObject:menuArray forKey:@"MenuListArray"];
               [[NSUserDefaults standardUserDefaults] synchronize];
-             [COMMON removeLoading];
-             [self.homeCollectionView reloadData];
+              [COMMON removeLoading];
+              [self.homeCollectionView reloadData];
+              isInitialLoadingAPI = YES;
+              [self loadActivityAPI:getLast availableStr:@"" doSomethingId:@""];
           }
     }
                         failure:^(AFHTTPRequestOperation *operation, id error) {
@@ -291,7 +313,7 @@ minimumLineSpacingForSectionAtIndex:(NSInteger)section {
         objCustomAlterview.alertCancelButton.hidden = NO;
         objCustomAlterview.btnYes.hidden = YES;
         objCustomAlterview.btnNo.hidden = YES;
-        objCustomAlterview.alertMsgLabel.text = @"ONLY 3 ACTIVIES\nCAN BE SELECTED";
+        objCustomAlterview.alertMsgLabel.text = @"ONLY 3 ACTIVITIES\nCAN BE SELECTED";
         objCustomAlterview.alertMsgLabel.textAlignment = NSTextAlignmentCenter;
         objCustomAlterview.alertMsgLabel.lineBreakMode = NSLineBreakByWordWrapping;
         objCustomAlterview.alertMsgLabel.numberOfLines = 2;
@@ -353,20 +375,19 @@ minimumLineSpacingForSectionAtIndex:(NSInteger)section {
 }
 #pragma mark - pressDosomethingAction
 - (IBAction)pressDosomething:(id)sender {
-    objCustomAlterview.view .hidden  = NO;
-    objCustomAlterview.alertBgView.hidden = NO;
-    objCustomAlterview.alertMainBgView.hidden = NO;
-    objCustomAlterview.btnYes.hidden = NO;
-    objCustomAlterview.btnNo.hidden = NO;
-    objCustomAlterview.alertCancelButton.hidden = NO;
-    objCustomAlterview.alertMsgLabel.text = @"AVAILABLE NOW?";
-    objCustomAlterview.alertMsgLabel.textAlignment = NSTextAlignmentCenter;
-   objCustomAlterview. alertMsgLabel.lineBreakMode = NSLineBreakByWordWrapping;
-    objCustomAlterview.alertMsgLabel.textColor = [UIColor whiteColor];
-    NSMutableDictionary *dic=[[NSMutableDictionary alloc]init];
-    dic =[[NSUserDefaults standardUserDefaults] valueForKey:USERDETAILS];
-    NSString * strsessionID =[dic valueForKey:@"SessionId"];
-    loginUserSessionID=strsessionID;
+    if([sender tag] == 1000){
+        [bottombutton setUserInteractionEnabled:NO];
+       // [self loadActivityAPI:Cancel availableStr:@"" doSomethingId:@""];
+    }else{
+        if([selectedItemsArray count] == 3){
+            isInitialLoadingAPI = NO;
+            [self loadActivityAPI:getLast availableStr:@"" doSomethingId:@""];
+        }
+        else{
+            [self showAltermessage:@"3 ACTIVITIES\nSHOULD BE SELECTED "];
+        }
+    }
+    
 }
 - (IBAction)alertPressCancel:(id)sender {
     objCustomAlterview. alertBgView.hidden = YES;
@@ -378,7 +399,8 @@ minimumLineSpacingForSectionAtIndex:(NSInteger)section {
     objCustomAlterview.alertMainBgView.hidden = YES;
     [objCustomAlterview.view setHidden:YES];
     strselectDosomething = [selectedItemsArray componentsJoinedByString:@","];
-    [self loadupdateDosomethingWebService:strselectDosomething :@"Yes"];
+    [self loadActivityAPI:Update availableStr:@"Yes" doSomethingId:strselectDosomething];
+    //[self loadupdateDosomethingWebService:strselectDosomething:@"Yes"];
 
 }
 - (IBAction)alertPressNo:(id)sender {
@@ -386,7 +408,8 @@ minimumLineSpacingForSectionAtIndex:(NSInteger)section {
     objCustomAlterview.alertMainBgView.hidden = YES;
     [objCustomAlterview.view setHidden:YES];
     strselectDosomething = [selectedArray componentsJoinedByString:@","];
-    [self loadupdateDosomethingWebService:strselectDosomething :@"No"];
+    [self loadActivityAPI:Update availableStr:@"No" doSomethingId:strselectDosomething];
+    //[self loadupdateDosomethingWebService:strselectDosomething :@"No"];
 }
 #pragma mark - loadupdateDosomethingWebService
 -(void)loadupdateDosomethingWebService:(NSString *)selectItemID :(NSString*)selectOption
@@ -413,11 +436,77 @@ minimumLineSpacingForSectionAtIndex:(NSInteger)section {
                              }];
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+-(void)loadActivityAPI:(NSString *)_activityNameStr availableStr:(NSString *)_availableStr doSomethingId:(NSString *)_dosomethingId{
+    
+    [objWebService getActivity:Activity activityName:_activityNameStr sessionId:loginUserSessionID availableNow:_availableStr doSomethingId:_dosomethingId
+     success:^(AFHTTPRequestOperation *operation, id responseObject)
+     {
+         NSLog(@"response object = %@",responseObject);
+         activityMainDict = [responseObject valueForKey:@"activity"];
+        
+         id activityList = [activityMainDict valueForKey:@"activityList"];
+         
+         NSLog(@"activityList = %@",activityList);
+         
+         if([activityList isKindOfClass:[NSArray class]]){
+             NSLog(@"activity list");
+             NSString *availStr = [activityMainDict valueForKey:@"Available"];
+             [self displayActivityView:availStr];
+            
+         }
+         else{
+             if(isInitialLoadingAPI == NO){
+                 objCustomAlterview.view .hidden  = NO;
+                 objCustomAlterview.alertBgView.hidden = NO;
+                 objCustomAlterview.alertMainBgView.hidden = NO;
+                 objCustomAlterview.btnYes.hidden = NO;
+                 objCustomAlterview.btnNo.hidden = NO;
+                 objCustomAlterview.alertCancelButton.hidden = NO;
+                 objCustomAlterview.alertMsgLabel.text = @"AVAILABLE NOW?";
+                 objCustomAlterview.alertMsgLabel.textAlignment = NSTextAlignmentCenter;
+                 objCustomAlterview. alertMsgLabel.lineBreakMode = NSLineBreakByWordWrapping;
+                 objCustomAlterview.alertMsgLabel.textColor = [UIColor whiteColor];
+
+             }
+             
+             [bottombutton setTitle:@"Let's Do Something!" forState:UIControlStateNormal];
+             
+         }
+         
+
+     }
+       failure:^(AFHTTPRequestOperation *operation, id error) {
+           
+           
+           [self showAltermessage:[NSString stringWithFormat:@"%@",error]];
+       }];
 }
 
+-(void)displayActivityView:(NSString *)_availStr{
+    
+    [activatedView setHidden:NO];
+    [self.view setBackgroundColor:[UIColor clearColor]];
+    [self.homeCollectionView setAlpha:0.1];
+    [self.homeCollectionView setUserInteractionEnabled:NO];
+    [bottombutton setTag:1000];
+    [bottombutton setTitle:@"Cancel All Activities ?" forState:UIControlStateNormal];
+    
+    [timeLabel setText:@"Available Since\n\nfew mins Ago"];
+    timeLabel.textAlignment = NSTextAlignmentCenter;
+    timeLabel.lineBreakMode = NSLineBreakByWordWrapping;
+    timeLabel.numberOfLines = 3;
 
+    if([_availStr isEqualToString:@"No"]){
+        [nowButton setBackgroundColor:Green_Color];
+        [anyTimeButton setBackgroundColor:Gray_Color];
+    }
+    else{
+        [nowButton setBackgroundColor:Gray_Color];
+        [anyTimeButton setBackgroundColor:Red_Color];
+    }
+   
+    
+    
+}
 
 @end
