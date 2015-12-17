@@ -893,13 +893,19 @@ if([[NSUserDefaults standardUserDefaults] valueForKey:@"SelectedItemCategoryID"]
             cell = cellProfileImg;
         }
         
-        if (IS_IPHONE6 ||IS_IPHONE6_Plus)
-        {
-            //cell.layoutConstraintProfileImageHeight.constant =159;
-            //cell.layoutConstraintProfileImageWidth.constant =161;
-        }
+//        if (IS_IPHONE6 ||IS_IPHONE6_Plus)
+//        {
+//            //cell.layoutConstraintProfileImageHeight.constant =159;
+//            //cell.layoutConstraintProfileImageWidth.constant =161;
+//        }
         cameraIcon=[UIButton buttonWithType:UIButtonTypeCustom];
+        if(IS_IPHONE6 || IS_IPHONE6_Plus)
+        {
         [cameraIcon setFrame:CGRectMake(cell.contentView.center.x+5,cell.contentView.frame.size.height-36,37,37)];
+        }
+        else{
+            [cameraIcon setFrame:CGRectMake(cell.contentView.center.x-22,cell.contentView.frame.size.height-36,37,37)];
+        }
         [cameraIcon addTarget:self action:@selector(selectCamera:) forControlEvents:UIControlEventTouchUpInside];
         UIImage *cameraIconImg = [UIImage imageNamed:@"camera_icon"];
         [cameraIcon setImage:cameraIconImg forState:UIControlStateNormal];
