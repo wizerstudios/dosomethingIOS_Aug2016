@@ -80,7 +80,7 @@
     CGRect buttonFrame = CGRectMake( 190, 33, 80, 40 );
     UIButton *letsDoButton = [[UIButton alloc] initWithFrame: buttonFrame];
     [letsDoButton setTitle: @"Let's Do Something!" forState: UIControlStateNormal];
-    [letsDoButton addTarget:self action:@selector(letsDoSomethingAction:) forControlEvents:UIControlEventTouchUpInside];
+    //[letsDoButton addTarget:self action:@selector(letsDoSomethingAction:) forControlEvents:UIControlEventTouchUpInside];
     [letsDoButton.titleLabel setFont:[UIFont fontWithName:@"Patron-Bold" size:12]];
     letsDoButton.titleLabel.lineBreakMode = NSLineBreakByTruncatingTail;
     letsDoButton.titleLabel.numberOfLines = 2;
@@ -93,13 +93,16 @@
     [self.thingsView addSubview:letsDoButton];
     //genderImage
     UIImage *genderImage;
+   
     if([[userDetailsDict objectForKey:@"gender"]isEqualToString:@"Female"]){
         genderImage = [UIImage imageNamed:@"female_Icon"];
+        
     }
     else
         genderImage = [UIImage imageNamed:@"male_Icon"];
     
     UIImageView *genderImageView = [[UIImageView alloc] initWithImage:genderImage];
+    genderImageView.frame = CGRectMake(0.0f, 0.0f,20.0f, 20.0f);
     [self.genderView addSubview:genderImageView];
 
     
