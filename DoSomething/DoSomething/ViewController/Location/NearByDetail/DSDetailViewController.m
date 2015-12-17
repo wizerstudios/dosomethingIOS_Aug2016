@@ -352,11 +352,46 @@
     //commonHeight = 54;
     yAxis = 31;
     commonWidth=19.5;
-        
-    
     space = imageSize / 2;
     commonHeight = imageSize+15;
     //imageNormalArray
+    UIView *myInterestsView;
+    
+    if([imageNormalArray count]<=1){
+        myInterestsView=[[UIView alloc]initWithFrame:CGRectMake(14, 367, 290, 10)];
+    }
+    if([imageNormalArray count] <=4){
+        myInterestsView=[[UIView alloc]initWithFrame:CGRectMake(14, 367, 290, 50)];
+    }
+    if([imageNormalArray count] <9 && [imageNormalArray count] >=5){
+        myInterestsView=[[UIView alloc]initWithFrame:CGRectMake(14, 367, 290,50)];
+    }
+    if([imageNormalArray count] <9 && [imageNormalArray count] >5){
+        myInterestsView=[[UIView alloc]initWithFrame:CGRectMake(14, 367, 290,160)];
+    }
+    if([imageNormalArray count] ==10){
+        myInterestsView=[[UIView alloc]initWithFrame:CGRectMake(14, 367, 290,160)];
+    }
+    if([imageNormalArray count] >10){
+        myInterestsView=[[UIView alloc]initWithFrame:CGRectMake(14, 367, 290,200)];
+    }
+    if([imageNormalArray count] >15){
+        myInterestsView=[[UIView alloc]initWithFrame:CGRectMake(14, 368, 290,265)];
+    }
+    UILabel *myInterests = [[UILabel alloc] initWithFrame:CGRectMake(10,5,170,20)];
+    //myInterests.autoresizingMask = paintView.autoresizingMask;
+    myInterests.text = NSLocalizedString(@"My Interest and Hobbies", @"");
+    [myInterests setFont:[UIFont fontWithName:@"Patron-Medium" size:12]];
+    myInterests.textColor =[UIColor colorWithRed:83.0f/255.0f
+                                           green:83.0f/255.0f
+                                            blue:83.0f/255.0f
+                                           alpha:1.0f];
+    
+    [myInterestsView addSubview:myInterests];
+    [myInterestsView setBackgroundColor:[UIColor whiteColor]];
+    [self.detailPageMainScroll addSubview:myInterestsView];
+    
+    
     for (int i =0; i< [imageNormalArray  count]; i++) {
         
         UIImageView *hobbiesImage;
@@ -373,7 +408,8 @@
         
             image= [image stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
             [hobbiesImage setImageWithURL:[NSURL URLWithString:image]];
-            [self.myInterestView addSubview:hobbiesImage];
+           // [self.myInterestView addSubview:hobbiesImage];
+            [myInterestsView addSubview:hobbiesImage];
        
     }
     //hobbiesNameArray
@@ -399,15 +435,34 @@
                                                alpha:1.0f];
         
         hobbiesname.text = image;
-        [self.myInterestView addSubview:hobbiesname];
+        
+        //[self.myInterestView addSubview:hobbiesname];
+        [myInterestsView addSubview:hobbiesname];
+        
         hobbiesname.textAlignment = NSTextAlignmentCenter;
+        
+        
+    }
+    if([hobbiesNameArray count] <=5){
+        self.detailPageMainScroll.contentInset = UIEdgeInsetsMake(0, 0, -50, 0);
+        
+        
+    }
+    if([hobbiesNameArray count] <=10 && [hobbiesNameArray count] >5){
+        self.detailPageMainScroll.contentInset = UIEdgeInsetsMake(0, 0, 20, 0);
         
         
     }
     
     if([hobbiesNameArray count] >10){
-        self.fullView.frame = CGRectMake((self.myInterestView.frame.size.width) , 20,self.myInterestView.frame.size.width, self.myInterestView.frame.size.height+100);
+        self.detailPageMainScroll.contentInset = UIEdgeInsetsMake(0, 0, 60, 0);
+        
+        
 
+    }
+    if([hobbiesNameArray count] >15){
+        self.detailPageMainScroll.contentInset = UIEdgeInsetsMake(0, 0, 125, 0);
+        
     }
 }
 
@@ -430,11 +485,14 @@
 
 - (void) updateScrollViewContentSize {
     
+    
+    
+    //myInterestView.origin.y + myInterestView.size.height
         
-        self.detailPageMainScroll.contentSize = CGSizeMake(self.view.frame.size.width,
-                                                  self.detailPageMainScroll.frame.size.height +
-                                                  self.fullView.frame.size.height +150
-                                                  );
+//        self.detailPageMainScroll.contentSize = CGSizeMake(self.view.frame.size.width,
+//                                                  self.detailPageMainScroll.frame.size.height +
+//                                                  self.fullView.frame.size.height +150
+//                                                  );
 }
 
 #pragma mark - back Action
