@@ -39,8 +39,11 @@
     objWebservice =[[DSWebservice alloc]init];
     deviceUdid = [OpenUDID value];
     
+   
+    NSLog(@"profileDetailsArray=%@",self.profileDetailsArray);
     
-
+    
+   
     [self.interestAndHobbiesCollectionView registerClass:[UICollectionReusableView class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"HeaderView"];
     UICollectionViewFlowLayout *flowLayout = [[UICollectionViewFlowLayout alloc] init];
     flowLayout.headerReferenceSize = CGSizeMake(self.interestAndHobbiesCollectionView.bounds.size.width,40);
@@ -175,9 +178,26 @@
         [self localArray];
        // [interestAndHobbiesCollectionView reloadData];
     }
+   
+        for(NSArray * bobbiesstr in interstAndHobbiesArray)
+            {
+                for(NSString * spratestr in  bobbiesstr)
+                {
+                    for(NSString * string in profileDetailsArray)
+                    {
+                        if([[string valueForKey:@"image"]  isEqualToString:[spratestr valueForKey:@"image"]])
+                        {
+                            NSLog(@"yes");
+                        }
+                        else{
+                            NSLog(@"no");
+                        }
+
+                }
+                        }
+    }
     
-
-
+    
    }
 
 
@@ -263,6 +283,9 @@
     [cell.nameLabel setText:[[[[interstAndHobbiesArray valueForKey:@"name"]objectAtIndex:indexPath.section]objectAtIndex:indexPath.row]uppercaseString]];
     //cell.nameLabel.numberOfLines = 0;
     
+    
+    NSLog(@"profile=%@",profileDict);
+
     NSString *image =[[[interstAndHobbiesArray valueForKey:@"image"]objectAtIndex:indexPath.section]objectAtIndex:indexPath.row];
     
     image= [image stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
@@ -391,7 +414,6 @@
     
     
     DSInterestAndHobbiesCollectionViewCell *dataselCell = (DSInterestAndHobbiesCollectionViewCell *)[collectionView cellForItemAtIndexPath:indexPath];
-    
     
     
     NSString *imageActive =[[[interstAndHobbiesArray valueForKey:@"image_active"]objectAtIndex:indexPath.section]objectAtIndex:indexPath.row];
