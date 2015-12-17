@@ -20,6 +20,8 @@
 @property(strong,nonatomic)NSArray *profileNames;
 @property(nonatomic,retain)NSArray *kiloMeterlabel;
 @property(nonatomic,retain)NSArray *userID;
+@property (nonatomic,retain) NSMutableArray*dosomethingImageArry;
 
+@property (nonatomic,strong) NSMutableArray * commonlocationArray;
 
 @end

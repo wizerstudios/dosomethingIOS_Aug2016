@@ -31,10 +31,10 @@
     NSString *profileUserID;
     UILabel * usernotfoundlbl;
 }
-@property(nonatomic,strong)IBOutlet NSLayoutConstraint *collectionviewxpostion;
+@property(nonatomic,strong)IBOutlet NSLayoutConstraint * collectionviewxpostion;
 @property(nonatomic,strong)IBOutlet NSLayoutConstraint * filterviewxposition;
-@property(nonatomic,strong)IBOutlet NSLayoutConstraint *sepratorXposition;
-@property (nonatomic,strong)  CLLocationManager       * locationManager;
+@property(nonatomic,strong)IBOutlet NSLayoutConstraint * CollectionviewWidth;
+@property (nonatomic,strong)  CLLocationManager       *  locationManager;
 
 @property(nonatomic,strong) IBOutlet UIButton *onlineBtn;
 @property(nonatomic,strong) IBOutlet UIButton *offlineBtn;
@@ -48,7 +48,7 @@
 @implementation DSLocationViewController
 @synthesize delegate;
 @synthesize locationCollectionView,locationManager;
-@synthesize profileImages,profileNames,kiloMeterlabel,userID;
+@synthesize profileImages,profileNames,kiloMeterlabel,userID,dosomethingImageArry,commonlocationArray;
 - (void)viewDidLoad {
     
     NSMutableDictionary *dic=[[NSMutableDictionary alloc]init];
@@ -83,14 +83,22 @@
     locationCollectionView.dataSource=self;
     profileImages =[[NSArray alloc]init];
     profileNames =[[NSArray alloc]init];
+    dosomethingImageArry=[[NSMutableArray alloc]init];
     kiloMeterlabel =[[NSArray alloc]init];
-    
+    commonlocationArray =[[NSMutableArray alloc]init];
+    if(IS_IPHONE6 || IS_IPHONE6_Plus)
+    {
+        //self.CollectionviewWidth.constant =self.view.frame.size.width+100;
+        self.filterviewxposition.constant =self.view.frame.size.width ;
+        
+    }
     
     if(!isLoadData){
     UICollectionViewFlowLayout *flowLayout1 = [[UICollectionViewFlowLayout alloc] init];
     flowLayout1.headerReferenceSize = CGSizeMake(locationCollectionView.bounds.size.width,45);
     [locationCollectionView setCollectionViewLayout:flowLayout1];
     
+
     if(IS_IPHONE5)
         [self.view addConstraint:[NSLayoutConstraint constraintWithItem:locationCollectionView
                                                               attribute:NSLayoutAttributeTop
@@ -102,6 +110,7 @@
         isLoadData=YES;
     
     }
+    
     [self filterPageButtonAction];
 
     
@@ -235,10 +244,12 @@
         {
             NSMutableArray * nearestUserdetaile =[[NSMutableArray alloc]init];
             nearestUserdetaile =[[responseObject valueForKey:@"nearestusers"] valueForKey:@"UserList"];
+            commonlocationArray =[nearestUserdetaile mutableCopy];
             profileNames     =[nearestUserdetaile valueForKey:@"first_name"];
             kiloMeterlabel   =[nearestUserdetaile valueForKey:@"distance"];
             profileImages    =[nearestUserdetaile valueForKey:@"image1"];
             userID           =[nearestUserdetaile valueForKey:@"user_id"];
+            dosomethingImageArry=[[nearestUserdetaile valueForKey:@"dosomething"]mutableCopy];
             
                     [locationCollectionView reloadData];
                     NSLog(@"%@",nearestUserdetaile);
@@ -300,6 +311,9 @@
     
     locationCellView.nameProfile.text =[profileNames objectAtIndex:indexPath.row];
     locationCellView.kiloMeter.text=[kiloMeterlabel objectAtIndex:indexPath.row];
+    //NSString *image =[[[dosomethingImageArry valueForKey:@"ActiveImage"]objectAtIndex:indexPath.section]objectAtIndex:indexPath.row];
+    
+    //[locationCellView.dosomethingImage2 setImageWithURL:[NSURL URLWithString:image]];
     MyPatternString= [MyPatternString stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
     if(MyPatternString == nil || [MyPatternString isEqualToString:@""])
     {
@@ -405,17 +419,21 @@
 {
     if(isFilteraction==NO)
     {
-        self.collectionviewxpostion.constant =-250;
-        self.filterviewxposition.constant    = 65;
+        self.collectionviewxpostion.constant =(IS_IPHONE6 || IS_IPHONE6_Plus)?-300:-250;
+        self.CollectionviewWidth.constant    =self.view.frame.size.width;
+        self.filterviewxposition.constant    =65;
         [self filterviewPosition];
         isFilteraction=YES;
+        [self.locationCollectionView setUserInteractionEnabled:NO];
     }
     else if (isFilteraction==YES)
     {
         self.collectionviewxpostion.constant =10;
-        self.filterviewxposition.constant    =self.locationCollectionView.frame.size.width+15;
+        self.CollectionviewWidth.constant    =self.view.frame.size.width;
+        self.filterviewxposition.constant    = self.CollectionviewWidth.constant+10;
         [self filterviewPosition];
         isFilteraction=NO;
+        [self.locationCollectionView setUserInteractionEnabled:YES];
         
     }
     
@@ -423,9 +441,10 @@
 -(void)filterviewPosition
 {
     appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
-    appDelegate.SepratorLbl.frame =CGRectMake(self.collectionviewxpostion.constant-15,self.view.frame.origin.y+self.view.frame.size.height-53,self.view.frame.size.width,3);
-    appDelegate.buttonsView.frame=CGRectMake(self.collectionviewxpostion.constant-15,self.view.frame.origin.y+self.view.frame.size.height-50,self.view.frame.size.width,50);
-    isFilteraction=NO;
+            appDelegate.SepratorLbl.frame =CGRectMake(self.collectionviewxpostion.constant-15,self.view.frame.origin.y+self.view.frame.size.height-53,self.view.frame.size.width,3);
+        appDelegate.buttonsView.frame=CGRectMake(self.collectionviewxpostion.constant-15,self.view.frame.origin.y+self.view.frame.size.height-50,self.view.frame.size.width,50);
+
+    
 }
 -(IBAction)StatusButtonAction:(id)sender
 {
