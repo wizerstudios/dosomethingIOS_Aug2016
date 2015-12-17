@@ -39,5 +39,6 @@
 
 @property (strong, nonatomic) IBOutlet UIView *thingsView;
 @property (strong, nonatomic) IBOutlet UIView *myInterestView;
+@property (strong, nonatomic) IBOutlet UIView *fullView;
 
 @end

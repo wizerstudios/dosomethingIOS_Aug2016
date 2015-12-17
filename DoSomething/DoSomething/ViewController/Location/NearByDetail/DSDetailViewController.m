@@ -14,6 +14,7 @@
 #import "UIImageView+AFNetworking.h"
 
 
+
 @interface DSDetailViewController ()
 {
     DSWebservice    * objWebService;
@@ -34,10 +35,11 @@
     NSString        * requestUserID;
     
 }
+@property (strong, nonatomic) IBOutlet UIButton *letsDoButton;
 @end
 
 @implementation DSDetailViewController
-@synthesize userDetailsDict;
+@synthesize userDetailsDict,letsDoButton;
 - (void)viewDidLoad {
     [super viewDidLoad];
     objWebService =[[DSWebservice alloc]init];
@@ -77,10 +79,17 @@
     
     [self profileImageDisplay];
     [self profileImageScrollView];
-    CGRect buttonFrame = CGRectMake( 190, 33, 80, 40 );
-    UIButton *letsDoButton = [[UIButton alloc] initWithFrame: buttonFrame];
+    
+    CGRect buttonFrame;
+    if(IS_IPHONE6||IS_IPHONE6_Plus)
+        buttonFrame = CGRectMake( 230, 33, 80, 40 );
+    else
+        buttonFrame = CGRectMake( 190, 33, 80, 40 );
+    //letsDoButton = [[UIButton alloc] init];//WithFrame: buttonFrame];
+    letsDoButton = [[UIButton alloc] initWithFrame: buttonFrame];
+    //letsDoButton.translatesAutoresizingMaskIntoConstraints = NO;
     [letsDoButton setTitle: @"Let's Do Something!" forState: UIControlStateNormal];
-    //[letsDoButton addTarget:self action:@selector(letsDoSomethingAction:) forControlEvents:UIControlEventTouchUpInside];
+  //  [letsDoButton addTarget:self action:@selector(letsDoSomethingAction:) forControlEvents:UIControlEventTouchUpInside];
     [letsDoButton.titleLabel setFont:[UIFont fontWithName:@"Patron-Bold" size:12]];
     letsDoButton.titleLabel.lineBreakMode = NSLineBreakByTruncatingTail;
     letsDoButton.titleLabel.numberOfLines = 2;
@@ -146,7 +155,8 @@
     [self profileInterestsDetails];
     [self profileDoSomethingDetails];
     
-}
+    [self updateScrollViewContentSize];
+   }
 #pragma mark - userAgeName
 -(NSString *) getData{
     
@@ -391,13 +401,19 @@
         hobbiesname.text = image;
         [self.myInterestView addSubview:hobbiesname];
         hobbiesname.textAlignment = NSTextAlignmentCenter;
+        
+        
+    }
+    
+    if([hobbiesNameArray count] >10){
+        self.fullView.frame = CGRectMake((self.myInterestView.frame.size.width) , 20,self.myInterestView.frame.size.width, self.myInterestView.frame.size.height+100);
+
     }
 }
 
 #pragma mark - letsDoSomethingAction
 - (void)letsDoSomethingAction:(id)sender
 {
-    
     requestUserID = [userDetailsDict valueForKey:@"user_id"];
     
    [objWebService sendRequest:SendRequest_API
@@ -410,6 +426,15 @@
                           NSLog(@"SEND REQ ERR%@",error);
                       }];
     
+}
+
+- (void) updateScrollViewContentSize {
+    
+        
+        self.detailPageMainScroll.contentSize = CGSizeMake(self.view.frame.size.width,
+                                                  self.detailPageMainScroll.frame.size.height +
+                                                  self.fullView.frame.size.height +150
+                                                  );
 }
 
 #pragma mark - back Action

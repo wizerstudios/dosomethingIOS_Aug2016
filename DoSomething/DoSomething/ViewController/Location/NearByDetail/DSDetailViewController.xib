@@ -24,6 +24,7 @@
                 <outlet property="detailPageControl" destination="pqL-YV-hqK" id="8IP-qL-bY2"/>
                 <outlet property="detailPageMainScroll" destination="LBx-ml-3gs" id="hUs-Yr-v9V"/>
                 <outlet property="detailPageMainView" destination="dNb-61-TEd" id="745-Kv-jcc"/>
+                <outlet property="fullView" destination="FAI-7a-HTe" id="aV4-S4-vfc"/>
                 <outlet property="genderView" destination="Pkn-qs-wqN" id="lR5-aV-Gxe"/>
                 <outlet property="myInterestView" destination="8vG-06-KjS" id="rUA-hK-if1"/>
                 <outlet property="myinterestsLabel" destination="wIa-Pl-fcb" id="TIh-t9-Hnb"/>
