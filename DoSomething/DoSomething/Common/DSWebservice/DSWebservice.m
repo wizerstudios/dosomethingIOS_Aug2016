@@ -373,7 +373,7 @@ notification_vibration:(NSString *)isnotification_vibration
          }
          else {
            
-             [[NSNotificationCenter defaultCenter] postNotificationName:@"updateprofileLogOut"object:self userInfo:nil];
+             [[NSNotificationCenter defaultCenter] postNotificationName:@"updateprofileLogOut"object:self userInfo:responseObject];
              
          }
 

@@ -817,21 +817,26 @@ if([[NSUserDefaults standardUserDefaults] valueForKey:@"SelectedItemCategoryID"]
         {
             return 40;
         }
+    
        if(indexPath.row == 5)
         {
             dataSize = [COMMON getControlHeight:strAbout withFontName:@"Patron-Regular" ofSize:14.0 withSize:CGSizeMake(tableView.frame.size.width-20,tableView.frame.size.height)];
-            
-            if(dataSize.height == 10)
-             {
-                return 40 ;
+            if([strAbout isEqualToString:@""]|| dataSize.height ==10){
+                 return 40 ;
             }
+            
+//            if(dataSize.height == 10)
+//             {
+//               
+//             }
+            else
+            {
                  self.aboutTextHeight.constant=dataSize.height-28;
                  return dataSize.height-18;
-                 
-             }
-            if (indexPath.row == 4) {
-            return 49;
             }
+            
+        }
+    
             if ( indexPath.row ==6)
             {
                 imageSize =39;
@@ -887,6 +892,15 @@ if([[NSUserDefaults standardUserDefaults] valueForKey:@"SelectedItemCategoryID"]
             //cell.layoutConstraintProfileImageHeight.constant =159;
             //cell.layoutConstraintProfileImageWidth.constant =161;
         }
+        cameraIcon=[UIButton buttonWithType:UIButtonTypeCustom];
+        [cameraIcon setFrame:CGRectMake(cell.contentView.center.x+5,cell.contentView.frame.size.height-36,37,37)];
+        [cameraIcon addTarget:self action:@selector(selectCamera:) forControlEvents:UIControlEventTouchUpInside];
+        UIImage *cameraIconImg = [UIImage imageNamed:@"camera_icon"];
+        [cameraIcon setImage:cameraIconImg forState:UIControlStateNormal];
+        [cameraIcon setTag:101];
+        [cell addSubview:cameraIcon];
+        [cameraIcon setHidden:NO];
+
        
         [self profileScroll];
         
@@ -896,20 +910,8 @@ if([[NSUserDefaults standardUserDefaults] valueForKey:@"SelectedItemCategoryID"]
         }
         else
             [profileImagePageControl setHidden:NO];
-        cameraIcon=[UIButton buttonWithType:UIButtonTypeCustom];
-        [cameraIcon setFrame:CGRectMake(cell.contentView.center.x+5,cell.contentView.frame.size.height-36,37,37)];
-        [cameraIcon addTarget:self action:@selector(selectCamera:) forControlEvents:UIControlEventTouchUpInside];
-        UIImage *cameraIconImg = [UIImage imageNamed:@"camera_icon"];
-        [cameraIcon setImage:cameraIconImg forState:UIControlStateNormal];
-         [cameraIcon setTag:101];
-        [cell addSubview:cameraIcon];
-        [cameraIcon setHidden:NO];
         
-        if(profileDict !=NULL || userDetailsDict!=NULL)
-        {
-            [cameraIcon setHidden:YES];
-        }
-        
+                
         
         userProfileImage.layer.masksToBounds = YES;
         
@@ -1665,6 +1667,8 @@ if([[NSUserDefaults standardUserDefaults] valueForKey:@"SelectedItemCategoryID"]
     }
 
     strAbout = textView.text;
+    dataSize = [COMMON getControlHeight:strAbout withFontName:@"Patron-Regular" ofSize:14.0 withSize:CGSizeMake(textView.frame.size.width-20,textView.frame.size.height)];
+     self.aboutTextHeight.constant=dataSize.height-28;
 }
 
 #pragma mark - Camera Action
@@ -1776,8 +1780,8 @@ if([[NSUserDefaults standardUserDefaults] valueForKey:@"SelectedItemCategoryID"]
                         failure:^(AFHTTPRequestOperation *operation, id error) {
                             
                             [COMMON removeLoading];
-                            UIAlertView *errorAlter =[[UIAlertView alloc]initWithTitle:nil message:[NSString stringWithFormat:@"%@",error] delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
-                            [errorAlter show];
+//                            UIAlertView *errorAlter =[[UIAlertView alloc]initWithTitle:nil message:[NSString stringWithFormat:@"%@",error] delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+//                            [errorAlter show];
                             
                         }];
 
@@ -1877,6 +1881,8 @@ if([[NSUserDefaults standardUserDefaults] valueForKey:@"SelectedItemCategoryID"]
 }
 -(void)loadUpdateError:(NSNotification *)notification
 {
+    [self showAltermessage:@"Error occurred when registering. Kindly check your network"];
+
              [COMMON removeUserDetails];
              DSHomeViewController*objSplashView =[[DSHomeViewController alloc]initWithNibName:@"DSHomeViewController" bundle:nil];
                [self.navigationController pushViewController:objSplashView animated:NO];
