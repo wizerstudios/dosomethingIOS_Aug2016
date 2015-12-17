@@ -405,26 +405,28 @@
 {
     if(isFilteraction==NO)
     {
-        self.collectionviewxpostion.constant =-240;
+        self.collectionviewxpostion.constant =-250;
         self.filterviewxposition.constant    = 65;
-        self.sepratorXposition.constant      =self.collectionviewxpostion.constant-20;
-        appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
-        appDelegate.buttonsView.frame=CGRectMake(self.collectionviewxpostion.constant-20,self.view.frame.origin.y+self.view.frame.size.height,self.view.frame.size.width,50);
+        [self filterviewPosition];
         isFilteraction=YES;
     }
     else if (isFilteraction==YES)
     {
         self.collectionviewxpostion.constant =10;
-        self.filterviewxposition.constant    =self.locationCollectionView.frame.size.width+10;
-        self.sepratorXposition.constant      =self.collectionviewxpostion.constant-10;
-        appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
-        appDelegate.buttonsView.frame=CGRectMake(self.collectionviewxpostion.constant-10,self.view.frame.origin.y+self.view.frame.size.height,self.view.frame.size.width,50);
+        self.filterviewxposition.constant    =self.locationCollectionView.frame.size.width+15;
+        [self filterviewPosition];
         isFilteraction=NO;
         
     }
     
 }
-
+-(void)filterviewPosition
+{
+    appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+    appDelegate.SepratorLbl.frame =CGRectMake(self.collectionviewxpostion.constant-15,self.view.frame.origin.y+self.view.frame.size.height-53,self.view.frame.size.width,3);
+    appDelegate.buttonsView.frame=CGRectMake(self.collectionviewxpostion.constant-15,self.view.frame.origin.y+self.view.frame.size.height-50,self.view.frame.size.width,50);
+    isFilteraction=NO;
+}
 -(IBAction)StatusButtonAction:(id)sender
 {
     if([sender tag] == 301)
