@@ -43,7 +43,6 @@
     NSMutableArray          *selectedItemsArray;
     NSMutableArray          * selectItemImageActiveArray;
     AVAudioPlayer           *audioPlayer;
-    NSString                *loginUserSessionID;
     CustomAlterview         * objCustomAlterview;
     NSString                *strselectDosomething;
     
@@ -59,22 +58,23 @@
     UIImageView *hobbiesImage;
     
     UILabel *titleLabel;
+    NSString                * currentLatitude, * currentLongitude;
    
 }
 @end
 
 @implementation HomeViewController
+@synthesize locationManager;
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    locationManager                 = [[CLLocationManager alloc] init];
+    locationManager.delegate        = self;
     objWebService = [[DSWebservice alloc]init];
     activityMainDict = [[NSMutableDictionary alloc]init];
     activityImageArray = [[NSMutableArray alloc]init];
-    NSMutableDictionary *dic=[[NSMutableDictionary alloc]init];
-    dic =[[NSUserDefaults standardUserDefaults] valueForKey:USERDETAILS];
-    NSString * strsessionID =[dic valueForKey:@"SessionId"];
-    loginUserSessionID=strsessionID;
+    
     [activatedView setHidden:YES];
     if([[NSUserDefaults standardUserDefaults] valueForKey:@"MenuListArray"]==nil){
         [COMMON LoadIcon:self.view];
@@ -89,6 +89,8 @@
 }
 -(void)viewWillAppear:(BOOL)animated
 {
+    [self getUserCurrenLocation];
+    
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(loadInvalidSessionAlert:)
                                                  name:@"InvalidSession"
@@ -194,6 +196,65 @@
                                                         error:NULL];
     [audioPlayer prepareToPlay];
 }
+
+#pragma mark get user CurrentLocation
+
+- (void)getUserCurrenLocation{
+    
+    if(!locationManager){
+        
+        
+        locationManager.distanceFilter  = kCLLocationAccuracyKilometer;
+        locationManager.desiredAccuracy = kCLLocationAccuracyBest;
+        locationManager.activityType    = CLActivityTypeAutomotiveNavigation;
+    }
+    if ([locationManager respondsToSelector:@selector(requestAlwaysAuthorization)])
+        [locationManager requestAlwaysAuthorization];
+    
+    if ([locationManager respondsToSelector:@selector(requestWhenInUseAuthorization)])
+        [locationManager requestWhenInUseAuthorization];
+    
+    [locationManager startUpdatingLocation];
+}
+
+-(void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations {
+    
+    
+    CLLocation *newLocation = [locations lastObject];
+    
+    currentLatitude         = [NSString stringWithFormat:@"%@",[NSNumber numberWithDouble:newLocation.coordinate.latitude]];
+    
+    currentLongitude        = [NSString stringWithFormat:@"%@",[NSNumber numberWithDouble:newLocation.coordinate.longitude]];
+    
+    [[NSUserDefaults standardUserDefaults] setObject:currentLatitude  forKey:@"currentLatitude"];
+    [[NSUserDefaults standardUserDefaults] setObject:currentLongitude forKey:@"currentLongitude"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+    
+    // Turn off the location manager to save power.
+    [locationManager stopUpdatingLocation];
+    
+    NSLog(@"current latitude & longitude for main view = %@ & %@",currentLatitude,currentLongitude);
+    
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        
+        [self loadLocationUpdateAPI];
+        dispatch_async(dispatch_get_main_queue(), ^(){
+            
+            
+        });
+        
+        
+    });
+  
+    
+}
+
+- (void)locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error
+{
+    
+    NSLog(@"Cannot find the location for main view.");
+}
+
 #pragma mark - setupCollectionView
 -(void)setupCollectionView {
     [self.homeCollectionView registerClass:[HomeCustomCell class]
@@ -429,33 +490,26 @@ minimumLineSpacingForSectionAtIndex:(NSInteger)section {
     //[self loadupdateDosomethingWebService:strselectDosomething :@"No"];
 }
 #pragma mark - loadupdateDosomethingWebService
--(void)loadupdateDosomethingWebService:(NSString *)selectItemID :(NSString*)selectOption
-{
-    [objWebService updateDosomething:UpdateDoSomething_API
-                           sessionid:loginUserSessionID
-                      dosomething_id:strselectDosomething
-                       available_now:selectOption
-                             success:^(AFHTTPRequestOperation *operation, id responseObject)
-    {
-        NSString * responseMsg=[[responseObject valueForKey:@"updatedosomething"]valueForKey:@"Message"];
-        
-        if(![responseMsg isEqualToString:@""])
-        {
-           NSLog(@"responseMsg:%@",responseMsg);
-          [self showAltermessage:responseMsg];
-                
+
+-(void)loadLocationUpdateAPI{
     
-        }
-    }
-    failure:^(AFHTTPRequestOperation *operation, id error) {
-        
-        [self showAltermessage:[NSString stringWithFormat:@"%@",error]];
-                             }];
+    [objWebService locationUpdate:LocationUpdate_API sessionid:[COMMON getSessionID] latitude:currentLatitude longitude:currentLongitude
+                          success:^(AFHTTPRequestOperation *operation, id responseObject)
+     {
+         NSLog(@"responseObject = %@",responseObject);
+     }
+                          failure:^(AFHTTPRequestOperation *operation, id error) {
+                              
+                              
+                              [self showAltermessage:[NSString stringWithFormat:@"%@",error]];
+                          }];
+
+    
 }
 
 -(void)loadActivityAPI:(NSString *)_activityNameStr availableStr:(NSString *)_availableStr doSomethingId:(NSString *)_dosomethingId{
     
-    [objWebService getActivity:Activity activityName:_activityNameStr sessionId:loginUserSessionID availableNow:_availableStr doSomethingId:_dosomethingId
+    [objWebService getActivity:Activity activityName:_activityNameStr sessionId:[COMMON getSessionID] availableNow:_availableStr doSomethingId:_dosomethingId
      success:^(AFHTTPRequestOperation *operation, id responseObject)
      {
          NSLog(@"response object = %@",responseObject);
