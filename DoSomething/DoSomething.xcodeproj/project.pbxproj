@@ -131,6 +131,7 @@
 		2B13322A1C1FFD1A000A3081 /* DSDetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = DSDetailViewController.xib; path = NearByDetail/DSDetailViewController.xib; sourceTree = "<group>"; };
 		2B1B8B941C23E830005A699E /* NSString+FontAwesome.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSString+FontAwesome.h"; path = "Helpers/AwesomeFont/NSString+FontAwesome.h"; sourceTree = "<group>"; };
 		2B1B8B951C23E830005A699E /* NSString+FontAwesome.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSString+FontAwesome.m"; path = "Helpers/AwesomeFont/NSString+FontAwesome.m"; sourceTree = "<group>"; };
+		2B1B8BA21C2401C1005A699E /* fontawesome-webfont.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "fontawesome-webfont.ttf"; sourceTree = "<group>"; };
 		2B83CAAD1BE8744E0064EC7F /* DSWebservice.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DSWebservice.h; sourceTree = "<group>"; };
 		2B83CAAE1BE8744E0064EC7F /* DSWebservice.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DSWebservice.m; sourceTree = "<group>"; };
 		2B83CABF1BE895AB0064EC7F /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
@@ -728,6 +729,7 @@
 		C6D5F62B1BC7B52C0050C1AE /* Fonts */ = {
 			isa = PBXGroup;
 			children = (
+				2B1B8BA21C2401C1005A699E /* fontawesome-webfont.ttf */,
 				C6D5F62C1BC7B52C0050C1AE /* FutworaPro-Regular.otf */,
 				C6D5F62D1BC7B52C0050C1AE /* Patron-Black.ttf */,
 				C6D5F62E1BC7B52C0050C1AE /* Patron-BlackItalic.ttf */,
