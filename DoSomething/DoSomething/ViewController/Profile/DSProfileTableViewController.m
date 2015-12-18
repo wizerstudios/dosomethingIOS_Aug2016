@@ -109,6 +109,8 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    locationManager                 = [[CLLocationManager alloc] init];
+    locationManager.delegate        = self;
     objWebService = [[DSWebservice alloc]init];
     deviceUdid = [OpenUDID value];
     isPick=NO;
@@ -119,6 +121,46 @@
 }
 -(void)viewWillAppear:(BOOL)animated
 {
+    [self loadNavigation];
+    
+    [self getUserCurrenLocation];
+    
+    imageNormalArray =[[NSMutableArray alloc]init];
+    
+    if([profileDict valueForKey:@"hobbieslist"]!=NULL)
+    {
+        [customNavigation.buttonBack setHidden:YES];
+      
+        [self selectitemMethod];
+    }
+       infoArray=[[NSMutableArray alloc]initWithObjects:@"profile_noimg",@"profile_noimg",@"profile_noimg", nil];
+    [self CustomAlterview];
+    if(!isLoadData){
+        [self initializeArray];
+       // [COMMON getUserCurrenLocation];
+        [self profileImageDisplayMethod];
+        isLoadData = YES;
+    }
+    else if(isLoadData == YES && profileDict ==NULL)
+    {
+        
+        interstAndHobbiesArray =[[[NSUserDefaults standardUserDefaults] valueForKey:@"SelectedItem"]mutableCopy];
+        
+        imageNormalArray =[[[NSUserDefaults standardUserDefaults] valueForKey:@"SelectedItemNormal"]mutableCopy];
+        
+        hobbiesNameArray =[[[NSUserDefaults standardUserDefaults] valueForKey:@"SelectedItemName"]mutableCopy];
+        
+        hobbiesCategoryIDArray =[[[NSUserDefaults standardUserDefaults] valueForKey:@"SelectedItemCategoryID"]mutableCopy];
+        
+        
+        strInterestHobbies = [hobbiesCategoryIDArray componentsJoinedByString:@","];
+    }
+
+     [_tableviewProfile reloadData];
+        
+}
+
+-(void)loadNavigation{
     self.navigationController.navigationBarHidden=NO;
     [self.navigationItem setHidesBackButton:YES animated:NO];
     [self.navigationController.navigationBar setTranslucent:YES];
@@ -142,40 +184,6 @@
     [customNavigation.saveBtn addTarget:self action:@selector(saveAction:) forControlEvents:UIControlEventTouchUpInside];
     [customNavigation.buttonBack addTarget:self action:@selector(backAction) forControlEvents:UIControlEventTouchUpInside];
     
-    
-    imageNormalArray =[[NSMutableArray alloc]init];
-    
-    if([profileDict valueForKey:@"hobbieslist"]!=NULL)
-    {
-        [customNavigation.buttonBack setHidden:YES];
-      
-        [self selectitemMethod];
-    }
-       infoArray=[[NSMutableArray alloc]initWithObjects:@"profile_noimg",@"profile_noimg",@"profile_noimg", nil];
-    [self CustomAlterview];
-    if(!isLoadData){
-        [self initializeArray];
-        [COMMON getUserCurrenLocation];
-        [self profileImageDisplayMethod];
-        isLoadData = YES;
-    }
-    else if(isLoadData == YES && profileDict ==NULL)
-    {
-        
-        interstAndHobbiesArray =[[[NSUserDefaults standardUserDefaults] valueForKey:@"SelectedItem"]mutableCopy];
-        
-        imageNormalArray =[[[NSUserDefaults standardUserDefaults] valueForKey:@"SelectedItemNormal"]mutableCopy];
-        
-        hobbiesNameArray =[[[NSUserDefaults standardUserDefaults] valueForKey:@"SelectedItemName"]mutableCopy];
-        
-        hobbiesCategoryIDArray =[[[NSUserDefaults standardUserDefaults] valueForKey:@"SelectedItemCategoryID"]mutableCopy];
-        
-        
-        strInterestHobbies = [hobbiesCategoryIDArray componentsJoinedByString:@","];
-    }
-
-     [_tableviewProfile reloadData];
-        
 }
 -(void)profileImageDisplayMethod
 {
@@ -529,6 +537,24 @@ if([[NSUserDefaults standardUserDefaults] valueForKey:@"SelectedItemCategoryID"]
 
 #pragma mark get user CurrentLocation
 
+- (void)getUserCurrenLocation{
+    
+    if(!locationManager){
+        
+        locationManager.distanceFilter  = kCLLocationAccuracyKilometer;
+        locationManager.desiredAccuracy = kCLLocationAccuracyBest;
+        locationManager.activityType    = CLActivityTypeAutomotiveNavigation;
+    }
+    if ([locationManager respondsToSelector:@selector(requestAlwaysAuthorization)])
+        [locationManager requestAlwaysAuthorization];
+    
+    if ([locationManager respondsToSelector:@selector(requestWhenInUseAuthorization)])
+        [locationManager requestWhenInUseAuthorization];
+    
+    [locationManager startUpdatingLocation];
+}
+
+
 -(void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations {
     
     
@@ -547,6 +573,15 @@ if([[NSUserDefaults standardUserDefaults] valueForKey:@"SelectedItemCategoryID"]
     
     NSLog(@"current latitude & longitude for main view = %@ & %@",currentLatitude,currentLongitude);
     
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        
+        [self loadLocationUpdateAPI];
+        dispatch_async(dispatch_get_main_queue(), ^(){
+            
+        });
+        
+    });
+    
 }
 
 - (void)locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error
@@ -555,6 +590,18 @@ if([[NSUserDefaults standardUserDefaults] valueForKey:@"SelectedItemCategoryID"]
     NSLog(@"Cannot find the location for main view.");
 }
 
+-(void)loadLocationUpdateAPI{
+    
+    [objWebService locationUpdate:LocationUpdate_API sessionid:[COMMON getSessionID] latitude:currentLatitude longitude:currentLongitude
+                          success:^(AFHTTPRequestOperation *operation, id responseObject){
+                              NSLog(@"responseObject = %@",responseObject);
+                          }
+                          failure:^(AFHTTPRequestOperation *operation, id error) {
+                              
+                          }];
+    
+    
+}
 
 -(void)loadDatePicker:(NSInteger)_tag{
     currentTextfield=(UITextField *)[self.view viewWithTag:_tag];
@@ -760,15 +807,6 @@ if([[NSUserDefaults standardUserDefaults] valueForKey:@"SelectedItemCategoryID"]
     objCustomAlterview. alertBgView.hidden = YES;
     objCustomAlterview.alertMainBgView.hidden = YES;
     objCustomAlterview.view .hidden  = YES;
-    if([msgStr isEqualToString:@"InvalidSession"]){
-        [COMMON removeUserDetails];
-        DSHomeViewController*objSplashView =[[DSHomeViewController alloc]initWithNibName:@"DSHomeViewController" bundle:nil];
-        [self.navigationController pushViewController:objSplashView animated:NO];
-        AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
-        appDelegate.buttonsView.hidden=YES;
-        appDelegate.SepratorLbl.hidden=YES;
-        [appDelegate.settingButton setBackgroundImage:[UIImage imageNamed:@"setting_icon.png"] forState:UIControlStateNormal];
-    }
    
 }
 -(void)showAltermessage:(NSString*)msg
@@ -1403,28 +1441,56 @@ if([[NSUserDefaults standardUserDefaults] valueForKey:@"SelectedItemCategoryID"]
             
         }
         if (IS_IPHONE6 ||IS_IPHONE6_Plus){
-            cell.layoutConstraintNotificationLabelYPos.constant = 40;
-            cell.layoutConstraintNotificationViewHeight.constant=51;
-            cell.layoutConstraintRadioButtonYPos.constant = 18;
-            cell.messSwitchBtn.transform = CGAffineTransformMakeScale(0.65, 0.65);
-            cell.SoundSwitchBtn.transform = CGAffineTransformMakeScale(0.65, 0.65);
-            cell.vibrationSwitchBtn.transform = CGAffineTransformMakeScale(0.65, 0.65);
+           // cell.layoutConstraintNotificationLabelYPos.constant = 40;
+            //cell.layoutConstraintNotificationViewHeight.constant=51;
+           // cell.layoutConstraintRadioButtonYPos.constant = 18;
+           // cell.messSwitchBtn.transform = CGAffineTransformMakeScale(0.65, 0.65);
+            //cell.SoundSwitchBtn.transform = CGAffineTransformMakeScale(0.65, 0.65);
+            //cell.vibrationSwitchBtn.transform = CGAffineTransformMakeScale(0.65, 0.65);
         }
         else
         {
             
-        cell.messSwitchBtn.transform = CGAffineTransformMakeScale(0.70, 0.70);
-        cell.SoundSwitchBtn.transform = CGAffineTransformMakeScale(0.70, 0.70);
-        cell.vibrationSwitchBtn.transform = CGAffineTransformMakeScale(0.70, 0.70);
+       // cell.messSwitchBtn.transform = CGAffineTransformMakeScale(0.70, 0.70);
+       // cell.SoundSwitchBtn.transform = CGAffineTransformMakeScale(0.70, 0.70);
+        //cell.vibrationSwitchBtn.transform = CGAffineTransformMakeScale(0.70, 0.70);
         }
-        cell.vibrationSwitchBtn.layer.cornerRadius = 16.0;
-        cell.SoundSwitchBtn.layer.cornerRadius = 16.0;
-        cell.messSwitchBtn.layer.cornerRadius = 16.0;
+       // cell.vibrationSwitchBtn.layer.cornerRadius = 16.0;
+        //cell.SoundSwitchBtn.layer.cornerRadius = 16.0;
+        //cell.messSwitchBtn.layer.cornerRadius = 16.0;
         
-        [self notificationMethod];
-        [cell.vibrationSwitchBtn addTarget:self action:@selector(vibrationSwithAction:) forControlEvents:UIControlEventTouchUpInside];
-        [cell.SoundSwitchBtn addTarget:self action:@selector(soundSwithAction:) forControlEvents:UIControlEventTouchUpInside];
-        [cell.messSwitchBtn addTarget:self action:@selector(messSwithAction:) forControlEvents:UIControlEventTouchUpInside];
+       [self notificationMethod];
+        
+        UISwipeGestureRecognizer *messBtnleftRecognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(NotificationmsgBtnSwipLeftAction:)];
+        [messBtnleftRecognizer setDirection: UISwipeGestureRecognizerDirectionLeft];
+        [cell.messSwitchBtn addGestureRecognizer:messBtnleftRecognizer];
+       
+        
+        UISwipeGestureRecognizer *messBtnrightRecognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(NotificationmessBtnSwipRightAction:)];
+        [messBtnrightRecognizer setDirection: UISwipeGestureRecognizerDirectionRight];
+        [cell.messSwitchBtn addGestureRecognizer:messBtnrightRecognizer];
+       
+        UISwipeGestureRecognizer *soundBtnleftRecognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(NotificationsoundBtnSwipLeftAction:)];
+        [soundBtnleftRecognizer setDirection: UISwipeGestureRecognizerDirectionLeft];
+        [cell.SoundSwitchBtn addGestureRecognizer:soundBtnleftRecognizer];
+        
+        
+        UISwipeGestureRecognizer *SoundBtnrightRecognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(NotificationsoundBtnSwipRightAction:)];
+        [SoundBtnrightRecognizer setDirection: UISwipeGestureRecognizerDirectionRight];
+        [cell.SoundSwitchBtn addGestureRecognizer:SoundBtnrightRecognizer];
+
+        UISwipeGestureRecognizer *VibrationBtnleftRecognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(NotificationvibrationBtnSwipLeftAction:)];
+        [VibrationBtnleftRecognizer setDirection: UISwipeGestureRecognizerDirectionLeft];
+        [cell.vibrationSwitchBtn addGestureRecognizer:VibrationBtnleftRecognizer];
+        
+        
+        UISwipeGestureRecognizer *vibrationBtnrightRecognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(NotificationvibrationBtnSwipRightAction:)];
+        [vibrationBtnrightRecognizer setDirection: UISwipeGestureRecognizerDirectionRight];
+        [cell.vibrationSwitchBtn addGestureRecognizer:vibrationBtnrightRecognizer];
+        
+        [cell.vibrationSwitchBtn addTarget:self action:@selector(NotificationbuttonAction:) forControlEvents:UIControlEventTouchUpInside];
+        [cell.SoundSwitchBtn addTarget:self action:@selector(NotificationbuttonAction:) forControlEvents:UIControlEventTouchUpInside];
+        [cell.messSwitchBtn addTarget:self action:@selector(NotificationbuttonAction:) forControlEvents:UIControlEventTouchUpInside];
         
     }
 
@@ -1462,6 +1528,124 @@ if([[NSUserDefaults standardUserDefaults] valueForKey:@"SelectedItemCategoryID"]
         }
 
     }
+
+
+-(void)NotificationmsgBtnSwipLeftAction:(id)sender
+{
+    
+    [cell.messSwitchBtn setImage:[UIImage imageNamed:@"switch_off"] forState:UIControlStateNormal];
+    isNotification_message =@"No";
+            
+    
+}
+-(void)NotificationmessBtnSwipRightAction:(id)sender
+  {
+    
+        [cell.messSwitchBtn setImage:[UIImage imageNamed:@"switch_on"] forState:UIControlStateNormal];
+        isNotification_message =@"Yes";
+    
+  }
+
+
+-(void)NotificationsoundBtnSwipLeftAction:(id)sender
+{
+    
+    [cell.SoundSwitchBtn setImage:[UIImage imageNamed:@"switch_off"] forState:UIControlStateNormal];
+    isNotification_message =@"No";
+    
+    
+}
+-(void)NotificationsoundBtnSwipRightAction:(id)sender
+{
+    
+    [cell.SoundSwitchBtn setImage:[UIImage imageNamed:@"switch_on"] forState:UIControlStateNormal];
+    isNotification_sound =@"Yes";
+    
+}
+-(void)NotificationvibrationBtnSwipLeftAction:(id)sender
+{
+    
+    [cell.vibrationSwitchBtn setImage:[UIImage imageNamed:@"switch_off"] forState:UIControlStateNormal];
+    isNotification_sound =@"No";
+    
+    
+}
+-(void)NotificationvibrationBtnSwipRightAction:(id)sender
+{
+    
+    [cell.vibrationSwitchBtn setImage:[UIImage imageNamed:@"switch_on"] forState:UIControlStateNormal];
+    isNotification_vibration =@"Yes";
+    
+}
+
+
+-(void)NotificationbuttonAction:(UIButton *)sender
+{
+    
+    id button = sender;
+    while (![button isKindOfClass:[UITableViewCell class]]) {
+        button = [button superview];
+    }
+    
+    NSIndexPath *indexPath;
+   
+    
+    indexPath = [_tableviewProfile indexPathForCell:(UITableViewCell *)button];
+    cell = (DSProfileTableViewCell *) [_tableviewProfile cellForRowAtIndexPath:[NSIndexPath indexPathForRow:indexPath.row inSection:0]];
+    
+    if([sender tag] == 501){
+        if ( [isNotification_message isEqualToString:@"Yes"]) {
+            
+            [cell.messSwitchBtn setImage:[UIImage imageNamed:@"switch_off"] forState:UIControlStateNormal];
+             isNotification_message =@"No";
+            
+        }else{
+            
+            [cell.messSwitchBtn setImage:[UIImage imageNamed:@"switch_on"] forState:UIControlStateNormal];
+            //[self notificationButtonOFFAction:sender];
+            isNotification_message =@"Yes";
+        }
+
+        
+    }
+    
+   else if([sender tag] == 502){
+        if ( [isNotification_sound isEqualToString:@"Yes"]) {
+            
+            [cell.SoundSwitchBtn setImage:[UIImage imageNamed:@"switch_off"] forState:UIControlStateNormal];
+            isNotification_sound =@"No";
+            
+        }else{
+            
+            [cell.SoundSwitchBtn setImage:[UIImage imageNamed:@"switch_on"] forState:UIControlStateNormal];
+            //[self notificationButtonOFFAction:sender];
+            isNotification_sound =@"Yes";
+        }
+
+        
+    }
+    
+   else if([sender tag] == 503)
+   {
+       if ( [isNotification_vibration isEqualToString:@"Yes"]) {
+           
+           [cell.vibrationSwitchBtn setImage:[UIImage imageNamed:@"switch_off"] forState:UIControlStateNormal];
+           isNotification_vibration =@"No";
+           
+       }else{
+           
+           [cell.vibrationSwitchBtn setImage:[UIImage imageNamed:@"switch_on"] forState:UIControlStateNormal];
+           //[self notificationButtonOFFAction:sender];
+           isNotification_vibration =@"Yes";
+       }
+       
+       
+   }
+
+    
+  
+    
+}
 
 
 #pragma mark -loadTermsOfUseView
@@ -1516,97 +1700,46 @@ if([[NSUserDefaults standardUserDefaults] valueForKey:@"SelectedItemCategoryID"]
     
     if([objMsg isEqualToString:@"switch_on"])
     {
-        [cell.messSwitchBtn setThumbTintColor:[UIColor greenColor]];
-        
-        [cell.messSwitchBtn setBackgroundColor:[UIColor colorWithRed:232.0f/255.0f green:232.0f/255.0f blue:232.0f/255.0f alpha:1.0f]];
-        [cell.messSwitchBtn setOnTintColor:[UIColor colorWithRed:232.0f/255.0f green:232.0f/255.0f blue:232.0f/255.0f alpha:1.0f]];
+        [cell.messSwitchBtn setImage:[UIImage imageNamed:@"switch_on"] forState:UIControlStateNormal];
+        isNotification_message =@"Yes";
+//        [cell.messSwitchBtn setBackgroundColor:[UIColor colorWithRed:232.0f/255.0f green:232.0f/255.0f blue:232.0f/255.0f alpha:1.0f]];
+//        [cell.messSwitchBtn setOnTintColor:[UIColor colorWithRed:232.0f/255.0f green:232.0f/255.0f blue:232.0f/255.0f alpha:1.0f]];
         
     }
     if([objSound isEqualToString:@"switch_on"])
     {
-        [cell.SoundSwitchBtn setThumbTintColor:[UIColor greenColor]];
-        
-        [cell.SoundSwitchBtn setBackgroundColor:[UIColor colorWithRed:232.0f/255.0f green:232.0f/255.0f blue:232.0f/255.0f alpha:1.0f]];
-        [cell.SoundSwitchBtn setOnTintColor:[UIColor colorWithRed:232.0f/255.0f green:232.0f/255.0f blue:232.0f/255.0f alpha:1.0f]];
+        [cell.SoundSwitchBtn setImage:[UIImage imageNamed:@"switch_on"] forState:UIControlStateNormal];
+        isNotification_message =@"Yes";
     }
     
     if([objVibration isEqualToString:@"switch_on"])
     {
-        [cell.vibrationSwitchBtn setThumbTintColor:[UIColor greenColor]];
-        
-        [cell.vibrationSwitchBtn setBackgroundColor:[UIColor colorWithRed:232.0f/255.0f green:232.0f/255.0f blue:232.0f/255.0f alpha:1.0f]];
-        [cell.vibrationSwitchBtn setOnTintColor:[UIColor colorWithRed:232.0f/255.0f green:232.0f/255.0f blue:232.0f/255.0f alpha:1.0f]];
+        [cell.vibrationSwitchBtn setImage:[UIImage imageNamed:@"switch_on"] forState:UIControlStateNormal];
+        isNotification_message =@"Yes";
+       
     }
     
     if([objMsg isEqualToString:@"switch_off"])
     {
-        [cell.messSwitchBtn setTintColor:[UIColor redColor]];
-        [cell.messSwitchBtn setBackgroundColor:[UIColor colorWithRed:232.0f/255.0f green:232.0f/255.0f blue:232.0f/255.0f alpha:1.0f]];
-        [cell.messSwitchBtn setThumbTintColor:[UIColor redColor]];
+//        [cell.messSwitchBtn setTintColor:[UIColor redColor]];
+//        [cell.messSwitchBtn setBackgroundColor:[UIColor colorWithRed:232.0f/255.0f green:232.0f/255.0f blue:232.0f/255.0f alpha:1.0f]];
+        [cell.messSwitchBtn setImage:[UIImage imageNamed:@"switch_off"] forState:UIControlStateNormal];
+        isNotification_message =@"No";
     }
     if([objSound isEqualToString:@"switch_off"])
     {
-        [cell.SoundSwitchBtn setTintColor:[UIColor whiteColor]];
-        [cell.SoundSwitchBtn setBackgroundColor:[UIColor colorWithRed:232.0f/255.0f green:232.0f/255.0f blue:232.0f/255.0f alpha:1.0f]];
-        [cell.SoundSwitchBtn setThumbTintColor:[UIColor redColor]];
+        [cell.SoundSwitchBtn setImage:[UIImage imageNamed:@"switch_off"] forState:UIControlStateNormal];
+        isNotification_message =@"No";
     }
     
     if([objVibration isEqualToString:@"switch_off"])
     {
-        [cell.vibrationSwitchBtn setTintColor:[UIColor whiteColor]];
-        [cell.vibrationSwitchBtn setBackgroundColor:[UIColor colorWithRed:232.0f/255.0f green:232.0f/255.0f blue:232.0f/255.0f alpha:1.0f]];
-        [cell.vibrationSwitchBtn setThumbTintColor:[UIColor redColor]];
+        [cell.vibrationSwitchBtn setImage:[UIImage imageNamed:@"switch_off"] forState:UIControlStateNormal];
+        isNotification_message =@"No";
     }
     
 }
 
-- (IBAction)messSwithAction:(UISwitch *)sender
-{
-    sender.layer.cornerRadius = 16.0;
-    if (sender.on) {
-       
-        [self notificationButtonONAction:sender];
-        isNotification_message =@"Yes";
-        
-    }else{
-       
-        [self notificationButtonOFFAction:sender];
-        isNotification_message =@"No";
-    }
-}
-
-- (IBAction)soundSwithAction:(UISwitch *)sender
-{
-    sender.layer.cornerRadius = 16.0;
-    if (sender.on) {
-       
-        [self notificationButtonONAction:sender];
-        isNotification_sound =@"Yes";
-        
-    }else{
-       
-        
-        [self notificationButtonOFFAction:sender];
-        isNotification_sound =@"No";
-        
-    }
-}
-
-- (IBAction)vibrationSwithAction:(UISwitch *)sender
-{
-    sender.layer.cornerRadius = 16.0;
-    if (sender.on) {
-        
-        [self notificationButtonONAction:sender];
-               isNotification_vibration =@"Yes";
-        
-    }else{
-       
-        [self notificationButtonOFFAction:sender];
-        
-        isNotification_vibration =@"No";
-    }
-}
 
 -(void)notificationButtonONAction:(id)sender
 {
@@ -1910,9 +2043,14 @@ if([[NSUserDefaults standardUserDefaults] valueForKey:@"SelectedItemCategoryID"]
 -(void)loadUpdateError:(NSNotification *)notification
 {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
-    NSDictionary *profile = [notification userInfo];
-    NSString *alertStr = [profile valueForKey:@"error"];
-    [self showAltermessage:alertStr];
+    [COMMON removeUserDetails];
+    DSHomeViewController*objSplashView =[[DSHomeViewController alloc]initWithNibName:@"DSHomeViewController" bundle:nil];
+    [self.navigationController pushViewController:objSplashView animated:NO];
+    AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+    appDelegate.buttonsView.hidden=YES;
+    appDelegate.SepratorLbl.hidden=YES;
+    [appDelegate.settingButton setBackgroundImage:[UIImage imageNamed:@"setting_icon.png"] forState:UIControlStateNormal];
+
 }
 
 #pragma mark - saveAction

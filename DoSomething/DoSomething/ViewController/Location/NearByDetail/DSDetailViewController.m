@@ -32,7 +32,7 @@
     float yAxis;
     float imageSize;
     float space;
-    NSString        * strsessionID;
+    
     NSString        * requestUserID;
     CGSize              dataSize;
     UIImage *genderImage;
@@ -43,16 +43,10 @@
 
 @implementation DSDetailViewController
 @synthesize userDetailsDict,letsDoButton;
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     objWebService =[[DSWebservice alloc]init];
-    NSMutableDictionary *dic=[[NSMutableDictionary alloc]init];
-    
-    dic =[[NSUserDefaults standardUserDefaults] valueForKey:USERDETAILS];
-    
-    strsessionID =[dic valueForKey:@"SessionId"];
-    // Do any additional setup after loading the view from its nib.
-   
 }
 
 -(void)viewWillAppear:(BOOL)animated
@@ -476,7 +470,7 @@
     requestUserID = [userDetailsDict valueForKey:@"user_id"];
     
    [objWebService sendRequest:SendRequest_API
-                    sessionid:strsessionID
+                    sessionid:[COMMON getSessionID]
          request_send_user_id:requestUserID
                       success:^(AFHTTPRequestOperation *operation, id responseObject) {
                           NSLog(@"SEND REQ%@",responseObject);

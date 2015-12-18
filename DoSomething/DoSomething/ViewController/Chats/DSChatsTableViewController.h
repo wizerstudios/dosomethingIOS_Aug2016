@@ -7,9 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <CoreLocation/CoreLocation.h>
 
-@interface DSChatsTableViewController : UIViewController
+@interface DSChatsTableViewController : UIViewController<CLLocationManagerDelegate>
 
+@property (nonatomic,strong)  CLLocationManager       * locationManager;
 @property (strong, nonatomic) IBOutlet UITableView *ChatTableView;
 
 @end

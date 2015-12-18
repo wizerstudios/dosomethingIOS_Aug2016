@@ -11,6 +11,8 @@
 #import "DSChatDetailViewController.h"
 #import "CustomNavigationView.h"
 #import "DSConfig.h"
+#import "DSWebservice.h"
+#import "DSAppCommon.h"
 
 @interface DSChatsTableViewController ()
 
@@ -21,17 +23,21 @@
     NSArray *imageArray;
     NSArray*badgeimage;
     UIButton *navButton;
+    NSString * currentLatitude, * currentLongitude;
+    DSWebservice *webService;
 }
 
 @end
 
 @implementation DSChatsTableViewController
-@synthesize ChatTableView;
+@synthesize ChatTableView,locationManager;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-    
+    locationManager                 = [[CLLocationManager alloc] init];
+    locationManager.delegate        = self;
+    webService = [[DSWebservice alloc]init];
     ChatNameArray =[[NSArray alloc] initWithObjects:@"Gal Gadot",@"Yuna",@"Taylor",nil];
     MessageArray =[[NSArray alloc] initWithObjects:@"Haha Sure I'll see you at 7:)",@"Hello?",@"See Ya!",nil];
     timeArray = [[NSArray alloc] initWithObjects:@"19:58",@"17:20",@"15:30",nil];
@@ -50,14 +56,13 @@
     
     }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
+
+
 
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+    [self getUserCurrenLocation];
     [self.navigationItem setHidesBackButton:YES animated:NO];
     [self setNavigation];
 }
@@ -81,6 +86,78 @@
     //    [customNavigation.saveBtn addTarget:self action:@selector(saveAction) forControlEvents:UIControlEventTouchUpInside];
     //    [customNavigation.buttonBack addTarget:self action:@selector(backAction) forControlEvents:UIControlEventTouchUpInside];
 }
+
+#pragma mark get user CurrentLocation
+
+- (void)getUserCurrenLocation{
+    
+    if(!locationManager){
+        
+        
+        locationManager.distanceFilter  = kCLLocationAccuracyKilometer;
+        locationManager.desiredAccuracy = kCLLocationAccuracyBest;
+        locationManager.activityType    = CLActivityTypeAutomotiveNavigation;
+    }
+    if ([locationManager respondsToSelector:@selector(requestAlwaysAuthorization)])
+        [locationManager requestAlwaysAuthorization];
+    
+    if ([locationManager respondsToSelector:@selector(requestWhenInUseAuthorization)])
+        [locationManager requestWhenInUseAuthorization];
+    
+    [locationManager startUpdatingLocation];
+}
+
+-(void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations {
+    
+    
+    CLLocation *newLocation = [locations lastObject];
+    
+    currentLatitude         = [NSString stringWithFormat:@"%@",[NSNumber numberWithDouble:newLocation.coordinate.latitude]];
+    
+    currentLongitude        = [NSString stringWithFormat:@"%@",[NSNumber numberWithDouble:newLocation.coordinate.longitude]];
+    
+    [[NSUserDefaults standardUserDefaults] setObject:currentLatitude  forKey:@"currentLatitude"];
+    [[NSUserDefaults standardUserDefaults] setObject:currentLongitude forKey:@"currentLongitude"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+    
+    // Turn off the location manager to save power.
+    [locationManager stopUpdatingLocation];
+    
+    NSLog(@"current latitude & longitude for main view = %@ & %@",currentLatitude,currentLongitude);
+    
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        
+        [self loadLocationUpdateAPI];
+        dispatch_async(dispatch_get_main_queue(), ^(){
+            
+            
+        });
+        
+        
+    });
+    
+    
+}
+- (void)locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error
+{
+    
+    NSLog(@"Cannot find the location for main view.");
+}
+
+-(void)loadLocationUpdateAPI{
+    
+    [webService locationUpdate:LocationUpdate_API sessionid:[COMMON getSessionID] latitude:currentLatitude longitude:currentLongitude
+                          success:^(AFHTTPRequestOperation *operation, id responseObject){
+                              NSLog(@"responseObject = %@",responseObject);
+                          }
+                          failure:^(AFHTTPRequestOperation *operation, id error) {
+                              
+                          }];
+    
+    
+}
+
+#pragma mark - TableView Datasources
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {

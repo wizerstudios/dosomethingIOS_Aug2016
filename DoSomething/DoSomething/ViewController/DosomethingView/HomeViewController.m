@@ -43,27 +43,38 @@
     NSMutableArray          *selectedItemsArray;
     NSMutableArray          * selectItemImageActiveArray;
     AVAudioPlayer           *audioPlayer;
-    NSString                *loginUserSessionID;
     CustomAlterview         * objCustomAlterview;
     NSString                *strselectDosomething;
     
     NSMutableDictionary     *activityMainDict;
+    NSMutableArray          *activityImageArray;
     BOOL isInitialLoadingAPI;
+    
+    float commonWidth, commonHeight;
+    float yPos;
+    float imageSize;
+    float space;
+    
+    UIImageView *hobbiesImage;
+    
+    UILabel *titleLabel;
+    NSString                * currentLatitude, * currentLongitude;
    
 }
 @end
 
 @implementation HomeViewController
+@synthesize locationManager;
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    locationManager                 = [[CLLocationManager alloc] init];
+    locationManager.delegate        = self;
     objWebService = [[DSWebservice alloc]init];
     activityMainDict = [[NSMutableDictionary alloc]init];
-    NSMutableDictionary *dic=[[NSMutableDictionary alloc]init];
-    dic =[[NSUserDefaults standardUserDefaults] valueForKey:USERDETAILS];
-    NSString * strsessionID =[dic valueForKey:@"SessionId"];
-    loginUserSessionID=strsessionID;
+    activityImageArray = [[NSMutableArray alloc]init];
+    
     [activatedView setHidden:YES];
     if([[NSUserDefaults standardUserDefaults] valueForKey:@"MenuListArray"]==nil){
         [COMMON LoadIcon:self.view];
@@ -78,9 +89,16 @@
 }
 -(void)viewWillAppear:(BOOL)animated
 {
+    [self getUserCurrenLocation];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(loadInvalidSessionAlert:)
+                                                 name:@"InvalidSession"
+                                               object:nil];
+
     appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
     appDelegate.buttonsView.hidden=NO;
-     appDelegate.SepratorLbl.hidden=NO;
+    appDelegate.SepratorLbl.hidden=NO;
     [self loadnavigationview];
     [self setupCollectionView];
     [self audioplayMethod];
@@ -178,6 +196,63 @@
                                                         error:NULL];
     [audioPlayer prepareToPlay];
 }
+
+#pragma mark get user CurrentLocation
+
+- (void)getUserCurrenLocation{
+    
+    if(!locationManager){
+        
+        
+        locationManager.distanceFilter  = kCLLocationAccuracyKilometer;
+        locationManager.desiredAccuracy = kCLLocationAccuracyBest;
+        locationManager.activityType    = CLActivityTypeAutomotiveNavigation;
+    }
+    if ([locationManager respondsToSelector:@selector(requestAlwaysAuthorization)])
+        [locationManager requestAlwaysAuthorization];
+    
+    if ([locationManager respondsToSelector:@selector(requestWhenInUseAuthorization)])
+        [locationManager requestWhenInUseAuthorization];
+    
+    [locationManager startUpdatingLocation];
+}
+
+-(void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations {
+    
+    
+    CLLocation *newLocation = [locations lastObject];
+    
+    currentLatitude         = [NSString stringWithFormat:@"%@",[NSNumber numberWithDouble:newLocation.coordinate.latitude]];
+    
+    currentLongitude        = [NSString stringWithFormat:@"%@",[NSNumber numberWithDouble:newLocation.coordinate.longitude]];
+    
+    [[NSUserDefaults standardUserDefaults] setObject:currentLatitude  forKey:@"currentLatitude"];
+    [[NSUserDefaults standardUserDefaults] setObject:currentLongitude forKey:@"currentLongitude"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+    
+    // Turn off the location manager to save power.
+    [locationManager stopUpdatingLocation];
+    
+    NSLog(@"current latitude & longitude for main view = %@ & %@",currentLatitude,currentLongitude);
+    
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+            
+            [self loadLocationUpdateAPI];
+            dispatch_async(dispatch_get_main_queue(), ^(){
+                
+            });
+            
+        });
+  
+    
+}
+
+- (void)locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error
+{
+    
+    NSLog(@"Cannot find the location for main view.");
+}
+
 #pragma mark - setupCollectionView
 -(void)setupCollectionView {
     [self.homeCollectionView registerClass:[HomeCustomCell class]
@@ -376,8 +451,8 @@ minimumLineSpacingForSectionAtIndex:(NSInteger)section {
 #pragma mark - pressDosomethingAction
 - (IBAction)pressDosomething:(id)sender {
     if([sender tag] == 1000){
-        [bottombutton setUserInteractionEnabled:NO];
-       // [self loadActivityAPI:Cancel availableStr:@"" doSomethingId:@""];
+       // [bottombutton setUserInteractionEnabled:NO];
+       [self loadActivityAPI:Cancel availableStr:@"" doSomethingId:@""];
     }else{
         if([selectedItemsArray count] == 3){
             isInitialLoadingAPI = NO;
@@ -393,6 +468,7 @@ minimumLineSpacingForSectionAtIndex:(NSInteger)section {
     objCustomAlterview. alertBgView.hidden = YES;
     objCustomAlterview.alertMainBgView.hidden = YES;
     objCustomAlterview.view .hidden  = YES;
+
 }
 - (IBAction)alertPressYes:(id)sender {
     objCustomAlterview.alertBgView.hidden = YES;
@@ -407,72 +483,79 @@ minimumLineSpacingForSectionAtIndex:(NSInteger)section {
     objCustomAlterview.alertBgView.hidden = YES;
     objCustomAlterview.alertMainBgView.hidden = YES;
     [objCustomAlterview.view setHidden:YES];
-    strselectDosomething = [selectedArray componentsJoinedByString:@","];
+    strselectDosomething = [selectedItemsArray componentsJoinedByString:@","];
     [self loadActivityAPI:Update availableStr:@"No" doSomethingId:strselectDosomething];
     //[self loadupdateDosomethingWebService:strselectDosomething :@"No"];
 }
 #pragma mark - loadupdateDosomethingWebService
--(void)loadupdateDosomethingWebService:(NSString *)selectItemID :(NSString*)selectOption
-{
-    [objWebService updateDosomething:UpdateDoSomething_API
-                           sessionid:loginUserSessionID
-                      dosomething_id:strselectDosomething
-                       available_now:selectOption
-                             success:^(AFHTTPRequestOperation *operation, id responseObject)
-    {
-        NSString * responseMsg=[[responseObject valueForKey:@"updatedosomething"]valueForKey:@"Message"];
-        
-        if(![responseMsg isEqualToString:@""])
-        {
-           NSLog(@"responseMsg:%@",responseMsg);
-          [self showAltermessage:responseMsg];
-                
+
+-(void)loadLocationUpdateAPI{
     
-        }
-    }
-    failure:^(AFHTTPRequestOperation *operation, id error) {
-        
-        [self showAltermessage:[NSString stringWithFormat:@"%@",error]];
-                             }];
+    [objWebService locationUpdate:LocationUpdate_API sessionid:[COMMON getSessionID] latitude:currentLatitude longitude:currentLongitude
+                          success:^(AFHTTPRequestOperation *operation, id responseObject){
+                          NSLog(@"responseObject = %@",responseObject);
+                        }
+                          failure:^(AFHTTPRequestOperation *operation, id error) {
+                              
+                              [self showAltermessage:[NSString stringWithFormat:@"%@",error]];
+                        }];
+
+    
 }
 
 -(void)loadActivityAPI:(NSString *)_activityNameStr availableStr:(NSString *)_availableStr doSomethingId:(NSString *)_dosomethingId{
     
-    [objWebService getActivity:Activity activityName:_activityNameStr sessionId:loginUserSessionID availableNow:_availableStr doSomethingId:_dosomethingId
+    [objWebService getActivity:Activity activityName:_activityNameStr sessionId:[COMMON getSessionID] availableNow:_availableStr doSomethingId:_dosomethingId
      success:^(AFHTTPRequestOperation *operation, id responseObject)
      {
          NSLog(@"response object = %@",responseObject);
+         
          activityMainDict = [responseObject valueForKey:@"activity"];
-        
-         id activityList = [activityMainDict valueForKey:@"activityList"];
+         NSString *msgString = [activityMainDict valueForKey:@"Message"];
          
-         NSLog(@"activityList = %@",activityList);
-         
-         if([activityList isKindOfClass:[NSArray class]]){
-             NSLog(@"activity list");
-             NSString *availStr = [activityMainDict valueForKey:@"Available"];
-             [self displayActivityView:availStr];
-            
+         if([msgString isEqualToString:@"Activity Canelled successfully"]){
+            // [self showAltermessage:msgString];
+             [activatedView setHidden:YES];
+             [self.homeCollectionView setAlpha:1];
+             [self.homeCollectionView setUserInteractionEnabled:YES];
+             [activityImageArray removeAllObjects];
+             isSelectMenu = NO;
+             [selectedItemsArray removeAllObjects];
+             [self.homeCollectionView reloadData];
+             [bottombutton setTag:1001];
+             [bottombutton setTitle:@"Let's Do Something!" forState:UIControlStateNormal];
          }
          else{
-             if(isInitialLoadingAPI == NO){
-                 objCustomAlterview.view .hidden  = NO;
-                 objCustomAlterview.alertBgView.hidden = NO;
-                 objCustomAlterview.alertMainBgView.hidden = NO;
-                 objCustomAlterview.btnYes.hidden = NO;
-                 objCustomAlterview.btnNo.hidden = NO;
-                 objCustomAlterview.alertCancelButton.hidden = NO;
-                 objCustomAlterview.alertMsgLabel.text = @"AVAILABLE NOW?";
-                 objCustomAlterview.alertMsgLabel.textAlignment = NSTextAlignmentCenter;
-                 objCustomAlterview. alertMsgLabel.lineBreakMode = NSLineBreakByWordWrapping;
-                 objCustomAlterview.alertMsgLabel.textColor = [UIColor whiteColor];
-
+             id activityList = [activityMainDict valueForKey:@"activityList"];
+             
+             NSLog(@"activityList = %@",activityList);
+             
+             if([activityList isKindOfClass:[NSArray class]]){
+                 NSLog(@"activity list");
+                 activityImageArray = [activityList mutableCopy];
+                 NSString *availStr = [activityMainDict valueForKey:@"Available"];
+                 [self displayActivityView:availStr];
+                
              }
-             
-             [bottombutton setTitle:@"Let's Do Something!" forState:UIControlStateNormal];
-             
+             else{
+                 if(isInitialLoadingAPI == NO){
+                     objCustomAlterview.view .hidden  = NO;
+                     objCustomAlterview.alertBgView.hidden = NO;
+                     objCustomAlterview.alertMainBgView.hidden = NO;
+                     objCustomAlterview.btnYes.hidden = NO;
+                     objCustomAlterview.btnNo.hidden = NO;
+                     objCustomAlterview.alertCancelButton.hidden = NO;
+                     objCustomAlterview.alertMsgLabel.text = @"AVAILABLE NOW?";
+                     objCustomAlterview.alertMsgLabel.textAlignment = NSTextAlignmentCenter;
+                     objCustomAlterview. alertMsgLabel.lineBreakMode = NSLineBreakByWordWrapping;
+                     objCustomAlterview.alertMsgLabel.textColor = [UIColor whiteColor];
+
+                 }
+                 
+                 [bottombutton setTitle:@"Let's Do Something!" forState:UIControlStateNormal];
+                 
+             }
          }
-         
 
      }
        failure:^(AFHTTPRequestOperation *operation, id error) {
@@ -484,6 +567,20 @@ minimumLineSpacingForSectionAtIndex:(NSInteger)section {
 
 -(void)displayActivityView:(NSString *)_availStr{
     
+    
+    for( UIImageView *subView in [activatedView subviews])
+    {
+        if ([subView isKindOfClass:[UIImageView class]]) {
+            [subView removeFromSuperview];
+        }
+        
+    }
+    for(UILabel *label in [activatedView subviews]){
+        if ([label isKindOfClass:[UILabel class]]&& label.tag !=100) {
+            [label removeFromSuperview];
+        }
+    }
+    
     [activatedView setHidden:NO];
     [self.view setBackgroundColor:[UIColor clearColor]];
     [self.homeCollectionView setAlpha:0.1];
@@ -491,7 +588,11 @@ minimumLineSpacingForSectionAtIndex:(NSInteger)section {
     [bottombutton setTag:1000];
     [bottombutton setTitle:@"Cancel All Activities ?" forState:UIControlStateNormal];
     
-    [timeLabel setText:@"Available Since\n\nfew mins Ago"];
+    NSString *timeStr = [activityMainDict valueForKey:@"LastActivity"];
+    timeStr = [NSString stringWithFormat:@"Available Since\n%@",timeStr];
+    
+    
+    [timeLabel setText:timeStr];
     timeLabel.textAlignment = NSTextAlignmentCenter;
     timeLabel.lineBreakMode = NSLineBreakByWordWrapping;
     timeLabel.numberOfLines = 3;
@@ -499,14 +600,106 @@ minimumLineSpacingForSectionAtIndex:(NSInteger)section {
     if([_availStr isEqualToString:@"No"]){
         [nowButton setBackgroundColor:Green_Color];
         [anyTimeButton setBackgroundColor:Gray_Color];
+        [anyTimeButton setUserInteractionEnabled:NO];
     }
     else{
         [nowButton setBackgroundColor:Gray_Color];
         [anyTimeButton setBackgroundColor:Red_Color];
+        [nowButton setUserInteractionEnabled:NO];
     }
-   
     
+    [self loadActivityImageView];
     
 }
+
+-(IBAction)nowAction:(id)sender{
+    [nowButton setBackgroundColor:Gray_Color];
+    [anyTimeButton setBackgroundColor:Red_Color];
+    [nowButton setUserInteractionEnabled:NO];
+    [anyTimeButton setUserInteractionEnabled:YES];
+   
+    strselectDosomething = [selectedItemsArray componentsJoinedByString:@","];
+    [self loadActivityAPI:Update availableStr:@"Yes" doSomethingId:strselectDosomething];
+    
+}
+-(IBAction)anyTimeAction:(id)sender{
+    [nowButton setBackgroundColor:Green_Color];
+    [anyTimeButton setBackgroundColor:Gray_Color];
+    [anyTimeButton setUserInteractionEnabled:NO];
+    [nowButton setUserInteractionEnabled:YES];
+    strselectDosomething = [selectedItemsArray componentsJoinedByString:@","];
+    [self loadActivityAPI:Update availableStr:@"No" doSomethingId:strselectDosomething];
+}
+
+
+-(void)loadActivityImageView{
+    
+    
+        imageSize =50;
+        commonWidth=19.5;
+    
+
+        space = imageSize / 2;
+        commonHeight = imageSize+15;
+        int imageXPos = 0;
+        int textXPos = 0;
+        if(IS_IPHONE6_Plus){
+             yPos = 300;
+            imageXPos = 50;
+            textXPos = 40;
+            commonWidth=75;
+        }
+        else if (IS_IPHONE6){
+            yPos = 230;
+            imageXPos = 35;
+            textXPos = 25;
+            commonWidth=75;
+        }
+        else{
+            yPos = 152;
+            imageXPos = 35;
+            textXPos = 25;
+            commonWidth=55;
+        }
+       
+       for (int i =0; i <[activityImageArray count]; i++) {
+            hobbiesImage = [[UIImageView alloc]init];
+            titleLabel = [[UILabel alloc]init];
+            hobbiesImage.frame = CGRectMake((i*(commonWidth + imageSize))+ imageXPos, yPos, imageSize, imageSize);
+            NSString *activityStr =[[[activityImageArray objectAtIndex:i]valueForKey:@"name"]uppercaseString];
+        
+            NSString *image =[[activityImageArray objectAtIndex:i]valueForKey:@"ActiveImage"];
+            image= [image stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+            [hobbiesImage setImageWithURL:[NSURL URLWithString:image]];
+               
+            titleLabel.frame = CGRectMake((i*(commonWidth + imageSize))+textXPos, yPos + imageSize+5, imageSize + 20, 15);
+            [titleLabel setFont:[UIFont fontWithName:@"HelveticaNeue-Bold" size:10]];
+            titleLabel.textAlignment = NSTextAlignmentCenter;
+            titleLabel.textColor = Red_Color;
+              
+            titleLabel.text = activityStr;
+            
+            titleLabel.textAlignment = NSTextAlignmentCenter;
+            [activatedView addSubview:hobbiesImage];
+            [activatedView addSubview:titleLabel];
+             NSString *Id = [[activityImageArray objectAtIndex:i]valueForKey:@"Id"];
+             [selectedItemsArray addObject:Id];
+          
+      }
+   
+}
+-(void)loadInvalidSessionAlert:(NSNotification *)notification
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+    [COMMON removeUserDetails];
+    DSHomeViewController*objSplashView =[[DSHomeViewController alloc]initWithNibName:@"DSHomeViewController" bundle:nil];
+    [self.navigationController pushViewController:objSplashView animated:NO];
+    appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+    appDelegate.buttonsView.hidden=YES;
+    appDelegate.SepratorLbl.hidden=YES;
+    [appDelegate.settingButton setBackgroundImage:[UIImage imageNamed:@"setting_icon.png"] forState:UIControlStateNormal];
+
+}
+
 
 @end

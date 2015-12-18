@@ -17,12 +17,15 @@
 #import <MapKit/MapKit.h>
 #import "DSDetailViewController.h"
 #import "CustomAlterview.h"
+
+#define hobbiesbackcolor = [UIColor colorWithRed: (199.0/255.0) green: (65.0/255.0) blue: (81.0/255.0) alpha: 1.0];
+
 @interface DSLocationViewController ()<CLLocationManagerDelegate>
 {
     CustomAlterview *objCustomAlterview;
     DSWebservice *objWebservice;
     AppDelegate *appDelegate;
-    NSString * strsessionID;
+    
     NSString * longitude;
     NSString * laditude;
     BOOL isFilteraction;
@@ -30,6 +33,12 @@
     BOOL isLoadData;
     NSString *profileUserID;
     UILabel * usernotfoundlbl;
+     UIRefreshControl *refreshControl;
+    BOOL              isAllPost;
+     NSString          *currentloadPage;
+    
+    NSString * onlineStatus;
+    NSString * avalibleGenderStatus;
 }
 @property(nonatomic,strong)IBOutlet NSLayoutConstraint * collectionviewxpostion;
 @property(nonatomic,strong)IBOutlet NSLayoutConstraint * filterviewxposition;
@@ -43,6 +52,8 @@
 @property(nonatomic,strong) IBOutlet UIButton *FemaleBtn;
 @property(nonatomic,strong) IBOutlet UIButton *avablebothBtn;
 
+@property(nonatomic,strong) IBOutlet UISwipeGestureRecognizer * locationviewSwipright;
+
 @end
 
 @implementation DSLocationViewController
@@ -51,14 +62,18 @@
 @synthesize profileImages,profileNames,kiloMeterlabel,userID,dosomethingImageArry,commonlocationArray;
 - (void)viewDidLoad {
     
+    refreshControl = [[UIRefreshControl alloc] init];
+    
+    [refreshControl addTarget:self action:@selector(releaseToRefresh:) forControlEvents:UIControlEventValueChanged];
+    [self.locationCollectionView addSubview:refreshControl];
+
+    
     NSMutableDictionary *dic=[[NSMutableDictionary alloc]init];
     
     dic =[[NSUserDefaults standardUserDefaults] valueForKey:USERDETAILS];
     
-    strsessionID =[dic valueForKey:@"SessionId"];
     longitude    =[dic valueForKey:@"longitude"];
     laditude     =[dic valueForKey:@"latitude"];
-    NSLog(@"usersessionID:%@",strsessionID);
     
     objWebservice =[[DSWebservice alloc]init];
     
@@ -74,6 +89,11 @@
     
     [super viewWillAppear:animated];
     [self.navigationItem setHidesBackButton:YES animated:NO];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(loadInvalidSessionAlert:)
+                                                 name:@"InvalidSession"
+                                               object:nil];
     [self getUserCurrenLocation];
     [self loadCustomNavigationview];
     UINib *cellNib = [UINib nibWithNibName:@"LocationCollectionViewCell" bundle:nil];
@@ -113,6 +133,10 @@
     
     [self filterPageButtonAction];
 
+    UISwipeGestureRecognizer * swiperight=[[UISwipeGestureRecognizer alloc]initWithTarget:self action:@selector(swiperight:)];
+    swiperight.direction=UISwipeGestureRecognizerDirectionRight;
+    
+    [self.locationCollectionView addGestureRecognizer:swiperight];
     
     
 }
@@ -178,6 +202,20 @@
     [self.avablebothBtn.layer setBorderColor:[[UIColor whiteColor] CGColor]];
     
 }
+
+-(void)loadInvalidSessionAlert:(NSNotification *)notification
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+    [COMMON removeUserDetails];
+    DSHomeViewController*objSplashView =[[DSHomeViewController alloc]initWithNibName:@"DSHomeViewController" bundle:nil];
+    [self.navigationController pushViewController:objSplashView animated:NO];
+    appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+    appDelegate.buttonsView.hidden=YES;
+    appDelegate.SepratorLbl.hidden=YES;
+    [appDelegate.settingButton setBackgroundImage:[UIImage imageNamed:@"setting_icon.png"] forState:UIControlStateNormal];
+    
+}
+
 #pragma mark get user CurrentLocation
 
 - (void)getUserCurrenLocation{
@@ -217,6 +255,18 @@
     NSLog(@"current latitude & longitude for main view = %@ & %@",currentLatitude,currentLongitude);
     [self nearestLocationWebservice];
     
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        
+        [self loadLocationUpdateAPI];
+        dispatch_async(dispatch_get_main_queue(), ^(){
+            
+            
+        });
+        
+        
+    });
+    
+    
 }
 
 - (void)locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error
@@ -225,12 +275,25 @@
     NSLog(@"Cannot find the location for main view.");
 }
 
+-(void)loadLocationUpdateAPI{
+    
+    [objWebservice locationUpdate:LocationUpdate_API sessionid:[COMMON getSessionID] latitude:currentLatitude longitude:currentLongitude
+                          success:^(AFHTTPRequestOperation *operation, id responseObject){
+                              NSLog(@"responseObject = %@",responseObject);
+                          }
+                          failure:^(AFHTTPRequestOperation *operation, id error) {
+                              
+                              [self showAltermessage:[NSString stringWithFormat:@"%@",error]];
+                          }];
+    
+    
+}
 
 -(void)nearestLocationWebservice
 {
     [COMMON LoadIcon:self.view];
        [objWebservice nearestUsers:NearestUsers_API
-                         sessionid:strsessionID
+                         sessionid:[COMMON getSessionID]
                           latitude:currentLatitude
                          longitude:currentLongitude
                      filter_status:@""
@@ -245,13 +308,7 @@
             NSMutableArray * nearestUserdetaile =[[NSMutableArray alloc]init];
             nearestUserdetaile =[[responseObject valueForKey:@"nearestusers"] valueForKey:@"UserList"];
             commonlocationArray =[nearestUserdetaile mutableCopy];
-            profileNames     =[nearestUserdetaile valueForKey:@"first_name"];
-            kiloMeterlabel   =[nearestUserdetaile valueForKey:@"distance"];
-            profileImages    =[nearestUserdetaile valueForKey:@"image1"];
-            userID           =[nearestUserdetaile valueForKey:@"user_id"];
-            dosomethingImageArry=[[nearestUserdetaile valueForKey:@"dosomething"]mutableCopy];
-            
-                    [locationCollectionView reloadData];
+                [locationCollectionView reloadData];
                     NSLog(@"%@",nearestUserdetaile);
             
            
@@ -273,9 +330,13 @@
              }
         
             [COMMON removeLoading];
-        
-        
-        }
+//         }
+//         else{
+//             isAllPost = YES;
+//             [COMMON removeLoading];
+//         }
+        [refreshControl endRefreshing];
+}
     failure:^(AFHTTPRequestOperation *operation, id error) {
         
         [COMMON removeLoading];
@@ -296,7 +357,7 @@
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
-    return [profileNames count];
+    return [commonlocationArray count];
 }
 
 -(UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
@@ -307,13 +368,33 @@
     if(IS_IPHONE6)
         locationCellView.bounds = CGRectMake(0,0, 100, 180);
     
-    NSString *MyPatternString = [profileImages objectAtIndex:indexPath.row];
+
     
-    locationCellView.nameProfile.text =[profileNames objectAtIndex:indexPath.row];
-    locationCellView.kiloMeter.text=[kiloMeterlabel objectAtIndex:indexPath.row];
-    //NSString *image =[[[dosomethingImageArry valueForKey:@"ActiveImage"]objectAtIndex:indexPath.section]objectAtIndex:indexPath.row];
+    NSString *MyPatternString = [[commonlocationArray valueForKey:@"image1"] objectAtIndex:indexPath.row];
     
-    //[locationCellView.dosomethingImage2 setImageWithURL:[NSURL URLWithString:image]];
+    locationCellView.nameProfile.text =[[commonlocationArray valueForKey:@"first_name"] objectAtIndex:indexPath.row];
+    locationCellView.kiloMeter.text=[[commonlocationArray valueForKey:@"distance"] objectAtIndex:indexPath.row];
+    NSString * avalableStr =[[commonlocationArray valueForKey:@"available_now"] objectAtIndex:indexPath.row];
+    locationCellView.activeNow.text=([avalableStr isEqualToString:@"Yes"])?@"NOW":@"";
+    locationCellView.activeNow.backgroundColor=([avalableStr isEqualToString:@"Yes"])?[UIColor whiteColor]:[UIColor clearColor];
+    NSString* reguestStr = [[commonlocationArray valueForKey:@"send_request"] objectAtIndex:indexPath.row];
+    
+    locationCellView.sendRequest.text = ([reguestStr isEqualToString:@"No"])?@"Send Request":@"Request Sent!";
+    locationCellView.hobbiesImagebackView.backgroundColor =([reguestStr isEqualToString:@"No"])?[UIColor colorWithRed:(218/255.0) green:(40/255.0) blue:(64.0/255.0f) alpha:1.0]:[UIColor whiteColor];
+    
+   NSMutableArray * dosomethingImageSprateArry =[[commonlocationArray valueForKey:@"dosomething"]objectAtIndex:indexPath.row];
+     NSLog(@"indexPath.row=%ld",(long)indexPath.row);
+   
+    dosomethingImageArry = [dosomethingImageSprateArry valueForKey:@"NearbyImage"];
+    NSString *dosomethingImage1=[dosomethingImageArry objectAtIndex:0];
+    NSString *dosomethingImage2=[dosomethingImageArry objectAtIndex:1];
+    NSString *dosomethingImage3=[dosomethingImageArry objectAtIndex:2];
+
+    
+    [locationCellView.dosomethingImage1 setImageWithURL:[NSURL URLWithString:dosomethingImage1]];
+     [locationCellView.dosomethingImage2 setImageWithURL:[NSURL URLWithString:dosomethingImage2]];
+     [locationCellView.dosomethingImage3 setImageWithURL:[NSURL URLWithString:dosomethingImage3]];
+    
     MyPatternString= [MyPatternString stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
     if(MyPatternString == nil || [MyPatternString isEqualToString:@""])
     {
@@ -332,6 +413,7 @@
     
     locationCellView.imageProfile.layer.masksToBounds = YES;
     
+
     return locationCellView;
 }
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
@@ -369,7 +451,7 @@
     UICollectionViewCell *cell = [collectionView cellForItemAtIndexPath:indexPath];
     NSLog(@"touched cell %@ at indexPath %@", cell, indexPath);
     
-    profileUserID=[userID objectAtIndex:indexPath.row];
+    profileUserID=[[commonlocationArray valueForKey:@"user_id"] objectAtIndex:indexPath.row];
     NSLog(@"profileUserID%@",profileUserID);
     
     
@@ -378,11 +460,30 @@
     NSLog(@"%ld", (long)indexPath.row);
     
 }
+
+- (void)collectionView:(UICollectionView *)collectionView willDisplayCell:(UICollectionViewCell *)cell forItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    NSLog(@"profileNames count=%lu",(unsigned long)profileNames.count);
+    if (([profileNames count]-1) == indexPath.row ) {
+        
+        int x = [currentloadPage intValue];
+        
+        x ++;
+        
+        currentloadPage= [NSString stringWithFormat:@"%d",x];
+        
+        //[self nearestLocationWebservice];
+        
+    }
+
+}
+
+
 -(void)getUserDetails{
     
     [COMMON LoadIcon:self.view];
     [objWebservice getUserDetails:UserDetails_API
-                        sessionid:strsessionID
+                        sessionid:[COMMON getSessionID]
                   profile_user_id:profileUserID
                           success:^(AFHTTPRequestOperation *operation, id responseObject) {
                                NSLog(@"responseObject%@",responseObject);
@@ -424,12 +525,12 @@
         self.filterviewxposition.constant    =65;
         [self filterviewPosition];
         isFilteraction=YES;
-        [self.locationCollectionView setUserInteractionEnabled:NO];
+        [self.locationCollectionView setUserInteractionEnabled:YES];
     }
     else if (isFilteraction==YES)
     {
         self.collectionviewxpostion.constant =10;
-        self.CollectionviewWidth.constant    =self.view.frame.size.width;
+        self.CollectionviewWidth.constant    =self.view.frame.size.width-10;
         self.filterviewxposition.constant    = self.CollectionviewWidth.constant+10;
         [self filterviewPosition];
         isFilteraction=NO;
@@ -441,8 +542,9 @@
 -(void)filterviewPosition
 {
     appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
-            appDelegate.SepratorLbl.frame =CGRectMake(self.collectionviewxpostion.constant-15,self.view.frame.origin.y+self.view.frame.size.height-53,self.view.frame.size.width,3);
-        appDelegate.buttonsView.frame=CGRectMake(self.collectionviewxpostion.constant-15,self.view.frame.origin.y+self.view.frame.size.height-50,self.view.frame.size.width,50);
+    
+        appDelegate.buttonsView.frame=CGRectMake(self.collectionviewxpostion.constant-10,self.view.frame.origin.y+self.view.frame.size.height-50,self.view.frame.size.width,50);
+    appDelegate.SepratorLbl.frame =CGRectMake(self.collectionviewxpostion.constant-10,appDelegate.buttonsView.frame.origin.y-2,self.view.frame.size.width,3);
 
     
 }
@@ -453,18 +555,42 @@
         self.onlineBtn.backgroundColor =[UIColor redColor];
         self.offlineBtn.backgroundColor =[UIColor whiteColor];
         self.statusBothBtn.backgroundColor=[UIColor whiteColor];
+        onlineStatus=@"1";
     }
     else if ([sender tag] == 302)
     {
         self.onlineBtn.backgroundColor =[UIColor whiteColor];
         self.offlineBtn.backgroundColor =[UIColor redColor];
         self.statusBothBtn.backgroundColor=[UIColor whiteColor];
+        onlineStatus =@"0";
     }
     else if ([sender tag] == 303)
     {
         self.onlineBtn.backgroundColor =[UIColor whiteColor];
         self.offlineBtn.backgroundColor =[UIColor whiteColor];
         self.statusBothBtn.backgroundColor=[UIColor redColor];
+        onlineStatus =@"";
+    }
+    else if ([sender tag]== 304)
+    {
+        self.maleBtn.backgroundColor =[UIColor redColor];
+        self.FemaleBtn.backgroundColor =[UIColor whiteColor];
+        self.avablebothBtn.backgroundColor=[UIColor whiteColor];
+         avalibleGenderStatus =@"male";
+    }
+    else if ([sender tag] == 305)
+    {
+        self.maleBtn.backgroundColor =[UIColor whiteColor];
+        self.FemaleBtn.backgroundColor =[UIColor redColor];
+        self.avablebothBtn.backgroundColor=[UIColor whiteColor];
+        avalibleGenderStatus =@"female";
+    }
+    else if ([sender tag] == 306)
+    {
+        self.maleBtn.backgroundColor =[UIColor whiteColor];
+        self.FemaleBtn.backgroundColor =[UIColor whiteColor];
+        self.avablebothBtn.backgroundColor=[UIColor redColor];
+        avalibleGenderStatus =@"";
     }
 }
 
@@ -509,6 +635,24 @@
     objCustomAlterview.alertMsgLabel.numberOfLines = 2;
     [objCustomAlterview.alertMsgLabel setTextColor:[UIColor colorWithRed:(255/255.0f) green:(255/255.0f) blue:(255/255.0f) alpha:1.0f]];
     
+}
+
+#pragma mark - UIRefresh Control Delegate
+
+- (void)releaseToRefresh:(UIRefreshControl *)_refreshControl
+{
+    currentloadPage=@"1";
+    [self nearestLocationWebservice];
+}
+
+-(void)swiperight:(UISwipeGestureRecognizer*)gestureRecognizer
+{
+    self.collectionviewxpostion.constant =10;
+    self.CollectionviewWidth.constant    =self.view.frame.size.width-10;
+    self.filterviewxposition.constant    = self.CollectionviewWidth.constant+10;
+    [self filterviewPosition];
+    isFilteraction=NO;
+    [self.locationCollectionView setUserInteractionEnabled:YES];
 }
 
 - (void)didReceiveMemoryWarning {

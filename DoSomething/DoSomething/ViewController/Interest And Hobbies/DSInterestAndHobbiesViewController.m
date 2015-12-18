@@ -15,6 +15,10 @@
 #import "OpenUDID.h"
 #import "UIImageView+AFNetworking.h"
 #import "AppDelegate.h"
+
+
+
+
 @interface DSInterestAndHobbiesViewController ()<UICollectionViewDataSource,UICollectionViewDelegate>
 {
     NSMutableArray*sectionNameArray;
@@ -56,6 +60,11 @@
 }
 
 -(void)viewWillAppear:(BOOL)animated{
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(loadInvalidSessionAlert:)
+                                                 name:@"InvalidSession"
+                                               object:nil];
     profileDict=[[NSMutableDictionary alloc]init];
     profileDict =[[NSUserDefaults standardUserDefaults] valueForKey:USERDETAILS];
     self.navigationController.navigationBarHidden=NO;
@@ -149,6 +158,18 @@
     
 }
 
+-(void)loadInvalidSessionAlert:(NSNotification *)notification
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+    [COMMON removeUserDetails];
+    DSHomeViewController*objSplashView =[[DSHomeViewController alloc]initWithNibName:@"DSHomeViewController" bundle:nil];
+    [self.navigationController pushViewController:objSplashView animated:NO];
+    appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+    appDelegate.buttonsView.hidden=YES;
+    appDelegate.SepratorLbl.hidden=YES;
+    [appDelegate.settingButton setBackgroundImage:[UIImage imageNamed:@"setting_icon.png"] forState:UIControlStateNormal];
+}
+
 -(void)initializeArray{
     
     UINib *cellNib = [UINib nibWithNibName:@"DSInterestAndHobbiesCollectionViewCell" bundle:nil];
@@ -179,23 +200,23 @@
        // [interestAndHobbiesCollectionView reloadData];
     }
    
-        for(NSArray * bobbiesstr in interstAndHobbiesArray)
-            {
-                for(NSDictionary * spratestr in  bobbiesstr)
-                {
-                    for(NSString * string in profileDetailsArray)
-                    {
-                        if([[string valueForKey:@"image"]  isEqualToString:[spratestr valueForKey:@"image"]])
-                        {
-                            NSLog(@"yes");
-                        }
-                        else{
-                            NSLog(@"no");
-                        }
-
-                }
-                        }
-    }
+//        for(NSArray * bobbiesstr in interstAndHobbiesArray)
+//            {
+//                for(NSDictionary * spratestr in  bobbiesstr)
+//                {
+//                    for(NSString * string in profileDetailsArray)
+//                    {
+//                        if([[string valueForKey:@"image"]  isEqualToString:[spratestr valueForKey:@"image"]])
+//                        {
+//                            NSLog(@"yes");
+//                        }
+//                        else{
+//                            NSLog(@"no");
+//                        }
+//
+//                }
+//                        }
+//    }
     
     
    }
