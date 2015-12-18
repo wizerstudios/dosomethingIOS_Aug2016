@@ -24,6 +24,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="DSLocationViewController">
             <connections>
+                <outlet property="CollectionviewWidth" destination="RVM-CS-C9f" id="nRT-ax-sS1"/>
                 <outlet property="FemaleBtn" destination="SPZ-Gb-emr" id="7Cy-Dl-FKI"/>
                 <outlet property="avablebothBtn" destination="ehZ-tW-FxO" id="wlY-7G-GjO"/>
                 <outlet property="collectionviewxpostion" destination="AK0-aj-zIk" id="1cz-dX-N4r"/>

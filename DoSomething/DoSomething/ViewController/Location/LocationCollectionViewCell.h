@@ -14,7 +14,9 @@
 @property(nonatomic,retain)IBOutlet UILabel *nameProfile;
 @property(nonatomic,retain)IBOutlet UILabel *sendRequest;
 @property(nonatomic,retain)IBOutlet UILabel *activeNow;
-
+@property (nonatomic,strong)IBOutlet UIImageView* dosomethingImage1;
+@property (nonatomic,strong)IBOutlet UIImageView* dosomethingImage2;
+@property (nonatomic,strong)IBOutlet UIImageView * dosomethingImage3;
 @property(nonatomic,retain)IBOutlet UIImageView *hobbiesImage;
 
 
