@@ -18,6 +18,7 @@
 @property (nonatomic,strong)IBOutlet UIImageView* dosomethingImage2;
 @property (nonatomic,strong)IBOutlet UIImageView * dosomethingImage3;
 @property(nonatomic,retain)IBOutlet  UIView * hobbiesImagebackView;
+@property(nonatomic,strong)IBOutlet UIButton *requestsendBtn;
 
 
 
