@@ -357,30 +357,22 @@
     //imageNormalArray
     UIView *myInterestsView;
     
-    if([imageNormalArray count]<=1){
-        myInterestsView=[[UIView alloc]initWithFrame:CGRectMake(14, 367, 290, 10)];
+
+    if([imageNormalArray count] <=5){
+        myInterestsView=[[UIView alloc]initWithFrame:CGRectMake(14, 367, 290, 90)];
     }
-    if([imageNormalArray count] <=4){
-        myInterestsView=[[UIView alloc]initWithFrame:CGRectMake(14, 367, 290, 50)];
-    }
-    if([imageNormalArray count] <9 && [imageNormalArray count] >=5){
-        myInterestsView=[[UIView alloc]initWithFrame:CGRectMake(14, 367, 290,50)];
-    }
-    if([imageNormalArray count] <9 && [imageNormalArray count] >5){
+
+    if([imageNormalArray count] >5 && [imageNormalArray count] <=10){
         myInterestsView=[[UIView alloc]initWithFrame:CGRectMake(14, 367, 290,160)];
     }
-    if([imageNormalArray count] ==10){
-        myInterestsView=[[UIView alloc]initWithFrame:CGRectMake(14, 367, 290,160)];
-    }
+
     if([imageNormalArray count] >10){
         myInterestsView=[[UIView alloc]initWithFrame:CGRectMake(14, 367, 290,200)];
     }
     if([imageNormalArray count] >15){
         myInterestsView=[[UIView alloc]initWithFrame:CGRectMake(14, 368, 290,265)];
     }
-    else{
-         myInterestsView=[[UIView alloc]initWithFrame:CGRectMake(14, 367, 290,160)];
-    }
+    
     UILabel *myInterests = [[UILabel alloc] initWithFrame:CGRectMake(10,5,170,20)];
     //myInterests.autoresizingMask = paintView.autoresizingMask;
     myInterests.text = NSLocalizedString(@"My Interest and Hobbies", @"");
@@ -448,20 +440,14 @@
     }
     if([hobbiesNameArray count] <=5){
         self.detailPageMainScroll.contentInset = UIEdgeInsetsMake(0, 0, -50, 0);
-        
-        
-    }
-    if([hobbiesNameArray count] <=10 && [hobbiesNameArray count] >5){
+     }
+    if([hobbiesNameArray count] >5 && [hobbiesNameArray count]<=10){
         self.detailPageMainScroll.contentInset = UIEdgeInsetsMake(0, 0, 20, 0);
-        
-        
-    }
+     }
     
     if([hobbiesNameArray count] >10){
         self.detailPageMainScroll.contentInset = UIEdgeInsetsMake(0, 0, 60, 0);
         
-        
-
     }
     if([hobbiesNameArray count] >15){
         self.detailPageMainScroll.contentInset = UIEdgeInsetsMake(0, 0, 125, 0);
