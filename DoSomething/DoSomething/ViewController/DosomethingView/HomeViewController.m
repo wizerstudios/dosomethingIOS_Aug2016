@@ -550,10 +550,12 @@ minimumLineSpacingForSectionAtIndex:(NSInteger)section {
     if([_availStr isEqualToString:@"No"]){
         [nowButton setBackgroundColor:Green_Color];
         [anyTimeButton setBackgroundColor:Gray_Color];
+        [anyTimeButton setUserInteractionEnabled:NO];
     }
     else{
         [nowButton setBackgroundColor:Gray_Color];
         [anyTimeButton setBackgroundColor:Red_Color];
+        [nowButton setUserInteractionEnabled:NO];
     }
     
     [self loadActivityImageView];
@@ -565,6 +567,9 @@ minimumLineSpacingForSectionAtIndex:(NSInteger)section {
     [anyTimeButton setBackgroundColor:Red_Color];
     [nowButton setUserInteractionEnabled:NO];
     [anyTimeButton setUserInteractionEnabled:YES];
+   
+    strselectDosomething = [selectedItemsArray componentsJoinedByString:@","];
+    [self loadActivityAPI:Update availableStr:@"Yes" doSomethingId:strselectDosomething];
     
 }
 -(IBAction)anyTimeAction:(id)sender{
@@ -572,6 +577,8 @@ minimumLineSpacingForSectionAtIndex:(NSInteger)section {
     [anyTimeButton setBackgroundColor:Gray_Color];
     [anyTimeButton setUserInteractionEnabled:NO];
     [nowButton setUserInteractionEnabled:YES];
+    strselectDosomething = [selectedItemsArray componentsJoinedByString:@","];
+    [self loadActivityAPI:Update availableStr:@"No" doSomethingId:strselectDosomething];
 }
 
 
@@ -604,11 +611,7 @@ minimumLineSpacingForSectionAtIndex:(NSInteger)section {
             textXPos = 25;
             commonWidth=55;
         }
-   
-    
-    
-        NSLog(@"dddd = %@",hobbiesImage.image);
-        NSLog(@"dd = %@",titleLabel.text);
+       
        for (int i =0; i <[activityImageArray count]; i++) {
             hobbiesImage = [[UIImageView alloc]init];
             titleLabel = [[UILabel alloc]init];
@@ -629,6 +632,8 @@ minimumLineSpacingForSectionAtIndex:(NSInteger)section {
             titleLabel.textAlignment = NSTextAlignmentCenter;
             [activatedView addSubview:hobbiesImage];
             [activatedView addSubview:titleLabel];
+             NSString *Id = [[activityImageArray objectAtIndex:i]valueForKey:@"Id"];
+             [selectedItemsArray addObject:Id];
           
       }
    
