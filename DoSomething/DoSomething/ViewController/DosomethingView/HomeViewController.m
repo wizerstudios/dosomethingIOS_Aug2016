@@ -235,16 +235,14 @@
     
     NSLog(@"current latitude & longitude for main view = %@ & %@",currentLatitude,currentLongitude);
     
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        
-        [self loadLocationUpdateAPI];
-        dispatch_async(dispatch_get_main_queue(), ^(){
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
             
+            [self loadLocationUpdateAPI];
+            dispatch_async(dispatch_get_main_queue(), ^(){
+                
+            });
             
         });
-        
-        
-    });
   
     
 }
@@ -494,15 +492,13 @@ minimumLineSpacingForSectionAtIndex:(NSInteger)section {
 -(void)loadLocationUpdateAPI{
     
     [objWebService locationUpdate:LocationUpdate_API sessionid:[COMMON getSessionID] latitude:currentLatitude longitude:currentLongitude
-                          success:^(AFHTTPRequestOperation *operation, id responseObject)
-     {
-         NSLog(@"responseObject = %@",responseObject);
-     }
+                          success:^(AFHTTPRequestOperation *operation, id responseObject){
+                          NSLog(@"responseObject = %@",responseObject);
+                        }
                           failure:^(AFHTTPRequestOperation *operation, id error) {
                               
-                              
                               [self showAltermessage:[NSString stringWithFormat:@"%@",error]];
-                          }];
+                        }];
 
     
 }

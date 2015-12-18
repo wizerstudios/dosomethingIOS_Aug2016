@@ -234,6 +234,18 @@
     NSLog(@"current latitude & longitude for main view = %@ & %@",currentLatitude,currentLongitude);
     [self nearestLocationWebservice];
     
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        
+        [self loadLocationUpdateAPI];
+        dispatch_async(dispatch_get_main_queue(), ^(){
+            
+            
+        });
+        
+        
+    });
+    
+    
 }
 
 - (void)locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error
@@ -242,6 +254,19 @@
     NSLog(@"Cannot find the location for main view.");
 }
 
+-(void)loadLocationUpdateAPI{
+    
+    [objWebservice locationUpdate:LocationUpdate_API sessionid:[COMMON getSessionID] latitude:currentLatitude longitude:currentLongitude
+                          success:^(AFHTTPRequestOperation *operation, id responseObject){
+                              NSLog(@"responseObject = %@",responseObject);
+                          }
+                          failure:^(AFHTTPRequestOperation *operation, id error) {
+                              
+                              [self showAltermessage:[NSString stringWithFormat:@"%@",error]];
+                          }];
+    
+    
+}
 
 -(void)nearestLocationWebservice
 {
