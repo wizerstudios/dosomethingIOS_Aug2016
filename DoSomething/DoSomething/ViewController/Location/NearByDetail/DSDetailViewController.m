@@ -378,9 +378,7 @@
     if([imageNormalArray count] >15){
         myInterestsView=[[UIView alloc]initWithFrame:CGRectMake(14, 368, 290,265)];
     }
-    else{
-         myInterestsView=[[UIView alloc]initWithFrame:CGRectMake(14, 367, 290,160)];
-    }
+    
     UILabel *myInterests = [[UILabel alloc] initWithFrame:CGRectMake(10,5,170,20)];
     //myInterests.autoresizingMask = paintView.autoresizingMask;
     myInterests.text = NSLocalizedString(@"My Interest and Hobbies", @"");
@@ -448,20 +446,14 @@
     }
     if([hobbiesNameArray count] <=5){
         self.detailPageMainScroll.contentInset = UIEdgeInsetsMake(0, 0, -50, 0);
-        
-        
-    }
+     }
     if([hobbiesNameArray count] <=10 && [hobbiesNameArray count] >5){
         self.detailPageMainScroll.contentInset = UIEdgeInsetsMake(0, 0, 20, 0);
-        
-        
-    }
+     }
     
     if([hobbiesNameArray count] >10){
         self.detailPageMainScroll.contentInset = UIEdgeInsetsMake(0, 0, 60, 0);
         
-        
-
     }
     if([hobbiesNameArray count] >15){
         self.detailPageMainScroll.contentInset = UIEdgeInsetsMake(0, 0, 125, 0);
