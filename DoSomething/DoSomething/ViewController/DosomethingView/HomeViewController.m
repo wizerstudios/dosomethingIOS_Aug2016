@@ -55,6 +55,10 @@
     float yPos;
     float imageSize;
     float space;
+    
+    UIImageView *hobbiesImage;
+    
+    UILabel *titleLabel;
    
 }
 @end
@@ -388,8 +392,8 @@ minimumLineSpacingForSectionAtIndex:(NSInteger)section {
 #pragma mark - pressDosomethingAction
 - (IBAction)pressDosomething:(id)sender {
     if([sender tag] == 1000){
-        [bottombutton setUserInteractionEnabled:NO];
-      // [self loadActivityAPI:Cancel availableStr:@"" doSomethingId:@""];
+       // [bottombutton setUserInteractionEnabled:NO];
+       [self loadActivityAPI:Cancel availableStr:@"" doSomethingId:@""];
     }else{
         if([selectedItemsArray count] == 3){
             isInitialLoadingAPI = NO;
@@ -430,7 +434,7 @@ minimumLineSpacingForSectionAtIndex:(NSInteger)section {
     objCustomAlterview.alertBgView.hidden = YES;
     objCustomAlterview.alertMainBgView.hidden = YES;
     [objCustomAlterview.view setHidden:YES];
-    strselectDosomething = [selectedArray componentsJoinedByString:@","];
+    strselectDosomething = [selectedItemsArray componentsJoinedByString:@","];
     [self loadActivityAPI:Update availableStr:@"No" doSomethingId:strselectDosomething];
     //[self loadupdateDosomethingWebService:strselectDosomething :@"No"];
 }
@@ -466,41 +470,52 @@ minimumLineSpacingForSectionAtIndex:(NSInteger)section {
      {
          NSLog(@"response object = %@",responseObject);
          
-//         if([responseObject containsObject:@"error"]){
-//             
-//         }
          activityMainDict = [responseObject valueForKey:@"activity"];
-        
-         id activityList = [activityMainDict valueForKey:@"activityList"];
+         NSString *msgString = [activityMainDict valueForKey:@"Message"];
          
-         NSLog(@"activityList = %@",activityList);
-         
-         if([activityList isKindOfClass:[NSArray class]]){
-             NSLog(@"activity list");
-             activityImageArray = [activityList mutableCopy];
-             NSString *availStr = [activityMainDict valueForKey:@"Available"];
-             [self displayActivityView:availStr];
-            
+         if([msgString isEqualToString:@"Activity Canelled successfully"]){
+             [self showAltermessage:msgString];
+             [activatedView setHidden:YES];
+             [self.homeCollectionView setAlpha:1];
+             [self.homeCollectionView setUserInteractionEnabled:YES];
+             [activityImageArray removeAllObjects];
+             isSelectMenu = NO;
+             [selectedItemsArray removeAllObjects];
+             [self.homeCollectionView reloadData];
+             [bottombutton setTag:1001];
+             [bottombutton setTitle:@"Let's Do Something!" forState:UIControlStateNormal];
          }
          else{
-             if(isInitialLoadingAPI == NO){
-                 objCustomAlterview.view .hidden  = NO;
-                 objCustomAlterview.alertBgView.hidden = NO;
-                 objCustomAlterview.alertMainBgView.hidden = NO;
-                 objCustomAlterview.btnYes.hidden = NO;
-                 objCustomAlterview.btnNo.hidden = NO;
-                 objCustomAlterview.alertCancelButton.hidden = NO;
-                 objCustomAlterview.alertMsgLabel.text = @"AVAILABLE NOW?";
-                 objCustomAlterview.alertMsgLabel.textAlignment = NSTextAlignmentCenter;
-                 objCustomAlterview. alertMsgLabel.lineBreakMode = NSLineBreakByWordWrapping;
-                 objCustomAlterview.alertMsgLabel.textColor = [UIColor whiteColor];
-
+             id activityList = [activityMainDict valueForKey:@"activityList"];
+             
+             NSLog(@"activityList = %@",activityList);
+             
+             if([activityList isKindOfClass:[NSArray class]]){
+                 NSLog(@"activity list");
+                 activityImageArray = [activityList mutableCopy];
+                 NSString *availStr = [activityMainDict valueForKey:@"Available"];
+                 [self displayActivityView:availStr];
+                
              }
-             
-             [bottombutton setTitle:@"Let's Do Something!" forState:UIControlStateNormal];
-             
+             else{
+                 if(isInitialLoadingAPI == NO){
+                     objCustomAlterview.view .hidden  = NO;
+                     objCustomAlterview.alertBgView.hidden = NO;
+                     objCustomAlterview.alertMainBgView.hidden = NO;
+                     objCustomAlterview.btnYes.hidden = NO;
+                     objCustomAlterview.btnNo.hidden = NO;
+                     objCustomAlterview.alertCancelButton.hidden = NO;
+                     objCustomAlterview.alertMsgLabel.text = @"AVAILABLE NOW?";
+                     objCustomAlterview.alertMsgLabel.textAlignment = NSTextAlignmentCenter;
+                     objCustomAlterview. alertMsgLabel.lineBreakMode = NSLineBreakByWordWrapping;
+                     objCustomAlterview.alertMsgLabel.textColor = [UIColor whiteColor];
+
+                 }
+                 
+                 [bottombutton setTitle:@"Let's Do Something!" forState:UIControlStateNormal];
+                 
+             }
          }
-         
 
      }
        failure:^(AFHTTPRequestOperation *operation, id error) {
@@ -511,6 +526,20 @@ minimumLineSpacingForSectionAtIndex:(NSInteger)section {
 }
 
 -(void)displayActivityView:(NSString *)_availStr{
+    
+    
+    for( UIImageView *subView in [activatedView subviews])
+    {
+        if ([subView isKindOfClass:[UIImageView class]]) {
+            [subView removeFromSuperview];
+        }
+        
+    }
+    for(UILabel *label in [activatedView subviews]){
+        if ([label isKindOfClass:[UILabel class]]&& label.tag !=100) {
+            [label removeFromSuperview];
+        }
+    }
     
     [activatedView setHidden:NO];
     [self.view setBackgroundColor:[UIColor clearColor]];
@@ -574,30 +603,34 @@ minimumLineSpacingForSectionAtIndex:(NSInteger)section {
             textXPos = 25;
             commonWidth=55;
         }
-      for (int i =0; i< [activityImageArray count]; i++) {
-        UIImageView *hobbiesImage;
-        hobbiesImage = [[UIImageView alloc]initWithFrame:CGRectMake((i*(commonWidth + imageSize))+ imageXPos, yPos, imageSize, imageSize)];
-        NSString *activityStr =[[[activityImageArray objectAtIndex:i]valueForKey:@"name"]uppercaseString];
-        UILabel *titleLabel;
+   
     
-        NSString *image =[[activityImageArray objectAtIndex:i]valueForKey:@"ActiveImage"];
-        image= [image stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-        [hobbiesImage setImageWithURL:[NSURL URLWithString:image]];
-        [activatedView addSubview:hobbiesImage];
-          
+    
+        NSLog(@"dddd = %@",hobbiesImage.image);
+        NSLog(@"dd = %@",titleLabel.text);
+       for (int i =0; i <[activityImageArray count]; i++) {
+            hobbiesImage = [[UIImageView alloc]init];
+            titleLabel = [[UILabel alloc]init];
+            hobbiesImage.frame = CGRectMake((i*(commonWidth + imageSize))+ imageXPos, yPos, imageSize, imageSize);
+            NSString *activityStr =[[[activityImageArray objectAtIndex:i]valueForKey:@"name"]uppercaseString];
         
-        titleLabel = [[UILabel alloc]initWithFrame:CGRectMake((i*(commonWidth + imageSize))+textXPos, yPos + imageSize+5, imageSize + 20, 15)];
-        [titleLabel setFont:[UIFont fontWithName:@"HelveticaNeue-Bold" size:10]];
-        titleLabel.textAlignment = NSTextAlignmentCenter;
-        titleLabel.textColor = Red_Color;
-          
-        titleLabel.text = activityStr;
-        [activatedView addSubview:titleLabel];
-        titleLabel.textAlignment = NSTextAlignmentCenter;
+            NSString *image =[[activityImageArray objectAtIndex:i]valueForKey:@"ActiveImage"];
+            image= [image stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+            [hobbiesImage setImageWithURL:[NSURL URLWithString:image]];
+               
+            titleLabel.frame = CGRectMake((i*(commonWidth + imageSize))+textXPos, yPos + imageSize+5, imageSize + 20, 15);
+            [titleLabel setFont:[UIFont fontWithName:@"HelveticaNeue-Bold" size:10]];
+            titleLabel.textAlignment = NSTextAlignmentCenter;
+            titleLabel.textColor = Red_Color;
+              
+            titleLabel.text = activityStr;
+            
+            titleLabel.textAlignment = NSTextAlignmentCenter;
+            [activatedView addSubview:hobbiesImage];
+            [activatedView addSubview:titleLabel];
           
       }
-
-
+   
 }
 -(void)loadInvalidSessionAlert:(NSNotification *)notification
 {
