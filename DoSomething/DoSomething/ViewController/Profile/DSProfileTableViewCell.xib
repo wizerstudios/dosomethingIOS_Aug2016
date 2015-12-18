@@ -461,21 +461,27 @@
                                 <color key="textColor" red="0.40000000000000002" green="0.40000000000000002" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="csE-xQ-hoS">
-                                <rect key="frame" x="145" y="3" width="51" height="31"/>
+                            <button opaque="NO" tag="501" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ksm-Un-eR9">
+                                <rect key="frame" x="152" y="10" width="35" height="22"/>
                                 <animations/>
-                                <color key="onTintColor" red="0.90980392160000001" green="0.90980392160000001" blue="0.90980392160000001" alpha="1" colorSpace="calibratedRGB"/>
-                            </switch>
-                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="9U0-PJ-dgh">
-                                <rect key="frame" x="145" y="37" width="51" height="31"/>
+                                <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <state key="normal" image="switch_on">
+                                    <color key="titleColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                </state>
+                            </button>
+                            <button opaque="NO" tag="502" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1BP-HX-6Px">
+                                <rect key="frame" x="153" y="39" width="35" height="22"/>
                                 <animations/>
-                                <color key="onTintColor" red="0.90980392160000001" green="0.90980392160000001" blue="0.90980392160000001" alpha="1" colorSpace="calibratedRGB"/>
-                            </switch>
-                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="sPJ-Or-EAF">
-                                <rect key="frame" x="145" y="69" width="51" height="31"/>
+                                <state key="normal" image="switch_on"/>
+                            </button>
+                            <button opaque="NO" tag="503" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2xI-kw-yw4">
+                                <rect key="frame" x="153" y="71" width="35" height="22"/>
                                 <animations/>
-                                <color key="onTintColor" red="0.90980392160000001" green="0.90980392160000001" blue="0.90980392160000001" alpha="1" colorSpace="calibratedRGB"/>
-                            </switch>
+                                <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <state key="normal" image="switch_on">
+                                    <color key="titleColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                </state>
+                            </button>
                         </subviews>
                         <animations/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -494,11 +500,11 @@
             </tableViewCellContentView>
             <animations/>
             <connections>
-                <outlet property="SoundSwitchBtn" destination="9U0-PJ-dgh" id="lgS-Ny-czB"/>
-                <outlet property="messSwitchBtn" destination="csE-xQ-hoS" id="rgQ-3F-Dun"/>
-                <outlet property="vibrationSwitchBtn" destination="sPJ-Or-EAF" id="esS-f5-h8y"/>
+                <outlet property="SoundSwitchBtn" destination="1BP-HX-6Px" id="5jK-26-QoD"/>
+                <outlet property="messSwitchBtn" destination="ksm-Un-eR9" id="erO-nc-otY"/>
+                <outlet property="vibrationSwitchBtn" destination="2xI-kw-yw4" id="Szi-mX-FKA"/>
             </connections>
-            <point key="canvasLocation" x="300" y="681"/>
+            <point key="canvasLocation" x="300" y="680.5"/>
         </tableViewCell>
         <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="1cD-va-IDg" customClass="DSProfileTableViewCell">
             <rect key="frame" x="0.0" y="0.0" width="300" height="80"/>
@@ -755,5 +761,6 @@
     </objects>
     <resources>
         <image name="Plus_icon" width="37" height="37"/>
+        <image name="switch_on" width="35" height="18"/>
     </resources>
 </document>

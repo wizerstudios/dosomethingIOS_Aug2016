@@ -17,7 +17,7 @@
 @property (nonatomic,strong)IBOutlet UIImageView* dosomethingImage1;
 @property (nonatomic,strong)IBOutlet UIImageView* dosomethingImage2;
 @property (nonatomic,strong)IBOutlet UIImageView * dosomethingImage3;
-@property(nonatomic,retain)IBOutlet UIImageView *hobbiesImage;
+@property(nonatomic,retain)IBOutlet  UIView * hobbiesImagebackView;
 
 
 

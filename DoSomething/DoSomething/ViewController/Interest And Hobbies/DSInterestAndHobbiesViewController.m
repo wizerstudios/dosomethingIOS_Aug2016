@@ -15,6 +15,10 @@
 #import "OpenUDID.h"
 #import "UIImageView+AFNetworking.h"
 #import "AppDelegate.h"
+
+
+
+
 @interface DSInterestAndHobbiesViewController ()<UICollectionViewDataSource,UICollectionViewDelegate>
 {
     NSMutableArray*sectionNameArray;
@@ -179,23 +183,23 @@
        // [interestAndHobbiesCollectionView reloadData];
     }
    
-        for(NSArray * bobbiesstr in interstAndHobbiesArray)
-            {
-                for(NSDictionary * spratestr in  bobbiesstr)
-                {
-                    for(NSString * string in profileDetailsArray)
-                    {
-                        if([[string valueForKey:@"image"]  isEqualToString:[spratestr valueForKey:@"image"]])
-                        {
-                            NSLog(@"yes");
-                        }
-                        else{
-                            NSLog(@"no");
-                        }
-
-                }
-                        }
-    }
+//        for(NSArray * bobbiesstr in interstAndHobbiesArray)
+//            {
+//                for(NSDictionary * spratestr in  bobbiesstr)
+//                {
+//                    for(NSString * string in profileDetailsArray)
+//                    {
+//                        if([[string valueForKey:@"image"]  isEqualToString:[spratestr valueForKey:@"image"]])
+//                        {
+//                            NSLog(@"yes");
+//                        }
+//                        else{
+//                            NSLog(@"no");
+//                        }
+//
+//                }
+//                        }
+//    }
     
     
    }

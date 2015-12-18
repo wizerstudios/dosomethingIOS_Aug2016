@@ -9,7 +9,7 @@
 #import "LocationCollectionViewCell.h"
 
 @implementation LocationCollectionViewCell
-@synthesize imageProfile,nameProfile,kiloMeter,hobbiesImage,dosomethingImage1,dosomethingImage2,dosomethingImage3;
+@synthesize imageProfile,nameProfile,kiloMeter,hobbiesImagebackView,dosomethingImage1,dosomethingImage2,dosomethingImage3;
 - (void)awakeFromNib {
     // Initialization code
 }
