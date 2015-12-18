@@ -93,6 +93,7 @@
     
     [attributedString replaceCharactersInRange:NSMakeRange(0, 0) withAttributedString:attrStringWithImage];
     
+    
    _userName.attributedText = [attributedString copy];
     self.aboutTextBox.text = [userDetailsDict valueForKey:@"about"];
     [_aboutTextBox sizeToFit];

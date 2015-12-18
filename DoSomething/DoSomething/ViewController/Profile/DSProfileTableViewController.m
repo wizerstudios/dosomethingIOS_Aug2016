@@ -21,6 +21,7 @@
 #import "DSTermsOfUseView.h"
 #import "DSHomeViewController.h"
 #import "AppDelegate.h"
+#import "DSTermsViewController.h"
 
 
 
@@ -1652,7 +1653,10 @@ if([[NSUserDefaults standardUserDefaults] valueForKey:@"SelectedItemCategoryID"]
 
 -(IBAction)loadTermsOfUseViewAction:(id)sender
 {
-    [self loadTermsOfUseView];
+    //[self loadTermsOfUseView];
+    DSTermsViewController* termViewController = [[DSTermsViewController alloc] init];
+    
+    [self.navigationController pushViewController:termViewController animated:YES];
 }
 
 -(void)loadTermsOfUseView
@@ -2036,7 +2040,7 @@ if([[NSUserDefaults standardUserDefaults] valueForKey:@"SelectedItemCategoryID"]
     
     [[NSNotificationCenter defaultCenter] removeObserver:self];
     
-    [self showAltermessage:@"Profile Updated Successfully"];
+   // [self showAltermessage:@"Profile Updated Successfully"];
     [COMMON removeLoading];
     
 }

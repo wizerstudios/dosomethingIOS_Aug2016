@@ -138,6 +138,11 @@
     
     [self.locationCollectionView addGestureRecognizer:swiperight];
     
+    [[UISlider appearance] setThumbImage:[UIImage imageNamed:@"dot_Image"] forState:UIControlStateNormal];
+    
+    
+    
+    
     
 }
 -(void)loadCustomNavigationview
