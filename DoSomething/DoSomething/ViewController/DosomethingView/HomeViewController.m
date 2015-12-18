@@ -570,6 +570,20 @@ minimumLineSpacingForSectionAtIndex:(NSInteger)section {
     
 }
 
+-(IBAction)nowAction:(id)sender{
+    [nowButton setBackgroundColor:Gray_Color];
+    [anyTimeButton setBackgroundColor:Red_Color];
+    [nowButton setUserInteractionEnabled:NO];
+    [anyTimeButton setUserInteractionEnabled:YES];
+    
+}
+-(IBAction)anyTimeAction:(id)sender{
+    [nowButton setBackgroundColor:Green_Color];
+    [anyTimeButton setBackgroundColor:Gray_Color];
+    [anyTimeButton setUserInteractionEnabled:NO];
+    [nowButton setUserInteractionEnabled:YES];
+}
+
 
 -(void)loadActivityImageView{
     
