@@ -109,6 +109,8 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    locationManager                 = [[CLLocationManager alloc] init];
+    locationManager.delegate        = self;
     objWebService = [[DSWebservice alloc]init];
     deviceUdid = [OpenUDID value];
     isPick=NO;
@@ -119,6 +121,46 @@
 }
 -(void)viewWillAppear:(BOOL)animated
 {
+    [self loadNavigation];
+    
+    [self getUserCurrenLocation];
+    
+    imageNormalArray =[[NSMutableArray alloc]init];
+    
+    if([profileDict valueForKey:@"hobbieslist"]!=NULL)
+    {
+        [customNavigation.buttonBack setHidden:YES];
+      
+        [self selectitemMethod];
+    }
+       infoArray=[[NSMutableArray alloc]initWithObjects:@"profile_noimg",@"profile_noimg",@"profile_noimg", nil];
+    [self CustomAlterview];
+    if(!isLoadData){
+        [self initializeArray];
+       // [COMMON getUserCurrenLocation];
+        [self profileImageDisplayMethod];
+        isLoadData = YES;
+    }
+    else if(isLoadData == YES && profileDict ==NULL)
+    {
+        
+        interstAndHobbiesArray =[[[NSUserDefaults standardUserDefaults] valueForKey:@"SelectedItem"]mutableCopy];
+        
+        imageNormalArray =[[[NSUserDefaults standardUserDefaults] valueForKey:@"SelectedItemNormal"]mutableCopy];
+        
+        hobbiesNameArray =[[[NSUserDefaults standardUserDefaults] valueForKey:@"SelectedItemName"]mutableCopy];
+        
+        hobbiesCategoryIDArray =[[[NSUserDefaults standardUserDefaults] valueForKey:@"SelectedItemCategoryID"]mutableCopy];
+        
+        
+        strInterestHobbies = [hobbiesCategoryIDArray componentsJoinedByString:@","];
+    }
+
+     [_tableviewProfile reloadData];
+        
+}
+
+-(void)loadNavigation{
     self.navigationController.navigationBarHidden=NO;
     [self.navigationItem setHidesBackButton:YES animated:NO];
     [self.navigationController.navigationBar setTranslucent:YES];
@@ -142,40 +184,6 @@
     [customNavigation.saveBtn addTarget:self action:@selector(saveAction:) forControlEvents:UIControlEventTouchUpInside];
     [customNavigation.buttonBack addTarget:self action:@selector(backAction) forControlEvents:UIControlEventTouchUpInside];
     
-    
-    imageNormalArray =[[NSMutableArray alloc]init];
-    
-    if([profileDict valueForKey:@"hobbieslist"]!=NULL)
-    {
-        [customNavigation.buttonBack setHidden:YES];
-      
-        [self selectitemMethod];
-    }
-       infoArray=[[NSMutableArray alloc]initWithObjects:@"profile_noimg",@"profile_noimg",@"profile_noimg", nil];
-    [self CustomAlterview];
-    if(!isLoadData){
-        [self initializeArray];
-        [COMMON getUserCurrenLocation];
-        [self profileImageDisplayMethod];
-        isLoadData = YES;
-    }
-    else if(isLoadData == YES && profileDict ==NULL)
-    {
-        
-        interstAndHobbiesArray =[[[NSUserDefaults standardUserDefaults] valueForKey:@"SelectedItem"]mutableCopy];
-        
-        imageNormalArray =[[[NSUserDefaults standardUserDefaults] valueForKey:@"SelectedItemNormal"]mutableCopy];
-        
-        hobbiesNameArray =[[[NSUserDefaults standardUserDefaults] valueForKey:@"SelectedItemName"]mutableCopy];
-        
-        hobbiesCategoryIDArray =[[[NSUserDefaults standardUserDefaults] valueForKey:@"SelectedItemCategoryID"]mutableCopy];
-        
-        
-        strInterestHobbies = [hobbiesCategoryIDArray componentsJoinedByString:@","];
-    }
-
-     [_tableviewProfile reloadData];
-        
 }
 -(void)profileImageDisplayMethod
 {
@@ -529,6 +537,24 @@ if([[NSUserDefaults standardUserDefaults] valueForKey:@"SelectedItemCategoryID"]
 
 #pragma mark get user CurrentLocation
 
+- (void)getUserCurrenLocation{
+    
+    if(!locationManager){
+        
+        locationManager.distanceFilter  = kCLLocationAccuracyKilometer;
+        locationManager.desiredAccuracy = kCLLocationAccuracyBest;
+        locationManager.activityType    = CLActivityTypeAutomotiveNavigation;
+    }
+    if ([locationManager respondsToSelector:@selector(requestAlwaysAuthorization)])
+        [locationManager requestAlwaysAuthorization];
+    
+    if ([locationManager respondsToSelector:@selector(requestWhenInUseAuthorization)])
+        [locationManager requestWhenInUseAuthorization];
+    
+    [locationManager startUpdatingLocation];
+}
+
+
 -(void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations {
     
     
@@ -547,6 +573,15 @@ if([[NSUserDefaults standardUserDefaults] valueForKey:@"SelectedItemCategoryID"]
     
     NSLog(@"current latitude & longitude for main view = %@ & %@",currentLatitude,currentLongitude);
     
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        
+        [self loadLocationUpdateAPI];
+        dispatch_async(dispatch_get_main_queue(), ^(){
+            
+        });
+        
+    });
+    
 }
 
 - (void)locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error
@@ -555,6 +590,18 @@ if([[NSUserDefaults standardUserDefaults] valueForKey:@"SelectedItemCategoryID"]
     NSLog(@"Cannot find the location for main view.");
 }
 
+-(void)loadLocationUpdateAPI{
+    
+    [objWebService locationUpdate:LocationUpdate_API sessionid:[COMMON getSessionID] latitude:currentLatitude longitude:currentLongitude
+                          success:^(AFHTTPRequestOperation *operation, id responseObject){
+                              NSLog(@"responseObject = %@",responseObject);
+                          }
+                          failure:^(AFHTTPRequestOperation *operation, id error) {
+                              
+                          }];
+    
+    
+}
 
 -(void)loadDatePicker:(NSInteger)_tag{
     currentTextfield=(UITextField *)[self.view viewWithTag:_tag];
@@ -760,15 +807,6 @@ if([[NSUserDefaults standardUserDefaults] valueForKey:@"SelectedItemCategoryID"]
     objCustomAlterview. alertBgView.hidden = YES;
     objCustomAlterview.alertMainBgView.hidden = YES;
     objCustomAlterview.view .hidden  = YES;
-    if([msgStr isEqualToString:@"InvalidSession"]){
-        [COMMON removeUserDetails];
-        DSHomeViewController*objSplashView =[[DSHomeViewController alloc]initWithNibName:@"DSHomeViewController" bundle:nil];
-        [self.navigationController pushViewController:objSplashView animated:NO];
-        AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
-        appDelegate.buttonsView.hidden=YES;
-        appDelegate.SepratorLbl.hidden=YES;
-        [appDelegate.settingButton setBackgroundImage:[UIImage imageNamed:@"setting_icon.png"] forState:UIControlStateNormal];
-    }
    
 }
 -(void)showAltermessage:(NSString*)msg
@@ -2005,9 +2043,14 @@ if([[NSUserDefaults standardUserDefaults] valueForKey:@"SelectedItemCategoryID"]
 -(void)loadUpdateError:(NSNotification *)notification
 {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
-    NSDictionary *profile = [notification userInfo];
-    NSString *alertStr = [profile valueForKey:@"error"];
-    [self showAltermessage:alertStr];
+    [COMMON removeUserDetails];
+    DSHomeViewController*objSplashView =[[DSHomeViewController alloc]initWithNibName:@"DSHomeViewController" bundle:nil];
+    [self.navigationController pushViewController:objSplashView animated:NO];
+    AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+    appDelegate.buttonsView.hidden=YES;
+    appDelegate.SepratorLbl.hidden=YES;
+    [appDelegate.settingButton setBackgroundImage:[UIImage imageNamed:@"setting_icon.png"] forState:UIControlStateNormal];
+
 }
 
 #pragma mark - saveAction

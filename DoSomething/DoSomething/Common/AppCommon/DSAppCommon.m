@@ -156,6 +156,12 @@ DSAppCommon *sharedCommon = nil;
     return NO;
 }
 
+-(NSString *)getSessionID{
+    NSString *sessionID = [[self getUserDetails]valueForKey:@"SessionId"];
+    NSLog(@"sessionID = %@",sessionID);
+    return sessionID;
+}
+
 
 
 #pragma mark User Interaction Loading :

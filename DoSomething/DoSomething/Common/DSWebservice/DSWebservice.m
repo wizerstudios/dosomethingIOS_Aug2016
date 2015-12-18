@@ -691,11 +691,19 @@ message_send_user_id:(NSString *)message_send_user_id
         [self GET:url parameters:nil
           success:^(AFHTTPRequestOperation *operation, id responseDict)
          {
-             if (sucesshandler) sucesshandler(operation,responseDict);
+             if (sucesshandler){
+                 if([responseDict objectForKey:@"error"]){
+                     [[NSNotificationCenter defaultCenter] postNotificationName:@"InvalidSession"object:self userInfo:responseDict];
+                 }
+                 sucesshandler(operation,responseDict);
+             }
          }
           failure:^(AFHTTPRequestOperation *operation, NSError *error)
          {
-             if (failurehandler) failurehandler(operation, error);
+             if (failurehandler){
+                  NSLog(@"response ");
+                 failurehandler(operation, error);
+             }
          }];
     }
     else
@@ -703,7 +711,12 @@ message_send_user_id:(NSString *)message_send_user_id
         [self POST:url parameters:parameters
            success:^(AFHTTPRequestOperation *operation, id responseDict)
          {
-             if (sucesshandler) sucesshandler(operation,responseDict);
+             if (sucesshandler){
+                 if([responseDict objectForKey:@"error"]){
+                     [[NSNotificationCenter defaultCenter] postNotificationName:@"InvalidSession"object:self userInfo:responseDict];
+                 }
+                 sucesshandler(operation,responseDict);
+             }
          }
            failure:^(AFHTTPRequestOperation *operation, NSError *error)
          {
@@ -714,5 +727,6 @@ message_send_user_id:(NSString *)message_send_user_id
 
 
 
+#pragma mark - CustomAlterviewload
 
 @end

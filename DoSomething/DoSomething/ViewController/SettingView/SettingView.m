@@ -21,7 +21,6 @@
 {
    
     DSWebservice    *objWebService;
-    NSString        *loginUserSessionID;
     NSString        *optionLogoutDelete;
     NSString        * notificationMsg;
     NSString        * notificationSound;
@@ -32,6 +31,9 @@
     UISwitch        *vibrationSwitch;
     CustomAlterview * objCustomAlterview;
     UIWindow        *windowInfo;
+    NSString        * currentLatitude, * currentLongitude;
+    
+
 }
 
 @property (nonatomic,strong) IBOutlet NSLayoutConstraint    * deletebuttonBottomoposition;
@@ -39,24 +41,31 @@
 
 @end
 @implementation SettingView
-@synthesize settingScroll;
+@synthesize settingScroll,locationManager;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    locationManager                 = [[CLLocationManager alloc] init];
+    locationManager.delegate        = self;
    // settingScroll.userInteractionEnabled = NO;
     objWebService =[[DSWebservice alloc]init];
     settingScroll.scrollEnabled =NO;
     NSMutableDictionary *dic=[[NSMutableDictionary alloc]init];
     dic =[[NSUserDefaults standardUserDefaults] valueForKey:USERDETAILS];
-    NSString * strsessionID =[dic valueForKey:@"SessionId"];
-    NSLog(@"usersessionID:%@",strsessionID);
+   
     notificationMsg=[dic valueForKey:@"notification_message"];
     notificationSound=[dic valueForKey:@"notification_sound"];
     notificationvibration=[dic valueForKey:@"notification_vibration"];
-    loginUserSessionID=strsessionID;
     
 }
 -(void)viewWillAppear:(BOOL)animated{
+    
+    [self getUserCurrenLocation];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(loadInvalidSessionAlert:)
+                                                 name:@"InvalidSession"
+                                               object:nil];
     
     [self loadNavigationview];
     
@@ -231,6 +240,74 @@
     }
 }
 
+#pragma mark get user CurrentLocation
+
+- (void)getUserCurrenLocation{
+    
+    if(!locationManager){
+        
+        locationManager.distanceFilter  = kCLLocationAccuracyKilometer;
+        locationManager.desiredAccuracy = kCLLocationAccuracyBest;
+        locationManager.activityType    = CLActivityTypeAutomotiveNavigation;
+    }
+    if ([locationManager respondsToSelector:@selector(requestAlwaysAuthorization)])
+        [locationManager requestAlwaysAuthorization];
+    
+    if ([locationManager respondsToSelector:@selector(requestWhenInUseAuthorization)])
+        [locationManager requestWhenInUseAuthorization];
+    
+    [locationManager startUpdatingLocation];
+}
+
+-(void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations {
+    
+    
+    CLLocation *newLocation = [locations lastObject];
+    
+    currentLatitude         = [NSString stringWithFormat:@"%@",[NSNumber numberWithDouble:newLocation.coordinate.latitude]];
+    
+    currentLongitude        = [NSString stringWithFormat:@"%@",[NSNumber numberWithDouble:newLocation.coordinate.longitude]];
+    
+    [[NSUserDefaults standardUserDefaults] setObject:currentLatitude  forKey:@"currentLatitude"];
+    [[NSUserDefaults standardUserDefaults] setObject:currentLongitude forKey:@"currentLongitude"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+    
+    // Turn off the location manager to save power.
+    [locationManager stopUpdatingLocation];
+    
+    NSLog(@"current latitude & longitude for main view = %@ & %@",currentLatitude,currentLongitude);
+    
+       dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        
+          [self loadLocationUpdateAPI];
+          dispatch_async(dispatch_get_main_queue(), ^(){
+            
+         });
+           
+    });
+    
+    
+}
+- (void)locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error
+{
+    
+    NSLog(@"Cannot find the location for main view.");
+}
+
+-(void)loadLocationUpdateAPI{
+    
+    [objWebService locationUpdate:LocationUpdate_API sessionid:[COMMON getSessionID] latitude:currentLatitude longitude:currentLongitude
+                          success:^(AFHTTPRequestOperation *operation, id responseObject){
+                              NSLog(@"responseObject = %@",responseObject);
+                          }
+                          failure:^(AFHTTPRequestOperation *operation, id error) {
+                              
+                          }];
+    
+    
+}
+
+
 - (IBAction)vibrationSwithAction:(UISwitch *)sender
 {
     sender.layer.cornerRadius = 16.0;
@@ -257,7 +334,7 @@
 -(void)logoutDeleteAction{
    
         [objWebService logoutDeleteUser:User_Logout_Delete_API
-                          sessionId:loginUserSessionID
+                          sessionId:[COMMON getSessionID]
                                  op:optionLogoutDelete
                             success:^(AFHTTPRequestOperation *operation, id responseObject) {
                                 NSLog(@"logout");
@@ -406,9 +483,16 @@
 
 
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+-(void)loadInvalidSessionAlert:(NSNotification *)notification
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+    [COMMON removeUserDetails];
+    DSHomeViewController*objSplashView =[[DSHomeViewController alloc]initWithNibName:@"DSHomeViewController" bundle:nil];
+    [self.navigationController pushViewController:objSplashView animated:NO];
+    appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+    appDelegate.buttonsView.hidden=YES;
+    appDelegate.SepratorLbl.hidden=YES;
+    [appDelegate.settingButton setBackgroundImage:[UIImage imageNamed:@"setting_icon.png"] forState:UIControlStateNormal];
 }
 
 

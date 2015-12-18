@@ -53,7 +53,7 @@ typedef enum {
 - (BOOL) isUserLoggedIn;
 - (void)getUserCurrenLocation;
 //- (void) getUserCurrentLocationData;
-
+-(NSString *)getSessionID;
 
 void downloadImageFromUrl(NSString* urlString, UIImageView * imageview);
 

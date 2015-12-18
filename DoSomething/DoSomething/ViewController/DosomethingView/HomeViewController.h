@@ -7,8 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <CoreLocation/CoreLocation.h>
 
-@interface HomeViewController : UIViewController
+@interface HomeViewController : UIViewController<CLLocationManagerDelegate>
 {
     NSMutableArray * menuArray;
     IBOutlet UIView *activatedView;
@@ -16,6 +17,7 @@
     IBOutlet UILabel *timeLabel;
 }
 @property(nonatomic,strong) IBOutlet UICollectionView * homeCollectionView;
+@property (nonatomic,strong)  CLLocationManager       * locationManager;
 - (IBAction)pressDosomething:(id)sender;
 
 

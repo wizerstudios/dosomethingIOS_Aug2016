@@ -7,8 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <CoreLocation/CoreLocation.h>
 
-@interface SettingView : UIViewController
+@interface SettingView : UIViewController<CLLocationManagerDelegate>
 {
     
     IBOutlet UILabel * messLbl;
@@ -19,5 +20,8 @@
 @property (strong,nonatomic) IBOutlet UIScrollView  *settingScroll;
 
 @property (nonatomic ,strong) IBOutlet UIView       * notificationview;
+
+@property (nonatomic,strong)  CLLocationManager       * locationManager;
+
 
 @end

@@ -25,7 +25,7 @@
     CustomAlterview *objCustomAlterview;
     DSWebservice *objWebservice;
     AppDelegate *appDelegate;
-    NSString * strsessionID;
+    
     NSString * longitude;
     NSString * laditude;
     BOOL isFilteraction;
@@ -72,10 +72,8 @@
     
     dic =[[NSUserDefaults standardUserDefaults] valueForKey:USERDETAILS];
     
-    strsessionID =[dic valueForKey:@"SessionId"];
     longitude    =[dic valueForKey:@"longitude"];
     laditude     =[dic valueForKey:@"latitude"];
-    NSLog(@"usersessionID:%@",strsessionID);
     
     objWebservice =[[DSWebservice alloc]init];
     
@@ -91,6 +89,11 @@
     
     [super viewWillAppear:animated];
     [self.navigationItem setHidesBackButton:YES animated:NO];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(loadInvalidSessionAlert:)
+                                                 name:@"InvalidSession"
+                                               object:nil];
     [self getUserCurrenLocation];
     [self loadCustomNavigationview];
     UINib *cellNib = [UINib nibWithNibName:@"LocationCollectionViewCell" bundle:nil];
@@ -199,6 +202,20 @@
     [self.avablebothBtn.layer setBorderColor:[[UIColor whiteColor] CGColor]];
     
 }
+
+-(void)loadInvalidSessionAlert:(NSNotification *)notification
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+    [COMMON removeUserDetails];
+    DSHomeViewController*objSplashView =[[DSHomeViewController alloc]initWithNibName:@"DSHomeViewController" bundle:nil];
+    [self.navigationController pushViewController:objSplashView animated:NO];
+    appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+    appDelegate.buttonsView.hidden=YES;
+    appDelegate.SepratorLbl.hidden=YES;
+    [appDelegate.settingButton setBackgroundImage:[UIImage imageNamed:@"setting_icon.png"] forState:UIControlStateNormal];
+    
+}
+
 #pragma mark get user CurrentLocation
 
 - (void)getUserCurrenLocation{
@@ -238,6 +255,18 @@
     NSLog(@"current latitude & longitude for main view = %@ & %@",currentLatitude,currentLongitude);
     [self nearestLocationWebservice];
     
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        
+        [self loadLocationUpdateAPI];
+        dispatch_async(dispatch_get_main_queue(), ^(){
+            
+            
+        });
+        
+        
+    });
+    
+    
 }
 
 - (void)locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error
@@ -246,12 +275,25 @@
     NSLog(@"Cannot find the location for main view.");
 }
 
+-(void)loadLocationUpdateAPI{
+    
+    [objWebservice locationUpdate:LocationUpdate_API sessionid:[COMMON getSessionID] latitude:currentLatitude longitude:currentLongitude
+                          success:^(AFHTTPRequestOperation *operation, id responseObject){
+                              NSLog(@"responseObject = %@",responseObject);
+                          }
+                          failure:^(AFHTTPRequestOperation *operation, id error) {
+                              
+                              [self showAltermessage:[NSString stringWithFormat:@"%@",error]];
+                          }];
+    
+    
+}
 
 -(void)nearestLocationWebservice
 {
     [COMMON LoadIcon:self.view];
        [objWebservice nearestUsers:NearestUsers_API
-                         sessionid:strsessionID
+                         sessionid:[COMMON getSessionID]
                           latitude:currentLatitude
                          longitude:currentLongitude
                      filter_status:@""
@@ -441,7 +483,7 @@
     
     [COMMON LoadIcon:self.view];
     [objWebservice getUserDetails:UserDetails_API
-                        sessionid:strsessionID
+                        sessionid:[COMMON getSessionID]
                   profile_user_id:profileUserID
                           success:^(AFHTTPRequestOperation *operation, id responseObject) {
                                NSLog(@"responseObject%@",responseObject);
