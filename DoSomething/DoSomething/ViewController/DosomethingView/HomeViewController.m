@@ -409,16 +409,6 @@ minimumLineSpacingForSectionAtIndex:(NSInteger)section {
     objCustomAlterview. alertBgView.hidden = YES;
     objCustomAlterview.alertMainBgView.hidden = YES;
     objCustomAlterview.view .hidden  = YES;
-    NSString *msgStr = objCustomAlterview.alertMsgLabel.text;
-    if([msgStr isEqualToString:@"InvalidSession"]){
-        [COMMON removeUserDetails];
-        DSHomeViewController*objSplashView =[[DSHomeViewController alloc]initWithNibName:@"DSHomeViewController" bundle:nil];
-        [self.navigationController pushViewController:objSplashView animated:NO];
-        appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
-        appDelegate.buttonsView.hidden=YES;
-        appDelegate.SepratorLbl.hidden=YES;
-        [appDelegate.settingButton setBackgroundImage:[UIImage imageNamed:@"setting_icon.png"] forState:UIControlStateNormal];
-    }
 
 }
 - (IBAction)alertPressYes:(id)sender {
@@ -474,7 +464,7 @@ minimumLineSpacingForSectionAtIndex:(NSInteger)section {
          NSString *msgString = [activityMainDict valueForKey:@"Message"];
          
          if([msgString isEqualToString:@"Activity Canelled successfully"]){
-             [self showAltermessage:msgString];
+            // [self showAltermessage:msgString];
              [activatedView setHidden:YES];
              [self.homeCollectionView setAlpha:1];
              [self.homeCollectionView setUserInteractionEnabled:YES];
@@ -646,9 +636,14 @@ minimumLineSpacingForSectionAtIndex:(NSInteger)section {
 -(void)loadInvalidSessionAlert:(NSNotification *)notification
 {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
-    NSDictionary *profile = [notification userInfo];
-    NSString *alertStr = [profile valueForKey:@"error"];
-    [self showAltermessage:alertStr];
+    [COMMON removeUserDetails];
+    DSHomeViewController*objSplashView =[[DSHomeViewController alloc]initWithNibName:@"DSHomeViewController" bundle:nil];
+    [self.navigationController pushViewController:objSplashView animated:NO];
+    appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+    appDelegate.buttonsView.hidden=YES;
+    appDelegate.SepratorLbl.hidden=YES;
+    [appDelegate.settingButton setBackgroundImage:[UIImage imageNamed:@"setting_icon.png"] forState:UIControlStateNormal];
+
 }
 
 
