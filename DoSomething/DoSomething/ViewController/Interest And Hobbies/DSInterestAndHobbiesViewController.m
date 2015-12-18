@@ -181,7 +181,7 @@
    
         for(NSArray * bobbiesstr in interstAndHobbiesArray)
             {
-                for(NSString * spratestr in  bobbiesstr)
+                for(NSDictionary * spratestr in  bobbiesstr)
                 {
                     for(NSString * string in profileDetailsArray)
                     {

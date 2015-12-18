@@ -14,6 +14,7 @@
 #import "UIImageView+AFNetworking.h"
 
 
+
 @interface DSDetailViewController ()
 {
     DSWebservice    * objWebService;
@@ -34,10 +35,11 @@
     NSString        * requestUserID;
     
 }
+@property (strong, nonatomic) IBOutlet UIButton *letsDoButton;
 @end
 
 @implementation DSDetailViewController
-@synthesize userDetailsDict;
+@synthesize userDetailsDict,letsDoButton;
 - (void)viewDidLoad {
     [super viewDidLoad];
     objWebService =[[DSWebservice alloc]init];
@@ -77,10 +79,17 @@
     
     [self profileImageDisplay];
     [self profileImageScrollView];
-    CGRect buttonFrame = CGRectMake( 190, 33, 80, 40 );
-    UIButton *letsDoButton = [[UIButton alloc] initWithFrame: buttonFrame];
+    
+    CGRect buttonFrame;
+    if(IS_IPHONE6||IS_IPHONE6_Plus)
+        buttonFrame = CGRectMake( 230, 33, 80, 40 );
+    else
+        buttonFrame = CGRectMake( 190, 33, 80, 40 );
+    //letsDoButton = [[UIButton alloc] init];//WithFrame: buttonFrame];
+    letsDoButton = [[UIButton alloc] initWithFrame: buttonFrame];
+    //letsDoButton.translatesAutoresizingMaskIntoConstraints = NO;
     [letsDoButton setTitle: @"Let's Do Something!" forState: UIControlStateNormal];
-    //[letsDoButton addTarget:self action:@selector(letsDoSomethingAction:) forControlEvents:UIControlEventTouchUpInside];
+  //  [letsDoButton addTarget:self action:@selector(letsDoSomethingAction:) forControlEvents:UIControlEventTouchUpInside];
     [letsDoButton.titleLabel setFont:[UIFont fontWithName:@"Patron-Bold" size:12]];
     letsDoButton.titleLabel.lineBreakMode = NSLineBreakByTruncatingTail;
     letsDoButton.titleLabel.numberOfLines = 2;
@@ -146,7 +155,8 @@
     [self profileInterestsDetails];
     [self profileDoSomethingDetails];
     
-}
+    [self updateScrollViewContentSize];
+   }
 #pragma mark - userAgeName
 -(NSString *) getData{
     
@@ -342,11 +352,41 @@
     //commonHeight = 54;
     yAxis = 31;
     commonWidth=19.5;
-        
-    
     space = imageSize / 2;
     commonHeight = imageSize+15;
     //imageNormalArray
+    UIView *myInterestsView;
+    
+
+    if([imageNormalArray count] <=5){
+        myInterestsView=[[UIView alloc]initWithFrame:CGRectMake(14, 367, 290, 90)];
+    }
+
+    if([imageNormalArray count] >5 && [imageNormalArray count] <=10){
+        myInterestsView=[[UIView alloc]initWithFrame:CGRectMake(14, 367, 290,160)];
+    }
+
+    if([imageNormalArray count] >10){
+        myInterestsView=[[UIView alloc]initWithFrame:CGRectMake(14, 367, 290,200)];
+    }
+    if([imageNormalArray count] >15){
+        myInterestsView=[[UIView alloc]initWithFrame:CGRectMake(14, 368, 290,265)];
+    }
+    
+    UILabel *myInterests = [[UILabel alloc] initWithFrame:CGRectMake(10,5,170,20)];
+    //myInterests.autoresizingMask = paintView.autoresizingMask;
+    myInterests.text = NSLocalizedString(@"My Interest and Hobbies", @"");
+    [myInterests setFont:[UIFont fontWithName:@"Patron-Medium" size:12]];
+    myInterests.textColor =[UIColor colorWithRed:83.0f/255.0f
+                                           green:83.0f/255.0f
+                                            blue:83.0f/255.0f
+                                           alpha:1.0f];
+    
+    [myInterestsView addSubview:myInterests];
+    [myInterestsView setBackgroundColor:[UIColor whiteColor]];
+    [self.detailPageMainScroll addSubview:myInterestsView];
+    
+    
     for (int i =0; i< [imageNormalArray  count]; i++) {
         
         UIImageView *hobbiesImage;
@@ -363,7 +403,8 @@
         
             image= [image stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
             [hobbiesImage setImageWithURL:[NSURL URLWithString:image]];
-            [self.myInterestView addSubview:hobbiesImage];
+           // [self.myInterestView addSubview:hobbiesImage];
+            [myInterestsView addSubview:hobbiesImage];
        
     }
     //hobbiesNameArray
@@ -389,15 +430,35 @@
                                                alpha:1.0f];
         
         hobbiesname.text = image;
-        [self.myInterestView addSubview:hobbiesname];
+        
+        //[self.myInterestView addSubview:hobbiesname];
+        [myInterestsView addSubview:hobbiesname];
+        
         hobbiesname.textAlignment = NSTextAlignmentCenter;
+        
+        
     }
+    if([hobbiesNameArray count] <=5){
+        self.detailPageMainScroll.contentInset = UIEdgeInsetsMake(0, 0, -50, 0);
+     }
+    if([hobbiesNameArray count] >5 && [hobbiesNameArray count]<=10){
+        self.detailPageMainScroll.contentInset = UIEdgeInsetsMake(0, 0, 20, 0);
+     }
+    
+    if([hobbiesNameArray count] >10){
+        self.detailPageMainScroll.contentInset = UIEdgeInsetsMake(0, 0, 60, 0);
+        
+    }
+    if([hobbiesNameArray count] >15){
+        self.detailPageMainScroll.contentInset = UIEdgeInsetsMake(0, 0, 125, 0);
+        
+    }
+    
 }
 
 #pragma mark - letsDoSomethingAction
 - (void)letsDoSomethingAction:(id)sender
 {
-    
     requestUserID = [userDetailsDict valueForKey:@"user_id"];
     
    [objWebService sendRequest:SendRequest_API
@@ -410,6 +471,18 @@
                           NSLog(@"SEND REQ ERR%@",error);
                       }];
     
+}
+
+- (void) updateScrollViewContentSize {
+    
+    
+    
+    //myInterestView.origin.y + myInterestView.size.height
+        
+//        self.detailPageMainScroll.contentSize = CGSizeMake(self.view.frame.size.width,
+//                                                  self.detailPageMainScroll.frame.size.height +
+//                                                  self.fullView.frame.size.height +150
+//                                                  );
 }
 
 #pragma mark - back Action
