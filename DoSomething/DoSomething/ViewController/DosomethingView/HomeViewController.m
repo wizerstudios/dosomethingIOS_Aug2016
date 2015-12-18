@@ -48,7 +48,13 @@
     NSString                *strselectDosomething;
     
     NSMutableDictionary     *activityMainDict;
+    NSMutableArray          *activityImageArray;
     BOOL isInitialLoadingAPI;
+    
+    float commonWidth, commonHeight;
+    float yAxis;
+    float imageSize;
+    float space;
    
 }
 @end
@@ -60,6 +66,7 @@
     [super viewDidLoad];
     objWebService = [[DSWebservice alloc]init];
     activityMainDict = [[NSMutableDictionary alloc]init];
+    activityImageArray = [[NSMutableArray alloc]init];
     NSMutableDictionary *dic=[[NSMutableDictionary alloc]init];
     dic =[[NSUserDefaults standardUserDefaults] valueForKey:USERDETAILS];
     NSString * strsessionID =[dic valueForKey:@"SessionId"];
@@ -78,9 +85,14 @@
 }
 -(void)viewWillAppear:(BOOL)animated
 {
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(loadInvalidSessionAlert:)
+                                                 name:@"InvalidSession"
+                                               object:nil];
+
     appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
     appDelegate.buttonsView.hidden=NO;
-     appDelegate.SepratorLbl.hidden=NO;
+    appDelegate.SepratorLbl.hidden=NO;
     [self loadnavigationview];
     [self setupCollectionView];
     [self audioplayMethod];
@@ -377,7 +389,7 @@ minimumLineSpacingForSectionAtIndex:(NSInteger)section {
 - (IBAction)pressDosomething:(id)sender {
     if([sender tag] == 1000){
         [bottombutton setUserInteractionEnabled:NO];
-       // [self loadActivityAPI:Cancel availableStr:@"" doSomethingId:@""];
+      // [self loadActivityAPI:Cancel availableStr:@"" doSomethingId:@""];
     }else{
         if([selectedItemsArray count] == 3){
             isInitialLoadingAPI = NO;
@@ -393,6 +405,17 @@ minimumLineSpacingForSectionAtIndex:(NSInteger)section {
     objCustomAlterview. alertBgView.hidden = YES;
     objCustomAlterview.alertMainBgView.hidden = YES;
     objCustomAlterview.view .hidden  = YES;
+    NSString *msgStr = objCustomAlterview.alertMsgLabel.text;
+    if([msgStr isEqualToString:@"InvalidSession"]){
+        [COMMON removeUserDetails];
+        DSHomeViewController*objSplashView =[[DSHomeViewController alloc]initWithNibName:@"DSHomeViewController" bundle:nil];
+        [self.navigationController pushViewController:objSplashView animated:NO];
+        appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+        appDelegate.buttonsView.hidden=YES;
+        appDelegate.SepratorLbl.hidden=YES;
+        [appDelegate.settingButton setBackgroundImage:[UIImage imageNamed:@"setting_icon.png"] forState:UIControlStateNormal];
+    }
+
 }
 - (IBAction)alertPressYes:(id)sender {
     objCustomAlterview.alertBgView.hidden = YES;
@@ -442,6 +465,10 @@ minimumLineSpacingForSectionAtIndex:(NSInteger)section {
      success:^(AFHTTPRequestOperation *operation, id responseObject)
      {
          NSLog(@"response object = %@",responseObject);
+         
+//         if([responseObject containsObject:@"error"]){
+//             
+//         }
          activityMainDict = [responseObject valueForKey:@"activity"];
         
          id activityList = [activityMainDict valueForKey:@"activityList"];
@@ -450,6 +477,7 @@ minimumLineSpacingForSectionAtIndex:(NSInteger)section {
          
          if([activityList isKindOfClass:[NSArray class]]){
              NSLog(@"activity list");
+             activityImageArray = [activityList mutableCopy];
              NSString *availStr = [activityMainDict valueForKey:@"Available"];
              [self displayActivityView:availStr];
             
@@ -491,7 +519,7 @@ minimumLineSpacingForSectionAtIndex:(NSInteger)section {
     [bottombutton setTag:1000];
     [bottombutton setTitle:@"Cancel All Activities ?" forState:UIControlStateNormal];
     
-    [timeLabel setText:@"Available Since\n\nfew mins Ago"];
+    [timeLabel setText:@"Available Since\nfew mins Ago"];
     timeLabel.textAlignment = NSTextAlignmentCenter;
     timeLabel.lineBreakMode = NSLineBreakByWordWrapping;
     timeLabel.numberOfLines = 3;
@@ -504,9 +532,69 @@ minimumLineSpacingForSectionAtIndex:(NSInteger)section {
         [nowButton setBackgroundColor:Gray_Color];
         [anyTimeButton setBackgroundColor:Red_Color];
     }
-   
     
+    [self loadActivityImageView];
     
 }
+
+-(void)loadActivityImageView{
+    
+        yAxis = 152;
+        imageSize =50;
+        commonWidth=19.5;
+    
+
+        space = imageSize / 2;
+        commonHeight = imageSize+15;
+        int imageXPos = 0;
+        int textXPos = 0;
+        if(IS_IPHONE6_Plus){
+            imageXPos = 33;
+            textXPos = 23;
+            commonWidth=29.5;
+        }
+        else if (IS_IPHONE6){
+            imageXPos = 18;
+            textXPos = 8;
+            commonWidth=29.5;
+        }
+        else{
+            imageXPos = 35;
+            textXPos = 25;
+            commonWidth=55;
+        }
+      for (int i =0; i< [activityImageArray count]; i++) {
+        UIImageView *hobbiesImage;
+        hobbiesImage = [[UIImageView alloc]initWithFrame:CGRectMake((i*(commonWidth + imageSize))+ imageXPos, yAxis, imageSize, imageSize)];
+        NSString *activityStr =[[[activityImageArray objectAtIndex:i]valueForKey:@"name"]uppercaseString];
+        UILabel *titleLabel;
+    
+        NSString *image =[[activityImageArray objectAtIndex:i]valueForKey:@"ActiveImage"];
+        image= [image stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+        [hobbiesImage setImageWithURL:[NSURL URLWithString:image]];
+        [activatedView addSubview:hobbiesImage];
+          
+        
+        titleLabel = [[UILabel alloc]initWithFrame:CGRectMake((i*(commonWidth + imageSize))+textXPos, yAxis + imageSize+5, imageSize + 20, 15)];
+        [titleLabel setFont:[UIFont fontWithName:@"HelveticaNeue-Bold" size:10]];
+        titleLabel.textAlignment = NSTextAlignmentCenter;
+        titleLabel.textColor = Red_Color;
+          
+        titleLabel.text = activityStr;
+        [activatedView addSubview:titleLabel];
+        titleLabel.textAlignment = NSTextAlignmentCenter;
+          
+      }
+
+
+}
+-(void)loadInvalidSessionAlert:(NSNotification *)notification
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+    NSDictionary *profile = [notification userInfo];
+    NSString *alertStr = [profile valueForKey:@"error"];
+    [self showAltermessage:alertStr];
+}
+
 
 @end
