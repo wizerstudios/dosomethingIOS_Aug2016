@@ -429,7 +429,7 @@
     else if (isFilteraction==YES)
     {
         self.collectionviewxpostion.constant =10;
-        self.CollectionviewWidth.constant    =self.view.frame.size.width;
+        self.CollectionviewWidth.constant    =self.view.frame.size.width-10;
         self.filterviewxposition.constant    = self.CollectionviewWidth.constant+10;
         [self filterviewPosition];
         isFilteraction=NO;
@@ -441,8 +441,8 @@
 -(void)filterviewPosition
 {
     appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
-            appDelegate.SepratorLbl.frame =CGRectMake(self.collectionviewxpostion.constant-15,self.view.frame.origin.y+self.view.frame.size.height-53,self.view.frame.size.width,3);
-        appDelegate.buttonsView.frame=CGRectMake(self.collectionviewxpostion.constant-15,self.view.frame.origin.y+self.view.frame.size.height-50,self.view.frame.size.width,50);
+            appDelegate.SepratorLbl.frame =CGRectMake(self.collectionviewxpostion.constant-10,self.view.frame.origin.y+self.view.frame.size.height-53,self.view.frame.size.width,3);
+        appDelegate.buttonsView.frame=CGRectMake(self.collectionviewxpostion.constant-10,self.view.frame.origin.y+self.view.frame.size.height-50,self.view.frame.size.width,50);
 
     
 }
