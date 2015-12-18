@@ -121,6 +121,7 @@
 		<string>Patron-Regular.ttf</string>
 		<string>Patron-Thin.ttf</string>
 		<string>Patron-ThinItalic.ttf</string>
+		<string>fontawesome-webfont.ttf</string>
 	</array>
 	<key>UILaunchStoryboardName</key>
 	<string>Launch Screen</string>
@@ -135,6 +136,8 @@
 		<string>UIInterfaceOrientationPortrait</string>
 		<string>UIInterfaceOrientationPortraitUpsideDown</string>
 	</array>
+	<key>CFBundleGetInfoString</key>
+	<string></string>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
 </dict>

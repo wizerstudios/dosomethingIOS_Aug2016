@@ -40,4 +40,6 @@
 @property (strong, nonatomic) IBOutlet UIView *thingsView;
 @property (strong, nonatomic) IBOutlet UIView *fullView;
 
+@property (strong, nonatomic) IBOutlet UIView *myAboutView;
+
 @end

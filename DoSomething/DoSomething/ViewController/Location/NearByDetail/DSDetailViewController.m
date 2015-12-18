@@ -12,6 +12,7 @@
 #import "DSAppCommon.h"
 #import "DSWebservice.h"
 #import "UIImageView+AFNetworking.h"
+#import "NSString+FontAwesome.h"
 
 
 
@@ -99,7 +100,7 @@
                                                    green:40.0f/255.0f
                                                     blue:64.0f/255.0f
                                                    alpha:1.0f];
-    [self.thingsView addSubview:letsDoButton];
+   // [self.thingsView addSubview:letsDoButton];
     //genderImage
     UIImage *genderImage;
    
@@ -114,10 +115,31 @@
     genderImageView.frame = CGRectMake(0.0f, 0.0f,20.0f, 20.0f);
     [self.genderView addSubview:genderImageView];
 
+    //self.window.frame.origin.x,self.window.frame.size.height-50,self.window.frame.size.width,50
+   // UIView *myAboutView;
+    _myAboutView=[[UIView alloc]initWithFrame:CGRectMake(self.view.frame.origin.x+15, self.view.frame.origin.y+210,self.view.frame.size.width-30, self.view.frame.size.height-490)];
+    [_myAboutView setBackgroundColor:[UIColor whiteColor]];
+    UILabel *myAboutLabel = [[UILabel alloc] initWithFrame:CGRectMake(self.myAboutView.frame.origin.x+15, self.myAboutView.frame.origin.y+210,self.myAboutView.frame.size.width-30, self.myAboutView.frame.size.height-490)];
+    //myInterests.autoresizingMask = paintView.autoresizingMask;
+    myAboutLabel.text = NSLocalizedString(@"About Me", @"");
+    [myAboutLabel setFont:[UIFont fontWithName:@"Patron-Medium" size:12]];
+    myAboutLabel.textColor =[UIColor colorWithRed:83.0f/255.0f
+                                           green:83.0f/255.0f
+                                            blue:83.0f/255.0f
+                                           alpha:1.0f];
+    
+    [_myAboutView addSubview:myAboutLabel];
+    
+    [self.detailPageMainScroll addSubview:_myAboutView];
     
    
     self.aboutTextBox.text = [userDetailsDict valueForKey:@"about"];
-    self.userName.text     = [self getData];
+    [_aboutTextBox sizeToFit];
+    //self.userName.text     = [self getData];
+    
+    self.userName.font = [UIFont fontWithName:kFontAwesomeFamilyName size:20];
+    self.userName.text = [NSString fontAwesomeIconStringForIconIdentifier:@"fa-venus"];
+    
     [self.userName setFont:[UIFont fontWithName:@"Patron-Medium" size:14]];
     self.userName.textColor =[UIColor colorWithRed:218.0f/255.0f
                                              green:40.0f/255.0f
@@ -152,10 +174,10 @@
     doSomethingNameArray    = [[doSomethingArray valueForKey:@"name"]mutableCopy];
     doSomethingImageArray   = [[doSomethingArray valueForKey:@"ActiveImage"]mutableCopy];
     
-    [self profileInterestsDetails];
+   // [self profileInterestsDetails];
     [self profileDoSomethingDetails];
     
-    [self updateScrollViewContentSize];
+   // [self updateScrollViewContentSize];
    }
 #pragma mark - userAgeName
 -(NSString *) getData{
@@ -250,7 +272,7 @@
     {
         if(IS_IPHONE6|| IS_IPHONE6_Plus)
         {
-           // [self.scrView setContentOffset:CGPointMake(4.5*self.profileImageView.frame.size.width - 25  , 0)animated:NO];
+           
             [self.profileImageScroll setContentOffset:CGPointMake(4*self.profileImageView.frame.size.width - 15, 0)animated:NO];
         }
         else
