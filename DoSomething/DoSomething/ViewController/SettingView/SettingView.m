@@ -21,7 +21,6 @@
 {
    
     DSWebservice    *objWebService;
-    NSString        *loginUserSessionID;
     NSString        *optionLogoutDelete;
     NSString        * notificationMsg;
     NSString        * notificationSound;
@@ -48,12 +47,10 @@
     settingScroll.scrollEnabled =NO;
     NSMutableDictionary *dic=[[NSMutableDictionary alloc]init];
     dic =[[NSUserDefaults standardUserDefaults] valueForKey:USERDETAILS];
-    NSString * strsessionID =[dic valueForKey:@"SessionId"];
-    NSLog(@"usersessionID:%@",strsessionID);
+   
     notificationMsg=[dic valueForKey:@"notification_message"];
     notificationSound=[dic valueForKey:@"notification_sound"];
     notificationvibration=[dic valueForKey:@"notification_vibration"];
-    loginUserSessionID=strsessionID;
     
 }
 -(void)viewWillAppear:(BOOL)animated{
@@ -262,7 +259,7 @@
 -(void)logoutDeleteAction{
    
         [objWebService logoutDeleteUser:User_Logout_Delete_API
-                          sessionId:loginUserSessionID
+                          sessionId:[COMMON getSessionID]
                                  op:optionLogoutDelete
                             success:^(AFHTTPRequestOperation *operation, id responseObject) {
                                 NSLog(@"logout");

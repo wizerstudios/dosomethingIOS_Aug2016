@@ -22,7 +22,7 @@
     CustomAlterview *objCustomAlterview;
     DSWebservice *objWebservice;
     AppDelegate *appDelegate;
-    NSString * strsessionID;
+    
     NSString * longitude;
     NSString * laditude;
     BOOL isFilteraction;
@@ -55,10 +55,8 @@
     
     dic =[[NSUserDefaults standardUserDefaults] valueForKey:USERDETAILS];
     
-    strsessionID =[dic valueForKey:@"SessionId"];
     longitude    =[dic valueForKey:@"longitude"];
     laditude     =[dic valueForKey:@"latitude"];
-    NSLog(@"usersessionID:%@",strsessionID);
     
     objWebservice =[[DSWebservice alloc]init];
     
@@ -249,7 +247,7 @@
 {
     [COMMON LoadIcon:self.view];
        [objWebservice nearestUsers:NearestUsers_API
-                         sessionid:strsessionID
+                         sessionid:[COMMON getSessionID]
                           latitude:currentLatitude
                          longitude:currentLongitude
                      filter_status:@""
@@ -401,7 +399,7 @@
     
     [COMMON LoadIcon:self.view];
     [objWebservice getUserDetails:UserDetails_API
-                        sessionid:strsessionID
+                        sessionid:[COMMON getSessionID]
                   profile_user_id:profileUserID
                           success:^(AFHTTPRequestOperation *operation, id responseObject) {
                                NSLog(@"responseObject%@",responseObject);
