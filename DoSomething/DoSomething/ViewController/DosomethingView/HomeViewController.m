@@ -455,8 +455,18 @@ minimumLineSpacingForSectionAtIndex:(NSInteger)section {
        [self loadActivityAPI:Cancel availableStr:@"" doSomethingId:@""];
     }else{
         if([selectedItemsArray count] == 3){
-            isInitialLoadingAPI = NO;
-            [self loadActivityAPI:getLast availableStr:@"" doSomethingId:@""];
+            objCustomAlterview.view .hidden  = NO;
+            objCustomAlterview.alertBgView.hidden = NO;
+            objCustomAlterview.alertMainBgView.hidden = NO;
+            objCustomAlterview.btnYes.hidden = NO;
+            objCustomAlterview.btnNo.hidden = NO;
+            objCustomAlterview.alertCancelButton.hidden = NO;
+            objCustomAlterview.alertMsgLabel.text = @"AVAILABLE NOW?";
+            objCustomAlterview.alertMsgLabel.textAlignment = NSTextAlignmentCenter;
+            objCustomAlterview. alertMsgLabel.lineBreakMode = NSLineBreakByWordWrapping;
+            objCustomAlterview.alertMsgLabel.textColor = [UIColor whiteColor];
+           // isInitialLoadingAPI = NO;
+            //[self loadActivityAPI:getLast availableStr:@"" doSomethingId:@""];
         }
         else{
             [self showAltermessage:@"3 ACTIVITIES\nSHOULD BE SELECTED "];
@@ -538,19 +548,19 @@ minimumLineSpacingForSectionAtIndex:(NSInteger)section {
                 
              }
              else{
-                 if(isInitialLoadingAPI == NO){
-                     objCustomAlterview.view .hidden  = NO;
-                     objCustomAlterview.alertBgView.hidden = NO;
-                     objCustomAlterview.alertMainBgView.hidden = NO;
-                     objCustomAlterview.btnYes.hidden = NO;
-                     objCustomAlterview.btnNo.hidden = NO;
-                     objCustomAlterview.alertCancelButton.hidden = NO;
-                     objCustomAlterview.alertMsgLabel.text = @"AVAILABLE NOW?";
-                     objCustomAlterview.alertMsgLabel.textAlignment = NSTextAlignmentCenter;
-                     objCustomAlterview. alertMsgLabel.lineBreakMode = NSLineBreakByWordWrapping;
-                     objCustomAlterview.alertMsgLabel.textColor = [UIColor whiteColor];
-
-                 }
+//                 if(isInitialLoadingAPI == NO){
+//                     objCustomAlterview.view .hidden  = NO;
+//                     objCustomAlterview.alertBgView.hidden = NO;
+//                     objCustomAlterview.alertMainBgView.hidden = NO;
+//                     objCustomAlterview.btnYes.hidden = NO;
+//                     objCustomAlterview.btnNo.hidden = NO;
+//                     objCustomAlterview.alertCancelButton.hidden = NO;
+//                     objCustomAlterview.alertMsgLabel.text = @"AVAILABLE NOW?";
+//                     objCustomAlterview.alertMsgLabel.textAlignment = NSTextAlignmentCenter;
+//                     objCustomAlterview. alertMsgLabel.lineBreakMode = NSLineBreakByWordWrapping;
+//                     objCustomAlterview.alertMsgLabel.textColor = [UIColor whiteColor];
+//
+//                 }
                  
                  [bottombutton setTitle:@"Let's Do Something!" forState:UIControlStateNormal];
                  
