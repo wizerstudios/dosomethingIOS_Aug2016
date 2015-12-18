@@ -52,7 +52,7 @@
     BOOL isInitialLoadingAPI;
     
     float commonWidth, commonHeight;
-    float yAxis;
+    float yPos;
     float imageSize;
     float space;
    
@@ -519,7 +519,14 @@ minimumLineSpacingForSectionAtIndex:(NSInteger)section {
     [bottombutton setTag:1000];
     [bottombutton setTitle:@"Cancel All Activities ?" forState:UIControlStateNormal];
     
-    [timeLabel setText:@"Available Since\nfew mins Ago"];
+    NSString *timeStr = [activityMainDict valueForKey:@"LastActivity"];
+    if([timeStr isEqualToString:@"0"])
+        timeStr = [NSString stringWithFormat:@"Available Since\nFew Mins ago"];
+    else
+        timeStr = [NSString stringWithFormat:@"Available Since\n%@ Mins ago",timeStr];
+    
+    
+    [timeLabel setText:timeStr];
     timeLabel.textAlignment = NSTextAlignmentCenter;
     timeLabel.lineBreakMode = NSLineBreakByWordWrapping;
     timeLabel.numberOfLines = 3;
@@ -537,9 +544,10 @@ minimumLineSpacingForSectionAtIndex:(NSInteger)section {
     
 }
 
+
 -(void)loadActivityImageView{
     
-        yAxis = 152;
+    
         imageSize =50;
         commonWidth=19.5;
     
@@ -549,23 +557,26 @@ minimumLineSpacingForSectionAtIndex:(NSInteger)section {
         int imageXPos = 0;
         int textXPos = 0;
         if(IS_IPHONE6_Plus){
-            imageXPos = 33;
-            textXPos = 23;
-            commonWidth=29.5;
+             yPos = 300;
+            imageXPos = 50;
+            textXPos = 40;
+            commonWidth=75;
         }
         else if (IS_IPHONE6){
-            imageXPos = 18;
-            textXPos = 8;
-            commonWidth=29.5;
+            yPos = 230;
+            imageXPos = 35;
+            textXPos = 25;
+            commonWidth=75;
         }
         else{
+            yPos = 152;
             imageXPos = 35;
             textXPos = 25;
             commonWidth=55;
         }
       for (int i =0; i< [activityImageArray count]; i++) {
         UIImageView *hobbiesImage;
-        hobbiesImage = [[UIImageView alloc]initWithFrame:CGRectMake((i*(commonWidth + imageSize))+ imageXPos, yAxis, imageSize, imageSize)];
+        hobbiesImage = [[UIImageView alloc]initWithFrame:CGRectMake((i*(commonWidth + imageSize))+ imageXPos, yPos, imageSize, imageSize)];
         NSString *activityStr =[[[activityImageArray objectAtIndex:i]valueForKey:@"name"]uppercaseString];
         UILabel *titleLabel;
     
@@ -575,7 +586,7 @@ minimumLineSpacingForSectionAtIndex:(NSInteger)section {
         [activatedView addSubview:hobbiesImage];
           
         
-        titleLabel = [[UILabel alloc]initWithFrame:CGRectMake((i*(commonWidth + imageSize))+textXPos, yAxis + imageSize+5, imageSize + 20, 15)];
+        titleLabel = [[UILabel alloc]initWithFrame:CGRectMake((i*(commonWidth + imageSize))+textXPos, yPos + imageSize+5, imageSize + 20, 15)];
         [titleLabel setFont:[UIFont fontWithName:@"HelveticaNeue-Bold" size:10]];
         titleLabel.textAlignment = NSTextAlignmentCenter;
         titleLabel.textColor = Red_Color;
