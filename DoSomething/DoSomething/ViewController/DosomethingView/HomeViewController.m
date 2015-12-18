@@ -549,10 +549,7 @@ minimumLineSpacingForSectionAtIndex:(NSInteger)section {
     [bottombutton setTitle:@"Cancel All Activities ?" forState:UIControlStateNormal];
     
     NSString *timeStr = [activityMainDict valueForKey:@"LastActivity"];
-    if([timeStr isEqualToString:@"0"])
-        timeStr = [NSString stringWithFormat:@"Available Since\nFew Mins ago"];
-    else
-        timeStr = [NSString stringWithFormat:@"Available Since\n%@ Mins ago",timeStr];
+    timeStr = [NSString stringWithFormat:@"Available Since\n%@",timeStr];
     
     
     [timeLabel setText:timeStr];
