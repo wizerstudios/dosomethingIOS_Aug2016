@@ -15,6 +15,7 @@
 #import "AppDelegate.h"
 #import "CustomAlterview.h"
 #import "DSTermsOfUseView.h"
+#import "DSTermsViewController.h"
 
 
 @interface SettingView ()
@@ -414,11 +415,19 @@
 }
 -(IBAction)didClickTearmofuseAction:(id)sender
 {
-    [self loadTermsOfUseView];
+   // [self loadTermsOfUseView];
+    
+    DSTermsViewController* termViewController = [[DSTermsViewController alloc] init];
+    
+    [self.navigationController pushViewController:termViewController animated:YES];
 }
 -(IBAction)didClickprivacypolicyAction:(id)sender
 {
-     [self loadTermsOfUseView];
+    // [self loadTermsOfUseView];
+    DSTermsViewController* termViewController = [[DSTermsViewController alloc] init];
+    
+    [self.navigationController pushViewController:termViewController animated:YES];
+
 }
 
 

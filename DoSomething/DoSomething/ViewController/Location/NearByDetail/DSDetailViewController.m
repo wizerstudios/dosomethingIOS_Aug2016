@@ -12,6 +12,7 @@
 #import "DSAppCommon.h"
 #import "DSWebservice.h"
 #import "UIImageView+AFNetworking.h"
+#import "NSString+FontAwesome.h"
 
 
 
@@ -33,6 +34,8 @@
     float space;
     
     NSString        * requestUserID;
+    CGSize              dataSize;
+    UIImage *genderImage;
     
 }
 @property (strong, nonatomic) IBOutlet UIButton *letsDoButton;
@@ -73,6 +76,44 @@
     
     [self profileImageDisplay];
     [self profileImageScrollView];
+        NSMutableAttributedString *attributedString = [[NSMutableAttributedString alloc] initWithString:NSLocalizedString([self getData], @"")attributes:@{NSBackgroundColorAttributeName: [UIColor clearColor]}];
+    
+    NSTextAttachment *textAttachment = [[NSTextAttachment alloc] init];
+    
+    if([[userDetailsDict objectForKey:@"gender"]isEqualToString:@"Female"]){
+        textAttachment.image = [UIImage imageNamed:@"female_Icon"];
+        
+    }
+    else
+        textAttachment.image = [UIImage imageNamed:@"male_Icon"];
+
+    
+    
+    NSAttributedString *attrStringWithImage = [NSAttributedString attributedStringWithAttachment:textAttachment];
+    
+    [attributedString replaceCharactersInRange:NSMakeRange(0, 0) withAttributedString:attrStringWithImage];
+    
+    
+   _userName.attributedText = [attributedString copy];
+    self.aboutTextBox.text = [userDetailsDict valueForKey:@"about"];
+    [_aboutTextBox sizeToFit];
+    
+    [self labelDetails];
+    [self profileInterestsDetails];
+    [self profileDoSomethingDetails];
+    
+   // [self updateScrollViewContentSize];
+   // [self aboutTestText];
+}
+
+-(void) labelDetails{
+    
+    //    [self.userName setFont:[UIFont fontWithName:@"Patron-Medium" size:14]];
+    //    self.userName.textColor =[UIColor colorWithRed:218.0f/255.0f
+    //                                             green:40.0f/255.0f
+    //                                              blue:64.0f/255.0f
+    //                                             alpha:1.0f];
+
     
     CGRect buttonFrame;
     if(IS_IPHONE6||IS_IPHONE6_Plus)
@@ -83,7 +124,7 @@
     letsDoButton = [[UIButton alloc] initWithFrame: buttonFrame];
     //letsDoButton.translatesAutoresizingMaskIntoConstraints = NO;
     [letsDoButton setTitle: @"Let's Do Something!" forState: UIControlStateNormal];
-  //  [letsDoButton addTarget:self action:@selector(letsDoSomethingAction:) forControlEvents:UIControlEventTouchUpInside];
+    //  [letsDoButton addTarget:self action:@selector(letsDoSomethingAction:) forControlEvents:UIControlEventTouchUpInside];
     [letsDoButton.titleLabel setFont:[UIFont fontWithName:@"Patron-Bold" size:12]];
     letsDoButton.titleLabel.lineBreakMode = NSLineBreakByTruncatingTail;
     letsDoButton.titleLabel.numberOfLines = 2;
@@ -94,29 +135,7 @@
                                                     blue:64.0f/255.0f
                                                    alpha:1.0f];
     [self.thingsView addSubview:letsDoButton];
-    //genderImage
-    UIImage *genderImage;
-   
-    if([[userDetailsDict objectForKey:@"gender"]isEqualToString:@"Female"]){
-        genderImage = [UIImage imageNamed:@"female_Icon"];
-        
-    }
-    else
-        genderImage = [UIImage imageNamed:@"male_Icon"];
-    
-    UIImageView *genderImageView = [[UIImageView alloc] initWithImage:genderImage];
-    genderImageView.frame = CGRectMake(0.0f, 0.0f,20.0f, 20.0f);
-    [self.genderView addSubview:genderImageView];
 
-    
-   
-    self.aboutTextBox.text = [userDetailsDict valueForKey:@"about"];
-    self.userName.text     = [self getData];
-    [self.userName setFont:[UIFont fontWithName:@"Patron-Medium" size:14]];
-    self.userName.textColor =[UIColor colorWithRed:218.0f/255.0f
-                                             green:40.0f/255.0f
-                                              blue:64.0f/255.0f
-                                             alpha:1.0f];
     //AboutLabel
     self.aboutLabel.text = NSLocalizedString(@"About Me", @"");
     [self.aboutLabel setFont:[UIFont fontWithName:@"Patron-Medium" size:12]];
@@ -129,7 +148,7 @@
     [self.thingsLabel setFont:[UIFont fontWithName:@"Patron-Medium" size:12]];
     self.thingsLabel.textColor =[UIColor colorWithRed:83.0f/255.0f
                                                 green:83.0f/255.0f
-                                                blue:83.0f/255.0f
+                                                 blue:83.0f/255.0f
                                                 alpha:1.0f];
     //MyInterestLabel
     [self.myinterestsLabel setText:NSLocalizedString(@"My Interests and Hobbies", @"")];
@@ -145,12 +164,8 @@
     doSomethingArray        = [[userDetailsDict valueForKey:@"dosomething"]mutableCopy];
     doSomethingNameArray    = [[doSomethingArray valueForKey:@"name"]mutableCopy];
     doSomethingImageArray   = [[doSomethingArray valueForKey:@"ActiveImage"]mutableCopy];
-    
-    [self profileInterestsDetails];
-    [self profileDoSomethingDetails];
-    
-    [self updateScrollViewContentSize];
-   }
+}
+
 #pragma mark - userAgeName
 -(NSString *) getData{
     
@@ -244,7 +259,7 @@
     {
         if(IS_IPHONE6|| IS_IPHONE6_Plus)
         {
-           // [self.scrView setContentOffset:CGPointMake(4.5*self.profileImageView.frame.size.width - 25  , 0)animated:NO];
+           
             [self.profileImageScroll setContentOffset:CGPointMake(4*self.profileImageView.frame.size.width - 15, 0)animated:NO];
         }
         else
@@ -487,6 +502,44 @@
     
 }
 
+-(void) aboutTestText{
+    dataSize = [COMMON getControlHeight:[userDetailsDict valueForKey:@"about"] withFontName:@"Patron-Regular" ofSize:14.0 withSize:CGSizeMake(self.view.frame.size.width,self.view.frame.size.height+10)];
+    
+    _myAboutView=[[UIView alloc]initWithFrame:CGRectMake(self.view.frame.origin.x+15, self.view.frame.origin.y+210,self.view.frame.size.width-30, dataSize.height+35)];
+    [_myAboutView setBackgroundColor:[UIColor whiteColor]];
+    
+    UILabel *myAboutLabel = [[UILabel alloc] initWithFrame:CGRectMake(self.view.frame.origin.x+10, self.view.frame.origin.y+5,80, 20)];//self.view.frame.size.width-240
+    //myInterests.autoresizingMask = paintView.autoresizingMask;
+    myAboutLabel.text = NSLocalizedString(@"About Me", @"");
+    [myAboutLabel setFont:[UIFont fontWithName:@"Patron-Medium" size:12]];
+    // myAboutLabel.backgroundColor = [UIColor redColor];
+    myAboutLabel.textColor =[UIColor colorWithRed:83.0f/255.0f
+                                            green:83.0f/255.0f
+                                             blue:83.0f/255.0f
+                                            alpha:1.0f];
+    
+    
+    UITextView *textView;
+    textView = [[UITextView alloc] initWithFrame:CGRectMake(self.myAboutView.frame.origin.x+80, self.myAboutView.frame.origin.y-210,self.myAboutView.frame.size.width-100, 50)];
+    textView.text =[userDetailsDict valueForKey:@"about"];
+    textView.font = [UIFont fontWithName:@"Patron-Medium" size:12];
+    textView.textColor =[UIColor colorWithRed:153.0f/255.0f
+                                        green:153.0f/255.0f
+                                         blue:153.0f/255.0f
+                                        alpha:1.0f];
+    [textView setUserInteractionEnabled:NO];
+    [textView sizeToFit];
+    [textView setScrollEnabled:NO];
+    textView.backgroundColor=[UIColor redColor];
+    _myAboutView.backgroundColor=[UIColor blueColor];
+    //
+    //    CGRect frame = textView.frame;
+    //    frame.size.height = textView.contentSize.height;
+    //    textView.frame=frame;
+    [self.myAboutView addSubview:myAboutLabel];
+    [self.myAboutView addSubview:textView];
+    [self.detailPageMainScroll addSubview:_myAboutView];
+}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

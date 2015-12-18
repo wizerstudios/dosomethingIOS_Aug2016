@@ -23,5 +23,7 @@
 @property (nonatomic,retain) NSMutableArray*dosomethingImageArry;
 
 @property (nonatomic,strong) NSMutableArray * commonlocationArray;
+@property (strong, nonatomic) IBOutlet UISlider *ageSlider;
+@property (strong, nonatomic) IBOutlet UISlider *distanceSlider;
 
 @end
