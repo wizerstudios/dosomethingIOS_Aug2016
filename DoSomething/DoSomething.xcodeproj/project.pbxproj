@@ -1310,7 +1310,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.oclockapps.DoSomething;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "8c65c90b-c61d-460f-a4ef-2f01bedb3a4d";
+				PROVISIONING_PROFILE = "88b4c0c5-eb7e-4eb9-847d-9cd3cdddf5d0";
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
@@ -1334,7 +1334,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.oclockapps.DoSomething;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "947fcca7-5cd1-4c2b-ad64-248cd3546291";
+				PROVISIONING_PROFILE = "94f0dcb4-0c04-4425-89c4-d1f2a7733725";
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
