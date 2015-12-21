@@ -15,5 +15,6 @@
 @property (strong, nonatomic) IBOutlet UILabel *Message;
 @property (strong, nonatomic) IBOutlet UILabel *Time;
 @property (weak, nonatomic) IBOutlet UIImageView *profileImageView;
+@property (nonatomic,strong) IBOutlet UILabel *msgCountLabel;
 
 @end
