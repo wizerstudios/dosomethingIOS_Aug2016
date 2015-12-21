@@ -39,6 +39,9 @@
     
     NSString * onlineStatus;
     NSString * avalibleGenderStatus;
+    LocationCollectionViewCell*locationCellView;
+    
+    NSString * sessionID;
 }
 @property(nonatomic,strong)IBOutlet NSLayoutConstraint * collectionviewxpostion;
 @property(nonatomic,strong)IBOutlet NSLayoutConstraint * filterviewxposition;
@@ -51,6 +54,7 @@
 @property(nonatomic,strong) IBOutlet UIButton *maleBtn;
 @property(nonatomic,strong) IBOutlet UIButton *FemaleBtn;
 @property(nonatomic,strong) IBOutlet UIButton *avablebothBtn;
+
 
 @property(nonatomic,strong) IBOutlet UISwipeGestureRecognizer * locationviewSwipright;
 
@@ -137,6 +141,11 @@
     swiperight.direction=UISwipeGestureRecognizerDirectionRight;
     
     [self.locationCollectionView addGestureRecognizer:swiperight];
+    
+    [[UISlider appearance] setThumbImage:[UIImage imageNamed:@"dot_Image"] forState:UIControlStateNormal];
+    
+    
+    
     
     
 }
@@ -362,7 +371,7 @@
 
 -(UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    LocationCollectionViewCell*locationCellView = [collectionView dequeueReusableCellWithReuseIdentifier:@"LocationCell" forIndexPath:indexPath];
+    locationCellView = [collectionView dequeueReusableCellWithReuseIdentifier:@"LocationCell" forIndexPath:indexPath];
     if(IS_IPHONE5)
         locationCellView.bounds = CGRectMake(0,0, 100, 180);
     if(IS_IPHONE6)
@@ -413,6 +422,7 @@
     
     locationCellView.imageProfile.layer.masksToBounds = YES;
     
+    [locationCellView.requestsendBtn addTarget:self action:@selector(didClickRequestSend:) forControlEvents:UIControlEventTouchUpInside];
 
     return locationCellView;
 }
@@ -515,6 +525,34 @@
     detailViewController.userDetailsDict = detailsDictionary;
     [self.navigationController pushViewController:detailViewController animated:YES];
 }
+
+-(void)didClickRequestSend:(id)sender
+{
+    id button = sender;
+    while (![button isKindOfClass:[UICollectionViewCell class]]) {
+        button = [button superview];
+    }
+    
+    NSIndexPath *indexPath;
+    
+    
+    indexPath = [locationCollectionView indexPathForCell:(UICollectionViewCell *)button];
+    locationCellView = (LocationCollectionViewCell *) [locationCollectionView cellForItemAtIndexPath:[NSIndexPath indexPathForRow:indexPath.row inSection:0]];
+ 
+     profileUserID=[[commonlocationArray valueForKey:@"user_id"] objectAtIndex:indexPath.row];
+        NSLog(@"%@",profileUserID);
+    NSString * requestsend=[[commonlocationArray valueForKey:@"send_request"] objectAtIndex:indexPath.row];
+    if([requestsend isEqualToString:@"No"])
+    {
+       //[self getUserDetails]
+    }
+}
+    
+
+    
+//    profileUserID=[[commonlocationArray valueForKey:@"user_id"] objectAtIndex:indexPath.row];
+//    NSLog(@"profileUserID%@",profileUserID);
+
 
 -(IBAction)filterAction:(id)sender
 {

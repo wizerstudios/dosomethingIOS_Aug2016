@@ -12,6 +12,8 @@
 		2B13322B1C1FFD1A000A3081 /* DSDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B1332291C1FFD1A000A3081 /* DSDetailViewController.m */; };
 		2B13322C1C1FFD1A000A3081 /* DSDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2B13322A1C1FFD1A000A3081 /* DSDetailViewController.xib */; };
 		2B1B8B961C23E830005A699E /* NSString+FontAwesome.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B1B8B951C23E830005A699E /* NSString+FontAwesome.m */; };
+		2B1B8BE51C24487A005A699E /* DSTermsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B1B8BE31C24487A005A699E /* DSTermsViewController.m */; };
+		2B1B8BE61C24487A005A699E /* DSTermsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2B1B8BE41C24487A005A699E /* DSTermsViewController.xib */; };
 		2B83CAAF1BE8744E0064EC7F /* DSWebservice.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B83CAAE1BE8744E0064EC7F /* DSWebservice.m */; };
 		2B83CAC41BE895AB0064EC7F /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 2B83CABF1BE895AB0064EC7F /* Default.png */; };
 		2B83CAC61BE895AB0064EC7F /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2B83CAC11BE895AB0064EC7F /* Default-568h@2x.png */; };
@@ -132,6 +134,9 @@
 		2B1B8B941C23E830005A699E /* NSString+FontAwesome.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSString+FontAwesome.h"; path = "Helpers/AwesomeFont/NSString+FontAwesome.h"; sourceTree = "<group>"; };
 		2B1B8B951C23E830005A699E /* NSString+FontAwesome.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSString+FontAwesome.m"; path = "Helpers/AwesomeFont/NSString+FontAwesome.m"; sourceTree = "<group>"; };
 		2B1B8BA21C2401C1005A699E /* fontawesome-webfont.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "fontawesome-webfont.ttf"; sourceTree = "<group>"; };
+		2B1B8BE21C24487A005A699E /* DSTermsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DSTermsViewController.h; sourceTree = "<group>"; };
+		2B1B8BE31C24487A005A699E /* DSTermsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DSTermsViewController.m; sourceTree = "<group>"; };
+		2B1B8BE41C24487A005A699E /* DSTermsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DSTermsViewController.xib; sourceTree = "<group>"; };
 		2B83CAAD1BE8744E0064EC7F /* DSWebservice.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DSWebservice.h; sourceTree = "<group>"; };
 		2B83CAAE1BE8744E0064EC7F /* DSWebservice.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DSWebservice.m; sourceTree = "<group>"; };
 		2B83CABF1BE895AB0064EC7F /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
@@ -534,6 +539,9 @@
 			children = (
 				2BEA3FC61C15ADEF00237D12 /* DSTermsOfUseView.h */,
 				2BEA3FC71C15ADEF00237D12 /* DSTermsOfUseView.m */,
+				2B1B8BE21C24487A005A699E /* DSTermsViewController.h */,
+				2B1B8BE31C24487A005A699E /* DSTermsViewController.m */,
+				2B1B8BE41C24487A005A699E /* DSTermsViewController.xib */,
 			);
 			name = TermsOfUse;
 			sourceTree = "<group>";
@@ -1003,6 +1011,7 @@
 				EAEF25361BCFEBF400F83E82 /* CustomNavigationView.xib in Resources */,
 				51322A221BDFBFAA00418216 /* chaton.png in Resources */,
 				C6D5F63D1BC7B52C0050C1AE /* Patron-BoldItalic.ttf in Resources */,
+				2B1B8BE61C24487A005A699E /* DSTermsViewController.xib in Resources */,
 				6A50C21D1BCCBB8C002B11AC /* DSProfileTableViewCell.xib in Resources */,
 				51F3C2F61BE75D40001E1FEC /* LocationCollectionViewCell.xib in Resources */,
 				511C735E1BE3801100D3D61D /* ChatTableViewCell.xib in Resources */,
@@ -1131,6 +1140,7 @@
 				EAF1DC511BD8B2AF00D51354 /* DSHomeViewController.m in Sources */,
 				2BD72AF61BFCC5AD003846E9 /* AFHTTPRequestOperation.m in Sources */,
 				2B1B8B961C23E830005A699E /* NSString+FontAwesome.m in Sources */,
+				2B1B8BE51C24487A005A699E /* DSTermsViewController.m in Sources */,
 				2BD72B131BFCC5D4003846E9 /* UIButton+AFNetworking.m in Sources */,
 				EAEF25271BCF9EF600F83E82 /* IQTitleBarButtonItem.m in Sources */,
 				EAEF251F1BCF9EF600F83E82 /* IQUIView+Hierarchy.m in Sources */,
