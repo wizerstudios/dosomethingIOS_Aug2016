@@ -41,8 +41,10 @@
     NSString * onlineStatus;
     NSString * avalibleGenderStatus;
     LocationCollectionViewCell*locationCellView;
+    NSString * filterAge;
+    NSString * filterDistance;
     
-    NSString * sessionID;
+    
 }
 @property(nonatomic,strong)IBOutlet NSLayoutConstraint * collectionviewxpostion;
 @property(nonatomic,strong)IBOutlet NSLayoutConstraint * filterviewxposition;
@@ -79,7 +81,9 @@
     
     longitude    =[dic valueForKey:@"longitude"];
     laditude     =[dic valueForKey:@"latitude"];
-    
+   
+    onlineStatus=@"";
+    avalibleGenderStatus=@"";
     objWebservice =[[DSWebservice alloc]init];
     
     
@@ -222,7 +226,8 @@
     appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
     appDelegate.buttonsView.hidden=YES;
     appDelegate.SepratorLbl.hidden=YES;
-    [appDelegate.settingButton setBackgroundImage:[UIImage imageNamed:@"setting_icon.png"] forState:UIControlStateNormal];
+    [appDelegate.locationButton setBackgroundImage:[UIImage imageNamed:@"loaction_normal.png"] forState:UIControlStateNormal];
+
     
 }
 
@@ -306,10 +311,10 @@
                          sessionid:[COMMON getSessionID]
                           latitude:currentLatitude
                          longitude:currentLongitude
-                     filter_status:@""
-                     filter_gender:@""
-                   filter_agerange:@""
-                   filter_distance:@""
+                     filter_status:onlineStatus
+                     filter_gender:avalibleGenderStatus
+                   filter_agerange:filterAge
+                   filter_distance:filterAge
                            success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSLog(@"responseObject=%@",responseObject);
         
@@ -390,12 +395,17 @@
     NSString* reguestStr = [[commonlocationArray valueForKey:@"send_request"] objectAtIndex:indexPath.row];
     
     locationCellView.sendRequest.text = ([reguestStr isEqualToString:@"No"])?@"Send Request":@"Request Sent!";
+    
+    locationCellView.sendRequest.textColor =([reguestStr isEqualToString:@"No"])?[UIColor whiteColor]:[UIColor lightGrayColor];
     locationCellView.hobbiesImagebackView.backgroundColor =([reguestStr isEqualToString:@"No"])?[UIColor colorWithRed:(218/255.0) green:(40/255.0) blue:(64.0/255.0f) alpha:1.0]:[UIColor whiteColor];
     
    NSMutableArray * dosomethingImageSprateArry =[[commonlocationArray valueForKey:@"dosomething"]objectAtIndex:indexPath.row];
      NSLog(@"indexPath.row=%ld",(long)indexPath.row);
    
-    dosomethingImageArry = [dosomethingImageSprateArry valueForKey:@"NearbyImage"];
+   
+    dosomethingImageArry =([reguestStr isEqualToString:@"No"])?[dosomethingImageSprateArry valueForKey:@"NearbyImage"]:[dosomethingImageSprateArry valueForKey:@"InactiveImage"];
+    
+   
     NSString *dosomethingImage1=[dosomethingImageArry objectAtIndex:0];
     NSString *dosomethingImage2=[dosomethingImageArry objectAtIndex:1];
     NSString *dosomethingImage3=[dosomethingImageArry objectAtIndex:2];
@@ -457,7 +467,6 @@
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath;
 {
-     // LocationCollectionViewCell*SelectCell = (LocationCollectionViewCell *)[collectionView cellForItemAtIndexPath:indexPath];
     
     UICollectionViewCell *cell = [collectionView cellForItemAtIndexPath:indexPath];
     NSLog(@"touched cell %@ at indexPath %@", cell, indexPath);
@@ -499,15 +508,6 @@
                           success:^(AFHTTPRequestOperation *operation, id responseObject) {
                                NSLog(@"responseObject%@",responseObject);
                               
-//                              NSMutableDictionary *detailsDict = [[NSMutableDictionary alloc]init];
-//                              
-//                              detailsDict = [responseObject valueForKey:@"getuserdetails"];
-//                              
-//                              if([[detailsDict valueForKey:@"status"]isEqualToString:@"success"]){
-//                                  
-//                                   NSLog(@"profileUse%@",[detailsDict objectForKey:@"userDetails"]);
-//                              }
-                              
                               if( [responseObject objectForKey:@"getuserdetails"]!=NULL){
                                                                     
                                   [self redirectToDetailViewWithDictionary:[[responseObject objectForKey:@"getuserdetails"]objectForKey:@"userDetails"]];
@@ -545,11 +545,28 @@
     NSString * requestsend=[[commonlocationArray valueForKey:@"send_request"] objectAtIndex:indexPath.row];
     if([requestsend isEqualToString:@"No"])
     {
-       //[self getUserDetails]
+        [self loadRequestsendWebService];
     }
 }
     
+-(void)loadRequestsendWebService
+{
+    [objWebservice sendRequest:SendRequest_API sessionid:[COMMON getSessionID] request_send_user_id:profileUserID success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        
+        if([[[responseObject valueForKey:@"sendrequest"]valueForKey:@"status"] isEqualToString:@"success"])
+        {
+            NSString * resposeMsg =[[responseObject valueForKey:@"sendrequest"]valueForKey:@"Message"];
+            [self showAltermessage:resposeMsg];
+        }
+        [locationCollectionView reloadData];
 
+       
+        
+    } failure:^(AFHTTPRequestOperation *operation, id error) {
+         NSLog(@"requestSend RESPONSE=%@",error);
+        
+    }];
+}
     
 //    profileUserID=[[commonlocationArray valueForKey:@"user_id"] objectAtIndex:indexPath.row];
 //    NSLog(@"profileUserID%@",profileUserID);
@@ -692,6 +709,35 @@
     [self filterviewPosition];
     isFilteraction=NO;
     [self.locationCollectionView setUserInteractionEnabled:YES];
+}
+
+-(IBAction)DidClickClearFilter:(id)sender
+{
+    self.onlineBtn.backgroundColor =[UIColor whiteColor];
+    self.offlineBtn.backgroundColor =[UIColor whiteColor];
+    self.statusBothBtn.backgroundColor=[UIColor redColor];
+    onlineStatus =@"";
+    
+    self.maleBtn.backgroundColor =[UIColor whiteColor];
+    self.FemaleBtn.backgroundColor =[UIColor whiteColor];
+    self.avablebothBtn.backgroundColor=[UIColor redColor];
+    avalibleGenderStatus =@"";
+    self.ageSlider.value =18;
+    self.distanceSlider.value=0;
+}
+- (IBAction)AgeSliderValueChanged:(UISlider *)sender {
+    UIImage *sliderLeftTrackImage = [[UIImage imageNamed: @"dot_Image.png"] stretchableImageWithLeftCapWidth:9 topCapHeight: 0];
+    [self.ageSlider setMinimumTrackImage: sliderLeftTrackImage forState: UIControlStateNormal];
+    filterAge =[NSString stringWithFormat:@"%f", [sender value]];
+    NSLog(@"AgeSliderValueChanged=%@",[NSString stringWithFormat:@"%f", [sender value]]);
+}
+
+- (IBAction)distanceSliderValueChanged:(UISlider *)sender {
+    UIImage *sliderLeftTrackImage = [[UIImage imageNamed: @"dot_Image.png"] stretchableImageWithLeftCapWidth: 9 topCapHeight: 0];
+
+    [self.distanceSlider setMinimumTrackImage: sliderLeftTrackImage forState: UIControlStateNormal];
+    filterDistance=[NSString stringWithFormat:@"%f", [sender value]];
+    NSLog(@"distanceSliderValueChanged=%@",[NSString stringWithFormat:@"%f", [sender value]]);
 }
 
 - (void)didReceiveMemoryWarning {
