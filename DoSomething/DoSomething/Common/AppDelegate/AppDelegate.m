@@ -30,6 +30,8 @@
       NSLog(@"### Running FB SDK Version: %@", [FBSDKSettings sdkVersion]);
     [[FBSDKApplicationDelegate sharedInstance] application:application
                              didFinishLaunchingWithOptions:launchOptions];
+    
+    [self initAPNS];
    
     if ([COMMON isUserLoggedIn]) {
         
