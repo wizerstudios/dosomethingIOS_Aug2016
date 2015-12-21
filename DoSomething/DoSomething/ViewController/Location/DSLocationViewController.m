@@ -744,8 +744,8 @@
 - (IBAction)AgeSliderValueChanged:(UISlider *)sender {
     UIImage *sliderLeftTrackImage = [[UIImage imageNamed: @"dot_Image.png"] stretchableImageWithLeftCapWidth:8 topCapHeight: 0];
     [self.ageSlider setMinimumTrackImage:sliderLeftTrackImage forState: UIControlStateNormal];
-    filterAge =[NSString stringWithFormat:@"%f", [sender value]];
-    //[self nearestLocationWebservice];
+    filterAge =[NSString stringWithFormat:@"18-%f", [sender value]];
+    [self nearestLocationWebservice];
     NSLog(@"AgeSliderValueChanged=%@",[NSString stringWithFormat:@"%f", [sender value]]);
 }
 
@@ -753,8 +753,8 @@
     UIImage *sliderLeftTrackImage = [[UIImage imageNamed: @"dot_Image.png"] stretchableImageWithLeftCapWidth: 8 topCapHeight: 0];
 
     [self.distanceSlider setMinimumTrackImage: sliderLeftTrackImage forState: UIControlStateNormal];
-    filterDistance=[NSString stringWithFormat:@"%f", [sender value]];
-   // [self nearestLocationWebservice];
+    filterDistance=[NSString stringWithFormat:@"0-%f", [sender value]];
+   [self nearestLocationWebservice];
     NSLog(@"distanceSliderValueChanged=%@",[NSString stringWithFormat:@"%f", [sender value]]);
 }
 
