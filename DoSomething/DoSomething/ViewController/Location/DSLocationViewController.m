@@ -509,8 +509,7 @@
 //                              }
                               
                               if( [responseObject objectForKey:@"getuserdetails"]!=NULL){
-                                  NSLog(@"profileUse%@",[[responseObject objectForKey:@"getuserdetails"]objectForKey:@"userDetails"]);
-                                  
+                                                                    
                                   [self redirectToDetailViewWithDictionary:[[responseObject objectForKey:@"getuserdetails"]objectForKey:@"userDetails"]];
                                   [COMMON removeLoading];
                               }
