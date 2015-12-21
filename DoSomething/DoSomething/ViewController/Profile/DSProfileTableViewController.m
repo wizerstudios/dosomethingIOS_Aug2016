@@ -674,7 +674,10 @@ if([[NSUserDefaults standardUserDefaults] valueForKey:@"SelectedItemCategoryID"]
     {
         
     }
+    [textField resignFirstResponder];
+ 
     return YES;
+    
 }
 
 -(BOOL)textFieldShouldBeginEditing:(UITextField *)textField{
@@ -1528,8 +1531,14 @@ if([[NSUserDefaults standardUserDefaults] valueForKey:@"SelectedItemCategoryID"]
             
         }
 
-    }
+}
 
+#pragma mark- hide keyboard
+- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event{
+    //hides keyboard when another part of layout was touched
+    [self.view endEditing:YES];
+    [super touchesBegan:touches withEvent:event];
+}
 
 -(void)NotificationmsgBtnSwipLeftAction:(id)sender
 {
@@ -2169,8 +2178,6 @@ if([[NSUserDefaults standardUserDefaults] valueForKey:@"SelectedItemCategoryID"]
     
 
 }
-
-
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

@@ -17,6 +17,7 @@
 #import <MapKit/MapKit.h>
 #import "DSDetailViewController.h"
 #import "CustomAlterview.h"
+#import "DSNearByDetailViewController.h"
 
 #define hobbiesbackcolor = [UIColor colorWithRed: (199.0/255.0) green: (65.0/255.0) blue: (81.0/255.0) alpha: 1.0];
 
@@ -517,8 +518,7 @@
                                NSLog(@"responseObject%@",responseObject);
                               
                               if( [responseObject objectForKey:@"getuserdetails"]!=NULL){
-                                  NSLog(@"profileUse%@",[[responseObject objectForKey:@"getuserdetails"]objectForKey:@"userDetails"]);
-                                  
+                                                                    
                                   [self redirectToDetailViewWithDictionary:[[responseObject objectForKey:@"getuserdetails"]objectForKey:@"userDetails"]];
                                   [COMMON removeLoading];
                               }
@@ -531,6 +531,7 @@
 - (void) redirectToDetailViewWithDictionary:(NSMutableDictionary *) detailsDictionary {
     
     DSDetailViewController* detailViewController = [[DSDetailViewController alloc] init];
+   // DSNearByDetailViewController* detailViewController = [[DSNearByDetailViewController alloc] init];
     detailViewController.userDetailsDict = detailsDictionary;
     [self.navigationController pushViewController:detailViewController animated:YES];
 }
