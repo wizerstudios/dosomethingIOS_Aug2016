@@ -13,6 +13,7 @@
 #import "DSWebservice.h"
 #import "UIImageView+AFNetworking.h"
 #import "NSString+FontAwesome.h"
+#import "DSNearByDetailViewController.h"
 
 
 
