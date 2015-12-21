@@ -14,6 +14,8 @@
 		2B1B8B961C23E830005A699E /* NSString+FontAwesome.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B1B8B951C23E830005A699E /* NSString+FontAwesome.m */; };
 		2B1B8BE51C24487A005A699E /* DSTermsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B1B8BE31C24487A005A699E /* DSTermsViewController.m */; };
 		2B1B8BE61C24487A005A699E /* DSTermsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2B1B8BE41C24487A005A699E /* DSTermsViewController.xib */; };
+		2B2C08901C27BB6C00996441 /* DSNearByDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B2C088E1C27BB6C00996441 /* DSNearByDetailViewController.m */; };
+		2B2C08911C27BB6C00996441 /* DSNearByDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2B2C088F1C27BB6C00996441 /* DSNearByDetailViewController.xib */; };
 		2B83CAAF1BE8744E0064EC7F /* DSWebservice.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B83CAAE1BE8744E0064EC7F /* DSWebservice.m */; };
 		2B83CAC41BE895AB0064EC7F /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 2B83CABF1BE895AB0064EC7F /* Default.png */; };
 		2B83CAC61BE895AB0064EC7F /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2B83CAC11BE895AB0064EC7F /* Default-568h@2x.png */; };
@@ -137,6 +139,9 @@
 		2B1B8BE21C24487A005A699E /* DSTermsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DSTermsViewController.h; sourceTree = "<group>"; };
 		2B1B8BE31C24487A005A699E /* DSTermsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DSTermsViewController.m; sourceTree = "<group>"; };
 		2B1B8BE41C24487A005A699E /* DSTermsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DSTermsViewController.xib; sourceTree = "<group>"; };
+		2B2C088D1C27BB6C00996441 /* DSNearByDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DSNearByDetailViewController.h; path = NearByDetail/DSNearByDetailViewController.h; sourceTree = "<group>"; };
+		2B2C088E1C27BB6C00996441 /* DSNearByDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DSNearByDetailViewController.m; path = NearByDetail/DSNearByDetailViewController.m; sourceTree = "<group>"; };
+		2B2C088F1C27BB6C00996441 /* DSNearByDetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = DSNearByDetailViewController.xib; path = NearByDetail/DSNearByDetailViewController.xib; sourceTree = "<group>"; };
 		2B83CAAD1BE8744E0064EC7F /* DSWebservice.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DSWebservice.h; sourceTree = "<group>"; };
 		2B83CAAE1BE8744E0064EC7F /* DSWebservice.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DSWebservice.m; sourceTree = "<group>"; };
 		2B83CABF1BE895AB0064EC7F /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
@@ -384,6 +389,9 @@
 				2B1332281C1FFD1A000A3081 /* DSDetailViewController.h */,
 				2B1332291C1FFD1A000A3081 /* DSDetailViewController.m */,
 				2B13322A1C1FFD1A000A3081 /* DSDetailViewController.xib */,
+				2B2C088D1C27BB6C00996441 /* DSNearByDetailViewController.h */,
+				2B2C088E1C27BB6C00996441 /* DSNearByDetailViewController.m */,
+				2B2C088F1C27BB6C00996441 /* DSNearByDetailViewController.xib */,
 			);
 			name = NearByDetail;
 			sourceTree = "<group>";
@@ -1001,6 +1009,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				EAF1DC521BD8B2AF00D51354 /* DSHomeViewController.xib in Resources */,
+				2B2C08911C27BB6C00996441 /* DSNearByDetailViewController.xib in Resources */,
 				2B83CAC41BE895AB0064EC7F /* Default.png in Resources */,
 				EAEF252A1BCF9EF600F83E82 /* IQKeyboardManager.bundle in Resources */,
 				2B83CAC81BE895AB0064EC7F /* Default-667h@2x.png in Resources */,
@@ -1144,6 +1153,7 @@
 				2BD72B131BFCC5D4003846E9 /* UIButton+AFNetworking.m in Sources */,
 				EAEF25271BCF9EF600F83E82 /* IQTitleBarButtonItem.m in Sources */,
 				EAEF251F1BCF9EF600F83E82 /* IQUIView+Hierarchy.m in Sources */,
+				2B2C08901C27BB6C00996441 /* DSNearByDetailViewController.m in Sources */,
 				065BAC521BC7A135005AF493 /* main.m in Sources */,
 				2BD72B151BFCC5D4003846E9 /* UIProgressView+AFNetworking.m in Sources */,
 				2BD72B101BFCC5D4003846E9 /* AFNetworkActivityIndicatorManager.m in Sources */,
