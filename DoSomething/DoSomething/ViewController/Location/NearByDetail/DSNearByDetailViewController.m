@@ -14,6 +14,7 @@
 #import "DSWebservice.h"
 #import "UIImageView+AFNetworking.h"
 #import "NSString+FontAwesome.h"
+#import "DSNearbyCustomCell.h"
 
 @interface DSNearByDetailViewController () <UIScrollViewDelegate,UITableViewDataSource,UITableViewDelegate>
 {
@@ -37,6 +38,8 @@
     UIImage *genderImage;
     NSMutableArray *valueArray;
     
+    DSNearbyCustomCell *NearbyCustomcell;
+
 }
 
 @property (strong, nonatomic) IBOutlet UITableView *tableView;
@@ -48,7 +51,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     objWebService =[[DSWebservice alloc]init];
-    valueArray=[[NSMutableArray alloc]initWithObjects:@"cell0",@"cell1",@"cell2", nil];
+    valueArray=[[NSMutableArray alloc]initWithObjects:@"cell0",@"cell1",@"cell2",@"cell3", nil];
 
     // Do any additional setup after loading the view from its nib.
 }
@@ -78,8 +81,7 @@
     
     [customNavigation.buttonBack addTarget:self action:@selector(backAction) forControlEvents:UIControlEventTouchUpInside];
     
-    [self profileImageDisplay];
-    [self profileImageScrollView];
+    
     self.nameAgeLabel.text=[self getData];
     
     interstAndHobbiesArray  = [[userDetailsDict valueForKey:@"hobbieslist"]mutableCopy];
@@ -90,30 +92,12 @@
     doSomethingImageArray   = [[doSomethingArray valueForKey:@"ActiveImage"]mutableCopy];
 
     
-    if([[userDetailsDict objectForKey:@"gender"]isEqualToString:@"Female"]){
-        _genderImageView.image = [UIImage imageNamed:@"female_Icon"];
-        
-    }
-    else
-        _genderImageView.image = [UIImage imageNamed:@"male_Icon"];
-
-    _tableView = [[UITableView alloc] init];//WithFrame:CGRectMake(10, 245, 300, 200)];
-    _tableView.delegate = self;
-    _tableView.dataSource = self;
-    _tableView.backgroundColor = [UIColor whiteColor];     _tableView.bounces = NO;
-   // _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-    _tableView.translatesAutoresizingMaskIntoConstraints = NO;
+    self.nameAgeLabel.text =[self getData];
+    [self profileImageDisplay];
     
-    [self.mainScroll addSubview:_tableView];
-    [self setupConstraints];
+   
 
 
-    
-   // [self profileInterestsDetails];
-  //  [self profileDoSomethingDetails];
-    
-    // [self updateScrollViewContentSize];
-    // [self aboutTestText];
 }
 
 #pragma mark - userAgeName
@@ -230,6 +214,34 @@
             [self.profileImageScroll setContentOffset:CGPointMake((1.5*self.profileImageView.frame.size.width - 15), 0)animated:NO];
         }
     }
+    xslider=0;
+    pgDtView=[[UIView alloc]init];
+    pgDtView.backgroundColor=[UIColor clearColor];
+    pageImageView =[[UIImageView alloc]init];
+    detailPageControl.numberOfPages=profileDataArray.count;
+    
+    for(int i=0;i<detailPageControl.numberOfPages;i++)
+    {
+        blkdot=[[UIImageView alloc]init];
+        [blkdot setFrame:CGRectMake(i*18, 0, 8, 8 )];
+        [blkdot setImage:[UIImage imageNamed:@"dot_normal"]];
+        
+        [pgDtView addSubview:blkdot];
+        [pageImageView setFrame:CGRectMake(0, 0, 8, 8)];
+        [pageImageView setImage:[UIImage imageNamed:@"dot_active_red"]];
+        [pgDtView addSubview:pageImageView];
+        [_topViewCell addSubview:pgDtView];
+        if(IS_IPHONE6||IS_IPHONE6_Plus) {
+            [pgDtView setFrame:CGRectMake(40, -5, detailPageControl.numberOfPages*18, 10)];
+        }
+        else{
+            [pgDtView setFrame:CGRectMake(15, -5, detailPageControl.numberOfPages*18, 10)];
+        }
+        
+        
+    }
+
+    
     
 }
 
@@ -239,29 +251,37 @@
     CurrentImage = scrollView.contentOffset.x / scrollView.frame.size.width;
     
     if (scrollView==self.profileImageScroll) {
-        pull=@"";
-        jslider = scrollView.contentOffset.x / scrollView.frame.size.width;
-        [self.profileImageScroll setNeedsDisplay];
-        detailPageControl.currentPage=jslider;
-        [pageImageView setFrame:CGRectMake(jslider*18, 0, 8, 8)];
         
-        isTapping=NO;
-        scrolldragging=@"YES";
     }
+    pull=@"";
+    jslider = scrollView.contentOffset.x / scrollView.frame.size.width;
+    [self.profileImageScroll setNeedsDisplay];
+    detailPageControl.currentPage=jslider;
+    [pageImageView setFrame:CGRectMake(jslider*18, 0, 8, 8)];
+    
+    isTapping=NO;
+    scrolldragging=@"YES";
 }
 //
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    if ( indexPath.row ==0)
+    
+    if(indexPath.row ==0)
     {
-        return 80;
- 
+        return 200;
     }
     if ( indexPath.row ==1)
     {
-
-        return 85;
+        dataSize = [COMMON getControlHeight:[userDetailsDict valueForKey:@"about"] withFontName:@"Patron-Medium" ofSize:12.0 withSize:CGSizeMake(tableView.frame.size.width-20,tableView.frame.size.height)];
+        self.aboutviewHeight.constant =dataSize.height;
+        return  self.aboutviewHeight.constant+10;
+ 
     }
     if ( indexPath.row ==2)
+    {
+
+        return 100;
+    }
+    if ( indexPath.row ==3)
     {
         imageSize =39;
         commonWidth=19.5;
@@ -269,16 +289,16 @@
         if([imageNormalArray count] < 1)
             return 80;
         else if([imageNormalArray count] <= 5)
-            return commonHeight + 46;
+            return commonHeight + 56;
         else if([imageNormalArray count] <= 10)
-            return (commonHeight*2)+46;
+            return (commonHeight*2)+56;
         else if([imageNormalArray count] <= 15)
-            return (commonHeight * 3)+48;
+            return (commonHeight * 3)+58;
         else if([imageNormalArray count] <= 20)
-            return (commonHeight * 4)+52;
+            return (commonHeight * 4)+62;
     }
 
-    return 80;
+    return 100;
     
 }
 
@@ -298,30 +318,61 @@
 {
     static NSString *cellIdentifier = @"Cell";
     
+    NearbyCustomcell = (DSNearbyCustomCell *)[tableView dequeueReusableCellWithIdentifier:cellIdentifier];
     
-    UITableViewCell *cell = (UITableViewCell *)[tableView dequeueReusableCellWithIdentifier:cellIdentifier];
-    if(cell==nil){
-    cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
+    if (indexPath.row == 0)
+    {
+        
+        if (NearbyCustomcell == nil)
+        {
+            [[NSBundle mainBundle] loadNibNamed:@"DSNearbyCustomCell" owner:self options:nil];
+            NearbyCustomcell = cellNearbyProfileImg;
+        }
+        [detailPageControl setHidden:YES];
+        [self profileImageScrollView];
+        if([[userDetailsDict objectForKey:@"gender"]isEqualToString:@"Female"]){
+            _genderImageView.image = [UIImage imageNamed:@"female_Icon"];
+            
+        }
+        else
+            _genderImageView.image = [UIImage imageNamed:@"male_Icon"];
+        
+        self.nameAgeLabel.text =[self getData];
+        
+        
+    }
+
+    
+
+    
+    if (indexPath.row == 1)
+    {
+        
+        if (NearbyCustomcell == nil)
+        {
+            [[NSBundle mainBundle] loadNibNamed:@"DSNearbyCustomCell" owner:self options:nil];
+            NearbyCustomcell = cellAbout;
+        }
+        NearbyCustomcell.aboutText.text = [userDetailsDict valueForKey:@"about"];
+        [NearbyCustomcell.aboutText sizeToFit];
+        
     }
     
-    
-    if (indexPath.row == 0 )
+    if (indexPath.row == 2 )
     {
-        UILabel *About = [[UILabel alloc] initWithFrame:CGRectMake(10,5,170,20)];
-        //myInterests.autoresizingMask = paintView.autoresizingMask;
-        About.text = NSLocalizedString(@"About Me", @"");
-        [About setFont:[UIFont fontWithName:@"Patron-Medium" size:12]];
-        About.textColor =[UIColor colorWithRed:83.0f/255.0f
-                                               green:83.0f/255.0f
-                                                blue:83.0f/255.0f
-                                               alpha:1.0f];
+        if (NearbyCustomcell == nil)
+        {
+            [[NSBundle mainBundle] loadNibNamed:@"DSNearbyCustomCell" owner:self options:nil];
+            NearbyCustomcell = cellDosomething;
+            
+            [NearbyCustomcell.letsDoSomethingButton addTarget:self action:@selector(letsDoSomethingAction:) forControlEvents:UIControlEventTouchUpInside];
+            NearbyCustomcell.letsDoSomethingButton.titleLabel.lineBreakMode = NSLineBreakByTruncatingTail;
+            NearbyCustomcell.letsDoSomethingButton.titleLabel.numberOfLines = 2;
+            NearbyCustomcell.letsDoSomethingButton.titleLabel.textAlignment = NSTextAlignmentCenter;
+
+        }
         
-        [cell addSubview:About];
         
-        
-    }
-    if (indexPath.row == 1 )
-    {
         imageSize =39;
         commonWidth=19.5;
         //commonHeight = 54;
@@ -332,17 +383,7 @@
         commonHeight = imageSize+15;
         
         
-        UILabel *myThings = [[UILabel alloc] initWithFrame:CGRectMake(10,5,170,20)];
-        //myInterests.autoresizingMask = paintView.autoresizingMask;
-        myThings.text = NSLocalizedString(@"Things I Wanna Do", @"");
-        [myThings setFont:[UIFont fontWithName:@"Patron-Medium" size:12]];
-        myThings.textColor =[UIColor colorWithRed:83.0f/255.0f
-                                               green:83.0f/255.0f
-                                                blue:83.0f/255.0f
-                                               alpha:1.0f];
         
-        [cell addSubview:myThings];
-
         //doSomethingImageArray
         for (int i =0; i< [doSomethingImageArray  count]; i++) {
             
@@ -359,7 +400,7 @@
             image= [image stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
             [doSomethingImage setImageWithURL:[NSURL URLWithString:image]];
             
-            [cell addSubview:doSomethingImage];
+            [NearbyCustomcell addSubview:doSomethingImage];
             
         }
         //doSomethingNameArray
@@ -381,7 +422,7 @@
                                                          blue:64.0f/255.0f
                                                         alpha:1.0f];
             doSomethingName.text = image;
-            [cell addSubview:doSomethingName];
+            [NearbyCustomcell addSubview:doSomethingName];
             doSomethingName.textAlignment = NSTextAlignmentCenter;
         }
 
@@ -390,8 +431,15 @@
    // cell.textLabel.text = @"Testing";
     
     }
-    if (indexPath.row == 2 )
+    if (indexPath.row == 3)
     {
+        
+        if (NearbyCustomcell == nil)
+        {
+            [[NSBundle mainBundle] loadNibNamed:@"DSNearbyCustomCell" owner:self options:nil];
+            NearbyCustomcell = cellInterestHobbies;
+        }
+        
         imageSize =39;
         commonWidth=19.5;
         //commonHeight = 54;
@@ -400,16 +448,6 @@
         space = imageSize / 2;
         commonHeight = imageSize+15;
         
-        UILabel *myInterests = [[UILabel alloc] initWithFrame:CGRectMake(10,10,170,20)];
-        //myInterests.autoresizingMask = paintView.autoresizingMask;
-        myInterests.text = NSLocalizedString(@"My Interest and Hobbies", @"");
-        [myInterests setFont:[UIFont fontWithName:@"Patron-Medium" size:12]];
-        myInterests.textColor =[UIColor colorWithRed:83.0f/255.0f
-                                               green:83.0f/255.0f
-                                                blue:83.0f/255.0f
-                                               alpha:1.0f];
-        
-        [cell addSubview:myInterests];
         
         for (int i =0; i< [imageNormalArray  count]; i++) {
             
@@ -428,7 +466,7 @@
             image= [image stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
             [hobbiesImage setImageWithURL:[NSURL URLWithString:image]];
             
-            [cell addSubview:hobbiesImage];
+            [NearbyCustomcell addSubview:hobbiesImage];
             
         }
         //hobbiesNameArray
@@ -456,7 +494,7 @@
             hobbiesname.text = image;
             
             //[self.myInterestView addSubview:hobbiesname];
-            [cell addSubview:hobbiesname];
+            [NearbyCustomcell addSubview:hobbiesname];
             
             hobbiesname.textAlignment = NSTextAlignmentCenter;
             
@@ -465,67 +503,29 @@
 
     
     }
-    tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-    cell.selectionStyle = UITableViewCellSelectionStyleNone;
-    [tableView setBounces:NO];
-
-    return cell;
+    NearbyCustomcell.selectionStyle = UITableViewCellSelectionStyleNone;
+    return NearbyCustomcell;
     
 }
 
-#pragma mark - UITableViewDelegate
-// when user tap the row, what action you want to perform
-- (void)tableView:(UITableView *)theTableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+
+#pragma mark - letsDoSomethingAction
+- (void)letsDoSomethingAction:(id)sender
 {
-    NSLog(@"selected %ld row", (long)indexPath.row);
+    requestUserID = [userDetailsDict valueForKey:@"user_id"];
+    
+    [objWebService sendRequest:SendRequest_API
+                     sessionid:[COMMON getSessionID]
+          request_send_user_id:requestUserID
+                       success:^(AFHTTPRequestOperation *operation, id responseObject) {
+                           NSLog(@"SEND REQ%@",responseObject);
+                           
+                       } failure:^(AFHTTPRequestOperation *operation, id error) {
+                           NSLog(@"SEND REQ ERR%@",error);
+                       }];
+    
 }
 
-
--(void) setupConstraints{
-    
-    
-    // Width constraint
-    [self.view addConstraint:[NSLayoutConstraint constraintWithItem:_tableView
-                                                     attribute:NSLayoutAttributeWidth
-                                                     relatedBy:NSLayoutRelationEqual
-                                                        toItem:self.mainScroll
-                                                     attribute:NSLayoutAttributeWidth
-                                                    multiplier:0.9
-                                                      constant:0]];
-    
-
-    
-    
-    
-    
-    // Height constraint
-    [self.view addConstraint:[NSLayoutConstraint constraintWithItem:_tableView
-                                                     attribute:NSLayoutAttributeHeight
-                                                     relatedBy:NSLayoutRelationEqual
-                                                        toItem:self.mainScroll
-                                                     attribute:NSLayoutAttributeHeight
-                                                    multiplier:0.7 //0.928
-                                                      constant:0]];
-    
-    // Center horizontally
-    [self.view addConstraint:[NSLayoutConstraint constraintWithItem:_tableView
-                                                     attribute:NSLayoutAttributeCenterX
-                                                     relatedBy:NSLayoutRelationEqual
-                                                        toItem:self.mainScroll
-                                                     attribute:NSLayoutAttributeCenterX
-                                                    multiplier:1.0
-                                                      constant:0.0]];
-    
-    
-    // Center vertically
-    [self.view addConstraint:[NSLayoutConstraint constraintWithItem:_tableView
-                                                         attribute:NSLayoutAttributeCenterY
-                                                         relatedBy:NSLayoutRelationEqual
-                                                            toItem:self.mainScroll
-                                                         attribute:NSLayoutAttributeCenterY
-                                                        multiplier:1.5 //1.105
-                                                          constant:0.0]];
-}
 
 
 - (void)backAction
@@ -535,20 +535,16 @@
     
 }
 
+
+
+
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
 
-/*
-#pragma mark - Navigation
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 
 @end

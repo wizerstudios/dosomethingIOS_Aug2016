@@ -530,8 +530,8 @@
 }
 - (void) redirectToDetailViewWithDictionary:(NSMutableDictionary *) detailsDictionary {
     
-    DSDetailViewController* detailViewController = [[DSDetailViewController alloc] init];
-   // DSNearByDetailViewController* detailViewController = [[DSNearByDetailViewController alloc] init];
+   // DSDetailViewController* detailViewController = [[DSDetailViewController alloc] init];
+    DSNearByDetailViewController* detailViewController = [[DSNearByDetailViewController alloc] init];
     detailViewController.userDetailsDict = detailsDictionary;
     [self.navigationController pushViewController:detailViewController animated:YES];
 }
