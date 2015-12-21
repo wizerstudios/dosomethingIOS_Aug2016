@@ -25,6 +25,8 @@
     UIButton *navButton;
     NSString * currentLatitude, * currentLongitude;
     DSWebservice *webService;
+    NSMutableArray *chatArray;
+    NSUInteger isSupportUser;
 }
 
 @end
@@ -37,13 +39,14 @@
     // Do any additional setup after loading the view from its nib.
     locationManager                 = [[CLLocationManager alloc] init];
     locationManager.delegate        = self;
+    chatArray = [[NSMutableArray alloc]init];
     webService = [[DSWebservice alloc]init];
-    ChatNameArray =[[NSArray alloc] initWithObjects:@"Gal Gadot",@"Yuna",@"Taylor",nil];
-    MessageArray =[[NSArray alloc] initWithObjects:@"Haha Sure I'll see you at 7:)",@"Hello?",@"See Ya!",nil];
-    timeArray = [[NSArray alloc] initWithObjects:@"19:58",@"17:20",@"15:30",nil];
-    imageArray =[[NSArray alloc] initWithObjects:@"Galglot.png",@"yuna.png",@"taylor.png",nil];
-    badgeimage=[[NSArray alloc] initWithObjects:@"12-Chats.png",@"18-Chats.png",@" ",nil];
-    badgeimage=[[NSArray alloc] initWithObjects:@"18-Chats.png",@"12-Chats.png",@" ",nil];
+//    ChatNameArray =[[NSArray alloc] initWithObjects:@"Gal Gadot",@"Yuna",@"Taylor",nil];
+//    MessageArray =[[NSArray alloc] initWithObjects:@"Haha Sure I'll see you at 7:)",@"Hello?",@"See Ya!",nil];
+//    timeArray = [[NSArray alloc] initWithObjects:@"19:58",@"17:20",@"15:30",nil];
+//    imageArray =[[NSArray alloc] initWithObjects:@"Galglot.png",@"yuna.png",@"taylor.png",nil];
+//    badgeimage=[[NSArray alloc] initWithObjects:@"12-Chats.png",@"18-Chats.png",@" ",nil];
+//    badgeimage=[[NSArray alloc] initWithObjects:@"18-Chats.png",@"12-Chats.png",@" ",nil];
     
     if(IS_IPHONE6 || IS_IPHONE6_Plus)
         [self.view addConstraint:[NSLayoutConstraint constraintWithItem:ChatTableView
@@ -65,6 +68,8 @@
     [self getUserCurrenLocation];
     [self.navigationItem setHidesBackButton:YES animated:NO];
     [self setNavigation];
+    [COMMON LoadIcon:self.view];
+    [self loadChatHistoryAPI];
 }
 
 - (void)setNavigation
@@ -150,7 +155,7 @@
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return [timeArray count];
+    return [chatArray count];
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -168,15 +173,43 @@
         Cell = [nib objectAtIndex:0];
         
     }
-    Cell.ChatName .text = [ChatNameArray objectAtIndex:indexPath.row];
-    Cell.Message.text= [MessageArray objectAtIndex:indexPath.row];
-    Cell.Time.text =[timeArray objectAtIndex:indexPath.row];
+    NSMutableDictionary *chatDict = [chatArray objectAtIndex:indexPath.row];
+    isSupportUser = [[chatDict valueForKey:@"supportuser"]integerValue];
+    Cell.ChatName .text = [chatDict valueForKey:@"Name"];
+    Cell.Message.text= [chatDict valueForKey:@"LastMessage"];
     
-    NSString *ProfileName=[NSString stringWithFormat:@"%@",[imageArray objectAtIndex:indexPath.row]];
-    [Cell.ChatImage setImage:[UIImage imageNamed:ProfileName]];
+    NSString *timeStr = [chatDict valueForKey:@"LastMessageSentTime"];
+    NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
+    [dateFormat setDateFormat:@"YYYY-MM-dd HH:mm:ss"];
+    NSDate *date = [dateFormat dateFromString:timeStr];
     
-    NSString *ProfileName1=[NSString stringWithFormat:@"%@",[badgeimage objectAtIndex:indexPath.row]];
-    [Cell.profileImageView setImage:[UIImage imageNamed:ProfileName1]];
+    [dateFormat setDateFormat:@"hh:mm"];
+    timeStr = [dateFormat stringFromDate:date];
+    
+    Cell.Time.text = timeStr;
+    
+    NSString *ProfileName=[NSString stringWithFormat:@"%@",[chatDict valueForKey:@"image1"]];
+    downloadImageFromUrl(ProfileName,Cell.profileImageView);
+    [Cell.profileImageView setImage:[UIImage imageNamed:ProfileName]];
+    [Cell.profileImageView.layer setCornerRadius:29];
+    
+    NSUInteger msgCount = [[chatDict valueForKey:@"unreadmessage"]integerValue];
+    if(msgCount >=1){
+        [Cell.msgCountLabel setHidden:NO];
+        [Cell.msgCountLabel setText:[NSString stringWithFormat:@"%lu",(unsigned long)msgCount]];
+        [Cell.msgCountLabel.layer setCornerRadius:9];
+        Cell.msgCountLabel.clipsToBounds = YES;
+    }
+    else
+        [Cell.msgCountLabel setHidden:YES];
+    
+    if(isSupportUser == 1){
+        [Cell.profileImageView.layer setMasksToBounds:YES];
+        [Cell.profileImageView.layer setBorderWidth:2.0f];
+        [Cell.profileImageView.layer setBorderColor:[[UIColor colorWithRed:229.0f/255.0f green:63.0f/255.0f blue:81.0f/255.0f alpha:1.0f] CGColor]];
+        
+    }
+    
     ChatTableView.backgroundColor = [UIColor colorWithRed:237.0f/255.0f green:237.0f/255.0f blue:237.0f/255.0f alpha:1.0f];
     
     return Cell;
@@ -188,24 +221,40 @@
 {
     
 }
+
+- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    NSMutableDictionary *chatDict = [chatArray objectAtIndex:indexPath.row];
+    isSupportUser = [[chatDict valueForKey:@"supportuser"]integerValue];
+    if(isSupportUser == 0)
+        return YES;
+    else
+        return NO;
+}
 -(NSArray *)tableView:(UITableView *)tableView editActionsForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    UITableViewRowAction *ShareAction = [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleDefault title:@"Block" handler:^(UITableViewRowAction *action, NSIndexPath *indexPath)
-                                         {
-                                             [self.ChatTableView setEditing:YES];
+       UITableViewRowAction *blockButton = [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleDefault title:@"Block" handler:^(UITableViewRowAction *action, NSIndexPath *indexPath){
+                                           
+                                           [self.ChatTableView setEditing:YES];
                                              
                                          }];
-    [ShareAction.title sizeWithAttributes:@{NSFontAttributeName:[UIFont fontWithName:@"Patron-Regular" size:11.0]}];
-    ShareAction.backgroundColor =[UIColor colorWithRed:0.465f green:0.465f blue:0.465f alpha:1.0f] ;
     
-    UITableViewRowAction *deleteAction = [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleDefault title:@"Delete"  handler:^(UITableViewRowAction *action, NSIndexPath *indexPath){
-        [timeArray objectAtIndex:indexPath.row];
-        [self.ChatTableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationRight];
-    }];
-    [deleteAction.title sizeWithAttributes:@{NSFontAttributeName:[UIFont fontWithName:@"Patron-Regular" size:11.0]}];
-    deleteAction.backgroundColor =[UIColor colorWithRed:(230/255.0) green:(63/255.0) blue:(82/255.0) alpha:1];
-    return @[deleteAction,ShareAction];
+   
+        [blockButton.title sizeWithAttributes:@{NSFontAttributeName:[UIFont fontWithName:@"Patron-Regular" size:11.0]}];
+        blockButton.backgroundColor =[UIColor colorWithRed:0.465f green:0.465f blue:0.465f alpha:1.0f] ;
+        
+        UITableViewRowAction *deleteButton = [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleDefault title:@"Delete"  handler:^(UITableViewRowAction *action, NSIndexPath *indexPath){
+           
+                [timeArray objectAtIndex:indexPath.row];
+                [self.ChatTableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationRight];
+        }];
+        [deleteButton.title sizeWithAttributes:@{NSFontAttributeName:[UIFont fontWithName:@"Patron-Regular" size:11.0]}];
+        deleteButton.backgroundColor =[UIColor colorWithRed:(230/255.0) green:(63/255.0) blue:(82/255.0) alpha:1];
+    
+         return @[deleteButton,blockButton];
+    
 }
+
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     DSChatDetailViewController *ChatDetail =[[DSChatDetailViewController alloc]initWithNibName:nil bundle:nil];
@@ -230,9 +279,18 @@
 }
 
 -(void)loadChatHistoryAPI{
-    [webService userChatHist:UserChatHistory_API sessionid:[COMMON getSessionID] success:^(AFHTTPRequestOperation *operation, id responseObject){
-        NSLog(@"responseObject = %@",responseObject);
-    }
+    [webService userChatHist:ChatHistory_API sessionid:[COMMON getSessionID]
+                    success:^(AFHTTPRequestOperation *operation, id responseObject){
+                        
+                        NSLog(@"responseObject = %@",responseObject);
+                        
+                        chatArray = [[responseObject valueForKey:@"getchathistory"]valueForKey:@"converation"];
+                        NSLog(@"chatArray = %@",chatArray);
+                        [ChatTableView reloadData];
+                        
+                        [COMMON removeLoading];
+                        
+                    }
                      failure:^(AFHTTPRequestOperation *operation, id error) {
                          
                      }];
