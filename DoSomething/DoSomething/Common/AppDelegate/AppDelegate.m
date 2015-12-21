@@ -31,8 +31,10 @@
     [[FBSDKApplicationDelegate sharedInstance] application:application
                              didFinishLaunchingWithOptions:launchOptions];
     
-    [self initAPNS];
-   
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
+        [self initAPNS];
+    });
+    
     if ([COMMON isUserLoggedIn]) {
         
         userHomeView = [[HomeViewController alloc]initWithNibName:@"HomeViewController" bundle:nil];
