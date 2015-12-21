@@ -43,7 +43,7 @@
     timeArray = [[NSArray alloc] initWithObjects:@"19:58",@"17:20",@"15:30",nil];
     imageArray =[[NSArray alloc] initWithObjects:@"Galglot.png",@"yuna.png",@"taylor.png",nil];
     badgeimage=[[NSArray alloc] initWithObjects:@"12-Chats.png",@"18-Chats.png",@" ",nil];
-//    badgeimage=[[NSArray alloc] initWithObjects:@"18-Chats.png",@"12-Chats.png",@" ",nil];
+    badgeimage=[[NSArray alloc] initWithObjects:@"18-Chats.png",@"12-Chats.png",@" ",nil];
     
     if(IS_IPHONE6 || IS_IPHONE6_Plus)
         [self.view addConstraint:[NSLayoutConstraint constraintWithItem:ChatTableView
@@ -144,18 +144,7 @@
     NSLog(@"Cannot find the location for main view.");
 }
 
--(void)loadLocationUpdateAPI{
-    
-    [webService locationUpdate:LocationUpdate_API sessionid:[COMMON getSessionID] latitude:currentLatitude longitude:currentLongitude
-                          success:^(AFHTTPRequestOperation *operation, id responseObject){
-                              NSLog(@"responseObject = %@",responseObject);
-                          }
-                          failure:^(AFHTTPRequestOperation *operation, id error) {
-                              
-                          }];
-    
-    
-}
+
 
 #pragma mark - TableView Datasources
 
@@ -225,14 +214,28 @@
     [self.navigationController pushViewController:ChatDetail animated:YES];
 }
 
-/*
-#pragma mark - Navigation
+#pragma mark - WebService
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+-(void)loadLocationUpdateAPI{
+    
+    [webService locationUpdate:LocationUpdate_API sessionid:[COMMON getSessionID] latitude:currentLatitude longitude:currentLongitude
+                       success:^(AFHTTPRequestOperation *operation, id responseObject){
+                           NSLog(@"responseObject = %@",responseObject);
+                       }
+                       failure:^(AFHTTPRequestOperation *operation, id error) {
+                           
+                       }];
+    
+    
 }
-*/
+
+-(void)loadChatHistoryAPI{
+    [webService userChatHist:UserChatHistory_API sessionid:[COMMON getSessionID] success:^(AFHTTPRequestOperation *operation, id responseObject){
+        NSLog(@"responseObject = %@",responseObject);
+    }
+                     failure:^(AFHTTPRequestOperation *operation, id error) {
+                         
+                     }];
+}
 
 @end

@@ -572,11 +572,12 @@ request_send_user_id:(NSString *)request_send_user_id
 
 -(void)userChatHist:(NSString *)userChatURL
           sessionid:(NSString *)sessionid
-       chat_user_id:(NSString *)chat_user_id
+       //chat_user_id:(NSString *)chat_user_id
             success:(WebserviceRequestSuccessHandler)success
             failure:(WebserviceRequestFailureHandler)failure
 {
-    urlString = [URL_FOR_RESOURCE(@"") stringByAppendingString:[NSString stringWithFormat:@"%@?sessionid=%@&chat_user_id%@",userChatURL,sessionid,chat_user_id]];
+    //urlString = [URL_FOR_RESOURCE(@"") stringByAppendingString:[NSString stringWithFormat:@"%@?sessionid=%@&chat_user_id%@",userChatURL,sessionid,chat_user_id]];
+    urlString = [URL_FOR_RESOURCE(@"") stringByAppendingString:[NSString stringWithFormat:@"%@?sessionid=%@",userChatURL,sessionid]];
     NSLog(@"urlString = %@",urlString);
     
     [self sendRequestWithURLString:urlString

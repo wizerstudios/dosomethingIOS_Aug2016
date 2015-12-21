@@ -24,5 +24,7 @@
 @property (nonatomic,retain) NSLayoutConstraint *pagerConstraint;
 //@property (nonatomic) CGFloat scrollPointsPerSecond;
 @property (strong, nonatomic) IBOutlet JBKenBurnsView *kenView;
+@property  IBOutlet NSLayoutConstraint *viewHeightConstraint;
+
 
 @end

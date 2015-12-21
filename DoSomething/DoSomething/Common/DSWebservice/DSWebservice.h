@@ -190,7 +190,7 @@ notification_vibration:(NSString*)isnotification_vibration
 
 -(void)userChatHist:(NSString *)userChatURL
          sessionid:(NSString *)sessionid
-       chat_user_id:(NSString *)chat_user_id
+       //chat_user_id:(NSString *)chat_user_id
            success:(WebserviceRequestSuccessHandler)success
            failure:(WebserviceRequestFailureHandler)failure;
 
