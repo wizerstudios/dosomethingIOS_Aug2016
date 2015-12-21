@@ -93,6 +93,16 @@
     [super viewWillAppear:animated];
     [self.navigationController setNavigationBarHidden:YES];
     [self.navigationItem setHidesBackButton:YES];
+    [kenView setNeedsLayout];
+    [self.view layoutIfNeeded];
+    [self.view updateConstraints];
+    [kenView layoutIfNeeded];
+    if(IS_IPHONE6_Plus)
+        self.viewHeightConstraint.constant = 688;
+    else if(IS_IPHONE6)
+        self.viewHeightConstraint.constant = 620;
+    else if(IS_IPHONE4)
+        self.viewHeightConstraint.constant = 430;
     
 }
 -(void)viewDidDisappear:(BOOL)animated{

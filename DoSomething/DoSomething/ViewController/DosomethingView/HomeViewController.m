@@ -104,6 +104,13 @@
     [self audioplayMethod];
 }
 
+-(void)viewDidAppear:(BOOL)animated{
+    [super viewDidAppear:animated];
+    appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+    appDelegate.buttonsView.hidden=NO;
+}
+
+
 
 #pragma mark - loadhomeviewListWebservice
 -(void)loadhomeviewListWebservice

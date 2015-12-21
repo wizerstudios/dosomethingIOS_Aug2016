@@ -109,6 +109,8 @@
 
 #define USERDETAILS                 @"userdetails"
 
+#define DeviceToken                 @"deviceToken"
+
 
 
 

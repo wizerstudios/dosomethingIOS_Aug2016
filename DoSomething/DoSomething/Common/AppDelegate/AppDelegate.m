@@ -30,7 +30,11 @@
       NSLog(@"### Running FB SDK Version: %@", [FBSDKSettings sdkVersion]);
     [[FBSDKApplicationDelegate sharedInstance] application:application
                              didFinishLaunchingWithOptions:launchOptions];
-   
+    
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
+        [self initAPNS];
+    });
+    
     if ([COMMON isUserLoggedIn]) {
         
         userHomeView = [[HomeViewController alloc]initWithNibName:@"HomeViewController" bundle:nil];
@@ -203,6 +207,44 @@
     [self.navigationController pushViewController:objSettingView animated:NO];
 
 }
+
+- (void)initAPNS{
+    if(IS_GREATER_IOS8)
+    {
+        if ([[UIApplication sharedApplication] respondsToSelector:@selector(registerForRemoteNotifications)]) {
+            
+            [[UIApplication sharedApplication] registerUserNotificationSettings:[UIUserNotificationSettings settingsForTypes:(UIUserNotificationTypeSound | UIUserNotificationTypeAlert)
+                                                                                                                  categories:nil]];
+            [[UIApplication sharedApplication] registerForRemoteNotifications];
+            
+        } else {
+            [[UIApplication sharedApplication] registerForRemoteNotificationTypes:UIRemoteNotificationTypeAlert | UIRemoteNotificationTypeSound];
+        }
+    }
+    
+}
+
+- (void)application:(UIApplication *)app didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken
+{
+    NSString *token = [[deviceToken description] stringByTrimmingCharactersInSet: [NSCharacterSet characterSetWithCharactersInString:@"<>"]];
+    token = [token stringByReplacingOccurrencesOfString:@" " withString:@""];
+    NSLog(@"content---%@", token);
+    [[NSUserDefaults standardUserDefaults]setValue:token forKey:DeviceToken];
+    [[NSUserDefaults standardUserDefaults]synchronize];
+}
+
+- (void)application:(UIApplication *)application didFailToRegisterForRemoteNotificationsWithError:(NSError *)error
+{
+    NSLog(@"error = %@",error);
+}
+
+- (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo{
+    
+    NSLog(@"UserInfo = %@",userInfo);
+    
+    [UIApplication sharedApplication].applicationIconBadgeNumber = 0;
+}
+
 
 - (void)applicationWillResignActive:(UIApplication *)application {
     

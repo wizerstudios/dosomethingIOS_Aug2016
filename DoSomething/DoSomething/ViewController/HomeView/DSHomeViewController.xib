@@ -1,101 +1,102 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9060" systemVersion="15B42" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9059" systemVersion="15B42" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9051"/>
-        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9049"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="DSHomeViewController">
             <connections>
-                <outlet property="InfoPageControl" destination="Iix-eG-ilF" id="tzz-g9-ugH"/>
-                <outlet property="createAnAccBtn" destination="obK-6O-h3w" id="EEx-sS-EAp"/>
-                <outlet property="infoPageControl" destination="Iix-eG-ilF" id="X38-hH-nfW"/>
-                <outlet property="kenView" destination="FoU-No-A5W" id="cyH-Jb-Zbn"/>
-                <outlet property="scrollViewImage" destination="SGC-db-wfP" id="6el-5A-X2e"/>
-                <outlet property="signInBtn" destination="8DB-X2-n7l" id="KAA-CB-U4o"/>
-                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+                <outlet property="createAnAccBtn" destination="qp7-fV-chZ" id="MeB-Eo-Gnq"/>
+                <outlet property="infoPageControl" destination="Mf1-L8-nKX" id="lJg-5o-lrA"/>
+                <outlet property="kenView" destination="Eby-0u-dNM" id="Igc-2a-Cw3"/>
+                <outlet property="scrollViewImage" destination="den-8O-nJd" id="VeJ-zP-wwg"/>
+                <outlet property="signInBtn" destination="gUJ-Ch-Nyk" id="mer-uV-nuI"/>
+                <outlet property="view" destination="dVy-AE-imx" id="Lvz-12-kZl"/>
+                <outlet property="viewHeightConstraint" destination="J8O-ke-YvW" id="zIx-mb-zxK"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="dVy-AE-imx">
             <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SGC-db-wfP">
-                    <rect key="frame" x="0.0" y="0.0" width="320" height="518"/>
+                <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="den-8O-nJd">
+                    <rect key="frame" x="0.0" y="-20" width="320" height="538"/>
                     <subviews>
-                        <pageControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="3" translatesAutoresizingMaskIntoConstraints="NO" id="Iix-eG-ilF">
+                        <pageControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="3" translatesAutoresizingMaskIntoConstraints="NO" id="Mf1-L8-nKX">
                             <rect key="frame" x="135" y="264" width="49" height="37"/>
                             <animations/>
                             <constraints>
-                                <constraint firstAttribute="width" constant="49" id="Kht-73-Kpr"/>
+                                <constraint firstAttribute="width" constant="49" id="Ber-sq-MdJ"/>
                             </constraints>
                         </pageControl>
-                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FoU-No-A5W" customClass="JBKenBurnsView">
-                            <rect key="frame" x="0.0" y="-20" width="320" height="518"/>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Eby-0u-dNM" customClass="JBKenBurnsView">
+                            <rect key="frame" x="0.0" y="0.0" width="320" height="518"/>
                             <animations/>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="518" id="J8O-ke-YvW"/>
+                            </constraints>
                         </view>
                     </subviews>
                     <animations/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     <constraints>
-                        <constraint firstAttribute="trailing" secondItem="FoU-No-A5W" secondAttribute="trailing" id="0Ta-qy-3N8"/>
-                        <constraint firstItem="FoU-No-A5W" firstAttribute="top" secondItem="SGC-db-wfP" secondAttribute="top" constant="-20" id="IRH-os-g8t"/>
-                        <constraint firstItem="FoU-No-A5W" firstAttribute="centerY" secondItem="SGC-db-wfP" secondAttribute="centerY" constant="-20" id="L66-KN-UtR"/>
-                        <constraint firstAttribute="bottom" secondItem="FoU-No-A5W" secondAttribute="bottom" constant="20" id="Vv4-cH-OV4"/>
-                        <constraint firstItem="Iix-eG-ilF" firstAttribute="top" secondItem="SGC-db-wfP" secondAttribute="top" constant="264" id="cxw-3R-Xd5"/>
-                        <constraint firstItem="FoU-No-A5W" firstAttribute="centerX" secondItem="Iix-eG-ilF" secondAttribute="centerX" id="eNl-6c-CEr"/>
-                        <constraint firstItem="FoU-No-A5W" firstAttribute="leading" secondItem="SGC-db-wfP" secondAttribute="leading" id="ua4-B8-bsP"/>
-                        <constraint firstItem="FoU-No-A5W" firstAttribute="centerX" secondItem="SGC-db-wfP" secondAttribute="centerX" id="w9P-OX-9bX"/>
+                        <constraint firstItem="Eby-0u-dNM" firstAttribute="top" secondItem="den-8O-nJd" secondAttribute="top" id="8bG-Af-BHf"/>
+                        <constraint firstItem="Mf1-L8-nKX" firstAttribute="top" secondItem="den-8O-nJd" secondAttribute="top" constant="264" id="O0l-HJ-VWg"/>
+                        <constraint firstItem="Eby-0u-dNM" firstAttribute="leading" secondItem="den-8O-nJd" secondAttribute="leading" id="Vl2-bb-aAe"/>
+                        <constraint firstAttribute="bottom" secondItem="Eby-0u-dNM" secondAttribute="bottom" constant="20" id="XEl-Wf-e71"/>
+                        <constraint firstAttribute="trailing" secondItem="Eby-0u-dNM" secondAttribute="trailing" id="gDA-oc-5Vy"/>
+                        <constraint firstItem="Eby-0u-dNM" firstAttribute="centerX" secondItem="den-8O-nJd" secondAttribute="centerX" id="gsw-TU-xNu"/>
+                        <constraint firstItem="Mf1-L8-nKX" firstAttribute="leading" secondItem="den-8O-nJd" secondAttribute="leading" constant="135" id="rn9-XA-1qP"/>
                     </constraints>
                     <connections>
-                        <outlet property="delegate" destination="-1" id="qFC-Mw-BYh"/>
+                        <outlet property="delegate" destination="-1" id="MnT-Xr-VKQ"/>
                     </connections>
                 </scrollView>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="obK-6O-h3w">
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qp7-fV-chZ">
                     <rect key="frame" x="0.0" y="518" width="160" height="50"/>
                     <animations/>
-                    <color key="backgroundColor" red="0.94509803921568625" green="0.94509803921568625" blue="0.94509803921568625" alpha="1" colorSpace="calibratedRGB"/>
+                    <color key="backgroundColor" red="0.94509803920000002" green="0.94509803920000002" blue="0.94509803920000002" alpha="1" colorSpace="calibratedRGB"/>
                     <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
                     <state key="normal" title="Create an Account">
-                        <color key="titleColor" red="0.8784313725490196" green="0.24313725490196078" blue="0.30980392156862746" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="titleColor" red="0.87843137250000003" green="0.24313725489999999" blue="0.30980392159999998" alpha="1" colorSpace="calibratedRGB"/>
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
                     <connections>
-                        <action selector="createAnAccount:" destination="-1" eventType="touchUpInside" id="9sd-LB-4Ko"/>
+                        <action selector="createAnAccount:" destination="-1" eventType="touchUpInside" id="M1q-xA-utM"/>
                     </connections>
                 </button>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8DB-X2-n7l">
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gUJ-Ch-Nyk">
                     <rect key="frame" x="160" y="518" width="160" height="50"/>
                     <animations/>
-                    <color key="backgroundColor" red="0.8784313725490196" green="0.24313725490196078" blue="0.30980392156862746" alpha="1" colorSpace="calibratedRGB"/>
+                    <color key="backgroundColor" red="0.87843137250000003" green="0.24313725489999999" blue="0.30980392159999998" alpha="1" colorSpace="calibratedRGB"/>
                     <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
                     <state key="normal" title="Sign In">
-                        <color key="titleColor" red="0.94509803921568625" green="0.94509803921568625" blue="0.94509803921568625" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="titleColor" red="0.94509803920000002" green="0.94509803920000002" blue="0.94509803920000002" alpha="1" colorSpace="calibratedRGB"/>
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
                     <connections>
-                        <action selector="Signin:" destination="-1" eventType="touchUpInside" id="I6E-qk-W1Y"/>
+                        <action selector="Signin:" destination="-1" eventType="touchUpInside" id="ZIm-gA-HeD"/>
                     </connections>
                 </button>
             </subviews>
             <animations/>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             <constraints>
-                <constraint firstItem="SGC-db-wfP" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="2cI-ys-D7x"/>
-                <constraint firstAttribute="trailing" secondItem="SGC-db-wfP" secondAttribute="trailing" id="Axc-2r-xbh"/>
-                <constraint firstItem="obK-6O-h3w" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="CMU-N7-8Mi"/>
-                <constraint firstItem="obK-6O-h3w" firstAttribute="height" secondItem="8DB-X2-n7l" secondAttribute="height" id="DpI-Y4-gnJ"/>
-                <constraint firstItem="obK-6O-h3w" firstAttribute="width" secondItem="8DB-X2-n7l" secondAttribute="width" id="L4U-Ax-m6W"/>
-                <constraint firstAttribute="bottom" secondItem="8DB-X2-n7l" secondAttribute="bottom" id="L68-5W-Uzh"/>
-                <constraint firstAttribute="trailing" secondItem="8DB-X2-n7l" secondAttribute="trailing" id="QDT-65-U2G"/>
-                <constraint firstItem="8DB-X2-n7l" firstAttribute="height" secondItem="SGC-db-wfP" secondAttribute="height" multiplier="50:518" id="cK9-rQ-y3z"/>
-                <constraint firstItem="8DB-X2-n7l" firstAttribute="leading" secondItem="obK-6O-h3w" secondAttribute="trailing" id="hQW-Ww-7je"/>
-                <constraint firstItem="8DB-X2-n7l" firstAttribute="top" secondItem="SGC-db-wfP" secondAttribute="bottom" id="q0z-r9-bNZ"/>
-                <constraint firstItem="SGC-db-wfP" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="q6Y-Q2-DWv"/>
-                <constraint firstAttribute="bottom" secondItem="obK-6O-h3w" secondAttribute="bottom" id="zCg-Kw-toS"/>
+                <constraint firstAttribute="bottom" secondItem="gUJ-Ch-Nyk" secondAttribute="bottom" id="0LB-SJ-MA8"/>
+                <constraint firstItem="gUJ-Ch-Nyk" firstAttribute="leading" secondItem="qp7-fV-chZ" secondAttribute="trailing" id="3Xp-YP-bov"/>
+                <constraint firstItem="gUJ-Ch-Nyk" firstAttribute="top" secondItem="den-8O-nJd" secondAttribute="bottom" id="BDH-Mw-vZ0"/>
+                <constraint firstItem="qp7-fV-chZ" firstAttribute="height" secondItem="gUJ-Ch-Nyk" secondAttribute="height" id="NWi-Sp-B8U"/>
+                <constraint firstItem="den-8O-nJd" firstAttribute="top" secondItem="dVy-AE-imx" secondAttribute="top" constant="-20" id="Rfs-T4-qfU"/>
+                <constraint firstAttribute="trailing" secondItem="gUJ-Ch-Nyk" secondAttribute="trailing" id="WbC-y9-epu"/>
+                <constraint firstItem="den-8O-nJd" firstAttribute="trailing" secondItem="gUJ-Ch-Nyk" secondAttribute="trailing" id="fh9-ZO-Kox"/>
+                <constraint firstAttribute="bottom" secondItem="den-8O-nJd" secondAttribute="bottom" constant="50" id="hSE-D0-781"/>
+                <constraint firstItem="qp7-fV-chZ" firstAttribute="leading" secondItem="dVy-AE-imx" secondAttribute="leading" id="hYf-0i-gXg"/>
+                <constraint firstItem="qp7-fV-chZ" firstAttribute="width" secondItem="gUJ-Ch-Nyk" secondAttribute="width" id="pwv-nP-46z"/>
+                <constraint firstItem="den-8O-nJd" firstAttribute="leading" secondItem="qp7-fV-chZ" secondAttribute="leading" id="rM0-Eh-X57"/>
+                <constraint firstAttribute="bottom" secondItem="qp7-fV-chZ" secondAttribute="bottom" id="sad-u5-99N"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <point key="canvasLocation" x="590" y="400"/>
