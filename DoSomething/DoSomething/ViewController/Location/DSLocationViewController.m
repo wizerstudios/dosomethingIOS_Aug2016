@@ -42,6 +42,7 @@
     LocationCollectionViewCell*locationCellView;
     NSString * filterAge;
     NSString * filterDistance;
+    BOOL isLoadWebservice;
     
     
 }
@@ -88,6 +89,8 @@
     
     [super viewDidLoad];
     isLoadData=NO;
+    isLoadWebservice=YES;
+    
     
     // Do any additional setup after loading the view from its nib.
 }
@@ -267,15 +270,20 @@
     [locationManager stopUpdatingLocation];
     
     NSLog(@"current latitude & longitude for main view = %@ & %@",currentLatitude,currentLongitude);
+    if([[NSUserDefaults standardUserDefaults]valueForKey:@"nearByLocationCommonArray"] == 0)
+    {
     [self nearestLocationWebservice];
+        
+    }
+    else
+    {
+        commonlocationArray =[[NSUserDefaults standardUserDefaults]valueForKey:@"nearByLocationCommonArray"];
+        [locationCollectionView reloadData];
+    }
     
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         
         [self loadLocationUpdateAPI];
-        dispatch_async(dispatch_get_main_queue(), ^(){
-            
-            
-        });
         
         
     });
@@ -312,8 +320,8 @@
                          longitude:currentLongitude
                      filter_status:onlineStatus
                      filter_gender:avalibleGenderStatus
-                   filter_agerange:filterAge
-                   filter_distance:filterAge
+                   filter_agerange:(filterAge==nil)?@"":filterAge
+                   filter_distance:(filterDistance==nil)?@"":filterDistance
                            success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSLog(@"responseObject=%@",responseObject);
         
@@ -322,6 +330,7 @@
             NSMutableArray * nearestUserdetaile =[[NSMutableArray alloc]init];
             nearestUserdetaile =[[responseObject valueForKey:@"nearestusers"] valueForKey:@"UserList"];
             commonlocationArray =[nearestUserdetaile mutableCopy];
+             [[NSUserDefaults standardUserDefaults] setObject:commonlocationArray forKey:@"nearByLocationCommonArray"];
                 [locationCollectionView reloadData];
                     NSLog(@"%@",nearestUserdetaile);
             
@@ -611,6 +620,7 @@
         self.offlineBtn.backgroundColor =[UIColor whiteColor];
         self.statusBothBtn.backgroundColor=[UIColor whiteColor];
         onlineStatus=@"1";
+        [self nearestLocationWebservice];
     }
     else if ([sender tag] == 302)
     {
@@ -618,6 +628,7 @@
         self.offlineBtn.backgroundColor =[UIColor redColor];
         self.statusBothBtn.backgroundColor=[UIColor whiteColor];
         onlineStatus =@"0";
+        [self nearestLocationWebservice];
     }
     else if ([sender tag] == 303)
     {
@@ -625,6 +636,7 @@
         self.offlineBtn.backgroundColor =[UIColor whiteColor];
         self.statusBothBtn.backgroundColor=[UIColor redColor];
         onlineStatus =@"";
+        [self nearestLocationWebservice];
     }
     else if ([sender tag]== 304)
     {
@@ -632,6 +644,7 @@
         self.FemaleBtn.backgroundColor =[UIColor whiteColor];
         self.avablebothBtn.backgroundColor=[UIColor whiteColor];
          avalibleGenderStatus =@"male";
+        [self nearestLocationWebservice];
     }
     else if ([sender tag] == 305)
     {
@@ -639,6 +652,7 @@
         self.FemaleBtn.backgroundColor =[UIColor redColor];
         self.avablebothBtn.backgroundColor=[UIColor whiteColor];
         avalibleGenderStatus =@"female";
+        [self nearestLocationWebservice];
     }
     else if ([sender tag] == 306)
     {
@@ -646,6 +660,7 @@
         self.FemaleBtn.backgroundColor =[UIColor whiteColor];
         self.avablebothBtn.backgroundColor=[UIColor redColor];
         avalibleGenderStatus =@"";
+        [self nearestLocationWebservice];
     }
 }
 
@@ -723,19 +738,22 @@
     avalibleGenderStatus =@"";
     self.ageSlider.value =18;
     self.distanceSlider.value=0;
+    [self nearestLocationWebservice];
 }
 - (IBAction)AgeSliderValueChanged:(UISlider *)sender {
-    UIImage *sliderLeftTrackImage = [[UIImage imageNamed: @"dot_Image.png"] stretchableImageWithLeftCapWidth:9 topCapHeight: 0];
-    [self.ageSlider setMinimumTrackImage: sliderLeftTrackImage forState: UIControlStateNormal];
+    UIImage *sliderLeftTrackImage = [[UIImage imageNamed: @"dot_Image.png"] stretchableImageWithLeftCapWidth:8 topCapHeight: 0];
+    [self.ageSlider setMinimumTrackImage:sliderLeftTrackImage forState: UIControlStateNormal];
     filterAge =[NSString stringWithFormat:@"%f", [sender value]];
+    //[self nearestLocationWebservice];
     NSLog(@"AgeSliderValueChanged=%@",[NSString stringWithFormat:@"%f", [sender value]]);
 }
 
 - (IBAction)distanceSliderValueChanged:(UISlider *)sender {
-    UIImage *sliderLeftTrackImage = [[UIImage imageNamed: @"dot_Image.png"] stretchableImageWithLeftCapWidth: 9 topCapHeight: 0];
+    UIImage *sliderLeftTrackImage = [[UIImage imageNamed: @"dot_Image.png"] stretchableImageWithLeftCapWidth: 8 topCapHeight: 0];
 
     [self.distanceSlider setMinimumTrackImage: sliderLeftTrackImage forState: UIControlStateNormal];
     filterDistance=[NSString stringWithFormat:@"%f", [sender value]];
+   // [self nearestLocationWebservice];
     NSLog(@"distanceSliderValueChanged=%@",[NSString stringWithFormat:@"%f", [sender value]]);
 }
 

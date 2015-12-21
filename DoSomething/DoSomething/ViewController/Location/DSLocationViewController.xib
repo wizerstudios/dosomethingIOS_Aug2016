@@ -271,7 +271,6 @@
                                         <constraint firstAttribute="height" constant="30" id="7xE-aQ-FVn"/>
                                     </constraints>
                                     <color key="maximumTrackTintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                    <color key="thumbTintColor" red="0.78039215689999997" green="0.13671875" blue="0.095835291350000004" alpha="1" colorSpace="calibratedRGB"/>
                                     <connections>
                                         <action selector="AgeSliderValueChanged:" destination="-1" eventType="valueChanged" id="ySE-b2-TTd"/>
                                     </connections>
@@ -305,7 +304,6 @@
                                         <constraint firstAttribute="height" constant="30" id="NY4-GE-dhm"/>
                                     </constraints>
                                     <color key="maximumTrackTintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                    <color key="thumbTintColor" red="0.85490196080000003" green="0.15686274510000001" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
                                     <connections>
                                         <action selector="distanceSliderValueChanged:" destination="-1" eventType="valueChanged" id="RoM-0b-Dqp"/>
                                     </connections>
