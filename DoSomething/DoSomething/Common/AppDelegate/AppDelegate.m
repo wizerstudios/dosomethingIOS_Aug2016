@@ -204,6 +204,44 @@
 
 }
 
+- (void)initAPNS{
+    if(IS_GREATER_IOS8)
+    {
+        if ([[UIApplication sharedApplication] respondsToSelector:@selector(registerForRemoteNotifications)]) {
+            
+            [[UIApplication sharedApplication] registerUserNotificationSettings:[UIUserNotificationSettings settingsForTypes:(UIUserNotificationTypeSound | UIUserNotificationTypeAlert)
+                                                                                                                  categories:nil]];
+            [[UIApplication sharedApplication] registerForRemoteNotifications];
+            
+        } else {
+            [[UIApplication sharedApplication] registerForRemoteNotificationTypes:UIRemoteNotificationTypeAlert | UIRemoteNotificationTypeSound];
+        }
+    }
+    
+}
+
+- (void)application:(UIApplication *)app didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken
+{
+    NSString *token = [[deviceToken description] stringByTrimmingCharactersInSet: [NSCharacterSet characterSetWithCharactersInString:@"<>"]];
+    token = [token stringByReplacingOccurrencesOfString:@" " withString:@""];
+    NSLog(@"content---%@", token);
+    [[NSUserDefaults standardUserDefaults]setValue:token forKey:DeviceToken];
+    [[NSUserDefaults standardUserDefaults]synchronize];
+}
+
+- (void)application:(UIApplication *)application didFailToRegisterForRemoteNotificationsWithError:(NSError *)error
+{
+    NSLog(@"error = %@",error);
+}
+
+- (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo{
+    
+    NSLog(@"UserInfo = %@",userInfo);
+    
+    [UIApplication sharedApplication].applicationIconBadgeNumber = 0;
+}
+
+
 - (void)applicationWillResignActive:(UIApplication *)application {
     
 }

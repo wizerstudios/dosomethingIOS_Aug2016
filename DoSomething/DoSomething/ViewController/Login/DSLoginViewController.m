@@ -480,6 +480,10 @@
 #pragma mark - loadloginAPI
 -(void)loadloginAPI
 {
+     NSString *deviceToken = [[NSUserDefaults standardUserDefaults]valueForKey:DeviceToken];
+    if(deviceToken == nil)
+        deviceToken = @"";
+    
     [objWebService getLogin:Login_API
                        type:objSigninType
                       email:email
@@ -491,7 +495,7 @@
                    latitude:currentLatitude
                   longitude:currentLongitude
                      device:@"iPhone"
-                   deviceid:deviceUdid
+                   deviceid:deviceToken
                     success:^(AFHTTPRequestOperation *operation, id responseObject)
     {
         
@@ -534,6 +538,9 @@
     NSURL *profileImageFBUrl = [NSURL URLWithString:profileImage];
     NSData *profileImageData = [[NSData alloc] initWithContentsOfURL:profileImageFBUrl];
     profileImage1 = [UIImage imageWithData:profileImageData];
+    NSString *deviceToken = [[NSUserDefaults standardUserDefaults]valueForKey:DeviceToken];
+    if(deviceToken == nil)
+        deviceToken = @"";
     
    [objWebService postRegister:Register_API
                           type:objSigninType
@@ -552,7 +559,7 @@
                       latitude:currentLatitude
                      longitude:currentLongitude
                         device:@"iPhone"
-                      deviceid:deviceUdid
+                      deviceid:deviceToken
                 fbprofileImage:@"" 
           notification_message:@"Yes"
           notification_sound  :@"Yes"
