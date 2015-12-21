@@ -850,9 +850,9 @@ if([[NSUserDefaults standardUserDefaults] valueForKey:@"SelectedItemCategoryID"]
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     
-           if (indexPath.row == 0 ){
+        if (indexPath.row == 0 ){
                return 200;
-            }
+        }
         if(indexPath.row ==1)
         {
             return 75;
@@ -880,7 +880,7 @@ if([[NSUserDefaults standardUserDefaults] valueForKey:@"SelectedItemCategoryID"]
             else
             {
                  self.aboutTextHeight.constant=dataSize.height-28;
-                 return dataSize.height-18;
+                 return dataSize.height-6;
             }
             
         }
