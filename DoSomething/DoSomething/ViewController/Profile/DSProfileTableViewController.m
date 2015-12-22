@@ -717,6 +717,7 @@ if([[NSUserDefaults standardUserDefaults] valueForKey:@"SelectedItemCategoryID"]
         
         
     }
+    [self.tableviewProfile scrollToRowAtIndexPath:[self.tableviewProfile indexPathForCell:cell] atScrollPosition:UITableViewScrollPositionBottom animated:NO];
 
     
 }
@@ -879,7 +880,7 @@ if([[NSUserDefaults standardUserDefaults] valueForKey:@"SelectedItemCategoryID"]
 //             }
             else
             {
-                 self.aboutTextHeight.constant=dataSize.height-28;
+                 self.aboutTextHeight.constant=dataSize.height;
                  return dataSize.height-6;
             }
             
@@ -1825,6 +1826,7 @@ if([[NSUserDefaults standardUserDefaults] valueForKey:@"SelectedItemCategoryID"]
         strAbout = textView.text;
        
     }
+    
 }
 
 
@@ -1843,7 +1845,24 @@ if([[NSUserDefaults standardUserDefaults] valueForKey:@"SelectedItemCategoryID"]
     strAbout = textView.text;
     dataSize = [COMMON getControlHeight:strAbout withFontName:@"Patron-Regular" ofSize:14.0 withSize:CGSizeMake(textView.frame.size.width-20,textView.frame.size.height)];
      self.aboutTextHeight.constant=dataSize.height-28;
+    //self.tableviewProfile.frame = CGRectMake(13,10,290,900);
+    //self.tableviewProfile.frame = CGRectMake(13,10,self.tableviewProfile.frame.size.width,self.tableviewProfile.frame.size.height);
+   
+    [self.tableviewProfile scrollToRowAtIndexPath:[self.tableviewProfile indexPathForCell:cell] atScrollPosition:UITableViewScrollPositionBottom animated:NO];
+    //self.tableviewProfile.frame
+   
+   // [self.tableviewProfile setContentInset:UIEdgeInsetsMake(108, 0, 0, 0)];
+    
+  //  self.tableviewProfile.scrollIndicatorInsets = UIEdgeInsetsMake(108, 0, 0, 0);
 }
+- (void) textViewDidChange:(UITextView *)textView
+{
+    
+    [self.tableviewProfile beginUpdates];
+    [self.tableviewProfile endUpdates];
+    
+}
+
 
 #pragma mark - Camera Action
 -(void)selectCamera: (UIButton *)sender
