@@ -36,6 +36,7 @@
 @property (strong, nonatomic) IBOutlet UIScrollView *profileImageScroll;
 @property (strong, nonatomic) IBOutlet UIImageView *profileImageView;
 @property (strong, nonatomic) IBOutlet UIImageView *genderImageView;
+
 //@property (strong, nonatomic) IBOutlet UIPageControl *profilePageControl;
 @property (strong, nonatomic) IBOutlet UILabel *nameAgeLabel;
 @property (weak, nonatomic) IBOutlet UIView *topViewCell;

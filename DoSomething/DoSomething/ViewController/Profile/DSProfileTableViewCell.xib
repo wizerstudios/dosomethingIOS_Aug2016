@@ -43,6 +43,7 @@
                 <outlet property="CellSwitchOn" destination="OpY-gd-Xse" id="TUA-pO-U2v"/>
                 <outlet property="CellTermsOfUse" destination="1cD-va-IDg" id="A6k-KR-AFN"/>
                 <outlet property="aboutTextHeight" destination="HNL-wO-c1x" id="k9K-lc-n3e"/>
+                <outlet property="aboutViewheight" destination="b5p-9w-gGa" id="mOt-hk-8vl"/>
                 <outlet property="cellAddIcon" destination="5Fu-f3-SQN" id="Sg8-4z-pxE"/>
                 <outlet property="cellButton" destination="fi2-qG-tV9" id="ml8-21-oRj"/>
                 <outlet property="cellDatePicker" destination="jaf-ij-gGi" id="1Ro-Do-NHV"/>
@@ -753,6 +754,7 @@
             </tableViewCellContentView>
             <animations/>
             <connections>
+                <outlet property="aboutview" destination="URf-8H-5OS" id="U4C-as-FYA"/>
                 <outlet property="labelAboutYou" destination="Mvl-SM-bdc" id="iim-O9-U9x"/>
                 <outlet property="textViewAboutYou" destination="d6I-S9-MzF" id="clv-p4-OFl"/>
             </connections>

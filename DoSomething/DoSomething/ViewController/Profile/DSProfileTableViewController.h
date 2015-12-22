@@ -80,5 +80,6 @@
 
 @property (nonatomic,strong) IBOutlet NSLayoutConstraint *aboutTextHeight;
 
+@property(nonatomic,strong) IBOutlet NSLayoutConstraint *aboutViewheight;
 
 @end

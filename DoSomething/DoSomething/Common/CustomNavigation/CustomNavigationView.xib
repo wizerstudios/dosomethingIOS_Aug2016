@@ -10,6 +10,7 @@
         </mutableArray>
         <mutableArray key="Patron-Regular.ttf">
             <string>Patron-Regular</string>
+            <string>Patron-Regular</string>
         </mutableArray>
     </customFonts>
     <objects>
@@ -88,6 +89,7 @@
                                 <constraint firstAttribute="width" constant="45" id="9zS-iI-Knq"/>
                                 <constraint firstAttribute="height" constant="45" id="eH1-RY-g3m"/>
                             </constraints>
+                            <fontDescription key="fontDescription" name="Patron-Regular" family="Patron" pointSize="12"/>
                             <state key="normal" image="filerImage"/>
                         </button>
                     </subviews>
