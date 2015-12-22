@@ -591,7 +591,7 @@
                                     <constraint firstItem="Aq5-3I-doL" firstAttribute="leading" secondItem="TYu-zj-QOQ" secondAttribute="leading" constant="7" id="A48-to-lZy"/>
                                     <constraint firstItem="QOA-QP-Ciw" firstAttribute="leading" secondItem="TYu-zj-QOQ" secondAttribute="leading" constant="100" id="Rmc-GB-tUr"/>
                                     <constraint firstAttribute="height" constant="40" id="Yth-HA-EyM"/>
-                                    <constraint firstItem="QOA-QP-Ciw" firstAttribute="top" secondItem="TYu-zj-QOQ" secondAttribute="top" constant="9" id="gxJ-q8-MYu"/>
+                                    <constraint firstItem="QOA-QP-Ciw" firstAttribute="top" secondItem="TYu-zj-QOQ" secondAttribute="top" constant="11" id="gxJ-q8-MYu"/>
                                     <constraint firstItem="Aq5-3I-doL" firstAttribute="top" secondItem="TYu-zj-QOQ" secondAttribute="top" constant="11" id="sT4-cS-8iv"/>
                                 </constraints>
                             </view>
@@ -671,10 +671,10 @@
                             </textView>
                         </subviews>
                         <constraints>
-                            <constraint firstAttribute="trailing" secondItem="d6I-S9-MzF" secondAttribute="trailing" id="B5Y-Al-ogT"/>
+                            <constraint firstAttribute="trailing" secondItem="d6I-S9-MzF" secondAttribute="trailing" constant="2" id="B5Y-Al-ogT"/>
                             <constraint firstItem="Mvl-SM-bdc" firstAttribute="leading" secondItem="URf-8H-5OS" secondAttribute="leading" constant="5" id="FKm-dW-5Sl"/>
                             <constraint firstItem="d6I-S9-MzF" firstAttribute="top" secondItem="URf-8H-5OS" secondAttribute="top" id="QBU-2g-Ftl"/>
-                            <constraint firstItem="d6I-S9-MzF" firstAttribute="leading" secondItem="Mvl-SM-bdc" secondAttribute="trailing" constant="20" id="Wpt-U6-KrB"/>
+                            <constraint firstItem="d6I-S9-MzF" firstAttribute="leading" secondItem="Mvl-SM-bdc" secondAttribute="trailing" constant="16" id="Wpt-U6-KrB"/>
                             <constraint firstAttribute="height" constant="39" id="b5p-9w-gGa"/>
                             <constraint firstItem="Mvl-SM-bdc" firstAttribute="top" secondItem="URf-8H-5OS" secondAttribute="top" constant="4" id="rvu-yT-O4b"/>
                         </constraints>

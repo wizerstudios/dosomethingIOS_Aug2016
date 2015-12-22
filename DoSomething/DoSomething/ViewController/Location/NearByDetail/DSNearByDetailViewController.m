@@ -38,6 +38,7 @@
     NSMutableArray *valueArray;
     
     DSNearbyCustomCell *NearbyCustomcell;
+    NSString *requestStr;
 
 }
 
@@ -95,7 +96,6 @@
     [self profileImageDisplay];
     
    
-
 
 }
 
@@ -334,9 +334,6 @@
         
         
     }
-
-    
-
     
     if (indexPath.row == 1)
     {
@@ -357,18 +354,27 @@
         {
             [[NSBundle mainBundle] loadNibNamed:@"DSNearbyCustomCell" owner:self options:nil];
             NearbyCustomcell = cellDosomething;
-            
-            [NearbyCustomcell.letsDoSomethingButton addTarget:self action:@selector(letsDoSomethingAction:) forControlEvents:UIControlEventTouchUpInside];
-            NearbyCustomcell.letsDoSomethingButton.titleLabel.lineBreakMode = NSLineBreakByTruncatingTail;
-            NearbyCustomcell.letsDoSomethingButton.titleLabel.numberOfLines = 2;
-            NearbyCustomcell.letsDoSomethingButton.titleLabel.textAlignment = NSTextAlignmentCenter;
+
+           // NearbyCustomcell.letsDoSomethingButton.titleLabel.lineBreakMode = NSLineBreakByTruncatingTail;
+            //NearbyCustomcell.letsDoSomethingButton.titleLabel.numberOfLines = 2;
+            //NearbyCustomcell.letsDoSomethingButton.titleLabel.textAlignment = NSTextAlignmentCenter;
 
         }
         
+        requestStr= [userDetailsDict valueForKey:@"send_request"];
+        if([requestStr isEqualToString:@"Yes"])
+        {
+            [NearbyCustomcell.letsDoSomethingButton setBackgroundColor:[UIColor lightGrayColor]];
+            [NearbyCustomcell.letsDoSomethingButton setTitle:@"   Request\n Sent" forState:UIControlStateNormal];
+        }
+        else
+        {
+            [NearbyCustomcell.letsDoSomethingButton setBackgroundColor:[UIColor redColor]];
+            [NearbyCustomcell.letsDoSomethingButton setTitle:@"   Let Do \n Something" forState:UIControlStateNormal];
+        }
         
         imageSize =39;
-        commonWidth=19.5;
-        //commonHeight = 54;
+        
         yAxis = 31;
         commonWidth=19.5;
         
@@ -503,19 +509,26 @@
 
 
 #pragma mark - letsDoSomethingAction
-- (void)letsDoSomethingAction:(id)sender
+-(IBAction)letsDoSomethingAction:(id)sender
 {
-    requestUserID = [userDetailsDict valueForKey:@"user_id"];
-    
-    [objWebService sendRequest:SendRequest_API
-                     sessionid:[COMMON getSessionID]
-          request_send_user_id:requestUserID
-                       success:^(AFHTTPRequestOperation *operation, id responseObject) {
-                           NSLog(@"SEND REQ%@",responseObject);
-                           
-                       } failure:^(AFHTTPRequestOperation *operation, id error) {
-                           NSLog(@"SEND REQ ERR%@",error);
-                       }];
+    if([requestStr isEqualToString:@"Yes"])
+    {
+    [NearbyCustomcell.letsDoSomethingButton setBackgroundColor:[UIColor lightGrayColor]];
+    [NearbyCustomcell.letsDoSomethingButton setTitle:@" Request Sent" forState:UIControlStateNormal];
+        
+        requestUserID = [userDetailsDict valueForKey:@"user_id"];
+        
+        [objWebService sendRequest:SendRequest_API
+                         sessionid:[COMMON getSessionID]
+              request_send_user_id:requestUserID
+                           success:^(AFHTTPRequestOperation *operation, id responseObject) {
+                               NSLog(@"SEND REQ%@",responseObject);
+                               
+                           } failure:^(AFHTTPRequestOperation *operation, id error) {
+                               NSLog(@"SEND REQ ERR%@",error);
+                           }];
+
+    }
     
 }
 

@@ -21,64 +21,81 @@
 @synthesize chatuserDetailsDict;
 
 - (void)viewDidLoad {
+    
     [super viewDidLoad];
-    // Do any additional setup after loading the view from its nib.
-    ProfileName.text= [chatuserDetailsDict valueForKey:@"Name"];
-    NSString *profileStr = [NSString stringWithFormat:@"%@",[chatuserDetailsDict valueForKey:@"image1"]];
-    downloadImageFromUrl(profileStr, ProfileImage);
-    ProfileImage.image = [UIImage imageNamed:profileStr];
-    [ProfileImage.layer setCornerRadius:28];
-    [ProfileImage.layer setMasksToBounds:YES];
     
-    Message1.text =@"   Hey;)";
-    Message1.layer.masksToBounds = YES;
-    Message1.layer.cornerRadius = 8.0;
+    [self loadNavigation];
     
-    Message2.text =@"   Wanna meet for a drink?";
-    Message2.layer.masksToBounds = YES;
-    Message2.layer.cornerRadius = 8.0;
-    
-    Message3.text =@"   oh hi!";
-    Message3.layer.masksToBounds = YES;
-    Message3.layer.cornerRadius = 8.0;
-    
-    Time1.text =@"13:20";
-    Time2.text =@"13:20";
-    Time3.text =@"13:24";
-    OnlineLabel.text =@"Online";
-    
-    CustomNavigationView *customNavigation;
-    customNavigation = [[CustomNavigationView alloc] initWithNibName:@"CustomNavigationView" bundle:nil];
-    customNavigation.view.frame = CGRectMake(0,-20, CGRectGetWidth(self.view.frame), 65);//65
-    if (IS_IPHONE6 ){
-        customNavigation.view.frame = CGRectMake(0,-20, 375, 76);
-    }
-    if(IS_IPHONE6_Plus)
-    {
-        customNavigation.view.frame = CGRectMake(0,-20, 420, 83);
-    }
-    [customNavigation.menuBtn setHidden:YES];
-    [customNavigation.buttonBack setHidden:NO];
-    [customNavigation.saveBtn setHidden:YES];
-    
-    [self.navigationController.navigationBar addSubview:customNavigation.view];
-    //    [customNavigation.saveBtn addTarget:self action:@selector(saveAction) forControlEvents:UIControlEventTouchUpInside];
-        [customNavigation.buttonBack addTarget:self action:@selector(backAction) forControlEvents:UIControlEventTouchUpInside];
-    
-    _transparentView.hidden = YES;
-    _backgroundView.hidden = YES;
+    [self displayUserDetailsView];
+   
 }
 
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+    
     [self.navigationItem setHidesBackButton:YES animated:NO];
+}
+
+-(void)loadNavigation{
+    
+    CustomNavigationView *customNavigation;
+    
+    customNavigation = [[CustomNavigationView alloc] initWithNibName:@"CustomNavigationView" bundle:nil];
+    
+    customNavigation.view.frame = CGRectMake(0,-20, CGRectGetWidth(self.view.frame), 65);//65
+    
+    if (IS_IPHONE6 )
+        
+        customNavigation.view.frame = CGRectMake(0,-20, 375, 76);
+    
+    if(IS_IPHONE6_Plus)
+        
+        customNavigation.view.frame = CGRectMake(0,-20, 420, 83);
+    
+    [customNavigation.menuBtn setHidden:YES];
+    
+    [customNavigation.buttonBack setHidden:NO];
+    
+    [customNavigation.saveBtn setHidden:YES];
+    
+    [self.navigationController.navigationBar addSubview:customNavigation.view];
+    
+    [customNavigation.buttonBack addTarget:self action:@selector(backAction) forControlEvents:UIControlEventTouchUpInside];
+    
+}
+
+-(void)displayUserDetailsView{
+    
+    ProfileName.text= [chatuserDetailsDict valueForKey:@"Name"];
+    
+    NSString *profileStr = [NSString stringWithFormat:@"%@",[chatuserDetailsDict valueForKey:@"image1"]];
+    
+    downloadImageFromUrl(profileStr, ProfileImage);
+    
+    ProfileImage.image = [UIImage imageNamed:profileStr];
+    
+    [ProfileImage.layer setCornerRadius:28];
+    
+    [ProfileImage.layer setMasksToBounds:YES];
+    
+    OnlineLabel.text =@"Online";
+    
+    _transparentView.hidden = YES;
+    
+    _backgroundView.hidden = YES;
+    
+    [chatView.postButton setHidden:YES];
+    
+
 }
 
 - (IBAction)showReallyFunkyIBActionSheet:(id)sender
 {
      _menuImageview.hidden = YES;
+    
     _transparentView.hidden = NO;
+    
     _backgroundView.hidden = NO;
 }
 - (void)backAction
@@ -167,14 +184,12 @@
     button.layer.borderColor = button.titleLabel.textColor.CGColor;
 }
 
-
-
-
-
-
 - (IBAction)pressCancel:(id)sender {
+    
     _transparentView.hidden = YES;
+    
     _backgroundView.hidden = YES;
+    
      _menuImageview.hidden = NO;
 }
 

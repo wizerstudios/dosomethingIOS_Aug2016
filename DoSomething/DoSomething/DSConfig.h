@@ -104,6 +104,7 @@
 #define BlockUser_API               @"blockUser"
 #define DeleteUserChat_API          @"DeleteUserChatHistory"
 #define Activity                    @"activity"
+#define GetConversation             @"getconversation"
 
 #define Device                      @"iPhone"
 
