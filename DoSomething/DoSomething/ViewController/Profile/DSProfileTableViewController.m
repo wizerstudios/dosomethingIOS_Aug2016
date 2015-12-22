@@ -96,6 +96,7 @@
     NSString *sessionID;
     CustomNavigationView *customNavigation;
     UIButton *cameraIcon;
+    NSMutableArray *hobbiesMainArray;
     
     
 
@@ -135,11 +136,23 @@
     
     imageNormalArray =[[NSMutableArray alloc]init];
     
-    if([profileDict valueForKey:@"hobbieslist"]!=NULL)
-    {
+    hobbiesMainArray = [[NSMutableArray alloc]init];
+    
+    hobbiesMainArray = [[NSUserDefaults standardUserDefaults]valueForKey:HobbiesArray];
+    
+    if([hobbiesMainArray count]){
+        
+//    if([profileDict valueForKey:@"hobbieslist"]!=NULL)
+//    {
         [customNavigation.buttonBack setHidden:YES];
+        
+       // hobbiesMainArray = [[profileDict valueForKey:@"hobbieslist"]mutableCopy];
       
         [self selectitemMethod];
+    }
+    else {
+         hobbiesMainArray = [[profileDict valueForKey:@"hobbieslist"]mutableCopy];
+        [[NSUserDefaults standardUserDefaults]setObject:hobbiesMainArray forKey:HobbiesArray];
     }
        infoArray=[[NSMutableArray alloc]initWithObjects:@"profile_noimg",@"profile_noimg",@"profile_noimg", nil];
     
@@ -152,16 +165,24 @@
     else if(isLoadData == YES && profileDict ==NULL)
     {
         
-        interstAndHobbiesArray =[[[NSUserDefaults standardUserDefaults] valueForKey:@"SelectedItem"]mutableCopy];
+//        interstAndHobbiesArray =[[[NSUserDefaults standardUserDefaults] valueForKey:@"SelectedItem"]mutableCopy];
+//        
+//        imageNormalArray =[[[NSUserDefaults standardUserDefaults] valueForKey:@"SelectedItemNormal"]mutableCopy];
+//        
+//        hobbiesNameArray =[[[NSUserDefaults standardUserDefaults] valueForKey:@"SelectedItemName"]mutableCopy];
+//        
+//        hobbiesCategoryIDArray =[[[NSUserDefaults standardUserDefaults] valueForKey:@"SelectedItemCategoryID"]mutableCopy];
         
-        imageNormalArray =[[[NSUserDefaults standardUserDefaults] valueForKey:@"SelectedItemNormal"]mutableCopy];
+        hobbiesMainArray = [[[NSUserDefaults standardUserDefaults]valueForKey:HobbiesArray]mutableCopy];
         
-        hobbiesNameArray =[[[NSUserDefaults standardUserDefaults] valueForKey:@"SelectedItemName"]mutableCopy];
+        imageNormalArray = [[hobbiesMainArray valueForKey:@"image"]mutableCopy];
         
-        hobbiesCategoryIDArray =[[[NSUserDefaults standardUserDefaults] valueForKey:@"SelectedItemCategoryID"]mutableCopy];
+        hobbiesNameArray = [hobbiesMainArray valueForKey:@"name"];
         
+        NSLog(@"imageNormalArray = %@",imageNormalArray);
         
-        strInterestHobbies = [hobbiesCategoryIDArray componentsJoinedByString:@","];
+        strInterestHobbies = [[hobbiesMainArray valueForKey:@"hobbies_id"] componentsJoinedByString:@","];
+        NSLog(@"strInterestHobbies = %@",strInterestHobbies);
     }
 
      [_tableviewProfile reloadData];
@@ -263,63 +284,76 @@
 -(void)selectitemMethod
 {
     
-    if([[NSUserDefaults standardUserDefaults] valueForKey:@"SelectedItemNormal"]!=nil)
-       
-    {
-        
-        imageNormalArray =[[[NSUserDefaults standardUserDefaults] valueForKey:@"SelectedItemNormal"]mutableCopy];
-        if(imageNormalArray.count == 0)
-        {
-            interstAndHobbiesArray = [[profileDict valueForKey:@"hobbieslist"]mutableCopy];
-            imageNormalArray= [[interstAndHobbiesArray valueForKey:@"image"]mutableCopy];
-
-        }
-    }
-    else
-    {
-        if(imageNormalArray.count == 0)
-        {
-            interstAndHobbiesArray = [[profileDict valueForKey:@"hobbieslist"]mutableCopy];
-            imageNormalArray= [[interstAndHobbiesArray valueForKey:@"image"]mutableCopy];
-            
-        }
-
-    }
-   
-    if([[NSUserDefaults standardUserDefaults] valueForKey:@"SelectedItem"]!=nil)
-    {
-      
-        hobbiesNameArray =[[[NSUserDefaults standardUserDefaults] valueForKey:@"SelectedItemName"]mutableCopy];
-         if(hobbiesNameArray.count == 0)
-         {
-             interstAndHobbiesArray = [[profileDict valueForKey:@"hobbieslist"]mutableCopy];
-             hobbiesNameArray =[[interstAndHobbiesArray valueForKey:@"name"]mutableCopy];
-         }
-    }
-    else
-    {
-        if(hobbiesNameArray.count == 0)
-        {
-            interstAndHobbiesArray = [[profileDict valueForKey:@"hobbieslist"]mutableCopy];
-            hobbiesNameArray =[[interstAndHobbiesArray valueForKey:@"name"]mutableCopy];
-        }
-
-    }
-   
-if([[NSUserDefaults standardUserDefaults] valueForKey:@"SelectedItemCategoryID"]!=nil)
-    {
-        
-        hobbiesCategoryIDArray =[[[NSUserDefaults standardUserDefaults] valueForKey:@"SelectedItemCategoryID"]mutableCopy];
-    }
-    else
-    {
-        interstAndHobbiesArray = [[profileDict valueForKey:@"hobbieslist"]mutableCopy];
-         hobbiesCategoryIDArray =[[interstAndHobbiesArray valueForKey:@"hobbies_id"]mutableCopy];
-    }
-
-     NSLog(@"SelectedItemCategoryID=%@",[[[NSUserDefaults standardUserDefaults] valueForKey:@"SelectedItemCategoryID"]mutableCopy]);
+//    if([[NSUserDefaults standardUserDefaults] valueForKey:@"SelectedItemNormal"]!=nil)
+//       
+//    {
+//        
+//        imageNormalArray =[[[NSUserDefaults standardUserDefaults] valueForKey:@"SelectedItemNormal"]mutableCopy];
+//        if(imageNormalArray.count == 0)
+//        {
+//            interstAndHobbiesArray = [[profileDict valueForKey:@"hobbieslist"]mutableCopy];
+//            imageNormalArray= [[interstAndHobbiesArray valueForKey:@"image"]mutableCopy];
+//
+//        }
+//    }
+//    else
+//    {
+//        if(imageNormalArray.count == 0)
+//        {
+//            interstAndHobbiesArray = [[profileDict valueForKey:@"hobbieslist"]mutableCopy];
+//            imageNormalArray= [[interstAndHobbiesArray valueForKey:@"image"]mutableCopy];
+//            
+//        }
+//
+//    }
+//   
+//    if([[NSUserDefaults standardUserDefaults] valueForKey:@"SelectedItem"]!=nil)
+//    {
+//      
+//        hobbiesNameArray =[[[NSUserDefaults standardUserDefaults] valueForKey:@"SelectedItemName"]mutableCopy];
+//         if(hobbiesNameArray.count == 0)
+//         {
+//             interstAndHobbiesArray = [[profileDict valueForKey:@"hobbieslist"]mutableCopy];
+//             hobbiesNameArray =[[interstAndHobbiesArray valueForKey:@"name"]mutableCopy];
+//         }
+//    }
+//    else
+//    {
+//        if(hobbiesNameArray.count == 0)
+//        {
+//            interstAndHobbiesArray = [[profileDict valueForKey:@"hobbieslist"]mutableCopy];
+//            hobbiesNameArray =[[interstAndHobbiesArray valueForKey:@"name"]mutableCopy];
+//        }
+//
+//    }
+//   
+//if([[NSUserDefaults standardUserDefaults] valueForKey:@"SelectedItemCategoryID"]!=nil)
+//    {
+//        
+//        hobbiesCategoryIDArray =[[[NSUserDefaults standardUserDefaults] valueForKey:@"SelectedItemCategoryID"]mutableCopy];
+//    }
+//    else
+//    {
+//        interstAndHobbiesArray = [[profileDict valueForKey:@"hobbieslist"]mutableCopy];
+//         hobbiesCategoryIDArray =[[interstAndHobbiesArray valueForKey:@"hobbies_id"]mutableCopy];
+//    }
+//
+//     NSLog(@"SelectedItemCategoryID=%@",[[[NSUserDefaults standardUserDefaults] valueForKey:@"SelectedItemCategoryID"]mutableCopy]);
+    hobbiesMainArray = [[NSUserDefaults standardUserDefaults]valueForKey:HobbiesArray];
     
-    strInterestHobbies = [hobbiesCategoryIDArray componentsJoinedByString:@","];
+    strInterestHobbies = [[hobbiesMainArray valueForKey:@"hobbies_id"] componentsJoinedByString:@","];
+    
+    NSLog(@"strInterestHobbies = %@",strInterestHobbies);
+    
+    imageNormalArray = [[hobbiesMainArray valueForKey:@"image"]mutableCopy];
+    
+    hobbiesNameArray = [hobbiesMainArray valueForKey:@"name"];
+    
+    [_tableviewProfile reloadData];
+    
+    NSLog(@"imageNormalArray = %@",imageNormalArray);
+    
+//    strInterestHobbies = [hobbiesCategoryIDArray componentsJoinedByString:@","];
 }
 
 
@@ -768,9 +802,8 @@ if([[NSUserDefaults standardUserDefaults] valueForKey:@"SelectedItemCategoryID"]
 
 - (void)pushToHobbiesView {
     
-
     DSInterestAndHobbiesViewController * DSHobbiesView  = [[DSInterestAndHobbiesViewController alloc]initWithNibName:@"DSInterestAndHobbiesViewController" bundle:nil];
-    DSHobbiesView.profileDetailsArray = interstAndHobbiesArray;   //placeHolderArray
+   // DSHobbiesView.profileDetailsArray = interstAndHobbiesArray;   //placeHolderArray
     [self.navigationController pushViewController:DSHobbiesView animated:YES];
 
     
@@ -1042,7 +1075,7 @@ if([[NSUserDefaults standardUserDefaults] valueForKey:@"SelectedItemCategoryID"]
            {
             cell.firstnameTxt.text = FirstName;
             cell.lastNameTxt.text   =LastName;
-               cell.firstaftersepratorlbl.hidden =NO;
+            cell.firstaftersepratorlbl.hidden =NO;
            }
         cell.firstnameTxt.autocapitalizationType = UITextAutocapitalizationTypeSentences;
         cell.lastNameTxt.autocapitalizationType = UITextAutocapitalizationTypeSentences;
@@ -1366,21 +1399,34 @@ if([[NSUserDefaults standardUserDefaults] valueForKey:@"SelectedItemCategoryID"]
             }
             [imageNormalArray addObject:plusIcon];
         }
+        NSLog(@"hobbiesMainArray = %@",hobbiesMainArray);
         
         UIButton *pushToHobbiesButton =[[UIButton alloc]initWithFrame:CGRectMake(0, 0, imageSize, imageSize)];
         for (int i =0; i< [imageNormalArray  count]; i++) {
             cell.plusIconImageView.hidden = YES;
             UIImageView *hobbiesImage;
+           
+            //UILabel *hobbiesname;
             
-            if(i <= 4)
+            if(i <= 4){
                 hobbiesImage = [[UIImageView alloc]initWithFrame:CGRectMake((i*(commonWidth + imageSize))+ imageXPos, yAxis, imageSize, imageSize)];
-            else if(i <= 9)
+               // hobbiesname = [[UILabel alloc]initWithFrame:CGRectMake((i*(commonWidth + imageSize))+textXPos, yAxis + imageSize, imageSize + 20, 15)];
+            }
+            else if(i <= 9){
                 hobbiesImage = [[UIImageView alloc]initWithFrame:CGRectMake(((i-5)*(commonWidth + imageSize))+ imageXPos, yAxis+imageSize+space, imageSize, imageSize)];
-            else if(i <= 14)
+                //hobbiesname = [[UILabel alloc]initWithFrame:CGRectMake(((i-5)*(commonWidth + imageSize))+textXPos, yAxis+(imageSize * 2)+space, imageSize + 20, 15)];
+            }
+            else if(i <= 14){
                 hobbiesImage = [[UIImageView alloc]initWithFrame:CGRectMake(((i-10)*(commonWidth + imageSize))+ imageXPos, yAxis+((imageSize+space) * 2), imageSize, imageSize)];
-            else
+               //  hobbiesname = [[UILabel alloc]initWithFrame:CGRectMake(((i-10)*(commonWidth + imageSize))+textXPos, yAxis+((imageSize+space) * 2)+imageSize, imageSize + 20, 15)];
+            }
+            else{
                 hobbiesImage = [[UIImageView alloc]initWithFrame:CGRectMake(((i-15)*(commonWidth + imageSize))+ imageXPos, yAxis+((imageSize+space) * 3), imageSize, imageSize)];
-            NSString *image =[imageNormalArray objectAtIndex:i];
+              //   hobbiesname = [[UILabel alloc]initWithFrame:CGRectMake(((i-15)*(commonWidth + imageSize))+textXPos, yAxis+((imageSize+space) * 3)+imageSize, imageSize + 20, 15)];
+            }
+            
+             NSString *image =[imageNormalArray objectAtIndex:i];
+            // NSString *title =[[[hobbiesMainArray valueForKey:@"name"] objectAtIndex:i]uppercaseString];
             
             if([image isEqualToString:@"Plus_icon.png"])
             {
@@ -1398,6 +1444,14 @@ if([[NSUserDefaults standardUserDefaults] valueForKey:@"SelectedItemCategoryID"]
                 [hobbiesImage addSubview:pushToHobbiesButton];
             }
             
+//            [hobbiesname setFont:[UIFont fontWithName:@"Patron-Regular" size:7]];
+//            hobbiesname.textAlignment = NSTextAlignmentCenter;
+//            hobbiesname.textColor =[UIColor colorWithRed:(float)102.0/255 green:(float)102.0/255 blue:(float)102.0/255 alpha:1.0f];
+//            
+//            
+//            hobbiesname.text = title;
+//            [cell addSubview:hobbiesname];
+//            hobbiesname.textAlignment = NSTextAlignmentCenter;
             [cell addSubview:hobbiesImage];
             [pushToHobbiesButton addTarget:self action:@selector(pushToHobbiesView) forControlEvents:UIControlEventTouchUpInside];
         }

@@ -112,6 +112,8 @@
 
 #define DeviceToken                 @"deviceToken"
 
+#define HobbiesArray                @"HobbiesArray"
+
 
 
 
