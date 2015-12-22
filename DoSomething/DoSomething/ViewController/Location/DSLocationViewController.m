@@ -510,7 +510,7 @@
 
 -(void)getUserDetails{
     
-   // [COMMON LoadIcon:self.view];
+    [COMMON LoadIcon:self.view];
     [objWebservice getUserDetails:UserDetails_API
                         sessionid:[COMMON getSessionID]
                   profile_user_id:profileUserID
