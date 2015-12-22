@@ -11,6 +11,6 @@
 @interface DSNearbyCustomCell : UITableViewCell
 
 @property(nonatomic,strong) IBOutlet UILabel * aboutText;
-@property(nonatomic,weak) IBOutlet UIButton *letsDoSomethingButton;
+@property(nonatomic,strong) IBOutlet UIButton *letsDoSomethingButton;
 
 @end

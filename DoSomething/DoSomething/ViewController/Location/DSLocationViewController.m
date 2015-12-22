@@ -15,7 +15,6 @@
 #import "DSAppCommon.h"
 #import "AppDelegate.h"
 #import <MapKit/MapKit.h>
-#import "DSDetailViewController.h"
 #import "CustomAlterview.h"
 #import "DSNearByDetailViewController.h"
 
@@ -177,13 +176,13 @@
     [customNavigation.FilterBtn addTarget:self action:@selector(filterAction:) forControlEvents:UIControlEventTouchUpInside];
     [self.navigationController.navigationBar addSubview:customNavigation.view];
     
-   usernotfoundlbl=[[UILabel alloc]initWithFrame:CGRectMake(self.locationCollectionView.frame.origin.x,self.locationCollectionView.center.y-30,self.locationCollectionView.frame.size.width,30)];
-    usernotfoundlbl.numberOfLines =10;
-    
-    usernotfoundlbl.textAlignment=NSTextAlignmentCenter;
-    usernotfoundlbl.font=Patron_Bold(10);
-    usernotfoundlbl.hidden=YES;
-    [self.locationCollectionView addSubview:usernotfoundlbl];
+//   usernotfoundlbl=[[UILabel alloc]initWithFrame:CGRectMake(self.locationCollectionView.frame.origin.x,self.locationCollectionView.center.y-30,self.locationCollectionView.frame.size.width,30)];
+//    usernotfoundlbl.numberOfLines =10;
+//    
+//    usernotfoundlbl.textAlignment=NSTextAlignmentCenter;
+//    usernotfoundlbl.font=Patron_Bold(10);
+//    usernotfoundlbl.hidden=YES;
+//    [self.locationCollectionView addSubview:usernotfoundlbl];
 
 }
 
@@ -350,8 +349,8 @@
              }
              else
              {
-                 usernotfoundlbl.hidden=NO;
-                 usernotfoundlbl.text  =[[responseObject valueForKey:@"nearestusers"]valueForKey:@"Message"];
+                 //usernotfoundlbl.hidden=NO;
+                // usernotfoundlbl.text  =[[responseObject valueForKey:@"nearestusers"]valueForKey:@"Message"];
              }
         
             [COMMON removeLoading];
@@ -365,8 +364,8 @@
     failure:^(AFHTTPRequestOperation *operation, id error) {
         
         [COMMON removeLoading];
-        usernotfoundlbl.hidden=NO;
-        usernotfoundlbl.text  =[NSString stringWithFormat:@"%@",error];
+        //usernotfoundlbl.hidden=NO;
+        //usernotfoundlbl.text  =[NSString stringWithFormat:@"%@",error];
         
         
         
@@ -493,7 +492,7 @@
 
 - (void)collectionView:(UICollectionView *)collectionView willDisplayCell:(UICollectionViewCell *)cell forItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSLog(@"profileNames count=%lu",(unsigned long)profileNames.count);
+    NSLog(@"profileNames count=%lu",(unsigned long)commonlocationArray.count);
     if (([commonlocationArray count]-1) == indexPath.row ) {
         
         int x = [currentloadPage intValue];

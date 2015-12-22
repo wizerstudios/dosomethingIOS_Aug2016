@@ -23,7 +23,7 @@
             <connections>
                 <outlet property="aboutviewHeight" destination="gNi-Ur-dII" id="Fbj-HR-IXI"/>
                 <outlet property="cellAbout" destination="KGk-i7-Jjw" id="1vm-Jd-ZCc"/>
-                <outlet property="cellDosomething" destination="q2J-GB-bAi" id="TF2-jr-WVP"/>
+                <outlet property="cellDosomething" destination="q2J-GB-bAi" id="Q3h-8B-q2g"/>
                 <outlet property="cellInterestHobbies" destination="f7Z-xa-G1g" id="bn5-Oz-wTV"/>
                 <outlet property="cellNearbyProfileImg" destination="VZx-ap-YZS" id="AfZ-VJ-Xmb"/>
                 <outlet property="detailPageControl" destination="zbx-aV-Ewk" id="u9d-I5-PTm"/>
@@ -88,7 +88,6 @@
             <animations/>
             <connections>
                 <outlet property="aboutText" destination="1Y6-JG-6XQ" id="I7M-bT-a98"/>
-                <outlet property="letsDoSomethingButton" destination="kfk-fw-2D9" id="X5C-od-yJ0"/>
             </connections>
             <point key="canvasLocation" x="324" y="296.5"/>
         </tableViewCell>
@@ -113,27 +112,30 @@
                                 <color key="textColor" red="0.40000000000000002" green="0.40000000000000002" blue="0.40000000000000002" alpha="1" colorSpace="deviceRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kfk-fw-2D9">
-                                <rect key="frame" x="195" y="50" width="100" height="40"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="wordWrap" translatesAutoresizingMaskIntoConstraints="NO" id="kfk-fw-2D9">
+                                <rect key="frame" x="210" y="35" width="80" height="44"/>
                                 <animations/>
-                                <color key="backgroundColor" red="0.85490196080000003" green="0.15686274510000001" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="40" id="NDs-cF-yvH"/>
-                                    <constraint firstAttribute="width" constant="100" id="QoG-Ez-6ry"/>
+                                    <constraint firstAttribute="height" constant="44" id="NDs-cF-yvH"/>
+                                    <constraint firstAttribute="width" constant="80" id="QoG-Ez-6ry"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="Patron-Regular" family="Patron" pointSize="10"/>
-                                <state key="normal" title="Let's Do Something">
+                                <state key="normal">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <action selector="letsDoSomethingAction:" destination="-1" eventType="touchUpInside" id="CxK-2e-yUa"/>
+                                </connections>
                             </button>
                         </subviews>
                         <animations/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="kfk-fw-2D9" firstAttribute="top" secondItem="3Mf-Js-xeW" secondAttribute="top" constant="50" id="HhV-jm-5s5"/>
+                            <constraint firstItem="kfk-fw-2D9" firstAttribute="top" secondItem="3Mf-Js-xeW" secondAttribute="top" constant="35" id="HhV-jm-5s5"/>
                             <constraint firstItem="RcP-aa-xfW" firstAttribute="top" secondItem="3Mf-Js-xeW" secondAttribute="top" constant="5" id="QGR-51-f6M"/>
                             <constraint firstItem="RcP-aa-xfW" firstAttribute="leading" secondItem="3Mf-Js-xeW" secondAttribute="leading" constant="5" id="Wtg-i9-IDn"/>
-                            <constraint firstAttribute="trailing" secondItem="kfk-fw-2D9" secondAttribute="trailing" constant="5" id="bws-de-iI0"/>
+                            <constraint firstAttribute="trailing" secondItem="kfk-fw-2D9" secondAttribute="trailing" constant="10" id="bws-de-iI0"/>
                         </constraints>
                     </view>
                 </subviews>
@@ -146,6 +148,9 @@
                 </constraints>
             </tableViewCellContentView>
             <animations/>
+            <connections>
+                <outlet property="letsDoSomethingButton" destination="kfk-fw-2D9" id="CIa-7G-gen"/>
+            </connections>
             <point key="canvasLocation" x="334" y="497"/>
         </tableViewCell>
         <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="99" id="f7Z-xa-G1g" customClass="DSNearbyCustomCell">
