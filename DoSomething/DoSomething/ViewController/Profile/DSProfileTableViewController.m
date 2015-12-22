@@ -664,7 +664,7 @@
     
     datePicker.tag =_tag;
     
-    if([currentTextfield.text length] > 0){
+    if([currentTextfield.text length] > 0  && ![currentTextfield.text isEqualToString:@"DD/MM/YYYY"]){
         
         NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
         
@@ -1209,7 +1209,10 @@
                 
                 
                 if(currentTextfield.text == NULL){
-                    cell.textFieldDPPlaceHolder.text =[profileDict valueForKey:@"date_of_birth"];
+                    if([[profileDict valueForKey:@"date_of_birth"]isEqualToString:@"00/00/0000"])
+                        cell.textFieldDPPlaceHolder.text = @"DD/MM/YYYY";
+                    else
+                        cell.textFieldDPPlaceHolder.text =[profileDict valueForKey:@"date_of_birth"];
                     [cell.textFieldDPPlaceHolder setTag:1000];
 
                 }
