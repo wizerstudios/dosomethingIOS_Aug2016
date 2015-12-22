@@ -225,8 +225,6 @@
         
         
     }
-
-    
 }
 
 #pragma mark - UIScrollViewDelegate
@@ -337,9 +335,6 @@
         {
             [[NSBundle mainBundle] loadNibNamed:@"DSNearbyCustomCell" owner:self options:nil];
             NearbyCustomcell = cellDosomething;
-
-           
-
         }
         
         requestStr= [userDetailsDict valueForKey:@"send_request"];
@@ -358,9 +353,6 @@
                                                                                         blue:81.0f/255.0f
                                                                                        alpha:1.0f]];
             [NearbyCustomcell.letsDoSomethingButton setTitle:@"   Let's Do \n Something" forState:UIControlStateNormal];
-            
-            
-            
         }
         
         imageSize =39;
@@ -410,10 +402,6 @@
             [NearbyCustomcell addSubview:doSomethingName];
             doSomethingName.textAlignment = NSTextAlignmentCenter;
         }
-
-       
-
-   // cell.textLabel.text = @"Testing";
     
     }
     if (indexPath.row == 3)
@@ -485,19 +473,14 @@
             
             
         }
-
-    
     }
     NearbyCustomcell.selectionStyle = UITableViewCellSelectionStyleNone;
     return NearbyCustomcell;
     
 }
-
-
 #pragma mark - letsDoSomethingAction
 -(IBAction)letsDoSomethingAction:(id)sender
 {
-    
     if(![requestStr isEqualToString:@"Yes"])
     {
         UIButton *buttonSender = (UIButton *)sender;
