@@ -1866,41 +1866,148 @@ if([[NSUserDefaults standardUserDefaults] valueForKey:@"SelectedItemCategoryID"]
 
 #pragma mark - Camera Action
 -(void)selectCamera: (UIButton *)sender
+
 {
- 
+    
     imagepickerController = [[UIImagePickerController alloc] init];
+    
     imagepickerController.delegate = self;
+    
     [imagepickerController setAllowsEditing:YES];
     
-    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@""
-                                                                   message:@""
-                                                            preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertController *alert;
+    
+    if(IS_GREATER_IOS8){
+        
+        alert = [UIAlertController alertControllerWithTitle:@""
+                 
+                                                    message:@""
+                 
+                                             preferredStyle:UIAlertControllerStyleAlert];
+        
+    }
+    
+    else{
+        
+        UIActionSheet *actionSheet1 = [[UIActionSheet alloc] initWithTitle:@"" delegate:self cancelButtonTitle:NSLocalizedString(@"CANCEL",@"") destructiveButtonTitle:NSLocalizedString(@"CAMERA",@"") otherButtonTitles:NSLocalizedString(@"PHOTO LIBRARY",@""), nil];
+        
+        [actionSheet1 showInView:self.view];
+        
+        [actionSheet1 sizeToFit];
+        
+    }
+    
+    
     
     UIAlertAction *camera = [UIAlertAction actionWithTitle:NSLocalizedString(@"CANCEL",@"") style:UIAlertActionStyleDefault
+                             
                                                    handler:^(UIAlertAction * action) {
+                                                       
                                                        //[self promptForCamera];
-                                                        [self.presentedViewController dismissViewControllerAnimated:NO completion:nil];
+                                                       
+                                                       [self.presentedViewController dismissViewControllerAnimated:NO completion:nil];
+                                                       
                                                    }];
+    
+    
     
     UIAlertAction *photoRoll = [UIAlertAction actionWithTitle:NSLocalizedString(@"CAMERA",@"") style:UIAlertActionStyleDefault
+                                
                                                       handler:^(UIAlertAction * action) {
+                                                          
                                                           imagepickerController.sourceType = UIImagePickerControllerSourceTypeCamera;
+                                                          
                                                           [self presentViewController:imagepickerController animated:YES completion:nil];
+                                                          
                                                       }];
     
+    
+    
     UIAlertAction *cancel = [UIAlertAction actionWithTitle:NSLocalizedString(@"PHOTO LIBRARY",@"") style:UIAlertActionStyleDefault
+                             
                                                    handler:^(UIAlertAction * action) {
-                                                      // [self.presentedViewController dismissViewControllerAnimated:NO completion:nil];
-                                                        imagepickerController.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
-                                                        [self presentViewController:imagepickerController animated:YES completion:nil];
+                                                       
+                                                       // [self.presentedViewController dismissViewControllerAnimated:NO completion:nil];
+                                                       
+                                                       imagepickerController.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+                                                       
+                                                       [self presentViewController:imagepickerController animated:YES completion:nil];
+                                                       
                                                    }];
     
-    [alert addAction:camera];
-    [alert addAction:photoRoll];
-    [alert addAction:cancel];
-    [self presentViewController:alert animated:YES completion:nil];
+    if(IS_GREATER_IOS8){
+        
+        [alert addAction:camera];
+        
+        [alert addAction:photoRoll];
+        
+        [alert addAction:cancel];
+        
+        [self presentViewController:alert animated:YES completion:nil];
+        
+    }
+    
 }
 
+
+
+-(void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
+
+{
+    
+    switch (buttonIndex) {
+            
+        case 0:
+            
+            if (![UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera])
+                
+            {
+                
+                UIAlertView *altView = [[UIAlertView alloc]initWithTitle:[[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleName"]
+                                        
+                                                                 message:NSLocalizedString(@"Sorry, you do not have a camera",@"")
+                                        
+                                                                delegate:nil
+                                        
+                                                       cancelButtonTitle:NSLocalizedString(@"OK",@"")
+                                        
+                                                       otherButtonTitles:nil];
+                
+                [altView show];
+                
+                return;
+                
+            }else{
+                
+                imagepickerController.sourceType = UIImagePickerControllerSourceTypeCamera;
+                
+                [self presentViewController:imagepickerController animated:YES completion:nil];
+                
+            }
+            
+            break;
+            
+            
+            
+        case 1:
+            
+            
+            
+            imagepickerController.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+            
+            [self presentViewController:imagepickerController animated:YES completion:nil];
+            
+            break;
+            
+            
+            
+        default:
+            
+            break;
+            
+    }
+    
+}
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
 {
     UIImage *image = nil;
