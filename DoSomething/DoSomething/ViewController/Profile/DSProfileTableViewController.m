@@ -109,16 +109,23 @@
 @synthesize userDetailsDict,emailAddressToRegister,emailPasswordToRegister,selectEmail;
 
 - (void)viewDidLoad {
+    
     [super viewDidLoad];
+    
     locationManager                 = [[CLLocationManager alloc] init];
+    
     locationManager.delegate        = self;
+    
     objWebService = [[DSWebservice alloc]init];
+    
     deviceUdid = [OpenUDID value];
+    
     isPick=NO;
+    
     isPageControl=NO;
+    
     isLoadData=NO;
-  
-   
+    
 }
 -(void)viewWillAppear:(BOOL)animated
 {
@@ -135,7 +142,7 @@
         [self selectitemMethod];
     }
        infoArray=[[NSMutableArray alloc]initWithObjects:@"profile_noimg",@"profile_noimg",@"profile_noimg", nil];
-    [self CustomAlterview];
+    
     if(!isLoadData){
         [self initializeArray];
        // [COMMON getUserCurrenLocation];
@@ -159,6 +166,11 @@
 
      [_tableviewProfile reloadData];
         
+}
+
+-(void)viewDidAppear:(BOOL)animated{
+    [super viewDidAppear:animated];
+    [self CustomAlterview];
 }
 
 -(void)loadNavigation{
@@ -605,13 +617,35 @@ if([[NSUserDefaults standardUserDefaults] valueForKey:@"SelectedItemCategoryID"]
 }
 
 -(void)loadDatePicker:(NSInteger)_tag{
+    
     currentTextfield=(UITextField *)[self.view viewWithTag:_tag];
+    
     datePicker   = [[UIDatePicker alloc] initWithFrame:CGRectMake(0, 300, 320, 150)];
+    
     [datePicker setDatePickerMode:UIDatePickerModeDate];
+    
     datePicker.backgroundColor = [UIColor whiteColor];
+    
     [datePicker addTarget:self action:@selector(DateSelectionAction:) forControlEvents:UIControlEventValueChanged];
+    
     datePicker.tag =_tag;
+    
+    if([currentTextfield.text length] > 0){
+        
+        NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+        
+        [dateFormatter setDateFormat:@"dd-MM-yyyy"];
+        
+        NSDate *dateFromString = [[NSDate alloc] init];
+        
+        dateFromString = [dateFormatter dateFromString:currentTextfield.text];
+        
+        [datePicker setDate:dateFromString animated:NO];
+        
+    }
+    
     [currentTextfield setInputView:datePicker];
+    
     currentTextfield.tintColor=[UIColor clearColor];
 }
 
@@ -619,10 +653,15 @@ if([[NSUserDefaults standardUserDefaults] valueForKey:@"SelectedItemCategoryID"]
 - (void)DateSelectionAction:(UIDatePicker *)sender
 {
     currentTextfield=(UITextField *)[self.view viewWithTag:[sender tag]];
+    
     NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
+    
     [dateFormat setTimeZone:[NSTimeZone systemTimeZone]];
+    
     [dateFormat setDateFormat:@"dd/MM/YYYY"];
+    
     NSString *dateString =  [dateFormat stringFromDate:sender.date];
+    
     currentTextfield.text = dateString;
 
     
@@ -680,15 +719,13 @@ if([[NSUserDefaults standardUserDefaults] valueForKey:@"SelectedItemCategoryID"]
     
 }
 
--(BOOL)textFieldShouldBeginEditing:(UITextField *)textField{
+-(void)textFieldDidBeginEditing:(UITextField *)textField{
     
     NSInteger tag = [textField tag];
-    if(textField.tag >= 1000){
+    if(textField.tag == 1000){
         [self loadDatePicker:tag];
     }
-    
-
-        return YES;
+           // return YES;
     
 }
 
@@ -731,6 +768,7 @@ if([[NSUserDefaults standardUserDefaults] valueForKey:@"SelectedItemCategoryID"]
 
 - (void)pushToHobbiesView {
     
+
     DSInterestAndHobbiesViewController * DSHobbiesView  = [[DSInterestAndHobbiesViewController alloc]initWithNibName:@"DSInterestAndHobbiesViewController" bundle:nil];
     DSHobbiesView.profileDetailsArray = interstAndHobbiesArray;   //placeHolderArray
     [self.navigationController pushViewController:DSHobbiesView animated:YES];
@@ -743,9 +781,6 @@ if([[NSUserDefaults standardUserDefaults] valueForKey:@"SelectedItemCategoryID"]
     
     placeHolderArray = [[NSMutableArray alloc] initWithCapacity: 1];
     
-   // NSMutableDictionary *detailsDict = [[NSMutableDictionary alloc]init];
-   // detailsDict = [[COMMON getUserDetails]mutableCopy];
-
     [placeHolderArray insertObject:[[NSMutableArray alloc]initWithObjects:[NSMutableDictionary dictionaryWithObjectsAndKeys:@"Image",@"placeHolder", nil],
                                     
                                     [NSMutableDictionary dictionaryWithObjectsAndKeys:[userDetailsDict valueForKey:@"first_name"],@"placeHolder", nil],
@@ -758,7 +793,6 @@ if([[NSUserDefaults standardUserDefaults] valueForKey:@"SelectedItemCategoryID"]
                                     [NSMutableDictionary dictionaryWithObjectsAndKeys:@"switch_on",@"placeHolder",@"",@"NewMessageImage",@"",@"SoundImage",@"",@"VibrationImage",nil],
                                     [NSMutableDictionary dictionaryWithObjectsAndKeys:@"TermsOfUse",@"placeHolder",@"",@"TypingText", nil], nil]atIndex:0];
     
-   // titleArray = [[NSArray alloc]initWithObjects:@"Image",@"First Name",@"Last Name",@"male",@"Date of Birth",@"About You",@"Hobbies",@"Email&Password",@"switch_on",@"TermsOfUse",nil];
     
     NSLog(@"PlaceHolder %@",placeHolderArray);
    
@@ -767,9 +801,6 @@ if([[NSUserDefaults standardUserDefaults] valueForKey:@"SelectedItemCategoryID"]
 -(void)initializeArrayProfile{
     
     placeHolderArray = [[NSMutableArray alloc] initWithCapacity: 1];
-    
-    // NSMutableDictionary *detailsDict = [[NSMutableDictionary alloc]init];
-    // detailsDict = [[COMMON getUserDetails]mutableCopy];
     
     [placeHolderArray insertObject:[[NSMutableArray alloc]initWithObjects:[NSMutableDictionary dictionaryWithObjectsAndKeys:@"Image",@"placeHolder",@"",@"TypingText", nil],
                                     
@@ -781,7 +812,7 @@ if([[NSUserDefaults standardUserDefaults] valueForKey:@"SelectedItemCategoryID"]
                                     [NSMutableDictionary dictionaryWithObjectsAndKeys:@"Hobbies",@"placeHolder", nil],
                                     [NSMutableDictionary dictionaryWithObjectsAndKeys:[profileDict valueForKey:@"email"],@"placeHolder",@"Password",@"placeHolderPass",@"",@"TypingTextPass", nil], nil]atIndex:0];
     
-    //titleArray = [[NSArray alloc]initWithObjects:@"Image",@"First Name",@"Last Name",@"male",@"Date of Birth",@"About You",@"Hobbies",@"Email&Password",nil];
+   
     
     NSLog(@"PlaceHolder %@",placeHolderArray);
     
@@ -871,7 +902,7 @@ if([[NSUserDefaults standardUserDefaults] valueForKey:@"SelectedItemCategoryID"]
         {
             dataSize = [COMMON getControlHeight:strAbout withFontName:@"Patron-Regular" ofSize:14.0 withSize:CGSizeMake(tableView.frame.size.width-20,tableView.frame.size.height)];
             if([strAbout isEqualToString:@""]|| dataSize.height ==10){
-                 return 40 ;
+                 return 30 ;
             }
             
 //            if(dataSize.height == 10)
@@ -881,7 +912,7 @@ if([[NSUserDefaults standardUserDefaults] valueForKey:@"SelectedItemCategoryID"]
             else
             {
                  self.aboutTextHeight.constant=dataSize.height;
-                 return dataSize.height-6;
+                 return dataSize.height;
             }
             
         }
@@ -995,6 +1026,8 @@ if([[NSUserDefaults standardUserDefaults] valueForKey:@"SelectedItemCategoryID"]
             FirstName = cell.firstnameTxt.text;
             LastName  = cell.lastNameTxt.text;
             cell.firstaftersepratorlbl.hidden =YES;
+            [cell.firstnameTxt setEnabled:NO];
+            [cell.lastNameTxt setEnabled:NO];
         }
         else if(userDetailsDict.count > 0){
 
