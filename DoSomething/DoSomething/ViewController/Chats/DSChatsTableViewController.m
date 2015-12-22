@@ -17,11 +17,6 @@
 @interface DSChatsTableViewController ()
 
 {
-    NSArray *ChatNameArray;
-    NSArray *MessageArray;
-    NSArray *timeArray;
-    NSArray *imageArray;
-    NSArray*badgeimage;
     UIButton *navButton;
     NSString * currentLatitude, * currentLongitude;
     DSWebservice *webService;
@@ -36,17 +31,11 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view from its nib.
     locationManager                 = [[CLLocationManager alloc] init];
     locationManager.delegate        = self;
     chatArray = [[NSMutableArray alloc]init];
     webService = [[DSWebservice alloc]init];
-//    ChatNameArray =[[NSArray alloc] initWithObjects:@"Gal Gadot",@"Yuna",@"Taylor",nil];
-//    MessageArray =[[NSArray alloc] initWithObjects:@"Haha Sure I'll see you at 7:)",@"Hello?",@"See Ya!",nil];
-//    timeArray = [[NSArray alloc] initWithObjects:@"19:58",@"17:20",@"15:30",nil];
-//    imageArray =[[NSArray alloc] initWithObjects:@"Galglot.png",@"yuna.png",@"taylor.png",nil];
-//    badgeimage=[[NSArray alloc] initWithObjects:@"12-Chats.png",@"18-Chats.png",@" ",nil];
-//    badgeimage=[[NSArray alloc] initWithObjects:@"18-Chats.png",@"12-Chats.png",@" ",nil];
+
     
     if(IS_IPHONE6 || IS_IPHONE6_Plus)
         [self.view addConstraint:[NSLayoutConstraint constraintWithItem:ChatTableView
@@ -75,18 +64,25 @@
 - (void)setNavigation
 {
     CustomNavigationView *customNavigation;
+    
     customNavigation = [[CustomNavigationView alloc] initWithNibName:@"CustomNavigationView" bundle:nil];
+    
     customNavigation.view.frame = CGRectMake(0,-20, CGRectGetWidth(self.view.frame), 65);
-    if (IS_IPHONE6 ){
+    
+    if (IS_IPHONE6 )
+        
         customNavigation.view.frame = CGRectMake(0,-20, 375, 83);
-    }
+    
     if(IS_IPHONE6_Plus)
-    {
+        
         customNavigation.view.frame = CGRectMake(0,-20, 420, 83);
-    }
+    
     [customNavigation.menuBtn setHidden:NO];
+    
     [customNavigation.buttonBack setHidden:YES];
+    
     [customNavigation.saveBtn setHidden:YES];
+    
     [self.navigationController.navigationBar addSubview:customNavigation.view];
     //    [customNavigation.saveBtn addTarget:self action:@selector(saveAction) forControlEvents:UIControlEventTouchUpInside];
     //    [customNavigation.buttonBack addTarget:self action:@selector(backAction) forControlEvents:UIControlEventTouchUpInside];
@@ -164,51 +160,89 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     ChatTableViewCell *Cell;
+    
     static NSString *identifier = @"Mycell";
+    
     Cell = (ChatTableViewCell*)[tableView dequeueReusableCellWithIdentifier:identifier];
     
+    
+    
     if (!Cell)
+        
     {
+        
         NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"ChatTableViewCell" owner:nil options:nil];
+        
         Cell = [nib objectAtIndex:0];
         
+        
     }
+    
     NSMutableDictionary *chatDict = [chatArray objectAtIndex:indexPath.row];
+    
     isSupportUser = [[chatDict valueForKey:@"supportuser"]integerValue];
+    
     Cell.ChatName .text = [chatDict valueForKey:@"Name"];
+    
     Cell.Message.text= [chatDict valueForKey:@"LastMessage"];
     
-    NSString *timeStr = [chatDict valueForKey:@"LastMessageSentTime"];
-    NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
-    [dateFormat setDateFormat:@"YYYY-MM-dd HH:mm:ss"];
-    NSDate *date = [dateFormat dateFromString:timeStr];
     
+    
+    NSString *timeStr = [chatDict valueForKey:@"LastMessageSentTime"];
+    
+    NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
+    
+    [dateFormat setDateFormat:@"YYYY-MM-dd HH:mm:ss"];
+    
+    NSDate *date = [dateFormat dateFromString:timeStr];
+        
     [dateFormat setDateFormat:@"hh:mm"];
+    
     timeStr = [dateFormat stringFromDate:date];
     
     Cell.Time.text = timeStr;
     
+    
     NSString *ProfileName=[NSString stringWithFormat:@"%@",[chatDict valueForKey:@"image1"]];
+    
     downloadImageFromUrl(ProfileName,Cell.profileImageView);
+    
     [Cell.profileImageView setImage:[UIImage imageNamed:ProfileName]];
+    
     [Cell.profileImageView.layer setCornerRadius:29];
     
-    NSUInteger msgCount = [[chatDict valueForKey:@"unreadmessage"]integerValue];
-    if(msgCount >=1){
-        [Cell.msgCountLabel setHidden:NO];
-        [Cell.msgCountLabel setText:[NSString stringWithFormat:@"%lu",(unsigned long)msgCount]];
-        [Cell.msgCountLabel.layer setCornerRadius:9];
-        Cell.msgCountLabel.clipsToBounds = YES;
-    }
-    else
-        [Cell.msgCountLabel setHidden:YES];
-    
     if(isSupportUser == 1){
+        
         [Cell.profileImageView.layer setMasksToBounds:YES];
+        
         [Cell.profileImageView.layer setBorderWidth:2.0f];
+        
         [Cell.profileImageView.layer setBorderColor:[[UIColor colorWithRed:229.0f/255.0f green:63.0f/255.0f blue:81.0f/255.0f alpha:1.0f] CGColor]];
         
     }
+
+    
+    NSUInteger msgCount = [[chatDict valueForKey:@"unreadmessage"]integerValue];
+    
+    if(msgCount >=1){
+        
+        [Cell.msgCountLabel setHidden:NO];
+        
+        [Cell.msgCountLabel setText:[NSString stringWithFormat:@"%lu",(unsigned long)msgCount]];
+        
+        [Cell.msgCountLabel.layer setCornerRadius:9];
+        
+        Cell.msgCountLabel.clipsToBounds = YES;
+        
+    }
+    
+    else
+        
+        [Cell.msgCountLabel setHidden:YES];
+    
+    
+    
+    
     
     ChatTableView.backgroundColor = [UIColor colorWithRed:237.0f/255.0f green:237.0f/255.0f blue:237.0f/255.0f alpha:1.0f];
     
@@ -225,43 +259,56 @@
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
 {
     NSMutableDictionary *chatDict = [chatArray objectAtIndex:indexPath.row];
+    
     isSupportUser = [[chatDict valueForKey:@"supportuser"]integerValue];
+    
     if(isSupportUser == 0)
         return YES;
+    
     else
         return NO;
 }
 -(NSArray *)tableView:(UITableView *)tableView editActionsForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-       UITableViewRowAction *blockButton = [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleDefault title:@"Block" handler:^(UITableViewRowAction *action, NSIndexPath *indexPath){
-                                           
-                                           [self.ChatTableView setEditing:YES];
-                                             
-                                         }];
-    
-   
-        [blockButton.title sizeWithAttributes:@{NSFontAttributeName:[UIFont fontWithName:@"Patron-Regular" size:11.0]}];
-        blockButton.backgroundColor =[UIColor colorWithRed:0.465f green:0.465f blue:0.465f alpha:1.0f] ;
+    UITableViewRowAction *blockButton = [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleDefault title:@"Block" handler:^(UITableViewRowAction *action, NSIndexPath *indexPath){
         
-        UITableViewRowAction *deleteButton = [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleDefault title:@"Delete"  handler:^(UITableViewRowAction *action, NSIndexPath *indexPath){
-           
-                [timeArray objectAtIndex:indexPath.row];
-                [self.ChatTableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationRight];
-        }];
-        [deleteButton.title sizeWithAttributes:@{NSFontAttributeName:[UIFont fontWithName:@"Patron-Regular" size:11.0]}];
-        deleteButton.backgroundColor =[UIColor colorWithRed:(230/255.0) green:(63/255.0) blue:(82/255.0) alpha:1];
+        
+        [self.ChatTableView setEditing:YES];
+        
+        
+    }];
     
-         return @[deleteButton,blockButton];
     
-}
+    [blockButton.title sizeWithAttributes:@{NSFontAttributeName:[UIFont fontWithName:@"Patron-Regular" size:11.0]}];
+    
+    blockButton.backgroundColor =[UIColor colorWithRed:0.465f green:0.465f blue:0.465f alpha:1.0f] ;
+    
+    
+    UITableViewRowAction *deleteButton = [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleDefault title:@"Delete"  handler:^(UITableViewRowAction *action, NSIndexPath *indexPath){
+        
+        //[timeArray objectAtIndex:indexPath.row];
+        
+        [self.ChatTableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationRight];
+        
+    }];
+    
+    [deleteButton.title sizeWithAttributes:@{NSFontAttributeName:[UIFont fontWithName:@"Patron-Regular" size:11.0]}];
+    
+    deleteButton.backgroundColor =[UIColor colorWithRed:(230/255.0) green:(63/255.0) blue:(82/255.0) alpha:1];
+    
+    
+    
+    return @[deleteButton,blockButton];}
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    
     DSChatDetailViewController *ChatDetail =[[DSChatDetailViewController alloc]initWithNibName:nil bundle:nil];
+    
     ChatDetail.chatuserDetailsDict = [chatArray objectAtIndex:indexPath.row];
-//    ChatDetail.activestring  = [ChatNameArray objectAtIndex:indexPath.row];
-//    ChatDetail.activestring1  = [imageArray objectAtIndex:indexPath.row];
+    
     [self.navigationController pushViewController:ChatDetail animated:YES];
+    
 }
 
 #pragma mark - WebService
@@ -280,21 +327,29 @@
 }
 
 -(void)loadChatHistoryAPI{
+    
     [webService userChatHist:ChatHistory_API sessionid:[COMMON getSessionID]
-                    success:^(AFHTTPRequestOperation *operation, id responseObject){
-                        
-                        NSLog(@"responseObject = %@",responseObject);
-                        
-                        chatArray = [[responseObject valueForKey:@"getchathistory"]valueForKey:@"converation"];
-                        NSLog(@"chatArray = %@",chatArray);
-                        [ChatTableView reloadData];
-                        
-                        [COMMON removeLoading];
-                        
-                    }
+     
+                     success:^(AFHTTPRequestOperation *operation, id responseObject){
+                         
+                         NSLog(@"responseObject = %@",responseObject);
+                         
+                         chatArray = [[responseObject valueForKey:@"getchathistory"]valueForKey:@"converation"];
+                         
+                         NSLog(@"chatArray = %@",chatArray);
+                         
+                         [ChatTableView reloadData];
+                         
+                         [COMMON removeLoading];
+                         
+                     }
+     
                      failure:^(AFHTTPRequestOperation *operation, id error) {
+                         [COMMON removeLoading];
                          
                      }];
+    
+    
 }
 
 @end
