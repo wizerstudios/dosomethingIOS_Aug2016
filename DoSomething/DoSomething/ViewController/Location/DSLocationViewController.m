@@ -44,6 +44,7 @@
     NSString * filterAge;
     NSString * filterDistance;
     BOOL isLoadWebservice;
+     CustomNavigationView *customNavigation;
     
     
 }
@@ -159,7 +160,7 @@
 }
 -(void)loadCustomNavigationview
 {
-    CustomNavigationView *customNavigation;
+   
     customNavigation = [[CustomNavigationView alloc] initWithNibName:@"CustomNavigationView" bundle:nil];
     customNavigation.view.frame = CGRectMake(0,-20, CGRectGetWidth(self.view.frame), 65);
     if (IS_IPHONE6 ){
@@ -493,7 +494,7 @@
 - (void)collectionView:(UICollectionView *)collectionView willDisplayCell:(UICollectionViewCell *)cell forItemAtIndexPath:(NSIndexPath *)indexPath
 {
     NSLog(@"profileNames count=%lu",(unsigned long)profileNames.count);
-    if (([profileNames count]-1) == indexPath.row ) {
+    if (([commonlocationArray count]-1) == indexPath.row ) {
         
         int x = [currentloadPage intValue];
         
@@ -588,15 +589,20 @@
         self.collectionviewxpostion.constant =(IS_IPHONE6 || IS_IPHONE6_Plus)?-300:-250;
         self.CollectionviewWidth.constant    =self.view.frame.size.width;
         self.filterviewxposition.constant    =65;
+        [customNavigation.FilterBtn setImage:[UIImage imageNamed:@""] forState:UIControlStateNormal];
+        [customNavigation.FilterBtn setTitle:@"Apply" forState:UIControlStateNormal];
         [self filterviewPosition];
         isFilteraction=YES;
         [self.locationCollectionView setUserInteractionEnabled:YES];
+        [self nearestLocationWebservice];
     }
     else if (isFilteraction==YES)
     {
         self.collectionviewxpostion.constant =10;
         self.CollectionviewWidth.constant    =self.view.frame.size.width-10;
         self.filterviewxposition.constant    = self.CollectionviewWidth.constant+10;
+        [customNavigation.FilterBtn setImage:[UIImage imageNamed:@"filerImage"] forState:UIControlStateNormal];
+        [customNavigation.FilterBtn setTitle:@"" forState:UIControlStateNormal];
         [self filterviewPosition];
         isFilteraction=NO;
         [self.locationCollectionView setUserInteractionEnabled:YES];
@@ -621,7 +627,7 @@
         self.offlineBtn.backgroundColor =[UIColor whiteColor];
         self.statusBothBtn.backgroundColor=[UIColor whiteColor];
         onlineStatus=@"1";
-        [self nearestLocationWebservice];
+        
     }
     else if ([sender tag] == 302)
     {
@@ -629,7 +635,7 @@
         self.offlineBtn.backgroundColor =[UIColor redColor];
         self.statusBothBtn.backgroundColor=[UIColor whiteColor];
         onlineStatus =@"0";
-        [self nearestLocationWebservice];
+        
     }
     else if ([sender tag] == 303)
     {
@@ -637,7 +643,6 @@
         self.offlineBtn.backgroundColor =[UIColor whiteColor];
         self.statusBothBtn.backgroundColor=[UIColor redColor];
         onlineStatus =@"";
-        [self nearestLocationWebservice];
     }
     else if ([sender tag]== 304)
     {
@@ -645,7 +650,7 @@
         self.FemaleBtn.backgroundColor =[UIColor whiteColor];
         self.avablebothBtn.backgroundColor=[UIColor whiteColor];
          avalibleGenderStatus =@"male";
-        [self nearestLocationWebservice];
+        
     }
     else if ([sender tag] == 305)
     {
@@ -653,7 +658,7 @@
         self.FemaleBtn.backgroundColor =[UIColor redColor];
         self.avablebothBtn.backgroundColor=[UIColor whiteColor];
         avalibleGenderStatus =@"female";
-        [self nearestLocationWebservice];
+       
     }
     else if ([sender tag] == 306)
     {
@@ -661,7 +666,7 @@
         self.FemaleBtn.backgroundColor =[UIColor whiteColor];
         self.avablebothBtn.backgroundColor=[UIColor redColor];
         avalibleGenderStatus =@"";
-        [self nearestLocationWebservice];
+       
     }
 }
 
@@ -739,13 +744,13 @@
     avalibleGenderStatus =@"";
     self.ageSlider.value =18;
     self.distanceSlider.value=0;
-    [self nearestLocationWebservice];
+    
 }
 - (IBAction)AgeSliderValueChanged:(UISlider *)sender {
     UIImage *sliderLeftTrackImage = [[UIImage imageNamed: @"dot_Image.png"] stretchableImageWithLeftCapWidth:8 topCapHeight: 0];
     [self.ageSlider setMinimumTrackImage:sliderLeftTrackImage forState: UIControlStateNormal];
     filterAge =[NSString stringWithFormat:@"18-%f", [sender value]];
-    [self nearestLocationWebservice];
+    
     NSLog(@"AgeSliderValueChanged=%@",[NSString stringWithFormat:@"%f", [sender value]]);
 }
 
@@ -754,7 +759,7 @@
 
     [self.distanceSlider setMinimumTrackImage: sliderLeftTrackImage forState: UIControlStateNormal];
     filterDistance=[NSString stringWithFormat:@"0-%f", [sender value]];
-   [self nearestLocationWebservice];
+  
     NSLog(@"distanceSliderValueChanged=%@",[NSString stringWithFormat:@"%f", [sender value]]);
 }
 
