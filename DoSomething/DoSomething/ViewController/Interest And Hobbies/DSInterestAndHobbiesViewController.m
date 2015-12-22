@@ -283,16 +283,50 @@
 {
     DSInterestAndHobbiesCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"InterestAndHobbiesCollectionViewCell" forIndexPath:indexPath];
     [cell.nameLabel setText:[[[[interstAndHobbiesArray valueForKey:@"name"]objectAtIndex:indexPath.section]objectAtIndex:indexPath.row]uppercaseString]];
-    //cell.nameLabel.numberOfLines = 0;
+     cell.nameLabel.numberOfLines = 0;
     
     
-    NSLog(@"profile=%@",profileDict);
 
-    NSString *image =[[[interstAndHobbiesArray valueForKey:@"image"]objectAtIndex:indexPath.section]objectAtIndex:indexPath.row];
+   NSString *image =[[[interstAndHobbiesArray valueForKey:@"image"]objectAtIndex:indexPath.section]objectAtIndex:indexPath.row];
     
     image= [image stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
     
     [cell.interestAndHobbiesImageView setImageWithURL:[NSURL URLWithString:image]];
+    NSMutableDictionary *data = [[interstAndHobbiesArray objectAtIndex:indexPath.section]objectAtIndex:indexPath.row];
+    NSArray *selectArray = [[NSArray alloc]init];
+    NSMutableArray *filtercatoryId=[[NSMutableArray alloc]init];
+    filtercatoryId =[[profileDetailsArray valueForKey:@"name"]mutableCopy];
+    selectArray = [filtercatoryId copy];
+    for(NSString *strDeselect in selectArray)
+    {
+        if([[data valueForKey:@"name"] isEqualToString:strDeselect])
+            
+        {
+            // [profileDetailsArray removeObject:strDeselect];
+            //isdeSelect=YES;
+            cell.nameLabel.textColor = [UIColor colorWithRed:(228/255.0f)
+                                                              green:(64/255.0f)
+                                                               blue:(81/255.0f)
+                                                              alpha:1.0f];
+            NSString * objstr = [NSString stringWithFormat:@"%@",[data valueForKey:@"image_active"]];
+            objstr= [objstr stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+            [cell.interestAndHobbiesImageView setImageWithURL:[NSURL URLWithString:objstr]];
+            NSMutableArray *tempselectedSection = [[interstAndHobbiesArray objectAtIndex:indexPath.section] mutableCopy];
+            
+            NSMutableDictionary *tempselectedDict = [[tempselectedSection objectAtIndex:indexPath.row] mutableCopy];
+            
+            [tempselectedDict setObject:objstr forKey:@"image"];
+            
+            
+            [tempselectedSection replaceObjectAtIndex:indexPath.row withObject:tempselectedDict];
+            
+            [interstAndHobbiesArray replaceObjectAtIndex:indexPath.section withObject:tempselectedSection];
+            
+        }
+        
+        
+    }
+
     
 
     return cell;
@@ -413,30 +447,7 @@
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath;
 
 {
-//     DSInterestAndHobbiesCollectionViewCell *dataselCell = (DSInterestAndHobbiesCollectionViewCell *)[collectionView cellForItemAtIndexPath:indexPath];
-//    
-//    NSMutableDictionary *data = [interstAndHobbiesArray objectAtIndex:indexPath.row];
-//    NSArray *selectArray = [[NSArray alloc]init];
-//    selectArray = [profileDetailsArray copy];
-//    for(NSString *strDeselect in selectArray)
-//    {
-//        if([[data valueForKey:@"Id"] isEqualToString:strDeselect])
-//            
-//        {
-//            [profileDetailsArray removeObject:strDeselect];
-//            //isdeSelect=YES;
-//            dataselCell.nameLabel.textColor = [UIColor colorWithRed:(164/255.0f)
-//                                                        green:(164/255.0f)
-//                                                         blue:(164/255.0f)
-//                                                        alpha:1.0f];
-//            NSString * objstr = [NSString stringWithFormat:@"%@",[data valueForKey:@"InactiveImage"]];
-//            objstr= [objstr stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-//            [dataselCell.interestAndHobbiesImageView setImageWithURL:[NSURL URLWithString:objstr]];
-//            //cell.MenuImg.image = [UIImage imageNamed:objstr];
-//        }
-//    }
 
-    
     DSInterestAndHobbiesCollectionViewCell *dataselCell = (DSInterestAndHobbiesCollectionViewCell *)[collectionView cellForItemAtIndexPath:indexPath];
     
     
