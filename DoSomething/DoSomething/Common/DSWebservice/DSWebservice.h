@@ -160,6 +160,7 @@ notification_vibration:(NSString*)isnotification_vibration
       filter_gender:(NSString *)filter_gender
     filter_agerange:(NSString *)filter_agerange
     filter_distance:(NSString *)filter_distance
+               page:(NSString *)currentpage
             success:(WebserviceRequestSuccessHandler)success
             failure:(WebserviceRequestFailureHandler)failure;
 

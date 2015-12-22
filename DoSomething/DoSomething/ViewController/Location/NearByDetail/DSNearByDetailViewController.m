@@ -262,6 +262,18 @@
     scrolldragging=@"YES";
 }
 //
+
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)theTableView
+{
+    return 1;
+}
+
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    return 4;
+}
+
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     
     if(indexPath.row ==0)
@@ -273,11 +285,11 @@
         dataSize = [COMMON getControlHeight:[userDetailsDict valueForKey:@"about"] withFontName:@"Patron-Medium" ofSize:12.0 withSize:CGSizeMake(tableView.frame.size.width-20,tableView.frame.size.height)];
         self.aboutviewHeight.constant =dataSize.height;
         return  self.aboutviewHeight.constant+10;
- 
+        
     }
     if ( indexPath.row ==2)
     {
-
+        
         return 100;
     }
     if ( indexPath.row ==3)
@@ -296,20 +308,9 @@
         else if([imageNormalArray count] <= 20)
             return (commonHeight * 4)+62;
     }
-
+    
     return 100;
     
-}
-
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)theTableView
-{
-    return 1;
-}
-
-
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
-{
-    return [valueArray count];
 }
 
 // the cell will be returned to the tableView
@@ -371,11 +372,11 @@
         if([requestStr isEqualToString:@"Yes"])
         {
             [NearbyCustomcell.letsDoSomethingButton setBackgroundColor:[UIColor lightGrayColor]];
-            [NearbyCustomcell.letsDoSomethingButton setTitle:@"   Request\n Sent" forState:UIControlStateNormal];
+            [NearbyCustomcell.letsDoSomethingButton setTitle:@"Request\n  Sent" forState:UIControlStateNormal];
         }
         else
         {
-            [NearbyCustomcell.letsDoSomethingButton setBackgroundColor:[UIColor redColor]];
+            [NearbyCustomcell.letsDoSomethingButton setBackgroundColor:[UIColor colorWithRed:(218/255.0) green:(40/255.0) blue:(64.0/255.0f) alpha:1.0]];
             [NearbyCustomcell.letsDoSomethingButton setTitle:@"   Let Do \n Something" forState:UIControlStateNormal];
         }
         
@@ -517,10 +518,15 @@
 #pragma mark - letsDoSomethingAction
 -(IBAction)letsDoSomethingAction:(id)sender
 {
-    if([requestStr isEqualToString:@"Yes"])
+    if(![requestStr isEqualToString:@"Yes"])
     {
-    [NearbyCustomcell.letsDoSomethingButton setBackgroundColor:[UIColor lightGrayColor]];
-    [NearbyCustomcell.letsDoSomethingButton setTitle:@" Request Sent" forState:UIControlStateNormal];
+        [self.nearbyTbl beginUpdates];
+       // [self.nearbyTbl reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+        [NearbyCustomcell.letsDoSomethingButton setBackgroundColor:[UIColor lightGrayColor]];
+        [NearbyCustomcell.letsDoSomethingButton setTitle:@" Request Sent" forState:UIControlStateNormal];
+        [self.nearbyTbl endUpdates];
+
+   
         
         requestUserID = [userDetailsDict valueForKey:@"user_id"];
         
