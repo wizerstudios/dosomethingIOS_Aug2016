@@ -720,7 +720,7 @@
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="d6I-S9-MzF">
                                 <rect key="frame" x="100" y="0.0" width="200" height="24"/>
                                 <animations/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="24" id="HNL-wO-c1x"/>
                                 </constraints>
@@ -733,7 +733,7 @@
                             </textView>
                         </subviews>
                         <animations/>
-                        <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="d6I-S9-MzF" secondAttribute="trailing" id="B5Y-Al-ogT"/>
                             <constraint firstItem="Mvl-SM-bdc" firstAttribute="leading" secondItem="URf-8H-5OS" secondAttribute="leading" constant="5" id="FKm-dW-5Sl"/>
