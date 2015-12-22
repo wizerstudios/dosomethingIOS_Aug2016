@@ -82,7 +82,7 @@
     
     longitude    =[dic valueForKey:@"longitude"];
     laditude     =[dic valueForKey:@"latitude"];
-   
+    commonlocationArray =[[NSMutableArray alloc]init];
     onlineStatus=@"";
     avalibleGenderStatus=@"";
     objWebservice =[[DSWebservice alloc]init];
@@ -93,7 +93,7 @@
     isLoadData=NO;
     isLoadWebservice=YES;
     
-    
+     [self nearestLocationWebservice];
     // Do any additional setup after loading the view from its nib.
 }
 
@@ -118,7 +118,7 @@
     profileNames =[[NSArray alloc]init];
     dosomethingImageArry=[[NSMutableArray alloc]init];
     kiloMeterlabel =[[NSArray alloc]init];
-    commonlocationArray =[[NSMutableArray alloc]init];
+   
     if(IS_IPHONE6 || IS_IPHONE6_Plus)
     {
         //self.CollectionviewWidth.constant =self.view.frame.size.width+100;
@@ -177,14 +177,6 @@
     [customNavigation.FilterBtn addTarget:self action:@selector(filterAction:) forControlEvents:UIControlEventTouchUpInside];
     [self.navigationController.navigationBar addSubview:customNavigation.view];
     
-//   usernotfoundlbl=[[UILabel alloc]initWithFrame:CGRectMake(self.locationCollectionView.frame.origin.x,self.locationCollectionView.center.y-30,self.locationCollectionView.frame.size.width,30)];
-//    usernotfoundlbl.numberOfLines =10;
-//    
-//    usernotfoundlbl.textAlignment=NSTextAlignmentCenter;
-//    usernotfoundlbl.font=Patron_Bold(10);
-//    usernotfoundlbl.hidden=YES;
-//    [self.locationCollectionView addSubview:usernotfoundlbl];
-
 }
 
 -(void)filterPageButtonAction
@@ -274,14 +266,14 @@
     NSLog(@"current latitude & longitude for main view = %@ & %@",currentLatitude,currentLongitude);
 //    if([[NSUserDefaults standardUserDefaults]valueForKey:@"nearByLocationCommonArray"] == 0)
 //    {
-    [self nearestLocationWebservice];
+   
         
-//    }
-//    else
-//    {
-//        commonlocationArray =[[NSUserDefaults standardUserDefaults]valueForKey:@"nearByLocationCommonArray"];
-//        [locationCollectionView reloadData];
-//    }
+    //}
+    //else
+    //{
+        //commonlocationArray =[[NSUserDefaults standardUserDefaults]valueForKey:@"nearByLocationCommonArray"];
+      // [//locationCollectionView reloadData];
+   // }
     
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         
@@ -318,8 +310,8 @@
     [COMMON LoadIcon:self.view];
        [objWebservice nearestUsers:NearestUsers_API
                          sessionid:[COMMON getSessionID]
-                          latitude:currentLatitude
-                         longitude:currentLongitude
+                          latitude:longitude
+                         longitude:laditude
                      filter_status:onlineStatus
                      filter_gender:avalibleGenderStatus
                    filter_agerange:(filterAge==nil)?@"":filterAge
@@ -347,6 +339,7 @@
                                                for (NSDictionary *dict in nextpageUserdetaile)
                                                {
                                                    [commonlocationArray addObject:dict];
+                                              //  [[NSUserDefaults standardUserDefaults] setObject:commonlocationArray forKey:@"nearByLocationCommonArray"];
                                                }
                                            }
 
