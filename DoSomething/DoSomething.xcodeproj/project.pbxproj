@@ -122,6 +122,7 @@
 		EAFC96591BD20FD400B3593D /* DSInterestAndHobbiesViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = EAFC96571BD20FD400B3593D /* DSInterestAndHobbiesViewController.xib */; };
 		EAFC97971BD21CF800B3593D /* DSInterestAndHobbiesCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = EAFC97951BD21CF800B3593D /* DSInterestAndHobbiesCollectionViewCell.m */; };
 		EAFC97981BD21CF800B3593D /* DSInterestAndHobbiesCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = EAFC97961BD21CF800B3593D /* DSInterestAndHobbiesCollectionViewCell.xib */; };
+		ED25ED6C1C2838E80041B856 /* ChatTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = ED25ED6B1C2838E80041B856 /* ChatTextView.m */; };
 		ED78176F1BEC7F6400C7138F /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED78176E1BEC7F6400C7138F /* CoreLocation.framework */; };
 		EDAE16281BF3873B0061E99D /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EDAE16271BF3873B0061E99D /* AVFoundation.framework */; };
 /* End PBXBuildFile section */
@@ -315,6 +316,8 @@
 		EAFC97941BD21CF800B3593D /* DSInterestAndHobbiesCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DSInterestAndHobbiesCollectionViewCell.h; sourceTree = "<group>"; };
 		EAFC97951BD21CF800B3593D /* DSInterestAndHobbiesCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DSInterestAndHobbiesCollectionViewCell.m; sourceTree = "<group>"; };
 		EAFC97961BD21CF800B3593D /* DSInterestAndHobbiesCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DSInterestAndHobbiesCollectionViewCell.xib; sourceTree = "<group>"; };
+		ED25ED6A1C2838E80041B856 /* ChatTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChatTextView.h; sourceTree = "<group>"; };
+		ED25ED6B1C2838E80041B856 /* ChatTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChatTextView.m; sourceTree = "<group>"; };
 		ED78176E1BEC7F6400C7138F /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		EDAE16271BF3873B0061E99D /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
@@ -710,6 +713,7 @@
 		C6D5F6081BC7A4340050C1AE /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				ED25ED691C2838E80041B856 /* ChatTextView */,
 				6A0C8D861C0C251C0056DA81 /* CustomAlterview */,
 				2B83CACB1BE8D4FD0064EC7F /* LoginValidations */,
 				2B83CAAC1BE8744E0064EC7F /* DSWebservice */,
@@ -954,6 +958,16 @@
 			path = "Interest And Hobbies Images/@3x";
 			sourceTree = "<group>";
 		};
+		ED25ED691C2838E80041B856 /* ChatTextView */ = {
+			isa = PBXGroup;
+			children = (
+				ED25ED6A1C2838E80041B856 /* ChatTextView.h */,
+				ED25ED6B1C2838E80041B856 /* ChatTextView.m */,
+			);
+			name = ChatTextView;
+			path = Common/ChatTextView;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -1190,6 +1204,7 @@
 				51F3C2F31BE75D40001E1FEC /* DSLocationViewController.m in Sources */,
 				2BD72AF81BFCC5AD003846E9 /* AFHTTPSessionManager.m in Sources */,
 				2BD72AE21BFCC584003846E9 /* AFNetworkActivityLogger.m in Sources */,
+				ED25ED6C1C2838E80041B856 /* ChatTextView.m in Sources */,
 				2BD72AFA1BFCC5AD003846E9 /* AFSecurityPolicy.m in Sources */,
 				6A0C8D8A1C0C25510056DA81 /* CustomAlterview.m in Sources */,
 				2BD72AFD1BFCC5AD003846E9 /* AFURLResponseSerialization.m in Sources */,

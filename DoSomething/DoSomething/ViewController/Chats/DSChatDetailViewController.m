@@ -9,6 +9,7 @@
 #import "DSChatDetailViewController.h"
 #import "CustomNavigationView.h"
 #import "DSConfig.h"
+#import "DSAppCommon.h"
 
 @interface DSChatDetailViewController ()
 
@@ -16,12 +17,17 @@
 
 @implementation DSChatDetailViewController
 @synthesize activestring,ProfileName,ProfileImage,activestring1;
+@synthesize chatView,chatuserDetailsDict;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-    ProfileName.text=activestring;
-    ProfileImage.image =[UIImage imageNamed:activestring1];
+    ProfileName.text= [chatuserDetailsDict valueForKey:@"Name"];
+    NSString *profileStr = [NSString stringWithFormat:@"%@",[chatuserDetailsDict valueForKey:@"image1"]];
+    downloadImageFromUrl(profileStr, ProfileImage);
+    ProfileImage.image = [UIImage imageNamed:profileStr];
+    [ProfileImage.layer setCornerRadius:28];
+    [ProfileImage.layer setMasksToBounds:YES];
     
     Message1.text =@"   Hey;)";
     Message1.layer.masksToBounds = YES;
@@ -78,6 +84,30 @@
 {
     [self.navigationController popViewControllerAnimated:YES];
 }
+
+-(void)textViewDidBeginEditing:(UITextView *)textView{
+    [chatView.placeHolderLabel setHidden:YES];
+    [UIView animateWithDuration:.25f animations:^{
+        if(IS_IPHONE4)
+            chatView.frame=CGRectMake(0,160,320,65);
+        
+        else
+            chatView.frame=CGRectMake(0,300,320,40);
+    }];
+}
+
+-(void)textViewDidEndEditing:(UITextView *)textView{
+    
+    [self.view endEditing:YES];
+    [UIView animateWithDuration:.25f animations:^{
+        if(IS_IPHONE4)
+            chatView.frame=CGRectMake(0,412,320,65);
+        else
+            chatView.frame=CGRectMake(0,350,320,65);
+    }];
+    
+}
+
 
 #pragma mark - All the other junk for the sample project
 
@@ -137,20 +167,9 @@
 }
 
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
 
-/*
-#pragma mark - Navigation
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
+
 
 - (IBAction)pressCancel:(id)sender {
     _transparentView.hidden = YES;

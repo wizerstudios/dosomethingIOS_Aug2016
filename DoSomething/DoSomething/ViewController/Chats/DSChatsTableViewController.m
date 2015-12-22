@@ -258,8 +258,9 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     DSChatDetailViewController *ChatDetail =[[DSChatDetailViewController alloc]initWithNibName:nil bundle:nil];
-    ChatDetail.activestring  = [ChatNameArray objectAtIndex:indexPath.row];
-    ChatDetail.activestring1  = [imageArray objectAtIndex:indexPath.row];
+    ChatDetail.chatuserDetailsDict = [chatArray objectAtIndex:indexPath.row];
+//    ChatDetail.activestring  = [ChatNameArray objectAtIndex:indexPath.row];
+//    ChatDetail.activestring1  = [imageArray objectAtIndex:indexPath.row];
     [self.navigationController pushViewController:ChatDetail animated:YES];
 }
 
