@@ -1246,7 +1246,7 @@ if([[NSUserDefaults standardUserDefaults] valueForKey:@"SelectedItemCategoryID"]
                     strAbout =cell.textViewAboutYou.text;
                     
                 }
-                //cell.textViewHeaderLabel.hidden = YES;
+               
                 
                 
                 cell.textViewAboutYou.delegate = self;
@@ -1262,15 +1262,14 @@ if([[NSUserDefaults standardUserDefaults] valueForKey:@"SelectedItemCategoryID"]
                 
                 if([strAbout isEqualToString:@""] ||strAbout == nil)
                 {
-               // cell.textViewHeaderLabel.hidden = NO;
+               
                 cell.textViewAboutYou.text = @"Write something about yourself here.";
-
-                    //self.aboutTextHeight.constant =16;
-
+                    cell.textViewAboutYou.scrollEnabled=YES;
+                   
                 }
                 else
                 {
-                    //cell.textViewHeaderLabel.hidden = YES;
+                    
                     cell.textViewAboutYou.text =strAbout;
                     dataSize = [COMMON getControlHeight:strAbout withFontName:@"Patron-Regular" ofSize:14.0 withSize:CGSizeMake(cell.frame.size.width-20,tableView.frame.size.height)];
                     self.aboutTextHeight.constant =dataSize.height-12;
@@ -1445,24 +1444,6 @@ if([[NSUserDefaults standardUserDefaults] valueForKey:@"SelectedItemCategoryID"]
             cell = CellSwitchOn;
             
         }
-        if (IS_IPHONE6 ||IS_IPHONE6_Plus){
-           // cell.layoutConstraintNotificationLabelYPos.constant = 40;
-            //cell.layoutConstraintNotificationViewHeight.constant=51;
-           // cell.layoutConstraintRadioButtonYPos.constant = 18;
-           // cell.messSwitchBtn.transform = CGAffineTransformMakeScale(0.65, 0.65);
-            //cell.SoundSwitchBtn.transform = CGAffineTransformMakeScale(0.65, 0.65);
-            //cell.vibrationSwitchBtn.transform = CGAffineTransformMakeScale(0.65, 0.65);
-        }
-        else
-        {
-            
-       // cell.messSwitchBtn.transform = CGAffineTransformMakeScale(0.70, 0.70);
-       // cell.SoundSwitchBtn.transform = CGAffineTransformMakeScale(0.70, 0.70);
-        //cell.vibrationSwitchBtn.transform = CGAffineTransformMakeScale(0.70, 0.70);
-        }
-       // cell.vibrationSwitchBtn.layer.cornerRadius = 16.0;
-        //cell.SoundSwitchBtn.layer.cornerRadius = 16.0;
-        //cell.messSwitchBtn.layer.cornerRadius = 16.0;
         
        [self notificationMethod];
         
@@ -1832,6 +1813,7 @@ if([[NSUserDefaults standardUserDefaults] valueForKey:@"SelectedItemCategoryID"]
 
 -(void)textViewDidEndEditing:(UITextView *)textView
 {
+    cell.textViewAboutYou.scrollEnabled=NO;
     CGPoint position = [textView convertPoint:CGPointZero toView: _tableviewProfile ];
     NSIndexPath *indexPath = [_tableviewProfile indexPathForRowAtPoint: position];
    
@@ -1843,26 +1825,36 @@ if([[NSUserDefaults standardUserDefaults] valueForKey:@"SelectedItemCategoryID"]
     }
 
     strAbout = textView.text;
-    dataSize = [COMMON getControlHeight:strAbout withFontName:@"Patron-Regular" ofSize:14.0 withSize:CGSizeMake(textView.frame.size.width-20,textView.frame.size.height)];
-     self.aboutTextHeight.constant=dataSize.height-28;
-    //self.tableviewProfile.frame = CGRectMake(13,10,290,900);
-    //self.tableviewProfile.frame = CGRectMake(13,10,self.tableviewProfile.frame.size.width,self.tableviewProfile.frame.size.height);
-   
-    [self.tableviewProfile scrollToRowAtIndexPath:[self.tableviewProfile indexPathForCell:cell] atScrollPosition:UITableViewScrollPositionBottom animated:NO];
-    //self.tableviewProfile.frame
-   
-   // [self.tableviewProfile setContentInset:UIEdgeInsetsMake(108, 0, 0, 0)];
+//    dataSize = [COMMON getControlHeight:strAbout withFontName:@"Patron-Regular" ofSize:14.0 withSize:CGSizeMake(textView.frame.size.width-20,textView.frame.size.height)];
     
-  //  self.tableviewProfile.scrollIndicatorInsets = UIEdgeInsetsMake(108, 0, 0, 0);
+   
+     [self.tableviewProfile scrollToRowAtIndexPath:[self.tableviewProfile indexPathForCell:cell] atScrollPosition:UITableViewScrollPositionBottom animated:NO];
+    
+    [self.tableviewProfile beginUpdates];
+    [self.tableviewProfile reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+    self.aboutTextHeight.constant = cell.textViewAboutYou.contentSize.height + cell.textViewAboutYou.contentInset.top + cell.textViewAboutYou.contentInset.bottom;
+
+    [self.tableviewProfile endUpdates];
+    // cell.textViewAboutYou.contentSize=CGSizeMake(cell.textViewAboutYou.frame.size.width,dataSize.height+10);
+
+     //self.aboutTextHeight.constant=dataSize.height;
+//    self.aboutViewheight.constant =self.aboutTextHeight.constant;
+//    
+    
+  
+   
+   
+    
+    
 }
 - (void) textViewDidChange:(UITextView *)textView
 {
     
     [self.tableviewProfile beginUpdates];
+      
     [self.tableviewProfile endUpdates];
     
 }
-
 
 #pragma mark - Camera Action
 -(void)selectCamera: (UIButton *)sender
