@@ -21,6 +21,7 @@
 		2B83CAC81BE895AB0064EC7F /* Default-667h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2B83CAC31BE895AB0064EC7F /* Default-667h@2x.png */; };
 		2B83CACA1BE8975F0064EC7F /* Default-736h@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2B83CAC91BE8975F0064EC7F /* Default-736h@3x.png */; };
 		2B83CACE1BE8D4FD0064EC7F /* NSString+validations.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B83CACD1BE8D4FD0064EC7F /* NSString+validations.m */; };
+		2BC69E6F1C2976E80074C486 /* ChatTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BC69E6E1C2976E80074C486 /* ChatTextView.m */; };
 		2BD72ADC1BFCC28A003846E9 /* PWParallaxScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BD72ADB1BFCC28A003846E9 /* PWParallaxScrollView.m */; };
 		2BD72ADF1BFCC2BF003846E9 /* DAAutoScroll.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BD72ADE1BFCC2BF003846E9 /* DAAutoScroll.m */; };
 		2BD72AE21BFCC584003846E9 /* AFNetworkActivityLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BD72AE11BFCC584003846E9 /* AFNetworkActivityLogger.m */; };
@@ -120,7 +121,6 @@
 		EAFC96591BD20FD400B3593D /* DSInterestAndHobbiesViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = EAFC96571BD20FD400B3593D /* DSInterestAndHobbiesViewController.xib */; };
 		EAFC97971BD21CF800B3593D /* DSInterestAndHobbiesCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = EAFC97951BD21CF800B3593D /* DSInterestAndHobbiesCollectionViewCell.m */; };
 		EAFC97981BD21CF800B3593D /* DSInterestAndHobbiesCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = EAFC97961BD21CF800B3593D /* DSInterestAndHobbiesCollectionViewCell.xib */; };
-		ED6EDEA51C2969E1003457D6 /* ChatTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = ED6EDEA31C2969E1003457D6 /* ChatTextView.m */; };
 		ED78176F1BEC7F6400C7138F /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED78176E1BEC7F6400C7138F /* CoreLocation.framework */; };
 		EDAE16281BF3873B0061E99D /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EDAE16271BF3873B0061E99D /* AVFoundation.framework */; };
 /* End PBXBuildFile section */
@@ -149,6 +149,8 @@
 		2B83CAC91BE8975F0064EC7F /* Default-736h@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-736h@3x.png"; sourceTree = "<group>"; };
 		2B83CACC1BE8D4FD0064EC7F /* NSString+validations.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+validations.h"; sourceTree = "<group>"; };
 		2B83CACD1BE8D4FD0064EC7F /* NSString+validations.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+validations.m"; sourceTree = "<group>"; };
+		2BC69E6D1C2976E80074C486 /* ChatTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChatTextView.h; sourceTree = "<group>"; };
+		2BC69E6E1C2976E80074C486 /* ChatTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChatTextView.m; sourceTree = "<group>"; };
 		2BD72ADA1BFCC28A003846E9 /* PWParallaxScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PWParallaxScrollView.h; path = Helpers/ParallaxScroll/PWParallaxScrollView.h; sourceTree = "<group>"; };
 		2BD72ADB1BFCC28A003846E9 /* PWParallaxScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PWParallaxScrollView.m; path = Helpers/ParallaxScroll/PWParallaxScrollView.m; sourceTree = "<group>"; };
 		2BD72ADD1BFCC2BF003846E9 /* DAAutoScroll.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DAAutoScroll.h; sourceTree = "<group>"; };
@@ -311,8 +313,6 @@
 		EAFC97941BD21CF800B3593D /* DSInterestAndHobbiesCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DSInterestAndHobbiesCollectionViewCell.h; sourceTree = "<group>"; };
 		EAFC97951BD21CF800B3593D /* DSInterestAndHobbiesCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DSInterestAndHobbiesCollectionViewCell.m; sourceTree = "<group>"; };
 		EAFC97961BD21CF800B3593D /* DSInterestAndHobbiesCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DSInterestAndHobbiesCollectionViewCell.xib; sourceTree = "<group>"; };
-		ED6EDEA31C2969E1003457D6 /* ChatTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChatTextView.m; sourceTree = "<group>"; };
-		ED6EDEA41C2969E1003457D6 /* ChatTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChatTextView.h; sourceTree = "<group>"; };
 		ED78176E1BEC7F6400C7138F /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		EDAE16271BF3873B0061E99D /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
@@ -953,8 +953,8 @@
 		ED25ED691C2838E80041B856 /* ChatTextView */ = {
 			isa = PBXGroup;
 			children = (
-				ED6EDEA31C2969E1003457D6 /* ChatTextView.m */,
-				ED6EDEA41C2969E1003457D6 /* ChatTextView.h */,
+				2BC69E6D1C2976E80074C486 /* ChatTextView.h */,
+				2BC69E6E1C2976E80074C486 /* ChatTextView.m */,
 			);
 			name = ChatTextView;
 			path = Common/ChatTextView;
@@ -1194,7 +1194,7 @@
 				51F3C2F31BE75D40001E1FEC /* DSLocationViewController.m in Sources */,
 				2BD72AF81BFCC5AD003846E9 /* AFHTTPSessionManager.m in Sources */,
 				2BD72AE21BFCC584003846E9 /* AFNetworkActivityLogger.m in Sources */,
-				ED6EDEA51C2969E1003457D6 /* ChatTextView.m in Sources */,
+				2BC69E6F1C2976E80074C486 /* ChatTextView.m in Sources */,
 				2BD72AFA1BFCC5AD003846E9 /* AFSecurityPolicy.m in Sources */,
 				6A0C8D8A1C0C25510056DA81 /* CustomAlterview.m in Sources */,
 				2BD72AFD1BFCC5AD003846E9 /* AFURLResponseSerialization.m in Sources */,

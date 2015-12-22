@@ -81,9 +81,6 @@
     
     [customNavigation.buttonBack addTarget:self action:@selector(backAction) forControlEvents:UIControlEventTouchUpInside];
     
-    
-    self.nameAgeLabel.text=[self getData];
-    
     interstAndHobbiesArray  = [[userDetailsDict valueForKey:@"hobbieslist"]mutableCopy];
     hobbiesNameArray        = [[interstAndHobbiesArray valueForKey:@"name"]mutableCopy];
     imageNormalArray        = [[interstAndHobbiesArray valueForKey:@"image"]mutableCopy];
@@ -92,11 +89,7 @@
     doSomethingImageArray   = [[doSomethingArray valueForKey:@"ActiveImage"]mutableCopy];
 
     
-    self.nameAgeLabel.text =[self getData];
     [self profileImageDisplay];
-    
-   
-
 }
 
 #pragma mark - userAgeName
@@ -179,13 +172,6 @@
     }
     self.profileImageScroll.contentSize=CGSizeMake(self.profileImageScroll.frame.size.width*3, self.profileImageScroll.frame.size.height);
     
-    //    if(CurrentImage == 0)
-    //        [self.profileImageScroll setContentOffset:CGPointMake(0, 0)animated:NO];
-    //    else if(CurrentImage == 1)
-    //        [self.profileImageScroll setContentOffset:CGPointMake(1*self.profileImageView.frame.size.width - 15, 0)animated:NO];
-    //    else if(CurrentImage == 2)
-    //        [self.profileImageScroll setContentOffset:CGPointMake((1.5*self.profileImageView.frame.size.width - 15), 0)animated:NO];
-    
     if(CurrentImage == 0)
         [self.profileImageScroll setContentOffset:CGPointMake(0, 0)animated:NO];
     else if(CurrentImage == 1)
@@ -204,7 +190,7 @@
     {
         if(IS_IPHONE6|| IS_IPHONE6_Plus)
         {
-            //[self.scrView setContentOffset:CGPointMake(9*self.profileImageView.frame.size.width - 15, 0)animated:NO];
+            
             [self.profileImageScroll setContentOffset:CGPointMake((6*self.profileImageView.frame.size.width - 15), 0)animated:NO];
         }
         else
@@ -239,9 +225,6 @@
         
         
     }
-
-    
-    
 }
 
 #pragma mark - UIScrollViewDelegate
@@ -322,7 +305,6 @@
     
     if (indexPath.row == 0)
     {
-        
         if (NearbyCustomcell == nil)
         {
             [[NSBundle mainBundle] loadNibNamed:@"DSNearbyCustomCell" owner:self options:nil];
@@ -336,12 +318,8 @@
         }
         else
             _genderImageView.image = [UIImage imageNamed:@"male_Icon"];
-        
-        self.nameAgeLabel.text =[self getData];
-        
-        
+            self.nameAgeLabel.text =[self getData];
     }
-    
     if (indexPath.row == 1)
     {
         
@@ -361,11 +339,6 @@
         {
             [[NSBundle mainBundle] loadNibNamed:@"DSNearbyCustomCell" owner:self options:nil];
             NearbyCustomcell = cellDosomething;
-
-           // NearbyCustomcell.letsDoSomethingButton.titleLabel.lineBreakMode = NSLineBreakByTruncatingTail;
-            //NearbyCustomcell.letsDoSomethingButton.titleLabel.numberOfLines = 2;
-            //NearbyCustomcell.letsDoSomethingButton.titleLabel.textAlignment = NSTextAlignmentCenter;
-
         }
         
         requestStr= [userDetailsDict valueForKey:@"send_request"];
@@ -381,14 +354,10 @@
         }
         
         imageSize =39;
-        
         yAxis = 31;
         commonWidth=19.5;
-        
         space = imageSize / 2;
         commonHeight = imageSize+15;
-        
-        
         
         //doSomethingImageArray
         for (int i =0; i< [doSomethingImageArray  count]; i++) {
@@ -431,10 +400,6 @@
             [NearbyCustomcell addSubview:doSomethingName];
             doSomethingName.textAlignment = NSTextAlignmentCenter;
         }
-
-       
-
-   // cell.textLabel.text = @"Testing";
     
     }
     if (indexPath.row == 3)
@@ -506,15 +471,11 @@
             
             
         }
-
-    
     }
     NearbyCustomcell.selectionStyle = UITableViewCellSelectionStyleNone;
     return NearbyCustomcell;
     
 }
-
-
 #pragma mark - letsDoSomethingAction
 -(IBAction)letsDoSomethingAction:(id)sender
 {
@@ -543,19 +504,13 @@
     }
     
 }
-
-
-
+#pragma  mark - backAction
 - (void)backAction
 {
     [self.navigationController popViewControllerAnimated:YES];
     [COMMON removeLoading];
     
 }
-
-
-
-
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

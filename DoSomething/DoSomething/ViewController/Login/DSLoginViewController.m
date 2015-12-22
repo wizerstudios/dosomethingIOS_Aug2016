@@ -95,6 +95,8 @@
       buttonCreateAnAcc.hidden =YES;
       buttonForgotPass.hidden=YES;
      [buttonSignIn addTarget:self action:@selector(CreateAnAccount) forControlEvents:UIControlEventTouchUpInside];
+     _forgotView.hidden=YES;
+     _buttonSigInFwd.hidden=YES;
 }
  if ([temp isEqualToString:@"Signin"]){
      if (IS_IPHONE6 ||IS_IPHONE6_Plus){
@@ -112,12 +114,46 @@
      labelEmail.text =@"Or log in with your email";
      labelSignIn.text =@"Sign in";
      [buttonForgotPass setTitle:@"Forgot password?" forState:UIControlStateNormal];
+     [buttonForgotPass addTarget:self action:@selector(forgotPasswordButton:) forControlEvents:UIControlEventTouchUpInside];
      [buttonCreateAnAcc setTitle:@"Create an Account" forState:UIControlStateNormal];
      buttonPrivacyPolicy.hidden =YES;
      buttonTermsOfUse.hidden =YES;
      buttonSignIn.hidden =NO;
      [buttonSignIn addTarget:self action:@selector(SignButtonAction) forControlEvents:UIControlEventTouchUpInside];
+     _forgotView.hidden=YES;
+     _buttonSigInFwd.hidden=YES;
  }
+    
+    if ([temp isEqualToString:@"ForgotPassword"]){
+        if (IS_IPHONE6 ||IS_IPHONE6_Plus){
+            self.layoutConstraintSignInButtonHeight.constant =47;
+            self.layoutConstraintBackButtonHeight.constant =49;
+            
+            
+        }
+        _forgotView.hidden=NO;
+        NSString *stringForgot = @"Forgot Your Password?";
+        NSMutableAttributedString *attStrForgot = [[NSMutableAttributedString alloc] initWithString:stringForgot ];
+        [attStrForgot addAttribute:NSFontAttributeName value:PATRON_REG(12) range:[stringForgot rangeOfString:@"Forgot Your Password?"]];
+        _forgotPasswordLabel.attributedText = attStrForgot;
+        NSString *string = @"No problem! Just fill in your Email and we'll send you password to reset instructions";
+        NSMutableAttributedString *attStr = [[NSMutableAttributedString alloc] initWithString:string ];
+        [attStr addAttribute:NSFontAttributeName value:PATRON_REG(12) range:[string rangeOfString:@"No problem! Just fill in your Email and we'll send \n you password to reset instructions"]];
+        _forgotInstructionTextView.attributedText = attStr;
+        _facebookButton.hidden= YES;
+        
+        labelSignIn.text =@"Reset Password";
+        //SignInAction
+        [_buttonSigInFwd setTitle:@"Sign In " forState:UIControlStateNormal];
+        [_buttonSigInFwd addTarget:self action:@selector(HaveAnAccount:) forControlEvents:UIControlEventTouchUpInside];
+        
+        //CreateAction
+        [buttonCreateAnAcc setTitle:@"Create an Account" forState:UIControlStateNormal];
+        buttonPrivacyPolicy.hidden =YES;
+        buttonTermsOfUse.hidden =YES;
+        buttonSignIn.hidden =NO;
+        [buttonSignIn addTarget:self action:@selector(forgotPasswordAction:) forControlEvents:UIControlEventTouchUpInside];
+    }
      [self CustomAlterview];
 
     
@@ -203,6 +239,17 @@
     [self.navigationController pushViewController:DSLoginView animated:YES];
     
 }
+- (IBAction)forgotPasswordButton:(id)sender {
+    DSLoginViewController * DSLoginView  = [[DSLoginViewController alloc]initWithNibName:@"DSLoginViewController" bundle:nil];
+    DSLoginView.temp = @"ForgotPassword";
+    [self.navigationController pushViewController:DSLoginView animated:YES];
+    
+}
+- (IBAction)forgotPasswordAction:(id)sender {
+    
+    
+}
+
 #pragma mark - CustomalterviewMethod
 
 -(void)CustomAlterview
@@ -617,4 +664,6 @@
 - (IBAction)createAnAccountFB:(id)sender {
     [self loginByFacebook];
 }
+
+
 @end

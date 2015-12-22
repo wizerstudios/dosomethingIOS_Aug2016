@@ -18,5 +18,5 @@
 @property(strong,nonatomic)  UIButton    *postButton;
 @property(strong,nonatomic)  UITextView  *textView;
 @property(strong,nonatomic)  UIImageView *backGroundImageView;
-@property(strong,nonatomic) UILabel       *placeHolderLabel;
+@property(strong,nonatomic) UILabel      *placeHolderLabel;
 @end
