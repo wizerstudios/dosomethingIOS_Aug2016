@@ -16,9 +16,8 @@
 @end
 
 @implementation DSChatDetailViewController
-@synthesize activestring,ProfileName,ProfileImage,activestring1;
-//@synthesize chatView,chatuserDetailsDict;
-@synthesize chatuserDetailsDict;
+@synthesize ProfileName,ProfileImage;
+@synthesize chatView,chatuserDetailsDict;
 
 - (void)viewDidLoad {
     
@@ -104,25 +103,47 @@
 }
 
 -(void)textViewDidBeginEditing:(UITextView *)textView{
-//    [chatView.placeHolderLabel setHidden:YES];
+    //[chatView.placeHolderLabel setHidden:YES];
 //    [UIView animateWithDuration:.25f animations:^{
 //        if(IS_IPHONE4)
-//            chatView.frame=CGRectMake(0,160,320,65);
-//        
-//        else
-//            chatView.frame=CGRectMake(0,300,320,40);
-//    }];
+//           // chatView.frame=CGRectMake(0,160,320,65);
+    
+    [chatView.placeHolderLabel setHidden:YES];
+    
+    [UIView animateWithDuration:.25f animations:^{
+        
+        if(IS_IPHONE4)
+            
+            chatView.frame=CGRectMake(0,160,320,50);
+        
+        else
+            
+            chatView.frame=CGRectMake(0,90,self.view.frame.size.width,40);
+        
+    }];
 }
 
 -(void)textViewDidEndEditing:(UITextView *)textView{
     
-//    [self.view endEditing:YES];
-//    [UIView animateWithDuration:.25f animations:^{
-//        if(IS_IPHONE4)
-//            chatView.frame=CGRectMake(0,412,320,65);
-//        else
-//            chatView.frame=CGRectMake(0,350,320,65);
-//    }];
+    if([textView.text isEqualToString:@""]){
+         [chatView.placeHolderLabel setHidden:NO];
+         [chatView.postButton setHidden:YES];
+    }
+    else{
+        [chatView.postButton setHidden:NO];
+    }
+    [self.view endEditing:YES];
+    
+    [UIView animateWithDuration:.25f animations:^{
+        
+        if(IS_IPHONE4)
+            
+            chatView.frame=CGRectMake(0,412,320,65);
+        
+        else
+            
+            chatView.frame=CGRectMake(0,335,320,40);
+    }];
     
 }
 

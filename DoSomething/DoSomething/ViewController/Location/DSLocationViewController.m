@@ -398,9 +398,9 @@
     
     locationCellView.nameProfile.text =[[commonlocationArray valueForKey:@"first_name"] objectAtIndex:indexPath.row];
     locationCellView.kiloMeter.text=[[commonlocationArray valueForKey:@"distance"] objectAtIndex:indexPath.row];
-    NSString * avalableStr =[[commonlocationArray valueForKey:@"available_now"] objectAtIndex:indexPath.row];
-    locationCellView.activeNow.text=([avalableStr isEqualToString:@"Yes"])?@"NOW":@"";
-    locationCellView.activeNow.backgroundColor=([avalableStr isEqualToString:@"Yes"])?[UIColor whiteColor]:[UIColor clearColor];
+    NSString * availableStr =[[commonlocationArray valueForKey:@"available_now"] objectAtIndex:indexPath.row];
+    locationCellView.activeNow.text=([availableStr isEqualToString:@"Yes"])?@"NOW":@"";
+    locationCellView.activeNow.backgroundColor=([availableStr isEqualToString:@"Yes"])?[UIColor whiteColor]:[UIColor clearColor];
     NSString* reguestStr = [[commonlocationArray valueForKey:@"send_request"] objectAtIndex:indexPath.row];
     
     locationCellView.sendRequest.text = ([reguestStr isEqualToString:@"No"])?@"Send Request":@"Request Sent!";
@@ -510,13 +510,11 @@
 
 -(void)getUserDetails{
     
-    [COMMON LoadIcon:self.view];
+   // [COMMON LoadIcon:self.view];
     [objWebservice getUserDetails:UserDetails_API
                         sessionid:[COMMON getSessionID]
                   profile_user_id:profileUserID
                           success:^(AFHTTPRequestOperation *operation, id responseObject) {
-                               NSLog(@"responseObject%@",responseObject);
-                              
                               if( [responseObject objectForKey:@"getuserdetails"]!=NULL){
                                                                     
                                   [self redirectToDetailViewWithDictionary:[[responseObject objectForKey:@"getuserdetails"]objectForKey:@"userDetails"]];

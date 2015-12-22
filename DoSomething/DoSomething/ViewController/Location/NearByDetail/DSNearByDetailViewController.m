@@ -81,9 +81,6 @@
     
     [customNavigation.buttonBack addTarget:self action:@selector(backAction) forControlEvents:UIControlEventTouchUpInside];
     
-    
-    self.nameAgeLabel.text=[self getData];
-    
     interstAndHobbiesArray  = [[userDetailsDict valueForKey:@"hobbieslist"]mutableCopy];
     hobbiesNameArray        = [[interstAndHobbiesArray valueForKey:@"name"]mutableCopy];
     imageNormalArray        = [[interstAndHobbiesArray valueForKey:@"image"]mutableCopy];
@@ -92,11 +89,7 @@
     doSomethingImageArray   = [[doSomethingArray valueForKey:@"ActiveImage"]mutableCopy];
 
     
-    self.nameAgeLabel.text =[self getData];
     [self profileImageDisplay];
-    
-   
-
 }
 
 #pragma mark - userAgeName
@@ -253,7 +246,7 @@
     isTapping=NO;
     scrolldragging=@"YES";
 }
-//
+#pragma mark - UITableViewDelegate
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     
     if(indexPath.row ==0)
@@ -292,19 +285,16 @@
     return 100;
     
 }
-
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)theTableView
 {
     return 1;
 }
-
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     return [valueArray count];
 }
 
-// the cell will be returned to the tableView
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     static NSString *cellIdentifier = @"Cell";
@@ -313,7 +303,6 @@
     
     if (indexPath.row == 0)
     {
-        
         if (NearbyCustomcell == nil)
         {
             [[NSBundle mainBundle] loadNibNamed:@"DSNearbyCustomCell" owner:self options:nil];
@@ -322,19 +311,13 @@
         [detailPageControl setHidden:YES];
         [self profileImageScrollView];
         if([[userDetailsDict objectForKey:@"gender"]isEqualToString:@"Female"]){
-            
-          _genderImageView.image = [UIImage imageNamed:@"female_Icon"];
+            _genderImageView.image = [UIImage imageNamed:@"female_Icon"];
             
         }
         else
             _genderImageView.image = [UIImage imageNamed:@"male_Icon"];
-        
-        
-        self.nameAgeLabel.text =[self getData];
-        
-        
+            self.nameAgeLabel.text =[self getData];
     }
-    
     if (indexPath.row == 1)
     {
         
@@ -355,33 +338,33 @@
             [[NSBundle mainBundle] loadNibNamed:@"DSNearbyCustomCell" owner:self options:nil];
             NearbyCustomcell = cellDosomething;
 
-           // NearbyCustomcell.letsDoSomethingButton.titleLabel.lineBreakMode = NSLineBreakByTruncatingTail;
-            //NearbyCustomcell.letsDoSomethingButton.titleLabel.numberOfLines = 2;
-            //NearbyCustomcell.letsDoSomethingButton.titleLabel.textAlignment = NSTextAlignmentCenter;
+           
 
         }
         
         requestStr= [userDetailsDict valueForKey:@"send_request"];
         if([requestStr isEqualToString:@"Yes"])
         {
-            [NearbyCustomcell.letsDoSomethingButton setBackgroundColor:[UIColor lightGrayColor]];
+            [NearbyCustomcell.letsDoSomethingButton setBackgroundColor:[UIColor colorWithRed:83.0f/255.0f
+                                                                                       green:83.0f/255.0f
+                                                                                        blue:83.0f/255.0f
+                                                                                       alpha:1.0f]];
             [NearbyCustomcell.letsDoSomethingButton setTitle:@"   Request\n Sent" forState:UIControlStateNormal];
         }
         else
         {
-            [NearbyCustomcell.letsDoSomethingButton setBackgroundColor:[UIColor redColor]];
-            [NearbyCustomcell.letsDoSomethingButton setTitle:@"   Let Do \n Something" forState:UIControlStateNormal];
+            [NearbyCustomcell.letsDoSomethingButton setBackgroundColor:[UIColor colorWithRed:228.0f/255.0f
+                                                                                       green:64.0f/255.0f
+                                                                                        blue:81.0f/255.0f
+                                                                                       alpha:1.0f]];
+            [NearbyCustomcell.letsDoSomethingButton setTitle:@"   Let's Do \n Something" forState:UIControlStateNormal];
         }
         
         imageSize =39;
-        
         yAxis = 31;
         commonWidth=19.5;
-        
         space = imageSize / 2;
         commonHeight = imageSize+15;
-        
-        
         
         //doSomethingImageArray
         for (int i =0; i< [doSomethingImageArray  count]; i++) {
@@ -511,9 +494,12 @@
 #pragma mark - letsDoSomethingAction
 -(IBAction)letsDoSomethingAction:(id)sender
 {
-    if([requestStr isEqualToString:@"Yes"])
+    if(![requestStr isEqualToString:@"Yes"])
     {
-    [NearbyCustomcell.letsDoSomethingButton setBackgroundColor:[UIColor lightGrayColor]];
+        [NearbyCustomcell.letsDoSomethingButton setBackgroundColor:[UIColor colorWithRed:83.0f/255.0f
+                                                                                   green:83.0f/255.0f
+                                                                                    blue:83.0f/255.0f
+                                                                                   alpha:1.0f]];
     [NearbyCustomcell.letsDoSomethingButton setTitle:@" Request Sent" forState:UIControlStateNormal];
         
         requestUserID = [userDetailsDict valueForKey:@"user_id"];
@@ -531,19 +517,13 @@
     }
     
 }
-
-
-
+#pragma  mark - backAction
 - (void)backAction
 {
     [self.navigationController popViewControllerAnimated:YES];
     [COMMON removeLoading];
     
 }
-
-
-
-
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
