@@ -249,7 +249,19 @@
     isTapping=NO;
     scrolldragging=@"YES";
 }
-#pragma mark - UITableViewDelegate
+//
+
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)theTableView
+{
+    return 1;
+}
+
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    return 4;
+}
+
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     
     if(indexPath.row ==0)
@@ -261,11 +273,11 @@
         dataSize = [COMMON getControlHeight:[userDetailsDict valueForKey:@"about"] withFontName:@"Patron-Medium" ofSize:12.0 withSize:CGSizeMake(tableView.frame.size.width-20,tableView.frame.size.height)];
         self.aboutviewHeight.constant =dataSize.height;
         return  self.aboutviewHeight.constant+10;
- 
+        
     }
     if ( indexPath.row ==2)
     {
-
+        
         return 100;
     }
     if ( indexPath.row ==3)
@@ -284,18 +296,9 @@
         else if([imageNormalArray count] <= 20)
             return (commonHeight * 4)+62;
     }
-
+    
     return 100;
     
-}
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)theTableView
-{
-    return 1;
-}
-
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
-{
-    return [valueArray count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath

@@ -86,13 +86,14 @@
     onlineStatus=@"";
     avalibleGenderStatus=@"";
     objWebservice =[[DSWebservice alloc]init];
-    
+    currentloadPage= @"1";
+
     
     [super viewDidLoad];
     isLoadData=NO;
     isLoadWebservice=YES;
     
-    
+     [self nearestLocationWebservice];
     // Do any additional setup after loading the view from its nib.
 }
 
@@ -117,7 +118,7 @@
     profileNames =[[NSArray alloc]init];
     dosomethingImageArry=[[NSMutableArray alloc]init];
     kiloMeterlabel =[[NSArray alloc]init];
-    commonlocationArray =[[NSMutableArray alloc]init];
+   
     if(IS_IPHONE6 || IS_IPHONE6_Plus)
     {
         //self.CollectionviewWidth.constant =self.view.frame.size.width+100;
@@ -176,14 +177,6 @@
     [customNavigation.FilterBtn addTarget:self action:@selector(filterAction:) forControlEvents:UIControlEventTouchUpInside];
     [self.navigationController.navigationBar addSubview:customNavigation.view];
     
-//   usernotfoundlbl=[[UILabel alloc]initWithFrame:CGRectMake(self.locationCollectionView.frame.origin.x,self.locationCollectionView.center.y-30,self.locationCollectionView.frame.size.width,30)];
-//    usernotfoundlbl.numberOfLines =10;
-//    
-//    usernotfoundlbl.textAlignment=NSTextAlignmentCenter;
-//    usernotfoundlbl.font=Patron_Bold(10);
-//    usernotfoundlbl.hidden=YES;
-//    [self.locationCollectionView addSubview:usernotfoundlbl];
-
 }
 
 -(void)filterPageButtonAction
@@ -271,16 +264,16 @@
     [locationManager stopUpdatingLocation];
     
     NSLog(@"current latitude & longitude for main view = %@ & %@",currentLatitude,currentLongitude);
-    if([[NSUserDefaults standardUserDefaults]valueForKey:@"nearByLocationCommonArray"] == 0)
-    {
-    [self nearestLocationWebservice];
+//    if([[NSUserDefaults standardUserDefaults]valueForKey:@"nearByLocationCommonArray"] == 0)
+//    {
+   
         
-    }
-    else
-    {
-        commonlocationArray =[[NSUserDefaults standardUserDefaults]valueForKey:@"nearByLocationCommonArray"];
-        [locationCollectionView reloadData];
-    }
+    //}
+    //else
+    //{
+        //commonlocationArray =[[NSUserDefaults standardUserDefaults]valueForKey:@"nearByLocationCommonArray"];
+      // [//locationCollectionView reloadData];
+   // }
     
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         
@@ -323,49 +316,66 @@
                      filter_gender:avalibleGenderStatus
                    filter_agerange:(filterAge==nil)?@"":filterAge
                    filter_distance:(filterDistance==nil)?@"":filterDistance
+                              page:currentloadPage
                            success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        NSLog(@"responseObject=%@",responseObject);
+                             if ( responseObject !=nil && [[[responseObject valueForKey:@"nearestusers"]valueForKey:@"status"] isEqualToString:@"success"])
+                             {
+                                 
+                                      
+                                       if ([currentloadPage isEqualToString:@"1"]) {
+                                       
+                                           NSMutableArray * nearestUserdetaile =[[NSMutableArray alloc]init];
+                                           nearestUserdetaile =[[responseObject valueForKey:@"nearestusers"] valueForKey:@"UserList"];
+                                           commonlocationArray =[nearestUserdetaile mutableCopy];
+                                          // [[NSUserDefaults standardUserDefaults] setObject:commonlocationArray forKey:@"nearByLocationCommonArray"];
+                                           [locationCollectionView reloadData];
+                                           NSLog(@"%@",nearestUserdetaile);
+                                           
+                                           
+                                          }
+                                    else {
+                                               NSArray * nextpageUserdetaile =[[responseObject valueForKey:@"nearestusers"] valueForKey:@"UserList"];
+                                        
+                                               for (NSDictionary *dict in nextpageUserdetaile)
+                                               {
+                                                   [commonlocationArray addObject:dict];
+                                              //  [[NSUserDefaults standardUserDefaults] setObject:commonlocationArray forKey:@"nearByLocationCommonArray"];
+                                               }
+                                           }
+
+                                       [COMMON removeLoading];
+
+                              }
+                               
+                             else if([[[responseObject valueForKey:@"nearestusers"]valueForKey:@"status"] isEqualToString:@"error"])
+                             {
+                                 [COMMON removeUserDetails];
+                                 DSHomeViewController*objSplashView =[[DSHomeViewController alloc]initWithNibName:@"DSHomeViewController" bundle:nil];
+                                 [self.navigationController pushViewController:objSplashView animated:NO];
+                                 appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+                                 appDelegate.buttonsView.hidden=YES;
+                                 appDelegate.SepratorLbl.hidden=YES;
+                                 [appDelegate.settingButton setBackgroundImage:[UIImage imageNamed:@"setting_icon.png"] forState:UIControlStateNormal];
+                             }
+                               
+
+                               
+                               else{
+                                   isAllPost = YES;
+                                   [COMMON removeLoading];
+                               }
         
-        if([[[responseObject valueForKey:@"nearestusers"]valueForKey:@"status"] isEqualToString:@"success"])
-        {
-            NSMutableArray * nearestUserdetaile =[[NSMutableArray alloc]init];
-            nearestUserdetaile =[[responseObject valueForKey:@"nearestusers"] valueForKey:@"UserList"];
-            commonlocationArray =[nearestUserdetaile mutableCopy];
-             [[NSUserDefaults standardUserDefaults] setObject:commonlocationArray forKey:@"nearByLocationCommonArray"];
-                [locationCollectionView reloadData];
-                    NSLog(@"%@",nearestUserdetaile);
-            
-           
-             }
-             else if([[[responseObject valueForKey:@"nearestusers"]valueForKey:@"status"] isEqualToString:@"error"])
-             {
-                 [COMMON removeUserDetails];
-                 DSHomeViewController*objSplashView =[[DSHomeViewController alloc]initWithNibName:@"DSHomeViewController" bundle:nil];
-                 [self.navigationController pushViewController:objSplashView animated:NO];
-                appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
-                 appDelegate.buttonsView.hidden=YES;
-                  appDelegate.SepratorLbl.hidden=YES;
-                 [appDelegate.settingButton setBackgroundImage:[UIImage imageNamed:@"setting_icon.png"] forState:UIControlStateNormal];
-             }
-             else
-             {
-                 //usernotfoundlbl.hidden=NO;
-                // usernotfoundlbl.text  =[[responseObject valueForKey:@"nearestusers"]valueForKey:@"Message"];
-             }
+                                [refreshControl endRefreshing];
+                                [locationCollectionView reloadData];
+                               
         
-            [COMMON removeLoading];
-//         }
-//         else{
-//             isAllPost = YES;
-//             [COMMON removeLoading];
-//         }
-        [refreshControl endRefreshing];
+        
+    
 }
     failure:^(AFHTTPRequestOperation *operation, id error) {
         
         [COMMON removeLoading];
-        //usernotfoundlbl.hidden=NO;
-        //usernotfoundlbl.text  =[NSString stringWithFormat:@"%@",error];
+       
         
         
         
@@ -493,7 +503,7 @@
 - (void)collectionView:(UICollectionView *)collectionView willDisplayCell:(UICollectionViewCell *)cell forItemAtIndexPath:(NSIndexPath *)indexPath
 {
     NSLog(@"profileNames count=%lu",(unsigned long)commonlocationArray.count);
-    if (([commonlocationArray count]-1) == indexPath.row ) {
+    if (([commonlocationArray count]-1) == indexPath.row && !isAllPost ) {
         
         int x = [currentloadPage intValue];
         
@@ -501,7 +511,7 @@
         
         currentloadPage= [NSString stringWithFormat:@"%d",x];
         
-        //[self nearestLocationWebservice];
+        [self nearestLocationWebservice];
         
     }
 
@@ -714,6 +724,7 @@
 
 - (void)releaseToRefresh:(UIRefreshControl *)_refreshControl
 {
+    
     currentloadPage=@"1";
     [self nearestLocationWebservice];
 }

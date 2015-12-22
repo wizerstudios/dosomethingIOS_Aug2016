@@ -491,10 +491,11 @@ notification_vibration:(NSString *)isnotification_vibration
       filter_gender:(NSString *)filter_gender
     filter_agerange:(NSString *)filter_agerange
     filter_distance:(NSString *)filter_distance
+               page:(NSString *)currentpage
             success:(WebserviceRequestSuccessHandler)success
             failure:(WebserviceRequestFailureHandler)failure
 {
-    urlString = [URL_FOR_RESOURCE(@"") stringByAppendingString:[NSString stringWithFormat:@"%@?sessionid=%@&latitude=%@&longitude=%@&filter_status=%@&filter_gender=%@&filter_agerange=%@&filter_distance=%@",nearestUsersURL,sessionid,latitude,longitude,filter_status,filter_gender,filter_agerange,filter_distance]];
+    urlString = [URL_FOR_RESOURCE(@"") stringByAppendingString:[NSString stringWithFormat:@"%@?sessionid=%@&latitude=%@&longitude=%@&filter_status=%@&filter_gender=%@&filter_agerange=%@&filter_distance=%@&page=%@",nearestUsersURL,sessionid,latitude,longitude,filter_status,filter_gender,filter_agerange,filter_distance,currentpage]];
     
     NSLog(@"urlString = %@",urlString);
     
