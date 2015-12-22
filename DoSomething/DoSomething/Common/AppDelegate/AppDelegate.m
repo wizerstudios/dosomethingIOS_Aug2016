@@ -57,6 +57,8 @@
         [Fabric with:@[[Crashlytics class]]];
     });
     
+    [[NSUserDefaults standardUserDefaults]removeObjectForKey:HobbiesArray];
+    
     return YES;
     
 }
