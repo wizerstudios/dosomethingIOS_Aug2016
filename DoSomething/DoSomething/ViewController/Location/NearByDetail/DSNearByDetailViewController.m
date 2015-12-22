@@ -296,7 +296,6 @@
     
 }
 
-// the cell will be returned to the tableView
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     static NSString *cellIdentifier = @"Cell";
@@ -344,13 +343,19 @@
         requestStr= [userDetailsDict valueForKey:@"send_request"];
         if([requestStr isEqualToString:@"Yes"])
         {
-            [NearbyCustomcell.letsDoSomethingButton setBackgroundColor:[UIColor lightGrayColor]];
-            [NearbyCustomcell.letsDoSomethingButton setTitle:@"Request\n  Sent" forState:UIControlStateNormal];
+            [NearbyCustomcell.letsDoSomethingButton setBackgroundColor:[UIColor colorWithRed:83.0f/255.0f
+                                                                                       green:83.0f/255.0f
+                                                                                        blue:83.0f/255.0f
+                                                                                       alpha:1.0f]];
+            [NearbyCustomcell.letsDoSomethingButton setTitle:@"Request\n    Sent" forState:UIControlStateNormal];
         }
         else
         {
-            [NearbyCustomcell.letsDoSomethingButton setBackgroundColor:[UIColor colorWithRed:(218/255.0) green:(40/255.0) blue:(64.0/255.0f) alpha:1.0]];
-            [NearbyCustomcell.letsDoSomethingButton setTitle:@"   Let Do \n Something" forState:UIControlStateNormal];
+            [NearbyCustomcell.letsDoSomethingButton setBackgroundColor:[UIColor colorWithRed:228.0f/255.0f
+                                                                                       green:64.0f/255.0f
+                                                                                        blue:81.0f/255.0f
+                                                                                       alpha:1.0f]];
+            [NearbyCustomcell.letsDoSomethingButton setTitle:@"   Let's Do \n Something" forState:UIControlStateNormal];
         }
         
         imageSize =39;
@@ -481,13 +486,13 @@
 {
     if(![requestStr isEqualToString:@"Yes"])
     {
-        [self.nearbyTbl beginUpdates];
-       // [self.nearbyTbl reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-        [NearbyCustomcell.letsDoSomethingButton setBackgroundColor:[UIColor lightGrayColor]];
-        [NearbyCustomcell.letsDoSomethingButton setTitle:@" Request Sent" forState:UIControlStateNormal];
-        [self.nearbyTbl endUpdates];
-
-   
+        UIButton *buttonSender = (UIButton *)sender;
+        NearbyCustomcell.letsDoSomethingButton = buttonSender;
+        [NearbyCustomcell.letsDoSomethingButton setBackgroundColor:[UIColor colorWithRed:83.0f/255.0f
+                                                                                   green:83.0f/255.0f
+                                                                                    blue:83.0f/255.0f
+                                                                                   alpha:1.0f]];
+        [NearbyCustomcell.letsDoSomethingButton setTitle:@"Request\n    Sent" forState:UIControlStateNormal];
         
         requestUserID = [userDetailsDict valueForKey:@"user_id"];
         
