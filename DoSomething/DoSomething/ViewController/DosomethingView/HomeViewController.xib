@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9059" systemVersion="15B42" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9531" systemVersion="15C50" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9049"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
         <capability name="Alignment constraints to the first baseline" minToolsVersion="6.0"/>
         <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
     </dependencies>
@@ -36,7 +36,6 @@
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" tag="100" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="justified" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9LY-Up-v23">
                             <rect key="frame" x="55" y="240" width="210" height="60"/>
-                            <animations/>
                             <color key="backgroundColor" red="0.90196078430000004" green="0.2470588235" blue="0.31764705879999999" alpha="1" colorSpace="calibratedRGB"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="60" id="3dY-X0-p4T"/>
@@ -54,7 +53,6 @@
                         </label>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wd8-4I-dSX">
                             <rect key="frame" x="55" y="300" width="105" height="46"/>
-                            <animations/>
                             <color key="backgroundColor" red="0.97601792899999995" green="0.97601792899999995" blue="0.97601792899999995" alpha="1" colorSpace="calibratedRGB"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="105" id="j8X-Az-zGu"/>
@@ -70,7 +68,6 @@
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jWF-hV-6F5">
                             <rect key="frame" x="160" y="300" width="105" height="46"/>
-                            <animations/>
                             <color key="backgroundColor" red="0.64692247550000004" green="0.64692247550000004" blue="0.64692247550000004" alpha="1" colorSpace="calibratedRGB"/>
                             <fontDescription key="fontDescription" type="boldSystem" pointSize="12"/>
                             <state key="normal" title="Any Time !">
@@ -82,7 +79,6 @@
                             </connections>
                         </button>
                     </subviews>
-                    <animations/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="320" id="4SN-67-nJz"/>
@@ -104,15 +100,14 @@
                     <variation key="default">
                         <mask key="constraints">
                             <exclude reference="Gfr-do-9mz"/>
-                            <exclude reference="I7T-u7-CPd"/>
                             <exclude reference="FSZ-Qp-fGz"/>
+                            <exclude reference="I7T-u7-CPd"/>
                             <exclude reference="7Xa-im-c16"/>
                         </mask>
                     </variation>
                 </view>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RNR-NB-6Yo">
                     <rect key="frame" x="0.0" y="474" width="320" height="45"/>
-                    <animations/>
                     <color key="backgroundColor" red="0.90196078430000004" green="0.2470588235" blue="0.31764705879999999" alpha="0.90000000000000002" colorSpace="custom" customColorSpace="sRGB"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="45" id="Vf5-UK-bDl"/>
@@ -128,7 +123,6 @@
                 </button>
                 <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="ney-ah-F0F">
                     <rect key="frame" x="15" y="80" width="290" height="390"/>
-                    <animations/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     <inset key="scrollIndicatorInsets" minX="20" minY="0.0" maxX="10" maxY="0.0"/>
                     <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="iO4-xz-8SJ">
@@ -144,7 +138,6 @@
                 </collectionView>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text=" " lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="K9e-Da-M0I">
                     <rect key="frame" x="0.0" y="518" width="320" height="1"/>
-                    <animations/>
                     <color key="backgroundColor" red="0.30544501229999999" green="0.30544501229999999" blue="0.30544501229999999" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="4" id="ORh-jC-2Cg"/>
@@ -157,14 +150,13 @@
                     <nil key="highlightedColor"/>
                     <variation key="default">
                         <mask key="constraints">
-                            <exclude reference="d8t-Lf-mfa"/>
                             <exclude reference="ORh-jC-2Cg"/>
+                            <exclude reference="d8t-Lf-mfa"/>
                             <exclude reference="pMs-J4-Qud"/>
                         </mask>
                     </variation>
                 </label>
             </subviews>
-            <animations/>
             <color key="backgroundColor" red="0.4881874491" green="0.4881874491" blue="0.4881874491" alpha="0.19" colorSpace="calibratedRGB"/>
             <constraints>
                 <constraint firstItem="K9e-Da-M0I" firstAttribute="leading" secondItem="V23-QB-awP" secondAttribute="leading" id="6A2-PH-cjI"/>

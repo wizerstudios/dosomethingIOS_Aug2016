@@ -15,7 +15,6 @@
 #import "DSAppCommon.h"
 #import "AppDelegate.h"
 #import <MapKit/MapKit.h>
-#import "DSDetailViewController.h"
 #import "CustomAlterview.h"
 #import "DSNearByDetailViewController.h"
 

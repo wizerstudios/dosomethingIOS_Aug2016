@@ -7,7 +7,6 @@
 //
 
 #import "DSNearByDetailViewController.h"
-#import "DSDetailViewController.h"
 #import "CustomNavigationView.h"
 #import "DSConfig.h"
 #import "DSAppCommon.h"
@@ -180,13 +179,6 @@
     }
     self.profileImageScroll.contentSize=CGSizeMake(self.profileImageScroll.frame.size.width*3, self.profileImageScroll.frame.size.height);
     
-    //    if(CurrentImage == 0)
-    //        [self.profileImageScroll setContentOffset:CGPointMake(0, 0)animated:NO];
-    //    else if(CurrentImage == 1)
-    //        [self.profileImageScroll setContentOffset:CGPointMake(1*self.profileImageView.frame.size.width - 15, 0)animated:NO];
-    //    else if(CurrentImage == 2)
-    //        [self.profileImageScroll setContentOffset:CGPointMake((1.5*self.profileImageView.frame.size.width - 15), 0)animated:NO];
-    
     if(CurrentImage == 0)
         [self.profileImageScroll setContentOffset:CGPointMake(0, 0)animated:NO];
     else if(CurrentImage == 1)
@@ -205,7 +197,7 @@
     {
         if(IS_IPHONE6|| IS_IPHONE6_Plus)
         {
-            //[self.scrView setContentOffset:CGPointMake(9*self.profileImageView.frame.size.width - 15, 0)animated:NO];
+            
             [self.profileImageScroll setContentOffset:CGPointMake((6*self.profileImageView.frame.size.width - 15), 0)animated:NO];
         }
         else
@@ -241,7 +233,6 @@
         
     }
 
-    
     
 }
 
@@ -331,11 +322,13 @@
         [detailPageControl setHidden:YES];
         [self profileImageScrollView];
         if([[userDetailsDict objectForKey:@"gender"]isEqualToString:@"Female"]){
-            _genderImageView.image = [UIImage imageNamed:@"female_Icon"];
+            
+          _genderImageView.image = [UIImage imageNamed:@"female_Icon"];
             
         }
         else
             _genderImageView.image = [UIImage imageNamed:@"male_Icon"];
+        
         
         self.nameAgeLabel.text =[self getData];
         
