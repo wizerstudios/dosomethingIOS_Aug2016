@@ -82,7 +82,9 @@
     latitude     =[dic valueForKey:@"latitude"];
     longitude    =[dic valueForKey:@"longitude"];
     
-   
+    longitude    =[dic valueForKey:@"longitude"];
+    latitude     =[dic valueForKey:@"latitude"];
+    commonlocationArray =[[NSMutableArray alloc]init];
     onlineStatus=@"";
     avalibleGenderStatus=@"";
     objWebservice =[[DSWebservice alloc]init];
@@ -310,8 +312,8 @@
     [COMMON LoadIcon:self.view];
        [objWebservice nearestUsers:NearestUsers_API
                          sessionid:[COMMON getSessionID]
-                          latitude:latitude
-                         longitude:longitude
+                          latitude:longitude
+                         longitude:latitude
                      filter_status:onlineStatus
                      filter_gender:avalibleGenderStatus
                    filter_agerange:(filterAge==nil)?@"":filterAge
