@@ -27,7 +27,7 @@
     AppDelegate *appDelegate;
     
     NSString * longitude;
-    NSString * laditude;
+    NSString * latitude;
     BOOL isFilteraction;
     NSString  * currentLatitude, * currentLongitude;
     BOOL isLoadData;
@@ -79,9 +79,9 @@
     NSMutableDictionary *dic=[[NSMutableDictionary alloc]init];
     
     dic =[[NSUserDefaults standardUserDefaults] valueForKey:USERDETAILS];
-    
+    latitude     =[dic valueForKey:@"latitude"];
     longitude    =[dic valueForKey:@"longitude"];
-    laditude     =[dic valueForKey:@"latitude"];
+    
    
     onlineStatus=@"";
     avalibleGenderStatus=@"";
@@ -317,8 +317,8 @@
     [COMMON LoadIcon:self.view];
        [objWebservice nearestUsers:NearestUsers_API
                          sessionid:[COMMON getSessionID]
-                          latitude:currentLatitude
-                         longitude:currentLongitude
+                          latitude:latitude
+                         longitude:longitude
                      filter_status:onlineStatus
                      filter_gender:avalibleGenderStatus
                    filter_agerange:(filterAge==nil)?@"":filterAge

@@ -97,6 +97,11 @@
     
     NSString *strUserData= @"";
     
+   // [doSomethingName setFont:[UIFont fontWithName:@"Patron-Regular" size:7]];
+  //  [self.nameAgeLabel setFont:[UIFont fontWithName:@"FontAwesome" size:2]];
+   
+  //  NSString *strUserData = [NSString stringWithFormat:@"%@", @"\uf222"];
+    
     if ([userDetailsDict objectForKey:@"first_name"] != NULL && ![[userDetailsDict objectForKey:@"first_name"] isEqualToString:@""]) {
         strUserData = [NSString stringWithFormat:@"%@%@",strUserData,[userDetailsDict objectForKey:@"first_name"]];
     }
