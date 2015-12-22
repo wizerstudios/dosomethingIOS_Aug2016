@@ -86,7 +86,8 @@
     onlineStatus=@"";
     avalibleGenderStatus=@"";
     objWebservice =[[DSWebservice alloc]init];
-    
+    currentloadPage= @"1";
+
     
     [super viewDidLoad];
     isLoadData=NO;
@@ -271,16 +272,16 @@
     [locationManager stopUpdatingLocation];
     
     NSLog(@"current latitude & longitude for main view = %@ & %@",currentLatitude,currentLongitude);
-    if([[NSUserDefaults standardUserDefaults]valueForKey:@"nearByLocationCommonArray"] == 0)
-    {
+//    if([[NSUserDefaults standardUserDefaults]valueForKey:@"nearByLocationCommonArray"] == 0)
+//    {
     [self nearestLocationWebservice];
         
-    }
-    else
-    {
-        commonlocationArray =[[NSUserDefaults standardUserDefaults]valueForKey:@"nearByLocationCommonArray"];
-        [locationCollectionView reloadData];
-    }
+//    }
+//    else
+//    {
+//        commonlocationArray =[[NSUserDefaults standardUserDefaults]valueForKey:@"nearByLocationCommonArray"];
+//        [locationCollectionView reloadData];
+//    }
     
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         
@@ -323,49 +324,65 @@
                      filter_gender:avalibleGenderStatus
                    filter_agerange:(filterAge==nil)?@"":filterAge
                    filter_distance:(filterDistance==nil)?@"":filterDistance
+                              page:currentloadPage
                            success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        NSLog(@"responseObject=%@",responseObject);
+                             if ( responseObject !=nil && [[[responseObject valueForKey:@"nearestusers"]valueForKey:@"status"] isEqualToString:@"success"])
+                             {
+                                 
+                                      
+                                       if ([currentloadPage isEqualToString:@"1"]) {
+                                       
+                                           NSMutableArray * nearestUserdetaile =[[NSMutableArray alloc]init];
+                                           nearestUserdetaile =[[responseObject valueForKey:@"nearestusers"] valueForKey:@"UserList"];
+                                           commonlocationArray =[nearestUserdetaile mutableCopy];
+                                          // [[NSUserDefaults standardUserDefaults] setObject:commonlocationArray forKey:@"nearByLocationCommonArray"];
+                                           [locationCollectionView reloadData];
+                                           NSLog(@"%@",nearestUserdetaile);
+                                           
+                                           
+                                          }
+                                    else {
+                                               NSArray * nextpageUserdetaile =[[responseObject valueForKey:@"nearestusers"] valueForKey:@"UserList"];
+                                        
+                                               for (NSDictionary *dict in nextpageUserdetaile)
+                                               {
+                                                   [commonlocationArray addObject:dict];
+                                               }
+                                           }
+
+                                       [COMMON removeLoading];
+
+                              }
+                               
+                             else if([[[responseObject valueForKey:@"nearestusers"]valueForKey:@"status"] isEqualToString:@"error"])
+                             {
+                                 [COMMON removeUserDetails];
+                                 DSHomeViewController*objSplashView =[[DSHomeViewController alloc]initWithNibName:@"DSHomeViewController" bundle:nil];
+                                 [self.navigationController pushViewController:objSplashView animated:NO];
+                                 appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+                                 appDelegate.buttonsView.hidden=YES;
+                                 appDelegate.SepratorLbl.hidden=YES;
+                                 [appDelegate.settingButton setBackgroundImage:[UIImage imageNamed:@"setting_icon.png"] forState:UIControlStateNormal];
+                             }
+                               
+
+                               
+                               else{
+                                   isAllPost = YES;
+                                   [COMMON removeLoading];
+                               }
         
-        if([[[responseObject valueForKey:@"nearestusers"]valueForKey:@"status"] isEqualToString:@"success"])
-        {
-            NSMutableArray * nearestUserdetaile =[[NSMutableArray alloc]init];
-            nearestUserdetaile =[[responseObject valueForKey:@"nearestusers"] valueForKey:@"UserList"];
-            commonlocationArray =[nearestUserdetaile mutableCopy];
-             [[NSUserDefaults standardUserDefaults] setObject:commonlocationArray forKey:@"nearByLocationCommonArray"];
-                [locationCollectionView reloadData];
-                    NSLog(@"%@",nearestUserdetaile);
-            
-           
-             }
-             else if([[[responseObject valueForKey:@"nearestusers"]valueForKey:@"status"] isEqualToString:@"error"])
-             {
-                 [COMMON removeUserDetails];
-                 DSHomeViewController*objSplashView =[[DSHomeViewController alloc]initWithNibName:@"DSHomeViewController" bundle:nil];
-                 [self.navigationController pushViewController:objSplashView animated:NO];
-                appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
-                 appDelegate.buttonsView.hidden=YES;
-                  appDelegate.SepratorLbl.hidden=YES;
-                 [appDelegate.settingButton setBackgroundImage:[UIImage imageNamed:@"setting_icon.png"] forState:UIControlStateNormal];
-             }
-             else
-             {
-                 //usernotfoundlbl.hidden=NO;
-                // usernotfoundlbl.text  =[[responseObject valueForKey:@"nearestusers"]valueForKey:@"Message"];
-             }
+                                [refreshControl endRefreshing];
+                                [locationCollectionView reloadData];
+                               
         
-            [COMMON removeLoading];
-//         }
-//         else{
-//             isAllPost = YES;
-//             [COMMON removeLoading];
-//         }
-        [refreshControl endRefreshing];
+        
+    
 }
     failure:^(AFHTTPRequestOperation *operation, id error) {
         
         [COMMON removeLoading];
-        //usernotfoundlbl.hidden=NO;
-        //usernotfoundlbl.text  =[NSString stringWithFormat:@"%@",error];
+       
         
         
         
@@ -398,9 +415,9 @@
     
     locationCellView.nameProfile.text =[[commonlocationArray valueForKey:@"first_name"] objectAtIndex:indexPath.row];
     locationCellView.kiloMeter.text=[[commonlocationArray valueForKey:@"distance"] objectAtIndex:indexPath.row];
-    NSString * avalableStr =[[commonlocationArray valueForKey:@"available_now"] objectAtIndex:indexPath.row];
-    locationCellView.activeNow.text=([avalableStr isEqualToString:@"Yes"])?@"NOW":@"";
-    locationCellView.activeNow.backgroundColor=([avalableStr isEqualToString:@"Yes"])?[UIColor whiteColor]:[UIColor clearColor];
+    NSString * availableStr =[[commonlocationArray valueForKey:@"available_now"] objectAtIndex:indexPath.row];
+    locationCellView.activeNow.text=([availableStr isEqualToString:@"Yes"])?@"NOW":@"";
+    locationCellView.activeNow.backgroundColor=([availableStr isEqualToString:@"Yes"])?[UIColor whiteColor]:[UIColor clearColor];
     NSString* reguestStr = [[commonlocationArray valueForKey:@"send_request"] objectAtIndex:indexPath.row];
     
     locationCellView.sendRequest.text = ([reguestStr isEqualToString:@"No"])?@"Send Request":@"Request Sent!";
@@ -493,7 +510,7 @@
 - (void)collectionView:(UICollectionView *)collectionView willDisplayCell:(UICollectionViewCell *)cell forItemAtIndexPath:(NSIndexPath *)indexPath
 {
     NSLog(@"profileNames count=%lu",(unsigned long)commonlocationArray.count);
-    if (([commonlocationArray count]-1) == indexPath.row ) {
+    if (([commonlocationArray count]-1) == indexPath.row && !isAllPost ) {
         
         int x = [currentloadPage intValue];
         
@@ -501,7 +518,7 @@
         
         currentloadPage= [NSString stringWithFormat:@"%d",x];
         
-        //[self nearestLocationWebservice];
+        [self nearestLocationWebservice];
         
     }
 
@@ -515,8 +532,6 @@
                         sessionid:[COMMON getSessionID]
                   profile_user_id:profileUserID
                           success:^(AFHTTPRequestOperation *operation, id responseObject) {
-                               NSLog(@"responseObject%@",responseObject);
-                              
                               if( [responseObject objectForKey:@"getuserdetails"]!=NULL){
                                                                     
                                   [self redirectToDetailViewWithDictionary:[[responseObject objectForKey:@"getuserdetails"]objectForKey:@"userDetails"]];
@@ -716,6 +731,7 @@
 
 - (void)releaseToRefresh:(UIRefreshControl *)_refreshControl
 {
+    
     currentloadPage=@"1";
     [self nearestLocationWebservice];
 }

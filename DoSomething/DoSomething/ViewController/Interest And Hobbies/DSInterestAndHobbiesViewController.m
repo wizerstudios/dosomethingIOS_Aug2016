@@ -431,28 +431,6 @@
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath;
 
 {
-//     DSInterestAndHobbiesCollectionViewCell *dataselCell = (DSInterestAndHobbiesCollectionViewCell *)[collectionView cellForItemAtIndexPath:indexPath];
-//    
-//    NSMutableDictionary *data = [interstAndHobbiesArray objectAtIndex:indexPath.row];
-//    NSArray *selectArray = [[NSArray alloc]init];
-//    selectArray = [profileDetailsArray copy];
-//    for(NSString *strDeselect in selectArray)
-//    {
-//        if([[data valueForKey:@"Id"] isEqualToString:strDeselect])
-//            
-//        {
-//            [profileDetailsArray removeObject:strDeselect];
-//            //isdeSelect=YES;
-//            dataselCell.nameLabel.textColor = [UIColor colorWithRed:(164/255.0f)
-//                                                        green:(164/255.0f)
-//                                                         blue:(164/255.0f)
-//                                                        alpha:1.0f];
-//            NSString * objstr = [NSString stringWithFormat:@"%@",[data valueForKey:@"InactiveImage"]];
-//            objstr= [objstr stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-//            [dataselCell.interestAndHobbiesImageView setImageWithURL:[NSURL URLWithString:objstr]];
-//            //cell.MenuImg.image = [UIImage imageNamed:objstr];
-//        }
-//    }
 
     
   //  DSInterestAndHobbiesCollectionViewCell *dataselCell = (DSInterestAndHobbiesCollectionViewCell *)[collectionView cellForItemAtIndexPath:indexPath];
