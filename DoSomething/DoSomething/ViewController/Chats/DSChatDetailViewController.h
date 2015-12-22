@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import <QuartzCore/QuartzCore.h>
 #import "IBActionSheet.h"
-//#import "ChatTextView.h"
+#import "ChatTextView.h"
 
 @interface DSChatDetailViewController : UIViewController < UIActionSheetDelegate>
 
@@ -23,7 +23,7 @@
 
 @property IBActionSheet *standardIBAS, *customIBAS, *funkyIBAS;
 
-//@property(nonatomic,strong)IBOutlet ChatTextView *chatView;
+@property(nonatomic,strong)IBOutlet ChatTextView *chatView;
 @property (strong, nonatomic) IBOutlet UIButton *funkyIBASButton;
 @property UIView *semiTransparentView;
 

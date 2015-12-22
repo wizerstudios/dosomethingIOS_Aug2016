@@ -103,6 +103,10 @@
 }
 
 -(void)textViewDidBeginEditing:(UITextView *)textView{
+    //[chatView.placeHolderLabel setHidden:YES];
+//    [UIView animateWithDuration:.25f animations:^{
+//        if(IS_IPHONE4)
+//           // chatView.frame=CGRectMake(0,160,320,65);
     
     [chatView.placeHolderLabel setHidden:YES];
     
