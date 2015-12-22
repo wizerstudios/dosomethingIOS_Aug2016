@@ -349,7 +349,7 @@
                                                                                        green:83.0f/255.0f
                                                                                         blue:83.0f/255.0f
                                                                                        alpha:1.0f]];
-            [NearbyCustomcell.letsDoSomethingButton setTitle:@"   Request\n Sent" forState:UIControlStateNormal];
+            [NearbyCustomcell.letsDoSomethingButton setTitle:@"Request\n    Sent" forState:UIControlStateNormal];
         }
         else
         {
@@ -358,6 +358,9 @@
                                                                                         blue:81.0f/255.0f
                                                                                        alpha:1.0f]];
             [NearbyCustomcell.letsDoSomethingButton setTitle:@"   Let's Do \n Something" forState:UIControlStateNormal];
+            
+            
+            
         }
         
         imageSize =39;
@@ -494,13 +497,16 @@
 #pragma mark - letsDoSomethingAction
 -(IBAction)letsDoSomethingAction:(id)sender
 {
+    
     if(![requestStr isEqualToString:@"Yes"])
     {
+        UIButton *buttonSender = (UIButton *)sender;
+        NearbyCustomcell.letsDoSomethingButton = buttonSender;
         [NearbyCustomcell.letsDoSomethingButton setBackgroundColor:[UIColor colorWithRed:83.0f/255.0f
                                                                                    green:83.0f/255.0f
                                                                                     blue:83.0f/255.0f
                                                                                    alpha:1.0f]];
-    [NearbyCustomcell.letsDoSomethingButton setTitle:@" Request Sent" forState:UIControlStateNormal];
+        [NearbyCustomcell.letsDoSomethingButton setTitle:@"Request\n    Sent" forState:UIControlStateNormal];
         
         requestUserID = [userDetailsDict valueForKey:@"user_id"];
         
