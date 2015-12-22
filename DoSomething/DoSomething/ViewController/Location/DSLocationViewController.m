@@ -82,8 +82,6 @@
     latitude     =[dic valueForKey:@"latitude"];
     longitude    =[dic valueForKey:@"longitude"];
     
-    longitude    =[dic valueForKey:@"longitude"];
-    latitude     =[dic valueForKey:@"latitude"];
     commonlocationArray =[[NSMutableArray alloc]init];
     onlineStatus=@"";
     avalibleGenderStatus=@"";
