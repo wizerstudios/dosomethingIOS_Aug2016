@@ -310,8 +310,8 @@
     [COMMON LoadIcon:self.view];
        [objWebservice nearestUsers:NearestUsers_API
                          sessionid:[COMMON getSessionID]
-                          latitude:longitude
-                         longitude:latitude
+                          latitude:latitude
+                         longitude:longitude
                      filter_status:onlineStatus
                      filter_gender:avalibleGenderStatus
                    filter_agerange:(filterAge==nil)?@"":filterAge
