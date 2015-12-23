@@ -53,15 +53,7 @@
     objWebService =[[DSWebservice alloc]init];
     valueArray=[[NSMutableArray alloc]initWithObjects:@"cell0",@"cell1",@"cell2",@"cell3", nil];
     
-    for (NSString* family in [UIFont familyNames])
-    {
-        NSLog(@"family%@", family);
-        
-        for (NSString* name in [UIFont fontNamesForFamilyName: family])
-        {
-            NSLog(@"name%@", name);
-        }
-    }
+   
 
     // Do any additional setup after loading the view from its nib.
 }

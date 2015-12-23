@@ -489,13 +489,14 @@ notification_vibration:(NSString *)isnotification_vibration
           longitude:(NSString *)longitude
       filter_status:(NSString *)filter_status
       filter_gender:(NSString *)filter_gender
+   filter_available:(NSString *)filter_available
     filter_agerange:(NSString *)filter_agerange
     filter_distance:(NSString *)filter_distance
                page:(NSString *)currentpage
             success:(WebserviceRequestSuccessHandler)success
             failure:(WebserviceRequestFailureHandler)failure
 {
-    urlString = [URL_FOR_RESOURCE(@"") stringByAppendingString:[NSString stringWithFormat:@"%@?sessionid=%@&latitude=%@&longitude=%@&filter_status=%@&filter_gender=%@&filter_agerange=%@&filter_distance=%@&page=%@",nearestUsersURL,sessionid,latitude,longitude,filter_status,filter_gender,filter_agerange,filter_distance,currentpage]];
+    urlString = [URL_FOR_RESOURCE(@"") stringByAppendingString:[NSString stringWithFormat:@"%@?sessionid=%@&latitude=%@&longitude=%@&filter_status=%@&filter_gender=%@&filter_agerange=%@&filter_distance=%@&filter_available=%@&page=%@",nearestUsersURL,sessionid,latitude,longitude,filter_status,filter_gender,filter_agerange,filter_distance,filter_available,currentpage]];
     
     NSLog(@"urlString = %@",urlString);
     
