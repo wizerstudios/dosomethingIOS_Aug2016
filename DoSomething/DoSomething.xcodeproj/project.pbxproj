@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		065433161BF38B0400DABBFC /* button-16.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 065433151BF38B0400DABBFC /* button-16.mp3 */; };
 		065BAC521BC7A135005AF493 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 065BAC511BC7A135005AF493 /* main.m */; };
+		2B0C3B3E1C2A743A009B7B42 /* fontawesome-webfont.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2BC69E701C2994860074C486 /* fontawesome-webfont.ttf */; };
 		2B1B8B961C23E830005A699E /* NSString+FontAwesome.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B1B8B951C23E830005A699E /* NSString+FontAwesome.m */; };
 		2B1B8BE51C24487A005A699E /* DSTermsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B1B8BE31C24487A005A699E /* DSTermsViewController.m */; };
 		2B1B8BE61C24487A005A699E /* DSTermsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2B1B8BE41C24487A005A699E /* DSTermsViewController.xib */; };
@@ -1022,6 +1023,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2B0C3B3E1C2A743A009B7B42 /* fontawesome-webfont.ttf in Resources */,
 				EAF1DC521BD8B2AF00D51354 /* DSHomeViewController.xib in Resources */,
 				2B2C08911C27BB6C00996441 /* DSNearByDetailViewController.xib in Resources */,
 				2B83CAC41BE895AB0064EC7F /* Default.png in Resources */,

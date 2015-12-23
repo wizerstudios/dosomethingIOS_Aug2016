@@ -52,6 +52,16 @@
     [super viewDidLoad];
     objWebService =[[DSWebservice alloc]init];
     valueArray=[[NSMutableArray alloc]initWithObjects:@"cell0",@"cell1",@"cell2",@"cell3", nil];
+    
+    for (NSString* family in [UIFont familyNames])
+    {
+        NSLog(@"family%@", family);
+        
+        for (NSString* name in [UIFont fontNamesForFamilyName: family])
+        {
+            NSLog(@"name%@", name);
+        }
+    }
 
     // Do any additional setup after loading the view from its nib.
 }
@@ -95,15 +105,19 @@
 #pragma mark - userAgeName
 -(NSString *) getData{
     
-    NSString *strUserData= @"";
+    NSString *strUserData;
+    [self.nameAgeLabel setFont:[UIFont fontWithName:@"FontAwesome" size:14]];
     
-   // [doSomethingName setFont:[UIFont fontWithName:@"Patron-Regular" size:7]];
-  //  [self.nameAgeLabel setFont:[UIFont fontWithName:@"FontAwesome" size:2]];
-   
-  //  NSString *strUserData = [NSString stringWithFormat:@"%@", @"\uf222"];
+    if([[userDetailsArray valueForKey:@"gender"]isEqualToString:@"Female"]){
+        strUserData= [NSString stringWithFormat:@"%@", @"\uf221"];
+        
+    }
+    else{
+         strUserData = [NSString stringWithFormat:@"%@", @"\uf222"];
+    }
     
     if ([userDetailsArray valueForKey:@"first_name"] != NULL && ![[userDetailsArray valueForKey:@"first_name"] isEqualToString:@""]) {
-        strUserData = [NSString stringWithFormat:@"%@%@",strUserData,[userDetailsArray valueForKey:@"first_name"]];
+        strUserData = [NSString stringWithFormat:@"%@ %@",strUserData,[userDetailsArray valueForKey:@"first_name"]];
     }
     if ([userDetailsArray valueForKey:@"last_name"] != NULL && ![[userDetailsArray valueForKey:@"last_name"] isEqualToString:@""]) {
         strUserData = [NSString stringWithFormat:@"%@ %@",strUserData,[userDetailsArray valueForKey:@"last_name"]];
@@ -316,13 +330,8 @@
         }
         [detailPageControl setHidden:YES];
         [self profileImageScrollView];
-        if([[userDetailsArray valueForKey:@"gender"]isEqualToString:@"Female"]){
-            _genderImageView.image = [UIImage imageNamed:@"female_Icon"];
-            
-        }
-        else
-            _genderImageView.image = [UIImage imageNamed:@"male_Icon"];
-            self.nameAgeLabel.text =[self getData];
+
+        self.nameAgeLabel.text =[self getData];
     }
     if (indexPath.row == 1)
     {
