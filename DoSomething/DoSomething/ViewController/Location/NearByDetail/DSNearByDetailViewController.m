@@ -47,11 +47,21 @@
 @end
 
 @implementation DSNearByDetailViewController
-@synthesize userDetailsDict;
+@synthesize userDetailsArray;
 - (void)viewDidLoad {
     [super viewDidLoad];
     objWebService =[[DSWebservice alloc]init];
     valueArray=[[NSMutableArray alloc]initWithObjects:@"cell0",@"cell1",@"cell2",@"cell3", nil];
+    
+    for (NSString* family in [UIFont familyNames])
+    {
+        NSLog(@"family%@", family);
+        
+        for (NSString* name in [UIFont fontNamesForFamilyName: family])
+        {
+            NSLog(@"name%@", name);
+        }
+    }
 
     // Do any additional setup after loading the view from its nib.
 }
@@ -81,10 +91,10 @@
     
     [customNavigation.buttonBack addTarget:self action:@selector(backAction) forControlEvents:UIControlEventTouchUpInside];
     
-    interstAndHobbiesArray  = [[userDetailsDict valueForKey:@"hobbieslist"]mutableCopy];
+    interstAndHobbiesArray  = [[userDetailsArray valueForKey:@"hobbieslist"]mutableCopy];
     hobbiesNameArray        = [[interstAndHobbiesArray valueForKey:@"name"]mutableCopy];
     imageNormalArray        = [[interstAndHobbiesArray valueForKey:@"image"]mutableCopy];
-    doSomethingArray        = [[userDetailsDict valueForKey:@"dosomething"]mutableCopy];
+    doSomethingArray        = [[userDetailsArray valueForKey:@"dosomething"]mutableCopy];
     doSomethingNameArray    = [[doSomethingArray valueForKey:@"name"]mutableCopy];
     doSomethingImageArray   = [[doSomethingArray valueForKey:@"ActiveImage"]mutableCopy];
 
@@ -95,16 +105,25 @@
 #pragma mark - userAgeName
 -(NSString *) getData{
     
-    NSString *strUserData= @"";
+    NSString *strUserData;
+    [self.nameAgeLabel setFont:[UIFont fontWithName:@"FontAwesome" size:14]];
     
-    if ([userDetailsDict objectForKey:@"first_name"] != NULL && ![[userDetailsDict objectForKey:@"first_name"] isEqualToString:@""]) {
-        strUserData = [NSString stringWithFormat:@"%@%@",strUserData,[userDetailsDict objectForKey:@"first_name"]];
+    if([[userDetailsArray valueForKey:@"gender"]isEqualToString:@"Female"]){
+        strUserData= [NSString stringWithFormat:@"%@", @"\uf221"];
+        
     }
-    if ([userDetailsDict objectForKey:@"last_name"] != NULL && ![[userDetailsDict objectForKey:@"last_name"] isEqualToString:@""]) {
-        strUserData = [NSString stringWithFormat:@"%@ %@",strUserData,[userDetailsDict objectForKey:@"last_name"]];
+    else{
+         strUserData = [NSString stringWithFormat:@"%@", @"\uf222"];
     }
-    if ([userDetailsDict objectForKey:@"age"] != NULL && ![[userDetailsDict objectForKey:@"age"] isEqualToString:@""]) {
-        strUserData = [NSString stringWithFormat:@"%@, %@",strUserData,[userDetailsDict objectForKey:@"age"]];
+    
+    if ([userDetailsArray valueForKey:@"first_name"] != NULL && ![[userDetailsArray valueForKey:@"first_name"] isEqualToString:@""]) {
+        strUserData = [NSString stringWithFormat:@"%@ %@",strUserData,[userDetailsArray valueForKey:@"first_name"]];
+    }
+    if ([userDetailsArray valueForKey:@"last_name"] != NULL && ![[userDetailsArray valueForKey:@"last_name"] isEqualToString:@""]) {
+        strUserData = [NSString stringWithFormat:@"%@ %@",strUserData,[userDetailsArray valueForKey:@"last_name"]];
+    }
+    if ([userDetailsArray valueForKey:@"age"] != NULL && ![[userDetailsArray valueForKey:@"age"] isEqualToString:@""]) {
+        strUserData = [NSString stringWithFormat:@"%@, %@",strUserData,[userDetailsArray valueForKey:@"age"]];
     }
     return strUserData;
     
@@ -114,23 +133,23 @@
 -(void)profileImageDisplay{
     
     NSString *ImageURL1,*ImageURL2,*ImageURL3;
-    if([[userDetailsDict valueForKey:@"image1"]isEqual:@""]){
+    if([[userDetailsArray valueForKey:@"image1"]isEqual:@""]){
         ImageURL1=@"";
     }
     else{
-        ImageURL1=[userDetailsDict valueForKey:@"image1_thumb"];
+        ImageURL1=[userDetailsArray valueForKey:@"image1_thumb"];
     }
-    if([[userDetailsDict valueForKey:@"image2"]isEqual:@""]){
+    if([[userDetailsArray valueForKey:@"image2"]isEqual:@""]){
         ImageURL2=@"";
     }
     else{
-        ImageURL2=[userDetailsDict valueForKey:@"image2_thumb"];
+        ImageURL2=[userDetailsArray valueForKey:@"image2_thumb"];
     }
-    if([[userDetailsDict valueForKey:@"image3"]isEqual:@""]){
+    if([[userDetailsArray valueForKey:@"image3"]isEqual:@""]){
         ImageURL3=@"";
     }
     else{
-        ImageURL3=[userDetailsDict valueForKey:@"image3_thumb"];
+        ImageURL3=[userDetailsArray valueForKey:@"image3_thumb"];
     }
     profileDataArray = [[NSMutableArray alloc]initWithObjects:ImageURL1,ImageURL2,ImageURL3, nil];
     
@@ -265,7 +284,7 @@
     }
     if ( indexPath.row ==1)
     {
-        dataSize = [COMMON getControlHeight:[userDetailsDict valueForKey:@"about"] withFontName:@"Patron-Medium" ofSize:12.0 withSize:CGSizeMake(tableView.frame.size.width-20,tableView.frame.size.height)];
+        dataSize = [COMMON getControlHeight:[userDetailsArray valueForKey:@"about"] withFontName:@"Patron-Medium" ofSize:12.0 withSize:CGSizeMake(tableView.frame.size.width-20,tableView.frame.size.height)];
         self.aboutviewHeight.constant =dataSize.height;
         return  self.aboutviewHeight.constant+10;
         
@@ -311,13 +330,8 @@
         }
         [detailPageControl setHidden:YES];
         [self profileImageScrollView];
-        if([[userDetailsDict objectForKey:@"gender"]isEqualToString:@"Female"]){
-            _genderImageView.image = [UIImage imageNamed:@"female_Icon"];
-            
-        }
-        else
-            _genderImageView.image = [UIImage imageNamed:@"male_Icon"];
-            self.nameAgeLabel.text =[self getData];
+
+        self.nameAgeLabel.text =[self getData];
     }
     if (indexPath.row == 1)
     {
@@ -327,7 +341,7 @@
             [[NSBundle mainBundle] loadNibNamed:@"DSNearbyCustomCell" owner:self options:nil];
             NearbyCustomcell = cellAbout;
         }
-        NearbyCustomcell.aboutText.text = [userDetailsDict valueForKey:@"about"];
+        NearbyCustomcell.aboutText.text = [userDetailsArray valueForKey:@"about"];
         [NearbyCustomcell.aboutText sizeToFit];
         
     }
@@ -340,7 +354,7 @@
             NearbyCustomcell = cellDosomething;
         }
         
-        requestStr= [userDetailsDict valueForKey:@"send_request"];
+        requestStr= [userDetailsArray valueForKey:@"send_request"];
         if([requestStr isEqualToString:@"Yes"])
         {
             [NearbyCustomcell.letsDoSomethingButton setBackgroundColor:[UIColor colorWithRed:83.0f/255.0f
@@ -494,7 +508,7 @@
                                                                                    alpha:1.0f]];
         [NearbyCustomcell.letsDoSomethingButton setTitle:@"Request\n    Sent" forState:UIControlStateNormal];
         
-        requestUserID = [userDetailsDict valueForKey:@"user_id"];
+        requestUserID = [userDetailsArray valueForKey:@"user_id"];
         
         [objWebService sendRequest:SendRequest_API
                          sessionid:[COMMON getSessionID]

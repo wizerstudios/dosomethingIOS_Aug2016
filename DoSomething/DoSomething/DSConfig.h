@@ -33,6 +33,8 @@
 
 #pragma mark - FONTS
 
+#define FontAwesome(_size)              [UIFont fontWithName:@"fontawesome-webfont.ttf" size:_size]
+
 #define FutworaPro_Regular(_size)       [UIFont fontWithName:@"FutworaPro-Regular.otf" size:_size]
 
 #define Patron_Black(_size)             [UIFont fontWithName:@"Patron-Black.ttf" size:_size]

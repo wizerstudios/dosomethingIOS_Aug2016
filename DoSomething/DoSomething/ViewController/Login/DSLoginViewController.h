@@ -74,6 +74,7 @@
 
 @property (strong, nonatomic) IBOutlet NSLayoutConstraint *layoutConstraintPassTextFieldlYPos;
 - (IBAction)createAnAccountFB:(id)sender;
+//FORGOT PASSWORD PAGE
 - (IBAction)forgotPasswordButton:(id)sender;
 @property (strong, nonatomic) IBOutlet UIButton *facebookButton;
 
@@ -83,5 +84,6 @@
 @property (strong, nonatomic) IBOutlet UIView *forgotSecondView;
 @property (strong, nonatomic) IBOutlet UITextField *forgotTextField;
 @property (strong, nonatomic) IBOutlet UIButton *buttonSigInFwd;
+- (IBAction)termsOfUseAction:(id)sender;
 
 @end
