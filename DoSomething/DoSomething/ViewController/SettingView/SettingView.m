@@ -14,9 +14,7 @@
 #import "DSHomeViewController.h"
 #import "AppDelegate.h"
 #import "CustomAlterview.h"
-#import "DSTermsOfUseView.h"
 #import "DSTermsViewController.h"
-
 
 @interface SettingView ()
 {
@@ -36,9 +34,8 @@
     
 
 }
-
 @property (nonatomic,strong) IBOutlet NSLayoutConstraint    * deletebuttonBottomoposition;
-@property(nonatomic,retain) DSTermsOfUseView                *termsOfUseView;
+
 
 @end
 @implementation SettingView
@@ -87,8 +84,6 @@
     }
     
 }
-
-
 -(void)loadNavigationview
 {
     self.navigationController.navigationBarHidden=NO;
@@ -131,7 +126,6 @@
     [self.notificationview addSubview:vibrationSwitch];
   
 }
-
 -(void)CustomAlterviewload
 {
     
@@ -218,7 +212,6 @@
         
     }
 }
-
 - (IBAction)soundSwithAction:(UISwitch *)sender
 {
     sender.layer.cornerRadius = 16.0;
@@ -240,7 +233,6 @@
 
     }
 }
-
 #pragma mark get user CurrentLocation
 
 - (void)getUserCurrenLocation{
@@ -297,18 +289,17 @@
 
 -(void)loadLocationUpdateAPI{
     
-    [objWebService locationUpdate:LocationUpdate_API sessionid:[COMMON getSessionID] latitude:currentLatitude longitude:currentLongitude
+    [objWebService locationUpdate:LocationUpdate_API
+                        sessionid:[COMMON getSessionID]
+                         latitude:currentLatitude
+                        longitude:currentLongitude
                           success:^(AFHTTPRequestOperation *operation, id responseObject){
                               NSLog(@"responseObject = %@",responseObject);
                           }
                           failure:^(AFHTTPRequestOperation *operation, id error) {
                               
                           }];
-    
-    
 }
-
-
 - (IBAction)vibrationSwithAction:(UISwitch *)sender
 {
     sender.layer.cornerRadius = 16.0;
@@ -329,8 +320,6 @@
     
     }
 }
-
-
 #pragma mark - Logout_Delete_Action_API
 -(void)logoutDeleteAction{
    
@@ -408,88 +397,34 @@
     objCustomAlterview.alertMsgLabel.lineBreakMode = NSLineBreakByWordWrapping;
     objCustomAlterview.alertMsgLabel.numberOfLines = 2;
     [objCustomAlterview.alertMsgLabel setTextColor:[UIColor colorWithRed:(255/255.0f) green:(255/255.0f) blue:(255/255.0f) alpha:1.0f]];
-   
-     
-   
 }
 -(IBAction)didClickTearmofuseAction:(id)sender
 {
-   // [self loadTermsOfUseView];
-    
     DSTermsViewController* termViewController = [[DSTermsViewController alloc] init];
     
     [self.navigationController pushViewController:termViewController animated:YES];
 }
 -(IBAction)didClickprivacypolicyAction:(id)sender
 {
-    // [self loadTermsOfUseView];
+    
     DSTermsViewController* termViewController = [[DSTermsViewController alloc] init];
     
     [self.navigationController pushViewController:termViewController animated:YES];
 
 }
-
-
 - (IBAction)alertPressYes:(id)sender {
     
     [self logoutDeleteAction];
     objCustomAlterview.view.hidden =YES;
     objCustomAlterview. alertBgView.hidden = YES;
     objCustomAlterview.alertMainBgView.hidden = YES;
-
 }
-
 - (IBAction)alertPressNo:(id)sender {
     
     objCustomAlterview.alertBgView.hidden = YES;
     objCustomAlterview.alertMainBgView.hidden = YES;
     objCustomAlterview.view.hidden =YES;
-      
-
 }
-
-#pragma mark TermsOfUse
-
--(void)loadTermsOfUseView
-{
-    windowInfo = [[[UIApplication sharedApplication] delegate] window];
-    
-    DSTermsOfUseView *termsOfUseView = [[DSTermsOfUseView alloc] init];
-    
-    [windowInfo addSubview:termsOfUseView];
-    
-    [termsOfUseView.closeButton addTarget:self action:@selector(closeButtonAction:) forControlEvents:UIControlEventTouchUpInside];
-   
-    [self setTermsOfUseView:termsOfUseView];
-    
-    NSDictionary *dictView = @{@"_terms":termsOfUseView};
-    
-    [windowInfo addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[_terms]|"
-                                
-                                                                       options:0
-                                
-                                                                       metrics:nil views:dictView]];
-    
-    [windowInfo addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[_terms]|"
-                                
-                                                                       options:0
-                                
-                                                                       metrics:nil views:dictView]];
-
-    
-    
-}
-
--(IBAction)closeButtonAction:(id)sender
-{
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        [self.termsOfUseView removeFromSuperview];
-        
-    });
-}
-
-
-
 -(void)loadInvalidSessionAlert:(NSNotification *)notification
 {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
