@@ -18,7 +18,6 @@
 #import "NSString+validations.h"
 #import "UIImageView+AFNetworking.h"
 #import "CustomAlterview.h"
-#import "DSTermsOfUseView.h"
 #import "DSHomeViewController.h"
 #import "AppDelegate.h"
 #import "DSTermsViewController.h"
@@ -101,7 +100,7 @@
     
 
 }
-@property(nonatomic,retain) DSTermsOfUseView *termsOfUseView;
+
 @end
 
 
@@ -1663,46 +1662,12 @@
 
 -(IBAction)loadTermsOfUseViewAction:(id)sender
 {
-    //[self loadTermsOfUseView];
+    
     DSTermsViewController* termViewController = [[DSTermsViewController alloc] init];
     
     [self.navigationController pushViewController:termViewController animated:YES];
 }
 
--(void)loadTermsOfUseView
-{
-    windowInfo = [[[UIApplication sharedApplication] delegate] window];
-    
-    DSTermsOfUseView *termsOfUseView = [[DSTermsOfUseView alloc] init];
-    
-    [windowInfo addSubview:termsOfUseView];
-    
-    [termsOfUseView.closeButton addTarget:self action:@selector(closeButtonAction:) forControlEvents:UIControlEventTouchUpInside];
-    
-    [self setTermsOfUseView:termsOfUseView];
-    
-    NSDictionary *dictView = @{@"_terms":termsOfUseView};
-    
-    [windowInfo addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[_terms]|"
-                                
-                                                                       options:0
-                                
-                                                                       metrics:nil views:dictView]];
-    
-    [windowInfo addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[_terms]|"
-                                
-                                                                       options:0
-                                
-                                                                       metrics:nil views:dictView]];
-}
-
--(IBAction)closeButtonAction:(id)sender
-{
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        [self.termsOfUseView removeFromSuperview];
-        
-    });
-}
 #pragma mark -notificationMethod
 -(void)notificationMethod
 {
