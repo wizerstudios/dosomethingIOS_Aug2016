@@ -21,7 +21,7 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="TERMS OF USE AND PRIVATE POLICY" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3VM-kV-WVL">
-                    <rect key="frame" x="27" y="83" width="269" height="21"/>
+                    <rect key="frame" x="29" y="83" width="269" height="21"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="21" id="7aR-uk-SJM"/>
                         <constraint firstAttribute="width" constant="269" id="tpj-XZ-nOW"/>
@@ -35,9 +35,9 @@
             <constraints>
                 <constraint firstItem="3VM-kV-WVL" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="83" id="DFc-49-11d"/>
                 <constraint firstAttribute="bottom" secondItem="3VM-kV-WVL" secondAttribute="bottom" constant="464" id="DxX-za-Pfn"/>
-                <constraint firstAttribute="trailing" secondItem="3VM-kV-WVL" secondAttribute="trailing" constant="24" id="XLE-Kj-ukq"/>
-                <constraint firstItem="3VM-kV-WVL" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="27" id="fJ2-RU-mUy"/>
-                <constraint firstItem="3VM-kV-WVL" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" constant="1.5" id="mKz-Lw-oq7"/>
+                <constraint firstAttribute="trailing" secondItem="3VM-kV-WVL" secondAttribute="trailing" constant="22" id="XLE-Kj-ukq"/>
+                <constraint firstItem="3VM-kV-WVL" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="29" id="fJ2-RU-mUy"/>
+                <constraint firstItem="3VM-kV-WVL" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" constant="3.5" id="mKz-Lw-oq7"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
         </view>

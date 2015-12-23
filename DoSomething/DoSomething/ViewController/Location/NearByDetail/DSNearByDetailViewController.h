@@ -41,7 +41,9 @@
 @property (strong, nonatomic) IBOutlet UILabel *nameAgeLabel;
 @property (weak, nonatomic) IBOutlet UIView *topViewCell;
 
-@property (strong, nonatomic) NSMutableDictionary *userDetailsDict;
+@property (strong, nonatomic) NSMutableArray *userDetailsArray;
+
+
 
 
 @property (strong, nonatomic) IBOutlet UITableView *nearbyTbl;

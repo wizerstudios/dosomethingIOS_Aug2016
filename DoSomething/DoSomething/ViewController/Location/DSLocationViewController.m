@@ -501,16 +501,15 @@
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath;
 {
     
-    UICollectionViewCell *cell = [collectionView cellForItemAtIndexPath:indexPath];
-    NSLog(@"touched cell %@ at indexPath %@", cell, indexPath);
+    UICollectionViewCell *cell;
+    cell = [collectionView cellForItemAtIndexPath:indexPath];
+   
+    NSMutableArray *detailsArray = [commonlocationArray objectAtIndex:indexPath.row];
     
-    profileUserID=[[commonlocationArray valueForKey:@"user_id"] objectAtIndex:indexPath.row];
-    NSLog(@"profileUserID%@",profileUserID);
+    DSNearByDetailViewController* detailViewController = [[DSNearByDetailViewController alloc] init];
+    detailViewController.userDetailsArray = detailsArray;
+    [self.navigationController pushViewController:detailViewController animated:YES];
     
-    
-    [self getUserDetails];
-    
-    NSLog(@"%ld", (long)indexPath.row);
     
 }
 
@@ -532,31 +531,6 @@
 }
 
 
--(void)getUserDetails{
-    
-    [COMMON LoadIcon:self.view];
-    [objWebservice getUserDetails:UserDetails_API
-                        sessionid:[COMMON getSessionID]
-                  profile_user_id:profileUserID
-                          success:^(AFHTTPRequestOperation *operation, id responseObject) {
-                              if( [responseObject objectForKey:@"getuserdetails"]!=NULL){
-                                                                    
-                                  [self redirectToDetailViewWithDictionary:[[responseObject objectForKey:@"getuserdetails"]objectForKey:@"userDetails"]];
-                                  [COMMON removeLoading];
-                              }
-                              
-                          }
-                          failure:^(AFHTTPRequestOperation *operation, id error) {
-                              NSLog(@"error%@",error);
-                          }];
-}
-- (void) redirectToDetailViewWithDictionary:(NSMutableDictionary *) detailsDictionary {
-    
-   // DSDetailViewController* detailViewController = [[DSDetailViewController alloc] init];
-    DSNearByDetailViewController* detailViewController = [[DSNearByDetailViewController alloc] init];
-    detailViewController.userDetailsDict = detailsDictionary;
-    [self.navigationController pushViewController:detailViewController animated:YES];
-}
 
 -(void)didClickRequestSend:(id)sender
 {

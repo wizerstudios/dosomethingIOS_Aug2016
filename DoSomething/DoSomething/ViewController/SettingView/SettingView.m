@@ -334,45 +334,42 @@
 #pragma mark - Logout_Delete_Action_API
 -(void)logoutDeleteAction{
    
-        [objWebService logoutDeleteUser:User_Logout_Delete_API
+    [objWebService logoutDeleteUser:User_Logout_Delete_API
+     
                           sessionId:[COMMON getSessionID]
+     
                                  op:optionLogoutDelete
+     
                             success:^(AFHTTPRequestOperation *operation, id responseObject) {
-                                NSLog(@"logout");
-                                NSLog(@"logoutDeleteUser %@ =" , responseObject);
-                                if([[[responseObject valueForKey:@"useraction"]valueForKey:@"status"] isEqualToString:@"success"])
-                                {
-                                                                   }
-                                else if([responseObject valueForKey:@"error"])
-                                {
-                                    
-                                    
-                                }
-                                else
-                                {
-                                      NSLog(@"delete failure");
-                                }
                                 
+                                NSLog(@"logoutDeleteUser %@ =" , responseObject);
+                                
+                                if([[[responseObject valueForKey:@"useraction"]valueForKey:@"status"] isEqualToString:@"success"])
+                                    
+                                {
+                                    
+                                    [COMMON removeUserDetails];
+                                    
+                                    [[NSUserDefaults standardUserDefaults]removeObjectForKey:HobbiesArray];
+                                    
+                                    DSHomeViewController*objSplashView =[[DSHomeViewController alloc]initWithNibName:@"DSHomeViewController" bundle:nil];
+                                    
+                                    [self.navigationController pushViewController:objSplashView animated:NO];
+                                    
+                                    appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+                                    
+                                    appDelegate.buttonsView.hidden=YES;
+                                    
+                                    appDelegate.SepratorLbl.hidden=YES;
+                                    
+                                }
+                                                                
                             }
+     
                             failure:^(AFHTTPRequestOperation *operation, id error) {
-                                NSLog(@"logout failure");
-
+                                
+                                
                             }];
-   
-    
-    [COMMON removeUserDetails];
- 
-    
-    DSHomeViewController*objSplashView =[[DSHomeViewController alloc]initWithNibName:@"DSHomeViewController" bundle:nil];
-    [self.navigationController pushViewController:objSplashView animated:NO];
-    
-    [COMMON removeUserDetails];
-    appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
-    appDelegate.buttonsView.hidden=YES;
-     appDelegate.SepratorLbl.hidden=YES;
-    [appDelegate.settingButton setBackgroundImage:[UIImage imageNamed:@"setting_icon.png"] forState:UIControlStateNormal];
-    
-
 }
 -(IBAction)didClickLogoutButtonAction:(id)sender
 {
@@ -432,20 +429,19 @@
 
 
 - (IBAction)alertPressYes:(id)sender {
-     objCustomAlterview.view.hidden =YES;
-       objCustomAlterview. alertBgView.hidden = YES;
-        objCustomAlterview.alertMainBgView.hidden = YES;
-         [self logoutDeleteAction];
-        
+    
+    [self logoutDeleteAction];
+    objCustomAlterview.view.hidden =YES;
+    objCustomAlterview. alertBgView.hidden = YES;
+    objCustomAlterview.alertMainBgView.hidden = YES;
 
-   }
+}
 
 - (IBAction)alertPressNo:(id)sender {
     
-        objCustomAlterview.alertBgView.hidden = YES;
-        
-        objCustomAlterview.alertMainBgView.hidden = YES;
-        objCustomAlterview.view.hidden =YES;
+    objCustomAlterview.alertBgView.hidden = YES;
+    objCustomAlterview.alertMainBgView.hidden = YES;
+    objCustomAlterview.view.hidden =YES;
       
 
 }
