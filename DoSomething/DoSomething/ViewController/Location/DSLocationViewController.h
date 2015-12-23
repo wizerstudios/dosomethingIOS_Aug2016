@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import <CoreLocation/CoreLocation.h>
-
+#import "NMRangeSlider.h"
 
 @interface DSLocationViewController : UIViewController<UICollectionViewDataSource,UICollectionViewDelegate,UICollectionViewDelegateFlowLayout,CLLocationManagerDelegate>
 @property (nonatomic, assign) id delegate;
@@ -26,4 +26,14 @@
 @property (strong, nonatomic) IBOutlet UISlider *ageSlider;
 @property (strong, nonatomic) IBOutlet UISlider *distanceSlider;
 
+@property (weak, nonatomic) IBOutlet NMRangeSlider *labelSlider;
+@property (weak, nonatomic) IBOutlet UILabel *lowerLabel;
+@property (weak, nonatomic) IBOutlet UILabel *upperLabel;
+- (IBAction)labelSliderChanged:(NMRangeSlider*)sender;
+
+
+@property (weak, nonatomic) IBOutlet NMRangeSlider *labelSlider1;
+@property (weak, nonatomic) IBOutlet UILabel *agelowerLabel;
+@property (weak, nonatomic) IBOutlet UILabel *ageupperLabel;
+- (IBAction)ageSliderChanged:(NMRangeSlider*)sender;
 @end
