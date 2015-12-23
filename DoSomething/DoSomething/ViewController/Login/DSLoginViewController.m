@@ -135,13 +135,13 @@
             
         }
         _forgotView.hidden=NO;
-        NSString *stringForgot = @"Forgot Your Password?";
+        NSString *stringForgot = @"Forget Your Password?";
         NSMutableAttributedString *attStrForgot = [[NSMutableAttributedString alloc] initWithString:stringForgot ];
-        [attStrForgot addAttribute:NSFontAttributeName value:PATRON_REG(12) range:[stringForgot rangeOfString:@"Forgot Your Password?"]];
+        [attStrForgot addAttribute:NSFontAttributeName value:PATRON_REG(12) range:[stringForgot rangeOfString:@"Forget Your Password?"]];
         _forgotPasswordLabel.attributedText = attStrForgot;
-        NSString *string = @"No problem! Just fill in your Email and we'll send you password to reset instructions";
+        NSString *string = @"No problem! Just fill in your Email and we'll send you password to reset instructions!";
         NSMutableAttributedString *attStr = [[NSMutableAttributedString alloc] initWithString:string ];
-        [attStr addAttribute:NSFontAttributeName value:PATRON_REG(12) range:[string rangeOfString:@"No problem! Just fill in your Email and we'll send \n you password to reset instructions"]];
+        [attStr addAttribute:NSFontAttributeName value:PATRON_REG(12) range:[string rangeOfString:@"No problem! Just fill in your Email and we'll send \n you password to reset instructions!"]];
         _forgotInstructionTextView.attributedText = attStr;
         _facebookButton.hidden= YES;
         
@@ -248,14 +248,39 @@
     [self.navigationController pushViewController:DSLoginView animated:YES];
     
 }
+#pragma mark forgotPasswordAction
 - (void)forgotPasswordAction:(id)sender {
+    [self.view endEditing:YES];
     
+    if([NSString isEmpty:self.forgotTextField.text] ){
+        
+        [self showAltermessage:EMAIL_REQUIRED];
+        return;
+    }
+    if(![NSString validateEmail:self.forgotTextField.text]){
+        [self showAltermessage:INVALID_EMAIL];
+        return;
+    }
+    
+    [objWebService forgetPasswordRequest:ForgetPassword_API
+                                   email:self.forgotTextField.text
+                                 success:^(AFHTTPRequestOperation *operation, id responseObject) {
+                                     if([[[responseObject objectForKey:@"forgetpassword"]objectForKey:@"status"] isEqualToString:@"success"]){
+                                         [self showAltermessage:[[responseObject objectForKey:@"forgetpassword"]objectForKey:@"message"]];
+                                     }
+                                     else{
+                                         [self showAltermessage:[[responseObject objectForKey:@"forgetpassword"]objectForKey:@"message"]];
+                                     }
+                                 }
+                                 failure:^(AFHTTPRequestOperation *operation, id error) {
+                                     NSLog(@"error%@",error);
+                                     [self showAltermessage:[NSString stringWithFormat:@"%@",error]];
+                                 }];
     
 }
 
 -(IBAction)loadTermsOfUseViewAction:(id)sender
 {
-    //[self loadTermsOfUseView];
     DSTermsViewController* termViewController = [[DSTermsViewController alloc] init];
     
     [self.navigationController pushViewController:termViewController animated:YES];

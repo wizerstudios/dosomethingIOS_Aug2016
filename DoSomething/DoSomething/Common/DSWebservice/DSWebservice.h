@@ -230,6 +230,13 @@ message_send_user_id:(NSString *)message_send_user_id
     success:(WebserviceRequestSuccessHandler)success
     failure:(WebserviceRequestFailureHandler)failure;
 
+//ForgotPassword_API
+-(void)forgetPasswordRequest:(NSString *)forgotPasswordRequestURL
+                       email:(NSString *)email
+                     success:(WebserviceRequestSuccessHandler)success
+                     failure:(WebserviceRequestFailureHandler)failure;
+
+
 
 
 
