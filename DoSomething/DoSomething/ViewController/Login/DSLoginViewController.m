@@ -421,17 +421,16 @@
                      success:^(AFHTTPRequestOperation *operation, id responseObject){
                          NSLog(@"checkuser = %@",responseObject);
                          NSLog(@"checkuser = %@",[[responseObject objectForKey:@"checkuser"]objectForKey:@"status"]);
-                         if(([[[responseObject objectForKey:@"checkuser"]objectForKey:@"RegisterType"]  isEqual: @"1"])){
-                             if([[[responseObject objectForKey:@"checkuser"]objectForKey:@"status"]  isEqual: @"error"]){
-                                 [self showAltermessage:[[responseObject objectForKey:@"checkuser"]objectForKey:@"Message"]];
-                                 [COMMON removeLoading];
+                            if(([[[responseObject objectForKey:@"checkuser"]objectForKey:@"RegisterType"]  isEqual: @"1"])){
+                                [self gotoProfileView:email :password:YES];//[self gotoProfileView];
+                                [COMMON removeLoading];
                              }
                              else {
-                                 [self gotoProfileView:email :password:YES];//[self gotoProfileView];
+                                 [self showAltermessage:[[responseObject objectForKey:@"checkuser"]objectForKey:@"Message"]];
                                  [COMMON removeLoading];
+                                
                              }
-                         }
-                         else {
+                         
                              if(([[[responseObject objectForKey:@"checkuser"]objectForKey:@"RegisterType"]  isEqual: @"2"])){
                                  if([[[responseObject objectForKey:@"checkuser"]objectForKey:@"status"]  isEqual: @"success"]){
                                      NSLog(@"checkuser = %@",responseObject);
@@ -443,7 +442,7 @@
                                      [self loadloginAPI];
                                  }
                                  
-                             }
+                            
 //                             else{
 //                             if([[[responseObject objectForKey:@"checkuser"]objectForKey:@"status"]  isEqual: @"error"]){
 //                                // [self loadCreateAPI];

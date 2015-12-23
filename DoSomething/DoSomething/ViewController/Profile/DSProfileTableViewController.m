@@ -22,6 +22,8 @@
 #import "DSHomeViewController.h"
 #import "AppDelegate.h"
 #import "DSTermsViewController.h"
+#import "IQKeyboardManager.h"
+#import "IQUIView+IQKeyboardToolbar.h"
 
 
 
@@ -112,6 +114,8 @@
 - (void)viewDidLoad {
     
     [super viewDidLoad];
+    
+    [[IQKeyboardManager sharedManager] considerToolbarPreviousNextInViewClass:[_tableviewProfile class]];
     
     locationManager                 = [[CLLocationManager alloc] init];
     
@@ -589,6 +593,23 @@
     datePicker   = [[UIDatePicker alloc] initWithFrame:CGRectMake(0, 300, 320, 150)];
     
     [datePicker setDatePickerMode:UIDatePickerModeDate];
+    NSCalendar *calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
+    NSDate *currentDate = [NSDate date];
+    NSDateComponents *components = [calendar components:(NSCalendarUnitYear | NSCalendarUnitMonth | NSCalendarUnitDay) fromDate:[NSDate date]];
+    NSDateComponents *comps = [[NSDateComponents alloc] init];
+    NSInteger year = components.year;
+    NSInteger month = components.month;
+    NSInteger day = components.day;
+    NSInteger minimumYear = year - 1915;//Given some year here for example
+    NSInteger minimumMonth = month - 1;
+    NSInteger minimumDay = day - 1;
+    [comps setYear:-minimumYear];
+    [comps setMonth:-minimumMonth];
+    [comps setDay:-minimumDay];
+    NSDate *minDate = [calendar dateByAddingComponents:comps toDate:currentDate options:0];
+    
+    [datePicker setMinimumDate:minDate];
+    [datePicker setMaximumDate:[NSDate date]];
     
     datePicker.backgroundColor = [UIColor whiteColor];
     
@@ -596,7 +617,7 @@
     
     datePicker.tag =_tag;
     
-    if([currentTextfield.text length] > 0  && ![currentTextfield.text isEqualToString:@"DD/MM/YYYY"]){
+    if([currentTextfield.text length] > 0  && ![currentTextfield.text isEqualToString:@"DD / MM / YYYY"]){
         
         NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
         
@@ -624,7 +645,7 @@
     
     [dateFormat setTimeZone:[NSTimeZone systemTimeZone]];
     
-    [dateFormat setDateFormat:@"dd/MM/YYYY"];
+    [dateFormat setDateFormat:@"dd / MM / YYYY"];
     
     NSString *dateString =  [dateFormat stringFromDate:sender.date];
     
@@ -672,13 +693,7 @@
 
 
 -(BOOL)textFieldShouldReturn:(UITextField*)textField {
-    if (textField.tag == 11) {
-       
-    }
-    else if (textField.tag ==12)
-    {
-        
-    }
+    
     [textField resignFirstResponder];
  
     return YES;
@@ -708,7 +723,7 @@
        
         NSDate *date = datePicker.date;
         NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-        [formatter setDateFormat:@"dd/MM/yyyy"];
+        [formatter setDateFormat:@"dd / MM / yyyy"];
         selOptionVal = [formatter stringFromDate:date];
        
         if(selOptionVal != nil || ![selOptionVal isEqualToString:@""]){
@@ -718,7 +733,7 @@
         
         
     }
-    [self.tableviewProfile scrollToRowAtIndexPath:[self.tableviewProfile indexPathForCell:cell] atScrollPosition:UITableViewScrollPositionBottom animated:NO];
+  //  [self.tableviewProfile scrollToRowAtIndexPath:[self.tableviewProfile indexPathForCell:cell] atScrollPosition:UITableViewScrollPositionBottom animated:NO];
 
     
 }
@@ -748,7 +763,7 @@
                                     [NSMutableDictionary dictionaryWithObjectsAndKeys:[userDetailsDict valueForKey:@"first_name"],@"placeHolder", nil],
                                     [NSMutableDictionary dictionaryWithObjectsAndKeys:[userDetailsDict valueForKey:@"last_name"],@"placeHolder", nil],
                                     [NSMutableDictionary dictionaryWithObjectsAndKeys:[userDetailsDict valueForKey:@"gender"],@"placeHolder", nil],
-                                    [NSMutableDictionary dictionaryWithObjectsAndKeys:@"DD/MM/YYYY",@"placeHolder", nil],
+                                    [NSMutableDictionary dictionaryWithObjectsAndKeys:@"DD / MM / YYYY",@"placeHolder", nil],
                                     [NSMutableDictionary dictionaryWithObjectsAndKeys:@"Write something about yourself here.",@"placeHolder", nil],
                                     [NSMutableDictionary dictionaryWithObjectsAndKeys:@"Hobbies",@"placeHolder", nil],
                                     [NSMutableDictionary dictionaryWithObjectsAndKeys:[userDetailsDict valueForKey:@"email"],@"placeHolder",@"Password",@"placeHolderPass",@"",@"TypingTextPass", nil],
@@ -849,7 +864,7 @@
         }
         if(indexPath.row ==1)
         {
-            return 75;
+            return 80;
         }
         if(indexPath.row ==2)
         {
@@ -857,8 +872,10 @@
         }
         if(indexPath.row ==3)
         {
-            return 40;
+            return 45;
         }
+       if(indexPath.row == 4)
+           return  48;
     
        if(indexPath.row == 5)
         {
@@ -1017,11 +1034,10 @@
         if (cell == nil)
         {
             [[NSBundle mainBundle] loadNibNamed:@"DSProfileTableViewCell" owner:self options:nil];
-            cell = cellTextField;
-           
+            cell = cellButton;
             
         }
-         cellTextField.hidden =YES;
+        [cellButton setHidden:YES];
 
     }
     if (indexPath.row == 3)
@@ -1061,7 +1077,7 @@
         
         
         if( profileDict !=NULL){
-            
+
             profileGenderValueLabel.text =[profileDict valueForKey:@"gender"];
             
         }
@@ -1139,23 +1155,27 @@
                 
                 if(currentTextfield.text == NULL){
                     if([[profileDict valueForKey:@"date_of_birth"]isEqualToString:@"00/00/0000"])
-                        cell.textFieldDPPlaceHolder.text = @"DD/MM/YYYY";
-                    else
-                        cell.textFieldDPPlaceHolder.text =[profileDict valueForKey:@"date_of_birth"];
-                    [cell.textFieldDPPlaceHolder setTag:1000];
+                        cell.textFieldDPPlaceHolder.text = @"DD / MM / YYYY";
+                    else{
+                        NSString *dateStr = [profileDict valueForKey:@"date_of_birth"];
+                        dateStr = [dateStr stringByReplacingOccurrencesOfString:@"/" withString:@" / "];
+                        cell.textFieldDPPlaceHolder.text =dateStr;
+                    }
+                        [cell.textFieldDPPlaceHolder setTag:1000];
 
                 }
                 else{
-                    [cell.textFieldDPPlaceHolder setTag:1000];
+                   
                     cell.textFieldDPPlaceHolder.text = currentTextfield.text;
                 }
             }
             else{
-                cell.textFieldDPPlaceHolder.text =[profileDict valueForKey:@"date_of_birth"];
-                [cell.textFieldDPPlaceHolder setTag:1000];
+                NSString *dateStr = [profileDict valueForKey:@"date_of_birth"];
+                dateStr = [dateStr stringByReplacingOccurrencesOfString:@"/" withString:@" / "];
+                cell.textFieldDPPlaceHolder.text =dateStr;
                 
             }
-            
+             [cell.textFieldDPPlaceHolder setTag:1000];
            
             
         }
@@ -2239,7 +2259,7 @@
 -(void)dateConverter{
     
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-    [dateFormatter setDateFormat:@"dd/MM/yyyy"];
+    [dateFormatter setDateFormat:@"dd / MM / yyyy"];
     NSDate *date = [dateFormatter dateFromString: strDOB];
     dateFormatter = [[NSDateFormatter alloc] init];
     [dateFormatter setDateFormat:@"yyyy-MM-dd"];
