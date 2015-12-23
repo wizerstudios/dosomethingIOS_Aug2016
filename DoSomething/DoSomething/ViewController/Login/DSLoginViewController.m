@@ -19,6 +19,7 @@
 #import <FBSDKCoreKit/FBSDKCoreKit.h>
 #import <FBSDKLoginKit/FBSDKLoginKit.h>
 #import "CustomAlterview.h"
+#import "DSTermsViewController.h"
 
 
 @interface DSLoginViewController ()<CLLocationManagerDelegate>
@@ -86,14 +87,16 @@
      labelFacebook.attributedText = attStr;
      labelFacebook.attributedText = attStr;
      labelFacebook.tag = 10;
-      labelEmail.text =@"Or sign up with your email";
-      labelCreateAnAcc.text =@"Create Your Account";
-      labelInstruction.text =@"By selecting this,you agree to our Terms of Use and our Privacy Policy";
-      [buttonTermsOfUse setTitle:@"Terms of Use" forState:UIControlStateNormal];
-      [buttonPrivacyPolicy setTitle:@"Privacy Policy" forState:UIControlStateNormal];
-      [buttonHaveAnAcc setTitle:@"Have an account? Sign In" forState:UIControlStateNormal];
-      buttonCreateAnAcc.hidden =YES;
-      buttonForgotPass.hidden=YES;
+     labelEmail.text =@"Or sign up with your email";
+     labelCreateAnAcc.text =@"Create Your Account";
+     labelInstruction.text =@"By selecting this,you agree to our Terms of Use and our Privacy Policy";
+     [buttonTermsOfUse setTitle:@"Terms of Use" forState:UIControlStateNormal];
+     [buttonPrivacyPolicy setTitle:@"Privacy Policy" forState:UIControlStateNormal];
+     [buttonTermsOfUse addTarget:self action:@selector(loadTermsOfUseViewAction:) forControlEvents:UIControlEventTouchUpInside];
+     [buttonPrivacyPolicy addTarget:self action:@selector(loadTermsOfUseViewAction:) forControlEvents:UIControlEventTouchUpInside];
+     [buttonHaveAnAcc setTitle:@"Have an account? Sign In" forState:UIControlStateNormal];
+     buttonCreateAnAcc.hidden =YES;
+     buttonForgotPass.hidden=YES;
      [buttonSignIn addTarget:self action:@selector(CreateAnAccount) forControlEvents:UIControlEventTouchUpInside];
      _forgotView.hidden=YES;
      _buttonSigInFwd.hidden=YES;
@@ -105,8 +108,8 @@
 
 
      }
-      NSString *string = @"Log in with Facebook";
-      NSMutableAttributedString *attStr = [[NSMutableAttributedString alloc] initWithString:string ];
+     NSString *string = @"Log in with Facebook";
+     NSMutableAttributedString *attStr = [[NSMutableAttributedString alloc] initWithString:string ];
      [attStr addAttribute:NSFontAttributeName value:PATRON_REG(12) range:[string rangeOfString:@"Log in with"]];
      [attStr addAttribute:NSFontAttributeName value:PATRON_BOLD(12) range:[string rangeOfString:@"Facebook"]];
      labelFacebook.attributedText = attStr;
@@ -245,10 +248,19 @@
     [self.navigationController pushViewController:DSLoginView animated:YES];
     
 }
-- (IBAction)forgotPasswordAction:(id)sender {
+- (void)forgotPasswordAction:(id)sender {
     
     
 }
+
+-(IBAction)loadTermsOfUseViewAction:(id)sender
+{
+    //[self loadTermsOfUseView];
+    DSTermsViewController* termViewController = [[DSTermsViewController alloc] init];
+    
+    [self.navigationController pushViewController:termViewController animated:YES];
+}
+
 
 #pragma mark - CustomalterviewMethod
 
@@ -666,4 +678,6 @@
 }
 
 
+- (IBAction)termsOfUseAction:(id)sender {
+}
 @end
