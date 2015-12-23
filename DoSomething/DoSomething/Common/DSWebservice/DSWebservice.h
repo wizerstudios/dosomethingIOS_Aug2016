@@ -158,6 +158,7 @@ notification_vibration:(NSString*)isnotification_vibration
           longitude:(NSString *)longitude
       filter_status:(NSString *)filter_status
       filter_gender:(NSString *)filter_gender
+   filter_available:(NSString *)filter_available
     filter_agerange:(NSString *)filter_agerange
     filter_distance:(NSString *)filter_distance
                page:(NSString *)currentpage
