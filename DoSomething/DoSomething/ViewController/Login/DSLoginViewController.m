@@ -654,8 +654,22 @@
 #pragma mark - ButtonActions
 - (IBAction)Back:(id)sender {
     
-    [self.navigationController popToRootViewControllerAnimated:YES];
-       
+    NSArray *viewControllers = [[self navigationController] viewControllers];
+    
+    for( int i=0;i<[viewControllers count];i++){
+        
+        id obj=[viewControllers objectAtIndex:i];
+        
+        if([obj isKindOfClass:[DSHomeViewController class]]){
+            
+            [[self navigationController] popToViewController:obj animated:YES];
+            
+            return;
+            
+        }
+        
+    }
+    
 }
 
 - (IBAction)createAnAccountFB:(id)sender {
