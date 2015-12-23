@@ -266,22 +266,21 @@
                                    email:self.forgotTextField.text
                                  success:^(AFHTTPRequestOperation *operation, id responseObject) {
                                 
-                                     NSLog(@"FWD_SUCCESS%@", [responseObject objectForKey:@"forgetpassword"]);
-                                     
                                      if([[[responseObject objectForKey:@"forgetpassword"]objectForKey:@"status"] isEqualToString:@"success"]){
-                                         [self showAltermessage:@"password reseted successfully please check your mail"];
+                                         [self showAltermessage:[[responseObject objectForKey:@"forgetpassword"]objectForKey:@"message"]];
                                          
                                           NSLog(@"FWD_SUCCESS%@",responseObject);
                                      }
                                      else{
                                           NSLog(@"FWD_ERROR%@",responseObject);
-                                         [self showAltermessage:@"enter valid email address"];
+                                         [self showAltermessage:[[responseObject objectForKey:@"forgetpassword"]objectForKey:@"message"]];
                                          
                                      }
                                      
                                  }
                                  failure:^(AFHTTPRequestOperation *operation, id error) {
                                      NSLog(@"error%@",error);
+                                     [self showAltermessage:[NSString stringWithFormat:@"%@",error]];
                                  }];
     
 }
