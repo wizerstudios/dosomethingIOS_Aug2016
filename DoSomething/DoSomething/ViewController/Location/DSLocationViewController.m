@@ -38,7 +38,8 @@
      NSString          *currentloadPage;
     
     NSString * onlineStatus;
-    NSString * avalibleGenderStatus;
+    NSString * GenderStatus;
+    NSString * avalableStatus;
     LocationCollectionViewCell*locationCellView;
     NSString * filterAge;
     NSString * filterDistance;
@@ -55,9 +56,14 @@
 @property(nonatomic,strong) IBOutlet UIButton *onlineBtn;
 @property(nonatomic,strong) IBOutlet UIButton *offlineBtn;
 @property(nonatomic,strong) IBOutlet UIButton *statusBothBtn;
+
+@property(nonatomic,strong) IBOutlet UIButton *avalableYesBtn;
+@property(nonatomic,strong) IBOutlet UIButton *avalableNoBtn;
+@property(nonatomic,strong) IBOutlet UIButton *avalableBothBtn;
+
 @property(nonatomic,strong) IBOutlet UIButton *maleBtn;
 @property(nonatomic,strong) IBOutlet UIButton *FemaleBtn;
-@property(nonatomic,strong) IBOutlet UIButton *avablebothBtn;
+@property(nonatomic,strong) IBOutlet UIButton *genderbothBtn;
 
 
 @property(nonatomic,strong) IBOutlet UISwipeGestureRecognizer * locationviewSwipright;
@@ -84,7 +90,8 @@
     
     commonlocationArray =[[NSMutableArray alloc]init];
     onlineStatus=@"";
-    avalibleGenderStatus=@"";
+    GenderStatus=@"";
+    avalableStatus=@"";
     objWebservice =[[DSWebservice alloc]init];
     currentloadPage= @"1";
 
@@ -206,10 +213,25 @@
     self.FemaleBtn.layer.borderWidth =4;
     [self.FemaleBtn.layer setBorderColor:[[UIColor whiteColor] CGColor]];
     
-    self.avablebothBtn.layer.cornerRadius =10;
-    self.avablebothBtn.layer.masksToBounds = YES;
-    self.avablebothBtn.layer.borderWidth =4;
-    [self.avablebothBtn.layer setBorderColor:[[UIColor whiteColor] CGColor]];
+    self.genderbothBtn.layer.cornerRadius =10;
+    self.genderbothBtn.layer.masksToBounds = YES;
+    self.genderbothBtn.layer.borderWidth =4;
+    [self.genderbothBtn.layer setBorderColor:[[UIColor whiteColor] CGColor]];
+    
+    self.avalableYesBtn.layer.cornerRadius =10;
+    self.avalableYesBtn.layer.masksToBounds = YES;
+    self.avalableYesBtn.layer.borderWidth =4;
+    [self.avalableYesBtn.layer setBorderColor:[[UIColor whiteColor] CGColor]];
+    
+    self.avalableNoBtn.layer.cornerRadius =10;
+    self.avalableNoBtn.layer.masksToBounds = YES;
+    self.avalableNoBtn.layer.borderWidth =4;
+    [self.avalableNoBtn.layer setBorderColor:[[UIColor whiteColor] CGColor]];
+    
+    self.avalableBothBtn.layer.cornerRadius =10;
+    self.avalableBothBtn.layer.masksToBounds = YES;
+    self.avalableBothBtn.layer.borderWidth =4;
+    [self.avalableBothBtn.layer setBorderColor:[[UIColor whiteColor] CGColor]];
     
 }
 
@@ -264,16 +286,7 @@
     [locationManager stopUpdatingLocation];
     
     NSLog(@"current latitude & longitude for main view = %@ & %@",currentLatitude,currentLongitude);
-//    if([[NSUserDefaults standardUserDefaults]valueForKey:@"nearByLocationCommonArray"] == 0)
-//    {
-   
-        
-    //}
-    //else
-    //{
-        //commonlocationArray =[[NSUserDefaults standardUserDefaults]valueForKey:@"nearByLocationCommonArray"];
-      // [//locationCollectionView reloadData];
-   // }
+
     
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         
@@ -310,10 +323,11 @@
     [COMMON LoadIcon:self.view];
        [objWebservice nearestUsers:NearestUsers_API
                          sessionid:[COMMON getSessionID]
-                          latitude:longitude
-                         longitude:latitude
+                          latitude:latitude
+                         longitude:longitude
                      filter_status:onlineStatus
-                     filter_gender:avalibleGenderStatus
+                     filter_gender:GenderStatus
+                  filter_available:avalableStatus
                    filter_agerange:(filterAge==nil)?@"":filterAge
                    filter_distance:(filterDistance==nil)?@"":filterDistance
                               page:currentloadPage
@@ -322,7 +336,7 @@
                              {
                                  
                                       
-                                       if ([currentloadPage isEqualToString:@"1"]) {
+                                       if ([[[responseObject valueForKey:@"nearestusers"]valueForKey:@"page"] isEqualToString:@"1"]) {
                                        
                                            NSMutableArray * nearestUserdetaile =[[NSMutableArray alloc]init];
                                            nearestUserdetaile =[[responseObject valueForKey:@"nearestusers"] valueForKey:@"UserList"];
@@ -601,7 +615,7 @@
         [self filterviewPosition];
         isFilteraction=YES;
         [self.locationCollectionView setUserInteractionEnabled:YES];
-        [self nearestLocationWebservice];
+        
     }
     else if (isFilteraction==YES)
     {
@@ -613,7 +627,8 @@
         [self filterviewPosition];
         isFilteraction=NO;
         [self.locationCollectionView setUserInteractionEnabled:YES];
-        
+        currentloadPage =@"";
+        [self nearestLocationWebservice];
     }
     
 }
@@ -653,29 +668,55 @@
     }
     else if ([sender tag]== 304)
     {
-        self.maleBtn.backgroundColor =[UIColor redColor];
-        self.FemaleBtn.backgroundColor =[UIColor whiteColor];
-        self.avablebothBtn.backgroundColor=[UIColor whiteColor];
-         avalibleGenderStatus =@"male";
+        self.avalableYesBtn.backgroundColor =[UIColor redColor];
+        self.avalableNoBtn.backgroundColor =[UIColor whiteColor];
+        self.avalableBothBtn.backgroundColor=[UIColor whiteColor];
+         avalableStatus=@"Yes";
         
     }
     else if ([sender tag] == 305)
     {
-        self.maleBtn.backgroundColor =[UIColor whiteColor];
-        self.FemaleBtn.backgroundColor =[UIColor redColor];
-        self.avablebothBtn.backgroundColor=[UIColor whiteColor];
-        avalibleGenderStatus =@"female";
+        self.avalableYesBtn.backgroundColor =[UIColor whiteColor];
+        self.avalableNoBtn.backgroundColor =[UIColor redColor];
+        self.avalableBothBtn.backgroundColor=[UIColor whiteColor];
+        avalableStatus =@"No";
        
     }
     else if ([sender tag] == 306)
     {
-        self.maleBtn.backgroundColor =[UIColor whiteColor];
-        self.FemaleBtn.backgroundColor =[UIColor whiteColor];
-        self.avablebothBtn.backgroundColor=[UIColor redColor];
-        avalibleGenderStatus =@"";
+        self.avalableYesBtn.backgroundColor =[UIColor whiteColor];
+        self.avalableNoBtn.backgroundColor =[UIColor whiteColor];
+        self.avalableBothBtn.backgroundColor=[UIColor redColor];
+        avalableStatus =@"";
        
     }
-}
+    
+    else if ([sender tag]== 307)
+    {
+        self.maleBtn.backgroundColor =[UIColor redColor];
+        self.FemaleBtn.backgroundColor =[UIColor whiteColor];
+        self.genderbothBtn.backgroundColor=[UIColor whiteColor];
+        GenderStatus =@"male";
+        
+    }
+    else if ([sender tag] == 308)
+    {
+        self.maleBtn.backgroundColor =[UIColor whiteColor];
+        self.FemaleBtn.backgroundColor =[UIColor redColor];
+        self.genderbothBtn.backgroundColor=[UIColor whiteColor];
+        GenderStatus =@"female";
+        
+    }
+    else if ([sender tag] == 309)
+    {
+        self.maleBtn.backgroundColor =[UIColor whiteColor];
+        self.FemaleBtn.backgroundColor =[UIColor whiteColor];
+        self.genderbothBtn.backgroundColor=[UIColor redColor];
+        GenderStatus =@"";
+        
+    }
+
+    }
 
 #pragma mark - CustomalterviewMethod
 
@@ -705,7 +746,6 @@
 {
     
     objCustomAlterview.view.hidden =NO;
-    //objCustomAlterview.view.alpha=0.0;
     objCustomAlterview.alertBgView.hidden = NO;
     objCustomAlterview.alertMainBgView.hidden = NO;
     objCustomAlterview.alertCancelButton.hidden = NO;
@@ -725,7 +765,10 @@
 - (void)releaseToRefresh:(UIRefreshControl *)_refreshControl
 {
     
-    currentloadPage=@"1";
+    currentloadPage=@"";
+    avalableStatus=@"";
+    GenderStatus =@"";
+    onlineStatus  =@"";
     [self nearestLocationWebservice];
 }
 
@@ -748,33 +791,49 @@
     
     self.maleBtn.backgroundColor =[UIColor whiteColor];
     self.FemaleBtn.backgroundColor =[UIColor whiteColor];
-    self.avablebothBtn.backgroundColor=[UIColor redColor];
-    avalibleGenderStatus =@"";
-    self.ageSlider.value =18;
-    self.distanceSlider.value=0;
+    self.genderbothBtn.backgroundColor=[UIColor redColor];
+    GenderStatus =@"";
+    
+    self.avalableYesBtn.backgroundColor =[UIColor whiteColor];
+    self.avalableNoBtn.backgroundColor =[UIColor whiteColor];
+    self.avalableBothBtn.backgroundColor=[UIColor redColor];
+    avalableStatus=@"";
+    self.ageSlider.value =26;
+    self.distanceSlider.value=5;
+    filterAge=@"18-26";
+    filterDistance=@"0-5";
     
 }
 - (IBAction)AgeSliderValueChanged:(UISlider *)sender {
-    UIImage *sliderLeftTrackImage = [[UIImage imageNamed: @"dot_Image.png"] stretchableImageWithLeftCapWidth:8 topCapHeight: 0];
-    [self.ageSlider setMinimumTrackImage:sliderLeftTrackImage forState: UIControlStateNormal];
+   // UIImage *sliderLeftTrackImage = [[UIImage imageNamed: @"dot_Image.png"] stretchableImageWithLeftCapWidth:9 topCapHeight: 0];
+   // [self.ageSlider setMinimumTrackImage:sliderLeftTrackImage forState: UIControlStateNormal];
     filterAge =[NSString stringWithFormat:@"18-%f", [sender value]];
-    
+   ;
     NSLog(@"AgeSliderValueChanged=%@",[NSString stringWithFormat:@"%f", [sender value]]);
+    //[self.ageSlider setNeedsDisplay];
+    //[self.ageSlider setNeedsLayout];
+    //[self trackRectForBounds: CGRectMake(0, 0, 500, 200)];
 }
 
 - (IBAction)distanceSliderValueChanged:(UISlider *)sender {
-    UIImage *sliderLeftTrackImage = [[UIImage imageNamed: @"dot_Image.png"] stretchableImageWithLeftCapWidth: 8 topCapHeight: 0];
+    //UIImage *sliderLeftTrackImage = [[UIImage imageNamed: @"dot_Image.png"] stretchableImageWithLeftCapWidth:9 topCapHeight: 0];
 
-    [self.distanceSlider setMinimumTrackImage: sliderLeftTrackImage forState: UIControlStateNormal];
+    //[self.distanceSlider setMinimumTrackImage: sliderLeftTrackImage forState: UIControlStateNormal];
     filterDistance=[NSString stringWithFormat:@"0-%f", [sender value]];
-  
+//    [self.distanceSlider setNeedsDisplay];
+//    [self.distanceSlider setNeedsLayout];
     NSLog(@"distanceSliderValueChanged=%@",[NSString stringWithFormat:@"%f", [sender value]]);
+    //[self trackRectForBounds: CGRectMake(0, 0, 500, 200)];
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-
+- (CGRect)trackRectForBounds:(CGRect)bounds
+{
+   
+    return  CGRectMake(0, 0, 500, 200);
+}
 
 @end
