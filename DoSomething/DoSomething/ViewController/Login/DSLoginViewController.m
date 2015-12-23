@@ -654,11 +654,8 @@
 #pragma mark - ButtonActions
 - (IBAction)Back:(id)sender {
     
-   // [self.navigationController popViewControllerAnimated:YES];
-    
-    NSArray *array = [self.navigationController viewControllers];
-    [self.navigationController popToViewController:[array objectAtIndex:0] animated:YES];
-    
+    [self.navigationController popToRootViewControllerAnimated:YES];
+       
 }
 
 - (IBAction)createAnAccountFB:(id)sender {
