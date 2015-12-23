@@ -265,18 +265,12 @@
     [objWebService forgetPasswordRequest:ForgetPassword_API
                                    email:self.forgotTextField.text
                                  success:^(AFHTTPRequestOperation *operation, id responseObject) {
-                                
                                      if([[[responseObject objectForKey:@"forgetpassword"]objectForKey:@"status"] isEqualToString:@"success"]){
                                          [self showAltermessage:[[responseObject objectForKey:@"forgetpassword"]objectForKey:@"message"]];
-                                         
-                                          NSLog(@"FWD_SUCCESS%@",responseObject);
                                      }
                                      else{
-                                          NSLog(@"FWD_ERROR%@",responseObject);
                                          [self showAltermessage:[[responseObject objectForKey:@"forgetpassword"]objectForKey:@"message"]];
-                                         
                                      }
-                                     
                                  }
                                  failure:^(AFHTTPRequestOperation *operation, id error) {
                                      NSLog(@"error%@",error);
