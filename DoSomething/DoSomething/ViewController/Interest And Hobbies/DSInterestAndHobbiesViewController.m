@@ -22,71 +22,83 @@
 @interface DSInterestAndHobbiesViewController ()<UICollectionViewDataSource,UICollectionViewDelegate>
 {
     NSMutableArray*sectionNameArray;
+    
     NSMutableArray * hobbiesArry;
-    NSMutableArray *interstAndHobbiesArray,*interestArray;
+    
+    NSMutableArray *interstAndHobbiesArray;
+    
     NSArray *sectionArray;
-    NSMutableArray *imageNormalImageArray,*hobbiesNameArray,*hobbiesCategoryID;
+    
     DSWebservice * objWebservice;
+    
     NSString                * deviceUdid;
+    
     BOOL   iscollectiviewreload;
+    
     AppDelegate *appDelegate;
+    
     NSMutableDictionary *profileDict;
+    
     NSMutableArray *profileHobbyArray;
+    
+
 }
 @end
 
 @implementation DSInterestAndHobbiesViewController
 @synthesize interestAndHobbiesCollectionView, profileDetailsArray;
+
 - (void)viewDidLoad {
     
     [super viewDidLoad];
+    
     [self loadNavigation];
+    
     objWebservice =[[DSWebservice alloc]init];
+    
     deviceUdid = [OpenUDID value];
+    
     profileHobbyArray = [[NSMutableArray alloc]init];
     
     [self.interestAndHobbiesCollectionView registerClass:[UICollectionReusableView class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"HeaderView"];
+    
     UICollectionViewFlowLayout *flowLayout = [[UICollectionViewFlowLayout alloc] init];
+    
     flowLayout.headerReferenceSize = CGSizeMake(self.interestAndHobbiesCollectionView.bounds.size.width,40);
+    
     [self.interestAndHobbiesCollectionView setCollectionViewLayout:flowLayout];
-
+    
     [self initializeArray];
-    
-    
     
 }
 
 -(void)viewWillAppear:(BOOL)animated{
     
     [[NSNotificationCenter defaultCenter] addObserver:self
+     
                                              selector:@selector(loadInvalidSessionAlert:)
+     
                                                  name:@"InvalidSession"
+     
                                                object:nil];
+    
     profileDict=[[NSMutableDictionary alloc]init];
+    
     profileDict =[[NSUserDefaults standardUserDefaults] valueForKey:USERDETAILS];
+    
     if([[NSUserDefaults standardUserDefaults]valueForKey:HobbiesArray] != NULL)
-         profileHobbyArray = [[[NSUserDefaults standardUserDefaults]valueForKey:HobbiesArray]mutableCopy];
+        
+        profileHobbyArray = [[[NSUserDefaults standardUserDefaults]valueForKey:HobbiesArray]mutableCopy];
+    
     else{
+        
         if(profileDict != NULL)
+            
             profileHobbyArray = [[profileDict valueForKey:@"hobbieslist"]mutableCopy];
-
+        
     }
     
     
-    imageNormalImageArray =[[[NSUserDefaults standardUserDefaults] valueForKey:@"SelectedItemNormal"]mutableCopy];
-    hobbiesNameArray = [[[NSUserDefaults standardUserDefaults] valueForKey:@"SelectedItemName"]mutableCopy];
-    hobbiesCategoryID =[[[NSUserDefaults standardUserDefaults]valueForKey:@"SelectedItemCategoryID"]mutableCopy];
-    
-    if (!hobbiesNameArray) {
-        hobbiesNameArray = [[NSMutableArray alloc] init];
-    }
-    if (!imageNormalImageArray) {
-        imageNormalImageArray = [[NSMutableArray alloc] init];
-    }
-    if (!hobbiesCategoryID) {
-        hobbiesCategoryID = [[NSMutableArray alloc] init];
-    }
-
 }
 
 -(void)loadNavigation{
@@ -186,10 +198,6 @@
          
          hobbiesArry=[objselectionname valueForKey:@"hobbieslist"];
          
-         [[NSUserDefaults standardUserDefaults] setObject:hobbiesArry forKey:@"ListofinterestArray"];
-         
-         [[NSUserDefaults standardUserDefaults] synchronize];
-         
          interstAndHobbiesArray=[hobbiesArry mutableCopy];
          
          [COMMON removeLoading];
@@ -213,21 +221,27 @@
 {
     sectionArray =[[NSArray alloc]init];
     sectionArray=[[[NSUserDefaults standardUserDefaults] valueForKey:@"ListofsectionNameArray"] mutableCopy];
-    interestArray = [[NSMutableArray alloc] initWithCapacity: 4];
-    interestArray =[[[NSUserDefaults standardUserDefaults] valueForKey:@"ListofinterestArray"] mutableCopy];
     
 }
 
 -(void)loadInvalidSessionAlert:(NSNotification *)notification
 {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
+    
     [COMMON removeUserDetails];
+    
     DSHomeViewController*objSplashView =[[DSHomeViewController alloc]initWithNibName:@"DSHomeViewController" bundle:nil];
+    
     [self.navigationController pushViewController:objSplashView animated:NO];
+    
     appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+    
     appDelegate.buttonsView.hidden=YES;
+    
     appDelegate.SepratorLbl.hidden=YES;
+    
     [appDelegate.settingButton setBackgroundImage:[UIImage imageNamed:@"setting_icon.png"] forState:UIControlStateNormal];
+    
 }
 
 -(void)initializeArray{
@@ -237,8 +251,6 @@
     
     interestAndHobbiesCollectionView.delegate=self;
     interestAndHobbiesCollectionView.dataSource=self;
-    
-    imageNormalImageArray =[[NSMutableArray alloc]init];
     
     [COMMON LoadIcon:self.view];
     
@@ -296,27 +308,47 @@
 - (UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout insetForSectionAtIndex:(NSInteger)section
 {
     NSInteger cellCount = [collectionView.dataSource collectionView:collectionView numberOfItemsInSection:section];
+    
     if( cellCount < 3 )
+        
     {
+        
         CGFloat cellWidth = ((UICollectionViewFlowLayout*)collectionViewLayout).itemSize.width+((UICollectionViewFlowLayout*)collectionViewLayout).minimumInteritemSpacing;
+        
         CGFloat totalCellWidth = cellWidth*cellCount;
+        
         CGFloat contentWidth = collectionView.frame.size.width-collectionView.contentInset.left-collectionView.contentInset.right;
+        
         if( totalCellWidth<contentWidth )
+            
         {
+            
             CGFloat padding = (contentWidth - totalCellWidth) / 2.0;
+            
             return UIEdgeInsetsMake(0, padding, 0, padding);
+            
         }
+        
     }
+    
     if( cellCount > 5 )
+        
     {
+        
         CGFloat cellWidth = ((UICollectionViewFlowLayout*)collectionViewLayout).itemSize.width+((UICollectionViewFlowLayout*)collectionViewLayout).minimumInteritemSpacing;
+        
         CGFloat totalCellWidth = cellWidth*cellCount;
+        
         CGFloat contentWidth = collectionView.frame.size.width-collectionView.contentInset.left-collectionView.contentInset.right;
+        
         if( totalCellWidth>contentWidth )
+            
         {
+            
             CGFloat padding = (totalCellWidth - contentWidth) / 8.0;
+            
             return UIEdgeInsetsMake(0, padding, 0, padding);
-           
+            
         }
         
     }
@@ -483,7 +515,6 @@
         [profileHobbyArray removeObject:dict];
     
     else
-        
         [profileHobbyArray addObject:dict];
     
     
