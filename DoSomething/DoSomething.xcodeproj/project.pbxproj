@@ -9,7 +9,7 @@
 /* Begin PBXBuildFile section */
 		065433161BF38B0400DABBFC /* button-16.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 065433151BF38B0400DABBFC /* button-16.mp3 */; };
 		065BAC521BC7A135005AF493 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 065BAC511BC7A135005AF493 /* main.m */; };
-		2B0C3B3E1C2A743A009B7B42 /* fontawesome-webfont.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2BC69E701C2994860074C486 /* fontawesome-webfont.ttf */; };
+		2B0C3B401C2A7A00009B7B42 /* fontawesome-webfont.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2B0C3B3F1C2A7A00009B7B42 /* fontawesome-webfont.ttf */; };
 		2B1B8B961C23E830005A699E /* NSString+FontAwesome.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B1B8B951C23E830005A699E /* NSString+FontAwesome.m */; };
 		2B1B8BE51C24487A005A699E /* DSTermsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B1B8BE31C24487A005A699E /* DSTermsViewController.m */; };
 		2B1B8BE61C24487A005A699E /* DSTermsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2B1B8BE41C24487A005A699E /* DSTermsViewController.xib */; };
@@ -132,6 +132,7 @@
 		065BAC511BC7A135005AF493 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		065BAC611BC7A135005AF493 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1C75845E698F9F0E3DFC07B6 /* Pods-DoSomething.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DoSomething.release.xcconfig"; path = "Pods/Target Support Files/Pods-DoSomething/Pods-DoSomething.release.xcconfig"; sourceTree = "<group>"; };
+		2B0C3B3F1C2A7A00009B7B42 /* fontawesome-webfont.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "fontawesome-webfont.ttf"; sourceTree = "<group>"; };
 		2B1B8B941C23E830005A699E /* NSString+FontAwesome.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSString+FontAwesome.h"; path = "Helpers/AwesomeFont/NSString+FontAwesome.h"; sourceTree = "<group>"; };
 		2B1B8B951C23E830005A699E /* NSString+FontAwesome.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSString+FontAwesome.m"; path = "Helpers/AwesomeFont/NSString+FontAwesome.m"; sourceTree = "<group>"; };
 		2B1B8BE21C24487A005A699E /* DSTermsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DSTermsViewController.h; sourceTree = "<group>"; };
@@ -151,7 +152,6 @@
 		2B83CACD1BE8D4FD0064EC7F /* NSString+validations.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+validations.m"; sourceTree = "<group>"; };
 		2BC69E6D1C2976E80074C486 /* ChatTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChatTextView.h; sourceTree = "<group>"; };
 		2BC69E6E1C2976E80074C486 /* ChatTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChatTextView.m; sourceTree = "<group>"; };
-		2BC69E701C2994860074C486 /* fontawesome-webfont.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "fontawesome-webfont.ttf"; sourceTree = "<group>"; };
 		2BD72ADA1BFCC28A003846E9 /* PWParallaxScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PWParallaxScrollView.h; path = Helpers/ParallaxScroll/PWParallaxScrollView.h; sourceTree = "<group>"; };
 		2BD72ADB1BFCC28A003846E9 /* PWParallaxScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PWParallaxScrollView.m; path = Helpers/ParallaxScroll/PWParallaxScrollView.m; sourceTree = "<group>"; };
 		2BD72ADD1BFCC2BF003846E9 /* DAAutoScroll.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DAAutoScroll.h; sourceTree = "<group>"; };
@@ -750,7 +750,7 @@
 		C6D5F62B1BC7B52C0050C1AE /* Fonts */ = {
 			isa = PBXGroup;
 			children = (
-				2BC69E701C2994860074C486 /* fontawesome-webfont.ttf */,
+				2B0C3B3F1C2A7A00009B7B42 /* fontawesome-webfont.ttf */,
 				C6D5F62C1BC7B52C0050C1AE /* FutworaPro-Regular.otf */,
 				C6D5F62D1BC7B52C0050C1AE /* Patron-Black.ttf */,
 				C6D5F62E1BC7B52C0050C1AE /* Patron-BlackItalic.ttf */,
@@ -1023,7 +1023,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2B0C3B3E1C2A743A009B7B42 /* fontawesome-webfont.ttf in Resources */,
 				EAF1DC521BD8B2AF00D51354 /* DSHomeViewController.xib in Resources */,
 				2B2C08911C27BB6C00996441 /* DSNearByDetailViewController.xib in Resources */,
 				2B83CAC41BE895AB0064EC7F /* Default.png in Resources */,
@@ -1041,6 +1040,7 @@
 				511C735E1BE3801100D3D61D /* ChatTableViewCell.xib in Resources */,
 				2B83CAC61BE895AB0064EC7F /* Default-568h@2x.png in Resources */,
 				51322A271BDFBFAA00418216 /* request_send.png in Resources */,
+				2B0C3B401C2A7A00009B7B42 /* fontawesome-webfont.ttf in Resources */,
 				065433161BF38B0400DABBFC /* button-16.mp3 in Resources */,
 				51322A261BDFBFAA00418216 /* menu_icon.png in Resources */,
 				C6D5F6391BC7B52C0050C1AE /* FutworaPro-Regular.otf in Resources */,
