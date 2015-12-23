@@ -502,13 +502,17 @@
 {
     
     UICollectionViewCell *cell;
+    
     cell = [collectionView cellForItemAtIndexPath:indexPath];
-   
+    
     NSMutableArray *detailsArray = [commonlocationArray objectAtIndex:indexPath.row];
     
     DSNearByDetailViewController* detailViewController = [[DSNearByDetailViewController alloc] init];
+    
     detailViewController.userDetailsArray = detailsArray;
+    
     [self.navigationController pushViewController:detailViewController animated:YES];
+    
     
     
 }
