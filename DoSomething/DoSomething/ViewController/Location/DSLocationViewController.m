@@ -532,7 +532,7 @@
 
 
 
--(void)didClickRequestSend:(id)sender
+-(IBAction)didClickRequestSend:(id)sender
 {
     id button = sender;
     while (![button isKindOfClass:[UICollectionViewCell class]]) {
@@ -550,29 +550,49 @@
     NSString * requestsend=[[commonlocationArray valueForKey:@"send_request"] objectAtIndex:indexPath.row];
     if([requestsend isEqualToString:@"No"])
     {
+        UIButton *buttonSender = (UIButton *)sender;
+        locationCellView.requestsendBtn = buttonSender;
+        [locationCellView.requestsendBtn setBackgroundColor:[UIColor whiteColor]];
+        locationCellView.sendRequest.text =@"Request Sent!";
+        locationCellView.sendRequest.textColor=[UIColor lightGrayColor];
+        
+        dosomethingImageArry =[[[commonlocationArray valueForKey:@"dosomething"]objectAtIndex:indexPath.row] valueForKey:@"InactiveImage"];
+        
+        
+        NSString *dosomethingImage1=[dosomethingImageArry objectAtIndex:0];
+        NSString *dosomethingImage2=[dosomethingImageArry objectAtIndex:1];
+        NSString *dosomethingImage3=[dosomethingImageArry objectAtIndex:2];
+        
+       
+        [locationCellView.dosomethingImage1 setImageWithURL:[NSURL URLWithString:dosomethingImage1]];
+        [locationCellView.dosomethingImage2 setImageWithURL:[NSURL URLWithString:dosomethingImage2]];
+        [locationCellView.dosomethingImage3 setImageWithURL:[NSURL URLWithString:dosomethingImage3]];
+        
         [self loadRequestsendWebService];
+      
     }
 }
     
 -(void)loadRequestsendWebService
 {
+    
     [objWebservice sendRequest:SendRequest_API sessionid:[COMMON getSessionID] request_send_user_id:profileUserID success:^(AFHTTPRequestOperation *operation, id responseObject) {
         
         if([[[responseObject valueForKey:@"sendrequest"]valueForKey:@"status"] isEqualToString:@"success"])
         {
             NSString * resposeMsg =[[responseObject valueForKey:@"sendrequest"]valueForKey:@"Message"];
+            
             [self showAltermessage:resposeMsg];
         }
-        [locationCollectionView reloadData];
-
-       
+        
         
     } failure:^(AFHTTPRequestOperation *operation, id error) {
-         NSLog(@"requestSend RESPONSE=%@",error);
+        NSLog(@"requestSend RESPONSE=%@",error);
         
     }];
+
 }
-    
+
 //    profileUserID=[[commonlocationArray valueForKey:@"user_id"] objectAtIndex:indexPath.row];
 //    NSLog(@"profileUserID%@",profileUserID);
 
