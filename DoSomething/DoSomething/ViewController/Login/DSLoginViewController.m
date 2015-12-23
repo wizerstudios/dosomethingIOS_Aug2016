@@ -135,13 +135,13 @@
             
         }
         _forgotView.hidden=NO;
-        NSString *stringForgot = @"Forgot Your Password?";
+        NSString *stringForgot = @"Forget Your Password?";
         NSMutableAttributedString *attStrForgot = [[NSMutableAttributedString alloc] initWithString:stringForgot ];
-        [attStrForgot addAttribute:NSFontAttributeName value:PATRON_REG(12) range:[stringForgot rangeOfString:@"Forgot Your Password?"]];
+        [attStrForgot addAttribute:NSFontAttributeName value:PATRON_REG(12) range:[stringForgot rangeOfString:@"Forget Your Password?"]];
         _forgotPasswordLabel.attributedText = attStrForgot;
-        NSString *string = @"No problem! Just fill in your Email and we'll send you password to reset instructions";
+        NSString *string = @"No problem! Just fill in your Email and we'll send you password to reset instructions!";
         NSMutableAttributedString *attStr = [[NSMutableAttributedString alloc] initWithString:string ];
-        [attStr addAttribute:NSFontAttributeName value:PATRON_REG(12) range:[string rangeOfString:@"No problem! Just fill in your Email and we'll send \n you password to reset instructions"]];
+        [attStr addAttribute:NSFontAttributeName value:PATRON_REG(12) range:[string rangeOfString:@"No problem! Just fill in your Email and we'll send \n you password to reset instructions!"]];
         _forgotInstructionTextView.attributedText = attStr;
         _facebookButton.hidden= YES;
         
@@ -249,7 +249,39 @@
     
 }
 - (void)forgotPasswordAction:(id)sender {
+    [self.view endEditing:YES];
     
+    if([NSString isEmpty:self.forgotTextField.text] ){
+        
+        [self showAltermessage:EMAIL_REQUIRED];
+        return;
+    }
+    if(![NSString validateEmail:self.forgotTextField.text]){
+        [self showAltermessage:EMAIL_REQUIRED];
+        return;
+    }
+    
+    [objWebService forgetPasswordRequest:ForgetPassword_API
+                                   email:self.forgotTextField.text
+                                 success:^(AFHTTPRequestOperation *operation, id responseObject) {
+                                
+                                     NSLog(@"FWD_SUCCESS%@", [responseObject objectForKey:@"forgetpassword"]);
+                                     
+                                     if([[[responseObject objectForKey:@"forgetpassword"]objectForKey:@"status"] isEqualToString:@"success"]){
+                                         [self showAltermessage:@"password reseted successfully please check your mail"];
+                                         
+                                          NSLog(@"FWD_SUCCESS%@",responseObject);
+                                     }
+                                     else{
+                                          NSLog(@"FWD_ERROR%@",responseObject);
+                                         [self showAltermessage:@"enter valid email address"];
+                                         
+                                     }
+                                     
+                                 }
+                                 failure:^(AFHTTPRequestOperation *operation, id error) {
+                                     NSLog(@"error%@",error);
+                                 }];
     
 }
 
