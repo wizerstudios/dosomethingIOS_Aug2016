@@ -100,6 +100,9 @@
     isLoadData=NO;
     isLoadWebservice=YES;
     
+    [self configureAgeChangeSlider];
+     [self configureLabelSlider];
+    
      [self nearestLocationWebservice];
     // Do any additional setup after loading the view from its nib.
 }
@@ -611,6 +614,7 @@
         [customNavigation.FilterBtn setImage:[UIImage imageNamed:@""] forState:UIControlStateNormal];
         [customNavigation.FilterBtn setTitle:@"Apply" forState:UIControlStateNormal];
         [self filterviewPosition];
+        appDelegate.settingButton.userInteractionEnabled=NO;
         isFilteraction=YES;
         [self.locationCollectionView setUserInteractionEnabled:YES];
         
@@ -625,6 +629,7 @@
         [self filterviewPosition];
         isFilteraction=NO;
         [self.locationCollectionView setUserInteractionEnabled:YES];
+        appDelegate.settingButton.userInteractionEnabled=YES;
         currentloadPage =@"";
         [self nearestLocationWebservice];
     }
@@ -778,6 +783,14 @@
     [self filterviewPosition];
     isFilteraction=NO;
     [self.locationCollectionView setUserInteractionEnabled:YES];
+    
+    [customNavigation.FilterBtn setImage:[UIImage imageNamed:@"filerImage"] forState:UIControlStateNormal];
+    [customNavigation.FilterBtn setTitle:@"" forState:UIControlStateNormal];
+    
+   
+    appDelegate.settingButton.userInteractionEnabled=YES;
+    currentloadPage =@"";
+    [self nearestLocationWebservice];
 }
 
 -(IBAction)DidClickClearFilter:(id)sender
@@ -802,36 +815,115 @@
     filterDistance=@"0-5";
     
 }
-- (IBAction)AgeSliderValueChanged:(UISlider *)sender {
-   // UIImage *sliderLeftTrackImage = [[UIImage imageNamed: @"dot_Image.png"] stretchableImageWithLeftCapWidth:9 topCapHeight: 0];
-   // [self.ageSlider setMinimumTrackImage:sliderLeftTrackImage forState: UIControlStateNormal];
-    filterAge =[NSString stringWithFormat:@"18-%f", [sender value]];
-   ;
-    NSLog(@"AgeSliderValueChanged=%@",[NSString stringWithFormat:@"%f", [sender value]]);
-    //[self.ageSlider setNeedsDisplay];
-    //[self.ageSlider setNeedsLayout];
-    //[self trackRectForBounds: CGRectMake(0, 0, 500, 200)];
+
+
+#pragma mark - Label  Slider
+
+- (void) configureMetalThemeForSlider:(NMRangeSlider*) slider
+{
+    UIImage* image = nil;
+    
+    image = [UIImage imageNamed:@""];  //slider-metal-trackBackground
+    image = [image resizableImageWithCapInsets:UIEdgeInsetsMake(0.0, -5.0, 0.0, 0-10.0)];
+    slider.trackBackgroundImage = image;
+    
+    image = [UIImage imageNamed:@"dot_Image"];    //slider-metal-track
+    image = [image resizableImageWithCapInsets:UIEdgeInsetsMake(0.0, 8.0, 0.0, 8.0)];
+     slider.trackImage = image;
+    
+    image = [UIImage imageNamed:@"dot_Image"];
+     image = [image imageWithAlignmentRectInsets:UIEdgeInsetsMake(0,0,0,0)];
+     slider.lowerHandleImageNormal = image;
+     slider.upperHandleImageNormal = image;
+    
+     image = [UIImage imageNamed:@"dot_Image"];          //slider-metal-handle-highlighted
+     image = [image imageWithAlignmentRectInsets:UIEdgeInsetsMake(0, 0, 0, 0)];
+     slider.lowerHandleImageHighlighted = image;
+     slider.upperHandleImageHighlighted = image;
+}
+- (void) configureLabelSlider
+{
+    self.labelSlider.minimumValue = 0;
+    self.labelSlider.maximumValue = 5;
+    
+    self.labelSlider.minimumRange = 0;
+   [self configureMetalThemeForSlider:self.labelSlider];
+    
+    self.labelSlider.lowerValue = 0;
+    self.labelSlider.upperValue = 5;
 }
 
-- (IBAction)distanceSliderValueChanged:(UISlider *)sender {
-    //UIImage *sliderLeftTrackImage = [[UIImage imageNamed: @"dot_Image.png"] stretchableImageWithLeftCapWidth:9 topCapHeight: 0];
+- (void) updateDistanceSliderLabels
+{
+    // You get get the center point of the slider handles and use this to arrange other subviews
+    
+    CGPoint lowerCenter;
+    lowerCenter.x = (self.labelSlider.lowerCenter.x + self.labelSlider.frame.origin.x);
+    lowerCenter.y = (self.labelSlider.center.y - 30.0f);
+    self.lowerLabel.center = lowerCenter;
+    self.lowerLabel.text = [NSString stringWithFormat:@"%d", (int)self.labelSlider.lowerValue];
+    
+    CGPoint upperCenter;
+    upperCenter.x = (self.labelSlider.upperCenter.x + self.labelSlider.frame.origin.x);
+    upperCenter.y = (self.labelSlider.center.y - 30.0f);
+    self.upperLabel.center = upperCenter;
+    self.upperLabel.text = [NSString stringWithFormat:@"%d", (int)self.labelSlider.upperValue];
+    
+    filterDistance=[NSString stringWithFormat:@"%@-%@",self.lowerLabel.text,self.upperLabel.text];
+    NSLog(@"distanceSliderValueChanged=%@",[NSString stringWithFormat:@"%@", filterDistance]);
 
-    //[self.distanceSlider setMinimumTrackImage: sliderLeftTrackImage forState: UIControlStateNormal];
-    filterDistance=[NSString stringWithFormat:@"0-%f", [sender value]];
-//    [self.distanceSlider setNeedsDisplay];
-//    [self.distanceSlider setNeedsLayout];
-    NSLog(@"distanceSliderValueChanged=%@",[NSString stringWithFormat:@"%f", [sender value]]);
-    //[self trackRectForBounds: CGRectMake(0, 0, 500, 200)];
 }
 
+
+- (void) configureAgeChangeSlider
+{
+    self.labelSlider1.minimumValue = 18;
+    self.labelSlider1.maximumValue = 26;
+    
+    self.labelSlider1.lowerValue = 18;
+    self.labelSlider1.upperValue = 26;
+    
+    self.labelSlider1.minimumRange = 0;
+    [self configureMetalThemeForSlider:self.labelSlider1];
+    
+    self.labelSlider1.lowerValue = 18;
+    self.labelSlider1.upperValue = 26;
+
+}
+
+- (void) updateAgeSliderLabels
+{
+    // You get get the center point of the slider handles and use this to arrange other subviews
+    
+    CGPoint lowerCenter;
+    lowerCenter.x = (self.labelSlider1.lowerCenter.x + self.labelSlider1.frame.origin.x);
+    lowerCenter.y = (self.labelSlider1.center.y - 30.0f);
+    self.agelowerLabel.center = lowerCenter;
+    self.agelowerLabel.text = [NSString stringWithFormat:@"%d", (int)self.labelSlider1.lowerValue];
+    
+    CGPoint upperCenter;
+    upperCenter.x = (self.labelSlider1.upperCenter.x + self.labelSlider1.frame.origin.x);
+    upperCenter.y = (self.labelSlider1.center.y - 30.0f);
+    self.ageupperLabel.center = upperCenter;
+    self.ageupperLabel.text = [NSString stringWithFormat:@"%d", (int)self.labelSlider1.upperValue];
+    filterAge =[NSString stringWithFormat:@"%@-%@",self.agelowerLabel.text,self.ageupperLabel.text];
+    ;
+    NSLog(@"AgeSliderValueChanged=%@",[NSString stringWithFormat:@"%@", filterAge]);
+
+}
+
+// Handle control value changed events just like a normal slider
+- (IBAction)labelSliderChanged:(NMRangeSlider*)sender
+{
+    [self updateDistanceSliderLabels];
+}
+-(IBAction)ageSliderChanged:(id)sender
+{
+    [self updateAgeSliderLabels];
+}
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
-}
-- (CGRect)trackRectForBounds:(CGRect)bounds
-{
-   
-    return  CGRectMake(0, 0, 500, 200);
 }
 
 @end
