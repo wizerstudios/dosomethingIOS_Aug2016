@@ -553,29 +553,6 @@ request_send_user_id:(NSString *)request_send_user_id
           completionFailureHandler:failure];
 }
 
-#pragma mark POST SendRequest
-
--(void)forgetPasswordRequest:(NSString *)forgotPasswordRequestURL
-                       email:(NSString *)email
-                     success:(WebserviceRequestSuccessHandler)success
-                     failure:(WebserviceRequestFailureHandler)failure
-{
-    urlString = [URL_FOR_RESOURCE(@"") stringByAppendingString:[NSString stringWithFormat:@"%@?",forgotPasswordRequestURL]];
-    
-    NSMutableDictionary *sendRequest = [[NSMutableDictionary alloc] init];
-    
-    if(email)               [sendRequest    setObject:email                 forKey:@"email"];
-    
-    NSLog(@"urlString = %@",urlString);
-    NSLog(@"forgotPasswordRequest = %@",sendRequest);
-    
-    [self sendRequestWithURLString:urlString
-                     andParameters:sendRequest
-                            method:ServicePost
-           completionSucessHandler:success
-          completionFailureHandler:failure];
-}
-
 
 #pragma mark GET ChatHistory
 
@@ -700,6 +677,31 @@ message_send_user_id:(NSString *)message_send_user_id
           completionFailureHandler:failure];
     
 }
+
+
+#pragma mark POST forgetPasswordRequest
+
+-(void)forgetPasswordRequest:(NSString *)forgotPasswordRequestURL
+                       email:(NSString *)email
+                     success:(WebserviceRequestSuccessHandler)success
+                     failure:(WebserviceRequestFailureHandler)failure
+{
+    urlString = [URL_FOR_RESOURCE(@"") stringByAppendingString:[NSString stringWithFormat:@"%@?",forgotPasswordRequestURL]];
+    
+    NSMutableDictionary *sendRequest = [[NSMutableDictionary alloc] init];
+    
+    if(email)               [sendRequest    setObject:email                 forKey:@"email"];
+    
+    NSLog(@"urlString = %@",urlString);
+    NSLog(@"forgotPasswordRequest = %@",sendRequest);
+    
+    [self sendRequestWithURLString:urlString
+                     andParameters:sendRequest
+                            method:ServicePost
+           completionSucessHandler:success
+          completionFailureHandler:failure];
+}
+
 
 
 #pragma mark - Helpers

@@ -248,6 +248,7 @@
     [self.navigationController pushViewController:DSLoginView animated:YES];
     
 }
+#pragma mark forgotPasswordAction
 - (void)forgotPasswordAction:(id)sender {
     [self.view endEditing:YES];
     
@@ -257,7 +258,7 @@
         return;
     }
     if(![NSString validateEmail:self.forgotTextField.text]){
-        [self showAltermessage:EMAIL_REQUIRED];
+        [self showAltermessage:INVALID_EMAIL];
         return;
     }
     
@@ -287,7 +288,6 @@
 
 -(IBAction)loadTermsOfUseViewAction:(id)sender
 {
-    //[self loadTermsOfUseView];
     DSTermsViewController* termViewController = [[DSTermsViewController alloc] init];
     
     [self.navigationController pushViewController:termViewController animated:YES];
