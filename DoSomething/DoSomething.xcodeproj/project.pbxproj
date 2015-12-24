@@ -72,6 +72,7 @@
 		6A71A9381C0471F900D6D5F4 /* NSLocalization.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6A71A93A1C0471F900D6D5F4 /* NSLocalization.strings */; };
 		6A8D15D31BCC059B000F1FB4 /* DSProfileTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A8D15D11BCC059B000F1FB4 /* DSProfileTableViewController.m */; };
 		6A8D15D41BCC059B000F1FB4 /* DSProfileTableViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6A8D15D21BCC059B000F1FB4 /* DSProfileTableViewController.xib */; };
+		6AD8A52E1C2AECE800828AED /* NMRangeSlider.m in Sources */ = {isa = PBXBuildFile; fileRef = 6AD8A52D1C2AECE800828AED /* NMRangeSlider.m */; };
 		6AE7361E1C05AA5D00C7DCF0 /* SettingView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6AE7361C1C05AA5D00C7DCF0 /* SettingView.m */; };
 		6AE7361F1C05AA5D00C7DCF0 /* SettingView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6AE7361D1C05AA5D00C7DCF0 /* SettingView.xib */; };
 		ABF8DF93B82C6FE210057F55 /* libPods-DoSomething.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 60244D170FD7494CCFDD04A4 /* libPods-DoSomething.a */; };
@@ -234,6 +235,8 @@
 		6A8D15D01BCC059B000F1FB4 /* DSProfileTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DSProfileTableViewController.h; sourceTree = "<group>"; };
 		6A8D15D11BCC059B000F1FB4 /* DSProfileTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DSProfileTableViewController.m; sourceTree = "<group>"; };
 		6A8D15D21BCC059B000F1FB4 /* DSProfileTableViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DSProfileTableViewController.xib; sourceTree = "<group>"; };
+		6AD8A52C1C2AECE800828AED /* NMRangeSlider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NMRangeSlider.h; sourceTree = "<group>"; };
+		6AD8A52D1C2AECE800828AED /* NMRangeSlider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NMRangeSlider.m; sourceTree = "<group>"; };
 		6AE7361B1C05AA5D00C7DCF0 /* SettingView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingView.h; sourceTree = "<group>"; };
 		6AE7361C1C05AA5D00C7DCF0 /* SettingView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingView.m; sourceTree = "<group>"; };
 		6AE7361D1C05AA5D00C7DCF0 /* SettingView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SettingView.xib; sourceTree = "<group>"; };
@@ -441,6 +444,7 @@
 		2BD72A841BFCC1CC003846E9 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
+				6AD8A52B1C2AECE800828AED /* SliderClass */,
 				2B1B8B931C23E7C9005A699E /* AwesomeFont */,
 				2BD72AD91BFCC259003846E9 /* ParallexScroll */,
 				2BD72A911BFCC228003846E9 /* AFNetworkActivityLogger */,
@@ -676,6 +680,16 @@
 			);
 			name = Profile;
 			path = ViewController/Profile;
+			sourceTree = "<group>";
+		};
+		6AD8A52B1C2AECE800828AED /* SliderClass */ = {
+			isa = PBXGroup;
+			children = (
+				6AD8A52C1C2AECE800828AED /* NMRangeSlider.h */,
+				6AD8A52D1C2AECE800828AED /* NMRangeSlider.m */,
+			);
+			name = SliderClass;
+			path = Helpers/SliderClass;
 			sourceTree = "<group>";
 		};
 		6AE7361A1C05AA1400C7DCF0 /* SettingView */ = {
@@ -1197,6 +1211,7 @@
 				EAFC97971BD21CF800B3593D /* DSInterestAndHobbiesCollectionViewCell.m in Sources */,
 				2BD72B121BFCC5D4003846E9 /* UIAlertView+AFNetworking.m in Sources */,
 				51F3C2F51BE75D40001E1FEC /* LocationCollectionViewCell.m in Sources */,
+				6AD8A52E1C2AECE800828AED /* NMRangeSlider.m in Sources */,
 				EADB949E1BDF566C00512374 /* HomeViewController.m in Sources */,
 				6A8D15D31BCC059B000F1FB4 /* DSProfileTableViewController.m in Sources */,
 				EAEF25281BCF9EF600F83E82 /* IQToolbar.m in Sources */,
