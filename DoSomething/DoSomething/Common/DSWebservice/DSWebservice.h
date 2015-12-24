@@ -241,6 +241,16 @@ message_send_user_id:(NSString *)message_send_user_id
 
 
 
+//Update Notification API
+
+-(void)updateNotification:(NSString *)notificationUpdate
+                sessionID:(NSString *)sessionId
+             vibrationStr:(NSString *)vibrationStr
+               messageStr:(NSString *)messageStr
+                 soundstr:(NSString *)soundStr
+                  success:(WebserviceRequestSuccessHandler)success
+                  failure:(WebserviceRequestFailureHandler)failure;
+
 
 
 
