@@ -234,11 +234,14 @@ enum JBSourceMode {
     
     pageControllBtn.backgroundColor = [UIColor clearColor];
     [pageControllBtn setFrame:CGRectMake(self.center.x-50,self.frame.size.height-40,120,40)];
-   pageControllBtn.numberOfPages = 5;
-   pageControllBtn.currentPage = _currentImageIndex;
+    pageControllBtn.numberOfPages = 5;
+    pageControllBtn.currentPage = _currentImageIndex;
+    pageControllBtn.transform = CGAffineTransformMakeScale(1.0, 1.0);
 
-    pageControllBtn.pageIndicatorTintColor=[UIColor redColor];
-       //pageControllBtn.currentPageIndicatorTintColor =[UIColor whiteColor];
+
+    pageControllBtn.pageIndicatorTintColor = [UIColor redColor];
+//    pageControllBtn.pageIndicatorTintColor=[UIColor colorWithPatternImage:[UIImage imageNamed:@"dot_Image"]];
+//    pageControllBtn.currentPageIndicatorTintColor =[UIColor colorWithPatternImage:[UIImage imageNamed:@"dot_active"]];
    // int current =_currentImageIndex;
     
     [pageControllBtn setCurrentPage:_currentImageIndex];
