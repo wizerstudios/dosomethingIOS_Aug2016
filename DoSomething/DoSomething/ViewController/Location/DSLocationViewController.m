@@ -156,10 +156,6 @@
     
     [self filterPageButtonAction];
 
-    UISwipeGestureRecognizer * swiperight=[[UISwipeGestureRecognizer alloc]initWithTarget:self action:@selector(swiperight:)];
-    swiperight.direction=UISwipeGestureRecognizerDirectionRight;
-    
-    [self.locationCollectionView addGestureRecognizer:swiperight];
     
     [[UISlider appearance] setThumbImage:[UIImage imageNamed:@"dot_Image"] forState:UIControlStateNormal];
     
@@ -285,11 +281,10 @@
     [[NSUserDefaults standardUserDefaults] setObject:currentLongitude forKey:@"currentLongitude"];
     [[NSUserDefaults standardUserDefaults] synchronize];
     
-    // Turn off the location manager to save power.
+    
     [locationManager stopUpdatingLocation];
     
-    NSLog(@"current latitude & longitude for main view = %@ & %@",currentLatitude,currentLongitude);
-
+  
     
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         
@@ -304,7 +299,7 @@
 - (void)locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error
 {
     
-    NSLog(@"Cannot find the location for main view.");
+   
 }
 
 -(void)loadLocationUpdateAPI{
@@ -326,8 +321,8 @@
     [COMMON LoadIcon:self.view];
        [objWebservice nearestUsers:NearestUsers_API
                          sessionid:[COMMON getSessionID]
-                          latitude:latitude
-                         longitude:longitude
+                          latitude:(latitude==NULL)?currentLatitude:latitude
+                         longitude:(longitude==NULL)?currentLongitude:longitude
                      filter_status:onlineStatus
                      filter_gender:GenderStatus
                   filter_available:avalableStatus
@@ -344,9 +339,9 @@
                                            NSMutableArray * nearestUserdetaile =[[NSMutableArray alloc]init];
                                            nearestUserdetaile =[[responseObject valueForKey:@"nearestusers"] valueForKey:@"UserList"];
                                            commonlocationArray =[nearestUserdetaile mutableCopy];
-                                          // [[NSUserDefaults standardUserDefaults] setObject:commonlocationArray forKey:@"nearByLocationCommonArray"];
+                                          
                                            [locationCollectionView reloadData];
-                                           NSLog(@"%@",nearestUserdetaile);
+                                          
                                            
                                            
                                           }
@@ -356,7 +351,7 @@
                                                for (NSDictionary *dict in nextpageUserdetaile)
                                                {
                                                    [commonlocationArray addObject:dict];
-                                              //  [[NSUserDefaults standardUserDefaults] setObject:commonlocationArray forKey:@"nearByLocationCommonArray"];
+                                              
                                                }
                                            }
 
@@ -374,9 +369,8 @@
                                  appDelegate.SepratorLbl.hidden=YES;
                                  [appDelegate.settingButton setBackgroundImage:[UIImage imageNamed:@"setting_icon.png"] forState:UIControlStateNormal];
                              }
-                               
-
-                               
+                            
+                    
                                else{
                                    isAllPost = YES;
                                    [COMMON removeLoading];
@@ -384,6 +378,8 @@
         
                                 [refreshControl endRefreshing];
                                 [locationCollectionView reloadData];
+                              
+
                                
         
         
@@ -436,7 +432,7 @@
     locationCellView.hobbiesImagebackView.backgroundColor =([reguestStr isEqualToString:@"No"])?[UIColor colorWithRed:(218/255.0) green:(40/255.0) blue:(64.0/255.0f) alpha:1.0]:[UIColor whiteColor];
     
    NSMutableArray * dosomethingImageSprateArry =[[commonlocationArray valueForKey:@"dosomething"]objectAtIndex:indexPath.row];
-     NSLog(@"indexPath.row=%ld",(long)indexPath.row);
+    
    
    
     dosomethingImageArry =([reguestStr isEqualToString:@"No"])?[dosomethingImageSprateArry valueForKey:@"NearbyImage"]:[dosomethingImageSprateArry valueForKey:@"InactiveImage"];
@@ -522,7 +518,7 @@
 
 - (void)collectionView:(UICollectionView *)collectionView willDisplayCell:(UICollectionViewCell *)cell forItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSLog(@"profileNames count=%lu",(unsigned long)commonlocationArray.count);
+   
     if (([commonlocationArray count]-1) == indexPath.row && !isAllPost ) {
         
         int x = [currentloadPage intValue];
@@ -532,8 +528,10 @@
         currentloadPage= [NSString stringWithFormat:@"%d",x];
         
         [self nearestLocationWebservice];
+        [locationCollectionView scrollToItemAtIndexPath:indexPath atScrollPosition:UICollectionViewScrollPositionTop animated:NO];
         
     }
+    
 
 }
 
@@ -553,7 +551,7 @@
     locationCellView = (LocationCollectionViewCell *) [locationCollectionView cellForItemAtIndexPath:[NSIndexPath indexPathForRow:indexPath.row inSection:0]];
  
      profileUserID=[[commonlocationArray valueForKey:@"user_id"] objectAtIndex:indexPath.row];
-        NSLog(@"%@",profileUserID);
+    
     NSString * requestsend=[[commonlocationArray valueForKey:@"send_request"] objectAtIndex:indexPath.row];
     if([requestsend isEqualToString:@"No"])
     {
@@ -600,8 +598,7 @@
 
 }
 
-//    profileUserID=[[commonlocationArray valueForKey:@"user_id"] objectAtIndex:indexPath.row];
-//    NSLog(@"profileUserID%@",profileUserID);
+
 
 
 -(IBAction)filterAction:(id)sender
@@ -616,7 +613,12 @@
         [self filterviewPosition];
         appDelegate.settingButton.userInteractionEnabled=NO;
         isFilteraction=YES;
-        [self.locationCollectionView setUserInteractionEnabled:YES];
+        [self.locationCollectionView setUserInteractionEnabled:NO];
+        UISwipeGestureRecognizer * swiperight=[[UISwipeGestureRecognizer alloc]initWithTarget:self action:@selector(swiperight:)];
+        swiperight.direction=UISwipeGestureRecognizerDirectionRight;
+        
+        [self.view addGestureRecognizer:swiperight];
+
         
     }
     else if (isFilteraction==YES)
@@ -633,6 +635,10 @@
         currentloadPage =@"";
         [self nearestLocationWebservice];
     }
+    self.upperLabel.text=@"";
+    self.lowerLabel.text=@"";
+    self.ageupperLabel.text=@"";
+    self.agelowerLabel.text =@"";
     
 }
 -(void)filterviewPosition
@@ -767,16 +773,18 @@
 
 - (void)releaseToRefresh:(UIRefreshControl *)_refreshControl
 {
-    
     currentloadPage=@"";
     avalableStatus=@"";
     GenderStatus =@"";
     onlineStatus  =@"";
+    filterAge     =@"";
+    filterDistance=@"";
     [self nearestLocationWebservice];
 }
 
 -(void)swiperight:(UISwipeGestureRecognizer*)gestureRecognizer
 {
+    
     self.collectionviewxpostion.constant =10;
     self.CollectionviewWidth.constant    =self.view.frame.size.width-10;
     self.filterviewxposition.constant    = self.CollectionviewWidth.constant+10;
@@ -790,7 +798,7 @@
    
     appDelegate.settingButton.userInteractionEnabled=YES;
     currentloadPage =@"";
-    [self nearestLocationWebservice];
+    //[self nearestLocationWebservice];
 }
 
 -(IBAction)DidClickClearFilter:(id)sender
@@ -809,11 +817,15 @@
     self.avalableNoBtn.backgroundColor =[UIColor whiteColor];
     self.avalableBothBtn.backgroundColor=[UIColor redColor];
     avalableStatus=@"";
-    self.ageSlider.value =26;
-    self.distanceSlider.value=5;
+
+    [self configureLabelSlider];
+    [self configureAgeChangeSlider];
+    self.upperLabel.text=@"";
+    self.lowerLabel.text=@"";
+    self.ageupperLabel.text=@"";
+    self.agelowerLabel.text =@"";
     filterAge=@"18-26";
     filterDistance=@"0-5";
-    
 }
 
 
@@ -824,19 +836,19 @@
     UIImage* image = nil;
     
     image = [UIImage imageNamed:@""];  //slider-metal-trackBackground
-    image = [image resizableImageWithCapInsets:UIEdgeInsetsMake(0.0, -5.0, 0.0, 0-10.0)];
+    image = [image resizableImageWithCapInsets:UIEdgeInsetsMake(0.0, 0.0, 0.0, 0.0)];
     slider.trackBackgroundImage = image;
     
-    image = [UIImage imageNamed:@"dot_Image"];    //slider-metal-track
-    image = [image resizableImageWithCapInsets:UIEdgeInsetsMake(0.0, 8.0, 0.0, 8.0)];
+    image = [UIImage imageNamed:@"dot_active_red"];    //slider-metal-track
+    image = [image resizableImageWithCapInsets:UIEdgeInsetsMake(2.0, 5.0, 2.0, 5.0)];
      slider.trackImage = image;
     
-    image = [UIImage imageNamed:@"dot_Image"];
+    image = [UIImage imageNamed:@"Filter_track"];
      image = [image imageWithAlignmentRectInsets:UIEdgeInsetsMake(0,0,0,0)];
      slider.lowerHandleImageNormal = image;
      slider.upperHandleImageNormal = image;
     
-     image = [UIImage imageNamed:@"dot_Image"];          //slider-metal-handle-highlighted
+     image = [UIImage imageNamed:@"Filter_track"];          //slider-metal-handle-highlighted
      image = [image imageWithAlignmentRectInsets:UIEdgeInsetsMake(0, 0, 0, 0)];
      slider.lowerHandleImageHighlighted = image;
      slider.upperHandleImageHighlighted = image;
@@ -858,20 +870,21 @@
     // You get get the center point of the slider handles and use this to arrange other subviews
     
     CGPoint lowerCenter;
-    lowerCenter.x = (self.labelSlider.lowerCenter.x + self.labelSlider.frame.origin.x);
-    lowerCenter.y = (self.labelSlider.center.y - 30.0f);
+    lowerCenter.x = (self.labelSlider.lowerCenter.x + self.labelSlider.frame.origin.x+12);
+    lowerCenter.y = (self.labelSlider.center.y - 15.0f);
     self.lowerLabel.center = lowerCenter;
     self.lowerLabel.text = [NSString stringWithFormat:@"%d", (int)self.labelSlider.lowerValue];
     
     CGPoint upperCenter;
-    upperCenter.x = (self.labelSlider.upperCenter.x + self.labelSlider.frame.origin.x);
-    upperCenter.y = (self.labelSlider.center.y - 30.0f);
+    upperCenter.x = (self.labelSlider.upperCenter.x + self.labelSlider.frame.origin.x+12);
+    upperCenter.y = (self.labelSlider.center.y - 15.0f);
     self.upperLabel.center = upperCenter;
     self.upperLabel.text = [NSString stringWithFormat:@"%d", (int)self.labelSlider.upperValue];
     
-    filterDistance=[NSString stringWithFormat:@"%@-%@",self.lowerLabel.text,self.upperLabel.text];
-    NSLog(@"distanceSliderValueChanged=%@",[NSString stringWithFormat:@"%@", filterDistance]);
+    NSString * filterdistanceStr   =[NSString stringWithFormat:@"%@-%@",self.lowerLabel.text,self.upperLabel.text];
+   
 
+     filterDistance=([filterdistanceStr isEqual:@"0-0"])?@"":filterdistanceStr;
 }
 
 
@@ -896,19 +909,20 @@
     // You get get the center point of the slider handles and use this to arrange other subviews
     
     CGPoint lowerCenter;
-    lowerCenter.x = (self.labelSlider1.lowerCenter.x + self.labelSlider1.frame.origin.x);
-    lowerCenter.y = (self.labelSlider1.center.y - 30.0f);
+    lowerCenter.x = (self.labelSlider1.lowerCenter.x + self.labelSlider1.frame.origin.x+10);
+    lowerCenter.y = (self.labelSlider1.center.y - 20.0f);
     self.agelowerLabel.center = lowerCenter;
     self.agelowerLabel.text = [NSString stringWithFormat:@"%d", (int)self.labelSlider1.lowerValue];
     
     CGPoint upperCenter;
-    upperCenter.x = (self.labelSlider1.upperCenter.x + self.labelSlider1.frame.origin.x);
-    upperCenter.y = (self.labelSlider1.center.y - 30.0f);
+    upperCenter.x = (self.labelSlider1.upperCenter.x + self.labelSlider1.frame.origin.x+10);
+    upperCenter.y = (self.labelSlider1.center.y - 20.0f);
     self.ageupperLabel.center = upperCenter;
     self.ageupperLabel.text = [NSString stringWithFormat:@"%d", (int)self.labelSlider1.upperValue];
-    filterAge =[NSString stringWithFormat:@"%@-%@",self.agelowerLabel.text,self.ageupperLabel.text];
+   NSString*agefilterSTr =[NSString stringWithFormat:@"%@-%@",self.agelowerLabel.text,self.ageupperLabel.text];
     ;
-    NSLog(@"AgeSliderValueChanged=%@",[NSString stringWithFormat:@"%@", filterAge]);
+    filterAge=([agefilterSTr isEqual:@"18-18"])?@"":agefilterSTr;
+   
 
 }
 
