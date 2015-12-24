@@ -251,8 +251,8 @@ NSUInteger DeviceSystemMajorVersion() {
         }
         else
         {
-            UIImage *image = [self imageFromBundle:@"slider-default7-trackBackground"]; //slider-default7-trackBackground
-            image = [image resizableImageWithCapInsets:UIEdgeInsetsMake(0.0, 2.0, 0.0, 2.0)];
+            UIImage *image = [self imageFromBundle:@"filter_bgImg"]; //slider-default7-trackBackground
+            image = [image resizableImageWithCapInsets:UIEdgeInsetsMake(0.0, 0.0, 0.0, 0.0)];
             _trackBackgroundImage = image;
         }
     }
@@ -273,8 +273,8 @@ NSUInteger DeviceSystemMajorVersion() {
         else
         {
             
-            UIImage* image = [self imageFromBundle:@"slider-default7-track"]; //slider-default7-track
-            image = [image resizableImageWithCapInsets:UIEdgeInsetsMake(0.0, 2.0, 0.0, 2.0)];
+            UIImage* image = [self imageFromBundle:@"Filter_track"]; //slider-default7-track
+            image = [image resizableImageWithCapInsets:UIEdgeInsetsMake(0.0, 8.0, 0.0, 8.0)];
             image = [image imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
             _trackImage = image;
         }
@@ -296,8 +296,8 @@ NSUInteger DeviceSystemMajorVersion() {
         }
         else
         {
-            UIImage *image = [self imageFromBundle:@"slider-default7-trackCrossedOver"];  //slider-default7-trackCrossedOver
-            image = [image resizableImageWithCapInsets:UIEdgeInsetsMake(0.0, 2.0, 0.0, 2.0)];
+            UIImage *image = [self imageFromBundle:@"filter_bgImg"];  //slider-default7-trackCrossedOver
+            image = [image resizableImageWithCapInsets:UIEdgeInsetsMake(0.0, 0.0, 0.0, 0.0)];
             _trackCrossedOverImage = image;
         }
     }
@@ -316,7 +316,7 @@ NSUInteger DeviceSystemMajorVersion() {
         }
         else
         {
-            UIImage *image = [self imageFromBundle:@"slider-default7-handle"];  //slider-default7-handle
+            UIImage *image = [self imageFromBundle:@"filter_bgImg"];  //slider-default7-handle
             _lowerHandleImageNormal = [image imageWithAlignmentRectInsets:UIEdgeInsetsMake(1, 8, 1, 8)];
         }
 
@@ -338,8 +338,8 @@ NSUInteger DeviceSystemMajorVersion() {
         }
         else
         {
-            UIImage *image = [self imageFromBundle:@"slider-default7-handle"];//slider-default7-handle
-            _lowerHandleImageHighlighted = [image imageWithAlignmentRectInsets:UIEdgeInsetsMake(-1, 8, 1, 8)];
+            UIImage *image = [self imageFromBundle:@"filter_bgImg"];//slider-default7-handle
+            _lowerHandleImageHighlighted = [image imageWithAlignmentRectInsets:UIEdgeInsetsMake(0, 0, 0, 0)];
         }
     }
     
@@ -358,8 +358,8 @@ NSUInteger DeviceSystemMajorVersion() {
         }
         else
         {
-            UIImage *image = [self imageFromBundle:@"slider-default7-handle"];
-            _upperHandleImageNormal = [image imageWithAlignmentRectInsets:UIEdgeInsetsMake(-1, 8, 1, 8)];
+            UIImage *image = [self imageFromBundle:@"filter_bgImg"];
+            _upperHandleImageNormal = [image imageWithAlignmentRectInsets:UIEdgeInsetsMake(0, 0, 0, 0)];
         }
     }
     
@@ -377,8 +377,8 @@ NSUInteger DeviceSystemMajorVersion() {
         }
         else
         {
-            UIImage *image = [self imageFromBundle:@"slider-default7-handle"];
-            _upperHandleImageHighlighted = [image imageWithAlignmentRectInsets:UIEdgeInsetsMake(-1, 8, 1, 8)];
+            UIImage *image = [self imageFromBundle:@"filter_bgImg"];
+            _upperHandleImageHighlighted = [image imageWithAlignmentRectInsets:UIEdgeInsetsMake(0,0,0,0)];
         }
     }
     
