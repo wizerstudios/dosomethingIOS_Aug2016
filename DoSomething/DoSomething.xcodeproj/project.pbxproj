@@ -1360,7 +1360,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.oclockapps.DoSomething;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "e8c0be5c-1c55-4238-aa6b-181308ddb714";
+				PROVISIONING_PROFILE = "94f0dcb4-0c04-4425-89c4-d1f2a7733725";
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
