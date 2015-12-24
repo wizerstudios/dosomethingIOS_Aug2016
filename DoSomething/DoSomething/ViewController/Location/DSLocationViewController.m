@@ -630,6 +630,10 @@
         currentloadPage =@"";
         [self nearestLocationWebservice];
     }
+    self.upperLabel.text=@"";
+    self.lowerLabel.text=@"";
+    self.ageupperLabel.text=@"";
+    self.agelowerLabel.text =@"";
     
 }
 -(void)filterviewPosition
