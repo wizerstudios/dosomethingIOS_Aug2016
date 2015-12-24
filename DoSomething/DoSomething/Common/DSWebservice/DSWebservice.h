@@ -18,10 +18,10 @@ typedef void (^WebserviceRequestXMLSuccessHandler)(AFHTTPRequestOperation  *oper
 typedef void (^WebserviceRequestXMLFailureHandler)(AFHTTPRequestOperation  *operation, NSError *error);
 
 //Demo URL
-//#define BASE_URL @"http://indiawebcoders.com/mobileapps/dosomething/"
+#define BASE_URL @"http://indiawebcoders.com/mobileapps/dosomething/"
 
 //Live URL
-#define BASE_URL @"http://wiztestinghost.com/dosomething/"
+//#define BASE_URL @"http://wiztestinghost.com/dosomething/"
 
 #define URL_FOR_RESOURCE(RESOURCE) [NSString stringWithFormat:@"%@%@",BASE_URL,RESOURCE]
 
@@ -240,6 +240,16 @@ message_send_user_id:(NSString *)message_send_user_id
                      failure:(WebserviceRequestFailureHandler)failure;
 
 
+
+//Update Notification API
+
+-(void)updateNotification:(NSString *)notificationUpdate
+                sessionID:(NSString *)sessionId
+             vibrationStr:(NSString *)vibrationStr
+               messageStr:(NSString *)messageStr
+                 soundstr:(NSString *)soundStr
+                  success:(WebserviceRequestSuccessHandler)success
+                  failure:(WebserviceRequestFailureHandler)failure;
 
 
 

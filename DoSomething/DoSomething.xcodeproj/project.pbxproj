@@ -13,6 +13,7 @@
 		2B1B8B961C23E830005A699E /* NSString+FontAwesome.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B1B8B951C23E830005A699E /* NSString+FontAwesome.m */; };
 		2B1B8BE51C24487A005A699E /* DSTermsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B1B8BE31C24487A005A699E /* DSTermsViewController.m */; };
 		2B1B8BE61C24487A005A699E /* DSTermsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2B1B8BE41C24487A005A699E /* DSTermsViewController.xib */; };
+		2B2B45121C2BEE710015C2E2 /* DSTermsOfUseView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B2B45111C2BEE700015C2E2 /* DSTermsOfUseView.m */; };
 		2B2C08901C27BB6C00996441 /* DSNearByDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B2C088E1C27BB6C00996441 /* DSNearByDetailViewController.m */; };
 		2B2C08911C27BB6C00996441 /* DSNearByDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2B2C088F1C27BB6C00996441 /* DSNearByDetailViewController.xib */; };
 		2B83CAAF1BE8744E0064EC7F /* DSWebservice.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B83CAAE1BE8744E0064EC7F /* DSWebservice.m */; };
@@ -138,6 +139,8 @@
 		2B1B8BE21C24487A005A699E /* DSTermsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DSTermsViewController.h; sourceTree = "<group>"; };
 		2B1B8BE31C24487A005A699E /* DSTermsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DSTermsViewController.m; sourceTree = "<group>"; };
 		2B1B8BE41C24487A005A699E /* DSTermsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DSTermsViewController.xib; sourceTree = "<group>"; };
+		2B2B45101C2BEE700015C2E2 /* DSTermsOfUseView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DSTermsOfUseView.h; path = ViewController/TermsOfUse/DSTermsOfUseView.h; sourceTree = "<group>"; };
+		2B2B45111C2BEE700015C2E2 /* DSTermsOfUseView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DSTermsOfUseView.m; path = ViewController/TermsOfUse/DSTermsOfUseView.m; sourceTree = "<group>"; };
 		2B2C088D1C27BB6C00996441 /* DSNearByDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DSNearByDetailViewController.h; path = NearByDetail/DSNearByDetailViewController.h; sourceTree = "<group>"; };
 		2B2C088E1C27BB6C00996441 /* DSNearByDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DSNearByDetailViewController.m; path = NearByDetail/DSNearByDetailViewController.m; sourceTree = "<group>"; };
 		2B2C088F1C27BB6C00996441 /* DSNearByDetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = DSNearByDetailViewController.xib; path = NearByDetail/DSNearByDetailViewController.xib; sourceTree = "<group>"; };
@@ -550,6 +553,8 @@
 		2BEA3FC51C15AD7100237D12 /* TermsOfUse */ = {
 			isa = PBXGroup;
 			children = (
+				2B2B45101C2BEE700015C2E2 /* DSTermsOfUseView.h */,
+				2B2B45111C2BEE700015C2E2 /* DSTermsOfUseView.m */,
 				2B1B8BE21C24487A005A699E /* DSTermsViewController.h */,
 				2B1B8BE31C24487A005A699E /* DSTermsViewController.m */,
 				2B1B8BE41C24487A005A699E /* DSTermsViewController.xib */,
@@ -1165,6 +1170,7 @@
 				6AE7361E1C05AA5D00C7DCF0 /* SettingView.m in Sources */,
 				EAEF251E1BCF9EF600F83E82 /* IQUITextFieldView+Additions.m in Sources */,
 				2BD72AFC1BFCC5AD003846E9 /* AFURLRequestSerialization.m in Sources */,
+				2B2B45121C2BEE710015C2E2 /* DSTermsOfUseView.m in Sources */,
 				511C73641BE3804E00D3D61D /* DSChatsTableViewController.m in Sources */,
 				EAEF25261BCF9EF600F83E82 /* IQBarButtonItem.m in Sources */,
 				2BD72AF91BFCC5AD003846E9 /* AFNetworkReachabilityManager.m in Sources */,
@@ -1336,7 +1342,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.oclockapps.DoSomething;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "88b4c0c5-eb7e-4eb9-847d-9cd3cdddf5d0";
+				PROVISIONING_PROFILE = "346a3fa5-7bd8-4d0e-998e-dd7f55c36569";
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;

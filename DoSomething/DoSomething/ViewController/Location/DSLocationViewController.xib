@@ -67,7 +67,7 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="x4s-f8-PZR">
-                    <rect key="frame" x="10" y="0.0" width="300" height="513"/>
+                    <rect key="frame" x="10" y="0.0" width="300" height="516"/>
                     <animations/>
                     <color key="backgroundColor" red="0.90980392156862744" green="0.90980392156862744" blue="0.90980392156862744" alpha="1" colorSpace="calibratedRGB"/>
                     <gestureRecognizers/>
@@ -573,7 +573,7 @@
                 <constraint firstAttribute="bottom" secondItem="m8H-NP-Mj6" secondAttribute="bottom" id="1TC-Fi-Cb5"/>
                 <constraint firstItem="m8H-NP-Mj6" firstAttribute="leading" secondItem="x4s-f8-PZR" secondAttribute="trailing" constant="10" id="3wj-cw-H9q"/>
                 <constraint firstItem="x4s-f8-PZR" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="10" id="AK0-aj-zIk"/>
-                <constraint firstAttribute="bottom" secondItem="x4s-f8-PZR" secondAttribute="bottom" constant="55" id="W9s-II-o7O"/>
+                <constraint firstAttribute="bottom" secondItem="x4s-f8-PZR" secondAttribute="bottom" constant="52" id="W9s-II-o7O"/>
                 <constraint firstItem="m8H-NP-Mj6" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="320" id="lTm-kY-CQu"/>
                 <constraint firstItem="x4s-f8-PZR" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="piE-PA-qlr"/>
             </constraints>

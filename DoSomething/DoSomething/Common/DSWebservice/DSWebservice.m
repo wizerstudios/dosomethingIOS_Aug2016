@@ -678,6 +678,26 @@ message_send_user_id:(NSString *)message_send_user_id
     
 }
 
+-(void)updateNotification:(NSString *)notificationUpdate
+                sessionID:(NSString *)sessionId
+             vibrationStr:(NSString *)vibrationStr
+               messageStr:(NSString *)messageStr
+                 soundstr:(NSString *)soundStr
+                  success:(WebserviceRequestSuccessHandler)success
+                  failure:(WebserviceRequestFailureHandler)failure{
+    
+    urlString = [URL_FOR_RESOURCE(@"") stringByAppendingString:[NSString stringWithFormat:@"%@?sessionid=%@&notification_vibration=%@&notification_message=%@&notification_sound=%@",notificationUpdate,sessionId,vibrationStr,messageStr,soundStr]];
+    
+    NSLog(@"urlString = %@",urlString);
+    
+    [self sendRequestWithURLString:urlString
+                     andParameters:nil
+                            method:ServiceGet
+           completionSucessHandler:success
+          completionFailureHandler:failure];
+    
+}
+
 
 #pragma mark POST forgetPasswordRequest
 
