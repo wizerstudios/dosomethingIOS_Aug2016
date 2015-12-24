@@ -59,6 +59,7 @@
 -(void)viewWillAppear:(BOOL)animated{
     
     [self getUserCurrenLocation];
+   
     
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(loadInvalidSessionAlert:)
@@ -69,7 +70,7 @@
     
     [self CustomAlterviewload];
     
-    [self notificationMethod];
+    
     
    
     self.deletebuttonBottomoposition.constant =45;
@@ -104,23 +105,25 @@
     [customNavigation.menuBtn setHidden:YES];
     [customNavigation.buttonBack setHidden:YES];
     [customNavigation.saveBtn setHidden:NO];
+    [customNavigation.saveBtn addTarget:self action:@selector(didClickSaveBntAction:) forControlEvents:UIControlEventTouchUpInside];
     [self.navigationController.navigationBar addSubview:customNavigation.view];
    
     
-     messSwith =[[UISwitch alloc]initWithFrame:CGRectMake(messLbl.frame.origin.x+messLbl.frame.size.width+24,messLbl.frame.origin.y-3,20,0)];
+     messSwith =[[UISwitch alloc]initWithFrame:CGRectMake(messLbl.frame.origin.x+messLbl.frame.size.width+24,messLbl.frame.origin.y-3,60,20)];
     [messSwith addTarget: self action: @selector(messSwithAction:) forControlEvents:UIControlEventValueChanged];
-    messSwith.transform = CGAffineTransformMakeScale(0.50, 0.50);
+    messSwith.transform = CGAffineTransformMakeScale(0.80, 0.60);
     messSwith.layer.cornerRadius = 16.0;
     
-    soundSwitch =[[UISwitch alloc]initWithFrame:CGRectMake(soundLbl.frame.origin.x+soundLbl.frame.size.width+24,soundLbl.frame.origin.y-3,20,0)];
-    soundSwitch.transform = CGAffineTransformMakeScale(0.50, 0.50);
+    soundSwitch =[[UISwitch alloc]initWithFrame:CGRectMake(soundLbl.frame.origin.x+soundLbl.frame.size.width+24,soundLbl.frame.origin.y-3,60,20)];
+    soundSwitch.transform = CGAffineTransformMakeScale(0.80, 0.60);
     [soundSwitch addTarget: self action: @selector(soundSwithAction:) forControlEvents:UIControlEventValueChanged];
     soundSwitch.layer.cornerRadius = 16.0;
     
-    vibrationSwitch =[[UISwitch alloc]initWithFrame:CGRectMake(vibrationLbl.frame.origin.x+vibrationLbl.frame.size.width+24,vibrationLbl.frame.origin.y-5,20,0)];
-     vibrationSwitch.transform = CGAffineTransformMakeScale(0.50, 0.50);
+    vibrationSwitch =[[UISwitch alloc]initWithFrame:CGRectMake(vibrationLbl.frame.origin.x+vibrationLbl.frame.size.width+24,vibrationLbl.frame.origin.y-5,60,20)];
+     vibrationSwitch.transform = CGAffineTransformMakeScale(0.80, 0.60);
     [vibrationSwitch addTarget: self action: @selector(vibrationSwithAction:) forControlEvents:UIControlEventValueChanged];
      vibrationSwitch.layer.cornerRadius = 16.0;
+     [self notificationMethod];
     [self.notificationview addSubview:messSwith];
     [self.notificationview addSubview:soundSwitch];
     [self.notificationview addSubview:vibrationSwitch];
@@ -154,6 +157,7 @@
         
         [messSwith setBackgroundColor:[UIColor colorWithRed:232.0f/255.0f green:232.0f/255.0f blue:232.0f/255.0f alpha:1.0f]];
         [messSwith setOnTintColor:[UIColor colorWithRed:232.0f/255.0f green:232.0f/255.0f blue:232.0f/255.0f alpha:1.0f]];
+         
         }
     if([objSound isEqualToString:@"switch_on"])
     {
@@ -436,6 +440,12 @@
     appDelegate.SepratorLbl.hidden=YES;
     [appDelegate.settingButton setBackgroundImage:[UIImage imageNamed:@"setting_icon.png"] forState:UIControlStateNormal];
 }
+-(IBAction)didClickSaveBntAction:(id)sender
+{
+    
+    //[self updateAPI];
+}
+
 
 
 @end

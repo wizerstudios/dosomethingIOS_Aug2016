@@ -55,6 +55,8 @@ typedef enum {
 //- (void) getUserCurrentLocationData;
 -(NSString *)getSessionID;
 
+-(NSMutableArray *)getuserLatitudeandLongitude;
+
 void downloadImageFromUrl(NSString* urlString, UIImageView * imageview);
 
 // ResizeableFont
