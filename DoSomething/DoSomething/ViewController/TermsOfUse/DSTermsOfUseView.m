@@ -56,14 +56,14 @@
     
     UIView *viewContainer = [[UIView alloc] init];
     [viewContainer setTranslatesAutoresizingMaskIntoConstraints:NO];
-    [viewContainer setBackgroundColor:[UIColor clearColor]];
+    [viewContainer setBackgroundColor:[UIColor whiteColor]];
     [viewContainer.layer setBorderWidth:1.0];
     [viewContainer.layer setBorderColor:[[UIColor colorWithRed:220.0f/255.0f green:220.0f/255.0f blue:220.0f/255.0f alpha:1.0f] CGColor]];
     [self addSubview:viewContainer];
     [self setViewContainer:viewContainer];
     
     UIWebView *termsConditionWebView = [[UIWebView alloc] init ];
-    termsConditionWebView.backgroundColor = [UIColor clearColor];
+    termsConditionWebView.backgroundColor = [UIColor whiteColor];
     termsConditionWebView.scalesPageToFit = YES;
     termsConditionWebView.autoresizingMask = (UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight);
     termsConditionWebView.delegate = self;
@@ -74,15 +74,15 @@
     [self setTermsConditionWebView:termsConditionWebView];
     
     
-    UIButton *closeButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-    [closeButton setTranslatesAutoresizingMaskIntoConstraints:NO];
-    [closeButton setBackgroundColor:[UIColor whiteColor]];
-    
-    //[closeButton setBackgroundImage:[UIImage imageNamed:@"close_button"] forState:UIControlStateNormal];
-    [closeButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-   
-    [self.viewContainer addSubview:closeButton];
-    [self setCloseButton:closeButton];
+//    UIButton *closeButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+//    [closeButton setTranslatesAutoresizingMaskIntoConstraints:NO];
+//    [closeButton setBackgroundColor:[UIColor whiteColor]];
+//    
+//    //[closeButton setBackgroundImage:[UIImage imageNamed:@"close_button"] forState:UIControlStateNormal];
+//    [closeButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+//   
+//    [self.viewContainer addSubview:closeButton];
+//    [self setCloseButton:closeButton];
     
 
     
@@ -95,7 +95,7 @@
     NSDictionary *viewDictionary = @{@"_imagviewContainerBg":_imageviewBackground,
                                      @"_viewContainer":_viewContainer,
                                      @"_termsConditionWebView":_termsConditionWebView,
-                                     @"_closeButton":_closeButton};
+                                     };
     
     [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[_imagviewContainerBg]|"
                                                                  options:0
@@ -166,25 +166,25 @@
                                                                                  views:viewDictionary]];
     
     
-    if(IS_IPHONE4|| IS_IPHONE5 ||IS_IPHONE6 ||IS_IPHONE6_Plus)
-    {
-        [self.viewContainer addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-275-[_closeButton(==20)]-10-|"
-                                                                                   options:0
-                                                                                   metrics:nil
-                                                                                     views:viewDictionary]];
-    }
-    else
-    {
-        [self.viewContainer addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-670-[_closeButton(==20)]-10-|"
-                                                                                   options:0
-                                                                                   metrics:nil
-                                                                                     views:viewDictionary]];
-    }
-    
-    [self.viewContainer addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-5-[_closeButton(==20)]-500-|"
-                                                                               options:0
-                                                                               metrics:nil
-                                                                                 views:viewDictionary]];
+//    if(IS_IPHONE4|| IS_IPHONE5 ||IS_IPHONE6 ||IS_IPHONE6_Plus)
+//    {
+//        [self.viewContainer addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-275-[_closeButton(==20)]-10-|"
+//                                                                                   options:0
+//                                                                                   metrics:nil
+//                                                                                     views:viewDictionary]];
+//    }
+//    else
+//    {
+//        [self.viewContainer addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-670-[_closeButton(==20)]-10-|"
+//                                                                                   options:0
+//                                                                                   metrics:nil
+//                                                                                     views:viewDictionary]];
+//    }
+//    
+//    [self.viewContainer addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-5-[_closeButton(==20)]-500-|"
+//                                                                               options:0
+//                                                                               metrics:nil
+//                                                                                 views:viewDictionary]];
     
     imageView =[[UIImageView alloc] initWithFrame:CGRectMake(0,0,320,360)];
     //NSString *image     = [userDetailsImageArray objectAtIndex:0];
@@ -199,17 +199,18 @@
     [imageView setImageWithURL:[NSURL URLWithString:profileImageStringValue]];
     }
     imageView.contentMode = UIViewContentModeScaleAspectFill;
-    // imageView.backgroundColor = [UIColor lightGrayColor];
+     imageView.backgroundColor = [UIColor whiteColor];
     //imageView.image=[UIImage imageNamed:@"draw.png"];
     [self.viewContainer addSubview:imageView];
     imageView.userInteractionEnabled = YES;
     
     label = [[UILabel alloc] init];
-    [label setFrame:CGRectMake(0,363,320,30)];
+    [label setFrame:CGRectMake(0,360,320,40)];
     label.textColor=[UIColor colorWithRed:218.0f/255.0f
                                     green:40.0f/255.0f
                                      blue:64.0f/255.0f
                                     alpha:1.0f];
+    label.backgroundColor = [UIColor whiteColor];
     [label setFont:[UIFont fontWithName:@"patron-regular" size:10]];
     [self.viewContainer addSubview:label];
     label.text= [self getData];

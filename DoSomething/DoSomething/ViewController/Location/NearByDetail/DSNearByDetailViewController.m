@@ -196,13 +196,12 @@
         userProfileImage.layer.masksToBounds = YES;
         [userProfileImage setUserInteractionEnabled:YES];
         [self.profileImageScroll addSubview:userProfileImage];
-        profilebutton1 = [[UIButton alloc] initWithFrame:CGRectMake(10.0f, 10.0f ,130, 140)];
-        profilebutton2 = [[UIButton alloc] initWithFrame:CGRectMake(10.0f, 10.0f ,130, 140)];
-        profilebutton3 = [[UIButton alloc] initWithFrame:CGRectMake(10.0f, 10.0f ,130, 140)];
-        [profilebutton1 addTarget:self action:@selector(changeSize:) forControlEvents:UIControlEventTouchUpInside];
-        [profilebutton2 addTarget:self action:@selector(changeSize:) forControlEvents:UIControlEventTouchUpInside];
-        [profilebutton3 addTarget:self action:@selector(changeSize:) forControlEvents:UIControlEventTouchUpInside];
-
+        profilebutton1 = [[UIButton alloc] initWithFrame:CGRectMake(0.0f, 0.0f ,130, 140)];
+        profilebutton2 = [[UIButton alloc] initWithFrame:CGRectMake(0.0f, 0.0f ,130, 140)];
+        profilebutton3 = [[UIButton alloc] initWithFrame:CGRectMake(0.0f, 0.0f ,130, 140)];
+       // [profilebutton1 addTarget:self action:@selector(changeSize:) forControlEvents:UIControlEventTouchUpInside];
+      //  [profilebutton2 addTarget:self action:@selector(changeSize:) forControlEvents:UIControlEventTouchUpInside];
+       // [profilebutton3 addTarget:self action:@selector(changeSize:) forControlEvents:UIControlEventTouchUpInside];
         profilebutton1.tag=101;
         profilebutton2.tag=102;
         profilebutton3.tag=103;
@@ -563,7 +562,7 @@
     
     [windowInfo addSubview:termsOfUseView];
     
-    [termsOfUseView.closeButton addTarget:self action:@selector(closeButtonAction:) forControlEvents:UIControlEventTouchUpInside];
+    //[termsOfUseView.closeButton addTarget:self action:@selector(closeButtonAction:) forControlEvents:UIControlEventTouchUpInside];
     
     [self setTermsOfUseView:termsOfUseView];
     
