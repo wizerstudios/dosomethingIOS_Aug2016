@@ -620,7 +620,7 @@
         
         NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
         
-        [dateFormatter setDateFormat:@"dd-MM-yyyy"];
+        [dateFormatter setDateFormat:@"dd / MM / yyyy"];
         
         NSDate *dateFromString = [[NSDate alloc] init];
         

@@ -122,10 +122,10 @@
     [settingButton addTarget:self action:@selector(settingView) forControlEvents:UIControlEventTouchUpInside];
     
     locationButton.frame=CGRectMake(buttonsView.frame.origin.x+20,3,45,45);
+    profileButton.frame=CGRectMake(buttonsView.frame.origin.x+80,3,45,45);
     menuButton.frame=CGRectMake(buttonsView.center.x-18,3,45,45);
     chatsButton.frame=CGRectMake(menuButton.frame.origin.x+menuButton.frame.size.width+20,3,45,45);
-    profileButton.frame=CGRectMake(menuButton.frame.origin.x-55,locationButton.frame.origin.y+8,29,28);
-    settingButton.frame =CGRectMake(chatsButton.frame.origin.x+chatsButton.frame.size.width+20,chatsButton.frame.origin.y+10,29,25);
+    settingButton.frame =CGRectMake(chatsButton.frame.origin.x+chatsButton.frame.size.width+20,3,45,45);
    
        if(IS_IPHONE6)
     {
