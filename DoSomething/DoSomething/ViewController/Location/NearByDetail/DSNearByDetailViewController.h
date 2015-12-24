@@ -30,6 +30,8 @@
     IBOutlet DSNearbyCustomCell *cellDosomething;
     IBOutlet DSNearbyCustomCell *cellInterestHobbies;
     IBOutlet DSNearbyCustomCell *cellNearbyProfileImg;
+    
+    UIView *view;
 }
 
 @property (strong, nonatomic) IBOutlet UIScrollView *mainScroll;
