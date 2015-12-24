@@ -162,7 +162,10 @@ DSAppCommon *sharedCommon = nil;
     return sessionID;
 }
 
-
+//-(NSMutableArray *)getuserLatitudeandLongitude
+//{
+//    return <#expression#>
+//}
 
 #pragma mark User Interaction Loading :
 
