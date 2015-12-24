@@ -445,42 +445,29 @@
                 profileImage:profileImage
                      success:^(AFHTTPRequestOperation *operation, id responseObject){
                          NSLog(@"checkuser = %@",responseObject);
-                         NSLog(@"checkuser = %@",[[responseObject objectForKey:@"checkuser"]objectForKey:@"status"]);
-                            if(([[[responseObject objectForKey:@"checkuser"]objectForKey:@"RegisterType"]  isEqual: @"1"])){
-                                [self gotoProfileView:email :password:YES];//[self gotoProfileView];
-                                [COMMON removeLoading];
-                             }
-                             else {
+                         if(([[[responseObject objectForKey:@"checkuser"]objectForKey:@"RegisterType"]  isEqual: @"1"])){
+                             if([[[responseObject objectForKey:@"checkuser"]objectForKey:@"status"]  isEqual: @"error"])
                                  [self showAltermessage:[[responseObject objectForKey:@"checkuser"]objectForKey:@"Message"]];
-                                 [COMMON removeLoading];
-                                
-                             }
-                         
-                             if(([[[responseObject objectForKey:@"checkuser"]objectForKey:@"RegisterType"]  isEqual: @"2"])){
-                                 if([[[responseObject objectForKey:@"checkuser"]objectForKey:@"status"]  isEqual: @"success"]){
-                                     NSLog(@"checkuser = %@",responseObject);
+                             
+                             else
+                                 [self gotoProfileView:email :password:YES];
+                                 
+                               [COMMON removeLoading];
+                         }
+                         else {
+                             
+                            if(([[[responseObject objectForKey:@"checkuser"]objectForKey:@"RegisterType"]  isEqual: @"2"])){
+                             
+                                 if([[[responseObject objectForKey:@"checkuser"]objectForKey:@"status"]  isEqual: @"success"])
                                      [self gotoProfileView:profileID];
                                      
-                                 }
-                                 else{
-                                     NSLog(@"checkuser = %@",responseObject);
+                                 else
                                      [self loadloginAPI];
-                                 }
-                                 
-                            
-//                             else{
-//                             if([[[responseObject objectForKey:@"checkuser"]objectForKey:@"status"]  isEqual: @"error"]){
-//                                // [self loadCreateAPI];
-//                                 [self loadRegister];
-//                                 NSLog(@"checkuser = %@",responseObject);
-//                                 
-//                             }
-//                             else{
-//                                 [self gotoProfileView:profileID];//[self gotoProfileView];
-//                                 [COMMON removeLoading];
-//                             }
-//                             }
-                         }
+                                
+                            }
+                       }
+     
+                         
                      }
                      failure:^(AFHTTPRequestOperation *operation, id error) {
                           NSLog(@"Error = %@",error);

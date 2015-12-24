@@ -236,7 +236,7 @@ enum JBSourceMode {
     [pageControllBtn setFrame:CGRectMake(self.center.x-50,self.frame.size.height-40,120,40)];
     pageControllBtn.numberOfPages = 5;
     pageControllBtn.currentPage = _currentImageIndex;
-    pageControllBtn.transform = CGAffineTransformMakeScale(1.0, 1.0);
+    //pageControllBtn.transform = CGAffineTransformMakeScale(1.0, 1.0);
 
 
     pageControllBtn.pageIndicatorTintColor = [UIColor redColor];
