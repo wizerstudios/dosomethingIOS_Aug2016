@@ -14,6 +14,9 @@
 #import "UIImageView+AFNetworking.h"
 #import "NSString+FontAwesome.h"
 #import "DSNearbyCustomCell.h"
+#import "AppDelegate.h"
+#import "DSTermsOfUseView.h"
+
 
 @interface DSNearByDetailViewController () <UIScrollViewDelegate,UITableViewDataSource,UITableViewDelegate>
 {
@@ -39,10 +42,17 @@
     
     DSNearbyCustomCell *NearbyCustomcell;
     NSString *requestStr;
+    AppDelegate *appDelegate;
+    
+    UIWindow *windowInfo;
+    UIButton * profilebutton1,* profilebutton2,* profilebutton3;
+    NSString *profileImageString;
+    
 
 }
 
 @property (strong, nonatomic) IBOutlet UITableView *tableView;
+@property(nonatomic,retain) DSTermsOfUseView *termsOfUseView;
 
 @end
 
@@ -92,6 +102,8 @@
 
     
     [self profileImageDisplay];
+    
+   
 }
 
 #pragma mark - userAgeName
@@ -163,6 +175,10 @@
         {
             userProfileImage = [[UIImageView alloc]initWithFrame:CGRectMake((self.view.frame.size.width/3.5) + spacing, 20,self.profileImageView.frame.size.width, self.profileImageView.frame.size.height)];
         }
+        else if(IS_IPHONE6){
+             userProfileImage = [[UIImageView alloc]initWithFrame:CGRectMake((i*self.profileImageScroll.frame.size.width) + 60, 20,self.profileImageView.frame.size.width+10, self.profileImageView.frame.size.height)];
+            
+        }
         else
         {
             userProfileImage = [[UIImageView alloc]initWithFrame:CGRectMake((i*self.profileImageScroll.frame.size.width) + spacing, 20,self.profileImageView.frame.size.width, self.profileImageView.frame.size.height)];
@@ -180,6 +196,34 @@
         userProfileImage.layer.masksToBounds = YES;
         [userProfileImage setUserInteractionEnabled:YES];
         [self.profileImageScroll addSubview:userProfileImage];
+        profilebutton1 = [[UIButton alloc] initWithFrame:CGRectMake(0.0f, 0.0f ,130, 140)];
+        profilebutton2 = [[UIButton alloc] initWithFrame:CGRectMake(0.0f, 0.0f ,130, 140)];
+        profilebutton3 = [[UIButton alloc] initWithFrame:CGRectMake(0.0f, 0.0f ,130, 140)];
+       // [profilebutton1 addTarget:self action:@selector(changeSize:) forControlEvents:UIControlEventTouchUpInside];
+      //  [profilebutton2 addTarget:self action:@selector(changeSize:) forControlEvents:UIControlEventTouchUpInside];
+       // [profilebutton3 addTarget:self action:@selector(changeSize:) forControlEvents:UIControlEventTouchUpInside];
+        profilebutton1.tag=101;
+        profilebutton2.tag=102;
+        profilebutton3.tag=103;
+
+
+        
+        if(i==0 &&[profileDataArray objectAtIndex:0]){
+            
+            [userProfileImage addSubview:profilebutton1];
+            
+        }
+        if(i==1 &&[profileDataArray objectAtIndex:1]){
+            [userProfileImage addSubview:profilebutton2];
+            
+        }
+        if(i==2 &&[profileDataArray objectAtIndex:2]){
+            
+            [userProfileImage addSubview:profilebutton3];
+        }
+        
+       
+        
     }
     self.profileImageScroll.contentSize=CGSizeMake(self.profileImageScroll.frame.size.width*3, self.profileImageScroll.frame.size.height);
     
@@ -324,6 +368,9 @@
         [self profileImageScrollView];
 
         self.nameAgeLabel.text =[self getData];
+        
+        
+       
     }
     if (indexPath.row == 1)
     {
@@ -477,14 +524,61 @@
             
             //[self.myInterestView addSubview:hobbiesname];
             [NearbyCustomcell addSubview:hobbiesname];
-            
-            hobbiesname.textAlignment = NSTextAlignmentCenter;
+             hobbiesname.textAlignment = NSTextAlignmentCenter;
             
             
         }
     }
     NearbyCustomcell.selectionStyle = UITableViewCellSelectionStyleNone;
     return NearbyCustomcell;
+    
+}
+
+-(IBAction)changeSize:(UIButton *)sender
+{
+    NSLog(@"Button %ld clicked.", (long int)[sender tag]);
+    windowInfo = [[[UIApplication sharedApplication] delegate] window];
+    
+    DSTermsOfUseView *termsOfUseView = [[DSTermsOfUseView alloc] init];
+    
+    if([sender tag] ==101){
+        
+        profileImageString= [userDetailsArray valueForKey:@"image1"];
+        
+    }
+    else if([sender tag] ==102){
+        profileImageString= [userDetailsArray valueForKey:@"image2"];
+        
+    }
+    else if([sender tag] ==103){
+        profileImageString= [userDetailsArray valueForKey:@"image3"];
+        
+    }
+        
+    
+    termsOfUseView.userDetailsImageArray   = userDetailsArray;
+    
+    termsOfUseView.profileImageStringValue = profileImageString;
+    
+    [windowInfo addSubview:termsOfUseView];
+    
+    //[termsOfUseView.closeButton addTarget:self action:@selector(closeButtonAction:) forControlEvents:UIControlEventTouchUpInside];
+    
+    [self setTermsOfUseView:termsOfUseView];
+    
+    NSDictionary *dictView = @{@"_terms":termsOfUseView};
+    
+    [windowInfo addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[_terms]|"
+                                
+                                                                       options:0
+                                
+                                                                       metrics:nil views:dictView]];
+    
+    [windowInfo addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[_terms]|"
+                                
+                                                                       options:0
+                                
+                                                                       metrics:nil views:dictView]];
     
 }
 #pragma mark - letsDoSomethingAction
@@ -522,6 +616,15 @@
     [COMMON removeLoading];
     
 }
+
+-(IBAction)closeButtonAction:(id)sender
+{
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        [self.termsOfUseView removeFromSuperview];
+        
+    });
+}
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
