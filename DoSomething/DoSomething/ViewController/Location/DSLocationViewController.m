@@ -156,10 +156,6 @@
     
     [self filterPageButtonAction];
 
-    UISwipeGestureRecognizer * swiperight=[[UISwipeGestureRecognizer alloc]initWithTarget:self action:@selector(swiperight:)];
-    swiperight.direction=UISwipeGestureRecognizerDirectionRight;
-    
-    [self.locationCollectionView addGestureRecognizer:swiperight];
     
     [[UISlider appearance] setThumbImage:[UIImage imageNamed:@"dot_Image"] forState:UIControlStateNormal];
     
@@ -382,6 +378,8 @@
         
                                 [refreshControl endRefreshing];
                                 [locationCollectionView reloadData];
+                              
+
                                
         
         
@@ -530,8 +528,10 @@
         currentloadPage= [NSString stringWithFormat:@"%d",x];
         
         [self nearestLocationWebservice];
+        [locationCollectionView scrollToItemAtIndexPath:indexPath atScrollPosition:UICollectionViewScrollPositionTop animated:NO];
         
     }
+    
 
 }
 
@@ -613,7 +613,12 @@
         [self filterviewPosition];
         appDelegate.settingButton.userInteractionEnabled=NO;
         isFilteraction=YES;
-        [self.locationCollectionView setUserInteractionEnabled:YES];
+        [self.locationCollectionView setUserInteractionEnabled:NO];
+        UISwipeGestureRecognizer * swiperight=[[UISwipeGestureRecognizer alloc]initWithTarget:self action:@selector(swiperight:)];
+        swiperight.direction=UISwipeGestureRecognizerDirectionRight;
+        
+        [self.view addGestureRecognizer:swiperight];
+
         
     }
     else if (isFilteraction==YES)
@@ -768,16 +773,18 @@
 
 - (void)releaseToRefresh:(UIRefreshControl *)_refreshControl
 {
-    
     currentloadPage=@"";
     avalableStatus=@"";
     GenderStatus =@"";
     onlineStatus  =@"";
+    filterAge     =@"";
+    filterDistance=@"";
     [self nearestLocationWebservice];
 }
 
 -(void)swiperight:(UISwipeGestureRecognizer*)gestureRecognizer
 {
+    
     self.collectionviewxpostion.constant =10;
     self.CollectionviewWidth.constant    =self.view.frame.size.width-10;
     self.filterviewxposition.constant    = self.CollectionviewWidth.constant+10;
@@ -791,7 +798,7 @@
    
     appDelegate.settingButton.userInteractionEnabled=YES;
     currentloadPage =@"";
-    [self nearestLocationWebservice];
+    //[self nearestLocationWebservice];
 }
 
 -(IBAction)DidClickClearFilter:(id)sender
@@ -828,12 +835,12 @@
 {
     UIImage* image = nil;
     
-    image = [UIImage imageNamed:@"filter_bgImg"];  //slider-metal-trackBackground
+    image = [UIImage imageNamed:@""];  //slider-metal-trackBackground
     image = [image resizableImageWithCapInsets:UIEdgeInsetsMake(0.0, 0.0, 0.0, 0.0)];
     slider.trackBackgroundImage = image;
     
-    image = [UIImage imageNamed:@"dot_Image"];    //slider-metal-track
-    image = [image resizableImageWithCapInsets:UIEdgeInsetsMake(0.0, 8.0, 0.0, 8.0)];
+    image = [UIImage imageNamed:@"dot_active_red"];    //slider-metal-track
+    image = [image resizableImageWithCapInsets:UIEdgeInsetsMake(2.0, 5.0, 2.0, 5.0)];
      slider.trackImage = image;
     
     image = [UIImage imageNamed:@"Filter_track"];
