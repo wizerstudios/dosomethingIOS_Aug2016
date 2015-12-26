@@ -15,7 +15,7 @@
 #import "NSString+FontAwesome.h"
 #import "DSNearbyCustomCell.h"
 #import "AppDelegate.h"
-#import "DSTermsOfUseView.h"
+#import "DSNearByImageView.h"
 
 
 @interface DSNearByDetailViewController () <UIScrollViewDelegate,UITableViewDataSource,UITableViewDelegate>
@@ -52,7 +52,7 @@
 }
 
 @property (strong, nonatomic) IBOutlet UITableView *tableView;
-@property(nonatomic,retain) DSTermsOfUseView *termsOfUseView;
+@property(nonatomic,retain) DSNearByImageView *nearByImageView;
 
 @end
 
@@ -171,14 +171,13 @@
         
         NSData * profileData = [profileDataArray objectAtIndex:i];
         NSString *image     = [profileDataArray objectAtIndex:i];
-        if(IS_IPHONE6_Plus)
-        {
-            userProfileImage = [[UIImageView alloc]initWithFrame:CGRectMake((self.view.frame.size.width/3.5) + spacing, 20,self.profileImageView.frame.size.width, self.profileImageView.frame.size.height)];
-        }
-        else if(IS_IPHONE6){
-             userProfileImage = [[UIImageView alloc]initWithFrame:CGRectMake((i*self.profileImageScroll.frame.size.width) + 60, 20,self.profileImageView.frame.size.width+10, self.profileImageView.frame.size.height)];
+        if(IS_IPHONE6||IS_IPHONE6_Plus)
             
+        {
+            userProfileImage = [[UIImageView alloc]initWithFrame:CGRectMake((i*self.profileImageScroll.frame.size.width) + spacing+30, 20,self.profileImageView.frame.size.width, self.profileImageView.frame.size.height)];
+
         }
+        
         else
         {
             userProfileImage = [[UIImageView alloc]initWithFrame:CGRectMake((i*self.profileImageScroll.frame.size.width) + spacing, 20,self.profileImageView.frame.size.width, self.profileImageView.frame.size.height)];
@@ -199,9 +198,9 @@
         profilebutton1 = [[UIButton alloc] initWithFrame:CGRectMake(0.0f, 0.0f ,130, 140)];
         profilebutton2 = [[UIButton alloc] initWithFrame:CGRectMake(0.0f, 0.0f ,130, 140)];
         profilebutton3 = [[UIButton alloc] initWithFrame:CGRectMake(0.0f, 0.0f ,130, 140)];
-       // [profilebutton1 addTarget:self action:@selector(changeSize:) forControlEvents:UIControlEventTouchUpInside];
-      //  [profilebutton2 addTarget:self action:@selector(changeSize:) forControlEvents:UIControlEventTouchUpInside];
-       // [profilebutton3 addTarget:self action:@selector(changeSize:) forControlEvents:UIControlEventTouchUpInside];
+        [profilebutton1 addTarget:self action:@selector(changeSize:) forControlEvents:UIControlEventTouchUpInside];
+        [profilebutton2 addTarget:self action:@selector(changeSize:) forControlEvents:UIControlEventTouchUpInside];
+        [profilebutton3 addTarget:self action:@selector(changeSize:) forControlEvents:UIControlEventTouchUpInside];
         profilebutton1.tag=101;
         profilebutton2.tag=102;
         profilebutton3.tag=103;
@@ -227,32 +226,16 @@
     }
     self.profileImageScroll.contentSize=CGSizeMake(self.profileImageScroll.frame.size.width*3, self.profileImageScroll.frame.size.height);
     
+    
     if(CurrentImage == 0)
         [self.profileImageScroll setContentOffset:CGPointMake(0, 0)animated:NO];
     else if(CurrentImage == 1)
     {
-        if(IS_IPHONE6|| IS_IPHONE6_Plus)
-        {
-            
-            [self.profileImageScroll setContentOffset:CGPointMake(4*self.profileImageView.frame.size.width - 15, 0)animated:NO];
-        }
-        else
-        {
             [self.profileImageScroll setContentOffset:CGPointMake(1*self.profileImageView.frame.size.width - 15, 0)animated:NO];
-        }
     }
     else if(CurrentImage == 2)
     {
-        if(IS_IPHONE6|| IS_IPHONE6_Plus)
-        {
-            
-            [self.profileImageScroll setContentOffset:CGPointMake((6*self.profileImageView.frame.size.width - 15), 0)animated:NO];
-        }
-        else
-        {
-            
             [self.profileImageScroll setContentOffset:CGPointMake((1.5*self.profileImageView.frame.size.width - 15), 0)animated:NO];
-        }
     }
     xslider=0;
     pgDtView=[[UIView alloc]init];
@@ -413,9 +396,21 @@
         
         imageSize =39;
         yAxis = 31;
-        commonWidth=19.5;
+      //  commonWidth=19.5;
         space = imageSize / 2;
         commonHeight = imageSize+15;
+        if(IS_IPHONE6_Plus){
+            
+            commonWidth=39.5;
+        }
+        else if (IS_IPHONE6){
+            
+            commonWidth=29.5;
+        }
+        else{
+            
+            commonWidth=19.5;
+        }
         
         //doSomethingImageArray
         for (int i =0; i< [doSomethingImageArray  count]; i++) {
@@ -473,10 +468,24 @@
         commonWidth=19.5;
         //commonHeight = 54;
         yAxis = 31;
-        commonWidth=19.5;
+        //commonWidth=19.5;
         space = imageSize / 2;
         commonHeight = imageSize+15;
         
+        
+        if(IS_IPHONE6_Plus){
+           
+            commonWidth=39.5;
+        }
+        else if (IS_IPHONE6){
+            
+            commonWidth=29.5;
+        }
+        else{
+            
+            commonWidth=19.5;
+        }
+
         
         for (int i =0; i< [imageNormalArray  count]; i++) {
             
@@ -536,10 +545,10 @@
 
 -(IBAction)changeSize:(UIButton *)sender
 {
-    NSLog(@"Button %ld clicked.", (long int)[sender tag]);
+   
     windowInfo = [[[UIApplication sharedApplication] delegate] window];
-    
-    DSTermsOfUseView *termsOfUseView = [[DSTermsOfUseView alloc] init];
+
+    DSNearByImageView *nearByImageView = [[DSNearByImageView alloc] init];
     
     if([sender tag] ==101){
         
@@ -556,17 +565,17 @@
     }
         
     
-    termsOfUseView.userDetailsImageArray   = userDetailsArray;
+    nearByImageView.userDetailsImageArray   = userDetailsArray;
     
-    termsOfUseView.profileImageStringValue = profileImageString;
+    nearByImageView.profileImageStringValue = profileImageString;
+   
+    [windowInfo addSubview:nearByImageView];
     
-    [windowInfo addSubview:termsOfUseView];
+    //[nearByImageView.closeButton addTarget:self action:@selector(closeButtonAction:) forControlEvents:UIControlEventTouchUpInside];
     
-    //[termsOfUseView.closeButton addTarget:self action:@selector(closeButtonAction:) forControlEvents:UIControlEventTouchUpInside];
+    [self setNearByImageView:nearByImageView];
     
-    [self setTermsOfUseView:termsOfUseView];
-    
-    NSDictionary *dictView = @{@"_terms":termsOfUseView};
+    NSDictionary *dictView = @{@"_terms":nearByImageView};
     
     [windowInfo addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[_terms]|"
                                 
@@ -620,7 +629,7 @@
 -(IBAction)closeButtonAction:(id)sender
 {
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        [self.termsOfUseView removeFromSuperview];
+        [self.nearByImageView removeFromSuperview];
         
     });
 }

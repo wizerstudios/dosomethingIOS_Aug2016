@@ -1,25 +1,25 @@
 //
-//  DSTermsOfUseView.m
+//  DSNearByImageView.m
 //  DoSomething
 //
-//  Created by OCS iOS Developer on 07/12/15.
+//  Created by OCS iOS Developer on 26/12/15.
 //  Copyright © 2015 OClock Apps. All rights reserved.
 //
 
-#import "DSTermsOfUseView.h"
+#import "DSNearByImageView.h"
 #import "DSAppCommon.h"
 #import "DSConfig.h"
 #import "UIImageView+AFNetworking.h"
 #import "NSString+FontAwesome.h"
 
-@interface DSTermsOfUseView()<UIWebViewDelegate,UIScrollViewDelegate>
+@interface DSNearByImageView()<UIWebViewDelegate>
 {
     BOOL isUpdateConstraint;
 }
 
 @end
 
-@implementation DSTermsOfUseView
+@implementation DSNearByImageView
 @synthesize userDetailsImageArray,profileImageStringValue;
 
 -(instancetype)init{
@@ -45,8 +45,9 @@
 -(void)configureElements{
     UIImageView *imagviewContainerBg = [[UIImageView alloc] init];
     [imagviewContainerBg setTranslatesAutoresizingMaskIntoConstraints:NO];
-    //[imagviewContainerBg setBackgroundColor:[UIColor whiteColor]];
-    [imagviewContainerBg setAlpha:0.6];
+    [imagviewContainerBg setBackgroundColor:[UIColor clearColor]];
+    imagviewContainerBg.userInteractionEnabled = YES;
+    //  [imagviewContainerBg setAlpha:0.6];
     [self addSubview:imagviewContainerBg];
     [self setImageviewBackground:imagviewContainerBg];
     
@@ -56,36 +57,27 @@
     
     UIView *viewContainer = [[UIView alloc] init];
     [viewContainer setTranslatesAutoresizingMaskIntoConstraints:NO];
-    [viewContainer setBackgroundColor:[UIColor whiteColor]];
-    [viewContainer.layer setBorderWidth:1.0];
-    [viewContainer.layer setBorderColor:[[UIColor colorWithRed:220.0f/255.0f green:220.0f/255.0f blue:220.0f/255.0f alpha:1.0f] CGColor]];
+   // viewContainer.backgroundColor = [UIColor clearColor];
+    viewContainer.userInteractionEnabled = YES;
+    //  [viewContainer setAlpha:0.6];
+     // [viewContainer.layer setBorderWidth:1.0];
     [self addSubview:viewContainer];
     [self setViewContainer:viewContainer];
     
-    UIWebView *termsConditionWebView = [[UIWebView alloc] init ];
-    termsConditionWebView.backgroundColor = [UIColor whiteColor];
-    termsConditionWebView.scalesPageToFit = YES;
+    UIView *termsConditionWebView = [[UIView alloc] init];
+    termsConditionWebView.backgroundColor = [UIColor colorWithRed:210.0f/255.0f
+                                                   green:210.0f/255.0f
+                                                    blue:210.0f/255.0f
+                                                   alpha:1.0f];
+    [termsConditionWebView setAlpha:0.7];
+    termsConditionWebView.userInteractionEnabled = YES;
     termsConditionWebView.autoresizingMask = (UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight);
-    termsConditionWebView.delegate = self;
-    
-    
-   // [termsConditionWebView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:@""]]];
+    // [termsConditionWebView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:@""]]];
     [self.viewContainer addSubview:termsConditionWebView];
     [self setTermsConditionWebView:termsConditionWebView];
     
     
-//    UIButton *closeButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-//    [closeButton setTranslatesAutoresizingMaskIntoConstraints:NO];
-//    [closeButton setBackgroundColor:[UIColor whiteColor]];
-//    
-//    //[closeButton setBackgroundImage:[UIImage imageNamed:@"close_button"] forState:UIControlStateNormal];
-//    [closeButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-//   
-//    [self.viewContainer addSubview:closeButton];
-//    [self setCloseButton:closeButton];
-    
 
-    
     
 }
 
@@ -109,26 +101,72 @@
     
     int widthPosition,heightPosition;
     
-    if(IS_IPHONE4|| IS_IPHONE5 ||IS_IPHONE6 ||IS_IPHONE6_Plus)
+    if(IS_IPHONE4 )
     {
-        widthPosition=320;//300
-        heightPosition=400;
+        widthPosition=320;//300,320
+        heightPosition=400;//400
+        
+    }
+    else if(IS_IPHONE5){
+        
+        widthPosition=320;
+        heightPosition=450;
+        
+    }
+    else if(IS_IPHONE6){
+        
+        widthPosition=400;
+        heightPosition=533;
+       
+    }
+    else if(IS_IPHONE6_Plus){
+        
+        widthPosition=414;
+        heightPosition=600;
+        
     }
     else{
         
         widthPosition=700;
         heightPosition=700;
     }
+    if(IS_IPHONE6||IS_IPHONE6_Plus)
+    {
+        [self addConstraint:[NSLayoutConstraint constraintWithItem:self.viewContainer
+                                                         attribute:NSLayoutAttributeCenterY
+                                                         relatedBy:NSLayoutRelationEqual
+                                                            toItem:self
+                                                         attribute:NSLayoutAttributeCenterY
+                                                        multiplier:1.0421 //98
+                                                          constant:0]];
+            
+        }
+    else if(IS_IPHONE5)
+    {
+        [self addConstraint:[NSLayoutConstraint constraintWithItem:self.viewContainer
+                                                         attribute:NSLayoutAttributeCenterY
+                                                         relatedBy:NSLayoutRelationEqual
+                                                            toItem:self
+                                                         attribute:NSLayoutAttributeCenterY
+                                                        multiplier:1.0237 //98 //0.93
+                                                          constant:0]];
+        
+    }
+    else{
+        [self addConstraint:[NSLayoutConstraint constraintWithItem:self.viewContainer
+                                                         attribute:NSLayoutAttributeCenterY
+                                                         relatedBy:NSLayoutRelationEqual
+                                                            toItem:self
+                                                         attribute:NSLayoutAttributeCenterY
+                                                        multiplier:0.93 //98
+                                                          constant:0]];
+
+        
+    }
     
     
-    [self addConstraint:[NSLayoutConstraint constraintWithItem:self.viewContainer
-                                                     attribute:NSLayoutAttributeCenterY
-                                                     relatedBy:NSLayoutRelationEqual
-                                                        toItem:self
-                                                     attribute:NSLayoutAttributeCenterY
-                                                    multiplier:0.90 //98
-                                                      constant:0]];
-    
+  
+        
     [self addConstraint:[NSLayoutConstraint constraintWithItem:self.viewContainer
                                                      attribute:NSLayoutAttributeWidth
                                                      relatedBy:NSLayoutRelationEqual
@@ -166,52 +204,115 @@
                                                                                  views:viewDictionary]];
     
     
-//    if(IS_IPHONE4|| IS_IPHONE5 ||IS_IPHONE6 ||IS_IPHONE6_Plus)
-//    {
-//        [self.viewContainer addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-275-[_closeButton(==20)]-10-|"
-//                                                                                   options:0
-//                                                                                   metrics:nil
-//                                                                                     views:viewDictionary]];
-//    }
-//    else
-//    {
-//        [self.viewContainer addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-670-[_closeButton(==20)]-10-|"
-//                                                                                   options:0
-//                                                                                   metrics:nil
-//                                                                                     views:viewDictionary]];
-//    }
-//    
-//    [self.viewContainer addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-5-[_closeButton(==20)]-500-|"
-//                                                                               options:0
-//                                                                               metrics:nil
-//                                                                                 views:viewDictionary]];
     
-    imageView =[[UIImageView alloc] initWithFrame:CGRectMake(0,0,320,360)];
-    //NSString *image     = [userDetailsImageArray objectAtIndex:0];
-   // imageView.layer.cornerRadius = imageView.frame.size.height / 2;
-   // imageView.layer.masksToBounds = YES;
     
-    if([profileImageStringValue isEqualToString:@""]){
-         [imageView setImage:[UIImage imageNamed:@"profile_noimg"]];
+    [self getImage];
+    
+    
+}
+#pragma mark - getImage
+-(void) getImage{
+    if(IS_IPHONE6_Plus)
+    {
+    viewProfile = [[UIView alloc] initWithFrame:CGRectMake(-25,0,460,450)];//-35,0,500,450
+   
+    }
+    else if(IS_IPHONE6)
+    {
+        viewProfile = [[UIView alloc] initWithFrame:CGRectMake(-25,0,460,400)];//-35,0,500,450
+        
     }
     else{
-    downloadImageFromUrl(profileImageStringValue, imageView);
-    [imageView setImageWithURL:[NSURL URLWithString:profileImageStringValue]];
+        viewProfile = [[UIView alloc] initWithFrame:CGRectMake(-35,0,390,360)];
+    }
+    
+   
+    //viewProfile.backgroundColor = [UIColor clearColor];
+    //[viewProfile.layer setBorderWidth:1.0];
+    
+    [self.viewContainer addSubview:viewProfile];
+    viewProfile.userInteractionEnabled = YES;
+    int r1,r2;
+    
+    if(IS_IPHONE6||IS_IPHONE6_Plus)
+    {
+        r1=160.0;
+        r2=160.0;
+    }
+    else{
+        r1=140.0;
+        r2=140.0;
+        
+    }
+       UIBezierPath *maskPath;
+    maskPath = [UIBezierPath bezierPathWithRoundedRect:viewProfile.bounds
+                                     byRoundingCorners:(UIRectCornerBottomLeft | UIRectCornerBottomRight)
+                                           cornerRadii:CGSizeMake(r1, r2)];
+    CAShapeLayer *maskLayer = [[CAShapeLayer alloc] init];
+    maskLayer.frame =viewProfile.bounds;
+    maskLayer.path = maskPath.CGPath;
+    viewProfile.layer.mask = maskLayer;
+    
+  //  viewProfile.layer.cornerRadius = viewProfile.frame.size.height/ 2;
+  //  viewProfile.layer.masksToBounds = YES;
+
+    if(IS_IPHONE6_Plus)
+    {
+        imageView =[[UIImageView alloc] initWithFrame:CGRectMake(25,0,415,450)];//(10,0,500,450)
+        
+        
+    }
+    else if(IS_IPHONE6)
+    {
+        imageView =[[UIImageView alloc] initWithFrame:CGRectMake(25,0,415,400)];//(10,0,500,450)
+    }
+    else{
+        imageView =[[UIImageView alloc] initWithFrame:CGRectMake(35,0,325,360)];
+    }
+
+   // [imageView.layer setBorderWidth:1.0];
+    //-20,0,380,360
+    
+    if([profileImageStringValue isEqualToString:@""]){
+        [imageView setImage:[UIImage imageNamed:@"profile_noimg"]];
+    }
+    else{
+        downloadImageFromUrl(profileImageStringValue, imageView);
+        [imageView setImageWithURL:[NSURL URLWithString:profileImageStringValue]];
     }
     imageView.contentMode = UIViewContentModeScaleAspectFill;
-     imageView.backgroundColor = [UIColor whiteColor];
-    //imageView.image=[UIImage imageNamed:@"draw.png"];
-    [self.viewContainer addSubview:imageView];
+    imageView.backgroundColor = [UIColor clearColor];
+     [viewProfile addSubview:imageView];
     imageView.userInteractionEnabled = YES;
     
+    
+    
     label = [[UILabel alloc] init];
-    [label setFrame:CGRectMake(0,360,320,40)];
+    if(IS_IPHONE6_Plus)
+    {
+        [label setFrame:CGRectMake(0,470,420,40)];
+        
+    }
+    else if(IS_IPHONE6)
+    {
+        [label setFrame:CGRectMake(0,420,420,40)];
+        
+    }
+    else if(IS_IPHONE5)
+    {
+        [label setFrame:CGRectMake(0,365,320,40)];
+        
+    }
+    else{
+        [label setFrame:CGRectMake(0,365,320,40)];
+    }
+    
     label.textColor=[UIColor colorWithRed:218.0f/255.0f
                                     green:40.0f/255.0f
                                      blue:64.0f/255.0f
                                     alpha:1.0f];
-    label.backgroundColor = [UIColor whiteColor];
-    [label setFont:[UIFont fontWithName:@"patron-regular" size:10]];
+   //  label.backgroundColor = [UIColor whiteColor];
+    [label setFont:[UIFont fontWithName:@"patron-bold" size:16]];
     [self.viewContainer addSubview:label];
     label.text= [self getData];
     [label setTextAlignment:NSTextAlignmentCenter];
@@ -219,11 +320,19 @@
 
     
 }
+
 #pragma mark - userAgeName
 -(NSString *) getData{
     
     NSString *strUserData;
-    [label setFont:[UIFont fontWithName:@"FontAwesome" size:14]];
+    if(IS_IPHONE5)
+    
+        [label setFont:[UIFont fontWithName:@"FontAwesome" size:16]];
+    
+    else
+
+        [label setFont:[UIFont fontWithName:@"FontAwesome" size:18]];
+    
     
     if([[userDetailsImageArray valueForKey:@"gender"]isEqualToString:@"Female"]){
         strUserData= [NSString stringWithFormat:@"%@", @"\uf221"];
