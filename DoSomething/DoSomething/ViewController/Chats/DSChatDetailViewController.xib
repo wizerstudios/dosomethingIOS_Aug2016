@@ -18,6 +18,7 @@
                 <outlet property="ProfileName" destination="qTm-CV-HgT" id="0Bl-1e-Vjb"/>
                 <outlet property="backgroundView" destination="XqN-Wp-lms" id="aJ3-oZ-xw7"/>
                 <outlet property="chatButton" destination="MkV-9D-hoy" id="8Pj-iz-kiD"/>
+                <outlet property="chatTableView" destination="xvP-6c-2gG" id="qJ9-uV-Ujv"/>
                 <outlet property="chatView" destination="pey-bp-htd" id="jAh-FI-rws"/>
                 <outlet property="transparentView" destination="vGn-Bt-vGu" id="NiA-3f-b4p"/>
                 <outlet property="view" destination="o0E-7A-6vB" id="yT4-ay-ktK"/>
@@ -70,6 +71,10 @@
                             <rect key="frame" x="0.0" y="0.0" width="320" height="327"/>
                             <animations/>
                             <color key="backgroundColor" red="0.9137254901960784" green="0.9137254901960784" blue="0.9137254901960784" alpha="1" colorSpace="calibratedRGB"/>
+                            <connections>
+                                <outlet property="dataSource" destination="-1" id="Vw7-Ms-ouD"/>
+                                <outlet property="delegate" destination="-1" id="HCc-vz-Zyu"/>
+                            </connections>
                         </tableView>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text=" " lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HWQ-D5-Dwc">
                             <rect key="frame" x="0.0" y="387" width="320" height="3"/>

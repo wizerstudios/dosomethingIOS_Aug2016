@@ -32,6 +32,7 @@ typedef enum {
     DSWebservice            * objWebService;
     NSMutableDictionary     *LocationDict;
     NSString *sessionId;
+    
     //NSString *latitude;
    // NSString *longitude;
     NSString                *currentLatitude,*currentLongitude;
@@ -54,8 +55,12 @@ typedef enum {
 - (void)getUserCurrenLocation;
 //- (void) getUserCurrentLocationData;
 -(NSString *)getSessionID;
+-(NSString *)getUserID;
 
 -(NSMutableArray *)getuserLatitudeandLongitude;
+
+- (CGSize)dataSize:(NSString *)string withFontName:(NSString *)fontName ofSize:(NSInteger)size withSize:(CGSize)LabelWidth;
+
 
 void downloadImageFromUrl(NSString* urlString, UIImageView * imageview);
 

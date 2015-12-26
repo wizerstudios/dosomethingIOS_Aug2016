@@ -251,6 +251,15 @@ message_send_user_id:(NSString *)message_send_user_id
                   success:(WebserviceRequestSuccessHandler)success
                   failure:(WebserviceRequestFailureHandler)failure;
 
+// Chat Conversation
+
+-(void)getConversation:(NSString *)getConversation
+             sessionID:(NSString *)sessionID
+        conversationId:(NSString *)conversationId
+               success:(WebserviceRequestSuccessHandler)success
+               failure:(WebserviceRequestFailureHandler)failure;
+
+
 
 
 

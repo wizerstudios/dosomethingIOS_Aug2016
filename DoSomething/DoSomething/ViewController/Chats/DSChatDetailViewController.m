@@ -10,10 +10,23 @@
 #import "CustomNavigationView.h"
 #import "DSConfig.h"
 #import "DSAppCommon.h"
+#import "DSWebservice.h"
+
+#define CONTENT_WIDTH           200.f
+#define CONTENT_START           0.f
+#define BUBBLE_IMAGE_HEIGHT     10.f
+#define BUBBLE_WIDTH            250.f
+#define BUBBLE_WIDTH_SPACE      70.f
+#define CELL_HEIGHT             CONTENT_START+25.f
+#define ME_RIGHT_WIDTH_SPACE    25.0f
 
 @interface DSChatDetailViewController (){
     
     NSUInteger supportUser;
+    
+    NSMutableArray *conversationArray;
+    
+    DSWebservice *webService;
 }
 
 @end
@@ -26,9 +39,15 @@
     
     [super viewDidLoad];
     
+    webService = [[DSWebservice alloc]init];
+    
+    conversationArray = [[NSMutableArray alloc]init];
+    
     [self loadNavigation];
     
     [self displayUserDetailsView];
+    
+    [self loadConverstionAPI];
    
 }
 
@@ -38,6 +57,26 @@
     
     [self.navigationItem setHidesBackButton:YES animated:NO];
 }
+
+- (void)viewWillLayoutSubviews {
+    
+    if (UIInterfaceOrientationIsPortrait([[UIApplication sharedApplication] statusBarOrientation])) {
+        [self setUpForPortrait];
+    } else {
+        [self setUpForLandscape];
+    }
+    
+    if (self.standardIBAS.visible) {
+        [self.standardIBAS rotateToCurrentOrientation];
+    }
+    if (self.customIBAS.visible) {
+        [self.customIBAS rotateToCurrentOrientation];
+    }
+    if (self.funkyIBAS.visible) {
+        [self.funkyIBAS rotateToCurrentOrientation];
+    }
+}
+#pragma mark - Navigation
 
 -(void)loadNavigation{
     
@@ -66,6 +105,14 @@
     [customNavigation.buttonBack addTarget:self action:@selector(backAction) forControlEvents:UIControlEventTouchUpInside];
     
 }
+
+- (void)backAction
+{
+    [self.navigationController popViewControllerAnimated:YES];
+}
+
+
+
 
 -(void)displayUserDetailsView{
     
@@ -125,24 +172,11 @@
 
 }
 
-- (IBAction)showReallyFunkyIBActionSheet:(id)sender
-{
-     _menuImageview.hidden = YES;
-    
-    _transparentView.hidden = NO;
-    
-    _backgroundView.hidden = NO;
-}
-- (void)backAction
-{
-    [self.navigationController popViewControllerAnimated:YES];
-}
+#pragma mark - Textview
+
 
 -(void)textViewDidBeginEditing:(UITextView *)textView{
-    //[chatView.placeHolderLabel setHidden:YES];
-//    [UIView animateWithDuration:.25f animations:^{
-//        if(IS_IPHONE4)
-//           // chatView.frame=CGRectMake(0,160,320,65);
+ 
     
     [chatView.placeHolderLabel setHidden:YES];
     
@@ -183,27 +217,41 @@
     
 }
 
+#pragma mark - Tableview Delegate
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+{
+    return 1;
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    return [conversationArray count];
+}
+
+-(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+    
+    NSString *text      = [[conversationArray objectAtIndex:[indexPath row]] valueForKey:@"Message"];
+    CGSize dataSize = [COMMON dataSize:text withFontName:@"HelveticaNeue" ofSize:15 withSize:CGSizeMake(195.0, 999.0)];
+    return dataSize.height + CELL_HEIGHT +20;
+    
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    static NSString *CellIdentifier = @"Cell";
+    ChatTableViewCell *cell = (ChatTableViewCell *) [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    if (cell == nil) {
+        [[NSBundle mainBundle] loadNibNamed:@"chatTableViewCell" owner:self options:nil];
+        cell = chatCustomcell;
+    }
+    [cell getMessageArray:[conversationArray objectAtIndex:indexPath.row]];
+    return cell;
+    
+}
+
 
 #pragma mark - All the other junk for the sample project
 
-- (void)viewWillLayoutSubviews {
-    
-    if (UIInterfaceOrientationIsPortrait([[UIApplication sharedApplication] statusBarOrientation])) {
-        [self setUpForPortrait];
-    } else {
-        [self setUpForLandscape];
-    }
-    
-    if (self.standardIBAS.visible) {
-        [self.standardIBAS rotateToCurrentOrientation];
-    }
-    if (self.customIBAS.visible) {
-        [self.customIBAS rotateToCurrentOrientation];
-    }
-    if (self.funkyIBAS.visible) {
-        [self.funkyIBAS rotateToCurrentOrientation];
-    }
-}
 - (void)setUpForPortrait {
     
     float halfOfWidth = CGRectGetWidth([UIScreen mainScreen].bounds) / 2.0;
@@ -241,24 +289,73 @@
     button.layer.borderColor = button.titleLabel.textColor.CGColor;
 }
 
+#pragma mark - Button Actions
+
 - (IBAction)pressCancel:(id)sender {
     
     _transparentView.hidden = YES;
     
     _backgroundView.hidden = YES;
     
-     _menuImageview.hidden = NO;
+    _menuImageview.hidden = NO;
+    
 }
 
 - (IBAction)pressDelete:(id)sender {
+    
     _transparentView.hidden = YES;
+    
     _backgroundView.hidden = YES;
-     _menuImageview.hidden = NO;
+    
+    _menuImageview.hidden = NO;
 }
 
 - (IBAction)pressBlock:(id)sender {
+    
     _transparentView.hidden = YES;
+    
     _backgroundView.hidden = YES;
-     _menuImageview.hidden = NO;
+    
+    _menuImageview.hidden = NO;
+    
 }
+- (IBAction)showReallyFunkyIBActionSheet:(id)sender
+{
+    _menuImageview.hidden = YES;
+    
+    _transparentView.hidden = NO;
+    
+    _backgroundView.hidden = NO;
+}
+
+
+#pragma mark - Webservice Method
+
+-(void)loadConverstionAPI{
+    
+    NSString *conversationID = [chatuserDetailsDict valueForKey:@"id"];
+    
+    [webService getConversation:GetConversation sessionID:[COMMON getSessionID] conversationId:conversationID
+                        success:^(AFHTTPRequestOperation *operation, id responseObject){
+                            
+                            NSMutableDictionary *responseDict = [[NSMutableDictionary alloc]init];
+                            
+                            responseDict = [[responseObject valueForKey:@"getconversation"]mutableCopy];
+                            
+                            if([[responseDict valueForKey:@"status"]isEqualToString:@"success"]){
+                                
+                                conversationArray = [[responseDict valueForKey:@"converation"]mutableCopy];
+                                
+                                [chatTableView reloadData];
+                            }
+                            
+                        }
+     
+                        failure:^(AFHTTPRequestOperation *operation, id error) {
+                            [COMMON removeLoading];
+                            
+                        }];
+    
+}
+
 @end

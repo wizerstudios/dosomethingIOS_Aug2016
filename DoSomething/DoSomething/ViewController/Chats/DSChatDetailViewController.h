@@ -10,11 +10,17 @@
 #import <QuartzCore/QuartzCore.h>
 #import "IBActionSheet.h"
 #import "ChatTextView.h"
+#import "ChatTableViewCell.h"
 
 @interface DSChatDetailViewController : UIViewController < UIActionSheetDelegate>
 
 {
     IBOutlet UILabel *OnlineLabel;
+    
+    IBOutlet UITableView *chatTableView;
+    
+    IBOutlet ChatTableViewCell *chatCustomcell;
+    
     
 }
 
