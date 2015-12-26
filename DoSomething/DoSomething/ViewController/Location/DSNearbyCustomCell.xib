@@ -194,11 +194,15 @@
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="BnH-u1-f5P">
                                 <rect key="frame" x="84" y="13" width="130" height="125"/>
                             </imageView>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="02G-Ll-uVK">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="02G-Ll-uVK">
                                 <rect key="frame" x="113" y="165" width="79" height="10"/>
                             </view>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8WK-Qy-QdA">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8WK-Qy-QdA">
                                 <rect key="frame" x="16" y="173" width="268" height="23"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="23" id="EZe-jP-MVs"/>
+                                    <constraint firstAttribute="width" constant="268" id="h6e-Hk-s9f"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" name="Patron-Bold" family="Patron" pointSize="13"/>
                                 <color key="textColor" red="0.85490196080000003" green="0.15686274510000001" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
@@ -209,9 +213,14 @@
                         </subviews>
                         <color key="backgroundColor" red="0.90980392160000001" green="0.90980392160000001" blue="0.90980392160000001" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
-                            <constraint firstAttribute="bottom" secondItem="8WK-Qy-QdA" secondAttribute="bottom" constant="4" id="aFI-76-wQo"/>
-                            <constraint firstItem="8WK-Qy-QdA" firstAttribute="leading" secondItem="DXX-ip-0t9" secondAttribute="leading" constant="16" id="hfN-uL-9vf"/>
-                            <constraint firstAttribute="trailing" secondItem="8WK-Qy-QdA" secondAttribute="trailing" constant="16" id="ky3-uk-oFh"/>
+                            <constraint firstItem="8WK-Qy-QdA" firstAttribute="centerY" secondItem="DXX-ip-0t9" secondAttribute="centerY" constant="84.5" id="8fe-IR-4H9"/>
+                            <constraint firstItem="02G-Ll-uVK" firstAttribute="top" secondItem="DXX-ip-0t9" secondAttribute="top" constant="165" id="HtM-Sv-x75"/>
+                            <constraint firstItem="8WK-Qy-QdA" firstAttribute="leading" secondItem="DXX-ip-0t9" secondAttribute="leading" constant="16" id="LPY-0S-R0T"/>
+                            <constraint firstItem="8WK-Qy-QdA" firstAttribute="centerX" secondItem="DXX-ip-0t9" secondAttribute="centerX" id="N9X-eA-ImK"/>
+                            <constraint firstAttribute="bottom" secondItem="02G-Ll-uVK" secondAttribute="bottom" constant="25" id="bie-yH-00L"/>
+                            <constraint firstAttribute="trailing" secondItem="8WK-Qy-QdA" secondAttribute="trailing" constant="16" id="end-10-1pQ"/>
+                            <constraint firstItem="02G-Ll-uVK" firstAttribute="leading" secondItem="DXX-ip-0t9" secondAttribute="leading" constant="113" id="l2O-RB-gwl"/>
+                            <constraint firstAttribute="trailing" secondItem="02G-Ll-uVK" secondAttribute="trailing" constant="108" id="t60-0g-gaY"/>
                         </constraints>
                     </view>
                 </subviews>

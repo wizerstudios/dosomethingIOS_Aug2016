@@ -164,8 +164,6 @@
         
     }
     
-    
-  
         
     [self addConstraint:[NSLayoutConstraint constraintWithItem:self.viewContainer
                                                      attribute:NSLayoutAttributeWidth
@@ -212,6 +210,8 @@
 }
 #pragma mark - getImage
 -(void) getImage{
+    
+    //VIEW PROFILE IMAGE
     if(IS_IPHONE6_Plus)
     {
     viewProfile = [[UIView alloc] initWithFrame:CGRectMake(-25,0,460,450)];//-35,0,500,450
@@ -252,15 +252,12 @@
     maskLayer.frame =viewProfile.bounds;
     maskLayer.path = maskPath.CGPath;
     viewProfile.layer.mask = maskLayer;
-    
   //  viewProfile.layer.cornerRadius = viewProfile.frame.size.height/ 2;
   //  viewProfile.layer.masksToBounds = YES;
 
     if(IS_IPHONE6_Plus)
     {
         imageView =[[UIImageView alloc] initWithFrame:CGRectMake(25,0,415,450)];//(10,0,500,450)
-        
-        
     }
     else if(IS_IPHONE6)
     {
@@ -285,7 +282,7 @@
      [viewProfile addSubview:imageView];
     imageView.userInteractionEnabled = YES;
     
-    
+    //VIEW PROFILE LABEL
     
     label = [[UILabel alloc] init];
     if(IS_IPHONE6_Plus)
@@ -331,7 +328,7 @@
     
     else
 
-        [label setFont:[UIFont fontWithName:@"FontAwesome" size:18]];
+        [label setFont:[UIFont fontWithName:@"FontAwesome" size:20]];
     
     
     if([[userDetailsImageArray valueForKey:@"gender"]isEqualToString:@"Female"]){

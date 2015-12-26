@@ -256,6 +256,8 @@
         [_topViewCell addSubview:pgDtView];
         if(IS_IPHONE6||IS_IPHONE6_Plus) {
             [pgDtView setFrame:CGRectMake(40, -5, detailPageControl.numberOfPages*18, 10)];
+           // [pgDtView setFrame:CGRectMake(60, -5, detailPageControl.numberOfPages*18, 10)];//IS_IPHONE6_Plus
+            
         }
         else{
             [pgDtView setFrame:CGRectMake(15, -5, detailPageControl.numberOfPages*18, 10)];
