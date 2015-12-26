@@ -10,7 +10,7 @@
 #import <QuartzCore/QuartzCore.h>
 #import "IBActionSheet.h"
 #import "ChatTextView.h"
-#import "ChatTableViewCell.h"
+#import "ChatDetailCustomcell.h"
 
 @interface DSChatDetailViewController : UIViewController < UIActionSheetDelegate>
 
@@ -19,7 +19,7 @@
     
     IBOutlet UITableView *chatTableView;
     
-    IBOutlet ChatTableViewCell *chatCustomcell;
+    IBOutlet ChatDetailCustomcell *chatCustomcell;
     
     
 }

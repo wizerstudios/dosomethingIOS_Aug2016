@@ -68,7 +68,7 @@
                     <rect key="frame" x="0.0" y="128" width="320" height="437"/>
                     <subviews>
                         <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="xvP-6c-2gG">
-                            <rect key="frame" x="0.0" y="0.0" width="320" height="327"/>
+                            <rect key="frame" x="0.0" y="0.0" width="320" height="345"/>
                             <animations/>
                             <color key="backgroundColor" red="0.9137254901960784" green="0.9137254901960784" blue="0.9137254901960784" alpha="1" colorSpace="calibratedRGB"/>
                             <connections>

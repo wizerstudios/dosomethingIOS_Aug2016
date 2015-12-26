@@ -17,7 +17,7 @@
 #define BUBBLE_IMAGE_HEIGHT     10.f
 #define BUBBLE_WIDTH            250.f
 #define BUBBLE_WIDTH_SPACE      70.f
-#define CELL_HEIGHT             CONTENT_START+25.f
+#define CELL_HEIGHT             CONTENT_START+15.f
 #define ME_RIGHT_WIDTH_SPACE    25.0f
 
 @interface DSChatDetailViewController (){
@@ -232,18 +232,19 @@
     
     NSString *text      = [[conversationArray objectAtIndex:[indexPath row]] valueForKey:@"Message"];
     CGSize dataSize = [COMMON dataSize:text withFontName:@"HelveticaNeue" ofSize:15 withSize:CGSizeMake(195.0, 999.0)];
-    return dataSize.height + CELL_HEIGHT +20;
+    return dataSize.height + CELL_HEIGHT+10;
     
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     static NSString *CellIdentifier = @"Cell";
-    ChatTableViewCell *cell = (ChatTableViewCell *) [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    ChatDetailCustomcell *cell = (ChatDetailCustomcell *) [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
-        [[NSBundle mainBundle] loadNibNamed:@"chatTableViewCell" owner:self options:nil];
+        [[NSBundle mainBundle] loadNibNamed:@"ChatDetailCustomcell" owner:self options:nil];
         cell = chatCustomcell;
     }
+    [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
     [cell getMessageArray:[conversationArray objectAtIndex:indexPath.row]];
     return cell;
     
@@ -335,8 +336,10 @@
     
     NSString *conversationID = [chatuserDetailsDict valueForKey:@"id"];
     
-    [webService getConversation:GetConversation sessionID:[COMMON getSessionID] conversationId:conversationID
+    [webService getConversation:GetConversation sessionID:/*[COMMON getSessionID]*/@"7edaa7f4e794fcf5cb625e95e0a390e3" conversationId:@"8"
                         success:^(AFHTTPRequestOperation *operation, id responseObject){
+                            
+                            NSLog(@"Conversation resp = %@",responseObject);
                             
                             NSMutableDictionary *responseDict = [[NSMutableDictionary alloc]init];
                             
@@ -347,6 +350,9 @@
                                 conversationArray = [[responseDict valueForKey:@"converation"]mutableCopy];
                                 
                                 [chatTableView reloadData];
+                            }
+                            else{
+                               
                             }
                             
                         }

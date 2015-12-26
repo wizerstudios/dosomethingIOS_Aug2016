@@ -116,6 +116,8 @@
 		EAFC97981BD21CF800B3593D /* DSInterestAndHobbiesCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = EAFC97961BD21CF800B3593D /* DSInterestAndHobbiesCollectionViewCell.xib */; };
 		ED0A471B1C2E98C3000CAB95 /* DSChatDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ED0A47191C2E98C3000CAB95 /* DSChatDetailViewController.m */; };
 		ED0A471C1C2E98C3000CAB95 /* DSChatDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = ED0A471A1C2E98C3000CAB95 /* DSChatDetailViewController.xib */; };
+		ED0A47211C2E9965000CAB95 /* ChatDetailCustomcell.m in Sources */ = {isa = PBXBuildFile; fileRef = ED0A471F1C2E9965000CAB95 /* ChatDetailCustomcell.m */; };
+		ED0A47221C2E9965000CAB95 /* ChatDetailCustomcell.xib in Resources */ = {isa = PBXBuildFile; fileRef = ED0A47201C2E9965000CAB95 /* ChatDetailCustomcell.xib */; };
 		ED78176F1BEC7F6400C7138F /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED78176E1BEC7F6400C7138F /* CoreLocation.framework */; };
 		EDAE16281BF3873B0061E99D /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EDAE16271BF3873B0061E99D /* AVFoundation.framework */; };
 /* End PBXBuildFile section */
@@ -303,6 +305,9 @@
 		ED0A47181C2E98C3000CAB95 /* DSChatDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DSChatDetailViewController.h; sourceTree = "<group>"; };
 		ED0A47191C2E98C3000CAB95 /* DSChatDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DSChatDetailViewController.m; sourceTree = "<group>"; };
 		ED0A471A1C2E98C3000CAB95 /* DSChatDetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DSChatDetailViewController.xib; sourceTree = "<group>"; };
+		ED0A471E1C2E9965000CAB95 /* ChatDetailCustomcell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChatDetailCustomcell.h; sourceTree = "<group>"; };
+		ED0A471F1C2E9965000CAB95 /* ChatDetailCustomcell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChatDetailCustomcell.m; sourceTree = "<group>"; };
+		ED0A47201C2E9965000CAB95 /* ChatDetailCustomcell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ChatDetailCustomcell.xib; sourceTree = "<group>"; };
 		ED78176E1BEC7F6400C7138F /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		EDAE16271BF3873B0061E99D /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
@@ -928,11 +933,22 @@
 		ED0A47171C2E989C000CAB95 /* ChatDetail */ = {
 			isa = PBXGroup;
 			children = (
+				ED0A471D1C2E993F000CAB95 /* ChatCustomCell */,
 				ED0A47181C2E98C3000CAB95 /* DSChatDetailViewController.h */,
 				ED0A47191C2E98C3000CAB95 /* DSChatDetailViewController.m */,
 				ED0A471A1C2E98C3000CAB95 /* DSChatDetailViewController.xib */,
 			);
 			path = ChatDetail;
+			sourceTree = "<group>";
+		};
+		ED0A471D1C2E993F000CAB95 /* ChatCustomCell */ = {
+			isa = PBXGroup;
+			children = (
+				ED0A471E1C2E9965000CAB95 /* ChatDetailCustomcell.h */,
+				ED0A471F1C2E9965000CAB95 /* ChatDetailCustomcell.m */,
+				ED0A47201C2E9965000CAB95 /* ChatDetailCustomcell.xib */,
+			);
+			path = ChatCustomCell;
 			sourceTree = "<group>";
 		};
 		ED25ED691C2838E80041B856 /* ChatTextView */ = {
@@ -1038,6 +1054,7 @@
 				C6D5F6441BC7B52C0050C1AE /* Patron-Thin.ttf in Resources */,
 				6A59C87E1C2807FD00286E35 /* DSNearbyCustomCell.xib in Resources */,
 				C6D5F6411BC7B52C0050C1AE /* Patron-Medium.ttf in Resources */,
+				ED0A47221C2E9965000CAB95 /* ChatDetailCustomcell.xib in Resources */,
 				C6D5F6431BC7B52C0050C1AE /* Patron-Regular.ttf in Resources */,
 				C6D5F67C1BC7EC440050C1AE /* Images.xcassets in Resources */,
 				EAFC96591BD20FD400B3593D /* DSInterestAndHobbiesViewController.xib in Resources */,
@@ -1170,6 +1187,7 @@
 				C6D5F6151BC7B0970050C1AE /* AppDelegate.m in Sources */,
 				EAEF25291BCF9EF600F83E82 /* IQUIView+IQKeyboardToolbar.m in Sources */,
 				2BD72AF71BFCC5AD003846E9 /* AFHTTPRequestOperationManager.m in Sources */,
+				ED0A47211C2E9965000CAB95 /* ChatDetailCustomcell.m in Sources */,
 				51F3C2F31BE75D40001E1FEC /* DSLocationViewController.m in Sources */,
 				2BD72AF81BFCC5AD003846E9 /* AFHTTPSessionManager.m in Sources */,
 				2BD72AE21BFCC584003846E9 /* AFNetworkActivityLogger.m in Sources */,
