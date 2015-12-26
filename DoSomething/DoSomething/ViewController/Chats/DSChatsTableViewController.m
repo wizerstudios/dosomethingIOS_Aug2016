@@ -45,11 +45,11 @@
                                                               attribute:NSLayoutAttributeTop
                                                              multiplier:1.0
                                                                constant:20.0]];
+    [COMMON LoadIcon:self.view];
+    [self loadChatHistoryAPI];
+
     
-    }
-
-
-
+}
 
 - (void)viewWillAppear:(BOOL)animated
 {
@@ -57,8 +57,6 @@
     [self getUserCurrenLocation];
     [self.navigationItem setHidesBackButton:YES animated:NO];
     [self setNavigation];
-    [COMMON LoadIcon:self.view];
-    [self loadChatHistoryAPI];
 }
 
 - (void)setNavigation
@@ -205,9 +203,18 @@
     
     NSString *ProfileName=[NSString stringWithFormat:@"%@",[chatDict valueForKey:@"image1"]];
     
-    downloadImageFromUrl(ProfileName,Cell.profileImageView);
+    NSLog(@"ProfileName = %@",ProfileName);
     
-    [Cell.profileImageView setImage:[UIImage imageNamed:ProfileName]];
+    if([ProfileName length]>0){
+        
+        downloadImageFromUrl(ProfileName,Cell.profileImageView);
+        
+        [Cell.profileImageView setImage:[UIImage imageNamed:ProfileName]];
+        
+    }
+    else{
+        [Cell.profileImageView setImage:[UIImage imageNamed:@"profile_noimg.png"]];
+    }
     
     [Cell.profileImageView.layer setCornerRadius:29];
     
@@ -241,7 +248,7 @@
         [Cell.msgCountLabel setHidden:YES];
     
     
-    
+    [Cell setSelectionStyle:UITableViewCellSelectionStyleNone];
     
     
     ChatTableView.backgroundColor = [UIColor colorWithRed:237.0f/255.0f green:237.0f/255.0f blue:237.0f/255.0f alpha:1.0f];

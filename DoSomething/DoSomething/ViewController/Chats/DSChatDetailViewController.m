@@ -11,13 +11,16 @@
 #import "DSConfig.h"
 #import "DSAppCommon.h"
 
-@interface DSChatDetailViewController ()
+@interface DSChatDetailViewController (){
+    
+    NSUInteger supportUser;
+}
 
 @end
 
 @implementation DSChatDetailViewController
 @synthesize ProfileName,ProfileImage;
-@synthesize chatView,chatuserDetailsDict;
+@synthesize chatView,chatuserDetailsDict,chatButton;
 
 - (void)viewDidLoad {
     
@@ -70,14 +73,47 @@
     
     NSString *profileStr = [NSString stringWithFormat:@"%@",[chatuserDetailsDict valueForKey:@"image1"]];
     
-    downloadImageFromUrl(profileStr, ProfileImage);
+    supportUser = [[chatuserDetailsDict valueForKey:@"supportuser"]integerValue];
+        
+    NSLog(@"profileStr = %@",profileStr);
     
-    ProfileImage.image = [UIImage imageNamed:profileStr];
+    if([profileStr length]>0){
+        
+        downloadImageFromUrl(profileStr, ProfileImage);
+        
+        ProfileImage.image = [UIImage imageNamed:profileStr];
+        
+    }else{
+        
+        ProfileImage.image = [UIImage imageNamed:@"profile_noimg.png"];
+        
+    }
     
     [ProfileImage.layer setCornerRadius:28];
     
     [ProfileImage.layer setMasksToBounds:YES];
     
+    if(supportUser == 1){
+        
+        [ProfileImage.layer setBorderWidth:2.0f];
+        
+        [ProfileImage.layer setBorderColor:[[UIColor colorWithRed:229.0f/255.0f green:63.0f/255.0f blue:81.0f/255.0f alpha:1.0f] CGColor]];
+        
+        [chatButton setBackgroundImage:[UIImage imageNamed:@"menu_icon.png"] forState:UIControlStateNormal];
+        
+        [chatButton setContentMode:UIViewContentModeScaleAspectFit];
+        
+        [chatButton setUserInteractionEnabled:NO];
+        
+    }
+    else{
+        
+        [chatButton setBackgroundImage:[UIImage imageNamed:@"menu_active.png"] forState:UIControlStateNormal];
+        
+        [chatButton setUserInteractionEnabled:NO];
+    }
+    
+      [chatButton setContentMode:UIViewContentModeScaleToFill];
     OnlineLabel.text =@"Online";
     
     _transparentView.hidden = YES;

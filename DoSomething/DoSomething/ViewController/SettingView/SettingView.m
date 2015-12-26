@@ -68,9 +68,6 @@
     [self loadNavigationview];
     
     [self CustomAlterviewload];
-    
-    
-    
    
     self.deletebuttonBottomoposition.constant =45;
     
