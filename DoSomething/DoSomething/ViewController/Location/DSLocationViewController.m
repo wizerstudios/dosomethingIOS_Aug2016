@@ -47,6 +47,8 @@
      CustomNavigationView *customNavigation;
     UISwipeGestureRecognizer * swiperight;
     
+    BOOL isgestureenable;
+    
     
 }
 @property(nonatomic,strong)IBOutlet NSLayoutConstraint * collectionviewxpostion;
@@ -503,6 +505,8 @@
     
     UICollectionViewCell *cell;
     
+    if(isgestureenable ==YES)
+    {
     cell = [collectionView cellForItemAtIndexPath:indexPath];
     
     NSMutableArray *detailsArray = [commonlocationArray objectAtIndex:indexPath.row];
@@ -512,7 +516,7 @@
     detailViewController.userDetailsArray = detailsArray;
     
     [self.navigationController pushViewController:detailViewController animated:YES];
-    
+    }
     
     
 }
@@ -614,11 +618,12 @@
         [self filterviewPosition];
         appDelegate.settingButton.userInteractionEnabled=NO;
         isFilteraction=YES;
-        [self.locationCollectionView setUserInteractionEnabled:NO];
-        UISwipeGestureRecognizer * swiperight=[[UISwipeGestureRecognizer alloc]initWithTarget:self action:@selector(swiperight:)];
+        [self.locationCollectionView setUserInteractionEnabled:YES];
+        swiperight=[[UISwipeGestureRecognizer alloc]initWithTarget:self action:@selector(swiperight:)];
         swiperight.direction=UISwipeGestureRecognizerDirectionRight;
         
-        [self.view addGestureRecognizer:swiperight];
+        [self.locationCollectionView addGestureRecognizer:swiperight];
+        isgestureenable=NO;
 
         
     }
@@ -634,6 +639,7 @@
         [self.locationCollectionView setUserInteractionEnabled:YES];
         appDelegate.settingButton.userInteractionEnabled=YES;
         currentloadPage =@"";
+        isgestureenable=YES;
         [self nearestLocationWebservice];
     }
     self.upperLabel.text=@"";
@@ -785,7 +791,7 @@
 
 -(void)swiperight:(UISwipeGestureRecognizer*)gestureRecognizer
 {
-    gestureRecognizer.enabled=NO;
+     isgestureenable=YES;
     self.collectionviewxpostion.constant =10;
     self.CollectionviewWidth.constant    =self.view.frame.size.width-10;
     self.filterviewxposition.constant    = self.CollectionviewWidth.constant+10;
