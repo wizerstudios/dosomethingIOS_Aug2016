@@ -10,11 +10,17 @@
 #import <QuartzCore/QuartzCore.h>
 #import "IBActionSheet.h"
 #import "ChatTextView.h"
+#import "ChatDetailCustomcell.h"
 
 @interface DSChatDetailViewController : UIViewController < UIActionSheetDelegate>
 
 {
     IBOutlet UILabel *OnlineLabel;
+    
+    IBOutlet UITableView *chatTableView;
+    
+    IBOutlet ChatDetailCustomcell *chatCustomcell;
+    
     
 }
 
@@ -34,6 +40,8 @@
 @property (strong, nonatomic) IBOutlet UIView *backgroundView;
 
 @property (strong,nonatomic) NSMutableDictionary *chatuserDetailsDict;
+
+@property (strong)NSTimer *messageTimer;
 
 - (IBAction)pressCancel:(id)sender;
 - (IBAction)pressDelete:(id)sender;

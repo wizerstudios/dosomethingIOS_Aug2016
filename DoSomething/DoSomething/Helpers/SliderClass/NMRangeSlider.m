@@ -91,8 +91,8 @@ NSUInteger DeviceSystemMajorVersion() {
     _lowerHandleHiddenWidth = 2.0f;
     _upperHandleHiddenWidth = 2.0f;
     
-    _lowerTouchEdgeInsets = UIEdgeInsetsMake(-5, -5, -5, -5);
-    _upperTouchEdgeInsets = UIEdgeInsetsMake(-5, -5, -5, -5);
+    _lowerTouchEdgeInsets = UIEdgeInsetsMake(0,0, 0, 0);
+    _upperTouchEdgeInsets = UIEdgeInsetsMake(0, 0, 0, 0);
 
     [self addSubviews];
 
@@ -508,11 +508,11 @@ NSUInteger DeviceSystemMajorVersion() {
     CGRect thumbRect;
     UIEdgeInsets insets = thumbImage.capInsets;
 
-    thumbRect.size = CGSizeMake(thumbImage.size.width+8, thumbImage.size.height+8);
+    thumbRect.size = CGSizeMake(thumbImage.size.width+5, thumbImage.size.height+5);
     
     if(insets.top || insets.bottom)
     {
-        thumbRect.size.height=self.bounds.size.height+8;
+        thumbRect.size.height=self.bounds.size.height+5;
     }
     
     float xValue = ((self.bounds.size.width-thumbRect.size.width)*((value - _minimumValue) / (_maximumValue - _minimumValue)));

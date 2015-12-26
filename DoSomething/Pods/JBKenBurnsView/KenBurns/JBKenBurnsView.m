@@ -226,7 +226,7 @@ enum JBSourceMode {
          textImageview  =[[UIImageView alloc] initWithFrame:CGRectMake(self.center.x-60,self.center.y-30,145,63)];
     }
     else{
-    textImageview  =[[UIImageView alloc] initWithFrame:CGRectMake(self.frame.origin.x+50,self.center.y-30,227,67)];
+    textImageview  =[[UIImageView alloc] initWithFrame:CGRectMake(self.center.x-100,self.center.y-30,227,67)];
     }
     textImageview.image =imageText;
     [textImageview setBackgroundColor:[UIColor clearColor]];
@@ -238,10 +238,11 @@ enum JBSourceMode {
     pageControllBtn.currentPage = _currentImageIndex;
     //pageControllBtn.transform = CGAffineTransformMakeScale(1.0, 1.0);
 
-
+    float pagecontrolxposition;
+    pagecontrolxposition =_currentImageIndex+22;
     pageControllBtn.pageIndicatorTintColor = [UIColor redColor];
 //    pageControllBtn.pageIndicatorTintColor=[UIColor colorWithPatternImage:[UIImage imageNamed:@"dot_Image"]];
-//    pageControllBtn.currentPageIndicatorTintColor =[UIColor colorWithPatternImage:[UIImage imageNamed:@"dot_active"]];
+    pageControllBtn.currentPageIndicatorTintColor =[UIColor clearColor];
    // int current =_currentImageIndex;
     
     [pageControllBtn setCurrentPage:_currentImageIndex];
@@ -249,12 +250,16 @@ enum JBSourceMode {
     UIImageView*pageImageView =[[UIImageView alloc]init];
     if(pageControllBtn.currentPage)
     {
-        [pageImageView setFrame:CGRectMake(_currentImageIndex*10,10,20,20)];
+        [pageImageView setFrame:CGRectMake(pagecontrolxposition+_currentImageIndex*15,13,14,14)];
+         pageImageView.image =[UIImage imageNamed:@"dot_active"];
+    }
+    else
+    {
+        [pageImageView setFrame:CGRectMake(_currentImageIndex+22,13,14,14)];
         pageImageView.image =[UIImage imageNamed:@"dot_active"];
     }
-    
     [pageImageView setBackgroundColor:[UIColor clearColor]];
-    //[pageControllBtn addSubview:pageImageView];
+    [pageControllBtn addSubview:pageImageView];
 
    
     imageView.backgroundColor = [UIColor blackColor];

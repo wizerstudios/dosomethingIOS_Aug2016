@@ -50,7 +50,7 @@ typedef void (^WebserviceRequestXMLFailureHandler)(AFHTTPRequestOperation  *oper
 
 // User Logout Delete API
 - (void)logoutDeleteUser:(NSString *)logoutDeleteURL
-               sessionId:(NSString *)sessionId
+               sessionId:(NSString *)sessionI
                       op:(NSString *)op
                  success:(WebserviceRequestSuccessHandler)success
                  failure:(WebserviceRequestFailureHandler)failure;
@@ -205,6 +205,7 @@ notification_vibration:(NSString*)isnotification_vibration
           sessionid:(NSString *)sessionid
 message_send_user_id:(NSString *)message_send_user_id
            message:(NSString *)message
+   conversation_id:(NSString *)conversationId
             success:(WebserviceRequestSuccessHandler)success
             failure:(WebserviceRequestFailureHandler)failure;
 
@@ -250,6 +251,16 @@ message_send_user_id:(NSString *)message_send_user_id
                  soundstr:(NSString *)soundStr
                   success:(WebserviceRequestSuccessHandler)success
                   failure:(WebserviceRequestFailureHandler)failure;
+
+// Chat Conversation
+
+-(void)getConversation:(NSString *)getConversation
+             sessionID:(NSString *)sessionID
+        conversationId:(NSString *)conversationId
+               success:(WebserviceRequestSuccessHandler)success
+               failure:(WebserviceRequestFailureHandler)failure;
+
+
 
 
 

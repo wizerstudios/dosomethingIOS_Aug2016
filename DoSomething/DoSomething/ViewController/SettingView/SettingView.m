@@ -45,7 +45,6 @@
     [super viewDidLoad];
     locationManager                 = [[CLLocationManager alloc] init];
     locationManager.delegate        = self;
-   // settingScroll.userInteractionEnabled = NO;
     objWebService =[[DSWebservice alloc]init];
     settingScroll.scrollEnabled =NO;
     NSMutableDictionary *profileDict=[[NSMutableDictionary alloc]init];
@@ -69,9 +68,6 @@
     [self loadNavigationview];
     
     [self CustomAlterviewload];
-    
-    
-    
    
     self.deletebuttonBottomoposition.constant =45;
     

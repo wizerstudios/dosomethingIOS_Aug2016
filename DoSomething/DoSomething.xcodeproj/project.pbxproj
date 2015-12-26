@@ -47,18 +47,9 @@
 		2BD72B1A1BFCC713003846E9 /* OpenUDID.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BD72B191BFCC713003846E9 /* OpenUDID.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		511C735D1BE3801100D3D61D /* ChatTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 511C73581BE3801100D3D61D /* ChatTableViewCell.m */; };
 		511C735E1BE3801100D3D61D /* ChatTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 511C73591BE3801100D3D61D /* ChatTableViewCell.xib */; };
-		511C735F1BE3801100D3D61D /* DSChatDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 511C735B1BE3801100D3D61D /* DSChatDetailViewController.m */; };
-		511C73601BE3801100D3D61D /* DSChatDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 511C735C1BE3801100D3D61D /* DSChatDetailViewController.xib */; };
 		511C73641BE3804E00D3D61D /* DSChatsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 511C73621BE3804E00D3D61D /* DSChatsTableViewController.m */; };
 		511C73651BE3804E00D3D61D /* DSChatsTableViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 511C73631BE3804E00D3D61D /* DSChatsTableViewController.xib */; };
-		51322A221BDFBFAA00418216 /* chaton.png in Resources */ = {isa = PBXBuildFile; fileRef = 51322A181BDFBFAA00418216 /* chaton.png */; };
-		51322A261BDFBFAA00418216 /* menu_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 51322A1C1BDFBFAA00418216 /* menu_icon.png */; };
-		51322A271BDFBFAA00418216 /* request_send.png in Resources */ = {isa = PBXBuildFile; fileRef = 51322A1D1BDFBFAA00418216 /* request_send.png */; };
-		51322A281BDFBFAA00418216 /* request_send1.png in Resources */ = {isa = PBXBuildFile; fileRef = 51322A1E1BDFBFAA00418216 /* request_send1.png */; };
 		51560BC01BE76D53009FCF2A /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 51560BBF1BE76D53009FCF2A /* AudioToolbox.framework */; };
-		51ED4E621BE08EDF0079E030 /* 18-Chats.png in Resources */ = {isa = PBXBuildFile; fileRef = 51ED4E5F1BE08EDF0079E030 /* 18-Chats.png */; };
-		51ED4E631BE08EDF0079E030 /* 12-Chats.png in Resources */ = {isa = PBXBuildFile; fileRef = 51ED4E601BE08EDF0079E030 /* 12-Chats.png */; };
-		51ED4E641BE08EDF0079E030 /* 19-ChatWindow.png in Resources */ = {isa = PBXBuildFile; fileRef = 51ED4E611BE08EDF0079E030 /* 19-ChatWindow.png */; };
 		51ED4E6C1BE0C5D50079E030 /* IBActionSheet.m in Sources */ = {isa = PBXBuildFile; fileRef = 51ED4E6B1BE0C5D50079E030 /* IBActionSheet.m */; };
 		51F3C2F31BE75D40001E1FEC /* DSLocationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 51F3C2EE1BE75D3F001E1FEC /* DSLocationViewController.m */; };
 		51F3C2F41BE75D40001E1FEC /* DSLocationViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 51F3C2EF1BE75D40001E1FEC /* DSLocationViewController.xib */; };
@@ -123,6 +114,10 @@
 		EAFC96591BD20FD400B3593D /* DSInterestAndHobbiesViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = EAFC96571BD20FD400B3593D /* DSInterestAndHobbiesViewController.xib */; };
 		EAFC97971BD21CF800B3593D /* DSInterestAndHobbiesCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = EAFC97951BD21CF800B3593D /* DSInterestAndHobbiesCollectionViewCell.m */; };
 		EAFC97981BD21CF800B3593D /* DSInterestAndHobbiesCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = EAFC97961BD21CF800B3593D /* DSInterestAndHobbiesCollectionViewCell.xib */; };
+		ED0A471B1C2E98C3000CAB95 /* DSChatDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ED0A47191C2E98C3000CAB95 /* DSChatDetailViewController.m */; };
+		ED0A471C1C2E98C3000CAB95 /* DSChatDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = ED0A471A1C2E98C3000CAB95 /* DSChatDetailViewController.xib */; };
+		ED0A47211C2E9965000CAB95 /* ChatDetailCustomcell.m in Sources */ = {isa = PBXBuildFile; fileRef = ED0A471F1C2E9965000CAB95 /* ChatDetailCustomcell.m */; };
+		ED0A47221C2E9965000CAB95 /* ChatDetailCustomcell.xib in Resources */ = {isa = PBXBuildFile; fileRef = ED0A47201C2E9965000CAB95 /* ChatDetailCustomcell.xib */; };
 		ED78176F1BEC7F6400C7138F /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED78176E1BEC7F6400C7138F /* CoreLocation.framework */; };
 		EDAE16281BF3873B0061E99D /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EDAE16271BF3873B0061E99D /* AVFoundation.framework */; };
 /* End PBXBuildFile section */
@@ -202,20 +197,10 @@
 		511C73571BE3801100D3D61D /* ChatTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChatTableViewCell.h; sourceTree = "<group>"; };
 		511C73581BE3801100D3D61D /* ChatTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChatTableViewCell.m; sourceTree = "<group>"; };
 		511C73591BE3801100D3D61D /* ChatTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ChatTableViewCell.xib; sourceTree = "<group>"; };
-		511C735A1BE3801100D3D61D /* DSChatDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DSChatDetailViewController.h; sourceTree = "<group>"; };
-		511C735B1BE3801100D3D61D /* DSChatDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DSChatDetailViewController.m; sourceTree = "<group>"; };
-		511C735C1BE3801100D3D61D /* DSChatDetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DSChatDetailViewController.xib; sourceTree = "<group>"; };
 		511C73611BE3804E00D3D61D /* DSChatsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DSChatsTableViewController.h; sourceTree = "<group>"; };
 		511C73621BE3804E00D3D61D /* DSChatsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DSChatsTableViewController.m; sourceTree = "<group>"; };
 		511C73631BE3804E00D3D61D /* DSChatsTableViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DSChatsTableViewController.xib; sourceTree = "<group>"; };
-		51322A181BDFBFAA00418216 /* chaton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = chaton.png; sourceTree = "<group>"; };
-		51322A1C1BDFBFAA00418216 /* menu_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = menu_icon.png; sourceTree = "<group>"; };
-		51322A1D1BDFBFAA00418216 /* request_send.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = request_send.png; sourceTree = "<group>"; };
-		51322A1E1BDFBFAA00418216 /* request_send1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = request_send1.png; sourceTree = "<group>"; };
 		51560BBF1BE76D53009FCF2A /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
-		51ED4E5F1BE08EDF0079E030 /* 18-Chats.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "18-Chats.png"; sourceTree = "<group>"; };
-		51ED4E601BE08EDF0079E030 /* 12-Chats.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "12-Chats.png"; sourceTree = "<group>"; };
-		51ED4E611BE08EDF0079E030 /* 19-ChatWindow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "19-ChatWindow.png"; sourceTree = "<group>"; };
 		51ED4E6A1BE0C5D50079E030 /* IBActionSheet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IBActionSheet.h; sourceTree = "<group>"; };
 		51ED4E6B1BE0C5D50079E030 /* IBActionSheet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IBActionSheet.m; sourceTree = "<group>"; };
 		51F3C2ED1BE75D3F001E1FEC /* DSLocationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DSLocationViewController.h; sourceTree = "<group>"; };
@@ -317,6 +302,12 @@
 		EAFC97941BD21CF800B3593D /* DSInterestAndHobbiesCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DSInterestAndHobbiesCollectionViewCell.h; sourceTree = "<group>"; };
 		EAFC97951BD21CF800B3593D /* DSInterestAndHobbiesCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DSInterestAndHobbiesCollectionViewCell.m; sourceTree = "<group>"; };
 		EAFC97961BD21CF800B3593D /* DSInterestAndHobbiesCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DSInterestAndHobbiesCollectionViewCell.xib; sourceTree = "<group>"; };
+		ED0A47181C2E98C3000CAB95 /* DSChatDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DSChatDetailViewController.h; sourceTree = "<group>"; };
+		ED0A47191C2E98C3000CAB95 /* DSChatDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DSChatDetailViewController.m; sourceTree = "<group>"; };
+		ED0A471A1C2E98C3000CAB95 /* DSChatDetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DSChatDetailViewController.xib; sourceTree = "<group>"; };
+		ED0A471E1C2E9965000CAB95 /* ChatDetailCustomcell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChatDetailCustomcell.h; sourceTree = "<group>"; };
+		ED0A471F1C2E9965000CAB95 /* ChatDetailCustomcell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChatDetailCustomcell.m; sourceTree = "<group>"; };
+		ED0A47201C2E9965000CAB95 /* ChatDetailCustomcell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ChatDetailCustomcell.xib; sourceTree = "<group>"; };
 		ED78176E1BEC7F6400C7138F /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		EDAE16271BF3873B0061E99D /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
@@ -582,27 +573,11 @@
 		513229FD1BDF944E00418216 /* ChatCells */ = {
 			isa = PBXGroup;
 			children = (
-				51ED4E5E1BE08BD50079E030 /* Images */,
 				511C73571BE3801100D3D61D /* ChatTableViewCell.h */,
 				511C73581BE3801100D3D61D /* ChatTableViewCell.m */,
 				511C73591BE3801100D3D61D /* ChatTableViewCell.xib */,
-				511C735A1BE3801100D3D61D /* DSChatDetailViewController.h */,
-				511C735B1BE3801100D3D61D /* DSChatDetailViewController.m */,
-				511C735C1BE3801100D3D61D /* DSChatDetailViewController.xib */,
 			);
 			name = ChatCells;
-			sourceTree = "<group>";
-		};
-		51322A171BDFBF8E00418216 /* Images */ = {
-			isa = PBXGroup;
-			children = (
-				51322A181BDFBFAA00418216 /* chaton.png */,
-				51322A1C1BDFBFAA00418216 /* menu_icon.png */,
-				51322A1D1BDFBFAA00418216 /* request_send.png */,
-				51322A1E1BDFBFAA00418216 /* request_send1.png */,
-			);
-			name = Images;
-			path = ../Chats;
 			sourceTree = "<group>";
 		};
 		51560BBC1BE76AEF009FCF2A /* Framework */ = {
@@ -613,16 +588,6 @@
 				51560BBF1BE76D53009FCF2A /* AudioToolbox.framework */,
 			);
 			name = Framework;
-			sourceTree = "<group>";
-		};
-		51ED4E5E1BE08BD50079E030 /* Images */ = {
-			isa = PBXGroup;
-			children = (
-				51ED4E5F1BE08EDF0079E030 /* 18-Chats.png */,
-				51ED4E601BE08EDF0079E030 /* 12-Chats.png */,
-				51ED4E611BE08EDF0079E030 /* 19-ChatWindow.png */,
-			);
-			name = Images;
 			sourceTree = "<group>";
 		};
 		51ED4E691BE0C5D50079E030 /* IBActionSheet */ = {
@@ -638,7 +603,6 @@
 		51F3C2EC1BE75D3F001E1FEC /* Location */ = {
 			isa = PBXGroup;
 			children = (
-				51322A171BDFBF8E00418216 /* Images */,
 				51F3C2ED1BE75D3F001E1FEC /* DSLocationViewController.h */,
 				51F3C2EE1BE75D3F001E1FEC /* DSLocationViewController.m */,
 				51F3C2EF1BE75D40001E1FEC /* DSLocationViewController.xib */,
@@ -665,6 +629,7 @@
 		6A50C2231BCCC310002B11AC /* Chats */ = {
 			isa = PBXGroup;
 			children = (
+				ED0A47171C2E989C000CAB95 /* ChatDetail */,
 				513229FD1BDF944E00418216 /* ChatCells */,
 				511C73611BE3804E00D3D61D /* DSChatsTableViewController.h */,
 				511C73621BE3804E00D3D61D /* DSChatsTableViewController.m */,
@@ -974,6 +939,27 @@
 			path = "Interest And Hobbies Images/@3x";
 			sourceTree = "<group>";
 		};
+		ED0A47171C2E989C000CAB95 /* ChatDetail */ = {
+			isa = PBXGroup;
+			children = (
+				ED0A471D1C2E993F000CAB95 /* ChatCustomCell */,
+				ED0A47181C2E98C3000CAB95 /* DSChatDetailViewController.h */,
+				ED0A47191C2E98C3000CAB95 /* DSChatDetailViewController.m */,
+				ED0A471A1C2E98C3000CAB95 /* DSChatDetailViewController.xib */,
+			);
+			path = ChatDetail;
+			sourceTree = "<group>";
+		};
+		ED0A471D1C2E993F000CAB95 /* ChatCustomCell */ = {
+			isa = PBXGroup;
+			children = (
+				ED0A471E1C2E9965000CAB95 /* ChatDetailCustomcell.h */,
+				ED0A471F1C2E9965000CAB95 /* ChatDetailCustomcell.m */,
+				ED0A47201C2E9965000CAB95 /* ChatDetailCustomcell.xib */,
+			);
+			path = ChatCustomCell;
+			sourceTree = "<group>";
+		};
 		ED25ED691C2838E80041B856 /* ChatTextView */ = {
 			isa = PBXGroup;
 			children = (
@@ -1055,35 +1041,29 @@
 				2B83CAC71BE895AB0064EC7F /* Default@2x.png in Resources */,
 				C6D5F63F1BC7B52C0050C1AE /* Patron-ExtraLightItalic.ttf in Resources */,
 				EAEF25361BCFEBF400F83E82 /* CustomNavigationView.xib in Resources */,
-				51322A221BDFBFAA00418216 /* chaton.png in Resources */,
 				C6D5F63D1BC7B52C0050C1AE /* Patron-BoldItalic.ttf in Resources */,
 				2B1B8BE61C24487A005A699E /* DSTermsViewController.xib in Resources */,
 				6A50C21D1BCCBB8C002B11AC /* DSProfileTableViewCell.xib in Resources */,
 				51F3C2F61BE75D40001E1FEC /* LocationCollectionViewCell.xib in Resources */,
 				511C735E1BE3801100D3D61D /* ChatTableViewCell.xib in Resources */,
 				2B83CAC61BE895AB0064EC7F /* Default-568h@2x.png in Resources */,
-				51322A271BDFBFAA00418216 /* request_send.png in Resources */,
 				2B0C3B401C2A7A00009B7B42 /* fontawesome-webfont.ttf in Resources */,
 				065433161BF38B0400DABBFC /* button-16.mp3 in Resources */,
-				51322A261BDFBFAA00418216 /* menu_icon.png in Resources */,
 				C6D5F6391BC7B52C0050C1AE /* FutworaPro-Regular.otf in Resources */,
+				ED0A471C1C2E98C3000CAB95 /* DSChatDetailViewController.xib in Resources */,
 				C6D5F6401BC7B52C0050C1AE /* Patron-Italic.ttf in Resources */,
 				6AE7361F1C05AA5D00C7DCF0 /* SettingView.xib in Resources */,
 				EACB22BC1BC7C7F7002FAD54 /* DSLoginViewController.xib in Resources */,
 				C6D5F63A1BC7B52C0050C1AE /* Patron-Black.ttf in Resources */,
-				511C73601BE3801100D3D61D /* DSChatDetailViewController.xib in Resources */,
-				51322A281BDFBFAA00418216 /* request_send1.png in Resources */,
 				51F3C2F41BE75D40001E1FEC /* DSLocationViewController.xib in Resources */,
-				51ED4E641BE08EDF0079E030 /* 19-ChatWindow.png in Resources */,
-				51ED4E631BE08EDF0079E030 /* 12-Chats.png in Resources */,
 				511C73651BE3804E00D3D61D /* DSChatsTableViewController.xib in Resources */,
 				C6D5F6421BC7B52C0050C1AE /* Patron-MediumItalic.ttf in Resources */,
 				C6D5F60C1BC7AF500050C1AE /* Launch Screen.xib in Resources */,
 				6A8D15D41BCC059B000F1FB4 /* DSProfileTableViewController.xib in Resources */,
-				51ED4E621BE08EDF0079E030 /* 18-Chats.png in Resources */,
 				C6D5F6441BC7B52C0050C1AE /* Patron-Thin.ttf in Resources */,
 				6A59C87E1C2807FD00286E35 /* DSNearbyCustomCell.xib in Resources */,
 				C6D5F6411BC7B52C0050C1AE /* Patron-Medium.ttf in Resources */,
+				ED0A47221C2E9965000CAB95 /* ChatDetailCustomcell.xib in Resources */,
 				C6D5F6431BC7B52C0050C1AE /* Patron-Regular.ttf in Resources */,
 				C6D5F67C1BC7EC440050C1AE /* Images.xcassets in Resources */,
 				EAFC96591BD20FD400B3593D /* DSInterestAndHobbiesViewController.xib in Resources */,
@@ -1175,7 +1155,6 @@
 				51ED4E6C1BE0C5D50079E030 /* IBActionSheet.m in Sources */,
 				EACB22BB1BC7C7F7002FAD54 /* DSLoginViewController.m in Sources */,
 				EA784F001BE0950500863A6D /* DVSwitch.m in Sources */,
-				511C735F1BE3801100D3D61D /* DSChatDetailViewController.m in Sources */,
 				6AE7361E1C05AA5D00C7DCF0 /* SettingView.m in Sources */,
 				EAEF251E1BCF9EF600F83E82 /* IQUITextFieldView+Additions.m in Sources */,
 				2BD72AFC1BFCC5AD003846E9 /* AFURLRequestSerialization.m in Sources */,
@@ -1199,6 +1178,7 @@
 				6A50C21C1BCCBB8C002B11AC /* DSProfileTableViewCell.m in Sources */,
 				EAEF25241BCF9EF600F83E82 /* IQSegmentedNextPrevious.m in Sources */,
 				2B83CACE1BE8D4FD0064EC7F /* NSString+validations.m in Sources */,
+				ED0A471B1C2E98C3000CAB95 /* DSChatDetailViewController.m in Sources */,
 				6A59C87D1C2807FD00286E35 /* DSNearbyCustomCell.m in Sources */,
 				2BD72B171BFCC5D4003846E9 /* UIWebView+AFNetworking.m in Sources */,
 				2B83CAAF1BE8744E0064EC7F /* DSWebservice.m in Sources */,
@@ -1216,6 +1196,7 @@
 				C6D5F6151BC7B0970050C1AE /* AppDelegate.m in Sources */,
 				EAEF25291BCF9EF600F83E82 /* IQUIView+IQKeyboardToolbar.m in Sources */,
 				2BD72AF71BFCC5AD003846E9 /* AFHTTPRequestOperationManager.m in Sources */,
+				ED0A47211C2E9965000CAB95 /* ChatDetailCustomcell.m in Sources */,
 				51F3C2F31BE75D40001E1FEC /* DSLocationViewController.m in Sources */,
 				2BD72AF81BFCC5AD003846E9 /* AFHTTPSessionManager.m in Sources */,
 				2BD72AE21BFCC584003846E9 /* AFNetworkActivityLogger.m in Sources */,
@@ -1351,7 +1332,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.oclockapps.DoSomething;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "88b4c0c5-eb7e-4eb9-847d-9cd3cdddf5d0";
+				PROVISIONING_PROFILE = "346a3fa5-7bd8-4d0e-998e-dd7f55c36569";
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
@@ -1375,7 +1356,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.oclockapps.DoSomething;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "e8c0be5c-1c55-4238-aa6b-181308ddb714";
+				PROVISIONING_PROFILE = "94f0dcb4-0c04-4425-89c4-d1f2a7733725";
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
