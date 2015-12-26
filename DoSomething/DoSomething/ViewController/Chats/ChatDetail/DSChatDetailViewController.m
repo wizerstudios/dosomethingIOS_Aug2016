@@ -36,6 +36,7 @@
 @implementation DSChatDetailViewController
 @synthesize ProfileName,ProfileImage;
 @synthesize chatView,chatuserDetailsDict,chatButton;
+@synthesize messageTimer;
 
 - (void)viewDidLoad {
     
@@ -59,10 +60,35 @@
 {
     [super viewWillAppear:animated];
     
+     messageTimer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(loadConverstionAPI) userInfo:nil repeats:YES];
+    
     [chatView.postButton addTarget:self action:@selector(sendAction:) forControlEvents:UIControlEventTouchUpInside];
     
     [self.navigationItem setHidesBackButton:YES animated:NO];
 }
+
+-(void)viewwillDisappear:(BOOL)animated{
+   
+    dispatch_async(dispatch_get_main_queue(), ^{
+         messageTimer =nil;
+        [messageTimer invalidate];
+       
+    });
+  
+     [super viewWillDisappear:animated];
+}
+
+-(void)viewDidDisappear:(BOOL)animated{
+  
+    dispatch_async(dispatch_get_main_queue(), ^{
+         messageTimer =nil;
+        [messageTimer invalidate];
+       // messageTimer =nil;
+    });
+      [super viewDidDisappear:animated];
+    
+}
+
 
 - (void)viewWillLayoutSubviews {
     
@@ -347,7 +373,12 @@
                             
                             if([[responseDict valueForKey:@"status"]isEqualToString:@"success"]){
                                 
-                                [conversationArray removeAllObjects];
+                                if (![messageTimer isValid]){
+                                    messageTimer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(loadConverstionAPI) userInfo:nil repeats:YES];
+                                }
+                                
+                                if([conversationArray count])
+                                   [conversationArray removeAllObjects];
                                 
                                 conversationArray = [[responseDict valueForKey:@"converation"]mutableCopy];
                                 
@@ -356,7 +387,7 @@
                                 [chatTableView scrollRectToVisible:CGRectMake(0, chatTableView.contentSize.height - chatTableView.bounds.size.height, chatTableView.bounds.size.width,chatTableView.bounds.size.height) animated:YES];
                             }
                             else{
-                               
+                                [messageTimer invalidate];
                             }
                             
                         }
