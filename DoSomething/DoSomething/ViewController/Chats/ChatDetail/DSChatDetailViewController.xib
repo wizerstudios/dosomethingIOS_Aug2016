@@ -17,7 +17,7 @@
                 <outlet property="ProfileImage" destination="hJo-cJ-0vp" id="0uT-2r-5K1"/>
                 <outlet property="ProfileName" destination="qTm-CV-HgT" id="0Bl-1e-Vjb"/>
                 <outlet property="backgroundView" destination="XqN-Wp-lms" id="aJ3-oZ-xw7"/>
-                <outlet property="chatButton" destination="MkV-9D-hoy" id="8Pj-iz-kiD"/>
+                <outlet property="chatButton" destination="MkV-9D-hoy" id="tG3-kG-cgw"/>
                 <outlet property="chatTableView" destination="xvP-6c-2gG" id="qJ9-uV-Ujv"/>
                 <outlet property="chatView" destination="pey-bp-htd" id="jAh-FI-rws"/>
                 <outlet property="transparentView" destination="vGn-Bt-vGu" id="NiA-3f-b4p"/>
@@ -68,7 +68,7 @@
                     <rect key="frame" x="0.0" y="128" width="320" height="437"/>
                     <subviews>
                         <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="xvP-6c-2gG">
-                            <rect key="frame" x="0.0" y="0.0" width="320" height="345"/>
+                            <rect key="frame" x="0.0" y="0.0" width="320" height="336"/>
                             <animations/>
                             <color key="backgroundColor" red="0.9137254901960784" green="0.9137254901960784" blue="0.9137254901960784" alpha="1" colorSpace="calibratedRGB"/>
                             <connections>

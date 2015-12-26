@@ -205,6 +205,7 @@ notification_vibration:(NSString*)isnotification_vibration
           sessionid:(NSString *)sessionid
 message_send_user_id:(NSString *)message_send_user_id
            message:(NSString *)message
+   conversation_id:(NSString *)conversationId
             success:(WebserviceRequestSuccessHandler)success
             failure:(WebserviceRequestFailureHandler)failure;
 
@@ -258,6 +259,7 @@ message_send_user_id:(NSString *)message_send_user_id
         conversationId:(NSString *)conversationId
                success:(WebserviceRequestSuccessHandler)success
                failure:(WebserviceRequestFailureHandler)failure;
+
 
 
 

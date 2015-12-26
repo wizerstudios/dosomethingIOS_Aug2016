@@ -41,6 +41,8 @@
 
 @property (strong,nonatomic) NSMutableDictionary *chatuserDetailsDict;
 
+@property (strong)NSTimer *messageTimer;
+
 - (IBAction)pressCancel:(id)sender;
 - (IBAction)pressDelete:(id)sender;
 - (IBAction)pressBlock:(id)sender;

@@ -46,7 +46,7 @@
                                                              multiplier:1.0
                                                                constant:20.0]];
     [COMMON LoadIcon:self.view];
-    [self loadChatHistoryAPI];
+   
 
     
 }
@@ -54,6 +54,8 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+    
+    [self loadChatHistoryAPI];
     [self getUserCurrenLocation];
     [self.navigationItem setHidesBackButton:YES animated:NO];
     [self setNavigation];

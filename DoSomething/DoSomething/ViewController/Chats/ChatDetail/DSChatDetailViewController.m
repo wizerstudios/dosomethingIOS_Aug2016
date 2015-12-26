@@ -11,6 +11,8 @@
 #import "DSConfig.h"
 #import "DSAppCommon.h"
 #import "DSWebservice.h"
+#import "IQKeyboardManager.h"
+#import "IQUIView+IQKeyboardToolbar.h"
 
 #define CONTENT_WIDTH           200.f
 #define CONTENT_START           0.f
@@ -39,6 +41,8 @@
     
     [super viewDidLoad];
     
+    [[IQKeyboardManager sharedManager] considerToolbarPreviousNextInViewClass:[chatTableView class]];
+    
     webService = [[DSWebservice alloc]init];
     
     conversationArray = [[NSMutableArray alloc]init];
@@ -54,6 +58,8 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+    
+    [chatView.postButton addTarget:self action:@selector(sendAction:) forControlEvents:UIControlEventTouchUpInside];
     
     [self.navigationItem setHidesBackButton:YES animated:NO];
 }
@@ -111,9 +117,6 @@
     [self.navigationController popViewControllerAnimated:YES];
 }
 
-
-
-
 -(void)displayUserDetailsView{
     
     ProfileName.text= [chatuserDetailsDict valueForKey:@"Name"];
@@ -157,7 +160,7 @@
         
         [chatButton setBackgroundImage:[UIImage imageNamed:@"menu_active.png"] forState:UIControlStateNormal];
         
-        [chatButton setUserInteractionEnabled:NO];
+        [chatButton setUserInteractionEnabled:YES];
     }
     
       [chatButton setContentMode:UIViewContentModeScaleToFill];
@@ -166,8 +169,6 @@
     _transparentView.hidden = YES;
     
     _backgroundView.hidden = YES;
-    
-    [chatView.postButton setHidden:YES];
     
 
 }
@@ -180,40 +181,16 @@
     
     [chatView.placeHolderLabel setHidden:YES];
     
-    [UIView animateWithDuration:.25f animations:^{
-        
-        if(IS_IPHONE4)
-            
-            chatView.frame=CGRectMake(0,160,320,50);
-        
-        else
-            
-            chatView.frame=CGRectMake(0,90,self.view.frame.size.width,40);
-        
-    }];
 }
 
 -(void)textViewDidEndEditing:(UITextView *)textView{
     
-    if([textView.text isEqualToString:@""]){
+    if([textView.text isEqualToString:@""])
          [chatView.placeHolderLabel setHidden:NO];
-         [chatView.postButton setHidden:YES];
-    }
-    else{
-        [chatView.postButton setHidden:NO];
-    }
-    [self.view endEditing:YES];
     
-    [UIView animateWithDuration:.25f animations:^{
-        
-        if(IS_IPHONE4)
-            
-            chatView.frame=CGRectMake(0,412,320,65);
-        
-        else
-            
-            chatView.frame=CGRectMake(0,335,320,40);
-    }];
+    
+        [self.view endEditing:YES];
+    
     
 }
 
@@ -329,6 +306,28 @@
     _backgroundView.hidden = NO;
 }
 
+-(void)sendAction:(id)sender{
+    
+   
+    
+    NSString *str=chatView.textView.text;
+    
+    NSString *receiverId = [chatuserDetailsDict valueForKey:@"UserId"];
+    
+    NSString *conversationID = [chatuserDetailsDict valueForKey:@"id"];
+    
+    str = [str stringByReplacingOccurrencesOfString:@"\n" withString:@""];
+    
+    if([str length] > 0){
+        
+        [self.view endEditing:YES];
+
+        [self loadSendMessageAPI:receiverId conversationId:conversationID];
+        
+    }
+    chatView.textView.text=@"";
+}
+
 
 #pragma mark - Webservice Method
 
@@ -336,7 +335,8 @@
     
     NSString *conversationID = [chatuserDetailsDict valueForKey:@"id"];
     
-    [webService getConversation:GetConversation sessionID:/*[COMMON getSessionID]*/@"7edaa7f4e794fcf5cb625e95e0a390e3" conversationId:@"8"
+    //[webService getConversation:GetConversation sessionID:@"7edaa7f4e794fcf5cb625e95e0a390e3" conversationId:@"8"
+    [webService getConversation:GetConversation sessionID:[COMMON getSessionID] conversationId:conversationID
                         success:^(AFHTTPRequestOperation *operation, id responseObject){
                             
                             NSLog(@"Conversation resp = %@",responseObject);
@@ -347,9 +347,13 @@
                             
                             if([[responseDict valueForKey:@"status"]isEqualToString:@"success"]){
                                 
+                                [conversationArray removeAllObjects];
+                                
                                 conversationArray = [[responseDict valueForKey:@"converation"]mutableCopy];
                                 
                                 [chatTableView reloadData];
+                                
+                                [chatTableView scrollRectToVisible:CGRectMake(0, chatTableView.contentSize.height - chatTableView.bounds.size.height, chatTableView.bounds.size.width,chatTableView.bounds.size.height) animated:YES];
                             }
                             else{
                                
@@ -361,6 +365,32 @@
                             [COMMON removeLoading];
                             
                         }];
+    
+}
+
+-(void)loadSendMessageAPI:(NSString *)_receiverId conversationId:(NSString *)_conversationId{
+    
+                    [webService sendMessage:SendMessage_API sessionid:[COMMON getSessionID] message_send_user_id:_receiverId message:chatView.textView.text conversation_id:_conversationId success:^(AFHTTPRequestOperation *operation, id responseObject){
+                        
+                        NSLog(@"Conversation resp = %@",responseObject);
+                        NSMutableDictionary *msgResponseDict = [[NSMutableDictionary alloc]init];
+                        
+                        msgResponseDict = [responseObject valueForKey:@"sendmessage"];
+                        
+                        if([[msgResponseDict valueForKey:@"status"]isEqualToString:@"success"]){
+                            
+                            [self loadConverstionAPI];
+                            
+                        }
+                       
+                        
+                    }
+     
+                    failure:^(AFHTTPRequestOperation *operation, id error) {
+                        [COMMON removeLoading];
+                        
+                    }];
+
     
 }
 

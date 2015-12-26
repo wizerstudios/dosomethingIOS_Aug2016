@@ -26,6 +26,7 @@
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qcq-Pk-Cvn">
                         <rect key="frame" x="96" y="10" width="195" height="21"/>
                         <animations/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="12"/>
                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <nil key="highlightedColor"/>
@@ -40,7 +41,7 @@
                 <outlet property="sender_bubbleimgView" destination="zFl-OK-SJ2" id="uA6-kG-DfG"/>
                 <outlet property="sender_msgLbl" destination="qcq-Pk-Cvn" id="Kh6-Yc-vzQ"/>
             </connections>
-            <point key="canvasLocation" x="283" y="308"/>
+            <point key="canvasLocation" x="454" y="276"/>
         </tableViewCell>
     </objects>
 </document>

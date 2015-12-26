@@ -594,23 +594,27 @@ request_send_user_id:(NSString *)request_send_user_id
 
 -(void)sendMessage:(NSString *)sendMessageURL
          sessionid:(NSString *)sessionid
-message_send_user_id:(NSString *)message_send_user_id
+         message_send_user_id:(NSString *)message_send_user_id
            message:(NSString *)message
+   conversation_id:(NSString *)conversationId
            success:(WebserviceRequestSuccessHandler)success
            failure:(WebserviceRequestFailureHandler)failure
 {
     urlString = [URL_FOR_RESOURCE(@"") stringByAppendingString:[NSString stringWithFormat:@"%@?",sendMessageURL]];
     
-    NSMutableDictionary *sendMessg = [[NSMutableDictionary alloc] init];
+    NSMutableDictionary *msgDict = [[NSMutableDictionary alloc] init];
     
-    if(sessionid)               [sendMessg    setObject:sessionid                 forKey:@"sessionid"];
-    if(message_send_user_id)    [sendMessg    setObject:message_send_user_id            forKey:@"message_send_user_id"];
+    if(sessionid)               [msgDict setObject:sessionid forKey:@"sessionid"];
+    if(message_send_user_id)    [msgDict setObject:message_send_user_id forKey:@"message_receiver_id"];
+                                [msgDict setObject:message forKey:@"message"];
+                                [msgDict setObject:conversationId forKey:@"conversation_id"];
+    
     
     NSLog(@"urlString = %@",urlString);
-    NSLog(@"SendMessage = %@",sendMessg);
+    NSLog(@"SendMessage = %@",msgDict);
     
     [self sendRequestWithURLString:urlString
-                     andParameters:sendMessg
+                     andParameters:msgDict
                             method:ServicePost
            completionSucessHandler:success
           completionFailureHandler:failure];
