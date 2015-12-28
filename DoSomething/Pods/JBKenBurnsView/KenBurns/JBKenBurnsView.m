@@ -24,6 +24,7 @@
 
 #import "JBKenBurnsView.h"
 
+
 #define enlargeRatio 1.1
 #define imageBufer 3
 
@@ -57,8 +58,7 @@ enum JBSourceMode {
     self = [super init];
     if (self) {
         [self setup];
-       // activeImage = [UIImage imageNamed:@"dot_active"];
-        //inactiveImage = [UIImage imageNamed:@"dot_Image"];
+       
     }
     return self;
 }
@@ -100,6 +100,7 @@ enum JBSourceMode {
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delay * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         _nextImageTimer = [NSTimer scheduledTimerWithTimeInterval:duration target:self selector:@selector(nextImage) userInfo:nil repeats:YES];
         [_nextImageTimer fire];
+        
     });
 }
 
@@ -162,8 +163,7 @@ enum JBSourceMode {
             break;
             
         case JBSourceModePaths:
-            //imageText = [UIImage imageWithContentsOfFile:_imagesArray[MAX(self.currentImageIndex, 0)]];
-            //textlbl=[UILabel]
+            
             break;
     }
     
@@ -221,6 +221,8 @@ enum JBSourceMode {
     float optimusWidth  = (image.size.width * resizeRatio) * enlargeRatio;
     float optimusHeight = (image.size.height * resizeRatio) * enlargeRatio;
     imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, optimusWidth, optimusHeight)];
+    
+    
     if(_currentImageIndex == 0)
     {
          textImageview  =[[UIImageView alloc] initWithFrame:CGRectMake(self.center.x-60,self.center.y-30,145,63)];
@@ -233,17 +235,17 @@ enum JBSourceMode {
     pageControllBtn = [[UIPageControl alloc]init];
     
     pageControllBtn.backgroundColor = [UIColor clearColor];
-    [pageControllBtn setFrame:CGRectMake(self.center.x-50,self.frame.size.height-40,120,40)];
+    [pageControllBtn setFrame:CGRectMake(self.center.x-50,self.frame.size.height-60,120,40)];
     pageControllBtn.numberOfPages = 5;
     pageControllBtn.currentPage = _currentImageIndex;
-    //pageControllBtn.transform = CGAffineTransformMakeScale(1.0, 1.0);
+    
 
     float pagecontrolxposition;
     pagecontrolxposition =_currentImageIndex+22;
     pageControllBtn.pageIndicatorTintColor = [UIColor redColor];
-//    pageControllBtn.pageIndicatorTintColor=[UIColor colorWithPatternImage:[UIImage imageNamed:@"dot_Image"]];
+
     pageControllBtn.currentPageIndicatorTintColor =[UIColor clearColor];
-   // int current =_currentImageIndex;
+   
     
     [pageControllBtn setCurrentPage:_currentImageIndex];
     
@@ -312,8 +314,6 @@ enum JBSourceMode {
             break;
     }
     
-//    NSLog(@"W: IW:%f OW:%f FW:%f MX:%f",image.size.width, optimusWidth, frameWidth, maxMoveX);
-//    NSLog(@"H: IH:%f OH:%f FH:%f MY:%f\n",image.size.height, optimusHeight, frameHeight, maxMoveY);
     
     CALayer *picLayer    = [CALayer layer];
     picLayer.contents    = (id)image.CGImage;
@@ -322,7 +322,7 @@ enum JBSourceMode {
     picLayer.position    = CGPointMake(originX, originY);
     
     [imageView.layer addSublayer:picLayer];
-    //[textlbl.layer addSublayer:picLayer];
+  
     
     CATransition *animation = [CATransition animation];
     [animation setDuration:1];
@@ -438,6 +438,7 @@ enum JBSourceMode {
     
     return resizeRatio;
 }
+
 
 
 - (void)notifyDelegate

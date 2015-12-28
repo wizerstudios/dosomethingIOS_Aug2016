@@ -883,10 +883,7 @@
                  return 30 ;
             }
             
-//            if(dataSize.height == 10)
-//             {
-//               
-//             }
+
             else
             {
                  self.aboutTextHeight.constant=dataSize.height;

@@ -24,7 +24,6 @@
 		2B83CACA1BE8975F0064EC7F /* Default-736h@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2B83CAC91BE8975F0064EC7F /* Default-736h@3x.png */; };
 		2B83CACE1BE8D4FD0064EC7F /* NSString+validations.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B83CACD1BE8D4FD0064EC7F /* NSString+validations.m */; };
 		2BC69E6F1C2976E80074C486 /* ChatTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BC69E6E1C2976E80074C486 /* ChatTextView.m */; };
-		2BD72ADC1BFCC28A003846E9 /* PWParallaxScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BD72ADB1BFCC28A003846E9 /* PWParallaxScrollView.m */; };
 		2BD72ADF1BFCC2BF003846E9 /* DAAutoScroll.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BD72ADE1BFCC2BF003846E9 /* DAAutoScroll.m */; };
 		2BD72AE21BFCC584003846E9 /* AFNetworkActivityLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BD72AE11BFCC584003846E9 /* AFNetworkActivityLogger.m */; };
 		2BD72AF61BFCC5AD003846E9 /* AFHTTPRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BD72AE41BFCC5AD003846E9 /* AFHTTPRequestOperation.m */; };
@@ -64,6 +63,7 @@
 		6A71A9381C0471F900D6D5F4 /* NSLocalization.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6A71A93A1C0471F900D6D5F4 /* NSLocalization.strings */; };
 		6A8D15D31BCC059B000F1FB4 /* DSProfileTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A8D15D11BCC059B000F1FB4 /* DSProfileTableViewController.m */; };
 		6A8D15D41BCC059B000F1FB4 /* DSProfileTableViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6A8D15D21BCC059B000F1FB4 /* DSProfileTableViewController.xib */; };
+		6ACBF64F1C2E8C2F00AFE131 /* PWParallaxScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6ACBF64D1C2E8BAC00AFE131 /* PWParallaxScrollView.m */; };
 		6AD8A52E1C2AECE800828AED /* NMRangeSlider.m in Sources */ = {isa = PBXBuildFile; fileRef = 6AD8A52D1C2AECE800828AED /* NMRangeSlider.m */; };
 		6AE7361E1C05AA5D00C7DCF0 /* SettingView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6AE7361C1C05AA5D00C7DCF0 /* SettingView.m */; };
 		6AE7361F1C05AA5D00C7DCF0 /* SettingView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6AE7361D1C05AA5D00C7DCF0 /* SettingView.xib */; };
@@ -150,8 +150,6 @@
 		2B83CACD1BE8D4FD0064EC7F /* NSString+validations.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+validations.m"; sourceTree = "<group>"; };
 		2BC69E6D1C2976E80074C486 /* ChatTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChatTextView.h; sourceTree = "<group>"; };
 		2BC69E6E1C2976E80074C486 /* ChatTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChatTextView.m; sourceTree = "<group>"; };
-		2BD72ADA1BFCC28A003846E9 /* PWParallaxScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PWParallaxScrollView.h; path = Helpers/ParallaxScroll/PWParallaxScrollView.h; sourceTree = "<group>"; };
-		2BD72ADB1BFCC28A003846E9 /* PWParallaxScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PWParallaxScrollView.m; path = Helpers/ParallaxScroll/PWParallaxScrollView.m; sourceTree = "<group>"; };
 		2BD72ADD1BFCC2BF003846E9 /* DAAutoScroll.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DAAutoScroll.h; sourceTree = "<group>"; };
 		2BD72ADE1BFCC2BF003846E9 /* DAAutoScroll.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DAAutoScroll.m; sourceTree = "<group>"; };
 		2BD72AE01BFCC584003846E9 /* AFNetworkActivityLogger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFNetworkActivityLogger.h; sourceTree = "<group>"; };
@@ -223,6 +221,8 @@
 		6A8D15D01BCC059B000F1FB4 /* DSProfileTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DSProfileTableViewController.h; sourceTree = "<group>"; };
 		6A8D15D11BCC059B000F1FB4 /* DSProfileTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DSProfileTableViewController.m; sourceTree = "<group>"; };
 		6A8D15D21BCC059B000F1FB4 /* DSProfileTableViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DSProfileTableViewController.xib; sourceTree = "<group>"; };
+		6ACBF64C1C2E8BAC00AFE131 /* PWParallaxScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PWParallaxScrollView.h; path = Helpers/ParallaxScroll/PWParallaxScrollView.h; sourceTree = "<group>"; };
+		6ACBF64D1C2E8BAC00AFE131 /* PWParallaxScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PWParallaxScrollView.m; path = Helpers/ParallaxScroll/PWParallaxScrollView.m; sourceTree = "<group>"; };
 		6AD8A52C1C2AECE800828AED /* NMRangeSlider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NMRangeSlider.h; sourceTree = "<group>"; };
 		6AD8A52D1C2AECE800828AED /* NMRangeSlider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NMRangeSlider.m; sourceTree = "<group>"; };
 		6AE7361B1C05AA5D00C7DCF0 /* SettingView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingView.h; sourceTree = "<group>"; };
@@ -546,8 +546,8 @@
 		2BD72AD91BFCC259003846E9 /* ParallexScroll */ = {
 			isa = PBXGroup;
 			children = (
-				2BD72ADA1BFCC28A003846E9 /* PWParallaxScrollView.h */,
-				2BD72ADB1BFCC28A003846E9 /* PWParallaxScrollView.m */,
+				6ACBF64C1C2E8BAC00AFE131 /* PWParallaxScrollView.h */,
+				6ACBF64D1C2E8BAC00AFE131 /* PWParallaxScrollView.m */,
 			);
 			name = ParallexScroll;
 			sourceTree = "<group>";
@@ -1147,6 +1147,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6ACBF64F1C2E8C2F00AFE131 /* PWParallaxScrollView.m in Sources */,
 				2BD72AFB1BFCC5AD003846E9 /* AFURLConnectionOperation.m in Sources */,
 				EAEF25221BCF9EF600F83E82 /* IQKeyboardManager.m in Sources */,
 				EAEF251D1BCF9EF600F83E82 /* IQNSArray+Sort.m in Sources */,
@@ -1191,7 +1192,6 @@
 				EAEF25211BCF9EF600F83E82 /* IQUIWindow+Hierarchy.m in Sources */,
 				EAFC96581BD20FD400B3593D /* DSInterestAndHobbiesViewController.m in Sources */,
 				2BD72ADF1BFCC2BF003846E9 /* DAAutoScroll.m in Sources */,
-				2BD72ADC1BFCC28A003846E9 /* PWParallaxScrollView.m in Sources */,
 				EAEF25231BCF9EF600F83E82 /* IQKeyboardReturnKeyHandler.m in Sources */,
 				C6D5F6151BC7B0970050C1AE /* AppDelegate.m in Sources */,
 				EAEF25291BCF9EF600F83E82 /* IQUIView+IQKeyboardToolbar.m in Sources */,

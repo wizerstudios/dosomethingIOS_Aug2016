@@ -41,6 +41,7 @@
     UIImage *profileImage3;
     
     CustomAlterview *objCustomAlterview;
+    bool isForgotBackButton;
 
 }
 @end
@@ -154,8 +155,11 @@
         [buttonCreateAnAcc setTitle:@"Create an Account" forState:UIControlStateNormal];
         buttonPrivacyPolicy.hidden =YES;
         buttonTermsOfUse.hidden =YES;
+        //forgotPasswordAction
         buttonSignIn.hidden =NO;
         [buttonSignIn addTarget:self action:@selector(forgotPasswordAction:) forControlEvents:UIControlEventTouchUpInside];
+        isForgotBackButton=YES;
+        //[_forgotTextField setKeyboardType:UIKeyboardTypeEmailAddress];
     }
      [self CustomAlterview];
 
@@ -230,9 +234,15 @@
 }
 
 - (IBAction)HaveAnAccount:(id)sender {
-    DSLoginViewController * DSLoginView  = [[DSLoginViewController alloc]initWithNibName:@"DSLoginViewController" bundle:nil];
-    DSLoginView.temp = @"Signin";
-    [self.navigationController pushViewController:DSLoginView animated:YES];
+    
+    if(isForgotBackButton==YES){
+        [self.navigationController popViewControllerAnimated:YES];
+    }
+    else{
+        DSLoginViewController * DSLoginView  = [[DSLoginViewController alloc]initWithNibName:@"DSLoginViewController" bundle:nil];
+        DSLoginView.temp = @"Signin";
+        [self.navigationController pushViewController:DSLoginView animated:YES];
+    }
 
     
 }
@@ -248,7 +258,7 @@
     [self.navigationController pushViewController:DSLoginView animated:YES];
     
 }
-#pragma mark forgotPasswordAction
+#pragma mark forgotPasswordAction_API
 - (void)forgotPasswordAction:(id)sender {
     [self.view endEditing:YES];
     
@@ -265,8 +275,11 @@
     [objWebService forgetPasswordRequest:ForgetPassword_API
                                    email:self.forgotTextField.text
                                  success:^(AFHTTPRequestOperation *operation, id responseObject) {
+                                     NSLog(@"responseObjectPWD%@",responseObject);
                                      if([[[responseObject objectForKey:@"forgetpassword"]objectForKey:@"status"] isEqualToString:@"success"]){
-                                         [self showAltermessage:[[responseObject objectForKey:@"forgetpassword"]objectForKey:@"message"]];
+                                         [self showAltermessage:@"Kindly check your Email for updated Password"];
+                                          NSLog(@"responseObjectPWD%@",responseObject);
+                                          //[[responseObject objectForKey:@"forgetpassword"]objectForKey:@"message"]];
                                      }
                                      else{
                                          [self showAltermessage:[[responseObject objectForKey:@"forgetpassword"]objectForKey:@"message"]];
@@ -677,6 +690,13 @@
 #pragma mark - ButtonActions
 - (IBAction)Back:(id)sender {
     
+    if(isForgotBackButton==YES)
+    {
+        [self.navigationController popViewControllerAnimated:YES];
+        
+    }
+    else{
+
     NSArray *viewControllers = [[self navigationController] viewControllers];
     
     for( int i=0;i<[viewControllers count];i++){
@@ -690,7 +710,7 @@
             return;
             
         }
-        
+    }
     }
     
 }

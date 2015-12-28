@@ -121,26 +121,26 @@
     
     [settingButton addTarget:self action:@selector(settingView) forControlEvents:UIControlEventTouchUpInside];
     
-    locationButton.frame=CGRectMake(buttonsView.frame.origin.x+20,3,45,45);
-    profileButton.frame=CGRectMake(buttonsView.frame.origin.x+80,3,45,45);
+    profileButton.frame=CGRectMake(buttonsView.frame.origin.x+20,3,45,45);
+    locationButton.frame=CGRectMake(buttonsView.frame.origin.x+80,3,45,45);
     menuButton.frame=CGRectMake(buttonsView.center.x-18,3,45,45);
     chatsButton.frame=CGRectMake(menuButton.frame.origin.x+menuButton.frame.size.width+20,3,45,45);
     settingButton.frame =CGRectMake(chatsButton.frame.origin.x+chatsButton.frame.size.width+20,3,45,45);
    
        if(IS_IPHONE6)
     {
-        locationButton.frame=CGRectMake(buttonsView.frame.origin.x+20,3,50,50);
+        profileButton.frame=CGRectMake(buttonsView.frame.origin.x+20,3,50,50);
         menuButton.frame=CGRectMake(self.window.frame.size.width/2-18,3,45,45);
         chatsButton.frame=CGRectMake(menuButton.frame.origin.x+menuButton.frame.size.width+25,3,50,50);
-        profileButton.frame=CGRectMake(locationButton.frame.origin.x+locationButton.frame.size.width+25,locationButton.frame.origin.y+10,29,28);
+        locationButton.frame=CGRectMake(profileButton.frame.origin.x+profileButton.frame.size.width+25,profileButton.frame.origin.y+10,29,28);
         settingButton.frame =CGRectMake(chatsButton.frame.origin.x+chatsButton.frame.size.width+25,chatsButton.frame.origin.y+10,29,28);
     }
     else if   (IS_IPHONE6_Plus)
     {
-        locationButton.frame=CGRectMake(buttonsView.frame.origin.x+20,3,50,50);
+        profileButton.frame=CGRectMake(buttonsView.frame.origin.x+20,3,50,50);
         menuButton.frame=CGRectMake(self.window.frame.size.width/2-18,3,45,45);
         chatsButton.frame=CGRectMake(menuButton.frame.origin.x+menuButton.frame.size.width+30,3,50,50);
-        profileButton.frame=CGRectMake(locationButton.frame.origin.x+locationButton.frame.size.width+30,locationButton.frame.origin.y+10,29,28);
+        locationButton.frame=CGRectMake(profileButton.frame.origin.x+profileButton.frame.size.width+30,profileButton.frame.origin.y+10,29,28);
         settingButton.frame =CGRectMake(chatsButton.frame.origin.x+chatsButton.frame.size.width+30,chatsButton.frame.origin.y+10,29,28);
     }
 

@@ -313,33 +313,47 @@
    //  label.backgroundColor = [UIColor whiteColor];
     [label setFont:[UIFont fontWithName:@"patron-bold" size:16]];
     [self.viewContainer addSubview:label];
-    label.text= [self getData];
+    //label.text= [self getData];
     [label setTextAlignment:NSTextAlignmentCenter];
     label.userInteractionEnabled = YES;
-
     
+    NSString *strUserGender;
+    if(IS_IPHONE5)
+        
+        [label setFont:[UIFont fontWithName:@"FontAwesome" size:16]];
+    
+    else
+        
+        [label setFont:[UIFont fontWithName:@"FontAwesome" size:20]];
+    
+    
+    if([[userDetailsImageArray valueForKey:@"gender"]isEqualToString:@"Female"]){
+        strUserGender= [NSString stringWithFormat:@"%@", @"\uf221"];
+        
+    }
+    else{
+        strUserGender = [NSString stringWithFormat:@"%@", @"\uf222"];
+    }
+
+    UIFont *AwesomeFont = [UIFont fontWithName:@"FontAwesome" size:16];
+    NSDictionary *AwesomeFontDict = [NSDictionary dictionaryWithObject: AwesomeFont forKey:NSFontAttributeName];
+    NSMutableAttributedString *aAttrString = [[NSMutableAttributedString alloc] initWithString:strUserGender attributes: AwesomeFontDict];
+    
+    UIFont *PatronFont = [UIFont fontWithName:@"patron-bold" size:16];
+    NSDictionary *PatronFontDict = [NSDictionary dictionaryWithObject:PatronFont forKey:NSFontAttributeName];
+    NSMutableAttributedString *vAttrString = [[NSMutableAttributedString alloc]initWithString: [self getData] attributes:PatronFontDict];
+    
+    [aAttrString appendAttributedString:vAttrString];
+    
+    
+    label.attributedText = aAttrString;
+
 }
 
 #pragma mark - userAgeName
 -(NSString *) getData{
     
-    NSString *strUserData;
-    if(IS_IPHONE5)
-    
-        [label setFont:[UIFont fontWithName:@"FontAwesome" size:16]];
-    
-    else
-
-        [label setFont:[UIFont fontWithName:@"FontAwesome" size:20]];
-    
-    
-    if([[userDetailsImageArray valueForKey:@"gender"]isEqualToString:@"Female"]){
-        strUserData= [NSString stringWithFormat:@"%@", @"\uf221"];
-        
-    }
-    else{
-        strUserData = [NSString stringWithFormat:@"%@", @"\uf222"];
-    }
+    NSString *strUserData=@"";
     
     if ([userDetailsImageArray valueForKey:@"first_name"] != NULL && ![[userDetailsImageArray valueForKey:@"first_name"] isEqualToString:@""]) {
         strUserData = [NSString stringWithFormat:@"%@ %@",strUserData,[userDetailsImageArray valueForKey:@"first_name"]];
