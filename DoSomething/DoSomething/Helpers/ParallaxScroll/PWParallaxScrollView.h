@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "DSProfileTableViewController.h"
+#import "JBKenBurnsView.h"
 
 @protocol PWParallaxScrollViewDataSource;
 @protocol PWParallaxScrollViewDelegate;
@@ -23,6 +23,8 @@
 
 @property (nonatomic, assign) NSInteger maxAllowableItem;
 
+
+
 - (void)prevItem;
 - (void)nextItem;
 - (void)moveToIndex:(NSInteger)index;
@@ -37,6 +39,7 @@
 
 @optional
 - (UIView *)foregroundViewAtIndex:(NSInteger)index scrollView:(PWParallaxScrollView *)scrollView;
+
 
 @end
 

@@ -12,7 +12,7 @@
 
 static const NSInteger PWInvalidPosition = -1;
 
-@interface PWParallaxScrollView () <UIScrollViewDelegate,CLLocationManagerDelegate>
+@interface PWParallaxScrollView () <UIScrollViewDelegate,CLLocationManagerDelegate,KenBurnsViewDelegate>
 {
     int pageFrame;
     
@@ -29,13 +29,15 @@ static const NSInteger PWInvalidPosition = -1;
 @property (nonatomic, strong) UIScrollView *foregroundScrollView;
 @property (nonatomic, strong) UIScrollView *backgroundScrollView;
 
+@property (strong, nonatomic) JBKenBurnsView *kenView;
+
 @property (nonatomic, strong) UIButton *tutorialpageOkButton;
 
 @property (nonatomic, strong) UIView *currentBottomView;
 
 @property (nonatomic, assign) NSInteger currentIndex;
 
-@property (nonatomic,strong) DSProfileTableViewController *objSplash;
+//@property (nonatomic,strong) DSProfileTableViewController *objSplash;
 
 - (void)touchScrollViewTapped:(id)sender;
 
@@ -82,7 +84,7 @@ static const NSInteger PWInvalidPosition = -1;
 {
     self.backgroundColor = [UIColor blackColor];
     self.clipsToBounds = YES;
-    
+   
     pageFrame = 1;
     
     self.touchScrollView = [[UIScrollView alloc] initWithFrame:self.bounds];
@@ -99,6 +101,8 @@ static const NSInteger PWInvalidPosition = -1;
     UITapGestureRecognizer *tapGestureRecognize = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(touchScrollViewTapped:)];
     tapGestureRecognize.numberOfTapsRequired = 1;
     [_touchScrollView addGestureRecognizer:tapGestureRecognize];
+    
+   
     
     self.foregroundScrollView = [[UIScrollView alloc] initWithFrame:self.bounds];
     //_foregroundScrollView.scrollEnabled = NO;
@@ -122,34 +126,50 @@ static const NSInteger PWInvalidPosition = -1;
 //    bgImage.image=[UIImage imageNamed:@"profile_noimg"];
     
     
-    tutorialpageOkButton=[[UIButton alloc]initWithFrame:CGRectMake(88,40,125,125)];
+//    tutorialpageOkButton=[[UIButton alloc]initWithFrame:CGRectMake(88,40,125,125)];
+//    
+//    [tutorialpageOkButton setTitle:@"OK" forState:UIControlStateNormal];
+//    
+//    [tutorialpageOkButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+//    
+//    tutorialpageOkButton.titleLabel.font = [UIFont systemFontOfSize:10];
+//    
+//    [tutorialpageOkButton setBackgroundColor:[UIColor colorWithRed:93.0/255 green:102.0/255 blue:122.0/255 alpha:1.0f]];
+//    
+//    [[tutorialpageOkButton layer] setBorderWidth:1.3f];
+//    
+//    [tutorialpageOkButton.layer setBorderColor:[UIColor whiteColor].CGColor];
+//    
+//    tutorialpageOkButton.layer.cornerRadius = 7; // this value vary as per your desire
+//    
+//    tutorialpageOkButton.clipsToBounds = YES;
+//    
     
-    [tutorialpageOkButton setTitle:@"OK" forState:UIControlStateNormal];
-    
-    [tutorialpageOkButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    
-    tutorialpageOkButton.titleLabel.font = [UIFont systemFontOfSize:10];
-    
-    //[tutorialpageOkButton setBackgroundColor:[UIColor colorWithRed:93.0/255 green:102.0/255 blue:122.0/255 alpha:1.0f]];
-    
-    //[[tutorialpageOkButton layer] setBorderWidth:1.3f];
-    
-    //[tutorialpageOkButton.layer setBorderColor:[UIColor whiteColor].CGColor];
-    
-    tutorialpageOkButton.layer.cornerRadius = 7; // this value vary as per your desire
-    
-    tutorialpageOkButton.clipsToBounds = YES;
-    
-    UIImage *btnImage = [UIImage imageNamed:@"profile_noimg"];
-    [tutorialpageOkButton setImage:btnImage forState:UIControlStateNormal];
-    [tutorialpageOkButton addTarget:self action:@selector(didClickOkButtonAction:) forControlEvents:UIControlEventTouchUpInside];
+//    UISwipeGestureRecognizer *tapGestureRecognizeokButton = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(touchScrollViewTappedswipe:)];
+//    tapGestureRecognizeokButton.numberOfTouchesRequired = 1;
+//    [tutorialpageOkButton addGestureRecognizer:tapGestureRecognizeokButton];
+    //UIImage *btnImage = [UIImage imageNamed:@"profile_noimg"];
+    //[tutorialpageOkButton setImage:btnImage forState:UIControlStateNormal];
+    //[tutorialpageOkButton addTarget:self action:@selector(didClickOkButtonAction:) forControlEvents:UIControlEventTouchUpInside];
     
 
+    self.kenView = [[JBKenBurnsView alloc] initWithFrame:self.bounds];
+    self.kenView.delegate = self;
+    self.kenView.backgroundColor = [UIColor clearColor];
+   
+     self.kenView.multipleTouchEnabled = YES;
+  
+    
+    
+    
      //[self addSubview:bgImage];
-    [self addSubview:_backgroundScrollView];
+    //[self addSubview:_backgroundScrollView];
     [self addSubview:_foregroundScrollView];
     [self addSubview:_touchScrollView];
-    [self addSubview:tutorialpageOkButton];
+    [_touchScrollView addSubview:self.kenView];
+    //[self addSubview:tutorialpageOkButton];
+    
+    
    
 }
 
@@ -211,7 +231,13 @@ static const NSInteger PWInvalidPosition = -1;
         [self.delegate parallaxScrollView:self didRecieveTapAtIndex:self.currentIndex];
     }
 }
-
+-(void)touchScrollViewTappedswipe:(UISwipeGestureRecognizer*)gesture
+{
+    if ([self.delegate respondsToSelector:@selector(parallaxScrollView:didRecieveTapAtIndex:)])
+    {
+        [self.delegate parallaxScrollView:self didRecieveTapAtIndex:self.currentIndex];
+    }
+}
 - (UIView *)foregroundViewAtIndex:(NSInteger)index
 {
     if (index < 0 || index >= _numberOfItems) {
@@ -257,10 +283,29 @@ static const NSInteger PWInvalidPosition = -1;
 - (void)loadForegroundViewAtIndex:(NSInteger)index
 {
     UIView *newParallaxView = [self foregroundViewAtIndex:index];
-    UIButton * ok_btn=[[UIButton alloc]initWithFrame:CGRectMake(200,50,35,40)];
-    [ok_btn setTitle:@"OK" forState:UIControlStateNormal];
-   // [_foregroundScrollView addSubview:ok_btn];
+//    UIView *cellContentView = [cell imageviewArticle];
+    CGFloat rotationAngleDegrees = -30;
+    CGFloat rotationAngleRadians = rotationAngleDegrees * (M_PI/180);
+    CGPoint offsetPositioning = CGPointMake(0, newParallaxView.frame.size.height/2);
+    CATransform3D transform = CATransform3DIdentity;
     
+    
+    transform = CATransform3DRotate(transform, rotationAngleRadians, -20.0, 0.0, 1.0);
+        
+   transform = CATransform3DTranslate(transform, offsetPositioning.x, offsetPositioning.y, -50.0);
+   
+    
+    newParallaxView.layer.transform = transform;
+    newParallaxView.layer.opacity = 0.8;
+    
+    [UIView animateWithDuration:0.8 delay:00 usingSpringWithDamping:1.95 initialSpringVelocity:0.8 options:0 animations:^{
+        newParallaxView.layer.transform = CATransform3DIdentity;
+        newParallaxView.layer.opacity = 1;
+    } completion:^(BOOL finished) {}];
+
+
+
+
     [_foregroundScrollView addSubview:newParallaxView];
 }
 
@@ -405,140 +450,9 @@ static const NSInteger PWInvalidPosition = -1;
     
 }
 
--(IBAction)didClickOkButtonAction:(id)sender
-{
-    lastindex=self.currentIndex;
-    if(lastindex==3)
-    {
-         if([CLLocationManager locationServicesEnabled])
-         {
-             [self locationmanagerMethod];
-         }
-        else
-        {
-            UIAlertView * geoalterview=[[UIAlertView alloc]initWithTitle:@"Geolocalisation" message:@"Chronoscènes vous propose tous les spectacles qui ont lieu autour de vous en fonction de votre position. Veuillez activer la géolocalisation dans vos paramètres > confidentialité > service de localisation > Chronoscènes afin de pouvoir utiliser l'application." delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
-            [geoalterview show];
- 
-        }
-        
-    }
-    else
-    {
-    [self didscrollIndex:3];
-        [self reloadData];
-    }
-}
 
--(void)locationmanagerMethod
-{
-    if(islocationManagerEnable == YES)
-    {
 
-        islocationManagerEnable = YES;
-      
-    }
-    else
 
-    {
-        if(!locationManager){
-            
-            locationManager = [[CLLocationManager alloc] init];
-            locationManager.delegate = self;
-            
-            locationManager.distanceFilter  = kCLLocationAccuracyKilometer;
-            locationManager.desiredAccuracy = kCLLocationAccuracyBest;
-         // locationManager.activityType    = CLActivityTypeAutomotiveNavigation;
-             islocationManagerEnable = NO;
-        }
-        else{
-            
-        }
-        if ([locationManager respondsToSelector:@selector(requestAlwaysAuthorization)])
-            
-            [locationManager requestAlwaysAuthorization];
-        
-        if ([locationManager respondsToSelector:@selector(requestWhenInUseAuthorization)])
-            
-            [locationManager requestWhenInUseAuthorization];
-        
-        [locationManager startUpdatingLocation];
-    }
-}
 
--(void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations {
-    
-    
-     if([CLLocationManager locationServicesEnabled]){
-          NSLog(@"Location Services Enabled");
-          [self.delegate didAllowgeolocation:YES];
-          // [(AppDelegate *)[[UIApplication sharedApplication] delegate]loadmainview:nil];
-     }
-    else
-    {
-       
-    }
 
-   
-}
-
-- (void)locationManager:(CLLocationManager *)manager
-       didFailWithError:(NSError *)error
-{
-    if([CLLocationManager locationServicesEnabled]){
-        
-        NSLog(@"Location Services Enabled");
-        if([CLLocationManager authorizationStatus]==kCLAuthorizationStatusDenied){
-            UIAlertView * geoalterview=[[UIAlertView alloc]initWithTitle:@"Geolocalisation" message:@"Chronoscènes vous propose tous les spectacles qui ont lieu autour de vous en fonction de votre position. Veuillez activer la géolocalisation dans vos paramètres > confidentialité > service de localisation > Chronoscènes afin de pouvoir utiliser l'application." delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
-            [geoalterview show];
-        }
-        else
-        {
-           // [(AppDelegate *)[[UIApplication sharedApplication] delegate]loadmainview:nil];
-
-        }
-
-        
-            }
-    
-    else{
-        UIAlertView * geoalterview=[[UIAlertView alloc]initWithTitle:@"Geolocalisation" message:@"Chronoscènes vous propose tous les spectacles qui ont lieu autour de vous en fonction de votre position. Veuillez activer la géolocalisation dans vos paramètres > confidentialité > service de localisation > Chronoscènes afin de pouvoir utiliser l'application." delegate:self cancelButtonTitle:@"Annuler" otherButtonTitles:@"Autoriser", nil];
-        [geoalterview show];
-     
-        }
- 
-    
-        NSLog(@"Error while getting core location : %@",[error localizedFailureReason]);
-    if ([error code] == kCLErrorDenied) {
-    }
-    
-    
-    [manager stopUpdatingLocation];
-}
-
-- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
-{
-    if (buttonIndex == 0)
-    {
-        
-    }
-    else if (buttonIndex==1)
-    {
-        if([CLLocationManager locationServicesEnabled])
-        {
-                CLAuthorizationStatus status = [CLLocationManager authorizationStatus];
-            
-                if (status == kCLAuthorizationStatusNotDetermined)
-                {
-            
-                }
-                else{
-                    //[(AppDelegate *)[[UIApplication sharedApplication] delegate]loadmainview:nil];
-                }
-        }
-        else
-        {
-        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:UIApplicationOpenSettingsURLString]];
-        }
-    }
-}
 @end

@@ -600,7 +600,7 @@ minimumLineSpacingForSectionAtIndex:(NSInteger)section {
     
     [activatedView setHidden:NO];
     [self.view setBackgroundColor:[UIColor clearColor]];
-    [self.homeCollectionView setAlpha:0.1];
+    [self.homeCollectionView setAlpha:0.085];
     [self.homeCollectionView setUserInteractionEnabled:NO];
     [bottombutton setTag:1000];
     [bottombutton setTitle:@"Cancel All Activities ?" forState:UIControlStateNormal];

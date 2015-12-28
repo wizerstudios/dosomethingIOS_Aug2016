@@ -455,9 +455,7 @@
                                     
                                     [[NSUserDefaults standardUserDefaults]removeObjectForKey:HobbiesArray];
                                     
-                                    DSHomeViewController*objSplashView =[[DSHomeViewController alloc]initWithNibName:@"DSHomeViewController" bundle:nil];
-                                    
-                                    [self.navigationController pushViewController:objSplashView animated:NO];
+                                   
                                     
                                     appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
                                     
@@ -475,6 +473,10 @@
                                 
                                 
                             }];
+    
+    DSHomeViewController*objSplashView =[[DSHomeViewController alloc]initWithNibName:@"DSHomeViewController" bundle:nil];
+    
+    [self.navigationController pushViewController:objSplashView animated:NO];
 }
 
 

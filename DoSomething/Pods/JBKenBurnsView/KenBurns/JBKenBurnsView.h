@@ -26,6 +26,8 @@
 #import <UIKit/UIKit.h>
 #import <QuartzCore/QuartzCore.h>
 
+
+
 @class JBKenBurnsView;
 @protocol KenBurnsViewDelegate <NSObject>
 
@@ -38,10 +40,8 @@
 
 
 @interface JBKenBurnsView : UIView
-{
-    UIImage* activeImage;
-    UIImage* inactiveImage;
-}
+
+
 
 @property (nonatomic,weak) id<KenBurnsViewDelegate> delegate;
 @property (nonatomic,assign,readonly) NSInteger currentImageIndex;
