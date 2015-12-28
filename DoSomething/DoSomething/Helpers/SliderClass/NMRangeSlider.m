@@ -251,8 +251,8 @@ NSUInteger DeviceSystemMajorVersion() {
         }
         else
         {
-            UIImage *image = [self imageFromBundle:@""]; //slider-default7-trackBackground
-            image = [image resizableImageWithCapInsets:UIEdgeInsetsMake(0.0, 0.0, 0.0, 0.0)];
+            UIImage *image = [self imageFromBundle:@"dot_active_red"]; //slider-default7-trackBackground
+            //image = [image resizableImageWithCapInsets:UIEdgeInsetsMake(0.0, 0.0, 0.0, 0.0)];
             _trackBackgroundImage = image;
         }
     }
@@ -273,7 +273,7 @@ NSUInteger DeviceSystemMajorVersion() {
         else
         {
             
-            UIImage* image = [self imageFromBundle:@""]; //slider-default7-track
+            UIImage* image = [self imageFromBundle:@"dot_active_red"]; //slider-default7-track
             image = [image resizableImageWithCapInsets:UIEdgeInsetsMake(0.0, 0.0, 0.0, 0.0)];
             image = [image imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
             _trackImage = image;
@@ -316,7 +316,7 @@ NSUInteger DeviceSystemMajorVersion() {
         }
         else
         {
-            UIImage *image = [self imageFromBundle:@""];  //slider-default7-handle
+            UIImage *image = [self imageFromBundle:@"dot_active_red"];  //slider-default7-handle
             _lowerHandleImageNormal = [image imageWithAlignmentRectInsets:UIEdgeInsetsMake(0, 0, 0, 0)];
         }
 
@@ -338,8 +338,8 @@ NSUInteger DeviceSystemMajorVersion() {
         }
         else
         {
-            UIImage *image = [self imageFromBundle:@""];//slider-default7-handle
-            _lowerHandleImageHighlighted = [image imageWithAlignmentRectInsets:UIEdgeInsetsMake(0, 0, 0, 0)];
+            UIImage *image = [self imageFromBundle:@"dot_active_red"];//slider-default7-handle
+            //_lowerHandleImageHighlighted = [image imageWithAlignmentRectInsets:UIEdgeInsetsMake(0, 0, 0, 0)];
         }
     }
     
@@ -358,8 +358,8 @@ NSUInteger DeviceSystemMajorVersion() {
         }
         else
         {
-            UIImage *image = [self imageFromBundle:@""];
-            _upperHandleImageNormal = [image imageWithAlignmentRectInsets:UIEdgeInsetsMake(0, 0, 0, 0)];
+            UIImage *image = [self imageFromBundle:@"dot_active_red"];
+            //_upperHandleImageNormal = [image imageWithAlignmentRectInsets:UIEdgeInsetsMake(0, 0, 0, 0)];
         }
     }
     
@@ -377,8 +377,8 @@ NSUInteger DeviceSystemMajorVersion() {
         }
         else
         {
-            UIImage *image = [self imageFromBundle:@""];
-            _upperHandleImageHighlighted = [image imageWithAlignmentRectInsets:UIEdgeInsetsMake(0,0,0,0)];
+            UIImage *image = [self imageFromBundle:@"dot_active_red"];
+            //_upperHandleImageHighlighted = [image imageWithAlignmentRectInsets:UIEdgeInsetsMake(0,0,0,0)];
         }
     }
     
