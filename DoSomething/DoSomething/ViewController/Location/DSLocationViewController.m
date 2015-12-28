@@ -403,15 +403,34 @@
    
     dosomethingImageArry =([reguestStr isEqualToString:@"No"])?[dosomethingImageSprateArry valueForKey:@"NearbyImage"]:[dosomethingImageSprateArry valueForKey:@"InactiveImage"];
     
+    NSString *dosomethingImage1,* dosomethingImage2,* dosomethingImage3;
    
-    NSString *dosomethingImage1=[dosomethingImageArry objectAtIndex:0];
-    NSString *dosomethingImage2=[dosomethingImageArry objectAtIndex:1];
-    NSString *dosomethingImage3=[dosomethingImageArry objectAtIndex:2];
+        if([dosomethingImageArry objectAtIndex:0]!=nil)
+           {
+                dosomethingImage1=[dosomethingImageArry objectAtIndex:0];
+              [locationCellView.dosomethingImage1 setImageWithURL:[NSURL URLWithString:dosomethingImage1]];
+               
+           }
+        else if ([dosomethingImageArry objectAtIndex:1]!=nil)
+        {
+            dosomethingImage2=[dosomethingImageArry objectAtIndex:1];
+            [locationCellView.dosomethingImage2 setImageWithURL:[NSURL URLWithString:dosomethingImage2]];
+           
+        }
+        else if ([dosomethingImageArry objectAtIndex:2]!=nil)
+        {
+             dosomethingImage3=[dosomethingImageArry objectAtIndex:2];
+            [locationCellView.dosomethingImage3 setImageWithURL:[NSURL URLWithString:dosomethingImage3]];
+        }
+          
 
     
-    [locationCellView.dosomethingImage1 setImageWithURL:[NSURL URLWithString:dosomethingImage1]];
-     [locationCellView.dosomethingImage2 setImageWithURL:[NSURL URLWithString:dosomethingImage2]];
-     [locationCellView.dosomethingImage3 setImageWithURL:[NSURL URLWithString:dosomethingImage3]];
+   
+   
+    
+    
+    
+    
     
     MyPatternString= [MyPatternString stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
     if(MyPatternString == nil || [MyPatternString isEqualToString:@""])

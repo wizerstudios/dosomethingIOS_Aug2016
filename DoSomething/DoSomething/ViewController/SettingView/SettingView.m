@@ -434,6 +434,10 @@
 
 -(void)logoutDeleteAction{
     
+    DSHomeViewController*objSplashView =[[DSHomeViewController alloc]initWithNibName:@"DSHomeViewController" bundle:nil];
+    
+    [self.navigationController pushViewController:objSplashView animated:NO];
+    
     [objWebService logoutDeleteUser:User_Logout_Delete_API
      
                           sessionId:[COMMON getSessionID]
@@ -471,9 +475,7 @@
                                 
                             }];
     
-    DSHomeViewController*objSplashView =[[DSHomeViewController alloc]initWithNibName:@"DSHomeViewController" bundle:nil];
     
-    [self.navigationController pushViewController:objSplashView animated:NO];
 }
 
 
