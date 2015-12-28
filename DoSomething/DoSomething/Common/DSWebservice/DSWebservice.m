@@ -798,8 +798,10 @@ request_send_user_id:(NSString *)request_send_user_id
     }
 }
 
+-(void)cancelRequest
+{
+    [self.operationQueue cancelAllOperations];
+}
 
-
-#pragma mark - CustomAlterviewload
 
 @end

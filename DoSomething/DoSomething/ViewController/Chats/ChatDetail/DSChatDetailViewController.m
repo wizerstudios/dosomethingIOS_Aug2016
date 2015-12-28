@@ -70,9 +70,8 @@
 -(void)viewwillDisappear:(BOOL)animated{
    
     dispatch_async(dispatch_get_main_queue(), ^{
-         messageTimer =nil;
         [messageTimer invalidate];
-       
+         messageTimer =nil;
     });
   
      [super viewWillDisappear:animated];
@@ -81,9 +80,8 @@
 -(void)viewDidDisappear:(BOOL)animated{
   
     dispatch_async(dispatch_get_main_queue(), ^{
-         messageTimer =nil;
         [messageTimer invalidate];
-       // messageTimer =nil;
+        messageTimer =nil;
     });
       [super viewDidDisappear:animated];
     
@@ -361,7 +359,6 @@
     
     NSString *conversationID = [chatuserDetailsDict valueForKey:@"id"];
     
-    //[webService getConversation:GetConversation sessionID:@"7edaa7f4e794fcf5cb625e95e0a390e3" conversationId:@"8"
     [webService getConversation:GetConversation sessionID:[COMMON getSessionID] conversationId:conversationID
                         success:^(AFHTTPRequestOperation *operation, id responseObject){
                             
@@ -373,9 +370,9 @@
                             
                             if([[responseDict valueForKey:@"status"]isEqualToString:@"success"]){
                                 
-                                if (![messageTimer isValid]){
-                                    messageTimer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(loadConverstionAPI) userInfo:nil repeats:YES];
-                                }
+//                                if (![messageTimer isValid]){
+//                                    messageTimer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(loadConverstionAPI) userInfo:nil repeats:YES];
+//                                }
                                 
                                 if([conversationArray count])
                                    [conversationArray removeAllObjects];
