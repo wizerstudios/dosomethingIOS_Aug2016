@@ -550,18 +550,19 @@
                      sessionid:[COMMON getSessionID]
           request_send_user_id:profileUserID
                        success:^(AFHTTPRequestOperation *operation, id responseObject)
-    {
-        if([[[responseObject valueForKey:@"sendrequest"]valueForKey:@"status"] isEqualToString:@"success"])
-        {
-            NSString * resposeMsg =[[responseObject valueForKey:@"sendrequest"]valueForKey:@"Message"];
+                        {
+                                if([[[responseObject valueForKey:@"sendrequest"]valueForKey:@"status"] isEqualToString:@"success"])
+                                {
+                                    NSString * resposeMsg =[[responseObject valueForKey:@"sendrequest"]valueForKey:@"Message"];
             
-            [self showAltermessage:resposeMsg];
-        }
-    }
-                       failure:^(AFHTTPRequestOperation *operation, id error)
-    {
-        NSLog(@"requestSend RESPONSE=%@",error);
-    }];
+                                    [self showAltermessage:resposeMsg];
+                                }
+                            
+                        }
+                  failure:^(AFHTTPRequestOperation *operation, id error)
+                            {
+                                NSLog(@"requestSend RESPONSE=%@",error);
+                            }];
 
 }
 -(IBAction)filterAction:(id)sender
@@ -805,7 +806,7 @@
     slider.trackBackgroundImage = image;
 
     image = [UIImage imageNamed:@"dot_active_red"];    //slider-metal-track
-    image = [image resizableImageWithCapInsets:UIEdgeInsetsMake(2.0, 5.0, 2.0, 5.0)];
+    image = [image resizableImageWithCapInsets:UIEdgeInsetsMake(-2.0, 5.0, -2.0, 5.0)];
     slider.trackImage = image;
 
     image = [UIImage imageNamed:@"Filter_track"];

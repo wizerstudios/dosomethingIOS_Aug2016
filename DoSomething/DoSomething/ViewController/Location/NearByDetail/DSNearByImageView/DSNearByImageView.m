@@ -335,18 +335,18 @@
         strUserGender = [NSString stringWithFormat:@"%@", @"\uf222"];
     }
 
-    UIFont *AwesomeFont = [UIFont fontWithName:@"FontAwesome" size:16];
-    NSDictionary *AwesomeFontDict = [NSDictionary dictionaryWithObject: AwesomeFont forKey:NSFontAttributeName];
-    NSMutableAttributedString *aAttrString = [[NSMutableAttributedString alloc] initWithString:strUserGender attributes: AwesomeFontDict];
+    UIFont *awesomeFont = [UIFont fontWithName:@"FontAwesome" size:16];
+    NSDictionary *awesomeFontDict = [NSDictionary dictionaryWithObject:awesomeFont forKey:NSFontAttributeName];
+    NSMutableAttributedString *awAttrString = [[NSMutableAttributedString alloc] initWithString:strUserGender attributes: awesomeFontDict];
     
-    UIFont *PatronFont = [UIFont fontWithName:@"patron-bold" size:16];
-    NSDictionary *PatronFontDict = [NSDictionary dictionaryWithObject:PatronFont forKey:NSFontAttributeName];
-    NSMutableAttributedString *vAttrString = [[NSMutableAttributedString alloc]initWithString: [self getData] attributes:PatronFontDict];
+    UIFont *patronFont = [UIFont fontWithName:@"patron-bold" size:16];
+    NSDictionary *patronFontDict = [NSDictionary dictionaryWithObject:patronFont forKey:NSFontAttributeName];
+    NSMutableAttributedString *patAttrString = [[NSMutableAttributedString alloc]initWithString: [self getData] attributes:patronFontDict];
     
-    [aAttrString appendAttributedString:vAttrString];
+    [awAttrString appendAttributedString:patAttrString];
     
     
-    label.attributedText = aAttrString;
+    label.attributedText = awAttrString;
 
 }
 

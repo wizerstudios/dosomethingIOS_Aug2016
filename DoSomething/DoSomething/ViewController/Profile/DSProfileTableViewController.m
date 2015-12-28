@@ -815,7 +815,8 @@
 - (IBAction)alertPressCancel:(id)sender {
     
     NSLog(@"Text Text = %@",objCustomAlterview.alertMsgLabel.text);
-    NSString *msgStr = objCustomAlterview.alertMsgLabel.text;
+    NSString *msgStr;
+    msgStr = objCustomAlterview.alertMsgLabel.text;
     objCustomAlterview. alertBgView.hidden = YES;
     objCustomAlterview.alertMainBgView.hidden = YES;
     objCustomAlterview.view .hidden  = YES;
