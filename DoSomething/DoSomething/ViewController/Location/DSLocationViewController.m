@@ -305,7 +305,7 @@
     
    
 }
-
+#pragma mark - loadLocationUpdateAPI
 -(void)loadLocationUpdateAPI{
     
     [objWebservice locationUpdate:LocationUpdate_API sessionid:[COMMON getSessionID] latitude:currentLatitude longitude:currentLongitude
@@ -319,7 +319,7 @@
     
     
 }
-
+#pragma mark - nearestLocationWebserviceAPI
 -(void)nearestLocationWebservice
 {
     [COMMON LoadIcon:self.view];
@@ -336,7 +336,7 @@
                            success:^(AFHTTPRequestOperation *operation, id responseObject) {
                              if ( responseObject !=nil && [[[responseObject valueForKey:@"nearestusers"]valueForKey:@"status"] isEqualToString:@"success"])
                              {
-                                 
+                                 NSLog(@"USERID%@",[[responseObject valueForKey:@"nearestusers"]valueForKey:@"user_id"]);
                                       
                                        if ([[[responseObject valueForKey:@"nearestusers"]valueForKey:@"page"] isEqualToString:@"1"]) {
                                        
@@ -400,7 +400,7 @@
 }
 
 
-
+#pragma mark - UICollectionView Delegate
 -(NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView{
     
     return 1;
@@ -583,7 +583,7 @@
       
     }
 }
-    
+#pragma mark - loadRequestsendWebServiceAPI
 -(void)loadRequestsendWebService
 {
     
