@@ -11,9 +11,11 @@
         </mutableArray>
         <mutableArray key="Patron-Medium.ttf">
             <string>Patron-Medium</string>
-            <string>Patron-Medium</string>
-            <string>Patron-Medium</string>
-            <string>Patron-Medium</string>
+        </mutableArray>
+        <mutableArray key="Patron-Regular.ttf">
+            <string>Patron-Regular</string>
+            <string>Patron-Regular</string>
+            <string>Patron-Regular</string>
         </mutableArray>
     </customFonts>
     <objects>
@@ -48,7 +50,7 @@
                                     <constraint firstAttribute="width" constant="100" id="bcC-o6-oo3"/>
                                     <constraint firstAttribute="height" constant="23" id="p34-Of-ScX"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" name="Patron-Medium" family="Patron" pointSize="12"/>
+                                <fontDescription key="fontDescription" name="Patron-Regular" family="Patron" pointSize="12"/>
                                 <color key="textColor" red="0.40000000000000002" green="0.40000000000000002" blue="0.40000000000000002" alpha="1" colorSpace="deviceRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
@@ -99,7 +101,7 @@
                                     <constraint firstAttribute="width" constant="126" id="77Q-cJ-Zki"/>
                                     <constraint firstAttribute="height" constant="21" id="fml-0d-uOL"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" name="Patron-Medium" family="Patron" pointSize="12"/>
+                                <fontDescription key="fontDescription" name="Patron-Regular" family="Patron" pointSize="12"/>
                                 <color key="textColor" red="0.40000000000000002" green="0.40000000000000002" blue="0.40000000000000002" alpha="1" colorSpace="deviceRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
@@ -157,7 +159,7 @@
                                     <constraint firstAttribute="width" constant="265" id="bNJ-E0-WmG"/>
                                     <constraint firstAttribute="height" constant="30" id="hmF-7c-Leb"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" name="Patron-Medium" family="Patron" pointSize="12"/>
+                                <fontDescription key="fontDescription" name="Patron-Regular" family="Patron" pointSize="12"/>
                                 <color key="textColor" red="0.40000000000000002" green="0.40000000000000002" blue="0.40000000000000002" alpha="1" colorSpace="deviceRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>

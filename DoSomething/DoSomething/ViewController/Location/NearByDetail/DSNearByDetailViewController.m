@@ -109,16 +109,16 @@
 #pragma mark - userAgeName
 -(NSString *) getData{
     
-    NSString *strUserData;
-    [self.nameAgeLabel setFont:[UIFont fontWithName:@"FontAwesome" size:14]];
-    
-    if([[userDetailsArray valueForKey:@"gender"]isEqualToString:@"Female"]){
-        strUserData= [NSString stringWithFormat:@"%@", @"\uf221"];
-        
-    }
-    else{
-         strUserData = [NSString stringWithFormat:@"%@", @"\uf222"];
-    }
+    NSString *strUserData=@"";
+//    [self.nameAgeLabel setFont:[UIFont fontWithName:@"FontAwesome" size:14]];
+//    
+//    if([[userDetailsArray valueForKey:@"gender"]isEqualToString:@"Female"]){
+//        strUserData= [NSString stringWithFormat:@"%@", @"\uf221"];
+//        
+//    }
+//    else{
+//         strUserData = [NSString stringWithFormat:@"%@", @"\uf222"];
+//    }
     
     if ([userDetailsArray valueForKey:@"first_name"] != NULL && ![[userDetailsArray valueForKey:@"first_name"] isEqualToString:@""]) {
         strUserData = [NSString stringWithFormat:@"%@ %@",strUserData,[userDetailsArray valueForKey:@"first_name"]];
@@ -132,6 +132,9 @@
     return strUserData;
     
 }
+
+
+
 #pragma mark - profileImageDisplay
 
 -(void)profileImageDisplay{
@@ -352,7 +355,29 @@
         [detailPageControl setHidden:YES];
         [self profileImageScrollView];
 
-        self.nameAgeLabel.text =[self getData];
+       // self.nameAgeLabel.text =[self getData];
+        NSString *strUserGender;
+        
+        if([[userDetailsArray valueForKey:@"gender"]isEqualToString:@"Female"]){
+            strUserGender= [NSString stringWithFormat:@"%@", @"\uf221"];
+            
+        }
+        else{
+            strUserGender = [NSString stringWithFormat:@"%@", @"\uf222"];
+        }
+        
+        UIFont *AwesomeFont = [UIFont fontWithName:@"FontAwesome" size:16];
+        NSDictionary *AwesomeFontDict = [NSDictionary dictionaryWithObject: AwesomeFont forKey:NSFontAttributeName];
+        NSMutableAttributedString *aAttrString = [[NSMutableAttributedString alloc] initWithString:strUserGender attributes: AwesomeFontDict];
+        
+        UIFont *PatronFont = [UIFont fontWithName:@"patron-bold" size:16];
+        NSDictionary *PatronFontDict = [NSDictionary dictionaryWithObject:PatronFont forKey:NSFontAttributeName];
+        NSMutableAttributedString *vAttrString = [[NSMutableAttributedString alloc]initWithString: [self getData] attributes:PatronFontDict];
+        
+        [aAttrString appendAttributedString:vAttrString];
+        
+        self.nameAgeLabel.attributedText = aAttrString;
+
         
         
        

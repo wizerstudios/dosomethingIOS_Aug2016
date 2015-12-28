@@ -278,6 +278,7 @@
                                      NSLog(@"responseObjectPWD%@",responseObject);
                                      if([[[responseObject objectForKey:@"forgetpassword"]objectForKey:@"status"] isEqualToString:@"success"]){
                                          [self showAltermessage:@"Kindly check your Email for updated Password"];
+                                          NSLog(@"responseObjectPWD%@",responseObject);
                                           //[[responseObject objectForKey:@"forgetpassword"]objectForKey:@"message"]];
                                      }
                                      else{
