@@ -296,7 +296,6 @@
 
         
         NSString *cellData = [[sectionArray objectAtIndex:indexPath.section]uppercaseString];
-        NSLog(@"headervalue =%@",cellData);
         
         label.text=cellData;
         [reusableview addSubview:label];

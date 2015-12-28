@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9060" systemVersion="15B42" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9059" systemVersion="15B42" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9051"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9049"/>
     </dependencies>
     <customFonts key="customFonts">
         <mutableArray key="Patron-Regular.ttf">
@@ -17,9 +17,9 @@
                 <outlet property="ProfileImage" destination="hJo-cJ-0vp" id="0uT-2r-5K1"/>
                 <outlet property="ProfileName" destination="qTm-CV-HgT" id="0Bl-1e-Vjb"/>
                 <outlet property="backgroundView" destination="XqN-Wp-lms" id="aJ3-oZ-xw7"/>
-                <outlet property="chatButton" destination="MkV-9D-hoy" id="8Pj-iz-kiD"/>
+                <outlet property="chatButton" destination="MkV-9D-hoy" id="tG3-kG-cgw"/>
+                <outlet property="chatTableView" destination="xvP-6c-2gG" id="qJ9-uV-Ujv"/>
                 <outlet property="chatView" destination="pey-bp-htd" id="jAh-FI-rws"/>
-                <outlet property="menuImageview" destination="CWc-NY-pPn" id="Hdm-dg-fAN"/>
                 <outlet property="transparentView" destination="vGn-Bt-vGu" id="NiA-3f-b4p"/>
                 <outlet property="view" destination="o0E-7A-6vB" id="yT4-ay-ktK"/>
             </connections>
@@ -43,14 +43,10 @@
                             <color key="textColor" red="0.90196078430000004" green="0.2470588235" blue="0.32156862749999998" alpha="1" colorSpace="calibratedRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="19-ChatWindow.png" translatesAutoresizingMaskIntoConstraints="NO" id="CWc-NY-pPn">
-                            <rect key="frame" x="286" y="15" width="24" height="24"/>
-                            <animations/>
-                        </imageView>
                         <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MkV-9D-hoy">
-                            <rect key="frame" x="286" y="15" width="24" height="24"/>
+                            <rect key="frame" x="267" y="8" width="40" height="40"/>
                             <animations/>
-                            <state key="normal" title=" ">
+                            <state key="normal" title=" " backgroundImage="menu_active">
                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                             </state>
                             <connections>
@@ -72,9 +68,13 @@
                     <rect key="frame" x="0.0" y="128" width="320" height="437"/>
                     <subviews>
                         <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="xvP-6c-2gG">
-                            <rect key="frame" x="0.0" y="0.0" width="320" height="327"/>
+                            <rect key="frame" x="0.0" y="0.0" width="320" height="336"/>
                             <animations/>
                             <color key="backgroundColor" red="0.9137254901960784" green="0.9137254901960784" blue="0.9137254901960784" alpha="1" colorSpace="calibratedRGB"/>
+                            <connections>
+                                <outlet property="dataSource" destination="-1" id="Vw7-Ms-ouD"/>
+                                <outlet property="delegate" destination="-1" id="HCc-vz-Zyu"/>
+                            </connections>
                         </tableView>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text=" " lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HWQ-D5-Dwc">
                             <rect key="frame" x="0.0" y="387" width="320" height="3"/>
@@ -104,13 +104,6 @@
                 <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="XqN-Wp-lms">
                     <rect key="frame" x="0.0" y="0.0" width="320" height="516"/>
                     <subviews>
-                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ajw-TG-4ey">
-                            <rect key="frame" x="277" y="75" width="40" height="40"/>
-                            <animations/>
-                            <state key="normal" title="Button" image="menu_list">
-                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                            </state>
-                        </button>
                         <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lnz-vO-2hL">
                             <rect key="frame" x="0.0" y="456" width="320" height="60"/>
                             <animations/>
@@ -169,7 +162,6 @@
         </view>
     </objects>
     <resources>
-        <image name="19-ChatWindow.png" width="54" height="54"/>
-        <image name="menu_list" width="67" height="67"/>
+        <image name="menu_active" width="67" height="67"/>
     </resources>
 </document>

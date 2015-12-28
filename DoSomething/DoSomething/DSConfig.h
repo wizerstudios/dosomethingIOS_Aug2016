@@ -102,7 +102,7 @@
 #define SendRequest_API             @"sendrequest"
 #define ChatHistory_API             @"getChatHistory"
 #define UserChatHistory_API         @"getUserChatHistory"
-#define SendMessage_API             @"sendMessage"
+#define SendMessage_API             @"sendmessage"
 #define BlockUser_API               @"blockUser"
 #define DeleteUserChat_API          @"DeleteUserChatHistory"
 #define Activity                    @"activity"

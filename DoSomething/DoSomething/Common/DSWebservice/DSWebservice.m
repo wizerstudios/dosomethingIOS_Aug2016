@@ -594,23 +594,27 @@ request_send_user_id:(NSString *)request_send_user_id
 
 -(void)sendMessage:(NSString *)sendMessageURL
          sessionid:(NSString *)sessionid
-message_send_user_id:(NSString *)message_send_user_id
+         message_send_user_id:(NSString *)message_send_user_id
            message:(NSString *)message
+   conversation_id:(NSString *)conversationId
            success:(WebserviceRequestSuccessHandler)success
            failure:(WebserviceRequestFailureHandler)failure
 {
     urlString = [URL_FOR_RESOURCE(@"") stringByAppendingString:[NSString stringWithFormat:@"%@?",sendMessageURL]];
     
-    NSMutableDictionary *sendMessg = [[NSMutableDictionary alloc] init];
+    NSMutableDictionary *msgDict = [[NSMutableDictionary alloc] init];
     
-    if(sessionid)               [sendMessg    setObject:sessionid                 forKey:@"sessionid"];
-    if(message_send_user_id)    [sendMessg    setObject:message_send_user_id            forKey:@"message_send_user_id"];
+    if(sessionid)               [msgDict setObject:sessionid forKey:@"sessionid"];
+    if(message_send_user_id)    [msgDict setObject:message_send_user_id forKey:@"message_receiver_id"];
+                                [msgDict setObject:message forKey:@"message"];
+                                [msgDict setObject:conversationId forKey:@"conversation_id"];
+    
     
     NSLog(@"urlString = %@",urlString);
-    NSLog(@"SendMessage = %@",sendMessg);
+    NSLog(@"SendMessage = %@",msgDict);
     
     [self sendRequestWithURLString:urlString
-                     andParameters:sendMessg
+                     andParameters:msgDict
                             method:ServicePost
            completionSucessHandler:success
           completionFailureHandler:failure];
@@ -677,6 +681,7 @@ message_send_user_id:(NSString *)message_send_user_id
           completionFailureHandler:failure];
     
 }
+#pragma mark - Update Notification
 
 -(void)updateNotification:(NSString *)notificationUpdate
                 sessionID:(NSString *)sessionId
@@ -687,6 +692,25 @@ message_send_user_id:(NSString *)message_send_user_id
                   failure:(WebserviceRequestFailureHandler)failure{
     
     urlString = [URL_FOR_RESOURCE(@"") stringByAppendingString:[NSString stringWithFormat:@"%@?sessionid=%@&notification_vibration=%@&notification_message=%@&notification_sound=%@",notificationUpdate,sessionId,vibrationStr,messageStr,soundStr]];
+    
+    NSLog(@"urlString = %@",urlString);
+    
+    [self sendRequestWithURLString:urlString
+                     andParameters:nil
+                            method:ServiceGet
+           completionSucessHandler:success
+          completionFailureHandler:failure];
+    
+}
+
+#pragma mark - Get Chat Conversation
+-(void)getConversation:(NSString *)getConversation
+             sessionID:(NSString *)sessionID
+        conversationId:(NSString *)conversationId
+               success:(WebserviceRequestSuccessHandler)success
+               failure:(WebserviceRequestFailureHandler)failure{
+    
+    urlString = [URL_FOR_RESOURCE(@"") stringByAppendingString:[NSString stringWithFormat:@"%@?sessionid=%@&conversationId=%@",getConversation,sessionID,conversationId]];
     
     NSLog(@"urlString = %@",urlString);
     
@@ -774,8 +798,10 @@ message_send_user_id:(NSString *)message_send_user_id
     }
 }
 
+-(void)cancelRequest
+{
+    [self.operationQueue cancelAllOperations];
+}
 
-
-#pragma mark - CustomAlterviewload
 
 @end
