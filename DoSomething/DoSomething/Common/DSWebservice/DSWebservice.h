@@ -17,7 +17,7 @@ typedef void (^WebserviceRequestFailureHandler)(AFHTTPRequestOperation  *operati
 typedef void (^WebserviceRequestXMLSuccessHandler)(AFHTTPRequestOperation  *operation);
 typedef void (^WebserviceRequestXMLFailureHandler)(AFHTTPRequestOperation  *operation, NSError *error);
 
-//DEVELOPEMENT URL
+//DEVELOPMENT URL
 #define BASE_URL @"http://indiawebcoders.com/mobileapps/dosomething/"
 
 //PRODUCTION URL
