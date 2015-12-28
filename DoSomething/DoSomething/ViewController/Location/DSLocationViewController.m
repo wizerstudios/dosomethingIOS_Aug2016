@@ -322,7 +322,7 @@
     {
         if ( responseObject !=nil && [[[responseObject valueForKey:@"nearestusers"]valueForKey:@"status"] isEqualToString:@"success"])
         {
-            NSLog(@"USERID%@",[[responseObject valueForKey:@"nearestusers"]valueForKey:@"user_id"]);
+           // NSLog(@"USERID%@",[[[responseObject valueForKey:@"nearestusers"]valueForKey:@"UserList"]valueForKey:@"user_id"]);
             if ([[[responseObject valueForKey:@"nearestusers"]valueForKey:@"page"] isEqualToString:@"1"])
             {
                 NSMutableArray * nearestUserdetaile =[[NSMutableArray alloc]init];
