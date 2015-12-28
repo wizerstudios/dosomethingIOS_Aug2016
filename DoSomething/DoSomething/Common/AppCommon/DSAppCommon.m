@@ -121,6 +121,31 @@ DSAppCommon *sharedCommon = nil;
     return CGSizeMake(dataHeight.width, dataHeight.height+10);
 }
 
+#pragma  mark - Cell Height
+
+- (CGSize)dataSize:(NSString *)string withFontName:(NSString *)fontName ofSize:(NSInteger)size withSize:(CGSize)LabelWidth {
+    CGSize maxSize = LabelWidth;
+    CGSize dataHeight;
+    
+    UIFont *font = [UIFont fontWithName:fontName size:size];
+    
+    NSString *version = [[UIDevice currentDevice] systemVersion];
+    if ([version floatValue]>=7.0) {
+        CGRect textRect = [string boundingRectWithSize:maxSize
+                                               options:NSStringDrawingUsesLineFragmentOrigin
+                                            attributes:@{NSFontAttributeName:font}
+                                               context:nil];
+        
+        dataHeight = CGSizeMake(textRect.size.width , textRect.size.height);
+        
+    }else{
+        dataHeight = [string sizeWithFont:font constrainedToSize:maxSize lineBreakMode:NSLineBreakByCharWrapping];
+    }
+    
+    return CGSizeMake(dataHeight.width, dataHeight.height+15);
+}
+
+
 
 #pragma mark - Userdetails
 
@@ -162,10 +187,13 @@ DSAppCommon *sharedCommon = nil;
     return sessionID;
 }
 
-//-(NSMutableArray *)getuserLatitudeandLongitude
-//{
-//    return <#expression#>
-//}
+-(NSString *)getUserID{
+    NSString *sessionID = [[self getUserDetails]valueForKey:@"user_id"];
+    NSLog(@"sessionID = %@",sessionID);
+    return sessionID;
+}
+
+
 
 #pragma mark User Interaction Loading :
 
