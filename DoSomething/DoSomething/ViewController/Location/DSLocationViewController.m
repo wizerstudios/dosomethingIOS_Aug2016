@@ -102,6 +102,7 @@
     [super viewDidLoad];
     isLoadData=NO;
     isLoadWebservice=YES;
+    isgestureenable =YES;
     
     [self configureAgeChangeSlider];
      [self configureLabelSlider];

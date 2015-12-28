@@ -244,7 +244,8 @@
         r2=140.0;
         
     }
-       UIBezierPath *maskPath;
+    
+    UIBezierPath *maskPath;
     maskPath = [UIBezierPath bezierPathWithRoundedRect:viewProfile.bounds
                                      byRoundingCorners:(UIRectCornerBottomLeft | UIRectCornerBottomRight)
                                            cornerRadii:CGSizeMake(r1, r2)];
@@ -254,6 +255,7 @@
     viewProfile.layer.mask = maskLayer;
   //  viewProfile.layer.cornerRadius = viewProfile.frame.size.height/ 2;
   //  viewProfile.layer.masksToBounds = YES;
+   // bottomBorder.backgroundColor = [UIColor colorWithWhite:0.8f alpha:1.0f].CGColor;
 
     if(IS_IPHONE6_Plus)
     {
