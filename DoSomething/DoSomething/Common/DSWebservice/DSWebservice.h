@@ -17,11 +17,11 @@ typedef void (^WebserviceRequestFailureHandler)(AFHTTPRequestOperation  *operati
 typedef void (^WebserviceRequestXMLSuccessHandler)(AFHTTPRequestOperation  *operation);
 typedef void (^WebserviceRequestXMLFailureHandler)(AFHTTPRequestOperation  *operation, NSError *error);
 
-//Demo URL
-//#define BASE_URL @"http://indiawebcoders.com/mobileapps/dosomething/"
+//DEVELOPMENT URL
+#define BASE_URL @"http://indiawebcoders.com/mobileapps/dosomething/"
 
-//Live URL
-#define BASE_URL @"http://wiztestinghost.com/dosomething/"
+//PRODUCTION URL
+//#define BASE_URL @"http://wiztestinghost.com/dosomething/"
 
 #define URL_FOR_RESOURCE(RESOURCE) [NSString stringWithFormat:@"%@%@",BASE_URL,RESOURCE]
 
