@@ -112,7 +112,6 @@
 
 - (void)viewWillAppear:(BOOL)animated
 {
-    
     [super viewWillAppear:animated];
     [self.navigationItem setHidesBackButton:YES animated:NO];
     
@@ -503,6 +502,8 @@
 }
 -(IBAction)didClickRequestSend:(id)sender
 {
+    if(isgestureenable==YES)
+    {
     id button = sender;
     while (![button isKindOfClass:[UICollectionViewCell class]]) {
         button = [button superview];
@@ -517,11 +518,11 @@
      profileUserID=[[commonlocationArray valueForKey:@"user_id"] objectAtIndex:indexPath.row];
     
     NSString * requestsend=[[commonlocationArray valueForKey:@"send_request"] objectAtIndex:indexPath.row];
-    if([requestsend isEqualToString:@"No"])
+    if([requestsend isEqualToString:@"No"] &&  [locationCellView.sendRequest.text isEqualToString:@"Send Request"])
     {
         UIButton *buttonSender = (UIButton *)sender;
         locationCellView.requestsendBtn = buttonSender;
-        [locationCellView.requestsendBtn setBackgroundColor:[UIColor whiteColor]];
+        [locationCellView.hobbiesImagebackView setBackgroundColor:[UIColor whiteColor]];
         locationCellView.sendRequest.text =@"Request Sent!";
         locationCellView.sendRequest.textColor=[UIColor lightGrayColor];
         
@@ -539,6 +540,7 @@
         
         [self loadRequestsendWebService];
       
+    }
     }
 }
 #pragma mark - loadRequestsendWebServiceAPI
@@ -579,6 +581,7 @@
         swiperight.direction=UISwipeGestureRecognizerDirectionRight;
         
         [self.locationCollectionView addGestureRecognizer:swiperight];
+
         isgestureenable=NO;
 
         
@@ -596,6 +599,7 @@
         appDelegate.settingButton.userInteractionEnabled=YES;
         currentloadPage =@"";
         isgestureenable=YES;
+       
         [self nearestLocationWebservice];
     }
     self.upperLabel.text=@"";
@@ -750,7 +754,8 @@
     self.filterviewxposition.constant    = self.CollectionviewWidth.constant+10;
     [self filterviewPosition];
     isFilteraction=NO;
-    [self.locationCollectionView setUserInteractionEnabled:YES];
+    [locationCellView setUserInteractionEnabled:YES];
+    
     
     [customNavigation.FilterBtn setImage:[UIImage imageNamed:@"filerImage"] forState:UIControlStateNormal];
     [customNavigation.FilterBtn setTitle:@"" forState:UIControlStateNormal];
