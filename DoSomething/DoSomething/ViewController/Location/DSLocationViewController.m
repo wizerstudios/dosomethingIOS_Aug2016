@@ -22,39 +22,38 @@
 
 @interface DSLocationViewController ()<CLLocationManagerDelegate>
 {
-    CustomAlterview *objCustomAlterview;
-    DSWebservice *objWebservice;
-    AppDelegate *appDelegate;
-    
-    NSString * longitude;
-    NSString * latitude;
-    BOOL isFilteraction;
-    NSString  * currentLatitude, * currentLongitude;
-    BOOL isLoadData;
-    NSString *profileUserID;
-    UILabel * usernotfoundlbl;
-     UIRefreshControl *refreshControl;
-    BOOL              isAllPost;
-     NSString          *currentloadPage;
-    
-    NSString * onlineStatus;
-    NSString * GenderStatus;
-    NSString * avalableStatus;
-    LocationCollectionViewCell*locationCellView;
-    NSString * filterAge;
-    NSString * filterDistance;
-    BOOL isLoadWebservice;
-     CustomNavigationView *customNavigation;
-    UISwipeGestureRecognizer * swiperight;
+    CustomAlterview             * objCustomAlterview;
+    DSWebservice                * objWebservice;
+    AppDelegate                 * appDelegate;
+    LocationCollectionViewCell  * locationCellView;
+    CustomNavigationView        * customNavigation;
+    UISwipeGestureRecognizer    * swiperight;
+    UILabel                     * usernotfoundlbl;
+    UIRefreshControl            * refreshControl;
+
+    NSString                    * longitude;
+    NSString                    * latitude;
+    NSString                    * currentLatitude, * currentLongitude;
+    NSString                    * profileUserID;
+    NSString                    * currentloadPage;
+    NSString                    * onlineStatus;
+    NSString                    * GenderStatus;
+    NSString                    * avalableStatus;
+    NSString                    * filterAge;
+    NSString                    * filterDistance;
     
     BOOL isgestureenable;
+    BOOL isLoadWebservice;
+    BOOL isAllPost;
+    BOOL isFilteraction;
+    BOOL isLoadData;
     
     
 }
-@property(nonatomic,strong)IBOutlet NSLayoutConstraint * collectionviewxpostion;
-@property(nonatomic,strong)IBOutlet NSLayoutConstraint * filterviewxposition;
-@property(nonatomic,strong)IBOutlet NSLayoutConstraint * CollectionviewWidth;
-@property (nonatomic,strong)  CLLocationManager       *  locationManager;
+@property(nonatomic,strong)IBOutlet NSLayoutConstraint  * collectionviewxpostion;
+@property(nonatomic,strong)IBOutlet NSLayoutConstraint  * filterviewxposition;
+@property(nonatomic,strong)IBOutlet NSLayoutConstraint  * CollectionviewWidth;
+@property (nonatomic,strong)  CLLocationManager         *  locationManager;
 
 @property(nonatomic,strong) IBOutlet UIButton *onlineBtn;
 @property(nonatomic,strong) IBOutlet UIButton *offlineBtn;
@@ -164,9 +163,6 @@
     [[UISlider appearance] setThumbImage:[UIImage imageNamed:@"dot_Image"] forState:UIControlStateNormal];
     
     
-    
-    
-    
 }
 -(void)loadCustomNavigationview
 {
@@ -237,7 +233,6 @@
     [self.avalableBothBtn.layer setBorderColor:[[UIColor whiteColor] CGColor]];
     
 }
-
 -(void)loadInvalidSessionAlert:(NSNotification *)notification
 {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
@@ -248,10 +243,7 @@
     appDelegate.buttonsView.hidden=YES;
     appDelegate.SepratorLbl.hidden=YES;
     [appDelegate.locationButton setBackgroundImage:[UIImage imageNamed:@"loaction_normal.png"] forState:UIControlStateNormal];
-
-    
 }
-
 #pragma mark get user CurrentLocation
 
 - (void)getUserCurrenLocation{
@@ -274,21 +266,15 @@
 
 -(void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations {
     
-    
     CLLocation *newLocation = [locations lastObject];
-    
     currentLatitude         = [NSString stringWithFormat:@"%@",[NSNumber numberWithDouble:newLocation.coordinate.latitude]];
-    
     currentLongitude        = [NSString stringWithFormat:@"%@",[NSNumber numberWithDouble:newLocation.coordinate.longitude]];
     
     [[NSUserDefaults standardUserDefaults] setObject:currentLatitude  forKey:@"currentLatitude"];
     [[NSUserDefaults standardUserDefaults] setObject:currentLongitude forKey:@"currentLongitude"];
     [[NSUserDefaults standardUserDefaults] synchronize];
     
-    
     [locationManager stopUpdatingLocation];
-    
-  
     
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         
@@ -307,98 +293,75 @@
 }
 #pragma mark - loadLocationUpdateAPI
 -(void)loadLocationUpdateAPI{
-    
-    [objWebservice locationUpdate:LocationUpdate_API sessionid:[COMMON getSessionID] latitude:currentLatitude longitude:currentLongitude
+    [objWebservice locationUpdate:LocationUpdate_API
+                        sessionid:[COMMON getSessionID]
+                         latitude:currentLatitude
+                        longitude:currentLongitude
                           success:^(AFHTTPRequestOperation *operation, id responseObject){
                               NSLog(@"responseObject = %@",responseObject);
                           }
                           failure:^(AFHTTPRequestOperation *operation, id error) {
-                              
                               [self showAltermessage:[NSString stringWithFormat:@"%@",error]];
                           }];
-    
-    
 }
 #pragma mark - nearestLocationWebserviceAPI
 -(void)nearestLocationWebservice
 {
     [COMMON LoadIcon:self.view];
-       [objWebservice nearestUsers:NearestUsers_API
-                         sessionid:[COMMON getSessionID]
-                          latitude:(latitude==NULL)?currentLatitude:latitude
-                         longitude:(longitude==NULL)?currentLongitude:longitude
-                     filter_status:onlineStatus
-                     filter_gender:GenderStatus
-                  filter_available:avalableStatus
-                   filter_agerange:(filterAge==nil)?@"":filterAge
-                   filter_distance:(filterDistance==nil)?@"":filterDistance
-                              page:currentloadPage
-                           success:^(AFHTTPRequestOperation *operation, id responseObject) {
-                             if ( responseObject !=nil && [[[responseObject valueForKey:@"nearestusers"]valueForKey:@"status"] isEqualToString:@"success"])
-                             {
-                                 NSLog(@"USERID%@",[[responseObject valueForKey:@"nearestusers"]valueForKey:@"user_id"]);
-                                      
-                                       if ([[[responseObject valueForKey:@"nearestusers"]valueForKey:@"page"] isEqualToString:@"1"]) {
-                                       
-                                           NSMutableArray * nearestUserdetaile =[[NSMutableArray alloc]init];
-                                           nearestUserdetaile =[[responseObject valueForKey:@"nearestusers"] valueForKey:@"UserList"];
-                                           commonlocationArray =[nearestUserdetaile mutableCopy];
-                                          
-                                           [locationCollectionView reloadData];
-                                          
-                                           
-                                           
-                                          }
-                                    else {
-                                               NSArray * nextpageUserdetaile =[[responseObject valueForKey:@"nearestusers"] valueForKey:@"UserList"];
-                                        
-                                               for (NSDictionary *dict in nextpageUserdetaile)
-                                               {
-                                                   [commonlocationArray addObject:dict];
-                                              
-                                               }
-                                           }
-
-                                       [COMMON removeLoading];
-
-                              }
-                               
-                             else if([[[responseObject valueForKey:@"nearestusers"]valueForKey:@"status"] isEqualToString:@"error"])
-                             {
-                                 [COMMON removeUserDetails];
-                                 DSHomeViewController*objSplashView =[[DSHomeViewController alloc]initWithNibName:@"DSHomeViewController" bundle:nil];
-                                 [self.navigationController pushViewController:objSplashView animated:NO];
-                                 appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
-                                 appDelegate.buttonsView.hidden=YES;
-                                 appDelegate.SepratorLbl.hidden=YES;
-                                 [appDelegate.settingButton setBackgroundImage:[UIImage imageNamed:@"setting_icon.png"] forState:UIControlStateNormal];
-                             }
-                            
-                    
-                               else{
-                                   isAllPost = YES;
-                                   [COMMON removeLoading];
-                               }
-        
-                                [refreshControl endRefreshing];
-                                [locationCollectionView reloadData];
-                              
-
-                               
-        
-        
-    
-}
-    failure:^(AFHTTPRequestOperation *operation, id error) {
-        
+    [objWebservice nearestUsers:NearestUsers_API
+                      sessionid:[COMMON getSessionID]
+                       latitude:(latitude==NULL)?currentLatitude:latitude
+                      longitude:(longitude==NULL)?currentLongitude:longitude
+                  filter_status:onlineStatus
+                  filter_gender:GenderStatus
+               filter_available:avalableStatus
+                filter_agerange:(filterAge==nil)?@"":filterAge
+                filter_distance:(filterDistance==nil)?@"":filterDistance
+                           page:currentloadPage
+                        success:^(AFHTTPRequestOperation *operation, id responseObject)
+    {
+        if ( responseObject !=nil && [[[responseObject valueForKey:@"nearestusers"]valueForKey:@"status"] isEqualToString:@"success"])
+        {
+            NSLog(@"USERID%@",[[responseObject valueForKey:@"nearestusers"]valueForKey:@"user_id"]);
+            if ([[[responseObject valueForKey:@"nearestusers"]valueForKey:@"page"] isEqualToString:@"1"])
+            {
+                NSMutableArray * nearestUserdetaile =[[NSMutableArray alloc]init];
+                nearestUserdetaile =[[responseObject valueForKey:@"nearestusers"] valueForKey:@"UserList"];
+                commonlocationArray =[nearestUserdetaile mutableCopy];
+                [locationCollectionView reloadData];
+            }
+            else
+            {
+                NSArray * nextpageUserdetaile =[[responseObject valueForKey:@"nearestusers"] valueForKey:@"UserList"];
+                for (NSDictionary *dict in nextpageUserdetaile)
+                {
+                    [commonlocationArray addObject:dict];
+                }
+            }
+            [COMMON removeLoading];
+        }
+        else if([[[responseObject valueForKey:@"nearestusers"]valueForKey:@"status"] isEqualToString:@"error"])
+        {
+            [COMMON removeUserDetails];
+             DSHomeViewController*objSplashView =[[DSHomeViewController alloc]initWithNibName:@"DSHomeViewController" bundle:nil];
+             [self.navigationController pushViewController:objSplashView animated:NO];
+             appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+             appDelegate.buttonsView.hidden=YES;
+             appDelegate.SepratorLbl.hidden=YES;
+             [appDelegate.settingButton setBackgroundImage:[UIImage imageNamed:@"setting_icon.png"] forState:UIControlStateNormal];
+        }
+        else{
+            isAllPost = YES;
+            [COMMON removeLoading];
+        }
+        [refreshControl endRefreshing];
+        [locationCollectionView reloadData];
+    }
+                        failure:^(AFHTTPRequestOperation *operation, id error)
+    {
         [COMMON removeLoading];
-       
-        
-        
-        
-    } ];
+    }];
 }
-
 
 #pragma mark - UICollectionView Delegate
 -(NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView{
@@ -500,7 +463,6 @@
     return UIEdgeInsetsMake(0, 0, 0, 0); // top, left, bottom, right
 }
 
-
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath;
 {
     
@@ -521,7 +483,6 @@
     
     
 }
-
 - (void)collectionView:(UICollectionView *)collectionView willDisplayCell:(UICollectionViewCell *)cell forItemAtIndexPath:(NSIndexPath *)indexPath
 {
    
@@ -540,9 +501,6 @@
     
 
 }
-
-
-
 -(IBAction)didClickRequestSend:(id)sender
 {
     id button = sender;
@@ -586,27 +544,24 @@
 #pragma mark - loadRequestsendWebServiceAPI
 -(void)loadRequestsendWebService
 {
-    
-    [objWebservice sendRequest:SendRequest_API sessionid:[COMMON getSessionID] request_send_user_id:profileUserID success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        
+    [objWebservice sendRequest:SendRequest_API
+                     sessionid:[COMMON getSessionID]
+          request_send_user_id:profileUserID
+                       success:^(AFHTTPRequestOperation *operation, id responseObject)
+    {
         if([[[responseObject valueForKey:@"sendrequest"]valueForKey:@"status"] isEqualToString:@"success"])
         {
             NSString * resposeMsg =[[responseObject valueForKey:@"sendrequest"]valueForKey:@"Message"];
             
             [self showAltermessage:resposeMsg];
         }
-        
-        
-    } failure:^(AFHTTPRequestOperation *operation, id error) {
+    }
+                       failure:^(AFHTTPRequestOperation *operation, id error)
+    {
         NSLog(@"requestSend RESPONSE=%@",error);
-        
     }];
 
 }
-
-
-
-
 -(IBAction)filterAction:(id)sender
 {
     if(isFilteraction==NO)
@@ -652,11 +607,9 @@
 -(void)filterviewPosition
 {
     appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
-    
-        appDelegate.buttonsView.frame=CGRectMake(self.collectionviewxpostion.constant-10,self.view.frame.origin.y+self.view.frame.size.height-50,self.view.frame.size.width,50);
+    appDelegate.buttonsView.frame=CGRectMake(self.collectionviewxpostion.constant-10,self.view.frame.origin.y+self.view.frame.size.height-50,self.view.frame.size.width,50);
     appDelegate.SepratorLbl.frame =CGRectMake(self.collectionviewxpostion.constant-10,appDelegate.buttonsView.frame.origin.y-2,self.view.frame.size.width,3);
 
-    
 }
 -(IBAction)StatusButtonAction:(id)sender
 {
@@ -732,8 +685,7 @@
         GenderStatus =@"";
         
     }
-
-    }
+}
 
 #pragma mark - CustomalterviewMethod
 
@@ -792,7 +744,7 @@
 
 -(void)swiperight:(UISwipeGestureRecognizer*)gestureRecognizer
 {
-     isgestureenable=YES;
+    isgestureenable=YES;
     self.collectionviewxpostion.constant =10;
     self.CollectionviewWidth.constant    =self.view.frame.size.width-10;
     self.filterviewxposition.constant    = self.CollectionviewWidth.constant+10;
@@ -842,24 +794,24 @@
 - (void) configureMetalThemeForSlider:(NMRangeSlider*) slider
 {
     UIImage* image = nil;
-    
+
     image = [UIImage imageNamed:@""];  //slider-metal-trackBackground
     image = [image resizableImageWithCapInsets:UIEdgeInsetsMake(0.0, 0.0, 0.0, 0.0)];
     slider.trackBackgroundImage = image;
-    
+
     image = [UIImage imageNamed:@"dot_active_red"];    //slider-metal-track
     image = [image resizableImageWithCapInsets:UIEdgeInsetsMake(2.0, 5.0, 2.0, 5.0)];
-     slider.trackImage = image;
-    
+    slider.trackImage = image;
+
     image = [UIImage imageNamed:@"Filter_track"];
-     image = [image imageWithAlignmentRectInsets:UIEdgeInsetsMake(0,0,0,0)];
-     slider.lowerHandleImageNormal = image;
-     slider.upperHandleImageNormal = image;
-    
-     image = [UIImage imageNamed:@"Filter_track"];          //slider-metal-handle-highlighted
-     image = [image imageWithAlignmentRectInsets:UIEdgeInsetsMake(0, 0, 0, 0)];
-     slider.lowerHandleImageHighlighted = image;
-     slider.upperHandleImageHighlighted = image;
+    image = [image imageWithAlignmentRectInsets:UIEdgeInsetsMake(0,0,0,0)];
+    slider.lowerHandleImageNormal = image;
+    slider.upperHandleImageNormal = image;
+
+    image = [UIImage imageNamed:@"Filter_track"];          //slider-metal-handle-highlighted
+    image = [image imageWithAlignmentRectInsets:UIEdgeInsetsMake(0, 0, 0, 0)];
+    slider.lowerHandleImageHighlighted = image;
+    slider.upperHandleImageHighlighted = image;
 }
 - (void) configureLabelSlider
 {
