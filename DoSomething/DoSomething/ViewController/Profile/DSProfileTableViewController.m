@@ -2110,8 +2110,8 @@
                          }
                          failure:^(AFHTTPRequestOperation *operation, id error) {
                              [COMMON removeLoading];
-                             UIAlertView *errorAlter =[[UIAlertView alloc]initWithTitle:nil message:[NSString stringWithFormat:@"%@",error] delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
-                             [errorAlter show];
+//                             UIAlertView *errorAlter =[[UIAlertView alloc]initWithTitle:nil message:[NSString stringWithFormat:@"%@",error] delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+//                             [errorAlter show];
 
                          }
      ];
