@@ -48,6 +48,10 @@
 @property (weak, nonatomic) IBOutlet UITextView *textViewAboutYou;
 @property (weak, nonatomic) IBOutlet UITextField *emailTextField;
 @property (weak, nonatomic) IBOutlet UITextField *passwordTextField;
+@property (weak, nonatomic) IBOutlet UITextField * currentpassword;
+@property (weak,nonatomic) IBOutlet  UITextField  * conformationpassword;
+
+
 @property (strong, nonatomic) IBOutlet UIButton *messSwitchBtn;
 @property (weak, nonatomic) IBOutlet UIButton *SoundSwitchBtn;
 @property (weak, nonatomic) IBOutlet UIButton *vibrationSwitchBtn;

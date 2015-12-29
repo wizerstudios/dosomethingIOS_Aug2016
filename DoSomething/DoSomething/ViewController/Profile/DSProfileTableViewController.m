@@ -108,7 +108,7 @@
 
 @implementation DSProfileTableViewController
 @synthesize  profileData1,textviewText, placeHolderArray,FBprofileID;
-@synthesize userDetailsDict,emailAddressToRegister,emailPasswordToRegister,selectEmail;
+@synthesize userDetailsDict,emailAddressToRegister,emailPasswordToRegister,selectEmail,currentPassword,confirmPassword;
 
 - (void)viewDidLoad {
     
@@ -681,6 +681,14 @@
             {
                 emailPasswordToRegister = strSearchLetters;
             }
+            else if (textField.tag ==16)
+            {
+                currentPassword  =strSearchLetters;
+            }
+            else if (textField.tag == 17)
+            {
+                confirmPassword =strSearchLetters;
+            }
             
             
         }
@@ -786,7 +794,7 @@
                                     [NSMutableDictionary dictionaryWithObjectsAndKeys:[profileDict valueForKey:@"date_of_birth"],@"placeHolder", nil],
                                     [NSMutableDictionary dictionaryWithObjectsAndKeys:@"Write something about yourself here.",@"placeHolder", nil],
                                     [NSMutableDictionary dictionaryWithObjectsAndKeys:@"Hobbies",@"placeHolder", nil],
-                                    [NSMutableDictionary dictionaryWithObjectsAndKeys:[profileDict valueForKey:@"email"],@"placeHolder",@"Password",@"placeHolderPass",@"",@"TypingTextPass", nil], nil]atIndex:0];
+                                    [NSMutableDictionary dictionaryWithObjectsAndKeys:[profileDict valueForKey:@"email"],@"placeHolder",@"Password",@"placeHolderPass",@"Current\n password",@"placeHolderCurrentPassword",@"Password\n Conformation",@"placeHolderconformation",@"",@"TypingTextPass", nil], nil]atIndex:0];
     
    
     
@@ -913,7 +921,7 @@
        
             if ( indexPath.row == 7) {
             
-                return 120;
+                return 180;
             }
             if (indexPath.row ==8) {
                 return 150;
@@ -1445,6 +1453,9 @@
             [cell.emailTextField setEnabled:NO];
             cell.emailTextField.text =(emailAddressToRegister==0)?[profileDict valueForKey:@"email"]:emailAddressToRegister;
             cell.passwordTextField.text  =(emailPasswordToRegister==0)? @"":emailPasswordToRegister;
+            cell.currentpassword.text    =(currentPassword==0)?@"":@"Your new password";
+            cell.conformationpassword.text =(confirmPassword==0)?@"":@"confirm your new password";
+            
 
         }
         else if(userDetailsDict.count > 0){
@@ -1454,6 +1465,8 @@
            
             cell.emailTextField.text =(emailAddressToRegister==0)?[userDetailsDict valueForKey:@"email"]:emailAddressToRegister;
             cell.passwordTextField.text  =(emailPasswordToRegister==0)? @"":emailPasswordToRegister;
+            cell.currentpassword.text    =(currentPassword==0)?@"":@"Your new password";
+            cell.conformationpassword.text =(confirmPassword==0)?@"":@"confirm your new password";
             emailAddressToRegister   = cell.emailTextField.text;
                        
           
@@ -2050,7 +2063,7 @@
                      first_name:FirstName
                       last_name:LastName
                           email:emailAddressToRegister
-                       password:emailPasswordToRegister
+                       password:currentPassword
                       profileId:strProfileID
                             dob:dateChange
                   profileImage1:profileImage1
@@ -2092,7 +2105,7 @@
                       first_name:FirstName
                        last_name:LastName
                              dob:dateChange
-                        password:emailPasswordToRegister
+                        password:currentPassword
                    profileImage1:profileImage1
                    profileImage2:profileImage2
                    profileImage3:profileImage3
@@ -2290,7 +2303,28 @@
         [COMMON removeLoading];
         return;
     }
+    else if ([currentPassword isEqualToString:@""] || currentPassword ==nil)
+    {
+        [self showAltermessage:PASSWORD_REQUIRED];
+        [COMMON removeLoading];
+        return;
+
+    }
+    else if ([currentPassword isEqualToString:@""]  || confirmPassword==nil)
+    {
+        [self showAltermessage:@"Enter Confirmation Password"];
+        [COMMON removeLoading];
+        return;
+    }
+    else if (![currentPassword isEqualToString:confirmPassword])
+    {
+        [self showAltermessage:@"Enter Valid Password"];
+        [COMMON removeLoading];
+        return;
+
+    }
   else
+      
   {
       [COMMON removeLoading];
       [self loadRegister];
