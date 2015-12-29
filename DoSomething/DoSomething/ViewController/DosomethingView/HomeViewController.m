@@ -606,45 +606,46 @@ minimumLineSpacingForSectionAtIndex:(NSInteger)section {
     [bottombutton setTitle:@"Cancel All Activities ?" forState:UIControlStateNormal];
     
     NSString *timeStr = [activityMainDict valueForKey:@"LastActivity"];
-    timeStr = [NSString stringWithFormat:@"Available Since\n%@",timeStr];
+    timeStr = [NSString stringWithFormat:@"    Last Selected:\n%@",timeStr];
     
     
     [timeLabel setText:timeStr];
     timeLabel.textAlignment = NSTextAlignmentCenter;
     timeLabel.lineBreakMode = NSLineBreakByWordWrapping;
     timeLabel.numberOfLines = 3;
-
-    if([_availStr isEqualToString:@"No"]){
-        [nowButton setBackgroundColor:Green_Color];
-        [anyTimeButton setBackgroundColor:Gray_Color];
-        [anyTimeButton setUserInteractionEnabled:NO];
-    }
-    else{
-        [nowButton setBackgroundColor:Gray_Color];
-        [anyTimeButton setBackgroundColor:Red_Color];
-        [nowButton setUserInteractionEnabled:NO];
-    }
+    nowButton.hidden=YES;
+    anyTimeButton.hidden =YES;
+   // if([_availStr isEqualToString:@"No"]){
+       // [nowButton setBackgroundColor:Green_Color];
+        //[anyTimeButton setBackgroundColor:Gray_Color];
+       // [anyTimeButton setUserInteractionEnabled:NO];
+   // }
+    //else{
+        //[nowButton setBackgroundColor:Gray_Color];
+       // [anyTimeButton setBackgroundColor:Red_Color];
+       // [nowButton setUserInteractionEnabled:NO];
+  //  }
     
     [self loadActivityImageView];
     
 }
 
 -(IBAction)nowAction:(id)sender{
-    [nowButton setBackgroundColor:Gray_Color];
-    [anyTimeButton setBackgroundColor:Red_Color];
-    [nowButton setUserInteractionEnabled:NO];
-    [anyTimeButton setUserInteractionEnabled:YES];
+   // [nowButton setBackgroundColor:Gray_Color];
+   // [anyTimeButton setBackgroundColor:Red_Color];
+   // [nowButton setUserInteractionEnabled:NO];
+   // [anyTimeButton setUserInteractionEnabled:YES];
    
     strselectDosomething = [selectedItemsArray componentsJoinedByString:@","];
     [self loadActivityAPI:Update availableStr:@"Yes" doSomethingId:strselectDosomething];
     
 }
 -(IBAction)anyTimeAction:(id)sender{
-    [nowButton setBackgroundColor:Green_Color];
-    [anyTimeButton setBackgroundColor:Gray_Color];
-    [anyTimeButton setUserInteractionEnabled:NO];
-    [nowButton setUserInteractionEnabled:YES];
-    strselectDosomething = [selectedItemsArray componentsJoinedByString:@","];
+    //[nowButton setBackgroundColor:Green_Color];
+    //[anyTimeButton setBackgroundColor:Gray_Color];
+    //[anyTimeButton setUserInteractionEnabled:NO];
+    //[nowButton setUserInteractionEnabled:YES];
+   // strselectDosomething = [selectedItemsArray componentsJoinedByString:@","];
     [self loadActivityAPI:Update availableStr:@"No" doSomethingId:strselectDosomething];
 }
 

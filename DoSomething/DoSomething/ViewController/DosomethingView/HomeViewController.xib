@@ -22,7 +22,7 @@
                 <outlet property="bottombutton" destination="RNR-NB-6Yo" id="pdw-U7-MI0"/>
                 <outlet property="homeCollectionView" destination="ney-ah-F0F" id="ll8-eW-k0T"/>
                 <outlet property="nowButton" destination="wd8-4I-dSX" id="v9K-qM-foQ"/>
-                <outlet property="timeLabel" destination="9LY-Up-v23" id="XPk-nZ-gek"/>
+                <outlet property="timeLabel" destination="9LY-Up-v23" id="ccp-xM-wXm"/>
                 <outlet property="view" destination="V23-QB-awP" id="dXU-73-7Oj"/>
             </connections>
         </placeholder>
@@ -35,16 +35,16 @@
                     <rect key="frame" x="0.0" y="80" width="320" height="390"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" tag="100" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="justified" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9LY-Up-v23">
-                            <rect key="frame" x="55" y="240" width="210" height="60"/>
+                            <rect key="frame" x="55" y="330" width="210" height="60"/>
                             <animations/>
-                            <color key="backgroundColor" red="0.90196078430000004" green="0.2470588235" blue="0.31764705879999999" alpha="1" colorSpace="calibratedRGB"/>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="60" id="3dY-X0-p4T"/>
                                 <constraint firstAttribute="height" constant="60" id="vSY-cX-tu3"/>
                                 <constraint firstAttribute="width" constant="210" id="xP6-jz-fZe"/>
                             </constraints>
                             <fontDescription key="fontDescription" name="Patron-Bold" family="Patron" pointSize="14"/>
-                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <color key="textColor" red="0.90196078430000004" green="0.2470588235" blue="0.31764705879999999" alpha="1" colorSpace="calibratedRGB"/>
                             <nil key="highlightedColor"/>
                             <variation key="default">
                                 <mask key="constraints">
@@ -72,7 +72,7 @@
                             <rect key="frame" x="160" y="300" width="105" height="46"/>
                             <animations/>
                             <color key="backgroundColor" red="0.64692247550000004" green="0.64692247550000004" blue="0.64692247550000004" alpha="1" colorSpace="calibratedRGB"/>
-                            <fontDescription key="fontDescription" type="boldSystem" pointSize="12"/>
+                            <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="12"/>
                             <state key="normal" title="Any Time !">
                                 <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -87,17 +87,17 @@
                     <constraints>
                         <constraint firstAttribute="width" constant="320" id="4SN-67-nJz"/>
                         <constraint firstItem="wd8-4I-dSX" firstAttribute="centerY" secondItem="jWF-hV-6F5" secondAttribute="firstBaseline" id="7Xa-im-c16"/>
-                        <constraint firstItem="jWF-hV-6F5" firstAttribute="top" secondItem="9LY-Up-v23" secondAttribute="bottom" id="8Qi-hW-duC"/>
+                        <constraint firstItem="jWF-hV-6F5" firstAttribute="top" secondItem="9LY-Up-v23" secondAttribute="bottom" constant="-90" id="8Qi-hW-duC"/>
                         <constraint firstItem="9LY-Up-v23" firstAttribute="top" secondItem="jli-ew-Tm4" secondAttribute="top" constant="240" id="FSZ-Qp-fGz"/>
                         <constraint firstAttribute="height" constant="390" id="Gfr-do-9mz"/>
                         <constraint firstItem="9LY-Up-v23" firstAttribute="centerY" secondItem="jli-ew-Tm4" secondAttribute="centerY" id="I7T-u7-CPd"/>
                         <constraint firstItem="wd8-4I-dSX" firstAttribute="leading" secondItem="9LY-Up-v23" secondAttribute="leading" id="INL-5a-7IG"/>
                         <constraint firstAttribute="bottom" secondItem="jWF-hV-6F5" secondAttribute="bottom" constant="44" id="VXg-Dz-GQo"/>
-                        <constraint firstAttribute="bottom" secondItem="9LY-Up-v23" secondAttribute="bottom" constant="90" id="WJ8-z1-W1M"/>
+                        <constraint firstAttribute="bottom" secondItem="9LY-Up-v23" secondAttribute="bottom" id="WJ8-z1-W1M"/>
                         <constraint firstItem="9LY-Up-v23" firstAttribute="trailing" secondItem="jWF-hV-6F5" secondAttribute="trailing" id="aKT-rY-luK"/>
                         <constraint firstItem="jWF-hV-6F5" firstAttribute="leading" secondItem="wd8-4I-dSX" secondAttribute="trailing" id="klv-D2-zr8"/>
                         <constraint firstItem="wd8-4I-dSX" firstAttribute="top" secondItem="jWF-hV-6F5" secondAttribute="top" id="liJ-Id-0ef"/>
-                        <constraint firstItem="jWF-hV-6F5" firstAttribute="top" secondItem="9LY-Up-v23" secondAttribute="bottom" id="qp3-74-sLb"/>
+                        <constraint firstItem="jWF-hV-6F5" firstAttribute="top" secondItem="9LY-Up-v23" secondAttribute="bottom" constant="-90" id="qp3-74-sLb"/>
                         <constraint firstAttribute="bottom" secondItem="wd8-4I-dSX" secondAttribute="bottom" constant="44" id="tbW-kr-zTU"/>
                         <constraint firstItem="9LY-Up-v23" firstAttribute="centerX" secondItem="jli-ew-Tm4" secondAttribute="centerX" id="vIZ-QE-aex"/>
                     </constraints>
