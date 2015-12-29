@@ -10,6 +10,7 @@
 #import <sys/xattr.h>
 #import <CommonCrypto/CommonCrypto.h>
 #import "DSConfig.h"
+#import <MapKit/MapKit.h>
 @implementation DSAppCommon
 DSAppCommon *sharedCommon = nil;
 
@@ -193,7 +194,16 @@ DSAppCommon *sharedCommon = nil;
     return sessionID;
 }
 
-
+-(NSString *)getLatitude
+{
+    NSString *Latitude =[[NSUserDefaults standardUserDefaults]valueForKey:@"currentLatitude"];
+     return Latitude;
+}
+-(NSString *)getLongitude
+{
+    NSString *Longitude =[[NSUserDefaults standardUserDefaults]valueForKey:@"currentLongitude"];
+    return Longitude;
+}
 
 #pragma mark User Interaction Loading :
 
@@ -225,10 +235,42 @@ DSAppCommon *sharedCommon = nil;
 
 - (void)getUserCurrenLocation{
     
+    
+    if(!locationManager){
+        locationManager                 = [[CLLocationManager alloc] init];
+        locationManager.delegate        = self;
+        locationManager.distanceFilter  = kCLLocationAccuracyKilometer;
+        locationManager.desiredAccuracy = kCLLocationAccuracyBest;
+        locationManager.activityType    = CLActivityTypeAutomotiveNavigation;
+    }
+    if ([locationManager respondsToSelector:@selector(requestAlwaysAuthorization)])
+        [locationManager requestAlwaysAuthorization];
+    
+    if ([locationManager respondsToSelector:@selector(requestWhenInUseAuthorization)])
+        [locationManager requestWhenInUseAuthorization];
+    
+    [locationManager startUpdatingLocation];
+    
     }
 
 -(void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations {
+    CLLocation *newLocation = [locations lastObject];
+    currentLatitude         = [NSString stringWithFormat:@"%@",[NSNumber numberWithDouble:newLocation.coordinate.latitude]];
+    currentLongitude        = [NSString stringWithFormat:@"%@",[NSNumber numberWithDouble:newLocation.coordinate.longitude]];
     
+    [[NSUserDefaults standardUserDefaults] setObject:currentLatitude  forKey:@"currentLatitude"];
+    [[NSUserDefaults standardUserDefaults] setObject:currentLongitude forKey:@"currentLongitude"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+    
+    [locationManager stopUpdatingLocation];
+    
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        
+        //[self loadLocationUpdateAPI];
+        
+        
+    });
+
 }
 
 - (void)locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error

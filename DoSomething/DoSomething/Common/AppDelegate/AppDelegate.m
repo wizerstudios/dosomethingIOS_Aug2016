@@ -28,6 +28,8 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
       NSLog(@"### Running FB SDK Version: %@", [FBSDKSettings sdkVersion]);
+    
+    
     [[FBSDKApplicationDelegate sharedInstance] application:application
                              didFinishLaunchingWithOptions:launchOptions];
     
@@ -51,6 +53,7 @@
     [self.window setRootViewController:self.navigationController];
     self.window.backgroundColor=[UIColor whiteColor];
     [self.window makeKeyAndVisible];
+    [COMMON getUserCurrenLocation];
     [self TabBarViews];
     
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{

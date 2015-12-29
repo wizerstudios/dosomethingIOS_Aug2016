@@ -39,7 +39,7 @@ typedef enum {
     
     
 }
-
+@property (nonatomic,strong)  CLLocationManager         *  locationManager;
 +(DSAppCommon *) common;
 
 - (void)setUserDetails:(NSMutableDictionary *)_dicInfo;
@@ -56,7 +56,8 @@ typedef enum {
 //- (void) getUserCurrentLocationData;
 -(NSString *)getSessionID;
 -(NSString *)getUserID;
-
+-(NSString *)getLatitude;
+-(NSString *)getLongitude;
 -(NSMutableArray *)getuserLatitudeandLongitude;
 
 - (CGSize)dataSize:(NSString *)string withFontName:(NSString *)fontName ofSize:(NSInteger)size withSize:(CGSize)LabelWidth;

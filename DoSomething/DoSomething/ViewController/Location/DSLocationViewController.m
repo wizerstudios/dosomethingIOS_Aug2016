@@ -82,20 +82,17 @@
     
     [refreshControl addTarget:self action:@selector(releaseToRefresh:) forControlEvents:UIControlEventValueChanged];
     [self.locationCollectionView addSubview:refreshControl];
-
     
-    NSMutableDictionary *dic=[[NSMutableDictionary alloc]init];
-    
-    dic =[[NSUserDefaults standardUserDefaults] valueForKey:USERDETAILS];
-    latitude     =[dic valueForKey:@"latitude"];
-    longitude    =[dic valueForKey:@"longitude"];
+    latitude     =[COMMON getLatitude];
+  
+    longitude    =[COMMON  getLongitude];
     
     commonlocationArray =[[NSMutableArray alloc]init];
     onlineStatus=@"";
     GenderStatus=@"";
     avalableStatus=@"";
     objWebservice =[[DSWebservice alloc]init];
-    currentloadPage= @"1";
+    currentloadPage= @"";
 
     
     [super viewDidLoad];
@@ -119,7 +116,7 @@
                                              selector:@selector(loadInvalidSessionAlert:)
                                                  name:@"InvalidSession"
                                                object:nil];
-    [self getUserCurrenLocation];
+   
     [self loadCustomNavigationview];
     UINib *cellNib = [UINib nibWithNibName:@"LocationCollectionViewCell" bundle:nil];
     [self.locationCollectionView registerNib:cellNib forCellWithReuseIdentifier:@"LocationCell"];
@@ -245,51 +242,51 @@
 }
 #pragma mark get user CurrentLocation
 
-- (void)getUserCurrenLocation{
-    
-    if(!locationManager){
-        locationManager                 = [[CLLocationManager alloc] init];
-        locationManager.delegate        = self;
-        locationManager.distanceFilter  = kCLLocationAccuracyKilometer;
-        locationManager.desiredAccuracy = kCLLocationAccuracyBest;
-        locationManager.activityType    = CLActivityTypeAutomotiveNavigation;
-    }
-    if ([locationManager respondsToSelector:@selector(requestAlwaysAuthorization)])
-        [locationManager requestAlwaysAuthorization];
-    
-    if ([locationManager respondsToSelector:@selector(requestWhenInUseAuthorization)])
-        [locationManager requestWhenInUseAuthorization];
-    
-    [locationManager startUpdatingLocation];
-}
-
--(void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations {
-    
-    CLLocation *newLocation = [locations lastObject];
-    currentLatitude         = [NSString stringWithFormat:@"%@",[NSNumber numberWithDouble:newLocation.coordinate.latitude]];
-    currentLongitude        = [NSString stringWithFormat:@"%@",[NSNumber numberWithDouble:newLocation.coordinate.longitude]];
-    
-    [[NSUserDefaults standardUserDefaults] setObject:currentLatitude  forKey:@"currentLatitude"];
-    [[NSUserDefaults standardUserDefaults] setObject:currentLongitude forKey:@"currentLongitude"];
-    [[NSUserDefaults standardUserDefaults] synchronize];
-    
-    [locationManager stopUpdatingLocation];
-    
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        
-        [self loadLocationUpdateAPI];
-        
-        
-    });
-    
-    
-}
-
-- (void)locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error
-{
-    
-   
-}
+//- (void)getUserCurrenLocation{
+//    
+//    if(!locationManager){
+//        locationManager                 = [[CLLocationManager alloc] init];
+//        locationManager.delegate        = self;
+//        locationManager.distanceFilter  = kCLLocationAccuracyKilometer;
+//        locationManager.desiredAccuracy = kCLLocationAccuracyBest;
+//        locationManager.activityType    = CLActivityTypeAutomotiveNavigation;
+//    }
+//    if ([locationManager respondsToSelector:@selector(requestAlwaysAuthorization)])
+//        [locationManager requestAlwaysAuthorization];
+//    
+//    if ([locationManager respondsToSelector:@selector(requestWhenInUseAuthorization)])
+//        [locationManager requestWhenInUseAuthorization];
+//    
+//    [locationManager startUpdatingLocation];
+//}
+//
+//-(void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations {
+//    
+//    CLLocation *newLocation = [locations lastObject];
+//    currentLatitude         = [NSString stringWithFormat:@"%@",[NSNumber numberWithDouble:newLocation.coordinate.latitude]];
+//    currentLongitude        = [NSString stringWithFormat:@"%@",[NSNumber numberWithDouble:newLocation.coordinate.longitude]];
+//    
+//    [[NSUserDefaults standardUserDefaults] setObject:currentLatitude  forKey:@"currentLatitude"];
+//    [[NSUserDefaults standardUserDefaults] setObject:currentLongitude forKey:@"currentLongitude"];
+//    [[NSUserDefaults standardUserDefaults] synchronize];
+//    
+//    [locationManager stopUpdatingLocation];
+//    
+//    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+//        
+//        [self loadLocationUpdateAPI];
+//        
+//        
+//    });
+//    
+//    
+//}
+//
+//- (void)locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error
+//{
+//    
+//   
+//}
 #pragma mark - loadLocationUpdateAPI
 -(void)loadLocationUpdateAPI{
     [objWebservice locationUpdate:LocationUpdate_API
@@ -309,8 +306,8 @@
     [COMMON LoadIcon:self.view];
     [objWebservice nearestUsers:NearestUsers_API
                       sessionid:[COMMON getSessionID]
-                       latitude:(latitude==NULL)?currentLatitude:latitude
-                      longitude:(longitude==NULL)?currentLongitude:longitude
+                       latitude:latitude
+                      longitude:longitude
                   filter_status:onlineStatus
                   filter_gender:GenderStatus
                filter_available:avalableStatus
@@ -352,6 +349,10 @@
         else{
             isAllPost = YES;
             [COMMON removeLoading];
+            if([[[responseObject valueForKey:@"nearestusers"]valueForKey:@"status"] isEqualToString:@"failed"])
+            {
+                [commonlocationArray removeLastObject];
+            }
         }
         [refreshControl endRefreshing];
         [locationCollectionView reloadData];
@@ -383,9 +384,13 @@
     
 
     
-    NSString *MyPatternString = [[commonlocationArray valueForKey:@"image1"] objectAtIndex:indexPath.row];
+    NSString *profileImg = [[commonlocationArray valueForKey:@"image1_thumb"] objectAtIndex:indexPath.row];
     
-    locationCellView.nameProfile.text =[[commonlocationArray valueForKey:@"first_name"] objectAtIndex:indexPath.row];
+   
+    NSString * firstname =[[commonlocationArray valueForKey:@"first_name"] objectAtIndex:indexPath.row];
+    NSString * lastname  =[[commonlocationArray valueForKey:@"last_name"] objectAtIndex:indexPath.row];
+    
+    locationCellView.nameProfile.text =[NSString stringWithFormat:@"%@\n%@", firstname, lastname];;
     locationCellView.kiloMeter.text=[[commonlocationArray valueForKey:@"distance"] objectAtIndex:indexPath.row];
     NSString * availableStr =[[commonlocationArray valueForKey:@"available_now"] objectAtIndex:indexPath.row];
     locationCellView.activeNow.text=([availableStr isEqualToString:@"Yes"])?@"NOW":@"";
@@ -430,17 +435,17 @@
     }
    
     
-    MyPatternString= [MyPatternString stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-    if(MyPatternString == nil || [MyPatternString isEqualToString:@""])
+    if([profileImg isEqual: [NSNull null]] || [profileImg isEqualToString:@""])
     {
         [locationCellView.imageProfile setImage:[UIImage imageNamed:@"profile_noimg"]];
     }
     else
     {
-        downloadImageFromUrl(MyPatternString,locationCellView.imageProfile);
+        profileImg= [profileImg stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+        downloadImageFromUrl(profileImg,locationCellView.imageProfile);
         
         
-        [locationCellView.imageProfile setImage:[UIImage imageNamed:MyPatternString]];
+        [locationCellView.imageProfile setImage:[UIImage imageNamed:profileImg]];
    
     }
     
@@ -511,7 +516,7 @@
         currentloadPage= [NSString stringWithFormat:@"%d",x];
         
         [self nearestLocationWebservice];
-        [locationCollectionView scrollToItemAtIndexPath:indexPath atScrollPosition:UICollectionViewScrollPositionTop animated:NO];
+        //[locationCollectionView scrollToItemAtIndexPath:indexPath atScrollPosition:UICollectionViewScrollPositionTop animated:NO];
         
     }
     
@@ -615,7 +620,9 @@
         isFilteraction=NO;
         [self.locationCollectionView setUserInteractionEnabled:YES];
         appDelegate.settingButton.userInteractionEnabled=YES;
-        currentloadPage =@"";
+        currentloadPage = @"";
+        filterAge = ([filterAge isEqualToString:@""])?@"18-26":filterAge;
+        filterDistance=([filterDistance isEqualToString:@""])?@"0-5":filterDistance;
         isgestureenable=YES;
        
         [self nearestLocationWebservice];
