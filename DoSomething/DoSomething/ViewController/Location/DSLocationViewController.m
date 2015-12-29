@@ -92,7 +92,7 @@
     GenderStatus=@"";
     avalableStatus=@"";
     objWebservice =[[DSWebservice alloc]init];
-    currentloadPage= @"1";
+    currentloadPage= @"";
 
     
     [super viewDidLoad];
@@ -311,8 +311,8 @@
                   filter_status:onlineStatus
                   filter_gender:GenderStatus
                filter_available:avalableStatus
-                filter_agerange:(filterAge==nil)?@"18-26":filterAge
-                filter_distance:(filterDistance==nil)?@"0-5":filterDistance
+                filter_agerange:(filterAge==nil)?@"":filterAge
+                filter_distance:(filterDistance==nil)?@"":filterDistance
                            page:currentloadPage
                         success:^(AFHTTPRequestOperation *operation, id responseObject)
     {
@@ -620,7 +620,9 @@
         isFilteraction=NO;
         [self.locationCollectionView setUserInteractionEnabled:YES];
         appDelegate.settingButton.userInteractionEnabled=YES;
-        currentloadPage =@"";
+        currentloadPage = @"";
+        filterAge = ([filterAge isEqualToString:@""])?@"18-26":filterAge;
+        filterDistance=([filterDistance isEqualToString:@""])?@"0-5":filterDistance;
         isgestureenable=YES;
        
         [self nearestLocationWebservice];
