@@ -383,9 +383,13 @@
     
 
     
-    NSString *MyPatternString = [[commonlocationArray valueForKey:@"image1"] objectAtIndex:indexPath.row];
+    NSString *profileImg = [[commonlocationArray valueForKey:@"image1_thumb"] objectAtIndex:indexPath.row];
     
-    locationCellView.nameProfile.text =[[commonlocationArray valueForKey:@"first_name"] objectAtIndex:indexPath.row];
+    NSLog(@"MyPatternString:%@",profileImg);
+    NSString * firstname =[[commonlocationArray valueForKey:@"first_name"] objectAtIndex:indexPath.row];
+    NSString * lastname  =[[commonlocationArray valueForKey:@"last_name"] objectAtIndex:indexPath.row];
+    
+    locationCellView.nameProfile.text =[NSString stringWithFormat:@"%@\n%@", firstname, lastname];;
     locationCellView.kiloMeter.text=[[commonlocationArray valueForKey:@"distance"] objectAtIndex:indexPath.row];
     NSString * availableStr =[[commonlocationArray valueForKey:@"available_now"] objectAtIndex:indexPath.row];
     locationCellView.activeNow.text=([availableStr isEqualToString:@"Yes"])?@"NOW":@"";
@@ -430,17 +434,18 @@
     }
    
     
-    MyPatternString= [MyPatternString stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-    if(MyPatternString == nil || [MyPatternString isEqualToString:@""])
+    
+    if([profileImg isEqual: [NSNull null]] || [profileImg isEqualToString:@""])
     {
         [locationCellView.imageProfile setImage:[UIImage imageNamed:@"profile_noimg"]];
     }
     else
     {
-        downloadImageFromUrl(MyPatternString,locationCellView.imageProfile);
+        profileImg= [profileImg stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+        downloadImageFromUrl(profileImg,locationCellView.imageProfile);
         
         
-        [locationCellView.imageProfile setImage:[UIImage imageNamed:MyPatternString]];
+        [locationCellView.imageProfile setImage:[UIImage imageNamed:profileImg]];
    
     }
     
