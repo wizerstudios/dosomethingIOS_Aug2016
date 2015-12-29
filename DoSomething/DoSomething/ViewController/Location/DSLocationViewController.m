@@ -403,34 +403,32 @@
    
     dosomethingImageArry =([reguestStr isEqualToString:@"No"])?[dosomethingImageSprateArry valueForKey:@"NearbyImage"]:[dosomethingImageSprateArry valueForKey:@"InactiveImage"];
     
+    if([dosomethingImageArry count]== 1){
+        NSLog(@"count one");
+    }
+    else if([dosomethingImageArry count] == 2){
+         NSLog(@"count two");
+    }else{
     NSString *dosomethingImage1,* dosomethingImage2,* dosomethingImage3;
-   
-        if([dosomethingImageArry objectAtIndex:0]!=nil)
+          if(![[dosomethingImageArry objectAtIndex:0]isEqualToString:@""])
            {
                 dosomethingImage1=[dosomethingImageArry objectAtIndex:0];
               [locationCellView.dosomethingImage1 setImageWithURL:[NSURL URLWithString:dosomethingImage1]];
                
            }
-        else if ([dosomethingImageArry objectAtIndex:1]!=nil)
+         if (![[dosomethingImageArry objectAtIndex:1] isEqualToString:@""])
         {
             dosomethingImage2=[dosomethingImageArry objectAtIndex:1];
             [locationCellView.dosomethingImage2 setImageWithURL:[NSURL URLWithString:dosomethingImage2]];
            
         }
-        else if ([dosomethingImageArry objectAtIndex:2]!=nil)
+       if (![[dosomethingImageArry objectAtIndex:2]isEqualToString:@""])
         {
              dosomethingImage3=[dosomethingImageArry objectAtIndex:2];
             [locationCellView.dosomethingImage3 setImageWithURL:[NSURL URLWithString:dosomethingImage3]];
         }
-          
-
-    
+    }
    
-   
-    
-    
-    
-    
     
     MyPatternString= [MyPatternString stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
     if(MyPatternString == nil || [MyPatternString isEqualToString:@""])

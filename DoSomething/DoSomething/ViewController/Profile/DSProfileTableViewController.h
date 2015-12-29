@@ -69,6 +69,8 @@
 @property (nonatomic,strong) NSMutableDictionary *userDetailsDict;
 @property (nonatomic, retain) NSString *emailAddressToRegister;
 @property (nonatomic, retain) NSString *emailPasswordToRegister;
+@property (nonatomic, retain) NSString *currentPassword;
+@property (nonatomic, retain) NSString *confirmPassword;
 
 @property (assign) BOOL selectEmail;
 
