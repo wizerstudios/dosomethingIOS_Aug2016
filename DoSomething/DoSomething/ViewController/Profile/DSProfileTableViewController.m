@@ -152,7 +152,7 @@
         
     }
     [[NSUserDefaults standardUserDefaults]setObject:hobbiesMainArray forKey:HobbiesArray];
-    [customNavigation.buttonBack setHidden:YES];
+    
     [self selectitemMethod];
     
     infoArray=[[NSMutableArray alloc]initWithObjects:@"profile_noimg",@"profile_noimg",@"profile_noimg", nil];
@@ -920,10 +920,12 @@
 
        
             if ( indexPath.row == 7) {
+                
             
                 return 180;
             }
             if (indexPath.row ==8) {
+                
                 return 150;
             }
 
@@ -1477,6 +1479,10 @@
         {
           cell.emailTextField.text = [self getEmail];
           cell.passwordTextField.text =[self getPassword];
+            //cell.currentpassword.hidden=YES;
+            //cell.conformationpassword.hidden=YES;
+            //cell.currentpasswordlbl.hidden=YES;
+            //cell.confirmpasswordlbl.hidden =YES;
         }
         
         if (IS_IPHONE6 ||IS_IPHONE6_Plus){

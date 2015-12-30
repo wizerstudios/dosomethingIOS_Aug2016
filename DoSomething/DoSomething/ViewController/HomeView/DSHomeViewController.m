@@ -81,8 +81,8 @@
                        initialDelay:0
                                loop:YES
                         isLandscape:YES];
-  //  [self initControl];
-    //[self SetImageArray];
+    //[self initControl];
+   // [self SetImageArray];
     //[self reloadData];
     
 }
@@ -228,7 +228,9 @@
     
     
     objImag.image=[UIImage imageNamed:FGimageArray[index]];
+    
     [mainview addSubview:objImag];
+    
    
        return foregroundView;
 }
@@ -241,106 +243,106 @@
 - (void)parallaxScrollView:(PWParallaxScrollView *)scrollView didChangeIndex:(NSInteger)index
 {
     
-//    UIImage * objimage =[UIImage imageNamed:FGimageArray[index]];
-//    float originX       = -1;
-//    float originY       = -1;
-//    float zoomInX       = -1;
-//    float zoomInY       = -1;
-//    float moveX         = -1;
-//    float moveY         = -1;
-//    
-//    float frameWidth    = _isLandscape ? self.view.bounds.size.width: self.view.bounds.size.height;
-//    float frameHeight   = _isLandscape ? self.view.bounds.size.height: self.view.bounds.size.width;
-//    
-//    float resizeRatio = [self getResizeRatioFromImage:objimage width:frameWidth height:frameHeight];
-//    float optimusWidth  = (objimage.size.width * resizeRatio) * enlargeRatio;
-//    float optimusHeight = (objimage.size.height * resizeRatio) * enlargeRatio;
-//    float maxMoveX = optimusWidth - frameWidth;
-//    float maxMoveY = optimusHeight - frameHeight;
-//    
-//    float rotation = (arc4random() % 9) / 100;
-//    
-//    switch (arc4random() % 4) {
-//        case 0:
-//            originX = 0;
-//            originY = 0;
-//            zoomInX = 1.25;
-//            zoomInY = 1.25;
-//            moveX   = -maxMoveX;
-//            moveY   = -maxMoveY;
-//            break;
-//            
-//        case 1:
-//            originX = 0;
-//            originY = frameHeight - optimusHeight;
-//            zoomInX = 1.10;
-//            zoomInY = 1.10;
-//            moveX   = -maxMoveX;
-//            moveY   = maxMoveY;
-//            break;
-//            
-//        case 2:
-//            originX = frameWidth - optimusWidth;
-//            originY = 0;
-//            zoomInX = 1.30;
-//            zoomInY = 1.30;
-//            moveX   = maxMoveX;
-//            moveY   = -maxMoveY;
-//            break;
-//            
-//        case 3:
-//            originX = frameWidth - optimusWidth;
-//            originY = frameHeight - optimusHeight;
-//            zoomInX = 1.20;
-//            zoomInY = 1.20;
-//            moveX   = maxMoveX;
-//            moveY   = maxMoveY;
-//            break;
-//            
-//        default:
-//            NSLog(@"Unknown random number found in JBKenBurnsView _animate");
-//            break;
+    UIImage * objimage =[UIImage imageNamed:FGimageArray[index]];
+    float originX       = -1;
+    float originY       = -1;
+    float zoomInX       = -1;
+    float zoomInY       = -1;
+    float moveX         = -1;
+    float moveY         = -1;
+    
+    float frameWidth    = _isLandscape ? self.view.bounds.size.width: self.view.bounds.size.height;
+    float frameHeight   = _isLandscape ? self.view.bounds.size.height: self.view.bounds.size.width;
+    
+    float resizeRatio = [self getResizeRatioFromImage:objimage width:frameWidth height:frameHeight];
+    float optimusWidth  = (objimage.size.width * resizeRatio) * enlargeRatio;
+    float optimusHeight = (objimage.size.height * resizeRatio) * enlargeRatio;
+    float maxMoveX = optimusWidth - frameWidth;
+    float maxMoveY = optimusHeight - frameHeight;
+    
+    float rotation = (arc4random() % 9) / 100;
+    
+    switch (arc4random() % 4) {
+        case 0:
+            originX = 0;
+            originY = 0;
+            zoomInX = 1.25;
+            zoomInY = 1.25;
+            moveX   = -maxMoveX;
+            moveY   = -maxMoveY;
+            break;
+            
+        case 1:
+            originX = 0;
+            originY = frameHeight - optimusHeight;
+            zoomInX = 1.10;
+            zoomInY = 1.10;
+            moveX   = -maxMoveX;
+            moveY   = maxMoveY;
+            break;
+            
+        case 2:
+            originX = frameWidth - optimusWidth;
+            originY = 0;
+            zoomInX = 1.30;
+            zoomInY = 1.30;
+            moveX   = maxMoveX;
+            moveY   = -maxMoveY;
+            break;
+            
+        case 3:
+            originX = frameWidth - optimusWidth;
+            originY = frameHeight - optimusHeight;
+            zoomInX = 1.20;
+            zoomInY = 1.20;
+            moveX   = maxMoveX;
+            moveY   = maxMoveY;
+            break;
+            
+        default:
+            NSLog(@"Unknown random number found in JBKenBurnsView _animate");
+            break;
+    }
+    
+    
+    CALayer *picLayer    = [CALayer layer];
+    picLayer.contents    = (id)objimage.CGImage;
+    picLayer.anchorPoint = CGPointMake(0, 0);
+    picLayer.bounds      = CGRectMake(0, 0, optimusWidth, optimusHeight);
+    picLayer.position    = CGPointMake(originX, originY);
+    
+    [foregroundView.layer addSublayer:picLayer];
+    
+    
+    CATransition *animation = [CATransition animation];
+    [animation setDuration:1];
+    [animation setType:kCATransitionFade];
+    [self.view.layer addAnimation:animation forKey:nil];
+    
+    // Remove the previous view
+//    if ([[self subviews] count] > 0)
+//    {
+//        UIView *oldImageView = [[self subviews] objectAtIndex:0];
+//        [oldImageView removeFromSuperview];
+//        oldImageView = nil;
 //    }
-//    
-//    
-//    CALayer *picLayer    = [CALayer layer];
-//    picLayer.contents    = (id)objimage.CGImage;
-//    picLayer.anchorPoint = CGPointMake(0, 0);
-//    picLayer.bounds      = CGRectMake(0, 0, optimusWidth, optimusHeight);
-//    picLayer.position    = CGPointMake(originX, originY);
-//    
-//    [foregroundView.layer addSublayer:picLayer];
-//    
-//    
-//    CATransition *animation = [CATransition animation];
-//    [animation setDuration:1];
-//    [animation setType:kCATransitionFade];
-//    [self.view.layer addAnimation:animation forKey:nil];
-//    
-//    // Remove the previous view
-////    if ([[self subviews] count] > 0)
-////    {
-////        UIView *oldImageView = [[self subviews] objectAtIndex:0];
-////        [oldImageView removeFromSuperview];
-////        oldImageView = nil;
-////    }
-//    
-//    //[self addSubview:mainview];
-//    //[self addSubview:textImageview];
-//    //[self addSubview:pageControllBtn];
-//    
-//    // Generates the animation  //before: UIViewAnimationCurveEaseInOut
-//    [UIView animateWithDuration:8 + 2 delay:0 options:UIViewAnimationOptionCurveEaseOut animations:^
-//     {
-//         CGAffineTransform rotate    = CGAffineTransformMakeRotation(rotation);
-//         CGAffineTransform moveRight = CGAffineTransformMakeTranslation(moveX, moveY);
-//         CGAffineTransform combo1    = CGAffineTransformConcat(rotate, moveRight);
-//         CGAffineTransform zoomIn    = CGAffineTransformMakeScale(zoomInX, zoomInY);
-//         CGAffineTransform transform = CGAffineTransformConcat(zoomIn, combo1);
-//         foregroundView.transform = transform;
-//         
-//     } completion:^(BOOL finished) {}];
-//    
+    
+    //[self addSubview:mainview];
+    //[self addSubview:textImageview];
+    //[self addSubview:pageControllBtn];
+    
+    // Generates the animation  //before: UIViewAnimationCurveEaseInOut
+    [UIView animateWithDuration:8 + 5 delay:0 options:UIViewAnimationOptionCurveEaseOut animations:^
+     {
+         CGAffineTransform rotate    = CGAffineTransformMakeRotation(rotation);
+         CGAffineTransform moveRight = CGAffineTransformMakeTranslation(moveX, moveY);
+         CGAffineTransform combo1    = CGAffineTransformConcat(rotate, moveRight);
+         CGAffineTransform zoomIn    = CGAffineTransformMakeScale(zoomInX, zoomInY);
+         CGAffineTransform transform = CGAffineTransformConcat(zoomIn, combo1);
+         foregroundView.transform = transform;
+         
+     } completion:^(BOOL finished) {}];
+    
     //[pageControllBtn setFrame:CGRectMake(20*index, 0, 10, 10)];
     //Currentindex = index;
 }

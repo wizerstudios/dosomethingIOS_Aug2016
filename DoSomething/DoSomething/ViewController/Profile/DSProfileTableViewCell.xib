@@ -457,10 +457,13 @@
             </tableViewCellContentView>
             <animations/>
             <connections>
+                <outlet property="confirmpasswordlbl" destination="bkO-e6-NLw" id="W0h-w5-fc1"/>
                 <outlet property="conformationpassword" destination="Ac8-mg-rLM" id="o6t-LK-Gba"/>
                 <outlet property="currentpassword" destination="NqL-pg-IGU" id="F92-bL-eiL"/>
+                <outlet property="currentpasswordlbl" destination="PmN-E8-WPL" id="Flp-q1-QOT"/>
                 <outlet property="emailTextField" destination="sig-cR-Dgx" id="Fnb-Nf-P8O"/>
                 <outlet property="passwordTextField" destination="nd4-Zf-byl" id="XJa-vF-VIw"/>
+                <outlet property="passwordlbl" destination="6TJ-ML-Q9A" id="mXI-r2-KBc"/>
             </connections>
             <point key="canvasLocation" x="286" y="494"/>
         </tableViewCell>
