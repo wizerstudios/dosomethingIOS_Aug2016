@@ -921,8 +921,16 @@
        
             if ( indexPath.row == 7) {
                 
+                if(profileDict!=nil)
+                {
+                    return 180;
+                }
+                else if (userDetailsDict.count>0)
+                {
+                    return 180;
+                }
             
-                return 180;
+                return 120;
             }
             if (indexPath.row ==8) {
                 
@@ -1449,6 +1457,12 @@
             
         }
         
+        cell.currentpassword.hidden=NO;
+        cell.conformationpassword.hidden=NO;
+        cell.currentpasswordlbl.text=@"Current password";
+        cell.confirmpasswordlbl.hidden =NO;
+        cell.passwordlbl.hidden =NO;
+       
         if(profileDict != NULL)
         {
           
@@ -1479,10 +1493,12 @@
         {
           cell.emailTextField.text = [self getEmail];
           cell.passwordTextField.text =[self getPassword];
-            //cell.currentpassword.hidden=YES;
-            //cell.conformationpassword.hidden=YES;
-            //cell.currentpasswordlbl.hidden=YES;
-            //cell.confirmpasswordlbl.hidden =YES;
+            cell.currentpassword.hidden=YES;
+            cell.conformationpassword.hidden=YES;
+            cell.currentpasswordlbl.text =@"Password";
+            cell.confirmpasswordlbl.hidden =YES;
+            cell.passwordlbl.hidden=YES;
+           
         }
         
         if (IS_IPHONE6 ||IS_IPHONE6_Plus){
@@ -2069,7 +2085,7 @@
                      first_name:FirstName
                       last_name:LastName
                           email:emailAddressToRegister
-                       password:currentPassword
+                       password:(currentPassword==nil)?emailPasswordToRegister:currentPassword
                       profileId:strProfileID
                             dob:dateChange
                   profileImage1:profileImage1
@@ -2111,7 +2127,7 @@
                       first_name:FirstName
                        last_name:LastName
                              dob:dateChange
-                        password:currentPassword
+                        password:(currentPassword==nil)?emailPasswordToRegister:currentPassword
                    profileImage1:profileImage1
                    profileImage2:profileImage2
                    profileImage3:profileImage3
@@ -2304,30 +2320,27 @@
     }
    else if ([emailPasswordToRegister isEqualToString:@""] || emailPasswordToRegister == nil)
     {
-
+        
         [self showAltermessage:PASSWORD_REQUIRED];
         [COMMON removeLoading];
         return;
     }
-    else if ([currentPassword isEqualToString:@""] || currentPassword ==nil)
+   else if (![[profileDict valueForKey:@"password"] isEqualToString:emailPasswordToRegister])
     {
-        [self showAltermessage:PASSWORD_REQUIRED];
-        [COMMON removeLoading];
-        return;
-
-    }
-    else if ([currentPassword isEqualToString:@""]  || confirmPassword==nil)
-    {
-        [self showAltermessage:@"Enter Confirmation Password"];
+        [self showAltermessage:@"Enter valid Password"];
         [COMMON removeLoading];
         return;
     }
-    else if (![currentPassword isEqualToString:confirmPassword])
+    else if(profileDict!=nil)
     {
-        [self showAltermessage:@"Enter Valid Password"];
-        [COMMON removeLoading];
-        return;
+        
+       if (![currentPassword isEqualToString:confirmPassword])
+        {
+            [self showAltermessage:@"Enter Valid Password"];
+            [COMMON removeLoading];
+            return;
 
+        }
     }
   else
       

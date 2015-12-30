@@ -452,6 +452,7 @@
                     <constraint firstItem="gmr-PN-Cp2" firstAttribute="top" secondItem="W5E-AF-OBh" secondAttribute="top" constant="25" id="M8Z-k9-j8w"/>
                     <constraint firstItem="gmr-PN-Cp2" firstAttribute="leading" secondItem="W5E-AF-OBh" secondAttribute="leading" id="PY0-ZN-BBh"/>
                     <constraint firstItem="SHS-IW-ID9" firstAttribute="leading" secondItem="W5E-AF-OBh" secondAttribute="leading" id="W18-9S-gpu"/>
+                    <constraint firstItem="SHS-IW-ID9" firstAttribute="top" secondItem="gmr-PN-Cp2" secondAttribute="bottom" constant="7" id="gTl-bA-UG9"/>
                     <constraint firstAttribute="bottom" secondItem="SHS-IW-ID9" secondAttribute="bottom" constant="-1" id="hkJ-Xg-mIr"/>
                 </constraints>
             </tableViewCellContentView>
