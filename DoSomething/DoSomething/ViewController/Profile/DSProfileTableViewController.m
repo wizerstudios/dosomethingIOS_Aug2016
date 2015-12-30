@@ -510,7 +510,7 @@
 - (NSString *) getPassword {
     
     if (emailPasswordToRegister == NULL) {
-        emailPasswordToRegister = @"";
+        //emailPasswordToRegister = @"";
     }
     NSString *emailPassword = emailPasswordToRegister;
     NSLog(@"email = %@",emailPassword);
@@ -1466,11 +1466,16 @@
         if(profileDict != NULL)
         {
           
-            [cell.emailTextField setEnabled:NO];
-            cell.emailTextField.text =(emailAddressToRegister==0)?[profileDict valueForKey:@"email"]:emailAddressToRegister;
-            cell.passwordTextField.text  =(emailPasswordToRegister==0)? @"":emailPasswordToRegister;
-            cell.currentpassword.text    =(currentPassword==0)?@"":@"Your new password";
-            cell.conformationpassword.text =(confirmPassword==0)?@"":@"confirm your new password";
+            [cell.emailTextField setUserInteractionEnabled:NO];
+            cell.emailTextField.text =(emailAddressToRegister==nil)?[profileDict valueForKey:@"email"]:emailAddressToRegister;
+             if(emailPasswordToRegister==nil || [emailPasswordToRegister isEqualToString:@""])
+             {
+                 emailPasswordToRegister=[profileDict valueForKey:@"password"];
+                 NSLog(@"emalpassword:%@",emailPasswordToRegister);
+             }
+            cell.passwordTextField.text  =(emailPasswordToRegister==nil)?[profileDict valueForKey:@"password"]:emailPasswordToRegister;
+            cell.currentpassword.text    =(currentPassword==nil)?@"":@"Your new password";
+            cell.conformationpassword.text =(confirmPassword==nil)?@"":@"confirm your new password";
             
 
         }
@@ -2233,10 +2238,13 @@
         
 
           strGender = [profileDict valueForKey:@"gender"];
-          strDOB    = (currentTextfield.text !=nil)?currentTextfield.text :@"";
+          //strDOB    = (currentTextfield.text !=nil)?currentTextfield.text :[profileDict valueForKey:@"date_of_birth"];
 
-        [self dateConverter];
-        [self loadUpdate];
+      //  [self dateConverter];
+        [self loadValidations];
+       // [self loadUpdate];
+        
+        
         isSave =YES;
     }
     else
@@ -2257,7 +2265,7 @@
 -(void)dateConverter{
     
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-    [dateFormatter setDateFormat:@"dd / MM / yyyy"];
+    [dateFormatter setDateFormat:@"dd/MM/yyyy"];
     NSDate *date = [dateFormatter dateFromString: strDOB];
     dateFormatter = [[NSDateFormatter alloc] init];
     [dateFormatter setDateFormat:@"yyyy-MM-dd"];
@@ -2274,80 +2282,112 @@
     strType      = (selectEmail== YES)?@"1":@"2";
     strProfileID = (FBprofileID!=nil)?FBprofileID:@"";
     //emailPasswordToRegister = cell.passwordTextField.text;
-    strDOB       = (currentTextfield.text !=nil)?currentTextfield.text :@"";
+    strDOB       = (currentTextfield.text !=nil)?currentTextfield.text :[profileDict valueForKey:@"date_of_birth"];
     [self dateConverter];
-    
-    NSLog(@"isNotification_vibration:%@",isNotification_vibration);
-    
-    
-    if(FirstName == nil)
-    {
 
-        [self showAltermessage:FIRSTNAME_REQUIRED];
-        [COMMON removeLoading];
-        return;
-    }
-   else if(LastName ==nil)
+    if(profileDict== NULL)
     {
-        [self showAltermessage:LASTNAME_REQUIRED];
-        [COMMON removeLoading];
-        return;
+            if(FirstName == nil)
+            {
+
+                [self showAltermessage:FIRSTNAME_REQUIRED];
+                [COMMON removeLoading];
+                return;
+            }
+            else if(LastName ==nil)
+            {
+                [self showAltermessage:LASTNAME_REQUIRED];
+                [COMMON removeLoading];
+                return;
         
-    }
-   else if ([strGender isEqualToString:@""] || strGender == NULL)
-   {
-       [self showAltermessage:GENDER_REQUIRED];
+            }
+            else if ([strGender isEqualToString:@""] || strGender == NULL)
+            {
+                [self showAltermessage:GENDER_REQUIRED];
        
-       [COMMON removeLoading];
-       return;
-   }
+                [COMMON removeLoading];
+                return;
+            }
 
     
-   else if ([dateChange isEqualToString:@""] || dateChange == NULL )
-    {
+            else if ([dateChange isEqualToString:@""] || dateChange == NULL )
+            {
 
-         [self showAltermessage:DOB_REQUIRED];
-        [COMMON removeLoading];
-        return;
+                [self showAltermessage:DOB_REQUIRED];
+                [COMMON removeLoading];
+                return;
+            }
+    
+   
+           else if ([emailAddressToRegister isEqualToString:@""] || emailAddressToRegister == nil)
+            {
+                [self showAltermessage:EMAIL_REQUIRED];
+                [COMMON removeLoading];
+                return;
+            }
+    
+            else if ([emailPasswordToRegister isEqualToString:@""] || emailPasswordToRegister == nil)
+            {
+        
+                [self showAltermessage:PASSWORD_REQUIRED];
+                [COMMON removeLoading];
+                return;
+            }
+            else
+            
+            {
+                [COMMON removeLoading];
+                [self loadRegister];
+            }
+
     }
     
-    
-   else if ([emailAddressToRegister isEqualToString:@""] || emailAddressToRegister == nil)
-    {
-        [self showAltermessage:EMAIL_REQUIRED];
-        [COMMON removeLoading];
-        return;
-    }
-   else if ([emailPasswordToRegister isEqualToString:@""] || emailPasswordToRegister == nil)
+     if(profileDict!=nil)
     {
         
-        [self showAltermessage:PASSWORD_REQUIRED];
-        [COMMON removeLoading];
-        return;
-    }
-   else if (![[profileDict valueForKey:@"password"] isEqualToString:emailPasswordToRegister])
-    {
-        [self showAltermessage:@"Enter valid Password"];
-        [COMMON removeLoading];
-        return;
-    }
-    else if(profileDict!=nil)
-    {
-        
-       if (![currentPassword isEqualToString:confirmPassword])
+       
+         if ([emailPasswordToRegister isEqualToString:@""] || emailPasswordToRegister == nil)
         {
-            [self showAltermessage:@"Enter Valid Password"];
+            
+            [self showAltermessage:PASSWORD_REQUIRED];
+            [COMMON removeLoading];
+            return;
+        }
+        
+         else if (![[profileDict valueForKey:@"password"] isEqualToString:emailPasswordToRegister])
+        {
+            [self showAltermessage:@"Your password mismatching"];
+            [COMMON removeLoading];
+            return;
+        }
+        else if ([currentPassword isEqualToString:@""] || currentPassword == nil)
+        {
+            
+            [self showAltermessage:PASSWORD_REQUIRED];
+            [COMMON removeLoading];
+            return;
+        }
+        else if ([confirmPassword isEqualToString:@""] || confirmPassword == nil)
+        {
+            
+            [self showAltermessage:@"Enter confirmpassword"];
+            [COMMON removeLoading];
+            return;
+        }
+
+       else if (![currentPassword isEqualToString:confirmPassword])
+        {
+            [self showAltermessage:@"Password don't match"];
             [COMMON removeLoading];
             return;
 
         }
+       else
+         {
+           [COMMON removeLoading];
+           [self updateAPI];
+         }
     }
-  else
-      
-  {
-      [COMMON removeLoading];
-      [self loadRegister];
-  }
     
 
 }
