@@ -138,7 +138,7 @@ static const NSInteger PWInvalidPosition = -1;
     pageControllBtn = [[UIPageControl alloc]init];
     
     pageControllBtn.backgroundColor = [UIColor clearColor];
-    [pageControllBtn setFrame:CGRectMake(self.center.x-50,self.frame.size.height-80,120,40)];
+    [pageControllBtn setFrame:CGRectMake(self.center.x-50,self.frame.size.height-100,120,40)];
     pageControllBtn.numberOfPages = 5;
     pageControllBtn.currentPage = _currentIndex;
     
@@ -486,10 +486,10 @@ static const NSInteger PWInvalidPosition = -1;
    
     if(_currentIndex == 0)
     {
-        textImageview  =[[UIImageView alloc] initWithFrame:CGRectMake(self.center.x-60,self.center.y-30,145,63)];
+        textImageview  =[[UIImageView alloc] initWithFrame:CGRectMake(self.center.x-60,self.center.y-80,145,63)];
     }
     else{
-        textImageview  =[[UIImageView alloc] initWithFrame:CGRectMake(self.center.x-100,self.center.y-30,227,67)];
+        textImageview  =[[UIImageView alloc] initWithFrame:CGRectMake(self.center.x-100,self.center.y-60,227,67)];
     }
     textImageview.image =[UIImage imageNamed:bannerText[index]];
     [textImageview setBackgroundColor:[UIColor clearColor]];
