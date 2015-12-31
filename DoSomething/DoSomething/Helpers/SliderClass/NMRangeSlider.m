@@ -508,11 +508,11 @@ NSUInteger DeviceSystemMajorVersion() {
     CGRect thumbRect;
     UIEdgeInsets insets = thumbImage.capInsets;
 
-    thumbRect.size = CGSizeMake(thumbImage.size.width+5, thumbImage.size.height+5);
+    thumbRect.size = CGSizeMake(thumbImage.size.width, thumbImage.size.height);
     
     if(insets.top || insets.bottom)
     {
-        thumbRect.size.height=self.bounds.size.height+5;
+        thumbRect.size.height=self.bounds.size.height;
     }
     
     float xValue = ((self.bounds.size.width-thumbRect.size.width)*((value - _minimumValue) / (_maximumValue - _minimumValue)));
@@ -610,6 +610,7 @@ NSUInteger DeviceSystemMajorVersion() {
     
     if(CGRectContainsPoint(UIEdgeInsetsInsetRect(_lowerHandle.frame, self.lowerTouchEdgeInsets), touchPoint))
     {
+        
         _lowerHandle.highlighted = YES;
         _lowerTouchOffset = touchPoint.x - _lowerHandle.center.x;
     }
@@ -645,7 +646,7 @@ NSUInteger DeviceSystemMajorVersion() {
         if(!_upperHandle.highlighted || newValue<_lowerValue)
         {
             _upperHandle.highlighted=NO;
-            [self bringSubviewToFront:_lowerHandle];
+            //[self bringSubviewToFront:_lowerHandle];
             
             [self setLowerValue:newValue animated:_stepValueContinuously ? YES : NO];
         }
@@ -664,7 +665,7 @@ NSUInteger DeviceSystemMajorVersion() {
         if(!_lowerHandle.highlighted || newValue>_upperValue)
         {
             _lowerHandle.highlighted=NO;
-            [self bringSubviewToFront:_upperHandle];
+           // [self bringSubviewToFront:_upperHandle];
             [self setUpperValue:newValue animated:_stepValueContinuously ? YES : NO];
         }
         else

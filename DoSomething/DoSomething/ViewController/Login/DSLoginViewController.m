@@ -477,7 +477,10 @@
                                  else
                                      [self loadloginAPI];
                                 
+                               
+                                
                             }
+                              [COMMON removeLoading];
                        }
      
                          

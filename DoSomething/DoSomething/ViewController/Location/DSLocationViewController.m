@@ -549,7 +549,12 @@
         locationCellView.sendRequest.textColor=[UIColor lightGrayColor];
         
         dosomethingImageArry =[[[commonlocationArray valueForKey:@"dosomething"]objectAtIndex:indexPath.row] valueForKey:@"InactiveImage"];
-        
+        if([dosomethingImageArry count]== 1){
+            NSLog(@"count one");
+        }
+        else if([dosomethingImageArry count] == 2){
+            NSLog(@"count two");
+        }else{
         
         NSString *dosomethingImage1=[dosomethingImageArry objectAtIndex:0];
         NSString *dosomethingImage2=[dosomethingImageArry objectAtIndex:1];
@@ -559,7 +564,7 @@
         [locationCellView.dosomethingImage1 setImageWithURL:[NSURL URLWithString:dosomethingImage1]];
         [locationCellView.dosomethingImage2 setImageWithURL:[NSURL URLWithString:dosomethingImage2]];
         [locationCellView.dosomethingImage3 setImageWithURL:[NSURL URLWithString:dosomethingImage3]];
-        
+        }
         [self loadRequestsendWebService];
       
     }

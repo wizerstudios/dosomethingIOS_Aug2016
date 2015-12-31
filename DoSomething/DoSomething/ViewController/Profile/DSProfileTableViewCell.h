@@ -51,6 +51,11 @@
 @property (weak, nonatomic) IBOutlet UITextField * currentpassword;
 @property (weak,nonatomic) IBOutlet  UITextField  * conformationpassword;
 
+@property (weak,nonatomic) IBOutlet UILabel * currentpasswordlbl;
+@property (weak,nonatomic) IBOutlet UILabel * confirmpasswordlbl;
+@property (weak,nonatomic) IBOutlet UILabel * passwordlbl;
+
+
 
 @property (strong, nonatomic) IBOutlet UIButton *messSwitchBtn;
 @property (weak, nonatomic) IBOutlet UIButton *SoundSwitchBtn;

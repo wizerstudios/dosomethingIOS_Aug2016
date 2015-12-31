@@ -283,30 +283,14 @@ static const NSInteger PWInvalidPosition = -1;
 - (void)loadForegroundViewAtIndex:(NSInteger)index
 {
     UIView *newParallaxView = [self foregroundViewAtIndex:index];
-//    UIView *cellContentView = [cell imageviewArticle];
-    CGFloat rotationAngleDegrees = -30;
-    CGFloat rotationAngleRadians = rotationAngleDegrees * (M_PI/180);
-    CGPoint offsetPositioning = CGPointMake(0, newParallaxView.frame.size.height/2);
-    CATransform3D transform = CATransform3DIdentity;
-    
-    
-    transform = CATransform3DRotate(transform, rotationAngleRadians, -20.0, 0.0, 1.0);
-        
-   transform = CATransform3DTranslate(transform, offsetPositioning.x, offsetPositioning.y, -50.0);
-   
-    
-    newParallaxView.layer.transform = transform;
-    newParallaxView.layer.opacity = 0.8;
-    
-    [UIView animateWithDuration:0.8 delay:00 usingSpringWithDamping:1.95 initialSpringVelocity:0.8 options:0 animations:^{
-        newParallaxView.layer.transform = CATransform3DIdentity;
-        newParallaxView.layer.opacity = 1;
-    } completion:^(BOOL finished) {}];
-
-
-
-
-    [_foregroundScrollView addSubview:newParallaxView];
+    CABasicAnimation *rotationAnimation = [CABasicAnimation animationWithKeyPath:@"transform.rotation.z"];
+    rotationAnimation.toValue = @(M_PI * 0.05);
+    rotationAnimation.duration = 1;
+    rotationAnimation.autoreverses = YES;
+    rotationAnimation.repeatCount = HUGE_VALF;
+    rotationAnimation.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut];
+    [newParallaxView.layer addAnimation:rotationAnimation forKey:@"rotationAnimation"];
+       [_foregroundScrollView addSubview:newParallaxView];
 }
 
 - (void)loadBackgroundViewAtIndex:(NSInteger)index

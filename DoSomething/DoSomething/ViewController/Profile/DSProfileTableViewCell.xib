@@ -399,7 +399,7 @@
                                 <color key="textColor" red="0.40000000000000002" green="0.40000000000000002" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Password  Conformation" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bkO-e6-NLw">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Password  Confirmation" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bkO-e6-NLw">
                                 <rect key="frame" x="7" y="104" width="75" height="23"/>
                                 <animations/>
                                 <fontDescription key="fontDescription" name="Patron-Bold" family="Patron" pointSize="10"/>
@@ -452,15 +452,19 @@
                     <constraint firstItem="gmr-PN-Cp2" firstAttribute="top" secondItem="W5E-AF-OBh" secondAttribute="top" constant="25" id="M8Z-k9-j8w"/>
                     <constraint firstItem="gmr-PN-Cp2" firstAttribute="leading" secondItem="W5E-AF-OBh" secondAttribute="leading" id="PY0-ZN-BBh"/>
                     <constraint firstItem="SHS-IW-ID9" firstAttribute="leading" secondItem="W5E-AF-OBh" secondAttribute="leading" id="W18-9S-gpu"/>
+                    <constraint firstItem="SHS-IW-ID9" firstAttribute="top" secondItem="gmr-PN-Cp2" secondAttribute="bottom" constant="7" id="gTl-bA-UG9"/>
                     <constraint firstAttribute="bottom" secondItem="SHS-IW-ID9" secondAttribute="bottom" constant="-1" id="hkJ-Xg-mIr"/>
                 </constraints>
             </tableViewCellContentView>
             <animations/>
             <connections>
+                <outlet property="confirmpasswordlbl" destination="bkO-e6-NLw" id="W0h-w5-fc1"/>
                 <outlet property="conformationpassword" destination="Ac8-mg-rLM" id="o6t-LK-Gba"/>
                 <outlet property="currentpassword" destination="NqL-pg-IGU" id="F92-bL-eiL"/>
+                <outlet property="currentpasswordlbl" destination="PmN-E8-WPL" id="Flp-q1-QOT"/>
                 <outlet property="emailTextField" destination="sig-cR-Dgx" id="Fnb-Nf-P8O"/>
                 <outlet property="passwordTextField" destination="nd4-Zf-byl" id="XJa-vF-VIw"/>
+                <outlet property="passwordlbl" destination="6TJ-ML-Q9A" id="mXI-r2-KBc"/>
             </connections>
             <point key="canvasLocation" x="286" y="494"/>
         </tableViewCell>
