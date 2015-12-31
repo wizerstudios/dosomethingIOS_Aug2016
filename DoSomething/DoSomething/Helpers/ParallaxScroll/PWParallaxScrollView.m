@@ -10,16 +10,24 @@
 #import <CoreLocation/CoreLocation.h>
 #import "AppDelegate.h"
 
+#define enlargeRatio 1.1
+
 static const NSInteger PWInvalidPosition = -1;
 
 @interface PWParallaxScrollView () <UIScrollViewDelegate,CLLocationManagerDelegate,KenBurnsViewDelegate>
 {
     int pageFrame;
     
-    NSInteger lastindex;
-    CLLocationManager * locationManager;
-    BOOL islocationManagerEnable;
+    NSMutableArray * bannerText;
+     NSMutableArray *FGimageArray;
+    NSArray * pageController;
+    UIImageView*pageImageView;
 }
+
+@property (nonatomic, assign) BOOL isLandscape;
+@property (nonatomic, assign) BOOL shouldLoop;
+@property (nonatomic, assign) CGFloat showImageDuration;
+@property (nonatomic, strong) NSTimer *nextImageTimer;
 
 @property (nonatomic, assign) NSInteger numberOfItems;
 @property (nonatomic, assign) NSInteger backgroundViewIndex;
@@ -36,6 +44,7 @@ static const NSInteger PWInvalidPosition = -1;
 @property (nonatomic, strong) UIView *currentBottomView;
 
 @property (nonatomic, assign) NSInteger currentIndex;
+@property (nonatomic,strong)  UIPageControl *pageControllBtn;
 
 //@property (nonatomic,strong) DSProfileTableViewController *objSplash;
 
@@ -45,7 +54,7 @@ static const NSInteger PWInvalidPosition = -1;
 
 @implementation PWParallaxScrollView
 
-@synthesize isdifferSpeed,tutorialpageOkButton;
+@synthesize isdifferSpeed,tutorialpageOkButton,pageControllBtn;
 
 #pragma mark
 
@@ -121,29 +130,25 @@ static const NSInteger PWInvalidPosition = -1;
     [_backgroundScrollView setShowsVerticalScrollIndicator:NO];
     _backgroundScrollView.bounces = NO;
     
+    FGimageArray = [[NSMutableArray alloc] initWithObjects:@"splash_bg",@"bg1",@"bg2",@"bg3",@"bg4",nil];
     
-//    UIImageView * bgImage =[[UIImageView alloc]initWithFrame:self.bounds];
-//    bgImage.image=[UIImage imageNamed:@"profile_noimg"];
+    bannerText=[[NSMutableArray alloc] initWithObjects:@"bgText5",@"bgText1",@"bgText2",@"bgText3",@"bgText4", nil];
+    
+    pageControllBtn = [[UIPageControl alloc]init];
+    
+    pageControllBtn.backgroundColor = [UIColor clearColor];
+    [pageControllBtn setFrame:CGRectMake(self.center.x-50,self.frame.size.height-80,120,40)];
+    pageControllBtn.numberOfPages = 5;
+    pageControllBtn.currentPage = _currentIndex;
+    
+    pageControllBtn.pageIndicatorTintColor = [UIColor redColor];
+    
+    pageControllBtn.currentPageIndicatorTintColor =[UIColor clearColor];
     
     
-//    tutorialpageOkButton=[[UIButton alloc]initWithFrame:CGRectMake(88,40,125,125)];
-//    
-//    [tutorialpageOkButton setTitle:@"OK" forState:UIControlStateNormal];
-//    
-//    [tutorialpageOkButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-//    
-//    tutorialpageOkButton.titleLabel.font = [UIFont systemFontOfSize:10];
-//    
-//    [tutorialpageOkButton setBackgroundColor:[UIColor colorWithRed:93.0/255 green:102.0/255 blue:122.0/255 alpha:1.0f]];
-//    
-//    [[tutorialpageOkButton layer] setBorderWidth:1.3f];
-//    
-//    [tutorialpageOkButton.layer setBorderColor:[UIColor whiteColor].CGColor];
-//    
-//    tutorialpageOkButton.layer.cornerRadius = 7; // this value vary as per your desire
-//    
-//    tutorialpageOkButton.clipsToBounds = YES;
-//    
+    [pageControllBtn setCurrentPage:_currentIndex];
+    
+    pageImageView =[[UIImageView alloc]init];
     
 //    UISwipeGestureRecognizer *tapGestureRecognizeokButton = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(touchScrollViewTappedswipe:)];
 //    tapGestureRecognizeokButton.numberOfTouchesRequired = 1;
@@ -166,7 +171,9 @@ static const NSInteger PWInvalidPosition = -1;
     //[self addSubview:_backgroundScrollView];
     [self addSubview:_foregroundScrollView];
     [self addSubview:_touchScrollView];
-    [_touchScrollView addSubview:self.kenView];
+    [self addSubview:pageControllBtn];
+    [self nextImage:_currentIndex];
+    //[_touchScrollView addSubview:self.kenView];
     //[self addSubview:tutorialpageOkButton];
     
     
@@ -397,7 +404,26 @@ static const NSInteger PWInvalidPosition = -1;
     
     if(_currentIndex != newCrrentIndex) {
         self.currentIndex = newCrrentIndex;
+       
+        float pagecontrolxposition;
+        pagecontrolxposition =self.currentIndex+22;
+        pageControllBtn.currentPageIndicatorTintColor=[UIColor clearColor];
         
+        [pageControllBtn setCurrentPage:_currentIndex];
+        
+        
+        if(self.currentIndex==0)
+        {
+            [pageImageView setFrame:CGRectMake(pagecontrolxposition+self.currentIndex*15,13,14,14)];
+            pageImageView.image =[UIImage imageNamed:@"dot_active"];
+        }
+        else
+        {
+            [pageImageView setFrame:CGRectMake(pagecontrolxposition+self.currentIndex*15,13,14,14)];
+            pageImageView.image =[UIImage imageNamed:@"dot_active"];
+        }
+        [pageImageView setBackgroundColor:[UIColor clearColor]];
+        [self nextImage:self.currentIndex];
         if([self.delegate respondsToSelector:@selector(parallaxScrollView:didChangeIndex:)]){
             [self.delegate parallaxScrollView:self didChangeIndex:self.currentIndex];
         }
@@ -434,7 +460,228 @@ static const NSInteger PWInvalidPosition = -1;
     
 }
 
+#pragma  animation
 
+- (void)nextImage:(NSInteger)index
+{
+    _isLandscape=YES;
+    _shouldLoop =YES;
+    UIImage *image;
+    _currentIndex =index;
+    
+    image =[UIImage imageNamed:FGimageArray[index]];
+    
+    
+    
+    UIImageView *imageView = nil;
+    UIImageView    * textImageview   =nil;
+    UIPageControl * pageControll =nil;
+    
+    float originX       = -1;
+    float originY       = -1;
+    float zoomInX       = -1;
+    float zoomInY       = -1;
+    float moveX         = -1;
+    float moveY         = -1;
+    
+    float frameWidth    = _isLandscape ? self.bounds.size.width: self.bounds.size.height;
+    float frameHeight   = _isLandscape ? self.bounds.size.height: self.bounds.size.width;
+    
+    float resizeRatio = [self getResizeRatioFromImage:image width:frameWidth height:frameHeight];
+    
+    // Resize the image.
+    float optimusWidth  = (image.size.width * resizeRatio) * enlargeRatio;
+    float optimusHeight = (image.size.height * resizeRatio) * enlargeRatio;
+    imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0,320,518)];
+    NSLog(@"imageView size=%@",imageView);
+    
+    if(_currentIndex == 0)
+    {
+        textImageview  =[[UIImageView alloc] initWithFrame:CGRectMake(self.center.x-60,self.center.y-30,145,63)];
+    }
+    else{
+        textImageview  =[[UIImageView alloc] initWithFrame:CGRectMake(self.center.x-100,self.center.y-30,227,67)];
+    }
+    textImageview.image =[UIImage imageNamed:bannerText[index]];
+    [textImageview setBackgroundColor:[UIColor clearColor]];
+    pageControll = [[UIPageControl alloc]init];
+    
+    pageControll.backgroundColor = [UIColor redColor];
+    [pageControll setFrame:CGRectMake(self.center.x-50,self.frame.size.height-60,120,40)];
+    pageControll.numberOfPages = 5;
+    pageControll.currentPage = _currentIndex;
+    
+    
+    float pagecontrolxposition;
+    pagecontrolxposition =_currentIndex+22;
+    pageControllBtn.pageIndicatorTintColor = [UIColor redColor];
+    
+    pageControllBtn.currentPageIndicatorTintColor =[UIColor clearColor];
+    
+    
+    [pageControllBtn setCurrentPage:_currentIndex];
+    
+    // UIImageView*pageImageView =[[UIImageView alloc]init];
+    if(pageControllBtn.currentPage)
+    {
+        [pageImageView setFrame:CGRectMake(pagecontrolxposition+_currentIndex*15,13,14,14)];
+        pageImageView.image =[UIImage imageNamed:@"dot_active"];
+    }
+    else
+    {
+        [pageImageView setFrame:CGRectMake(_currentIndex+22,13,14,14)];
+        pageImageView.image =[UIImage imageNamed:@"dot_active"];
+    }
+    [pageImageView setBackgroundColor:[UIColor clearColor]];
+    [pageControllBtn addSubview:pageImageView];
+    
+    
+    imageView.backgroundColor = [UIColor redColor];
+    
+    
+    
+    // Calcule the maximum move allowed.
+    float maxMoveX = optimusWidth - frameWidth;
+    float maxMoveY = optimusHeight - frameHeight;
+    
+    float rotation = (arc4random() % 9) / 100;
+    
+    switch (arc4random() % 4) {
+        case 0:
+            originX = 0;
+            originY = 0;
+            zoomInX = 1.25;
+            zoomInY = 1.25;
+            moveX   = -maxMoveX;
+            moveY   = -maxMoveY;
+            break;
+            
+        case 1:
+            originX = 0;
+            originY = frameHeight - optimusHeight;
+            zoomInX = 1.10;
+            zoomInY = 1.10;
+            moveX   = -maxMoveX;
+            moveY   = maxMoveY;
+            break;
+            
+        case 2:
+            originX = frameWidth - optimusWidth;
+            originY = 0;
+            zoomInX = 1.30;
+            zoomInY = 1.30;
+            moveX   = maxMoveX;
+            moveY   = -maxMoveY;
+            break;
+            
+        case 3:
+            originX = frameWidth - optimusWidth;
+            originY = frameHeight - optimusHeight;
+            zoomInX = 1.20;
+            zoomInY = 1.20;
+            moveX   = maxMoveX;
+            moveY   = maxMoveY;
+            break;
+            
+        default:
+            NSLog(@"Unknown random number found in JBKenBurnsView _animate");
+            break;
+    }
+    
+    
+    CALayer *picLayer    = [CALayer layer];
+    picLayer.contents    = (id)image.CGImage;
+    picLayer.anchorPoint = CGPointMake(0, 0);
+    picLayer.bounds      = CGRectMake(0, 0, optimusWidth, optimusHeight);
+    picLayer.position    = CGPointMake(originX, originY);
+    
+    [imageView.layer addSublayer:picLayer];
+    
+    
+    CATransition *animation = [CATransition animation];
+    [animation setDuration:1];
+    [animation setType:kCATransitionFade];
+    // [[self layer] addAnimation:animation forKey:nil];
+    
+    [self addSubview:imageView];
+    [self addSubview:textImageview];
+    [self addSubview:pageControllBtn];
+    
+    // Generates the animation  //before: UIViewAnimationCurveEaseInOut
+    [UIView animateWithDuration:8 + 2 delay:0 options:UIViewAnimationOptionCurveEaseOut animations:^
+     {
+         CGAffineTransform rotate    = CGAffineTransformMakeRotation(rotation);
+         CGAffineTransform moveRight = CGAffineTransformMakeTranslation(moveX, moveY);
+         CGAffineTransform combo1    = CGAffineTransformConcat(rotate, moveRight);
+         CGAffineTransform zoomIn    = CGAffineTransformMakeScale(zoomInX, zoomInY);
+         CGAffineTransform transform = CGAffineTransformConcat(zoomIn, combo1);
+         imageView.transform = transform;
+         
+     } completion:^(BOOL finished) {}];
+    
+}
+
+- (float)getResizeRatioFromImage:(UIImage *)image width:(float)frameWidth height:(float)frameHeight
+{
+    float resizeRatio   = -1;
+    float widthDiff     = -1;
+    float heightDiff    = -1;
+    
+    // Wider than screen
+    if (image.size.width > frameWidth)
+    {
+        widthDiff  = image.size.width - frameWidth;
+        
+        // Higher than screen
+        if (image.size.height > frameHeight)
+        {
+            heightDiff = image.size.height - frameHeight;
+            
+            if (widthDiff > heightDiff)
+                resizeRatio = frameHeight / image.size.height;
+            else
+                resizeRatio = frameWidth / image.size.width;
+        }
+        // No higher than screen
+        else
+        {
+            heightDiff = frameHeight - image.size.height;
+            
+            if (widthDiff > heightDiff)
+                resizeRatio = frameWidth / image.size.width;
+            else
+                resizeRatio = self.bounds.size.height / image.size.height;
+        }
+    }
+    // No wider than screen
+    else
+    {
+        widthDiff  = frameWidth - image.size.width;
+        
+        // Higher than screen
+        if (image.size.height > frameHeight)
+        {
+            heightDiff = image.size.height - frameHeight;
+            
+            if (widthDiff > heightDiff)
+                resizeRatio = image.size.height / frameHeight;
+            else
+                resizeRatio = frameWidth / image.size.width;
+        }
+        // No higher than screen
+        else
+        {
+            heightDiff = frameHeight - image.size.height;
+            
+            if (widthDiff > heightDiff)
+                resizeRatio = frameWidth / image.size.width;
+            else
+                resizeRatio = frameHeight / image.size.height;
+        }
+    }
+    
+    return resizeRatio;
+}
 
 
 
