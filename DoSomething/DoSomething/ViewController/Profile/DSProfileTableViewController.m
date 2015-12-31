@@ -133,6 +133,8 @@
 }
 -(void)viewWillAppear:(BOOL)animated
 {
+    NSLog(@"userDetailsDict:%@",userDetailsDict);
+    
     [self loadNavigation];
     
     [self getUserCurrenLocation];
@@ -510,10 +512,10 @@
 - (NSString *) getPassword {
     
     if (emailPasswordToRegister == NULL) {
-        //emailPasswordToRegister = @"";
+        emailPasswordToRegister = @"";
     }
     NSString *emailPassword = emailPasswordToRegister;
-    NSLog(@"email = %@",emailPassword);
+    NSLog(@"password = %@",emailPassword);
     return emailPassword;
 }
 
@@ -925,10 +927,10 @@
                 {
                     return 180;
                 }
-                else if (userDetailsDict.count>0)
-                {
-                    return 180;
-                }
+//                else if (userDetailsDict.count>0)
+//                {
+//                    return 180;
+//                }
             
                 return 120;
             }
@@ -1486,17 +1488,20 @@
            
             cell.emailTextField.text =(emailAddressToRegister==0)?[userDetailsDict valueForKey:@"email"]:emailAddressToRegister;
             cell.passwordTextField.text  =(emailPasswordToRegister==0)? @"":emailPasswordToRegister;
-            cell.currentpassword.text    =(currentPassword==0)?@"":@"Your new password";
-            cell.conformationpassword.text =(confirmPassword==0)?@"":@"confirm your new password";
             emailAddressToRegister   = cell.emailTextField.text;
-                       
+//            cell.currentpassword.hidden=YES;
+//            cell.conformationpassword.hidden=YES;
+//            cell.currentpasswordlbl.text =@"Password";
+//            cell.confirmpasswordlbl.hidden =YES;
+//            cell.passwordlbl.hidden=YES;
+         
           
 
             
         }
         else
         {
-          cell.emailTextField.text = [self getEmail];
+            cell.emailTextField.text = [self getEmail];
           cell.passwordTextField.text =[self getPassword];
             cell.currentpassword.hidden=YES;
             cell.conformationpassword.hidden=YES;
@@ -1730,7 +1735,6 @@
 -(void)notificationMethod
 {
     
-    
     NSString * objMsg =[isNotification_message isEqualToString:@"Yes"]? @"switch_on":@"switch_off";
     NSString * objSound =[isNotification_sound isEqualToString:@"Yes"]? @"switch_on":@"switch_off";
     NSString * objVibration =[isNotification_vibration isEqualToString:@"Yes"]? @"switch_on":@"switch_off";
@@ -1739,8 +1743,7 @@
     {
         [cell.messSwitchBtn setImage:[UIImage imageNamed:@"switch_on"] forState:UIControlStateNormal];
         isNotification_message =@"Yes";
-//        [cell.messSwitchBtn setBackgroundColor:[UIColor colorWithRed:232.0f/255.0f green:232.0f/255.0f blue:232.0f/255.0f alpha:1.0f]];
-//        [cell.messSwitchBtn setOnTintColor:[UIColor colorWithRed:232.0f/255.0f green:232.0f/255.0f blue:232.0f/255.0f alpha:1.0f]];
+
         
     }
     if([objSound isEqualToString:@"switch_on"])
@@ -2114,8 +2117,7 @@
                         failure:^(AFHTTPRequestOperation *operation, id error) {
                             
                             [COMMON removeLoading];
-//                            UIAlertView *errorAlter =[[UIAlertView alloc]initWithTitle:nil message:[NSString stringWithFormat:@"%@",error] delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
-//                            [errorAlter show];
+                 
                             
                         }];
 
@@ -2150,8 +2152,6 @@
                          }
                          failure:^(AFHTTPRequestOperation *operation, id error) {
                              [COMMON removeLoading];
-//                             UIAlertView *errorAlter =[[UIAlertView alloc]initWithTitle:nil message:[NSString stringWithFormat:@"%@",error] delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
-//                             [errorAlter show];
 
                          }
      ];
@@ -2222,7 +2222,7 @@
     AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
     appDelegate.buttonsView.hidden=YES;
     appDelegate.SepratorLbl.hidden=YES;
-    [appDelegate.settingButton setBackgroundImage:[UIImage imageNamed:@"setting_icon.png"] forState:UIControlStateNormal];
+    [appDelegate.settingButton setBackgroundImage:[UIImage imageNamed:@"profile_icon.png"] forState:UIControlStateNormal];
 
 }
 
@@ -2281,6 +2281,7 @@
     NSLog(@"hobby:%@",hobbiesNameArray);
     strType      = (selectEmail== YES)?@"1":@"2";
     strProfileID = (FBprofileID!=nil)?FBprofileID:@"";
+    //emailAddressToRegister =cell.emailTextField.text;
     //emailPasswordToRegister = cell.passwordTextField.text;
     strDOB       = (currentTextfield.text !=nil)?currentTextfield.text :[profileDict valueForKey:@"date_of_birth"];
     [self dateConverter];

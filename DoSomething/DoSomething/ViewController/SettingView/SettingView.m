@@ -437,6 +437,13 @@
     DSHomeViewController*objSplashView =[[DSHomeViewController alloc]initWithNibName:@"DSHomeViewController" bundle:nil];
     
     [self.navigationController pushViewController:objSplashView animated:NO];
+    appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+    
+    appDelegate.buttonsView.hidden=YES;
+    
+    appDelegate.SepratorLbl.hidden=YES;
+    
+    [appDelegate.settingButton setBackgroundImage:[UIImage imageNamed:@"setting_icon.png"] forState:UIControlStateNormal];
     
     [objWebService logoutDeleteUser:User_Logout_Delete_API
      
@@ -458,13 +465,7 @@
                                     
                                    
                                     
-                                    appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
-                                    
-                                    appDelegate.buttonsView.hidden=YES;
-                                    
-                                    appDelegate.SepratorLbl.hidden=YES;
-                                    
-                                    [appDelegate.settingButton setBackgroundImage:[UIImage imageNamed:@"setting_icon.png"] forState:UIControlStateNormal];
+                                   
                                     
                                 }
                                 
