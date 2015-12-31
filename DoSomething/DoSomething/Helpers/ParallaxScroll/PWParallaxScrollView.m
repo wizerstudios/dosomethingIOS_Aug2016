@@ -117,6 +117,7 @@ static const NSInteger PWInvalidPosition = -1;
     //_foregroundScrollView.scrollEnabled = NO;
     _foregroundScrollView.clipsToBounds = NO;
     _foregroundScrollView.backgroundColor = [UIColor clearColor];
+    
     _foregroundScrollView.contentOffset = CGPointMake(0, 0);
     [_foregroundScrollView setShowsHorizontalScrollIndicator:NO];
     [_foregroundScrollView setShowsVerticalScrollIndicator:NO];
@@ -137,7 +138,7 @@ static const NSInteger PWInvalidPosition = -1;
     pageControllBtn = [[UIPageControl alloc]init];
     
     pageControllBtn.backgroundColor = [UIColor clearColor];
-    [pageControllBtn setFrame:CGRectMake(self.center.x-50,self.frame.size.height-80,120,40)];
+    [pageControllBtn setFrame:CGRectMake(self.center.x-50,self.frame.size.height-100,120,40)];
     pageControllBtn.numberOfPages = 5;
     pageControllBtn.currentPage = _currentIndex;
     
@@ -158,11 +159,6 @@ static const NSInteger PWInvalidPosition = -1;
     //[tutorialpageOkButton addTarget:self action:@selector(didClickOkButtonAction:) forControlEvents:UIControlEventTouchUpInside];
     
 
-    self.kenView = [[JBKenBurnsView alloc] initWithFrame:self.bounds];
-    self.kenView.delegate = self;
-    self.kenView.backgroundColor = [UIColor clearColor];
-   
-     self.kenView.multipleTouchEnabled = YES;
   
     
     
@@ -290,13 +286,7 @@ static const NSInteger PWInvalidPosition = -1;
 - (void)loadForegroundViewAtIndex:(NSInteger)index
 {
     UIView *newParallaxView = [self foregroundViewAtIndex:index];
-    CABasicAnimation *rotationAnimation = [CABasicAnimation animationWithKeyPath:@"transform.rotation.z"];
-    rotationAnimation.toValue = @(M_PI * 0.05);
-    rotationAnimation.duration = 1;
-    rotationAnimation.autoreverses = YES;
-    rotationAnimation.repeatCount = HUGE_VALF;
-    rotationAnimation.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut];
-    [newParallaxView.layer addAnimation:rotationAnimation forKey:@"rotationAnimation"];
+
        [_foregroundScrollView addSubview:newParallaxView];
 }
 
@@ -493,21 +483,20 @@ static const NSInteger PWInvalidPosition = -1;
     float optimusWidth  = (image.size.width * resizeRatio) * enlargeRatio;
     float optimusHeight = (image.size.height * resizeRatio) * enlargeRatio;
     imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0,320,518)];
-    NSLog(@"imageView size=%@",imageView);
-    
+   
     if(_currentIndex == 0)
     {
-        textImageview  =[[UIImageView alloc] initWithFrame:CGRectMake(self.center.x-60,self.center.y-30,145,63)];
+        textImageview  =[[UIImageView alloc] initWithFrame:CGRectMake(self.center.x-60,self.center.y-80,145,63)];
     }
     else{
-        textImageview  =[[UIImageView alloc] initWithFrame:CGRectMake(self.center.x-100,self.center.y-30,227,67)];
+        textImageview  =[[UIImageView alloc] initWithFrame:CGRectMake(self.center.x-100,self.center.y-60,227,67)];
     }
     textImageview.image =[UIImage imageNamed:bannerText[index]];
     [textImageview setBackgroundColor:[UIColor clearColor]];
     pageControll = [[UIPageControl alloc]init];
     
     pageControll.backgroundColor = [UIColor redColor];
-    [pageControll setFrame:CGRectMake(self.center.x-50,self.frame.size.height-60,120,40)];
+    [pageControll setFrame:CGRectMake(self.center.x-50,self.frame.size.height-80,120,40)];
     pageControll.numberOfPages = 5;
     pageControll.currentPage = _currentIndex;
     

@@ -149,7 +149,7 @@
 
     [self.window.rootViewController.view addSubview:buttonsView];
     [self.window.rootViewController.view addSubview:SepratorLbl];
-    NSLog(@"Septraor=%@",SepratorLbl);
+   
     [buttonsView addSubview:locationButton];
     [buttonsView addSubview:menuButton];
     [buttonsView addSubview:chatsButton];
