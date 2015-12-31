@@ -1489,11 +1489,11 @@
             cell.emailTextField.text =(emailAddressToRegister==0)?[userDetailsDict valueForKey:@"email"]:emailAddressToRegister;
             cell.passwordTextField.text  =(emailPasswordToRegister==0)? @"":emailPasswordToRegister;
             emailAddressToRegister   = cell.emailTextField.text;
-//            cell.currentpassword.hidden=YES;
-//            cell.conformationpassword.hidden=YES;
-//            cell.currentpasswordlbl.text =@"Password";
-//            cell.confirmpasswordlbl.hidden =YES;
-//            cell.passwordlbl.hidden=YES;
+            cell.currentpassword.hidden=YES;
+            cell.conformationpassword.hidden=YES;
+            cell.currentpasswordlbl.text =@"Password";
+            cell.confirmpasswordlbl.hidden =YES;
+            cell.passwordlbl.hidden=YES;
          
           
 
