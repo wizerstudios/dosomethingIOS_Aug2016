@@ -20,7 +20,7 @@
 
 
 @implementation ChatDetailCustomcell
-
+@synthesize sender_bubbleimgView,sender_msgLbl;
 - (void)awakeFromNib {
     // Initialization code
 }
@@ -46,7 +46,7 @@
 
 -(void)loadMessageView{
     if([chatArray count]){
-        sender_bubbleimgView.hidden=NO;
+       sender_bubbleimgView.hidden=NO;
         
         if([[chatArray valueForKey:@"type"] isEqualToString:@"SENDER"]){
             
@@ -63,6 +63,23 @@
                                              MAX(dataSize.width, [COMMON dataSize:sender_msgLbl.text withFontName:@"HelveticaNeue" ofSize:15 withSize:CGSizeMake(195.0, 999.0)].width+10 + BUBBLE_WIDTH_SPACE),
                                              dataSize.height-10);
             [sender_msgLbl setTextColor:[UIColor whiteColor]];
+            NSString *timeStr = [chatArray valueForKey:@"senttime"];
+            
+            NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
+            
+            [dateFormat setDateFormat:@"YYYY-MM-dd HH:mm:ss"];
+            
+            NSDate *date = [dateFormat dateFromString:timeStr];
+            
+            [dateFormat setDateFormat:@"hh:mm"];
+            
+            timeStr = [dateFormat stringFromDate:date];
+            
+            
+            self.chatTime.frame = CGRectMake(windowSize.width - ME_RIGHT_WIDTH_SPACE - MAX(dataSize.width, [COMMON dataSize:sender_msgLbl.text withFontName:@"HelveticaNeue" ofSize:15 withSize:CGSizeMake(195.0, 999.0)].width + BUBBLE_WIDTH_SPACE)+dataSize.width+50,dataSize.height+BUBBLE_IMAGE_HEIGHT-20,40,40);
+            
+             self.chatTime.text = timeStr;
+
             
             sender_bubbleimgView.frame = CGRectMake(windowSize.width - ME_RIGHT_WIDTH_SPACE - MAX(dataSize.width, [COMMON dataSize:sender_msgLbl.text withFontName:@"HelveticaNeue" ofSize:15 withSize:CGSizeMake(195.0, 999.0)].width + BUBBLE_WIDTH_SPACE),
                                                     y_Position + sender_bubbleimgView.frame.origin.y,

@@ -10,6 +10,7 @@
 #import "CustomNavigationView.h"
 #import "DSConfig.h"
 #import "DSAppCommon.h"
+#import "AppDelegate.h"
 #import "DSWebservice.h"
 #import "IQKeyboardManager.h"
 #import "IQUIView+IQKeyboardToolbar.h"
@@ -22,6 +23,7 @@
 #define CELL_HEIGHT             CONTENT_START+15.f
 #define ME_RIGHT_WIDTH_SPACE    25.0f
 
+
 @interface DSChatDetailViewController (){
     
     NSUInteger supportUser;
@@ -29,6 +31,11 @@
     NSMutableArray *conversationArray;
     
     DSWebservice *webService;
+    
+    CGSize dataSize;
+    CGSize windowSize;
+    NSMutableArray *chatArray;
+    //ChatDetailCustomcell *ChatDetailcell;
 }
 
 @end
@@ -48,7 +55,7 @@
     
     conversationArray = [[NSMutableArray alloc]init];
     
-    [self loadNavigation];
+   
     
     [self displayUserDetailsView];
     
@@ -58,9 +65,10 @@
 
 - (void)viewWillAppear:(BOOL)animated
 {
+     [self loadNavigation];
     [super viewWillAppear:animated];
     
-     messageTimer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(loadConverstionAPI) userInfo:nil repeats:YES];
+     messageTimer = [NSTimer scheduledTimerWithTimeInterval:5.0 target:self selector:@selector(loadConverstionAPI) userInfo:nil repeats:YES];
     
     [chatView.postButton addTarget:self action:@selector(sendAction:) forControlEvents:UIControlEventTouchUpInside];
     
@@ -173,7 +181,7 @@
         
         [ProfileImage.layer setBorderColor:[[UIColor colorWithRed:229.0f/255.0f green:63.0f/255.0f blue:81.0f/255.0f alpha:1.0f] CGColor]];
         
-        [chatButton setBackgroundImage:[UIImage imageNamed:@"menu_icon.png"] forState:UIControlStateNormal];
+        [chatButton setBackgroundImage:[UIImage imageNamed:@"menu_Icon"] forState:UIControlStateNormal];
         
         [chatButton setContentMode:UIViewContentModeScaleAspectFit];
         
@@ -182,7 +190,7 @@
     }
     else{
         
-        [chatButton setBackgroundImage:[UIImage imageNamed:@"menu_active.png"] forState:UIControlStateNormal];
+        [chatButton setBackgroundImage:[UIImage imageNamed:@"menu_Icon"] forState:UIControlStateNormal];
         
         [chatButton setUserInteractionEnabled:YES];
     }
@@ -213,7 +221,7 @@
          [chatView.placeHolderLabel setHidden:NO];
     
     
-        [self.view endEditing:YES];
+       [self.view endEditing:YES];
     
     
 }
@@ -240,16 +248,19 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     static NSString *CellIdentifier = @"Cell";
-    ChatDetailCustomcell *cell = (ChatDetailCustomcell *) [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+   ChatDetailCustomcell* cell = (ChatDetailCustomcell *) [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
         [[NSBundle mainBundle] loadNibNamed:@"ChatDetailCustomcell" owner:self options:nil];
         cell = chatCustomcell;
     }
+    
+    
     [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
     [cell getMessageArray:[conversationArray objectAtIndex:indexPath.row]];
     return cell;
     
 }
+
 
 
 #pragma mark - All the other junk for the sample project
@@ -310,6 +321,9 @@
     _backgroundView.hidden = YES;
     
     _menuImageview.hidden = NO;
+    
+    [self loadDeleteUserChatHistory];
+    
 }
 
 - (IBAction)pressBlock:(id)sender {
@@ -319,6 +333,7 @@
     _backgroundView.hidden = YES;
     
     _menuImageview.hidden = NO;
+    [self loadblockUser];
     
 }
 - (IBAction)showReallyFunkyIBActionSheet:(id)sender
@@ -328,6 +343,8 @@
     _transparentView.hidden = NO;
     
     _backgroundView.hidden = NO;
+   
+
 }
 
 -(void)sendAction:(id)sender{
@@ -422,4 +439,33 @@
     
 }
 
+#pragma deleteuserchatdetails, Blockuser
+-(void)loadDeleteUserChatHistory
+{
+     NSString *conversationID = [chatuserDetailsDict valueForKey:@"id"];
+    
+    [webService deleteUserChatHist:DeleteConversation sessionid:[COMMON getSessionID] chat_user_id:conversationID success:^(AFHTTPRequestOperation *operation, id responseObject)
+    {
+        NSLog(@"response:%@",responseObject);
+        
+        [conversationArray removeAllObjects];
+        [chatTableView reloadData];
+        
+        
+        
+    } failure:^(AFHTTPRequestOperation *operation, id error) {
+       
+    }];
+}
+-(void)loadblockUser
+{
+     NSString *conversationID = [chatuserDetailsDict valueForKey:@"id"];
+    
+    [webService blockUser:BlockUser_API sessionid:[COMMON getSessionID] block_user_id:conversationID success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSLog(@"response:%@",responseObject);
+        
+    } failure:^(AFHTTPRequestOperation *operation, id error) {
+        
+    }];
+}
 @end

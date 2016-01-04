@@ -830,12 +830,12 @@
 {
     UIImage* image = nil;
 
-    image = [UIImage imageNamed:@""];  //slider-metal-trackBackground
-    image = [image resizableImageWithCapInsets:UIEdgeInsetsMake(0.0, 0.0, 0.0, 0.0)];
+    image = [UIImage imageNamed:@"backgroundImg"];  //slider-metal-trackBackground
+    image = [image resizableImageWithCapInsets:UIEdgeInsetsMake(0.0, 7.0, 0.0, 7.0)];
     slider.trackBackgroundImage = image;
 
     image = [UIImage imageNamed:@"dot_active_red"];    //slider-metal-track
-    image = [image resizableImageWithCapInsets:UIEdgeInsetsMake(-2.0, 5.0, -2.0, 5.0)];
+    image = [image resizableImageWithCapInsets:UIEdgeInsetsMake(0.0, 7.0, 0.0, 7.0)];
     slider.trackImage = image;
 
     image = [UIImage imageNamed:@"Filter_track"];
@@ -904,13 +904,13 @@
     // You get get the center point of the slider handles and use this to arrange other subviews
     
     CGPoint lowerCenter;
-    lowerCenter.x = (self.labelSlider1.lowerCenter.x + self.labelSlider1.frame.origin.x+10);
+    lowerCenter.x = (self.labelSlider1.lowerCenter.x + self.labelSlider1.frame.origin.x+8);
     lowerCenter.y = (self.labelSlider1.center.y - 20.0f);
     self.agelowerLabel.center = lowerCenter;
     self.agelowerLabel.text = [NSString stringWithFormat:@"%d", (int)self.labelSlider1.lowerValue];
     
     CGPoint upperCenter;
-    upperCenter.x = (self.labelSlider1.upperCenter.x + self.labelSlider1.frame.origin.x+10);
+    upperCenter.x = (self.labelSlider1.upperCenter.x + self.labelSlider1.frame.origin.x+12);
     upperCenter.y = (self.labelSlider1.center.y - 20.0f);
     self.ageupperLabel.center = upperCenter;
     self.ageupperLabel.text = [NSString stringWithFormat:@"%d", (int)self.labelSlider1.upperValue];

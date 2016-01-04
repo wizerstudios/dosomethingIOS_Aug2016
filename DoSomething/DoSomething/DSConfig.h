@@ -108,6 +108,7 @@
 #define DeleteUserChat_API          @"DeleteUserChatHistory"
 #define Activity                    @"activity"
 #define GetConversation             @"getconversation"
+#define DeleteConversation          @"deleteconversation"
 #define ForgetPassword_API          @"forgetpassword"
 
 #define Device                      @"iPhone"
