@@ -262,7 +262,10 @@
 
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath;
 {
-    
+    if (editingStyle == UITableViewCellEditingStyleDelete) {
+        [chatArray removeObjectAtIndex:indexPath.row];
+        [ChatTableView reloadData];
+    }
 }
 
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
@@ -280,8 +283,9 @@
 -(NSArray *)tableView:(UITableView *)tableView editActionsForRowAtIndexPath:(NSIndexPath *)indexPath {
     
     UITableViewRowAction *blockButton = [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleDefault title:@"Block" handler:^(UITableViewRowAction *action, NSIndexPath *indexPath){
-        
-        
+         NSMutableArray*objselectuser = [chatArray objectAtIndex:indexPath.row];
+        NSString *userid=[objselectuser valueForKey:@"id"];
+        [self loadblockUser:userid];
         [self.ChatTableView setEditing:YES];
         
         
@@ -294,10 +298,13 @@
     
     
     UITableViewRowAction *deleteButton = [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleDefault title:@"Delete"  handler:^(UITableViewRowAction *action, NSIndexPath *indexPath){
-        
+         NSLog(@"index:%ld",(long)indexPath.row);
+        NSInteger* selectIndex=indexPath.row;
+        NSMutableArray*objselectuser = [chatArray objectAtIndex:indexPath.row];
+        NSString *userid=[objselectuser valueForKey:@"id"];
         //[timeArray objectAtIndex:indexPath.row];
-        
-        [self.ChatTableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationRight];
+        [self loadDeleteUserChatHistory:userid :selectIndex];
+        //[self.ChatTableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationRight];
         
     }];
     
@@ -311,6 +318,7 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    NSLog(@"didselectindex:%ld",(long)indexPath.row);
     
     DSChatDetailViewController *ChatDetail =[[DSChatDetailViewController alloc]initWithNibName:nil bundle:nil];
     
@@ -343,7 +351,7 @@
                          
                          NSLog(@"responseObject = %@",responseObject);
                          
-                         chatArray = [[responseObject valueForKey:@"getchathistory"]valueForKey:@"converation"];
+                         chatArray = [[[responseObject valueForKey:@"getchathistory"]valueForKey:@"converation"] mutableCopy];
                          
                          NSLog(@"chatArray = %@",chatArray);
                          
@@ -360,5 +368,41 @@
     
     
 }
+
+
+#pragma deleteuserchatdetails, Blockuser
+-(void)loadDeleteUserChatHistory:(NSString*) deleteuserID :(NSInteger)selectIndex
+{
+     NSLog(@"selectIndex:%ld",(long)selectIndex);
+    
+    [webService deleteUserChatHist:DeleteConversation sessionid:[COMMON getSessionID] chat_user_id:deleteuserID success:^(AFHTTPRequestOperation *operation, id responseObject)
+     {
+         NSLog(@"response:%@",responseObject);
+         if([[[responseObject valueForKey:@"deleteconversation"]valueForKey:@"status"]isEqualToString:@"success"])
+         {
+             NSIndexPath *path = [NSIndexPath indexPathForRow:selectIndex inSection:0];
+         
+            //[chatArray removeObject:selectIndex];
+             [self tableView:ChatTableView commitEditingStyle:UITableViewCellEditingStyleDelete forRowAtIndexPath:path];
+
+             //[ChatTableView reloadData];
+         }
+         
+     } failure:^(AFHTTPRequestOperation *operation, id error) {
+         
+     }];
+}
+-(void)loadblockUser:(NSString*)blockuserID
+{
+   
+    
+    [webService blockUser:BlockUser_API sessionid:[COMMON getSessionID] block_user_id:blockuserID success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSLog(@"response:%@",responseObject);
+        
+    } failure:^(AFHTTPRequestOperation *operation, id error) {
+        
+    }];
+}
+
 
 @end

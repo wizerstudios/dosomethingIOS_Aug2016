@@ -430,7 +430,7 @@
     
 }
 
-#pragma deleteuserchatdetails
+#pragma deleteuserchatdetails, Blockuser
 -(void)loadDeleteUserChatHistory
 {
      NSString *conversationID = [chatuserDetailsDict valueForKey:@"id"];
