@@ -35,7 +35,7 @@
     backGroundImageView  = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, 320, self.frame.size.height+10)];
     
     backGroundImageView.backgroundColor = [UIColor colorWithRed:246.0f/255.0f green:246.0f/255.0f blue:246.0f/255.0f alpha:1.0f];
-    
+   
     [self addSubview:backGroundImageView];
     
     

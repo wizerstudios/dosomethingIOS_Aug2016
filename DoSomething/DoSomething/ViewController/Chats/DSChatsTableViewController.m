@@ -303,7 +303,7 @@
         NSMutableArray*objselectuser = [chatArray objectAtIndex:indexPath.row];
         NSString *userid=[objselectuser valueForKey:@"id"];
         //[timeArray objectAtIndex:indexPath.row];
-        [self loadDeleteUserChatHistory:userid :selectIndex];
+        [self loadDeleteUserChatHistory:userid :*selectIndex];
         //[self.ChatTableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationRight];
         
     }];

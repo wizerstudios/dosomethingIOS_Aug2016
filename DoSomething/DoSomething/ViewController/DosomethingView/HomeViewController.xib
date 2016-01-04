@@ -104,9 +104,9 @@
                     <variation key="default">
                         <mask key="constraints">
                             <exclude reference="Gfr-do-9mz"/>
+                            <exclude reference="7Xa-im-c16"/>
                             <exclude reference="FSZ-Qp-fGz"/>
                             <exclude reference="I7T-u7-CPd"/>
-                            <exclude reference="7Xa-im-c16"/>
                         </mask>
                     </variation>
                 </view>

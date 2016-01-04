@@ -11,8 +11,7 @@
 @interface ChatDetailCustomcell : UITableViewCell{
     
     
-    IBOutlet UILabel *sender_msgLbl;
-    IBOutlet UIImageView *sender_bubbleimgView;
+  
     
     CGSize dataSize;
     CGSize windowSize;
@@ -22,5 +21,6 @@
 
 -(void)getMessageArray:(NSMutableArray *)Array;
 @property(nonatomic,strong)IBOutlet UILabel * chatTime;
-
+@property(nonatomic,strong)IBOutlet UILabel *sender_msgLbl;
+@property(nonatomic,strong)IBOutlet UIImageView *sender_bubbleimgView;
 @end

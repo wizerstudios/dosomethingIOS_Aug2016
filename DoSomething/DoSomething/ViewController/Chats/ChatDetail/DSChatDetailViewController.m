@@ -23,6 +23,16 @@
 #define CELL_HEIGHT             CONTENT_START+15.f
 #define ME_RIGHT_WIDTH_SPACE    25.0f
 
+
+//#define CONTENT_WIDTH           200.f
+//#define CONTENT_START           0.f
+//#define BUBBLE_IMAGE_HEIGHT     10.f
+//#define BUBBLE_WIDTH            250.f
+//#define BUBBLE_WIDTH_SPACE      70.f
+//#define CELL_HEIGHT             CONTENT_START+15.f
+//#define ME_RIGHT_WIDTH_SPACE    25.0f
+
+
 @interface DSChatDetailViewController (){
     
     NSUInteger supportUser;
@@ -30,6 +40,11 @@
     NSMutableArray *conversationArray;
     
     DSWebservice *webService;
+    
+    CGSize dataSize;
+    CGSize windowSize;
+    NSMutableArray *chatArray;
+    //ChatDetailCustomcell *ChatDetailcell;
 }
 
 @end
@@ -43,7 +58,7 @@
     
     [super viewDidLoad];
     
-    [[IQKeyboardManager sharedManager] considerToolbarPreviousNextInViewClass:[self.view class]];
+    [[IQKeyboardManager sharedManager] considerToolbarPreviousNextInViewClass:[chatTableView class]];
     
     webService = [[DSWebservice alloc]init];
     
@@ -175,7 +190,7 @@
         
         [ProfileImage.layer setBorderColor:[[UIColor colorWithRed:229.0f/255.0f green:63.0f/255.0f blue:81.0f/255.0f alpha:1.0f] CGColor]];
         
-        [chatButton setBackgroundImage:[UIImage imageNamed:@"menu_icon.png"] forState:UIControlStateNormal];
+        [chatButton setBackgroundImage:[UIImage imageNamed:@"menu_Icon"] forState:UIControlStateNormal];
         
         [chatButton setContentMode:UIViewContentModeScaleAspectFit];
         
@@ -184,7 +199,7 @@
     }
     else{
         
-        [chatButton setBackgroundImage:[UIImage imageNamed:@"menu_active.png"] forState:UIControlStateNormal];
+        [chatButton setBackgroundImage:[UIImage imageNamed:@"menu_Icon"] forState:UIControlStateNormal];
         
         [chatButton setUserInteractionEnabled:YES];
     }
@@ -205,14 +220,14 @@
 -(void)textViewDidBeginEditing:(UITextView *)textView{
  
     
-    [chatView.placeHolderLabel setHidden:YES];
+    //[chatView.placeHolderLabel setHidden:YES];
     
 }
 
 -(void)textViewDidEndEditing:(UITextView *)textView{
     
     if([textView.text isEqualToString:@""])
-         [chatView.placeHolderLabel setHidden:NO];
+         //[chatView.placeHolderLabel setHidden:NO];
     
     
        [self.view endEditing:YES];
@@ -242,7 +257,7 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     static NSString *CellIdentifier = @"Cell";
-    ChatDetailCustomcell *cell = (ChatDetailCustomcell *) [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+   ChatDetailCustomcell* cell = (ChatDetailCustomcell *) [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
         [[NSBundle mainBundle] loadNibNamed:@"ChatDetailCustomcell" owner:self options:nil];
         cell = chatCustomcell;
@@ -254,6 +269,91 @@
     return cell;
     
 }
+
+//-(void)getMessageArray:(NSMutableArray *)msgArray
+//{
+//    chatArray=[msgArray mutableCopy];
+//    ChatDetailcell.sender_bubbleimgView.hidden  = YES;
+//    [self loadMessageView];
+//    
+//}
+//
+//-(void)loadMessageView{
+//    if([chatArray count]){
+//        ChatDetailcell.sender_bubbleimgView.hidden=NO;
+//        
+//        if([[chatArray valueForKey:@"type"] isEqualToString:@"SENDER"]){
+//            
+//            ChatDetailcell.sender_msgLbl.text=[chatArray valueForKey:@"Message"];
+//            dataSize = [COMMON dataSize:ChatDetailcell.sender_msgLbl.text withFontName:@"HelveticaNeue" ofSize:15 withSize:CGSizeMake(195.0, 999.0)];
+//            int y_Position=10;
+//            windowSize = CGSizeMake(320,440);
+//            ChatDetailcell.sender_msgLbl.numberOfLines = 2000;
+//            ChatDetailcell.sender_bubbleimgView.image = [[UIImage imageNamed:@""] stretchableImageWithLeftCapWidth:20 topCapHeight:16];
+//            ChatDetailcell.sender_bubbleimgView.layer.cornerRadius = 7;
+//            
+//            ChatDetailcell.sender_msgLbl.frame = CGRectMake(windowSize.width - ME_RIGHT_WIDTH_SPACE - MAX(dataSize.width, [COMMON dataSize:ChatDetailcell.sender_msgLbl.text withFontName:@"HelveticaNeue" ofSize:15 withSize:CGSizeMake(195.0, 999.0)].width + BUBBLE_WIDTH_SPACE) + 10,
+//                                             y_Position + ChatDetailcell.sender_msgLbl.frame.origin.y + 8,
+//                                             MAX(dataSize.width, [COMMON dataSize:ChatDetailcell.sender_msgLbl.text withFontName:@"HelveticaNeue" ofSize:15 withSize:CGSizeMake(195.0, 999.0)].width+10 + BUBBLE_WIDTH_SPACE),
+//                                             dataSize.height-10);
+//            [ChatDetailcell.sender_msgLbl setTextColor:[UIColor whiteColor]];
+//            NSString *timeStr = [chatArray valueForKey:@"senttime"];
+//            
+//            NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
+//            
+//            [dateFormat setDateFormat:@"YYYY-MM-dd HH:mm:ss"];
+//            
+//            NSDate *date = [dateFormat dateFromString:timeStr];
+//            
+//            [dateFormat setDateFormat:@"hh:mm"];
+//            
+//            timeStr = [dateFormat stringFromDate:date];
+//            
+//            
+//            ChatDetailcell.chatTime.frame = CGRectMake(windowSize.width - ME_RIGHT_WIDTH_SPACE - MAX(dataSize.width, [COMMON dataSize:ChatDetailcell.sender_msgLbl.text withFontName:@"HelveticaNeue" ofSize:15 withSize:CGSizeMake(195.0, 999.0)].width + BUBBLE_WIDTH_SPACE)+dataSize.width+50,dataSize.height+BUBBLE_IMAGE_HEIGHT-20,40,40);
+//            
+//            ChatDetailcell.chatTime.text = timeStr;
+//            
+//            
+//            ChatDetailcell.sender_bubbleimgView.frame = CGRectMake(windowSize.width - ME_RIGHT_WIDTH_SPACE - MAX(dataSize.width, [COMMON dataSize:ChatDetailcell.sender_msgLbl.text withFontName:@"HelveticaNeue" ofSize:15 withSize:CGSizeMake(195.0, 999.0)].width + BUBBLE_WIDTH_SPACE),
+//                                                    y_Position + ChatDetailcell.sender_bubbleimgView.frame.origin.y,
+//                                                    MAX(dataSize.width, [COMMON dataSize:ChatDetailcell.sender_msgLbl.text withFontName:@"HelveticaNeue" ofSize:15 withSize:CGSizeMake(195.0, 999.0)].width + BUBBLE_WIDTH_SPACE)+20,
+//                                                    dataSize.height+BUBBLE_IMAGE_HEIGHT-10);
+//            
+//            
+//            
+//        }
+//        else {
+//            
+//            ChatDetailcell.sender_msgLbl.text=[chatArray valueForKey:@"Message"];
+//            dataSize = [COMMON dataSize:ChatDetailcell.sender_msgLbl.text withFontName:@"HelveticaNeue" ofSize:15 withSize:CGSizeMake(195.0, 999.0)];
+//            int y_Position=10;
+//            windowSize = CGSizeMake(320,440);
+//            
+//            ChatDetailcell.sender_msgLbl.numberOfLines = 2000;
+//            ChatDetailcell.sender_bubbleimgView.image = [[UIImage imageNamed:@""] stretchableImageWithLeftCapWidth:20 topCapHeight:16];
+//            ChatDetailcell.sender_bubbleimgView.backgroundColor = [UIColor whiteColor];
+//            ChatDetailcell.sender_bubbleimgView.layer.cornerRadius = 7;
+//            ChatDetailcell.sender_msgLbl.frame = CGRectMake(25 ,
+//                                             y_Position + ChatDetailcell.sender_msgLbl.frame.origin.y+8,
+//                                             MAX(dataSize.width, [COMMON dataSize:ChatDetailcell.sender_msgLbl.text withFontName:@"HelveticaNeue" ofSize:15 withSize:CGSizeMake(195.0, 999.0)].width+10 + BUBBLE_WIDTH_SPACE),
+//                                             dataSize.height);
+//            [ChatDetailcell.sender_msgLbl setTextColor:[UIColor blackColor]];
+//            
+//            ChatDetailcell.sender_bubbleimgView.frame = CGRectMake(12,
+//                                                    y_Position + ChatDetailcell.sender_bubbleimgView.frame.origin.y,
+//                                                    MAX(dataSize.width, [COMMON dataSize:ChatDetailcell.sender_msgLbl.text withFontName:@"HelveticaNeue" ofSize:15 withSize:CGSizeMake(195.0, 999.0)].width + BUBBLE_WIDTH_SPACE)+20,
+//                                                    dataSize.height+BUBBLE_IMAGE_HEIGHT);
+//            
+//            
+//            
+//            
+//        }
+//        
+//    }
+//    
+//}
+//
 
 
 #pragma mark - All the other junk for the sample project
@@ -336,6 +436,8 @@
     _transparentView.hidden = NO;
     
     _backgroundView.hidden = NO;
+    //[chatButton setBackgroundImage:[UIImage imageNamed:@"image_active"] forState:UIControlStateNormal];
+
 }
 
 -(void)sendAction:(id)sender{
@@ -357,7 +459,7 @@
         [self loadSendMessageAPI:receiverId conversationId:conversationID];
         
     }
-    chatView.textView.text=@"";
+    //chatView.textView.text=@"";
 }
 
 
