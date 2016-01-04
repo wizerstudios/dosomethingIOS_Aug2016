@@ -215,7 +215,7 @@
          [chatView.placeHolderLabel setHidden:NO];
     
     
-      //  [self.view endEditing:YES];
+       [self.view endEditing:YES];
     
     
 }
@@ -352,7 +352,7 @@
     
     if([str length] > 0){
         
-       // [self.view endEditing:YES];
+        [self.view endEditing:YES];
 
         [self loadSendMessageAPI:receiverId conversationId:conversationID];
         

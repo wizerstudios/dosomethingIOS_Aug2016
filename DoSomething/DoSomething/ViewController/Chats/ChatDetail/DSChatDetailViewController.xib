@@ -46,7 +46,7 @@
                         <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MkV-9D-hoy">
                             <rect key="frame" x="270" y="8" width="40" height="40"/>
                             <animations/>
-                            <state key="normal" title=" " image="menu_Icon" backgroundImage="menu_active">
+                            <state key="normal" title=" " backgroundImage="menu_active">
                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                             </state>
                             <connections>
@@ -163,7 +163,6 @@
         </view>
     </objects>
     <resources>
-        <image name="menu_Icon" width="33" height="33"/>
         <image name="menu_active" width="67" height="67"/>
     </resources>
 </document>
