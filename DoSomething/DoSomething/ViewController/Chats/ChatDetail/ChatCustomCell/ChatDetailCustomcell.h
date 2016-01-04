@@ -21,5 +21,6 @@
 }
 
 -(void)getMessageArray:(NSMutableArray *)Array;
+@property(nonatomic,strong)IBOutlet UILabel * chatTime;
 
 @end

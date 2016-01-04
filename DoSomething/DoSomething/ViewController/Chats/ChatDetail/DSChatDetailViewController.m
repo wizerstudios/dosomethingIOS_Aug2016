@@ -10,6 +10,7 @@
 #import "CustomNavigationView.h"
 #import "DSConfig.h"
 #import "DSAppCommon.h"
+#import "AppDelegate.h"
 #import "DSWebservice.h"
 #import "IQKeyboardManager.h"
 #import "IQUIView+IQKeyboardToolbar.h"
@@ -42,13 +43,13 @@
     
     [super viewDidLoad];
     
-    [[IQKeyboardManager sharedManager] considerToolbarPreviousNextInViewClass:[chatTableView class]];
+    [[IQKeyboardManager sharedManager] considerToolbarPreviousNextInViewClass:[self.view class]];
     
     webService = [[DSWebservice alloc]init];
     
     conversationArray = [[NSMutableArray alloc]init];
     
-    [self loadNavigation];
+   
     
     [self displayUserDetailsView];
     
@@ -58,9 +59,10 @@
 
 - (void)viewWillAppear:(BOOL)animated
 {
+     [self loadNavigation];
     [super viewWillAppear:animated];
     
-     messageTimer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(loadConverstionAPI) userInfo:nil repeats:YES];
+     messageTimer = [NSTimer scheduledTimerWithTimeInterval:5.0 target:self selector:@selector(loadConverstionAPI) userInfo:nil repeats:YES];
     
     [chatView.postButton addTarget:self action:@selector(sendAction:) forControlEvents:UIControlEventTouchUpInside];
     
@@ -213,7 +215,7 @@
          [chatView.placeHolderLabel setHidden:NO];
     
     
-        [self.view endEditing:YES];
+      //  [self.view endEditing:YES];
     
     
 }
@@ -245,6 +247,8 @@
         [[NSBundle mainBundle] loadNibNamed:@"ChatDetailCustomcell" owner:self options:nil];
         cell = chatCustomcell;
     }
+    
+    
     [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
     [cell getMessageArray:[conversationArray objectAtIndex:indexPath.row]];
     return cell;
@@ -310,6 +314,9 @@
     _backgroundView.hidden = YES;
     
     _menuImageview.hidden = NO;
+    
+    [self loadDeleteUserChatHistory];
+    
 }
 
 - (IBAction)pressBlock:(id)sender {
@@ -319,6 +326,7 @@
     _backgroundView.hidden = YES;
     
     _menuImageview.hidden = NO;
+    [self loadblockUser];
     
 }
 - (IBAction)showReallyFunkyIBActionSheet:(id)sender
@@ -344,7 +352,7 @@
     
     if([str length] > 0){
         
-        [self.view endEditing:YES];
+       // [self.view endEditing:YES];
 
         [self loadSendMessageAPI:receiverId conversationId:conversationID];
         
@@ -422,4 +430,33 @@
     
 }
 
+#pragma deleteuserchatdetails
+-(void)loadDeleteUserChatHistory
+{
+     NSString *conversationID = [chatuserDetailsDict valueForKey:@"id"];
+    
+    [webService deleteUserChatHist:DeleteConversation sessionid:[COMMON getSessionID] chat_user_id:conversationID success:^(AFHTTPRequestOperation *operation, id responseObject)
+    {
+        NSLog(@"response:%@",responseObject);
+        
+        [conversationArray removeAllObjects];
+        [chatTableView reloadData];
+        
+        
+        
+    } failure:^(AFHTTPRequestOperation *operation, id error) {
+       
+    }];
+}
+-(void)loadblockUser
+{
+     NSString *conversationID = [chatuserDetailsDict valueForKey:@"id"];
+    
+    [webService blockUser:BlockUser_API sessionid:[COMMON getSessionID] block_user_id:conversationID success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSLog(@"response:%@",responseObject);
+        
+    } failure:^(AFHTTPRequestOperation *operation, id error) {
+        
+    }];
+}
 @end

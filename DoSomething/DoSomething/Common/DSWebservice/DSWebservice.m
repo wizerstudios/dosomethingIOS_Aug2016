@@ -628,7 +628,7 @@ request_send_user_id:(NSString *)request_send_user_id
          success:(WebserviceRequestSuccessHandler)success
          failure:(WebserviceRequestFailureHandler)failure
 {
-    urlString = [URL_FOR_RESOURCE(@"") stringByAppendingString:[NSString stringWithFormat:@"%@?sessionid=%@&chat_user_id%@",blockUserURL,sessionid,block_user_id]];
+    urlString = [URL_FOR_RESOURCE(@"") stringByAppendingString:[NSString stringWithFormat:@"%@?sessionid=%@&conversationId=%@",blockUserURL,sessionid,block_user_id]];
     NSLog(@"urlString = %@",urlString);
     
     [self sendRequestWithURLString:urlString
@@ -646,7 +646,7 @@ request_send_user_id:(NSString *)request_send_user_id
                   success:(WebserviceRequestSuccessHandler)success
                   failure:(WebserviceRequestFailureHandler)failure
 {
-    urlString = [URL_FOR_RESOURCE(@"") stringByAppendingString:[NSString stringWithFormat:@"%@?sessionid=%@&chat_user_id%@",deleteUserChatURL,sessionid,chat_user_id]];
+    urlString = [URL_FOR_RESOURCE(@"") stringByAppendingString:[NSString stringWithFormat:@"%@?sessionid=%@&conversationId=%@",deleteUserChatURL,sessionid,chat_user_id]];
     NSLog(@"urlString = %@",urlString);
     
     [self sendRequestWithURLString:urlString
