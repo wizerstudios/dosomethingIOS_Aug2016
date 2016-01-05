@@ -113,7 +113,7 @@
 - (void)viewDidLoad {
     
     [super viewDidLoad];
-    
+     NSLog(@"password = %@",emailPasswordToRegister);
     [[IQKeyboardManager sharedManager] considerToolbarPreviousNextInViewClass:[_tableviewProfile class]];
     
     locationManager                 = [[CLLocationManager alloc] init];
@@ -151,6 +151,7 @@
     else{
         if([profileDict valueForKey:@"hobbieslist"]!=NULL)
                hobbiesMainArray = [[profileDict valueForKey:@"hobbieslist"]mutableCopy];
+        emailPasswordToRegister=[profileDict valueForKey:@"password"];
         
     }
     [[NSUserDefaults standardUserDefaults]setObject:hobbiesMainArray forKey:HobbiesArray];
@@ -715,6 +716,19 @@
     if(textField.tag == 1000){
         [self loadDatePicker:tag];
     }
+    else if (textField.tag == 15)
+    {
+        emailPasswordToRegister = @"";
+    }
+    else if (textField.tag ==16)
+    {
+        currentPassword  =@"";
+    }
+    else if (textField.tag == 17)
+    {
+        confirmPassword =@"";
+    }
+
 }
 
 - (void)textFieldDidEndEditing:(UITextField *)textField{
@@ -1475,7 +1489,8 @@
                  emailPasswordToRegister=[profileDict valueForKey:@"password"];
                  NSLog(@"emalpassword:%@",emailPasswordToRegister);
              }
-            cell.passwordTextField.text  =(emailPasswordToRegister==nil)?[profileDict valueForKey:@"password"]:emailPasswordToRegister;
+           emailPasswordToRegister =(emailPasswordToRegister==nil)?[profileDict valueForKey:@"password"]:emailPasswordToRegister;
+           //cell.passwordTextField.placeholder  =(emailPasswordToRegister!=nil)?@"Your Current password":emailPasswordToRegister;
             cell.currentpassword.text    =(currentPassword==nil)?@"":@"Your new password";
             cell.conformationpassword.text =(confirmPassword==nil)?@"":@"confirm your new password";
             
@@ -1501,8 +1516,9 @@
         }
         else
         {
+              NSLog(@"cell.emailTextField.text=%@",emailPasswordToRegister);
             cell.emailTextField.text = [self getEmail];
-          cell.passwordTextField.text =[self getPassword];
+            cell.passwordTextField.text =emailPasswordToRegister  ;            //[self getPassword];
             cell.currentpassword.hidden=YES;
             cell.conformationpassword.hidden=YES;
             cell.currentpasswordlbl.text =@"Password";
@@ -2281,8 +2297,6 @@
     NSLog(@"hobby:%@",hobbiesNameArray);
     strType      = (selectEmail== YES)?@"1":@"2";
     strProfileID = (FBprofileID!=nil)?FBprofileID:@"";
-    //emailAddressToRegister =cell.emailTextField.text;
-    //emailPasswordToRegister = cell.passwordTextField.text;
     strDOB       = (currentTextfield.text !=nil)?currentTextfield.text :[profileDict valueForKey:@"date_of_birth"];
     [self dateConverter];
 
@@ -2350,40 +2364,68 @@
          if ([emailPasswordToRegister isEqualToString:@""] || emailPasswordToRegister == nil)
         {
             
-            [self showAltermessage:PASSWORD_REQUIRED];
+            [self showAltermessage:@"Enter your Current password"];
             [COMMON removeLoading];
             return;
         }
         
-         else if (![[profileDict valueForKey:@"password"] isEqualToString:emailPasswordToRegister])
+        else if (![[profileDict valueForKey:@"password"] isEqualToString:emailPasswordToRegister])
         {
+            
             [self showAltermessage:@"Your password mismatching"];
             [COMMON removeLoading];
             return;
         }
-        else if ([currentPassword isEqualToString:@""] || currentPassword == nil)
+        
+        else if([currentPassword isEqualToString:@""])
         {
+            if([emailPasswordToRegister isEqualToString:@""])
+            {
+                [self showAltermessage:@"Enter your current password"];
+                [COMMON removeLoading];
+                return;
+            }
+            else if(![confirmPassword isEqualToString:@""] && confirmPassword!=nil)
+            {
+                [self showAltermessage:@"Enter your New password"];
+                [COMMON removeLoading];
+                return;
+            }
+            else
             
-            [self showAltermessage:PASSWORD_REQUIRED];
-            [COMMON removeLoading];
-            return;
+            {
+                [COMMON removeLoading];
+                [self updateAPI];
+           
+            }
+            
         }
-        else if ([confirmPassword isEqualToString:@""] || confirmPassword == nil)
+       else  if ([confirmPassword isEqualToString:@""] || confirmPassword==nil)
         {
+            if([currentPassword isEqualToString:@""])
+            {
+                [self showAltermessage:@"Enter New password"];
+                [COMMON removeLoading];
+                return;
+            }
+            else if (currentPassword!=nil || confirmPassword !=nil)
+            {
+                if(![currentPassword isEqualToString:confirmPassword])
+                [self showAltermessage:@"Password don't match"];
+                [COMMON removeLoading];
+                return;
+                
+            }
+            else
+            {
+                [COMMON removeLoading];
+                [self updateAPI];
+            }
             
-            [self showAltermessage:@"Enter confirmpassword"];
-            [COMMON removeLoading];
-            return;
         }
 
-       else if (![currentPassword isEqualToString:confirmPassword])
-        {
-            [self showAltermessage:@"Password don't match"];
-            [COMMON removeLoading];
-            return;
 
-        }
-       else
+        else
          {
            [COMMON removeLoading];
            [self updateAPI];
