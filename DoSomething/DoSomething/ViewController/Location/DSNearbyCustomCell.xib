@@ -7,14 +7,14 @@
     <customFonts key="customFonts">
         <mutableArray key="Patron-Bold.ttf">
             <string>Patron-Bold</string>
-            <string>Patron-Bold</string>
         </mutableArray>
         <mutableArray key="Patron-Medium.ttf">
             <string>Patron-Medium</string>
+            <string>Patron-Medium</string>
+            <string>Patron-Medium</string>
+            <string>Patron-Medium</string>
         </mutableArray>
         <mutableArray key="Patron-Regular.ttf">
-            <string>Patron-Regular</string>
-            <string>Patron-Regular</string>
             <string>Patron-Regular</string>
         </mutableArray>
     </customFonts>
@@ -51,8 +51,8 @@
                                     <constraint firstAttribute="width" constant="100" id="bcC-o6-oo3"/>
                                     <constraint firstAttribute="height" constant="23" id="p34-Of-ScX"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" name="Patron-Regular" family="Patron" pointSize="12"/>
-                                <color key="textColor" red="0.40000000000000002" green="0.40000000000000002" blue="0.40000000000000002" alpha="1" colorSpace="deviceRGB"/>
+                                <fontDescription key="fontDescription" name="Patron-Medium" family="Patron" pointSize="10"/>
+                                <color key="textColor" red="0.40000000000000002" green="0.40000000000000002" blue="0.40000000000000002" alpha="0.80454371165644167" colorSpace="deviceRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="500" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1Y6-JG-6XQ">
@@ -107,8 +107,8 @@
                                     <constraint firstAttribute="width" constant="126" id="77Q-cJ-Zki"/>
                                     <constraint firstAttribute="height" constant="21" id="fml-0d-uOL"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" name="Patron-Regular" family="Patron" pointSize="12"/>
-                                <color key="textColor" red="0.40000000000000002" green="0.40000000000000002" blue="0.40000000000000002" alpha="1" colorSpace="deviceRGB"/>
+                                <fontDescription key="fontDescription" name="Patron-Medium" family="Patron" pointSize="10"/>
+                                <color key="textColor" red="0.40000000000000002" green="0.40000000000000002" blue="0.40000000000000002" alpha="0.80121261503067487" colorSpace="deviceRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="wordWrap" translatesAutoresizingMaskIntoConstraints="NO" id="kfk-fw-2D9">
@@ -170,8 +170,8 @@
                                     <constraint firstAttribute="width" constant="265" id="bNJ-E0-WmG"/>
                                     <constraint firstAttribute="height" constant="30" id="hmF-7c-Leb"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" name="Patron-Regular" family="Patron" pointSize="12"/>
-                                <color key="textColor" red="0.40000000000000002" green="0.40000000000000002" blue="0.40000000000000002" alpha="1" colorSpace="deviceRGB"/>
+                                <fontDescription key="fontDescription" name="Patron-Medium" family="Patron" pointSize="10"/>
+                                <color key="textColor" red="0.40000000000000002" green="0.40000000000000002" blue="0.40000000000000002" alpha="0.80414829371165641" colorSpace="deviceRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
@@ -223,7 +223,7 @@
                                     <constraint firstAttribute="height" constant="23" id="EZe-jP-MVs"/>
                                     <constraint firstAttribute="width" constant="268" id="h6e-Hk-s9f"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" name="Patron-Bold" family="Patron" pointSize="13"/>
+                                <fontDescription key="fontDescription" name="Patron-Regular" family="Patron" pointSize="11"/>
                                 <color key="textColor" red="0.85490196080000003" green="0.15686274510000001" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>

@@ -357,7 +357,7 @@
         NSDictionary *awesomeFontDict = [NSDictionary dictionaryWithObject:awesomeFont forKey:NSFontAttributeName];
         NSMutableAttributedString *awAttrString = [[NSMutableAttributedString alloc] initWithString:strUserGender attributes: awesomeFontDict];
         
-        UIFont *patronFont = [UIFont fontWithName:@"patron-bold" size:16];
+        UIFont *patronFont = [UIFont fontWithName:@"patron-Medium" size:14];
         NSDictionary *patronFontDict = [NSDictionary dictionaryWithObject:patronFont forKey:NSFontAttributeName];
         NSMutableAttributedString *patAttrString = [[NSMutableAttributedString alloc]initWithString: [self getData] attributes:patronFontDict];
         
