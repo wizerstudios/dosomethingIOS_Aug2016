@@ -22,6 +22,7 @@
     IBOutlet DSProfileTableViewCell *CellSwitchOn;
     IBOutlet DSProfileTableViewCell *CellTermsOfUse;
     IBOutlet DSProfileTableViewCell *cellTextView;
+    IBOutlet DSProfileTableViewCell *cellloginTypeView;
    
     IBOutlet UIView *profileGenderView;
     

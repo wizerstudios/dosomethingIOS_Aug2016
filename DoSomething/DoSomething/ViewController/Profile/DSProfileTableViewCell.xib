@@ -3,6 +3,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9051"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <customFonts key="customFonts">
         <mutableArray key="Patron-Bold.ttf">
@@ -39,6 +40,7 @@
             <string>Patron-Regular</string>
             <string>Patron-Regular</string>
             <string>Patron-Regular</string>
+            <string>Patron-Regular</string>
         </mutableArray>
     </customFonts>
     <objects>
@@ -55,6 +57,7 @@
                 <outlet property="cellProfileImg" destination="KGk-i7-Jjw" id="U1r-DQ-mAX"/>
                 <outlet property="cellTextField" destination="Vd7-lK-9ag" id="iaC-bq-dBn"/>
                 <outlet property="cellTextView" destination="fgc-Db-ZpK" id="nqk-XJ-vMr"/>
+                <outlet property="cellloginTypeView" destination="ccx-HL-1Pr" id="pFK-Qp-l6P"/>
                 <outlet property="profileGenderLabel" destination="Aq5-3I-doL" id="EyK-WS-nTI"/>
                 <outlet property="profileGenderValueLabel" destination="QOA-QP-Ciw" id="Hh0-u6-DZk"/>
                 <outlet property="profileGenderView" destination="TYu-zj-QOQ" id="pRu-Tc-J2N"/>
@@ -127,8 +130,6 @@
             <animations/>
             <connections>
                 <outlet property="hobbiesLabel" destination="CBw-9W-xH2" id="LLK-iC-TSe"/>
-                <outlet property="privacyPolicy" destination="bzZ-MU-7QJ" id="WEp-EF-oPJ"/>
-                <outlet property="termsOfUse" destination="VtB-GW-ldJ" id="UE6-RD-C9L"/>
                 <outlet property="topViewCell" destination="uey-h2-iAy" id="fgE-vy-5Ru"/>
             </connections>
             <point key="canvasLocation" x="286" y="158"/>
@@ -355,114 +356,127 @@
                 <rect key="frame" x="0.0" y="0.0" width="300" height="180"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SHS-IW-ID9">
-                        <rect key="frame" x="0.0" y="46" width="300" height="135"/>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ivt-1I-e1x">
+                        <rect key="frame" x="0.0" y="0.0" width="300" height="180"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Current Password" lineBreakMode="wordWrap" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PmN-E8-WPL">
-                                <rect key="frame" x="7" y="42" width="75" height="22"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Account" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gmr-PN-Cp2">
+                                <rect key="frame" x="5" y="20" width="89" height="14"/>
                                 <animations/>
-                                <fontDescription key="fontDescription" name="Patron-Bold" family="Patron" pointSize="10"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="14" id="7fL-IO-ZCe"/>
+                                    <constraint firstAttribute="width" constant="89" id="edh-Du-Vyu"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="Patron-Bold" family="Patron" pointSize="13"/>
                                 <color key="textColor" red="0.40000000000000002" green="0.40000000000000002" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <textField opaque="NO" clipsSubviews="YES" tag="14" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="sig-cR-Dgx">
-                                <rect key="frame" x="100" y="4" width="200" height="30"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SHS-IW-ID9">
+                                <rect key="frame" x="0.0" y="44" width="300" height="135"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Current Password" lineBreakMode="wordWrap" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PmN-E8-WPL">
+                                        <rect key="frame" x="7" y="42" width="75" height="22"/>
+                                        <animations/>
+                                        <fontDescription key="fontDescription" name="Patron-Bold" family="Patron" pointSize="10"/>
+                                        <color key="textColor" red="0.40000000000000002" green="0.40000000000000002" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <textField opaque="NO" clipsSubviews="YES" tag="14" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="sig-cR-Dgx">
+                                        <rect key="frame" x="100" y="4" width="200" height="30"/>
+                                        <animations/>
+                                        <color key="textColor" red="0.59999999999999998" green="0.59999999999999998" blue="0.59999999999999998" alpha="1" colorSpace="calibratedRGB"/>
+                                        <fontDescription key="fontDescription" name="Patron-Regular" family="Patron" pointSize="10"/>
+                                        <textInputTraits key="textInputTraits" autocorrectionType="no"/>
+                                        <connections>
+                                            <outlet property="delegate" destination="-1" id="JcU-75-xM7"/>
+                                        </connections>
+                                    </textField>
+                                    <textField opaque="NO" clipsSubviews="YES" tag="15" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Your Current password" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="nd4-Zf-byl">
+                                        <rect key="frame" x="100" y="45" width="200" height="18"/>
+                                        <animations/>
+                                        <color key="textColor" red="0.59999999999999998" green="0.59999999999999998" blue="0.59999999999999998" alpha="1" colorSpace="calibratedRGB"/>
+                                        <fontDescription key="fontDescription" name="Patron-Regular" family="Patron" pointSize="10"/>
+                                        <textInputTraits key="textInputTraits" autocorrectionType="no" secureTextEntry="YES"/>
+                                        <connections>
+                                            <outlet property="delegate" destination="-1" id="2nH-NW-TmI"/>
+                                        </connections>
+                                    </textField>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Email" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Pdf-dj-LfX">
+                                        <rect key="frame" x="7" y="15" width="75" height="13"/>
+                                        <animations/>
+                                        <fontDescription key="fontDescription" name="Patron-Bold" family="Patron" pointSize="10"/>
+                                        <color key="textColor" red="0.40000000000000002" green="0.40000000000000002" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Password" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6TJ-ML-Q9A">
+                                        <rect key="frame" x="7" y="75" width="75" height="18"/>
+                                        <animations/>
+                                        <fontDescription key="fontDescription" name="Patron-Bold" family="Patron" pointSize="10"/>
+                                        <color key="textColor" red="0.40000000000000002" green="0.40000000000000002" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Password  Confirmation" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bkO-e6-NLw">
+                                        <rect key="frame" x="7" y="104" width="75" height="23"/>
+                                        <animations/>
+                                        <fontDescription key="fontDescription" name="Patron-Bold" family="Patron" pointSize="10"/>
+                                        <color key="textColor" red="0.40000000000000002" green="0.40000000000000002" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <textField opaque="NO" clipsSubviews="YES" tag="16" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Your new password" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="NqL-pg-IGU">
+                                        <rect key="frame" x="100" y="72" width="200" height="18"/>
+                                        <animations/>
+                                        <color key="textColor" red="0.40000000000000002" green="0.40000000000000002" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
+                                        <fontDescription key="fontDescription" name="Patron-Bold" family="Patron" pointSize="10"/>
+                                        <textInputTraits key="textInputTraits" autocorrectionType="no" secureTextEntry="YES"/>
+                                        <connections>
+                                            <outlet property="delegate" destination="-1" id="4n7-x7-yoN"/>
+                                        </connections>
+                                    </textField>
+                                    <textField opaque="NO" clipsSubviews="YES" tag="17" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Confirm your new password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Ac8-mg-rLM">
+                                        <rect key="frame" x="100" y="105" width="200" height="20"/>
+                                        <animations/>
+                                        <color key="textColor" red="0.40000000000000002" green="0.40000000000000002" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
+                                        <fontDescription key="fontDescription" name="Patron-Bold" family="Patron" pointSize="10"/>
+                                        <textInputTraits key="textInputTraits" autocorrectionType="no" secureTextEntry="YES"/>
+                                        <connections>
+                                            <outlet property="delegate" destination="-1" id="jnP-iW-cQe"/>
+                                        </connections>
+                                    </textField>
+                                </subviews>
                                 <animations/>
-                                <color key="textColor" red="0.59999999999999998" green="0.59999999999999998" blue="0.59999999999999998" alpha="1" colorSpace="calibratedRGB"/>
-                                <fontDescription key="fontDescription" name="Patron-Regular" family="Patron" pointSize="10"/>
-                                <textInputTraits key="textInputTraits" autocorrectionType="no"/>
-                                <connections>
-                                    <outlet property="delegate" destination="-1" id="JcU-75-xM7"/>
-                                </connections>
-                            </textField>
-                            <textField opaque="NO" clipsSubviews="YES" tag="15" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Your Current password" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="nd4-Zf-byl">
-                                <rect key="frame" x="100" y="45" width="200" height="18"/>
-                                <animations/>
-                                <color key="textColor" red="0.59999999999999998" green="0.59999999999999998" blue="0.59999999999999998" alpha="1" colorSpace="calibratedRGB"/>
-                                <fontDescription key="fontDescription" name="Patron-Regular" family="Patron" pointSize="10"/>
-                                <textInputTraits key="textInputTraits" autocorrectionType="no" secureTextEntry="YES"/>
-                                <connections>
-                                    <outlet property="delegate" destination="-1" id="2nH-NW-TmI"/>
-                                </connections>
-                            </textField>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Email" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Pdf-dj-LfX">
-                                <rect key="frame" x="7" y="15" width="75" height="13"/>
-                                <animations/>
-                                <fontDescription key="fontDescription" name="Patron-Bold" family="Patron" pointSize="10"/>
-                                <color key="textColor" red="0.40000000000000002" green="0.40000000000000002" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Password" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6TJ-ML-Q9A">
-                                <rect key="frame" x="7" y="75" width="75" height="18"/>
-                                <animations/>
-                                <fontDescription key="fontDescription" name="Patron-Bold" family="Patron" pointSize="10"/>
-                                <color key="textColor" red="0.40000000000000002" green="0.40000000000000002" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Password  Confirmation" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bkO-e6-NLw">
-                                <rect key="frame" x="7" y="104" width="75" height="23"/>
-                                <animations/>
-                                <fontDescription key="fontDescription" name="Patron-Bold" family="Patron" pointSize="10"/>
-                                <color key="textColor" red="0.40000000000000002" green="0.40000000000000002" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <textField opaque="NO" clipsSubviews="YES" tag="16" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Your new password" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="NqL-pg-IGU">
-                                <rect key="frame" x="100" y="72" width="200" height="18"/>
-                                <animations/>
-                                <color key="textColor" red="0.40000000000000002" green="0.40000000000000002" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
-                                <fontDescription key="fontDescription" name="Patron-Bold" family="Patron" pointSize="10"/>
-                                <textInputTraits key="textInputTraits" autocorrectionType="no" secureTextEntry="YES"/>
-                                <connections>
-                                    <outlet property="delegate" destination="-1" id="4n7-x7-yoN"/>
-                                </connections>
-                            </textField>
-                            <textField opaque="NO" clipsSubviews="YES" tag="17" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Confirm your new password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Ac8-mg-rLM">
-                                <rect key="frame" x="100" y="105" width="200" height="20"/>
-                                <animations/>
-                                <color key="textColor" red="0.40000000000000002" green="0.40000000000000002" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
-                                <fontDescription key="fontDescription" name="Patron-Bold" family="Patron" pointSize="10"/>
-                                <textInputTraits key="textInputTraits" autocorrectionType="no" secureTextEntry="YES"/>
-                                <connections>
-                                    <outlet property="delegate" destination="-1" id="jnP-iW-cQe"/>
-                                </connections>
-                            </textField>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
                         </subviews>
                         <animations/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" red="0.90980392156862744" green="0.90980392156862744" blue="0.90980392156862744" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
-                            <constraint firstAttribute="height" constant="135" id="o0Z-qe-DDK"/>
+                            <constraint firstAttribute="trailing" secondItem="gmr-PN-Cp2" secondAttribute="trailing" constant="206" id="AuU-SB-2Vl"/>
+                            <constraint firstItem="SHS-IW-ID9" firstAttribute="top" secondItem="gmr-PN-Cp2" secondAttribute="bottom" constant="10" id="Mt5-1G-T7O"/>
+                            <constraint firstItem="gmr-PN-Cp2" firstAttribute="leading" secondItem="ivt-1I-e1x" secondAttribute="leading" constant="5" id="O6G-kf-mVT"/>
+                            <constraint firstItem="SHS-IW-ID9" firstAttribute="leading" secondItem="ivt-1I-e1x" secondAttribute="leading" id="Q0P-Rj-JAQ"/>
+                            <constraint firstAttribute="trailing" secondItem="SHS-IW-ID9" secondAttribute="trailing" id="YVf-bD-Eiq"/>
+                            <constraint firstItem="gmr-PN-Cp2" firstAttribute="top" secondItem="ivt-1I-e1x" secondAttribute="top" constant="20" id="sSm-vO-gQb"/>
+                            <constraint firstAttribute="bottom" secondItem="SHS-IW-ID9" secondAttribute="bottom" constant="1" id="v1W-kH-IQG"/>
                         </constraints>
                     </view>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Account" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gmr-PN-Cp2">
-                        <rect key="frame" x="0.0" y="25" width="89" height="14"/>
-                        <animations/>
-                        <constraints>
-                            <constraint firstAttribute="width" constant="89" id="a4A-4j-z6z"/>
-                            <constraint firstAttribute="height" constant="14" id="z7Q-MO-e0U"/>
-                        </constraints>
-                        <fontDescription key="fontDescription" name="Patron-Bold" family="Patron" pointSize="13"/>
-                        <color key="textColor" red="0.40000000000000002" green="0.40000000000000002" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
-                        <nil key="highlightedColor"/>
-                    </label>
                 </subviews>
                 <animations/>
                 <color key="backgroundColor" red="0.90980392156862744" green="0.90980392156862744" blue="0.90980392156862744" alpha="1" colorSpace="calibratedRGB"/>
                 <constraints>
-                    <constraint firstAttribute="trailing" secondItem="SHS-IW-ID9" secondAttribute="trailing" id="1oc-bx-GLD"/>
-                    <constraint firstItem="gmr-PN-Cp2" firstAttribute="top" secondItem="W5E-AF-OBh" secondAttribute="top" constant="25" id="M8Z-k9-j8w"/>
-                    <constraint firstItem="gmr-PN-Cp2" firstAttribute="leading" secondItem="W5E-AF-OBh" secondAttribute="leading" id="PY0-ZN-BBh"/>
-                    <constraint firstItem="SHS-IW-ID9" firstAttribute="leading" secondItem="W5E-AF-OBh" secondAttribute="leading" id="W18-9S-gpu"/>
-                    <constraint firstItem="SHS-IW-ID9" firstAttribute="top" secondItem="gmr-PN-Cp2" secondAttribute="bottom" constant="7" id="gTl-bA-UG9"/>
-                    <constraint firstAttribute="bottom" secondItem="SHS-IW-ID9" secondAttribute="bottom" constant="-1" id="hkJ-Xg-mIr"/>
+                    <constraint firstAttribute="bottom" secondItem="ivt-1I-e1x" secondAttribute="bottom" id="Okb-Pw-iLp"/>
+                    <constraint firstItem="ivt-1I-e1x" firstAttribute="leading" secondItem="W5E-AF-OBh" secondAttribute="leading" id="dbQ-Ke-olk"/>
+                    <constraint firstItem="ivt-1I-e1x" firstAttribute="top" secondItem="W5E-AF-OBh" secondAttribute="top" id="f9o-A0-8xx"/>
+                    <constraint firstAttribute="trailing" secondItem="ivt-1I-e1x" secondAttribute="trailing" id="l4b-ao-mVW"/>
                 </constraints>
             </tableViewCellContentView>
             <animations/>
             <connections>
+                <outlet property="Accounttittlelbl" destination="gmr-PN-Cp2" id="86v-6D-bgp"/>
                 <outlet property="confirmpasswordlbl" destination="bkO-e6-NLw" id="W0h-w5-fc1"/>
                 <outlet property="conformationpassword" destination="Ac8-mg-rLM" id="o6t-LK-Gba"/>
                 <outlet property="currentpassword" destination="NqL-pg-IGU" id="F92-bL-eiL"/>
                 <outlet property="currentpasswordlbl" destination="PmN-E8-WPL" id="Flp-q1-QOT"/>
                 <outlet property="emailTextField" destination="sig-cR-Dgx" id="Fnb-Nf-P8O"/>
+                <outlet property="emailview" destination="SHS-IW-ID9" id="8g8-cO-ZUH"/>
                 <outlet property="passwordTextField" destination="nd4-Zf-byl" id="XJa-vF-VIw"/>
                 <outlet property="passwordlbl" destination="6TJ-ML-Q9A" id="mXI-r2-KBc"/>
             </connections>
@@ -547,6 +561,7 @@
             <connections>
                 <outlet property="SoundSwitchBtn" destination="1BP-HX-6Px" id="5jK-26-QoD"/>
                 <outlet property="messSwitchBtn" destination="ksm-Un-eR9" id="erO-nc-otY"/>
+                <outlet property="notificationTittlelbl" destination="Uec-ou-dGP" id="iQs-Gz-EL1"/>
                 <outlet property="vibrationSwitchBtn" destination="2xI-kw-yw4" id="Szi-mX-FKA"/>
             </connections>
             <point key="canvasLocation" x="280" y="799.5"/>
@@ -591,29 +606,32 @@
                         <animations/>
                         <color key="backgroundColor" red="0.90980392156862744" green="0.90980392156862744" blue="0.90980392156862744" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
-                            <constraint firstAttribute="trailing" secondItem="bzZ-MU-7QJ" secondAttribute="trailing" id="8hi-hS-t1J"/>
-                            <constraint firstItem="VtB-GW-ldJ" firstAttribute="leading" secondItem="tI3-zn-hET" secondAttribute="leading" id="LPm-xD-38H"/>
-                            <constraint firstItem="bzZ-MU-7QJ" firstAttribute="height" secondItem="VtB-GW-ldJ" secondAttribute="height" id="PGx-G9-6e1"/>
-                            <constraint firstItem="bzZ-MU-7QJ" firstAttribute="top" secondItem="tI3-zn-hET" secondAttribute="top" id="Td7-uY-FK2"/>
-                            <constraint firstItem="bzZ-MU-7QJ" firstAttribute="width" secondItem="VtB-GW-ldJ" secondAttribute="width" id="Z4A-Di-YKc"/>
-                            <constraint firstItem="bzZ-MU-7QJ" firstAttribute="leading" secondItem="VtB-GW-ldJ" secondAttribute="trailing" constant="4" id="emY-l4-4Z6"/>
-                            <constraint firstItem="VtB-GW-ldJ" firstAttribute="top" secondItem="tI3-zn-hET" secondAttribute="top" id="mib-MF-Ujt"/>
-                            <constraint firstAttribute="bottom" secondItem="VtB-GW-ldJ" secondAttribute="bottom" id="nuX-rN-TII"/>
-                            <constraint firstAttribute="height" constant="40" id="tw7-yi-GyD"/>
-                            <constraint firstAttribute="bottom" secondItem="bzZ-MU-7QJ" secondAttribute="bottom" id="wbc-XQ-ZyG"/>
+                            <constraint firstItem="bzZ-MU-7QJ" firstAttribute="leading" secondItem="VtB-GW-ldJ" secondAttribute="trailing" constant="4" id="M9L-6S-2xl"/>
+                            <constraint firstAttribute="bottom" secondItem="VtB-GW-ldJ" secondAttribute="bottom" id="Ofa-fc-w76"/>
+                            <constraint firstItem="VtB-GW-ldJ" firstAttribute="leading" secondItem="tI3-zn-hET" secondAttribute="leading" id="Yc1-HO-AmY"/>
+                            <constraint firstAttribute="trailing" secondItem="bzZ-MU-7QJ" secondAttribute="trailing" id="Z1z-lE-NPj"/>
+                            <constraint firstItem="bzZ-MU-7QJ" firstAttribute="top" secondItem="tI3-zn-hET" secondAttribute="top" id="Z5l-AK-ddb"/>
+                            <constraint firstItem="bzZ-MU-7QJ" firstAttribute="width" secondItem="VtB-GW-ldJ" secondAttribute="width" id="nP1-rm-QXE"/>
+                            <constraint firstItem="bzZ-MU-7QJ" firstAttribute="height" secondItem="VtB-GW-ldJ" secondAttribute="height" id="nT1-1V-ahO"/>
+                            <constraint firstAttribute="bottom" secondItem="bzZ-MU-7QJ" secondAttribute="bottom" id="rVQ-ZE-Hv0"/>
+                            <constraint firstItem="VtB-GW-ldJ" firstAttribute="top" secondItem="tI3-zn-hET" secondAttribute="top" id="usr-h4-5R7"/>
                         </constraints>
                     </view>
                 </subviews>
                 <animations/>
                 <color key="backgroundColor" red="0.90980392156862744" green="0.90980392156862744" blue="0.90980392156862744" alpha="1" colorSpace="calibratedRGB"/>
                 <constraints>
-                    <constraint firstAttribute="trailing" secondItem="tI3-zn-hET" secondAttribute="trailing" id="K59-7u-tU6"/>
-                    <constraint firstItem="tI3-zn-hET" firstAttribute="top" secondItem="yac-Lg-eap" secondAttribute="top" constant="20" id="PcS-XN-lQs"/>
-                    <constraint firstItem="tI3-zn-hET" firstAttribute="leading" secondItem="yac-Lg-eap" secondAttribute="leading" id="bXe-gT-JRP"/>
-                    <constraint firstAttribute="bottom" secondItem="tI3-zn-hET" secondAttribute="bottom" constant="19" id="csA-vD-01t"/>
+                    <constraint firstItem="tI3-zn-hET" firstAttribute="centerY" secondItem="yac-Lg-eap" secondAttribute="centerY" id="0ae-Oh-eW6"/>
+                    <constraint firstAttribute="trailing" secondItem="tI3-zn-hET" secondAttribute="trailing" id="F8R-cN-g6k"/>
+                    <constraint firstItem="tI3-zn-hET" firstAttribute="top" secondItem="yac-Lg-eap" secondAttribute="topMargin" constant="12" id="h6p-XO-Gnc"/>
+                    <constraint firstItem="tI3-zn-hET" firstAttribute="leading" secondItem="yac-Lg-eap" secondAttribute="leading" id="kWu-7R-xoa"/>
                 </constraints>
             </tableViewCellContentView>
             <animations/>
+            <connections>
+                <outlet property="privacyPolicy" destination="bzZ-MU-7QJ" id="4wL-FI-9PJ"/>
+                <outlet property="termsOfUse" destination="VtB-GW-ldJ" id="ERa-vt-ohV"/>
+            </connections>
             <point key="canvasLocation" x="751" y="716"/>
         </tableViewCell>
         <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="fi2-qG-tV9" customClass="DSProfileTableViewCell">
@@ -803,6 +821,71 @@
                 <outlet property="textViewAboutYou" destination="d6I-S9-MzF" id="clv-p4-OFl"/>
             </connections>
             <point key="canvasLocation" x="751" y="568"/>
+        </tableViewCell>
+        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="ccx-HL-1Pr" customClass="DSProfileTableViewCell">
+            <rect key="frame" x="0.0" y="0.0" width="300" height="50"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="ccx-HL-1Pr" id="vTU-4W-FNn">
+                <rect key="frame" x="0.0" y="0.0" width="300" height="49"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0GV-jn-QOK">
+                        <rect key="frame" x="0.0" y="0.0" width="300" height="51"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yyu-Og-U1D">
+                                <rect key="frame" x="50" y="10" width="240" height="30"/>
+                                <animations/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="4kF-N3-h58"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="Patron-Regular" family="Patron" pointSize="10"/>
+                                <color key="textColor" red="0.40000000000000002" green="0.40000000000000002" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="8aA-jW-dS1">
+                                <rect key="frame" x="30" y="15" width="10" height="10"/>
+                                <animations/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="10" id="UnZ-Mo-sSK"/>
+                                    <constraint firstAttribute="width" constant="10" id="ukc-eP-GpJ"/>
+                                </constraints>
+                            </imageView>
+                        </subviews>
+                        <animations/>
+                        <color key="backgroundColor" red="0.90980392156862744" green="0.90980392156862744" blue="0.90980392156862744" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstItem="yyu-Og-U1D" firstAttribute="leading" secondItem="8aA-jW-dS1" secondAttribute="trailing" constant="10" id="3IT-VX-COD"/>
+                            <constraint firstAttribute="height" constant="51" id="CVb-vC-l9N"/>
+                            <constraint firstAttribute="trailing" secondItem="yyu-Og-U1D" secondAttribute="trailing" constant="7" id="CxA-Qx-WyH"/>
+                            <constraint firstItem="8aA-jW-dS1" firstAttribute="top" secondItem="0GV-jn-QOK" secondAttribute="top" constant="15" id="LTP-vC-aKY"/>
+                            <constraint firstAttribute="trailing" secondItem="yyu-Og-U1D" secondAttribute="trailing" constant="10" id="ajX-Xf-qun"/>
+                            <constraint firstAttribute="bottom" secondItem="yyu-Og-U1D" secondAttribute="bottom" constant="11" id="gSr-al-hY6"/>
+                            <constraint firstItem="yyu-Og-U1D" firstAttribute="top" secondItem="0GV-jn-QOK" secondAttribute="top" constant="10" id="kB6-Fu-E3h"/>
+                            <constraint firstAttribute="trailing" secondItem="yyu-Og-U1D" secondAttribute="trailing" constant="10" id="n2S-ql-YHt"/>
+                            <constraint firstItem="8aA-jW-dS1" firstAttribute="leading" secondItem="0GV-jn-QOK" secondAttribute="leading" constant="30" id="yAL-OA-j8b"/>
+                        </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="CxA-Qx-WyH"/>
+                                <exclude reference="ajX-Xf-qun"/>
+                            </mask>
+                        </variation>
+                    </view>
+                </subviews>
+                <animations/>
+                <constraints>
+                    <constraint firstItem="0GV-jn-QOK" firstAttribute="top" secondItem="vTU-4W-FNn" secondAttribute="top" id="9jy-NG-FOo"/>
+                    <constraint firstAttribute="trailing" secondItem="0GV-jn-QOK" secondAttribute="trailing" id="Abl-Am-L3t"/>
+                    <constraint firstItem="0GV-jn-QOK" firstAttribute="leading" secondItem="vTU-4W-FNn" secondAttribute="leading" id="eRu-Rw-d2L"/>
+                    <constraint firstAttribute="bottom" secondItem="0GV-jn-QOK" secondAttribute="bottom" constant="-2" id="u2C-1S-1sy"/>
+                </constraints>
+            </tableViewCellContentView>
+            <animations/>
+            <connections>
+                <outlet property="logilTypelbl" destination="yyu-Og-U1D" id="B86-id-jM1"/>
+                <outlet property="loginTypeImg" destination="8aA-jW-dS1" id="bQR-9r-tUu"/>
+            </connections>
+            <point key="canvasLocation" x="291" y="334"/>
         </tableViewCell>
     </objects>
     <resources>
