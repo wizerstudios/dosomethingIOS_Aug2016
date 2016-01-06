@@ -195,17 +195,32 @@
     {
          self.matchActivityView.hidden =NO;
      NSString *matchprofileImg =[matchUserArray valueForKey:@"image1_thumb"];
-    matchprofileImg= [matchprofileImg stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-    downloadImageFromUrl(matchprofileImg,self.matcheduserImg);
+        if([matchprofileImg isEqualToString:@""] || matchprofileImg ==nil)
+        {
+            [self.matcheduserImg setImage:[UIImage imageNamed:@"profile_noimg"]];
+        }
+        else
+        {
+            matchprofileImg= [matchprofileImg stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+            downloadImageFromUrl(matchprofileImg,self.matcheduserImg);
+            [self.matcheduserImg setImage:[UIImage imageNamed:matchprofileImg]];
+        }
     
     currentuser=[[NSMutableDictionary alloc]init];
     currentuser =[[NSUserDefaults standardUserDefaults] valueForKey:USERDETAILS];
     NSString *objCurrentuserImg=[currentuser valueForKey:@"image1_thumb"];
-    objCurrentuserImg= [objCurrentuserImg stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-    downloadImageFromUrl(objCurrentuserImg,self.currentUserImg);
+        if([objCurrentuserImg isEqualToString:@""] || objCurrentuserImg ==nil)
+        {
+             [self.currentUserImg setImage:[UIImage imageNamed:@"profile_noimg"]];
+        }
+        else
+        {
+            objCurrentuserImg= [objCurrentuserImg stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+            downloadImageFromUrl(objCurrentuserImg,self.currentUserImg);
 
-    [self.currentUserImg setImage:[UIImage imageNamed:objCurrentuserImg]];
-    [self.matcheduserImg setImage:[UIImage imageNamed:matchprofileImg]];
+            [self.currentUserImg setImage:[UIImage imageNamed:objCurrentuserImg]];
+        }
+    
    
     
     self.currentUserImg .layer.cornerRadius = 45;

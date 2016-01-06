@@ -88,11 +88,11 @@
                         <outletCollection property="gestureRecognizers" destination="vMM-5U-eS9" appends="YES" id="LzM-gB-Rv7"/>
                     </connections>
                 </collectionView>
-                <view alpha="0.84999999999999998" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="pwd-6K-YCG">
+                <view alpha="0.84999999999999998" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pwd-6K-YCG">
                     <rect key="frame" x="0.0" y="63" width="320" height="500"/>
                     <subviews>
-                        <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="zBc-as-c5f">
-                            <rect key="frame" x="20" y="130" width="280" height="200"/>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zBc-as-c5f">
+                            <rect key="frame" x="20" y="130" width="280" height="240"/>
                             <subviews>
                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="d4d-mC-Tg8">
                                     <rect key="frame" x="35" y="10" width="90" height="90"/>
@@ -136,6 +136,13 @@
                     </subviews>
                     <animations/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstItem="zBc-as-c5f" firstAttribute="centerX" secondItem="pwd-6K-YCG" secondAttribute="centerX" id="7DK-jm-c2O"/>
+                        <constraint firstItem="zBc-as-c5f" firstAttribute="leading" secondItem="pwd-6K-YCG" secondAttribute="leading" constant="20" id="HHh-2w-4Pc"/>
+                        <constraint firstItem="zBc-as-c5f" firstAttribute="centerY" secondItem="pwd-6K-YCG" secondAttribute="centerY" id="Nuu-uQ-NSU"/>
+                        <constraint firstItem="zBc-as-c5f" firstAttribute="top" secondItem="pwd-6K-YCG" secondAttribute="top" constant="130" id="XC9-4X-Dzs"/>
+                        <constraint firstAttribute="trailing" secondItem="zBc-as-c5f" secondAttribute="trailing" constant="20" id="eDN-AJ-RHh"/>
+                    </constraints>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="m8H-NP-Mj6">
                     <rect key="frame" x="320" y="0.0" width="270" height="568"/>
@@ -627,9 +634,13 @@
             <constraints>
                 <constraint firstItem="m8H-NP-Mj6" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="0pK-aL-X6L"/>
                 <constraint firstAttribute="bottom" secondItem="m8H-NP-Mj6" secondAttribute="bottom" id="1TC-Fi-Cb5"/>
+                <constraint firstAttribute="bottom" secondItem="pwd-6K-YCG" secondAttribute="bottom" constant="5" id="3Bh-uS-JzK"/>
                 <constraint firstItem="m8H-NP-Mj6" firstAttribute="leading" secondItem="x4s-f8-PZR" secondAttribute="trailing" constant="10" id="3wj-cw-H9q"/>
                 <constraint firstItem="x4s-f8-PZR" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="10" id="AK0-aj-zIk"/>
+                <constraint firstItem="m8H-NP-Mj6" firstAttribute="leading" secondItem="pwd-6K-YCG" secondAttribute="trailing" id="M9t-ly-q41"/>
+                <constraint firstItem="pwd-6K-YCG" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="63" id="Sys-Er-dZY"/>
                 <constraint firstAttribute="bottom" secondItem="x4s-f8-PZR" secondAttribute="bottom" constant="52" id="W9s-II-o7O"/>
+                <constraint firstItem="pwd-6K-YCG" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="Yfm-cE-X4C"/>
                 <constraint firstItem="m8H-NP-Mj6" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="320" id="lTm-kY-CQu"/>
                 <constraint firstItem="x4s-f8-PZR" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="piE-PA-qlr"/>
             </constraints>
