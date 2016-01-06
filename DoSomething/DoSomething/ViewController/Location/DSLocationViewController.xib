@@ -29,8 +29,10 @@
             <string>Patron-Medium</string>
             <string>Patron-Medium</string>
             <string>Patron-Medium</string>
+            <string>Patron-Medium</string>
         </mutableArray>
         <mutableArray key="Patron-Regular.ttf">
+            <string>Patron-Regular</string>
             <string>Patron-Regular</string>
         </mutableArray>
     </customFonts>
@@ -45,6 +47,7 @@
                 <outlet property="avalableNoBtn" destination="SPZ-Gb-emr" id="lJc-fU-eaJ"/>
                 <outlet property="avalableYesBtn" destination="b0G-N7-6UG" id="uFB-W2-3UT"/>
                 <outlet property="collectionviewxpostion" destination="AK0-aj-zIk" id="1cz-dX-N4r"/>
+                <outlet property="currentUserImg" destination="d4d-mC-Tg8" id="v5s-XD-BJ9"/>
                 <outlet property="filterview" destination="m8H-NP-Mj6" id="Ovc-jV-sQ2"/>
                 <outlet property="filterviewxposition" destination="lTm-kY-CQu" id="3fs-pq-c0p"/>
                 <outlet property="genderbothBtn" destination="uEU-bW-3vv" id="2dA-9H-FJe"/>
@@ -54,6 +57,10 @@
                 <outlet property="locationviewSwipright" destination="vMM-5U-eS9" id="0g5-yC-89s"/>
                 <outlet property="lowerLabel" destination="wk2-EH-TRf" id="yFS-Dl-SNX"/>
                 <outlet property="maleBtn" destination="0V6-uC-L0f" id="Efz-Mc-e10"/>
+                <outlet property="matchActivityView" destination="pwd-6K-YCG" id="vGG-HQ-qoT"/>
+                <outlet property="matchActivitylbl" destination="FNa-sz-TrK" id="wmg-9Y-ISF"/>
+                <outlet property="matchactivityBtn" destination="JOg-98-nPY" id="WHX-gG-e9I"/>
+                <outlet property="matcheduserImg" destination="d4H-yX-O7a" id="5Vp-3A-3LK"/>
                 <outlet property="offlineBtn" destination="64U-f9-MAd" id="tOh-U2-9DI"/>
                 <outlet property="onlineBtn" destination="cI1-lw-Ck1" id="Kik-vD-Wsa"/>
                 <outlet property="statusBothBtn" destination="8sz-iq-cVT" id="FTw-hw-lAj"/>
@@ -81,6 +88,55 @@
                         <outletCollection property="gestureRecognizers" destination="vMM-5U-eS9" appends="YES" id="LzM-gB-Rv7"/>
                     </connections>
                 </collectionView>
+                <view alpha="0.84999999999999998" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="pwd-6K-YCG">
+                    <rect key="frame" x="0.0" y="63" width="320" height="500"/>
+                    <subviews>
+                        <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="zBc-as-c5f">
+                            <rect key="frame" x="20" y="130" width="280" height="200"/>
+                            <subviews>
+                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="d4d-mC-Tg8">
+                                    <rect key="frame" x="35" y="10" width="90" height="90"/>
+                                    <animations/>
+                                </imageView>
+                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="d4H-yX-O7a">
+                                    <rect key="frame" x="155" y="10" width="90" height="90"/>
+                                    <animations/>
+                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </imageView>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="4" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FNa-sz-TrK">
+                                    <rect key="frame" x="15" y="105" width="250" height="35"/>
+                                    <animations/>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                    <string key="text">You and Gal Gadot are a match
+       Start Chatting to</string>
+                                    <fontDescription key="fontDescription" name="Patron-Medium" family="Patron" pointSize="10"/>
+                                    <color key="textColor" red="0.85490196080000003" green="0.15686274510000001" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JOg-98-nPY">
+                                    <rect key="frame" x="112" y="137" width="60" height="12"/>
+                                    <animations/>
+                                    <color key="backgroundColor" red="0.90196078430000004" green="0.2470588235" blue="0.31764705879999999" alpha="1" colorSpace="calibratedRGB"/>
+                                    <fontDescription key="fontDescription" name="Patron-Regular" family="Patron" pointSize="8"/>
+                                    <state key="normal" title="Do Something">
+                                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    </state>
+                                </button>
+                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pek-Oz-Jvb">
+                                    <rect key="frame" x="36" y="105" width="205" height="50"/>
+                                    <animations/>
+                                    <connections>
+                                        <action selector="didClickmatchuserDosomethingBtnAction:" destination="-1" eventType="touchUpInside" id="SGc-Yb-hxV"/>
+                                    </connections>
+                                </button>
+                            </subviews>
+                            <animations/>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        </view>
+                    </subviews>
+                    <animations/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="m8H-NP-Mj6">
                     <rect key="frame" x="320" y="0.0" width="270" height="568"/>
                     <subviews>
