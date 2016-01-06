@@ -110,13 +110,14 @@
     [self configureAgeChangeSlider];
      [self configureLabelSlider];
     
-     [self nearestLocationWebservice];
+    
     // Do any additional setup after loading the view from its nib.
 }
 
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+    [self nearestLocationWebservice];
     [self.navigationItem setHidesBackButton:YES animated:NO];
     
     [[NSNotificationCenter defaultCenter] addObserver:self
@@ -190,6 +191,9 @@
 }
 -(void)loadMatchActivityMethod
 {
+    if(matchUserArray !=0 && ![matchUserArray isEqual:@""])
+    {
+         self.matchActivityView.hidden =NO;
      NSString *matchprofileImg =[matchUserArray valueForKey:@"image1_thumb"];
     matchprofileImg= [matchprofileImg stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
     downloadImageFromUrl(matchprofileImg,self.matcheduserImg);
@@ -216,6 +220,10 @@
     
     NSString*objmatchusername =[NSString stringWithFormat:@"You and %@ are a match \nStart Chatting to",[matchUserArray valueForKey:@"first_name"]];
     self.matchActivitylbl.text =objmatchusername;
+    }
+    else{
+        self.matchActivityView.hidden =YES;
+    }
 }
 -(void)filterPageButtonAction
 {
@@ -356,10 +364,9 @@
         NSLog(@"response=%@",responseObject);
             recordCount =[[responseObject valueForKey:@"nearestusers"]valueForKey:@"recordCount"];
         matchUserArray =[[responseObject valueForKey:@"nearestusers"]valueForKey:@"matchedUser"];
-        if(matchUserArray.count >0)
-        {
+       
             [self loadMatchActivityMethod];
-        }
+        
         if ( responseObject !=nil && [[[responseObject valueForKey:@"nearestusers"]valueForKey:@"status"] isEqualToString:@"success"])
         {
 
@@ -978,15 +985,17 @@
 -(IBAction)didClickmatchuserDosomethingBtnAction:(id)sender
 {
     [COMMON LoadIcon:self.view];
-    NSString *requestsenduserid=[currentuser valueForKey:@"user_id"];
+    NSString *requestsenduserid=[matchUserArray valueForKey:@"user_id"];
     [objWebservice getMatchuserrequestSend:matchuserrequestsend sessionid:[COMMON getSessionID] requestsenduser:requestsenduserid chartstart:@"1" success:^(AFHTTPRequestOperation *operation, id responseObject) {
         if([[[responseObject valueForKey:@"sendrequest"]valueForKey:@"status"]isEqualToString:@"success"])
         {
         NSLog(@"response=%@",responseObject);
             [COMMON removeLoading];
+            
+            NSMutableArray *objmatchuserHistory=[[responseObject valueForKey:@"sendrequest"]valueForKey:@"Conversaion"];
                 DSChatDetailViewController *ChatDetail =[[DSChatDetailViewController alloc]initWithNibName:nil bundle:nil];
                 NSMutableDictionary *matchuserdic = [[NSMutableDictionary alloc] init];
-                matchuserdic = [matchUserArray mutableCopy];
+                matchuserdic = [objmatchuserHistory mutableCopy];
                 ChatDetail.chatuserDetailsDict = matchuserdic;
             
                 [self.navigationController pushViewController:ChatDetail animated:YES];
@@ -996,57 +1005,7 @@
         
     }];
     
-
-
 }
-//-(void)displayActivityView:(NSString *)_availStr{
-//    
-//    
-//    for( UIImageView *subView in [matchActivityView subviews])
-//    {
-//        if ([subView isKindOfClass:[UIImageView class]]) {
-//            [subView removeFromSuperview];
-//        }
-//        
-//    }
-//    for(UILabel *label in [matchActivityView subviews]){
-//        if ([label isKindOfClass:[UILabel class]]&& label.tag !=100) {
-//            [label removeFromSuperview];
-//        }
-//    }
-//    
-//    [matchActivityView setHidden:NO];
-//    [self.view setBackgroundColor:[UIColor clearColor]];
-//    //[self.homeCollectionView setAlpha:0.085];
-//    //[self.homeCollectionView setUserInteractionEnabled:NO];
-//   // [bottombutton setTag:1000];
-//    //[bottombutton setTitle:@"Cancel All Activities ?" forState:UIControlStateNormal];
-//    
-//   // NSString *timeStr = [activityMainDict valueForKey:@"LastActivity"];
-//    //timeStr = [NSString stringWithFormat:@"    Last Selected:\n%@",timeStr];
-//    
-//    
-//   // [matchActivitylbl setText:timeStr];
-//    matchActivitylbl.textAlignment = NSTextAlignmentCenter;
-//    matchActivitylbl.lineBreakMode = NSLineBreakByWordWrapping;
-//    matchActivitylbl.numberOfLines = 3;
-//    //nowButton.hidden=YES;
-//    //anyTimeButton.hidden =YES;
-//    // if([_availStr isEqualToString:@"No"]){
-//    // [nowButton setBackgroundColor:Green_Color];
-//    //[anyTimeButton setBackgroundColor:Gray_Color];
-//    // [anyTimeButton setUserInteractionEnabled:NO];
-//    // }
-//    //else{
-//    //[nowButton setBackgroundColor:Gray_Color];
-//    // [anyTimeButton setBackgroundColor:Red_Color];
-//    // [nowButton setUserInteractionEnabled:NO];
-//    //  }
-//    
-//   // [self loadActivityImageView];
-//    
-//}
-
 
 
 - (void)didReceiveMemoryWarning {
