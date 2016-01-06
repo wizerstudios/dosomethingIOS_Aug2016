@@ -13,6 +13,7 @@
 #import "DSConfig.h"
 #import "DSWebservice.h"
 #import "DSAppCommon.h"
+#import "UIImageView+AFNetworking.h"
 
 @interface DSChatsTableViewController ()
 
@@ -209,10 +210,10 @@
     
     if([ProfileName length]>0){
         
-        downloadImageFromUrl(ProfileName,Cell.profileImageView);
+        //downloadImageFromUrl(ProfileName,Cell.profileImageView);
         
-        [Cell.profileImageView setImage:[UIImage imageNamed:ProfileName]];
-        
+        //[Cell.profileImageView setImage:[UIImage imageNamed:ProfileName]];
+        [Cell.profileImageView setImageWithURL:[NSURL URLWithString:ProfileName]];
     }
     else{
         [Cell.profileImageView setImage:[UIImage imageNamed:@"profile_noimg.png"]];

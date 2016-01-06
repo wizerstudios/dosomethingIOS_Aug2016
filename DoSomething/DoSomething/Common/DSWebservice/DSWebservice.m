@@ -746,6 +746,19 @@ request_send_user_id:(NSString *)request_send_user_id
           completionFailureHandler:failure];
 }
 
+-(void)getMatchuserrequestSend:(NSString *)matchuserrequest sessionid:(NSString *)sessionid requestsenduser:(NSString *)resquestsenduserid chartstart:(NSString *)chatstart success:(WebserviceRequestSuccessHandler)success failure:(WebserviceRequestFailureHandler)failure
+{
+    urlString = [URL_FOR_RESOURCE(@"") stringByAppendingString:[NSString stringWithFormat:@"%@?sessionid=%@&request_send_user_id=%@&chatstart=%@",matchuserrequest,sessionid,resquestsenduserid,chatstart]];
+    
+    NSLog(@"urlString = %@",urlString);
+    
+    [self sendRequestWithURLString:urlString
+                     andParameters:nil
+                            method:ServiceGet
+           completionSucessHandler:success
+          completionFailureHandler:failure];
+
+}
 
 
 #pragma mark - Helpers

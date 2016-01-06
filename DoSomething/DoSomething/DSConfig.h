@@ -119,6 +119,7 @@
 
 #define HobbiesArray                @"HobbiesArray"
 
+#define matchuserrequestsend        @"sendrequest"
 
 
 

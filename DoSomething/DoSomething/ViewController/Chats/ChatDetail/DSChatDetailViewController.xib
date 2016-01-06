@@ -74,7 +74,7 @@
                             <rect key="frame" x="0.0" y="128" width="320" height="377"/>
                             <subviews>
                                 <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="xvP-6c-2gG">
-                                    <rect key="frame" x="0.0" y="0.0" width="320" height="332"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="340"/>
                                     <animations/>
                                     <color key="backgroundColor" red="0.9137254901960784" green="0.9137254901960784" blue="0.9137254901960784" alpha="1" colorSpace="calibratedRGB"/>
                                     <connections>
@@ -83,7 +83,7 @@
                                     </connections>
                                 </tableView>
                                 <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="pey-bp-htd" customClass="ChatTextView">
-                                    <rect key="frame" x="0.0" y="330" width="320" height="40"/>
+                                    <rect key="frame" x="0.0" y="340" width="320" height="40"/>
                                     <animations/>
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     <connections>

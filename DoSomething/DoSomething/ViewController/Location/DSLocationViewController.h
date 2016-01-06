@@ -36,4 +36,11 @@
 @property (weak, nonatomic) IBOutlet UILabel *agelowerLabel;
 @property (weak, nonatomic) IBOutlet UILabel *ageupperLabel;
 - (IBAction)ageSliderChanged:(NMRangeSlider*)sender;
+
+
+@property(nonatomic,strong)IBOutlet UIView * matchActivityView;
+@property (nonatomic,strong) IBOutlet UILabel * matchActivitylbl;
+@property (nonatomic,strong) IBOutlet UIButton *matchactivityBtn;
+@property (nonatomic,strong) IBOutlet UIImageView * currentUserImg;
+@property (nonatomic,strong) IBOutlet UIImageView *matcheduserImg;
 @end

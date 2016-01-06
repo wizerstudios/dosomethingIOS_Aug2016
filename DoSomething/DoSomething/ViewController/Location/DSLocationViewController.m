@@ -17,6 +17,7 @@
 #import <MapKit/MapKit.h>
 #import "CustomAlterview.h"
 #import "DSNearByDetailViewController.h"
+#import "DSChatDetailViewController.h";
 
 #define hobbiesbackcolor = [UIColor colorWithRed: (199.0/255.0) green: (65.0/255.0) blue: (81.0/255.0) alpha: 1.0];
 
@@ -43,6 +44,10 @@
     NSString                    * filterDistance;
     
     NSString                    *recordCount;
+    
+    NSMutableArray              * matchUserArray;
+    
+    NSDictionary                *currentuser;
     
     BOOL isgestureenable;
     BOOL isLoadWebservice;
@@ -77,7 +82,7 @@
 @implementation DSLocationViewController
 @synthesize delegate;
 @synthesize locationCollectionView,locationManager;
-@synthesize profileImages,profileNames,kiloMeterlabel,userID,dosomethingImageArry,commonlocationArray;
+@synthesize profileImages,profileNames,kiloMeterlabel,userID,dosomethingImageArry,commonlocationArray,matchactivityBtn,matchActivitylbl,matchActivityView;
 - (void)viewDidLoad {
     
     refreshControl = [[UIRefreshControl alloc] init];
@@ -88,7 +93,7 @@
     latitude     =[COMMON getLatitude];
   
     longitude    =[COMMON  getLongitude];
-    
+    matchUserArray =[[NSMutableArray alloc]init];
     commonlocationArray =[[NSMutableArray alloc]init];
     onlineStatus=@"";
     GenderStatus=@"";
@@ -105,13 +110,14 @@
     [self configureAgeChangeSlider];
      [self configureLabelSlider];
     
-     [self nearestLocationWebservice];
+    
     // Do any additional setup after loading the view from its nib.
 }
 
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+    [self nearestLocationWebservice];
     [self.navigationItem setHidesBackButton:YES animated:NO];
     
     [[NSNotificationCenter defaultCenter] addObserver:self
@@ -120,6 +126,7 @@
                                                object:nil];
    
     [self loadCustomNavigationview];
+    
     UINib *cellNib = [UINib nibWithNibName:@"LocationCollectionViewCell" bundle:nil];
     [self.locationCollectionView registerNib:cellNib forCellWithReuseIdentifier:@"LocationCell"];
     
@@ -182,7 +189,57 @@
     [self.navigationController.navigationBar addSubview:customNavigation.view];
     
 }
+-(void)loadMatchActivityMethod
+{
+    if(matchUserArray !=0 && ![matchUserArray isEqual:@""])
+    {
+         self.matchActivityView.hidden =NO;
+     NSString *matchprofileImg =[matchUserArray valueForKey:@"image1_thumb"];
+        if([matchprofileImg isEqualToString:@""] || matchprofileImg ==nil)
+        {
+            [self.matcheduserImg setImage:[UIImage imageNamed:@"profile_noimg"]];
+        }
+        else
+        {
+            matchprofileImg= [matchprofileImg stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+            downloadImageFromUrl(matchprofileImg,self.matcheduserImg);
+            [self.matcheduserImg setImage:[UIImage imageNamed:matchprofileImg]];
+        }
+    
+    currentuser=[[NSMutableDictionary alloc]init];
+    currentuser =[[NSUserDefaults standardUserDefaults] valueForKey:USERDETAILS];
+    NSString *objCurrentuserImg=[currentuser valueForKey:@"image1_thumb"];
+        if([objCurrentuserImg isEqualToString:@""] || objCurrentuserImg ==nil)
+        {
+             [self.currentUserImg setImage:[UIImage imageNamed:@"profile_noimg"]];
+        }
+        else
+        {
+            objCurrentuserImg= [objCurrentuserImg stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+            downloadImageFromUrl(objCurrentuserImg,self.currentUserImg);
 
+            [self.currentUserImg setImage:[UIImage imageNamed:objCurrentuserImg]];
+        }
+    
+   
+    
+    self.currentUserImg .layer.cornerRadius = 45;
+     self.currentUserImg .clipsToBounds = YES;
+    self.currentUserImg.layer.borderWidth=1;
+    [self.currentUserImg.layer setBorderColor:[UIColor redColor].CGColor];
+    
+   self.matcheduserImg .layer.cornerRadius = 45;
+    self.matcheduserImg .clipsToBounds = YES;
+    self.matcheduserImg.layer.borderWidth=1;
+    [self.matcheduserImg.layer setBorderColor:[UIColor redColor].CGColor];
+    
+    NSString*objmatchusername =[NSString stringWithFormat:@"You and %@ are a match \nStart Chatting to",[matchUserArray valueForKey:@"first_name"]];
+    self.matchActivitylbl.text =objmatchusername;
+    }
+    else{
+        self.matchActivityView.hidden =YES;
+    }
+}
 -(void)filterPageButtonAction
 {
     self.onlineBtn.layer.cornerRadius =10;
@@ -321,6 +378,10 @@
         
         NSLog(@"response=%@",responseObject);
             recordCount =[[responseObject valueForKey:@"nearestusers"]valueForKey:@"recordCount"];
+        matchUserArray =[[responseObject valueForKey:@"nearestusers"]valueForKey:@"matchedUser"];
+       
+            [self loadMatchActivityMethod];
+        
         if ( responseObject !=nil && [[[responseObject valueForKey:@"nearestusers"]valueForKey:@"status"] isEqualToString:@"success"])
         {
 
@@ -362,7 +423,7 @@
         [refreshControl endRefreshing];
         [locationCollectionView reloadData];
     }
-                        failure:^(AFHTTPRequestOperation *operation, id error)
+    failure:^(AFHTTPRequestOperation *operation, id error)
     {
         [COMMON removeLoading];
     }];
@@ -935,6 +996,33 @@
 {
     [self updateAgeSliderLabels];
 }
+
+-(IBAction)didClickmatchuserDosomethingBtnAction:(id)sender
+{
+    [COMMON LoadIcon:self.view];
+    NSString *requestsenduserid=[matchUserArray valueForKey:@"user_id"];
+    [objWebservice getMatchuserrequestSend:matchuserrequestsend sessionid:[COMMON getSessionID] requestsenduser:requestsenduserid chartstart:@"1" success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        if([[[responseObject valueForKey:@"sendrequest"]valueForKey:@"status"]isEqualToString:@"success"])
+        {
+        NSLog(@"response=%@",responseObject);
+            [COMMON removeLoading];
+            
+            NSMutableArray *objmatchuserHistory=[[responseObject valueForKey:@"sendrequest"]valueForKey:@"Conversaion"];
+                DSChatDetailViewController *ChatDetail =[[DSChatDetailViewController alloc]initWithNibName:nil bundle:nil];
+                NSMutableDictionary *matchuserdic = [[NSMutableDictionary alloc] init];
+                matchuserdic = [objmatchuserHistory mutableCopy];
+                ChatDetail.chatuserDetailsDict = matchuserdic;
+            
+                [self.navigationController pushViewController:ChatDetail animated:YES];
+        }
+       
+    } failure:^(AFHTTPRequestOperation *operation, id error) {
+        
+    }];
+    
+}
+
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.

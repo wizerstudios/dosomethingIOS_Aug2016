@@ -3,7 +3,6 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9051"/>
-        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <customFonts key="customFonts">
         <mutableArray key="Patron-Bold.ttf">
@@ -132,7 +131,6 @@
                         <animations/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="Qrf-6q-c2F" firstAttribute="top" relation="greaterThanOrEqual" secondItem="lNt-g0-diT" secondAttribute="top" constant="14" id="0Jx-0w-SUo"/>
                             <constraint firstItem="o8L-NC-hYd" firstAttribute="top" secondItem="QXZ-CJ-AiG" secondAttribute="bottom" constant="1" id="2HQ-6w-RrR"/>
                             <constraint firstAttribute="trailing" secondItem="o8L-NC-hYd" secondAttribute="trailing" constant="10" id="3X9-pT-qgm"/>
                             <constraint firstAttribute="bottom" secondItem="XCe-Kc-Sie" secondAttribute="bottom" constant="8" id="4RW-Ih-uZu"/>
@@ -153,25 +151,14 @@
                             <constraint firstItem="5GA-ta-996" firstAttribute="top" secondItem="QXZ-CJ-AiG" secondAttribute="bottom" constant="6" id="fly-Ty-qde"/>
                             <constraint firstItem="Qrf-6q-c2F" firstAttribute="top" secondItem="lNt-g0-diT" secondAttribute="top" constant="22" id="gV3-2j-neQ"/>
                             <constraint firstItem="62S-dD-MPM" firstAttribute="top" secondItem="lNt-g0-diT" secondAttribute="top" constant="3" id="gmn-Fp-SXg"/>
-                            <constraint firstItem="Qrf-6q-c2F" firstAttribute="leading" secondItem="lNt-g0-diT" secondAttribute="leading" id="h2e-bB-Ooz"/>
                             <constraint firstItem="elS-s6-A7j" firstAttribute="top" secondItem="5GA-ta-996" secondAttribute="bottom" constant="2" id="hHc-sq-jwY"/>
                             <constraint firstAttribute="trailing" secondItem="5GA-ta-996" secondAttribute="trailing" constant="4" id="hTO-Kz-o3Z"/>
-                            <constraint firstAttribute="trailing" secondItem="Qrf-6q-c2F" secondAttribute="trailing" constant="4" id="hf5-C0-buq"/>
                             <constraint firstItem="QXZ-CJ-AiG" firstAttribute="leading" secondItem="lNt-g0-diT" secondAttribute="leading" constant="8" id="iI3-1P-fKT"/>
-                            <constraint firstItem="62S-dD-MPM" firstAttribute="top" secondItem="lNt-g0-diT" secondAttribute="topMargin" id="kdI-en-GtF"/>
                             <constraint firstAttribute="trailing" secondItem="62S-dD-MPM" secondAttribute="trailing" constant="8" id="oLw-0V-bQA"/>
                             <constraint firstItem="XyY-39-1Hh" firstAttribute="leading" secondItem="lNt-g0-diT" secondAttribute="leading" constant="25" id="rlj-Fs-adF"/>
                             <constraint firstItem="62S-dD-MPM" firstAttribute="leading" secondItem="lNt-g0-diT" secondAttribute="leading" constant="8" id="tpc-SH-6wm"/>
                             <constraint firstAttribute="trailing" secondItem="XCe-Kc-Sie" secondAttribute="trailing" constant="10" id="yVd-jF-CpF"/>
                         </constraints>
-                        <variation key="default">
-                            <mask key="constraints">
-                                <exclude reference="kdI-en-GtF"/>
-                                <exclude reference="0Jx-0w-SUo"/>
-                                <exclude reference="h2e-bB-Ooz"/>
-                                <exclude reference="hf5-C0-buq"/>
-                            </mask>
-                        </variation>
                     </view>
                 </subviews>
                 <animations/>

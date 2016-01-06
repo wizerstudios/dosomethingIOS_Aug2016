@@ -262,7 +262,12 @@ message_send_user_id:(NSString *)message_send_user_id
 
 -(void)cancelRequest;
 
-
+-(void)getMatchuserrequestSend:(NSString *)matchuserrequest
+                     sessionid:(NSString *)sessionid
+               requestsenduser:(NSString *)resquestsenduserid
+                    chartstart:(NSString *)chatstart
+                       success:(WebserviceRequestSuccessHandler)success
+                       failure:(WebserviceRequestFailureHandler)failure;
 
 
 @end
