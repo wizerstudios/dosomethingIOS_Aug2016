@@ -54,7 +54,7 @@
 @property (weak,nonatomic) IBOutlet UILabel * currentpasswordlbl;
 @property (weak,nonatomic) IBOutlet UILabel * confirmpasswordlbl;
 @property (weak,nonatomic) IBOutlet UILabel * passwordlbl;
-
+@property (weak,nonatomic) IBOutlet UIView * emailview;
 
 
 @property (strong, nonatomic) IBOutlet UIButton *messSwitchBtn;
@@ -73,5 +73,11 @@
 @property (nonatomic,strong) IBOutlet UILabel *firstaftersepratorlbl;
 
 @property(nonatomic,strong) IBOutlet UIView *aboutview;
+
+@property (nonatomic,strong) IBOutlet UIImageView * loginTypeImg;
+@property (nonatomic,strong) IBOutlet UILabel * logilTypelbl;
+
+@property (nonatomic,strong) IBOutlet UILabel *notificationTittlelbl;
+@property (nonatomic,strong) IBOutlet UILabel *Accounttittlelbl;
 
 @end

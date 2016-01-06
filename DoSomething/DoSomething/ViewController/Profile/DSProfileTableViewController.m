@@ -810,7 +810,8 @@
                                     [NSMutableDictionary dictionaryWithObjectsAndKeys:[profileDict valueForKey:@"date_of_birth"],@"placeHolder", nil],
                                     [NSMutableDictionary dictionaryWithObjectsAndKeys:@"Write something about yourself here.",@"placeHolder", nil],
                                     [NSMutableDictionary dictionaryWithObjectsAndKeys:@"Hobbies",@"placeHolder", nil],
-                                    [NSMutableDictionary dictionaryWithObjectsAndKeys:[profileDict valueForKey:@"email"],@"placeHolder",@"Password",@"placeHolderPass",@"Current\n password",@"placeHolderCurrentPassword",@"Password\n Conformation",@"placeHolderconformation",@"",@"TypingTextPass", nil], nil]atIndex:0];
+                                    [NSMutableDictionary dictionaryWithObjectsAndKeys:[profileDict valueForKey:@"email"],@"placeHolder",@"Password",@"placeHolderPass",@"Current\n password",@"placeHolderCurrentPassword",@"Password\n Conformation",@"placeHolderconformation",@"",@"TypingTextPass", nil], [NSMutableDictionary dictionaryWithObjectsAndKeys:@"loginType",@"placeHolder", nil],
+                                     [NSMutableDictionary dictionaryWithObjectsAndKeys:@"loginType",@"placeHolder", nil],[NSMutableDictionary dictionaryWithObjectsAndKeys:@"loginType",@"placeHolder", nil], nil]atIndex:0];
     
    
     
@@ -937,26 +938,49 @@
        
             if ( indexPath.row == 7) {
                 
+                
                 if(profileDict!=nil)
                 {
+                    NSString *objlogintype=[profileDict valueForKey:@"type"];
+                    if([objlogintype isEqual:@"2"])
+                    
+                    {
+                        return 0;
+                    }
+                    else
+                    {
                     return 180;
+                    }
                 }
-//                else if (userDetailsDict.count>0)
-//                {
-//                    return 180;
-//                }
             
                 return 120;
             }
             if (indexPath.row ==8) {
                 
+                if(profileDict!=nil)
+                {
+                    return 0;
+                }
                 return 150;
             }
 
         
             if (indexPath.row == 9) {
+                
+                if(profileDict != nil)
+                {
+                    return 0;
+                }
                 return 80;
             }
+       if(indexPath.row ==10)
+       {
+           if(profileDict!=nil)
+           {
+               return 40;
+           }
+           return 0;
+       }
 
 
     return 40;
@@ -1478,9 +1502,23 @@
         cell.currentpasswordlbl.text=@"Current password";
         cell.confirmpasswordlbl.hidden =NO;
         cell.passwordlbl.hidden =NO;
+        
        
         if(profileDict != NULL)
         {
+            NSString *loginType =[profileDict valueForKey:@"type"];
+            if([loginType isEqualToString:@"2"])
+            {
+                 cell.Accounttittlelbl.hidden=YES;
+
+
+                cell.emailview.hidden =YES;
+
+            }
+            else
+            { cell.Accounttittlelbl.hidden=NO;
+                
+                cell.emailview.hidden =NO;
           
             [cell.emailTextField setUserInteractionEnabled:NO];
             cell.emailTextField.text =(emailAddressToRegister==nil)?[profileDict valueForKey:@"email"]:emailAddressToRegister;
@@ -1493,24 +1531,30 @@
            //cell.passwordTextField.placeholder  =(emailPasswordToRegister!=nil)?@"Your Current password":emailPasswordToRegister;
             cell.currentpassword.text    =(currentPassword==nil)?@"":@"Your new password";
             cell.conformationpassword.text =(confirmPassword==nil)?@"":@"confirm your new password";
-            
+            }
 
         }
         else if(userDetailsDict.count > 0){
 
-            NSLog(@"cell.emailTextField.text%@",cell.emailTextField.text);
-            NSLog(@"cell.emailTextField.text%@",emailAddressToRegister);
-           
+            NSString *loginType =[userDetailsDict valueForKey:@"type"];
+           if([loginType isEqualToString:@"1"])
+           {
+               cell.Accounttittlelbl.hidden=NO;
+           }
+            else
+            {
+                 cell.Accounttittlelbl.hidden=YES;
+            }
             cell.emailTextField.text =(emailAddressToRegister==0)?[userDetailsDict valueForKey:@"email"]:emailAddressToRegister;
             cell.passwordTextField.text  =(emailPasswordToRegister==0)? @"":emailPasswordToRegister;
             emailAddressToRegister   = cell.emailTextField.text;
+         
+            cell.emailTextField.hidden =YES;
+            cell.passwordTextField.hidden=YES;
             cell.currentpassword.hidden=YES;
             cell.conformationpassword.hidden=YES;
             cell.currentpasswordlbl.text =@"Password";
             cell.confirmpasswordlbl.hidden =YES;
-            cell.passwordlbl.hidden=YES;
-         
-          
 
             
         }
@@ -1540,6 +1584,14 @@
             [[NSBundle mainBundle] loadNibNamed:@"DSProfileTableViewCell" owner:self options:nil];
             cell = CellSwitchOn;
             
+        }
+        if(profileDict != nil)
+        {
+            cell.notificationTittlelbl.hidden=YES;
+        }
+        else
+        {
+            cell.notificationTittlelbl.hidden=NO;
         }
         
        [self notificationMethod];
@@ -1586,12 +1638,38 @@
             cell = CellTermsOfUse;
             
         }
-        
+        if(profileDict !=nil)
+        {
+            cell.termsOfUse.hidden =YES;
+            cell.privacyPolicy.hidden=YES;
+        }
+        else{
+            cell.termsOfUse.hidden =NO;
+            cell.privacyPolicy.hidden=NO;
+        }
         if (IS_IPHONE6 ||IS_IPHONE6_Plus){
         cell.layoutConstraintTermsOfUseBtnDependViewHeight.constant =50;
         }
         
        
+    }
+    if(indexPath.row==10)
+    {
+        if (cell == nil)
+        {
+            [[NSBundle mainBundle] loadNibNamed:@"DSProfileTableViewCell" owner:self options:nil];
+            cell = cellloginTypeView;
+        }
+        NSString *objloginType =[profileDict valueForKey:@"type"];
+        if([objloginType isEqualToString:@"1"])
+        {
+            cell.logilTypelbl.text =@"You are connect via DoSomething Account";
+            cell.loginTypeImg.image=[UIImage imageNamed:@"loginTypeDS"];
+        }
+        else{
+            cell.logilTypelbl.text =@"You are connect via through Facebook";
+            cell.loginTypeImg.image=[UIImage imageNamed:@"loginTypeFB"];
+        }
     }
 
     [cell setSelectionStyle:UITableViewCellSelectionStyleNone];

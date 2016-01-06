@@ -42,6 +42,8 @@
     NSString                    * filterAge;
     NSString                    * filterDistance;
     
+    NSString                    *recordCount;
+    
     BOOL isgestureenable;
     BOOL isLoadWebservice;
     BOOL isAllPost;
@@ -316,10 +318,13 @@
                            page:currentloadPage
                         success:^(AFHTTPRequestOperation *operation, id responseObject)
     {
+        
+        NSLog(@"response=%@",responseObject);
+            recordCount =[[responseObject valueForKey:@"nearestusers"]valueForKey:@"recordCount"];
         if ( responseObject !=nil && [[[responseObject valueForKey:@"nearestusers"]valueForKey:@"status"] isEqualToString:@"success"])
         {
-           // NSLog(@"USERID%@",[[[responseObject valueForKey:@"nearestusers"]valueForKey:@"UserList"]valueForKey:@"user_id"]);
-            if ([[[responseObject valueForKey:@"nearestusers"]valueForKey:@"page"] isEqualToString:@"1"])
+
+            if ([[[responseObject valueForKey:@"nearestusers"]valueForKey:@"pageCount"] isEqualToString:@"1"])
             {
                 NSMutableArray * nearestUserdetaile =[[NSMutableArray alloc]init];
                 nearestUserdetaile =[[responseObject valueForKey:@"nearestusers"] valueForKey:@"UserList"];
@@ -507,7 +512,7 @@
 - (void)collectionView:(UICollectionView *)collectionView willDisplayCell:(UICollectionViewCell *)cell forItemAtIndexPath:(NSIndexPath *)indexPath
 {
    
-    if (([commonlocationArray count]-1) == indexPath.row && !isAllPost ) {
+    if ((30-1) == indexPath.row && !isAllPost ) {
         
         int x = [currentloadPage intValue];
         
