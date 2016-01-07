@@ -172,6 +172,8 @@
 }
 -(void)loadHobbiesWebserviceMethod
 {
+    [COMMON LoadIcon:self.view];
+
     [objWebservice getHobbies:GetHobbies_API sessionid:deviceUdid success:^(AFHTTPRequestOperation *operation, id responseObject)
      
      {
@@ -196,8 +198,12 @@
          
          [[NSUserDefaults standardUserDefaults] synchronize];
          
+         
+         
          hobbiesArry=[objselectionname valueForKey:@"hobbieslist"];
          
+         [[NSUserDefaults standardUserDefaults] setObject:hobbiesArry forKey:@"ListofinterestArray"];
+         [[NSUserDefaults standardUserDefaults] synchronize];
          interstAndHobbiesArray=[hobbiesArry mutableCopy];
          
          [COMMON removeLoading];
@@ -251,10 +257,27 @@
     
     interestAndHobbiesCollectionView.delegate=self;
     interestAndHobbiesCollectionView.dataSource=self;
+    sectionArray = [[[NSUserDefaults standardUserDefaults] valueForKey:@"ListofsectionNameArray"] mutableCopy];
     
-    [COMMON LoadIcon:self.view];
-    
-    [self loadHobbiesWebserviceMethod];
+    if([[NSUserDefaults standardUserDefaults] valueForKey:@"ListofinterestArray"]==nil){
+        
+        [COMMON LoadIcon:self.view];
+        [self loadHobbiesWebserviceMethod];
+        
+        
+    }
+    else{
+        if([[NSUserDefaults standardUserDefaults] valueForKey:@"SelectedItem"]==nil)
+        {
+            
+            interstAndHobbiesArray =[[[NSUserDefaults standardUserDefaults] valueForKey:@"ListofinterestArray"] mutableCopy];
+            // interestArray=interstAndHobbiesArray;
+        }
+        
+         //[interestAndHobbiesCollectionView reloadData];
+    }
+
+    //[self loadHobbiesWebserviceMethod];
         
     
 }
@@ -520,12 +543,18 @@
     [[NSUserDefaults standardUserDefaults]setObject:profileHobbyArray forKey:HobbiesArray];
     
     [[NSUserDefaults standardUserDefaults]synchronize];
+     [CATransaction begin];
+     [CATransaction setValue:(id)kCFBooleanTrue forKey:kCATransactionAnimationDuration];
+    [interestAndHobbiesCollectionView reloadItemsAtIndexPaths:@[indexPath]];
+
+     [CATransaction commit];
+  
     
-    [interestAndHobbiesCollectionView reloadData];
+     
+    //[interestAndHobbiesCollectionView reloadData];
     
 
 }
-
 
 -(void)backAction
 {
