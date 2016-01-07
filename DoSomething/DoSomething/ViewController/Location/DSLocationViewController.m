@@ -117,6 +117,7 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+    self.matchActivityView.hidden=YES;
     [self nearestLocationWebservice];
     [self.navigationItem setHidesBackButton:YES animated:NO];
     
@@ -223,17 +224,17 @@
     
    
     
-    self.currentUserImg .layer.cornerRadius = 45;
+    self.currentUserImg .layer.cornerRadius = 60;
      self.currentUserImg .clipsToBounds = YES;
     self.currentUserImg.layer.borderWidth=1;
     [self.currentUserImg.layer setBorderColor:[UIColor redColor].CGColor];
     
-   self.matcheduserImg .layer.cornerRadius = 45;
+   self.matcheduserImg .layer.cornerRadius = 60;
     self.matcheduserImg .clipsToBounds = YES;
     self.matcheduserImg.layer.borderWidth=1;
     [self.matcheduserImg.layer setBorderColor:[UIColor redColor].CGColor];
     
-    NSString*objmatchusername =[NSString stringWithFormat:@"You and %@ are a match \nStart Chatting to",[matchUserArray valueForKey:@"first_name"]];
+    NSString*objmatchusername =[NSString stringWithFormat:@"You and %@ are a match \n Start Chatting to",[matchUserArray valueForKey:@"first_name"]];
     self.matchActivitylbl.text =objmatchusername;
     }
     else{
