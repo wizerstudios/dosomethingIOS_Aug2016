@@ -41,15 +41,15 @@
 @end
 
 @implementation DSChatDetailViewController
-@synthesize ProfileName,ProfileImage;
-@synthesize chatView,chatuserDetailsDict,chatButton;
+@synthesize chatView,ProfileName,ProfileImage;
+@synthesize chatuserDetailsDict,chatButton;
 @synthesize messageTimer;
 
 - (void)viewDidLoad {
     
     [super viewDidLoad];
     
-    [[IQKeyboardManager sharedManager] considerToolbarPreviousNextInViewClass:[chatTableView class]];
+    [[IQKeyboardManager sharedManager] considerToolbarPreviousNextInViewClass:[ChatTextView class]];
     
     webService = [[DSWebservice alloc]init];
     
@@ -73,6 +73,7 @@
     [chatView.postButton addTarget:self action:@selector(sendAction:) forControlEvents:UIControlEventTouchUpInside];
     
     [self.navigationItem setHidesBackButton:YES animated:NO];
+    
 }
 
 -(void)viewwillDisappear:(BOOL)animated{
@@ -349,7 +350,6 @@
 
 -(void)sendAction:(id)sender{
     
-   
     
     NSString *str=chatView.textView.text;
     

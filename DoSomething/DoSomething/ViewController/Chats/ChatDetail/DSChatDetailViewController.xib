@@ -19,7 +19,7 @@
                 <outlet property="backgroundView" destination="XqN-Wp-lms" id="aJ3-oZ-xw7"/>
                 <outlet property="chatButton" destination="MkV-9D-hoy" id="tG3-kG-cgw"/>
                 <outlet property="chatTableView" destination="xvP-6c-2gG" id="qJ9-uV-Ujv"/>
-                <outlet property="chatView" destination="pey-bp-htd" id="ncW-HM-Fy0"/>
+                <outlet property="chatView" destination="pey-bp-htd" id="4m5-xU-2tC"/>
                 <outlet property="transparentView" destination="vGn-Bt-vGu" id="NiA-3f-b4p"/>
                 <outlet property="view" destination="o0E-7A-6vB" id="yT4-ay-ktK"/>
             </connections>
@@ -30,10 +30,10 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="GpL-YA-edD">
-                    <rect key="frame" x="0.0" y="0.0" width="320" height="500"/>
+                    <rect key="frame" x="0.0" y="0.0" width="320" height="550"/>
                     <subviews>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Vyo-Sj-gzT">
-                            <rect key="frame" x="0.0" y="66" width="320" height="60"/>
+                            <rect key="frame" x="0.0" y="65" width="320" height="60"/>
                             <subviews>
                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="hJo-cJ-0vp">
                                     <rect key="frame" x="10" y="2" width="55" height="55"/>
@@ -67,26 +67,48 @@
                             <animations/>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <constraints>
-                                <constraint firstAttribute="height" constant="60" id="BmM-Ob-Onp"/>
+                                <constraint firstAttribute="height" constant="60" id="Jww-W3-ikR"/>
                             </constraints>
                         </view>
-                        <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="xvP-6c-2gG">
-                            <rect key="frame" x="0.0" y="126" width="320" height="335"/>
+                        <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YKw-Va-zYe">
+                            <rect key="frame" x="0.0" y="126" width="320" height="415"/>
+                            <subviews>
+                                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="xvP-6c-2gG">
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="340"/>
+                                    <animations/>
+                                    <color key="backgroundColor" red="0.9137254901960784" green="0.9137254901960784" blue="0.9137254901960784" alpha="1" colorSpace="calibratedRGB"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="340" id="VlX-LP-L8Z"/>
+                                    </constraints>
+                                    <connections>
+                                        <outlet property="dataSource" destination="-1" id="Vw7-Ms-ouD"/>
+                                        <outlet property="delegate" destination="-1" id="HCc-vz-Zyu"/>
+                                    </connections>
+                                </tableView>
+                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pey-bp-htd" customClass="ChatTextView">
+                                    <rect key="frame" x="0.0" y="350" width="320" height="40"/>
+                                    <animations/>
+                                    <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                    <constraints>
+                                        <constraint firstAttribute="width" constant="320" id="0Nr-JU-IEw"/>
+                                        <constraint firstAttribute="height" constant="40" id="Ght-fc-Y31"/>
+                                    </constraints>
+                                    <connections>
+                                        <outlet property="delegate" destination="-1" id="ZFY-0h-oD0"/>
+                                    </connections>
+                                </view>
+                            </subviews>
                             <animations/>
-                            <color key="backgroundColor" red="0.9137254901960784" green="0.9137254901960784" blue="0.9137254901960784" alpha="1" colorSpace="calibratedRGB"/>
-                            <connections>
-                                <outlet property="dataSource" destination="-1" id="Vw7-Ms-ouD"/>
-                                <outlet property="delegate" destination="-1" id="HCc-vz-Zyu"/>
-                            </connections>
-                        </tableView>
-                        <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="pey-bp-htd" customClass="ChatTextView">
-                            <rect key="frame" x="0.0" y="468" width="320" height="40"/>
-                            <animations/>
-                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                            <connections>
-                                <outlet property="delegate" destination="-1" id="bPn-of-ekj"/>
-                            </connections>
-                        </view>
+                            <constraints>
+                                <constraint firstItem="pey-bp-htd" firstAttribute="top" secondItem="YKw-Va-zYe" secondAttribute="top" constant="350" id="HmV-1Y-CtO"/>
+                                <constraint firstItem="pey-bp-htd" firstAttribute="leading" secondItem="YKw-Va-zYe" secondAttribute="leading" id="JCd-VU-CXT"/>
+                                <constraint firstAttribute="trailing" secondItem="pey-bp-htd" secondAttribute="trailing" id="Ks3-Co-9is"/>
+                                <constraint firstItem="xvP-6c-2gG" firstAttribute="leading" secondItem="pey-bp-htd" secondAttribute="leading" id="c0R-Lr-2rX"/>
+                                <constraint firstAttribute="bottom" secondItem="xvP-6c-2gG" secondAttribute="bottom" constant="75" id="xPr-Xq-RHW"/>
+                                <constraint firstItem="xvP-6c-2gG" firstAttribute="centerY" secondItem="pey-bp-htd" secondAttribute="centerY" constant="-200" id="y3x-JH-yev"/>
+                                <constraint firstItem="pey-bp-htd" firstAttribute="trailing" secondItem="xvP-6c-2gG" secondAttribute="trailing" id="zfG-5k-W1y"/>
+                            </constraints>
+                        </scrollView>
                         <view alpha="0.84999999999999998" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vGn-Bt-vGu">
                             <rect key="frame" x="0.0" y="0.0" width="320" height="500"/>
                             <animations/>
@@ -147,16 +169,21 @@
                     <animations/>
                     <color key="backgroundColor" red="0.90980392160000001" green="0.90980392160000001" blue="0.90980392160000001" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
-                        <constraint firstAttribute="bottom" secondItem="XqN-Wp-lms" secondAttribute="bottom" id="5GJ-ha-e7L"/>
+                        <constraint firstItem="YKw-Va-zYe" firstAttribute="leading" secondItem="GpL-YA-edD" secondAttribute="leading" id="0g0-Iv-ifs"/>
+                        <constraint firstAttribute="bottom" secondItem="XqN-Wp-lms" secondAttribute="bottom" constant="50" id="5GJ-ha-e7L"/>
+                        <constraint firstAttribute="trailing" secondItem="Vyo-Sj-gzT" secondAttribute="trailing" id="84k-Ce-aDd"/>
+                        <constraint firstItem="YKw-Va-zYe" firstAttribute="centerX" secondItem="GpL-YA-edD" secondAttribute="centerX" id="Atb-bq-sdS"/>
                         <constraint firstAttribute="trailing" secondItem="XqN-Wp-lms" secondAttribute="trailing" id="KyY-mU-WZc"/>
-                        <constraint firstItem="Vyo-Sj-gzT" firstAttribute="top" secondItem="GpL-YA-edD" secondAttribute="top" constant="66" id="Lb7-9d-y25"/>
-                        <constraint firstAttribute="trailing" secondItem="Vyo-Sj-gzT" secondAttribute="trailing" id="MV8-t0-2nd"/>
                         <constraint firstItem="XqN-Wp-lms" firstAttribute="leading" secondItem="GpL-YA-edD" secondAttribute="leading" id="QCx-6f-o5O"/>
+                        <constraint firstAttribute="trailing" secondItem="YKw-Va-zYe" secondAttribute="trailing" id="Vgo-eS-bXR"/>
                         <constraint firstItem="XqN-Wp-lms" firstAttribute="top" secondItem="GpL-YA-edD" secondAttribute="top" id="WuI-aB-Wjv"/>
                         <constraint firstItem="vGn-Bt-vGu" firstAttribute="leading" secondItem="GpL-YA-edD" secondAttribute="leading" id="ZHu-2p-15G"/>
-                        <constraint firstItem="Vyo-Sj-gzT" firstAttribute="leading" secondItem="GpL-YA-edD" secondAttribute="leading" id="ceu-Mz-prZ"/>
-                        <constraint firstAttribute="bottom" secondItem="vGn-Bt-vGu" secondAttribute="bottom" id="k1m-7t-DHd"/>
+                        <constraint firstItem="Vyo-Sj-gzT" firstAttribute="leading" secondItem="GpL-YA-edD" secondAttribute="leading" id="ZJa-X0-bAM"/>
+                        <constraint firstAttribute="bottom" secondItem="YKw-Va-zYe" secondAttribute="bottom" constant="9" id="axR-ZJ-ySz"/>
+                        <constraint firstAttribute="bottom" secondItem="vGn-Bt-vGu" secondAttribute="bottom" constant="50" id="k1m-7t-DHd"/>
+                        <constraint firstItem="Vyo-Sj-gzT" firstAttribute="top" secondItem="GpL-YA-edD" secondAttribute="top" constant="65" id="qWI-8w-a4W"/>
                         <constraint firstItem="vGn-Bt-vGu" firstAttribute="top" secondItem="GpL-YA-edD" secondAttribute="top" id="vcF-aW-Ncp"/>
+                        <constraint firstItem="YKw-Va-zYe" firstAttribute="top" secondItem="Vyo-Sj-gzT" secondAttribute="bottom" constant="1" id="wF1-hy-ene"/>
                         <constraint firstAttribute="trailing" secondItem="vGn-Bt-vGu" secondAttribute="trailing" id="x6t-fr-HkJ"/>
                     </constraints>
                 </view>
@@ -165,7 +192,7 @@
             <color key="backgroundColor" red="0.85098039215686272" green="0.85098039215686272" blue="0.85098039215686272" alpha="1" colorSpace="calibratedRGB"/>
             <constraints>
                 <constraint firstItem="GpL-YA-edD" firstAttribute="top" secondItem="o0E-7A-6vB" secondAttribute="top" id="eLW-JG-n0T"/>
-                <constraint firstAttribute="bottom" secondItem="GpL-YA-edD" secondAttribute="bottom" constant="50" id="pri-GO-iSi"/>
+                <constraint firstAttribute="bottom" secondItem="GpL-YA-edD" secondAttribute="bottom" id="pri-GO-iSi"/>
                 <constraint firstItem="GpL-YA-edD" firstAttribute="leading" secondItem="o0E-7A-6vB" secondAttribute="leading" id="rGA-oL-7YJ"/>
                 <constraint firstAttribute="trailing" secondItem="GpL-YA-edD" secondAttribute="trailing" id="yfH-Xd-o1y"/>
             </constraints>
