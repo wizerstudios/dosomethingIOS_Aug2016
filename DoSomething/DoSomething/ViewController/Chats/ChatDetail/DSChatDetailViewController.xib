@@ -70,29 +70,22 @@
                                 <constraint firstAttribute="height" constant="60" id="BmM-Ob-Onp"/>
                             </constraints>
                         </view>
-                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="95L-kz-lld">
-                            <rect key="frame" x="0.0" y="128" width="320" height="377"/>
-                            <subviews>
-                                <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="xvP-6c-2gG">
-                                    <rect key="frame" x="0.0" y="0.0" width="320" height="340"/>
-                                    <animations/>
-                                    <color key="backgroundColor" red="0.9137254901960784" green="0.9137254901960784" blue="0.9137254901960784" alpha="1" colorSpace="calibratedRGB"/>
-                                    <connections>
-                                        <outlet property="dataSource" destination="-1" id="Vw7-Ms-ouD"/>
-                                        <outlet property="delegate" destination="-1" id="HCc-vz-Zyu"/>
-                                    </connections>
-                                </tableView>
-                                <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="pey-bp-htd" customClass="ChatTextView">
-                                    <rect key="frame" x="0.0" y="340" width="320" height="40"/>
-                                    <animations/>
-                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                    <connections>
-                                        <outlet property="delegate" destination="-1" id="bPn-of-ekj"/>
-                                    </connections>
-                                </view>
-                            </subviews>
+                        <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="xvP-6c-2gG">
+                            <rect key="frame" x="0.0" y="126" width="320" height="335"/>
                             <animations/>
-                            <color key="backgroundColor" red="0.92941176469999998" green="0.92941176469999998" blue="0.92941176469999998" alpha="1" colorSpace="deviceRGB"/>
+                            <color key="backgroundColor" red="0.9137254901960784" green="0.9137254901960784" blue="0.9137254901960784" alpha="1" colorSpace="calibratedRGB"/>
+                            <connections>
+                                <outlet property="dataSource" destination="-1" id="Vw7-Ms-ouD"/>
+                                <outlet property="delegate" destination="-1" id="HCc-vz-Zyu"/>
+                            </connections>
+                        </tableView>
+                        <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="pey-bp-htd" customClass="ChatTextView">
+                            <rect key="frame" x="0.0" y="468" width="320" height="40"/>
+                            <animations/>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <connections>
+                                <outlet property="delegate" destination="-1" id="bPn-of-ekj"/>
+                            </connections>
                         </view>
                         <view alpha="0.84999999999999998" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vGn-Bt-vGu">
                             <rect key="frame" x="0.0" y="0.0" width="320" height="500"/>
@@ -152,12 +145,9 @@
                         </view>
                     </subviews>
                     <animations/>
-                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <color key="backgroundColor" red="0.90980392160000001" green="0.90980392160000001" blue="0.90980392160000001" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
-                        <constraint firstAttribute="trailing" secondItem="95L-kz-lld" secondAttribute="trailing" id="2Pu-FD-2A4"/>
                         <constraint firstAttribute="bottom" secondItem="XqN-Wp-lms" secondAttribute="bottom" id="5GJ-ha-e7L"/>
-                        <constraint firstItem="95L-kz-lld" firstAttribute="leading" secondItem="GpL-YA-edD" secondAttribute="leading" id="IG0-gG-6xI"/>
-                        <constraint firstAttribute="bottom" secondItem="95L-kz-lld" secondAttribute="bottom" constant="-5" id="Jaw-HA-FTJ"/>
                         <constraint firstAttribute="trailing" secondItem="XqN-Wp-lms" secondAttribute="trailing" id="KyY-mU-WZc"/>
                         <constraint firstItem="Vyo-Sj-gzT" firstAttribute="top" secondItem="GpL-YA-edD" secondAttribute="top" constant="66" id="Lb7-9d-y25"/>
                         <constraint firstAttribute="trailing" secondItem="Vyo-Sj-gzT" secondAttribute="trailing" id="MV8-t0-2nd"/>
@@ -165,7 +155,6 @@
                         <constraint firstItem="XqN-Wp-lms" firstAttribute="top" secondItem="GpL-YA-edD" secondAttribute="top" id="WuI-aB-Wjv"/>
                         <constraint firstItem="vGn-Bt-vGu" firstAttribute="leading" secondItem="GpL-YA-edD" secondAttribute="leading" id="ZHu-2p-15G"/>
                         <constraint firstItem="Vyo-Sj-gzT" firstAttribute="leading" secondItem="GpL-YA-edD" secondAttribute="leading" id="ceu-Mz-prZ"/>
-                        <constraint firstItem="95L-kz-lld" firstAttribute="top" secondItem="Vyo-Sj-gzT" secondAttribute="bottom" constant="2" id="cit-Y9-wlL"/>
                         <constraint firstAttribute="bottom" secondItem="vGn-Bt-vGu" secondAttribute="bottom" id="k1m-7t-DHd"/>
                         <constraint firstItem="vGn-Bt-vGu" firstAttribute="top" secondItem="GpL-YA-edD" secondAttribute="top" id="vcF-aW-Ncp"/>
                         <constraint firstAttribute="trailing" secondItem="vGn-Bt-vGu" secondAttribute="trailing" id="x6t-fr-HkJ"/>
