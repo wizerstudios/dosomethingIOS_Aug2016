@@ -98,7 +98,7 @@
     CustomNavigationView *customNavigation;
     UIButton *cameraIcon;
     NSMutableArray *hobbiesMainArray;
-    
+    NSString * Regpassword;
     
 
 }
@@ -114,6 +114,7 @@
     
     [super viewDidLoad];
      NSLog(@"password = %@",emailPasswordToRegister);
+    Regpassword=emailPasswordToRegister;
     [[IQKeyboardManager sharedManager] considerToolbarPreviousNextInViewClass:[_tableviewProfile class]];
     
     locationManager                 = [[CLLocationManager alloc] init];
@@ -513,7 +514,7 @@
 - (NSString *) getPassword {
     
     if (emailPasswordToRegister == NULL) {
-        emailPasswordToRegister = @"";
+        emailPasswordToRegister =Regpassword;              //@"";
     }
     NSString *emailPassword = emailPasswordToRegister;
     NSLog(@"password = %@",emailPassword);
@@ -1543,26 +1544,26 @@
            }
             else
             {
-                 cell.Accounttittlelbl.hidden=YES;
+                 cell.Accounttittlelbl.hidden=NO;
             }
             cell.emailTextField.text =(emailAddressToRegister==0)?[userDetailsDict valueForKey:@"email"]:emailAddressToRegister;
             cell.passwordTextField.text  =(emailPasswordToRegister==0)? @"":emailPasswordToRegister;
             emailAddressToRegister   = cell.emailTextField.text;
          
-            cell.emailTextField.hidden =YES;
-            cell.passwordTextField.hidden=YES;
+    
             cell.currentpassword.hidden=YES;
             cell.conformationpassword.hidden=YES;
             cell.currentpasswordlbl.text =@"Password";
             cell.confirmpasswordlbl.hidden =YES;
+            cell.passwordlbl.hidden =YES;
 
             
         }
         else
         {
-              NSLog(@"cell.emailTextField.text=%@",emailPasswordToRegister);
+              NSLog(@"cell.emailTextField.text=%@",Regpassword);
             cell.emailTextField.text = [self getEmail];
-            cell.passwordTextField.text =emailPasswordToRegister  ;            //[self getPassword];
+            cell.passwordTextField.text = [self getPassword];
             cell.currentpassword.hidden=YES;
             cell.conformationpassword.hidden=YES;
             cell.currentpasswordlbl.text =@"Password";

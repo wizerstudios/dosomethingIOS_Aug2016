@@ -26,6 +26,10 @@
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="GJi-rD-MMc">
                         <rect key="frame" x="0.0" y="2" width="320" height="64"/>
                         <subviews>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="h4e-wB-0M2">
+                                <rect key="frame" x="29" y="22" width="20" height="20"/>
+                                <animations/>
+                            </activityIndicatorView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="jFl-vW-95V">
                                 <rect key="frame" x="13" y="4" width="57" height="56"/>
                                 <animations/>
@@ -34,10 +38,6 @@
                                     <constraint firstAttribute="height" constant="56" id="jzK-Ym-Bo7"/>
                                 </constraints>
                             </imageView>
-                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="h4e-wB-0M2">
-                                <rect key="frame" x="29" y="22" width="20" height="20"/>
-                                <animations/>
-                            </activityIndicatorView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gJc-lJ-WiO">
                                 <rect key="frame" x="85" y="8" width="147" height="27"/>
                                 <animations/>
