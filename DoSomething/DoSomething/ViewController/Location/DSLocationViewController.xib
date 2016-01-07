@@ -88,7 +88,7 @@
                         <outletCollection property="gestureRecognizers" destination="vMM-5U-eS9" appends="YES" id="LzM-gB-Rv7"/>
                     </connections>
                 </collectionView>
-                <view alpha="0.84999999999999998" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pwd-6K-YCG">
+                <view alpha="0.90000000000000002" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pwd-6K-YCG">
                     <rect key="frame" x="0.0" y="63" width="320" height="500"/>
                     <subviews>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zBc-as-c5f">
