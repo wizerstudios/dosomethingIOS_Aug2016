@@ -23,6 +23,7 @@
     DSWebservice *webService;
     NSMutableArray *chatArray;
     NSUInteger isSupportUser;
+    
 }
 
 @end
@@ -48,7 +49,7 @@
                                                                constant:20.0]];
     [COMMON LoadIcon:self.view];
    
-
+   
     
 }
 
@@ -178,7 +179,8 @@
         
         
     }
-    
+    [Cell.activeIndicator setHidden:NO];
+    [Cell.activeIndicator startAnimating];
     NSMutableDictionary *chatDict = [chatArray objectAtIndex:indexPath.row];
     
     isSupportUser = [[chatDict valueForKey:@"supportuser"]integerValue];
@@ -209,14 +211,26 @@
     NSLog(@"ProfileName = %@",ProfileName);
     
     if([ProfileName length]>0){
+       
+//        downloadImageFromUrl(ProfileName,Cell.profileImageView);
+//        
+//        [Cell.profileImageView setImage:[UIImage imageNamed:ProfileName]];
         
-        //downloadImageFromUrl(ProfileName,Cell.profileImageView);
+       [Cell.profileImageView setImageWithURL:[NSURL URLWithString:ProfileName]];
+       if(Cell.profileImageView.image==nil)
+       {
+           [Cell.activeIndicator startAnimating];
+       }
+        else
+        {
+           [Cell.activeIndicator stopAnimating];
+            [Cell.activeIndicator setHidden:YES];
+        }
         
-        //[Cell.profileImageView setImage:[UIImage imageNamed:ProfileName]];
-        [Cell.profileImageView setImageWithURL:[NSURL URLWithString:ProfileName]];
     }
     else{
         [Cell.profileImageView setImage:[UIImage imageNamed:@"profile_noimg.png"]];
+         [Cell.activeIndicator setHidden:YES];
     }
     
     [Cell.profileImageView.layer setCornerRadius:29];

@@ -2324,7 +2324,7 @@
 -(void)saveAction:(id)sender
 {
     [self.view endEditing:YES];
-    [COMMON LoadIcon:self.view];
+    [COMMON LoadIcon:self.tableviewProfile];
     //[customNavigation.saveBtn setUserInteractionEnabled:NO];
 //    if(isSave==NO)
 //    {
@@ -2340,6 +2340,7 @@
         
         
         isSave =YES;
+       
     }
     else
         [self loadValidations];
@@ -2501,7 +2502,20 @@
             }
             
         }
-
+        else if (![confirmPassword isEqualToString:@""])
+        {
+            if([currentPassword isEqualToString:@""] || currentPassword==nil)
+            {
+                [self showAltermessage:@"Enter New password"];
+                [COMMON removeLoading];
+                return;
+            }
+            else
+            {
+                [COMMON removeLoading];
+                [self updateAPI];
+            }
+        }
 
         else
          {
