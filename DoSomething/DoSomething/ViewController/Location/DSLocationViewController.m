@@ -234,7 +234,7 @@
     self.matcheduserImg.layer.borderWidth=1;
     [self.matcheduserImg.layer setBorderColor:[UIColor redColor].CGColor];
     
-    NSString*objmatchusername =[NSString stringWithFormat:@"You and %@ are a match \n\nStart Chatting to",[matchUserArray valueForKey:@"first_name"]];
+    NSString*objmatchusername =[NSString stringWithFormat:@"You and %@ are a match \n Start Chatting to",[matchUserArray valueForKey:@"first_name"]];
     self.matchActivitylbl.text =objmatchusername;
     }
     else{
