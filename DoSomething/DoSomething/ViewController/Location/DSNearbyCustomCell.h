@@ -10,7 +10,7 @@
 
 @interface DSNearbyCustomCell : UITableViewCell
 
-@property(nonatomic,strong) IBOutlet UILabel * aboutText;
+@property(nonatomic,strong) IBOutlet UITextView * aboutText;
 @property(nonatomic,strong) IBOutlet UIButton *letsDoSomethingButton;
 
 @end
