@@ -305,7 +305,7 @@
         
         else
         {
-            self.aboutTextHeight.constant=dataSize.height+50;
+            self.aboutTextHeight.constant=dataSize.height+45;
             self.aboutviewHeight.constant=self.aboutTextHeight.constant;
             
             return self.aboutviewHeight.constant-10;

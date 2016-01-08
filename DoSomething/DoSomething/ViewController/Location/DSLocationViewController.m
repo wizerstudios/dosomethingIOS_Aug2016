@@ -898,7 +898,7 @@
     UIImage* image = nil;
 
     image = [UIImage imageNamed:@"backgroundImg"];  //slider-metal-trackBackground
-    image = [image resizableImageWithCapInsets:UIEdgeInsetsMake(0.0, 7.0, 0.0, 7.0)];
+    image = [image resizableImageWithCapInsets:UIEdgeInsetsMake(0.0, 0.0, 0.0, 10.0)];
     slider.trackBackgroundImage = image;
 
     image = [UIImage imageNamed:@"dot_active_red"];    //slider-metal-track
@@ -911,7 +911,7 @@
     slider.upperHandleImageNormal = image;
 
     image = [UIImage imageNamed:@"Filter_track"];          //slider-metal-handle-highlighted
-    image = [image imageWithAlignmentRectInsets:UIEdgeInsetsMake(0, 0, 0, 0)];
+    image = [image imageWithAlignmentRectInsets:UIEdgeInsetsMake(0,0, 0,0)];
     slider.lowerHandleImageHighlighted = image;
     slider.upperHandleImageHighlighted = image;
 }
