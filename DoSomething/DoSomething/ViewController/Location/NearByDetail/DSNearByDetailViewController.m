@@ -18,7 +18,7 @@
 #import "DSNearByImageView.h"
 
 
-@interface DSNearByDetailViewController () <UIScrollViewDelegate,UITableViewDataSource,UITableViewDelegate>
+@interface DSNearByDetailViewController () <UIScrollViewDelegate,UITableViewDataSource,UITableViewDelegate,UITextViewDelegate>
 {
     DSWebservice    * objWebService;
     NSMutableArray  * profileDataArray;
@@ -295,9 +295,21 @@
     }
     if ( indexPath.row ==1)
     {
-        dataSize = [COMMON getControlHeight:[userDetailsArray valueForKey:@"about"] withFontName:@"Patron-Medium" ofSize:12.0 withSize:CGSizeMake(tableView.frame.size.width-20,tableView.frame.size.height)];
-        self.aboutviewHeight.constant =dataSize.height;
-        return  self.aboutviewHeight.constant+10;
+        NSString *objstr=[userDetailsArray valueForKey:@"about"];
+         dataSize = [COMMON getControlHeight:objstr withFontName:@"Patron-Medium" ofSize:10.0 withSize:CGSizeMake(150,tableView.frame.size.height+60)];
+        if([objstr isEqualToString:@""]|| dataSize.height <=24)
+        {
+            return 30 ;
+        }
+        
+        
+        else
+        {
+            self.aboutTextHeight.constant=dataSize.height+45;
+            self.aboutviewHeight.constant=self.aboutTextHeight.constant;
+            
+            return self.aboutviewHeight.constant-10;
+       }
         
     }
     if ( indexPath.row ==2)
@@ -373,8 +385,12 @@
             [[NSBundle mainBundle] loadNibNamed:@"DSNearbyCustomCell" owner:self options:nil];
             NearbyCustomcell = cellAbout;
         }
-        NearbyCustomcell.aboutText.text = [userDetailsArray valueForKey:@"about"];
-        [NearbyCustomcell.aboutText sizeToFit];
+       
+        NSString *strAbout=[userDetailsArray valueForKey:@"about"];
+        NearbyCustomcell.aboutText.text = strAbout;
+        NearbyCustomcell.aboutText.textColor=[UIColor lightGrayColor];
+        
+       
         
     }
     
