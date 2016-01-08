@@ -151,27 +151,11 @@ static const NSInteger PWInvalidPosition = -1;
     
     pageImageView =[[UIImageView alloc]init];
     
-//    UISwipeGestureRecognizer *tapGestureRecognizeokButton = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(touchScrollViewTappedswipe:)];
-//    tapGestureRecognizeokButton.numberOfTouchesRequired = 1;
-//    [tutorialpageOkButton addGestureRecognizer:tapGestureRecognizeokButton];
-    //UIImage *btnImage = [UIImage imageNamed:@"profile_noimg"];
-    //[tutorialpageOkButton setImage:btnImage forState:UIControlStateNormal];
-    //[tutorialpageOkButton addTarget:self action:@selector(didClickOkButtonAction:) forControlEvents:UIControlEventTouchUpInside];
-    
-
-  
-    
-    
-    
-     //[self addSubview:bgImage];
-    //[self addSubview:_backgroundScrollView];
     [self addSubview:_foregroundScrollView];
     [self addSubview:_touchScrollView];
     [self addSubview:pageControllBtn];
     [self nextImage:_currentIndex];
-    //[_touchScrollView addSubview:self.kenView];
-    //[self addSubview:tutorialpageOkButton];
-    
+       
     
    
 }
@@ -597,7 +581,7 @@ static const NSInteger PWInvalidPosition = -1;
     [self addSubview:pageControllBtn];
     
     // Generates the animation  //before: UIViewAnimationCurveEaseInOut
-    [UIView animateWithDuration:8 + 2 delay:0 options:UIViewAnimationOptionCurveEaseOut animations:^
+    [UIView animateWithDuration:13 delay:0 options:UIViewAnimationOptionCurveEaseOut animations:^
      {
          CGAffineTransform rotate    = CGAffineTransformMakeRotation(rotation);
          CGAffineTransform moveRight = CGAffineTransformMakeTranslation(moveX, moveY);
