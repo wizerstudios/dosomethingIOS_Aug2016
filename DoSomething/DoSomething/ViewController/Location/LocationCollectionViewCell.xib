@@ -33,11 +33,11 @@
                                 </constraints>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QXZ-CJ-AiG">
-                                <rect key="frame" x="8" y="113" width="92" height="25"/>
+                                <rect key="frame" x="4" y="113" width="100" height="25"/>
                                 <animations/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="25" id="dpV-BK-4Ch"/>
-                                    <constraint firstAttribute="width" constant="92" id="t8x-KT-o1p"/>
+                                    <constraint firstAttribute="width" constant="100" id="t8x-KT-o1p"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="10"/>
                                 <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
@@ -143,7 +143,7 @@
                             <constraint firstItem="XCe-Kc-Sie" firstAttribute="top" secondItem="QXZ-CJ-AiG" secondAttribute="bottom" constant="1" id="JUC-tA-U0j"/>
                             <constraint firstAttribute="trailing" secondItem="hUv-43-UZa" secondAttribute="trailing" constant="11" id="LCd-9q-4m7"/>
                             <constraint firstItem="hUv-43-UZa" firstAttribute="leading" secondItem="elS-s6-A7j" secondAttribute="trailing" constant="5" id="LSQ-I1-biQ"/>
-                            <constraint firstAttribute="trailing" secondItem="QXZ-CJ-AiG" secondAttribute="trailing" constant="8" id="Pkt-QS-2g9"/>
+                            <constraint firstAttribute="trailing" secondItem="QXZ-CJ-AiG" secondAttribute="trailing" constant="4" id="Pkt-QS-2g9"/>
                             <constraint firstItem="Qrf-6q-c2F" firstAttribute="leading" secondItem="lNt-g0-diT" secondAttribute="leading" constant="14" id="R0n-MQ-coo"/>
                             <constraint firstItem="hL2-Dp-N0G" firstAttribute="top" secondItem="5GA-ta-996" secondAttribute="bottom" constant="2" id="URA-Ee-K8S"/>
                             <constraint firstAttribute="trailing" secondItem="XyY-39-1Hh" secondAttribute="trailing" constant="25" id="aYb-WI-7Xd"/>
@@ -153,7 +153,7 @@
                             <constraint firstItem="62S-dD-MPM" firstAttribute="top" secondItem="lNt-g0-diT" secondAttribute="top" constant="3" id="gmn-Fp-SXg"/>
                             <constraint firstItem="elS-s6-A7j" firstAttribute="top" secondItem="5GA-ta-996" secondAttribute="bottom" constant="2" id="hHc-sq-jwY"/>
                             <constraint firstAttribute="trailing" secondItem="5GA-ta-996" secondAttribute="trailing" constant="4" id="hTO-Kz-o3Z"/>
-                            <constraint firstItem="QXZ-CJ-AiG" firstAttribute="leading" secondItem="lNt-g0-diT" secondAttribute="leading" constant="8" id="iI3-1P-fKT"/>
+                            <constraint firstItem="QXZ-CJ-AiG" firstAttribute="leading" secondItem="lNt-g0-diT" secondAttribute="leading" constant="4" id="iI3-1P-fKT"/>
                             <constraint firstAttribute="trailing" secondItem="62S-dD-MPM" secondAttribute="trailing" constant="8" id="oLw-0V-bQA"/>
                             <constraint firstItem="XyY-39-1Hh" firstAttribute="leading" secondItem="lNt-g0-diT" secondAttribute="leading" constant="25" id="rlj-Fs-adF"/>
                             <constraint firstItem="62S-dD-MPM" firstAttribute="leading" secondItem="lNt-g0-diT" secondAttribute="leading" constant="8" id="tpc-SH-6wm"/>

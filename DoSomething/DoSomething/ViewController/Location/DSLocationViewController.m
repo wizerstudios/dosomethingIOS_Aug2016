@@ -457,7 +457,7 @@
     NSString * firstname =[[commonlocationArray valueForKey:@"first_name"] objectAtIndex:indexPath.row];
     NSString * lastname  =[[commonlocationArray valueForKey:@"last_name"] objectAtIndex:indexPath.row];
     
-    locationCellView.nameProfile.text =[NSString stringWithFormat:@"%@\n%@", firstname, lastname];;
+    locationCellView.nameProfile.text =[NSString stringWithFormat:@"%@%@", firstname, lastname];;
     locationCellView.kiloMeter.text=[[commonlocationArray valueForKey:@"distance"] objectAtIndex:indexPath.row];
     NSString * availableStr =[[commonlocationArray valueForKey:@"available_now"] objectAtIndex:indexPath.row];
     locationCellView.activeNow.text=([availableStr isEqualToString:@"Yes"])?@"NOW":@"";

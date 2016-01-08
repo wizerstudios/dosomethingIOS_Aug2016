@@ -113,7 +113,7 @@
 - (void)viewDidLoad {
     
     [super viewDidLoad];
-     NSLog(@"password = %@",emailPasswordToRegister);
+    
     Regpassword=emailPasswordToRegister;
     [[IQKeyboardManager sharedManager] considerToolbarPreviousNextInViewClass:[_tableviewProfile class]];
     
@@ -134,7 +134,7 @@
 }
 -(void)viewWillAppear:(BOOL)animated
 {
-    NSLog(@"userDetailsDict:%@",userDetailsDict);
+    
     
     [self loadNavigation];
     
@@ -175,10 +175,10 @@
         
         hobbiesNameArray = [hobbiesMainArray valueForKey:@"name"];
         
-        NSLog(@"imageNormalArray = %@",imageNormalArray);
+       
         
         strInterestHobbies = [[hobbiesMainArray valueForKey:@"hobbies_id"] componentsJoinedByString:@","];
-        NSLog(@"strInterestHobbies = %@",strInterestHobbies);
+       
     }
 
      [_tableviewProfile reloadData];
@@ -200,12 +200,12 @@
     customNavigation.view.frame = CGRectMake(0,-20, CGRectGetWidth(self.view.frame), 65);
     if (IS_IPHONE6 ){
         customNavigation.view.frame = CGRectMake(0,-20, 375, 76);
-        self.layoutConstraintTableViewYPos.constant= 20;
+        //self.layoutConstraintTableViewYPos.constant= 20;
     }
     if(IS_IPHONE6_Plus)
     {
         customNavigation.view.frame = CGRectMake(0,-20, 420, 83);
-        self.layoutConstraintTableViewYPos.constant= 20;
+        //self.layoutConstraintTableViewYPos.constant= 20;
     }
     [customNavigation.menuBtn setHidden:YES];
     [customNavigation.buttonBack setHidden:NO];
@@ -220,8 +220,7 @@
     
     NSString * strsessionID =[profileDict valueForKey:@"SessionId"];
     loginUserSessionID = strsessionID;
-    NSLog(@"strsessionID%@",strsessionID);
-     NSLog(@"DICT%@",profileDict);
+  
     if(profileDict != NULL)
     {
         [self initializeArrayProfile];
@@ -230,7 +229,7 @@
         interstAndHobbiesArray = [[profileDict valueForKey:@"hobbieslist"]mutableCopy];
         hobbiesNameArray       =[[interstAndHobbiesArray valueForKey:@"name"]mutableCopy];
         imageNormalArray     = [[interstAndHobbiesArray valueForKey:@"image"]mutableCopy];
-        self.tableViewHeightConstraint.constant=75;
+        self.tableViewHeightConstraint.constant=50;
     }
     
     [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"SelectedItemCategoryID"];
@@ -283,7 +282,6 @@
     
     strInterestHobbies = [[hobbiesMainArray valueForKey:@"hobbies_id"] componentsJoinedByString:@","];
     
-    NSLog(@"strInterestHobbies = %@",strInterestHobbies);
     
     imageNormalArray = [[hobbiesMainArray valueForKey:@"image"]mutableCopy];
     
@@ -291,7 +289,7 @@
     
     [_tableviewProfile reloadData];
     
-    NSLog(@"imageNormalArray = %@",imageNormalArray);
+   
     
 }
 
@@ -474,12 +472,12 @@
     }
     isPageControl=YES;
    [cell.topViewCell addSubview:pgDtView];
-    //NSLog(@"%@",pgDtView);
+   
     
 }
 
 - (IBAction)pageChanged:(id)sender {
-    NSLog(@"current page = %ld",(long)profileImagePageControl.currentPage);
+   
     
     CGFloat x = profileImagePageControl.currentPage * self.scrView.frame.size.width;
     [self.scrView setContentOffset:CGPointMake(x, 0) animated:YES];
@@ -508,7 +506,7 @@
         emailAddressToRegister = @"";
     }
     NSString *emailAddress = emailAddressToRegister;
-    NSLog(@"email = %@",emailAddress);
+   
     return emailAddress;
 }
 - (NSString *) getPassword {
@@ -517,7 +515,7 @@
         emailPasswordToRegister =Regpassword;              //@"";
     }
     NSString *emailPassword = emailPasswordToRegister;
-    NSLog(@"password = %@",emailPassword);
+   
     return emailPassword;
 }
 
@@ -734,7 +732,7 @@
 
 - (void)textFieldDidEndEditing:(UITextField *)textField{
     
-    NSLog(@"texttag:%ld",(long)textField.tag);
+   
 
     textField.textColor =[UIColor colorWithRed:(float)161.0/255 green:(float)161.0/255 blue:(float)161.0/255 alpha:1.0f];
     
@@ -795,7 +793,7 @@
                                     [NSMutableDictionary dictionaryWithObjectsAndKeys:@"TermsOfUse",@"placeHolder",@"",@"TypingText", nil], nil]atIndex:0];
     
     
-    NSLog(@"PlaceHolder %@",placeHolderArray);
+   
    
    
 }
@@ -816,7 +814,7 @@
     
    
     
-    NSLog(@"PlaceHolder %@",placeHolderArray);
+   
     
     
 }
@@ -840,7 +838,7 @@
 
 - (IBAction)alertPressCancel:(id)sender {
     
-    NSLog(@"Text Text = %@",objCustomAlterview.alertMsgLabel.text);
+   
     NSString *msgStr;
     msgStr = objCustomAlterview.alertMsgLabel.text;
     objCustomAlterview. alertBgView.hidden = YES;
@@ -907,7 +905,7 @@
         {
             dataSize = [COMMON getControlHeight:strAbout withFontName:@"Patron-Regular" ofSize:14.0 withSize:CGSizeMake(tableView.frame.size.width-20,tableView.frame.size.height)];
             if([strAbout isEqualToString:@""]|| dataSize.height ==10){
-                 return 30 ;
+                 return 40 ;
             }
             
 
@@ -984,7 +982,7 @@
        }
 
 
-    return 40;
+    return 0;
     }
 
 
@@ -1374,7 +1372,7 @@
         else
         {
             imageSize =39;
-            commonWidth=19.5;
+           // commonWidth=19.5;
             
         }
         space = imageSize / 2;
@@ -1407,7 +1405,7 @@
             }
             [imageNormalArray addObject:plusIcon];
         }
-        NSLog(@"hobbiesMainArray = %@",hobbiesMainArray);
+       
         
         UIButton *pushToHobbiesButton =[[UIButton alloc]initWithFrame:CGRectMake(0, 0, imageSize, imageSize)];
         for (int i =0; i< [imageNormalArray  count]; i++) {
@@ -1526,7 +1524,7 @@
              if(emailPasswordToRegister==nil || [emailPasswordToRegister isEqualToString:@""])
              {
                  emailPasswordToRegister=[profileDict valueForKey:@"password"];
-                 NSLog(@"emalpassword:%@",emailPasswordToRegister);
+                
              }
            emailPasswordToRegister =(emailPasswordToRegister==nil)?[profileDict valueForKey:@"password"]:emailPasswordToRegister;
            //cell.passwordTextField.placeholder  =(emailPasswordToRegister!=nil)?@"Your Current password":emailPasswordToRegister;
@@ -1561,7 +1559,7 @@
         }
         else
         {
-              NSLog(@"cell.emailTextField.text=%@",Regpassword);
+            
             cell.emailTextField.text = [self getEmail];
             cell.passwordTextField.text = [self getPassword];
             cell.currentpassword.hidden=YES;
@@ -1682,12 +1680,12 @@
 
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)Tablecell forRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if(indexPath.row == 6)
-    {
-            commonWidth = (Tablecell.contentView.frame.size.width - 20) / 14;
-            imageSize = commonWidth * 2;
-            
-        }
+//    if(indexPath.row == 6)
+//    {
+//            commonWidth = (Tablecell.contentView.frame.size.width - 20) / 14;
+//            imageSize = commonWidth * 2;
+//            
+//        }
 
 }
 
@@ -2241,7 +2239,7 @@
                     notification:@""
                        sessionid:loginUserSessionID
                          success:^(AFHTTPRequestOperation *operation, id responseObject) {
-                             NSLog(@"profileUpdate%@",responseObject);
+                            
                              
                              [COMMON removeLoading];
                          }
@@ -2366,7 +2364,7 @@
     dateFormatter = [[NSDateFormatter alloc] init];
     [dateFormatter setDateFormat:@"yyyy-MM-dd"];
     dateChange = [dateFormatter stringFromDate:date];
-    NSLog(@"Converted String : %@",dateChange);
+   
 
 }
 #pragma mark - saveAction
@@ -2374,7 +2372,7 @@
 {
     [COMMON LoadIcon:self.view];
     
-    NSLog(@"hobby:%@",hobbiesNameArray);
+   
     strType      = (selectEmail== YES)?@"1":@"2";
     strProfileID = (FBprofileID!=nil)?FBprofileID:@"";
     strDOB       = (currentTextfield.text !=nil)?currentTextfield.text :[profileDict valueForKey:@"date_of_birth"];
