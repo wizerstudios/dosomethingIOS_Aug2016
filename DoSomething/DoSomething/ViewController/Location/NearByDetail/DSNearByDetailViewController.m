@@ -64,7 +64,7 @@
     valueArray=[[NSMutableArray alloc]initWithObjects:@"cell0",@"cell1",@"cell2",@"cell3", nil];
     
    
-
+   
     // Do any additional setup after loading the view from its nib.
 }
 
@@ -102,7 +102,7 @@
 
     
     [self profileImageDisplay];
-    
+    self.profileImgSelectview.hidden=YES;
    
 }
 
@@ -571,10 +571,13 @@
 
 -(IBAction)changeSize:(UIButton *)sender
 {
-   
-    windowInfo = [[[UIApplication sharedApplication] delegate] window];
+    self.profileImgSelectview.hidden=NO;
+    self.selectImgBgview.layer.cornerRadius =170;
+    self.selectImgBgview.layer.masksToBounds = YES;
+//    UIView * selectprofileImg=[[UIView alloc]initWithFrame:CGRectMake(0,0,320,368)];
+    //windowInfo = [[[UIApplication sharedApplication] delegate] window];
 
-    DSNearByImageView *nearByImageView = [[DSNearByImageView alloc] init];
+   // DSNearByImageView *nearByImageView = [[DSNearByImageView alloc] init];
     
     if([sender tag] ==101){
         
@@ -589,31 +592,83 @@
         profileImageString= [userDetailsArray valueForKey:@"image3"];
         
     }
+    if([profileImageString isEqualToString:@""]){
+        [self.selectImg setImage:[UIImage imageNamed:@"profile_noimg"]];
+    }
+    else{
+        downloadImageFromUrl(profileImageString, self.selectImg);
+        [self.selectImg setImageWithURL:[NSURL URLWithString:profileImageString]];
         
+    }
+
     
-    nearByImageView.userDetailsImageArray   = userDetailsArray;
     
-    nearByImageView.profileImageStringValue = profileImageString;
+   // self.selectuserName.tintColor=[UIColor colorWithRed:218.0f/255.0f
+                                 //   green:40.0f/255.0f
+                                   //  blue:64.0f/255.0f
+                                    //alpha:1.0f];
+    //  label.backgroundColor = [UIColor whiteColor];
+    //[self.selectuserName setFont:[UIFont fontWithName:@"patron-bold" size:16]];
+    
+    //label.text= [self getData];
+    //[label setTextAlignment:NSTextAlignmentCenter];
+   // label.userInteractionEnabled = YES;
+    
+    NSString *strUserGender;
+    if(IS_IPHONE5)
+        
+        [self.selectuserName setFont:[UIFont fontWithName:@"FontAwesome" size:16]];
+    
+    else
+        
+        [self.selectuserName setFont:[UIFont fontWithName:@"FontAwesome" size:20]];
+    
+    
+    if([[userDetailsArray valueForKey:@"gender"]isEqualToString:@"Female"]){
+        strUserGender= [NSString stringWithFormat:@"%@", @"\uf221"];
+        
+    }
+    else{
+        strUserGender = [NSString stringWithFormat:@"%@", @"\uf222"];
+    }
+    
+    UIFont *awesomeFont = [UIFont fontWithName:@"FontAwesome" size:16];
+    NSDictionary *awesomeFontDict = [NSDictionary dictionaryWithObject:awesomeFont forKey:NSFontAttributeName];
+    NSMutableAttributedString *awAttrString = [[NSMutableAttributedString alloc] initWithString:strUserGender attributes: awesomeFontDict];
+    
+    UIFont *patronFont = [UIFont fontWithName:@"patron-bold" size:16];
+    NSDictionary *patronFontDict = [NSDictionary dictionaryWithObject:patronFont forKey:NSFontAttributeName];
+    NSMutableAttributedString *patAttrString = [[NSMutableAttributedString alloc]initWithString: [self getData] attributes:patronFontDict];
+    
+    [awAttrString appendAttributedString:patAttrString];
+    
+    
+    self.selectuserName.attributedText = awAttrString;
+    
+    
+    //nearByImageView.userDetailsImageArray   = userDetailsArray;
+    
+   // nearByImageView.profileImageStringValue = profileImageString;
    
-    [windowInfo addSubview:nearByImageView];
+    //[selectprofileImg addSubview:nearByImageView];
     
-    //[nearByImageView.closeButton addTarget:self action:@selector(closeButtonAction:) forControlEvents:UIControlEventTouchUpInside];
+    [self.selectImgCloseBtn addTarget:self action:@selector(closeButtonAction:) forControlEvents:UIControlEventTouchUpInside];
     
-    [self setNearByImageView:nearByImageView];
+    //[self setNearByImageView:nearByImageView];
     
-    NSDictionary *dictView = @{@"_terms":nearByImageView};
-    
-    [windowInfo addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[_terms]|"
-                                
-                                                                       options:0
-                                
-                                                                       metrics:nil views:dictView]];
-    
-    [windowInfo addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[_terms]|"
-                                
-                                                                       options:0
-                                
-                                                                       metrics:nil views:dictView]];
+//    NSDictionary *dictView = @{@"_terms":nearByImageView};
+//    
+//    [windowInfo addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[_terms]|"
+//                                
+//                                                                       options:0
+//                                
+//                                                                       metrics:nil views:dictView]];
+//    
+//    [windowInfo addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[_terms]|"
+//                                
+//                                                                       options:0
+//                                
+//                                                                       metrics:nil views:dictView]];
     
 }
 #pragma mark - letsDoSomethingAction
@@ -658,6 +713,7 @@
         [self.nearByImageView removeFromSuperview];
         
     });
+    self.profileImgSelectview.hidden=YES;
 }
 
 

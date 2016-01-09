@@ -4,10 +4,19 @@
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9051"/>
     </dependencies>
+    <customFonts key="customFonts">
+        <mutableArray key="Patron-Bold.ttf">
+            <string>Patron-Bold</string>
+        </mutableArray>
+    </customFonts>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="DSNearByDetailViewController">
             <connections>
                 <outlet property="nearbyTbl" destination="7IW-Xx-7LS" id="ACx-SX-oG2"/>
+                <outlet property="profileImgSelectview" destination="g3H-4o-la9" id="a5S-Hg-atd"/>
+                <outlet property="selectImg" destination="Pir-IC-jte" id="0hS-y1-lgT"/>
+                <outlet property="selectImgBgview" destination="2N9-tc-ktI" id="jLp-Ec-Oc3"/>
+                <outlet property="selectuserName" destination="AyD-Z5-0CP" id="tt6-MC-FeH"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -25,16 +34,60 @@
                         <outlet property="delegate" destination="-1" id="q16-t7-9zw"/>
                     </connections>
                 </tableView>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="g3H-4o-la9">
+                    <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                    <subviews>
+                        <view alpha="0.59999999999999998" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="XVI-N2-ggm">
+                            <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                            <animations/>
+                            <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                        </view>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AyD-Z5-0CP">
+                            <rect key="frame" x="40" y="395" width="240" height="40"/>
+                            <animations/>
+                            <fontDescription key="fontDescription" name="Patron-Bold" family="Patron" pointSize="14"/>
+                            <color key="textColor" red="0.90196078430000004" green="0.2470588235" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="2N9-tc-ktI">
+                            <rect key="frame" x="-40" y="0.0" width="400" height="400"/>
+                            <subviews>
+                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="chong" translatesAutoresizingMaskIntoConstraints="NO" id="Pir-IC-jte">
+                                    <rect key="frame" x="40" y="63" width="320" height="340"/>
+                                    <animations/>
+                                </imageView>
+                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fLc-IK-ICu">
+                                    <rect key="frame" x="40" y="63" width="320" height="340"/>
+                                    <animations/>
+                                    <connections>
+                                        <action selector="closeButtonAction:" destination="-1" eventType="touchUpInside" id="VCc-Fj-TF6"/>
+                                    </connections>
+                                </button>
+                            </subviews>
+                            <animations/>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        </view>
+                    </subviews>
+                    <animations/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                </view>
             </subviews>
             <animations/>
             <color key="backgroundColor" red="0.90980392160000001" green="0.90980392160000001" blue="0.90980392160000001" alpha="1" colorSpace="calibratedRGB"/>
             <constraints>
                 <constraint firstAttribute="trailing" secondItem="7IW-Xx-7LS" secondAttribute="trailing" constant="10" id="87R-4S-XqL"/>
+                <constraint firstAttribute="trailing" secondItem="g3H-4o-la9" secondAttribute="trailing" id="Q2e-to-pka"/>
                 <constraint firstAttribute="bottom" secondItem="7IW-Xx-7LS" secondAttribute="bottom" constant="52" id="U9E-sR-SxD"/>
                 <constraint firstItem="7IW-Xx-7LS" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="10" id="VTU-f9-zVM"/>
+                <constraint firstItem="g3H-4o-la9" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="Xrm-QC-WEj"/>
+                <constraint firstItem="g3H-4o-la9" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="tJY-Rf-Q62"/>
                 <constraint firstItem="7IW-Xx-7LS" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="vjt-ek-34U"/>
+                <constraint firstAttribute="bottom" secondItem="g3H-4o-la9" secondAttribute="bottom" id="ysv-Dv-9V3"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
         </view>
     </objects>
+    <resources>
+        <image name="chong" width="253" height="253"/>
+    </resources>
 </document>
