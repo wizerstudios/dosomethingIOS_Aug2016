@@ -15,6 +15,7 @@
     IBOutlet UILabel * messLbl;
     IBOutlet UILabel *soundLbl;
     IBOutlet UILabel *vibrationLbl;
+ 
 }
 
 @property (strong,nonatomic) IBOutlet UIScrollView  *settingScroll;
@@ -23,5 +24,8 @@
 
 @property (nonatomic,strong)  CLLocationManager       * locationManager;
 
+@property (strong,nonatomic)  IBOutlet UIButton * messSwitch;
+@property (strong,nonatomic)  IBOutlet UIButton *soundSwitch;
+@property (strong,nonatomic) IBOutlet UIButton *vibrationSwitch;
 
 @end
