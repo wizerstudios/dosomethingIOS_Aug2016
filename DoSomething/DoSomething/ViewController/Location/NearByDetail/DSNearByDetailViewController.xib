@@ -43,17 +43,17 @@
                             <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                         </view>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AyD-Z5-0CP">
-                            <rect key="frame" x="40" y="395" width="240" height="40"/>
+                            <rect key="frame" x="40" y="400" width="240" height="40"/>
                             <animations/>
-                            <fontDescription key="fontDescription" name="Patron-Bold" family="Patron" pointSize="14"/>
-                            <color key="textColor" red="0.90196078430000004" green="0.2470588235" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
+                            <fontDescription key="fontDescription" name="Patron-Bold" family="Patron" pointSize="12"/>
+                            <color key="textColor" red="0.85490196078431369" green="0.25098039215686274" blue="0.31372549019607843" alpha="1" colorSpace="calibratedRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="2N9-tc-ktI">
-                            <rect key="frame" x="-40" y="0.0" width="400" height="400"/>
+                            <rect key="frame" x="-80" y="0.0" width="480" height="400"/>
                             <subviews>
-                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="chong" translatesAutoresizingMaskIntoConstraints="NO" id="Pir-IC-jte">
-                                    <rect key="frame" x="40" y="63" width="320" height="340"/>
+                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Pir-IC-jte">
+                                    <rect key="frame" x="75" y="63" width="325" height="340"/>
                                     <animations/>
                                 </imageView>
                                 <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fLc-IK-ICu">
@@ -87,7 +87,4 @@
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
         </view>
     </objects>
-    <resources>
-        <image name="chong" width="253" height="253"/>
-    </resources>
 </document>

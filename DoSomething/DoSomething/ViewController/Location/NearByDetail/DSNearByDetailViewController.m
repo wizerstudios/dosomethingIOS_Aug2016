@@ -572,8 +572,7 @@
 -(IBAction)changeSize:(UIButton *)sender
 {
     self.profileImgSelectview.hidden=NO;
-    self.selectImgBgview.layer.cornerRadius =170;
-    self.selectImgBgview.layer.masksToBounds = YES;
+   
 //    UIView * selectprofileImg=[[UIView alloc]initWithFrame:CGRectMake(0,0,320,368)];
     //windowInfo = [[[UIApplication sharedApplication] delegate] window];
 
@@ -601,7 +600,8 @@
         
     }
 
-    
+    self.selectImgBgview.layer.cornerRadius =210;
+    self.selectImgBgview.layer.masksToBounds = YES;
     
    // self.selectuserName.tintColor=[UIColor colorWithRed:218.0f/255.0f
                                  //   green:40.0f/255.0f
@@ -617,7 +617,7 @@
     NSString *strUserGender;
     if(IS_IPHONE5)
         
-        [self.selectuserName setFont:[UIFont fontWithName:@"FontAwesome" size:16]];
+        [self.selectuserName setFont:[UIFont fontWithName:@"FontAwesome" size:14]];
     
     else
         
@@ -632,11 +632,11 @@
         strUserGender = [NSString stringWithFormat:@"%@", @"\uf222"];
     }
     
-    UIFont *awesomeFont = [UIFont fontWithName:@"FontAwesome" size:16];
+    UIFont *awesomeFont = [UIFont fontWithName:@"FontAwesome" size:14];
     NSDictionary *awesomeFontDict = [NSDictionary dictionaryWithObject:awesomeFont forKey:NSFontAttributeName];
     NSMutableAttributedString *awAttrString = [[NSMutableAttributedString alloc] initWithString:strUserGender attributes: awesomeFontDict];
     
-    UIFont *patronFont = [UIFont fontWithName:@"patron-bold" size:16];
+    UIFont *patronFont = [UIFont fontWithName:@"patron-bold" size:14];
     NSDictionary *patronFontDict = [NSDictionary dictionaryWithObject:patronFont forKey:NSFontAttributeName];
     NSMutableAttributedString *patAttrString = [[NSMutableAttributedString alloc]initWithString: [self getData] attributes:patronFontDict];
     
