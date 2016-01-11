@@ -1827,7 +1827,7 @@
 {
     
     [cell.SoundSwitchBtn setImage:[UIImage imageNamed:@"switch_off"] forState:UIControlStateNormal];
-    isNotification_message =@"No";
+    isNotification_sound =@"No";
     
     
 }
@@ -1842,7 +1842,7 @@
 {
     
     [cell.vibrationSwitchBtn setImage:[UIImage imageNamed:@"switch_off"] forState:UIControlStateNormal];
-    isNotification_sound =@"No";
+    isNotification_vibration =@"No";
     
     
 }

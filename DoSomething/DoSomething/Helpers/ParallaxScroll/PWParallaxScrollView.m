@@ -581,7 +581,7 @@ static const NSInteger PWInvalidPosition = -1;
     [self addSubview:pageControllBtn];
     
     // Generates the animation  //before: UIViewAnimationCurveEaseInOut
-    [UIView animateWithDuration:13 delay:0 options:UIViewAnimationOptionCurveEaseOut animations:^
+    [UIView animateWithDuration:8 delay:0 options:UIViewAnimationOptionCurveEaseOut animations:^
      {
          CGAffineTransform rotate    = CGAffineTransformMakeRotation(rotation);
          CGAffineTransform moveRight = CGAffineTransformMakeTranslation(moveX, moveY);
