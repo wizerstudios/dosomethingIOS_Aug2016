@@ -24,10 +24,13 @@
             <connections>
                 <outlet property="deletebuttonBottomoposition" destination="xA2-ar-81j" id="Fcc-hS-JCH"/>
                 <outlet property="messLbl" destination="Mhh-yM-OrN" id="Jhj-fP-Scu"/>
+                <outlet property="messSwitch" destination="F95-4w-50u" id="ROZ-0S-GZ4"/>
                 <outlet property="notificationview" destination="foH-is-yaE" id="iXd-7b-MZg"/>
                 <outlet property="settingScroll" destination="xEE-yJ-RYa" id="UVq-8y-rWT"/>
                 <outlet property="soundLbl" destination="yEG-Rq-yMk" id="90a-ok-Iy9"/>
+                <outlet property="soundSwitch" destination="oHW-nc-0IU" id="lYr-xn-wX1"/>
                 <outlet property="vibrationLbl" destination="Gb6-aP-jrl" id="hER-vA-OlG"/>
+                <outlet property="vibrationSwitch" destination="nbG-UA-Xg2" id="I0q-xG-sYj"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -74,6 +77,11 @@
                                     <color key="textColor" red="0.55294117647058827" green="0.55294117647058827" blue="0.55294117647058827" alpha="1" colorSpace="calibratedRGB"/>
                                     <nil key="highlightedColor"/>
                                 </label>
+                                <button opaque="NO" tag="602" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oHW-nc-0IU">
+                                    <rect key="frame" x="160" y="38" width="50" height="38"/>
+                                    <animations/>
+                                    <state key="normal" title="Button" image="switch_on"/>
+                                </button>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Vibration" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Gb6-aP-jrl">
                                     <rect key="frame" x="8" y="76" width="118" height="21"/>
                                     <animations/>
@@ -85,6 +93,16 @@
                                     <color key="textColor" red="0.55294117647058827" green="0.55294117647058827" blue="0.55294117647058827" alpha="1" colorSpace="calibratedRGB"/>
                                     <nil key="highlightedColor"/>
                                 </label>
+                                <button opaque="NO" tag="603" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nbG-UA-Xg2">
+                                    <rect key="frame" x="160" y="75" width="50" height="38"/>
+                                    <animations/>
+                                    <state key="normal" title="Button" image="switch_on"/>
+                                </button>
+                                <button opaque="NO" tag="601" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="F95-4w-50u">
+                                    <rect key="frame" x="153" y="0.0" width="50" height="38"/>
+                                    <animations/>
+                                    <state key="normal" image="switch_on"/>
+                                </button>
                             </subviews>
                             <animations/>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -198,4 +216,7 @@
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
         </view>
     </objects>
+    <resources>
+        <image name="switch_on" width="35" height="18"/>
+    </resources>
 </document>

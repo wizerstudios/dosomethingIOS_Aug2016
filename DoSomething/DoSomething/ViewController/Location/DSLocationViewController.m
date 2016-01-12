@@ -17,7 +17,7 @@
 #import <MapKit/MapKit.h>
 #import "CustomAlterview.h"
 #import "DSNearByDetailViewController.h"
-#import "DSChatDetailViewController.h";
+#import "DSChatDetailViewController.h"
 
 #define hobbiesbackcolor = [UIColor colorWithRed: (199.0/255.0) green: (65.0/255.0) blue: (81.0/255.0) alpha: 1.0];
 
@@ -666,19 +666,33 @@
         self.collectionviewxpostion.constant =(IS_IPHONE6 || IS_IPHONE6_Plus)?-300:-250;
         self.CollectionviewWidth.constant    =self.view.frame.size.width;
         self.filterviewxposition.constant    =65;
-        [customNavigation.FilterBtn setImage:[UIImage imageNamed:@""] forState:UIControlStateNormal];
-        [customNavigation.FilterBtn setTitle:@"Apply" forState:UIControlStateNormal];
-        [self filterviewPosition];
-        appDelegate.settingButton.userInteractionEnabled=NO;
-        isFilteraction=YES;
-        [self.locationCollectionView setUserInteractionEnabled:YES];
-        swiperight=[[UISwipeGestureRecognizer alloc]initWithTarget:self action:@selector(swiperight:)];
-        swiperight.direction=UISwipeGestureRecognizerDirectionRight;
+          [UIView animateWithDuration:2.0 animations:^{
+             
+              [self.view layoutIfNeeded];
+            
+             
+               [self filterviewPosition];
+          }];
         
-        [self.locationCollectionView addGestureRecognizer:swiperight];
+       
+            
+            
+            [customNavigation.FilterBtn setImage:[UIImage imageNamed:@""] forState:UIControlStateNormal];
+            [customNavigation.FilterBtn setTitle:@"Apply" forState:UIControlStateNormal];
+        
+            appDelegate.settingButton.userInteractionEnabled=NO;
+            isFilteraction=YES;
+            [self.locationCollectionView setUserInteractionEnabled:YES];
+            swiperight=[[UISwipeGestureRecognizer alloc]initWithTarget:self action:@selector(swiperight:)];
+            swiperight.direction=UISwipeGestureRecognizerDirectionRight;
+            
+            [self.locationCollectionView addGestureRecognizer:swiperight];
+            
+            isgestureenable=NO;
 
-        isgestureenable=NO;
 
+        
+        
         
     }
     else if (isFilteraction==YES)
@@ -686,9 +700,17 @@
         self.collectionviewxpostion.constant =10;
         self.CollectionviewWidth.constant    =self.view.frame.size.width-10;
         self.filterviewxposition.constant    = self.CollectionviewWidth.constant+10;
+        [UIView animateWithDuration:2.0 animations:^{
+            
+            [self.view layoutIfNeeded];
+            
+             [self filterviewPosition];
+           
+        }];
+
         [customNavigation.FilterBtn setImage:[UIImage imageNamed:@"filerImage"] forState:UIControlStateNormal];
         [customNavigation.FilterBtn setTitle:@"" forState:UIControlStateNormal];
-        [self filterviewPosition];
+       
         isFilteraction=NO;
         [self.locationCollectionView setUserInteractionEnabled:YES];
         appDelegate.settingButton.userInteractionEnabled=YES;
@@ -849,7 +871,14 @@
     self.collectionviewxpostion.constant =10;
     self.CollectionviewWidth.constant    =self.view.frame.size.width-10;
     self.filterviewxposition.constant    = self.CollectionviewWidth.constant+10;
-    [self filterviewPosition];
+    [UIView animateWithDuration:2.0 animations:^{
+        
+        [self.view layoutIfNeeded];
+        
+        [self filterviewPosition];
+        
+    }];
+    //[self filterviewPosition];
     isFilteraction=NO;
     [locationCellView setUserInteractionEnabled:YES];
     

@@ -222,11 +222,11 @@
                         <rect key="frame" x="0.0" y="0.0" width="300" height="100"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Your Interests and Hobbies" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CBw-9W-xH2">
-                                <rect key="frame" x="7" y="0.0" width="137" height="21"/>
+                                <rect key="frame" x="7" y="2" width="137" height="21"/>
                                 <animations/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="21" id="GOE-EC-ER4"/>
-                                    <constraint firstAttribute="width" constant="137" id="iwy-0y-9v5"/>
+                                    <constraint firstAttribute="width" constant="137" id="3aT-XX-pHJ"/>
+                                    <constraint firstAttribute="height" constant="21" id="oJ1-kU-rXg"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="Patron-Bold" family="Patron" pointSize="10"/>
                                 <color key="textColor" red="0.40000000000000002" green="0.40000000000000002" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
@@ -247,18 +247,18 @@
                         <animations/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="CBw-9W-xH2" firstAttribute="leading" secondItem="hoj-aW-4aX" secondAttribute="leading" constant="7" id="BdR-3M-JnH"/>
-                            <constraint firstItem="CBw-9W-xH2" firstAttribute="top" secondItem="hoj-aW-4aX" secondAttribute="top" id="fBi-ot-dFb"/>
+                            <constraint firstItem="CBw-9W-xH2" firstAttribute="leading" secondItem="hoj-aW-4aX" secondAttribute="leading" constant="7" id="dc0-Iz-Bn7"/>
+                            <constraint firstItem="CBw-9W-xH2" firstAttribute="top" secondItem="hoj-aW-4aX" secondAttribute="top" constant="2" id="hPj-G1-Pjg"/>
                         </constraints>
                     </view>
                 </subviews>
                 <animations/>
                 <color key="backgroundColor" red="0.90980392156862744" green="0.90980392156862744" blue="0.90980392156862744" alpha="1" colorSpace="calibratedRGB"/>
                 <constraints>
-                    <constraint firstAttribute="bottom" secondItem="hoj-aW-4aX" secondAttribute="bottom" id="XSb-bE-zFi"/>
-                    <constraint firstItem="hoj-aW-4aX" firstAttribute="top" secondItem="d97-4g-Rc2" secondAttribute="top" id="elG-ll-j2f"/>
-                    <constraint firstItem="hoj-aW-4aX" firstAttribute="leading" secondItem="d97-4g-Rc2" secondAttribute="leading" id="gwi-pQ-18Y"/>
-                    <constraint firstAttribute="trailing" secondItem="hoj-aW-4aX" secondAttribute="trailing" id="wnx-s3-mlP"/>
+                    <constraint firstAttribute="trailing" secondItem="hoj-aW-4aX" secondAttribute="trailing" id="0d7-qR-1Q1"/>
+                    <constraint firstAttribute="bottom" secondItem="hoj-aW-4aX" secondAttribute="bottom" id="B6T-D5-m2d"/>
+                    <constraint firstItem="hoj-aW-4aX" firstAttribute="leading" secondItem="d97-4g-Rc2" secondAttribute="leading" id="Khg-5W-Ytq"/>
+                    <constraint firstItem="hoj-aW-4aX" firstAttribute="top" secondItem="d97-4g-Rc2" secondAttribute="top" id="a3P-yb-NYv"/>
                 </constraints>
             </tableViewCellContentView>
             <animations/>
@@ -340,7 +340,8 @@
                                 <rect key="frame" x="5" y="20" width="89" height="14"/>
                                 <animations/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="14" id="Ahv-fv-OxI"/>
+                                    <constraint firstAttribute="width" constant="89" id="GLF-P3-IVL"/>
+                                    <constraint firstAttribute="height" constant="14" id="q9Y-7W-vUk"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="Patron-Bold" family="Patron" pointSize="13"/>
                                 <color key="textColor" red="0.40000000000000002" green="0.40000000000000002" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
@@ -425,13 +426,12 @@
                         <animations/>
                         <color key="backgroundColor" red="0.90980392156862744" green="0.90980392156862744" blue="0.90980392156862744" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
-                            <constraint firstItem="gmr-PN-Cp2" firstAttribute="leading" secondItem="ivt-1I-e1x" secondAttribute="leading" constant="5" id="MP5-4b-TQw"/>
                             <constraint firstItem="SHS-IW-ID9" firstAttribute="leading" secondItem="ivt-1I-e1x" secondAttribute="leading" id="Q0P-Rj-JAQ"/>
                             <constraint firstAttribute="trailing" secondItem="SHS-IW-ID9" secondAttribute="trailing" id="YVf-bD-Eiq"/>
-                            <constraint firstItem="SHS-IW-ID9" firstAttribute="top" secondItem="gmr-PN-Cp2" secondAttribute="bottom" constant="10" id="u61-ea-TFc"/>
+                            <constraint firstItem="SHS-IW-ID9" firstAttribute="top" secondItem="gmr-PN-Cp2" secondAttribute="bottom" constant="10" id="bHy-Hi-xe3"/>
+                            <constraint firstItem="gmr-PN-Cp2" firstAttribute="leading" secondItem="ivt-1I-e1x" secondAttribute="leading" constant="5" id="rc3-mj-rlO"/>
                             <constraint firstAttribute="bottom" secondItem="SHS-IW-ID9" secondAttribute="bottom" constant="1" id="v1W-kH-IQG"/>
-                            <constraint firstItem="gmr-PN-Cp2" firstAttribute="top" secondItem="ivt-1I-e1x" secondAttribute="top" constant="20" id="wfy-Yl-y6g"/>
-                            <constraint firstAttribute="trailing" secondItem="gmr-PN-Cp2" secondAttribute="trailing" constant="206" id="x5r-w0-YQX"/>
+                            <constraint firstItem="gmr-PN-Cp2" firstAttribute="top" secondItem="ivt-1I-e1x" secondAttribute="top" constant="20" id="yJL-U1-zj2"/>
                         </constraints>
                     </view>
                 </subviews>

@@ -55,5 +55,10 @@
 
 @property(nonatomic,strong) IBOutlet NSLayoutConstraint *nearbyScrollHeight;
 
+@property (nonatomic,strong) IBOutlet UIView *profileImgSelectview;
+@property (nonatomic,strong) IBOutlet UIView * selectImgBgview;
+@property (nonatomic,strong) IBOutlet UIImageView * selectImg;
+@property (nonatomic,strong) IBOutlet UIButton * selectImgCloseBtn;
+@property (nonatomic,strong) IBOutlet UILabel * selectuserName;
 
 @end
