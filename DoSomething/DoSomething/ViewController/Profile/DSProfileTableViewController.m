@@ -208,7 +208,10 @@
         //self.layoutConstraintTableViewYPos.constant= 20;
     }
     [customNavigation.menuBtn setHidden:YES];
+    if(profileDict == NULL)
+    {
     [customNavigation.buttonBack setHidden:NO];
+    }
     [customNavigation.saveBtn setHidden:NO];
     [self.navigationController.navigationBar addSubview:customNavigation.view];
     [customNavigation.saveBtn addTarget:self action:@selector(saveAction:) forControlEvents:UIControlEventTouchUpInside];
