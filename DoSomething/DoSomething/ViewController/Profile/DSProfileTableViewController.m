@@ -1798,7 +1798,7 @@
 //            commonHeight= (commonHeight * 4)+52;
 //    }
     
-   
+    
 
 }
 
@@ -2061,7 +2061,6 @@
     
 }
 
-
 -(void)textViewDidEndEditing:(UITextView *)textView
 {
     cell.textViewAboutYou.scrollEnabled=NO;
@@ -2069,34 +2068,18 @@
     NSIndexPath *indexPath = [_tableviewProfile indexPathForRowAtPoint: position];
    
     cell = (DSProfileTableViewCell *)[_tableviewProfile cellForRowAtIndexPath:indexPath];
-    //cell.textViewHeaderLabel.hidden = YES;
+    
     if([textView.text length] == 0)
     {
         textView.tag = 0;
     }
 
     strAbout = textView.text;
-//    dataSize = [COMMON getControlHeight:strAbout withFontName:@"Patron-Regular" ofSize:14.0 withSize:CGSizeMake(textView.frame.size.width-20,textView.frame.size.height)];
     
-   
      [self.tableviewProfile scrollToRowAtIndexPath:[self.tableviewProfile indexPathForCell:cell] atScrollPosition:UITableViewScrollPositionBottom animated:NO];
     
     [self.tableviewProfile beginUpdates];
-    [self.tableviewProfile reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    self.aboutTextHeight.constant = cell.textViewAboutYou.contentSize.height + cell.textViewAboutYou.contentInset.top + cell.textViewAboutYou.contentInset.bottom;
-
     [self.tableviewProfile endUpdates];
-    // cell.textViewAboutYou.contentSize=CGSizeMake(cell.textViewAboutYou.frame.size.width,dataSize.height+10);
-
-     //self.aboutTextHeight.constant=dataSize.height;
-//    self.aboutViewheight.constant =self.aboutTextHeight.constant;
-//    
-    
-  
-   
-   
-    
-    
 }
 - (void) textViewDidChange:(UITextView *)textView
 {
