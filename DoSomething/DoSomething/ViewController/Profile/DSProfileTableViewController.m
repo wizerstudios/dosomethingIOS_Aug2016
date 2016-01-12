@@ -1326,14 +1326,9 @@
                 }
                
                 
-                
-              
-                
             }
             
-            
-            
-        }
+    }
        
         else{
             if(textviewText == nil){
@@ -1370,110 +1365,7 @@
             [cell.buttonPushHobbies addTarget:self action:@selector(pushToHobbiesView) forControlEvents:UIControlEventTouchUpInside];
         }
         
-//        yAxis = 31;
-//        imageSize =39;
-//        space = imageSize / 2;
-//        commonHeight = imageSize+15;
-//        int imageXPos = 0;
-//        int textXPos = 0;
-//        if(IS_IPHONE6_Plus){
-//            imageXPos = 33;
-//            textXPos = 23;
-//            commonWidth=29.5;
-//        }
-//        else if (IS_IPHONE6){
-//            imageXPos = 18;
-//            textXPos = 8;
-//            commonWidth=29.5;
-//        }
-//        else{
-//            imageXPos = 10;
-//            textXPos = 0;
-//            commonWidth=19.5;
-//        }
-//        
-//        NSString *plusIcon = @"Plus_icon.png";
-//        if ([imageNormalArray count] >=1)
-//        {
-//            for(NSString *strPlus in imageNormalArray)
-//            {
-//                if([strPlus isEqualToString:@"Plus_icon.png"])
-//                    [imageNormalArray removeObject:strPlus];
-//            }
-//            [imageNormalArray addObject:plusIcon];
-//        }
-//       
-//        
-//        UIButton *pushToHobbiesButton =[[UIButton alloc]initWithFrame:CGRectMake(0, 0, imageSize, imageSize)];
-//        for (int i =0; i< [imageNormalArray  count]; i++) {
-//            cell.plusIconImageView.hidden = YES;
-//            UIImageView *hobbiesImage;
-//           
-//           
-//            
-//            if(i <= 4){
-//                hobbiesImage = [[UIImageView alloc]initWithFrame:CGRectMake((i*(commonWidth + imageSize))+ imageXPos, yAxis, imageSize, imageSize)];
-//              
-//            }
-//            else if(i <= 9){
-//                hobbiesImage = [[UIImageView alloc]initWithFrame:CGRectMake(((i-5)*(commonWidth + imageSize))+ imageXPos, yAxis+imageSize+space, imageSize, imageSize)];
-//                          }
-//            else if(i <= 14){
-//                hobbiesImage = [[UIImageView alloc]initWithFrame:CGRectMake(((i-10)*(commonWidth + imageSize))+ imageXPos, yAxis+((imageSize+space) * 2), imageSize, imageSize)];
-//               
-//            }
-//            else{
-//                hobbiesImage = [[UIImageView alloc]initWithFrame:CGRectMake(((i-15)*(commonWidth + imageSize))+ imageXPos, yAxis+((imageSize+space) * 3), imageSize, imageSize)];
-//              
-//            }
-//            
-//             NSString *image =[imageNormalArray objectAtIndex:i];
-//           
-//            
-//            if([image isEqualToString:@"Plus_icon.png"])
-//            {
-//                [hobbiesImage setImage:[UIImage imageNamed:image]];
-//            }
-//            else
-//            {
-//                image= [image stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-//                [hobbiesImage setImageWithURL:[NSURL URLWithString:image]];
-//            }
-//            
-//            if (image == plusIcon) {
-//                hobbiesImage.userInteractionEnabled = YES;
-//                pushToHobbiesButton.imageView.contentMode = UIViewContentModeScaleAspectFit;
-//                [hobbiesImage addSubview:pushToHobbiesButton];
-//            }
-//            
-//
-//            [cell addSubview:hobbiesImage];
-//            [pushToHobbiesButton addTarget:self action:@selector(pushToHobbiesView) forControlEvents:UIControlEventTouchUpInside];
-//        }
-//        
-//        for (int i =0; i< [hobbiesNameArray  count]; i++) {
-//            
-//            NSString *image =[[hobbiesNameArray objectAtIndex:i]uppercaseString];
-//            UILabel *hobbiesname;
-//            
-//            if(i <= 4)
-//                hobbiesname = [[UILabel alloc]initWithFrame:CGRectMake((i*(commonWidth + imageSize))+textXPos, yAxis + imageSize, imageSize + 20, 15)];
-//            else if(i <= 9)
-//                hobbiesname = [[UILabel alloc]initWithFrame:CGRectMake(((i-5)*(commonWidth + imageSize))+textXPos, yAxis+(imageSize * 2)+space, imageSize + 20, 15)];
-//            else if(i <= 14)
-//                hobbiesname = [[UILabel alloc]initWithFrame:CGRectMake(((i-10)*(commonWidth + imageSize))+textXPos, yAxis+((imageSize+space) * 2)+imageSize, imageSize + 20, 15)];
-//            else
-//                hobbiesname = [[UILabel alloc]initWithFrame:CGRectMake(((i-15)*(commonWidth + imageSize))+textXPos, yAxis+((imageSize+space) * 3)+imageSize, imageSize + 20, 15)];
-//            
-//            [hobbiesname setFont:[UIFont fontWithName:@"Patron-Regular" size:7]];
-//            hobbiesname.textAlignment = NSTextAlignmentCenter;
-//            hobbiesname.textColor =[UIColor colorWithRed:(float)102.0/255 green:(float)102.0/255 blue:(float)102.0/255 alpha:1.0f];
-//            
-//            
-//            hobbiesname.text = image;
-//            [cell addSubview:hobbiesname];
-//            hobbiesname.textAlignment = NSTextAlignmentCenter;
-//        }
+
     }
     
     if (indexPath.row == 7)
@@ -1494,8 +1386,8 @@
        
         if(profileDict != NULL)
         {
-            NSString *loginType =[profileDict valueForKey:@"type"];
-            if([loginType isEqualToString:@"2"])
+            NSString *loginType =[profileDict valueForKey:@"showpassword"];
+            if([loginType isEqualToString:@"no"])
             {
                  cell.Accounttittlelbl.hidden=YES;
 
@@ -1525,7 +1417,7 @@
         else if(userDetailsDict.count > 0){
 
             NSString *loginType =[userDetailsDict valueForKey:@"type"];
-           if([loginType isEqualToString:@"1"])
+           if([loginType isEqualToString:@"no"])
            {
                cell.Accounttittlelbl.hidden=NO;
            }
@@ -1648,8 +1540,8 @@
             [[NSBundle mainBundle] loadNibNamed:@"DSProfileTableViewCell" owner:self options:nil];
             cell = cellloginTypeView;
         }
-        NSString *objloginType =[profileDict valueForKey:@"type"];
-        if([objloginType isEqualToString:@"1"])
+        NSString *objloginType =[profileDict valueForKey:@"registervia"];
+        if([objloginType isEqualToString:@"dosomething"])
         {
             cell.logilTypelbl.text =@"You are connect via DoSomething Account";
             cell.loginTypeImg.image=[UIImage imageNamed:@"loginTypeDS"];
