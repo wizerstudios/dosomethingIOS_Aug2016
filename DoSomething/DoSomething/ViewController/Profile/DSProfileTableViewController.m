@@ -1396,7 +1396,8 @@
 
             }
             else
-            { cell.Accounttittlelbl.hidden=NO;
+            {
+                cell.Accounttittlelbl.hidden=NO;
                 
                 cell.emailview.hidden =NO;
           
@@ -1417,7 +1418,7 @@
         else if(userDetailsDict.count > 0){
 
             NSString *loginType =[userDetailsDict valueForKey:@"type"];
-           if([loginType isEqualToString:@"no"])
+           if([loginType isEqualToString:@"1"])
            {
                cell.Accounttittlelbl.hidden=NO;
            }
