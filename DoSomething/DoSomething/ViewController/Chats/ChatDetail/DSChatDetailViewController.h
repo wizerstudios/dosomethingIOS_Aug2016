@@ -41,6 +41,7 @@
 @property (strong, nonatomic) IBOutlet UIView *backgroundView;
 
 @property (strong,nonatomic) NSMutableDictionary *chatuserDetailsDict;
+@property (strong,nonatomic) NSString *conversionID;
 
 @property (strong)NSTimer *messageTimer;
 

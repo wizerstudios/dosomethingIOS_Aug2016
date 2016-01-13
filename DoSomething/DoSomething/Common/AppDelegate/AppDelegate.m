@@ -14,6 +14,7 @@
 #import "HomeViewController.h"
 #import <Fabric/Fabric.h>
 #import <Crashlytics/Crashlytics.h>
+#import "DSChatDetailViewController.h"
 
 @interface AppDelegate ()
 
@@ -61,7 +62,7 @@
     });
     
     [[NSUserDefaults standardUserDefaults]removeObjectForKey:HobbiesArray];
-    [self enablePushNotification];
+  
     
     return YES;
     
@@ -238,92 +239,14 @@
     [[NSUserDefaults standardUserDefaults]setValue:token forKey:DeviceToken];
     [[NSUserDefaults standardUserDefaults]synchronize];
     
-//    NSString *appName = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleDisplayName"];
-//    NSString *appVersion = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleVersion"];
-//    
-//    // Check what Notifications the user has turned on.  We registered for all three, but they may have manually disabled some or all of them.
-//    NSUInteger rntypes = [[UIApplication sharedApplication] enabledRemoteNotificationTypes];
-//    
-//    // Set the defaults to disabled unless we find otherwise...
-//    NSString *pushBadge = (rntypes & UIRemoteNotificationTypeBadge) ? @"enabled" : @"disabled";
-//    NSString *pushAlert = (rntypes & UIRemoteNotificationTypeAlert) ? @"NO" : @"YES";
-//    NSString *pushSound = (rntypes & UIRemoteNotificationTypeSound) ? @"NO" : @"YES";
-    
-    // Get the users Device Model, Display Name, Unique ID, Token & Version Number
-//    UIDevice *dev = [UIDevice currentDevice];
-//    NSString *deviceUdid = [OpenUDID value];
-//    
-//    NSString *deviceName = dev.name;
-//    NSString *deviceModel = dev.model;
-//    NSString *deviceSystemVersion = dev.systemVersion;
-//    
-//    // Prepare the Device Token for Registration (remove spaces and < >)
-//    NSString *deviceToken = [[[[devToken description]
-//                               stringByReplacingOccurrencesOfString:@"<"withString:@""]
-//                              stringByReplacingOccurrencesOfString:@">" withString:@""]
-//                             stringByReplacingOccurrencesOfString: @" " withString: @""];
-//    
-//    [[NSUserDefaults standardUserDefaults] setValue:deviceToken forKey:@"DEVICETOKEN"];
-//    [[NSUserDefaults standardUserDefaults] synchronize];
-//    
-//    ChronosceneWebService *service = [[ChronosceneWebService alloc] init];
-//    
-//    [service postDeviceUDID:PUSHES
-//                   deviceID:deviceUdid
-//                   deviceOS:deviceName
-//                      token:deviceToken
-//                    appName:appName
-//                 appversion:appVersion
-//                devicemodel:deviceModel
-//              deviceversion:deviceSystemVersion
-//                  pushbadge:pushBadge
-//                  pushalert:pushAlert
-//                  pushsound:pushSound
-//                development:BUILD_FOR
-//                       type:BUILD_FOR
-//          completionHandler:^(id result, NSError *error)
-//     
-//     {
-//         
-//         if ([[result objectForKey:@"success"] boolValue]) {
-//             
-//         }
-//         if(error){
-//             NSLog(@"create user error response main view = %@",[error userInfo]);
-//         }
-//         
-//         
-//     }];
 
 }
 
 
 
 
--(void)enablePushNotification{
-    //Enable Push Notification
-    //iOS 8 handling
-    if ([[UIApplication sharedApplication] respondsToSelector:@selector(registerForRemoteNotifications)]) {
-        
-        [[UIApplication sharedApplication] registerUserNotificationSettings:[UIUserNotificationSettings settingsForTypes:(UIUserNotificationTypeSound | UIRemoteNotificationTypeBadge | UIUserNotificationTypeAlert)
-                                                                                                              categories:nil]];
-        [[UIApplication sharedApplication] registerForRemoteNotifications];
-        
-    } else {
-        [[UIApplication sharedApplication] registerForRemoteNotificationTypes:(UIRemoteNotificationTypeAlert | UIRemoteNotificationTypeBadge | UIRemoteNotificationTypeSound)];
-    }
-}
 
 #pragma mark Push Notification Services
-
--(void) handleRemoteNotification:(UIApplication *)application userInfo:(NSDictionary *)userInfo
-{
-    application.applicationIconBadgeNumber = 0;
-    
-    // NSString *strOccasionId = [userInfo objectForKey:@"alert_occasion_id"];
-    //[self loadGetAlertsWebservices:strOccasionId];
-    
-}
 
 - (void)application:(UIApplication *)application didFailToRegisterForRemoteNotificationsWithError:(NSError *)error
 {
@@ -339,7 +262,7 @@
     }
     
     [UIApplication sharedApplication].applicationIconBadgeNumber = 0;
-    [self handleRemoteNotification:application userInfo:userInfo];
+    //[self handleRemoteNotification:application userInfo:userInfo];
 }
 
 -(void) handleRemoteNotification:(UIApplication *)application userInfo:(NSDictionary *)userInfo {
@@ -351,7 +274,13 @@
 - (void)applicationWillResignActive:(UIApplication *)application {
     
 }
-
+-(void)loadnotificationmsg:(NSString*)conversationID
+{
+    DSChatDetailViewController *ChatDetail =[[DSChatDetailViewController alloc]initWithNibName:nil bundle:nil];
+     ChatDetail.conversionID = conversationID;
+    
+    [self.navigationController pushViewController:ChatDetail animated:YES];
+}
 - (void)applicationDidEnterBackground:(UIApplication *)application {
    
 }
