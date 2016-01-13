@@ -49,6 +49,8 @@
     
     [super viewDidLoad];
     
+    NSLog(@"conversionID=%@",_conversionID);
+    
     [[IQKeyboardManager sharedManager] considerToolbarPreviousNextInViewClass:[ChatTextView class]];
     
     webService = [[DSWebservice alloc]init];
@@ -350,12 +352,19 @@
 
 -(void)sendAction:(id)sender{
     
-    
+    NSString *conversationID;
     NSString *str=chatView.textView.text;
     
     NSString *receiverId = [chatuserDetailsDict valueForKey:@"UserId"];
-    
-    NSString *conversationID = [chatuserDetailsDict valueForKey:@"id"];
+    if(_conversionID==nil)
+    {
+        conversationID = [chatuserDetailsDict valueForKey:@"id"];
+    }
+    else
+    {
+        conversationID=_conversionID;
+    }
+   
     
     str = [str stringByReplacingOccurrencesOfString:@"\n" withString:@""];
     
@@ -392,7 +401,16 @@
 
 -(void)loadConverstionAPI{
     
-    NSString *conversationID = [chatuserDetailsDict valueForKey:@"id"];
+    NSString *conversationID;
+     NSLog(@"conversionID=%@",_conversionID);
+    if(_conversionID==nil)
+    {
+          conversationID = [chatuserDetailsDict valueForKey:@"id"];
+    }
+    else
+    {
+        conversationID=_conversionID;
+    }
     
     [webService getConversation:GetConversation sessionID:[COMMON getSessionID] conversationId:conversationID
                         success:^(AFHTTPRequestOperation *operation, id responseObject){
