@@ -247,8 +247,17 @@
     
     NSLog(@"UserInfo = %@",userInfo);
     
+    if (application.applicationState != UIApplicationStateActive ) {
+        [self handleRemoteNotification:application userInfo:userInfo];
+    }
+    
     [UIApplication sharedApplication].applicationIconBadgeNumber = 0;
 }
+
+-(void) handleRemoteNotification:(UIApplication *)application userInfo:(NSDictionary *)userInfo {
+    
+}
+
 
 
 - (void)applicationWillResignActive:(UIApplication *)application {
