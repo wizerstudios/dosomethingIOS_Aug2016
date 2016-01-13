@@ -242,10 +242,6 @@
 
 }
 
-
-
-
-
 #pragma mark Push Notification Services
 
 - (void)application:(UIApplication *)application didFailToRegisterForRemoteNotificationsWithError:(NSError *)error
@@ -262,7 +258,7 @@
     }
     
     [UIApplication sharedApplication].applicationIconBadgeNumber = 0;
-    //[self handleRemoteNotification:application userInfo:userInfo];
+    [self handleRemoteNotification:application userInfo:userInfo];
 }
 
 -(void) handleRemoteNotification:(UIApplication *)application userInfo:(NSDictionary *)userInfo {
@@ -276,6 +272,7 @@
 }
 -(void)loadnotificationmsg:(NSString*)conversationID
 {
+    NSLog(@"session id=%@",[COMMON getSessionID]);
     DSChatDetailViewController *ChatDetail =[[DSChatDetailViewController alloc]initWithNibName:nil bundle:nil];
      ChatDetail.conversionID = conversationID;
     
