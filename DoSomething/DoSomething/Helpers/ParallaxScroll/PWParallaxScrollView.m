@@ -22,6 +22,7 @@ static const NSInteger PWInvalidPosition = -1;
      NSMutableArray *FGimageArray;
     NSArray * pageController;
     UIImageView*pageImageView;
+    NSTimer *nextImageTimer;
 }
 
 @property (nonatomic, assign) BOOL isLandscape;
@@ -155,11 +156,31 @@ static const NSInteger PWInvalidPosition = -1;
     [self addSubview:_touchScrollView];
     [self addSubview:pageControllBtn];
     [self nextImage:_currentIndex];
-       
+    nextImageTimer = [NSTimer scheduledTimerWithTimeInterval:15.0 target:self selector:@selector(nextImage) userInfo:nil repeats:YES];
+    [_nextImageTimer fire];
+
+    
     
    
 }
-
+-(void)nextImage
+{
+    if (self.currentIndex == 0) {
+       
+         [self nextImage:_currentIndex+1];
+    }
+    else if (self.currentIndex==4)
+    {
+        _currentIndex=0;
+         [self nextImage:_currentIndex];
+    }
+    else
+    {
+         _currentIndex ++;
+         [self nextImage:_currentIndex];
+    }
+    
+}
 #pragma mark - public method
 
 - (void)moveToIndex:(NSInteger)index
@@ -581,7 +602,7 @@ static const NSInteger PWInvalidPosition = -1;
     [self addSubview:pageControllBtn];
     
     // Generates the animation  //before: UIViewAnimationCurveEaseInOut
-    [UIView animateWithDuration:8 delay:0 options:UIViewAnimationOptionCurveEaseOut animations:^
+    [UIView animateWithDuration:15.0 delay:0 options:UIViewAnimationOptionCurveEaseOut animations:^
      {
          CGAffineTransform rotate    = CGAffineTransformMakeRotation(rotation);
          CGAffineTransform moveRight = CGAffineTransformMakeTranslation(moveX, moveY);
@@ -589,6 +610,7 @@ static const NSInteger PWInvalidPosition = -1;
          CGAffineTransform zoomIn    = CGAffineTransformMakeScale(zoomInX, zoomInY);
          CGAffineTransform transform = CGAffineTransformConcat(zoomIn, combo1);
          imageView.transform = transform;
+         
          
      } completion:^(BOOL finished) {}];
     

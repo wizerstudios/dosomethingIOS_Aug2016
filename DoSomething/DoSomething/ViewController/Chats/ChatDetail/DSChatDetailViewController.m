@@ -35,7 +35,7 @@
     CGSize dataSize;
     CGSize windowSize;
     NSMutableArray *chatArray;
-    //ChatDetailCustomcell *ChatDetailcell;
+    ChatDetailCustomcell *ChatDetailcell;
 }
 
 @end
@@ -249,16 +249,16 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     static NSString *CellIdentifier = @"Cell";
-   ChatDetailCustomcell* cell = (ChatDetailCustomcell *) [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-    if (cell == nil) {
+  ChatDetailcell = (ChatDetailCustomcell *) [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    if (ChatDetailcell == nil) {
         [[NSBundle mainBundle] loadNibNamed:@"ChatDetailCustomcell" owner:self options:nil];
-        cell = chatCustomcell;
+        ChatDetailcell = chatCustomcell;
     }
     
     
-    [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
-    [cell getMessageArray:[conversationArray objectAtIndex:indexPath.row]];
-    return cell;
+    [ChatDetailcell setSelectionStyle:UITableViewCellSelectionStyleNone];
+    [ChatDetailcell getMessageArray:[conversationArray objectAtIndex:indexPath.row]];
+    return ChatDetailcell;
     
 }
 
@@ -359,11 +359,29 @@
     
     str = [str stringByReplacingOccurrencesOfString:@"\n" withString:@""];
     
+        CGPoint position = [chatView convertPoint:CGPointZero toView: chatTableView ];
+    NSIndexPath *indexPath = [chatTableView indexPathForRowAtPoint: position];
+    
+  ChatDetailcell = (ChatDetailCustomcell*)[chatTableView cellForRowAtIndexPath:indexPath];
+    NSLog(@"%@",str);
+    if(conversationArray.count > 1)
+    {
+        [ChatDetailcell getMessageArray:[conversationArray objectAtIndex:indexPath.row]];
+    }
     if([str length] > 0){
         
         [self.view endEditing:YES];
-
+       
+      NSMutableDictionary*AddDIcconversion =[NSMutableDictionary dictionaryWithObjectsAndKeys:[NSString stringWithFormat:@"%@",str],@"Message",@"SENDER",@"type",@"2016-01-12 06:08:09",@"senttime", nil];
+        [conversationArray addObject:AddDIcconversion];
+       
+        [chatTableView reloadData];
+         [chatTableView scrollRectToVisible:CGRectMake(0, chatTableView.contentSize.height - chatTableView.bounds.size.height, chatTableView.bounds.size.width,chatTableView.bounds.size.height) animated:NO];
+        
+      
         [self loadSendMessageAPI:receiverId conversationId:conversationID];
+       
+        
         
     }
     chatView.textView.text=@"";
@@ -414,7 +432,7 @@
 }
 
 -(void)loadSendMessageAPI:(NSString *)_receiverId conversationId:(NSString *)_conversationId{
-    
+    [COMMON LoadIcon:self.view];
                     [webService sendMessage:SendMessage_API sessionid:[COMMON getSessionID] message_send_user_id:_receiverId message:chatView.textView.text conversation_id:_conversationId success:^(AFHTTPRequestOperation *operation, id responseObject){
                         
                         NSLog(@"Conversation resp = %@",responseObject);
@@ -427,7 +445,7 @@
                             [self loadConverstionAPI];
                             
                         }
-                       
+                       [COMMON removeLoading];
                         
                     }
      
