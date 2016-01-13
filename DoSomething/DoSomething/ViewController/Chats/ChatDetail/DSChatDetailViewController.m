@@ -364,8 +364,10 @@
     
   ChatDetailcell = (ChatDetailCustomcell*)[chatTableView cellForRowAtIndexPath:indexPath];
     NSLog(@"%@",str);
-    [ChatDetailcell getMessageArray:[conversationArray objectAtIndex:indexPath.row]];
-    
+    if(conversationArray.count > 1)
+    {
+        [ChatDetailcell getMessageArray:[conversationArray objectAtIndex:indexPath.row]];
+    }
     if([str length] > 0){
         
         [self.view endEditing:YES];
