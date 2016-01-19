@@ -125,15 +125,28 @@
     
     customNavigation = [[CustomNavigationView alloc] initWithNibName:@"CustomNavigationView" bundle:nil];
     
-    customNavigation.view.frame = CGRectMake(0,-20, CGRectGetWidth(self.view.frame), 65);//65
+    customNavigation.view.frame = CGRectMake(0,-20, CGRectGetWidth(self.view.frame), 65);
+     self.topviewYposition.constant = customNavigation.view.frame.size.height;//65
     
     if (IS_IPHONE6 )
-        
-        customNavigation.view.frame = CGRectMake(0,-20, 375, 76);
+    {
+    
+        customNavigation.view.frame = CGRectMake(0,-20, CGRectGetWidth(self.view.frame), 76);
+         self.chatviewbottom.constant =430;
+         self.chattableheight.constant =10;
+         self.topviewYposition.constant = customNavigation.view.frame.size.height+5;
+    }
     
     if(IS_IPHONE6_Plus)
+    {
         
         customNavigation.view.frame = CGRectMake(0,-20, 420, 83);
+        self.chatviewbottom.constant =450;
+        self.chattableheight.constant =10;
+         self.topviewYposition.constant = customNavigation.view.frame.size.height+5;
+    }
+    
+   
     
     [customNavigation.menuBtn setHidden:YES];
     

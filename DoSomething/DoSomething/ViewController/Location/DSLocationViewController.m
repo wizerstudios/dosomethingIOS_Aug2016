@@ -85,6 +85,8 @@
 @synthesize profileImages,profileNames,kiloMeterlabel,userID,dosomethingImageArry,commonlocationArray,matchactivityBtn,matchActivitylbl,matchActivityView;
 - (void)viewDidLoad {
     
+
+    [COMMON LoadIcon:self.view];
     refreshControl = [[UIRefreshControl alloc] init];
     
     [refreshControl addTarget:self action:@selector(releaseToRefresh:) forControlEvents:UIControlEventValueChanged];
@@ -100,7 +102,7 @@
     avalableStatus=@"";
     objWebservice =[[DSWebservice alloc]init];
     currentloadPage= @"";
-
+ [self nearestLocationWebservice];
     
     [super viewDidLoad];
     isLoadData=NO;
@@ -110,7 +112,6 @@
     [self configureAgeChangeSlider];
      [self configureLabelSlider];
     
-    
     // Do any additional setup after loading the view from its nib.
 }
 
@@ -118,7 +119,7 @@
 {
     [super viewWillAppear:animated];
     self.matchActivityView.hidden=YES;
-    [self nearestLocationWebservice];
+   
     [self.navigationItem setHidesBackButton:YES animated:NO];
     
     [[NSNotificationCenter defaultCenter] addObserver:self
@@ -363,7 +364,7 @@
 #pragma mark - nearestLocationWebserviceAPI
 -(void)nearestLocationWebservice
 {
-    [COMMON LoadIcon:self.view];
+    
     [objWebservice nearestUsers:NearestUsers_API
                       sessionid:[COMMON getSessionID]
                        latitude:latitude

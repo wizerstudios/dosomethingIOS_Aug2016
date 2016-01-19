@@ -600,7 +600,14 @@
         
     }
 
-    self.selectImgBgview.layer.cornerRadius =225;
+    if(IS_IPHONE6 || IS_IPHONE6_Plus)
+    {
+        self.selectImgBgview.layer.cornerRadius =245;
+    }
+    else
+    {
+        self.selectImgBgview.layer.cornerRadius =225;
+    }
     self.selectImgBgview.layer.masksToBounds = YES;
     
    // self.selectuserName.tintColor=[UIColor colorWithRed:218.0f/255.0f

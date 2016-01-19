@@ -23,6 +23,8 @@
     
     
 }
+@property (nonatomic,strong) IBOutlet UIView * topview;
+@property (nonatomic ,strong) IBOutlet NSLayoutConstraint * topviewYposition;
 
 @property (strong, nonatomic) IBOutlet UIImageView *ProfileImage;
 @property (strong, nonatomic) IBOutlet UILabel *ProfileName;
@@ -30,6 +32,8 @@
 @property IBActionSheet *standardIBAS, *customIBAS, *funkyIBAS;
 
 @property(nonatomic,strong)IBOutlet ChatTextView *chatView;
+@property (nonatomic,strong) IBOutlet NSLayoutConstraint *chatviewbottom;
+@property (nonatomic,strong) IBOutlet NSLayoutConstraint * chattableheight;
 
 @property (strong, nonatomic) IBOutlet UIButton *funkyIBASButton;
 @property UIView *semiTransparentView;

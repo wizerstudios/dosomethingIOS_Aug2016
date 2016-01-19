@@ -7,6 +7,7 @@
 //
 
 #import "ChatTextView.h"
+#import "DSAppCommon.h"
 
 @implementation ChatTextView
 @synthesize textView,postButton,delegate,backGroundImageView,placeHolderLabel;
@@ -32,7 +33,15 @@
 
 - (void) composeView{
     
-    backGroundImageView  = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, 320, self.frame.size.height+10)];
+    if(IS_IPHONE6 || IS_IPHONE6_Plus)
+    {
+        backGroundImageView  = [[UIImageView alloc]initWithFrame:CGRectMake(0,0,self.frame.size.width+55, self.frame.size.height+10)];
+
+    }
+    else
+    {
+    backGroundImageView  = [[UIImageView alloc]initWithFrame:CGRectMake(0,0,self.frame.size.width, self.frame.size.height+10)];
+    }
     
     backGroundImageView.backgroundColor = [UIColor colorWithRed:246.0f/255.0f green:246.0f/255.0f blue:246.0f/255.0f alpha:1.0f];
    
