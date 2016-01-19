@@ -666,7 +666,7 @@
         self.collectionviewxpostion.constant =(IS_IPHONE6 || IS_IPHONE6_Plus)?-300:-250;
         self.CollectionviewWidth.constant    =self.view.frame.size.width;
         self.filterviewxposition.constant    =65;
-          [UIView animateWithDuration:2.0 animations:^{
+          [UIView animateWithDuration:0.5 animations:^{
              
               [self.view layoutIfNeeded];
             
@@ -700,7 +700,7 @@
         self.collectionviewxpostion.constant =10;
         self.CollectionviewWidth.constant    =self.view.frame.size.width-10;
         self.filterviewxposition.constant    = self.CollectionviewWidth.constant+10;
-        [UIView animateWithDuration:2.0 animations:^{
+        [UIView animateWithDuration:0.5 animations:^{
             
             [self.view layoutIfNeeded];
             

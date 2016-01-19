@@ -600,7 +600,7 @@
         
     }
 
-    self.selectImgBgview.layer.cornerRadius =210;
+    self.selectImgBgview.layer.cornerRadius =225;
     self.selectImgBgview.layer.masksToBounds = YES;
     
    // self.selectuserName.tintColor=[UIColor colorWithRed:218.0f/255.0f

@@ -119,7 +119,7 @@ DSAppCommon *sharedCommon = nil;
         
     }
     
-    return CGSizeMake(dataHeight.width, dataHeight.height+10);
+    return CGSizeMake(dataHeight.width, dataHeight.height+20);
 }
 
 #pragma  mark - Cell Height

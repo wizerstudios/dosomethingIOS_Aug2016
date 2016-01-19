@@ -946,8 +946,8 @@
                 
                 if(profileDict!=nil)
                 {
-                    NSString *objlogintype=[profileDict valueForKey:@"type"];
-                    if([objlogintype isEqual:@"2"])
+                    NSString *objlogintype=[profileDict valueForKey:@"showpassword"];
+                    if([objlogintype isEqual:@"no"])
                     
                     {
                         return 0;
@@ -1296,9 +1296,9 @@
                 
                 strAbout =cell.textViewAboutYou.text;
                 
-//              dataSize = [COMMON getControlHeight:strAbout withFontName:@"Patron-Regular" ofSize:14.0 withSize:CGSizeMake(cell.frame.size.width-20,tableView.frame.size.height)];
-//                
-//                cell.textViewAboutYou.delegate = self;
+              dataSize = [COMMON getControlHeight:strAbout withFontName:@"Patron-Regular" ofSize:14.0 withSize:CGSizeMake(cell.frame.size.width-20,tableView.frame.size.height)];
+                
+                cell.textViewAboutYou.delegate = self;
                 
             }
             
@@ -1309,13 +1309,13 @@
                     if(strAbout == NULL){
                         cell.textViewAboutYou.text = [[profileDict valueForKey:@"about"]mutableCopy];
                         strAbout =cell.textViewAboutYou.text;
-//                         dataSize = [COMMON getControlHeight:strAbout withFontName:@"Patron-Regular" ofSize:14.0 withSize:CGSizeMake(cell.frame.size.width-20,tableView.frame.size.height)];
-//                        self.aboutTextHeight.constant =dataSize.height;
+                         dataSize = [COMMON getControlHeight:strAbout withFontName:@"Patron-Regular" ofSize:14.0 withSize:CGSizeMake(cell.frame.size.width-20,tableView.frame.size.height)];
+                        self.aboutTextHeight.constant =dataSize.height;
                     }
                     else{
                          cell.textViewAboutYou.text = strAbout;
-//                        dataSize = [COMMON getControlHeight:strAbout withFontName:@"Patron-Regular" ofSize:14.0 withSize:CGSizeMake(cell.frame.size.width-20,tableView.frame.size.height)];
-//                        self.aboutTextHeight.constant =dataSize.height-12;
+                        dataSize = [COMMON getControlHeight:strAbout withFontName:@"Patron-Regular" ofSize:14.0 withSize:CGSizeMake(cell.frame.size.width-20,tableView.frame.size.height)];
+                        self.aboutTextHeight.constant =dataSize.height-12;
                     }
                 }
                 else{
@@ -2207,6 +2207,8 @@
 }
 #pragma mark - updateAPI
 -(void) updateAPI{
+    
+    [COMMON LoadIcon:self.view];
     if(currentLatitude == nil)
         currentLatitude = @"";
     if(currentLongitude == nil)
@@ -2311,8 +2313,9 @@
 #pragma mark - saveAction
 -(void)saveAction:(id)sender
 {
+    //[COMMON LoadIcon:self.tableviewProfile];
     [self.view endEditing:YES];
-    [COMMON LoadIcon:self.tableviewProfile];
+    
     //[customNavigation.saveBtn setUserInteractionEnabled:NO];
 //    if(isSave==NO)
 //    {
