@@ -47,7 +47,7 @@
 -(void)loadMessageView{
     if([chatArray count]){
        sender_bubbleimgView.hidden=NO;
-        
+       
         if([[chatArray valueForKey:@"type"] isEqualToString:@"SENDER"]){
             
             sender_msgLbl.text=[chatArray valueForKey:@"Message"];
@@ -100,17 +100,18 @@
             sender_bubbleimgView.image = [[UIImage imageNamed:@""] stretchableImageWithLeftCapWidth:20 topCapHeight:16];
             sender_bubbleimgView.backgroundColor = [UIColor whiteColor];
             sender_bubbleimgView.layer.cornerRadius = 7;
-            sender_msgLbl.frame = CGRectMake(25 ,
+
+
+            sender_msgLbl.frame = CGRectMake(20 ,
                                              y_Position + sender_msgLbl.frame.origin.y+8,
                                              MAX(dataSize.width, [COMMON dataSize:sender_msgLbl.text withFontName:@"HelveticaNeue" ofSize:15 withSize:CGSizeMake(195.0, 999.0)].width+10 + BUBBLE_WIDTH_SPACE),
-                                             dataSize.height);
+                                             dataSize.height-10);
             [sender_msgLbl setTextColor:[UIColor blackColor]];
             
-            sender_bubbleimgView.frame = CGRectMake(12,
+            sender_bubbleimgView.frame = CGRectMake(10,
                                                     y_Position + sender_bubbleimgView.frame.origin.y,
-                                                    MAX(dataSize.width, [COMMON dataSize:sender_msgLbl.text withFontName:@"HelveticaNeue" ofSize:15 withSize:CGSizeMake(195.0, 999.0)].width + BUBBLE_WIDTH_SPACE)+20,
-                                                    dataSize.height+BUBBLE_IMAGE_HEIGHT);
-            
+                                                    MAX(dataSize.width, [COMMON dataSize:sender_msgLbl.text withFontName:@"HelveticaNeue" ofSize:15 withSize:CGSizeMake(195.0, 999.0)].width + BUBBLE_WIDTH_SPACE)+y_Position + sender_bubbleimgView.frame.origin.y,
+                                                    dataSize.height+BUBBLE_IMAGE_HEIGHT-10);
             
             
             

@@ -47,7 +47,7 @@
                                                               attribute:NSLayoutAttributeTop
                                                              multiplier:1.0
                                                                constant:20.0]];
-    [COMMON LoadIcon:self.view];
+    [COMMON LoadIcon:self.ChatTableView];
    
    
     
@@ -255,7 +255,7 @@
         [Cell.msgCountLabel setText:[NSString stringWithFormat:@"%lu",(unsigned long)msgCount]];
         
         [Cell.msgCountLabel.layer setCornerRadius:9];
-        
+      
         Cell.msgCountLabel.clipsToBounds = YES;
         
     }

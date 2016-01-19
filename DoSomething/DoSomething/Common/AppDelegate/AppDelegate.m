@@ -36,7 +36,7 @@
     
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
         [self initAPNS];
-    });
+            });
     
     if ([COMMON isUserLoggedIn]) {
         
@@ -263,6 +263,10 @@
 
 -(void) handleRemoteNotification:(UIApplication *)application userInfo:(NSDictionary *)userInfo {
     
+    NSLog(@"userInfo=%@",userInfo);
+    NSString *conversationid =[[userInfo valueForKey:@"aps"]valueForKey:@"conversationid"];
+
+    [self loadnotificationmsg: conversationid];
 }
 
 

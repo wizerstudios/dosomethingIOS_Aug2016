@@ -76,7 +76,7 @@
     [textView addSubview:placeHolderLabel];
     
     
-    postButton = [[UIButton alloc]initWithFrame:CGRectMake(270,8, 50, 30)];
+    postButton = [[UIButton alloc]initWithFrame:CGRectMake(backGroundImageView.frame.size.width-60,8, 50, 30)];
     
     postButton.layer.cornerRadius = 6;
     
