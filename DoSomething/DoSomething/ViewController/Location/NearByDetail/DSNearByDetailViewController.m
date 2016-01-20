@@ -606,7 +606,7 @@
     }
     else
     {
-        self.selectImgBgview.layer.cornerRadius =230;
+        self.selectImgBgview.layer.cornerRadius =235;
     }
     self.selectImgBgview.layer.masksToBounds = YES;
     

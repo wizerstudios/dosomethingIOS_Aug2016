@@ -258,7 +258,7 @@
     }
     
     [UIApplication sharedApplication].applicationIconBadgeNumber = 0;
-    [self handleRemoteNotification:application userInfo:userInfo];
+    //[self handleRemoteNotification:application userInfo:userInfo];
 }
 
 -(void) handleRemoteNotification:(UIApplication *)application userInfo:(NSDictionary *)userInfo {
@@ -277,6 +277,10 @@
 -(void)loadnotificationmsg:(NSString*)conversationID
 {
     NSLog(@"session id=%@",[COMMON getSessionID]);
+//     if([COMMON getSessionID] != nil)
+//     {
+//         
+//     }
     DSChatDetailViewController *ChatDetail =[[DSChatDetailViewController alloc]initWithNibName:nil bundle:nil];
      ChatDetail.conversionID = conversationID;
     
@@ -286,7 +290,9 @@
    
 }
 
-- (void)applicationWillEnterForeground:(UIApplication *)application {
+- (void)applicationWillEnterForeground:(UIApplication *)application
+{
+    
 }
 
 - (void)applicationDidBecomeActive:(UIApplication *)application {
@@ -298,6 +304,31 @@
   
 }
 
+//-(void)loadChatHistoryAPI{
+//    
+//    [webService userChatHist:ChatHistory_API sessionid:[COMMON getSessionID]
+//     
+//                     success:^(AFHTTPRequestOperation *operation, id responseObject){
+//                         
+//                         NSLog(@"responseObject = %@",responseObject);
+//                         
+//                         chatArray = [[[responseObject valueForKey:@"getchathistory"]valueForKey:@"converation"] mutableCopy];
+//                         
+//                         NSLog(@"chatArray = %@",chatArray);
+//                         
+//                         [ChatTableView reloadData];
+//                         
+//                         [COMMON removeLoading];
+//                         
+//                     }
+//     
+//                     failure:^(AFHTTPRequestOperation *operation, id error) {
+//                         [COMMON removeLoading];
+//                         
+//                     }];
+//    
+//    
+//}
 
 
 @end

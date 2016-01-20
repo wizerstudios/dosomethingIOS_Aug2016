@@ -41,9 +41,9 @@
                             <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                         </view>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AyD-Z5-0CP">
-                            <rect key="frame" x="40" y="402" width="240" height="40"/>
+                            <rect key="frame" x="40" y="404" width="240" height="35"/>
                             <constraints>
-                                <constraint firstAttribute="height" constant="40" id="NKE-XH-PqV"/>
+                                <constraint firstAttribute="height" constant="35" id="NKE-XH-PqV"/>
                             </constraints>
                             <fontDescription key="fontDescription" name="Patron-Bold" family="Patron" pointSize="12"/>
                             <color key="textColor" red="0.85490196078431369" green="0.25098039215686274" blue="0.31372549019607843" alpha="1" colorSpace="calibratedRGB"/>
@@ -78,7 +78,7 @@
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     <constraints>
                         <constraint firstAttribute="trailing" secondItem="2N9-tc-ktI" secondAttribute="trailing" constant="-80" id="CpV-FP-Igo"/>
-                        <constraint firstItem="AyD-Z5-0CP" firstAttribute="top" secondItem="2N9-tc-ktI" secondAttribute="bottom" constant="2" id="EiT-xk-rFL"/>
+                        <constraint firstItem="AyD-Z5-0CP" firstAttribute="top" secondItem="2N9-tc-ktI" secondAttribute="bottom" constant="4" id="EiT-xk-rFL"/>
                         <constraint firstItem="2N9-tc-ktI" firstAttribute="leading" secondItem="g3H-4o-la9" secondAttribute="leading" constant="-80" id="LAt-Wy-P00"/>
                         <constraint firstItem="XVI-N2-ggm" firstAttribute="top" secondItem="g3H-4o-la9" secondAttribute="top" id="MS1-gg-Ecc"/>
                         <constraint firstAttribute="trailing" secondItem="XVI-N2-ggm" secondAttribute="trailing" id="P2F-6E-OY2"/>

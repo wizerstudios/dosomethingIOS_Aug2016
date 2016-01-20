@@ -1377,85 +1377,85 @@
             
         }
         
-        cell.currentpassword.hidden=NO;
-        cell.conformationpassword.hidden=NO;
-        cell.currentpasswordlbl.text=@"Current password";
-        cell.confirmpasswordlbl.hidden =NO;
-        cell.passwordlbl.hidden =NO;
-        
-       
-        if(profileDict != NULL)
-        {
-            NSString *loginType =[profileDict valueForKey:@"showpassword"];
-            if([loginType isEqualToString:@"no"])
-            {
-                 cell.Accounttittlelbl.hidden=YES;
-
-
-                cell.emailview.hidden =YES;
-
-            }
-            else
-            {
-                cell.Accounttittlelbl.hidden=NO;
-                
-                cell.emailview.hidden =NO;
-          
-            [cell.emailTextField setUserInteractionEnabled:NO];
-            cell.emailTextField.text =(emailAddressToRegister==nil)?[profileDict valueForKey:@"email"]:emailAddressToRegister;
-             if(emailPasswordToRegister==nil || [emailPasswordToRegister isEqualToString:@""])
-             {
-                 emailPasswordToRegister=[profileDict valueForKey:@"password"];
-                
-             }
-           emailPasswordToRegister =(emailPasswordToRegister==nil)?[profileDict valueForKey:@"password"]:emailPasswordToRegister;
-           //cell.passwordTextField.placeholder  =(emailPasswordToRegister!=nil)?@"Your Current password":emailPasswordToRegister;
-            cell.currentpassword.text    =(currentPassword==nil)?@"":@"Your new password";
-            cell.conformationpassword.text =(confirmPassword==nil)?@"":@"confirm your new password";
-            }
-
-        }
-        else if(userDetailsDict.count > 0){
-
-            NSString *loginType =[userDetailsDict valueForKey:@"type"];
-           if([loginType isEqualToString:@"1"])
-           {
-               cell.Accounttittlelbl.hidden=NO;
-           }
-            else
-            {
-                 cell.Accounttittlelbl.hidden=NO;
-            }
-            cell.emailTextField.text =(emailAddressToRegister==0)?[userDetailsDict valueForKey:@"email"]:emailAddressToRegister;
-            cell.passwordTextField.text  =(emailPasswordToRegister==0)? @"":emailPasswordToRegister;
-            emailAddressToRegister   = cell.emailTextField.text;
-         
-    
-            cell.currentpassword.hidden=YES;
-            cell.conformationpassword.hidden=YES;
-            cell.currentpasswordlbl.text =@"Password";
-            cell.confirmpasswordlbl.hidden =YES;
-            cell.passwordlbl.hidden =YES;
-
-            
-        }
-        else
-        {
-            
-            cell.emailTextField.text = [self getEmail];
-            cell.passwordTextField.text = [self getPassword];
-            cell.currentpassword.hidden=YES;
-            cell.conformationpassword.hidden=YES;
-            cell.currentpasswordlbl.text =@"Password";
-            cell.confirmpasswordlbl.hidden =YES;
-            cell.passwordlbl.hidden=YES;
-           
-        }
-        
-        if (IS_IPHONE6 ||IS_IPHONE6_Plus){
-        cell.layoutConstraintAccLabelYPos.constant =42;
-        cell.layoutConstraintEmailPassViewHeight.constant =50;
-        }
+//        cell.currentpassword.hidden=NO;
+//        cell.conformationpassword.hidden=NO;
+//        cell.currentpasswordlbl.text=@"Current password";
+//        cell.confirmpasswordlbl.hidden =NO;
+//        cell.passwordlbl.hidden =NO;
+//        
+//       
+//        if(profileDict != NULL)
+//        {
+//            NSString *loginType =[profileDict valueForKey:@"showpassword"];
+//            if([loginType isEqualToString:@"no"])
+//            {
+//                 cell.Accounttittlelbl.hidden=YES;
+//
+//
+//                cell.emailview.hidden =YES;
+//
+//            }
+//            else
+//            {
+//                cell.Accounttittlelbl.hidden=NO;
+//                
+//                cell.emailview.hidden =NO;
+//          
+//            [cell.emailTextField setUserInteractionEnabled:NO];
+//            cell.emailTextField.text =(emailAddressToRegister==nil)?[profileDict valueForKey:@"email"]:emailAddressToRegister;
+//             if(emailPasswordToRegister==nil || [emailPasswordToRegister isEqualToString:@""])
+//             {
+//                 emailPasswordToRegister=[profileDict valueForKey:@"password"];
+//                
+//             }
+//           emailPasswordToRegister =(emailPasswordToRegister==nil)?[profileDict valueForKey:@"password"]:emailPasswordToRegister;
+//           //cell.passwordTextField.placeholder  =(emailPasswordToRegister!=nil)?@"Your Current password":emailPasswordToRegister;
+//            cell.currentpassword.text    =(currentPassword==nil)?@"":@"Your new password";
+//            cell.conformationpassword.text =(confirmPassword==nil)?@"":@"confirm your new password";
+//            }
+//
+//        }
+//        else if(userDetailsDict.count > 0){
+//
+//            NSString *loginType =[userDetailsDict valueForKey:@"type"];
+//           if([loginType isEqualToString:@"1"])
+//           {
+//               cell.Accounttittlelbl.hidden=NO;
+//           }
+//            else
+//            {
+//                 cell.Accounttittlelbl.hidden=NO;
+//            }
+//            cell.emailTextField.text =(emailAddressToRegister==0)?[userDetailsDict valueForKey:@"email"]:emailAddressToRegister;
+//            cell.passwordTextField.text  =(emailPasswordToRegister==0)? @"":emailPasswordToRegister;
+//            emailAddressToRegister   = cell.emailTextField.text;
+//         
+//    
+//            cell.currentpassword.hidden=YES;
+//            cell.conformationpassword.hidden=YES;
+//            cell.currentpasswordlbl.text =@"Password";
+//            cell.confirmpasswordlbl.hidden =YES;
+//            cell.passwordlbl.hidden =YES;
+//
+//            
+//        }
+//        else
+//        {
+//            
+//            cell.emailTextField.text = [self getEmail];
+//            cell.passwordTextField.text = [self getPassword];
+//            cell.currentpassword.hidden=YES;
+//            cell.conformationpassword.hidden=YES;
+//            cell.currentpasswordlbl.text =@"Password";
+//            cell.confirmpasswordlbl.hidden =YES;
+//            cell.passwordlbl.hidden=YES;
+//           
+//        }
+//        
+//        if (IS_IPHONE6 ||IS_IPHONE6_Plus){
+//        cell.layoutConstraintAccLabelYPos.constant =42;
+//        cell.layoutConstraintEmailPassViewHeight.constant =50;
+//        }
     }
     if (indexPath.row == 8)
     {
@@ -1541,16 +1541,16 @@
             [[NSBundle mainBundle] loadNibNamed:@"DSProfileTableViewCell" owner:self options:nil];
             cell = cellloginTypeView;
         }
-        NSString *objloginType =[profileDict valueForKey:@"registervia"];
-        if([objloginType isEqualToString:@"dosomething"])
-        {
-            cell.logilTypelbl.text =@"You are connect via DoSomething Account";
-            cell.loginTypeImg.image=[UIImage imageNamed:@"loginTypeDS"];
-        }
-        else{
-            cell.logilTypelbl.text =@"You are connect via through Facebook";
-            cell.loginTypeImg.image=[UIImage imageNamed:@"loginTypeFB"];
-        }
+//        NSString *objloginType =[profileDict valueForKey:@"registervia"];
+//        if([objloginType isEqualToString:@"dosomething"])
+//        {
+//            cell.logilTypelbl.text =@"You are connect via DoSomething Account";
+//            cell.loginTypeImg.image=[UIImage imageNamed:@"loginTypeDS"];
+//        }
+//        else{
+//            cell.logilTypelbl.text =@"You are connect via through Facebook";
+//            cell.loginTypeImg.image=[UIImage imageNamed:@"loginTypeFB"];
+//        }
     }
 
     [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
@@ -1691,7 +1691,104 @@
 //            commonHeight= (commonHeight * 4)+52;
 //    }
     
+    if(indexPath.row == 7)
+    {
+        cell.currentpassword.hidden=NO;
+        cell.conformationpassword.hidden=NO;
+        cell.currentpasswordlbl.text=@"Current password";
+        cell.confirmpasswordlbl.hidden =NO;
+        cell.passwordlbl.hidden =NO;
+        
+        
+        if(profileDict != NULL)
+        {
+            NSString *loginType =[profileDict valueForKey:@"showpassword"];
+            if([loginType isEqualToString:@"no"])
+            {
+                cell.Accounttittlelbl.hidden=YES;
+                
+                
+                cell.emailview.hidden =YES;
+                
+            }
+            else
+            {
+                cell.Accounttittlelbl.hidden=NO;
+                
+                cell.emailview.hidden =NO;
+                
+                [cell.emailTextField setUserInteractionEnabled:NO];
+                cell.emailTextField.text =(emailAddressToRegister==nil)?[profileDict valueForKey:@"email"]:emailAddressToRegister;
+                if(emailPasswordToRegister==nil || [emailPasswordToRegister isEqualToString:@""])
+                {
+                    emailPasswordToRegister=[profileDict valueForKey:@"password"];
+                    
+                }
+                emailPasswordToRegister =(emailPasswordToRegister==nil)?[profileDict valueForKey:@"password"]:emailPasswordToRegister;
+                //cell.passwordTextField.placeholder  =(emailPasswordToRegister!=nil)?@"Your Current password":emailPasswordToRegister;
+                cell.currentpassword.text    =(currentPassword==nil)?@"":@"Your new password";
+                cell.conformationpassword.text =(confirmPassword==nil)?@"":@"confirm your new password";
+            }
+            
+        }
+        else if(userDetailsDict.count > 0){
+            
+            NSString *loginType =[userDetailsDict valueForKey:@"type"];
+            if([loginType isEqualToString:@"1"])
+            {
+                cell.Accounttittlelbl.hidden=NO;
+            }
+            else
+            {
+                cell.Accounttittlelbl.hidden=NO;
+            }
+            cell.emailTextField.text =(emailAddressToRegister==0)?[userDetailsDict valueForKey:@"email"]:emailAddressToRegister;
+            cell.passwordTextField.text  =(emailPasswordToRegister==0)? @"":emailPasswordToRegister;
+            emailAddressToRegister   = cell.emailTextField.text;
+            
+            
+            cell.currentpassword.hidden=YES;
+            cell.conformationpassword.hidden=YES;
+            cell.currentpasswordlbl.text =@"Password";
+            cell.confirmpasswordlbl.hidden =YES;
+            cell.passwordlbl.hidden =YES;
+            
+            
+        }
+        else
+        {
+            
+            cell.emailTextField.text = [self getEmail];
+            cell.passwordTextField.text = [self getPassword];
+            cell.currentpassword.hidden=YES;
+            cell.conformationpassword.hidden=YES;
+            cell.currentpasswordlbl.text =@"Password";
+            cell.confirmpasswordlbl.hidden =YES;
+            cell.passwordlbl.hidden=YES;
+            
+        }
+        
+        if (IS_IPHONE6 ||IS_IPHONE6_Plus){
+            cell.layoutConstraintAccLabelYPos.constant =42;
+            cell.layoutConstraintEmailPassViewHeight.constant =50;
+        }
+
+    }
     
+    if(indexPath.row==10)
+    {
+        NSString *objloginType =[profileDict valueForKey:@"registervia"];
+        if([objloginType isEqualToString:@"dosomething"])
+        {
+            cell.logilTypelbl.text =@"You are connect via DoSomething Account";
+            cell.loginTypeImg.image=[UIImage imageNamed:@"loginTypeDS"];
+        }
+        else{
+            cell.logilTypelbl.text =@"You are connect via through Facebook";
+            cell.loginTypeImg.image=[UIImage imageNamed:@"loginTypeFB"];
+        }
+
+    }
 
 }
 

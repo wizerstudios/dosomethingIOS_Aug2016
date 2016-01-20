@@ -133,8 +133,9 @@
               [self loadActivityAPI:getLast availableStr:@"" doSomethingId:@""];
           }
     }
-                        failure:^(AFHTTPRequestOperation *operation, id error) {
-                        }];
+    failure:^(AFHTTPRequestOperation *operation, id error)
+    {
+    }];
 }
 #pragma mark - loadnavigationview
 -(void)loadnavigationview
