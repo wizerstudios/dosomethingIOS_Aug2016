@@ -200,12 +200,12 @@
     customNavigation.view.frame = CGRectMake(0,-20, CGRectGetWidth(self.view.frame), 65);
     if (IS_IPHONE6 ){
         customNavigation.view.frame = CGRectMake(0,-20, 375, 76);
-        //self.layoutConstraintTableViewYPos.constant= 20;
+        self.layoutConstraintTableViewYPos.constant= 20;
     }
     if(IS_IPHONE6_Plus)
     {
         customNavigation.view.frame = CGRectMake(0,-20, 420, 83);
-        //self.layoutConstraintTableViewYPos.constant= 20;
+        self.layoutConstraintTableViewYPos.constant= 20;
     }
     [customNavigation.menuBtn setHidden:YES];
     if(profileDict == NULL)
@@ -232,7 +232,7 @@
         interstAndHobbiesArray = [[profileDict valueForKey:@"hobbieslist"]mutableCopy];
         hobbiesNameArray       =[[interstAndHobbiesArray valueForKey:@"name"]mutableCopy];
         imageNormalArray     = [[interstAndHobbiesArray valueForKey:@"image"]mutableCopy];
-        self.tableViewHeightConstraint.constant=50;
+        self.tableViewHeightConstraint.constant=(IS_IPHONE6_Plus||IS_IPHONE6)? 50:50;
     }
     
     [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"SelectedItemCategoryID"];
