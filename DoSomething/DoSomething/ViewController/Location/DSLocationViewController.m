@@ -872,7 +872,7 @@
     self.collectionviewxpostion.constant =10;
     self.CollectionviewWidth.constant    =self.view.frame.size.width-10;
     self.filterviewxposition.constant    = self.CollectionviewWidth.constant+10;
-    [UIView animateWithDuration:2.0 animations:^{
+    [UIView animateWithDuration:0.5 animations:^{
         
         [self.view layoutIfNeeded];
         
