@@ -36,6 +36,7 @@
     CGSize windowSize;
     NSMutableArray *chatArray;
     ChatDetailCustomcell *ChatDetailcell;
+    int height;
 }
 
 @end
@@ -51,7 +52,8 @@
     
     NSLog(@"conversionID=%@",_conversionID);
     
-    [[IQKeyboardManager sharedManager] considerToolbarPreviousNextInViewClass:[ChatTextView class]];
+    //[[IQKeyboardManager sharedManager] considerToolbarPreviousNextInViewClass:[ChatTextView class]];
+    [[IQKeyboardManager sharedManager] setEnableAutoToolbar:NO];
     
     webService = [[DSWebservice alloc]init];
     
@@ -62,9 +64,9 @@
     [self displayUserDetailsView];
     
     [self loadConverstionAPI];
-   
+    UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(removeKeyboard:)];
+    [chatTableView addGestureRecognizer:tapGestureRecognizer];
 }
-
 - (void)viewWillAppear:(BOOL)animated
 {
      [self loadNavigation];
@@ -159,7 +161,10 @@
     [customNavigation.buttonBack addTarget:self action:@selector(backAction) forControlEvents:UIControlEventTouchUpInside];
     
 }
-
+- (void) removeKeyboard: (UITapGestureRecognizer *)recognizer
+{
+    [[IQKeyboardManager sharedManager]resignFirstResponder];
+}
 - (void)backAction
 {
     
@@ -228,7 +233,9 @@
 -(void)textViewDidBeginEditing:(UITextView *)textView{
  
     
+    
     [chatView.placeHolderLabel setHidden:YES];
+    //self.chatviewbottom.constant =height+(self.view.frame.size.height)/2;
     
 }
 
@@ -408,6 +415,7 @@
         
     }
     chatView.textView.text=@"";
+    [[IQKeyboardManager sharedManager]resignFirstResponder];
 }
 
 

@@ -21,10 +21,13 @@
     
     IBOutlet ChatDetailCustomcell *chatCustomcell;
     
+    IBOutlet UIScrollView *chatScrollview;
+    
     
 }
 @property (nonatomic,strong) IBOutlet UIView * topview;
 @property (nonatomic ,strong) IBOutlet NSLayoutConstraint * topviewYposition;
+@property (nonatomic,strong) IBOutlet NSLayoutConstraint *chatscrollviewBottom;
 
 @property (strong, nonatomic) IBOutlet UIImageView *ProfileImage;
 @property (strong, nonatomic) IBOutlet UILabel *ProfileName;

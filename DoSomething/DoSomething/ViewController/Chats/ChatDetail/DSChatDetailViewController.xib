@@ -18,8 +18,10 @@
                 <outlet property="ProfileName" destination="qTm-CV-HgT" id="0Bl-1e-Vjb"/>
                 <outlet property="backgroundView" destination="XqN-Wp-lms" id="aJ3-oZ-xw7"/>
                 <outlet property="chatButton" destination="MkV-9D-hoy" id="tG3-kG-cgw"/>
+                <outlet property="chatScrollview" destination="YKw-Va-zYe" id="0nf-g8-DqY"/>
                 <outlet property="chatTableView" destination="xvP-6c-2gG" id="qJ9-uV-Ujv"/>
                 <outlet property="chatView" destination="pey-bp-htd" id="4m5-xU-2tC"/>
+                <outlet property="chatscrollviewBottom" destination="axR-ZJ-ySz" id="WM5-43-CQm"/>
                 <outlet property="chattableheight" destination="HpC-X7-WXp" id="6xN-1e-G0w"/>
                 <outlet property="chatviewbottom" destination="4QE-ih-MRe" id="Qaj-rn-7U4"/>
                 <outlet property="topview" destination="Vyo-Sj-gzT" id="ek0-k7-Mz6"/>
