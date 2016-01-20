@@ -297,7 +297,7 @@
     {
         NSString *objstr=[userDetailsArray valueForKey:@"about"];
          dataSize = [COMMON getControlHeight:objstr withFontName:@"Patron-Medium" ofSize:10.0 withSize:CGSizeMake(150,tableView.frame.size.height+60)];
-        if([objstr isEqualToString:@""]|| dataSize.height <=24)
+        if([objstr isEqualToString:@""]|| dataSize.height <=34)
         {
             return 30 ;
         }
@@ -305,10 +305,10 @@
         
         else
         {
-            self.aboutTextHeight.constant=dataSize.height+45;
+            self.aboutTextHeight.constant=dataSize.height+30;
             self.aboutviewHeight.constant=self.aboutTextHeight.constant;
             
-            return self.aboutviewHeight.constant-10;
+            return self.aboutviewHeight.constant-5;
        }
         
     }
@@ -606,7 +606,7 @@
     }
     else
     {
-        self.selectImgBgview.layer.cornerRadius =225;
+        self.selectImgBgview.layer.cornerRadius =230;
     }
     self.selectImgBgview.layer.masksToBounds = YES;
     
