@@ -314,11 +314,13 @@
     
     UITableViewRowAction *deleteButton = [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleDefault title:@"Delete"  handler:^(UITableViewRowAction *action, NSIndexPath *indexPath){
          NSLog(@"index:%ld",(long)indexPath.row);
-        NSInteger* selectIndex=indexPath.row;
+        NSInteger row = indexPath.row;
+       
+       // NSInteger* selectIndex= &row;
         NSMutableArray*objselectuser = [chatArray objectAtIndex:indexPath.row];
         NSString *userid=[objselectuser valueForKey:@"id"];
         //[timeArray objectAtIndex:indexPath.row];
-        [self loadDeleteUserChatHistory:userid :*selectIndex];
+        [self loadDeleteUserChatHistory:userid :row];
         //[self.ChatTableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationRight];
         
     }];

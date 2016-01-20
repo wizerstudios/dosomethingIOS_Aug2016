@@ -102,7 +102,7 @@
     avalableStatus=@"";
     objWebservice =[[DSWebservice alloc]init];
     currentloadPage= @"";
- [self nearestLocationWebservice];
+   [self nearestLocationWebservice];
     
     [super viewDidLoad];
     isLoadData=NO;

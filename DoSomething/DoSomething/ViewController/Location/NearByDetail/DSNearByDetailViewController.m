@@ -709,6 +709,7 @@
 #pragma  mark - backAction
 - (void)backAction
 {
+    self.profileImgSelectview.hidden=YES;
     [self.navigationController popViewControllerAnimated:YES];
     [COMMON removeLoading];
     
