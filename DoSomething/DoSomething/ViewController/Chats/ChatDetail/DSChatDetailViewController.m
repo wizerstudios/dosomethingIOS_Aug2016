@@ -52,7 +52,7 @@
     
     NSLog(@"conversionID=%@",_conversionID);
     
-    [[IQKeyboardManager sharedManager] considerToolbarPreviousNextInViewClass:[chatTableView class]];
+    [[IQKeyboardManager sharedManager] considerToolbarPreviousNextInViewClass:[chatScrollview class]];
    // [[IQKeyboardManager sharedManager] setEnableAutoToolbar:NO];
     
     webService = [[DSWebservice alloc]init];
@@ -203,7 +203,7 @@
         
         [ProfileImage.layer setBorderColor:[[UIColor colorWithRed:229.0f/255.0f green:63.0f/255.0f blue:81.0f/255.0f alpha:1.0f] CGColor]];
         
-        [chatButton setBackgroundImage:[UIImage imageNamed:@"menu_Icon"] forState:UIControlStateNormal];
+        [chatButton setBackgroundImage:[UIImage imageNamed:@"menu_icon"] forState:UIControlStateNormal];
         
         [chatButton setContentMode:UIViewContentModeScaleAspectFit];
         
@@ -212,7 +212,7 @@
     }
     else{
         
-        [chatButton setBackgroundImage:[UIImage imageNamed:@"menu_Icon"] forState:UIControlStateNormal];
+        [chatButton setBackgroundImage:[UIImage imageNamed:@"menu_active"] forState:UIControlStateNormal];
         
         [chatButton setUserInteractionEnabled:YES];
     }
@@ -232,7 +232,15 @@
 
 -(void)textViewDidBeginEditing:(UITextView *)textView{
  
+    [chatScrollview setScrollEnabled:NO];
     
+  //  chatTableView.contentInset =  UIEdgeInsetsMake(0, 0, chatTableView.contentSize.height, 0);
+//    
+//    UITableViewCell *cell = (UITableViewCell *)[textView superview];
+//    NSIndexPath *indexPath = [chatTableView indexPathForCell:cell];
+//    [chatTableView scrollToRowAtIndexPath:indexPath atScrollPosition:UITableViewScrollPositionBottom animated:YES];
+
+    //[chatTableView scrollRectToVisible:CGRectMake(0, chatTableView.contentSize.height, chatTableView.bounds.size.width,chatTableView.bounds.size.height) animated:YES];
     
     [chatView.placeHolderLabel setHidden:YES];
     //self.chatviewbottom.constant =height+(self.view.frame.size.height)/2;
@@ -243,7 +251,6 @@
     
     if([textView.text isEqualToString:@""])
          [chatView.placeHolderLabel setHidden:NO];
-    
     
        [self.view endEditing:YES];
     
@@ -367,6 +374,8 @@
     _transparentView.hidden = NO;
     
     _backgroundView.hidden = NO;
+    
+    [self.view endEditing:YES];
    
 
 }
@@ -400,7 +409,7 @@
     }
     if([str length] > 0){
         
-        [self.view endEditing:YES];
+       // [self.view endEditing:YES];
        
       NSMutableDictionary*AddDIcconversion =[NSMutableDictionary dictionaryWithObjectsAndKeys:[NSString stringWithFormat:@"%@",str],@"Message",@"SENDER",@"type",@"2016-01-12 06:08:09",@"senttime", nil];
         [conversationArray addObject:AddDIcconversion];
@@ -415,7 +424,7 @@
         
     }
     chatView.textView.text=@"";
-    [[IQKeyboardManager sharedManager]resignFirstResponder];
+    //[[IQKeyboardManager sharedManager]resignFirstResponder];
 }
 
 
@@ -505,9 +514,10 @@
     [webService deleteUserChatHist:DeleteConversation sessionid:[COMMON getSessionID] chat_user_id:conversationID success:^(AFHTTPRequestOperation *operation, id responseObject)
     {
         NSLog(@"response:%@",responseObject);
+        [self.navigationController popViewControllerAnimated:YES];
         
-        [conversationArray removeAllObjects];
-        [chatTableView reloadData];
+//        [conversationArray removeAllObjects];
+//        [chatTableView reloadData];
         
         
         
