@@ -152,8 +152,8 @@
                                     </connections>
                                 </button>
                                 <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3HW-n5-th6">
-                                    <rect key="frame" x="273" y="72" width="45" height="45"/>
-                                    <state key="normal" title="Button" image="image_active"/>
+                                    <rect key="frame" x="270" y="72" width="40" height="40"/>
+                                    <state key="normal" backgroundImage="menu_active"/>
                                 </button>
                             </subviews>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -192,6 +192,6 @@
         </view>
     </objects>
     <resources>
-        <image name="image_active" width="33" height="33"/>
+        <image name="menu_active" width="33" height="33"/>
     </resources>
 </document>

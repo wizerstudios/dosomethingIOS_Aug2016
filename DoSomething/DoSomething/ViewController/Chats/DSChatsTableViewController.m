@@ -67,11 +67,18 @@
 {
     [super viewWillAppear:animated];
     
-     messageTimer = [NSTimer scheduledTimerWithTimeInterval:5.0 target:self selector:@selector(loadChatHistoryAPI) userInfo:nil repeats:YES];
-//    [self loadChatHistoryAPI];
+    [self loadChatHistoryAPI];
     [self getUserCurrenLocation];
     [self.navigationItem setHidesBackButton:YES animated:NO];
     [self setNavigation];
+}
+
+-(void)viewDidAppear:(BOOL)animated{
+    
+    [super viewDidAppear:animated];
+    
+    messageTimer = [NSTimer scheduledTimerWithTimeInterval:5.0 target:self selector:@selector(loadChatHistoryAPI) userInfo:nil repeats:YES];
+
 }
 
 -(void)viewwillDisappear:(BOOL)animated{
