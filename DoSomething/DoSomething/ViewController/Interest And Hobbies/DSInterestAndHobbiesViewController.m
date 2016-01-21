@@ -518,6 +518,7 @@
         if( isDownloadactiveImg==YES)
         {
             image = [dict valueForKey:@"image"];
+            
             downloadImageFromUrl(image, cell.interestAndHobbiesImageView);
            // [cell.interestAndHobbiesImageView setImageWithURL:[NSURL URLWithString:image]];
         }
@@ -540,11 +541,11 @@
         [cell.nameLabel setTextColor:[UIColor grayColor]];
     }
     
-    downloadImageFromUrl(image, cell.interestAndHobbiesImageView);
-    [cell.interestAndHobbiesImageView setImageWithURL:[NSURL URLWithString:image]];
-//    image = [image stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-//    
+//    downloadImageFromUrl(image, cell.interestAndHobbiesImageView);
 //    [cell.interestAndHobbiesImageView setImageWithURL:[NSURL URLWithString:image]];
+    image = [image stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+    
+    [cell.interestAndHobbiesImageView setImageWithURL:[NSURL URLWithString:image]];
     
     
     return cell;
