@@ -14,4 +14,6 @@
 @property (nonatomic,strong)  CLLocationManager       * locationManager;
 @property (strong, nonatomic) IBOutlet UITableView *ChatTableView;
 
+@property (strong)NSTimer *messageTimer;
+
 @end

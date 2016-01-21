@@ -100,13 +100,32 @@
             sender_bubbleimgView.image = [[UIImage imageNamed:@""] stretchableImageWithLeftCapWidth:20 topCapHeight:16];
             sender_bubbleimgView.backgroundColor = [UIColor whiteColor];
             sender_bubbleimgView.layer.cornerRadius = 7;
-
+            
 
             sender_msgLbl.frame = CGRectMake(20 ,
                                              y_Position + sender_msgLbl.frame.origin.y+8,
                                              MAX(dataSize.width, [COMMON dataSize:sender_msgLbl.text withFontName:@"HelveticaNeue" ofSize:15 withSize:CGSizeMake(195.0, 999.0)].width+10 + BUBBLE_WIDTH_SPACE),
                                              dataSize.height-10);
             [sender_msgLbl setTextColor:[UIColor blackColor]];
+            
+            NSString *timeStr = [chatArray valueForKey:@"senttime"];
+            
+            NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
+            
+            [dateFormat setDateFormat:@"YYYY-MM-dd HH:mm:ss"];
+            
+            NSDate *date = [dateFormat dateFromString:timeStr];
+            
+            [dateFormat setDateFormat:@"hh:mm"];
+            
+            timeStr = [dateFormat stringFromDate:date];
+            
+            
+            self.chatTime.frame = CGRectMake( MAX(dataSize.width, [COMMON dataSize:sender_msgLbl.text withFontName:@"HelveticaNeue" ofSize:15 withSize:CGSizeMake(195.0, 999.0)].width + BUBBLE_WIDTH_SPACE)+y_Position + sender_bubbleimgView.frame.origin.y - 20,dataSize.height+BUBBLE_IMAGE_HEIGHT-20,40,40);
+            
+            self.chatTime.text = timeStr;
+
+            [self.chatTime setTextColor:[UIColor blackColor]];
             
             sender_bubbleimgView.frame = CGRectMake(10,
                                                     y_Position + sender_bubbleimgView.frame.origin.y,

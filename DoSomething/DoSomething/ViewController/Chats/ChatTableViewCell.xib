@@ -5,6 +5,9 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
     </dependencies>
     <customFonts key="customFonts">
+        <mutableArray key="HelveticaNeue.ttc">
+            <string>HelveticaNeue</string>
+        </mutableArray>
         <mutableArray key="Patron-Medium.ttf">
             <string>Patron-Medium</string>
         </mutableArray>
@@ -83,7 +86,7 @@
                                     <constraint firstAttribute="width" constant="20" id="k29-rq-QQm"/>
                                     <constraint firstAttribute="height" constant="20" id="pJf-5e-Spe"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="13"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
