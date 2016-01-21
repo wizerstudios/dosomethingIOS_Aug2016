@@ -116,6 +116,7 @@
     
     Regpassword=emailPasswordToRegister;
     [[IQKeyboardManager sharedManager] considerToolbarPreviousNextInViewClass:[_tableviewProfile class]];
+    [[IQKeyboardManager sharedManager]setEnableAutoToolbar:YES];
     
     locationManager                 = [[CLLocationManager alloc] init];
     
@@ -2527,7 +2528,8 @@
      if(profileDict!=nil)
     {
         
-       
+       if([[profileDict valueForKey:@"showpassword"] isEqualToString:@"Yes"])
+       {
          if ([emailPasswordToRegister isEqualToString:@""] || emailPasswordToRegister == nil)
         {
             
@@ -2565,7 +2567,7 @@
                 [self updateAPI];
            
             }
-            
+        }
         }
        else  if ([confirmPassword isEqualToString:@""] || confirmPassword==nil)
         {
@@ -2588,7 +2590,7 @@
                 [COMMON removeLoading];
                 [self updateAPI];
             }
-            
+        
         }
         else if (![confirmPassword isEqualToString:@""])
         {
@@ -2604,7 +2606,7 @@
                 [self updateAPI];
             }
         }
-
+       
         else
          {
            [COMMON removeLoading];

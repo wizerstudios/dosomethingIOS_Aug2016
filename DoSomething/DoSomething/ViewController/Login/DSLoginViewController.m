@@ -20,7 +20,8 @@
 #import <FBSDKLoginKit/FBSDKLoginKit.h>
 #import "CustomAlterview.h"
 #import "DSTermsViewController.h"
-
+#import "IQKeyboardManager.h"
+#import "IQUIView+IQKeyboardToolbar.h"
 
 @interface DSLoginViewController ()<CLLocationManagerDelegate>
 {
@@ -54,6 +55,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    [[IQKeyboardManager sharedManager]setEnableAutoToolbar:YES];
     fbUserDetailsDict = [[NSMutableDictionary alloc]init];
     locationManager                 = [[CLLocationManager alloc] init];
     locationManager.delegate        = self;
