@@ -57,7 +57,7 @@
                                                               attribute:NSLayoutAttributeTop
                                                              multiplier:1.0
                                                                constant:20.0]];
-    [COMMON LoadIcon:self.ChatTableView];
+    
    
    
     
@@ -66,7 +66,10 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    
+    if([[NSUserDefaults standardUserDefaults]valueForKey:@"backAction"] == nil){
+         [COMMON LoadIcon:self.view];
+        [[NSUserDefaults standardUserDefaults]removeObjectForKey:@"backAction"];
+    }
     [self loadChatHistoryAPI];
     [self getUserCurrenLocation];
     [self.navigationItem setHidesBackButton:YES animated:NO];

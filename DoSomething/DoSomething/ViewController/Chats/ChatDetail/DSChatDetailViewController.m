@@ -167,7 +167,7 @@
 }
 - (void)backAction
 {
-    
+    [[NSUserDefaults standardUserDefaults]setObject:@"Yes" forKey:@"backAction"];
     [self.navigationController popViewControllerAnimated:YES];
 }
 
@@ -514,6 +514,8 @@
     [webService deleteUserChatHist:DeleteConversation sessionid:[COMMON getSessionID] chat_user_id:conversationID success:^(AFHTTPRequestOperation *operation, id responseObject)
     {
         NSLog(@"response:%@",responseObject);
+        [[NSUserDefaults standardUserDefaults]setObject:@"Yes" forKey:@"backAction"];
+        [[NSUserDefaults standardUserDefaults]synchronize];
         [self.navigationController popViewControllerAnimated:YES];
         
 //        [conversationArray removeAllObjects];
