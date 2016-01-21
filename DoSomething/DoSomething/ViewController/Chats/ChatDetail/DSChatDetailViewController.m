@@ -52,19 +52,19 @@
     
     NSLog(@"conversionID=%@",_conversionID);
     
-    //[[IQKeyboardManager sharedManager] considerToolbarPreviousNextInViewClass:[ChatTextView class]];
-    [[IQKeyboardManager sharedManager] setEnableAutoToolbar:NO];
+    [[IQKeyboardManager sharedManager] considerToolbarPreviousNextInViewClass:[chatTableView class]];
+   // [[IQKeyboardManager sharedManager] setEnableAutoToolbar:NO];
     
     webService = [[DSWebservice alloc]init];
     
     conversationArray = [[NSMutableArray alloc]init];
     
-   
-    
     [self displayUserDetailsView];
     
     [self loadConverstionAPI];
+    
     UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(removeKeyboard:)];
+    
     [chatTableView addGestureRecognizer:tapGestureRecognizer];
 }
 - (void)viewWillAppear:(BOOL)animated
