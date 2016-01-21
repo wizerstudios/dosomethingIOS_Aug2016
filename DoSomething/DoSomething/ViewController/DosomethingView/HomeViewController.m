@@ -20,6 +20,7 @@
 #import "OpenUDID.h"
 #import "CustomAlterview.h"
 
+
 #define ITEMS_PAGE_SIZE 4
 #define ITEM_CELL_IDENTIFIER @"ItemCell"
 #define LOADING_CELL_IDENTIFIER @"LoadingItemCell"
@@ -523,65 +524,79 @@ minimumLineSpacingForSectionAtIndex:(NSInteger)section {
 
 -(void)loadActivityAPI:(NSString *)_activityNameStr availableStr:(NSString *)_availableStr doSomethingId:(NSString *)_dosomethingId{
     
-    [objWebService getActivity:Activity activityName:_activityNameStr sessionId:[COMMON getSessionID] availableNow:_availableStr doSomethingId:_dosomethingId
-     success:^(AFHTTPRequestOperation *operation, id responseObject)
-     {
-         NSLog(@"response object = %@",responseObject);
-         
-         activityMainDict = [responseObject valueForKey:@"activity"];
-         NSString *msgString = [activityMainDict valueForKey:@"Message"];
-         
-         if([msgString isEqualToString:@"Activity Canelled successfully"]){
-            // [self showAltermessage:msgString];
-             [activatedView setHidden:YES];
-             [self.homeCollectionView setAlpha:1];
-             [self.homeCollectionView setUserInteractionEnabled:YES];
-             [activityImageArray removeAllObjects];
-             isSelectMenu = NO;
-             [selectedItemsArray removeAllObjects];
-             [self.homeCollectionView reloadData];
-             [bottombutton setTag:1001];
-             [bottombutton setTitle:@"Let's Do Something!" forState:UIControlStateNormal];
-         }
-         else{
-             id activityList = [activityMainDict valueForKey:@"activityList"];
+    if([COMMON isInternetReachable]){
+        
+       
+        NSLog(@"interentavailable=%hhd",[COMMON isInternetReachable]);
+        [objWebService getActivity:Activity activityName:_activityNameStr sessionId:[COMMON getSessionID] availableNow:_availableStr doSomethingId:_dosomethingId
+                           success:^(AFHTTPRequestOperation *operation, id responseObject)
+         {
+             NSLog(@"response object = %@",responseObject);
              
-             NSLog(@"activityList = %@",activityList);
+             activityMainDict = [responseObject valueForKey:@"activity"];
+             NSString *msgString = [activityMainDict valueForKey:@"Message"];
              
-             if([activityList isKindOfClass:[NSArray class]]){
-                 NSLog(@"activity list");
-                 activityImageArray = [activityList mutableCopy];
-                 NSString *availStr = [activityMainDict valueForKey:@"Available"];
-                 [self displayActivityView:availStr];
-                
+             if([msgString isEqualToString:@"Activity Canelled successfully"]){
+                 // [self showAltermessage:msgString];
+                 [activatedView setHidden:YES];
+                 [self.homeCollectionView setAlpha:1];
+                 [self.homeCollectionView setUserInteractionEnabled:YES];
+                 [activityImageArray removeAllObjects];
+                 isSelectMenu = NO;
+                 [selectedItemsArray removeAllObjects];
+                 [self.homeCollectionView reloadData];
+                 [bottombutton setTag:1001];
+                 [bottombutton setTitle:@"Let's Do Something!" forState:UIControlStateNormal];
              }
              else{
-//                 if(isInitialLoadingAPI == NO){
-//                     objCustomAlterview.view .hidden  = NO;
-//                     objCustomAlterview.alertBgView.hidden = NO;
-//                     objCustomAlterview.alertMainBgView.hidden = NO;
-//                     objCustomAlterview.btnYes.hidden = NO;
-//                     objCustomAlterview.btnNo.hidden = NO;
-//                     objCustomAlterview.alertCancelButton.hidden = NO;
-//                     objCustomAlterview.alertMsgLabel.text = @"AVAILABLE NOW?";
-//                     objCustomAlterview.alertMsgLabel.textAlignment = NSTextAlignmentCenter;
-//                     objCustomAlterview. alertMsgLabel.lineBreakMode = NSLineBreakByWordWrapping;
-//                     objCustomAlterview.alertMsgLabel.textColor = [UIColor whiteColor];
-//
-//                 }
+                 id activityList = [activityMainDict valueForKey:@"activityList"];
                  
-                 [bottombutton setTitle:@"Let's Do Something!" forState:UIControlStateNormal];
+                 NSLog(@"activityList = %@",activityList);
                  
+                 if([activityList isKindOfClass:[NSArray class]]){
+                     NSLog(@"activity list");
+                     activityImageArray = [activityList mutableCopy];
+                     NSString *availStr = [activityMainDict valueForKey:@"Available"];
+                     [self displayActivityView:availStr];
+                     
+                 }
+                 else{
+                     //                 if(isInitialLoadingAPI == NO){
+                     //                     objCustomAlterview.view .hidden  = NO;
+                     //                     objCustomAlterview.alertBgView.hidden = NO;
+                     //                     objCustomAlterview.alertMainBgView.hidden = NO;
+                     //                     objCustomAlterview.btnYes.hidden = NO;
+                     //                     objCustomAlterview.btnNo.hidden = NO;
+                     //                     objCustomAlterview.alertCancelButton.hidden = NO;
+                     //                     objCustomAlterview.alertMsgLabel.text = @"AVAILABLE NOW?";
+                     //                     objCustomAlterview.alertMsgLabel.textAlignment = NSTextAlignmentCenter;
+                     //                     objCustomAlterview. alertMsgLabel.lineBreakMode = NSLineBreakByWordWrapping;
+                     //                     objCustomAlterview.alertMsgLabel.textColor = [UIColor whiteColor];
+                     //
+                     //                 }
+                     
+                     [bottombutton setTitle:@"Let's Do Something!" forState:UIControlStateNormal];
+                     
+                 }
              }
+             
          }
+                           failure:^(AFHTTPRequestOperation *operation, id error) {
+                               
+                               
+                               // [self showAltermessage:[NSString stringWithFormat:@"%@",error]];
+                           }];
 
-     }
-       failure:^(AFHTTPRequestOperation *operation, id error) {
-           
-           
-          // [self showAltermessage:[NSString stringWithFormat:@"%@",error]];
-       }];
-}
+    }
+    else{
+        
+         NSLog(@"interentavailable=%hhd",[COMMON isInternetReachable]);
+        [COMMON showErrorAlert:@"No Response From Server"];
+        
+    }
+
+    
+   }
 
 -(void)displayActivityView:(NSString *)_availStr{
     

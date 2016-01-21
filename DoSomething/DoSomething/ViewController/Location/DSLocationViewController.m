@@ -716,8 +716,8 @@
         [self.locationCollectionView setUserInteractionEnabled:YES];
         appDelegate.settingButton.userInteractionEnabled=YES;
         currentloadPage = @"";
-        filterAge = ([filterAge isEqualToString:@""])?@"18-26":filterAge;
-        filterDistance=([filterDistance isEqualToString:@""])?@"0-5":filterDistance;
+        filterAge = ([filterAge isEqualToString:@""])?@"":filterAge;
+        filterDistance=([filterDistance isEqualToString:@""])?@"":filterDistance;
         isgestureenable=YES;
        
         [self nearestLocationWebservice];
@@ -916,8 +916,8 @@
     self.lowerLabel.text=@"";
     self.ageupperLabel.text=@"";
     self.agelowerLabel.text =@"";
-    filterAge=@"18-26";
-    filterDistance=@"0-5";
+    filterAge=@"";  //18-26
+    filterDistance=@"";  //0-5
 }
 
 

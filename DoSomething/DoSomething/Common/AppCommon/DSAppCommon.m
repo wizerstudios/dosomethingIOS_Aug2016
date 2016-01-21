@@ -11,6 +11,7 @@
 #import <CommonCrypto/CommonCrypto.h>
 #import "DSConfig.h"
 #import <MapKit/MapKit.h>
+#import "Reachability.h"
 @implementation DSAppCommon
 DSAppCommon *sharedCommon = nil;
 
@@ -95,8 +96,50 @@ DSAppCommon *sharedCommon = nil;
     return alert;
 
 }
+#pragma mark Reachable
 
+-(BOOL) isInternetReachable
+{
+    Reachability *reachability = [Reachability reachabilityForInternetConnection];
+    NetworkStatus internetStatus = [reachability currentReachabilityStatus];
+    if (internetStatus != NotReachable) {
+        NSLog(@"Data Connected");
+        return YES;
+    }
+    else {
+        [self reachabilityNotReachableAlert];
+        return NO;
+    }
+}
 
+-(void)reachabilityNotReachableAlert{
+    [self removeLoading];
+   
+    
+    
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:[[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleName"]
+                                                    message:@"It appears that you have lost network connectivity. Please check your network settings!"
+                                                   delegate:self
+                                          cancelButtonTitle:@"Ok"
+                                          otherButtonTitles:nil];
+    [alert show];
+    
+    NSLog(@"Data Not Connected");
+    
+}
+#pragma mark - Alert Function
+
+- (void) showErrorAlert:(NSString *)strMessage{
+    
+    
+    
+    UIAlertView *errorAlert = [[UIAlertView alloc] initWithTitle:[[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleName"]
+                                                         message:strMessage
+                                                        delegate:self
+                                               cancelButtonTitle:@"OK"
+                                               otherButtonTitles:nil];
+    [errorAlert show];
+}
 #pragma mark - Get Height of Control
 
 - (CGSize)getControlHeight:(NSString *)string withFontName:(NSString *)fontName ofSize:(NSInteger)size withSize:(CGSize)LabelWidth {
