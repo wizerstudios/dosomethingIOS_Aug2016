@@ -49,7 +49,8 @@ typedef enum {
 
 - (void)LoadIcon:(UIView *)view;
 - (void)removeLoading;
-
+-(BOOL)isInternetReachable;
+- (void) showErrorAlert:(NSString *)strMessage;
 - (currentDevice)getCurrentDevice;
 - (BOOL) isUserLoggedIn;
 - (void)getUserCurrenLocation;

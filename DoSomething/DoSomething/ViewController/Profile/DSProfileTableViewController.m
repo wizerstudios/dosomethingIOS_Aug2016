@@ -293,11 +293,7 @@
     
     [_tableviewProfile reloadData];
     
-   
-    
 }
-
-
 
 #pragma mark - profileDataArray
 
@@ -776,8 +772,6 @@
     DSInterestAndHobbiesViewController * DSHobbiesView  = [[DSInterestAndHobbiesViewController alloc]initWithNibName:@"DSInterestAndHobbiesViewController" bundle:nil];
     [self.navigationController pushViewController:DSHobbiesView animated:YES];
 
-    
-
 }
 
 -(void)initializeArray{
@@ -815,11 +809,6 @@
                                     [NSMutableDictionary dictionaryWithObjectsAndKeys:@"Hobbies",@"placeHolder", nil],
                                     [NSMutableDictionary dictionaryWithObjectsAndKeys:[profileDict valueForKey:@"email"],@"placeHolder",@"Password",@"placeHolderPass",@"Current\n password",@"placeHolderCurrentPassword",@"Password\n Conformation",@"placeHolderconformation",@"",@"TypingTextPass", nil], [NSMutableDictionary dictionaryWithObjectsAndKeys:@"loginType",@"placeHolder", nil],
                                      [NSMutableDictionary dictionaryWithObjectsAndKeys:@"loginType",@"placeHolder", nil],[NSMutableDictionary dictionaryWithObjectsAndKeys:@"loginType",@"placeHolder", nil], nil]atIndex:0];
-    
-   
-    
-   
-    
     
 }
 
@@ -868,8 +857,6 @@
     [objCustomAlterview.alertMsgLabel setTextColor:[UIColor colorWithRed:(255/255.0f) green:(255/255.0f) blue:(255/255.0f) alpha:1.0f]];
     
 }
-
-
 
 #pragma mark - TableView Datasource & Delegate
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
@@ -1377,86 +1364,7 @@
             cell = cellEmailPassword;
             
         }
-        
-//        cell.currentpassword.hidden=NO;
-//        cell.conformationpassword.hidden=NO;
-//        cell.currentpasswordlbl.text=@"Current password";
-//        cell.confirmpasswordlbl.hidden =NO;
-//        cell.passwordlbl.hidden =NO;
-//        
-//       
-//        if(profileDict != NULL)
-//        {
-//            NSString *loginType =[profileDict valueForKey:@"showpassword"];
-//            if([loginType isEqualToString:@"no"])
-//            {
-//                 cell.Accounttittlelbl.hidden=YES;
-//
-//
-//                cell.emailview.hidden =YES;
-//
-//            }
-//            else
-//            {
-//                cell.Accounttittlelbl.hidden=NO;
-//                
-//                cell.emailview.hidden =NO;
-//          
-//            [cell.emailTextField setUserInteractionEnabled:NO];
-//            cell.emailTextField.text =(emailAddressToRegister==nil)?[profileDict valueForKey:@"email"]:emailAddressToRegister;
-//             if(emailPasswordToRegister==nil || [emailPasswordToRegister isEqualToString:@""])
-//             {
-//                 emailPasswordToRegister=[profileDict valueForKey:@"password"];
-//                
-//             }
-//           emailPasswordToRegister =(emailPasswordToRegister==nil)?[profileDict valueForKey:@"password"]:emailPasswordToRegister;
-//           //cell.passwordTextField.placeholder  =(emailPasswordToRegister!=nil)?@"Your Current password":emailPasswordToRegister;
-//            cell.currentpassword.text    =(currentPassword==nil)?@"":@"Your new password";
-//            cell.conformationpassword.text =(confirmPassword==nil)?@"":@"confirm your new password";
-//            }
-//
-//        }
-//        else if(userDetailsDict.count > 0){
-//
-//            NSString *loginType =[userDetailsDict valueForKey:@"type"];
-//           if([loginType isEqualToString:@"1"])
-//           {
-//               cell.Accounttittlelbl.hidden=NO;
-//           }
-//            else
-//            {
-//                 cell.Accounttittlelbl.hidden=NO;
-//            }
-//            cell.emailTextField.text =(emailAddressToRegister==0)?[userDetailsDict valueForKey:@"email"]:emailAddressToRegister;
-//            cell.passwordTextField.text  =(emailPasswordToRegister==0)? @"":emailPasswordToRegister;
-//            emailAddressToRegister   = cell.emailTextField.text;
-//         
-//    
-//            cell.currentpassword.hidden=YES;
-//            cell.conformationpassword.hidden=YES;
-//            cell.currentpasswordlbl.text =@"Password";
-//            cell.confirmpasswordlbl.hidden =YES;
-//            cell.passwordlbl.hidden =YES;
-//
-//            
-//        }
-//        else
-//        {
-//            
-//            cell.emailTextField.text = [self getEmail];
-//            cell.passwordTextField.text = [self getPassword];
-//            cell.currentpassword.hidden=YES;
-//            cell.conformationpassword.hidden=YES;
-//            cell.currentpasswordlbl.text =@"Password";
-//            cell.confirmpasswordlbl.hidden =YES;
-//            cell.passwordlbl.hidden=YES;
-//           
-//        }
-//        
-//        if (IS_IPHONE6 ||IS_IPHONE6_Plus){
-//        cell.layoutConstraintAccLabelYPos.constant =42;
-//        cell.layoutConstraintEmailPassViewHeight.constant =50;
-//        }
+
     }
     if (indexPath.row == 8)
     {
@@ -1467,47 +1375,47 @@
             cell = CellSwitchOn;
             
         }
-        if(profileDict != nil)
-        {
-            cell.notificationTittlelbl.hidden=YES;
-        }
-        else
-        {
-            cell.notificationTittlelbl.hidden=NO;
-        }
-        
-       [self notificationMethod];
-        
-        UISwipeGestureRecognizer *messBtnleftRecognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(NotificationmsgBtnSwipLeftAction:)];
-        [messBtnleftRecognizer setDirection: UISwipeGestureRecognizerDirectionLeft];
-        [cell.messSwitchBtn addGestureRecognizer:messBtnleftRecognizer];
-       
-        
-        UISwipeGestureRecognizer *messBtnrightRecognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(NotificationmessBtnSwipRightAction:)];
-        [messBtnrightRecognizer setDirection: UISwipeGestureRecognizerDirectionRight];
-        [cell.messSwitchBtn addGestureRecognizer:messBtnrightRecognizer];
-       
-        UISwipeGestureRecognizer *soundBtnleftRecognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(NotificationsoundBtnSwipLeftAction:)];
-        [soundBtnleftRecognizer setDirection: UISwipeGestureRecognizerDirectionLeft];
-        [cell.SoundSwitchBtn addGestureRecognizer:soundBtnleftRecognizer];
-        
-        
-        UISwipeGestureRecognizer *SoundBtnrightRecognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(NotificationsoundBtnSwipRightAction:)];
-        [SoundBtnrightRecognizer setDirection: UISwipeGestureRecognizerDirectionRight];
-        [cell.SoundSwitchBtn addGestureRecognizer:SoundBtnrightRecognizer];
-
-        UISwipeGestureRecognizer *VibrationBtnleftRecognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(NotificationvibrationBtnSwipLeftAction:)];
-        [VibrationBtnleftRecognizer setDirection: UISwipeGestureRecognizerDirectionLeft];
-        [cell.vibrationSwitchBtn addGestureRecognizer:VibrationBtnleftRecognizer];
-        
-        
-        UISwipeGestureRecognizer *vibrationBtnrightRecognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(NotificationvibrationBtnSwipRightAction:)];
-        [vibrationBtnrightRecognizer setDirection: UISwipeGestureRecognizerDirectionRight];
-        [cell.vibrationSwitchBtn addGestureRecognizer:vibrationBtnrightRecognizer];
-        
-        [cell.vibrationSwitchBtn addTarget:self action:@selector(NotificationbuttonAction:) forControlEvents:UIControlEventTouchUpInside];
-        [cell.SoundSwitchBtn addTarget:self action:@selector(NotificationbuttonAction:) forControlEvents:UIControlEventTouchUpInside];
-        [cell.messSwitchBtn addTarget:self action:@selector(NotificationbuttonAction:) forControlEvents:UIControlEventTouchUpInside];
+//        if(profileDict != nil)
+//        {
+//            cell.notificationTittlelbl.hidden=YES;
+//        }
+//        else
+//        {
+//            cell.notificationTittlelbl.hidden=NO;
+//        }
+//        
+//       [self notificationMethod];
+//        
+//        UISwipeGestureRecognizer *messBtnleftRecognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(NotificationmsgBtnSwipLeftAction:)];
+//        [messBtnleftRecognizer setDirection: UISwipeGestureRecognizerDirectionLeft];
+//        [cell.messSwitchBtn addGestureRecognizer:messBtnleftRecognizer];
+//       
+//        
+//        UISwipeGestureRecognizer *messBtnrightRecognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(NotificationmessBtnSwipRightAction:)];
+//        [messBtnrightRecognizer setDirection: UISwipeGestureRecognizerDirectionRight];
+//        [cell.messSwitchBtn addGestureRecognizer:messBtnrightRecognizer];
+//       
+//        UISwipeGestureRecognizer *soundBtnleftRecognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(NotificationsoundBtnSwipLeftAction:)];
+//        [soundBtnleftRecognizer setDirection: UISwipeGestureRecognizerDirectionLeft];
+//        [cell.SoundSwitchBtn addGestureRecognizer:soundBtnleftRecognizer];
+//        
+//        
+//        UISwipeGestureRecognizer *SoundBtnrightRecognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(NotificationsoundBtnSwipRightAction:)];
+//        [SoundBtnrightRecognizer setDirection: UISwipeGestureRecognizerDirectionRight];
+//        [cell.SoundSwitchBtn addGestureRecognizer:SoundBtnrightRecognizer];
+//
+//        UISwipeGestureRecognizer *VibrationBtnleftRecognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(NotificationvibrationBtnSwipLeftAction:)];
+//        [VibrationBtnleftRecognizer setDirection: UISwipeGestureRecognizerDirectionLeft];
+//        [cell.vibrationSwitchBtn addGestureRecognizer:VibrationBtnleftRecognizer];
+//        
+//        
+//        UISwipeGestureRecognizer *vibrationBtnrightRecognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(NotificationvibrationBtnSwipRightAction:)];
+//        [vibrationBtnrightRecognizer setDirection: UISwipeGestureRecognizerDirectionRight];
+//        [cell.vibrationSwitchBtn addGestureRecognizer:vibrationBtnrightRecognizer];
+//        
+//        [cell.vibrationSwitchBtn addTarget:self action:@selector(NotificationbuttonAction:) forControlEvents:UIControlEventTouchUpInside];
+//        [cell.SoundSwitchBtn addTarget:self action:@selector(NotificationbuttonAction:) forControlEvents:UIControlEventTouchUpInside];
+//        [cell.messSwitchBtn addTarget:self action:@selector(NotificationbuttonAction:) forControlEvents:UIControlEventTouchUpInside];
         
     }
 
@@ -1520,20 +1428,7 @@
             cell = CellTermsOfUse;
             
         }
-        if(profileDict !=nil)
-        {
-            cell.termsOfUse.hidden =YES;
-            cell.privacyPolicy.hidden=YES;
-        }
-        else{
-            cell.termsOfUse.hidden =NO;
-            cell.privacyPolicy.hidden=NO;
-        }
-        if (IS_IPHONE6 ||IS_IPHONE6_Plus){
-        cell.layoutConstraintTermsOfUseBtnDependViewHeight.constant =50;
-        }
         
-       
     }
     if(indexPath.row==10)
     {
@@ -1542,16 +1437,7 @@
             [[NSBundle mainBundle] loadNibNamed:@"DSProfileTableViewCell" owner:self options:nil];
             cell = cellloginTypeView;
         }
-//        NSString *objloginType =[profileDict valueForKey:@"registervia"];
-//        if([objloginType isEqualToString:@"dosomething"])
-//        {
-//            cell.logilTypelbl.text =@"You are connect via DoSomething Account";
-//            cell.loginTypeImg.image=[UIImage imageNamed:@"loginTypeDS"];
-//        }
-//        else{
-//            cell.logilTypelbl.text =@"You are connect via through Facebook";
-//            cell.loginTypeImg.image=[UIImage imageNamed:@"loginTypeFB"];
-//        }
+
     }
 
     [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
@@ -1668,29 +1554,6 @@
         hobbiesname.textAlignment = NSTextAlignmentCenter;
     }
     }
-//    if(indexPath.row == 6)
-//    {
-//            commonWidth = (Tablecell.contentView.frame.size.width - 20) / 14;
-//            imageSize = commonWidth * 2;
-//
-//        }
-    
-//    if ( indexPath.row ==6)
-//    {
-//                        imageSize =39;
-//                        commonWidth=19.5;
-//                        commonHeight = 54;
-//        if([imageNormalArray count] < 1)
-//            commonHeight= 80;
-//        else if([imageNormalArray count] <= 5)
-//            commonHeight= commonHeight + 46;
-//        else if([imageNormalArray count] <= 10)
-//            commonHeight= (commonHeight*2)+46;
-//        else if([imageNormalArray count] <= 15)
-//            commonHeight= (commonHeight * 3)+48;
-//        else if([imageNormalArray count] <= 20)
-//            commonHeight= (commonHeight * 4)+52;
-//    }
     
     if(indexPath.row == 7)
     {
@@ -1775,7 +1638,67 @@
         }
 
     }
-    
+    if(indexPath.row ==8)
+    {
+        if(profileDict != nil)
+        {
+            cell.notificationTittlelbl.hidden=YES;
+        }
+        else
+        {
+            cell.notificationTittlelbl.hidden=NO;
+        }
+        
+        [self notificationMethod];
+        
+        UISwipeGestureRecognizer *messBtnleftRecognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(NotificationmsgBtnSwipLeftAction:)];
+        [messBtnleftRecognizer setDirection: UISwipeGestureRecognizerDirectionLeft];
+        [cell.messSwitchBtn addGestureRecognizer:messBtnleftRecognizer];
+        
+        
+        UISwipeGestureRecognizer *messBtnrightRecognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(NotificationmessBtnSwipRightAction:)];
+        [messBtnrightRecognizer setDirection: UISwipeGestureRecognizerDirectionRight];
+        [cell.messSwitchBtn addGestureRecognizer:messBtnrightRecognizer];
+        
+        UISwipeGestureRecognizer *soundBtnleftRecognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(NotificationsoundBtnSwipLeftAction:)];
+        [soundBtnleftRecognizer setDirection: UISwipeGestureRecognizerDirectionLeft];
+        [cell.SoundSwitchBtn addGestureRecognizer:soundBtnleftRecognizer];
+        
+        
+        UISwipeGestureRecognizer *SoundBtnrightRecognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(NotificationsoundBtnSwipRightAction:)];
+        [SoundBtnrightRecognizer setDirection: UISwipeGestureRecognizerDirectionRight];
+        [cell.SoundSwitchBtn addGestureRecognizer:SoundBtnrightRecognizer];
+        
+        UISwipeGestureRecognizer *VibrationBtnleftRecognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(NotificationvibrationBtnSwipLeftAction:)];
+        [VibrationBtnleftRecognizer setDirection: UISwipeGestureRecognizerDirectionLeft];
+        [cell.vibrationSwitchBtn addGestureRecognizer:VibrationBtnleftRecognizer];
+        
+        
+        UISwipeGestureRecognizer *vibrationBtnrightRecognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(NotificationvibrationBtnSwipRightAction:)];
+        [vibrationBtnrightRecognizer setDirection: UISwipeGestureRecognizerDirectionRight];
+        [cell.vibrationSwitchBtn addGestureRecognizer:vibrationBtnrightRecognizer];
+        
+        [cell.vibrationSwitchBtn addTarget:self action:@selector(NotificationbuttonAction:) forControlEvents:UIControlEventTouchUpInside];
+        [cell.SoundSwitchBtn addTarget:self action:@selector(NotificationbuttonAction:) forControlEvents:UIControlEventTouchUpInside];
+        [cell.messSwitchBtn addTarget:self action:@selector(NotificationbuttonAction:) forControlEvents:UIControlEventTouchUpInside];
+    }
+    if(indexPath.row ==9)
+    {
+        if(profileDict !=nil)
+        {
+            cell.termsOfUse.hidden =YES;
+            cell.privacyPolicy.hidden=YES;
+        }
+        else{
+            cell.termsOfUse.hidden =NO;
+            cell.privacyPolicy.hidden=NO;
+        }
+        if (IS_IPHONE6 ||IS_IPHONE6_Plus){
+            cell.layoutConstraintTermsOfUseBtnDependViewHeight.constant =50;
+        }
+        
+
+    }
     if(indexPath.row==10)
     {
         NSString *objloginType =[profileDict valueForKey:@"registervia"];
@@ -1912,9 +1835,6 @@
        
    }
 
-    
-  
-    
 }
 
 
@@ -2114,8 +2034,6 @@
         
     }
     
-    
-    
     UIAlertAction *camera = [UIAlertAction actionWithTitle:NSLocalizedString(@"CANCEL",@"") style:UIAlertActionStyleDefault
                              
                                                    handler:^(UIAlertAction * action) {
@@ -2266,43 +2184,49 @@
     NSString *fbProfileStr;
     if([strType isEqualToString:@"2"])
         fbProfileStr = [userDetailsDict valueForKey:@"profileImage"];
-
-    
-    [objWebService postRegister:Register_API
-                           type:strType
-                     first_name:FirstName
-                      last_name:LastName
-                          email:emailAddressToRegister
-                       password:(currentPassword==nil)?emailPasswordToRegister:currentPassword
-                      profileId:strProfileID
-                            dob:dateChange
-                  profileImage1:profileImage1
-                  profileImage2:profileImage2
-                  profileImage3:profileImage3
-               IntersertHobbies:strInterestHobbies
-                          About:strAbout
-                         gender:strGender
-                       latitude:currentLatitude
-                      longitude:currentLongitude
-                         device:Device
-                       deviceid:deviceUdid
-                  fbprofileImage:fbProfileStr
-           notification_message:isNotification_message
-           notification_sound  :isNotification_sound
-         notification_vibration:isNotification_vibration
-                        success:^(AFHTTPRequestOperation *operation, id responseObject){
-                            [COMMON removeLoading];
-                        }
-     
-                        failure:^(AFHTTPRequestOperation *operation, id error) {
-                            
-                            [COMMON removeLoading];
-                 
-                            
-                        }];
-
-    
-}
+    if([COMMON isInternetReachable]){
+        
+        [objWebService postRegister:Register_API
+                               type:strType
+                         first_name:FirstName
+                          last_name:LastName
+                              email:emailAddressToRegister
+                           password:(currentPassword==nil)?emailPasswordToRegister:currentPassword
+                          profileId:strProfileID
+                                dob:dateChange
+                      profileImage1:profileImage1
+                      profileImage2:profileImage2
+                      profileImage3:profileImage3
+                   IntersertHobbies:strInterestHobbies
+                              About:strAbout
+                             gender:strGender
+                           latitude:currentLatitude
+                          longitude:currentLongitude
+                             device:Device
+                           deviceid:deviceUdid
+                     fbprofileImage:fbProfileStr
+               notification_message:isNotification_message
+               notification_sound  :isNotification_sound
+             notification_vibration:isNotification_vibration
+                            success:^(AFHTTPRequestOperation *operation, id responseObject){
+                                [COMMON removeLoading];
+                            }
+         
+                            failure:^(AFHTTPRequestOperation *operation, id error) {
+                                
+                                [COMMON removeLoading];
+                                
+                                
+                            }];
+        
+        
+    }
+    else{
+        
+        [COMMON showErrorAlert:@"Check Your Internet connection"];
+        
+    }
+  }
 #pragma mark - updateAPI
 -(void) updateAPI{
     
@@ -2312,31 +2236,41 @@
     if(currentLongitude == nil)
         currentLongitude = @"";
     
-    [objWebService profileUpdate:ProfileUpdate_API
-                      first_name:FirstName
-                       last_name:LastName
-                             dob:dateChange
-                        password:(currentPassword==nil)?emailPasswordToRegister:currentPassword
-                   profileImage1:profileImage1
-                   profileImage2:profileImage2
-                   profileImage3:profileImage3
-                          gender:strGender
-                           about:strAbout
-                         hobbies:strInterestHobbies
-                        latitude:currentLatitude
-                       longitude:currentLongitude
-                    notification:@""
-                       sessionid:loginUserSessionID
-                         success:^(AFHTTPRequestOperation *operation, id responseObject) {
-                            
-                             
-                             [COMMON removeLoading];
-                         }
-                         failure:^(AFHTTPRequestOperation *operation, id error) {
-                             [COMMON removeLoading];
+    
+    if([COMMON isInternetReachable]){
+        [objWebService profileUpdate:ProfileUpdate_API
+                          first_name:FirstName
+                           last_name:LastName
+                                 dob:dateChange
+                            password:(currentPassword==nil)?emailPasswordToRegister:currentPassword
+                       profileImage1:profileImage1
+                       profileImage2:profileImage2
+                       profileImage3:profileImage3
+                              gender:strGender
+                               about:strAbout
+                             hobbies:strInterestHobbies
+                            latitude:currentLatitude
+                           longitude:currentLongitude
+                        notification:@""
+                           sessionid:loginUserSessionID
+                             success:^(AFHTTPRequestOperation *operation, id responseObject) {
+                                 
+                                 
+                                 [COMMON removeLoading];
+                             }
+                             failure:^(AFHTTPRequestOperation *operation, id error) {
+                                 [COMMON removeLoading];
+                                 
+                             }
+         ];
+        
+    }
+    else{
+        
+        [COMMON showErrorAlert:@"Check Your Internet connection"];
+        
+    }
 
-                         }
-     ];
 }
 #pragma mark - loadRegisterNotification
 -(void)loadRegister{

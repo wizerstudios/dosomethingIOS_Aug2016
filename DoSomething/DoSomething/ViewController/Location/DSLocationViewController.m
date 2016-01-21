@@ -350,85 +350,105 @@
 //}
 #pragma mark - loadLocationUpdateAPI
 -(void)loadLocationUpdateAPI{
-    [objWebservice locationUpdate:LocationUpdate_API
-                        sessionid:[COMMON getSessionID]
-                         latitude:currentLatitude
-                        longitude:currentLongitude
-                          success:^(AFHTTPRequestOperation *operation, id responseObject){
-                              NSLog(@"responseObject = %@",responseObject);
-                          }
-                          failure:^(AFHTTPRequestOperation *operation, id error) {
-                              [self showAltermessage:[NSString stringWithFormat:@"%@",error]];
-                          }];
+    
+    
+    if([COMMON isInternetReachable]){
+        [objWebservice locationUpdate:LocationUpdate_API
+                            sessionid:[COMMON getSessionID]
+                             latitude:currentLatitude
+                            longitude:currentLongitude
+                              success:^(AFHTTPRequestOperation *operation, id responseObject){
+                                  NSLog(@"responseObject = %@",responseObject);
+                              }
+                              failure:^(AFHTTPRequestOperation *operation, id error) {
+                                  [self showAltermessage:[NSString stringWithFormat:@"%@",error]];
+                              }];
+    }
+    else{
+        
+        [COMMON showErrorAlert:@"Check Your Internet connection"];
+        
+    }
+
+    
 }
 #pragma mark - nearestLocationWebserviceAPI
 -(void)nearestLocationWebservice
 {
     
-    [objWebservice nearestUsers:NearestUsers_API
-                      sessionid:[COMMON getSessionID]
-                       latitude:latitude
-                      longitude:longitude
-                  filter_status:onlineStatus
-                  filter_gender:GenderStatus
-               filter_available:avalableStatus
-                filter_agerange:(filterAge==nil)?@"":filterAge
-                filter_distance:(filterDistance==nil)?@"":filterDistance
-                           page:currentloadPage
-                        success:^(AFHTTPRequestOperation *operation, id responseObject)
-    {
-        
-        NSLog(@"response=%@",responseObject);
-            recordCount =[[responseObject valueForKey:@"nearestusers"]valueForKey:@"recordCount"];
-        matchUserArray =[[responseObject valueForKey:@"nearestusers"]valueForKey:@"matchedUser"];
-       
-            [self loadMatchActivityMethod];
-        
-        if ( responseObject !=nil && [[[responseObject valueForKey:@"nearestusers"]valueForKey:@"status"] isEqualToString:@"success"])
-        {
-
-            if ([[[responseObject valueForKey:@"nearestusers"]valueForKey:@"pageCount"] isEqualToString:@"1"])
-            {
-                NSMutableArray * nearestUserdetaile =[[NSMutableArray alloc]init];
-                nearestUserdetaile =[[responseObject valueForKey:@"nearestusers"] valueForKey:@"UserList"];
-                commonlocationArray =[nearestUserdetaile mutableCopy];
-                [locationCollectionView reloadData];
-            }
-            else
-            {
-                NSArray * nextpageUserdetaile =[[responseObject valueForKey:@"nearestusers"] valueForKey:@"UserList"];
-                for (NSDictionary *dict in nextpageUserdetaile)
-                {
-                    [commonlocationArray addObject:dict];
-                }
-            }
-            [COMMON removeLoading];
-        }
-        else if([[[responseObject valueForKey:@"nearestusers"]valueForKey:@"status"] isEqualToString:@"error"])
-        {
-            [COMMON removeUserDetails];
-             DSHomeViewController*objSplashView =[[DSHomeViewController alloc]initWithNibName:@"DSHomeViewController" bundle:nil];
-             [self.navigationController pushViewController:objSplashView animated:NO];
-             appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
-             appDelegate.buttonsView.hidden=YES;
-             appDelegate.SepratorLbl.hidden=YES;
-             [appDelegate.settingButton setBackgroundImage:[UIImage imageNamed:@"setting_icon.png"] forState:UIControlStateNormal];
-        }
-        else{
-            isAllPost = YES;
-            [COMMON removeLoading];
-            if([[[responseObject valueForKey:@"nearestusers"]valueForKey:@"status"] isEqualToString:@"failed"])
-            {
-                [commonlocationArray removeLastObject];
-            }
-        }
-        [refreshControl endRefreshing];
-        [locationCollectionView reloadData];
+    if([COMMON isInternetReachable]){
+        [objWebservice nearestUsers:NearestUsers_API
+                          sessionid:[COMMON getSessionID]
+                           latitude:latitude
+                          longitude:longitude
+                      filter_status:onlineStatus
+                      filter_gender:GenderStatus
+                   filter_available:avalableStatus
+                    filter_agerange:(filterAge==nil)?@"":filterAge
+                    filter_distance:(filterDistance==nil)?@"":filterDistance
+                               page:currentloadPage
+                            success:^(AFHTTPRequestOperation *operation, id responseObject)
+         {
+             
+             NSLog(@"response=%@",responseObject);
+             recordCount =[[responseObject valueForKey:@"nearestusers"]valueForKey:@"recordCount"];
+             matchUserArray =[[responseObject valueForKey:@"nearestusers"]valueForKey:@"matchedUser"];
+             
+             [self loadMatchActivityMethod];
+             
+             if ( responseObject !=nil && [[[responseObject valueForKey:@"nearestusers"]valueForKey:@"status"] isEqualToString:@"success"])
+             {
+                 
+                 if ([[[responseObject valueForKey:@"nearestusers"]valueForKey:@"pageCount"] isEqualToString:@"1"])
+                 {
+                     NSMutableArray * nearestUserdetaile =[[NSMutableArray alloc]init];
+                     nearestUserdetaile =[[responseObject valueForKey:@"nearestusers"] valueForKey:@"UserList"];
+                     commonlocationArray =[nearestUserdetaile mutableCopy];
+                     [locationCollectionView reloadData];
+                 }
+                 else
+                 {
+                     NSArray * nextpageUserdetaile =[[responseObject valueForKey:@"nearestusers"] valueForKey:@"UserList"];
+                     for (NSDictionary *dict in nextpageUserdetaile)
+                     {
+                         [commonlocationArray addObject:dict];
+                     }
+                 }
+                 [COMMON removeLoading];
+             }
+             else if([[[responseObject valueForKey:@"nearestusers"]valueForKey:@"status"] isEqualToString:@"error"])
+             {
+                 [COMMON removeUserDetails];
+                 DSHomeViewController*objSplashView =[[DSHomeViewController alloc]initWithNibName:@"DSHomeViewController" bundle:nil];
+                 [self.navigationController pushViewController:objSplashView animated:NO];
+                 appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+                 appDelegate.buttonsView.hidden=YES;
+                 appDelegate.SepratorLbl.hidden=YES;
+                 [appDelegate.settingButton setBackgroundImage:[UIImage imageNamed:@"setting_icon.png"] forState:UIControlStateNormal];
+             }
+             else{
+                 isAllPost = YES;
+                 [COMMON removeLoading];
+                 if([[[responseObject valueForKey:@"nearestusers"]valueForKey:@"status"] isEqualToString:@"failed"])
+                 {
+                     [commonlocationArray removeLastObject];
+                 }
+             }
+             [refreshControl endRefreshing];
+             [locationCollectionView reloadData];
+         }
+                            failure:^(AFHTTPRequestOperation *operation, id error)
+         {
+             [COMMON removeLoading];
+         }];
     }
-    failure:^(AFHTTPRequestOperation *operation, id error)
-    {
-        [COMMON removeLoading];
-    }];
+    else{
+        
+        [COMMON showErrorAlert:@"Check Your Internet connection"];
+        
+    }
+    
+    
 }
 
 #pragma mark - UICollectionView Delegate
@@ -641,24 +661,33 @@
 #pragma mark - loadRequestsendWebServiceAPI
 -(void)loadRequestsendWebService
 {
-    [objWebservice sendRequest:SendRequest_API
-                     sessionid:[COMMON getSessionID]
-          request_send_user_id:profileUserID
-                       success:^(AFHTTPRequestOperation *operation, id responseObject)
-                        {
-                                if([[[responseObject valueForKey:@"sendrequest"]valueForKey:@"status"] isEqualToString:@"success"])
-                                {
-                                    NSString * resposeMsg =[[responseObject valueForKey:@"sendrequest"]valueForKey:@"Message"];
-            
-                                    [self showAltermessage:resposeMsg];
-                                }
-                            
-                        }
-                  failure:^(AFHTTPRequestOperation *operation, id error)
-                            {
-                                NSLog(@"requestSend RESPONSE=%@",error);
-                            }];
+    
+    if([COMMON isInternetReachable]){
+        [objWebservice sendRequest:SendRequest_API
+                         sessionid:[COMMON getSessionID]
+              request_send_user_id:profileUserID
+                           success:^(AFHTTPRequestOperation *operation, id responseObject)
+         {
+             if([[[responseObject valueForKey:@"sendrequest"]valueForKey:@"status"] isEqualToString:@"success"])
+             {
+                 NSString * resposeMsg =[[responseObject valueForKey:@"sendrequest"]valueForKey:@"Message"];
+                 
+                 [self showAltermessage:resposeMsg];
+             }
+             
+         }
+                           failure:^(AFHTTPRequestOperation *operation, id error)
+         {
+             NSLog(@"requestSend RESPONSE=%@",error);
+         }];
+    }
+    else{
+        
+        [COMMON showErrorAlert:@"Check Your Internet connection"];
+        
+    }
 
+    
 }
 -(IBAction)filterAction:(id)sender
 {
@@ -691,10 +720,6 @@
             
             isgestureenable=NO;
 
-
-        
-        
-        
     }
     else if (isFilteraction==YES)
     {
@@ -716,8 +741,8 @@
         [self.locationCollectionView setUserInteractionEnabled:YES];
         appDelegate.settingButton.userInteractionEnabled=YES;
         currentloadPage = @"";
-        filterAge = ([filterAge isEqualToString:@""])?@"18-26":filterAge;
-        filterDistance=([filterDistance isEqualToString:@""])?@"0-5":filterDistance;
+        filterAge = ([filterAge isEqualToString:@""])?@"":filterAge;
+        filterDistance=([filterDistance isEqualToString:@""])?@"":filterDistance;
         isgestureenable=YES;
        
         [self nearestLocationWebservice];
@@ -916,8 +941,8 @@
     self.lowerLabel.text=@"";
     self.ageupperLabel.text=@"";
     self.agelowerLabel.text =@"";
-    filterAge=@"18-26";
-    filterDistance=@"0-5";
+    filterAge=@"";  //18-26
+    filterDistance=@"";  //0-5
 }
 
 
@@ -1032,26 +1057,34 @@
 {
     [COMMON LoadIcon:self.view];
     NSString *requestsenduserid=[matchUserArray valueForKey:@"user_id"];
-    [objWebservice getMatchuserrequestSend:matchuserrequestsend sessionid:[COMMON getSessionID] requestsenduser:requestsenduserid chartstart:@"1" success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        if([[[responseObject valueForKey:@"sendrequest"]valueForKey:@"status"]isEqualToString:@"success"])
-        {
-        NSLog(@"response=%@",responseObject);
-            [COMMON removeLoading];
-            
-            NSMutableArray *objmatchuserHistory=[[responseObject valueForKey:@"sendrequest"]valueForKey:@"Conversaion"];
+    
+    if([COMMON isInternetReachable]){
+        [objWebservice getMatchuserrequestSend:matchuserrequestsend sessionid:[COMMON getSessionID] requestsenduser:requestsenduserid chartstart:@"1" success:^(AFHTTPRequestOperation *operation, id responseObject) {
+            if([[[responseObject valueForKey:@"sendrequest"]valueForKey:@"status"]isEqualToString:@"success"])
+            {
+                NSLog(@"response=%@",responseObject);
+                [COMMON removeLoading];
+                
+                NSMutableArray *objmatchuserHistory=[[responseObject valueForKey:@"sendrequest"]valueForKey:@"Conversaion"];
                 DSChatDetailViewController *ChatDetail =[[DSChatDetailViewController alloc]initWithNibName:nil bundle:nil];
                 NSMutableDictionary *matchuserdic = [[NSMutableDictionary alloc] init];
                 matchuserdic = [objmatchuserHistory mutableCopy];
                 ChatDetail.chatuserDetailsDict = matchuserdic;
-            
+                
                 [self.navigationController pushViewController:ChatDetail animated:YES];
-        }
-       
-    } failure:^(AFHTTPRequestOperation *operation, id error) {
+            }
+            
+        } failure:^(AFHTTPRequestOperation *operation, id error) {
+            
+        }];
+    }
+    else{
         
-    }];
-    
-}
+        [COMMON showErrorAlert:@"Check Your Internet connection"];
+        
+    }
+
+   }
 
 
 - (void)didReceiveMemoryWarning {

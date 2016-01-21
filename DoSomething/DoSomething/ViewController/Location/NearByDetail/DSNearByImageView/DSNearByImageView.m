@@ -76,9 +76,6 @@
     [self.viewContainer addSubview:termsConditionWebView];
     [self setTermsConditionWebView:termsConditionWebView];
     
-    
-
-    
 }
 
 -(void)setUpConstraints
