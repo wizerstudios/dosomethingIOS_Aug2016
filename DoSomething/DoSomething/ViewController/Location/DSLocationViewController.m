@@ -366,7 +366,7 @@
     }
     else{
         
-        [COMMON showErrorAlert:@"No Response From Server"];
+        [COMMON showErrorAlert:@"Check Your Internet connection"];
         
     }
 
@@ -444,7 +444,7 @@
     }
     else{
         
-        [COMMON showErrorAlert:@"No Response From Server"];
+        [COMMON showErrorAlert:@"Check Your Internet connection"];
         
     }
     
@@ -683,7 +683,7 @@
     }
     else{
         
-        [COMMON showErrorAlert:@"No Response From Server"];
+        [COMMON showErrorAlert:@"Check Your Internet connection"];
         
     }
 
@@ -1080,7 +1080,7 @@
     }
     else{
         
-        [COMMON showErrorAlert:@"No Response From Server"];
+        [COMMON showErrorAlert:@"Check Your Internet connection"];
         
     }
 

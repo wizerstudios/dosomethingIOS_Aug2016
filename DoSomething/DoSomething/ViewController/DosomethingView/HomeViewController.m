@@ -144,7 +144,7 @@
     }
     else{
         
-        [COMMON showErrorAlert:@"No Response From Server"];
+        [COMMON showErrorAlert:@"Check Your Internet connection"];
         
     }
 
@@ -538,7 +538,7 @@ minimumLineSpacingForSectionAtIndex:(NSInteger)section {
     }
     else{
         
-        [COMMON showErrorAlert:@"No Response From Server"];
+        [COMMON showErrorAlert:@"Check Your Internet connection"];
         
     }
 
@@ -611,7 +611,7 @@ minimumLineSpacingForSectionAtIndex:(NSInteger)section {
     }
     else{
         
-        [COMMON showErrorAlert:@"No Response From Server"];
+        [COMMON showErrorAlert:@"Check Your Internet connection"];
         
     }
 
