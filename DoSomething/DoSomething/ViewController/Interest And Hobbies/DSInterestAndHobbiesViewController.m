@@ -40,7 +40,7 @@
     NSMutableDictionary *profileDict;
     
     NSMutableArray *profileHobbyArray;
-    
+    BOOL isDownloadactiveImg;
 
 }
 @end
@@ -275,14 +275,16 @@
     if([[NSUserDefaults standardUserDefaults] valueForKey:@"ListofinterestArray"]==nil){
         
         [COMMON LoadIcon:self.view];
+        isDownloadactiveImg=YES;
         [self loadHobbiesWebserviceMethod];
+        
         
         
     }
     else{
         if([[NSUserDefaults standardUserDefaults] valueForKey:@"SelectedItem"]==nil)
         {
-            
+             isDownloadactiveImg=NO;
             interstAndHobbiesArray =[[[NSUserDefaults standardUserDefaults] valueForKey:@"ListofinterestArray"] mutableCopy];
             // interestArray=interstAndHobbiesArray;
         }
@@ -513,7 +515,13 @@
     NSDictionary *dict = [[interstAndHobbiesArray objectAtIndex:indexPath.section]objectAtIndex:indexPath.row];
     
     if([profileHobbyArray containsObject:dict]){
-        
+        if( isDownloadactiveImg==YES)
+        {
+            image = [dict valueForKey:@"image"];
+            downloadImageFromUrl(image, cell.interestAndHobbiesImageView);
+           // [cell.interestAndHobbiesImageView setImageWithURL:[NSURL URLWithString:image]];
+        }
+
         image = [dict valueForKey:@"image_active"];
         
         [cell.nameLabel setTextColor:[UIColor colorWithRed:(224.0f/255) green:(62.0f/255) blue:(79.0f/255) alpha:1.0f]];
@@ -521,14 +529,22 @@
     
     else{
         
+        if( isDownloadactiveImg==YES)
+        {
+             image = [dict valueForKey:@"image_active"];
+            downloadImageFromUrl(image, cell.interestAndHobbiesImageView);
+            //[cell.interestAndHobbiesImageView setImageWithURL:[NSURL URLWithString:image]];
+        }
         image = [dict valueForKey:@"image"];
         
         [cell.nameLabel setTextColor:[UIColor grayColor]];
     }
     
-    image = [image stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-    
+    downloadImageFromUrl(image, cell.interestAndHobbiesImageView);
     [cell.interestAndHobbiesImageView setImageWithURL:[NSURL URLWithString:image]];
+//    image = [image stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+//    
+//    [cell.interestAndHobbiesImageView setImageWithURL:[NSURL URLWithString:image]];
     
     
     return cell;
