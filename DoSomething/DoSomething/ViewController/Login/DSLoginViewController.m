@@ -274,25 +274,35 @@
         return;
     }
     
-    [objWebService forgetPasswordRequest:ForgetPassword_API
-                                   email:self.forgotTextField.text
-                                 success:^(AFHTTPRequestOperation *operation, id responseObject) {
-                                     NSLog(@"responseObjectPWD%@",responseObject);
-                                     if([[[responseObject objectForKey:@"forgetpassword"]objectForKey:@"status"] isEqualToString:@"success"]){
-                                         [self showAltermessage:@"Kindly check your Email for updated Password"];
-                                          NSLog(@"responseObjectPWD%@",responseObject);
-                                          //[[responseObject objectForKey:@"forgetpassword"]objectForKey:@"message"]];
-                                     }
-                                     else{
-                                         [self showAltermessage:[[responseObject objectForKey:@"forgetpassword"]objectForKey:@"message"]];
-                                     }
-                                 }
-                                 failure:^(AFHTTPRequestOperation *operation, id error) {
-                                     NSLog(@"error%@",error);
-                                     [self showAltermessage:[NSString stringWithFormat:@"%@",error]];
-                                 }];
     
-}
+    if([COMMON isInternetReachable]){
+        
+        [objWebService forgetPasswordRequest:ForgetPassword_API
+                                       email:self.forgotTextField.text
+                                     success:^(AFHTTPRequestOperation *operation, id responseObject) {
+                                         NSLog(@"responseObjectPWD%@",responseObject);
+                                         if([[[responseObject objectForKey:@"forgetpassword"]objectForKey:@"status"] isEqualToString:@"success"]){
+                                             [self showAltermessage:@"Kindly check your Email for updated Password"];
+                                             NSLog(@"responseObjectPWD%@",responseObject);
+                                             //[[responseObject objectForKey:@"forgetpassword"]objectForKey:@"message"]];
+                                         }
+                                         else{
+                                             [self showAltermessage:[[responseObject objectForKey:@"forgetpassword"]objectForKey:@"message"]];
+                                         }
+                                     }
+                                     failure:^(AFHTTPRequestOperation *operation, id error) {
+                                         NSLog(@"error%@",error);
+                                         [self showAltermessage:[NSString stringWithFormat:@"%@",error]];
+                                     }];
+        
+          }
+    else{
+        
+        [COMMON showErrorAlert:@"No Response From Server"];
+        
+    }
+
+     }
 
 -(IBAction)loadTermsOfUseViewAction:(id)sender
 {
@@ -448,53 +458,64 @@
 }
 #pragma mark - checkuserEmailAPI
 - (void)checkUserEmail{
-    [COMMON LoadIcon:self.view];
-    [objWebService checkUser:CheckUser_API
-                       email:email
-                        type:objSigninType
-                    password:password
-                  first_name:firstName
-                   last_name:lastName
-                         dob:dob
-                      gender:gender
-                profileImage:profileImage
-                     success:^(AFHTTPRequestOperation *operation, id responseObject){
-                         NSLog(@"checkuser = %@",responseObject);
-                         if(([[[responseObject objectForKey:@"checkuser"]objectForKey:@"RegisterType"]  isEqual: @"1"])){
-                             if([[[responseObject objectForKey:@"checkuser"]objectForKey:@"status"]  isEqual: @"error"])
-                                 [self showAltermessage:[[responseObject objectForKey:@"checkuser"]objectForKey:@"Message"]];
-                             
-                             else
-                                 [self gotoProfileView:email :password:YES];
+    if([COMMON isInternetReachable]){
+        
+        [COMMON LoadIcon:self.view];
+        [objWebService checkUser:CheckUser_API
+                           email:email
+                            type:objSigninType
+                        password:password
+                      first_name:firstName
+                       last_name:lastName
+                             dob:dob
+                          gender:gender
+                    profileImage:profileImage
+                         success:^(AFHTTPRequestOperation *operation, id responseObject){
+                             NSLog(@"checkuser = %@",responseObject);
+                             if(([[[responseObject objectForKey:@"checkuser"]objectForKey:@"RegisterType"]  isEqual: @"1"])){
+                                 if([[[responseObject objectForKey:@"checkuser"]objectForKey:@"status"]  isEqual: @"error"])
+                                     [self showAltermessage:[[responseObject objectForKey:@"checkuser"]objectForKey:@"Message"]];
                                  
-                               [COMMON removeLoading];
-                         }
-                         else {
-                             
-                            if(([[[responseObject objectForKey:@"checkuser"]objectForKey:@"RegisterType"]  isEqual: @"2"])){
-                             
-                                 if([[[responseObject objectForKey:@"checkuser"]objectForKey:@"status"]  isEqual: @"success"])
-                                     [self gotoProfileView:profileID];
-                                     
                                  else
-                                     [self loadloginAPI];
-                                
-                               
-                                
-                            }
-                              [COMMON removeLoading];
-                       }
-     
-                         
-                     }
-                     failure:^(AFHTTPRequestOperation *operation, id error) {
-                          NSLog(@"Error = %@",error);
+                                     [self gotoProfileView:email :password:YES];
+                                 
+                                 [COMMON removeLoading];
+                             }
+                             else {
+                                 
+                                 if(([[[responseObject objectForKey:@"checkuser"]objectForKey:@"RegisterType"]  isEqual: @"2"])){
+                                     
+                                     if([[[responseObject objectForKey:@"checkuser"]objectForKey:@"status"]  isEqual: @"success"])
+                                         [self gotoProfileView:profileID];
+                                     
+                                     else
+                                         [self loadloginAPI];
+                                     
+                                     
+                                     
+                                 }
+                                 [COMMON removeLoading];
+                             }
+                             
+                             
+                         }
+                         failure:^(AFHTTPRequestOperation *operation, id error) {
+                             NSLog(@"Error = %@",error);
+                             
+                             [self showAltermessage:@"ERROR"];
+                             [COMMON removeLoading];
+                             
+                             
+                         }];
+        
+        
+    }
+    else{
+        
+        [COMMON showErrorAlert:@"No Response From Server"];
+        
+    }
 
-                         [self showAltermessage:@"ERROR"];
-                         [COMMON removeLoading];
-                         
-
-                     }];
 }
 #pragma mark - loginByFacebook
 -(void)loginByFacebook
@@ -572,52 +593,61 @@
      if(deviceToken == nil)
         deviceToken = @"";
     
-    [objWebService getLogin:Login_API
-                       type:objSigninType
-                      email:email
-                   password:self.passwordTxt.text
-                  profileId:profileID
-                        dob:dob
-               profileImage:profileImage
-                     gender:gender
-                   latitude:currentLatitude
-                  longitude:currentLongitude
-                     device:@"iPhone"
-                   deviceid:deviceToken
-                    success:^(AFHTTPRequestOperation *operation, id responseObject)
-    {
+    if([COMMON isInternetReachable]){
         
-        NSLog(@"responseObjectLogin = %@",responseObject);
+        [objWebService getLogin:Login_API
+                           type:objSigninType
+                          email:email
+                       password:self.passwordTxt.text
+                      profileId:profileID
+                            dob:dob
+                   profileImage:profileImage
+                         gender:gender
+                       latitude:currentLatitude
+                      longitude:currentLongitude
+                         device:@"iPhone"
+                       deviceid:deviceToken
+                        success:^(AFHTTPRequestOperation *operation, id responseObject)
+         {
+             
+             NSLog(@"responseObjectLogin = %@",responseObject);
+             
+             NSMutableDictionary *loginDict = [[NSMutableDictionary alloc]init];
+             
+             loginDict = [responseObject valueForKey:@"signin"];
+             
+             if([[loginDict valueForKey:@"status"]isEqualToString:@"success"]){
+                 
+                 [COMMON setUserDetails:[[loginDict valueForKey:@"userDetails"]objectAtIndex:0]];
+                 NSLog(@"userdetails = %@",[COMMON getUserDetails]);
+                 [self gotoHomeView];
+                 [COMMON removeLoading];
+                 
+             }
+             else{
+                 NSLog(@"responseObject = %@",responseObject);
+                 [self showAltermessage:[loginDict valueForKey:@"Message"]];
+                 [COMMON removeLoading];
+                 
+             }
+             
+             
+         }
+                        failure:^(AFHTTPRequestOperation *operation, id error){
+                            
+                            NSLog(@"ERROR = %@",error);
+                            
+                            [COMMON removeLoading];
+                            
+                        }];
+    }
+    else{
         
-        NSMutableDictionary *loginDict = [[NSMutableDictionary alloc]init];
-        
-        loginDict = [responseObject valueForKey:@"signin"];
-        
-        if([[loginDict valueForKey:@"status"]isEqualToString:@"success"]){
-            
-            [COMMON setUserDetails:[[loginDict valueForKey:@"userDetails"]objectAtIndex:0]];
-             NSLog(@"userdetails = %@",[COMMON getUserDetails]);
-            [self gotoHomeView];
-            [COMMON removeLoading];
-            
-        }
-        else{
-            NSLog(@"responseObject = %@",responseObject);
-            [self showAltermessage:[loginDict valueForKey:@"Message"]];
-            [COMMON removeLoading];
-            
-        }
-        
+        [COMMON showErrorAlert:@"No Response From Server"];
         
     }
-    failure:^(AFHTTPRequestOperation *operation, id error){
-        
-         NSLog(@"ERROR = %@",error);
-       
-        [COMMON removeLoading];
-
-    }];
-}
+    
+   }
 
 #pragma mark - loadCreateAPI
 -(void)loadCreateAPI
@@ -628,36 +658,46 @@
     NSString *deviceToken = [[NSUserDefaults standardUserDefaults]valueForKey:DeviceToken];
     if(deviceToken == nil)
         deviceToken = @"";
-    
-   [objWebService postRegister:Register_API
-                          type:objSigninType
-                    first_name:firstName
-                     last_name:lastName
-                         email:email
-                      password:self.passwordTxt.text
-                     profileId:profileID
-                           dob:dob
-                 profileImage1:profileImage1
-                 profileImage2:profileImage2
-                 profileImage3:profileImage3
-              IntersertHobbies:nil
-                         About:@""
-                        gender:gender
-                      latitude:currentLatitude
-                     longitude:currentLongitude
-                        device:@"iPhone"
-                      deviceid:deviceToken
-                fbprofileImage:@"" 
-          notification_message:@"Yes"
-          notification_sound  :@"Yes"
-        notification_vibration:@"Yes"    
-                       success:^(AFHTTPRequestOperation *operation, id responseObject){
-                           [COMMON removeLoading];
-                    }
-                   failure:^(AFHTTPRequestOperation *operation, id error) {
-                       [COMMON removeLoading];
-
-                   }];
+    if([COMMON isInternetReachable]){
+        
+        [objWebService postRegister:Register_API
+                               type:objSigninType
+                         first_name:firstName
+                          last_name:lastName
+                              email:email
+                           password:self.passwordTxt.text
+                          profileId:profileID
+                                dob:dob
+                      profileImage1:profileImage1
+                      profileImage2:profileImage2
+                      profileImage3:profileImage3
+                   IntersertHobbies:nil
+                              About:@""
+                             gender:gender
+                           latitude:currentLatitude
+                          longitude:currentLongitude
+                             device:@"iPhone"
+                           deviceid:deviceToken
+                     fbprofileImage:@""
+               notification_message:@"Yes"
+               notification_sound  :@"Yes"
+             notification_vibration:@"Yes"
+                            success:^(AFHTTPRequestOperation *operation, id responseObject){
+                                [COMMON removeLoading];
+                            }
+                            failure:^(AFHTTPRequestOperation *operation, id error) {
+                                [COMMON removeLoading];
+                                
+                            }];
+        
+        
+    }
+    else{
+        
+        [COMMON showErrorAlert:@"No Response From Server"];
+        
+    }
+   
     
 }
 #pragma mark - loadRegisterNotification

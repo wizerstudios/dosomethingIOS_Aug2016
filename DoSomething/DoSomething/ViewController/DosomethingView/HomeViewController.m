@@ -116,27 +116,38 @@
 #pragma mark - loadhomeviewListWebservice
 -(void)loadhomeviewListWebservice
 {
-    [objWebService HomeviewList:DoSomething_API
-                        success:^(AFHTTPRequestOperation *operation, id responseObject)
-    {
-        if(responseObject!=nil)
-          {
-              NSLog(@"response:%@",responseObject);
-              NSMutableDictionary *homeviewlist = [[NSMutableDictionary alloc]init];
-              menuArray=[NSMutableArray alloc];
-              homeviewlist = [responseObject valueForKey:@"dosomethinglist"];
-              menuArray =[homeviewlist valueForKey:@"list"];
-              [[NSUserDefaults standardUserDefaults] setObject:menuArray forKey:@"MenuListArray"];
-              [[NSUserDefaults standardUserDefaults] synchronize];
-              [COMMON removeLoading];
-              [self.homeCollectionView reloadData];
-              isInitialLoadingAPI = YES;
-              [self loadActivityAPI:getLast availableStr:@"" doSomethingId:@""];
-          }
+    if([COMMON isInternetReachable]){
+        
+        
+        [objWebService HomeviewList:DoSomething_API
+                            success:^(AFHTTPRequestOperation *operation, id responseObject)
+         {
+             if(responseObject!=nil)
+             {
+                 NSLog(@"response:%@",responseObject);
+                 NSMutableDictionary *homeviewlist = [[NSMutableDictionary alloc]init];
+                 menuArray=[NSMutableArray alloc];
+                 homeviewlist = [responseObject valueForKey:@"dosomethinglist"];
+                 menuArray =[homeviewlist valueForKey:@"list"];
+                 [[NSUserDefaults standardUserDefaults] setObject:menuArray forKey:@"MenuListArray"];
+                 [[NSUserDefaults standardUserDefaults] synchronize];
+                 [COMMON removeLoading];
+                 [self.homeCollectionView reloadData];
+                 isInitialLoadingAPI = YES;
+                 [self loadActivityAPI:getLast availableStr:@"" doSomethingId:@""];
+             }
+         }
+                            failure:^(AFHTTPRequestOperation *operation, id error)
+         {
+         }];
+        
     }
-    failure:^(AFHTTPRequestOperation *operation, id error)
-    {
-    }];
+    else{
+        
+        [COMMON showErrorAlert:@"No Response From Server"];
+        
+    }
+
 }
 #pragma mark - loadnavigationview
 -(void)loadnavigationview
@@ -510,14 +521,26 @@ minimumLineSpacingForSectionAtIndex:(NSInteger)section {
 
 -(void)loadLocationUpdateAPI{
     
-    [objWebService locationUpdate:LocationUpdate_API sessionid:[COMMON getSessionID] latitude:currentLatitude longitude:currentLongitude
-                          success:^(AFHTTPRequestOperation *operation, id responseObject){
-                          NSLog(@"responseObject = %@",responseObject);
-                        }
-                          failure:^(AFHTTPRequestOperation *operation, id error) {
-                              
-                              [self showAltermessage:[NSString stringWithFormat:@"%@",error]];
-                        }];
+    if([COMMON isInternetReachable]){
+        
+        
+        [objWebService locationUpdate:LocationUpdate_API sessionid:[COMMON getSessionID] latitude:currentLatitude longitude:currentLongitude
+                              success:^(AFHTTPRequestOperation *operation, id responseObject){
+                                  NSLog(@"responseObject = %@",responseObject);
+                              }
+                              failure:^(AFHTTPRequestOperation *operation, id error) {
+                                  
+                                  [self showAltermessage:[NSString stringWithFormat:@"%@",error]];
+                              }];
+        
+
+        
+    }
+    else{
+        
+        [COMMON showErrorAlert:@"No Response From Server"];
+        
+    }
 
     
 }
@@ -526,8 +549,6 @@ minimumLineSpacingForSectionAtIndex:(NSInteger)section {
     
     if([COMMON isInternetReachable]){
         
-       
-        NSLog(@"interentavailable=%hhd",[COMMON isInternetReachable]);
         [objWebService getActivity:Activity activityName:_activityNameStr sessionId:[COMMON getSessionID] availableNow:_availableStr doSomethingId:_dosomethingId
                            success:^(AFHTTPRequestOperation *operation, id responseObject)
          {
@@ -590,7 +611,6 @@ minimumLineSpacingForSectionAtIndex:(NSInteger)section {
     }
     else{
         
-         NSLog(@"interentavailable=%hhd",[COMMON isInternetReachable]);
         [COMMON showErrorAlert:@"No Response From Server"];
         
     }

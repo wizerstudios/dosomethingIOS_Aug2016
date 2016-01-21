@@ -693,16 +693,24 @@
         
         requestUserID = [userDetailsArray valueForKey:@"user_id"];
         
-        [objWebService sendRequest:SendRequest_API
-                         sessionid:[COMMON getSessionID]
-              request_send_user_id:requestUserID
-                           success:^(AFHTTPRequestOperation *operation, id responseObject) {
-                               NSLog(@"SEND REQ%@",responseObject);
-                               
-                           } failure:^(AFHTTPRequestOperation *operation, id error) {
-                               NSLog(@"SEND REQ ERR%@",error);
-                           }];
-
+        
+        if([COMMON isInternetReachable]){
+            [objWebService sendRequest:SendRequest_API
+                             sessionid:[COMMON getSessionID]
+                  request_send_user_id:requestUserID
+                               success:^(AFHTTPRequestOperation *operation, id responseObject) {
+                                   NSLog(@"SEND REQ%@",responseObject);
+                                   
+                               } failure:^(AFHTTPRequestOperation *operation, id error) {
+                                   NSLog(@"SEND REQ ERR%@",error);
+                               }];
+        }
+        else{
+            
+            [COMMON showErrorAlert:@"No Response From Server"];
+            
+        }
+       
     }
     
 }

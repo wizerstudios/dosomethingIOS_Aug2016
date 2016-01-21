@@ -233,7 +233,7 @@
         interstAndHobbiesArray = [[profileDict valueForKey:@"hobbieslist"]mutableCopy];
         hobbiesNameArray       =[[interstAndHobbiesArray valueForKey:@"name"]mutableCopy];
         imageNormalArray     = [[interstAndHobbiesArray valueForKey:@"image"]mutableCopy];
-        //self.tableViewHeightConstraint.constant=(IS_IPHONE6_Plus||IS_IPHONE6)? 50:50;
+        self.tableViewHeightConstraint.constant=(IS_IPHONE6_Plus||IS_IPHONE6)? 50:50;
     }
     
     [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"SelectedItemCategoryID"];
@@ -293,11 +293,7 @@
     
     [_tableviewProfile reloadData];
     
-   
-    
 }
-
-
 
 #pragma mark - profileDataArray
 
@@ -776,8 +772,6 @@
     DSInterestAndHobbiesViewController * DSHobbiesView  = [[DSInterestAndHobbiesViewController alloc]initWithNibName:@"DSInterestAndHobbiesViewController" bundle:nil];
     [self.navigationController pushViewController:DSHobbiesView animated:YES];
 
-    
-
 }
 
 -(void)initializeArray{
@@ -815,11 +809,6 @@
                                     [NSMutableDictionary dictionaryWithObjectsAndKeys:@"Hobbies",@"placeHolder", nil],
                                     [NSMutableDictionary dictionaryWithObjectsAndKeys:[profileDict valueForKey:@"email"],@"placeHolder",@"Password",@"placeHolderPass",@"Current\n password",@"placeHolderCurrentPassword",@"Password\n Conformation",@"placeHolderconformation",@"",@"TypingTextPass", nil], [NSMutableDictionary dictionaryWithObjectsAndKeys:@"loginType",@"placeHolder", nil],
                                      [NSMutableDictionary dictionaryWithObjectsAndKeys:@"loginType",@"placeHolder", nil],[NSMutableDictionary dictionaryWithObjectsAndKeys:@"loginType",@"placeHolder", nil], nil]atIndex:0];
-    
-   
-    
-   
-    
     
 }
 
@@ -868,8 +857,6 @@
     [objCustomAlterview.alertMsgLabel setTextColor:[UIColor colorWithRed:(255/255.0f) green:(255/255.0f) blue:(255/255.0f) alpha:1.0f]];
     
 }
-
-
 
 #pragma mark - TableView Datasource & Delegate
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
@@ -1848,9 +1835,6 @@
        
    }
 
-    
-  
-    
 }
 
 
@@ -2050,8 +2034,6 @@
         
     }
     
-    
-    
     UIAlertAction *camera = [UIAlertAction actionWithTitle:NSLocalizedString(@"CANCEL",@"") style:UIAlertActionStyleDefault
                              
                                                    handler:^(UIAlertAction * action) {
@@ -2202,43 +2184,49 @@
     NSString *fbProfileStr;
     if([strType isEqualToString:@"2"])
         fbProfileStr = [userDetailsDict valueForKey:@"profileImage"];
-
-    
-    [objWebService postRegister:Register_API
-                           type:strType
-                     first_name:FirstName
-                      last_name:LastName
-                          email:emailAddressToRegister
-                       password:(currentPassword==nil)?emailPasswordToRegister:currentPassword
-                      profileId:strProfileID
-                            dob:dateChange
-                  profileImage1:profileImage1
-                  profileImage2:profileImage2
-                  profileImage3:profileImage3
-               IntersertHobbies:strInterestHobbies
-                          About:strAbout
-                         gender:strGender
-                       latitude:currentLatitude
-                      longitude:currentLongitude
-                         device:Device
-                       deviceid:deviceUdid
-                  fbprofileImage:fbProfileStr
-           notification_message:isNotification_message
-           notification_sound  :isNotification_sound
-         notification_vibration:isNotification_vibration
-                        success:^(AFHTTPRequestOperation *operation, id responseObject){
-                            [COMMON removeLoading];
-                        }
-     
-                        failure:^(AFHTTPRequestOperation *operation, id error) {
-                            
-                            [COMMON removeLoading];
-                 
-                            
-                        }];
-
-    
-}
+    if([COMMON isInternetReachable]){
+        
+        [objWebService postRegister:Register_API
+                               type:strType
+                         first_name:FirstName
+                          last_name:LastName
+                              email:emailAddressToRegister
+                           password:(currentPassword==nil)?emailPasswordToRegister:currentPassword
+                          profileId:strProfileID
+                                dob:dateChange
+                      profileImage1:profileImage1
+                      profileImage2:profileImage2
+                      profileImage3:profileImage3
+                   IntersertHobbies:strInterestHobbies
+                              About:strAbout
+                             gender:strGender
+                           latitude:currentLatitude
+                          longitude:currentLongitude
+                             device:Device
+                           deviceid:deviceUdid
+                     fbprofileImage:fbProfileStr
+               notification_message:isNotification_message
+               notification_sound  :isNotification_sound
+             notification_vibration:isNotification_vibration
+                            success:^(AFHTTPRequestOperation *operation, id responseObject){
+                                [COMMON removeLoading];
+                            }
+         
+                            failure:^(AFHTTPRequestOperation *operation, id error) {
+                                
+                                [COMMON removeLoading];
+                                
+                                
+                            }];
+        
+        
+    }
+    else{
+        
+        [COMMON showErrorAlert:@"No Response From Server"];
+        
+    }
+  }
 #pragma mark - updateAPI
 -(void) updateAPI{
     
@@ -2248,31 +2236,41 @@
     if(currentLongitude == nil)
         currentLongitude = @"";
     
-    [objWebService profileUpdate:ProfileUpdate_API
-                      first_name:FirstName
-                       last_name:LastName
-                             dob:dateChange
-                        password:(currentPassword==nil)?emailPasswordToRegister:currentPassword
-                   profileImage1:profileImage1
-                   profileImage2:profileImage2
-                   profileImage3:profileImage3
-                          gender:strGender
-                           about:strAbout
-                         hobbies:strInterestHobbies
-                        latitude:currentLatitude
-                       longitude:currentLongitude
-                    notification:@""
-                       sessionid:loginUserSessionID
-                         success:^(AFHTTPRequestOperation *operation, id responseObject) {
-                            
-                             
-                             [COMMON removeLoading];
-                         }
-                         failure:^(AFHTTPRequestOperation *operation, id error) {
-                             [COMMON removeLoading];
+    
+    if([COMMON isInternetReachable]){
+        [objWebService profileUpdate:ProfileUpdate_API
+                          first_name:FirstName
+                           last_name:LastName
+                                 dob:dateChange
+                            password:(currentPassword==nil)?emailPasswordToRegister:currentPassword
+                       profileImage1:profileImage1
+                       profileImage2:profileImage2
+                       profileImage3:profileImage3
+                              gender:strGender
+                               about:strAbout
+                             hobbies:strInterestHobbies
+                            latitude:currentLatitude
+                           longitude:currentLongitude
+                        notification:@""
+                           sessionid:loginUserSessionID
+                             success:^(AFHTTPRequestOperation *operation, id responseObject) {
+                                 
+                                 
+                                 [COMMON removeLoading];
+                             }
+                             failure:^(AFHTTPRequestOperation *operation, id error) {
+                                 [COMMON removeLoading];
+                                 
+                             }
+         ];
+        
+    }
+    else{
+        
+        [COMMON showErrorAlert:@"No Response From Server"];
+        
+    }
 
-                         }
-     ];
 }
 #pragma mark - loadRegisterNotification
 -(void)loadRegister{

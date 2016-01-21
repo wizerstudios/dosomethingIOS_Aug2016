@@ -172,55 +172,68 @@
 }
 -(void)loadHobbiesWebserviceMethod
 {
-    [COMMON LoadIcon:self.view];
+    
+    if([COMMON isInternetReachable]){
+        
+        [COMMON LoadIcon:self.view];
+        
+        [objWebservice getHobbies:GetHobbies_API sessionid:deviceUdid success:^(AFHTTPRequestOperation *operation, id responseObject)
+         
+         {
+             
+             NSLog(@"response:%@",responseObject);
+             
+             hobbiesArry=[[NSMutableArray alloc]init];
+             
+             sectionNameArray=[[NSMutableArray alloc]init];
+             
+             NSMutableDictionary *loginDict = [[NSMutableDictionary alloc]init];
+             
+             NSDictionary *objselectionname=[[NSDictionary alloc]init];
+             
+             loginDict = [responseObject valueForKey:@"gethobbies"];
+             
+             objselectionname =[loginDict valueForKey:@"list"];
+             
+             sectionNameArray  = [objselectionname valueForKey:@"name"];
+             
+             [[NSUserDefaults standardUserDefaults] setObject:sectionNameArray forKey:@"ListofsectionNameArray"];
+             
+             [[NSUserDefaults standardUserDefaults] synchronize];
+             
+             
+             
+             hobbiesArry=[objselectionname valueForKey:@"hobbieslist"];
+             
+             [[NSUserDefaults standardUserDefaults] setObject:hobbiesArry forKey:@"ListofinterestArray"];
+             [[NSUserDefaults standardUserDefaults] synchronize];
+             interstAndHobbiesArray=[hobbiesArry mutableCopy];
+             
+             [COMMON removeLoading];
+             
+             [interestAndHobbiesCollectionView reloadData];
+             
+             [self localArray];
+             
+             
+             
+         } failure:^(AFHTTPRequestOperation *operation, id error) {
+             
+             
+             NSLog(@"intersesthobbieseror=%@",error);
+             
+             
+         }];
 
-    [objWebservice getHobbies:GetHobbies_API sessionid:deviceUdid success:^(AFHTTPRequestOperation *operation, id responseObject)
-     
-     {
-         
-         NSLog(@"response:%@",responseObject);
-         
-         hobbiesArry=[[NSMutableArray alloc]init];
-         
-         sectionNameArray=[[NSMutableArray alloc]init];
-         
-         NSMutableDictionary *loginDict = [[NSMutableDictionary alloc]init];
-         
-         NSDictionary *objselectionname=[[NSDictionary alloc]init];
-         
-         loginDict = [responseObject valueForKey:@"gethobbies"];
-         
-         objselectionname =[loginDict valueForKey:@"list"];
-         
-         sectionNameArray  = [objselectionname valueForKey:@"name"];
-         
-         [[NSUserDefaults standardUserDefaults] setObject:sectionNameArray forKey:@"ListofsectionNameArray"];
-         
-         [[NSUserDefaults standardUserDefaults] synchronize];
-         
-         
-         
-         hobbiesArry=[objselectionname valueForKey:@"hobbieslist"];
-         
-         [[NSUserDefaults standardUserDefaults] setObject:hobbiesArry forKey:@"ListofinterestArray"];
-         [[NSUserDefaults standardUserDefaults] synchronize];
-         interstAndHobbiesArray=[hobbiesArry mutableCopy];
-         
-         [COMMON removeLoading];
-         
-         [interestAndHobbiesCollectionView reloadData];
-         
-         [self localArray];
-         
-         
-         
-     } failure:^(AFHTTPRequestOperation *operation, id error) {
-         
-         
-         NSLog(@"intersesthobbieseror=%@",error);
-         
-         
-     }];
+        
+        
+    }
+    else{
+        
+        [COMMON showErrorAlert:@"No Response From Server"];
+        
+    }
+
     
 }
 -(void)localArray
@@ -520,8 +533,6 @@
     
     return cell;
 }
-
-
 
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath;
