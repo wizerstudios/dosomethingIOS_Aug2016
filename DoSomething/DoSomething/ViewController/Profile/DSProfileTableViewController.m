@@ -38,6 +38,7 @@
     UITextField             *currentTextfield;
     UILabel                 *maleLabel;
     UILabel                 *femaleLabel;
+    AppDelegate             *appDelegate;
     
     float commonWidth, commonHeight;
     float yAxis;
@@ -187,7 +188,9 @@
 }
 
 -(void)viewDidAppear:(BOOL)animated{
+    
     [super viewDidAppear:animated];
+    
     [self CustomAlterview];
 }
 
@@ -2335,7 +2338,7 @@
     [COMMON removeUserDetails];
     DSHomeViewController*objSplashView =[[DSHomeViewController alloc]initWithNibName:@"DSHomeViewController" bundle:nil];
     [self.navigationController pushViewController:objSplashView animated:NO];
-    AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+    appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
     appDelegate.buttonsView.hidden=YES;
     appDelegate.SepratorLbl.hidden=YES;
     [appDelegate.settingButton setBackgroundImage:[UIImage imageNamed:@"profile_icon.png"] forState:UIControlStateNormal];

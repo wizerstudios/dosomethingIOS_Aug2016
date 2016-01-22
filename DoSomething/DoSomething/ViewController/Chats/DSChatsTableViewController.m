@@ -14,6 +14,7 @@
 #import "DSWebservice.h"
 #import "DSAppCommon.h"
 #import "UIImageView+AFNetworking.h"
+#import "AppDelegate.h"
 
 
 @interface DSChatsTableViewController ()
@@ -25,6 +26,7 @@
     NSMutableArray *chatArray;
     NSUInteger isSupportUser;
     UIRefreshControl            * refreshControl;
+    AppDelegate *appDelegate;
     
 }
 
@@ -59,6 +61,7 @@
                                                                constant:20.0]];
     
    
+  
    
     
 }
@@ -77,6 +80,7 @@
     [self.navigationItem setHidesBackButton:YES animated:NO];
     
     [self setNavigation];
+    
 }
 
 -(void)viewDidAppear:(BOOL)animated{
@@ -424,12 +428,14 @@
                          
                          NSLog(@"chatArray = %@",chatArray);
                          
+                         [self loadTabbarMsgCount];
+                         
+                        
                          [refreshControl endRefreshing];
                          
                          [ChatTableView reloadData];
                          
                          [COMMON removeLoading];
-                         
                         
                          
                      }
@@ -475,6 +481,32 @@
     } failure:^(AFHTTPRequestOperation *operation, id error) {
         
     }];
+}
+
+-(void)loadTabbarMsgCount{
+    
+    NSArray *unreadMsgArray = [chatArray valueForKey: @"unreadmessage"];
+    int total =0;
+    for(int i=0;i<[unreadMsgArray count];i++)
+    {
+        total += [[unreadMsgArray objectAtIndex:i]integerValue];
+    }
+     appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+    if(total > 0){
+        [appDelegate.badgeCountLabel setHidden:NO];
+        NSString *count = [NSString stringWithFormat:@"%d",total];
+        [appDelegate.badgeCountLabel setText:count];
+        [[NSUserDefaults standardUserDefaults]setValue:count forKey:UnreadMsgCount];
+        [[NSUserDefaults standardUserDefaults]synchronize];
+    }
+    else{
+        [appDelegate.badgeCountLabel setHidden:YES];
+        [[NSUserDefaults standardUserDefaults]setValue:@"0" forKey:UnreadMsgCount];
+        [[NSUserDefaults standardUserDefaults]synchronize];
+    }
+    
+    
+    NSLog(@"total = %d",total);
 }
 
 

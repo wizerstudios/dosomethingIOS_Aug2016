@@ -109,6 +109,13 @@
     [super viewDidAppear:animated];
     appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
     appDelegate.buttonsView.hidden=NO;
+    NSString *countStr = [NSString stringWithFormat:@"%@",[[NSUserDefaults standardUserDefaults]valueForKey:UnreadMsgCount]];
+    if(![countStr isEqualToString:@"0"]){
+        [appDelegate.badgeCountLabel setHidden:NO];
+        [appDelegate.badgeCountLabel setText:countStr];
+    }
+    else
+        [appDelegate.badgeCountLabel setHidden:YES];
 }
 
 

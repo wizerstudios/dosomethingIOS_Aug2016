@@ -52,7 +52,8 @@
     
     NSLog(@"conversionID=%@",_conversionID);
     
-    [[IQKeyboardManager sharedManager] considerToolbarPreviousNextInViewClass:[chatTableView class]];
+    [[IQKeyboardManager sharedManager] considerToolbarPreviousNextInViewClass:[chatScrollview class]];
+    
     [[IQKeyboardManager sharedManager] setEnableAutoToolbar:NO];
     
     webService = [[DSWebservice alloc]init];
@@ -232,6 +233,7 @@
 
 }
 
+
 #pragma mark - Textview
 
 
@@ -239,13 +241,11 @@
  
     [chatScrollview setScrollEnabled:NO];
     
-  //  chatTableView.contentInset =  UIEdgeInsetsMake(0, 0, chatTableView.contentSize.height, 0);
-    
-//     NSIndexPath* ip = [NSIndexPath indexPathForRow:[chatArray count]-1 inSection:0];
-//    [chatTableView scrollToRowAtIndexPath:ip atScrollPosition:UITableViewScrollPositionTop animated:NO];
+//    if([chatArray count] > 4)
+//        [chatTableView setContentOffset:CGPointMake(0,-200)];
     
     [chatView.placeHolderLabel setHidden:YES];
-    //self.chatviewbottom.constant =height+(self.view.frame.size.height)/2;
+   // self.chatviewbottom.constant =(height+(self.view.frame.size.height)/2)-500;
     
 }
 
@@ -415,13 +415,17 @@
        
       NSMutableDictionary*AddDIcconversion =[NSMutableDictionary dictionaryWithObjectsAndKeys:[NSString stringWithFormat:@"%@",str],@"Message",@"SENDER",@"type",@"2016-01-12 06:08:09",@"senttime", nil];
         [conversationArray addObject:AddDIcconversion];
-       
-        [chatTableView reloadData];
-         [chatTableView scrollRectToVisible:CGRectMake(0, chatTableView.contentSize.height - chatTableView.bounds.size.height, chatTableView.bounds.size.width,chatTableView.bounds.size.height) animated:NO];
         
+        [chatTableView reloadData];
+        
+//        if([chatArray count] < 4)
+//            [chatTableView setContentOffset:CGPointMake(0,-200)];
+        
+        [chatTableView scrollRectToVisible:CGRectMake(0, chatTableView.contentSize.height - chatTableView.bounds.size.height, chatTableView.bounds.size.width,chatTableView.bounds.size.height) animated:NO];
       
         [self loadSendMessageAPI:receiverId conversationId:conversationID];
        
+        
         
         
     }
@@ -456,9 +460,6 @@
                             
                             if([[responseDict valueForKey:@"status"]isEqualToString:@"success"]){
                                 
-//                                if (![messageTimer isValid]){
-//                                    messageTimer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(loadConverstionAPI) userInfo:nil repeats:YES];
-//                                }
                                 
                                 if([conversationArray count])
                                    [conversationArray removeAllObjects];
@@ -483,7 +484,7 @@
 }
 
 -(void)loadSendMessageAPI:(NSString *)_receiverId conversationId:(NSString *)_conversationId{
-  //  [COMMON LoadIcon:self.view];
+    
                     [webService sendMessage:SendMessage_API sessionid:[COMMON getSessionID] message_send_user_id:_receiverId message:chatView.textView.text conversation_id:_conversationId success:^(AFHTTPRequestOperation *operation, id responseObject){
                         
                         NSLog(@"Conversation resp = %@",responseObject);
