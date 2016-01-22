@@ -50,7 +50,7 @@
     locationManager                 = [[CLLocationManager alloc] init];
     locationManager.delegate        = self;
     objWebService =[[DSWebservice alloc]init];
-    settingScroll.scrollEnabled =NO;
+    settingScroll.scrollEnabled =YES;
     NSMutableDictionary *profileDict=[[NSMutableDictionary alloc]init];
     profileDict = [COMMON getUserDetails];
    
@@ -73,17 +73,17 @@
     
     [self CustomAlterviewload];
    
-    self.deletebuttonBottomoposition.constant =45;
+    self.deletebuttonBottomoposition.constant =(IS_IPHONE4)?30:0;
     self.scrollYposition.constant =0;
     
     if(IS_IPHONE6)
     {
         self.scrollYposition.constant =15;
-        self.deletebuttonBottomoposition.constant =-55;
+        self.deletebuttonBottomoposition.constant =-70;
     }
     if(IS_IPHONE6_Plus)
     {
-        self.deletebuttonBottomoposition.constant =-130;
+        self.deletebuttonBottomoposition.constant =-150;
         self.scrollYposition.constant =15;
     }
     

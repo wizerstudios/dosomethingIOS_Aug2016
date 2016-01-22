@@ -24,12 +24,13 @@
 
 @synthesize locationButton,menuButton,chatsButton,buttonsView,buttons_array,profileButton,settingButton,SepratorLbl;
 @synthesize homePage,chatPage,window, locationPage,profilePage,objSettingView;
+@synthesize badgeCountLabel;
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
       NSLog(@"### Running FB SDK Version: %@", [FBSDKSettings sdkVersion]);
-    
+   // [[NSUserDefaults standardUserDefaults]removeObjectForKey:BadgeCount];
     
     [[FBSDKApplicationDelegate sharedInstance] application:application
                              didFinishLaunchingWithOptions:launchOptions];
@@ -80,7 +81,9 @@
 {
   
     buttonsView=[[UIView alloc]init];
-     SepratorLbl     =[[UILabel alloc]init];
+    SepratorLbl     =[[UILabel alloc]init];
+    badgeCountLabel = [[UILabel alloc]init];
+    
     [buttonsView setBackgroundColor:[UIColor whiteColor]];
     [SepratorLbl setBackgroundColor:[UIColor grayColor]];
 
@@ -97,7 +100,7 @@
     
     
     [locationButton setBackgroundImage:[UIImage imageNamed:@"loaction_normal.png"] forState:UIControlStateNormal];
-    UIImage *locationActive = [UIImage imageNamed:@"loaction_active.png"];
+     UIImage *locationActive = [UIImage imageNamed:@"loaction_active.png"];
     [locationButton setBackgroundImage:locationActive forState:UIControlStateSelected];
     
     [menuButton setBackgroundImage:[UIImage imageNamed:@"menu_btn.png"] forState:UIControlStateNormal];
@@ -132,6 +135,15 @@
     menuButton.frame=CGRectMake(buttonsView.center.x-18,3,45,45);
     chatsButton.frame=CGRectMake(menuButton.frame.origin.x+menuButton.frame.size.width+20,3,45,45);
     settingButton.frame =CGRectMake(chatsButton.frame.origin.x+chatsButton.frame.size.width+20,3,45,45);
+    
+    [badgeCountLabel setFrame:CGRectMake(menuButton.frame.origin.x+menuButton.frame.size.width+45,5,20,20)];
+    badgeCountLabel.layer.cornerRadius = 10.0;
+    [badgeCountLabel.layer setMasksToBounds:YES];
+    [badgeCountLabel setTextColor:[UIColor whiteColor]];
+    [badgeCountLabel setTextAlignment:NSTextAlignmentCenter];
+    [badgeCountLabel setFont:PATRON_REG(12)];
+    [badgeCountLabel setBackgroundColor:[UIColor redColor]];
+    
    
        if(IS_IPHONE6)
     {
@@ -148,6 +160,7 @@
         chatsButton.frame=CGRectMake(menuButton.frame.origin.x+menuButton.frame.size.width+30,3,45,45);
         locationButton.frame=CGRectMake(profileButton.frame.origin.x+profileButton.frame.size.width+30,profileButton.frame.origin.y,45,45);
         settingButton.frame =CGRectMake(chatsButton.frame.origin.x+chatsButton.frame.size.width+30,chatsButton.frame.origin.y,45,45);
+        [badgeCountLabel setFrame:CGRectMake(menuButton.frame.origin.x+menuButton.frame.size.width+55,5,20,20)];
     }
 
     [self.window.rootViewController.view addSubview:buttonsView];
@@ -158,6 +171,7 @@
     [buttonsView addSubview:chatsButton];
     [buttonsView addSubview:profileButton];
     [buttonsView addSubview:settingButton];
+    [buttonsView addSubview:badgeCountLabel];
     
     buttons_array=[[NSMutableArray alloc]init];
     [buttons_array addObject:locationButton];
@@ -165,6 +179,8 @@
     [buttons_array addObject:chatsButton];
     [buttons_array addObject:profileButton];
     [buttons_array addObject:chatsButton];
+    
+    [badgeCountLabel setHidden:YES];
 }
 
 -(void)locationView
@@ -254,6 +270,15 @@
     
     NSLog(@"UserInfo = %@",userInfo);
     
+    NSString *badgecountStr = [NSString stringWithFormat:@"%@",[[userInfo valueForKey:@"aps"]valueForKey:@"msgcnt"]];
+    [[NSUserDefaults standardUserDefaults]setObject:badgecountStr forKey:UnreadMsgCount];
+    [[NSUserDefaults standardUserDefaults]synchronize];
+    
+    if(![badgecountStr isEqualToString:@"0"]){
+        [badgeCountLabel setText:badgecountStr];
+        [badgeCountLabel setHidden:NO];
+    }
+    
     if (application.applicationState != UIApplicationStateActive ) {
         [self handleRemoteNotification:application userInfo:userInfo];
     }
@@ -265,6 +290,16 @@
 -(void) handleRemoteNotification:(UIApplication *)application userInfo:(NSDictionary *)userInfo {
     
     NSLog(@"userInfo=%@",userInfo);
+    
+     NSString *badgecountStr = [NSString stringWithFormat:@"%@",[[userInfo valueForKey:@"aps"]valueForKey:@"msgcnt"]];
+    [[NSUserDefaults standardUserDefaults]setObject:badgecountStr forKey:UnreadMsgCount];
+    [[NSUserDefaults standardUserDefaults]synchronize];
+    
+    if(![badgecountStr isEqualToString:@"0"]){
+        [badgeCountLabel setText:badgecountStr];
+        [badgeCountLabel setHidden:NO];
+    }
+    
     NSString *conversationid =[[userInfo valueForKey:@"aps"]valueForKey:@"conversationid"];
 
     [self loadnotificationmsg: conversationid];
@@ -278,12 +313,9 @@
 -(void)loadnotificationmsg:(NSString*)conversationID
 {
     NSLog(@"session id=%@",[COMMON getSessionID]);
-//     if([COMMON getSessionID] != nil)
-//     {
-//         
-//     }
+
     DSChatDetailViewController *ChatDetail =[[DSChatDetailViewController alloc]initWithNibName:nil bundle:nil];
-     ChatDetail.conversionID = conversationID;
+    ChatDetail.conversionID = conversationID;
     
     [self.navigationController pushViewController:ChatDetail animated:YES];
 }
@@ -298,6 +330,8 @@
 
 - (void)applicationDidBecomeActive:(UIApplication *)application {
  
+   [UIApplication sharedApplication].applicationIconBadgeNumber = 0;
+
    [FBSDKAppEvents activateApp];
 }
 

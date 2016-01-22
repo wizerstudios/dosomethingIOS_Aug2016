@@ -26,6 +26,7 @@
 
 @property(nonatomic,strong)IBOutlet UIView *alertMainBgView;
 
+@property (nonatomic,strong) IBOutlet NSLayoutConstraint * mainalterviewheight;
 
 - (IBAction)alertPressCancel:(id)sender;
 - (IBAction)alertPressYes:(id)sender;

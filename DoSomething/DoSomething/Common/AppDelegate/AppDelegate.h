@@ -44,5 +44,6 @@
 @property(nonatomic,retain)UIButton                             *settingButton;
 @property (nonatomic,strong) UILabel                            *SepratorLbl;
 @property(nonatomic,retain)NSMutableArray                       *buttons_array;
+@property (nonatomic,retain) UILabel                            *badgeCountLabel;
 @end
 

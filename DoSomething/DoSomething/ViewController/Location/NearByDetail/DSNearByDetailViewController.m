@@ -326,7 +326,7 @@
             self.aboutTextHeight.constant=dataSize.height+30;
             self.aboutviewHeight.constant=self.aboutTextHeight.constant;
             
-            return self.aboutviewHeight.constant-5;
+            return self.aboutviewHeight.constant-10;
        }
         
     }
@@ -618,9 +618,13 @@
         
     }
 
-    if(IS_IPHONE6 || IS_IPHONE6_Plus)
+    if(IS_IPHONE6)
     {
         self.selectImgBgview.layer.cornerRadius =248;
+    }
+    else if(IS_IPHONE6_Plus)
+    {
+        self.selectImgBgview.layer.cornerRadius =265;
     }
     else
     {

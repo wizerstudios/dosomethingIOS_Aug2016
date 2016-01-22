@@ -90,6 +90,8 @@
 
 #define timerSeconds                5.0
 
+#define UnreadMsgCount              @"chatunreadmessage"
+
 //API Keys
 #define CheckUser_API               @"checkuser"
 #define User_Logout_Delete_API      @"useraction"
