@@ -38,6 +38,7 @@
 
 }
 @property (nonatomic,strong) IBOutlet NSLayoutConstraint    * deletebuttonBottomoposition;
+@property (nonatomic,strong) IBOutlet NSLayoutConstraint    * scrollYposition;
 
 
 @end
@@ -73,14 +74,17 @@
     [self CustomAlterviewload];
    
     self.deletebuttonBottomoposition.constant =45;
+    self.scrollYposition.constant =0;
     
     if(IS_IPHONE6)
     {
+        self.scrollYposition.constant =15;
         self.deletebuttonBottomoposition.constant =-55;
     }
     if(IS_IPHONE6_Plus)
     {
         self.deletebuttonBottomoposition.constant =-130;
+        self.scrollYposition.constant =15;
     }
     
 }
@@ -93,12 +97,12 @@
     CustomNavigationView *customNavigation;
     customNavigation = [[CustomNavigationView alloc] initWithNibName:@"CustomNavigationView" bundle:nil];
     customNavigation.view.frame = CGRectMake(0,-20, CGRectGetWidth(self.view.frame), 65);
-    if (IS_IPHONE4 ||IS_IPHONE5)
+    if (IS_IPHONE6)
     {
-        customNavigation.view.frame = CGRectMake(0,-20, CGRectGetWidth(self.view.frame), 65);
+        customNavigation.view.frame = CGRectMake(0,-20, CGRectGetWidth(self.view.frame),76);
     }
-    else{
-        customNavigation.view.frame = CGRectMake(0,-20,420, 75);
+    if(IS_IPHONE6_Plus){
+        customNavigation.view.frame = CGRectMake(0,-20,CGRectGetWidth(self.view.frame), 83);
     }
 
     [customNavigation.menuBtn setHidden:YES];

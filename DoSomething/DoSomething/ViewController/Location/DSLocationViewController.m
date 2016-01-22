@@ -60,6 +60,9 @@
 @property(nonatomic,strong)IBOutlet NSLayoutConstraint  * collectionviewxpostion;
 @property(nonatomic,strong)IBOutlet NSLayoutConstraint  * filterviewxposition;
 @property(nonatomic,strong)IBOutlet NSLayoutConstraint  * CollectionviewWidth;
+@property(nonatomic,strong)IBOutlet NSLayoutConstraint  * FilterScrollviewYposition;
+@property(nonatomic,strong)IBOutlet NSLayoutConstraint  * FilterScrollviewWidth;
+@property(nonatomic,strong)IBOutlet NSLayoutConstraint  * FilterScrollviewXposition;
 @property (nonatomic,strong)  CLLocationManager         *  locationManager;
 
 @property(nonatomic,strong) IBOutlet UIButton *onlineBtn;
@@ -149,6 +152,8 @@
     if(!isLoadData){
     UICollectionViewFlowLayout *flowLayout1 = [[UICollectionViewFlowLayout alloc] init];
     flowLayout1.headerReferenceSize = CGSizeMake(locationCollectionView.bounds.size.width,45);
+      
+
     [locationCollectionView setCollectionViewLayout:flowLayout1];
     
 
@@ -177,7 +182,7 @@
     customNavigation = [[CustomNavigationView alloc] initWithNibName:@"CustomNavigationView" bundle:nil];
     customNavigation.view.frame = CGRectMake(0,-20, CGRectGetWidth(self.view.frame), 65);
     if (IS_IPHONE6 ){
-        customNavigation.view.frame = CGRectMake(0,-20, 375, 83);
+        customNavigation.view.frame = CGRectMake(0,-20, CGRectGetWidth(self.view.frame), 76);
     }
     if(IS_IPHONE6_Plus)
     {
@@ -542,6 +547,7 @@
     locationCellView.imageProfile.layer.masksToBounds = YES;
     
     [locationCellView.requestsendBtn addTarget:self action:@selector(didClickRequestSend:) forControlEvents:UIControlEventTouchUpInside];
+    [locationCollectionView scrollToItemAtIndexPath:indexPath atScrollPosition:UICollectionViewScrollPositionTop animated:YES];
 
     return locationCellView;
 }
@@ -549,7 +555,7 @@
 {
     CGSize returnSize = CGSizeZero;
     if (IS_IPHONE6)
-        returnSize = CGSizeMake((self.view.frame.size.width / 3.800f), 160);
+        returnSize = CGSizeMake((self.view.frame.size.width / 3.300f), 184);
     if(IS_IPHONE6_Plus)
         returnSize = CGSizeMake((self.view.frame.size.width / 3.800f), 190);
     if (IS_IPHONE4 ||IS_IPHONE5 )
@@ -694,6 +700,9 @@
     if(isFilteraction==NO)
     {
         self.collectionviewxpostion.constant =(IS_IPHONE6 || IS_IPHONE6_Plus)?-300:-250;
+        self.FilterScrollviewYposition.constant=(IS_IPHONE6|| IS_IPHONE6_Plus)?80:58;
+        self.FilterScrollviewWidth.constant    =(IS_IPHONE6|| IS_IPHONE6_Plus)?308:270;
+        self.FilterScrollviewXposition.constant =(IS_IPHONE6|| IS_IPHONE6_Plus)?25:0;
         self.CollectionviewWidth.constant    =self.view.frame.size.width;
         self.filterviewxposition.constant    =65;
           [UIView animateWithDuration:0.5 animations:^{

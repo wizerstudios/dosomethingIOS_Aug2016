@@ -15,7 +15,7 @@
 #import "NSString+FontAwesome.h"
 #import "DSNearbyCustomCell.h"
 #import "AppDelegate.h"
-#import "DSNearByImageView.h"
+//#import "DSNearByImageView.h"
 
 
 @interface DSNearByDetailViewController () <UIScrollViewDelegate,UITableViewDataSource,UITableViewDelegate,UITextViewDelegate>
@@ -52,7 +52,7 @@
 }
 
 @property (strong, nonatomic) IBOutlet UITableView *tableView;
-@property(nonatomic,retain) DSNearByImageView *nearByImageView;
+//@property(nonatomic,retain) DSNearByImageView *nearByImageView;
 
 @end
 
@@ -77,13 +77,16 @@
     CustomNavigationView *customNavigation;
     customNavigation = [[CustomNavigationView alloc] initWithNibName:@"CustomNavigationView" bundle:nil];
     customNavigation.view.frame = CGRectMake(0,-20, CGRectGetWidth(self.view.frame), 65);
+    self.nearbyDetailTblYposition.constant =0;
     if (IS_IPHONE6 ){
         customNavigation.view.frame = CGRectMake(0,-20, 375, 76);
+         self.nearbyDetailTblYposition.constant =20;
         
     }
     if(IS_IPHONE6_Plus)
     {
         customNavigation.view.frame = CGRectMake(0,-20, 420, 83);
+         self.nearbyDetailTblYposition.constant =25;
         
     }
     [customNavigation.menuBtn setHidden:YES];
@@ -602,7 +605,7 @@
 
     if(IS_IPHONE6 || IS_IPHONE6_Plus)
     {
-        self.selectImgBgview.layer.cornerRadius =245;
+        self.selectImgBgview.layer.cornerRadius =248;
     }
     else
     {
@@ -726,7 +729,7 @@
 -(IBAction)closeButtonAction:(id)sender
 {
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        [self.nearByImageView removeFromSuperview];
+       // [self.nearByImageView removeFromSuperview];
         
     });
     self.profileImgSelectview.hidden=YES;

@@ -51,10 +51,11 @@
 @property (strong, nonatomic) IBOutlet UITableView *nearbyTbl;
 @property (nonatomic,strong) IBOutlet NSLayoutConstraint * aboutviewHeight;
 @property (nonatomic,strong) IBOutlet NSLayoutConstraint *aboutTextHeight;
-@property(nonatomic,strong) IBOutlet NSLayoutConstraint *nearbyTblHeight;
+//@property(nonatomic,strong) IBOutlet NSLayoutConstraint *nearbyTblHeight;
 
-@property(nonatomic,strong) IBOutlet NSLayoutConstraint *nearbyScrollHeight;
+//@property(nonatomic,strong) IBOutlet NSLayoutConstraint *nearbyScrollHeight;
 
+@property (nonatomic,strong) IBOutlet NSLayoutConstraint * nearbyDetailTblYposition;
 @property (nonatomic,strong) IBOutlet UIView *profileImgSelectview;
 @property (nonatomic,strong) IBOutlet UIView * selectImgBgview;
 @property (nonatomic,strong) IBOutlet UIImageView * selectImg;
