@@ -322,11 +322,15 @@
         
         NSData * profileData = [profileDataArray objectAtIndex:i];
         NSString *image     = [profileDataArray objectAtIndex:i];
-        if(IS_IPHONE6_Plus || IS_IPHONE6)
+        if(IS_IPHONE6)
         {
             userProfileImage = [[UIImageView alloc]initWithFrame:CGRectMake((i*self.scrView.frame.size.width) + spacing+30, 20,self.profileImageView.frame.size.width, self.profileImageView.frame.size.height)];
         }
-    
+        else if(IS_IPHONE6_Plus)
+        {
+            userProfileImage = [[UIImageView alloc]initWithFrame:CGRectMake((i*self.scrView.frame.size.width) + spacing+50, 20,self.profileImageView.frame.size.width, self.profileImageView.frame.size.height)];
+        }
+
         else
         {
             userProfileImage = [[UIImageView alloc]initWithFrame:CGRectMake((i*self.scrView.frame.size.width) + spacing, 20,self.profileImageView.frame.size.width, self.profileImageView.frame.size.height)];
@@ -459,11 +463,14 @@
             [pageImageView setImage:[UIImage imageNamed:@"dot_active_red"]];
             [pgDtView addSubview:pageImageView];
             [cell.topViewCell addSubview:pgDtView];
-            if(IS_IPHONE6||IS_IPHONE6_Plus) {
+            if(IS_IPHONE6) {
             [pgDtView setFrame:CGRectMake(40, -5, profileImagePageControl.numberOfPages*18, 10)];
             }
+            else if(IS_IPHONE6_Plus) {
+                [pgDtView setFrame:CGRectMake(60, -5, profileImagePageControl.numberOfPages*18, 10)];
+            }
             else{
-            [pgDtView setFrame:CGRectMake(15, -5, profileImagePageControl.numberOfPages*18, 10)];
+            [pgDtView setFrame:CGRectMake(10, -5, profileImagePageControl.numberOfPages*18, 10)];
             }
             
             
@@ -1000,10 +1007,15 @@
 //            //cell.layoutConstraintProfileImageWidth.constant =161;
 //        }
         cameraIcon=[UIButton buttonWithType:UIButtonTypeCustom];
-        if(IS_IPHONE6 || IS_IPHONE6_Plus)
+        if(IS_IPHONE6)
         {
         [cameraIcon setFrame:CGRectMake(cell.contentView.center.x+5,cell.contentView.frame.size.height-36,37,37)];
         }
+        else  if(IS_IPHONE6_Plus)
+        {
+            [cameraIcon setFrame:CGRectMake(cell.contentView.center.x+25,cell.contentView.frame.size.height-36,37,37)];
+        }
+
         else{
             [cameraIcon setFrame:CGRectMake(cell.contentView.center.x-22,cell.contentView.frame.size.height-36,37,37)];
         }
