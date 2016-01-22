@@ -151,14 +151,8 @@
     
     if(!isLoadData){
     UICollectionViewFlowLayout *flowLayout1 = [[UICollectionViewFlowLayout alloc] init];
-//        if(IS_IPHONE6 )
-//        {
-//           flowLayout1.headerReferenceSize = CGSizeMake(locationCollectionView.bounds.size.width,38);
-//        }
-//        if(IS_IPHONE5 || IS_IPHONE4)
-//        {
-            flowLayout1.headerReferenceSize = CGSizeMake(locationCollectionView.bounds.size.width,45);
-        //}
+    flowLayout1.headerReferenceSize = CGSizeMake(locationCollectionView.bounds.size.width,45);
+      
 
     [locationCollectionView setCollectionViewLayout:flowLayout1];
     
@@ -553,6 +547,7 @@
     locationCellView.imageProfile.layer.masksToBounds = YES;
     
     [locationCellView.requestsendBtn addTarget:self action:@selector(didClickRequestSend:) forControlEvents:UIControlEventTouchUpInside];
+    [locationCollectionView scrollToItemAtIndexPath:indexPath atScrollPosition:UICollectionViewScrollPositionTop animated:YES];
 
     return locationCellView;
 }
