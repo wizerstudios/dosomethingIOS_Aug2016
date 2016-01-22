@@ -169,6 +169,9 @@
 }
 - (void) removeKeyboard: (UITapGestureRecognizer *)recognizer
 {
+    if([conversationArray count] <= 5)
+       [chatTableView setContentOffset:CGPointMake(0,0)];
+    
     [[IQKeyboardManager sharedManager]resignFirstResponder];
 }
 - (void)backAction
@@ -240,9 +243,10 @@
 -(void)textViewDidBeginEditing:(UITextView *)textView{
  
     [chatScrollview setScrollEnabled:NO];
-    
-//    if([chatArray count] > 4)
-//        [chatTableView setContentOffset:CGPointMake(0,-200)];
+    [chatTableView setScrollEnabled:YES];
+    NSLog(@"conversationArray count = %d",[conversationArray count]);
+    if([conversationArray count] <= 4)
+        [chatTableView setContentOffset:CGPointMake(0,-200)];
     
     [chatView.placeHolderLabel setHidden:YES];
    // self.chatviewbottom.constant =(height+(self.view.frame.size.height)/2)-500;
@@ -403,7 +407,7 @@
         CGPoint position = [chatView convertPoint:CGPointZero toView: chatTableView ];
     NSIndexPath *indexPath = [chatTableView indexPathForRowAtPoint: position];
     
-  ChatDetailcell = (ChatDetailCustomcell*)[chatTableView cellForRowAtIndexPath:indexPath];
+   ChatDetailcell = (ChatDetailCustomcell*)[chatTableView cellForRowAtIndexPath:indexPath];
     NSLog(@"%@",str);
     if(conversationArray.count > 1)
     {
@@ -418,10 +422,10 @@
         
         [chatTableView reloadData];
         
-//        if([chatArray count] < 4)
-//            [chatTableView setContentOffset:CGPointMake(0,-200)];
-        
-        [chatTableView scrollRectToVisible:CGRectMake(0, chatTableView.contentSize.height - chatTableView.bounds.size.height, chatTableView.bounds.size.width,chatTableView.bounds.size.height) animated:NO];
+        if([conversationArray count] <= 4)
+            [chatTableView setContentOffset:CGPointMake(0,-200)];
+        else
+           [chatTableView scrollRectToVisible:CGRectMake(0, chatTableView.contentSize.height - chatTableView.bounds.size.height, chatTableView.bounds.size.width,chatTableView.bounds.size.height) animated:NO];
       
         [self loadSendMessageAPI:receiverId conversationId:conversationID];
        
