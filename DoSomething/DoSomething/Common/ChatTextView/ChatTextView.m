@@ -33,28 +33,39 @@
 
 - (void) composeView{
     
-    if(IS_IPHONE6 || IS_IPHONE6_Plus)
+    textView = [[UITextView alloc]init];
+    backGroundImageView  = [[UIImageView alloc]init];
+    placeHolderLabel = [[UILabel alloc] init];
+    postButton = [[UIButton alloc]init];
+    
+    if(IS_IPHONE6_Plus)
     {
-        backGroundImageView  = [[UIImageView alloc]initWithFrame:CGRectMake(0,0,self.frame.size.width+55, self.frame.size.height+10)];
+        [backGroundImageView setFrame:CGRectMake(0,0,self.frame.size.width+95, self.frame.size.height+10)];
+        [textView setFrame:CGRectMake(10, 5, 320, 40)];
+        [placeHolderLabel setFrame:CGRectMake(2.0,0,textView.frame.size.width - 10.0, 34.0)];
+        [postButton setFrame:CGRectMake(backGroundImageView.frame.size.width-60,8, 50, 30)];
 
     }
+    else if(IS_IPHONE6){
+        
+        [backGroundImageView setFrame:CGRectMake(0,0,self.frame.size.width+95, self.frame.size.height+10)];
+        [textView setFrame:CGRectMake(10, 5, 320, 40)];
+        [placeHolderLabel setFrame:CGRectMake(2.0,0,textView.frame.size.width - 10.0, 34.0)];
+        [postButton setFrame:CGRectMake(backGroundImageView.frame.size.width-95,8, 50, 30)];
+
+    }
+        
     else
     {
-    backGroundImageView  = [[UIImageView alloc]initWithFrame:CGRectMake(0,0,self.frame.size.width, self.frame.size.height+10)];
+        [backGroundImageView setFrame:CGRectMake(0,0,self.frame.size.width, self.frame.size.height+10)];
+        [textView setFrame:CGRectMake(10, 5, 260, 40)];
+        [placeHolderLabel setFrame:CGRectMake(2.0, 0.0,textView.frame.size.width - 10.0, 34.0)];
+        [postButton setFrame:CGRectMake(backGroundImageView.frame.size.width-60,8, 50, 30)];
     }
     
     backGroundImageView.backgroundColor = [UIColor colorWithRed:246.0f/255.0f green:246.0f/255.0f blue:246.0f/255.0f alpha:1.0f];
    
     [self addSubview:backGroundImageView];
-    
-    
-    textView = [[UITextView alloc]initWithFrame:CGRectMake(10, 5, 260, 40)];
-    
-//    textView.layer.cornerRadius = 5;
-//    
-//    textView.layer.borderWidth = 1;
-//    
-//    textView.layer.borderColor = [UIColor colorWithRed:202.0f/255.0f green:207.0f/255.0f blue:210.0f/255.0f alpha:1.0f].CGColor;
     
     textView.delegate = delegate;
     
@@ -63,7 +74,7 @@
     [self addSubview:textView];
     
     
-    placeHolderLabel = [[UILabel alloc] initWithFrame:CGRectMake(2.0, 0.0,textView.frame.size.width - 10.0, 34.0)];
+    
     
     [placeHolderLabel setText:@"Message"];
     
@@ -76,7 +87,7 @@
     [textView addSubview:placeHolderLabel];
     
     
-    postButton = [[UIButton alloc]initWithFrame:CGRectMake(backGroundImageView.frame.size.width-60,8, 50, 30)];
+    
     
     postButton.layer.cornerRadius = 6;
     

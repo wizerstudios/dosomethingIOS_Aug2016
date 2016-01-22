@@ -47,7 +47,7 @@
     [refreshControl addTarget:self action:@selector(releaseToRefresh:) forControlEvents:UIControlEventValueChanged];
     [ChatTableView addSubview:refreshControl];
 
-
+    [[NSUserDefaults standardUserDefaults]removeObjectForKey:@"backAction"];
     
     if(IS_IPHONE6 || IS_IPHONE6_Plus)
         [self.view addConstraint:[NSLayoutConstraint constraintWithItem:ChatTableView
@@ -66,13 +66,16 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    if([[NSUserDefaults standardUserDefaults]valueForKey:@"backAction"] == nil){
+    
+    if([[NSUserDefaults standardUserDefaults]valueForKey:@"backAction"] == nil)
          [COMMON LoadIcon:self.view];
-        [[NSUserDefaults standardUserDefaults]removeObjectForKey:@"backAction"];
-    }
+    
     [self loadChatHistoryAPI];
+    
     [self getUserCurrenLocation];
+    
     [self.navigationItem setHidesBackButton:YES animated:NO];
+    
     [self setNavigation];
 }
 
@@ -80,7 +83,7 @@
     
     [super viewDidAppear:animated];
     
-    messageTimer = [NSTimer scheduledTimerWithTimeInterval:5.0 target:self selector:@selector(loadChatHistoryAPI) userInfo:nil repeats:YES];
+    messageTimer = [NSTimer scheduledTimerWithTimeInterval:timerSeconds target:self selector:@selector(loadChatHistoryAPI) userInfo:nil repeats:YES];
 
 }
 
