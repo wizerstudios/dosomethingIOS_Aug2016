@@ -115,15 +115,16 @@
     
     customNavigation.view.frame = CGRectMake(0,-20, (self.view.frame.size.width), 65);
     
-    if (IS_IPHONE5 ){
-        
-        self.layoutConstraintinterestAndHobbiesLabelYPos.constant =68;
-        
-        self.layoutConstraintCollectionviewYPos.constant =25;
-        
-        self.layoutConstraintTapLabelYPos.constant =0;
-        
-    }
+    
+//    if (IS_IPHONE5 ){
+//        
+//        self.layoutConstraintinterestAndHobbiesLabelYPos.constant =68;
+//        
+//        self.layoutConstraintCollectionviewYPos.constant =25;
+//        
+//        self.layoutConstraintTapLabelYPos.constant =0;
+//        
+//    }
     
     if (IS_IPHONE6 ){
         
@@ -137,7 +138,7 @@
         
     }
     
-    if(IS_IPHONE6_Plus)
+    else if(IS_IPHONE6_Plus)
         
     {
         
@@ -150,6 +151,16 @@
         self.layoutConstraintTapLabelYPos.constant = 6;
         
     }
+   else {
+        
+        self.layoutConstraintinterestAndHobbiesLabelYPos.constant =68;
+        
+        self.layoutConstraintCollectionviewYPos.constant =25;
+        
+        self.layoutConstraintTapLabelYPos.constant =0;
+        
+    }
+
     
     [self.navigationController.navigationBar addSubview:customNavigation.view];
     
@@ -419,15 +430,25 @@
 
         }
         
-             else if(IS_IPHONE5)
-        {
-            int numberOfCellInRow = 6.5;
-            int padding = 1;
-            collectionCellWidth =  [[UIScreen mainScreen] bounds].size.width/numberOfCellInRow;
-            finalWidthWithPadding = collectionCellWidth - (padding);
-            return CGSizeMake(finalWidthWithPadding , finalWidthWithPadding);
-            
-        }
+//             else if(IS_IPHONE5)
+//        {
+//            int numberOfCellInRow = 6.5;
+//            int padding = 1;
+//            collectionCellWidth =  [[UIScreen mainScreen] bounds].size.width/numberOfCellInRow;
+//            finalWidthWithPadding = collectionCellWidth - (padding);
+//            return CGSizeMake(finalWidthWithPadding , finalWidthWithPadding);
+//            
+//        }
+             else
+             {
+                 int numberOfCellInRow = 6.5;
+                 int padding = 1;
+                 collectionCellWidth =  [[UIScreen mainScreen] bounds].size.width/numberOfCellInRow;
+                 finalWidthWithPadding = collectionCellWidth - (padding);
+                 return CGSizeMake(finalWidthWithPadding , finalWidthWithPadding);
+                 
+             }
+
 
     }
     
@@ -451,7 +472,16 @@
               return CGSizeMake(finalWidthWithPadding , finalWidthWithPadding);
               
           }
-          else if(IS_IPHONE5)
+//          else if(IS_IPHONE5)
+//          {
+//              int numberOfCellInRow = 6;
+//              int padding = 2;
+//              collectionCellWidth =  [[UIScreen mainScreen] bounds].size.width/numberOfCellInRow;
+//              finalWidthWithPadding = collectionCellWidth - (padding);
+//              return CGSizeMake(finalWidthWithPadding , finalWidthWithPadding);
+//              
+//          }
+          else
           {
               int numberOfCellInRow = 6;
               int padding = 2;
@@ -484,7 +514,16 @@
             finalWidthWithPadding = collectionCellWidth - (padding);
             return CGSizeMake(finalWidthWithPadding , finalWidthWithPadding);
         }
-        else if(IS_IPHONE5)
+//        else if(IS_IPHONE5)
+//        {
+//            int numberOfCellInRow = 6;
+//            int padding = 1;
+//            collectionCellWidth =  [[UIScreen mainScreen] bounds].size.width/numberOfCellInRow;
+//            finalWidthWithPadding = collectionCellWidth - (padding);
+//            return CGSizeMake(finalWidthWithPadding , finalWidthWithPadding);
+//            
+//        }
+        else
         {
             int numberOfCellInRow = 6;
             int padding = 1;
@@ -493,7 +532,7 @@
             return CGSizeMake(finalWidthWithPadding , finalWidthWithPadding);
             
         }
-        
+
 
     }
     return CGSizeMake(finalWidthWithPadding , finalWidthWithPadding);
