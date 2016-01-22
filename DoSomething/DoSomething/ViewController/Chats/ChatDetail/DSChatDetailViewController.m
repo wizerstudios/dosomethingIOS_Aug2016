@@ -72,7 +72,7 @@
      [self loadNavigation];
     [super viewWillAppear:animated];
     
-     messageTimer = [NSTimer scheduledTimerWithTimeInterval:5.0 target:self selector:@selector(loadConverstionAPI) userInfo:nil repeats:YES];
+     messageTimer = [NSTimer scheduledTimerWithTimeInterval:timerSeconds target:self selector:@selector(loadConverstionAPI) userInfo:nil repeats:YES];
     
     [chatView.postButton addTarget:self action:@selector(sendAction:) forControlEvents:UIControlEventTouchUpInside];
     
@@ -133,19 +133,24 @@
     if (IS_IPHONE6 )
     {
     
-        customNavigation.view.frame = CGRectMake(0,-20, CGRectGetWidth(self.view.frame), 76);
-         self.chatviewbottom.constant =430;
+         customNavigation.view.frame = CGRectMake(0,-20, CGRectGetWidth(self.view.frame), 76);
+         self.chatviewbottom.constant =420;
          self.chattableheight.constant =10;
-         self.topviewYposition.constant = customNavigation.view.frame.size.height+5;
+         self.blockBtnYOrigin.constant = 435;
+         self.topviewYposition.constant = customNavigation.view.frame.size.height+10;
+         self.menuImageyOrigin.constant = 93;
+        
     }
     
     if(IS_IPHONE6_Plus)
     {
         
         customNavigation.view.frame = CGRectMake(0,-20, 420, 83);
-        self.chatviewbottom.constant =450;
+        self.chatviewbottom.constant =480;
         self.chattableheight.constant =10;
-         self.topviewYposition.constant = customNavigation.view.frame.size.height+5;
+        self.blockBtnYOrigin.constant = 505;
+        self.topviewYposition.constant = customNavigation.view.frame.size.height+5;
+        self.menuImageyOrigin.constant = 95;
     }
     
    
@@ -279,7 +284,7 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     static NSString *CellIdentifier = @"Cell";
-  ChatDetailcell = (ChatDetailCustomcell *) [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+     ChatDetailcell = (ChatDetailCustomcell *) [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (ChatDetailcell == nil) {
         [[NSBundle mainBundle] loadNibNamed:@"ChatDetailCustomcell" owner:self options:nil];
         ChatDetailcell = chatCustomcell;
@@ -533,6 +538,9 @@
     
     [webService blockUser:BlockUser_API sessionid:[COMMON getSessionID] block_user_id:conversationID success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSLog(@"response:%@",responseObject);
+        [[NSUserDefaults standardUserDefaults]setObject:@"Yes" forKey:@"backAction"];
+        [[NSUserDefaults standardUserDefaults]synchronize];
+        [self.navigationController popViewControllerAnimated:YES];
         
     } failure:^(AFHTTPRequestOperation *operation, id error) {
         
