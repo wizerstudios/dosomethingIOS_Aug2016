@@ -253,7 +253,18 @@ DSAppCommon *sharedCommon = nil;
 -(void)LoadIcon:(UIView *)view
 {
     [self removeLoading];
-    loadingView = [[UIView alloc] initWithFrame:CGRectMake((view.frame.size.width)/2.3, (view.frame.size.height-37)/2.3, 37, 37)];
+    if(IS_IPHONE6)
+    {
+        loadingView = [[UIView alloc] initWithFrame:CGRectMake((view.frame.size.width)/2, (view.frame.size.height)/2, 37, 37)];
+    }
+    else  if(IS_IPHONE6_Plus)
+    {
+        loadingView = [[UIView alloc] initWithFrame:CGRectMake((view.frame.size.width+40)/2, (view.frame.size.height+100)/2, 37, 37)];
+    }
+    else
+    {
+        loadingView = [[UIView alloc] initWithFrame:CGRectMake((view.frame.size.width-20)/2, (view.frame.size.height-37)/2, 37, 37)];
+    }
     [loadingView.layer setCornerRadius:5.0];
     
     [loadingView setBackgroundColor:[UIColor blackColor]];
