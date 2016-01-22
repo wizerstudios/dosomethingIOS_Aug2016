@@ -75,13 +75,7 @@
                    [UIImage imageNamed:@"bgText4"]];
     pageController =@[@"1",@"2",@"3",@"4",@"5"];
     
-//    [self.kenView animateWithImages:bannerImage
-//                         BannerText:bannerText
-//                        Pagenation :pageController
-//                 transitionDuration:8
-//                       initialDelay:0
-//                               loop:YES
-//                        isLandscape:YES];
+
     [self initControl];
     [self SetImageArray];
     [self reloadData];
@@ -89,10 +83,7 @@
 }
 - (void)viewDidUnload
 {
-    //[self.kenView stopAnimation];
-    //[self setKenView:nil];
-   // [self initControl];
-    [super viewDidUnload];
+ [super viewDidUnload];
 }
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
@@ -113,10 +104,7 @@
     [super viewWillAppear:animated];
     [self.navigationController setNavigationBarHidden:YES];
     [self.navigationItem setHidesBackButton:YES];
-    //[kenView setNeedsLayout];
-    //[self.view layoutIfNeeded];
-    //[self.view updateConstraints];
-   // [kenView layoutIfNeeded];
+   
     if(IS_IPHONE6_Plus)
         self.viewHeightConstraint.constant = 688;
     else if(IS_IPHONE6)
@@ -159,39 +147,6 @@
 
 - (NSInteger)numberOfItemsInScrollView:(PWParallaxScrollView *)scrollView
 {
-//    UIView *pgDtView = [[UIView alloc] initWithFrame:CGRectMake((self.view.frame.size.width/2) - (([BGimageArray count] * 30)/2) + 18 ,40, [BGimageArray count] * 20, 15)];
-//    
-//    pgDtView.backgroundColor = [UIColor clearColor];
-//    
-//    for(int i=0;i<[BGimageArray count];i++){
-//        
-//        UIButton *blkdot = [[UIButton alloc]init];
-//        
-//        [blkdot setFrame:CGRectMake(i*20, 0, 10, 10)];
-//        
-//        [blkdot setTag:i];
-//        
-//        [blkdot setBackgroundColor:[UIColor clearColor]];
-//        
-//        [blkdot setImage:[UIImage imageNamed:@"tuto_dot_Inactive.png"] forState:UIControlStateNormal];
-//        
-//        [pgDtView addSubview:blkdot];
-//    }
-//    
-////    pageControllBtn = [[UIButton alloc]init];
-////    
-////    pageControllBtn.backgroundColor = [UIColor clearColor];
-////    [pageControllBtn setFrame:CGRectMake(0, 0, 10, 10)];
-////    [pageControllBtn setImage:[UIImage imageNamed:@"tuto_dot"] forState:UIControlStateNormal];
-////    
-////    
-////    
-////    [pgDtView addSubview:pageControllBtn];
-//    
-//    [self.view addSubview: pgDtView];
-    
-    
-    
     return [BGimageArray count];
 }
 
@@ -200,7 +155,7 @@
     
     UIImageView *imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:BGimageArray[index]]];
     imageView.contentMode = UIViewContentModeScaleAspectFill;
-    //[imageView setBackgroundColor:[UIColor redColor]];
+   
     return imageView;
 }
 
@@ -220,20 +175,17 @@
     if(IS_IPHONE4)
     {
         labelTitle = [[UIView alloc] initWithFrame:CGRectMake(self.view.center.x-100,self.view.center.y-30,227,67)];
-        textImg.frame =(index==0)?CGRectMake(30,0,147,63):CGRectMake(0,0,227,67);
-        objImag=[[UIImageView alloc]initWithFrame:CGRectMake(self.view.frame.origin.x,self.view.frame.origin.y,self.view.frame.size.width,self.view.frame.size.height)];
         
     }
     else
     {
         labelTitle = [[UIView alloc] initWithFrame:CGRectMake(self.view.center.x-100,self.view.center.y-60,227,67)];
-        textImg.frame =(index==0)?CGRectMake(30,0,147,63):CGRectMake(0,0,227,67);
-        objImag=[[UIImageView alloc]initWithFrame:CGRectMake(self.view.frame.origin.x,self.view.frame.origin.y,self.view.frame.size.width,self.view.frame.size.height)];
-        
-        
+               
         
     }
-    
+    textImg.frame =(index==0)?CGRectMake(30,0,147,63):CGRectMake(0,0,227,67);
+    objImag=[[UIImageView alloc]initWithFrame:CGRectMake(self.view.frame.origin.x,self.view.frame.origin.y,self.view.frame.size.width,self.view.frame.size.height)];
+
     textImg.image=[bannerImageArr objectAtIndex:index];
     [labelTitle addSubview:textImg];
     

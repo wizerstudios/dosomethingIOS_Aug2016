@@ -40,7 +40,7 @@
     NSMutableDictionary *profileDict;
     
     NSMutableArray *profileHobbyArray;
-    
+    BOOL isDownloadactiveImg;
 
 }
 @end
@@ -172,55 +172,68 @@
 }
 -(void)loadHobbiesWebserviceMethod
 {
-    [COMMON LoadIcon:self.view];
+    
+    if([COMMON isInternetReachable]){
+        
+        [COMMON LoadIcon:self.view];
+        
+        [objWebservice getHobbies:GetHobbies_API sessionid:deviceUdid success:^(AFHTTPRequestOperation *operation, id responseObject)
+         
+         {
+             
+             NSLog(@"response:%@",responseObject);
+             
+             hobbiesArry=[[NSMutableArray alloc]init];
+             
+             sectionNameArray=[[NSMutableArray alloc]init];
+             
+             NSMutableDictionary *loginDict = [[NSMutableDictionary alloc]init];
+             
+             NSDictionary *objselectionname=[[NSDictionary alloc]init];
+             
+             loginDict = [responseObject valueForKey:@"gethobbies"];
+             
+             objselectionname =[loginDict valueForKey:@"list"];
+             
+             sectionNameArray  = [objselectionname valueForKey:@"name"];
+             
+             [[NSUserDefaults standardUserDefaults] setObject:sectionNameArray forKey:@"ListofsectionNameArray"];
+             
+             [[NSUserDefaults standardUserDefaults] synchronize];
+             
+             
+             
+             hobbiesArry=[objselectionname valueForKey:@"hobbieslist"];
+             
+             [[NSUserDefaults standardUserDefaults] setObject:hobbiesArry forKey:@"ListofinterestArray"];
+             [[NSUserDefaults standardUserDefaults] synchronize];
+             interstAndHobbiesArray=[hobbiesArry mutableCopy];
+             
+             [COMMON removeLoading];
+             
+             [interestAndHobbiesCollectionView reloadData];
+             
+             [self localArray];
+             
+             
+             
+         } failure:^(AFHTTPRequestOperation *operation, id error) {
+             
+             
+             NSLog(@"intersesthobbieseror=%@",error);
+             
+             
+         }];
 
-    [objWebservice getHobbies:GetHobbies_API sessionid:deviceUdid success:^(AFHTTPRequestOperation *operation, id responseObject)
-     
-     {
-         
-         NSLog(@"response:%@",responseObject);
-         
-         hobbiesArry=[[NSMutableArray alloc]init];
-         
-         sectionNameArray=[[NSMutableArray alloc]init];
-         
-         NSMutableDictionary *loginDict = [[NSMutableDictionary alloc]init];
-         
-         NSDictionary *objselectionname=[[NSDictionary alloc]init];
-         
-         loginDict = [responseObject valueForKey:@"gethobbies"];
-         
-         objselectionname =[loginDict valueForKey:@"list"];
-         
-         sectionNameArray  = [objselectionname valueForKey:@"name"];
-         
-         [[NSUserDefaults standardUserDefaults] setObject:sectionNameArray forKey:@"ListofsectionNameArray"];
-         
-         [[NSUserDefaults standardUserDefaults] synchronize];
-         
-         
-         
-         hobbiesArry=[objselectionname valueForKey:@"hobbieslist"];
-         
-         [[NSUserDefaults standardUserDefaults] setObject:hobbiesArry forKey:@"ListofinterestArray"];
-         [[NSUserDefaults standardUserDefaults] synchronize];
-         interstAndHobbiesArray=[hobbiesArry mutableCopy];
-         
-         [COMMON removeLoading];
-         
-         [interestAndHobbiesCollectionView reloadData];
-         
-         [self localArray];
-         
-         
-         
-     } failure:^(AFHTTPRequestOperation *operation, id error) {
-         
-         
-         NSLog(@"intersesthobbieseror=%@",error);
-         
-         
-     }];
+        
+        
+    }
+    else{
+        
+        [COMMON showErrorAlert:@"Check Your Internet connection"];
+        
+    }
+
     
 }
 -(void)localArray
@@ -262,14 +275,16 @@
     if([[NSUserDefaults standardUserDefaults] valueForKey:@"ListofinterestArray"]==nil){
         
         [COMMON LoadIcon:self.view];
+        isDownloadactiveImg=YES;
         [self loadHobbiesWebserviceMethod];
+        
         
         
     }
     else{
         if([[NSUserDefaults standardUserDefaults] valueForKey:@"SelectedItem"]==nil)
         {
-            
+             isDownloadactiveImg=NO;
             interstAndHobbiesArray =[[[NSUserDefaults standardUserDefaults] valueForKey:@"ListofinterestArray"] mutableCopy];
             // interestArray=interstAndHobbiesArray;
         }
@@ -500,7 +515,14 @@
     NSDictionary *dict = [[interstAndHobbiesArray objectAtIndex:indexPath.section]objectAtIndex:indexPath.row];
     
     if([profileHobbyArray containsObject:dict]){
-        
+        if( isDownloadactiveImg==YES)
+        {
+            image = [dict valueForKey:@"image"];
+            
+            downloadImageFromUrl(image, cell.interestAndHobbiesImageView);
+           // [cell.interestAndHobbiesImageView setImageWithURL:[NSURL URLWithString:image]];
+        }
+
         image = [dict valueForKey:@"image_active"];
         
         [cell.nameLabel setTextColor:[UIColor colorWithRed:(224.0f/255) green:(62.0f/255) blue:(79.0f/255) alpha:1.0f]];
@@ -508,11 +530,19 @@
     
     else{
         
+        if( isDownloadactiveImg==YES)
+        {
+             image = [dict valueForKey:@"image_active"];
+            downloadImageFromUrl(image, cell.interestAndHobbiesImageView);
+            //[cell.interestAndHobbiesImageView setImageWithURL:[NSURL URLWithString:image]];
+        }
         image = [dict valueForKey:@"image"];
         
         [cell.nameLabel setTextColor:[UIColor grayColor]];
     }
     
+//    downloadImageFromUrl(image, cell.interestAndHobbiesImageView);
+//    [cell.interestAndHobbiesImageView setImageWithURL:[NSURL URLWithString:image]];
     image = [image stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
     
     [cell.interestAndHobbiesImageView setImageWithURL:[NSURL URLWithString:image]];
@@ -520,8 +550,6 @@
     
     return cell;
 }
-
-
 
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath;

@@ -24,21 +24,30 @@
     DSWebservice *webService;
     NSMutableArray *chatArray;
     NSUInteger isSupportUser;
+    UIRefreshControl            * refreshControl;
     
 }
 
 @end
 
 @implementation DSChatsTableViewController
-@synthesize ChatTableView,locationManager;
+@synthesize ChatTableView,locationManager,messageTimer;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    
     locationManager                 = [[CLLocationManager alloc] init];
     locationManager.delegate        = self;
     chatArray = [[NSMutableArray alloc]init];
     webService = [[DSWebservice alloc]init];
+    
+    refreshControl = [[UIRefreshControl alloc] init];
+    
+    [refreshControl addTarget:self action:@selector(releaseToRefresh:) forControlEvents:UIControlEventValueChanged];
+    [ChatTableView addSubview:refreshControl];
 
+    [[NSUserDefaults standardUserDefaults]removeObjectForKey:@"backAction"];
     
     if(IS_IPHONE6 || IS_IPHONE6_Plus)
         [self.view addConstraint:[NSLayoutConstraint constraintWithItem:ChatTableView
@@ -48,7 +57,7 @@
                                                               attribute:NSLayoutAttributeTop
                                                              multiplier:1.0
                                                                constant:20.0]];
-    [COMMON LoadIcon:self.ChatTableView];
+    
    
    
     
@@ -58,11 +67,46 @@
 {
     [super viewWillAppear:animated];
     
+    if([[NSUserDefaults standardUserDefaults]valueForKey:@"backAction"] == nil)
+         [COMMON LoadIcon:self.view];
+    
     [self loadChatHistoryAPI];
+    
     [self getUserCurrenLocation];
+    
     [self.navigationItem setHidesBackButton:YES animated:NO];
+    
     [self setNavigation];
 }
+
+-(void)viewDidAppear:(BOOL)animated{
+    
+    [super viewDidAppear:animated];
+    
+    messageTimer = [NSTimer scheduledTimerWithTimeInterval:timerSeconds target:self selector:@selector(loadChatHistoryAPI) userInfo:nil repeats:YES];
+
+}
+
+-(void)viewwillDisappear:(BOOL)animated{
+    
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [messageTimer invalidate];
+        messageTimer =nil;
+    });
+    
+    [super viewWillDisappear:animated];
+}
+
+-(void)viewDidDisappear:(BOOL)animated{
+    
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [messageTimer invalidate];
+        messageTimer =nil;
+    });
+    [super viewDidDisappear:animated];
+    
+}
+
 
 - (void)setNavigation
 {
@@ -89,6 +133,11 @@
     [self.navigationController.navigationBar addSubview:customNavigation.view];
     //    [customNavigation.saveBtn addTarget:self action:@selector(saveAction) forControlEvents:UIControlEventTouchUpInside];
     //    [customNavigation.buttonBack addTarget:self action:@selector(backAction) forControlEvents:UIControlEventTouchUpInside];
+}
+
+- (void)releaseToRefresh:(UIRefreshControl *)_refreshControl
+{
+    [self loadChatHistoryAPI];
 }
 
 #pragma mark get user CurrentLocation
@@ -249,13 +298,15 @@
     
     NSUInteger msgCount = [[chatDict valueForKey:@"unreadmessage"]integerValue];
     
-    if(msgCount >=1){
+  //  msgCount = 3;
+        
+    if(msgCount > 0){
         
         [Cell.msgCountLabel setHidden:NO];
         
         [Cell.msgCountLabel setText:[NSString stringWithFormat:@"%lu",(unsigned long)msgCount]];
         
-        [Cell.msgCountLabel.layer setCornerRadius:9];
+        [Cell.msgCountLabel.layer setCornerRadius:10];
       
         Cell.msgCountLabel.clipsToBounds = YES;
         
@@ -373,9 +424,13 @@
                          
                          NSLog(@"chatArray = %@",chatArray);
                          
+                         [refreshControl endRefreshing];
+                         
                          [ChatTableView reloadData];
                          
                          [COMMON removeLoading];
+                         
+                        
                          
                      }
      

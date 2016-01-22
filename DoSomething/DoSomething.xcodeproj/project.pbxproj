@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		065433161BF38B0400DABBFC /* button-16.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 065433151BF38B0400DABBFC /* button-16.mp3 */; };
 		065BAC521BC7A135005AF493 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 065BAC511BC7A135005AF493 /* main.m */; };
-		2B0209751C2E768600CC588E /* DSNearByImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B0209741C2E768600CC588E /* DSNearByImageView.m */; };
 		2B0C3B401C2A7A00009B7B42 /* fontawesome-webfont.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2B0C3B3F1C2A7A00009B7B42 /* fontawesome-webfont.ttf */; };
 		2B1B8B961C23E830005A699E /* NSString+FontAwesome.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B1B8B951C23E830005A699E /* NSString+FontAwesome.m */; };
 		2B1B8BE51C24487A005A699E /* DSTermsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B1B8BE31C24487A005A699E /* DSTermsViewController.m */; };
@@ -63,6 +62,7 @@
 		6A71A9381C0471F900D6D5F4 /* NSLocalization.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6A71A93A1C0471F900D6D5F4 /* NSLocalization.strings */; };
 		6A8D15D31BCC059B000F1FB4 /* DSProfileTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A8D15D11BCC059B000F1FB4 /* DSProfileTableViewController.m */; };
 		6A8D15D41BCC059B000F1FB4 /* DSProfileTableViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6A8D15D21BCC059B000F1FB4 /* DSProfileTableViewController.xib */; };
+		6AA86BE21C5102C2006D30F0 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 6AA86BE11C5102C2006D30F0 /* Reachability.m */; };
 		6ACBF64F1C2E8C2F00AFE131 /* PWParallaxScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6ACBF64D1C2E8BAC00AFE131 /* PWParallaxScrollView.m */; };
 		6AD8A52E1C2AECE800828AED /* NMRangeSlider.m in Sources */ = {isa = PBXBuildFile; fileRef = 6AD8A52D1C2AECE800828AED /* NMRangeSlider.m */; };
 		6AE7361E1C05AA5D00C7DCF0 /* SettingView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6AE7361C1C05AA5D00C7DCF0 /* SettingView.m */; };
@@ -128,8 +128,6 @@
 		065BAC511BC7A135005AF493 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		065BAC611BC7A135005AF493 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1C75845E698F9F0E3DFC07B6 /* Pods-DoSomething.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DoSomething.release.xcconfig"; path = "Pods/Target Support Files/Pods-DoSomething/Pods-DoSomething.release.xcconfig"; sourceTree = "<group>"; };
-		2B0209731C2E768600CC588E /* DSNearByImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DSNearByImageView.h; sourceTree = "<group>"; };
-		2B0209741C2E768600CC588E /* DSNearByImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DSNearByImageView.m; sourceTree = "<group>"; };
 		2B0C3B3F1C2A7A00009B7B42 /* fontawesome-webfont.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "fontawesome-webfont.ttf"; sourceTree = "<group>"; };
 		2B1B8B941C23E830005A699E /* NSString+FontAwesome.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSString+FontAwesome.h"; path = "Helpers/AwesomeFont/NSString+FontAwesome.h"; sourceTree = "<group>"; };
 		2B1B8B951C23E830005A699E /* NSString+FontAwesome.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSString+FontAwesome.m"; path = "Helpers/AwesomeFont/NSString+FontAwesome.m"; sourceTree = "<group>"; };
@@ -221,6 +219,8 @@
 		6A8D15D01BCC059B000F1FB4 /* DSProfileTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DSProfileTableViewController.h; sourceTree = "<group>"; };
 		6A8D15D11BCC059B000F1FB4 /* DSProfileTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DSProfileTableViewController.m; sourceTree = "<group>"; };
 		6A8D15D21BCC059B000F1FB4 /* DSProfileTableViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DSProfileTableViewController.xib; sourceTree = "<group>"; };
+		6AA86BE01C5102C2006D30F0 /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
+		6AA86BE11C5102C2006D30F0 /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
 		6ACBF64C1C2E8BAC00AFE131 /* PWParallaxScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PWParallaxScrollView.h; path = Helpers/ParallaxScroll/PWParallaxScrollView.h; sourceTree = "<group>"; };
 		6ACBF64D1C2E8BAC00AFE131 /* PWParallaxScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PWParallaxScrollView.m; path = Helpers/ParallaxScroll/PWParallaxScrollView.m; sourceTree = "<group>"; };
 		6AD8A52C1C2AECE800828AED /* NMRangeSlider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NMRangeSlider.h; sourceTree = "<group>"; };
@@ -381,16 +381,6 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		2B0209721C2E766900CC588E /* DSNearByImageView */ = {
-			isa = PBXGroup;
-			children = (
-				2B0209731C2E768600CC588E /* DSNearByImageView.h */,
-				2B0209741C2E768600CC588E /* DSNearByImageView.m */,
-			);
-			name = DSNearByImageView;
-			path = NearByDetail/DSNearByImageView;
-			sourceTree = "<group>";
-		};
 		2B1332271C1FF81E000A3081 /* NearByDetail */ = {
 			isa = PBXGroup;
 			children = (
@@ -400,7 +390,6 @@
 				6A59C87A1C2807FD00286E35 /* DSNearbyCustomCell.h */,
 				6A59C87B1C2807FD00286E35 /* DSNearbyCustomCell.m */,
 				6A59C87C1C2807FD00286E35 /* DSNearbyCustomCell.xib */,
-				2B0209721C2E766900CC588E /* DSNearByImageView */,
 			);
 			name = NearByDetail;
 			sourceTree = "<group>";
@@ -449,6 +438,7 @@
 		2BD72A841BFCC1CC003846E9 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
+				6AA86BDF1C5102C2006D30F0 /* Reachability */,
 				6AD8A52B1C2AECE800828AED /* SliderClass */,
 				2B1B8B931C23E7C9005A699E /* AwesomeFont */,
 				2BD72AD91BFCC259003846E9 /* ParallexScroll */,
@@ -659,6 +649,16 @@
 			);
 			name = Profile;
 			path = ViewController/Profile;
+			sourceTree = "<group>";
+		};
+		6AA86BDF1C5102C2006D30F0 /* Reachability */ = {
+			isa = PBXGroup;
+			children = (
+				6AA86BE01C5102C2006D30F0 /* Reachability.h */,
+				6AA86BE11C5102C2006D30F0 /* Reachability.m */,
+			);
+			name = Reachability;
+			path = Helpers/Reachability;
 			sourceTree = "<group>";
 		};
 		6AD8A52B1C2AECE800828AED /* SliderClass */ = {
@@ -1188,7 +1188,6 @@
 				EAEF25351BCFEBF400F83E82 /* CustomNavigationView.m in Sources */,
 				EAEF25251BCF9EF600F83E82 /* IQTextView.m in Sources */,
 				EADB949C1BDF566C00512374 /* HomeCustomCell.m in Sources */,
-				2B0209751C2E768600CC588E /* DSNearByImageView.m in Sources */,
 				EAEF25211BCF9EF600F83E82 /* IQUIWindow+Hierarchy.m in Sources */,
 				EAFC96581BD20FD400B3593D /* DSInterestAndHobbiesViewController.m in Sources */,
 				2BD72ADF1BFCC2BF003846E9 /* DAAutoScroll.m in Sources */,
@@ -1205,6 +1204,7 @@
 				6A0C8D8A1C0C25510056DA81 /* CustomAlterview.m in Sources */,
 				2BD72AFD1BFCC5AD003846E9 /* AFURLResponseSerialization.m in Sources */,
 				EAFC97971BD21CF800B3593D /* DSInterestAndHobbiesCollectionViewCell.m in Sources */,
+				6AA86BE21C5102C2006D30F0 /* Reachability.m in Sources */,
 				2BD72B121BFCC5D4003846E9 /* UIAlertView+AFNetworking.m in Sources */,
 				51F3C2F51BE75D40001E1FEC /* LocationCollectionViewCell.m in Sources */,
 				6AD8A52E1C2AECE800828AED /* NMRangeSlider.m in Sources */,

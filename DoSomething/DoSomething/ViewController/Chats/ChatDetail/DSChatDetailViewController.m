@@ -52,19 +52,19 @@
     
     NSLog(@"conversionID=%@",_conversionID);
     
-    //[[IQKeyboardManager sharedManager] considerToolbarPreviousNextInViewClass:[ChatTextView class]];
-    [[IQKeyboardManager sharedManager] setEnableAutoToolbar:NO];
+    [[IQKeyboardManager sharedManager] considerToolbarPreviousNextInViewClass:[chatScrollview class]];
+   // [[IQKeyboardManager sharedManager] setEnableAutoToolbar:NO];
     
     webService = [[DSWebservice alloc]init];
     
     conversationArray = [[NSMutableArray alloc]init];
     
-   
-    
     [self displayUserDetailsView];
     
     [self loadConverstionAPI];
+    
     UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(removeKeyboard:)];
+    
     [chatTableView addGestureRecognizer:tapGestureRecognizer];
 }
 - (void)viewWillAppear:(BOOL)animated
@@ -72,7 +72,7 @@
      [self loadNavigation];
     [super viewWillAppear:animated];
     
-     messageTimer = [NSTimer scheduledTimerWithTimeInterval:5.0 target:self selector:@selector(loadConverstionAPI) userInfo:nil repeats:YES];
+     messageTimer = [NSTimer scheduledTimerWithTimeInterval:timerSeconds target:self selector:@selector(loadConverstionAPI) userInfo:nil repeats:YES];
     
     [chatView.postButton addTarget:self action:@selector(sendAction:) forControlEvents:UIControlEventTouchUpInside];
     
@@ -133,19 +133,24 @@
     if (IS_IPHONE6 )
     {
     
-        customNavigation.view.frame = CGRectMake(0,-20, CGRectGetWidth(self.view.frame), 76);
-         self.chatviewbottom.constant =430;
+         customNavigation.view.frame = CGRectMake(0,-20, CGRectGetWidth(self.view.frame), 76);
+         self.chatviewbottom.constant =420;
          self.chattableheight.constant =10;
-         self.topviewYposition.constant = customNavigation.view.frame.size.height+5;
+         self.blockBtnYOrigin.constant = 435;
+         self.topviewYposition.constant = customNavigation.view.frame.size.height+10;
+         self.menuImageyOrigin.constant = 93;
+        
     }
     
     if(IS_IPHONE6_Plus)
     {
         
         customNavigation.view.frame = CGRectMake(0,-20, 420, 83);
-        self.chatviewbottom.constant =450;
+        self.chatviewbottom.constant =480;
         self.chattableheight.constant =10;
-         self.topviewYposition.constant = customNavigation.view.frame.size.height+5;
+        self.blockBtnYOrigin.constant = 505;
+        self.topviewYposition.constant = customNavigation.view.frame.size.height+5;
+        self.menuImageyOrigin.constant = 95;
     }
     
    
@@ -167,7 +172,7 @@
 }
 - (void)backAction
 {
-    
+    [[NSUserDefaults standardUserDefaults]setObject:@"Yes" forKey:@"backAction"];
     [self.navigationController popViewControllerAnimated:YES];
 }
 
@@ -203,7 +208,7 @@
         
         [ProfileImage.layer setBorderColor:[[UIColor colorWithRed:229.0f/255.0f green:63.0f/255.0f blue:81.0f/255.0f alpha:1.0f] CGColor]];
         
-        [chatButton setBackgroundImage:[UIImage imageNamed:@"menu_Icon"] forState:UIControlStateNormal];
+        [chatButton setBackgroundImage:[UIImage imageNamed:@"menu_icon"] forState:UIControlStateNormal];
         
         [chatButton setContentMode:UIViewContentModeScaleAspectFit];
         
@@ -212,7 +217,7 @@
     }
     else{
         
-        [chatButton setBackgroundImage:[UIImage imageNamed:@"menu_Icon"] forState:UIControlStateNormal];
+        [chatButton setBackgroundImage:[UIImage imageNamed:@"menu_active"] forState:UIControlStateNormal];
         
         [chatButton setUserInteractionEnabled:YES];
     }
@@ -232,7 +237,15 @@
 
 -(void)textViewDidBeginEditing:(UITextView *)textView{
  
+    [chatScrollview setScrollEnabled:NO];
     
+  //  chatTableView.contentInset =  UIEdgeInsetsMake(0, 0, chatTableView.contentSize.height, 0);
+//    
+//    UITableViewCell *cell = (UITableViewCell *)[textView superview];
+//    NSIndexPath *indexPath = [chatTableView indexPathForCell:cell];
+//    [chatTableView scrollToRowAtIndexPath:indexPath atScrollPosition:UITableViewScrollPositionBottom animated:YES];
+
+    //[chatTableView scrollRectToVisible:CGRectMake(0, chatTableView.contentSize.height, chatTableView.bounds.size.width,chatTableView.bounds.size.height) animated:YES];
     
     [chatView.placeHolderLabel setHidden:YES];
     //self.chatviewbottom.constant =height+(self.view.frame.size.height)/2;
@@ -243,7 +256,6 @@
     
     if([textView.text isEqualToString:@""])
          [chatView.placeHolderLabel setHidden:NO];
-    
     
        [self.view endEditing:YES];
     
@@ -272,7 +284,7 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     static NSString *CellIdentifier = @"Cell";
-  ChatDetailcell = (ChatDetailCustomcell *) [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+     ChatDetailcell = (ChatDetailCustomcell *) [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (ChatDetailcell == nil) {
         [[NSBundle mainBundle] loadNibNamed:@"ChatDetailCustomcell" owner:self options:nil];
         ChatDetailcell = chatCustomcell;
@@ -367,6 +379,8 @@
     _transparentView.hidden = NO;
     
     _backgroundView.hidden = NO;
+    
+    [self.view endEditing:YES];
    
 
 }
@@ -400,7 +414,7 @@
     }
     if([str length] > 0){
         
-        [self.view endEditing:YES];
+       // [self.view endEditing:YES];
        
       NSMutableDictionary*AddDIcconversion =[NSMutableDictionary dictionaryWithObjectsAndKeys:[NSString stringWithFormat:@"%@",str],@"Message",@"SENDER",@"type",@"2016-01-12 06:08:09",@"senttime", nil];
         [conversationArray addObject:AddDIcconversion];
@@ -415,7 +429,7 @@
         
     }
     chatView.textView.text=@"";
-    [[IQKeyboardManager sharedManager]resignFirstResponder];
+    //[[IQKeyboardManager sharedManager]resignFirstResponder];
 }
 
 
@@ -505,9 +519,12 @@
     [webService deleteUserChatHist:DeleteConversation sessionid:[COMMON getSessionID] chat_user_id:conversationID success:^(AFHTTPRequestOperation *operation, id responseObject)
     {
         NSLog(@"response:%@",responseObject);
+        [[NSUserDefaults standardUserDefaults]setObject:@"Yes" forKey:@"backAction"];
+        [[NSUserDefaults standardUserDefaults]synchronize];
+        [self.navigationController popViewControllerAnimated:YES];
         
-        [conversationArray removeAllObjects];
-        [chatTableView reloadData];
+//        [conversationArray removeAllObjects];
+//        [chatTableView reloadData];
         
         
         
@@ -521,6 +538,9 @@
     
     [webService blockUser:BlockUser_API sessionid:[COMMON getSessionID] block_user_id:conversationID success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSLog(@"response:%@",responseObject);
+        [[NSUserDefaults standardUserDefaults]setObject:@"Yes" forKey:@"backAction"];
+        [[NSUserDefaults standardUserDefaults]synchronize];
+        [self.navigationController popViewControllerAnimated:YES];
         
     } failure:^(AFHTTPRequestOperation *operation, id error) {
         

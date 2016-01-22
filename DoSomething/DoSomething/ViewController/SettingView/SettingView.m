@@ -38,6 +38,7 @@
 
 }
 @property (nonatomic,strong) IBOutlet NSLayoutConstraint    * deletebuttonBottomoposition;
+@property (nonatomic,strong) IBOutlet NSLayoutConstraint    * scrollYposition;
 
 
 @end
@@ -73,14 +74,17 @@
     [self CustomAlterviewload];
    
     self.deletebuttonBottomoposition.constant =45;
+    self.scrollYposition.constant =0;
     
     if(IS_IPHONE6)
     {
+        self.scrollYposition.constant =15;
         self.deletebuttonBottomoposition.constant =-55;
     }
     if(IS_IPHONE6_Plus)
     {
         self.deletebuttonBottomoposition.constant =-130;
+        self.scrollYposition.constant =15;
     }
     
 }
@@ -93,12 +97,12 @@
     CustomNavigationView *customNavigation;
     customNavigation = [[CustomNavigationView alloc] initWithNibName:@"CustomNavigationView" bundle:nil];
     customNavigation.view.frame = CGRectMake(0,-20, CGRectGetWidth(self.view.frame), 65);
-    if (IS_IPHONE4 ||IS_IPHONE5)
+    if (IS_IPHONE6)
     {
-        customNavigation.view.frame = CGRectMake(0,-20, CGRectGetWidth(self.view.frame), 65);
+        customNavigation.view.frame = CGRectMake(0,-20, CGRectGetWidth(self.view.frame),76);
     }
-    else{
-        customNavigation.view.frame = CGRectMake(0,-20,420, 75);
+    if(IS_IPHONE6_Plus){
+        customNavigation.view.frame = CGRectMake(0,-20,CGRectGetWidth(self.view.frame), 83);
     }
 
     [customNavigation.menuBtn setHidden:YES];
@@ -436,10 +440,7 @@
         
     }
     
-    
-    
-    
-}
+   }
 
 #pragma mark - Custom AlertView
 
@@ -557,95 +558,124 @@
 #pragma mark - WebService
 -(void)loadLocationUpdateAPI{
     
-    [objWebService locationUpdate:LocationUpdate_API
-                        sessionid:[COMMON getSessionID]
-                         latitude:currentLatitude
-                        longitude:currentLongitude
-                          success:^(AFHTTPRequestOperation *operation, id responseObject){
-                              NSLog(@"responseObject = %@",responseObject);
-                          }
-                          failure:^(AFHTTPRequestOperation *operation, id error) {
-                              
-                          }];
+    if([COMMON isInternetReachable]){
     
-}
+        [objWebService locationUpdate:LocationUpdate_API
+                            sessionid:[COMMON getSessionID]
+                             latitude:currentLatitude
+                            longitude:currentLongitude
+                              success:^(AFHTTPRequestOperation *operation, id responseObject){
+                                  NSLog(@"responseObject = %@",responseObject);
+                              }
+                              failure:^(AFHTTPRequestOperation *operation, id error) {
+                                  
+                              }];
+        
+    }
+    else{
+        
+        [COMMON showErrorAlert:@"Check Your Internet connection"];
+        
+    }
+    
+    
+  }
 
 -(void)logoutDeleteAction{
     
-    DSHomeViewController*objSplashView =[[DSHomeViewController alloc]initWithNibName:@"DSHomeViewController" bundle:nil];
-    
-    [self.navigationController pushViewController:objSplashView animated:NO];
-    appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
-    
-    appDelegate.buttonsView.hidden=YES;
-    
-    appDelegate.SepratorLbl.hidden=YES;
-    
-    [appDelegate.settingButton setBackgroundImage:[UIImage imageNamed:@"setting_icon.png"] forState:UIControlStateNormal];
-    
-    [objWebService logoutDeleteUser:User_Logout_Delete_API
-     
-                          sessionId:[COMMON getSessionID]
-     
-                                 op:optionLogoutDelete
-     
-                            success:^(AFHTTPRequestOperation *operation, id responseObject) {
-                                
-                                NSLog(@"logoutDeleteUser %@ =" , responseObject);
-                                
-                                if([[[responseObject valueForKey:@"useraction"]valueForKey:@"status"] isEqualToString:@"success"])
+    if([COMMON isInternetReachable]){
+        
+        
+        DSHomeViewController*objSplashView =[[DSHomeViewController alloc]initWithNibName:@"DSHomeViewController" bundle:nil];
+        
+        [self.navigationController pushViewController:objSplashView animated:NO];
+        appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+        
+        appDelegate.buttonsView.hidden=YES;
+        
+        appDelegate.SepratorLbl.hidden=YES;
+        
+        [appDelegate.settingButton setBackgroundImage:[UIImage imageNamed:@"setting_icon.png"] forState:UIControlStateNormal];
+        
+        [objWebService logoutDeleteUser:User_Logout_Delete_API
+         
+                              sessionId:[COMMON getSessionID]
+         
+                                     op:optionLogoutDelete
+         
+                                success:^(AFHTTPRequestOperation *operation, id responseObject) {
                                     
-                                {
+                                    NSLog(@"logoutDeleteUser %@ =" , responseObject);
                                     
-                                    [COMMON removeUserDetails];
-                                    
-                                    [[NSUserDefaults standardUserDefaults]removeObjectForKey:HobbiesArray];
-                                    
-                                   
-                                    
-                                   
+                                    if([[[responseObject valueForKey:@"useraction"]valueForKey:@"status"] isEqualToString:@"success"])
+                                        
+                                    {
+                                        
+                                        [COMMON removeUserDetails];
+                                        
+                                        [[NSUserDefaults standardUserDefaults]removeObjectForKey:HobbiesArray];
+                                        
+                                        
+                                        
+                                        
+                                        
+                                    }
                                     
                                 }
-                                
-                            }
-     
-                            failure:^(AFHTTPRequestOperation *operation, id error) {
-                                
-                                
-                            }];
-    
-    
-}
+         
+                                failure:^(AFHTTPRequestOperation *operation, id error) {
+                                    
+                                    
+                                }];
+        
+    }
+    else{
+        
+        [COMMON showErrorAlert:@"Check Your Internet connection"];
+        
+    }
+
+  }
 
 
 
 -(void)loadUpdateNotificationAPI{
-    [objWebService updateNotification:ProfileUpdate_API sessionID:[COMMON getSessionID] vibrationStr:notificationvibration messageStr:notificationMsg soundstr:notificationSound
-                              success:^(AFHTTPRequestOperation *operation, id responseObject){
-                               NSLog(@"responseObject = %@",responseObject);
-                                  
-                                  NSMutableDictionary *mainDict = [[NSMutableDictionary alloc]init];
-                                  
-                                  mainDict = [responseObject valueForKey:@"updateprofile"];
-                                  
-                                  if([[mainDict valueForKey:@"status"]isEqualToString:@"success"]){
+    
+    
+    if([COMMON isInternetReachable]){
+        
+        [objWebService updateNotification:ProfileUpdate_API sessionID:[COMMON getSessionID] vibrationStr:notificationvibration messageStr:notificationMsg soundstr:notificationSound
+                                  success:^(AFHTTPRequestOperation *operation, id responseObject){
+                                      NSLog(@"responseObject = %@",responseObject);
                                       
-                                      NSMutableDictionary *userDetailsDict = [[NSMutableDictionary alloc]init];
+                                      NSMutableDictionary *mainDict = [[NSMutableDictionary alloc]init];
                                       
-                                      userDetailsDict = [[mainDict valueForKey:@"userDetails"]objectAtIndex:0];
+                                      mainDict = [responseObject valueForKey:@"updateprofile"];
                                       
-                                      [COMMON setUserDetails:userDetailsDict];
+                                      if([[mainDict valueForKey:@"status"]isEqualToString:@"success"]){
+                                          
+                                          NSMutableDictionary *userDetailsDict = [[NSMutableDictionary alloc]init];
+                                          
+                                          userDetailsDict = [[mainDict valueForKey:@"userDetails"]objectAtIndex:0];
+                                          
+                                          [COMMON setUserDetails:userDetailsDict];
+                                          
+                                          [COMMON removeLoading];
+                                      }
                                       
-                                      [COMMON removeLoading];
+                                      
                                   }
-                                 
-                                  
-                               }
-                              failure:^(AFHTTPRequestOperation *operation, id error) {
-                                  
-                              }];
-    
-    
-}
+                                  failure:^(AFHTTPRequestOperation *operation, id error) {
+                                      
+                                  }];
+        
+        
+    }
+    else{
+        
+        [COMMON showErrorAlert:@"Check Your Internet connection"];
+        
+    }
+   }
 
 @end

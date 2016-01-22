@@ -12,6 +12,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="DSNearByDetailViewController">
             <connections>
+                <outlet property="nearbyDetailTblYposition" destination="vjt-ek-34U" id="7Rk-z8-2VV"/>
                 <outlet property="nearbyTbl" destination="7IW-Xx-7LS" id="ACx-SX-oG2"/>
                 <outlet property="profileImgSelectview" destination="g3H-4o-la9" id="a5S-Hg-atd"/>
                 <outlet property="selectImg" destination="Pir-IC-jte" id="0hS-y1-lgT"/>
@@ -26,7 +27,7 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" bounces="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" style="plain" separatorStyle="none" sectionIndexMinimumDisplayRowCount="3" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="7IW-Xx-7LS">
-                    <rect key="frame" x="10" y="0.0" width="300" height="513"/>
+                    <rect key="frame" x="10" y="20" width="300" height="493"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <connections>
                         <outlet property="dataSource" destination="-1" id="1Wt-ft-ZDi"/>
@@ -99,7 +100,7 @@
                 <constraint firstItem="7IW-Xx-7LS" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="10" id="VTU-f9-zVM"/>
                 <constraint firstItem="g3H-4o-la9" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="Xrm-QC-WEj"/>
                 <constraint firstItem="g3H-4o-la9" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="tJY-Rf-Q62"/>
-                <constraint firstItem="7IW-Xx-7LS" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="vjt-ek-34U"/>
+                <constraint firstItem="7IW-Xx-7LS" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="20" id="vjt-ek-34U"/>
                 <constraint firstAttribute="bottom" secondItem="g3H-4o-la9" secondAttribute="bottom" id="ysv-Dv-9V3"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>

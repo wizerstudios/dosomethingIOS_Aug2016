@@ -88,6 +88,8 @@
 
 #define DOB_REQUIRED                @"Date OF Birth Required"
 
+#define timerSeconds                5.0
+
 //API Keys
 #define CheckUser_API               @"checkuser"
 #define User_Logout_Delete_API      @"useraction"

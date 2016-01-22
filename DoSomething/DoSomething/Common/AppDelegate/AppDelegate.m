@@ -62,6 +62,7 @@
     });
     
     [[NSUserDefaults standardUserDefaults]removeObjectForKey:HobbiesArray];
+    [[NSUserDefaults standardUserDefaults]removeObjectForKey:@"backAction"];
   
     
     return YES;
