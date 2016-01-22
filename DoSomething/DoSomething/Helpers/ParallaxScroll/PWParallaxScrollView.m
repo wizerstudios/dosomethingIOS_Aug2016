@@ -9,7 +9,7 @@
 #import "PWParallaxScrollView.h"
 #import <CoreLocation/CoreLocation.h>
 #import "AppDelegate.h"
-
+#import "DSAppCommon.h"
 #define enlargeRatio 1.1
 
 static const NSInteger PWInvalidPosition = -1;
@@ -487,7 +487,7 @@ static const NSInteger PWInvalidPosition = -1;
     // Resize the image.
     float optimusWidth  = (image.size.width * resizeRatio) * enlargeRatio;
     float optimusHeight = (image.size.height * resizeRatio) * enlargeRatio;
-    imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0,320,518)];
+    imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0,self.frame.size.width,518)];
    
     if(_currentIndex == 0)
     {
@@ -530,7 +530,7 @@ static const NSInteger PWInvalidPosition = -1;
     [pageControllBtn addSubview:pageImageView];
     
     
-    imageView.backgroundColor = [UIColor redColor];
+    imageView.backgroundColor = [UIColor greenColor];
     
     
     
@@ -621,7 +621,10 @@ static const NSInteger PWInvalidPosition = -1;
     float resizeRatio   = -1;
     float widthDiff     = -1;
     float heightDiff    = -1;
-    
+    if(IS_IPHONE6_Plus)
+    {
+        frameHeight=frameHeight-69;
+    }
     // Wider than screen
     if (image.size.width > frameWidth)
     {
