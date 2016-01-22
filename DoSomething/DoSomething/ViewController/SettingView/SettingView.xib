@@ -41,7 +41,7 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xEE-yJ-RYa">
-                    <rect key="frame" x="0.0" y="15" width="320" height="455"/>
+                    <rect key="frame" x="0.0" y="15" width="320" height="420"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Notifications" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8Qn-UM-IQM">
                             <rect key="frame" x="10" y="10" width="300" height="23"/>
@@ -170,7 +170,7 @@
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     <constraints>
                         <constraint firstItem="8Qn-UM-IQM" firstAttribute="centerX" secondItem="xEE-yJ-RYa" secondAttribute="centerX" id="0bu-Gu-0hk"/>
-                        <constraint firstAttribute="bottom" secondItem="8Qn-UM-IQM" secondAttribute="bottom" constant="422" id="2VM-3g-Uz1"/>
+                        <constraint firstAttribute="bottom" secondItem="8Qn-UM-IQM" secondAttribute="bottom" constant="387" id="2VM-3g-Uz1"/>
                         <constraint firstItem="VcQ-5f-k8S" firstAttribute="leading" secondItem="mVq-wo-sUe" secondAttribute="trailing" constant="10" id="E3g-iD-xe5"/>
                         <constraint firstItem="Old-oT-b7M" firstAttribute="leading" secondItem="xEE-yJ-RYa" secondAttribute="leading" constant="10" id="OZc-AI-UTW"/>
                         <constraint firstItem="mVq-wo-sUe" firstAttribute="leading" secondItem="xEE-yJ-RYa" secondAttribute="leading" constant="10" id="ObI-Sz-bKW"/>
@@ -188,7 +188,7 @@
                         <constraint firstItem="Old-oT-b7M" firstAttribute="top" secondItem="VcQ-5f-k8S" secondAttribute="bottom" constant="30" id="qH9-SC-duX"/>
                         <constraint firstItem="8Qn-UM-IQM" firstAttribute="top" secondItem="xEE-yJ-RYa" secondAttribute="top" constant="10" id="rtz-mB-wfT"/>
                         <constraint firstAttribute="trailing" secondItem="8Qn-UM-IQM" secondAttribute="trailing" constant="10" id="uki-ED-1MZ"/>
-                        <constraint firstAttribute="bottom" secondItem="2EP-Qb-quU" secondAttribute="bottom" constant="10" id="xA2-ar-81j"/>
+                        <constraint firstAttribute="bottom" secondItem="2EP-Qb-quU" secondAttribute="bottom" constant="-25" id="xA2-ar-81j"/>
                         <constraint firstAttribute="trailing" secondItem="Old-oT-b7M" secondAttribute="trailing" constant="10" id="zUT-ud-SyO"/>
                     </constraints>
                 </scrollView>
@@ -197,7 +197,7 @@
             <constraints>
                 <constraint firstItem="xEE-yJ-RYa" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="15" id="DmB-0F-gVu"/>
                 <constraint firstAttribute="trailing" secondItem="xEE-yJ-RYa" secondAttribute="trailing" id="ay6-Bj-pJ1"/>
-                <constraint firstAttribute="bottom" secondItem="xEE-yJ-RYa" secondAttribute="bottom" id="et3-rN-gMx"/>
+                <constraint firstAttribute="bottom" secondItem="xEE-yJ-RYa" secondAttribute="bottom" constant="35" id="et3-rN-gMx"/>
                 <constraint firstItem="xEE-yJ-RYa" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="tyW-ey-flp"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
