@@ -7,7 +7,7 @@
 //
 
 #import "CustomAlterview.h"
-
+#import "DSAppCommon.h"
 @interface CustomAlterview ()
 
 
@@ -21,6 +21,19 @@
     alertBgView.hidden =YES;
     alertMainBgView.hidden =YES;
     [self.view setHidden:YES];
+    if(IS_IPHONE6)
+    {
+        self.mainalterviewheight.constant=-100;
+    }
+    else if(IS_IPHONE6_Plus)
+    {
+        self.mainalterviewheight.constant=-180;
+    }
+    else
+    {
+        self.mainalterviewheight.constant=0;
+    }
+    
     
 }
 

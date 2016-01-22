@@ -70,31 +70,7 @@
 
 -(void)viewWillAppear:(BOOL)animated
 {
-    self.navigationController.navigationBarHidden=NO;
-    [self.navigationItem setHidesBackButton:YES animated:NO];
-    [self.navigationController.navigationBar setTranslucent:YES];
-    
-    CustomNavigationView *customNavigation;
-    customNavigation = [[CustomNavigationView alloc] initWithNibName:@"CustomNavigationView" bundle:nil];
-    customNavigation.view.frame = CGRectMake(0,-20, CGRectGetWidth(self.view.frame), 65);
-    self.nearbyDetailTblYposition.constant =0;
-    if (IS_IPHONE6 ){
-        customNavigation.view.frame = CGRectMake(0,-20, 375, 76);
-         self.nearbyDetailTblYposition.constant =20;
-        
-    }
-    if(IS_IPHONE6_Plus)
-    {
-        customNavigation.view.frame = CGRectMake(0,-20, 420, 83);
-         self.nearbyDetailTblYposition.constant =25;
-        
-    }
-    [customNavigation.menuBtn setHidden:YES];
-    [customNavigation.buttonBack setHidden:NO];
-    [customNavigation.saveBtn setHidden:YES];
-    [self.navigationController.navigationBar addSubview:customNavigation.view];
-    
-    [customNavigation.buttonBack addTarget:self action:@selector(backAction) forControlEvents:UIControlEventTouchUpInside];
+    [self loadCustomNavigationview];
     
     interstAndHobbiesArray  = [[userDetailsArray valueForKey:@"hobbieslist"]mutableCopy];
     hobbiesNameArray        = [[interstAndHobbiesArray valueForKey:@"name"]mutableCopy];
@@ -107,6 +83,34 @@
     [self profileImageDisplay];
     self.profileImgSelectview.hidden=YES;
    
+}
+-(void)loadCustomNavigationview
+{
+    self.navigationController.navigationBarHidden=NO;
+    
+    [self.navigationItem setHidesBackButton:YES animated:NO];
+    
+    [self.navigationController.navigationBar setTranslucent:YES];
+    
+  CustomNavigationView * customNavigation = [[CustomNavigationView alloc] initWithNibName:@"CustomNavigationView" bundle:nil];
+    customNavigation.view.frame = CGRectMake(0,-20,self.view.frame.size.width, 65);
+    self.nearbyDetailTblYposition.constant =0;
+    if (IS_IPHONE6 ){
+        customNavigation.view.frame = CGRectMake(0,-20,375, 76);
+        self.nearbyDetailTblYposition.constant =20;
+    }
+    if(IS_IPHONE6_Plus)
+    {
+        customNavigation.view.frame = CGRectMake(0,-20, 420, 83);
+         self.nearbyDetailTblYposition.constant =20;
+    }
+    [customNavigation.menuBtn setHidden:YES];
+    [customNavigation.buttonBack setHidden:NO];
+    [customNavigation.saveBtn setHidden:YES];
+    [customNavigation.FilterBtn setHidden:YES];
+    [customNavigation.buttonBack addTarget:self action:@selector(backAction) forControlEvents:UIControlEventTouchUpInside];
+    [self.navigationController.navigationBar addSubview:customNavigation.view];
+    
 }
 
 #pragma mark - userAgeName
@@ -164,13 +168,21 @@
         
         NSData * profileData = [profileDataArray objectAtIndex:i];
         NSString *image     = [profileDataArray objectAtIndex:i];
-        if(IS_IPHONE6||IS_IPHONE6_Plus)
+        if(IS_IPHONE6)
             
         {
+            
             userProfileImage = [[UIImageView alloc]initWithFrame:CGRectMake((i*self.profileImageScroll.frame.size.width) + spacing+30, 20,self.profileImageView.frame.size.width, self.profileImageView.frame.size.height)];
 
         }
-        
+        else  if(IS_IPHONE6_Plus)
+            
+        {
+            
+            userProfileImage = [[UIImageView alloc]initWithFrame:CGRectMake((i*self.profileImageScroll.frame.size.width) + spacing+50, 20,self.profileImageView.frame.size.width, self.profileImageView.frame.size.height)];
+            
+        }
+
         else
         {
             userProfileImage = [[UIImageView alloc]initWithFrame:CGRectMake((i*self.profileImageScroll.frame.size.width) + spacing, 20,self.profileImageView.frame.size.width, self.profileImageView.frame.size.height)];
@@ -247,9 +259,12 @@
         [pageImageView setImage:[UIImage imageNamed:@"dot_active_red"]];
         [pgDtView addSubview:pageImageView];
         [_topViewCell addSubview:pgDtView];
-        if(IS_IPHONE6||IS_IPHONE6_Plus) {
+        if(IS_IPHONE6) {
             [pgDtView setFrame:CGRectMake(40, -5, detailPageControl.numberOfPages*18, 10)];
-           // [pgDtView setFrame:CGRectMake(60, -5, detailPageControl.numberOfPages*18, 10)];//IS_IPHONE6_Plus
+            
+        }
+        else if(IS_IPHONE6_Plus) {
+            [pgDtView setFrame:CGRectMake(60, -5, detailPageControl.numberOfPages*18, 10)];
             
         }
         else{
@@ -311,7 +326,7 @@
             self.aboutTextHeight.constant=dataSize.height+30;
             self.aboutviewHeight.constant=self.aboutTextHeight.constant;
             
-            return self.aboutviewHeight.constant-5;
+            return self.aboutviewHeight.constant-10;
        }
         
     }
@@ -603,9 +618,13 @@
         
     }
 
-    if(IS_IPHONE6 || IS_IPHONE6_Plus)
+    if(IS_IPHONE6)
     {
         self.selectImgBgview.layer.cornerRadius =248;
+    }
+    else if(IS_IPHONE6_Plus)
+    {
+        self.selectImgBgview.layer.cornerRadius =265;
     }
     else
     {
