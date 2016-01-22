@@ -52,8 +52,8 @@
     
     NSLog(@"conversionID=%@",_conversionID);
     
-    [[IQKeyboardManager sharedManager] considerToolbarPreviousNextInViewClass:[chatScrollview class]];
-   // [[IQKeyboardManager sharedManager] setEnableAutoToolbar:NO];
+    [[IQKeyboardManager sharedManager] considerToolbarPreviousNextInViewClass:[chatTableView class]];
+    [[IQKeyboardManager sharedManager] setEnableAutoToolbar:NO];
     
     webService = [[DSWebservice alloc]init];
     
@@ -240,12 +240,9 @@
     [chatScrollview setScrollEnabled:NO];
     
   //  chatTableView.contentInset =  UIEdgeInsetsMake(0, 0, chatTableView.contentSize.height, 0);
-//    
-//    UITableViewCell *cell = (UITableViewCell *)[textView superview];
-//    NSIndexPath *indexPath = [chatTableView indexPathForCell:cell];
-//    [chatTableView scrollToRowAtIndexPath:indexPath atScrollPosition:UITableViewScrollPositionBottom animated:YES];
-
-    //[chatTableView scrollRectToVisible:CGRectMake(0, chatTableView.contentSize.height, chatTableView.bounds.size.width,chatTableView.bounds.size.height) animated:YES];
+    
+//     NSIndexPath* ip = [NSIndexPath indexPathForRow:[chatArray count]-1 inSection:0];
+//    [chatTableView scrollToRowAtIndexPath:ip atScrollPosition:UITableViewScrollPositionTop animated:NO];
     
     [chatView.placeHolderLabel setHidden:YES];
     //self.chatviewbottom.constant =height+(self.view.frame.size.height)/2;
@@ -486,7 +483,7 @@
 }
 
 -(void)loadSendMessageAPI:(NSString *)_receiverId conversationId:(NSString *)_conversationId{
-    [COMMON LoadIcon:self.view];
+  //  [COMMON LoadIcon:self.view];
                     [webService sendMessage:SendMessage_API sessionid:[COMMON getSessionID] message_send_user_id:_receiverId message:chatView.textView.text conversation_id:_conversationId success:^(AFHTTPRequestOperation *operation, id responseObject){
                         
                         NSLog(@"Conversation resp = %@",responseObject);

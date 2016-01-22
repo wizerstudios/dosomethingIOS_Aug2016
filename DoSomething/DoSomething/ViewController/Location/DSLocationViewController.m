@@ -557,7 +557,7 @@
     if (IS_IPHONE6)
         returnSize = CGSizeMake((self.view.frame.size.width / 3.300f), 184);
     if(IS_IPHONE6_Plus)
-        returnSize = CGSizeMake((self.view.frame.size.width / 3.800f), 190);
+        returnSize = CGSizeMake((self.view.frame.size.width / 3.300f), 182);
     if (IS_IPHONE4 ||IS_IPHONE5 )
         returnSize = CGSizeMake((self.view.frame.size.width / 3.300f), 184);
     
@@ -575,7 +575,18 @@
 
 
 - (UIEdgeInsets)collectionView:(UICollectionView*)collectionView layout:(UICollectionViewLayout *)collectionViewLayout insetForSectionAtIndex:(NSInteger)section {
-    return UIEdgeInsetsMake(0, 0, 0, 0); // top, left, bottom, right
+    if(IS_IPHONE6_Plus)
+    {
+        return UIEdgeInsetsMake(0,15, 0, 0);
+    }
+    else if(IS_IPHONE6)
+    {
+        return UIEdgeInsetsMake(0,0, 0,5);
+    }
+    else
+    {
+    return UIEdgeInsetsMake(0,0, 0, 0);
+    }                                         // top, left, bottom, right
 }
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath;
@@ -588,12 +599,9 @@
     cell = [collectionView cellForItemAtIndexPath:indexPath];
     
     NSMutableArray *detailsArray = [commonlocationArray objectAtIndex:indexPath.row];
-    
-    DSNearByDetailViewController* detailViewController = [[DSNearByDetailViewController alloc] init];
-    
-    detailViewController.userDetailsArray = detailsArray;
-    
-    [self.navigationController pushViewController:detailViewController animated:YES];
+        DSNearByDetailViewController * detailViewController  = [[DSNearByDetailViewController alloc]initWithNibName:@"DSNearByDetailViewController" bundle:nil];
+         detailViewController.userDetailsArray = detailsArray;
+        [self.navigationController pushViewController:detailViewController animated:YES];
     }
     
     
@@ -704,7 +712,7 @@
         self.FilterScrollviewWidth.constant    =(IS_IPHONE6|| IS_IPHONE6_Plus)?308:270;
         self.FilterScrollviewXposition.constant =(IS_IPHONE6|| IS_IPHONE6_Plus)?25:0;
         self.CollectionviewWidth.constant    =self.view.frame.size.width;
-        self.filterviewxposition.constant    =65;
+        self.filterviewxposition.constant    =(IS_IPHONE6_Plus)?104:65;
           [UIView animateWithDuration:0.5 animations:^{
              
               [self.view layoutIfNeeded];
