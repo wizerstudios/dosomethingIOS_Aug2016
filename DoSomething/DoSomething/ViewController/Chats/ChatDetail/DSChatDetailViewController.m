@@ -79,6 +79,8 @@
     
     [self.navigationItem setHidesBackButton:YES animated:NO];
     
+     [chatScrollview setScrollEnabled:NO];
+    
 }
 
 -(void)viewwillDisappear:(BOOL)animated{
@@ -244,12 +246,12 @@
  
     [chatScrollview setScrollEnabled:NO];
     [chatTableView setScrollEnabled:YES];
-    NSLog(@"conversationArray count = %d",[conversationArray count]);
-    if([conversationArray count] <= 4)
+    if([conversationArray count] <= 4){
         [chatTableView setContentOffset:CGPointMake(0,-200)];
+        [chatTableView setScrollEnabled:NO];
+    }
     
     [chatView.placeHolderLabel setHidden:YES];
-   // self.chatviewbottom.constant =(height+(self.view.frame.size.height)/2)-500;
     
 }
 

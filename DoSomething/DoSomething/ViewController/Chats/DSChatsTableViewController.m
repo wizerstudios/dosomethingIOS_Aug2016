@@ -61,7 +61,8 @@
                                                                constant:20.0]];
     
    
-  
+    [COMMON LoadIcon:self.view];
+
    
     
 }
@@ -70,8 +71,8 @@
 {
     [super viewWillAppear:animated];
     
-    if([[NSUserDefaults standardUserDefaults]valueForKey:@"backAction"] == nil)
-         [COMMON LoadIcon:self.view];
+//    if([[NSUserDefaults standardUserDefaults]valueForKey:@"backAction"] == nil)
+//         [COMMON LoadIcon:self.view];
     
     [self loadChatHistoryAPI];
     
