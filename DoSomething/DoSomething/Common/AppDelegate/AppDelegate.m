@@ -15,8 +15,15 @@
 #import <Fabric/Fabric.h>
 #import <Crashlytics/Crashlytics.h>
 #import "DSChatDetailViewController.h"
+#import "DSWebservice.h"
 
-@interface AppDelegate ()
+@interface AppDelegate (){
+    
+    DSWebservice *webservice;
+    
+}
+
+
 
 @end
 
@@ -279,12 +286,11 @@
         [badgeCountLabel setHidden:NO];
     }
     
-    if (application.applicationState != UIApplicationStateActive ) {
+    if (application.applicationState == UIApplicationStateInactive) {
         [self handleRemoteNotification:application userInfo:userInfo];
     }
     
     [UIApplication sharedApplication].applicationIconBadgeNumber = 0;
-    //[self handleRemoteNotification:application userInfo:userInfo];
 }
 
 -(void) handleRemoteNotification:(UIApplication *)application userInfo:(NSDictionary *)userInfo {
@@ -313,11 +319,13 @@
 -(void)loadnotificationmsg:(NSString*)conversationID
 {
     NSLog(@"session id=%@",[COMMON getSessionID]);
-
-    DSChatDetailViewController *ChatDetail =[[DSChatDetailViewController alloc]initWithNibName:nil bundle:nil];
-    ChatDetail.conversionID = conversationID;
     
-    [self.navigationController pushViewController:ChatDetail animated:YES];
+    if(![[COMMON getSessionID]isEqualToString:@"(null)"]){
+        [self loadConverstaionAPI:conversationID];
+    }
+    
+   
+    
 }
 - (void)applicationDidEnterBackground:(UIApplication *)application {
    
@@ -339,31 +347,37 @@
   
 }
 
-//-(void)loadChatHistoryAPI{
-//    
-//    [webService userChatHist:ChatHistory_API sessionid:[COMMON getSessionID]
-//     
-//                     success:^(AFHTTPRequestOperation *operation, id responseObject){
-//                         
-//                         NSLog(@"responseObject = %@",responseObject);
-//                         
-//                         chatArray = [[[responseObject valueForKey:@"getchathistory"]valueForKey:@"converation"] mutableCopy];
-//                         
-//                         NSLog(@"chatArray = %@",chatArray);
-//                         
-//                         [ChatTableView reloadData];
-//                         
-//                         [COMMON removeLoading];
-//                         
-//                     }
-//     
-//                     failure:^(AFHTTPRequestOperation *operation, id error) {
-//                         [COMMON removeLoading];
-//                         
-//                     }];
-//    
-//    
-//}
+-(void)loadConverstaionAPI:(NSString *)_conversationID{
+    webservice = [[DSWebservice alloc]init];
+    
+    [webservice getConversation:GetConversation sessionID:[COMMON getSessionID] conversationId:_conversationID
+                        success:^(AFHTTPRequestOperation *operation, id responseObject){
+                            
+                            NSLog(@"Conversation resp = %@",responseObject);
+                            
+                            NSMutableDictionary *responseDict = [[NSMutableDictionary alloc]init];
+                            
+                            responseDict = [[responseObject valueForKey:@"getconversation"]mutableCopy];
+                            
+                            if([[responseDict valueForKey:@"status"]isEqualToString:@"success"]){
+                                
+                                NSMutableDictionary *receiverDict = [[NSMutableDictionary alloc]init];
+                                receiverDict = [[responseDict valueForKey:@"receiver"]objectAtIndex:0];
+                                DSChatDetailViewController *ChatDetail =[[DSChatDetailViewController alloc]initWithNibName:nil bundle:nil];
+                                ChatDetail.conversionID = _conversationID;
+                                ChatDetail.chatuserDetailsDict = [receiverDict mutableCopy];
+                                [self.navigationController pushViewController:ChatDetail animated:YES];
+                                
+                            }
+                        }
+     
+                        failure:^(AFHTTPRequestOperation *operation, id error) {
+                            [COMMON removeLoading];
+                            
+                        }];
+    
+    
+}
 
 
 @end

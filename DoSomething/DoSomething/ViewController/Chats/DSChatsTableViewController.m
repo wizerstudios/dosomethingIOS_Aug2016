@@ -94,11 +94,11 @@
 
 -(void)viewwillDisappear:(BOOL)animated{
     
-    [super viewWillDisappear:animated];
-    dispatch_async(dispatch_get_main_queue(), ^{
-        [messageTimer invalidate];
-        messageTimer =nil;
-    });
+//    [super viewWillDisappear:animated];
+//    dispatch_async(dispatch_get_main_queue(), ^{
+//        [messageTimer invalidate];
+//        messageTimer =nil;
+//    });
     
     
 }
