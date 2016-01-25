@@ -132,14 +132,11 @@
     isPageControl=NO;
     
     isLoadData=NO;
-    
+   
 }
 -(void)viewWillAppear:(BOOL)animated
 {
-    
-    
-    [self loadNavigation];
-    
+   
     [self getUserCurrenLocation];
     
     imageNormalArray =[[NSMutableArray alloc]init];
@@ -170,7 +167,7 @@
     }
     else if(isLoadData == YES && profileDict ==NULL)
     {
-      
+        
         hobbiesMainArray = [[[NSUserDefaults standardUserDefaults]valueForKey:HobbiesArray]mutableCopy];
         
         imageNormalArray = [[hobbiesMainArray valueForKey:@"image"]mutableCopy];
@@ -184,7 +181,13 @@
     }
 
      [_tableviewProfile reloadData];
-        
+    
+    [self loadNavigation];
+    if(profileDict==NULL)
+    {
+        [customNavigation.saveBtn setTitle:@"Create" forState:UIControlStateNormal];
+    }
+    
 }
 
 -(void)viewDidAppear:(BOOL)animated{
@@ -217,7 +220,7 @@
     [customNavigation.buttonBack setHidden:NO];
     }
     [customNavigation.saveBtn setHidden:NO];
-     [customNavigation.saveBtn setTitle:@"Create" forState:UIControlStateNormal];
+   
     [self.navigationController.navigationBar addSubview:customNavigation.view];
     [customNavigation.saveBtn addTarget:self action:@selector(saveAction:) forControlEvents:UIControlEventTouchUpInside];
     [customNavigation.buttonBack addTarget:self action:@selector(backAction) forControlEvents:UIControlEventTouchUpInside];
@@ -278,6 +281,7 @@
             
         }
         else{
+            
             [self profileDataArrayValue];
         }
     }
@@ -430,7 +434,7 @@
         }
     else
     {
-        [self.scrView setContentOffset:CGPointMake(1.5*self.profileImageView.frame.size.width - 15, 0)animated:NO];
+        [self.scrView setContentOffset:CGPointMake(1.8*self.profileImageView.frame.size.width, 0)animated:NO];
     }
     }
     else if(CurrentImage == 2)
@@ -442,7 +446,7 @@
         else
         {
 
-        [self.scrView setContentOffset:CGPointMake((3*self.profileImageView.frame.size.width - 15), 0)animated:NO];
+        [self.scrView setContentOffset:CGPointMake((3.6*self.profileImageView.frame.size.width), 0)animated:NO];
         }
     }
     
@@ -1014,6 +1018,8 @@
             cell = cellProfileImg;
         }
         
+       
+      
 //        if (IS_IPHONE6 ||IS_IPHONE6_Plus)
 //        {
 //            //cell.layoutConstraintProfileImageHeight.constant =159;
