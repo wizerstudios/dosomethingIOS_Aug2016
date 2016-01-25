@@ -483,7 +483,7 @@
     NSString * firstname =[[commonlocationArray valueForKey:@"first_name"] objectAtIndex:indexPath.row];
     NSString * lastname  =[[commonlocationArray valueForKey:@"last_name"] objectAtIndex:indexPath.row];
     
-    locationCellView.nameProfile.text =[NSString stringWithFormat:@"%@%@", firstname, lastname];;
+    locationCellView.nameProfile.text =[NSString stringWithFormat:@"%@ %@", firstname, lastname];;
     locationCellView.kiloMeter.text=[[commonlocationArray valueForKey:@"distance"] objectAtIndex:indexPath.row];
     NSString * availableStr =[[commonlocationArray valueForKey:@"available_now"] objectAtIndex:indexPath.row];
     locationCellView.activeNow.text=([availableStr isEqualToString:@"Yes"])?@"NOW":@"";
@@ -547,7 +547,7 @@
     locationCellView.imageProfile.layer.masksToBounds = YES;
     
     [locationCellView.requestsendBtn addTarget:self action:@selector(didClickRequestSend:) forControlEvents:UIControlEventTouchUpInside];
-    [locationCollectionView scrollToItemAtIndexPath:indexPath atScrollPosition:UICollectionViewScrollPositionTop animated:YES];
+   
 
     return locationCellView;
 }

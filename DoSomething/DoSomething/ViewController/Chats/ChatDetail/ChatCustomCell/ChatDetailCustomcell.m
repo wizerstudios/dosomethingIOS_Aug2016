@@ -55,7 +55,7 @@
             int y_Position=10;
             windowSize = CGSizeMake(320,440);
             sender_msgLbl.numberOfLines = 2000;
-            sender_bubbleimgView.image = [[UIImage imageNamed:@""] stretchableImageWithLeftCapWidth:20 topCapHeight:16];
+           // sender_bubbleimgView.image = [[UIImage imageNamed:[NSString stringWithFormat:@""]] stretchableImageWithLeftCapWidth:20 topCapHeight:16];
             sender_bubbleimgView.layer.cornerRadius = 7;
             
             NSString *timeStr = [chatArray valueForKey:@"senttime"];
@@ -143,7 +143,7 @@
             windowSize = CGSizeMake(320,440);
             
             sender_msgLbl.numberOfLines = 2000;
-            sender_bubbleimgView.image = [[UIImage imageNamed:@""] stretchableImageWithLeftCapWidth:20 topCapHeight:16];
+           // sender_bubbleimgView.image = [[UIImage imageNamed:[NSString stringWithFormat:@""]] stretchableImageWithLeftCapWidth:20 topCapHeight:16];
             sender_bubbleimgView.backgroundColor = [UIColor whiteColor];
             sender_bubbleimgView.layer.cornerRadius = 7;
             

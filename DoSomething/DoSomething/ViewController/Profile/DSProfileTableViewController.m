@@ -217,6 +217,7 @@
     [customNavigation.buttonBack setHidden:NO];
     }
     [customNavigation.saveBtn setHidden:NO];
+     [customNavigation.saveBtn setTitle:@"Create" forState:UIControlStateNormal];
     [self.navigationController.navigationBar addSubview:customNavigation.view];
     [customNavigation.saveBtn addTarget:self action:@selector(saveAction:) forControlEvents:UIControlEventTouchUpInside];
     [customNavigation.buttonBack addTarget:self action:@selector(backAction) forControlEvents:UIControlEventTouchUpInside];
@@ -232,6 +233,7 @@
     {
         [self initializeArrayProfile];
         [customNavigation.buttonBack setHidden:YES];
+        [customNavigation.saveBtn setTitle:@"Save" forState:UIControlStateNormal];
         
         interstAndHobbiesArray = [[profileDict valueForKey:@"hobbieslist"]mutableCopy];
         hobbiesNameArray       =[[interstAndHobbiesArray valueForKey:@"name"]mutableCopy];
@@ -834,20 +836,25 @@
     [objCustomAlterview.btnYes setHidden:YES];
     [objCustomAlterview.btnNo setHidden:YES];
     [objCustomAlterview.alertCancelButton setHidden:NO];
-    [objCustomAlterview.alertCancelButton addTarget:self action:@selector(alertPressCancel:) forControlEvents:UIControlEventTouchUpInside];
+    [objCustomAlterview.btnYes addTarget:self action:@selector(alertPressNo:) forControlEvents:UIControlEventTouchUpInside];
+    [objCustomAlterview.btnNo addTarget:self action:@selector(alertPressYes:) forControlEvents:UIControlEventTouchUpInside];
     
     [self.view addSubview:objCustomAlterview.view];
 }
 
-- (IBAction)alertPressCancel:(id)sender {
+- (IBAction)alertPressNo:(id)sender {
     
-   
-    NSString *msgStr;
-    msgStr = objCustomAlterview.alertMsgLabel.text;
     objCustomAlterview. alertBgView.hidden = YES;
     objCustomAlterview.alertMainBgView.hidden = YES;
     objCustomAlterview.view .hidden  = YES;
    
+}
+-(IBAction)alertPressYes:(id)sender
+{
+    objCustomAlterview. alertBgView.hidden = YES;
+    objCustomAlterview.alertMainBgView.hidden = YES;
+    objCustomAlterview.view .hidden  = YES;
+     [self loadValidations];
 }
 -(void)showAltermessage:(NSString*)msg
 {
@@ -857,9 +864,11 @@
     objCustomAlterview.alertBgView.hidden = NO;
     objCustomAlterview.alertMainBgView.hidden = NO;
     objCustomAlterview.alertCancelButton.hidden = NO;
-    objCustomAlterview.btnYes.hidden = YES;
-    objCustomAlterview.btnNo.hidden = YES;
-    
+    objCustomAlterview.btnYes.hidden = NO;
+    objCustomAlterview.btnNo.hidden = NO;
+    objCustomAlterview.alertCancelButton.hidden=YES;
+    [objCustomAlterview.btnYes setTitle:@"No" forState:UIControlStateNormal];
+    [objCustomAlterview.btnNo setTitle:@"Create" forState:UIControlStateNormal];
     objCustomAlterview.alertMsgLabel.text = msg;
     objCustomAlterview.alertMsgLabel.textAlignment = NSTextAlignmentCenter;
     objCustomAlterview.alertMsgLabel.lineBreakMode = NSLineBreakByWordWrapping;
@@ -908,8 +917,6 @@
             if([strAbout isEqualToString:@""]|| dataSize.height ==10){
                  return 40 ;
             }
-            
-
             else
             {
                  self.aboutTextHeight.constant=dataSize.height;
@@ -955,7 +962,10 @@
                     return 180;
                     }
                 }
-            
+              else if (userDetailsDict.count > 0)
+              {
+                 return 100;
+              }
                 return 120;
             }
             if (indexPath.row ==8) {
@@ -1067,6 +1077,8 @@
             cell.lastNameTxt.text  =(LastName==0)? [profileDict valueForKey:@"last_name"]:LastName;
             FirstName = cell.firstnameTxt.text;
             LastName  = cell.lastNameTxt.text;
+            cell.firstnameTxt.textColor =[UIColor darkGrayColor];
+            cell.lastNameTxt.textColor = [UIColor darkGrayColor];
             cell.firstaftersepratorlbl.hidden =YES;
             [cell.firstnameTxt setEnabled:NO];
             [cell.lastNameTxt setEnabled:NO];
@@ -1077,8 +1089,11 @@
             cell.lastNameTxt.text  =(LastName==0)? [userDetailsDict valueForKey:@"last_name"]:LastName;
             FirstName = cell.firstnameTxt.text;
             LastName  = cell.lastNameTxt.text;
+            cell.firstnameTxt.textColor =[UIColor darkGrayColor];
+            cell.lastNameTxt.textColor = [UIColor darkGrayColor];
             cell.firstaftersepratorlbl.hidden =YES;
-            
+            [cell.firstnameTxt setEnabled:NO];
+            [cell.lastNameTxt setEnabled:NO];
         }
         else
            {
@@ -1142,7 +1157,7 @@
         if( profileDict !=NULL){
 
             profileGenderValueLabel.text =[profileDict valueForKey:@"gender"];
-            
+           
         }
         else if(userDetailsDict.count > 0){
             
@@ -1390,47 +1405,7 @@
             cell = CellSwitchOn;
             
         }
-//        if(profileDict != nil)
-//        {
-//            cell.notificationTittlelbl.hidden=YES;
-//        }
-//        else
-//        {
-//            cell.notificationTittlelbl.hidden=NO;
-//        }
-//        
-//       [self notificationMethod];
-//        
-//        UISwipeGestureRecognizer *messBtnleftRecognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(NotificationmsgBtnSwipLeftAction:)];
-//        [messBtnleftRecognizer setDirection: UISwipeGestureRecognizerDirectionLeft];
-//        [cell.messSwitchBtn addGestureRecognizer:messBtnleftRecognizer];
-//       
-//        
-//        UISwipeGestureRecognizer *messBtnrightRecognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(NotificationmessBtnSwipRightAction:)];
-//        [messBtnrightRecognizer setDirection: UISwipeGestureRecognizerDirectionRight];
-//        [cell.messSwitchBtn addGestureRecognizer:messBtnrightRecognizer];
-//       
-//        UISwipeGestureRecognizer *soundBtnleftRecognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(NotificationsoundBtnSwipLeftAction:)];
-//        [soundBtnleftRecognizer setDirection: UISwipeGestureRecognizerDirectionLeft];
-//        [cell.SoundSwitchBtn addGestureRecognizer:soundBtnleftRecognizer];
-//        
-//        
-//        UISwipeGestureRecognizer *SoundBtnrightRecognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(NotificationsoundBtnSwipRightAction:)];
-//        [SoundBtnrightRecognizer setDirection: UISwipeGestureRecognizerDirectionRight];
-//        [cell.SoundSwitchBtn addGestureRecognizer:SoundBtnrightRecognizer];
-//
-//        UISwipeGestureRecognizer *VibrationBtnleftRecognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(NotificationvibrationBtnSwipLeftAction:)];
-//        [VibrationBtnleftRecognizer setDirection: UISwipeGestureRecognizerDirectionLeft];
-//        [cell.vibrationSwitchBtn addGestureRecognizer:VibrationBtnleftRecognizer];
-//        
-//        
-//        UISwipeGestureRecognizer *vibrationBtnrightRecognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(NotificationvibrationBtnSwipRightAction:)];
-//        [vibrationBtnrightRecognizer setDirection: UISwipeGestureRecognizerDirectionRight];
-//        [cell.vibrationSwitchBtn addGestureRecognizer:vibrationBtnrightRecognizer];
-//        
-//        [cell.vibrationSwitchBtn addTarget:self action:@selector(NotificationbuttonAction:) forControlEvents:UIControlEventTouchUpInside];
-//        [cell.SoundSwitchBtn addTarget:self action:@selector(NotificationbuttonAction:) forControlEvents:UIControlEventTouchUpInside];
-//        [cell.messSwitchBtn addTarget:self action:@selector(NotificationbuttonAction:) forControlEvents:UIControlEventTouchUpInside];
+
         
     }
 
@@ -1577,6 +1552,8 @@
         cell.currentpasswordlbl.text=@"Current password";
         cell.confirmpasswordlbl.hidden =NO;
         cell.passwordlbl.hidden =NO;
+        cell.passwordTextField.hidden =NO;
+        cell.currentpasswordlbl.hidden=NO;
         
         
         if(profileDict != NULL)
@@ -1598,6 +1575,7 @@
                 
                 [cell.emailTextField setUserInteractionEnabled:NO];
                 cell.emailTextField.text =(emailAddressToRegister==nil)?[profileDict valueForKey:@"email"]:emailAddressToRegister;
+                cell.emailTextField.textColor =[UIColor darkGrayColor];
                 if(emailPasswordToRegister==nil || [emailPasswordToRegister isEqualToString:@""])
                 {
                     emailPasswordToRegister=[profileDict valueForKey:@"password"];
@@ -1622,16 +1600,18 @@
                 cell.Accounttittlelbl.hidden=NO;
             }
             cell.emailTextField.text =(emailAddressToRegister==0)?[userDetailsDict valueForKey:@"email"]:emailAddressToRegister;
+            cell.emailTextField.textColor =[UIColor darkGrayColor];
             cell.passwordTextField.text  =(emailPasswordToRegister==0)? @"":emailPasswordToRegister;
             emailAddressToRegister   = cell.emailTextField.text;
             
-            
+            cell.passwordTextField.hidden =YES;
             cell.currentpassword.hidden=YES;
             cell.conformationpassword.hidden=YES;
-            cell.currentpasswordlbl.text =@"Password";
+            cell.currentpasswordlbl.hidden=YES;
+            //cell.currentpasswordlbl.text =@"Password";
             cell.confirmpasswordlbl.hidden =YES;
             cell.passwordlbl.hidden =YES;
-            
+            [cell.emailTextField setEnabled:NO];
             
         }
         else
@@ -1723,7 +1703,7 @@
             cell.loginTypeImg.image=[UIImage imageNamed:@"loginTypeDS"];
         }
         else{
-            cell.logilTypelbl.text =@"You are connect via through Facebook";
+            cell.logilTypelbl.text =@"You are connect via Facebook";
             cell.loginTypeImg.image=[UIImage imageNamed:@"loginTypeFB"];
         }
 
@@ -2381,7 +2361,8 @@
        
     }
     else
-        [self loadValidations];
+        [self showAltermessage:@"By clicking create,you agree to the Term of \n Use & Privacy policy"];
+        //[self loadValidations];
    
    
     }
@@ -2455,15 +2436,27 @@
             {
                 [self showAltermessage:EMAIL_REQUIRED];
                 [COMMON removeLoading];
+               
                 return;
+                
             }
     
             else if ([emailPasswordToRegister isEqualToString:@""] || emailPasswordToRegister == nil)
             {
         
-                [self showAltermessage:PASSWORD_REQUIRED];
-                [COMMON removeLoading];
-                return;
+                if(userDetailsDict > 0)
+                {
+                    [COMMON removeLoading];
+                    [self loadRegister];
+                    return;
+                }
+                else
+                    
+                {
+                   [self showAltermessage:PASSWORD_REQUIRED];
+                   [COMMON removeLoading];
+                    return;
+                }
             }
             else
             
@@ -2562,9 +2555,29 @@
            [self updateAPI];
          }
     }
-    
-
+  
 }
+
+#pragma mark - CustomAlterviewload
+-(void)CustomAlterviewload
+{
+    objCustomAlterview = [[CustomAlterview alloc] initWithNibName:@"CustomAlterview" bundle:nil];
+    [objCustomAlterview.alertBgView setHidden:YES];
+    [objCustomAlterview.alertMainBgView setHidden:YES];
+    [objCustomAlterview.view setHidden:YES];
+    [objCustomAlterview.alertCancelButton addTarget:self
+                                             action:@selector(alertPressCancel:)
+                                   forControlEvents:UIControlEventTouchUpInside];
+    [objCustomAlterview.btnNo addTarget:self
+                                 action:@selector(alertPressNo:)
+                       forControlEvents:UIControlEventTouchUpInside];
+    [objCustomAlterview.btnYes addTarget:self
+                                  action:@selector(alertPressYes:)
+                        forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:objCustomAlterview.view];
+}
+
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

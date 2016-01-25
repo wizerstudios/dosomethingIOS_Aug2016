@@ -149,7 +149,7 @@
     {
         
         customNavigation.view.frame = CGRectMake(0,-20, 420, 83);
-        self.chatviewbottom.constant =480;
+        self.chatviewbottom.constant =488;
         self.chattableheight.constant =10;
         self.blockBtnYOrigin.constant = 505;
         self.topviewYposition.constant = customNavigation.view.frame.size.height+5;
@@ -171,8 +171,7 @@
 }
 - (void) removeKeyboard: (UITapGestureRecognizer *)recognizer
 {
-    if([conversationArray count] <= 5)
-       [chatTableView setContentOffset:CGPointMake(0,0)];
+    [chatTableView setContentInset:UIEdgeInsetsMake(0,0, 0, 0)];
     
     [[IQKeyboardManager sharedManager]resignFirstResponder];
 }
@@ -200,7 +199,7 @@
         
     }else{
         
-        ProfileImage.image = [UIImage imageNamed:@"profile_noimg.png"];
+        ProfileImage.image = [UIImage imageNamed:[NSString stringWithFormat:@"profile_noimg.png"]];
         
     }
     
@@ -214,7 +213,7 @@
         
         [ProfileImage.layer setBorderColor:[[UIColor colorWithRed:229.0f/255.0f green:63.0f/255.0f blue:81.0f/255.0f alpha:1.0f] CGColor]];
         
-        [chatButton setBackgroundImage:[UIImage imageNamed:@"menu_icon"] forState:UIControlStateNormal];
+        [chatButton setBackgroundImage:[UIImage imageNamed:[NSString stringWithFormat:@"menu_icon"]] forState:UIControlStateNormal];
         
         [chatButton setContentMode:UIViewContentModeScaleAspectFit];
         
@@ -244,15 +243,22 @@
 
 -(void)textViewDidBeginEditing:(UITextView *)textView{
  
-    [chatScrollview setScrollEnabled:NO];
-    [chatTableView setScrollEnabled:YES];
-    if([conversationArray count] <= 4){
-        [chatTableView setContentOffset:CGPointMake(0,-200)];
-        [chatTableView setScrollEnabled:NO];
-    }
+   [messageTimer invalidate];
+    messageTimer = nil;
     
+    [chatScrollview setScrollEnabled:NO];
+    if (chatTableView.contentSize.height < chatTableView.frame.size.height)
+    {
+        [chatTableView setContentInset:UIEdgeInsetsMake(200,0, 0, 0)];
+
+    }
+    else{
+        [chatTableView setContentInset:UIEdgeInsetsMake(200,0, 0, 0)];
+    }
+
     [chatView.placeHolderLabel setHidden:YES];
     
+   
 }
 
 -(void)textViewDidEndEditing:(UITextView *)textView{
@@ -260,8 +266,13 @@
     if([textView.text isEqualToString:@""])
          [chatView.placeHolderLabel setHidden:NO];
     
-       [self.view endEditing:YES];
+    [chatTableView setContentInset:UIEdgeInsetsMake(0,0, 0, 0)];
     
+    [self.view endEditing:YES];
+    
+    [chatScrollview setContentOffset:CGPointMake(0,0)];
+    
+     messageTimer = [NSTimer scheduledTimerWithTimeInterval:timerSeconds target:self selector:@selector(loadConverstionAPI) userInfo:nil repeats:YES];
     
 }
 
@@ -424,8 +435,9 @@
         
         [chatTableView reloadData];
         
-        if([conversationArray count] <= 4)
-            [chatTableView setContentOffset:CGPointMake(0,-200)];
+        if (chatTableView.contentSize.height < chatTableView.frame.size.height)
+            [chatTableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:conversationArray.count-1 inSection:0] atScrollPosition:UITableViewScrollPositionBottom animated:YES];
+            
         else
            [chatTableView scrollRectToVisible:CGRectMake(0, chatTableView.contentSize.height - chatTableView.bounds.size.height, chatTableView.bounds.size.width,chatTableView.bounds.size.height) animated:NO];
       
@@ -473,8 +485,13 @@
                                 conversationArray = [[responseDict valueForKey:@"converation"]mutableCopy];
                                 
                                 [chatTableView reloadData];
+                                if (chatTableView.contentSize.height > chatTableView.frame.size.height)
+                                    [chatTableView scrollRectToVisible:CGRectMake(0, chatTableView.contentSize.height - chatTableView.bounds.size.height, chatTableView.bounds.size.width,chatTableView.bounds.size.height) animated:YES];
+                                else{
+                                   [chatTableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:conversationArray.count-1 inSection:0] atScrollPosition:UITableViewScrollPositionBottom animated:YES];
+                                }
                                 
-                                [chatTableView scrollRectToVisible:CGRectMake(0, chatTableView.contentSize.height - chatTableView.bounds.size.height, chatTableView.bounds.size.width,chatTableView.bounds.size.height) animated:YES];
+                                
                             }
                             else{
                                 [messageTimer invalidate];
