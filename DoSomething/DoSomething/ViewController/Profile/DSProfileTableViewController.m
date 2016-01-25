@@ -1723,7 +1723,7 @@
             cell.loginTypeImg.image=[UIImage imageNamed:@"loginTypeDS"];
         }
         else{
-            cell.logilTypelbl.text =@"You are connect via through Facebook";
+            cell.logilTypelbl.text =@"You are connect via Facebook";
             cell.loginTypeImg.image=[UIImage imageNamed:@"loginTypeFB"];
         }
 
