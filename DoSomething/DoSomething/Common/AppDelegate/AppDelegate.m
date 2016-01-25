@@ -37,7 +37,6 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
       NSLog(@"### Running FB SDK Version: %@", [FBSDKSettings sdkVersion]);
-   // [[NSUserDefaults standardUserDefaults]removeObjectForKey:BadgeCount];
     
     [[FBSDKApplicationDelegate sharedInstance] application:application
                              didFinishLaunchingWithOptions:launchOptions];
@@ -333,7 +332,7 @@
 
 - (void)applicationWillEnterForeground:(UIApplication *)application
 {
-    
+   
 }
 
 - (void)applicationDidBecomeActive:(UIApplication *)application {
@@ -374,6 +373,50 @@
                             
                         }];
     
+    
+}
+
+- (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo fetchCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler {
+    
+    if(application.applicationState == UIApplicationStateInactive) {
+        
+        NSLog(@"Inactive");
+        
+         //Show the view with the content of the push
+        
+        [self handleRemoteNotification:application userInfo:userInfo];
+        
+        completionHandler(UIBackgroundFetchResultNewData);
+        
+    } else if (application.applicationState == UIApplicationStateBackground) {
+        
+        NSLog(@"Background");
+        
+        //Refresh the local model
+        
+        completionHandler(UIBackgroundFetchResultNewData);
+        
+    } else {
+        
+        NSLog(@"Active");
+        
+        //Show an in-app banner
+        
+        completionHandler(UIBackgroundFetchResultNewData);
+        
+    }
+    
+    
+    NSString *badgecountStr = [NSString stringWithFormat:@"%@",[[userInfo valueForKey:@"aps"]valueForKey:@"msgcnt"]];
+    [[NSUserDefaults standardUserDefaults]setObject:badgecountStr forKey:UnreadMsgCount];
+    [[NSUserDefaults standardUserDefaults]synchronize];
+    
+    if(![badgecountStr isEqualToString:@"0"]){
+        [badgeCountLabel setText:badgecountStr];
+        [badgeCountLabel setHidden:NO];
+    }
+    
+
     
 }
 
