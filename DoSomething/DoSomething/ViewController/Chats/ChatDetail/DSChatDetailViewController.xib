@@ -100,7 +100,7 @@
                             </constraints>
                         </view>
                         <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YKw-Va-zYe">
-                            <rect key="frame" x="0.0" y="97" width="320" height="440"/>
+                            <rect key="frame" x="0.0" y="97" width="320" height="453"/>
                             <subviews>
                                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="xvP-6c-2gG">
                                     <rect key="frame" x="0.0" y="0.0" width="320" height="340"/>
@@ -114,7 +114,7 @@
                                     </connections>
                                 </tableView>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pey-bp-htd" customClass="ChatTextView">
-                                    <rect key="frame" x="0.0" y="350" width="320" height="40"/>
+                                    <rect key="frame" x="0.0" y="346" width="320" height="40"/>
                                     <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="40" id="zZB-Kt-5pV"/>
@@ -125,11 +125,11 @@
                                 </view>
                             </subviews>
                             <constraints>
-                                <constraint firstItem="pey-bp-htd" firstAttribute="top" secondItem="YKw-Va-zYe" secondAttribute="top" constant="350" id="4QE-ih-MRe"/>
+                                <constraint firstItem="pey-bp-htd" firstAttribute="top" secondItem="YKw-Va-zYe" secondAttribute="top" constant="346" id="4QE-ih-MRe"/>
                                 <constraint firstAttribute="trailing" secondItem="pey-bp-htd" secondAttribute="trailing" id="9Sq-ht-ShK"/>
                                 <constraint firstItem="xvP-6c-2gG" firstAttribute="top" secondItem="YKw-Va-zYe" secondAttribute="top" id="9mo-DT-lBJ"/>
-                                <constraint firstItem="pey-bp-htd" firstAttribute="top" secondItem="xvP-6c-2gG" secondAttribute="bottom" constant="10" id="HpC-X7-WXp"/>
-                                <constraint firstAttribute="bottom" secondItem="pey-bp-htd" secondAttribute="bottom" constant="25" id="VFC-Qp-kEA"/>
+                                <constraint firstItem="pey-bp-htd" firstAttribute="top" secondItem="xvP-6c-2gG" secondAttribute="bottom" constant="6" id="HpC-X7-WXp"/>
+                                <constraint firstAttribute="bottom" secondItem="pey-bp-htd" secondAttribute="bottom" constant="67" id="VFC-Qp-kEA"/>
                                 <constraint firstItem="pey-bp-htd" firstAttribute="leading" secondItem="YKw-Va-zYe" secondAttribute="leading" id="apX-3E-yhX"/>
                                 <constraint firstItem="xvP-6c-2gG" firstAttribute="centerX" secondItem="YKw-Va-zYe" secondAttribute="centerX" id="epr-Pt-5xq"/>
                                 <constraint firstAttribute="trailing" secondItem="xvP-6c-2gG" secondAttribute="trailing" id="vgZ-Gn-Dg4"/>
@@ -227,7 +227,7 @@
                         <constraint firstItem="XqN-Wp-lms" firstAttribute="top" secondItem="GpL-YA-edD" secondAttribute="top" id="WuI-aB-Wjv"/>
                         <constraint firstItem="vGn-Bt-vGu" firstAttribute="leading" secondItem="GpL-YA-edD" secondAttribute="leading" id="ZHu-2p-15G"/>
                         <constraint firstItem="Vyo-Sj-gzT" firstAttribute="leading" secondItem="GpL-YA-edD" secondAttribute="leading" id="ZJa-X0-bAM"/>
-                        <constraint firstAttribute="bottom" secondItem="YKw-Va-zYe" secondAttribute="bottom" constant="13" id="axR-ZJ-ySz"/>
+                        <constraint firstAttribute="bottom" secondItem="YKw-Va-zYe" secondAttribute="bottom" id="axR-ZJ-ySz"/>
                         <constraint firstAttribute="bottom" secondItem="vGn-Bt-vGu" secondAttribute="bottom" constant="50" id="k1m-7t-DHd"/>
                         <constraint firstItem="Vyo-Sj-gzT" firstAttribute="top" secondItem="GpL-YA-edD" secondAttribute="top" constant="35" id="qWI-8w-a4W"/>
                         <constraint firstItem="vGn-Bt-vGu" firstAttribute="top" secondItem="GpL-YA-edD" secondAttribute="top" id="vcF-aW-Ncp"/>
