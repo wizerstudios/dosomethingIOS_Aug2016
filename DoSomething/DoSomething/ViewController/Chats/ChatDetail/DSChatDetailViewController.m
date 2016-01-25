@@ -436,7 +436,7 @@
         [chatTableView reloadData];
         
         if (chatTableView.contentSize.height < chatTableView.frame.size.height)
-            [chatTableView setContentInset:UIEdgeInsetsMake(200,0, 0, 0)];
+            [chatTableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:conversationArray.count-1 inSection:0] atScrollPosition:UITableViewScrollPositionBottom animated:YES];
             
         else
            [chatTableView scrollRectToVisible:CGRectMake(0, chatTableView.contentSize.height - chatTableView.bounds.size.height, chatTableView.bounds.size.width,chatTableView.bounds.size.height) animated:NO];
@@ -488,7 +488,7 @@
                                 if (chatTableView.contentSize.height > chatTableView.frame.size.height)
                                     [chatTableView scrollRectToVisible:CGRectMake(0, chatTableView.contentSize.height - chatTableView.bounds.size.height, chatTableView.bounds.size.width,chatTableView.bounds.size.height) animated:YES];
                                 else{
-                                   [chatTableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:conversationArray.count-1 inSection:0] atScrollPosition:UITableViewScrollPositionMiddle animated:YES];
+                                   [chatTableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:conversationArray.count-1 inSection:0] atScrollPosition:UITableViewScrollPositionBottom animated:YES];
                                 }
                                 
                                 
