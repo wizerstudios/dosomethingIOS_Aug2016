@@ -318,24 +318,24 @@
 - (void)setUpForPortrait {
     
     float halfOfWidth = CGRectGetWidth([UIScreen mainScreen].bounds) / 2.0;
-    float height = CGRectGetHeight([UIScreen mainScreen].bounds);
+    float height1 = CGRectGetHeight([UIScreen mainScreen].bounds);
     
-    self.semiTransparentView.frame = CGRectMake(0, 0, halfOfWidth * 2.0, height+40);
-    self.semiTransparentView.center = CGPointMake(halfOfWidth, height /0);
+    self.semiTransparentView.frame = CGRectMake(0, 0, halfOfWidth * 2.0, height1+40);
+    self.semiTransparentView.center = CGPointMake(halfOfWidth, height1 /0);
     
-    self.funkyIBASButton.center = CGPointMake(halfOfWidth, (height / 2.0) +120);
+    self.funkyIBASButton.center = CGPointMake(halfOfWidth, (height1 / 2.0) +120);
     if (SYSTEM_VERSION_LESS_THAN(@"5.0")) {
-        height -= 0;
+        height1 -= 0;
     }
 }
 - (void)setUpForLandscape
 {
     float halfOfWidth = CGRectGetHeight([UIScreen mainScreen].bounds) / 2.0;
-    float height = CGRectGetWidth([UIScreen mainScreen].bounds);
-    self.funkyIBASButton.center = CGPointMake(halfOfWidth, (height / 2.0) + 120);
+    float height1 = CGRectGetWidth([UIScreen mainScreen].bounds);
+    self.funkyIBASButton.center = CGPointMake(halfOfWidth, (height1 / 2.0) + 120);
     if (SYSTEM_VERSION_LESS_THAN(@"5.0"))
     {
-        height -= 0;
+        height1 -= 0;
     }
 }
 
@@ -543,10 +543,6 @@
         [[NSUserDefaults standardUserDefaults]setObject:@"Yes" forKey:@"backAction"];
         [[NSUserDefaults standardUserDefaults]synchronize];
         [self.navigationController popViewControllerAnimated:YES];
-        
-//        [conversationArray removeAllObjects];
-//        [chatTableView reloadData];
-        
         
         
     } failure:^(AFHTTPRequestOperation *operation, id error) {

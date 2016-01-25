@@ -353,8 +353,6 @@
     [webservice getConversation:GetConversation sessionID:[COMMON getSessionID] conversationId:_conversationID
                         success:^(AFHTTPRequestOperation *operation, id responseObject){
                             
-                            NSLog(@"Conversation resp = %@",responseObject);
-                            
                             NSMutableDictionary *responseDict = [[NSMutableDictionary alloc]init];
                             
                             responseDict = [[responseObject valueForKey:@"getconversation"]mutableCopy];
