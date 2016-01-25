@@ -261,7 +261,7 @@
          [chatView.placeHolderLabel setHidden:NO];
     
        [self.view endEditing:YES];
-    
+    [chatScrollview setContentOffset:CGPointMake(0,0)];
     
 }
 

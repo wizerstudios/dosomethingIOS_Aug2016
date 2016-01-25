@@ -50,17 +50,17 @@
         
         [backGroundImageView setFrame:CGRectMake(0,0,self.frame.size.width+95, self.frame.size.height+10)];
         [textView setFrame:CGRectMake(10, 5, 320, 40)];
-        [placeHolderLabel setFrame:CGRectMake(2.0,0,textView.frame.size.width - 10.0, 34.0)];
+        [placeHolderLabel setFrame:CGRectMake(2.0,0,textView.frame.size.width - 10.0, 32.0)];
         [postButton setFrame:CGRectMake(backGroundImageView.frame.size.width-95,8, 50, 30)];
 
     }
         
     else
     {
-        [backGroundImageView setFrame:CGRectMake(0,0,self.frame.size.width, self.frame.size.height+10)];
-        [textView setFrame:CGRectMake(10, 5, 260, 40)];
-        [placeHolderLabel setFrame:CGRectMake(2.0, 0.0,textView.frame.size.width - 10.0, 34.0)];
-        [postButton setFrame:CGRectMake(backGroundImageView.frame.size.width-60,8, 50, 30)];
+        [backGroundImageView setFrame:CGRectMake(0,0,self.frame.size.width, self.frame.size.height+5)];
+        [textView setFrame:CGRectMake(10,11, 260,25)];
+        [placeHolderLabel setFrame:CGRectMake(2.0,0,textView.frame.size.width - 10.0, 26.0)];
+        [postButton setFrame:CGRectMake(backGroundImageView.frame.size.width-60,6, 50,34)];
     }
     
     backGroundImageView.backgroundColor = [UIColor colorWithRed:246.0f/255.0f green:246.0f/255.0f blue:246.0f/255.0f alpha:1.0f];
@@ -72,8 +72,6 @@
     textView.backgroundColor = [UIColor clearColor];
     
     [self addSubview:textView];
-    
-    
     
     
     [placeHolderLabel setText:@"Message"];
