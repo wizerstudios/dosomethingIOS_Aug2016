@@ -51,6 +51,8 @@
 
     [[NSUserDefaults standardUserDefaults]removeObjectForKey:@"backAction"];
     
+     [self getUserCurrenLocation];
+    
     if(IS_IPHONE6 || IS_IPHONE6_Plus)
         [self.view addConstraint:[NSLayoutConstraint constraintWithItem:ChatTableView
                                                               attribute:NSLayoutAttributeTop
@@ -75,8 +77,6 @@
 //         [COMMON LoadIcon:self.view];
     
     [self loadChatHistoryAPI];
-    
-    [self getUserCurrenLocation];
     
     [self.navigationItem setHidesBackButton:YES animated:NO];
     
@@ -394,7 +394,13 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSLog(@"didselectindex:%ld",(long)indexPath.row);
+    
+    NSMutableDictionary *newDict = [[NSMutableDictionary alloc] init];
+    NSDictionary *oldDict = (NSDictionary *)[chatArray objectAtIndex:indexPath.row];
+    [newDict addEntriesFromDictionary:oldDict];
+    [newDict setObject:@"0" forKey:@"unreadmessage"];
+    [chatArray replaceObjectAtIndex:indexPath.row withObject:newDict];
+    [self loadTabbarMsgCount];
     
     DSChatDetailViewController *ChatDetail =[[DSChatDetailViewController alloc]initWithNibName:nil bundle:nil];
     
@@ -488,7 +494,7 @@
 
 -(void)loadTabbarMsgCount{
     
-    NSArray *unreadMsgArray = [chatArray valueForKey: @"unreadmessage"];
+    NSArray *unreadMsgArray = [chatArray valueForKey:@"unreadmessage"];
     int total =0;
     for(int i=0;i<[unreadMsgArray count];i++)
     {

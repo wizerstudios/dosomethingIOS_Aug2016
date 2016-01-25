@@ -1172,10 +1172,13 @@
                 if([[userDetailsDict valueForKey:@"gender"]isEqual:@"male"]){
                     [cell.maleButton setTitleColor:[UIColor redColor] forState:UIControlStateNormal];
                     strGender=[userDetailsDict valueForKey:@"gender"];
+                    [cell.femaleButton setTitleColor:[UIColor darkGrayColor] forState:UIControlStateNormal];
                 }
                 else if([[userDetailsDict valueForKey:@"gender"]isEqual:@"female"]){
                     [cell.femaleButton setTitleColor:[UIColor redColor] forState:UIControlStateNormal];
                     strGender=[userDetailsDict valueForKey:@"gender"];
+                    [cell.maleButton setTitleColor:[UIColor darkGrayColor] forState:UIControlStateNormal];
+
                 }
             }
             else{

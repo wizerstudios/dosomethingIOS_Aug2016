@@ -389,7 +389,7 @@
                       filter_status:onlineStatus
                       filter_gender:GenderStatus
                    filter_available:avalableStatus
-                    filter_agerange:(filterAge==nil)?@"":filterAge
+                    filter_agerange:(filterAge==nil)?@"18":filterAge
                     filter_distance:(filterDistance==nil)?@"":filterDistance
                                page:currentloadPage
                             success:^(AFHTTPRequestOperation *operation, id responseObject)
@@ -758,7 +758,7 @@
         [self.locationCollectionView setUserInteractionEnabled:YES];
         appDelegate.settingButton.userInteractionEnabled=YES;
         currentloadPage = @"";
-        filterAge = ([filterAge isEqualToString:@""])?@"":filterAge;
+        filterAge = ([filterAge isEqualToString:@""])?@"18":filterAge;
         filterDistance=([filterDistance isEqualToString:@""])?@"":filterDistance;
         isgestureenable=YES;
        
@@ -903,7 +903,7 @@
     avalableStatus=@"";
     GenderStatus =@"";
     onlineStatus  =@"";
-    filterAge     =@"";
+    filterAge     =@"18";
     filterDistance=@"";
     [self nearestLocationWebservice];
 }
@@ -958,7 +958,7 @@
     self.lowerLabel.text=@"";
     self.ageupperLabel.text=@"";
     self.agelowerLabel.text =@"";
-    filterAge=@"";  //18-26
+    filterAge=@"18";  //18-26
     filterDistance=@"";  //0-5
 }
 
@@ -990,13 +990,13 @@
 - (void) configureLabelSlider
 {
     self.labelSlider.minimumValue = 0;
-    self.labelSlider.maximumValue = 5;
+    self.labelSlider.maximumValue = 50;
     
     self.labelSlider.minimumRange = 0;
    [self configureMetalThemeForSlider:self.labelSlider];
     
     self.labelSlider.lowerValue = 0;
-    self.labelSlider.upperValue = 5;
+    self.labelSlider.upperValue = 50;
 }
 
 - (void) updateDistanceSliderLabels
@@ -1025,16 +1025,17 @@
 - (void) configureAgeChangeSlider
 {
     self.labelSlider1.minimumValue = 18;
-    self.labelSlider1.maximumValue = 26;
+    self.labelSlider1.upperHandleHidden = YES;
+    self.labelSlider1.maximumValue = 200;
     
     self.labelSlider1.lowerValue = 18;
-    self.labelSlider1.upperValue = 26;
+    self.labelSlider1.upperValue = 200;
     
-    self.labelSlider1.minimumRange = 0;
+    
     [self configureMetalThemeForSlider:self.labelSlider1];
     
     self.labelSlider1.lowerValue = 18;
-    self.labelSlider1.upperValue = 26;
+    self.labelSlider1.upperValue = 200;
 
 }
 
@@ -1048,14 +1049,14 @@
     self.agelowerLabel.center = lowerCenter;
     self.agelowerLabel.text = [NSString stringWithFormat:@"%d", (int)self.labelSlider1.lowerValue];
     
-    CGPoint upperCenter;
-    upperCenter.x = (self.labelSlider1.upperCenter.x + self.labelSlider1.frame.origin.x+12);
-    upperCenter.y = (self.labelSlider1.center.y - 20.0f);
-    self.ageupperLabel.center = upperCenter;
-    self.ageupperLabel.text = [NSString stringWithFormat:@"%d", (int)self.labelSlider1.upperValue];
-   NSString*agefilterSTr =[NSString stringWithFormat:@"%@-%@",self.agelowerLabel.text,self.ageupperLabel.text];
-    ;
-    filterAge=([agefilterSTr isEqual:@"18-18"])?@"":agefilterSTr;
+//    CGPoint upperCenter;
+//    upperCenter.x = (self.labelSlider1.upperCenter.x + self.labelSlider1.frame.origin.x+12);
+//    upperCenter.y = (self.labelSlider1.center.y - 20.0f);
+//    self.ageupperLabel.center = upperCenter;
+//    self.ageupperLabel.text = [NSString stringWithFormat:@"%d", (int)self.labelSlider1.upperValue];
+   NSString*agefilterSTr =[NSString stringWithFormat:@"%@",self.agelowerLabel.text];
+    
+    filterAge=([agefilterSTr isEqual:@"18"])?@"18":agefilterSTr;
    
 
 }
