@@ -40,18 +40,18 @@
     
     if(IS_IPHONE6_Plus)
     {
-        [backGroundImageView setFrame:CGRectMake(0,0,self.frame.size.width+95, self.frame.size.height+10)];
-        [textView setFrame:CGRectMake(10, 5, 320, 40)];
-        [placeHolderLabel setFrame:CGRectMake(2.0,0,textView.frame.size.width - 10.0, 34.0)];
-        [postButton setFrame:CGRectMake(backGroundImageView.frame.size.width-60,8, 50, 30)];
+        [backGroundImageView setFrame:CGRectMake(0,0,self.frame.size.width+95, self.frame.size.height+5)];
+        [textView setFrame:CGRectMake(10,11, 320, 25)];
+        [placeHolderLabel setFrame:CGRectMake(13,8,textView.frame.size.width - 10.0, 26)];
+        [postButton setFrame:CGRectMake(backGroundImageView.frame.size.width-60,6, 50, 34)];
 
     }
     else if(IS_IPHONE6){
         
-        [backGroundImageView setFrame:CGRectMake(0,0,self.frame.size.width+95, self.frame.size.height+10)];
-        [textView setFrame:CGRectMake(10, 5, 320, 40)];
-        [placeHolderLabel setFrame:CGRectMake(2.0,0,textView.frame.size.width - 10.0, 32.0)];
-        [postButton setFrame:CGRectMake(backGroundImageView.frame.size.width-95,8, 50, 30)];
+        [backGroundImageView setFrame:CGRectMake(0,0,self.frame.size.width+95, self.frame.size.height+5)];
+        [textView setFrame:CGRectMake(10, 11, 320, 25)];
+        [placeHolderLabel setFrame:CGRectMake(13,9,textView.frame.size.width - 10.0,26)];
+        [postButton setFrame:CGRectMake(backGroundImageView.frame.size.width-95,6, 50, 34)];
 
     }
         

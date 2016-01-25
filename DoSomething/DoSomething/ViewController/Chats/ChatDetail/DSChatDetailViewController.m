@@ -149,7 +149,7 @@
     {
         
         customNavigation.view.frame = CGRectMake(0,-20, 420, 83);
-        self.chatviewbottom.constant =480;
+        self.chatviewbottom.constant =488;
         self.chattableheight.constant =10;
         self.blockBtnYOrigin.constant = 505;
         self.topviewYposition.constant = customNavigation.view.frame.size.height+5;
@@ -199,7 +199,7 @@
         
     }else{
         
-        ProfileImage.image = [UIImage imageNamed:@"profile_noimg.png"];
+        ProfileImage.image = [UIImage imageNamed:[NSString stringWithFormat:@"profile_noimg.png"]];
         
     }
     
@@ -213,7 +213,7 @@
         
         [ProfileImage.layer setBorderColor:[[UIColor colorWithRed:229.0f/255.0f green:63.0f/255.0f blue:81.0f/255.0f alpha:1.0f] CGColor]];
         
-        [chatButton setBackgroundImage:[UIImage imageNamed:@"menu_icon"] forState:UIControlStateNormal];
+        [chatButton setBackgroundImage:[UIImage imageNamed:[NSString stringWithFormat:@"menu_icon"]] forState:UIControlStateNormal];
         
         [chatButton setContentMode:UIViewContentModeScaleAspectFit];
         
