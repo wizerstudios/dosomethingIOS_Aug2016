@@ -171,8 +171,7 @@
 }
 - (void) removeKeyboard: (UITapGestureRecognizer *)recognizer
 {
-    if([conversationArray count] <= 5)
-       [chatTableView setContentOffset:CGPointMake(0,0)];
+    [chatTableView setContentInset:UIEdgeInsetsMake(0,0, 0, 0)];
     
     [[IQKeyboardManager sharedManager]resignFirstResponder];
 }
@@ -244,15 +243,22 @@
 
 -(void)textViewDidBeginEditing:(UITextView *)textView{
  
-    [chatScrollview setScrollEnabled:NO];
-    [chatTableView setScrollEnabled:YES];
-    if([conversationArray count] <= 4){
-        [chatTableView setContentOffset:CGPointMake(0,-200)];
-        [chatTableView setScrollEnabled:NO];
-    }
+   [messageTimer invalidate];
+    messageTimer = nil;
     
+    [chatScrollview setScrollEnabled:NO];
+    if (chatTableView.contentSize.height < chatTableView.frame.size.height)
+    {
+        [chatTableView setContentInset:UIEdgeInsetsMake(200,0, 0, 0)];
+
+    }
+    else{
+        [chatTableView setContentInset:UIEdgeInsetsMake(200,0, 0, 0)];
+    }
+
     [chatView.placeHolderLabel setHidden:YES];
     
+   
 }
 
 -(void)textViewDidEndEditing:(UITextView *)textView{
@@ -260,8 +266,13 @@
     if([textView.text isEqualToString:@""])
          [chatView.placeHolderLabel setHidden:NO];
     
-       [self.view endEditing:YES];
+    [chatTableView setContentInset:UIEdgeInsetsMake(0,0, 0, 0)];
+    
+    [self.view endEditing:YES];
+    
     [chatScrollview setContentOffset:CGPointMake(0,0)];
+    
+     messageTimer = [NSTimer scheduledTimerWithTimeInterval:timerSeconds target:self selector:@selector(loadConverstionAPI) userInfo:nil repeats:YES];
     
 }
 
@@ -424,8 +435,9 @@
         
         [chatTableView reloadData];
         
-        if([conversationArray count] <= 4)
-            [chatTableView setContentOffset:CGPointMake(0,-200)];
+        if (chatTableView.contentSize.height < chatTableView.frame.size.height)
+            [chatTableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:conversationArray.count-1 inSection:0] atScrollPosition:UITableViewScrollPositionBottom animated:YES];
+            
         else
            [chatTableView scrollRectToVisible:CGRectMake(0, chatTableView.contentSize.height - chatTableView.bounds.size.height, chatTableView.bounds.size.width,chatTableView.bounds.size.height) animated:NO];
       
@@ -473,8 +485,13 @@
                                 conversationArray = [[responseDict valueForKey:@"converation"]mutableCopy];
                                 
                                 [chatTableView reloadData];
+                                if (chatTableView.contentSize.height > chatTableView.frame.size.height)
+                                    [chatTableView scrollRectToVisible:CGRectMake(0, chatTableView.contentSize.height - chatTableView.bounds.size.height, chatTableView.bounds.size.width,chatTableView.bounds.size.height) animated:YES];
+                                else{
+                                   [chatTableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:conversationArray.count-1 inSection:0] atScrollPosition:UITableViewScrollPositionBottom animated:YES];
+                                }
                                 
-                                [chatTableView scrollRectToVisible:CGRectMake(0, chatTableView.contentSize.height - chatTableView.bounds.size.height, chatTableView.bounds.size.width,chatTableView.bounds.size.height) animated:YES];
+                                
                             }
                             else{
                                 [messageTimer invalidate];
