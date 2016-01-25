@@ -836,20 +836,25 @@
     [objCustomAlterview.btnYes setHidden:YES];
     [objCustomAlterview.btnNo setHidden:YES];
     [objCustomAlterview.alertCancelButton setHidden:NO];
-    [objCustomAlterview.alertCancelButton addTarget:self action:@selector(alertPressCancel:) forControlEvents:UIControlEventTouchUpInside];
+    [objCustomAlterview.btnYes addTarget:self action:@selector(alertPressNo:) forControlEvents:UIControlEventTouchUpInside];
+    [objCustomAlterview.btnNo addTarget:self action:@selector(alertPressYes:) forControlEvents:UIControlEventTouchUpInside];
     
     [self.view addSubview:objCustomAlterview.view];
 }
 
-- (IBAction)alertPressCancel:(id)sender {
+- (IBAction)alertPressNo:(id)sender {
     
-   
-    NSString *msgStr;
-    msgStr = objCustomAlterview.alertMsgLabel.text;
     objCustomAlterview. alertBgView.hidden = YES;
     objCustomAlterview.alertMainBgView.hidden = YES;
     objCustomAlterview.view .hidden  = YES;
    
+}
+-(IBAction)alertPressYes:(id)sender
+{
+    objCustomAlterview. alertBgView.hidden = YES;
+    objCustomAlterview.alertMainBgView.hidden = YES;
+    objCustomAlterview.view .hidden  = YES;
+     [self loadValidations];
 }
 -(void)showAltermessage:(NSString*)msg
 {
@@ -859,9 +864,11 @@
     objCustomAlterview.alertBgView.hidden = NO;
     objCustomAlterview.alertMainBgView.hidden = NO;
     objCustomAlterview.alertCancelButton.hidden = NO;
-    objCustomAlterview.btnYes.hidden = YES;
-    objCustomAlterview.btnNo.hidden = YES;
-    
+    objCustomAlterview.btnYes.hidden = NO;
+    objCustomAlterview.btnNo.hidden = NO;
+    objCustomAlterview.alertCancelButton.hidden=YES;
+    [objCustomAlterview.btnYes setTitle:@"No" forState:UIControlStateNormal];
+    [objCustomAlterview.btnNo setTitle:@"Create" forState:UIControlStateNormal];
     objCustomAlterview.alertMsgLabel.text = msg;
     objCustomAlterview.alertMsgLabel.textAlignment = NSTextAlignmentCenter;
     objCustomAlterview.alertMsgLabel.lineBreakMode = NSLineBreakByWordWrapping;
@@ -910,8 +917,6 @@
             if([strAbout isEqualToString:@""]|| dataSize.height ==10){
                  return 40 ;
             }
-            
-
             else
             {
                  self.aboutTextHeight.constant=dataSize.height;
@@ -1084,6 +1089,8 @@
             cell.lastNameTxt.text  =(LastName==0)? [userDetailsDict valueForKey:@"last_name"]:LastName;
             FirstName = cell.firstnameTxt.text;
             LastName  = cell.lastNameTxt.text;
+            cell.firstnameTxt.textColor =[UIColor darkGrayColor];
+            cell.lastNameTxt.textColor = [UIColor darkGrayColor];
             cell.firstaftersepratorlbl.hidden =YES;
             [cell.firstnameTxt setEnabled:NO];
             [cell.lastNameTxt setEnabled:NO];
@@ -2354,7 +2361,8 @@
        
     }
     else
-        [self loadValidations];
+        [self showAltermessage:@"By clicking create,you agree to the Term of \n Use & Privacy policy"];
+        //[self loadValidations];
    
    
     }
@@ -2547,9 +2555,29 @@
            [self updateAPI];
          }
     }
-    
-
+  
 }
+
+#pragma mark - CustomAlterviewload
+-(void)CustomAlterviewload
+{
+    objCustomAlterview = [[CustomAlterview alloc] initWithNibName:@"CustomAlterview" bundle:nil];
+    [objCustomAlterview.alertBgView setHidden:YES];
+    [objCustomAlterview.alertMainBgView setHidden:YES];
+    [objCustomAlterview.view setHidden:YES];
+    [objCustomAlterview.alertCancelButton addTarget:self
+                                             action:@selector(alertPressCancel:)
+                                   forControlEvents:UIControlEventTouchUpInside];
+    [objCustomAlterview.btnNo addTarget:self
+                                 action:@selector(alertPressNo:)
+                       forControlEvents:UIControlEventTouchUpInside];
+    [objCustomAlterview.btnYes addTarget:self
+                                  action:@selector(alertPressYes:)
+                        forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:objCustomAlterview.view];
+}
+
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
