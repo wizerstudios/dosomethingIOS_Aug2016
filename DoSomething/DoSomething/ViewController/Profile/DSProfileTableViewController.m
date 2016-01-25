@@ -217,6 +217,7 @@
     [customNavigation.buttonBack setHidden:NO];
     }
     [customNavigation.saveBtn setHidden:NO];
+     [customNavigation.saveBtn setTitle:@"Create" forState:UIControlStateNormal];
     [self.navigationController.navigationBar addSubview:customNavigation.view];
     [customNavigation.saveBtn addTarget:self action:@selector(saveAction:) forControlEvents:UIControlEventTouchUpInside];
     [customNavigation.buttonBack addTarget:self action:@selector(backAction) forControlEvents:UIControlEventTouchUpInside];
@@ -232,6 +233,7 @@
     {
         [self initializeArrayProfile];
         [customNavigation.buttonBack setHidden:YES];
+        [customNavigation.saveBtn setTitle:@"Save" forState:UIControlStateNormal];
         
         interstAndHobbiesArray = [[profileDict valueForKey:@"hobbieslist"]mutableCopy];
         hobbiesNameArray       =[[interstAndHobbiesArray valueForKey:@"name"]mutableCopy];
@@ -1723,7 +1725,7 @@
             cell.loginTypeImg.image=[UIImage imageNamed:@"loginTypeDS"];
         }
         else{
-            cell.logilTypelbl.text =@"You are connect via through Facebook";
+            cell.logilTypelbl.text =@"You are connect via Facebook";
             cell.loginTypeImg.image=[UIImage imageNamed:@"loginTypeFB"];
         }
 
