@@ -59,7 +59,7 @@
     {
         [backGroundImageView setFrame:CGRectMake(0,0,self.frame.size.width, self.frame.size.height+5)];
         [textView setFrame:CGRectMake(10,11, 260,25)];
-        [placeHolderLabel setFrame:CGRectMake(2.0,0,textView.frame.size.width - 10.0, 26.0)];
+        [placeHolderLabel setFrame:CGRectMake(13.0,8,textView.frame.size.width - 10.0, 26.0)];
         [postButton setFrame:CGRectMake(backGroundImageView.frame.size.width-60,6, 50,34)];
     }
     
@@ -82,7 +82,7 @@
     
     [placeHolderLabel setTextColor:[UIColor lightGrayColor]];
     
-    [textView addSubview:placeHolderLabel];
+    [self addSubview:placeHolderLabel];
     
     
     
