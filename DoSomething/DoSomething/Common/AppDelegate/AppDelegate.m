@@ -283,7 +283,7 @@
         [self handleRemoteNotification:application userInfo:userInfo];
     }
     
-    [UIApplication sharedApplication].applicationIconBadgeNumber = 0;
+    //[UIApplication sharedApplication].applicationIconBadgeNumber = 0;
     //[self handleRemoteNotification:application userInfo:userInfo];
 }
 
