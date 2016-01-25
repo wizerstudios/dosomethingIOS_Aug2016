@@ -957,7 +957,10 @@
                     return 180;
                     }
                 }
-            
+              else if (userDetailsDict.count > 0)
+              {
+                 return 100;
+              }
                 return 120;
             }
             if (indexPath.row ==8) {
@@ -1069,6 +1072,8 @@
             cell.lastNameTxt.text  =(LastName==0)? [profileDict valueForKey:@"last_name"]:LastName;
             FirstName = cell.firstnameTxt.text;
             LastName  = cell.lastNameTxt.text;
+            cell.firstnameTxt.textColor =[UIColor darkGrayColor];
+            cell.lastNameTxt.textColor = [UIColor darkGrayColor];
             cell.firstaftersepratorlbl.hidden =YES;
             [cell.firstnameTxt setEnabled:NO];
             [cell.lastNameTxt setEnabled:NO];
@@ -1080,7 +1085,8 @@
             FirstName = cell.firstnameTxt.text;
             LastName  = cell.lastNameTxt.text;
             cell.firstaftersepratorlbl.hidden =YES;
-            
+            [cell.firstnameTxt setEnabled:NO];
+            [cell.lastNameTxt setEnabled:NO];
         }
         else
            {
@@ -1144,7 +1150,7 @@
         if( profileDict !=NULL){
 
             profileGenderValueLabel.text =[profileDict valueForKey:@"gender"];
-            
+           
         }
         else if(userDetailsDict.count > 0){
             
@@ -1392,47 +1398,7 @@
             cell = CellSwitchOn;
             
         }
-//        if(profileDict != nil)
-//        {
-//            cell.notificationTittlelbl.hidden=YES;
-//        }
-//        else
-//        {
-//            cell.notificationTittlelbl.hidden=NO;
-//        }
-//        
-//       [self notificationMethod];
-//        
-//        UISwipeGestureRecognizer *messBtnleftRecognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(NotificationmsgBtnSwipLeftAction:)];
-//        [messBtnleftRecognizer setDirection: UISwipeGestureRecognizerDirectionLeft];
-//        [cell.messSwitchBtn addGestureRecognizer:messBtnleftRecognizer];
-//       
-//        
-//        UISwipeGestureRecognizer *messBtnrightRecognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(NotificationmessBtnSwipRightAction:)];
-//        [messBtnrightRecognizer setDirection: UISwipeGestureRecognizerDirectionRight];
-//        [cell.messSwitchBtn addGestureRecognizer:messBtnrightRecognizer];
-//       
-//        UISwipeGestureRecognizer *soundBtnleftRecognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(NotificationsoundBtnSwipLeftAction:)];
-//        [soundBtnleftRecognizer setDirection: UISwipeGestureRecognizerDirectionLeft];
-//        [cell.SoundSwitchBtn addGestureRecognizer:soundBtnleftRecognizer];
-//        
-//        
-//        UISwipeGestureRecognizer *SoundBtnrightRecognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(NotificationsoundBtnSwipRightAction:)];
-//        [SoundBtnrightRecognizer setDirection: UISwipeGestureRecognizerDirectionRight];
-//        [cell.SoundSwitchBtn addGestureRecognizer:SoundBtnrightRecognizer];
-//
-//        UISwipeGestureRecognizer *VibrationBtnleftRecognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(NotificationvibrationBtnSwipLeftAction:)];
-//        [VibrationBtnleftRecognizer setDirection: UISwipeGestureRecognizerDirectionLeft];
-//        [cell.vibrationSwitchBtn addGestureRecognizer:VibrationBtnleftRecognizer];
-//        
-//        
-//        UISwipeGestureRecognizer *vibrationBtnrightRecognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(NotificationvibrationBtnSwipRightAction:)];
-//        [vibrationBtnrightRecognizer setDirection: UISwipeGestureRecognizerDirectionRight];
-//        [cell.vibrationSwitchBtn addGestureRecognizer:vibrationBtnrightRecognizer];
-//        
-//        [cell.vibrationSwitchBtn addTarget:self action:@selector(NotificationbuttonAction:) forControlEvents:UIControlEventTouchUpInside];
-//        [cell.SoundSwitchBtn addTarget:self action:@selector(NotificationbuttonAction:) forControlEvents:UIControlEventTouchUpInside];
-//        [cell.messSwitchBtn addTarget:self action:@selector(NotificationbuttonAction:) forControlEvents:UIControlEventTouchUpInside];
+
         
     }
 
@@ -1579,6 +1545,8 @@
         cell.currentpasswordlbl.text=@"Current password";
         cell.confirmpasswordlbl.hidden =NO;
         cell.passwordlbl.hidden =NO;
+        cell.passwordTextField.hidden =NO;
+        cell.currentpasswordlbl.hidden=NO;
         
         
         if(profileDict != NULL)
@@ -1600,6 +1568,7 @@
                 
                 [cell.emailTextField setUserInteractionEnabled:NO];
                 cell.emailTextField.text =(emailAddressToRegister==nil)?[profileDict valueForKey:@"email"]:emailAddressToRegister;
+                cell.emailTextField.textColor =[UIColor darkGrayColor];
                 if(emailPasswordToRegister==nil || [emailPasswordToRegister isEqualToString:@""])
                 {
                     emailPasswordToRegister=[profileDict valueForKey:@"password"];
@@ -1624,16 +1593,18 @@
                 cell.Accounttittlelbl.hidden=NO;
             }
             cell.emailTextField.text =(emailAddressToRegister==0)?[userDetailsDict valueForKey:@"email"]:emailAddressToRegister;
+            cell.emailTextField.textColor =[UIColor darkGrayColor];
             cell.passwordTextField.text  =(emailPasswordToRegister==0)? @"":emailPasswordToRegister;
             emailAddressToRegister   = cell.emailTextField.text;
             
-            
+            cell.passwordTextField.hidden =YES;
             cell.currentpassword.hidden=YES;
             cell.conformationpassword.hidden=YES;
-            cell.currentpasswordlbl.text =@"Password";
+            cell.currentpasswordlbl.hidden=YES;
+            //cell.currentpasswordlbl.text =@"Password";
             cell.confirmpasswordlbl.hidden =YES;
             cell.passwordlbl.hidden =YES;
-            
+            [cell.emailTextField setEnabled:NO];
             
         }
         else
@@ -2457,15 +2428,27 @@
             {
                 [self showAltermessage:EMAIL_REQUIRED];
                 [COMMON removeLoading];
+               
                 return;
+                
             }
     
             else if ([emailPasswordToRegister isEqualToString:@""] || emailPasswordToRegister == nil)
             {
         
-                [self showAltermessage:PASSWORD_REQUIRED];
-                [COMMON removeLoading];
-                return;
+                if(userDetailsDict > 0)
+                {
+                    [COMMON removeLoading];
+                    [self loadRegister];
+                    return;
+                }
+                else
+                    
+                {
+                   [self showAltermessage:PASSWORD_REQUIRED];
+                   [COMMON removeLoading];
+                    return;
+                }
             }
             else
             
