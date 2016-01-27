@@ -24,6 +24,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SettingView">
             <connections>
                 <outlet property="deletebuttonBottomoposition" destination="xA2-ar-81j" id="Fcc-hS-JCH"/>
+                <outlet property="matchSwitch" destination="xXc-gu-RJa" id="4sV-n4-NbK"/>
                 <outlet property="messLbl" destination="Mhh-yM-OrN" id="Jhj-fP-Scu"/>
                 <outlet property="messSwitch" destination="F95-4w-50u" id="ROZ-0S-GZ4"/>
                 <outlet property="notificationview" destination="foH-is-yaE" id="iXd-7b-MZg"/>
@@ -165,7 +166,7 @@
                                     <color key="textColor" red="0.55294117647058827" green="0.55294117647058827" blue="0.55294117647058827" alpha="1" colorSpace="calibratedRGB"/>
                                     <nil key="highlightedColor"/>
                                 </label>
-                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xXc-gu-RJa">
+                                <button opaque="NO" tag="604" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xXc-gu-RJa">
                                     <rect key="frame" x="153" y="35" width="50" height="38"/>
                                     <state key="normal" image="switch_on"/>
                                 </button>

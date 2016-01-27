@@ -249,6 +249,7 @@ message_send_user_id:(NSString *)message_send_user_id
              vibrationStr:(NSString *)vibrationStr
                messageStr:(NSString *)messageStr
                  soundstr:(NSString *)soundStr
+                    match:(NSString *)domatch
                   success:(WebserviceRequestSuccessHandler)success
                   failure:(WebserviceRequestFailureHandler)failure;
 
