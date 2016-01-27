@@ -27,5 +27,6 @@
 @property (strong,nonatomic)  IBOutlet UIButton * messSwitch;
 @property (strong,nonatomic)  IBOutlet UIButton *soundSwitch;
 @property (strong,nonatomic) IBOutlet UIButton *vibrationSwitch;
+@property (strong,nonatomic) IBOutlet UIButton *matchSwitch;
 
 @end

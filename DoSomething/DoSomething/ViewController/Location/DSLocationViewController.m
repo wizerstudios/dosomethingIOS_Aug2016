@@ -1053,17 +1053,28 @@
     upperCenter.x = (self.labelSlider1.upperCenter.x + self.labelSlider1.frame.origin.x+12);
     upperCenter.y = (self.labelSlider1.center.y - 20.0f);
     self.ageupperLabel.center = upperCenter;
+    NSString *upperlable;
     if(self.labelSlider1.upperValue==80)
     {
-      self.ageupperLabel.text = [NSString stringWithFormat:@"%d+",(int)self.labelSlider1.upperValue];
+        upperlable=[NSString stringWithFormat:@"%d",(int)self.labelSlider1.upperValue];
+       self.ageupperLabel.text = [NSString stringWithFormat:@"%d+",(int)self.labelSlider1.upperValue];
     }
     else
     {
+        upperlable=[NSString stringWithFormat:@"%d",(int)self.labelSlider1.upperValue];
         self.ageupperLabel.text = [NSString stringWithFormat:@"%d",(int)self.labelSlider1.upperValue];
     }
-   NSString*agefilterSTr =[NSString stringWithFormat:@"%@-%@",self.agelowerLabel.text,self.ageupperLabel.text];
+   NSString*agefilterSTr =[NSString stringWithFormat:@"%@-%@",self.agelowerLabel.text,self.ageupperLabel.text
+                           ];
     
+    if([upperlable isEqualToString:@"80+"])
+    {
+        filterAge=[NSString stringWithFormat:@"%@",self.agelowerLabel.text];
+    }
+    else
+    {
     filterAge=([agefilterSTr isEqual:@"18-80+"])?@"":agefilterSTr;
+    }
    
 
 }
