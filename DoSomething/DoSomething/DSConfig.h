@@ -125,5 +125,9 @@
 
 #define matchuserrequestsend        @"sendrequest"
 
+#define CurrentLatitude             @"currentLatitude"
+
+#define CurrentLongitude            @"currentLongitude"
+
 
 
