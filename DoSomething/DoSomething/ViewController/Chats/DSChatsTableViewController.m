@@ -88,29 +88,38 @@
     
     [super viewDidAppear:animated];
     
-    messageTimer = [NSTimer scheduledTimerWithTimeInterval:timerSeconds target:self selector:@selector(loadChatHistoryAPI) userInfo:nil repeats:YES];
+    [self startTimer];
 
+}
+
+-(void)startTimer{
+    
+    if(messageTimer == nil)
+        messageTimer = [NSTimer scheduledTimerWithTimeInterval:timerSeconds target:self selector:@selector(loadChatHistoryAPI) userInfo:nil repeats:YES];
+
+}
+
+-(void)stopTimer{
+    
+    if(messageTimer){
+      [messageTimer invalidate];
+       messageTimer =nil;
+    }
+    
 }
 
 -(void)viewwillDisappear:(BOOL)animated{
     
     [super viewWillDisappear:animated];
-    dispatch_async(dispatch_get_main_queue(), ^{
-        [messageTimer invalidate];
-        messageTimer =nil;
-    });
     
+    [self stopTimer];
     
 }
 
 -(void)viewDidDisappear:(BOOL)animated{
     
      [super viewDidDisappear:animated];
-    dispatch_async(dispatch_get_main_queue(), ^{
-        [messageTimer invalidate];
-        messageTimer =nil;
-    });
-   
+    [self stopTimer];
     
 }
 
@@ -427,9 +436,13 @@
 
 -(void)loadChatHistoryAPI{
     
+    [self stopTimer];
+    
     [webService userChatHist:ChatHistory_API sessionid:[COMMON getSessionID]
      
                      success:^(AFHTTPRequestOperation *operation, id responseObject){
+                         
+                         [self startTimer];
                          
                          NSLog(@"responseObject = %@",responseObject);
                          
@@ -445,8 +458,7 @@
                          [ChatTableView reloadData];
                          
                          [COMMON removeLoading];
-                        
-                         
+                                                  
                      }
      
                      failure:^(AFHTTPRequestOperation *operation, id error) {
