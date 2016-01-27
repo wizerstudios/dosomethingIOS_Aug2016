@@ -707,7 +707,7 @@
 {
     if(isFilteraction==NO)
     {
-        self.collectionviewxpostion.constant =(IS_IPHONE6 || IS_IPHONE6_Plus)?-300:-250;
+        self.collectionviewxpostion.constant =(IS_IPHONE6 || IS_IPHONE6_Plus)?-300:-245;
         self.FilterScrollviewYposition.constant=(IS_IPHONE6|| IS_IPHONE6_Plus)?80:58;
         self.FilterScrollviewWidth.constant    =(IS_IPHONE6|| IS_IPHONE6_Plus)?308:270;
         self.FilterScrollviewXposition.constant =(IS_IPHONE6|| IS_IPHONE6_Plus)?25:0;
