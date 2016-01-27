@@ -42,6 +42,7 @@
                              didFinishLaunchingWithOptions:launchOptions];
     
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
+        self.isNotificationSound = YES;
         [self initAPNS];
             });
     
@@ -242,13 +243,22 @@
     if(IS_GREATER_IOS8)
     {
         if ([[UIApplication sharedApplication] respondsToSelector:@selector(registerForRemoteNotifications)]) {
+            NSLog(@"isNotificationSound = %d",self.isNotificationSound);
+            if(self.isNotificationSound == NO){
+                
+               [[UIApplication sharedApplication] registerUserNotificationSettings:[UIUserNotificationSettings settingsForTypes:(UIUserNotificationTypeBadge  | UIUserNotificationTypeAlert) categories:nil]];
+
+            }
+            else{
+                 [[UIApplication sharedApplication] registerUserNotificationSettings:[UIUserNotificationSettings settingsForTypes:(UIUserNotificationTypeBadge | UIUserNotificationTypeSound | UIUserNotificationTypeAlert) categories:nil]];
+            }
+                 [[UIApplication sharedApplication] registerForRemoteNotifications];
             
-            [[UIApplication sharedApplication] registerUserNotificationSettings:[UIUserNotificationSettings settingsForTypes:(UIUserNotificationTypeBadge | UIUserNotificationTypeSound | UIUserNotificationTypeAlert)
-                                                                                                                  categories:nil]];
-            [[UIApplication sharedApplication] registerForRemoteNotifications];
             
         } else {
-            [[UIApplication sharedApplication] registerForRemoteNotificationTypes:UIRemoteNotificationTypeBadge | UIRemoteNotificationTypeAlert | UIRemoteNotificationTypeSound];
+            
+                [[UIApplication sharedApplication] registerForRemoteNotificationTypes:UIRemoteNotificationTypeBadge | UIRemoteNotificationTypeAlert | UIRemoteNotificationTypeSound];
+
         }
     }
     
