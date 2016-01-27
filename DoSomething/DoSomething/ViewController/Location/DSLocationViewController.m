@@ -1063,7 +1063,7 @@
     }
    NSString*agefilterSTr =[NSString stringWithFormat:@"%@-%@",self.agelowerLabel.text,self.ageupperLabel.text];
     
-    filterAge=([agefilterSTr isEqual:@"18"])?@"":agefilterSTr;
+    filterAge=([agefilterSTr isEqual:@"18-80+"])?@"":agefilterSTr;
    
 
 }

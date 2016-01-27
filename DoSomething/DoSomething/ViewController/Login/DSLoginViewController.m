@@ -771,9 +771,13 @@
     
     if(isForgotBackButton==YES)
     {
-        [self.navigationController popViewControllerAnimated:YES];
+        DSLoginViewController * DSLoginView  = [[DSLoginViewController alloc]initWithNibName:@"DSLoginViewController" bundle:nil];
+         DSLoginView.temp = @"Signin";
+     [self.navigationController pushViewController:DSLoginView animated:YES];
+        //[self.navigationController popViewControllerAnimated:YES];
         
     }
+   
     else{
 
     NSArray *viewControllers = [[self navigationController] viewControllers];
