@@ -43,7 +43,7 @@
     
     CustomAlterview *objCustomAlterview;
     bool isForgotBackButton;
-
+   
 }
 @end
 
@@ -55,6 +55,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
     [[IQKeyboardManager sharedManager]setEnableAutoToolbar:YES];
     fbUserDetailsDict = [[NSMutableDictionary alloc]init];
     locationManager                 = [[CLLocationManager alloc] init];
@@ -130,39 +131,40 @@
      _buttonSigInFwd.hidden=YES;
  }
     
-    if ([temp isEqualToString:@"ForgotPassword"]){
-        if (IS_IPHONE6 ||IS_IPHONE6_Plus){
-            self.layoutConstraintSignInButtonHeight.constant =47;
-            self.layoutConstraintBackButtonHeight.constant =49;
-            
-            
-        }
-        _forgotView.hidden=NO;
-        NSString *stringForgot = @"Forget Your Password?";
-        NSMutableAttributedString *attStrForgot = [[NSMutableAttributedString alloc] initWithString:stringForgot ];
-        [attStrForgot addAttribute:NSFontAttributeName value:PATRON_REG(12) range:[stringForgot rangeOfString:@"Forget Your Password?"]];
-        _forgotPasswordLabel.attributedText = attStrForgot;
-        NSString *string = @"No problem! Just fill in your Email and we'll send you password to reset instructions!";
-        NSMutableAttributedString *attStr = [[NSMutableAttributedString alloc] initWithString:string ];
-        [attStr addAttribute:NSFontAttributeName value:PATRON_REG(12) range:[string rangeOfString:@"No problem! Just fill in your Email and we'll send \n you password to reset instructions!"]];
-        _forgotInstructionTextView.attributedText = attStr;
-        _facebookButton.hidden= YES;
-        
-        labelSignIn.text =@"Reset Password";
-        //SignInAction
-        [_buttonSigInFwd setTitle:@"Sign In " forState:UIControlStateNormal];
-        [_buttonSigInFwd addTarget:self action:@selector(HaveAnAccount:) forControlEvents:UIControlEventTouchUpInside];
-        
-        //CreateAction
-        [buttonCreateAnAcc setTitle:@"Create an Account" forState:UIControlStateNormal];
-        buttonPrivacyPolicy.hidden =YES;
-        buttonTermsOfUse.hidden =YES;
-        //forgotPasswordAction
-        buttonSignIn.hidden =NO;
-        [buttonSignIn addTarget:self action:@selector(forgotPasswordAction:) forControlEvents:UIControlEventTouchUpInside];
-        isForgotBackButton=YES;
-        //[_forgotTextField setKeyboardType:UIKeyboardTypeEmailAddress];
-    }
+//    if ([temp isEqualToString:@"ForgotPassword"]){
+//        if (IS_IPHONE6 ||IS_IPHONE6_Plus){
+//            self.layoutConstraintSignInButtonHeight.constant =47;
+//            self.layoutConstraintBackButtonHeight.constant =49;
+//            
+//            
+//        }
+//        _forgotView.hidden=NO;
+//        NSString *stringForgot = @"Forget Your Password?";
+//        NSMutableAttributedString *attStrForgot = [[NSMutableAttributedString alloc] initWithString:stringForgot ];
+//        [attStrForgot addAttribute:NSFontAttributeName value:PATRON_REG(12) range:[stringForgot rangeOfString:@"Forget Your Password?"]];
+//        _forgotPasswordLabel.attributedText = attStrForgot;
+//        NSString *string = @"No problem! Just fill in your Email and we'll send you password to reset instructions!";
+//        NSMutableAttributedString *attStr = [[NSMutableAttributedString alloc] initWithString:string ];
+//        [attStr addAttribute:NSFontAttributeName value:PATRON_REG(12) range:[string rangeOfString:@"No problem! Just fill in your Email and we'll send \n you password to reset instructions!"]];
+//        _forgotInstructionTextView.attributedText = attStr;
+//        _facebookButton.hidden= YES;
+//       
+//        self.forgotTextField.text=([self.emailTxt.text isEqualToString:@""])?@"":self.emailTxt.text;
+//        labelSignIn.text =@"Reset Password";
+//        //SignInAction
+//        [_buttonSigInFwd setTitle:@"Sign In " forState:UIControlStateNormal];
+//        [_buttonSigInFwd addTarget:self action:@selector(HaveAnAccount:) forControlEvents:UIControlEventTouchUpInside];
+//        
+//        //CreateAction
+//        [buttonCreateAnAcc setTitle:@"Create an Account" forState:UIControlStateNormal];
+//        buttonPrivacyPolicy.hidden =YES;
+//        buttonTermsOfUse.hidden =YES;
+//        //forgotPasswordAction
+//        buttonSignIn.hidden =NO;
+//        [buttonSignIn addTarget:self action:@selector(forgotPasswordAction:) forControlEvents:UIControlEventTouchUpInside];
+//        isForgotBackButton=YES;
+//        //[_forgotTextField setKeyboardType:UIKeyboardTypeEmailAddress];
+//    }
      [self CustomAlterview];
 
     
@@ -255,9 +257,41 @@
     
 }
 - (IBAction)forgotPasswordButton:(id)sender {
-    DSLoginViewController * DSLoginView  = [[DSLoginViewController alloc]initWithNibName:@"DSLoginViewController" bundle:nil];
-    DSLoginView.temp = @"ForgotPassword";
-    [self.navigationController pushViewController:DSLoginView animated:YES];
+//    DSLoginViewController * DSLoginView  = [[DSLoginViewController alloc]initWithNibName:@"DSLoginViewController" bundle:nil];
+//    DSLoginView.temp = @"ForgotPassword";
+//    [self.navigationController pushViewController:DSLoginView animated:YES];
+    
+    if (IS_IPHONE6 ||IS_IPHONE6_Plus){
+        self.layoutConstraintSignInButtonHeight.constant =47;
+        self.layoutConstraintBackButtonHeight.constant =49;
+        
+        
+    }
+    _forgotView.hidden=NO;
+    NSString *stringForgot = @"Forget Your Password?";
+    NSMutableAttributedString *attStrForgot = [[NSMutableAttributedString alloc] initWithString:stringForgot ];
+    [attStrForgot addAttribute:NSFontAttributeName value:PATRON_REG(12) range:[stringForgot rangeOfString:@"Forget Your Password?"]];
+    _forgotPasswordLabel.attributedText = attStrForgot;
+    NSString *string = @"No problem! Just fill in your Email and we'll send you password to reset instructions!";
+    NSMutableAttributedString *attStr = [[NSMutableAttributedString alloc] initWithString:string ];
+    [attStr addAttribute:NSFontAttributeName value:PATRON_REG(12) range:[string rangeOfString:@"No problem! Just fill in your Email and we'll send \n you password to reset instructions!"]];
+    _forgotInstructionTextView.attributedText = attStr;
+    _facebookButton.hidden= YES;
+    
+    self.forgotTextField.text=([self.emailTxt.text isEqualToString:@""])?@"":self.emailTxt.text;
+    labelSignIn.text =@"Reset Password";
+    //SignInAction
+    [_buttonSigInFwd setTitle:@"Sign In " forState:UIControlStateNormal];
+    [_buttonSigInFwd addTarget:self action:@selector(HaveAnAccount:) forControlEvents:UIControlEventTouchUpInside];
+    
+    //CreateAction
+    [buttonCreateAnAcc setTitle:@"Create an Account" forState:UIControlStateNormal];
+    buttonPrivacyPolicy.hidden =YES;
+    buttonTermsOfUse.hidden =YES;
+    //forgotPasswordAction
+    buttonSignIn.hidden =NO;
+    [buttonSignIn addTarget:self action:@selector(forgotPasswordAction:) forControlEvents:UIControlEventTouchUpInside];
+    isForgotBackButton=YES;
     
 }
 #pragma mark forgotPasswordAction_API
@@ -351,6 +385,7 @@
 }
 
 #pragma mark- hide keyboard
+
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event{
     //hides keyboard when another part of layout was touched
     [self.view endEditing:YES];
@@ -359,12 +394,13 @@
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
     
     [textField resignFirstResponder];
-    
+     NSLog(@"textfield:%@",textField);
     return YES;
 }
 - (BOOL)textFieldShouldEndEditing:(UITextField *)textField
 {
     [textField resignFirstResponder];
+   
     return YES;
 }
 
@@ -735,9 +771,13 @@
     
     if(isForgotBackButton==YES)
     {
-        [self.navigationController popViewControllerAnimated:YES];
+        DSLoginViewController * DSLoginView  = [[DSLoginViewController alloc]initWithNibName:@"DSLoginViewController" bundle:nil];
+         DSLoginView.temp = @"Signin";
+     [self.navigationController pushViewController:DSLoginView animated:YES];
+        //[self.navigationController popViewControllerAnimated:YES];
         
     }
+   
     else{
 
     NSArray *viewControllers = [[self navigationController] viewControllers];
