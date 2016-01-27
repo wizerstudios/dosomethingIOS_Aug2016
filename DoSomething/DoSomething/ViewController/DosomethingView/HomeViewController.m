@@ -258,18 +258,15 @@
     
     currentLongitude        = [NSString stringWithFormat:@"%@",[NSNumber numberWithDouble:newLocation.coordinate.longitude]];
     
-    [[NSUserDefaults standardUserDefaults] setObject:currentLatitude  forKey:@"currentLatitude"];
-    [[NSUserDefaults standardUserDefaults] setObject:currentLongitude forKey:@"currentLongitude"];
-    [[NSUserDefaults standardUserDefaults] synchronize];
-    
-    // Turn off the location manager to save power.
+        // Turn off the location manager to save power.
     [locationManager stopUpdatingLocation];
     
     NSLog(@"current latitude & longitude for main view = %@ & %@",currentLatitude,currentLongitude);
     
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
             
-            [self loadLocationUpdateAPI];
+                  [self loadLocationUpdateAPI];
+            
             dispatch_async(dispatch_get_main_queue(), ^(){
                 
             });
@@ -539,6 +536,11 @@ minimumLineSpacingForSectionAtIndex:(NSInteger)section {
         [objWebService locationUpdate:LocationUpdate_API sessionid:[COMMON getSessionID] latitude:currentLatitude longitude:currentLongitude
                               success:^(AFHTTPRequestOperation *operation, id responseObject){
                                   NSLog(@"responseObject = %@",responseObject);
+                                  if([[responseObject valueForKey:@"status"]isEqualToString:@"success"]){
+                                      [[NSUserDefaults standardUserDefaults] setObject:currentLatitude  forKey:CurrentLatitude];
+                                      [[NSUserDefaults standardUserDefaults] setObject:currentLongitude forKey:CurrentLongitude];
+                                      [[NSUserDefaults standardUserDefaults] synchronize];
+                                  }
                               }
                               failure:^(AFHTTPRequestOperation *operation, id error) {
                                   
