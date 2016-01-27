@@ -257,7 +257,9 @@
     
     [soundSwitch setImage:[UIImage imageNamed:@"switch_off"] forState:UIControlStateNormal];
     notificationSound =@"No";
-    
+    appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+    appDelegate.isNotificationSound = NO;
+    [appDelegate initAPNS];
     
 }
 -(void)NotificationsoundBtnSwipRightAction:(id)sender
@@ -265,6 +267,7 @@
     
     [soundSwitch setImage:[UIImage imageNamed:@"switch_on"] forState:UIControlStateNormal];
     notificationSound =@"Yes";
+    [[UIApplication sharedApplication] registerForRemoteNotificationTypes:UIRemoteNotificationTypeBadge | UIRemoteNotificationTypeAlert | UIRemoteNotificationTypeSound];
     
 }
 -(void)NotificationvibrationBtnSwipLeftAction:(id)sender

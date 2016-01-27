@@ -45,5 +45,8 @@
 @property (nonatomic,strong) UILabel                            *SepratorLbl;
 @property(nonatomic,retain)NSMutableArray                       *buttons_array;
 @property (nonatomic,retain) UILabel                            *badgeCountLabel;
+@property (nonatomic) BOOL                               isNotificationSound;
+
+-(void)initAPNS;
 @end
 
