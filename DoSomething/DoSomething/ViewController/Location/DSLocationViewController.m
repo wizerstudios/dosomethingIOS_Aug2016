@@ -1064,16 +1064,16 @@
         upperlable=[NSString stringWithFormat:@"%d",(int)self.labelSlider1.upperValue];
         self.ageupperLabel.text = [NSString stringWithFormat:@"%d",(int)self.labelSlider1.upperValue];
     }
-   NSString*agefilterSTr =[NSString stringWithFormat:@"%@-%@",self.agelowerLabel.text,self.ageupperLabel.text
+   NSString*agefilterSTr =[NSString stringWithFormat:@"%@-%@",self.agelowerLabel.text,upperlable
                            ];
     
-    if([upperlable isEqualToString:@"80+"])
+    if([self.agelowerLabel.text isEqualToString:@"80"])
     {
         filterAge=[NSString stringWithFormat:@"%@",self.agelowerLabel.text];
     }
     else
     {
-    filterAge=([agefilterSTr isEqual:@"18-80+"])?@"":agefilterSTr;
+        filterAge=([agefilterSTr isEqual:@"18-80"])?@"":agefilterSTr;
     }
    
 
