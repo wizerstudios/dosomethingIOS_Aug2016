@@ -389,7 +389,7 @@
                       filter_status:onlineStatus
                       filter_gender:GenderStatus
                    filter_available:avalableStatus
-                    filter_agerange:(filterAge==nil)?@"18":filterAge
+                    filter_agerange:(filterAge==nil)?@"":filterAge
                     filter_distance:(filterDistance==nil)?@"":filterDistance
                                page:currentloadPage
                             success:^(AFHTTPRequestOperation *operation, id responseObject)
@@ -758,7 +758,7 @@
         [self.locationCollectionView setUserInteractionEnabled:YES];
         appDelegate.settingButton.userInteractionEnabled=YES;
         currentloadPage = @"";
-        filterAge = ([filterAge isEqualToString:@""])?@"18":filterAge;
+        filterAge = ([filterAge isEqualToString:@""])?@"":filterAge;
         filterDistance=([filterDistance isEqualToString:@""])?@"":filterDistance;
         isgestureenable=YES;
        
@@ -903,7 +903,7 @@
     avalableStatus=@"";
     GenderStatus =@"";
     onlineStatus  =@"";
-    filterAge     =@"18";
+    filterAge     =@"";
     filterDistance=@"";
     [self nearestLocationWebservice];
 }
@@ -958,7 +958,7 @@
     self.lowerLabel.text=@"";
     self.ageupperLabel.text=@"";
     self.agelowerLabel.text =@"";
-    filterAge=@"18";  //18-26
+    filterAge=@"";  //18-26
     filterDistance=@"";  //0-5
 }
 
@@ -1025,7 +1025,7 @@
 - (void) configureAgeChangeSlider
 {
     self.labelSlider1.minimumValue = 18;
-    self.labelSlider1.upperHandleHidden = YES;
+    //self.labelSlider1.upperHandleHidden = YES;
     self.labelSlider1.maximumValue = 80;
     
     self.labelSlider1.lowerValue = 18;
@@ -1053,10 +1053,17 @@
     upperCenter.x = (self.labelSlider1.upperCenter.x + self.labelSlider1.frame.origin.x+12);
     upperCenter.y = (self.labelSlider1.center.y - 20.0f);
     self.ageupperLabel.center = upperCenter;
-    self.ageupperLabel.text = [NSString stringWithFormat:@"80+"];
-   NSString*agefilterSTr =[NSString stringWithFormat:@"%@",self.agelowerLabel.text];
+    if(self.labelSlider1.upperValue==80)
+    {
+      self.ageupperLabel.text = [NSString stringWithFormat:@"%d+",(int)self.labelSlider1.upperValue];
+    }
+    else
+    {
+        self.ageupperLabel.text = [NSString stringWithFormat:@"%d",(int)self.labelSlider1.upperValue];
+    }
+   NSString*agefilterSTr =[NSString stringWithFormat:@"%@-%@",self.agelowerLabel.text,self.ageupperLabel.text];
     
-    filterAge=([agefilterSTr isEqual:@"18"])?@"18":agefilterSTr;
+    filterAge=([agefilterSTr isEqual:@"18-80+"])?@"":agefilterSTr;
    
 
 }
