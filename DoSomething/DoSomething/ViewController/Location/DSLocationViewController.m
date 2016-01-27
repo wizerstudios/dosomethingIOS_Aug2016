@@ -1053,7 +1053,7 @@
     upperCenter.x = (self.labelSlider1.upperCenter.x + self.labelSlider1.frame.origin.x+12);
     upperCenter.y = (self.labelSlider1.center.y - 20.0f);
     self.ageupperLabel.center = upperCenter;
-    self.ageupperLabel.text = [NSString stringWithFormat:@"%d+", (int)self.labelSlider1.upperValue];
+    self.ageupperLabel.text = [NSString stringWithFormat:@"80+"];
    NSString*agefilterSTr =[NSString stringWithFormat:@"%@",self.agelowerLabel.text];
     
     filterAge=([agefilterSTr isEqual:@"18"])?@"18":agefilterSTr;
