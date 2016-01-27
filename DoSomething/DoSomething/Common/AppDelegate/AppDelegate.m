@@ -144,7 +144,7 @@
     locationButton.frame=CGRectMake(buttonsView.frame.origin.x+80,3,45,45);
     menuButton.frame=CGRectMake(buttonsView.center.x-18,3,45,45);
     chatsButton.frame=CGRectMake(menuButton.frame.origin.x+menuButton.frame.size.width+20,3,45,45);
-    settingButton.frame =CGRectMake(chatsButton.frame.origin.x+chatsButton.frame.size.width+20,3,45,45);
+    settingButton.frame =CGRectMake(chatsButton.frame.origin.x+chatsButton.frame.size.width+10,3,45,45);
     
     [badgeCountLabel setFrame:CGRectMake(menuButton.frame.origin.x+menuButton.frame.size.width+45,5,20,20)];
     badgeCountLabel.layer.cornerRadius = 10.0;
