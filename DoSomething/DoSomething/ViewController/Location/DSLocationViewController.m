@@ -54,6 +54,7 @@
     BOOL isAllPost;
     BOOL isFilteraction;
     BOOL isLoadData;
+    BOOL isfilterChange;
     
     
 }
@@ -111,7 +112,7 @@
     isLoadData=NO;
     isLoadWebservice=YES;
     isgestureenable =YES;
-    
+    isfilterChange=NO;
     [self configureAgeChangeSlider];
      [self configureLabelSlider];
     
@@ -306,53 +307,7 @@
     appDelegate.SepratorLbl.hidden=YES;
     [appDelegate.locationButton setBackgroundImage:[UIImage imageNamed:@"loaction_normal.png"] forState:UIControlStateNormal];
 }
-#pragma mark get user CurrentLocation
 
-//- (void)getUserCurrenLocation{
-//    
-//    if(!locationManager){
-//        locationManager                 = [[CLLocationManager alloc] init];
-//        locationManager.delegate        = self;
-//        locationManager.distanceFilter  = kCLLocationAccuracyKilometer;
-//        locationManager.desiredAccuracy = kCLLocationAccuracyBest;
-//        locationManager.activityType    = CLActivityTypeAutomotiveNavigation;
-//    }
-//    if ([locationManager respondsToSelector:@selector(requestAlwaysAuthorization)])
-//        [locationManager requestAlwaysAuthorization];
-//    
-//    if ([locationManager respondsToSelector:@selector(requestWhenInUseAuthorization)])
-//        [locationManager requestWhenInUseAuthorization];
-//    
-//    [locationManager startUpdatingLocation];
-//}
-//
-//-(void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations {
-//    
-//    CLLocation *newLocation = [locations lastObject];
-//    currentLatitude         = [NSString stringWithFormat:@"%@",[NSNumber numberWithDouble:newLocation.coordinate.latitude]];
-//    currentLongitude        = [NSString stringWithFormat:@"%@",[NSNumber numberWithDouble:newLocation.coordinate.longitude]];
-//    
-//    [[NSUserDefaults standardUserDefaults] setObject:currentLatitude  forKey:@"currentLatitude"];
-//    [[NSUserDefaults standardUserDefaults] setObject:currentLongitude forKey:@"currentLongitude"];
-//    [[NSUserDefaults standardUserDefaults] synchronize];
-//    
-//    [locationManager stopUpdatingLocation];
-//    
-//    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-//        
-//        [self loadLocationUpdateAPI];
-//        
-//        
-//    });
-//    
-//    
-//}
-//
-//- (void)locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error
-//{
-//    
-//   
-//}
 #pragma mark - loadLocationUpdateAPI
 -(void)loadLocationUpdateAPI{
     
@@ -761,8 +716,12 @@
         filterAge = ([filterAge isEqualToString:@""])?@"":filterAge;
         filterDistance=([filterDistance isEqualToString:@""])?@"":filterDistance;
         isgestureenable=YES;
+       if( isfilterChange==YES)
+       {
+            [self nearestLocationWebservice];
+           isfilterChange=NO;
+       }
        
-        [self nearestLocationWebservice];
     }
     self.upperLabel.text=@"";
     self.lowerLabel.text=@"";
@@ -785,6 +744,7 @@
         self.offlineBtn.backgroundColor =[UIColor whiteColor];
         self.statusBothBtn.backgroundColor=[UIColor whiteColor];
         onlineStatus=@"1";
+        isfilterChange=YES;
         
     }
     else if ([sender tag] == 302)
@@ -793,7 +753,7 @@
         self.offlineBtn.backgroundColor =[UIColor redColor];
         self.statusBothBtn.backgroundColor=[UIColor whiteColor];
         onlineStatus =@"0";
-        
+        isfilterChange=YES;
     }
     else if ([sender tag] == 303)
     {
@@ -801,6 +761,7 @@
         self.offlineBtn.backgroundColor =[UIColor whiteColor];
         self.statusBothBtn.backgroundColor=[UIColor redColor];
         onlineStatus =@"";
+        isfilterChange=YES;
     }
     else if ([sender tag]== 304)
     {
@@ -808,6 +769,7 @@
         self.avalableNoBtn.backgroundColor =[UIColor whiteColor];
         self.avalableBothBtn.backgroundColor=[UIColor whiteColor];
          avalableStatus=@"Yes";
+         isfilterChange=YES;
         
     }
     else if ([sender tag] == 305)
@@ -816,6 +778,7 @@
         self.avalableNoBtn.backgroundColor =[UIColor redColor];
         self.avalableBothBtn.backgroundColor=[UIColor whiteColor];
         avalableStatus =@"No";
+        isfilterChange=YES;
        
     }
     else if ([sender tag] == 306)
@@ -824,6 +787,7 @@
         self.avalableNoBtn.backgroundColor =[UIColor whiteColor];
         self.avalableBothBtn.backgroundColor=[UIColor redColor];
         avalableStatus =@"";
+        isfilterChange=YES;
        
     }
     
@@ -833,6 +797,7 @@
         self.FemaleBtn.backgroundColor =[UIColor whiteColor];
         self.genderbothBtn.backgroundColor=[UIColor whiteColor];
         GenderStatus =@"male";
+        isfilterChange=YES;
         
     }
     else if ([sender tag] == 308)
@@ -841,6 +806,7 @@
         self.FemaleBtn.backgroundColor =[UIColor redColor];
         self.genderbothBtn.backgroundColor=[UIColor whiteColor];
         GenderStatus =@"female";
+        isfilterChange=YES;
         
     }
     else if ([sender tag] == 309)
@@ -849,7 +815,7 @@
         self.FemaleBtn.backgroundColor =[UIColor whiteColor];
         self.genderbothBtn.backgroundColor=[UIColor redColor];
         GenderStatus =@"";
-        
+        isfilterChange=YES;
     }
 }
 
@@ -1019,6 +985,7 @@
    
 
      filterDistance=([filterdistanceStr isEqual:@"0-0"])?@"":filterdistanceStr;
+     isfilterChange=YES;
 }
 
 
@@ -1075,7 +1042,7 @@
     {
         filterAge=([agefilterSTr isEqual:@"18-80"])?@"":agefilterSTr;
     }
-   
+    isfilterChange=YES;
 
 }
 
