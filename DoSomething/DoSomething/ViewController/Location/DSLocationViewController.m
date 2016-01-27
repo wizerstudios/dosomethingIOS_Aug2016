@@ -1026,16 +1026,16 @@
 {
     self.labelSlider1.minimumValue = 18;
     self.labelSlider1.upperHandleHidden = YES;
-    self.labelSlider1.maximumValue = 200;
+    self.labelSlider1.maximumValue = 80;
     
     self.labelSlider1.lowerValue = 18;
-    self.labelSlider1.upperValue = 200;
+    self.labelSlider1.upperValue = 80;
     
     
     [self configureMetalThemeForSlider:self.labelSlider1];
     
     self.labelSlider1.lowerValue = 18;
-    self.labelSlider1.upperValue = 200;
+    self.labelSlider1.upperValue = 80;
 
 }
 
@@ -1049,11 +1049,11 @@
     self.agelowerLabel.center = lowerCenter;
     self.agelowerLabel.text = [NSString stringWithFormat:@"%d", (int)self.labelSlider1.lowerValue];
     
-//    CGPoint upperCenter;
-//    upperCenter.x = (self.labelSlider1.upperCenter.x + self.labelSlider1.frame.origin.x+12);
-//    upperCenter.y = (self.labelSlider1.center.y - 20.0f);
-//    self.ageupperLabel.center = upperCenter;
-//    self.ageupperLabel.text = [NSString stringWithFormat:@"%d", (int)self.labelSlider1.upperValue];
+    CGPoint upperCenter;
+    upperCenter.x = (self.labelSlider1.upperCenter.x + self.labelSlider1.frame.origin.x+12);
+    upperCenter.y = (self.labelSlider1.center.y - 20.0f);
+    self.ageupperLabel.center = upperCenter;
+    self.ageupperLabel.text = [NSString stringWithFormat:@"80+"];
    NSString*agefilterSTr =[NSString stringWithFormat:@"%@",self.agelowerLabel.text];
     
     filterAge=([agefilterSTr isEqual:@"18"])?@"18":agefilterSTr;
