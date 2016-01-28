@@ -88,8 +88,8 @@ NSUInteger DeviceSystemMajorVersion() {
     _upperHandleHidden = NO;
     _lowerHandleHidden = NO;
     
-    _lowerHandleHiddenWidth = 2.0f;
-    _upperHandleHiddenWidth = 2.0f;
+    _lowerHandleHiddenWidth = 5.0f;
+    _upperHandleHiddenWidth = 5.0f;
     
     _lowerTouchEdgeInsets = UIEdgeInsetsMake(-5,-5,-5,-5);
     _upperTouchEdgeInsets = UIEdgeInsetsMake(-5, -5, -5, -5);
@@ -391,7 +391,7 @@ NSUInteger DeviceSystemMajorVersion() {
     }
     
     float xValue = ((self.bounds.size.width-thumbRect.size.width)*((value - _minimumValue) / (_maximumValue - _minimumValue)));
-    thumbRect.origin = CGPointMake(xValue, (self.bounds.size.height/2.0f+15) - (thumbRect.size.height/2.0f+15));
+    thumbRect.origin = CGPointMake(xValue+2, (self.bounds.size.height/2.0f+15) - (thumbRect.size.height/2.0f+15));
     
     return CGRectIntegral(thumbRect);
 
