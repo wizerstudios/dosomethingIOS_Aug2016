@@ -282,21 +282,7 @@
     NSLog(@"ProfileName = %@",ProfileName);
     
     if([ProfileName length]>0){
-       
-//        downloadImageFromUrl(ProfileName,Cell.profileImageView);
-//        
-//        [Cell.profileImageView setImage:[UIImage imageNamed:ProfileName]];
-        
-       [Cell.profileImageView setImageWithURL:[NSURL URLWithString:ProfileName]];
-       if(Cell.profileImageView.image==nil)
-       {
-           [Cell.activeIndicator startAnimating];
-       }
-        else
-        {
-           [Cell.activeIndicator stopAnimating];
-            [Cell.activeIndicator setHidden:YES];
-        }
+         [Cell.profileImageView setImageWithURL:[NSURL URLWithString:ProfileName]];
         
     }
     else{
