@@ -140,11 +140,11 @@
     
     [settingButton addTarget:self action:@selector(settingView) forControlEvents:UIControlEventTouchUpInside];
     
-    profileButton.frame=CGRectMake(buttonsView.frame.origin.x+20,3,45,45);
-    locationButton.frame=CGRectMake(buttonsView.frame.origin.x+80,3,45,45);
-    menuButton.frame=CGRectMake(buttonsView.center.x-18,3,45,45);
-    chatsButton.frame=CGRectMake(menuButton.frame.origin.x+menuButton.frame.size.width+20,3,45,45);
-    settingButton.frame =CGRectMake(chatsButton.frame.origin.x+chatsButton.frame.size.width+10,3,45,45);
+    profileButton.frame=CGRectMake(20,3,40,40);
+    locationButton.frame=CGRectMake(profileButton.frame.origin.x+profileButton.frame.size.width+20,3,40,40);
+    menuButton.frame=CGRectMake(buttonsView.center.x-15,3,45,45);
+    chatsButton.frame=CGRectMake(menuButton.frame.origin.x+menuButton.frame.size.width+17,3,40,40);
+    settingButton.frame =CGRectMake(chatsButton.frame.origin.x+chatsButton.frame.size.width+17,3,40,40);
     
     [badgeCountLabel setFrame:CGRectMake(menuButton.frame.origin.x+menuButton.frame.size.width+45,5,20,20)];
     badgeCountLabel.layer.cornerRadius = 10.0;
