@@ -448,22 +448,24 @@
     
     [self stopTimer];
     
-    [webService userChatHist:ChatHistory_API sessionid:[COMMON getSessionID]
-     
+    [webService userChatHist:ChatHistory_API sessionid:[COMMON getSessionID] dateTime:[COMMON getCurrentDateTime]
                      success:^(AFHTTPRequestOperation *operation, id responseObject){
+                         
                          
                          if(_isStartTimer == YES)
                               [self startTimer];
                          
                          NSLog(@"responseObject = %@",responseObject);
+                         if([[[responseObject valueForKey:@"getchathistory"] valueForKey:@"status"]isEqualToString:@"success"]){
                          
-                         chatArray = [[[responseObject valueForKey:@"getchathistory"]valueForKey:@"converation"] mutableCopy];
-                         
-                         [self loadTabbarMsgCount];
-                                                 
-                         [refreshControl endRefreshing];
-                         
-                         [ChatTableView reloadData];
+                             chatArray = [[[responseObject valueForKey:@"getchathistory"]valueForKey:@"converation"] mutableCopy];
+                             
+                             [self loadTabbarMsgCount];
+                                                     
+                             [refreshControl endRefreshing];
+                             
+                             [ChatTableView reloadData];
+                         }
                          
                          [COMMON removeLoading];
                                                   

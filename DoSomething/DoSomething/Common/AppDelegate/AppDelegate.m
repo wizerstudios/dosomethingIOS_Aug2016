@@ -45,7 +45,7 @@
     [[NSUserDefaults standardUserDefaults]removeObjectForKey:CurrentLatitude];
     
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
-        self.isNotificationSound = YES;
+       // self.isNotificationSound = YES;
         [self initAPNS];
             });
     
@@ -140,11 +140,11 @@
     
     [settingButton addTarget:self action:@selector(settingView) forControlEvents:UIControlEventTouchUpInside];
     
-    profileButton.frame=CGRectMake(buttonsView.frame.origin.x+20,3,45,45);
-    locationButton.frame=CGRectMake(buttonsView.frame.origin.x+80,3,45,45);
-    menuButton.frame=CGRectMake(buttonsView.center.x-18,3,45,45);
-    chatsButton.frame=CGRectMake(menuButton.frame.origin.x+menuButton.frame.size.width+20,3,45,45);
-    settingButton.frame =CGRectMake(chatsButton.frame.origin.x+chatsButton.frame.size.width+10,3,45,45);
+    profileButton.frame=CGRectMake(20,3,40,40);
+    locationButton.frame=CGRectMake(profileButton.frame.origin.x+profileButton.frame.size.width+20,3,40,40);
+    menuButton.frame=CGRectMake(buttonsView.center.x-15,3,45,45);
+    chatsButton.frame=CGRectMake(menuButton.frame.origin.x+menuButton.frame.size.width+17,3,40,40);
+    settingButton.frame =CGRectMake(chatsButton.frame.origin.x+chatsButton.frame.size.width+17,3,40,40);
     
     [badgeCountLabel setFrame:CGRectMake(menuButton.frame.origin.x+menuButton.frame.size.width+45,5,20,20)];
     badgeCountLabel.layer.cornerRadius = 10.0;
@@ -246,15 +246,15 @@
     if(IS_GREATER_IOS8)
     {
         if ([[UIApplication sharedApplication] respondsToSelector:@selector(registerForRemoteNotifications)]) {
-            NSLog(@"isNotificationSound = %d",self.isNotificationSound);
-            if(self.isNotificationSound == NO){
-                
-               [[UIApplication sharedApplication] registerUserNotificationSettings:[UIUserNotificationSettings settingsForTypes:(UIUserNotificationTypeBadge  | UIUserNotificationTypeAlert) categories:nil]];
-
-            }
-            else{
+            //NSLog(@"isNotificationSound = %d",self.isNotificationSound);
+//            if(self.isNotificationSound == NO){
+//                
+//               [[UIApplication sharedApplication] registerUserNotificationSettings:[UIUserNotificationSettings settingsForTypes:(UIUserNotificationTypeBadge  | UIUserNotificationTypeAlert) categories:nil]];
+//
+//            }
+//            else{
                  [[UIApplication sharedApplication] registerUserNotificationSettings:[UIUserNotificationSettings settingsForTypes:(UIUserNotificationTypeBadge | UIUserNotificationTypeSound | UIUserNotificationTypeAlert) categories:nil]];
-            }
+//            }
                  [[UIApplication sharedApplication] registerForRemoteNotifications];
             
             
@@ -360,9 +360,11 @@
 }
 
 -(void)loadConverstaionAPI:(NSString *)_conversationID{
+    
+    
     webservice = [[DSWebservice alloc]init];
     
-    [webservice getConversation:GetConversation sessionID:[COMMON getSessionID] conversationId:_conversationID
+    [webservice getConversation:GetConversation sessionID:[COMMON getSessionID] conversationId:_conversationID dateTime:[COMMON getCurrentDateTime]
                         success:^(AFHTTPRequestOperation *operation, id responseObject){
                             
                             NSMutableDictionary *responseDict = [[NSMutableDictionary alloc]init];
@@ -429,7 +431,6 @@
         [badgeCountLabel setHidden:NO];
     }
     
-
     
 }
 

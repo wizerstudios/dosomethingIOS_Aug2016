@@ -47,6 +47,8 @@ typedef enum {
 - (NSMutableDictionary *)getUserDetails;
 //- (NSString *)getUserId;
 
+-(NSString *)getCurrentDateTime;
+
 - (void)LoadIcon:(UIView *)view;
 - (void)removeLoading;
 -(BOOL)isInternetReachable;

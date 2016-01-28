@@ -286,9 +286,9 @@
     
     [soundSwitch setImage:[UIImage imageNamed:@"switch_off"] forState:UIControlStateNormal];
     notificationSound =@"No";
-    appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
-    appDelegate.isNotificationSound = NO;
-    [appDelegate initAPNS];
+//    appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+//    appDelegate.isNotificationSound = NO;
+//    [appDelegate initAPNS];
     
 }
 -(void)NotificationsoundBtnSwipRightAction:(id)sender
