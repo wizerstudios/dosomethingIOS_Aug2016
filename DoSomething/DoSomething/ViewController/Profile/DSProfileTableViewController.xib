@@ -7,8 +7,8 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="DSProfileTableViewController">
             <connections>
-                <outlet property="layoutConstraintTableViewYPos" destination="jgy-5W-yw2" id="qDd-vF-ygy"/>
-                <outlet property="tableViewHeightConstraint" destination="TTf-Wp-Bzm" id="7AJ-fB-uTN"/>
+                <outlet property="layoutConstraintTableViewYPos" destination="aAr-Ul-5Um" id="zf3-Bo-H40"/>
+                <outlet property="tableViewHeightConstraint" destination="DO7-8o-td3" id="W9z-YD-cXW"/>
                 <outlet property="tableviewProfile" destination="HcG-cC-Fek" id="D9w-cN-jlO"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
@@ -18,25 +18,36 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="518"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="HcG-cC-Fek">
-                    <rect key="frame" x="13" y="3" width="294" height="500"/>
-                    <color key="backgroundColor" red="0.90980392156862744" green="0.90980392156862744" blue="0.90980392156862744" alpha="1" colorSpace="calibratedRGB"/>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Bfj-Xy-2mh">
+                    <rect key="frame" x="0.0" y="0.0" width="320" height="518"/>
+                    <subviews>
+                        <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="HcG-cC-Fek">
+                            <rect key="frame" x="13" y="5" width="294" height="465"/>
+                            <color key="backgroundColor" red="0.90980392156862744" green="0.90980392156862744" blue="0.90980392156862744" alpha="1" colorSpace="calibratedRGB"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="465" id="DO7-8o-td3"/>
+                            </constraints>
+                            <color key="sectionIndexBackgroundColor" red="0.90980392160000001" green="0.90980392160000001" blue="0.90980392160000001" alpha="1" colorSpace="calibratedRGB"/>
+                            <connections>
+                                <outlet property="dataSource" destination="-1" id="6gW-oT-ZQd"/>
+                                <outlet property="delegate" destination="-1" id="gkf-pE-zHf"/>
+                            </connections>
+                        </tableView>
+                    </subviews>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="500" id="r7s-6G-uXo"/>
+                        <constraint firstAttribute="trailing" secondItem="HcG-cC-Fek" secondAttribute="trailing" constant="13" id="Nlj-0G-0mA"/>
+                        <constraint firstItem="HcG-cC-Fek" firstAttribute="leading" secondItem="Bfj-Xy-2mh" secondAttribute="leading" constant="13" id="YpE-he-VUx"/>
+                        <constraint firstItem="HcG-cC-Fek" firstAttribute="top" secondItem="Bfj-Xy-2mh" secondAttribute="top" constant="5" id="aAr-Ul-5Um"/>
                     </constraints>
-                    <color key="sectionIndexBackgroundColor" red="0.90980392160000001" green="0.90980392160000001" blue="0.90980392160000001" alpha="1" colorSpace="calibratedRGB"/>
-                    <connections>
-                        <outlet property="dataSource" destination="-1" id="6gW-oT-ZQd"/>
-                        <outlet property="delegate" destination="-1" id="gkf-pE-zHf"/>
-                    </connections>
-                </tableView>
+                </view>
             </subviews>
             <color key="backgroundColor" red="0.90980392160000001" green="0.90980392160000001" blue="0.90980392160000001" alpha="1" colorSpace="calibratedRGB"/>
             <constraints>
-                <constraint firstAttribute="bottom" secondItem="HcG-cC-Fek" secondAttribute="bottom" constant="15" id="TTf-Wp-Bzm"/>
-                <constraint firstItem="HcG-cC-Fek" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="13" id="Uqe-T6-zuE"/>
-                <constraint firstItem="HcG-cC-Fek" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="3" id="jgy-5W-yw2"/>
-                <constraint firstAttribute="trailing" secondItem="HcG-cC-Fek" secondAttribute="trailing" constant="13" id="lWr-FT-vEd"/>
+                <constraint firstItem="Bfj-Xy-2mh" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="8QC-2b-VyL"/>
+                <constraint firstAttribute="bottom" secondItem="Bfj-Xy-2mh" secondAttribute="bottom" id="LzU-OQ-x5j"/>
+                <constraint firstItem="Bfj-Xy-2mh" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="Npe-MP-abf"/>
+                <constraint firstAttribute="trailing" secondItem="Bfj-Xy-2mh" secondAttribute="trailing" id="dGM-he-Spt"/>
             </constraints>
             <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="lightContent"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>

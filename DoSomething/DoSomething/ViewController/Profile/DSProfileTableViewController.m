@@ -241,7 +241,8 @@
         interstAndHobbiesArray = [[profileDict valueForKey:@"hobbieslist"]mutableCopy];
         hobbiesNameArray       =[[interstAndHobbiesArray valueForKey:@"name"]mutableCopy];
         imageNormalArray     = [[interstAndHobbiesArray valueForKey:@"image"]mutableCopy];
-        self.tableViewHeightConstraint.constant=(IS_IPHONE6_Plus||IS_IPHONE6)? 50:50;
+        //self.tableViewHeightConstraint.constant=(IS_IPHONE6_Plus||IS_IPHONE6)? 50:50;
+         self.tableViewHeightConstraint.constant=(IS_IPHONE6_Plus||IS_IPHONE6)? self.view.frame.size.height-70:self.tableviewProfile.frame.size.height+50;
     }
     
     [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"SelectedItemCategoryID"];
@@ -795,7 +796,7 @@
 }
 
 -(void)initializeArray{
-    
+    self.tableViewHeightConstraint.constant=(IS_IPHONE6_Plus||IS_IPHONE6)? self.view.frame.size.height+120:self.view.frame.size.height+55;
     placeHolderArray = [[NSMutableArray alloc] initWithCapacity: 1];
     
     [placeHolderArray insertObject:[[NSMutableArray alloc]initWithObjects:[NSMutableDictionary dictionaryWithObjectsAndKeys:@"Image",@"placeHolder", nil],
