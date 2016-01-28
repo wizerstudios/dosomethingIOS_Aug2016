@@ -323,10 +323,18 @@
         
         else
         {
-            self.aboutTextHeight.constant=dataSize.height+30;
-            self.aboutviewHeight.constant=self.aboutTextHeight.constant;
-            
-            return self.aboutviewHeight.constant-10;
+            //self.aboutTextHeight.constant=dataSize.height+30;
+            //self.aboutviewHeight.constant=self.aboutTextHeight.constant;
+            if(IS_GREATER_IOS7)
+            {
+                return dataSize.height+20;
+            }
+            else
+            {
+                return self.aboutviewHeight.constant-10;
+            }
+
+            //return self.aboutviewHeight.constant-10;
        }
         
     }
@@ -407,8 +415,19 @@
         NSString *strAbout=[userDetailsArray valueForKey:@"about"];
         NearbyCustomcell.aboutText.text = strAbout;
         NearbyCustomcell.aboutText.textColor=[UIColor lightGrayColor];
+        dataSize = [COMMON getControlHeight:strAbout withFontName:@"Patron-Medium" ofSize:10.0 withSize:CGSizeMake(150,tableView.frame.size.height+60)];
+        if([strAbout isEqualToString:@""]|| dataSize.height <=34)
+        {
+            //self.aboutTextHeight.constant=dataSize.height+30;
+            //self.aboutviewHeight.constant=self.aboutTextHeight.constant;
+        }
         
-       
+        
+        else
+        {
+            self.aboutTextHeight.constant=dataSize.height+30;
+            self.aboutviewHeight.constant=self.aboutTextHeight.constant-10;
+        }
         
     }
     
