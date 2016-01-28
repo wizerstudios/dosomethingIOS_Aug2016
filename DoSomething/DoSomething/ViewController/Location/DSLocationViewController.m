@@ -64,6 +64,8 @@
 @property(nonatomic,strong)IBOutlet NSLayoutConstraint  * FilterScrollviewYposition;
 @property(nonatomic,strong)IBOutlet NSLayoutConstraint  * FilterScrollviewWidth;
 @property(nonatomic,strong)IBOutlet NSLayoutConstraint  * FilterScrollviewXposition;
+@property(nonatomic,strong)IBOutlet NSLayoutConstraint  * MatchImgviewXposition;
+@property(nonatomic,strong)IBOutlet NSLayoutConstraint  * MatchImgviewYposition;
 @property (nonatomic,strong)  CLLocationManager         *  locationManager;
 
 @property(nonatomic,strong) IBOutlet UIButton *onlineBtn;
@@ -201,7 +203,20 @@
 {
     if(matchUserArray !=0 && ![matchUserArray isEqual:@""])
     {
-         self.matchActivityView.hidden =NO;
+        self.matchActivityView.hidden =NO;
+        if(IS_IPHONE6)
+        {
+           self.MatchImgviewXposition.constant=50;
+        }
+        else if (IS_IPHONE6_Plus)
+        {
+            self.MatchImgviewXposition.constant=70;
+        }
+        else
+        {
+            self.MatchImgviewXposition.constant=20;
+        }
+        self.MatchImgviewYposition.constant=(IS_IPHONE6||IS_IPHONE6_Plus)?170:130;
      NSString *matchprofileImg =[matchUserArray valueForKey:@"image1_thumb"];
         if([matchprofileImg isEqualToString:@""] || matchprofileImg ==nil)
         {
