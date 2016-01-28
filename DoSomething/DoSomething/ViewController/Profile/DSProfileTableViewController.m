@@ -2235,6 +2235,7 @@
                notification_message:isNotification_message
                notification_sound  :isNotification_sound
              notification_vibration:isNotification_vibration
+                           pushType:push_type
                             success:^(AFHTTPRequestOperation *operation, id responseObject){
                                 [COMMON removeLoading];
                             }

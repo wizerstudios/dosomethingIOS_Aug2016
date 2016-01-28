@@ -134,10 +134,11 @@ static NSString       *ServiceMimeType    = @"image/jpeg";
        longitude:(NSString *)longitude
           device:(NSString *)device
         deviceid:(NSString *)deviceid
+        pushType:(NSString *)pushType
          success:(WebserviceRequestSuccessHandler)success
          failure:(WebserviceRequestFailureHandler)failure
 {
-    urlString = [URL_FOR_RESOURCE(@"") stringByAppendingString:[NSString stringWithFormat:@"%@?type=%@&email=%@&password=%@&profileId=%@&dob=%@&profileImage=%@&gender=%@&latitude=%@&longitude=%@&device=%@&deviceid=%@",loginURL,type,email,password,profileId,dob,profileImage,gender,latitude,longitude,device,deviceid]];
+    urlString = [URL_FOR_RESOURCE(@"") stringByAppendingString:[NSString stringWithFormat:@"%@?type=%@&email=%@&password=%@&profileId=%@&dob=%@&profileImage=%@&gender=%@&latitude=%@&longitude=%@&device=%@&deviceid=%@&push_type=%@",loginURL,type,email,password,profileId,dob,profileImage,gender,latitude,longitude,device,deviceid,pushType]];
     
     NSLog(@"urlString = %@",urlString);
     
@@ -173,6 +174,7 @@ static NSString       *ServiceMimeType    = @"image/jpeg";
 notification_message:(NSString *)isnotification_message
 notification_sound  :(NSString *)isnotification_sound
 notification_vibration:(NSString *)isnotification_vibration
+            pushType:(NSString *)pushType
              success:(WebserviceRequestSuccessHandler)success
              failure:(WebserviceRequestFailureHandler)failure
 {
@@ -198,6 +200,7 @@ notification_vibration:(NSString *)isnotification_vibration
     if(isnotification_message)  [registerDetails    setObject:isnotification_message forKey:@"notification_message"];
     if(isnotification_sound)    [registerDetails    setObject:isnotification_sound  forKey:@"notification_sound"];
     if(isnotification_vibration)[registerDetails    setObject:isnotification_vibration  forKey:@"notification_vibration"];
+    if(pushType) [registerDetails setObject:pushType forKey:@"push_type"];
     if(fbProfile)  [registerDetails setObject:fbProfile forKey:@"profileImage1"];
     
     NSDateFormatter *formatter = [[NSDateFormatter alloc]init];

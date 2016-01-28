@@ -643,6 +643,7 @@
                       longitude:currentLongitude
                          device:@"iPhone"
                        deviceid:deviceToken
+                       pushType:push_type
                         success:^(AFHTTPRequestOperation *operation, id responseObject)
          {
              
@@ -718,6 +719,7 @@
                notification_message:@"Yes"
                notification_sound  :@"Yes"
              notification_vibration:@"Yes"
+                           pushType:push_type
                             success:^(AFHTTPRequestOperation *operation, id responseObject){
                                 [COMMON removeLoading];
                             }

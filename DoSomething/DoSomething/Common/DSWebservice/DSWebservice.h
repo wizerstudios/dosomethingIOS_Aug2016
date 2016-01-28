@@ -19,9 +19,11 @@ typedef void (^WebserviceRequestXMLFailureHandler)(AFHTTPRequestOperation  *oper
 
 //DEVELOPMENT URL
 #define BASE_URL @"http://indiawebcoders.com/mobileapps/dosomething/"
+#define push_type @"dev"
 
 //PRODUCTION URL
 //#define BASE_URL @"http://wiztestinghost.com/dosomething/"
+//#define push_type @"pro"
 
 #define URL_FOR_RESOURCE(RESOURCE) [NSString stringWithFormat:@"%@%@",BASE_URL,RESOURCE]
 
@@ -70,6 +72,7 @@ typedef void (^WebserviceRequestXMLFailureHandler)(AFHTTPRequestOperation  *oper
        longitude:(NSString *)longitude
           device:(NSString *)device
         deviceid:(NSString *)deviceid
+        pushType:(NSString *)pushType
          success:(WebserviceRequestSuccessHandler)success
          failure:(WebserviceRequestFailureHandler)failure;
 
@@ -97,6 +100,7 @@ typedef void (^WebserviceRequestXMLFailureHandler)(AFHTTPRequestOperation  *oper
 notification_message:(NSString *)isnotification_message
 notification_sound  :(NSString *)isnotification_sound
 notification_vibration:(NSString*)isnotification_vibration
+            pushType:(NSString *)pushType
             success:(WebserviceRequestSuccessHandler)success
              failure:(WebserviceRequestFailureHandler)failure;
 
