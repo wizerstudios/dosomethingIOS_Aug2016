@@ -452,7 +452,6 @@
      
                      success:^(AFHTTPRequestOperation *operation, id responseObject){
                          
-                         NSLog(@"start timer = %d",_isStartTimer);
                          if(_isStartTimer == YES)
                               [self startTimer];
                          
@@ -460,11 +459,8 @@
                          
                          chatArray = [[[responseObject valueForKey:@"getchathistory"]valueForKey:@"converation"] mutableCopy];
                          
-                         NSLog(@"chatArray = %@",chatArray);
-                         
                          [self loadTabbarMsgCount];
-                         
-                        
+                                                 
                          [refreshControl endRefreshing];
                          
                          [ChatTableView reloadData];
