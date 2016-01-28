@@ -39,6 +39,7 @@
 
 
 @property(nonatomic,strong)IBOutlet UIView * matchActivityView;
+
 @property (nonatomic,strong) IBOutlet UILabel * matchActivitylbl;
 @property (nonatomic,strong) IBOutlet UIButton *matchactivityBtn;
 @property (nonatomic,strong) IBOutlet UIImageView * currentUserImg;
