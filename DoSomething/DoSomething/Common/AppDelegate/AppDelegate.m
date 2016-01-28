@@ -45,7 +45,7 @@
     [[NSUserDefaults standardUserDefaults]removeObjectForKey:CurrentLatitude];
     
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
-        self.isNotificationSound = YES;
+       // self.isNotificationSound = YES;
         [self initAPNS];
             });
     
@@ -246,15 +246,15 @@
     if(IS_GREATER_IOS8)
     {
         if ([[UIApplication sharedApplication] respondsToSelector:@selector(registerForRemoteNotifications)]) {
-            NSLog(@"isNotificationSound = %d",self.isNotificationSound);
-            if(self.isNotificationSound == NO){
-                
-               [[UIApplication sharedApplication] registerUserNotificationSettings:[UIUserNotificationSettings settingsForTypes:(UIUserNotificationTypeBadge  | UIUserNotificationTypeAlert) categories:nil]];
-
-            }
-            else{
+            //NSLog(@"isNotificationSound = %d",self.isNotificationSound);
+//            if(self.isNotificationSound == NO){
+//                
+//               [[UIApplication sharedApplication] registerUserNotificationSettings:[UIUserNotificationSettings settingsForTypes:(UIUserNotificationTypeBadge  | UIUserNotificationTypeAlert) categories:nil]];
+//
+//            }
+//            else{
                  [[UIApplication sharedApplication] registerUserNotificationSettings:[UIUserNotificationSettings settingsForTypes:(UIUserNotificationTypeBadge | UIUserNotificationTypeSound | UIUserNotificationTypeAlert) categories:nil]];
-            }
+//            }
                  [[UIApplication sharedApplication] registerForRemoteNotifications];
             
             
@@ -429,7 +429,6 @@
         [badgeCountLabel setHidden:NO];
     }
     
-
     
 }
 
