@@ -44,6 +44,8 @@
                 <outlet property="FilterScrollviewWidth" destination="gn5-UW-OmR" id="NKh-zi-kDU"/>
                 <outlet property="FilterScrollviewXposition" destination="yAa-w5-gUI" id="a5U-W5-S4b"/>
                 <outlet property="FilterScrollviewYposition" destination="Mwt-jc-UEQ" id="s6c-0y-LBC"/>
+                <outlet property="MatchImgviewXposition" destination="HHh-2w-4Pc" id="VgR-E6-g7O"/>
+                <outlet property="MatchImgviewYposition" destination="XC9-4X-Dzs" id="TgO-bL-2xi"/>
                 <outlet property="agelowerLabel" destination="ijJ-VE-f1W" id="3IY-IN-Ody"/>
                 <outlet property="ageupperLabel" destination="aKT-Kp-WEK" id="Hq2-4i-jpM"/>
                 <outlet property="avalableBothBtn" destination="ehZ-tW-FxO" id="Wc0-5B-yxB"/>
