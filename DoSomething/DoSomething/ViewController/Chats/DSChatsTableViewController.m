@@ -282,21 +282,7 @@
     NSLog(@"ProfileName = %@",ProfileName);
     
     if([ProfileName length]>0){
-       
-//        downloadImageFromUrl(ProfileName,Cell.profileImageView);
-//        
-//        [Cell.profileImageView setImage:[UIImage imageNamed:ProfileName]];
-        
-       [Cell.profileImageView setImageWithURL:[NSURL URLWithString:ProfileName]];
-       if(Cell.profileImageView.image==nil)
-       {
-           [Cell.activeIndicator startAnimating];
-       }
-        else
-        {
-           [Cell.activeIndicator stopAnimating];
-            [Cell.activeIndicator setHidden:YES];
-        }
+         [Cell.profileImageView setImageWithURL:[NSURL URLWithString:ProfileName]];
         
     }
     else{
@@ -448,22 +434,24 @@
     
     [self stopTimer];
     
-    [webService userChatHist:ChatHistory_API sessionid:[COMMON getSessionID]
-     
+    [webService userChatHist:ChatHistory_API sessionid:[COMMON getSessionID] dateTime:[COMMON getCurrentDateTime]
                      success:^(AFHTTPRequestOperation *operation, id responseObject){
+                         
                          
                          if(_isStartTimer == YES)
                               [self startTimer];
                          
                          NSLog(@"responseObject = %@",responseObject);
+                         if([[[responseObject valueForKey:@"getchathistory"] valueForKey:@"status"]isEqualToString:@"success"]){
                          
-                         chatArray = [[[responseObject valueForKey:@"getchathistory"]valueForKey:@"converation"] mutableCopy];
-                         
-                         [self loadTabbarMsgCount];
-                                                 
-                         [refreshControl endRefreshing];
-                         
-                         [ChatTableView reloadData];
+                             chatArray = [[[responseObject valueForKey:@"getchathistory"]valueForKey:@"converation"] mutableCopy];
+                             
+                             [self loadTabbarMsgCount];
+                                                     
+                             [refreshControl endRefreshing];
+                             
+                             [ChatTableView reloadData];
+                         }
                          
                          [COMMON removeLoading];
                                                   

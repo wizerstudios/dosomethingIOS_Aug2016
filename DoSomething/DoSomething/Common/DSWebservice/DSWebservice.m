@@ -578,12 +578,13 @@ request_send_user_id:(NSString *)request_send_user_id
 
 -(void)userChatHist:(NSString *)userChatURL
           sessionid:(NSString *)sessionid
+          dateTime:(NSString *)dateTime
        //chat_user_id:(NSString *)chat_user_id
             success:(WebserviceRequestSuccessHandler)success
             failure:(WebserviceRequestFailureHandler)failure
 {
     //urlString = [URL_FOR_RESOURCE(@"") stringByAppendingString:[NSString stringWithFormat:@"%@?sessionid=%@&chat_user_id%@",userChatURL,sessionid,chat_user_id]];
-    urlString = [URL_FOR_RESOURCE(@"") stringByAppendingString:[NSString stringWithFormat:@"%@?sessionid=%@",userChatURL,sessionid]];
+    urlString = [URL_FOR_RESOURCE(@"") stringByAppendingString:[NSString stringWithFormat:@"%@?sessionid=%@&datetime=%@",userChatURL,sessionid,dateTime]];
     NSLog(@"urlString = %@",urlString);
     
     [self sendRequestWithURLString:urlString
@@ -711,10 +712,11 @@ request_send_user_id:(NSString *)request_send_user_id
 -(void)getConversation:(NSString *)getConversation
              sessionID:(NSString *)sessionID
         conversationId:(NSString *)conversationId
+              dateTime:(NSString *)dateTime
                success:(WebserviceRequestSuccessHandler)success
                failure:(WebserviceRequestFailureHandler)failure{
     
-    urlString = [URL_FOR_RESOURCE(@"") stringByAppendingString:[NSString stringWithFormat:@"%@?sessionid=%@&conversationId=%@",getConversation,sessionID,conversationId]];
+    urlString = [URL_FOR_RESOURCE(@"") stringByAppendingString:[NSString stringWithFormat:@"%@?sessionid=%@&conversationId=%@&datetime=%@",getConversation,sessionID,conversationId,dateTime]];
     
     NSLog(@"urlString = %@",urlString);
     

@@ -430,7 +430,7 @@
         
        // [self.view endEditing:YES];
        
-      NSMutableDictionary*AddDIcconversion =[NSMutableDictionary dictionaryWithObjectsAndKeys:[NSString stringWithFormat:@"%@",str],@"Message",@"SENDER",@"type",@"2016-01-12 06:08:09",@"senttime", nil];
+      NSMutableDictionary*AddDIcconversion =[NSMutableDictionary dictionaryWithObjectsAndKeys:[NSString stringWithFormat:@"%@",str],@"Message",@"SENDER",@"type",[COMMON getCurrentDateTime],@"senttime", nil];
         [conversationArray addObject:AddDIcconversion];
         
         [chatTableView reloadData];
@@ -457,17 +457,15 @@
 -(void)loadConverstionAPI{
     
     NSString *conversationID;
-     NSLog(@"conversionID=%@",_conversionID);
-    if(_conversionID==nil)
-    {
-          conversationID = [chatuserDetailsDict valueForKey:@"id"];
-    }
-    else
-    {
-        conversationID=_conversionID;
-    }
     
-    [webService getConversation:GetConversation sessionID:[COMMON getSessionID] conversationId:conversationID
+    if(_conversionID==nil)
+          conversationID = [chatuserDetailsDict valueForKey:@"id"];
+    
+    else
+        conversationID=_conversionID;
+    
+    
+    [webService getConversation:GetConversation sessionID:[COMMON getSessionID] conversationId:conversationID dateTime:[COMMON getCurrentDateTime]
                         success:^(AFHTTPRequestOperation *operation, id responseObject){
                             
                             NSLog(@"Conversation resp = %@",responseObject);
@@ -539,11 +537,8 @@
     
     [webService deleteUserChatHist:DeleteConversation sessionid:[COMMON getSessionID] chat_user_id:conversationID success:^(AFHTTPRequestOperation *operation, id responseObject)
     {
-        NSLog(@"response:%@",responseObject);
-        [[NSUserDefaults standardUserDefaults]setObject:@"Yes" forKey:@"backAction"];
-        [[NSUserDefaults standardUserDefaults]synchronize];
-        [self.navigationController popViewControllerAnimated:YES];
         
+        [self.navigationController popViewControllerAnimated:YES];
         
     } failure:^(AFHTTPRequestOperation *operation, id error) {
        
