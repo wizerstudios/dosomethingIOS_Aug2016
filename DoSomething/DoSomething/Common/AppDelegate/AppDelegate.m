@@ -360,9 +360,11 @@
 }
 
 -(void)loadConverstaionAPI:(NSString *)_conversationID{
+    
+    
     webservice = [[DSWebservice alloc]init];
     
-    [webservice getConversation:GetConversation sessionID:[COMMON getSessionID] conversationId:_conversationID
+    [webservice getConversation:GetConversation sessionID:[COMMON getSessionID] conversationId:_conversationID dateTime:[COMMON getCurrentDateTime]
                         success:^(AFHTTPRequestOperation *operation, id responseObject){
                             
                             NSMutableDictionary *responseDict = [[NSMutableDictionary alloc]init];

@@ -189,6 +189,13 @@ DSAppCommon *sharedCommon = nil;
     return CGSizeMake(dataHeight.width, dataHeight.height+15);
 }
 
+-(NSString *)getCurrentDateTime{
+    
+    NSDateFormatter *dateformat = [[NSDateFormatter alloc] init];
+    [dateformat setDateFormat:@"yyyy-MM-dd hh:mm:ss"];
+    NSString* dateString = [dateformat stringFromDate:[NSDate date]];
+    return dateString;
+}
 
 
 #pragma mark - Userdetails

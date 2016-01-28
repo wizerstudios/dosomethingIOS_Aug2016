@@ -199,6 +199,7 @@ notification_vibration:(NSString*)isnotification_vibration
 
 -(void)userChatHist:(NSString *)userChatURL
          sessionid:(NSString *)sessionid
+           dateTime:(NSString *)dateTime
        //chat_user_id:(NSString *)chat_user_id
            success:(WebserviceRequestSuccessHandler)success
            failure:(WebserviceRequestFailureHandler)failure;
@@ -262,6 +263,7 @@ message_send_user_id:(NSString *)message_send_user_id
 -(void)getConversation:(NSString *)getConversation
              sessionID:(NSString *)sessionID
         conversationId:(NSString *)conversationId
+              dateTime:(NSString *)dateTime
                success:(WebserviceRequestSuccessHandler)success
                failure:(WebserviceRequestFailureHandler)failure;
 
