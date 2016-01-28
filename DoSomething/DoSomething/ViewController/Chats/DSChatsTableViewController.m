@@ -27,6 +27,7 @@
     NSUInteger isSupportUser;
     UIRefreshControl            * refreshControl;
     AppDelegate *appDelegate;
+    BOOL _isStartTimer;
     
 }
 
@@ -73,9 +74,6 @@
 {
     [super viewWillAppear:animated];
     
-//    if([[NSUserDefaults standardUserDefaults]valueForKey:@"backAction"] == nil)
-//         [COMMON LoadIcon:self.view];
-    
     [self loadChatHistoryAPI];
     
     [self.navigationItem setHidesBackButton:YES animated:NO];
@@ -87,6 +85,8 @@
 -(void)viewDidAppear:(BOOL)animated{
     
     [super viewDidAppear:animated];
+
+    _isStartTimer = YES;
     
     [self startTimer];
 
@@ -112,6 +112,8 @@
     
     [super viewWillDisappear:animated];
     
+    _isStartTimer = NO;
+
     [self stopTimer];
     
 }
@@ -119,6 +121,9 @@
 -(void)viewDidDisappear:(BOOL)animated{
     
      [super viewDidDisappear:animated];
+    
+    _isStartTimer = NO;
+
     [self stopTimer];
     
 }
@@ -447,17 +452,15 @@
      
                      success:^(AFHTTPRequestOperation *operation, id responseObject){
                          
-                         [self startTimer];
+                         if(_isStartTimer == YES)
+                              [self startTimer];
                          
                          NSLog(@"responseObject = %@",responseObject);
                          
                          chatArray = [[[responseObject valueForKey:@"getchathistory"]valueForKey:@"converation"] mutableCopy];
                          
-                         NSLog(@"chatArray = %@",chatArray);
-                         
                          [self loadTabbarMsgCount];
-                         
-                        
+                                                 
                          [refreshControl endRefreshing];
                          
                          [ChatTableView reloadData];
