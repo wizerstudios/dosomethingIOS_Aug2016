@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		0621A6BC1C5B49DE00121B8E /* Glass.aiff in Resources */ = {isa = PBXBuildFile; fileRef = 0621A6BB1C5B49DE00121B8E /* Glass.aiff */; };
+		0621A6BF1C5B5F7700121B8E /* silence.aiff in Resources */ = {isa = PBXBuildFile; fileRef = 0621A6BE1C5B5F7700121B8E /* silence.aiff */; };
 		065433161BF38B0400DABBFC /* button-16.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 065433151BF38B0400DABBFC /* button-16.mp3 */; };
 		065BAC521BC7A135005AF493 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 065BAC511BC7A135005AF493 /* main.m */; };
 		2B0C3B401C2A7A00009B7B42 /* fontawesome-webfont.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2B0C3B3F1C2A7A00009B7B42 /* fontawesome-webfont.ttf */; };
@@ -126,6 +127,7 @@
 /* Begin PBXFileReference section */
 		0621A6BB1C5B49DE00121B8E /* Glass.aiff */ = {isa = PBXFileReference; lastKnownFileType = audio.aiff; path = Glass.aiff; sourceTree = "<group>"; };
 		0621A6BD1C5B4DD900121B8E /* silence.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = silence.caf; sourceTree = "<group>"; };
+		0621A6BE1C5B5F7700121B8E /* silence.aiff */ = {isa = PBXFileReference; lastKnownFileType = audio.aiff; path = silence.aiff; sourceTree = "<group>"; };
 		065433151BF38B0400DABBFC /* button-16.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "button-16.mp3"; sourceTree = "<group>"; };
 		065BAC4D1BC7A135005AF493 /* DoSomething.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DoSomething.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		065BAC511BC7A135005AF493 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -333,6 +335,7 @@
 		065433141BF38B0400DABBFC /* Audio */ = {
 			isa = PBXGroup;
 			children = (
+				0621A6BE1C5B5F7700121B8E /* silence.aiff */,
 				0621A6BD1C5B4DD900121B8E /* silence.caf */,
 				0621A6BB1C5B49DE00121B8E /* Glass.aiff */,
 				065433151BF38B0400DABBFC /* button-16.mp3 */,
@@ -1064,6 +1067,7 @@
 				51F3C2F41BE75D40001E1FEC /* DSLocationViewController.xib in Resources */,
 				511C73651BE3804E00D3D61D /* DSChatsTableViewController.xib in Resources */,
 				C6D5F6421BC7B52C0050C1AE /* Patron-MediumItalic.ttf in Resources */,
+				0621A6BF1C5B5F7700121B8E /* silence.aiff in Resources */,
 				C6D5F60C1BC7AF500050C1AE /* Launch Screen.xib in Resources */,
 				6A8D15D41BCC059B000F1FB4 /* DSProfileTableViewController.xib in Resources */,
 				C6D5F6441BC7B52C0050C1AE /* Patron-Thin.ttf in Resources */,
