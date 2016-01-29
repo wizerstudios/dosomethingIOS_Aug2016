@@ -544,7 +544,7 @@ minimumLineSpacingForSectionAtIndex:(NSInteger)section {
                               }
                               failure:^(AFHTTPRequestOperation *operation, id error) {
                                   
-                                  [self showAltermessage:[NSString stringWithFormat:@"%@",error]];
+                                  //[self showAltermessage:[NSString stringWithFormat:@"%@",error]];
                               }];
         
 

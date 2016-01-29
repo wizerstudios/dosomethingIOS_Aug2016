@@ -140,7 +140,7 @@
          self.chatviewbottom.constant =420;
          self.chattableheight.constant =10;
          self.blockBtnYOrigin.constant = 435;
-         self.topviewYposition.constant = customNavigation.view.frame.size.height+10;
+        self.topviewYposition.constant = customNavigation.view.frame.origin.y+customNavigation.view.frame.size.height+28;
          self.menuImageyOrigin.constant = 93;
         
     }
