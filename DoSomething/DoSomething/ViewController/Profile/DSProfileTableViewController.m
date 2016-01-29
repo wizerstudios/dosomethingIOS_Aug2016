@@ -845,8 +845,8 @@
     [objCustomAlterview.btnYes setHidden:YES];
     [objCustomAlterview.btnNo setHidden:YES];
     [objCustomAlterview.alertCancelButton setHidden:NO];
-    [objCustomAlterview.btnYes addTarget:self action:@selector(alertPressNo:) forControlEvents:UIControlEventTouchUpInside];
-    [objCustomAlterview.btnNo addTarget:self action:@selector(alertPressYes:) forControlEvents:UIControlEventTouchUpInside];
+    [objCustomAlterview.btnYes addTarget:self action:@selector(alertPressYes:) forControlEvents:UIControlEventTouchUpInside];
+    [objCustomAlterview.btnNo addTarget:self action:@selector(alertPressNo:) forControlEvents:UIControlEventTouchUpInside];
     
     [self.view addSubview:objCustomAlterview.view];
 }
@@ -876,8 +876,8 @@
     objCustomAlterview.btnYes.hidden = NO;
     objCustomAlterview.btnNo.hidden = NO;
     objCustomAlterview.alertCancelButton.hidden=YES;
-    [objCustomAlterview.btnYes setTitle:@"No" forState:UIControlStateNormal];
-    [objCustomAlterview.btnNo setTitle:@"Create" forState:UIControlStateNormal];
+    [objCustomAlterview.btnYes setTitle:@"Create" forState:UIControlStateNormal];
+    [objCustomAlterview.btnNo setTitle:@"No" forState:UIControlStateNormal];
     objCustomAlterview.alertMsgLabel.text = msg;
     objCustomAlterview.alertMsgLabel.textAlignment = NSTextAlignmentCenter;
     objCustomAlterview.alertMsgLabel.lineBreakMode = NSLineBreakByWordWrapping;
