@@ -2209,6 +2209,10 @@
     if(currentLongitude == nil)
         currentLongitude = @"";
     
+    NSString *deviceToken = [[NSUserDefaults standardUserDefaults]valueForKey:DeviceToken];
+    if(deviceToken == nil)
+        deviceToken = @"";
+    
     NSString *fbProfileStr;
     if([strType isEqualToString:@"2"])
         fbProfileStr = [userDetailsDict valueForKey:@"profileImage"];
@@ -2231,7 +2235,7 @@
                            latitude:currentLatitude
                           longitude:currentLongitude
                              device:Device
-                           deviceid:deviceUdid
+                           deviceid:deviceToken
                      fbprofileImage:fbProfileStr
                notification_message:isNotification_message
                notification_sound  :isNotification_sound
