@@ -283,14 +283,15 @@
     NSLog(@"UserInfo = %@",userInfo);
     
     NSString *badgecountStr = [NSString stringWithFormat:@"%@",[[userInfo valueForKey:@"aps"]valueForKey:@"msgcnt"]];
-    [[NSUserDefaults standardUserDefaults]setObject:badgecountStr forKey:UnreadMsgCount];
-    [[NSUserDefaults standardUserDefaults]synchronize];
-    
-    if(![badgecountStr isEqualToString:@"0"]){
+    if (badgecountStr != NULL && ![badgecountStr isEqualToString:@"(null)"]) {
+        [[NSUserDefaults standardUserDefaults]setObject:badgecountStr forKey:UnreadMsgCount];
+        [[NSUserDefaults standardUserDefaults]synchronize];
         [badgeCountLabel setText:badgecountStr];
         [badgeCountLabel setHidden:NO];
+    } else {
+        [badgeCountLabel setText:@""];
+        [badgeCountLabel setHidden:YES];
     }
-    
     if (application.applicationState == UIApplicationStateInactive) {
         [self handleRemoteNotification:application userInfo:userInfo];
     }
@@ -303,15 +304,24 @@
     NSLog(@"userInfo=%@",userInfo);
     
      NSString *badgecountStr = [NSString stringWithFormat:@"%@",[[userInfo valueForKey:@"aps"]valueForKey:@"msgcnt"]];
-    [[NSUserDefaults standardUserDefaults]setObject:badgecountStr forKey:UnreadMsgCount];
-    [[NSUserDefaults standardUserDefaults]synchronize];
     
-    if(![badgecountStr isEqualToString:@"0"]){
+    if (badgecountStr != NULL && ![badgecountStr isEqualToString:@"(null)"]) {
+        [[NSUserDefaults standardUserDefaults]setObject:badgecountStr forKey:UnreadMsgCount];
+        [[NSUserDefaults standardUserDefaults]synchronize];
+        
         [badgeCountLabel setText:badgecountStr];
         [badgeCountLabel setHidden:NO];
     }
+    else {
+        
+        [badgeCountLabel setText:@""];
+        [badgeCountLabel setHidden:YES];
+        
+    }
+
     
     NSString *conversationid =[[userInfo valueForKey:@"aps"]valueForKey:@"conversationid"];
+    
 
     [self loadnotificationmsg: conversationid];
 }
@@ -367,12 +377,13 @@
                             if([[responseDict valueForKey:@"status"]isEqualToString:@"success"]){
                                 
                                 NSMutableDictionary *receiverDict = [[NSMutableDictionary alloc]init];
-                                receiverDict = [[responseDict valueForKey:@"receiver"]objectAtIndex:0];
-                                DSChatDetailViewController *ChatDetail =[[DSChatDetailViewController alloc]initWithNibName:nil bundle:nil];
-                                ChatDetail.conversionID = _conversationID;
-                                ChatDetail.chatuserDetailsDict = [receiverDict mutableCopy];
-                                [self.navigationController pushViewController:ChatDetail animated:YES];
-                                
+                                if (receiverDict != NULL && [receiverDict count] > 0) {
+                                    receiverDict = [[responseDict valueForKey:@"receiver"]objectAtIndex:0];
+                                    DSChatDetailViewController *ChatDetail =[[DSChatDetailViewController alloc]initWithNibName:nil bundle:nil];
+                                    ChatDetail.conversionID = _conversationID;
+                                    ChatDetail.chatuserDetailsDict = [receiverDict mutableCopy];
+                                    [self.navigationController pushViewController:ChatDetail animated:YES];
+                                }
                             }
                         }
      
@@ -416,15 +427,16 @@
     
     
     NSString *badgecountStr = [NSString stringWithFormat:@"%@",[[userInfo valueForKey:@"aps"]valueForKey:@"msgcnt"]];
-    [[NSUserDefaults standardUserDefaults]setObject:badgecountStr forKey:UnreadMsgCount];
-    [[NSUserDefaults standardUserDefaults]synchronize];
-    
-    if(![badgecountStr isEqualToString:@"0"]){
+    if (badgecountStr != NULL && ![badgecountStr isEqualToString:@"(null)"]) {
+        [[NSUserDefaults standardUserDefaults]setObject:badgecountStr forKey:UnreadMsgCount];
+        [[NSUserDefaults standardUserDefaults]synchronize];
+        
         [badgeCountLabel setText:badgecountStr];
         [badgeCountLabel setHidden:NO];
+    } else {
+        [badgeCountLabel setText:@""];
+        [badgeCountLabel setHidden:YES];
     }
-    
-    
 }
 
 

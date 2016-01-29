@@ -292,6 +292,20 @@ DSAppCommon *sharedCommon = nil;
 }
 
 
+#pragma mark Set Message Count
+
+- (void) setMessageCount:(NSString *)messageCount {
+    
+    if (messageCount == NULL || [messageCount isEqualToString:@"(null)"]) {
+        messageCount = @"";
+    }
+    else {
+        messageCount = [NSString stringWithFormat:@"%ld",(long)[[UIApplication sharedApplication] applicationIconBadgeNumber]];
+    }
+    [[NSUserDefaults standardUserDefaults]setObject:messageCount forKey:UnreadMsgCount];
+    [[NSUserDefaults standardUserDefaults]synchronize];
+}
+
 #pragma mark get user CurrentLocation
 
 - (void)getUserCurrenLocation{

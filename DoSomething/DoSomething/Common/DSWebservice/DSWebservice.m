@@ -412,8 +412,7 @@ notification_vibration:(NSString *)isnotification_vibration
     if(latitude)          [locationUpdate    setObject:latitude                  forKey:@"latitude"];
     if(longitude)         [locationUpdate    setObject:longitude                 forKey:@"longitude"];
 
-    NSLog(@"urlString = %@",urlString);
-    NSLog(@"Location Update = %@",locationUpdate);
+
     
     [self sendRequestWithURLString:urlString
                      andParameters:locationUpdate

@@ -65,6 +65,9 @@ typedef enum {
 
 - (CGSize)dataSize:(NSString *)string withFontName:(NSString *)fontName ofSize:(NSInteger)size withSize:(CGSize)LabelWidth;
 
+- (void) setMessageCount:(NSString *)messageCount;
+- (NSString *) getMessageCount;
+
 
 void downloadImageFromUrl(NSString* urlString, UIImageView * imageview);
 
