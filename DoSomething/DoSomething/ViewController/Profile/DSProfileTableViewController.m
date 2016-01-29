@@ -596,7 +596,7 @@
 
 -(void)loadLocationUpdateAPI{
     
-    if([COMMON getSessionID]!= NULL)
+    if(profileDict != NULL)
     {
     [objWebService locationUpdate:LocationUpdate_API sessionid:[COMMON getSessionID] latitude:currentLatitude longitude:currentLongitude
                           success:^(AFHTTPRequestOperation *operation, id responseObject){
