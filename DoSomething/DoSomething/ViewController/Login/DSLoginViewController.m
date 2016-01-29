@@ -720,6 +720,7 @@
                notification_sound  :@"Yes"
              notification_vibration:@"Yes"
                            pushType:push_type
+                            fbimage:@""
                             success:^(AFHTTPRequestOperation *operation, id responseObject){
                                 [COMMON removeLoading];
                             }

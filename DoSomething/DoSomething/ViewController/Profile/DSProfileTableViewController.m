@@ -102,6 +102,7 @@
     NSString * Regpassword;
     
      BOOL isclickIconAddBtn;
+    NSString * FBImageStr;
 }
 
 @end
@@ -849,6 +850,7 @@
     [objCustomAlterview.alertCancelButton setHidden:NO];
     [objCustomAlterview.btnYes addTarget:self action:@selector(alertPressYes:) forControlEvents:UIControlEventTouchUpInside];
     [objCustomAlterview.btnNo addTarget:self action:@selector(alertPressNo:) forControlEvents:UIControlEventTouchUpInside];
+    [objCustomAlterview.alertCancelButton addTarget:self action:@selector(alertPressCancel:) forControlEvents:UIControlEventTouchUpInside];
     
     [self.view addSubview:objCustomAlterview.view];
 }
@@ -865,11 +867,38 @@
     objCustomAlterview. alertBgView.hidden = YES;
     objCustomAlterview.alertMainBgView.hidden = YES;
     objCustomAlterview.view .hidden  = YES;
-     [self loadValidations];
+     [self loadRegister];
+}
+-(IBAction)alertPressCancel:(id)sender
+{
+    objCustomAlterview. alertBgView.hidden = YES;
+    objCustomAlterview.alertMainBgView.hidden = YES;
+    objCustomAlterview.view .hidden  = YES;
 }
 -(void)showAltermessage:(NSString*)msg
 {
 
+    objCustomAlterview.view.hidden =NO;
+    //objCustomAlterview.view.alpha=0.0;
+    objCustomAlterview.alertBgView.hidden = NO;
+    objCustomAlterview.alertMainBgView.hidden = NO;
+    objCustomAlterview.alertCancelButton.hidden = NO;
+    objCustomAlterview.btnYes.hidden = YES;
+    objCustomAlterview.btnNo.hidden = YES;
+    objCustomAlterview.alertCancelButton.hidden=NO;
+    //[objCustomAlterview.btnYes setTitle:@"Create" forState:UIControlStateNormal];
+    //[objCustomAlterview.btnNo setTitle:@"No" forState:UIControlStateNormal];
+    objCustomAlterview.alertMsgLabel.text = msg;
+    objCustomAlterview.alertMsgLabel.textAlignment = NSTextAlignmentCenter;
+    objCustomAlterview.alertMsgLabel.lineBreakMode = NSLineBreakByWordWrapping;
+    objCustomAlterview.alertMsgLabel.numberOfLines = 2;
+    [objCustomAlterview.alertMsgLabel setTextColor:[UIColor colorWithRed:(255/255.0f) green:(255/255.0f) blue:(255/255.0f) alpha:1.0f]];
+    
+}
+
+-(void)showAccountCreateAltermessage:(NSString*)msg
+{
+    
     objCustomAlterview.view.hidden =NO;
     //objCustomAlterview.view.alpha=0.0;
     objCustomAlterview.alertBgView.hidden = NO;
@@ -887,6 +916,7 @@
     [objCustomAlterview.alertMsgLabel setTextColor:[UIColor colorWithRed:(255/255.0f) green:(255/255.0f) blue:(255/255.0f) alpha:1.0f]];
     
 }
+
 
 #pragma mark - TableView Datasource & Delegate
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
@@ -2180,7 +2210,14 @@
     image = [info valueForKey:UIImagePickerControllerEditedImage];
     
     if(CurrentImage==0)
+    {
         profileImage1 = image;
+        if(userDetailsDict>0)
+        {
+            
+            FBImageStr=@"1";
+        }
+        }
     else if(CurrentImage == 1)
         profileImage2 = image;
     else if(CurrentImage == 2)
@@ -2217,7 +2254,7 @@
     
     NSString *fbProfileStr;
     if([strType isEqualToString:@"2"])
-        fbProfileStr = [userDetailsDict valueForKey:@"profileImage"];
+        fbProfileStr =([FBImageStr isEqualToString:@"1"])?@"":[userDetailsDict valueForKey:@"profileImage"];
     if([COMMON isInternetReachable]){
         
         [objWebService postRegister:Register_API
@@ -2243,6 +2280,7 @@
                notification_sound  :isNotification_sound
              notification_vibration:isNotification_vibration
                            pushType:push_type
+                            fbimage:FBImageStr
                             success:^(AFHTTPRequestOperation *operation, id responseObject){
                                 [COMMON removeLoading];
                             }
@@ -2401,8 +2439,9 @@
        
     }
     else
-        [self showAltermessage:@"By clicking create,you agree to the Term of \n Use & Privacy policy"];
-        //[self loadValidations];
+         [self loadValidations];
+    
+    
    
    
     }
@@ -2487,7 +2526,9 @@
                 if(userDetailsDict > 0)
                 {
                     [COMMON removeLoading];
-                    [self loadRegister];
+                    //[self loadRegister];
+                    //[self showAltermessage:@"By clicking create,you agree to the Term of \n Use & Privacy policy"];
+                    [self showAccountCreateAltermessage:@"By clicking create,you agree to the Term of \n Use & Privacy policy"];
                     return;
                 }
                 else
@@ -2502,7 +2543,8 @@
             
             {
                 [COMMON removeLoading];
-                [self loadRegister];
+               // [self loadRegister];
+                [self showAccountCreateAltermessage:@"By clicking create,you agree to the Term of \n Use & Privacy policy"];
             }
 
     }
