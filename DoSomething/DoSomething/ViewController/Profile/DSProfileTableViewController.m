@@ -137,7 +137,7 @@
 -(void)viewWillAppear:(BOOL)animated
 {
    
-    [self getUserCurrenLocation];
+   
     
     imageNormalArray =[[NSMutableArray alloc]init];
     
@@ -228,7 +228,7 @@
 }
 -(void)profileImageDisplayMethod
 {
-    
+     [self getUserCurrenLocation];
     NSString * strsessionID =[profileDict valueForKey:@"SessionId"];
     loginUserSessionID = strsessionID;
   
@@ -596,6 +596,8 @@
 
 -(void)loadLocationUpdateAPI{
     
+    if([COMMON getSessionID]!= NULL)
+    {
     [objWebService locationUpdate:LocationUpdate_API sessionid:[COMMON getSessionID] latitude:currentLatitude longitude:currentLongitude
                           success:^(AFHTTPRequestOperation *operation, id responseObject){
                               NSLog(@"responseObject = %@",responseObject);
@@ -603,7 +605,7 @@
                           failure:^(AFHTTPRequestOperation *operation, id error) {
                               
                           }];
-    
+    }
     
 }
 
