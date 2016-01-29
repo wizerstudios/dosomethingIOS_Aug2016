@@ -19,11 +19,16 @@ typedef void (^WebserviceRequestXMLFailureHandler)(AFHTTPRequestOperation  *oper
 
 //DEVELOPMENT URL
 #define BASE_URL @"http://indiawebcoders.com/mobileapps/dosomething/"
-//#define push_type @"dev"
 
 //PRODUCTION URL
 //#define BASE_URL @"http://wiztestinghost.com/dosomething/"
-#define push_type @"pro"
+
+
+#ifdef DEBUG
+    #define push_type   @"dev"
+#else
+    #define push_type   @"pro"
+#endif
 
 #define URL_FOR_RESOURCE(RESOURCE) [NSString stringWithFormat:@"%@%@",BASE_URL,RESOURCE]
 

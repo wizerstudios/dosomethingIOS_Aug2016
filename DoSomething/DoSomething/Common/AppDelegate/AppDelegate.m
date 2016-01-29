@@ -246,15 +246,8 @@
     if(IS_GREATER_IOS8)
     {
         if ([[UIApplication sharedApplication] respondsToSelector:@selector(registerForRemoteNotifications)]) {
-            //NSLog(@"isNotificationSound = %d",self.isNotificationSound);
-//            if(self.isNotificationSound == NO){
-//                
-//               [[UIApplication sharedApplication] registerUserNotificationSettings:[UIUserNotificationSettings settingsForTypes:(UIUserNotificationTypeBadge  | UIUserNotificationTypeAlert) categories:nil]];
-//
-//            }
-//            else{
+
                  [[UIApplication sharedApplication] registerUserNotificationSettings:[UIUserNotificationSettings settingsForTypes:(UIUserNotificationTypeBadge | UIUserNotificationTypeSound | UIUserNotificationTypeAlert) categories:nil]];
-//            }
                  [[UIApplication sharedApplication] registerForRemoteNotifications];
             
             
