@@ -106,6 +106,7 @@ notification_message:(NSString *)isnotification_message
 notification_sound  :(NSString *)isnotification_sound
 notification_vibration:(NSString*)isnotification_vibration
             pushType:(NSString *)pushType
+            fbimage :(NSString *)fbimage
             success:(WebserviceRequestSuccessHandler)success
              failure:(WebserviceRequestFailureHandler)failure;
 

@@ -175,12 +175,14 @@ notification_message:(NSString *)isnotification_message
 notification_sound  :(NSString *)isnotification_sound
 notification_vibration:(NSString *)isnotification_vibration
             pushType:(NSString *)pushType
+            fbimage :(NSString *)fbimage
              success:(WebserviceRequestSuccessHandler)success
              failure:(WebserviceRequestFailureHandler)failure
 {
     urlString = [URL_FOR_RESOURCE(@"") stringByAppendingString:[NSString stringWithFormat:@"%@?",registerURL]];
     
-       
+    
+   
     NSMutableDictionary *registerDetails = [[NSMutableDictionary alloc] init];
     
     if(type)                    [registerDetails    setObject:type                  forKey:@"type"];
@@ -201,15 +203,16 @@ notification_vibration:(NSString *)isnotification_vibration
     if(isnotification_sound)    [registerDetails    setObject:isnotification_sound  forKey:@"notification_sound"];
     if(isnotification_vibration)[registerDetails    setObject:isnotification_vibration  forKey:@"notification_vibration"];
     if(pushType) [registerDetails setObject:pushType forKey:@"push_type"];
+    if(fbimage)  [registerDetails setObject:fbimage forKey:@"fbimage"];
     if(fbProfile)  [registerDetails setObject:fbProfile forKey:@"profileImage1"];
     
     NSDateFormatter *formatter = [[NSDateFormatter alloc]init];
     [formatter setDateFormat:@"yyyyMMddhhmmssSSS"];
     NSString *imageNameStr = [NSString stringWithFormat:@"%@.png",[formatter stringFromDate:[NSDate date]]];
     NSLog(@"Registerdeteils%@",registerDetails);
+     NSLog(@"RegisterdeteilsUrl = %@",urlString);
     [self POST:urlString parameters:registerDetails constructingBodyWithBlock:^(id<AFMultipartFormData> formData)
      {
-         
          if(profileImage1){
              [formData appendPartWithFileData:UIImagePNGRepresentation(profileImage1)
                                          name:@"profileImage1"
@@ -218,6 +221,8 @@ notification_vibration:(NSString *)isnotification_vibration
              
              NSLog(@"formData = %@",formData);
          }
+        
+                  
          if(profileImage2){
              [formData appendPartWithFileData:UIImagePNGRepresentation(profileImage2)
                                          name:@"profileImage2"
