@@ -106,65 +106,10 @@
      _buttonSigInFwd.hidden=YES;
 }
  if ([temp isEqualToString:@"Signin"]){
-     if (IS_IPHONE6 ||IS_IPHONE6_Plus){
-     self.layoutConstraintSignInButtonHeight.constant =47;
-         self.layoutConstraintBackButtonHeight.constant =49;
-
-
-     }
-     NSString *string = @"Log in with Facebook";
-     NSMutableAttributedString *attStr = [[NSMutableAttributedString alloc] initWithString:string ];
-     [attStr addAttribute:NSFontAttributeName value:PATRON_REG(12) range:[string rangeOfString:@"Log in with"]];
-     [attStr addAttribute:NSFontAttributeName value:PATRON_BOLD(12) range:[string rangeOfString:@"Facebook"]];
-     labelFacebook.attributedText = attStr;
-     labelFacebook.tag = 11;
-     labelEmail.text =@"Or log in with your email";
-     labelSignIn.text =@"Sign in";
-     [buttonForgotPass setTitle:@"Forgot password?" forState:UIControlStateNormal];
-     [buttonForgotPass addTarget:self action:@selector(forgotPasswordButton:) forControlEvents:UIControlEventTouchUpInside];
-     [buttonCreateAnAcc setTitle:@"Create an Account" forState:UIControlStateNormal];
-     buttonPrivacyPolicy.hidden =YES;
-     buttonTermsOfUse.hidden =YES;
-     buttonSignIn.hidden =NO;
-     [buttonSignIn addTarget:self action:@selector(SignButtonAction) forControlEvents:UIControlEventTouchUpInside];
-     _forgotView.hidden=YES;
-     _buttonSigInFwd.hidden=YES;
+     
+     [self signinMethod];
  }
     
-//    if ([temp isEqualToString:@"ForgotPassword"]){
-//        if (IS_IPHONE6 ||IS_IPHONE6_Plus){
-//            self.layoutConstraintSignInButtonHeight.constant =47;
-//            self.layoutConstraintBackButtonHeight.constant =49;
-//            
-//            
-//        }
-//        _forgotView.hidden=NO;
-//        NSString *stringForgot = @"Forget Your Password?";
-//        NSMutableAttributedString *attStrForgot = [[NSMutableAttributedString alloc] initWithString:stringForgot ];
-//        [attStrForgot addAttribute:NSFontAttributeName value:PATRON_REG(12) range:[stringForgot rangeOfString:@"Forget Your Password?"]];
-//        _forgotPasswordLabel.attributedText = attStrForgot;
-//        NSString *string = @"No problem! Just fill in your Email and we'll send you password to reset instructions!";
-//        NSMutableAttributedString *attStr = [[NSMutableAttributedString alloc] initWithString:string ];
-//        [attStr addAttribute:NSFontAttributeName value:PATRON_REG(12) range:[string rangeOfString:@"No problem! Just fill in your Email and we'll send \n you password to reset instructions!"]];
-//        _forgotInstructionTextView.attributedText = attStr;
-//        _facebookButton.hidden= YES;
-//       
-//        self.forgotTextField.text=([self.emailTxt.text isEqualToString:@""])?@"":self.emailTxt.text;
-//        labelSignIn.text =@"Reset Password";
-//        //SignInAction
-//        [_buttonSigInFwd setTitle:@"Sign In " forState:UIControlStateNormal];
-//        [_buttonSigInFwd addTarget:self action:@selector(HaveAnAccount:) forControlEvents:UIControlEventTouchUpInside];
-//        
-//        //CreateAction
-//        [buttonCreateAnAcc setTitle:@"Create an Account" forState:UIControlStateNormal];
-//        buttonPrivacyPolicy.hidden =YES;
-//        buttonTermsOfUse.hidden =YES;
-//        //forgotPasswordAction
-//        buttonSignIn.hidden =NO;
-//        [buttonSignIn addTarget:self action:@selector(forgotPasswordAction:) forControlEvents:UIControlEventTouchUpInside];
-//        isForgotBackButton=YES;
-//        //[_forgotTextField setKeyboardType:UIKeyboardTypeEmailAddress];
-//    }
      [self CustomAlterview];
 
     
@@ -257,10 +202,6 @@
     
 }
 - (IBAction)forgotPasswordButton:(id)sender {
-//    DSLoginViewController * DSLoginView  = [[DSLoginViewController alloc]initWithNibName:@"DSLoginViewController" bundle:nil];
-//    DSLoginView.temp = @"ForgotPassword";
-//    [self.navigationController pushViewController:DSLoginView animated:YES];
-    
     if (IS_IPHONE6 ||IS_IPHONE6_Plus){
         self.layoutConstraintSignInButtonHeight.constant =47;
         self.layoutConstraintBackButtonHeight.constant =49;
@@ -281,8 +222,10 @@
     self.forgotTextField.text=([self.emailTxt.text isEqualToString:@""])?@"":self.emailTxt.text;
     labelSignIn.text =@"Reset Password";
     //SignInAction
-    [_buttonSigInFwd setTitle:@"Sign In " forState:UIControlStateNormal];
-    [_buttonSigInFwd addTarget:self action:@selector(HaveAnAccount:) forControlEvents:UIControlEventTouchUpInside];
+    
+    [buttonForgotPass setTitle:@"Sign In " forState:UIControlStateNormal];
+    [buttonForgotPass addTarget:self action:@selector(signinMethod) forControlEvents:UIControlEventTouchUpInside];
+   [_buttonSigInFwd addTarget:self action:@selector(HaveAnAccount:) forControlEvents:UIControlEventTouchUpInside];
     
     //CreateAction
     [buttonCreateAnAcc setTitle:@"Create an Account" forState:UIControlStateNormal];
@@ -344,8 +287,35 @@
         
     }
     }
-     }
+}
 
+-(void)signinMethod
+{
+    if (IS_IPHONE6 ||IS_IPHONE6_Plus){
+        self.layoutConstraintSignInButtonHeight.constant =47;
+        self.layoutConstraintBackButtonHeight.constant =49;
+        
+        
+    }
+    NSString *string = @"Log in with Facebook";
+    NSMutableAttributedString *attStr = [[NSMutableAttributedString alloc] initWithString:string ];
+    [attStr addAttribute:NSFontAttributeName value:PATRON_REG(12) range:[string rangeOfString:@"Log in with"]];
+    [attStr addAttribute:NSFontAttributeName value:PATRON_BOLD(12) range:[string rangeOfString:@"Facebook"]];
+    labelFacebook.attributedText = attStr;
+    labelFacebook.tag = 11;
+    labelEmail.text =@"Or log in with your email";
+    labelSignIn.text =@"Sign in";
+    [buttonForgotPass setTitle:@"Forgot password?" forState:UIControlStateNormal];
+    [buttonForgotPass addTarget:self action:@selector(forgotPasswordButton:) forControlEvents:UIControlEventTouchUpInside];
+    [buttonCreateAnAcc setTitle:@"Create an Account" forState:UIControlStateNormal];
+    buttonPrivacyPolicy.hidden =YES;
+    buttonTermsOfUse.hidden =YES;
+    buttonSignIn.hidden =NO;
+    [buttonSignIn addTarget:self action:@selector(SignButtonAction) forControlEvents:UIControlEventTouchUpInside];
+    _forgotView.hidden=YES;
+    _buttonSigInFwd.hidden=YES;
+
+}
 -(IBAction)loadTermsOfUseViewAction:(id)sender
 {
     DSTermsViewController* termViewController = [[DSTermsViewController alloc] init];
@@ -800,23 +770,7 @@
         }
         else
         {
-        NSString *string = @"Log in with Facebook";
-        NSMutableAttributedString *attStr = [[NSMutableAttributedString alloc] initWithString:string ];
-        [attStr addAttribute:NSFontAttributeName value:PATRON_REG(12) range:[string rangeOfString:@"Log in with"]];
-        [attStr addAttribute:NSFontAttributeName value:PATRON_BOLD(12) range:[string rangeOfString:@"Facebook"]];
-        labelFacebook.attributedText = attStr;
-        labelFacebook.tag = 11;
-        labelEmail.text =@"Or log in with your email";
-        labelSignIn.text =@"Sign in";
-        [buttonForgotPass setTitle:@"Forgot password?" forState:UIControlStateNormal];
-       // [buttonForgotPass addTarget:self action:@selector(forgotPasswordButton:) forControlEvents:UIControlEventTouchUpInside];
-        [buttonCreateAnAcc setTitle:@"Create an Account" forState:UIControlStateNormal];
-        buttonPrivacyPolicy.hidden =YES;
-        buttonTermsOfUse.hidden =YES;
-        buttonSignIn.hidden =NO;
-        [buttonSignIn addTarget:self action:@selector(SignButtonAction) forControlEvents:UIControlEventTouchUpInside];
-        _forgotView.hidden=YES;
-        _buttonSigInFwd.hidden=YES;
+            [self signinMethod];
         }
         
     }
