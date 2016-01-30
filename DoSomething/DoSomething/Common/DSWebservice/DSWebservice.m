@@ -693,14 +693,13 @@ request_send_user_id:(NSString *)request_send_user_id
 
 -(void)updateNotification:(NSString *)notificationUpdate
                 sessionID:(NSString *)sessionId
-             vibrationStr:(NSString *)vibrationStr
                messageStr:(NSString *)messageStr
                  soundstr:(NSString *)soundStr
                     match:(NSString *)domatch
                   success:(WebserviceRequestSuccessHandler)success
                   failure:(WebserviceRequestFailureHandler)failure{
     
-    urlString = [URL_FOR_RESOURCE(@"") stringByAppendingString:[NSString stringWithFormat:@"%@?sessionid=%@&notification_vibration=%@&notification_message=%@&notification_sound=%@&do_match=%@",notificationUpdate,sessionId,vibrationStr,messageStr,soundStr,domatch]];
+    urlString = [URL_FOR_RESOURCE(@"") stringByAppendingString:[NSString stringWithFormat:@"%@?sessionid=%@&notification_message=%@&notification_sound=%@&do_match=%@",notificationUpdate,sessionId,messageStr,soundStr,domatch]];
     
     NSLog(@"urlString = %@",urlString);
     

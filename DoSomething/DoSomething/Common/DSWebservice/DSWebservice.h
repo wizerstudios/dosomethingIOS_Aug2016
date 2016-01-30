@@ -257,7 +257,6 @@ message_send_user_id:(NSString *)message_send_user_id
 
 -(void)updateNotification:(NSString *)notificationUpdate
                 sessionID:(NSString *)sessionId
-             vibrationStr:(NSString *)vibrationStr
                messageStr:(NSString *)messageStr
                  soundstr:(NSString *)soundStr
                     match:(NSString *)domatch
