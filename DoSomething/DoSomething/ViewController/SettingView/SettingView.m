@@ -370,6 +370,15 @@
     
     [objCustomAlterview.btnNo addTarget:self action:@selector(alertPressNo:) forControlEvents:UIControlEventTouchUpInside];
     [objCustomAlterview.btnYes addTarget:self action:@selector(alertPressYes:) forControlEvents:UIControlEventTouchUpInside];
+    if(IS_IPHONE6||IS_IPHONE6_Plus)
+    {
+        objCustomAlterview.mainalterviewheight.constant=50;
+    }
+    else
+    {
+        objCustomAlterview.mainalterviewheight.constant=0;
+    }
+
     [self.view addSubview:objCustomAlterview.view];
     
 }

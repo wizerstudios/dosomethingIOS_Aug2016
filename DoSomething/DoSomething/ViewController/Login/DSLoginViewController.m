@@ -341,6 +341,18 @@
     objCustomAlterview.alertMsgLabel.lineBreakMode = NSLineBreakByWordWrapping;
     objCustomAlterview.alertMsgLabel.numberOfLines = 2;
     [objCustomAlterview.alertMsgLabel setTextColor:[UIColor colorWithRed:(255/255.0f) green:(255/255.0f) blue:(255/255.0f) alpha:1.0f]];
+//    if(IS_IPHONE6)
+//    {
+//        objCustomAlterview.mainalterviewheight.constant=0;
+//    }
+//    else if(IS_IPHONE6_Plus)
+//    {
+//        objCustomAlterview.mainalterviewheight.constant=0;
+//    }
+//    else
+//    {
+        objCustomAlterview.mainalterviewheight.constant=0;
+    //}
 
     [self.view addSubview:objCustomAlterview.view];
     

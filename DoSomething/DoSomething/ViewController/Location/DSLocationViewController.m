@@ -336,7 +336,7 @@
                                   NSLog(@"responseObject = %@",responseObject);
                               }
                               failure:^(AFHTTPRequestOperation *operation, id error) {
-                                  [self showAltermessage:[NSString stringWithFormat:@"%@",error]];
+                                  //[self showAltermessage:[NSString stringWithFormat:@"%@",error]];
                               }];
     }
     else{
@@ -847,7 +847,15 @@
     [objCustomAlterview.btnNo setHidden:YES];
     [objCustomAlterview.alertCancelButton setHidden:NO];
     [objCustomAlterview.alertCancelButton addTarget:self action:@selector(alertPressCancel:) forControlEvents:UIControlEventTouchUpInside];
-    
+    if(IS_IPHONE6||IS_IPHONE6_Plus)
+    {
+        objCustomAlterview.mainalterviewheight.constant=50;
+    }
+    else
+    {
+        objCustomAlterview.mainalterviewheight.constant=0;
+    }
+
     [self.view addSubview:objCustomAlterview.view];
 }
 

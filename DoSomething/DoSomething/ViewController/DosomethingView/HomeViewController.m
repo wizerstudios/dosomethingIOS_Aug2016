@@ -202,6 +202,19 @@
     [objCustomAlterview.btnYes addTarget:self
                                   action:@selector(alertPressYes:)
                         forControlEvents:UIControlEventTouchUpInside];
+    if(IS_IPHONE6)
+    {
+        objCustomAlterview.mainalterviewheight.constant=-100;
+    }
+    else if(IS_IPHONE6_Plus)
+    {
+        objCustomAlterview.mainalterviewheight.constant=-180;
+    }
+    else
+    {
+        objCustomAlterview.mainalterviewheight.constant=0;
+    }
+
     [self.view addSubview:objCustomAlterview.view];
 }
 
@@ -596,19 +609,7 @@ minimumLineSpacingForSectionAtIndex:(NSInteger)section {
                      
                  }
                  else{
-                     //                 if(isInitialLoadingAPI == NO){
-                     //                     objCustomAlterview.view .hidden  = NO;
-                     //                     objCustomAlterview.alertBgView.hidden = NO;
-                     //                     objCustomAlterview.alertMainBgView.hidden = NO;
-                     //                     objCustomAlterview.btnYes.hidden = NO;
-                     //                     objCustomAlterview.btnNo.hidden = NO;
-                     //                     objCustomAlterview.alertCancelButton.hidden = NO;
-                     //                     objCustomAlterview.alertMsgLabel.text = @"AVAILABLE NOW?";
-                     //                     objCustomAlterview.alertMsgLabel.textAlignment = NSTextAlignmentCenter;
-                     //                     objCustomAlterview. alertMsgLabel.lineBreakMode = NSLineBreakByWordWrapping;
-                     //                     objCustomAlterview.alertMsgLabel.textColor = [UIColor whiteColor];
-                     //
-                     //                 }
+                    
                      
                      [bottombutton setTitle:@"Let's Do Something!" forState:UIControlStateNormal];
                      
