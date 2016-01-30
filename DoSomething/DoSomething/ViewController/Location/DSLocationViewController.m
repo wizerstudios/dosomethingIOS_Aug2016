@@ -941,6 +941,7 @@
     self.agelowerLabel.text =@"";
     filterAge=@"";  //18-26
     filterDistance=@"";  //0-5
+    isfilterChange=YES;
 }
 
 
