@@ -2420,32 +2420,17 @@
 #pragma mark - saveAction
 -(void)saveAction:(id)sender
 {
-    //[COMMON LoadIcon:self.tableviewProfile];
     [self.view endEditing:YES];
-    
-    //[customNavigation.saveBtn setUserInteractionEnabled:NO];
-//    if(isSave==NO)
-//    {
+
     if(profileDict !=NULL){
-        
-
+    
           strGender = [profileDict valueForKey:@"gender"];
-          //strDOB    = (currentTextfield.text !=nil)?currentTextfield.text :[profileDict valueForKey:@"date_of_birth"];
-
-      //  [self dateConverter];
-        [self loadValidations];
-       // [self loadUpdate];
-        
-        
-        isSave =YES;
+          [self loadValidations];
+           isSave =YES;
        
     }
     else
          [self loadValidations];
-    
-    
-   
-   
     }
 
 -(void) enableSendButton:(NSNotification*)notification
@@ -2473,7 +2458,6 @@
 {
     [COMMON LoadIcon:self.view];
     
-   
     strType      = (selectEmail== YES)?@"1":@"2";
     strProfileID = (FBprofileID!=nil)?FBprofileID:@"";
     strDOB       = (currentTextfield.text !=nil)?currentTextfield.text :[profileDict valueForKey:@"date_of_birth"];
@@ -2511,7 +2495,13 @@
                 [COMMON removeLoading];
                 return;
             }
-    
+            else if ([strAbout isEqualToString:@""] || strAbout == NULL )
+            {
+                
+                [self showAltermessage:@"About Required"];
+                [COMMON removeLoading];
+                return;
+            }
    
            else if ([emailAddressToRegister isEqualToString:@""] || emailAddressToRegister == nil)
             {
@@ -2553,7 +2543,14 @@
     
      if(profileDict!=nil)
     {
-        
+        if ([strAbout isEqualToString:@""] || strAbout == NULL )
+        {
+            
+            [self showAltermessage:@"About Required"];
+            [COMMON removeLoading];
+            return;
+        }
+
        if([[profileDict valueForKey:@"showpassword"] isEqualToString:@"Yes"])
        {
          if ([emailPasswordToRegister isEqualToString:@""] || emailPasswordToRegister == nil)
