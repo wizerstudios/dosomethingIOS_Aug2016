@@ -290,12 +290,19 @@
     buttonTermsOfUse.hidden =YES;
    
     buttonSignIn.hidden =NO;
+   
     [buttonSignIn addTarget:self action:@selector(forgotPasswordAction:) forControlEvents:UIControlEventTouchUpInside];
     isForgotBackButton=YES;
     
 }
 #pragma mark forgotPasswordAction_API
 - (void)forgotPasswordAction:(id)sender {
+      if([labelSignIn.text isEqualToString:@"Sign in"])
+      {
+          
+      }
+    else
+    {
     [self.view endEditing:YES];
     
     if([NSString isEmpty:self.forgotTextField.text] ){
@@ -330,12 +337,13 @@
                                      }];
         
           }
+    
     else{
         
         [COMMON showErrorAlert:@"Check Your Internet connection"];
         
     }
-
+    }
      }
 
 -(IBAction)loadTermsOfUseViewAction:(id)sender
@@ -777,10 +785,7 @@
     
     if(isForgotBackButton==YES)
     {
-//        DSLoginViewController * DSLoginView  = [[DSLoginViewController alloc]initWithNibName:@"DSLoginViewController" bundle:nil];
-//         DSLoginView.temp = @"Signin";
-//     [self.navigationController pushViewController:DSLoginView animated:YES];
-        //[self.navigationController popViewControllerAnimated:YES];
+
         if (IS_IPHONE6 ||IS_IPHONE6_Plus){
             self.layoutConstraintSignInButtonHeight.constant =47;
             self.layoutConstraintBackButtonHeight.constant =49;
@@ -804,7 +809,7 @@
         labelEmail.text =@"Or log in with your email";
         labelSignIn.text =@"Sign in";
         [buttonForgotPass setTitle:@"Forgot password?" forState:UIControlStateNormal];
-        [buttonForgotPass addTarget:self action:@selector(forgotPasswordButton:) forControlEvents:UIControlEventTouchUpInside];
+       // [buttonForgotPass addTarget:self action:@selector(forgotPasswordButton:) forControlEvents:UIControlEventTouchUpInside];
         [buttonCreateAnAcc setTitle:@"Create an Account" forState:UIControlStateNormal];
         buttonPrivacyPolicy.hidden =YES;
         buttonTermsOfUse.hidden =YES;

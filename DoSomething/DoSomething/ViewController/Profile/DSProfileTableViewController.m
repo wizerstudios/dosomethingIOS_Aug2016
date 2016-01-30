@@ -1765,10 +1765,12 @@
         if([objloginType isEqualToString:@"dosomething"])
         {
             cell.logilTypelbl.text =@"You are connect via DoSomething Account";
+            self.TypeImgexposition.constant=(IS_IPHONE6||IS_IPHONE6_Plus)?-20:5;
             cell.loginTypeImg.image=[UIImage imageNamed:@"loginTypeDS"];
         }
         else{
             cell.logilTypelbl.text =@"You are connect via Facebook";
+            self.TypeImgexposition.constant=(IS_IPHONE6||IS_IPHONE6_Plus)?-50:-25;
             cell.loginTypeImg.image=[UIImage imageNamed:@"loginTypeFB"];
         }
 
