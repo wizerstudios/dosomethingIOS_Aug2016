@@ -23,19 +23,13 @@
     NSString        *optionLogoutDelete;
     NSString        * notificationMsg;
     NSString        * notificationSound;
-    NSString        * notificationvibration;
     NSString        * notificationMatch;
     AppDelegate     *appDelegate;
-   // UISwitch        * messSwitch;
-    //UISwitch        * soundSwitch;
-    //UISwitch        *vibrationSwitch;
+  
     CustomAlterview * objCustomAlterview;
     UIWindow        *windowInfo;
     NSString        * currentLatitude, * currentLongitude;
     
-//    NSString * isNotification_message;
-//    NSString * isNotification_sound;
-//    NSString * isNotification_vibration;
 
 }
 @property (nonatomic,strong) IBOutlet NSLayoutConstraint    * deletebuttonBottomoposition;
@@ -44,7 +38,7 @@
 
 @end
 @implementation SettingView
-@synthesize settingScroll,locationManager,messSwitch,soundSwitch,vibrationSwitch,matchSwitch;
+@synthesize settingScroll,locationManager,messSwitch,soundSwitch,matchSwitch;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -57,7 +51,6 @@
    
     notificationMsg=[profileDict valueForKey:@"notification_message"];
     notificationSound=[profileDict valueForKey:@"notification_sound"];
-    notificationvibration=[profileDict valueForKey:@"notification_vibration"];
     notificationMatch=[profileDict valueForKey:@"isMatch"];
     
 }
@@ -143,109 +136,13 @@
     [SoundBtnrightRecognizer setDirection: UISwipeGestureRecognizerDirectionRight];
     [soundSwitch addGestureRecognizer:SoundBtnrightRecognizer];
     
-    UISwipeGestureRecognizer *VibrationBtnleftRecognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(NotificationvibrationBtnSwipLeftAction:)];
-    [VibrationBtnleftRecognizer setDirection: UISwipeGestureRecognizerDirectionLeft];
-    [vibrationSwitch addGestureRecognizer:VibrationBtnleftRecognizer];
-    
-    
-    UISwipeGestureRecognizer *vibrationBtnrightRecognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(NotificationvibrationBtnSwipRightAction:)];
-    [vibrationBtnrightRecognizer setDirection: UISwipeGestureRecognizerDirectionRight];
-    [vibrationSwitch addGestureRecognizer:vibrationBtnrightRecognizer];
-
-    
-    
    
-    [vibrationSwitch addTarget:self action:@selector(NotificationbuttonAction:) forControlEvents:UIControlEventTouchUpInside];
     [soundSwitch addTarget:self action:@selector(NotificationbuttonAction:) forControlEvents:UIControlEventTouchUpInside];
     [messSwitch addTarget:self action:@selector(NotificationbuttonAction:) forControlEvents:UIControlEventTouchUpInside];
     [matchSwitch addTarget:self action:@selector(NotificationbuttonAction:) forControlEvents:UIControlEventTouchUpInside];
 
-    
-    
-//     messSwitch =[[UISwitch alloc]initWithFrame:CGRectMake(messLbl.frame.origin.x+messLbl.frame.size.width+24,messLbl.frame.origin.y-3,60,20)];
-   /// [messSwitch addTarget: self action: @selector(messSwithAction:) forControlEvents:UIControlEventValueChanged];
-//    messSwitch.transform = CGAffineTransformMakeScale(0.75, 0.75);
-    //messSwitch.layer.cornerRadius = 16.0;
-    
-//    soundSwitch =[[UISwitch alloc]initWithFrame:CGRectMake(soundLbl.frame.origin.x+soundLbl.frame.size.width+24,soundLbl.frame.origin.y-3,60,20)];
-//    soundSwitch.transform = CGAffineTransformMakeScale(0.75, 0.75);
-    //[soundSwitch addTarget: self action: @selector(soundSwithAction:) forControlEvents:UIControlEventValueChanged];
-    ///soundSwitch.layer.cornerRadius = 16.0;
-    
-//    vibrationSwitch =[[UISwitch alloc]initWithFrame:CGRectMake(vibrationLbl.frame.origin.x+vibrationLbl.frame.size.width+24,vibrationLbl.frame.origin.y-5,60,20)];
-//    vibrationSwitch.transform = CGAffineTransformMakeScale(0.75, 0.75);
-    //[vibrationSwitch addTarget: self action: @selector(vibrationSwithAction:) forControlEvents:UIControlEventValueChanged];
-   // vibrationSwitch.layer.cornerRadius = 16.0;
-  
-    //[self.notificationview addSubview:messSwitch];
-    //[self.notificationview addSubview:soundSwitch];
-    //[self.notificationview addSubview:vibrationSwitch];
   
 }
-
-
-//-(void)notificationMethod
-//{
-//    
-//    NSString * objMsg =[notificationMsg isEqualToString:@"Yes"]? @"switch_on":@"switch_off";
-//    NSString * objSound =[notificationSound isEqualToString:@"Yes"]? @"switch_on":@"switch_off";
-//    NSString * objVibration =[notificationvibration isEqualToString:@"Yes"]? @"switch_on":@"switch_off";
-//    
-//    if([objMsg isEqualToString:@"switch_on"])
-//    {
-//        [messSwitch setOn:YES];
-//        [messSwitch setThumbTintColor:[UIColor greenColor]];
-//        [messSwitch setBackgroundColor:[UIColor clearColor]];
-//        [messSwitch setOnTintColor:[UIColor colorWithRed:232.0f/255.0f green:232.0f/255.0f blue:232.0f/255.0f alpha:1.0f]];
-//         notificationMsg = @"Yes";
-//        
-//    }
-//    else{
-//        [messSwitch setOn:NO];
-//        [messSwitch setTintColor:[UIColor clearColor]];
-//        [messSwitch setBackgroundColor:[UIColor colorWithRed:232.0f/255.0f green:232.0f/255.0f blue:232.0f/255.0f alpha:1.0f]];
-//        [messSwitch setThumbTintColor:[UIColor redColor]];
-//        notificationMsg = @"No";
-//
-//    }
-//    if([objSound isEqualToString:@"switch_on"])
-//    {
-//        [soundSwitch setOn:YES];
-//        [soundSwitch setThumbTintColor:[UIColor greenColor]];
-//        [soundSwitch setBackgroundColor:[UIColor clearColor]];
-//        [soundSwitch setOnTintColor:[UIColor colorWithRed:232.0f/255.0f green:232.0f/255.0f blue:232.0f/255.0f alpha:1.0f]];
-//        notificationSound = @"Yes";
-//    }
-//     else{
-//         [soundSwitch setOn:NO];
-//         [soundSwitch setTintColor:[UIColor clearColor]];
-//         [soundSwitch setBackgroundColor:[UIColor colorWithRed:232.0f/255.0f green:232.0f/255.0f blue:232.0f/255.0f alpha:1.0f]];
-//         [soundSwitch setThumbTintColor:[UIColor redColor]];
-//         notificationMsg = @"No";
-//
-//     }
-//    
-//    if([objVibration isEqualToString:@"switch_on"])
-//    {
-//        [vibrationSwitch setOn:YES];
-//        [vibrationSwitch setThumbTintColor:[UIColor greenColor]];
-//        [vibrationSwitch setBackgroundColor:[UIColor clearColor]];
-//        [vibrationSwitch setOnTintColor:[UIColor colorWithRed:232.0f/255.0f green:232.0f/255.0f blue:232.0f/255.0f alpha:1.0f]];
-//        notificationvibration = @"Yes";
-//    }
-//
-//    else
-//    {
-//        [vibrationSwitch setOn:NO];
-//        [vibrationSwitch setTintColor:[UIColor clearColor]];
-//        [vibrationSwitch setBackgroundColor:[UIColor colorWithRed:232.0f/255.0f green:232.0f/255.0f blue:232.0f/255.0f alpha:1.0f]];
-//        [vibrationSwitch setThumbTintColor:[UIColor redColor]];
-//        notificationvibration = @"No";
-//    }
-//    
-//    
-//  
-//}
 
 -(void)NotificationmsgBtnSwipLeftAction:(id)sender
 {
@@ -299,22 +196,6 @@
     [[UIApplication sharedApplication] registerForRemoteNotificationTypes:UIRemoteNotificationTypeBadge | UIRemoteNotificationTypeAlert | UIRemoteNotificationTypeSound];
     
 }
--(void)NotificationvibrationBtnSwipLeftAction:(id)sender
-{
-    
-    [vibrationSwitch setImage:[UIImage imageNamed:@"switch_off"] forState:UIControlStateNormal];
-    notificationvibration =@"No";
-    
-    
-}
--(void)NotificationvibrationBtnSwipRightAction:(id)sender
-{
-    
-    [vibrationSwitch setImage:[UIImage imageNamed:@"switch_on"] forState:UIControlStateNormal];
-    notificationvibration =@"Yes";
-    
-}
-
 
 #pragma mark -notificationMethod
 -(void)notificationMethod
@@ -323,7 +204,7 @@
     NSString * objMsg =[notificationMsg isEqualToString:@"Yes"]? @"switch_on":@"switch_off";
     NSString * objMatch =[notificationMatch isEqualToString:@"Yes"]? @"switch_on":@"switch_off";
     NSString * objSound =[notificationSound isEqualToString:@"Yes"]? @"switch_on":@"switch_off";
-    NSString * objVibration =[notificationvibration isEqualToString:@"Yes"]? @"switch_on":@"switch_off";
+  
     
     if([objMsg isEqualToString:@"switch_on"])
     {
@@ -345,17 +226,9 @@
         notificationSound =@"Yes";
     }
     
-    if([objVibration isEqualToString:@"switch_on"])
-    {
-        [vibrationSwitch setImage:[UIImage imageNamed:@"switch_on"] forState:UIControlStateNormal];
-        notificationvibration =@"Yes";
-        
-    }
     
     if([objMsg isEqualToString:@"switch_off"])
     {
-        //        [cell.messSwitchBtn setTintColor:[UIColor redColor]];
-        //        [cell.messSwitchBtn setBackgroundColor:[UIColor colorWithRed:232.0f/255.0f green:232.0f/255.0f blue:232.0f/255.0f alpha:1.0f]];
         [messSwitch setImage:[UIImage imageNamed:@"switch_off"] forState:UIControlStateNormal];
         notificationMsg =@"No";
     }
@@ -368,12 +241,6 @@
     {
         [soundSwitch setImage:[UIImage imageNamed:@"switch_off"] forState:UIControlStateNormal];
         notificationSound =@"No";
-    }
-    
-    if([objVibration isEqualToString:@"switch_off"])
-    {
-        [vibrationSwitch setImage:[UIImage imageNamed:@"switch_off"] forState:UIControlStateNormal];
-        notificationvibration =@"No";
     }
     
 }
@@ -488,22 +355,6 @@
         
     }
     
-    else if([sender tag] == 603)
-    {
-        if ( [notificationvibration isEqualToString:@"Yes"]) {
-            
-            [vibrationSwitch setImage:[UIImage imageNamed:@"switch_off"] forState:UIControlStateNormal];
-            notificationvibration =@"No";
-            
-        }else{
-            
-            [vibrationSwitch setImage:[UIImage imageNamed:@"switch_on"] forState:UIControlStateNormal];
-            //[self notificationButtonOFFAction:sender];
-            notificationvibration =@"Yes";
-        }
-        
-        
-    }
     
    }
 
@@ -519,6 +370,15 @@
     
     [objCustomAlterview.btnNo addTarget:self action:@selector(alertPressNo:) forControlEvents:UIControlEventTouchUpInside];
     [objCustomAlterview.btnYes addTarget:self action:@selector(alertPressYes:) forControlEvents:UIControlEventTouchUpInside];
+    if(IS_IPHONE6||IS_IPHONE6_Plus)
+    {
+        objCustomAlterview.mainalterviewheight.constant=50;
+    }
+    else
+    {
+        objCustomAlterview.mainalterviewheight.constant=0;
+    }
+
     [self.view addSubview:objCustomAlterview.view];
     
 }
@@ -685,10 +545,6 @@
                                         
                                         [[NSUserDefaults standardUserDefaults]removeObjectForKey:HobbiesArray];
                                         
-                                        
-                                        
-                                        
-                                        
                                     }
                                     
                                 }
@@ -714,7 +570,7 @@
     
     if([COMMON isInternetReachable]){
         
-        [objWebService updateNotification:ProfileUpdate_API sessionID:[COMMON getSessionID] vibrationStr:notificationvibration messageStr:notificationMsg soundstr:notificationSound
+        [objWebService updateNotification:ProfileUpdate_API sessionID:[COMMON getSessionID]messageStr:notificationMsg soundstr:notificationSound
                                     match:notificationMatch
                                   success:^(AFHTTPRequestOperation *operation, id responseObject){
                                       NSLog(@"responseObject = %@",responseObject);

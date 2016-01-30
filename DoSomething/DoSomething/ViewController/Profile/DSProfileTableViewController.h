@@ -84,5 +84,6 @@
 @property (nonatomic,strong) IBOutlet NSLayoutConstraint *aboutTextHeight;
 
 @property(nonatomic,strong) IBOutlet NSLayoutConstraint *aboutViewheight;
+@property(nonatomic,strong) IBOutlet NSLayoutConstraint *TypeImgexposition;
 
 @end

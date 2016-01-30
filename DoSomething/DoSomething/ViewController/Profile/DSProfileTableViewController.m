@@ -243,7 +243,23 @@
         hobbiesNameArray       =[[interstAndHobbiesArray valueForKey:@"name"]mutableCopy];
         imageNormalArray     = [[interstAndHobbiesArray valueForKey:@"image"]mutableCopy];
         //self.tableViewHeightConstraint.constant=(IS_IPHONE6_Plus||IS_IPHONE6)? 50:50;
-         self.tableViewHeightConstraint.constant=(IS_IPHONE6_Plus||IS_IPHONE6)? self.view.frame.size.height-70:self.tableviewProfile.frame.size.height+50;
+        if(IS_GREATER_IOS9)
+            
+        {
+            
+            self.tableViewHeightConstraint.constant=(IS_IPHONE6_Plus||IS_IPHONE6)? self.view.frame.size.height-70:self.tableviewProfile.frame.size.height+50;
+            
+        }
+        
+        else
+            
+        {
+            
+            self.tableViewHeightConstraint.constant=(IS_IPHONE6_Plus||IS_IPHONE6)? self.view.frame.size.height-70:self.tableviewProfile.frame.size.height+50;
+            
+            
+        }
+       
     }
     
     [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"SelectedItemCategoryID"];
@@ -799,7 +815,31 @@
 }
 
 -(void)initializeArray{
-    self.tableViewHeightConstraint.constant=(IS_IPHONE6_Plus||IS_IPHONE6)? self.view.frame.size.height+120:self.view.frame.size.height+55;
+    
+    if(IS_GREATER_IOS9)
+        
+    {
+        
+        if(IS_IPHONE6)
+        {
+            self.tableViewHeightConstraint.constant= self.view.frame.size.height+125;
+        }
+        else if(IS_IPHONE6_Plus)
+        {
+            self.tableViewHeightConstraint.constant= self.view.frame.size.height+190;
+        }
+        else
+        {
+            self.tableViewHeightConstraint.constant=self.view.frame.size.height+55;
+        }
+    }
+    
+    else{
+        
+        self.tableViewHeightConstraint.constant=(IS_IPHONE6_Plus||IS_IPHONE6)? self.view.frame.size.height-20:self.view.frame.size.height;
+        
+    }
+    
     placeHolderArray = [[NSMutableArray alloc] initWithCapacity: 1];
     
     [placeHolderArray insertObject:[[NSMutableArray alloc]initWithObjects:[NSMutableDictionary dictionaryWithObjectsAndKeys:@"Image",@"placeHolder", nil],
@@ -851,6 +891,9 @@
     [objCustomAlterview.btnYes addTarget:self action:@selector(alertPressYes:) forControlEvents:UIControlEventTouchUpInside];
     [objCustomAlterview.btnNo addTarget:self action:@selector(alertPressNo:) forControlEvents:UIControlEventTouchUpInside];
     [objCustomAlterview.alertCancelButton addTarget:self action:@selector(alertPressCancel:) forControlEvents:UIControlEventTouchUpInside];
+     objCustomAlterview.mainalterviewheight.constant=0;
+
+
     
     [self.view addSubview:objCustomAlterview.view];
 }
@@ -955,7 +998,7 @@
        if(indexPath.row == 5)
         {
             dataSize = [COMMON getControlHeight:strAbout withFontName:@"Patron-Regular" ofSize:14.0 withSize:CGSizeMake(tableView.frame.size.width-20,tableView.frame.size.height)];
-            if([strAbout isEqualToString:@""]|| dataSize.height ==10){
+            if([strAbout isEqualToString:@""]|| dataSize.height ==20){
                  return 40 ;
             }
             else
@@ -1360,7 +1403,7 @@
                 
                 strAbout =cell.textViewAboutYou.text;
                 
-              dataSize = [COMMON getControlHeight:strAbout withFontName:@"Patron-Regular" ofSize:14.0 withSize:CGSizeMake(cell.frame.size.width-20,tableView.frame.size.height)];
+//              dataSize = [COMMON getControlHeight:strAbout withFontName:@"Patron-Regular" ofSize:14.0 withSize:CGSizeMake(cell.frame.size.width-20,tableView.frame.size.height)];
                 
                 cell.textViewAboutYou.delegate = self;
                 
@@ -1372,14 +1415,14 @@
                   
                     if(strAbout == NULL){
                         cell.textViewAboutYou.text = [[profileDict valueForKey:@"about"]mutableCopy];
-                        strAbout =cell.textViewAboutYou.text;
-                         dataSize = [COMMON getControlHeight:strAbout withFontName:@"Patron-Regular" ofSize:14.0 withSize:CGSizeMake(cell.frame.size.width-20,tableView.frame.size.height)];
-                        self.aboutTextHeight.constant =dataSize.height;
+//                        strAbout =cell.textViewAboutYou.text;
+//                         dataSize = [COMMON getControlHeight:strAbout withFontName:@"Patron-Regular" ofSize:14.0 withSize:CGSizeMake(cell.frame.size.width-20,tableView.frame.size.height)];
+//                        self.aboutTextHeight.constant =dataSize.height;
                     }
                     else{
                          cell.textViewAboutYou.text = strAbout;
-                        dataSize = [COMMON getControlHeight:strAbout withFontName:@"Patron-Regular" ofSize:14.0 withSize:CGSizeMake(cell.frame.size.width-20,tableView.frame.size.height)];
-                        self.aboutTextHeight.constant =dataSize.height-12;
+//                        dataSize = [COMMON getControlHeight:strAbout withFontName:@"Patron-Regular" ofSize:14.0 withSize:CGSizeMake(cell.frame.size.width-20,tableView.frame.size.height)];
+//                        self.aboutTextHeight.constant =dataSize.height-12;
                     }
                 }
                 else{
@@ -1402,14 +1445,15 @@
                
                 cell.textViewAboutYou.text = @"Write something about yourself here.";
                     cell.textViewAboutYou.scrollEnabled=YES;
+                  
                    
                 }
                 else
                 {
                     
                     cell.textViewAboutYou.text =strAbout;
-                    dataSize = [COMMON getControlHeight:strAbout withFontName:@"Patron-Regular" ofSize:14.0 withSize:CGSizeMake(cell.frame.size.width-20,tableView.frame.size.height)];
-                    self.aboutTextHeight.constant =dataSize.height-12;
+//                    dataSize = [COMMON getControlHeight:strAbout withFontName:@"Patron-Regular" ofSize:14.0 withSize:CGSizeMake(cell.frame.size.width-20,tableView.frame.size.height)];
+//                    self.aboutTextHeight.constant =dataSize.height-12;
 
                     
                 }
@@ -1765,10 +1809,12 @@
         if([objloginType isEqualToString:@"dosomething"])
         {
             cell.logilTypelbl.text =@"You are connect via DoSomething Account";
+            self.TypeImgexposition.constant=(IS_IPHONE6||IS_IPHONE6_Plus)?-20:5;
             cell.loginTypeImg.image=[UIImage imageNamed:@"loginTypeDS"];
         }
         else{
             cell.logilTypelbl.text =@"You are connect via Facebook";
+            self.TypeImgexposition.constant=(IS_IPHONE6||IS_IPHONE6_Plus)?-50:-25;
             cell.loginTypeImg.image=[UIImage imageNamed:@"loginTypeFB"];
         }
 
@@ -2418,32 +2464,17 @@
 #pragma mark - saveAction
 -(void)saveAction:(id)sender
 {
-    //[COMMON LoadIcon:self.tableviewProfile];
     [self.view endEditing:YES];
-    
-    //[customNavigation.saveBtn setUserInteractionEnabled:NO];
-//    if(isSave==NO)
-//    {
+
     if(profileDict !=NULL){
-        
-
+    
           strGender = [profileDict valueForKey:@"gender"];
-          //strDOB    = (currentTextfield.text !=nil)?currentTextfield.text :[profileDict valueForKey:@"date_of_birth"];
-
-      //  [self dateConverter];
-        [self loadValidations];
-       // [self loadUpdate];
-        
-        
-        isSave =YES;
+          [self loadValidations];
+           isSave =YES;
        
     }
     else
          [self loadValidations];
-    
-    
-   
-   
     }
 
 -(void) enableSendButton:(NSNotification*)notification
@@ -2471,7 +2502,6 @@
 {
     [COMMON LoadIcon:self.view];
     
-   
     strType      = (selectEmail== YES)?@"1":@"2";
     strProfileID = (FBprofileID!=nil)?FBprofileID:@"";
     strDOB       = (currentTextfield.text !=nil)?currentTextfield.text :[profileDict valueForKey:@"date_of_birth"];
@@ -2509,7 +2539,13 @@
                 [COMMON removeLoading];
                 return;
             }
-    
+            else if ([strAbout isEqualToString:@""] || strAbout == NULL )
+            {
+                
+                [self showAltermessage:@"About Required"];
+                [COMMON removeLoading];
+                return;
+            }
    
            else if ([emailAddressToRegister isEqualToString:@""] || emailAddressToRegister == nil)
             {
@@ -2551,7 +2587,14 @@
     
      if(profileDict!=nil)
     {
-        
+        if ([strAbout isEqualToString:@""] || strAbout == NULL )
+        {
+            
+            [self showAltermessage:@"About Required"];
+            [COMMON removeLoading];
+            return;
+        }
+
        if([[profileDict valueForKey:@"showpassword"] isEqualToString:@"Yes"])
        {
          if ([emailPasswordToRegister isEqualToString:@""] || emailPasswordToRegister == nil)
