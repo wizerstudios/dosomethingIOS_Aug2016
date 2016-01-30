@@ -212,7 +212,7 @@
     }
     if(IS_IPHONE6_Plus)
     {
-        customNavigation.view.frame = CGRectMake(0,-20, 420, 83);
+        customNavigation.view.frame = CGRectMake(0,-20, 415, 83);
         self.layoutConstraintTableViewYPos.constant= 20;
     }
     [customNavigation.menuBtn setHidden:YES];
