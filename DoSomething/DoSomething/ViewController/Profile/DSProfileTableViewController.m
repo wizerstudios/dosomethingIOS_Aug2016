@@ -753,7 +753,8 @@
     NSInteger tag = [textField tag];
     if(textField.tag == 1000){
         [self loadDatePicker:tag];
-    }
+        [textField becomeFirstResponder];
+       }
     else if (textField.tag == 15)
     {
         emailPasswordToRegister = @"";
@@ -798,7 +799,6 @@
 
     
 }
-
 
 
 -(void)backAction
@@ -2488,14 +2488,14 @@
 #pragma mark - dateConverter
 -(void)dateConverter{
     
-    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+       NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
     [dateFormatter setDateFormat:@"dd/MM/yyyy"];
     NSDate *date = [dateFormatter dateFromString: strDOB];
     dateFormatter = [[NSDateFormatter alloc] init];
     [dateFormatter setDateFormat:@"yyyy-MM-dd"];
     dateChange = [dateFormatter stringFromDate:date];
-   
-
+    
+    
 }
 #pragma mark - saveAction
 -(void)loadValidations
@@ -2505,8 +2505,14 @@
     strType      = (selectEmail== YES)?@"1":@"2";
     strProfileID = (FBprofileID!=nil)?FBprofileID:@"";
     strDOB       = (currentTextfield.text !=nil)?currentTextfield.text :[profileDict valueForKey:@"date_of_birth"];
-    [self dateConverter];
-
+    if(IS_GREATER_IOS8)
+    {
+        [self dateConverter];
+    }
+    else
+    {
+    dateChange=[NSString stringWithFormat:@"%@/%@/%@",[[strDOB componentsSeparatedByString:@"/"]objectAtIndex:2],[[strDOB componentsSeparatedByString:@"/"]objectAtIndex:1],[[strDOB componentsSeparatedByString:@"/"]objectAtIndex:0]];
+    }
     if(profileDict== NULL)
     {
             if(FirstName == nil)

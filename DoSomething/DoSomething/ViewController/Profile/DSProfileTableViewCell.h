@@ -80,4 +80,6 @@
 @property (nonatomic,strong) IBOutlet UILabel *notificationTittlelbl;
 @property (nonatomic,strong) IBOutlet UILabel *Accounttittlelbl;
 
+@property(nonatomic,strong) IBOutlet UIButton * dobBtn;
+
 @end
