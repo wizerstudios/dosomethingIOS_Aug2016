@@ -173,7 +173,7 @@ static NSString       *ServiceMimeType    = @"image/jpeg";
       fbprofileImage:(NSString *)fbProfile
 notification_message:(NSString *)isnotification_message
 notification_sound  :(NSString *)isnotification_sound
-notification_vibration:(NSString *)isnotification_vibration
+             isMatch:(NSString *)isMatch
             pushType:(NSString *)pushType
             fbimage :(NSString *)fbimage
              success:(WebserviceRequestSuccessHandler)success
@@ -201,7 +201,7 @@ notification_vibration:(NSString *)isnotification_vibration
     if(deviceid)                [registerDetails    setObject:deviceid              forKey:@"deviceid"];
     if(isnotification_message)  [registerDetails    setObject:isnotification_message forKey:@"notification_message"];
     if(isnotification_sound)    [registerDetails    setObject:isnotification_sound  forKey:@"notification_sound"];
-    if(isnotification_vibration)[registerDetails    setObject:isnotification_vibration  forKey:@"notification_vibration"];
+    if(isMatch)[registerDetails    setObject:isMatch  forKey:@"isMatch"];
     if(pushType) [registerDetails setObject:pushType forKey:@"push_type"];
     if(fbimage)  [registerDetails setObject:fbimage forKey:@"fbimage"];
     if(fbProfile)  [registerDetails setObject:fbProfile forKey:@"profileImage1"];
