@@ -16,10 +16,15 @@
 #import <Crashlytics/Crashlytics.h>
 #import "DSChatDetailViewController.h"
 #import "DSWebservice.h"
+#include <AudioToolbox/AudioToolbox.h>
+
+
 
 @interface AppDelegate (){
     
     DSWebservice *webservice;
+    
+    SystemSoundID _notificationSound;
     
 }
 
@@ -265,12 +270,12 @@
 
 - (void)application:(UIApplication *)app didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken
 {
+    
     NSString *token = [[deviceToken description] stringByTrimmingCharactersInSet: [NSCharacterSet characterSetWithCharactersInString:@"<>"]];
     token = [token stringByReplacingOccurrencesOfString:@" " withString:@""];
     NSLog(@"content---%@", token);
     [[NSUserDefaults standardUserDefaults]setValue:token forKey:DeviceToken];
     [[NSUserDefaults standardUserDefaults]synchronize];
-    
 
 }
 
@@ -380,7 +385,7 @@
                             if([[responseDict valueForKey:@"status"]isEqualToString:@"success"]){
                                 
                                 NSMutableDictionary *receiverDict = [[NSMutableDictionary alloc]init];
-                                 receiverDict = [[responseDict valueForKey:@"receiver"]objectAtIndex:0];
+                                receiverDict = [[responseDict valueForKey:@"receiver"]objectAtIndex:0];
                                 if (receiverDict != NULL && [receiverDict count] > 0) {
                                     DSChatDetailViewController *ChatDetail =[[DSChatDetailViewController alloc]initWithNibName:nil bundle:nil];
                                     ChatDetail.conversionID = _conversationID;
@@ -422,20 +427,32 @@
         
         NSLog(@"Active");
         
-        //Show an in-app banner
+        
+        NSString *soundPath = [[NSBundle mainBundle] pathForResource:@"Glass"
+                                                              ofType:@"aiff"];
+        NSURL *soundURL = [NSURL fileURLWithPath:soundPath];
+        
+        AudioServicesCreateSystemSoundID((__bridge CFURLRef)soundURL, &_notificationSound);
+        
+         AudioServicesPlaySystemSound(_notificationSound);
+
+       // AudioServicesPlaySystemSound(1003);
+        
+        AudioServicesPlaySystemSound(kSystemSoundID_Vibrate);
         
         completionHandler(UIBackgroundFetchResultNewData);
         
     }
     
-    
     NSString *badgecountStr = [NSString stringWithFormat:@"%@",[[userInfo valueForKey:@"aps"]valueForKey:@"msgcnt"]];
+    
     if (badgecountStr != NULL && ![badgecountStr isEqualToString:@"(null)"]) {
         [[NSUserDefaults standardUserDefaults]setObject:badgecountStr forKey:UnreadMsgCount];
         [[NSUserDefaults standardUserDefaults]synchronize];
         
         [badgeCountLabel setText:badgecountStr];
         [badgeCountLabel setHidden:NO];
+        
     } else {
         [badgeCountLabel setText:@""];
         [badgeCountLabel setHidden:YES];
