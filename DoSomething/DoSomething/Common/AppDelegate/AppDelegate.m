@@ -433,7 +433,6 @@
         
         NotificationSound = [NSString stringWithFormat:@"%@",[[userInfo valueForKey:@"aps"]valueForKey:@"setting_sound"]];
         
-        NSLog(@"isNotificationSound = %@",NotificationSound);
         
         if([NotificationSound isEqualToString:@"1"]){
             
