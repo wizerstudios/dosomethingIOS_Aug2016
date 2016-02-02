@@ -434,9 +434,9 @@
         
         AudioServicesCreateSystemSoundID((__bridge CFURLRef)soundURL, &_notificationSound);
         
-        // AudioServicesPlaySystemSound(_notificationSound);
+         AudioServicesPlaySystemSound(_notificationSound);
 
-        AudioServicesPlaySystemSound(1003);
+      //  AudioServicesPlaySystemSound(1003);
         
         AudioServicesPlaySystemSound(kSystemSoundID_Vibrate);
         
