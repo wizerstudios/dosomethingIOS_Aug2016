@@ -377,8 +377,8 @@
                             if([[responseDict valueForKey:@"status"]isEqualToString:@"success"]){
                                 
                                 NSMutableDictionary *receiverDict = [[NSMutableDictionary alloc]init];
+                                 receiverDict = [[responseDict valueForKey:@"receiver"]objectAtIndex:0];
                                 if (receiverDict != NULL && [receiverDict count] > 0) {
-                                    receiverDict = [[responseDict valueForKey:@"receiver"]objectAtIndex:0];
                                     DSChatDetailViewController *ChatDetail =[[DSChatDetailViewController alloc]initWithNibName:nil bundle:nil];
                                     ChatDetail.conversionID = _conversationID;
                                     ChatDetail.chatuserDetailsDict = [receiverDict mutableCopy];
