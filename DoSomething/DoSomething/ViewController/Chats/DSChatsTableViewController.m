@@ -414,7 +414,12 @@
 
 -(void)loadLocationUpdateAPI{
     
+    NSString *deviceToken = [[NSUserDefaults standardUserDefaults]valueForKey:DeviceToken];
+    if(deviceToken == nil)
+        deviceToken = @"";
+    
     [webService locationUpdate:LocationUpdate_API sessionid:[COMMON getSessionID] latitude:currentLatitude longitude:currentLongitude
+                 deviceToken:deviceToken pushType:push_type
                        success:^(AFHTTPRequestOperation *operation, id responseObject){
                            NSLog(@"responseObject = %@",responseObject);
                            if([[responseObject valueForKey:@"status"]isEqualToString:@"success"]){

@@ -406,18 +406,22 @@ notification_sound  :(NSString *)isnotification_sound
              sessionid:(NSString *)sessionid
               latitude:(NSString *)latitude
              longitude:(NSString *)longitude
+           deviceToken:(NSString *)deviceToken
+              pushType:(NSString *)pushType
                success:(WebserviceRequestSuccessHandler)success
                failure:(WebserviceRequestFailureHandler)failure
 {
    urlString = [URL_FOR_RESOURCE(@"") stringByAppendingString:[NSString stringWithFormat:@"%@?",locationUpdtURL]];
-    
+    NSLog(@"urlString = %@",urlString);
     NSMutableDictionary *locationUpdate = [[NSMutableDictionary alloc] init];
     
     if(sessionid)         [locationUpdate    setObject:sessionid                 forKey:@"sessionid"];
     if(latitude)          [locationUpdate    setObject:latitude                  forKey:@"latitude"];
     if(longitude)         [locationUpdate    setObject:longitude                 forKey:@"longitude"];
+                          [locationUpdate    setObject:deviceToken               forKey:@"device_token"];
+                          [locationUpdate    setObject:pushType                  forKey:@"push_type"];
 
-
+    NSLog(@"locationUpdate = %@",locationUpdate);
     
     [self sendRequestWithURLString:urlString
                      andParameters:locationUpdate

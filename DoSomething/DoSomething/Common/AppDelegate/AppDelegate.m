@@ -151,7 +151,7 @@
     chatsButton.frame=CGRectMake(menuButton.frame.origin.x+menuButton.frame.size.width+17,3,40,40);
     settingButton.frame =CGRectMake(chatsButton.frame.origin.x+chatsButton.frame.size.width+17,3,40,40);
     
-    [badgeCountLabel setFrame:CGRectMake(menuButton.frame.origin.x+menuButton.frame.size.width+45,5,20,20)];
+    [badgeCountLabel setFrame:CGRectMake(menuButton.frame.origin.x+menuButton.frame.size.width+40,5,20,20)];
     badgeCountLabel.layer.cornerRadius = 10.0;
     [badgeCountLabel.layer setMasksToBounds:YES];
     [badgeCountLabel setTextColor:[UIColor whiteColor]];
@@ -160,7 +160,7 @@
     [badgeCountLabel setBackgroundColor:[UIColor redColor]];
     
    
-       if(IS_IPHONE6)
+    if(IS_IPHONE6)
     {
         profileButton.frame=CGRectMake(buttonsView.frame.origin.x+20,3,45,45);
         menuButton.frame=CGRectMake(self.window.frame.size.width/2-18,3,45,45);
@@ -434,9 +434,9 @@
         
         AudioServicesCreateSystemSoundID((__bridge CFURLRef)soundURL, &_notificationSound);
         
-         AudioServicesPlaySystemSound(_notificationSound);
+        // AudioServicesPlaySystemSound(_notificationSound);
 
-       // AudioServicesPlaySystemSound(1003);
+        AudioServicesPlaySystemSound(1003);
         
         AudioServicesPlaySystemSound(kSystemSoundID_Vibrate);
         

@@ -326,12 +326,12 @@
 #pragma mark - loadLocationUpdateAPI
 -(void)loadLocationUpdateAPI{
     
-    
+    NSString *deviceToken = [[NSUserDefaults standardUserDefaults]valueForKey:DeviceToken];
+    if(deviceToken == nil)
+        deviceToken = @"";
     if([COMMON isInternetReachable]){
-        [objWebservice locationUpdate:LocationUpdate_API
-                            sessionid:[COMMON getSessionID]
-                             latitude:currentLatitude
-                            longitude:currentLongitude
+    [objWebservice locationUpdate:LocationUpdate_API sessionid:[COMMON getSessionID] latitude:currentLatitude longitude:currentLongitude
+                   deviceToken:deviceToken pushType:push_type
                               success:^(AFHTTPRequestOperation *operation, id responseObject){
                                   NSLog(@"responseObject = %@",responseObject);
                               }

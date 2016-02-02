@@ -613,11 +613,20 @@
 
 -(void)loadLocationUpdateAPI{
     
+    NSString *deviceToken = [[NSUserDefaults standardUserDefaults]valueForKey:DeviceToken];
+    if(deviceToken == nil)
+        deviceToken = @"";
     if(profileDict != NULL)
     {
-    [objWebService locationUpdate:LocationUpdate_API sessionid:[COMMON getSessionID] latitude:currentLatitude longitude:currentLongitude
+        
+            [objWebService locationUpdate:LocationUpdate_API sessionid:[COMMON getSessionID] latitude:currentLatitude longitude:currentLongitude
+                              deviceToken:deviceToken pushType:push_type
                           success:^(AFHTTPRequestOperation *operation, id responseObject){
                               NSLog(@"responseObject = %@",responseObject);
+                              [[NSUserDefaults standardUserDefaults] setObject:currentLatitude  forKey:CurrentLatitude];
+                              [[NSUserDefaults standardUserDefaults] setObject:currentLongitude forKey:CurrentLongitude];
+                              [[NSUserDefaults standardUserDefaults] synchronize];
+                              
                           }
                           failure:^(AFHTTPRequestOperation *operation, id error) {
                               
