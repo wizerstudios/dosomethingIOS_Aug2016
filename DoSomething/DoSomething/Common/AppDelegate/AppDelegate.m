@@ -257,6 +257,9 @@
 
         }
     }
+    else{
+         [[UIApplication sharedApplication] registerForRemoteNotificationTypes:UIRemoteNotificationTypeBadge | UIRemoteNotificationTypeAlert | UIRemoteNotificationTypeSound];
+    }
     
 }
 
