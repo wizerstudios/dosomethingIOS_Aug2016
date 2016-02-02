@@ -266,7 +266,7 @@
     
     isNotification_message = @"Yes";
     isNotification_match = @"Yes";
-    isNotification_sound = @"Yes";
+    isNotification_sound =@"Yes";
     
     NSString *ImageURL1 , *ImageURL2, *ImageURL3 ;
     
@@ -753,7 +753,6 @@
     NSInteger tag = [textField tag];
     if(textField.tag == 1000){
         [self loadDatePicker:tag];
-        [textField becomeFirstResponder];
        }
     else if (textField.tag == 15)
     {
