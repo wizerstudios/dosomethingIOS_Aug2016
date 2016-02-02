@@ -17,6 +17,7 @@
 #import "DSChatDetailViewController.h"
 #import "DSWebservice.h"
 #include <AudioToolbox/AudioToolbox.h>
+#import <AVFoundation/AVFoundation.h>
 
 
 
@@ -25,6 +26,8 @@
     DSWebservice *webservice;
     
     SystemSoundID _notificationSound;
+    
+     AVAudioPlayer           *audioPlayer;
     
 }
 
@@ -426,24 +429,33 @@
     } else {
         
         NSLog(@"Active");
+        NSString *NotificationSound;
+        
+        NotificationSound = [NSString stringWithFormat:@"%@",[[userInfo valueForKey:@"aps"]valueForKey:@"setting_sound"]];
         
         
-        NSString *soundPath = [[NSBundle mainBundle] pathForResource:@"Glass"
-                                                              ofType:@"aiff"];
-        NSURL *soundURL = [NSURL fileURLWithPath:soundPath];
-        
-        AudioServicesCreateSystemSoundID((__bridge CFURLRef)soundURL, &_notificationSound);
-        
-         AudioServicesPlaySystemSound(_notificationSound);
-
-      //  AudioServicesPlaySystemSound(1003);
+        if([NotificationSound isEqualToString:@"1"]){
+            
+           // NSString *playSoundOnAlert = [NSString stringWithFormat:@"%@",[[userInfo objectForKey:@"aps"] objectForKey:@"sound"]];
+            
+          //   NSURL *soundURL =[NSURL fileURLWithPath:[NSString stringWithFormat:@"%@/%@",[[NSBundle mainBundle] resourcePath],playSoundOnAlert]];
+            
+            NSString *playSoundOnAlert = [[NSBundle mainBundle] pathForResource:@"Glass"
+                                                                  ofType:@"aiff"];
+            NSURL *soundURL = [NSURL fileURLWithPath:playSoundOnAlert];
+            
+            AudioServicesCreateSystemSoundID((__bridge CFURLRef)soundURL, &_notificationSound);
+            
+            AudioServicesPlaySystemSound(_notificationSound);
+            
+        }
         
         AudioServicesPlaySystemSound(kSystemSoundID_Vibrate);
         
         completionHandler(UIBackgroundFetchResultNewData);
         
     }
-    
+    NSLog(@"notification user info = %@",userInfo);
     NSString *badgecountStr = [NSString stringWithFormat:@"%@",[[userInfo valueForKey:@"aps"]valueForKey:@"msgcnt"]];
     
     if (badgecountStr != NULL && ![badgecountStr isEqualToString:@"(null)"]) {
