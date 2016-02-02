@@ -366,11 +366,16 @@ DSAppCommon *sharedCommon = nil;
     NSLog(@"strsessionID%@",strsessionID);
     NSLog(@"currentLatitude%@",currentLatitude);
     NSLog(@"currentLongitude%@",currentLongitude);
+    NSString *deviceToken = [[NSUserDefaults standardUserDefaults]valueForKey:DeviceToken];
+    if(deviceToken == nil)
+        deviceToken = @"";
     
     [objWebService locationUpdate:LocationUpdate_API
                         sessionid:sessionId
                          latitude:currentLatitude
                         longitude:currentLongitude
+                      deviceToken:deviceToken
+                         pushType:push_type
                           success:^(AFHTTPRequestOperation *operation, id responseObject) {
                               NSLog(@"LocationUpdate_API%@",responseObject);
                               
