@@ -418,10 +418,10 @@ notification_sound  :(NSString *)isnotification_sound
     if(sessionid)         [locationUpdate    setObject:sessionid                 forKey:@"sessionid"];
     if(latitude)          [locationUpdate    setObject:latitude                  forKey:@"latitude"];
     if(longitude)         [locationUpdate    setObject:longitude                 forKey:@"longitude"];
-                          [locationUpdate    setObject:deviceToken               forKey:@"device_token"];
-                          [locationUpdate    setObject:pushType                  forKey:@"push_type"];
+    if(deviceToken)       [locationUpdate    setObject:deviceToken               forKey:@"device_token"];
+    if(pushType)          [locationUpdate    setObject:pushType                 forKey:@"push_type"];
+    
 
-    NSLog(@"locationUpdate = %@",locationUpdate);
     
     [self sendRequestWithURLString:urlString
                      andParameters:locationUpdate

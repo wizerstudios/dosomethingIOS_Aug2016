@@ -55,7 +55,7 @@
     BOOL isFilteraction;
     BOOL isLoadData;
     BOOL isfilterChange;
-    
+    NSString * RequestStr;
     
 }
 @property(nonatomic,strong)IBOutlet NSLayoutConstraint  * collectionviewxpostion;
@@ -330,8 +330,12 @@
     if(deviceToken == nil)
         deviceToken = @"";
     if([COMMON isInternetReachable]){
-    [objWebservice locationUpdate:LocationUpdate_API sessionid:[COMMON getSessionID] latitude:currentLatitude longitude:currentLongitude
-                   deviceToken:deviceToken pushType:push_type
+        [objWebservice locationUpdate:LocationUpdate_API
+                            sessionid:[COMMON getSessionID]
+                             latitude:currentLatitude
+                            longitude:currentLongitude
+                          deviceToken:DeviceToken
+                             pushType:push_type
                               success:^(AFHTTPRequestOperation *operation, id responseObject){
                                   NSLog(@"responseObject = %@",responseObject);
                               }
@@ -611,8 +615,9 @@
  
      profileUserID=[[commonlocationArray valueForKey:@"user_id"] objectAtIndex:indexPath.row];
     
-    NSString * requestsend=[[commonlocationArray valueForKey:@"send_request"] objectAtIndex:indexPath.row];
-    if([requestsend isEqualToString:@"No"] &&  [locationCellView.sendRequest.text isEqualToString:@"Send Request"])
+    //NSString * requestsend=[[commonlocationArray valueForKey:@"send_request"] objectAtIndex:indexPath.row];
+        NSLog(@"%@",locationCellView.sendRequest.text);
+    if([locationCellView.sendRequest.text isEqualToString:@"Send Request"])
     {
         UIButton *buttonSender = (UIButton *)sender;
         locationCellView.requestsendBtn = buttonSender;
@@ -640,31 +645,62 @@
         [self loadRequestsendWebService];
       
     }
+      
+    else if([locationCellView.sendRequest.text isEqualToString:@"Request Sent!"])
+    {
+        UIButton *buttonSender = (UIButton *)sender;
+        locationCellView.requestsendBtn = buttonSender;
+        [locationCellView.hobbiesImagebackView setBackgroundColor:[UIColor colorWithRed:(218/255.0) green:(40/255.0) blue:(64.0/255.0f) alpha:1.0]];
+        locationCellView.sendRequest.text =@"Send Request";
+        locationCellView.sendRequest.textColor=[UIColor whiteColor];
+        
+        dosomethingImageArry =[[[commonlocationArray valueForKey:@"dosomething"]objectAtIndex:indexPath.row] valueForKey:@"NearbyImage"];
+        if([dosomethingImageArry count]== 1){
+            NSLog(@"count one");
+        }
+        else if([dosomethingImageArry count] == 2){
+            NSLog(@"count two");
+        }else{
+            
+            NSString *dosomethingImage1=[dosomethingImageArry objectAtIndex:0];
+            NSString *dosomethingImage2=[dosomethingImageArry objectAtIndex:1];
+            NSString *dosomethingImage3=[dosomethingImageArry objectAtIndex:2];
+            
+            
+            [locationCellView.dosomethingImage1 setImageWithURL:[NSURL URLWithString:dosomethingImage1]];
+            [locationCellView.dosomethingImage2 setImageWithURL:[NSURL URLWithString:dosomethingImage2]];
+            [locationCellView.dosomethingImage3 setImageWithURL:[NSURL URLWithString:dosomethingImage3]];
+        }
+        [self loadRequestsendWebService];
     }
-}
+        
+        }
+    }
+
+
 #pragma mark - loadRequestsendWebServiceAPI
 -(void)loadRequestsendWebService
 {
     
     if([COMMON isInternetReachable]){
-        [objWebservice sendRequest:SendRequest_API
-                         sessionid:[COMMON getSessionID]
-              request_send_user_id:profileUserID
-                           success:^(AFHTTPRequestOperation *operation, id responseObject)
-         {
-             if([[[responseObject valueForKey:@"sendrequest"]valueForKey:@"status"] isEqualToString:@"success"])
-             {
-                 NSString * resposeMsg =[[responseObject valueForKey:@"sendrequest"]valueForKey:@"Message"];
+                    [objWebservice sendRequest:SendRequest_API
+                                     sessionid:[COMMON getSessionID]
+                                    request_send_user_id:profileUserID
+                                    success:^(AFHTTPRequestOperation *operation, id responseObject)
+                                {
+                                    if([[[responseObject valueForKey:@"sendrequest"]valueForKey:@"status"] isEqualToString:@"success"])
+                                    {
+                                        NSString * resposeMsg =[[responseObject valueForKey:@"sendrequest"]valueForKey:@"Message"];
+                                        [self showAltermessage:resposeMsg];
                  
-                 [self showAltermessage:resposeMsg];
-             }
+                                    }
              
-         }
-                           failure:^(AFHTTPRequestOperation *operation, id error)
-         {
-             NSLog(@"requestSend RESPONSE=%@",error);
-         }];
-    }
+                                }
+                             failure:^(AFHTTPRequestOperation *operation, id error)
+                            {
+                                NSLog(@"requestSend RESPONSE=%@",error);
+                            }];
+                            }
     else{
         
         [COMMON showErrorAlert:@"Check Your Internet connection"];
