@@ -406,6 +406,8 @@ notification_sound  :(NSString *)isnotification_sound
              sessionid:(NSString *)sessionid
               latitude:(NSString *)latitude
              longitude:(NSString *)longitude
+           deviceToken:(NSString *)deviceToken
+              pushType:(NSString *)pushType
                success:(WebserviceRequestSuccessHandler)success
                failure:(WebserviceRequestFailureHandler)failure
 {
@@ -416,7 +418,9 @@ notification_sound  :(NSString *)isnotification_sound
     if(sessionid)         [locationUpdate    setObject:sessionid                 forKey:@"sessionid"];
     if(latitude)          [locationUpdate    setObject:latitude                  forKey:@"latitude"];
     if(longitude)         [locationUpdate    setObject:longitude                 forKey:@"longitude"];
-
+    if(deviceToken)       [locationUpdate    setObject:deviceToken               forKey:@"device_token"];
+    if(pushType)          [locationUpdate    setObject:pushType                 forKey:@"push_type"];
+    
 
     
     [self sendRequestWithURLString:urlString

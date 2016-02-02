@@ -615,7 +615,12 @@
     
     if(profileDict != NULL)
     {
-    [objWebService locationUpdate:LocationUpdate_API sessionid:[COMMON getSessionID] latitude:currentLatitude longitude:currentLongitude
+    [objWebService locationUpdate:LocationUpdate_API
+                        sessionid:[COMMON getSessionID]
+                         latitude:currentLatitude
+                        longitude:currentLongitude
+                      deviceToken:DeviceToken
+                         pushType:push_type
                           success:^(AFHTTPRequestOperation *operation, id responseObject){
                               NSLog(@"responseObject = %@",responseObject);
                           }
@@ -677,7 +682,7 @@
 }
 
 
-- (void)DateSelectionAction:(UIDatePicker *)sender
+- (IBAction)DateSelectionAction:(UIDatePicker *)sender
 {
     currentTextfield=(UITextField *)[self.view viewWithTag:[sender tag]];
     
@@ -685,7 +690,7 @@
     
     [dateFormat setTimeZone:[NSTimeZone systemTimeZone]];
     
-    [dateFormat setDateFormat:@"dd / MM / YYYY"];
+    [dateFormat setDateFormat:@"dd/MM/YYYY"];
     
     NSString *dateString =  [dateFormat stringFromDate:sender.date];
     
@@ -752,6 +757,8 @@
     
     NSInteger tag = [textField tag];
     if(textField.tag == 1000){
+        //[textField resignFirstResponder];
+
         [self loadDatePicker:tag];
        }
     else if (textField.tag == 15)
@@ -784,7 +791,7 @@
        
         NSDate *date = datePicker.date;
         NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-        [formatter setDateFormat:@"dd / MM / yyyy"];
+        [formatter setDateFormat:@"dd/MM/yyyy"];
         selOptionVal = [formatter stringFromDate:date];
        
         if(selOptionVal != nil || ![selOptionVal isEqualToString:@""]){
@@ -1321,7 +1328,7 @@
                 
                 if(currentTextfield.text == NULL){
                     if([[profileDict valueForKey:@"date_of_birth"]isEqualToString:@"00/00/0000"])
-                        cell.textFieldDPPlaceHolder.text = @"DD / MM / YYYY";
+                        cell.textFieldDPPlaceHolder.text = @"DD/MM/YYYY";
                     else{
                         NSString *dateStr = [profileDict valueForKey:@"date_of_birth"];
                         dateStr = [dateStr stringByReplacingOccurrencesOfString:@"/" withString:@" / "];
@@ -2484,18 +2491,18 @@
 
 
 //}
-#pragma mark - dateConverter
--(void)dateConverter{
-    
-       NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-    [dateFormatter setDateFormat:@"dd/MM/yyyy"];
-    NSDate *date = [dateFormatter dateFromString: strDOB];
-    dateFormatter = [[NSDateFormatter alloc] init];
-    [dateFormatter setDateFormat:@"yyyy-MM-dd"];
-    dateChange = [dateFormatter stringFromDate:date];
-    
-    
-}
+//#pragma mark - dateConverter
+//-(void)dateConverter{
+//    
+//    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+//    [dateFormatter setDateFormat:@"dd/MM/yyyy"];
+//    NSDate *date = [dateFormatter dateFromString: strDOB];
+//    dateFormatter = [[NSDateFormatter alloc] init];
+//    [dateFormatter setDateFormat:@"yyyy-MM-dd"];
+//    dateChange = [dateFormatter stringFromDate:date];
+//    
+//    
+//}
 #pragma mark - saveAction
 -(void)loadValidations
 {
@@ -2504,15 +2511,9 @@
     strType      = (selectEmail== YES)?@"1":@"2";
     strProfileID = (FBprofileID!=nil)?FBprofileID:@"";
     strDOB       = (currentTextfield.text !=nil)?currentTextfield.text :[profileDict valueForKey:@"date_of_birth"];
-    if(IS_GREATER_IOS8)
-    {
-        [self dateConverter];
-    }
-    else
-    {
+   
     dateChange=[NSString stringWithFormat:@"%@/%@/%@",[[strDOB componentsSeparatedByString:@"/"]objectAtIndex:2],[[strDOB componentsSeparatedByString:@"/"]objectAtIndex:1],[[strDOB componentsSeparatedByString:@"/"]objectAtIndex:0]];
-    }
-    if(profileDict== NULL)
+       if(profileDict== NULL)
     {
             if(FirstName == nil)
             {

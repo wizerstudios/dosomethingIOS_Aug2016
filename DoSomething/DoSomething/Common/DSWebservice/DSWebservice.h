@@ -137,6 +137,8 @@ notification_sound:(NSString *)isnotification_sound
              sessionid:(NSString *)sessionid
               latitude:(NSString *)latitude
              longitude:(NSString *)longitude
+           deviceToken:(NSString *)deviceToken
+              pushType:(NSString *)pushType
                success:(WebserviceRequestSuccessHandler)success
                failure:(WebserviceRequestFailureHandler)failure;
 
