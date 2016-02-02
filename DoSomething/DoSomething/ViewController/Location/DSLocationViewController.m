@@ -326,7 +326,9 @@
 #pragma mark - loadLocationUpdateAPI
 -(void)loadLocationUpdateAPI{
     
-    
+    NSString *deviceToken = [[NSUserDefaults standardUserDefaults]valueForKey:DeviceToken];
+    if(deviceToken == nil)
+        deviceToken = @"";
     if([COMMON isInternetReachable]){
         [objWebservice locationUpdate:LocationUpdate_API
                             sessionid:[COMMON getSessionID]

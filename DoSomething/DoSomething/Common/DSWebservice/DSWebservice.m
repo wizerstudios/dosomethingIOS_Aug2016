@@ -412,7 +412,7 @@ notification_sound  :(NSString *)isnotification_sound
                failure:(WebserviceRequestFailureHandler)failure
 {
    urlString = [URL_FOR_RESOURCE(@"") stringByAppendingString:[NSString stringWithFormat:@"%@?",locationUpdtURL]];
-    
+    NSLog(@"urlString = %@",urlString);
     NSMutableDictionary *locationUpdate = [[NSMutableDictionary alloc] init];
     
     if(sessionid)         [locationUpdate    setObject:sessionid                 forKey:@"sessionid"];

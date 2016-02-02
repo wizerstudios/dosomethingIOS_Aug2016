@@ -16,10 +16,15 @@
 #import <Crashlytics/Crashlytics.h>
 #import "DSChatDetailViewController.h"
 #import "DSWebservice.h"
+#include <AudioToolbox/AudioToolbox.h>
+
+
 
 @interface AppDelegate (){
     
     DSWebservice *webservice;
+    
+    SystemSoundID _notificationSound;
     
 }
 
@@ -146,7 +151,7 @@
     chatsButton.frame=CGRectMake(menuButton.frame.origin.x+menuButton.frame.size.width+17,3,40,40);
     settingButton.frame =CGRectMake(chatsButton.frame.origin.x+chatsButton.frame.size.width+17,3,40,40);
     
-    [badgeCountLabel setFrame:CGRectMake(menuButton.frame.origin.x+menuButton.frame.size.width+45,5,20,20)];
+    [badgeCountLabel setFrame:CGRectMake(menuButton.frame.origin.x+menuButton.frame.size.width+40,5,20,20)];
     badgeCountLabel.layer.cornerRadius = 10.0;
     [badgeCountLabel.layer setMasksToBounds:YES];
     [badgeCountLabel setTextColor:[UIColor whiteColor]];
@@ -155,7 +160,7 @@
     [badgeCountLabel setBackgroundColor:[UIColor redColor]];
     
    
-       if(IS_IPHONE6)
+    if(IS_IPHONE6)
     {
         profileButton.frame=CGRectMake(buttonsView.frame.origin.x+20,3,45,45);
         menuButton.frame=CGRectMake(self.window.frame.size.width/2-18,3,45,45);
@@ -257,17 +262,20 @@
 
         }
     }
+    else{
+         [[UIApplication sharedApplication] registerForRemoteNotificationTypes:UIRemoteNotificationTypeBadge | UIRemoteNotificationTypeAlert | UIRemoteNotificationTypeSound];
+    }
     
 }
 
 - (void)application:(UIApplication *)app didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken
 {
+    
     NSString *token = [[deviceToken description] stringByTrimmingCharactersInSet: [NSCharacterSet characterSetWithCharactersInString:@"<>"]];
     token = [token stringByReplacingOccurrencesOfString:@" " withString:@""];
     NSLog(@"content---%@", token);
     [[NSUserDefaults standardUserDefaults]setValue:token forKey:DeviceToken];
     [[NSUserDefaults standardUserDefaults]synchronize];
-    
 
 }
 
@@ -377,8 +385,8 @@
                             if([[responseDict valueForKey:@"status"]isEqualToString:@"success"]){
                                 
                                 NSMutableDictionary *receiverDict = [[NSMutableDictionary alloc]init];
+                                receiverDict = [[responseDict valueForKey:@"receiver"]objectAtIndex:0];
                                 if (receiverDict != NULL && [receiverDict count] > 0) {
-                                    receiverDict = [[responseDict valueForKey:@"receiver"]objectAtIndex:0];
                                     DSChatDetailViewController *ChatDetail =[[DSChatDetailViewController alloc]initWithNibName:nil bundle:nil];
                                     ChatDetail.conversionID = _conversationID;
                                     ChatDetail.chatuserDetailsDict = [receiverDict mutableCopy];
@@ -419,20 +427,32 @@
         
         NSLog(@"Active");
         
-        //Show an in-app banner
+        
+        NSString *soundPath = [[NSBundle mainBundle] pathForResource:@"Glass"
+                                                              ofType:@"aiff"];
+        NSURL *soundURL = [NSURL fileURLWithPath:soundPath];
+        
+        AudioServicesCreateSystemSoundID((__bridge CFURLRef)soundURL, &_notificationSound);
+        
+         AudioServicesPlaySystemSound(_notificationSound);
+
+      //  AudioServicesPlaySystemSound(1003);
+        
+        AudioServicesPlaySystemSound(kSystemSoundID_Vibrate);
         
         completionHandler(UIBackgroundFetchResultNewData);
         
     }
     
-    
     NSString *badgecountStr = [NSString stringWithFormat:@"%@",[[userInfo valueForKey:@"aps"]valueForKey:@"msgcnt"]];
+    
     if (badgecountStr != NULL && ![badgecountStr isEqualToString:@"(null)"]) {
         [[NSUserDefaults standardUserDefaults]setObject:badgecountStr forKey:UnreadMsgCount];
         [[NSUserDefaults standardUserDefaults]synchronize];
         
         [badgeCountLabel setText:badgecountStr];
         [badgeCountLabel setHidden:NO];
+        
     } else {
         [badgeCountLabel setText:@""];
         [badgeCountLabel setHidden:YES];
