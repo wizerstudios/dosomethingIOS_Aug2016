@@ -58,7 +58,7 @@
     
     NSString * isNotification_message;
     NSString * isNotification_sound;
-    NSString * isNotification_vibration;
+    NSString * isNotification_match;
     NSMutableArray *BGimageArray;
     NSMutableArray *FGimageArray;
     UIButton *pageControllBtn;
@@ -265,8 +265,8 @@
     [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"SelectedItemCategoryID"];
     
     isNotification_message = @"Yes";
-    isNotification_vibration = @"Yes";
-    isNotification_sound = @"Yes";
+    isNotification_match = @"Yes";
+    isNotification_sound =@"Yes";
     
     NSString *ImageURL1 , *ImageURL2, *ImageURL3 ;
     
@@ -753,7 +753,7 @@
     NSInteger tag = [textField tag];
     if(textField.tag == 1000){
         [self loadDatePicker:tag];
-    }
+       }
     else if (textField.tag == 15)
     {
         emailPasswordToRegister = @"";
@@ -798,7 +798,6 @@
 
     
 }
-
 
 
 -(void)backAction
@@ -1415,7 +1414,7 @@
                   
                     if(strAbout == NULL){
                         cell.textViewAboutYou.text = [[profileDict valueForKey:@"about"]mutableCopy];
-//                        strAbout =cell.textViewAboutYou.text;
+                       strAbout =cell.textViewAboutYou.text;
 //                         dataSize = [COMMON getControlHeight:strAbout withFontName:@"Patron-Regular" ofSize:14.0 withSize:CGSizeMake(cell.frame.size.width-20,tableView.frame.size.height)];
 //                        self.aboutTextHeight.constant =dataSize.height;
                     }
@@ -1865,7 +1864,7 @@
 {
     
     [cell.vibrationSwitchBtn setImage:[UIImage imageNamed:@"switch_off"] forState:UIControlStateNormal];
-    isNotification_vibration =@"No";
+    isNotification_match =@"No";
     
     
 }
@@ -1873,7 +1872,7 @@
 {
     
     [cell.vibrationSwitchBtn setImage:[UIImage imageNamed:@"switch_on"] forState:UIControlStateNormal];
-    isNotification_vibration =@"Yes";
+    isNotification_match =@"Yes";
     
 }
 
@@ -1926,16 +1925,16 @@
     
    else if([sender tag] == 503)
    {
-       if ( [isNotification_vibration isEqualToString:@"Yes"]) {
+       if ( [isNotification_match isEqualToString:@"Yes"]) {
            
            [cell.vibrationSwitchBtn setImage:[UIImage imageNamed:@"switch_off"] forState:UIControlStateNormal];
-           isNotification_vibration =@"No";
+           isNotification_match =@"No";
            
        }else{
            
            [cell.vibrationSwitchBtn setImage:[UIImage imageNamed:@"switch_on"] forState:UIControlStateNormal];
            //[self notificationButtonOFFAction:sender];
-           isNotification_vibration =@"Yes";
+           isNotification_match =@"Yes";
        }
        
        
@@ -1960,7 +1959,7 @@
     
     NSString * objMsg =[isNotification_message isEqualToString:@"Yes"]? @"switch_on":@"switch_off";
     NSString * objSound =[isNotification_sound isEqualToString:@"Yes"]? @"switch_on":@"switch_off";
-    NSString * objVibration =[isNotification_vibration isEqualToString:@"Yes"]? @"switch_on":@"switch_off";
+    NSString * objVibration =[isNotification_match isEqualToString:@"Yes"]? @"switch_on":@"switch_off";
     
     if([objMsg isEqualToString:@"switch_on"])
     {
@@ -1972,13 +1971,13 @@
     if([objSound isEqualToString:@"switch_on"])
     {
         [cell.SoundSwitchBtn setImage:[UIImage imageNamed:@"switch_on"] forState:UIControlStateNormal];
-        isNotification_message =@"Yes";
+        isNotification_sound =@"Yes";
     }
     
     if([objVibration isEqualToString:@"switch_on"])
     {
         [cell.vibrationSwitchBtn setImage:[UIImage imageNamed:@"switch_on"] forState:UIControlStateNormal];
-        isNotification_message =@"Yes";
+        isNotification_match =@"Yes";
        
     }
     
@@ -1992,13 +1991,13 @@
     if([objSound isEqualToString:@"switch_off"])
     {
         [cell.SoundSwitchBtn setImage:[UIImage imageNamed:@"switch_off"] forState:UIControlStateNormal];
-        isNotification_message =@"No";
+        isNotification_sound =@"No";
     }
     
     if([objVibration isEqualToString:@"switch_off"])
     {
         [cell.vibrationSwitchBtn setImage:[UIImage imageNamed:@"switch_off"] forState:UIControlStateNormal];
-        isNotification_message =@"No";
+        isNotification_match =@"No";
     }
     
 }
@@ -2324,7 +2323,7 @@
                      fbprofileImage:fbProfileStr
                notification_message:isNotification_message
                notification_sound  :isNotification_sound
-             notification_vibration:isNotification_vibration
+                            isMatch:isNotification_match
                            pushType:push_type
                             fbimage:FBImageStr
                             success:^(AFHTTPRequestOperation *operation, id responseObject){
@@ -2488,14 +2487,14 @@
 #pragma mark - dateConverter
 -(void)dateConverter{
     
-    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+       NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
     [dateFormatter setDateFormat:@"dd/MM/yyyy"];
     NSDate *date = [dateFormatter dateFromString: strDOB];
     dateFormatter = [[NSDateFormatter alloc] init];
     [dateFormatter setDateFormat:@"yyyy-MM-dd"];
     dateChange = [dateFormatter stringFromDate:date];
-   
-
+    
+    
 }
 #pragma mark - saveAction
 -(void)loadValidations
@@ -2505,8 +2504,14 @@
     strType      = (selectEmail== YES)?@"1":@"2";
     strProfileID = (FBprofileID!=nil)?FBprofileID:@"";
     strDOB       = (currentTextfield.text !=nil)?currentTextfield.text :[profileDict valueForKey:@"date_of_birth"];
-    [self dateConverter];
-
+    if(IS_GREATER_IOS8)
+    {
+        [self dateConverter];
+    }
+    else
+    {
+    dateChange=[NSString stringWithFormat:@"%@/%@/%@",[[strDOB componentsSeparatedByString:@"/"]objectAtIndex:2],[[strDOB componentsSeparatedByString:@"/"]objectAtIndex:1],[[strDOB componentsSeparatedByString:@"/"]objectAtIndex:0]];
+    }
     if(profileDict== NULL)
     {
             if(FirstName == nil)

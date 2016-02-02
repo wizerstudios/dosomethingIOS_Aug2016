@@ -711,7 +711,7 @@
                      fbprofileImage:@""
                notification_message:@"Yes"
                notification_sound  :@"Yes"
-             notification_vibration:@"Yes"
+                            isMatch:@"Yes"
                            pushType:push_type
                             fbimage:@""
                             success:^(AFHTTPRequestOperation *operation, id responseObject){

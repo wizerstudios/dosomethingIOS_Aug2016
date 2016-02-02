@@ -103,8 +103,8 @@ typedef void (^WebserviceRequestXMLFailureHandler)(AFHTTPRequestOperation  *oper
             deviceid:(NSString *)deviceid
       fbprofileImage:(NSString *)fbProfile
 notification_message:(NSString *)isnotification_message
-notification_sound  :(NSString *)isnotification_sound
-notification_vibration:(NSString*)isnotification_vibration
+notification_sound:(NSString *)isnotification_sound
+           isMatch:(NSString*)isMatch
             pushType:(NSString *)pushType
             fbimage :(NSString *)fbimage
             success:(WebserviceRequestSuccessHandler)success
