@@ -56,6 +56,8 @@
     BOOL isLoadData;
     BOOL isfilterChange;
     NSString * RequestStr;
+    NSMutableArray *detailsArray;
+    BOOL isuserdetail;
     
 }
 @property(nonatomic,strong)IBOutlet NSLayoutConstraint  * collectionviewxpostion;
@@ -97,7 +99,7 @@
     
     [refreshControl addTarget:self action:@selector(releaseToRefresh:) forControlEvents:UIControlEventValueChanged];
     [self.locationCollectionView addSubview:refreshControl];
-    
+   
     latitude     =[COMMON getLatitude];
   
     longitude    =[COMMON  getLongitude];
@@ -144,7 +146,11 @@
     profileNames =[[NSArray alloc]init];
     dosomethingImageArry=[[NSMutableArray alloc]init];
     kiloMeterlabel =[[NSArray alloc]init];
-   
+     detailsArray=[[NSMutableArray alloc]init];
+    if([[NSUserDefaults standardUserDefaults] boolForKey:@"ViewuserDetail"]) {
+      [self nearestLocationWebservice];
+      [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"ViewuserDetail"];
+    }
     if(IS_IPHONE6 || IS_IPHONE6_Plus)
     {
         //self.CollectionviewWidth.constant =self.view.frame.size.width+100;
@@ -571,10 +577,15 @@
     if(isgestureenable ==YES)
     {
     cell = [collectionView cellForItemAtIndexPath:indexPath];
-    
-    NSMutableArray *detailsArray = [commonlocationArray objectAtIndex:indexPath.row];
+      
+        if([detailsArray count] == 0)
+        {
+             detailsArray = [[commonlocationArray objectAtIndex:indexPath.row] mutableCopy];
+        }
+        
         DSNearByDetailViewController * detailViewController  = [[DSNearByDetailViewController alloc]initWithNibName:@"DSNearByDetailViewController" bundle:nil];
-         detailViewController.userDetailsArray = detailsArray;
+    
+        detailViewController.userDetailsArray = detailsArray;
         [self.navigationController pushViewController:detailViewController animated:YES];
     }
     
@@ -615,7 +626,7 @@
  
      profileUserID=[[commonlocationArray valueForKey:@"user_id"] objectAtIndex:indexPath.row];
     
-    //NSString * requestsend=[[commonlocationArray valueForKey:@"send_request"] objectAtIndex:indexPath.row];
+   // NSString * requestsend=[[commonlocationArray valueForKey:@"send_request"] objectAtIndex:indexPath.row];
         NSLog(@"%@",locationCellView.sendRequest.text);
     if([locationCellView.sendRequest.text isEqualToString:@"Send Request"])
     {
@@ -624,6 +635,14 @@
         [locationCellView.hobbiesImagebackView setBackgroundColor:[UIColor whiteColor]];
         locationCellView.sendRequest.text =@"Request Sent!";
         locationCellView.sendRequest.textColor=[UIColor lightGrayColor];
+        
+       
+        NSMutableDictionary *dict = [[NSMutableDictionary alloc] init];
+        dict = [[commonlocationArray objectAtIndex:indexPath.row] mutableCopy];
+        
+        [dict removeObjectForKey:@"send_request"];
+        [dict setObject:@"Yes" forKey:@"send_request"];
+        detailsArray =[dict copy];
         
         dosomethingImageArry =[[[commonlocationArray valueForKey:@"dosomething"]objectAtIndex:indexPath.row] valueForKey:@"InactiveImage"];
         if([dosomethingImageArry count]== 1){
@@ -641,6 +660,8 @@
         [locationCellView.dosomethingImage1 setImageWithURL:[NSURL URLWithString:dosomethingImage1]];
         [locationCellView.dosomethingImage2 setImageWithURL:[NSURL URLWithString:dosomethingImage2]];
         [locationCellView.dosomethingImage3 setImageWithURL:[NSURL URLWithString:dosomethingImage3]];
+            
+            
         }
         [self loadRequestsendWebService];
       
@@ -653,6 +674,15 @@
         [locationCellView.hobbiesImagebackView setBackgroundColor:[UIColor colorWithRed:(218/255.0) green:(40/255.0) blue:(64.0/255.0f) alpha:1.0]];
         locationCellView.sendRequest.text =@"Send Request";
         locationCellView.sendRequest.textColor=[UIColor whiteColor];
+        
+        NSMutableDictionary *dict = [[NSMutableDictionary alloc] init];
+        dict = [[commonlocationArray objectAtIndex:indexPath.row] mutableCopy];
+        
+        [dict removeObjectForKey:@"send_request"];
+        [dict setObject:@"No" forKey:@"send_request"];
+        detailsArray =[dict copy];
+        
+        
         
         dosomethingImageArry =[[[commonlocationArray valueForKey:@"dosomething"]objectAtIndex:indexPath.row] valueForKey:@"NearbyImage"];
         if([dosomethingImageArry count]== 1){
