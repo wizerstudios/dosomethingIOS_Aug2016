@@ -119,7 +119,7 @@
 
 #define USERDETAILS                 @"userdetails"
 
-#define DeviceToken                 @"deviceToken"
+#define DeviceToken                 @"device_Token"
 
 #define HobbiesArray                @"HobbiesArray"
 
