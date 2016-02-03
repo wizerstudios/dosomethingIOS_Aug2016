@@ -367,6 +367,7 @@ DSAppCommon *sharedCommon = nil;
     NSLog(@"currentLatitude%@",currentLatitude);
     NSLog(@"currentLongitude%@",currentLongitude);
     NSString *deviceToken = [[NSUserDefaults standardUserDefaults]valueForKey:DeviceToken];
+    
     if(deviceToken == nil)
         deviceToken = @"";
     

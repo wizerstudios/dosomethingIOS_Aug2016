@@ -421,7 +421,7 @@ notification_sound  :(NSString *)isnotification_sound
              [locationUpdate    setObject:deviceToken               forKey:@"device_token"];
              [locationUpdate    setObject:pushType                 forKey:@"push_type"];
     
-
+    NSLog(@"locationUpdate = %@",locationUpdate);
     
     [self sendRequestWithURLString:urlString
                      andParameters:locationUpdate
