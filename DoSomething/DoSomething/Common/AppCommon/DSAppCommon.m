@@ -233,7 +233,7 @@ DSAppCommon *sharedCommon = nil;
 }
 
 -(NSString *)getSessionID{
-    NSString *sessionID = [[self getUserDetails]valueForKey:@"SessionId"];
+    NSString *sessionID = [NSString stringWithFormat:@"%@",[[self getUserDetails]valueForKey:@"SessionId"]];
     NSLog(@"sessionID = %@",sessionID);
     return sessionID;
 }
@@ -367,6 +367,7 @@ DSAppCommon *sharedCommon = nil;
     NSLog(@"currentLatitude%@",currentLatitude);
     NSLog(@"currentLongitude%@",currentLongitude);
     NSString *deviceToken = [[NSUserDefaults standardUserDefaults]valueForKey:DeviceToken];
+    
     if(deviceToken == nil)
         deviceToken = @"";
     

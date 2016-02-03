@@ -415,13 +415,13 @@ notification_sound  :(NSString *)isnotification_sound
     NSLog(@"urlString = %@",urlString);
     NSMutableDictionary *locationUpdate = [[NSMutableDictionary alloc] init];
     
-    if(sessionid)         [locationUpdate    setObject:sessionid                 forKey:@"sessionid"];
-    if(latitude)          [locationUpdate    setObject:latitude                  forKey:@"latitude"];
-    if(longitude)         [locationUpdate    setObject:longitude                 forKey:@"longitude"];
-    if(deviceToken)       [locationUpdate    setObject:deviceToken               forKey:@"device_token"];
-    if(pushType)          [locationUpdate    setObject:pushType                 forKey:@"push_type"];
+             [locationUpdate    setObject:sessionid                 forKey:@"sessionid"];
+             [locationUpdate    setObject:latitude                  forKey:@"latitude"];
+             [locationUpdate    setObject:longitude                 forKey:@"longitude"];
+             [locationUpdate    setObject:deviceToken               forKey:@"device_token"];
+             [locationUpdate    setObject:pushType                 forKey:@"push_type"];
     
-
+    NSLog(@"locationUpdate = %@",locationUpdate);
     
     [self sendRequestWithURLString:urlString
                      andParameters:locationUpdate

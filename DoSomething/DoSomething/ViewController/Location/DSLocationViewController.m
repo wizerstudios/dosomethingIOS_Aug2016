@@ -340,7 +340,7 @@
                             sessionid:[COMMON getSessionID]
                              latitude:currentLatitude
                             longitude:currentLongitude
-                          deviceToken:DeviceToken
+                          deviceToken:deviceToken
                              pushType:push_type
                               success:^(AFHTTPRequestOperation *operation, id responseObject){
                                   NSLog(@"responseObject = %@",responseObject);

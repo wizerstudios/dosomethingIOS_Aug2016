@@ -119,15 +119,15 @@
 
 #define USERDETAILS                 @"userdetails"
 
-#define DeviceToken                 @"deviceToken"
+#define DeviceToken                 @"device_Token"
 
 #define HobbiesArray                @"HobbiesArray"
 
 #define matchuserrequestsend        @"sendrequest"
 
-#define CurrentLatitude             @"currentLatitude"
+#define CurrentLatitude             @"current_Latitude"
 
-#define CurrentLongitude            @"currentLongitude"
+#define CurrentLongitude            @"current_Longitude"
 
 
 

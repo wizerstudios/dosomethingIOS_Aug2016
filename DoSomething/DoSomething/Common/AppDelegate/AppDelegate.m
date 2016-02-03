@@ -17,6 +17,7 @@
 #import "DSChatDetailViewController.h"
 #import "DSWebservice.h"
 #include <AudioToolbox/AudioToolbox.h>
+#import <AVFoundation/AVFoundation.h>
 
 
 
@@ -25,6 +26,8 @@
     DSWebservice *webservice;
     
     SystemSoundID _notificationSound;
+    
+     AVAudioPlayer           *audioPlayer;
     
 }
 
@@ -152,7 +155,7 @@
     settingButton.frame =CGRectMake(chatsButton.frame.origin.x+chatsButton.frame.size.width+17,3,40,40);
     
     [badgeCountLabel setFrame:CGRectMake(menuButton.frame.origin.x+menuButton.frame.size.width+40,5,20,20)];
-    badgeCountLabel.layer.cornerRadius = 10.0;
+     badgeCountLabel.layer.cornerRadius = 10.0;
     [badgeCountLabel.layer setMasksToBounds:YES];
     [badgeCountLabel setTextColor:[UIColor whiteColor]];
     [badgeCountLabel setTextAlignment:NSTextAlignmentCenter];
@@ -167,6 +170,7 @@
         chatsButton.frame=CGRectMake(menuButton.frame.origin.x+menuButton.frame.size.width+25,3,45,45);
         locationButton.frame=CGRectMake(profileButton.frame.origin.x+profileButton.frame.size.width+25,profileButton.frame.origin.y,45,45);
         settingButton.frame =CGRectMake(chatsButton.frame.origin.x+chatsButton.frame.size.width+25,chatsButton.frame.origin.y,45,45);
+        [badgeCountLabel setFrame:CGRectMake(menuButton.frame.origin.x+menuButton.frame.size.width+48,5,20,20)];
     }
     else if   (IS_IPHONE6_Plus)
     {
@@ -426,24 +430,33 @@
     } else {
         
         NSLog(@"Active");
+        NSString *NotificationSound;
+        
+        NotificationSound = [NSString stringWithFormat:@"%@",[[userInfo valueForKey:@"aps"]valueForKey:@"setting_sound"]];
         
         
-        NSString *soundPath = [[NSBundle mainBundle] pathForResource:@"Glass"
-                                                              ofType:@"aiff"];
-        NSURL *soundURL = [NSURL fileURLWithPath:soundPath];
-        
-        AudioServicesCreateSystemSoundID((__bridge CFURLRef)soundURL, &_notificationSound);
-        
-         AudioServicesPlaySystemSound(_notificationSound);
-
-      //  AudioServicesPlaySystemSound(1003);
+        if([NotificationSound isEqualToString:@"1"]){
+            
+           // NSString *playSoundOnAlert = [NSString stringWithFormat:@"%@",[[userInfo objectForKey:@"aps"] objectForKey:@"sound"]];
+            
+          //   NSURL *soundURL =[NSURL fileURLWithPath:[NSString stringWithFormat:@"%@/%@",[[NSBundle mainBundle] resourcePath],playSoundOnAlert]];
+            
+            NSString *playSoundOnAlert = [[NSBundle mainBundle] pathForResource:@"Glass"
+                                                                  ofType:@"aiff"];
+            NSURL *soundURL = [NSURL fileURLWithPath:playSoundOnAlert];
+            
+            AudioServicesCreateSystemSoundID((__bridge CFURLRef)soundURL, &_notificationSound);
+            
+            AudioServicesPlaySystemSound(_notificationSound);
+            
+        }
         
         AudioServicesPlaySystemSound(kSystemSoundID_Vibrate);
         
         completionHandler(UIBackgroundFetchResultNewData);
         
     }
-    
+    NSLog(@"notification user info = %@",userInfo);
     NSString *badgecountStr = [NSString stringWithFormat:@"%@",[[userInfo valueForKey:@"aps"]valueForKey:@"msgcnt"]];
     
     if (badgecountStr != NULL && ![badgecountStr isEqualToString:@"(null)"]) {

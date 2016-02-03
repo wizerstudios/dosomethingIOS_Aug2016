@@ -49,7 +49,7 @@
     else if(IS_IPHONE6){
         
         [backGroundImageView setFrame:CGRectMake(0,0,self.frame.size.width+95, self.frame.size.height+5)];
-        [textView setFrame:CGRectMake(10, 11, 320, 25)];
+        [textView setFrame:CGRectMake(10, 11, 315, 25)];
         [placeHolderLabel setFrame:CGRectMake(13,9,textView.frame.size.width - 10.0,26)];
         [postButton setFrame:CGRectMake(backGroundImageView.frame.size.width-95,6, 50, 34)];
 
@@ -58,7 +58,7 @@
     else
     {
         [backGroundImageView setFrame:CGRectMake(0,0,self.frame.size.width, self.frame.size.height+5)];
-        [textView setFrame:CGRectMake(10,11, 260,25)];
+        [textView setFrame:CGRectMake(10,11, 255,25)];
         [placeHolderLabel setFrame:CGRectMake(13.0,8,textView.frame.size.width - 10.0, 26.0)];
         [postButton setFrame:CGRectMake(backGroundImageView.frame.size.width-60,6, 50,34)];
     }
@@ -70,6 +70,8 @@
     textView.delegate = delegate;
     
     textView.backgroundColor = [UIColor clearColor];
+    
+    textView.textAlignment = NSTextAlignmentJustified;
     
     [self addSubview:textView];
     
