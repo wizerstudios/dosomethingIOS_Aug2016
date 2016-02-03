@@ -145,7 +145,7 @@
         
         customNavigation.view.frame = CGRectMake(0,-20, 420, 83);
     
-    [customNavigation.menuBtn setHidden:NO];
+    [customNavigation.menuBtn setHidden:YES];
     
     [customNavigation.buttonBack setHidden:YES];
     
@@ -166,7 +166,6 @@
 - (void)getUserCurrenLocation{
     
     if(!locationManager){
-        
         
         locationManager.distanceFilter  = kCLLocationAccuracyKilometer;
         locationManager.desiredAccuracy = kCLLocationAccuracyBest;

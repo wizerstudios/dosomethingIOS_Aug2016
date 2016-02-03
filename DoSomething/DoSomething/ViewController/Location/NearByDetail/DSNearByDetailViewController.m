@@ -610,10 +610,6 @@
 {
     self.profileImgSelectview.hidden=NO;
    
-//    UIView * selectprofileImg=[[UIView alloc]initWithFrame:CGRectMake(0,0,320,368)];
-    //windowInfo = [[[UIApplication sharedApplication] delegate] window];
-
-   // DSNearByImageView *nearByImageView = [[DSNearByImageView alloc] init];
     
     if([sender tag] ==101){
         
@@ -651,17 +647,7 @@
     }
     self.selectImgBgview.layer.masksToBounds = YES;
     
-   // self.selectuserName.tintColor=[UIColor colorWithRed:218.0f/255.0f
-                                 //   green:40.0f/255.0f
-                                   //  blue:64.0f/255.0f
-                                    //alpha:1.0f];
-    //  label.backgroundColor = [UIColor whiteColor];
-    //[self.selectuserName setFont:[UIFont fontWithName:@"patron-bold" size:16]];
-    
-    //label.text= [self getData];
-    //[label setTextAlignment:NSTextAlignmentCenter];
-   // label.userInteractionEnabled = YES;
-    
+       
     NSString *strUserGender;
     if(IS_IPHONE5)
         
@@ -694,34 +680,26 @@
     self.selectuserName.attributedText = awAttrString;
     
     
-    //nearByImageView.userDetailsImageArray   = userDetailsArray;
-    
-   // nearByImageView.profileImageStringValue = profileImageString;
-   
-    //[selectprofileImg addSubview:nearByImageView];
-    
     [self.selectImgCloseBtn addTarget:self action:@selector(closeButtonAction:) forControlEvents:UIControlEventTouchUpInside];
     
-    //[self setNearByImageView:nearByImageView];
     
-//    NSDictionary *dictView = @{@"_terms":nearByImageView};
-//    
-//    [windowInfo addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[_terms]|"
-//                                
-//                                                                       options:0
-//                                
-//                                                                       metrics:nil views:dictView]];
-//    
-//    [windowInfo addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[_terms]|"
-//                                
-//                                                                       options:0
-//                                
-//                                                                       metrics:nil views:dictView]];
     
 }
 #pragma mark - letsDoSomethingAction
 -(IBAction)letsDoSomethingAction:(id)sender
 {
+    id button = sender;
+//    while (![button isKindOfClass:[UICollectionViewCell class]]) {
+//        button = [button superview];
+//    }
+    
+    NSIndexPath *indexPath;
+    
+    
+    indexPath = [self.nearbyTbl indexPathForCell:(UITableViewCell *)button];
+   
+     NearbyCustomcell = (DSNearbyCustomCell *) [self.nearbyTbl cellForRowAtIndexPath:[NSIndexPath indexPathForRow:indexPath.row inSection:0]];
+    [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"ViewuserDetail"];
     if(![requestStr isEqualToString:@"Yes"])
     {
         UIButton *buttonSender = (UIButton *)sender;
@@ -733,27 +711,57 @@
         [NearbyCustomcell.letsDoSomethingButton setTitle:@"Request\n    Sent" forState:UIControlStateNormal];
         
         requestUserID = [userDetailsArray valueForKey:@"user_id"];
-        
-        
-        if([COMMON isInternetReachable]){
-            [objWebService sendRequest:SendRequest_API
-                             sessionid:[COMMON getSessionID]
-                  request_send_user_id:requestUserID
-                               success:^(AFHTTPRequestOperation *operation, id responseObject) {
-                                   NSLog(@"SEND REQ%@",responseObject);
-                                   
-                               } failure:^(AFHTTPRequestOperation *operation, id error) {
-                                   NSLog(@"SEND REQ ERR%@",error);
-                               }];
-        }
-        else{
-            
-            [COMMON showErrorAlert:@"Check Your Internet connection"];
-            
-        }
        
+        [self loadRequestSendWebService];
+         requestStr=@"Yes";
+        [self.tableView beginUpdates];
+        [self.tableView reloadRowsAtIndexPaths:@[NearbyCustomcell] withRowAnimation:UITableViewRowAnimationNone];
+        [self.tableView endUpdates];
+        
+    }
+    else if([requestStr isEqualToString:@"Yes"])
+    {
+        
+        UIButton *buttonSender = (UIButton *)sender;
+        NearbyCustomcell.letsDoSomethingButton = buttonSender;
+        [NearbyCustomcell.letsDoSomethingButton setBackgroundColor:[UIColor colorWithRed:228.0f/255.0f
+                                                                                   green:64.0f/255.0f
+                                                                                    blue:81.0f/255.0f
+                                                                                   alpha:1.0f]];
+        [NearbyCustomcell.letsDoSomethingButton setTitle:@"   Let's Do \n Something" forState:UIControlStateNormal];
+        requestUserID = [userDetailsArray valueForKey:@"user_id"];
+
+        [self loadRequestSendWebService];
+        requestStr=@"No";
+        [self.tableView beginUpdates];
+        [self.tableView reloadRowsAtIndexPaths:@[NearbyCustomcell] withRowAnimation:UITableViewRowAnimationNone];
+        [self.tableView endUpdates];
+        
+        
+
     }
     
+}
+
+-(void)loadRequestSendWebService
+{
+    if([COMMON isInternetReachable]){
+        [objWebService sendRequest:SendRequest_API
+                         sessionid:[COMMON getSessionID]
+              request_send_user_id:requestUserID
+                           success:^(AFHTTPRequestOperation *operation, id responseObject) {
+                               NSLog(@"SEND REQ%@",responseObject);
+                              
+                           } failure:^(AFHTTPRequestOperation *operation, id error) {
+                               NSLog(@"SEND REQ ERR%@",error);
+                           }];
+    }
+    else{
+        
+        [COMMON showErrorAlert:@"Check Your Internet connection"];
+        
+    }
+
 }
 #pragma  mark - backAction
 - (void)backAction
