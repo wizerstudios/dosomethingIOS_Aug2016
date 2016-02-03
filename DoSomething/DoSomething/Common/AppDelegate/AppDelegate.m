@@ -155,7 +155,7 @@
     settingButton.frame =CGRectMake(chatsButton.frame.origin.x+chatsButton.frame.size.width+17,3,40,40);
     
     [badgeCountLabel setFrame:CGRectMake(menuButton.frame.origin.x+menuButton.frame.size.width+40,5,20,20)];
-    badgeCountLabel.layer.cornerRadius = 10.0;
+     badgeCountLabel.layer.cornerRadius = 10.0;
     [badgeCountLabel.layer setMasksToBounds:YES];
     [badgeCountLabel setTextColor:[UIColor whiteColor]];
     [badgeCountLabel setTextAlignment:NSTextAlignmentCenter];
@@ -170,6 +170,7 @@
         chatsButton.frame=CGRectMake(menuButton.frame.origin.x+menuButton.frame.size.width+25,3,45,45);
         locationButton.frame=CGRectMake(profileButton.frame.origin.x+profileButton.frame.size.width+25,profileButton.frame.origin.y,45,45);
         settingButton.frame =CGRectMake(chatsButton.frame.origin.x+chatsButton.frame.size.width+25,chatsButton.frame.origin.y,45,45);
+        [badgeCountLabel setFrame:CGRectMake(menuButton.frame.origin.x+menuButton.frame.size.width+48,5,20,20)];
     }
     else if   (IS_IPHONE6_Plus)
     {
