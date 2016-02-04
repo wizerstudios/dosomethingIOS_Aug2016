@@ -446,25 +446,34 @@
         [self.scrView setContentOffset:CGPointMake(0, 0)animated:NO];
     else if(CurrentImage == 1)
     {
-        if(IS_IPHONE6|| IS_IPHONE6_Plus)
+        if(IS_IPHONE6)
         {
-            [self.scrView setContentOffset:CGPointMake(4.5*self.profileImageView.frame.size.width - 25  , 0)animated:NO];
+            [self.scrView setContentOffset:CGPointMake(1.95*self.profileImageView.frame.size.width - 25  , 0)animated:NO];
         }
-    else
-    {
-        [self.scrView setContentOffset:CGPointMake(1.8*self.profileImageView.frame.size.width, 0)animated:NO];
-    }
+        else  if(IS_IPHONE6_Plus)
+        {
+            [self.scrView setContentOffset:CGPointMake(1.95*self.profileImageView.frame.size.width - 25  , 0)animated:NO];
+        }
+
+        else
+        {
+            [self.scrView setContentOffset:CGPointMake(1.8*self.profileImageView.frame.size.width, 0)animated:NO];
+        }
     }
     else if(CurrentImage == 2)
     {
-        if(IS_IPHONE6|| IS_IPHONE6_Plus)
+        if(IS_IPHONE6)
         {
-            [self.scrView setContentOffset:CGPointMake(9*self.profileImageView.frame.size.width - 15, 0)animated:NO];
+            [self.scrView setContentOffset:CGPointMake(3.65*self.profileImageView.frame.size.width - 15, 0)animated:NO];
         }
+        else  if(IS_IPHONE6_Plus)
+        {
+            [self.scrView setContentOffset:CGPointMake(1.95*self.profileImageView.frame.size.width - 25  , 0)animated:NO];
+        }
+
         else
         {
-
-        [self.scrView setContentOffset:CGPointMake((3.6*self.profileImageView.frame.size.width), 0)animated:NO];
+            [self.scrView setContentOffset:CGPointMake((3.6*self.profileImageView.frame.size.width), 0)animated:NO];
         }
     }
     
@@ -1585,7 +1594,7 @@
         UIImageView *hobbiesImage;
          UILabel *hobbiesname;
         NSString *imageName;
-        NSLog(@"count=%lu",(unsigned long)imageNormalArray.count);
+        
         if([hobbiesNameArray count] > i)
         {
            imageName =[[hobbiesNameArray objectAtIndex:i]uppercaseString];
