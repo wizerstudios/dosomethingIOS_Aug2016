@@ -468,7 +468,7 @@
         }
         else  if(IS_IPHONE6_Plus)
         {
-            [self.scrView setContentOffset:CGPointMake(1.95*self.profileImageView.frame.size.width - 25  , 0)animated:NO];
+            [self.scrView setContentOffset:CGPointMake(3.65*self.profileImageView.frame.size.width -15 , 0)animated:NO];
         }
 
         else
@@ -682,7 +682,7 @@
         
         NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
         
-        [dateFormatter setDateFormat:@"dd / MM / yyyy"];
+        [dateFormatter setDateFormat:@"dd/MM/yyyy"];
         
         NSDate *dateFromString = [[NSDate alloc] init];
         
