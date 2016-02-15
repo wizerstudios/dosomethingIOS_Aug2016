@@ -1046,13 +1046,13 @@
 - (void) configureLabelSlider
 {
     self.labelSlider.minimumValue = 0;
-    self.labelSlider.maximumValue = 50;
+    self.labelSlider.maximumValue = 100;
     
     self.labelSlider.minimumRange = 0;
    [self configureMetalThemeForSlider:self.labelSlider];
     
     self.labelSlider.lowerValue = 0;
-    self.labelSlider.upperValue = 50;
+    self.labelSlider.upperValue = 100;
 }
 
 - (void) updateDistanceSliderLabels
