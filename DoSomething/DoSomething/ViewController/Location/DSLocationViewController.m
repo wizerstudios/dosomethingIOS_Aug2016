@@ -1151,8 +1151,8 @@
 
 -(IBAction)didClickmatchuserDosomethingBtnAction:(id)sender
 {
-    [COMMON LoadIcon:self.view];
-    NSString *requestsenduserid=[matchUserArray valueForKey:@"UserId"];
+    //[COMMON LoadIcon:self.view];
+   // NSString *requestsenduserid=[matchUserArray valueForKey:@"UserId"];
     
 //    if([COMMON isInternetReachable]){
 //        [objWebservice getMatchuserrequestSend:matchuserrequestsend sessionid:[COMMON getSessionID] requestsenduser:requestsenduserid chartstart:@"1" success:^(AFHTTPRequestOperation *operation, id responseObject) {

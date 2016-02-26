@@ -63,7 +63,10 @@
             NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
             
             [dateFormat setDateFormat:@"YYYY-MM-dd HH:mm:ss"];
-            
+            NSArray *components = [timeStr componentsSeparatedByString:@" "];
+            NSString *msgsenddate = components[0];
+            NSString *time = components[1];
+
             NSDate *date = [dateFormat dateFromString:timeStr];
             
             [dateFormat setDateFormat:@"hh:mm"];
@@ -80,7 +83,7 @@
                 [sender_msgLbl setTextColor:[UIColor whiteColor]];
                 
                 
-                self.chatTime.frame = CGRectMake(windowSize.width - ME_RIGHT_WIDTH_SPACE - MAX(dataSize.width, [COMMON dataSize:sender_msgLbl.text withFontName:@"HelveticaNeue" ofSize:15 withSize:CGSizeMake(195.0, 999.0)].width + BUBBLE_WIDTH_SPACE)+dataSize.width+50+80,dataSize.height+BUBBLE_IMAGE_HEIGHT-20,40,40);
+                self.chatTime.frame = CGRectMake(windowSize.width-30 - ME_RIGHT_WIDTH_SPACE - MAX(dataSize.width, [COMMON dataSize:sender_msgLbl.text withFontName:@"HelveticaNeue" ofSize:15 withSize:CGSizeMake(195.0, 999.0)].width + BUBBLE_WIDTH_SPACE)+dataSize.width+50+80,dataSize.height+BUBBLE_IMAGE_HEIGHT-50,100,40);
                 
                 
 
@@ -99,7 +102,7 @@
                 [sender_msgLbl setTextColor:[UIColor whiteColor]];
                 
                 
-                self.chatTime.frame = CGRectMake(windowSize.width - ME_RIGHT_WIDTH_SPACE - MAX(dataSize.width, [COMMON dataSize:sender_msgLbl.text withFontName:@"HelveticaNeue" ofSize:15 withSize:CGSizeMake(195.0, 999.0)].width + BUBBLE_WIDTH_SPACE)+dataSize.width+50+50,dataSize.height+BUBBLE_IMAGE_HEIGHT-20,40,40);
+                self.chatTime.frame = CGRectMake(windowSize.width-30 - ME_RIGHT_WIDTH_SPACE - MAX(dataSize.width, [COMMON dataSize:sender_msgLbl.text withFontName:@"HelveticaNeue" ofSize:15 withSize:CGSizeMake(195.0, 999.0)].width + BUBBLE_WIDTH_SPACE)+dataSize.width+50+50,dataSize.height+BUBBLE_IMAGE_HEIGHT-50,100,40);
                 
                 
                 
@@ -118,7 +121,7 @@
                 [sender_msgLbl setTextColor:[UIColor whiteColor]];
                 
                 
-                self.chatTime.frame = CGRectMake(windowSize.width - ME_RIGHT_WIDTH_SPACE - MAX(dataSize.width, [COMMON dataSize:sender_msgLbl.text withFontName:@"HelveticaNeue" ofSize:15 withSize:CGSizeMake(195.0, 999.0)].width + BUBBLE_WIDTH_SPACE)+dataSize.width+50,dataSize.height+BUBBLE_IMAGE_HEIGHT-20,40,40);
+                self.chatTime.frame = CGRectMake(windowSize.width-30 - ME_RIGHT_WIDTH_SPACE - MAX(dataSize.width, [COMMON dataSize:sender_msgLbl.text withFontName:@"HelveticaNeue" ofSize:15 withSize:CGSizeMake(195.0, 999.0)].width + BUBBLE_WIDTH_SPACE)+dataSize.width+50,dataSize.height+BUBBLE_IMAGE_HEIGHT-50,100,40);
                 
                 
                 
@@ -129,8 +132,25 @@
                                                         dataSize.height+BUBBLE_IMAGE_HEIGHT-10);
 
             }
+            NSDateFormatter *dateFormatt = [[NSDateFormatter alloc] init];
+            [dateFormatt setDateFormat:@"yyyy-MM-dd"];
             
-             self.chatTime.text = timeStr;
+            NSDateFormatter *timeFormat = [[NSDateFormatter alloc] init];
+            [timeFormat setDateFormat:@"HH:mm:ss"];
+            
+            NSDate *now = [[NSDate alloc] init];
+            
+            NSString *theDate = [dateFormatt stringFromDate:now];
+             [ self.chatTime setTextColor:[UIColor grayColor]];
+            if([msgsenddate isEqualToString:theDate])
+            {
+                self.chatTime.text =[NSString stringWithFormat:@"today %@",timeStr] ;
+            }
+            else{
+                self.chatTime.text =[NSString stringWithFormat:@"%@ %@",msgsenddate,timeStr] ;
+            }
+
+            // self.chatTime.text = timeStr;
             
             
             
@@ -159,17 +179,34 @@
             NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
             
             [dateFormat setDateFormat:@"YYYY-MM-dd HH:mm:ss"];
+            NSArray *components = [timeStr componentsSeparatedByString:@" "];
+            NSString *msgsenddate = components[0];
+            NSString *time = components[1];
             
             NSDate *date = [dateFormat dateFromString:timeStr];
-            
             [dateFormat setDateFormat:@"hh:mm"];
             
             timeStr = [dateFormat stringFromDate:date];
             
+            self.chatTime.frame = CGRectMake(MAX(dataSize.width, [COMMON dataSize:sender_msgLbl.text withFontName:@"HelveticaNeue" ofSize:15 withSize:CGSizeMake(195.0, 999.0)].width + BUBBLE_WIDTH_SPACE)+y_Position + sender_bubbleimgView.frame.origin.y -60,dataSize.height+BUBBLE_IMAGE_HEIGHT-50,100,40);
             
-            self.chatTime.frame = CGRectMake( MAX(dataSize.width, [COMMON dataSize:sender_msgLbl.text withFontName:@"HelveticaNeue" ofSize:15 withSize:CGSizeMake(195.0, 999.0)].width + BUBBLE_WIDTH_SPACE)+y_Position + sender_bubbleimgView.frame.origin.y - 20,dataSize.height+BUBBLE_IMAGE_HEIGHT-20,40,40);
+            NSDateFormatter *dateFormatt = [[NSDateFormatter alloc] init];
+            [dateFormatt setDateFormat:@"yyyy-MM-dd"];
             
-            self.chatTime.text = timeStr;
+            NSDateFormatter *timeFormat = [[NSDateFormatter alloc] init];
+            [timeFormat setDateFormat:@"HH:mm:ss"];
+            
+            NSDate *now = [[NSDate alloc] init];
+            
+            NSString *theDate = [dateFormatt stringFromDate:now];
+            if([msgsenddate isEqualToString:theDate])
+            {
+                 self.chatTime.text =[NSString stringWithFormat:@"today %@",timeStr] ;
+            }
+            else{
+                     self.chatTime.text =[NSString stringWithFormat:@"%@ %@",msgsenddate,timeStr] ;
+            }
+
 
             [self.chatTime setTextColor:[UIColor blackColor]];
             
