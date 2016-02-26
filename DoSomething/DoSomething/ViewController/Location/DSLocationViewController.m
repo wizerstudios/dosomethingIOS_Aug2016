@@ -207,7 +207,7 @@
 }
 -(void)loadMatchActivityMethod
 {
-    if(matchUserArray !=0 && ![matchUserArray isEqual:@""])
+    if(matchUserArray !=0 && ![matchUserArray isEqual:@"0"])
     {
         self.matchActivityView.hidden =NO;
         if(IS_IPHONE6)
@@ -223,7 +223,7 @@
             self.MatchImgviewXposition.constant=20;
         }
         self.MatchImgviewYposition.constant=(IS_IPHONE6||IS_IPHONE6_Plus)?170:130;
-     NSString *matchprofileImg =[matchUserArray valueForKey:@"image1_thumb"];
+     NSString *matchprofileImg =[matchUserArray valueForKey:@"image1"];
         if([matchprofileImg isEqualToString:@""] || matchprofileImg ==nil)
         {
             [self.matcheduserImg setImage:[UIImage imageNamed:@"profile_noimg"]];
@@ -262,7 +262,7 @@
     self.matcheduserImg.layer.borderWidth=1;
     [self.matcheduserImg.layer setBorderColor:[UIColor redColor].CGColor];
     
-    NSString*objmatchusername =[NSString stringWithFormat:@"You and %@ are a match \n Start Chatting to",[matchUserArray valueForKey:@"first_name"]];
+    NSString*objmatchusername =[NSString stringWithFormat:@"You and %@ are a match \n Start Chatting to",[matchUserArray valueForKey:@"Name"]];
     self.matchActivitylbl.text =objmatchusername;
     }
     else{
@@ -379,7 +379,7 @@
              recordCount =[[responseObject valueForKey:@"nearestusers"]valueForKey:@"recordCount"];
              matchUserArray =[[responseObject valueForKey:@"nearestusers"]valueForKey:@"matchedUser"];
              
-             [self loadMatchActivityMethod];
+             //[self loadMatchActivityMethod];
              
              if ( responseObject !=nil && [[[responseObject valueForKey:@"nearestusers"]valueForKey:@"status"] isEqualToString:@"success"])
              {
@@ -720,6 +720,9 @@
                                 {
                                     if([[[responseObject valueForKey:@"sendrequest"]valueForKey:@"status"] isEqualToString:@"success"])
                                     {
+                                        matchUserArray =[[responseObject valueForKey:@"sendrequest"]valueForKey:@"Conversaion"];
+                                        
+                                        [self loadMatchActivityMethod];
                                         NSString * resposeMsg =[[responseObject valueForKey:@"sendrequest"]valueForKey:@"Message"];
                                         [self showAltermessage:resposeMsg];
                  
@@ -1149,33 +1152,33 @@
 -(IBAction)didClickmatchuserDosomethingBtnAction:(id)sender
 {
     [COMMON LoadIcon:self.view];
-    NSString *requestsenduserid=[matchUserArray valueForKey:@"user_id"];
+    NSString *requestsenduserid=[matchUserArray valueForKey:@"UserId"];
     
-    if([COMMON isInternetReachable]){
-        [objWebservice getMatchuserrequestSend:matchuserrequestsend sessionid:[COMMON getSessionID] requestsenduser:requestsenduserid chartstart:@"1" success:^(AFHTTPRequestOperation *operation, id responseObject) {
-            if([[[responseObject valueForKey:@"sendrequest"]valueForKey:@"status"]isEqualToString:@"success"])
-            {
-                NSLog(@"response=%@",responseObject);
-                [COMMON removeLoading];
+//    if([COMMON isInternetReachable]){
+//        [objWebservice getMatchuserrequestSend:matchuserrequestsend sessionid:[COMMON getSessionID] requestsenduser:requestsenduserid chartstart:@"1" success:^(AFHTTPRequestOperation *operation, id responseObject) {
+//            if([[[responseObject valueForKey:@"sendrequest"]valueForKey:@"status"]isEqualToString:@"success"])
+//            {
+                //NSLog(@"response=%@",responseObject);
+                //[COMMON removeLoading];
                 
-                NSMutableArray *objmatchuserHistory=[[responseObject valueForKey:@"sendrequest"]valueForKey:@"Conversaion"];
+//                NSMutableArray *objmatchuserHistory=[[responseObject valueForKey:@"sendrequest"]valueForKey:@"Conversaion"];
                 DSChatDetailViewController *ChatDetail =[[DSChatDetailViewController alloc]initWithNibName:nil bundle:nil];
                 NSMutableDictionary *matchuserdic = [[NSMutableDictionary alloc] init];
-                matchuserdic = [objmatchuserHistory mutableCopy];
+                matchuserdic = [matchUserArray mutableCopy];
                 ChatDetail.chatuserDetailsDict = matchuserdic;
                 
                 [self.navigationController pushViewController:ChatDetail animated:YES];
-            }
-            
-        } failure:^(AFHTTPRequestOperation *operation, id error) {
-            
-        }];
-    }
-    else{
-        
-        [COMMON showErrorAlert:@"Check Your Internet connection"];
-        
-    }
+//            }
+//            
+//        } failure:^(AFHTTPRequestOperation *operation, id error) {
+//            
+//        }];
+//    }
+//    else{
+//        
+//        [COMMON showErrorAlert:@"Check Your Internet connection"];
+//        
+//    }
 
    }
 
