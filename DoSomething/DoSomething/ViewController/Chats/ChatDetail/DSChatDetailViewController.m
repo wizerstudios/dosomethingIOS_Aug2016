@@ -228,7 +228,8 @@
     }
     
       [chatButton setContentMode:UIViewContentModeScaleToFill];
-    OnlineLabel.text =@"Online";
+    NSString * selectuserstatus=( self.status == nil)?@"online":@"online";
+    OnlineLabel.text =selectuserstatus;
     
     _transparentView.hidden = YES;
     

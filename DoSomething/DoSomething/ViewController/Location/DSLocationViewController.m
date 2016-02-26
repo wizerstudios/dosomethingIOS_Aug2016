@@ -48,7 +48,7 @@
     NSMutableArray              * matchUserArray;
     
     NSDictionary                *currentuser;
-    
+    NSString * selectuserstatus;
     BOOL isgestureenable;
     BOOL isLoadWebservice;
     BOOL isAllPost;
@@ -626,7 +626,8 @@
  
      profileUserID=[[commonlocationArray valueForKey:@"user_id"] objectAtIndex:indexPath.row];
     
-   // NSString * requestsend=[[commonlocationArray valueForKey:@"send_request"] objectAtIndex:indexPath.row];
+    NSString *onlineStausofSelectuser=[[commonlocationArray valueForKey:@"online_status"] objectAtIndex:indexPath.row];
+       selectuserstatus =([onlineStausofSelectuser isEqualToString:@"1"])? @"Online":@"Offline";
         NSLog(@"%@",locationCellView.sendRequest.text);
     if([locationCellView.sendRequest.text isEqualToString:@"Send Request"])
     {
@@ -1162,8 +1163,12 @@
                 //[COMMON removeLoading];
                 
 //                NSMutableArray *objmatchuserHistory=[[responseObject valueForKey:@"sendrequest"]valueForKey:@"Conversaion"];
+    
+    
+    
                 DSChatDetailViewController *ChatDetail =[[DSChatDetailViewController alloc]initWithNibName:nil bundle:nil];
                 NSMutableDictionary *matchuserdic = [[NSMutableDictionary alloc] init];
+                ChatDetail.status =selectuserstatus;
                 matchuserdic = [matchUserArray mutableCopy];
                 ChatDetail.chatuserDetailsDict = matchuserdic;
                 

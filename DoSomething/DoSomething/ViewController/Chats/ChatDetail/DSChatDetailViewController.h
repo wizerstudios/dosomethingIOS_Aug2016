@@ -49,6 +49,7 @@
 
 @property (strong,nonatomic) NSMutableDictionary *chatuserDetailsDict;
 @property (strong,nonatomic) NSString *conversionID;
+@property (strong,nonatomic) NSString * status;
 
 @property (strong)NSTimer *messageTimer;
 
