@@ -21,7 +21,7 @@
 
 #define hobbiesbackcolor = [UIColor colorWithRed: (199.0/255.0) green: (65.0/255.0) blue: (81.0/255.0) alpha: 1.0];
 
-@interface DSLocationViewController ()<CLLocationManagerDelegate>
+@interface DSLocationViewController ()<CLLocationManagerDelegate,UIAlertViewDelegate>
 {
     CustomAlterview             * objCustomAlterview;
     DSWebservice                * objWebservice;
@@ -125,6 +125,19 @@
 
 - (void)viewWillAppear:(BOOL)animated
 {
+    if (![CLLocationManager locationServicesEnabled]) {
+        
+        
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Location Service Disabled"
+                                                        message:@"Turn on location services to allow “Do Something” to determine your locationDoSomething would like to use your location"
+                                                       delegate:self
+                                              cancelButtonTitle:@"Settings"
+                                              otherButtonTitles:@"Cancel", nil];
+        [alert show];
+       
+        
+    }
+    
     [super viewWillAppear:animated];
     self.matchActivityView.hidden=YES;
    
@@ -1152,41 +1165,26 @@
 
 -(IBAction)didClickmatchuserDosomethingBtnAction:(id)sender
 {
-    //[COMMON LoadIcon:self.view];
-   // NSString *requestsenduserid=[matchUserArray valueForKey:@"UserId"];
+    DSChatDetailViewController *ChatDetail =[[DSChatDetailViewController alloc]initWithNibName:nil bundle:nil];
+    NSMutableDictionary *matchuserdic = [[NSMutableDictionary alloc] init];
+    ChatDetail.status =selectuserstatus;
+    matchuserdic = [matchUserArray mutableCopy];
+    ChatDetail.chatuserDetailsDict = matchuserdic;
     
-//    if([COMMON isInternetReachable]){
-//        [objWebservice getMatchuserrequestSend:matchuserrequestsend sessionid:[COMMON getSessionID] requestsenduser:requestsenduserid chartstart:@"1" success:^(AFHTTPRequestOperation *operation, id responseObject) {
-//            if([[[responseObject valueForKey:@"sendrequest"]valueForKey:@"status"]isEqualToString:@"success"])
-//            {
-                //NSLog(@"response=%@",responseObject);
-                //[COMMON removeLoading];
-                
-//                NSMutableArray *objmatchuserHistory=[[responseObject valueForKey:@"sendrequest"]valueForKey:@"Conversaion"];
+    [self.navigationController pushViewController:ChatDetail animated:YES];
+ 
+}
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+   
     
-    
-    
-                DSChatDetailViewController *ChatDetail =[[DSChatDetailViewController alloc]initWithNibName:nil bundle:nil];
-                NSMutableDictionary *matchuserdic = [[NSMutableDictionary alloc] init];
-                ChatDetail.status =selectuserstatus;
-                matchuserdic = [matchUserArray mutableCopy];
-                ChatDetail.chatuserDetailsDict = matchuserdic;
-                
-                [self.navigationController pushViewController:ChatDetail animated:YES];
-//            }
-//            
-//        } failure:^(AFHTTPRequestOperation *operation, id error) {
-//            
-//        }];
-//    }
-//    else{
-//        
-//        [COMMON showErrorAlert:@"Check Your Internet connection"];
-//        
-//    }
-
-   }
-
+    if (buttonIndex == 0)
+    {
+        //code for opening settings app in iOS 8
+        NSURL *url = [NSURL URLWithString:UIApplicationOpenSettingsURLString];
+        [[UIApplication sharedApplication] openURL:url];
+    }
+}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

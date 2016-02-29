@@ -10,7 +10,7 @@
 #import <CoreLocation/CoreLocation.h>
 #import "NMRangeSlider.h"
 
-@interface DSLocationViewController : UIViewController<UICollectionViewDataSource,UICollectionViewDelegate,UICollectionViewDelegateFlowLayout,CLLocationManagerDelegate>
+@interface DSLocationViewController : UIViewController<UICollectionViewDataSource,UICollectionViewDelegate,UICollectionViewDelegateFlowLayout,CLLocationManagerDelegate,UIAlertViewDelegate>
 @property (nonatomic, assign) id delegate;
 @property (strong, nonatomic) UIWindow *window;
 @property (strong, nonatomic) IBOutlet UICollectionView *locationCollectionView;
