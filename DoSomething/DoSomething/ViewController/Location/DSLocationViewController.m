@@ -149,6 +149,7 @@
                                                object:nil];
    
     [self loadCustomNavigationview];
+    [self CustomAlterview];
     
     UINib *cellNib = [UINib nibWithNibName:@"LocationCollectionViewCell" bundle:nil];
     [self.locationCollectionView registerNib:cellNib forCellWithReuseIdentifier:@"LocationCell"];
@@ -430,6 +431,9 @@
                  if([[[responseObject valueForKey:@"nearestusers"]valueForKey:@"status"] isEqualToString:@"failed"])
                  {
                      [commonlocationArray removeLastObject];
+                     NSString * nearestuserMsg=[NSString stringWithFormat:@"%@",[[responseObject valueForKey:@"nearestusers"]valueForKey:@"Message"]];
+                     [self showAltermessage:nearestuserMsg];
+                     
                  }
              }
              [refreshControl endRefreshing];
