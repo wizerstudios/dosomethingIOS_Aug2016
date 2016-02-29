@@ -74,6 +74,7 @@
 {
     [super viewWillAppear:animated];
     
+    
     [self loadChatHistoryAPI];
     
     [self.navigationItem setHidesBackButton:YES animated:NO];

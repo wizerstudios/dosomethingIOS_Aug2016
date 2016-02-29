@@ -272,8 +272,8 @@ DSAppCommon *sharedCommon = nil;
     {
         loadingView = [[UIView alloc] initWithFrame:CGRectMake((view.frame.size.width-20)/2, (view.frame.size.height-37)/2, 37, 37)];
     }
-    [loadingView.layer setCornerRadius:5.0];
-    
+    [loadingView.layer setCornerRadius:20.0];
+   
     [loadingView setBackgroundColor:[UIColor clearColor]];
     //Enable maskstobound so that corner radius would work.
     [loadingView.layer setMasksToBounds:YES];
@@ -287,7 +287,7 @@ DSAppCommon *sharedCommon = nil;
      NSString* filePath = [[NSBundle mainBundle] pathForResource:@"1.gif" ofType:nil];
      NSData* imageData = [NSData dataWithContentsOfFile:filePath];
      */
-    _gifImageView = [[SCGIFImageView alloc] initWithFrame:CGRectMake(1,1,37,37)] ;
+    _gifImageView = [[SCGIFImageView alloc] initWithFrame:CGRectMake(0,0,37,37)] ;
     [_gifImageView setData:imageData];
     [loadingView addSubview:_gifImageView];
     
