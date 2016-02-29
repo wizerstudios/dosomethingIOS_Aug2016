@@ -1349,6 +1349,7 @@
                         NSString *dateStr = [profileDict valueForKey:@"date_of_birth"];
                         dateStr = [dateStr stringByReplacingOccurrencesOfString:@"/" withString:@" / "];
                         cell.textFieldDPPlaceHolder.text =dateStr;
+                         strDOB  = (currentTextfield.text !=nil)?currentTextfield.text :[profileDict valueForKey:@"date_of_birth"];
                     }
                         [cell.textFieldDPPlaceHolder setTag:1000];
 
@@ -1362,6 +1363,7 @@
                 NSString *dateStr = [profileDict valueForKey:@"date_of_birth"];
                 dateStr = [dateStr stringByReplacingOccurrencesOfString:@"/" withString:@" / "];
                 cell.textFieldDPPlaceHolder.text =dateStr;
+                 strDOB  = (currentTextfield.text !=nil)?currentTextfield.text :[profileDict valueForKey:@"date_of_birth"];
                 
             }
              [cell.textFieldDPPlaceHolder setTag:1000];
@@ -1370,9 +1372,13 @@
         }
         else if(userDetailsDict.count > 0){
           
-            if(![[userDetailsDict valueForKey:@"dob"] isEqual:currentTextfield.text]){
+            if(![[userDetailsDict valueForKey:@"birthday"] isEqual:currentTextfield.text]){
+               
+                
                 if(currentTextfield.text == NULL){
-                    cell.textFieldDPPlaceHolder.text =[userDetailsDict valueForKey:@"dob"];
+                    cell.textFieldDPPlaceHolder.text =[userDetailsDict valueForKey:@"birthday"];
+                     currentTextfield.text=cell.textFieldDPPlaceHolder.text;
+                    strDOB       = (currentTextfield.text !=nil)?currentTextfield.text :[userDetailsDict valueForKey:@"birthday"];
                     [cell.textFieldDPPlaceHolder setTag:1000];
                     
                 }
@@ -1383,7 +1389,7 @@
             }
             else{
                 if(currentTextfield.text == NULL){
-                    cell.textFieldDPPlaceHolder.text =[userDetailsDict valueForKey:@"dob"];
+                    cell.textFieldDPPlaceHolder.text =[userDetailsDict valueForKey:@"birthday"];
                     [cell.textFieldDPPlaceHolder setTag:1000];
                     
                 }
@@ -1400,6 +1406,7 @@
             
             [cell.textFieldDPPlaceHolder setTag:1000];
             cell.textFieldDPPlaceHolder.text = currentTextfield.text;
+             strDOB       = (currentTextfield.text !=nil)?currentTextfield.text :[profileDict valueForKey:@"date_of_birth"];
         }
         
         
@@ -2526,8 +2533,9 @@
     
     strType      = (selectEmail== YES)?@"1":@"2";
     strProfileID = (FBprofileID!=nil)?FBprofileID:@"";
-    strDOB       = (currentTextfield.text !=nil)?currentTextfield.text :[profileDict valueForKey:@"date_of_birth"];
    
+//    strDOB       = (currentTextfield.text !=nil)?currentTextfield.text :[profileDict valueForKey:@"date_of_birth"];
+    
     dateChange=[NSString stringWithFormat:@"%@/%@/%@",[[strDOB componentsSeparatedByString:@"/"]objectAtIndex:2],[[strDOB componentsSeparatedByString:@"/"]objectAtIndex:1],[[strDOB componentsSeparatedByString:@"/"]objectAtIndex:0]];
        if(profileDict== NULL)
     {

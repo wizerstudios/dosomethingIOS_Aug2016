@@ -69,7 +69,7 @@
 
             NSDate *date = [dateFormat dateFromString:timeStr];
             
-            [dateFormat setDateFormat:@"hh:mm"];
+            [dateFormat setDateFormat:@"hh:mm a"];
             
             timeStr = [dateFormat stringFromDate:date];
             
@@ -128,7 +128,7 @@
                                                         MAX(dataSize.width, [COMMON dataSize:sender_msgLbl.text withFontName:@"HelveticaNeue" ofSize:15 withSize:CGSizeMake(195.0, 999.0)].width + BUBBLE_WIDTH_SPACE)+20,
                                                         dataSize.height+BUBBLE_IMAGE_HEIGHT-10);
                 
-                 self.chatTime.frame = CGRectMake(windowSize.width-30 - ME_RIGHT_WIDTH_SPACE - MAX(dataSize.width, [COMMON dataSize:sender_msgLbl.text withFontName:@"HelveticaNeue" ofSize:15 withSize:CGSizeMake(195.0, 999.0)].width + BUBBLE_WIDTH_SPACE)+dataSize.width+50, sender_bubbleimgView.frame.origin.y-30,100,40);
+                 self.chatTime.frame = CGRectMake(windowSize.width-55 - ME_RIGHT_WIDTH_SPACE - MAX(dataSize.width, [COMMON dataSize:sender_msgLbl.text withFontName:@"HelveticaNeue" ofSize:15 withSize:CGSizeMake(195.0, 999.0)].width + BUBBLE_WIDTH_SPACE)+dataSize.width+50, sender_bubbleimgView.frame.origin.y-30,100,40);
 
             }
             NSDateFormatter *dateFormatt = [[NSDateFormatter alloc] init];
@@ -141,6 +141,7 @@
             
             NSString *theDate = [dateFormatt stringFromDate:now];
              [ self.chatTime setTextColor:[UIColor grayColor]];
+            
             if([msgsenddate isEqualToString:theDate])
             {
                 self.chatTime.text =[NSString stringWithFormat:@"today %@",timeStr] ;
@@ -183,9 +184,13 @@
             NSString *time = components[1];
             
             NSDate *date = [dateFormat dateFromString:timeStr];
-            [dateFormat setDateFormat:@"hh:mm"];
-            
+            [dateFormat setDateFormat:@"hh:mm a"];
             timeStr = [dateFormat stringFromDate:date];
+            
+            NSLog(@"===> %@",date);
+            NSLog(@"===> %@",timeStr);
+
+
             sender_bubbleimgView.frame = CGRectMake(10,
                                                     y_Position + sender_bubbleimgView.frame.origin.y,
                                                     MAX(dataSize.width, [COMMON dataSize:sender_msgLbl.text withFontName:@"HelveticaNeue" ofSize:15 withSize:CGSizeMake(195.0, 999.0)].width + BUBBLE_WIDTH_SPACE)+y_Position + sender_bubbleimgView.frame.origin.y,

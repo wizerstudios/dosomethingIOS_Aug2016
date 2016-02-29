@@ -570,7 +570,8 @@
                  profileID = [userData valueForKey:@"id"];
                  gender = [userData valueForKey:@"gender"];
                  profileImage = [NSString stringWithFormat:@"https://graph.facebook.com/%@/picture?type=large&return_ssl_resources=1", userData[@"id"]];
-                 dob = @""; //[userData valueForKey:@"birthday"]
+                 dob = [userData valueForKey:@"birthday"]; //@""; //
+                 NSLog(@"birthday=%@",[userData valueForKey:@"birthday"]);
                  [fbUserDetailsDict setObject:profileImage forKey:@"profileImage"];
                  NSLog(@"fbUserDetailsDictt = %@",fbUserDetailsDict);
                  
