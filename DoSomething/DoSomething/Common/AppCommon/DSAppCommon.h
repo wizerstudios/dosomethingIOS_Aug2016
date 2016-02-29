@@ -12,7 +12,7 @@
 #import "DSWebservice.h"
 #import "DSConfig.h"
 #import <MapKit/MapKit.h>
-
+#import "SCGIFImageView.h"
 typedef enum {
     
     iPhone4,
@@ -40,6 +40,7 @@ typedef enum {
     
 }
 @property (nonatomic,strong)  CLLocationManager         *  locationManager;
+@property (strong, nonatomic) IBOutlet SCGIFImageView * gifImageView;
 +(DSAppCommon *) common;
 
 - (void)setUserDetails:(NSMutableDictionary *)_dicInfo;

@@ -57,6 +57,9 @@
 		51F3C2F61BE75D40001E1FEC /* LocationCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 51F3C2F21BE75D40001E1FEC /* LocationCollectionViewCell.xib */; };
 		6A0C8D8A1C0C25510056DA81 /* CustomAlterview.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A0C8D881C0C25510056DA81 /* CustomAlterview.m */; };
 		6A0C8D8B1C0C25510056DA81 /* CustomAlterview.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6A0C8D891C0C25510056DA81 /* CustomAlterview.xib */; };
+		6A3F8DD21C843B8500D013F8 /* DoSomething_loading.gif in Resources */ = {isa = PBXBuildFile; fileRef = 6A3F8DD01C843B8500D013F8 /* DoSomething_loading.gif */; };
+		6A3F8DDB1C84403300D013F8 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6A3F8DDA1C84403300D013F8 /* CoreGraphics.framework */; };
+		6A3F8DDF1C84418100D013F8 /* SCGIFImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A3F8DDE1C84418100D013F8 /* SCGIFImageView.m */; };
 		6A50C21C1BCCBB8C002B11AC /* DSProfileTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A50C21A1BCCBB8C002B11AC /* DSProfileTableViewCell.m */; };
 		6A50C21D1BCCBB8C002B11AC /* DSProfileTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6A50C21B1BCCBB8C002B11AC /* DSProfileTableViewCell.xib */; };
 		6A59C87D1C2807FD00286E35 /* DSNearbyCustomCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A59C87B1C2807FD00286E35 /* DSNearbyCustomCell.m */; };
@@ -214,6 +217,10 @@
 		6A0C8D871C0C25510056DA81 /* CustomAlterview.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomAlterview.h; sourceTree = "<group>"; };
 		6A0C8D881C0C25510056DA81 /* CustomAlterview.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomAlterview.m; sourceTree = "<group>"; };
 		6A0C8D891C0C25510056DA81 /* CustomAlterview.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CustomAlterview.xib; sourceTree = "<group>"; };
+		6A3F8DD11C843B8500D013F8 /* en */ = {isa = PBXFileReference; lastKnownFileType = image.gif; name = en; path = en.lproj/DoSomething_loading.gif; sourceTree = "<group>"; };
+		6A3F8DDA1C84403300D013F8 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		6A3F8DDD1C84418100D013F8 /* SCGIFImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCGIFImageView.h; sourceTree = "<group>"; };
+		6A3F8DDE1C84418100D013F8 /* SCGIFImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCGIFImageView.m; sourceTree = "<group>"; };
 		6A50C2191BCCBB8C002B11AC /* DSProfileTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DSProfileTableViewCell.h; sourceTree = "<group>"; };
 		6A50C21A1BCCBB8C002B11AC /* DSProfileTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DSProfileTableViewCell.m; sourceTree = "<group>"; };
 		6A50C21B1BCCBB8C002B11AC /* DSProfileTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DSProfileTableViewCell.xib; sourceTree = "<group>"; };
@@ -322,6 +329,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6A3F8DDB1C84403300D013F8 /* CoreGraphics.framework in Frameworks */,
 				EDAE16281BF3873B0061E99D /* AVFoundation.framework in Frameworks */,
 				ED78176F1BEC7F6400C7138F /* CoreLocation.framework in Frameworks */,
 				51560BC01BE76D53009FCF2A /* AudioToolbox.framework in Frameworks */,
@@ -563,6 +571,7 @@
 		3D9284336DE9EF0F3BACE1DA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				6A3F8DDA1C84403300D013F8 /* CoreGraphics.framework */,
 				60244D170FD7494CCFDD04A4 /* libPods-DoSomething.a */,
 			);
 			name = Frameworks;
@@ -624,6 +633,16 @@
 			path = Common/CustomAlterview;
 			sourceTree = "<group>";
 		};
+		6A3F8DDC1C84418100D013F8 /* GIF Library */ = {
+			isa = PBXGroup;
+			children = (
+				6A3F8DDD1C84418100D013F8 /* SCGIFImageView.h */,
+				6A3F8DDE1C84418100D013F8 /* SCGIFImageView.m */,
+			);
+			name = "GIF Library";
+			path = "en.lproj/GIF Library";
+			sourceTree = "<group>";
+		};
 		6A50C2231BCCC310002B11AC /* Chats */ = {
 			isa = PBXGroup;
 			children = (
@@ -640,6 +659,8 @@
 		6A71A92E1C046FB200D6D5F4 /* Resourse */ = {
 			isa = PBXGroup;
 			children = (
+				6A3F8DDC1C84418100D013F8 /* GIF Library */,
+				6A3F8DD01C843B8500D013F8 /* DoSomething_loading.gif */,
 				6A71A93A1C0471F900D6D5F4 /* NSLocalization.strings */,
 			);
 			name = Resourse;
@@ -1047,6 +1068,7 @@
 				2B83CAC81BE895AB0064EC7F /* Default-667h@2x.png in Resources */,
 				EADB949D1BDF566C00512374 /* HomeCustomCell.xib in Resources */,
 				2B83CAC71BE895AB0064EC7F /* Default@2x.png in Resources */,
+				6A3F8DD21C843B8500D013F8 /* DoSomething_loading.gif in Resources */,
 				C6D5F63F1BC7B52C0050C1AE /* Patron-ExtraLightItalic.ttf in Resources */,
 				EAEF25361BCFEBF400F83E82 /* CustomNavigationView.xib in Resources */,
 				C6D5F63D1BC7B52C0050C1AE /* Patron-BoldItalic.ttf in Resources */,
@@ -1166,6 +1188,7 @@
 				51ED4E6C1BE0C5D50079E030 /* IBActionSheet.m in Sources */,
 				EACB22BB1BC7C7F7002FAD54 /* DSLoginViewController.m in Sources */,
 				EA784F001BE0950500863A6D /* DVSwitch.m in Sources */,
+				6A3F8DDF1C84418100D013F8 /* SCGIFImageView.m in Sources */,
 				6AE7361E1C05AA5D00C7DCF0 /* SettingView.m in Sources */,
 				EAEF251E1BCF9EF600F83E82 /* IQUITextFieldView+Additions.m in Sources */,
 				2BD72AFC1BFCC5AD003846E9 /* AFURLRequestSerialization.m in Sources */,
@@ -1228,6 +1251,14 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
+		6A3F8DD01C843B8500D013F8 /* DoSomething_loading.gif */ = {
+			isa = PBXVariantGroup;
+			children = (
+				6A3F8DD11C843B8500D013F8 /* en */,
+			);
+			name = DoSomething_loading.gif;
+			sourceTree = "<group>";
+		};
 		6A71A93A1C0471F900D6D5F4 /* NSLocalization.strings */ = {
 			isa = PBXVariantGroup;
 			children = (

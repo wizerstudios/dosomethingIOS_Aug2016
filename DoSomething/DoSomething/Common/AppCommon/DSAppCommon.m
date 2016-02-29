@@ -274,16 +274,29 @@ DSAppCommon *sharedCommon = nil;
     }
     [loadingView.layer setCornerRadius:5.0];
     
-    [loadingView setBackgroundColor:[UIColor blackColor]];
+    [loadingView setBackgroundColor:[UIColor clearColor]];
     //Enable maskstobound so that corner radius would work.
     [loadingView.layer setMasksToBounds:YES];
     //Set the corner radius
+   
     
-    activityView = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhite];
-    [activityView setFrame:CGRectMake(1, 1, 37, 37)];
-    [activityView setHidesWhenStopped:YES];
-    [activityView startAnimating];
-    [loadingView addSubview:activityView];
+    NSURL *imageURL = [[NSBundle mainBundle] URLForResource:@"DoSomething_loading" withExtension:@"gif"];;
+    NSData *imageData = [NSData dataWithContentsOfURL:imageURL];
+    /*
+     //load local gif image
+     NSString* filePath = [[NSBundle mainBundle] pathForResource:@"1.gif" ofType:nil];
+     NSData* imageData = [NSData dataWithContentsOfFile:filePath];
+     */
+    _gifImageView = [[SCGIFImageView alloc] initWithFrame:CGRectMake(1,1,37,37)] ;
+    [_gifImageView setData:imageData];
+    [loadingView addSubview:_gifImageView];
+    
+
+//    activityView = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhite];
+   // [animatedImageView setFrame:CGRectMake(1, 1, 37, 37)];
+//    [activityView setHidesWhenStopped:YES];
+//    [activityView startAnimating];
+//    [loadingView addSubview:activityView];
     [view addSubview:loadingView];
 }
 
