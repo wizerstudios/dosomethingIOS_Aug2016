@@ -1349,8 +1349,7 @@
                         NSString *dateStr = [profileDict valueForKey:@"date_of_birth"];
                         dateStr = [dateStr stringByReplacingOccurrencesOfString:@"/" withString:@" / "];
                         cell.textFieldDPPlaceHolder.text =dateStr;
-                         strDOB  = (currentTextfield.text !=nil)?currentTextfield.text :[profileDict valueForKey:@"date_of_birth"];
-                        dateChange=[NSString stringWithFormat:@"%@/%@/%@",[[strDOB componentsSeparatedByString:@"/"]objectAtIndex:2],[[strDOB componentsSeparatedByString:@"/"]objectAtIndex:1],[[strDOB componentsSeparatedByString:@"/"]objectAtIndex:0]];
+                        
                     }
                         [cell.textFieldDPPlaceHolder setTag:1000];
 
@@ -1364,8 +1363,7 @@
                 NSString *dateStr = [profileDict valueForKey:@"date_of_birth"];
                 dateStr = [dateStr stringByReplacingOccurrencesOfString:@"/" withString:@" / "];
                 cell.textFieldDPPlaceHolder.text =dateStr;
-                 strDOB  = (currentTextfield.text !=nil)?currentTextfield.text :[profileDict valueForKey:@"date_of_birth"];
-                dateChange=[NSString stringWithFormat:@"%@/%@/%@",[[strDOB componentsSeparatedByString:@"/"]objectAtIndex:2],[[strDOB componentsSeparatedByString:@"/"]objectAtIndex:1],[[strDOB componentsSeparatedByString:@"/"]objectAtIndex:0]];
+                
                 
             }
              [cell.textFieldDPPlaceHolder setTag:1000];
@@ -1374,7 +1372,8 @@
         }
         else if(userDetailsDict.count > 0){
           
-            if(![[userDetailsDict valueForKey:@"birthday"] isEqual:currentTextfield.text]){
+            NSString *datestr= [userDetailsDict valueForKey:@"birthday"];
+            if(datestr!=nil ){
                
                 
                 if(currentTextfield.text == NULL){
@@ -1401,6 +1400,8 @@
             else{
                 if(currentTextfield.text == NULL){
                     cell.textFieldDPPlaceHolder.text =[userDetailsDict valueForKey:@"birthday"];
+                    
+                    
                     [cell.textFieldDPPlaceHolder setTag:1000];
                     
                 }
@@ -1417,8 +1418,7 @@
             
             [cell.textFieldDPPlaceHolder setTag:1000];
             cell.textFieldDPPlaceHolder.text = currentTextfield.text;
-             strDOB       = (currentTextfield.text !=nil)?currentTextfield.text :[profileDict valueForKey:@"date_of_birth"];
-            dateChange=[NSString stringWithFormat:@"%@/%@/%@",[[strDOB componentsSeparatedByString:@"/"]objectAtIndex:2],[[strDOB componentsSeparatedByString:@"/"]objectAtIndex:1],[[strDOB componentsSeparatedByString:@"/"]objectAtIndex:0]];
+            
         }
         
         
@@ -2545,11 +2545,21 @@
     
     strType      = (selectEmail== YES)?@"1":@"2";
     strProfileID = (FBprofileID!=nil)?FBprofileID:@"";
-   
-//    strDOB       = (currentTextfield.text !=nil)?currentTextfield.text :[profileDict valueForKey:@"date_of_birth"];
+    NSString *datestr= [userDetailsDict valueForKey:@"birthday"];
+    if(userDetailsDict==0)
+    {
+    strDOB       = (currentTextfield.text !=nil)?currentTextfield.text :[profileDict valueForKey:@"date_of_birth"];
+        strDOB  = (currentTextfield.text !=nil)?currentTextfield.text :[profileDict valueForKey:@"date_of_birth"];
+        dateChange=[NSString stringWithFormat:@"%@/%@/%@",[[strDOB componentsSeparatedByString:@"/"]objectAtIndex:2],[[strDOB componentsSeparatedByString:@"/"]objectAtIndex:1],[[strDOB componentsSeparatedByString:@"/"]objectAtIndex:0]];
     
-    
-       if(profileDict== NULL)
+    }
+    else if (datestr==nil)
+    {
+        strDOB       = (currentTextfield.text !=nil)?currentTextfield.text :[profileDict valueForKey:@"date_of_birth"];
+        strDOB  = (currentTextfield.text !=nil)?currentTextfield.text :[profileDict valueForKey:@"date_of_birth"];
+        dateChange=[NSString stringWithFormat:@"%@/%@/%@",[[strDOB componentsSeparatedByString:@"/"]objectAtIndex:2],[[strDOB componentsSeparatedByString:@"/"]objectAtIndex:1],[[strDOB componentsSeparatedByString:@"/"]objectAtIndex:0]];
+    }
+           if(profileDict== NULL)
     {
             if(FirstName == nil)
             {
