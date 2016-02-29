@@ -94,7 +94,7 @@
 - (void)viewDidLoad {
     
 
-    [COMMON LoadIcon:self.view];
+   
     refreshControl = [[UIRefreshControl alloc] init];
     
     [refreshControl addTarget:self action:@selector(releaseToRefresh:) forControlEvents:UIControlEventValueChanged];
@@ -110,7 +110,25 @@
     avalableStatus=@"";
     objWebservice =[[DSWebservice alloc]init];
     currentloadPage= @"";
-   [self nearestLocationWebservice];
+    if (![CLLocationManager locationServicesEnabled]) {
+        
+        
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Location Service Disabled"
+                                                        message:@"Turn on location services to allow “Do Something” to determine your locationDoSomething would like to use your location"
+                                                       delegate:self
+                                              cancelButtonTitle:@"Settings"
+                                              otherButtonTitles:@"Cancel", nil];
+        [alert show];
+        
+        
+    }
+
+    else
+    {
+         [COMMON LoadIcon:self.view];
+         [self nearestLocationWebservice];
+    }
+  
     
     [super viewDidLoad];
     isLoadData=NO;
@@ -125,18 +143,6 @@
 
 - (void)viewWillAppear:(BOOL)animated
 {
-    if (![CLLocationManager locationServicesEnabled]) {
-        
-        
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Location Service Disabled"
-                                                        message:@"Turn on location services to allow “Do Something” to determine your locationDoSomething would like to use your location"
-                                                       delegate:self
-                                              cancelButtonTitle:@"Settings"
-                                              otherButtonTitles:@"Cancel", nil];
-        [alert show];
-       
-        
-    }
     
     [super viewWillAppear:animated];
     self.matchActivityView.hidden=YES;
