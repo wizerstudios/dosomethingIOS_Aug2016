@@ -1350,6 +1350,7 @@
                         dateStr = [dateStr stringByReplacingOccurrencesOfString:@"/" withString:@" / "];
                         cell.textFieldDPPlaceHolder.text =dateStr;
                          strDOB  = (currentTextfield.text !=nil)?currentTextfield.text :[profileDict valueForKey:@"date_of_birth"];
+                        dateChange=[NSString stringWithFormat:@"%@/%@/%@",[[strDOB componentsSeparatedByString:@"/"]objectAtIndex:2],[[strDOB componentsSeparatedByString:@"/"]objectAtIndex:1],[[strDOB componentsSeparatedByString:@"/"]objectAtIndex:0]];
                     }
                         [cell.textFieldDPPlaceHolder setTag:1000];
 
@@ -1364,6 +1365,7 @@
                 dateStr = [dateStr stringByReplacingOccurrencesOfString:@"/" withString:@" / "];
                 cell.textFieldDPPlaceHolder.text =dateStr;
                  strDOB  = (currentTextfield.text !=nil)?currentTextfield.text :[profileDict valueForKey:@"date_of_birth"];
+                dateChange=[NSString stringWithFormat:@"%@/%@/%@",[[strDOB componentsSeparatedByString:@"/"]objectAtIndex:2],[[strDOB componentsSeparatedByString:@"/"]objectAtIndex:1],[[strDOB componentsSeparatedByString:@"/"]objectAtIndex:0]];
                 
             }
              [cell.textFieldDPPlaceHolder setTag:1000];
@@ -1377,8 +1379,17 @@
                 
                 if(currentTextfield.text == NULL){
                     cell.textFieldDPPlaceHolder.text =[userDetailsDict valueForKey:@"birthday"];
+                    NSString *datestr=[userDetailsDict valueForKey:@"birthday"];
                      currentTextfield.text=cell.textFieldDPPlaceHolder.text;
-                    strDOB       = (currentTextfield.text !=nil)?currentTextfield.text :[userDetailsDict valueForKey:@"birthday"];
+                    NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
+                    [dateFormat setDateFormat:@"dd/mm/yyyy"];
+                    NSDate *date = [dateFormat dateFromString:datestr];
+                    dateFormat = [[NSDateFormatter alloc] init];
+                    [dateFormat setDateFormat:@"yyyy-MM-dd"];
+                    dateChange = [dateFormat stringFromDate:date];
+                    NSLog(@"%@",dateChange);
+                    
+                    strDOB       = (currentTextfield.text !=nil)?currentTextfield.text :dateChange;
                     [cell.textFieldDPPlaceHolder setTag:1000];
                     
                 }
@@ -1407,6 +1418,7 @@
             [cell.textFieldDPPlaceHolder setTag:1000];
             cell.textFieldDPPlaceHolder.text = currentTextfield.text;
              strDOB       = (currentTextfield.text !=nil)?currentTextfield.text :[profileDict valueForKey:@"date_of_birth"];
+            dateChange=[NSString stringWithFormat:@"%@/%@/%@",[[strDOB componentsSeparatedByString:@"/"]objectAtIndex:2],[[strDOB componentsSeparatedByString:@"/"]objectAtIndex:1],[[strDOB componentsSeparatedByString:@"/"]objectAtIndex:0]];
         }
         
         
@@ -2536,7 +2548,7 @@
    
 //    strDOB       = (currentTextfield.text !=nil)?currentTextfield.text :[profileDict valueForKey:@"date_of_birth"];
     
-    dateChange=[NSString stringWithFormat:@"%@/%@/%@",[[strDOB componentsSeparatedByString:@"/"]objectAtIndex:2],[[strDOB componentsSeparatedByString:@"/"]objectAtIndex:1],[[strDOB componentsSeparatedByString:@"/"]objectAtIndex:0]];
+    
        if(profileDict== NULL)
     {
             if(FirstName == nil)
