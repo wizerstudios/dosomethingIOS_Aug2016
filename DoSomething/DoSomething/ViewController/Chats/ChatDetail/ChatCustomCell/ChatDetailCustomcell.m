@@ -83,8 +83,6 @@
                 [sender_msgLbl setTextColor:[UIColor whiteColor]];
                 
                 
-                self.chatTime.frame = CGRectMake(windowSize.width-30 - ME_RIGHT_WIDTH_SPACE - MAX(dataSize.width, [COMMON dataSize:sender_msgLbl.text withFontName:@"HelveticaNeue" ofSize:15 withSize:CGSizeMake(195.0, 999.0)].width + BUBBLE_WIDTH_SPACE)+dataSize.width+50+80,dataSize.height+BUBBLE_IMAGE_HEIGHT-50,100,40);
-                
                 
 
                 
@@ -92,6 +90,9 @@
                                                         y_Position + sender_bubbleimgView.frame.origin.y,
                                                         MAX(dataSize.width, [COMMON dataSize:sender_msgLbl.text withFontName:@"HelveticaNeue" ofSize:15 withSize:CGSizeMake(195.0, 999.0)].width + BUBBLE_WIDTH_SPACE)+20,
                                                         dataSize.height+BUBBLE_IMAGE_HEIGHT-10);
+                self.chatTime.frame = CGRectMake(windowSize.width-40 - ME_RIGHT_WIDTH_SPACE - MAX(dataSize.width, [COMMON dataSize:sender_msgLbl.text withFontName:@"HelveticaNeue" ofSize:15 withSize:CGSizeMake(195.0, 999.0)].width + BUBBLE_WIDTH_SPACE)+dataSize.width+50+80,sender_bubbleimgView.frame.origin.y-30,100,40);
+                
+
             }
             else if(IS_IPHONE6){
                 
@@ -102,15 +103,11 @@
                 [sender_msgLbl setTextColor:[UIColor whiteColor]];
                 
                 
-                self.chatTime.frame = CGRectMake(windowSize.width-30 - ME_RIGHT_WIDTH_SPACE - MAX(dataSize.width, [COMMON dataSize:sender_msgLbl.text withFontName:@"HelveticaNeue" ofSize:15 withSize:CGSizeMake(195.0, 999.0)].width + BUBBLE_WIDTH_SPACE)+dataSize.width+50+50,dataSize.height+BUBBLE_IMAGE_HEIGHT-50,100,40);
-                
-                
-                
-                
                 sender_bubbleimgView.frame = CGRectMake(windowSize.width - ME_RIGHT_WIDTH_SPACE - MAX(dataSize.width, [COMMON dataSize:sender_msgLbl.text withFontName:@"HelveticaNeue" ofSize:15 withSize:CGSizeMake(195.0, 999.0)].width + BUBBLE_WIDTH_SPACE)+50,
                                                         y_Position + sender_bubbleimgView.frame.origin.y,
                                                         MAX(dataSize.width, [COMMON dataSize:sender_msgLbl.text withFontName:@"HelveticaNeue" ofSize:15 withSize:CGSizeMake(195.0, 999.0)].width + BUBBLE_WIDTH_SPACE)+20,
                                                         dataSize.height+BUBBLE_IMAGE_HEIGHT-10);
+                 self.chatTime.frame = CGRectMake(windowSize.width-30 - ME_RIGHT_WIDTH_SPACE - MAX(dataSize.width, [COMMON dataSize:sender_msgLbl.text withFontName:@"HelveticaNeue" ofSize:15 withSize:CGSizeMake(195.0, 999.0)].width + BUBBLE_WIDTH_SPACE)+dataSize.width+50+50,sender_bubbleimgView.frame.origin.y-30,100,40);
 
             }
             else{
@@ -121,7 +118,7 @@
                 [sender_msgLbl setTextColor:[UIColor whiteColor]];
                 
                 
-                self.chatTime.frame = CGRectMake(windowSize.width-30 - ME_RIGHT_WIDTH_SPACE - MAX(dataSize.width, [COMMON dataSize:sender_msgLbl.text withFontName:@"HelveticaNeue" ofSize:15 withSize:CGSizeMake(195.0, 999.0)].width + BUBBLE_WIDTH_SPACE)+dataSize.width+50,dataSize.height+BUBBLE_IMAGE_HEIGHT-50,100,40);
+               
                 
                 
                 
@@ -130,6 +127,8 @@
                                                         y_Position + sender_bubbleimgView.frame.origin.y,
                                                         MAX(dataSize.width, [COMMON dataSize:sender_msgLbl.text withFontName:@"HelveticaNeue" ofSize:15 withSize:CGSizeMake(195.0, 999.0)].width + BUBBLE_WIDTH_SPACE)+20,
                                                         dataSize.height+BUBBLE_IMAGE_HEIGHT-10);
+                
+                 self.chatTime.frame = CGRectMake(windowSize.width-30 - ME_RIGHT_WIDTH_SPACE - MAX(dataSize.width, [COMMON dataSize:sender_msgLbl.text withFontName:@"HelveticaNeue" ofSize:15 withSize:CGSizeMake(195.0, 999.0)].width + BUBBLE_WIDTH_SPACE)+dataSize.width+50, sender_bubbleimgView.frame.origin.y-30,100,40);
 
             }
             NSDateFormatter *dateFormatt = [[NSDateFormatter alloc] init];
@@ -187,8 +186,11 @@
             [dateFormat setDateFormat:@"hh:mm"];
             
             timeStr = [dateFormat stringFromDate:date];
-            
-            self.chatTime.frame = CGRectMake(MAX(dataSize.width, [COMMON dataSize:sender_msgLbl.text withFontName:@"HelveticaNeue" ofSize:15 withSize:CGSizeMake(195.0, 999.0)].width + BUBBLE_WIDTH_SPACE)+y_Position + sender_bubbleimgView.frame.origin.y -60,dataSize.height+BUBBLE_IMAGE_HEIGHT-50,100,40);
+            sender_bubbleimgView.frame = CGRectMake(10,
+                                                    y_Position + sender_bubbleimgView.frame.origin.y,
+                                                    MAX(dataSize.width, [COMMON dataSize:sender_msgLbl.text withFontName:@"HelveticaNeue" ofSize:15 withSize:CGSizeMake(195.0, 999.0)].width + BUBBLE_WIDTH_SPACE)+y_Position + sender_bubbleimgView.frame.origin.y,
+                                                    dataSize.height+BUBBLE_IMAGE_HEIGHT-10);
+            self.chatTime.frame = CGRectMake(MAX(dataSize.width, [COMMON dataSize:sender_msgLbl.text withFontName:@"HelveticaNeue" ofSize:15 withSize:CGSizeMake(195.0, 999.0)].width + BUBBLE_WIDTH_SPACE)+y_Position + sender_bubbleimgView.frame.origin.y-80, sender_bubbleimgView.frame.origin.y-30,100,40);
             
             NSDateFormatter *dateFormatt = [[NSDateFormatter alloc] init];
             [dateFormatt setDateFormat:@"yyyy-MM-dd"];
@@ -210,10 +212,7 @@
 
             [self.chatTime setTextColor:[UIColor blackColor]];
             
-            sender_bubbleimgView.frame = CGRectMake(10,
-                                                    y_Position + sender_bubbleimgView.frame.origin.y,
-                                                    MAX(dataSize.width, [COMMON dataSize:sender_msgLbl.text withFontName:@"HelveticaNeue" ofSize:15 withSize:CGSizeMake(195.0, 999.0)].width + BUBBLE_WIDTH_SPACE)+y_Position + sender_bubbleimgView.frame.origin.y,
-                                                    dataSize.height+BUBBLE_IMAGE_HEIGHT-10);
+          
             
             
             
