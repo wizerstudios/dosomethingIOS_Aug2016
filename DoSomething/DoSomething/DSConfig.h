@@ -129,5 +129,6 @@
 
 #define CurrentLongitude            @"current_Longitude"
 
+#define OnlineStatus               @"onlinestatus"
 
 

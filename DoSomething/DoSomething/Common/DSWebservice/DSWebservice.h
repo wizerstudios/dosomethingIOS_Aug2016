@@ -283,5 +283,10 @@ message_send_user_id:(NSString *)message_send_user_id
                        success:(WebserviceRequestSuccessHandler)success
                        failure:(WebserviceRequestFailureHandler)failure;
 
-
+// OnlineStatus
+-(void)getOnlinstatus:(NSString *)onlineStatus
+            sessionID:(NSString *)sessionID
+               status:(NSString *)status
+              success:(WebserviceRequestSuccessHandler)success
+              failure:(WebserviceRequestFailureHandler)failure;
 @end
