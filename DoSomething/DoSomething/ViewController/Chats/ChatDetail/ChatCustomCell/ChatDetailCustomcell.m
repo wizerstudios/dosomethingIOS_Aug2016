@@ -186,10 +186,7 @@
             NSDate *date = [dateFormat dateFromString:timeStr];
             [dateFormat setDateFormat:@"hh:mm a"];
             timeStr = [dateFormat stringFromDate:date];
-            
-            NSLog(@"===> %@",date);
-            NSLog(@"===> %@",timeStr);
-
+        
 
             sender_bubbleimgView.frame = CGRectMake(10,
                                                     y_Position + sender_bubbleimgView.frame.origin.y,

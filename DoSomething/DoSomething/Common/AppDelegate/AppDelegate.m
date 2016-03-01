@@ -28,7 +28,7 @@
     SystemSoundID _notificationSound;
     
      AVAudioPlayer           *audioPlayer;
-    
+    BOOL _isStartTimer;
 }
 
 
@@ -39,7 +39,7 @@
 
 @synthesize locationButton,menuButton,chatsButton,buttonsView,buttons_array,profileButton,settingButton,SepratorLbl;
 @synthesize homePage,chatPage,window, locationPage,profilePage,objSettingView;
-@synthesize badgeCountLabel;
+@synthesize badgeCountLabel,onlineStatusTimer;
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
@@ -354,14 +354,26 @@
    
     
 }
-- (void)applicationDidEnterBackground:(UIApplication *)application {
-   
+- (void)applicationDidEnterBackground:(UIApplication *)application
+{
+    _isStartTimer = NO;
+    
+    
+    dispatch_async(dispatch_get_main_queue(), ^{
+         [self loadonlineStausAPI:@"0"];
+        [self stopTimer];
+    });
 }
 
 - (void)applicationWillEnterForeground:(UIApplication *)application
 {
-   
-}
+    _isStartTimer = YES;
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [self loadonlineStausAPI:@"1"];
+        [self startTimer];
+    });
+    
+   }
 
 - (void)applicationDidBecomeActive:(UIApplication *)application {
  
@@ -373,7 +385,49 @@
 - (void)applicationWillTerminate:(UIApplication *)application {
   
 }
+-(void)startTimer{
+    
+    if(onlineStatusTimer == nil)
+        onlineStatusTimer = [NSTimer scheduledTimerWithTimeInterval:timerSeconds target:self selector:@selector(loadonlineStausAPI) userInfo:nil repeats:YES];
+    
+}
+-(void)stopTimer{
+    
+    if(onlineStatusTimer){
+        [onlineStatusTimer invalidate];
+        onlineStatusTimer =nil;
+    }
+    
+}
+-(void)loadonlineStausAPI
+{
+    if(_isStartTimer==YES)
+    {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self loadonlineStausAPI:@"1"];
+             [self startTimer];
+        });
 
+    }
+    else
+    {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self loadonlineStausAPI:@"0"];
+            [self stopTimer];
+        });
+
+    }
+    
+}
+-(void)loadonlineStausAPI:(NSString *) status
+{
+     webservice = [[DSWebservice alloc]init];
+    [webservice getOnlinstatus:OnlineStatus sessionID:[COMMON getSessionID] status:status success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSLog(@"onlinestausresponseObject= %@",responseObject);
+    } failure:^(AFHTTPRequestOperation *operation, id error) {
+        NSLog(@"onlinestausresponseObjecterror= %@",error);
+    }];
+}
 -(void)loadConverstaionAPI:(NSString *)_conversationID{
     
     

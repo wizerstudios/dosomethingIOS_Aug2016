@@ -46,7 +46,7 @@
 @property(nonatomic,retain)NSMutableArray                       *buttons_array;
 @property (nonatomic,retain) UILabel                            *badgeCountLabel;
 @property (nonatomic) BOOL                               isNotificationSound;
-
+@property (strong)NSTimer *onlineStatusTimer;
 -(void)initAPNS;
 @end
 

@@ -734,7 +734,20 @@ request_send_user_id:(NSString *)request_send_user_id
           completionFailureHandler:failure];
     
 }
+#pragma onlineStatus
+-(void)getOnlinstatus:(NSString *)onlineStatus sessionID:(NSString *)sessionID status:(NSString *)status success:(WebserviceRequestSuccessHandler)success failure:(WebserviceRequestFailureHandler)failure
+{
+    urlString = [URL_FOR_RESOURCE(@"") stringByAppendingString:[NSString stringWithFormat:@"%@?sessionid=%@&status=%@",onlineStatus,sessionID,status]];
+    
+    NSLog(@"urlString = %@",urlString);
+    
+    [self sendRequestWithURLString:urlString
+                     andParameters:nil
+                            method:ServiceGet
+           completionSucessHandler:success
+          completionFailureHandler:failure];
 
+}
 
 #pragma mark POST forgetPasswordRequest
 
