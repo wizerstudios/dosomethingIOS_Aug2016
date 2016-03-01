@@ -18,10 +18,10 @@ typedef void (^WebserviceRequestXMLSuccessHandler)(AFHTTPRequestOperation  *oper
 typedef void (^WebserviceRequestXMLFailureHandler)(AFHTTPRequestOperation  *operation, NSError *error);
 
 //DEVELOPMENT URL
-#define BASE_URL @"http://indiawebcoders.com/mobileapps/dosomething/"
+//#define BASE_URL @"http://indiawebcoders.com/mobileapps/dosomething/"
 
 //PRODUCTION URL
-//#define BASE_URL @"http://wiztestinghost.com/dosomething/"
+#define BASE_URL @"http://128.199.130.137/dosomething/"
 
 
 #ifdef DEBUG
