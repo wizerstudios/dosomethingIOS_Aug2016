@@ -44,4 +44,6 @@
 @property (nonatomic,strong) IBOutlet UIButton *matchactivityBtn;
 @property (nonatomic,strong) IBOutlet UIImageView * currentUserImg;
 @property (nonatomic,strong) IBOutlet UIImageView *matcheduserImg;
+@property(nonatomic,strong) NSMutableArray * senduserDetail;
+
 @end

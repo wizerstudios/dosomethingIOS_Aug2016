@@ -145,8 +145,7 @@
 {
     
     [super viewWillAppear:animated];
-    self.matchActivityView.hidden=YES;
-   
+    
     [self.navigationItem setHidesBackButton:YES animated:NO];
     
     [[NSNotificationCenter defaultCenter] addObserver:self
@@ -171,12 +170,7 @@
       [self nearestLocationWebservice];
       [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"ViewuserDetail"];
     }
-    if(IS_IPHONE6 || IS_IPHONE6_Plus)
-    {
-        //self.CollectionviewWidth.constant =self.view.frame.size.width+100;
-        self.filterviewxposition.constant =self.view.frame.size.width ;
-        
-    }
+    
     
     if(!isLoadData){
     UICollectionViewFlowLayout *flowLayout1 = [[UICollectionViewFlowLayout alloc] init];
@@ -197,12 +191,38 @@
         isLoadData=YES;
     
     }
+     [self filterPageButtonAction];
+    if(self.senduserDetail.count>0)
+    {
+        self.matchActivityView.hidden=NO;
+        matchUserArray=self.senduserDetail;
+        if(IS_IPHONE6 || IS_IPHONE6_Plus)
+        {
+//            self.CollectionviewWidth.constant =self.view.frame.size.width+100;
+            //self.filterviewxposition.constant =self.view.frame.size.width ;
+            self.collectionviewxpostion.constant =10;
+            self.CollectionviewWidth.constant    =self.view.frame.size.width+100-10;
+            self.filterviewxposition.constant    = self.CollectionviewWidth.constant+10;
+        }
+        [self RequestSendNotification];
+    }
+    else{
+        self.matchActivityView.hidden=YES;
+        if(IS_IPHONE6 || IS_IPHONE6_Plus)
+        {
+            //self.CollectionviewWidth.constant =self.view.frame.size.width+100;
+            self.filterviewxposition.constant =self.view.frame.size.width ;
+            
+        }
+    }
+
     
-    [self filterPageButtonAction];
+   
 
     
     [[UISlider appearance] setThumbImage:[UIImage imageNamed:@"dot_Image"] forState:UIControlStateNormal];
     
+   
     
 }
 -(void)loadCustomNavigationview
@@ -747,8 +767,8 @@
                                         matchUserArray =[[responseObject valueForKey:@"sendrequest"]valueForKey:@"Conversaion"];
                                         
                                         [self loadMatchActivityMethod];
-                                        NSString * resposeMsg =[[responseObject valueForKey:@"sendrequest"]valueForKey:@"Message"];
-                                        [self showAltermessage:resposeMsg];
+//                                        NSString * resposeMsg =[[responseObject valueForKey:@"sendrequest"]valueForKey:@"Message"];
+//                                        [self showAltermessage:resposeMsg];
                  
                                     }
              
@@ -1178,7 +1198,7 @@
     DSChatDetailViewController *ChatDetail =[[DSChatDetailViewController alloc]initWithNibName:nil bundle:nil];
     NSMutableDictionary *matchuserdic = [[NSMutableDictionary alloc] init];
     ChatDetail.status =selectuserstatus;
-    matchuserdic = [matchUserArray mutableCopy];
+    matchuserdic = ([matchUserArray isEqual:@""])?[self.senduserDetail mutableCopy]:[matchUserArray mutableCopy];
     ChatDetail.chatuserDetailsDict = matchuserdic;
     
     [self.navigationController pushViewController:ChatDetail animated:YES];
@@ -1196,6 +1216,71 @@
     }
 }
 
+-(void)RequestSendNotification
+{
+    if(matchUserArray !=0 && ![matchUserArray isEqual:@"0"])
+    {
+        self.matchActivityView.hidden =NO;
+        if(IS_IPHONE6)
+        {
+            self.MatchImgviewXposition.constant=50;
+        }
+        else if (IS_IPHONE6_Plus)
+        {
+            self.MatchImgviewXposition.constant=70;
+        }
+        else
+        {
+            self.MatchImgviewXposition.constant=20;
+        }
+        self.MatchImgviewYposition.constant=(IS_IPHONE6||IS_IPHONE6_Plus)?170:130;
+        NSString *matchprofileImg =[matchUserArray valueForKey:@"image1"];
+        if([matchprofileImg isEqualToString:@""] || matchprofileImg ==nil)
+        {
+            [self.currentUserImg setImage:[UIImage imageNamed:@"profile_noimg"]];
+        }
+        else
+        {
+            matchprofileImg= [matchprofileImg stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+            downloadImageFromUrl(matchprofileImg,self.currentUserImg);
+            [self.currentUserImg setImage:[UIImage imageNamed:matchprofileImg]];
+        }
+        
+        currentuser=[[NSMutableDictionary alloc]init];
+        currentuser =[[NSUserDefaults standardUserDefaults] valueForKey:USERDETAILS];
+        NSString *objCurrentuserImg=[currentuser valueForKey:@"image1_thumb"];
+        if([objCurrentuserImg isEqualToString:@""] || objCurrentuserImg ==nil)
+        {
+            [self.matcheduserImg setImage:[UIImage imageNamed:@"profile_noimg"]];
+        }
+        else
+        {
+            objCurrentuserImg= [objCurrentuserImg stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+            downloadImageFromUrl(objCurrentuserImg,self.matcheduserImg);
+            
+            [self.matcheduserImg setImage:[UIImage imageNamed:objCurrentuserImg]];
+        }
+        
+        
+        
+        self.currentUserImg .layer.cornerRadius = 60;
+        self.currentUserImg .clipsToBounds = YES;
+        self.currentUserImg.layer.borderWidth=1;
+        [self.currentUserImg.layer setBorderColor:[UIColor redColor].CGColor];
+        
+        self.matcheduserImg .layer.cornerRadius = 60;
+        self.matcheduserImg .clipsToBounds = YES;
+        self.matcheduserImg.layer.borderWidth=1;
+        [self.matcheduserImg.layer setBorderColor:[UIColor redColor].CGColor];
+        
+        NSString*objmatchusername =[NSString stringWithFormat:@"You and %@ are a match \n Start Chatting to",[currentuser valueForKey:@"first_name"]];
+        self.matchActivitylbl.text =objmatchusername;
+    }
+    else{
+        self.matchActivityView.hidden =YES;
+    }
+
+}
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.

@@ -18,7 +18,7 @@
 #import "DSWebservice.h"
 #include <AudioToolbox/AudioToolbox.h>
 #import <AVFoundation/AVFoundation.h>
-
+#import "DSLocationViewController.h"
 
 
 @interface AppDelegate (){
@@ -512,6 +512,7 @@
     }
     NSLog(@"notification user info = %@",userInfo);
     NSString *badgecountStr = [NSString stringWithFormat:@"%@",[[userInfo valueForKey:@"aps"]valueForKey:@"msgcnt"]];
+   
     
     if (badgecountStr != NULL && ![badgecountStr isEqualToString:@"(null)"]) {
         [[NSUserDefaults standardUserDefaults]setObject:badgecountStr forKey:UnreadMsgCount];
@@ -524,7 +525,46 @@
         [badgeCountLabel setText:@""];
         [badgeCountLabel setHidden:YES];
     }
+    
+    NSString *requestSend = [NSString stringWithFormat:@"%@",[[userInfo valueForKey:@"aps"]valueForKey:@"push_type"]];
+    if([requestSend isEqualToString:@"sendrequest"])
+    {
+         NSString *conversationid =[[userInfo valueForKey:@"aps"]valueForKey:@"conversationid"];
+        [self RequestSend:conversationid];
+    }
 }
 
+-(void)RequestSend:(NSString *)conversationID
+{
+    webservice = [[DSWebservice alloc]init];
+    
+    [webservice getConversation:GetConversation sessionID:[COMMON getSessionID] conversationId:conversationID dateTime:[COMMON getCurrentDateTime]
+                        success:^(AFHTTPRequestOperation *operation, id responseObject){
+                            
+                            NSMutableDictionary *responseDict = [[NSMutableDictionary alloc]init];
+                            
+                            responseDict = [[responseObject valueForKey:@"getconversation"]mutableCopy];
+                            
+                            if([[responseDict valueForKey:@"status"]isEqualToString:@"success"]){
+                                
+                                NSMutableArray *receiverDict = [[NSMutableArray alloc]init];
+                                receiverDict = [[responseDict valueForKey:@"receiver"]objectAtIndex:0];
+                                if (receiverDict != NULL && [receiverDict count] > 0) {
+                                    DSLocationViewController *locationview =[[DSLocationViewController alloc]initWithNibName:nil bundle:nil];
+                                   
+                                    locationview.senduserDetail=[receiverDict mutableCopy];
+                                    
+                                    [self.navigationController pushViewController:locationview animated:YES];
+                                }
+                            }
+                        }
+     
+                        failure:^(AFHTTPRequestOperation *operation, id error) {
+                            [COMMON removeLoading];
+                            
+                        }];
+    
+
+}
 
 @end
