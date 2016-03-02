@@ -37,6 +37,7 @@
     NSMutableArray *chatArray;
     ChatDetailCustomcell *ChatDetailcell;
     int height;
+    NSMutableArray * recevierDetails;
 }
 
 @end
@@ -59,7 +60,7 @@
     webService = [[DSWebservice alloc]init];
     
     conversationArray = [[NSMutableArray alloc]init];
-    
+    recevierDetails =[[NSMutableArray alloc]init];
     [self displayUserDetailsView];
     
     [self loadConverstionAPI];
@@ -471,6 +472,7 @@
                             
                             NSLog(@"Conversation resp = %@",responseObject);
                             
+                            
                             NSMutableDictionary *responseDict = [[NSMutableDictionary alloc]init];
                             
                             responseDict = [[responseObject valueForKey:@"getconversation"]mutableCopy];
@@ -482,6 +484,10 @@
                                    [conversationArray removeAllObjects];
                                 
                                 conversationArray = [[responseDict valueForKey:@"converation"]mutableCopy];
+                                 recevierDetails=[[responseDict valueForKey:@"receiver"] mutableCopy];
+                                NSString * objonline = [[recevierDetails valueForKey:@"online_status"] componentsJoinedByString:@""];
+                                NSString *onlinestatus=([objonline isEqualToString: @"0"])?@"offline":@"online";
+                                OnlineLabel.text =onlinestatus;
                                 
                                 [chatTableView reloadData];
                                 if (chatTableView.contentSize.height > chatTableView.frame.size.height)
