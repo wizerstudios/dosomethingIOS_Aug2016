@@ -11,6 +11,44 @@
 		0621A6BF1C5B5F7700121B8E /* silence.aiff in Resources */ = {isa = PBXBuildFile; fileRef = 0621A6BE1C5B5F7700121B8E /* silence.aiff */; };
 		065433161BF38B0400DABBFC /* button-16.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 065433151BF38B0400DABBFC /* button-16.mp3 */; };
 		065BAC521BC7A135005AF493 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 065BAC511BC7A135005AF493 /* main.m */; };
+		06E1A6E31C886CD9008633D8 /* aurora.caf in Resources */ = {isa = PBXBuildFile; fileRef = 06E1A6BD1C886CD9008633D8 /* aurora.caf */; };
+		06E1A6E41C886CD9008633D8 /* bamboo.caf in Resources */ = {isa = PBXBuildFile; fileRef = 06E1A6BE1C886CD9008633D8 /* bamboo.caf */; };
+		06E1A6E51C886CD9008633D8 /* Beacon.caf in Resources */ = {isa = PBXBuildFile; fileRef = 06E1A6BF1C886CD9008633D8 /* Beacon.caf */; };
+		06E1A6E61C886CD9008633D8 /* Bulletin.caf in Resources */ = {isa = PBXBuildFile; fileRef = 06E1A6C01C886CD9008633D8 /* Bulletin.caf */; };
+		06E1A6E71C886CD9008633D8 /* By The Seaside.caf in Resources */ = {isa = PBXBuildFile; fileRef = 06E1A6C11C886CD9008633D8 /* By The Seaside.caf */; };
+		06E1A6E81C886CD9008633D8 /* Chimes.caf in Resources */ = {isa = PBXBuildFile; fileRef = 06E1A6C21C886CD9008633D8 /* Chimes.caf */; };
+		06E1A6E91C886CD9008633D8 /* chord.caf in Resources */ = {isa = PBXBuildFile; fileRef = 06E1A6C31C886CD9008633D8 /* chord.caf */; };
+		06E1A6EA1C886CD9008633D8 /* circles.caf in Resources */ = {isa = PBXBuildFile; fileRef = 06E1A6C41C886CD9008633D8 /* circles.caf */; };
+		06E1A6EB1C886CD9008633D8 /* Circuit.caf in Resources */ = {isa = PBXBuildFile; fileRef = 06E1A6C51C886CD9008633D8 /* Circuit.caf */; };
+		06E1A6EC1C886CD9008633D8 /* complete.caf in Resources */ = {isa = PBXBuildFile; fileRef = 06E1A6C61C886CD9008633D8 /* complete.caf */; };
+		06E1A6ED1C886CD9008633D8 /* Constellation.caf in Resources */ = {isa = PBXBuildFile; fileRef = 06E1A6C71C886CD9008633D8 /* Constellation.caf */; };
+		06E1A6EE1C886CD9008633D8 /* Cosmic.caf in Resources */ = {isa = PBXBuildFile; fileRef = 06E1A6C81C886CD9008633D8 /* Cosmic.caf */; };
+		06E1A6EF1C886CD9008633D8 /* Crystals.caf in Resources */ = {isa = PBXBuildFile; fileRef = 06E1A6C91C886CD9008633D8 /* Crystals.caf */; };
+		06E1A6F01C886CD9008633D8 /* hello.caf in Resources */ = {isa = PBXBuildFile; fileRef = 06E1A6CA1C886CD9008633D8 /* hello.caf */; };
+		06E1A6F11C886CD9008633D8 /* Hillside.caf in Resources */ = {isa = PBXBuildFile; fileRef = 06E1A6CB1C886CD9008633D8 /* Hillside.caf */; };
+		06E1A6F21C886CD9008633D8 /* Illuminate.caf in Resources */ = {isa = PBXBuildFile; fileRef = 06E1A6CC1C886CD9008633D8 /* Illuminate.caf */; };
+		06E1A6F31C886CD9008633D8 /* input.caf in Resources */ = {isa = PBXBuildFile; fileRef = 06E1A6CD1C886CD9008633D8 /* input.caf */; };
+		06E1A6F41C886CD9008633D8 /* keys.caf in Resources */ = {isa = PBXBuildFile; fileRef = 06E1A6CE1C886CD9008633D8 /* keys.caf */; };
+		06E1A6F51C886CD9008633D8 /* Night Owl.caf in Resources */ = {isa = PBXBuildFile; fileRef = 06E1A6CF1C886CD9008633D8 /* Night Owl.caf */; };
+		06E1A6F61C886CD9008633D8 /* note.caf in Resources */ = {isa = PBXBuildFile; fileRef = 06E1A6D01C886CD9008633D8 /* note.caf */; };
+		06E1A6F71C886CD9008633D8 /* Opening.caf in Resources */ = {isa = PBXBuildFile; fileRef = 06E1A6D11C886CD9008633D8 /* Opening.caf */; };
+		06E1A6F81C886CD9008633D8 /* Playtime.caf in Resources */ = {isa = PBXBuildFile; fileRef = 06E1A6D21C886CD9008633D8 /* Playtime.caf */; };
+		06E1A6F91C886CD9008633D8 /* popcorn.caf in Resources */ = {isa = PBXBuildFile; fileRef = 06E1A6D31C886CD9008633D8 /* popcorn.caf */; };
+		06E1A6FA1C886CD9008633D8 /* Presto.caf in Resources */ = {isa = PBXBuildFile; fileRef = 06E1A6D41C886CD9008633D8 /* Presto.caf */; };
+		06E1A6FB1C886CD9008633D8 /* pulse.caf in Resources */ = {isa = PBXBuildFile; fileRef = 06E1A6D51C886CD9008633D8 /* pulse.caf */; };
+		06E1A6FC1C886CD9008633D8 /* Radar.caf in Resources */ = {isa = PBXBuildFile; fileRef = 06E1A6D61C886CD9008633D8 /* Radar.caf */; };
+		06E1A6FD1C886CD9008633D8 /* Radiate.caf in Resources */ = {isa = PBXBuildFile; fileRef = 06E1A6D71C886CD9008633D8 /* Radiate.caf */; };
+		06E1A6FE1C886CD9008633D8 /* Ripples.caf in Resources */ = {isa = PBXBuildFile; fileRef = 06E1A6D81C886CD9008633D8 /* Ripples.caf */; };
+		06E1A6FF1C886CD9008633D8 /* Sencha.caf in Resources */ = {isa = PBXBuildFile; fileRef = 06E1A6D91C886CD9008633D8 /* Sencha.caf */; };
+		06E1A7001C886CD9008633D8 /* Signal.caf in Resources */ = {isa = PBXBuildFile; fileRef = 06E1A6DA1C886CD9008633D8 /* Signal.caf */; };
+		06E1A7011C886CD9008633D8 /* Silk.caf in Resources */ = {isa = PBXBuildFile; fileRef = 06E1A6DB1C886CD9008633D8 /* Silk.caf */; };
+		06E1A7021C886CD9008633D8 /* Slow Rise.caf in Resources */ = {isa = PBXBuildFile; fileRef = 06E1A6DC1C886CD9008633D8 /* Slow Rise.caf */; };
+		06E1A7031C886CD9008633D8 /* Stargaze.caf in Resources */ = {isa = PBXBuildFile; fileRef = 06E1A6DD1C886CD9008633D8 /* Stargaze.caf */; };
+		06E1A7041C886CD9008633D8 /* Summit.caf in Resources */ = {isa = PBXBuildFile; fileRef = 06E1A6DE1C886CD9008633D8 /* Summit.caf */; };
+		06E1A7051C886CD9008633D8 /* synth.caf in Resources */ = {isa = PBXBuildFile; fileRef = 06E1A6DF1C886CD9008633D8 /* synth.caf */; };
+		06E1A7061C886CD9008633D8 /* Twinkle.caf in Resources */ = {isa = PBXBuildFile; fileRef = 06E1A6E01C886CD9008633D8 /* Twinkle.caf */; };
+		06E1A7071C886CD9008633D8 /* Uplift.caf in Resources */ = {isa = PBXBuildFile; fileRef = 06E1A6E11C886CD9008633D8 /* Uplift.caf */; };
+		06E1A7081C886CD9008633D8 /* Waves.caf in Resources */ = {isa = PBXBuildFile; fileRef = 06E1A6E21C886CD9008633D8 /* Waves.caf */; };
 		2B0C3B401C2A7A00009B7B42 /* fontawesome-webfont.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2B0C3B3F1C2A7A00009B7B42 /* fontawesome-webfont.ttf */; };
 		2B1B8B961C23E830005A699E /* NSString+FontAwesome.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B1B8B951C23E830005A699E /* NSString+FontAwesome.m */; };
 		2B1B8BE51C24487A005A699E /* DSTermsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B1B8BE31C24487A005A699E /* DSTermsViewController.m */; };
@@ -139,6 +177,44 @@
 		065BAC4D1BC7A135005AF493 /* DoSomething.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DoSomething.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		065BAC511BC7A135005AF493 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		065BAC611BC7A135005AF493 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		06E1A6BD1C886CD9008633D8 /* aurora.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = aurora.caf; sourceTree = "<group>"; };
+		06E1A6BE1C886CD9008633D8 /* bamboo.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = bamboo.caf; sourceTree = "<group>"; };
+		06E1A6BF1C886CD9008633D8 /* Beacon.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Beacon.caf; sourceTree = "<group>"; };
+		06E1A6C01C886CD9008633D8 /* Bulletin.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Bulletin.caf; sourceTree = "<group>"; };
+		06E1A6C11C886CD9008633D8 /* By The Seaside.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "By The Seaside.caf"; sourceTree = "<group>"; };
+		06E1A6C21C886CD9008633D8 /* Chimes.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Chimes.caf; sourceTree = "<group>"; };
+		06E1A6C31C886CD9008633D8 /* chord.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = chord.caf; sourceTree = "<group>"; };
+		06E1A6C41C886CD9008633D8 /* circles.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = circles.caf; sourceTree = "<group>"; };
+		06E1A6C51C886CD9008633D8 /* Circuit.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Circuit.caf; sourceTree = "<group>"; };
+		06E1A6C61C886CD9008633D8 /* complete.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = complete.caf; sourceTree = "<group>"; };
+		06E1A6C71C886CD9008633D8 /* Constellation.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Constellation.caf; sourceTree = "<group>"; };
+		06E1A6C81C886CD9008633D8 /* Cosmic.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Cosmic.caf; sourceTree = "<group>"; };
+		06E1A6C91C886CD9008633D8 /* Crystals.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Crystals.caf; sourceTree = "<group>"; };
+		06E1A6CA1C886CD9008633D8 /* hello.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = hello.caf; sourceTree = "<group>"; };
+		06E1A6CB1C886CD9008633D8 /* Hillside.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Hillside.caf; sourceTree = "<group>"; };
+		06E1A6CC1C886CD9008633D8 /* Illuminate.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Illuminate.caf; sourceTree = "<group>"; };
+		06E1A6CD1C886CD9008633D8 /* input.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = input.caf; sourceTree = "<group>"; };
+		06E1A6CE1C886CD9008633D8 /* keys.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = keys.caf; sourceTree = "<group>"; };
+		06E1A6CF1C886CD9008633D8 /* Night Owl.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Night Owl.caf"; sourceTree = "<group>"; };
+		06E1A6D01C886CD9008633D8 /* note.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = note.caf; sourceTree = "<group>"; };
+		06E1A6D11C886CD9008633D8 /* Opening.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Opening.caf; sourceTree = "<group>"; };
+		06E1A6D21C886CD9008633D8 /* Playtime.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Playtime.caf; sourceTree = "<group>"; };
+		06E1A6D31C886CD9008633D8 /* popcorn.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = popcorn.caf; sourceTree = "<group>"; };
+		06E1A6D41C886CD9008633D8 /* Presto.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Presto.caf; sourceTree = "<group>"; };
+		06E1A6D51C886CD9008633D8 /* pulse.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = pulse.caf; sourceTree = "<group>"; };
+		06E1A6D61C886CD9008633D8 /* Radar.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Radar.caf; sourceTree = "<group>"; };
+		06E1A6D71C886CD9008633D8 /* Radiate.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Radiate.caf; sourceTree = "<group>"; };
+		06E1A6D81C886CD9008633D8 /* Ripples.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Ripples.caf; sourceTree = "<group>"; };
+		06E1A6D91C886CD9008633D8 /* Sencha.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Sencha.caf; sourceTree = "<group>"; };
+		06E1A6DA1C886CD9008633D8 /* Signal.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Signal.caf; sourceTree = "<group>"; };
+		06E1A6DB1C886CD9008633D8 /* Silk.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Silk.caf; sourceTree = "<group>"; };
+		06E1A6DC1C886CD9008633D8 /* Slow Rise.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Slow Rise.caf"; sourceTree = "<group>"; };
+		06E1A6DD1C886CD9008633D8 /* Stargaze.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Stargaze.caf; sourceTree = "<group>"; };
+		06E1A6DE1C886CD9008633D8 /* Summit.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Summit.caf; sourceTree = "<group>"; };
+		06E1A6DF1C886CD9008633D8 /* synth.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = synth.caf; sourceTree = "<group>"; };
+		06E1A6E01C886CD9008633D8 /* Twinkle.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Twinkle.caf; sourceTree = "<group>"; };
+		06E1A6E11C886CD9008633D8 /* Uplift.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Uplift.caf; sourceTree = "<group>"; };
+		06E1A6E21C886CD9008633D8 /* Waves.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Waves.caf; sourceTree = "<group>"; };
 		1C75845E698F9F0E3DFC07B6 /* Pods-DoSomething.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DoSomething.release.xcconfig"; path = "Pods/Target Support Files/Pods-DoSomething/Pods-DoSomething.release.xcconfig"; sourceTree = "<group>"; };
 		2B0C3B3F1C2A7A00009B7B42 /* fontawesome-webfont.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "fontawesome-webfont.ttf"; sourceTree = "<group>"; };
 		2B1B8B941C23E830005A699E /* NSString+FontAwesome.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSString+FontAwesome.h"; path = "Helpers/AwesomeFont/NSString+FontAwesome.h"; sourceTree = "<group>"; };
@@ -353,6 +429,7 @@
 		065433141BF38B0400DABBFC /* Audio */ = {
 			isa = PBXGroup;
 			children = (
+				06E1A6BC1C886CD9008633D8 /* Notifications */,
 				0621A6BE1C5B5F7700121B8E /* silence.aiff */,
 				0621A6BD1C5B4DD900121B8E /* silence.caf */,
 				0621A6BB1C5B49DE00121B8E /* Glass.aiff */,
@@ -405,6 +482,51 @@
 				065BAC511BC7A135005AF493 /* main.m */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		06E1A6BC1C886CD9008633D8 /* Notifications */ = {
+			isa = PBXGroup;
+			children = (
+				06E1A6BD1C886CD9008633D8 /* aurora.caf */,
+				06E1A6BE1C886CD9008633D8 /* bamboo.caf */,
+				06E1A6BF1C886CD9008633D8 /* Beacon.caf */,
+				06E1A6C01C886CD9008633D8 /* Bulletin.caf */,
+				06E1A6C11C886CD9008633D8 /* By The Seaside.caf */,
+				06E1A6C21C886CD9008633D8 /* Chimes.caf */,
+				06E1A6C31C886CD9008633D8 /* chord.caf */,
+				06E1A6C41C886CD9008633D8 /* circles.caf */,
+				06E1A6C51C886CD9008633D8 /* Circuit.caf */,
+				06E1A6C61C886CD9008633D8 /* complete.caf */,
+				06E1A6C71C886CD9008633D8 /* Constellation.caf */,
+				06E1A6C81C886CD9008633D8 /* Cosmic.caf */,
+				06E1A6C91C886CD9008633D8 /* Crystals.caf */,
+				06E1A6CA1C886CD9008633D8 /* hello.caf */,
+				06E1A6CB1C886CD9008633D8 /* Hillside.caf */,
+				06E1A6CC1C886CD9008633D8 /* Illuminate.caf */,
+				06E1A6CD1C886CD9008633D8 /* input.caf */,
+				06E1A6CE1C886CD9008633D8 /* keys.caf */,
+				06E1A6CF1C886CD9008633D8 /* Night Owl.caf */,
+				06E1A6D01C886CD9008633D8 /* note.caf */,
+				06E1A6D11C886CD9008633D8 /* Opening.caf */,
+				06E1A6D21C886CD9008633D8 /* Playtime.caf */,
+				06E1A6D31C886CD9008633D8 /* popcorn.caf */,
+				06E1A6D41C886CD9008633D8 /* Presto.caf */,
+				06E1A6D51C886CD9008633D8 /* pulse.caf */,
+				06E1A6D61C886CD9008633D8 /* Radar.caf */,
+				06E1A6D71C886CD9008633D8 /* Radiate.caf */,
+				06E1A6D81C886CD9008633D8 /* Ripples.caf */,
+				06E1A6D91C886CD9008633D8 /* Sencha.caf */,
+				06E1A6DA1C886CD9008633D8 /* Signal.caf */,
+				06E1A6DB1C886CD9008633D8 /* Silk.caf */,
+				06E1A6DC1C886CD9008633D8 /* Slow Rise.caf */,
+				06E1A6DD1C886CD9008633D8 /* Stargaze.caf */,
+				06E1A6DE1C886CD9008633D8 /* Summit.caf */,
+				06E1A6DF1C886CD9008633D8 /* synth.caf */,
+				06E1A6E01C886CD9008633D8 /* Twinkle.caf */,
+				06E1A6E11C886CD9008633D8 /* Uplift.caf */,
+				06E1A6E21C886CD9008633D8 /* Waves.caf */,
+			);
+			path = Notifications;
 			sourceTree = "<group>";
 		};
 		2B1332271C1FF81E000A3081 /* NearByDetail */ = {
@@ -1094,51 +1216,89 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				06E1A6ED1C886CD9008633D8 /* Constellation.caf in Resources */,
+				06E1A6E71C886CD9008633D8 /* By The Seaside.caf in Resources */,
 				EAF1DC521BD8B2AF00D51354 /* DSHomeViewController.xib in Resources */,
 				2B2C08911C27BB6C00996441 /* DSNearByDetailViewController.xib in Resources */,
 				2B83CAC41BE895AB0064EC7F /* Default.png in Resources */,
+				06E1A6F51C886CD9008633D8 /* Night Owl.caf in Resources */,
+				06E1A7021C886CD9008633D8 /* Slow Rise.caf in Resources */,
+				06E1A6FA1C886CD9008633D8 /* Presto.caf in Resources */,
 				EAEF252A1BCF9EF600F83E82 /* IQKeyboardManager.bundle in Resources */,
 				6A1FBD1D1C8726D200F88AC8 /* SoundTableCell.xib in Resources */,
+				06E1A6E61C886CD9008633D8 /* Bulletin.caf in Resources */,
 				2B83CAC81BE895AB0064EC7F /* Default-667h@2x.png in Resources */,
+				06E1A6E81C886CD9008633D8 /* Chimes.caf in Resources */,
 				EADB949D1BDF566C00512374 /* HomeCustomCell.xib in Resources */,
 				2B83CAC71BE895AB0064EC7F /* Default@2x.png in Resources */,
 				6A3F8DD21C843B8500D013F8 /* DoSomething_loading.gif in Resources */,
 				C6D5F63F1BC7B52C0050C1AE /* Patron-ExtraLightItalic.ttf in Resources */,
+				06E1A6F41C886CD9008633D8 /* keys.caf in Resources */,
 				EAEF25361BCFEBF400F83E82 /* CustomNavigationView.xib in Resources */,
+				06E1A7051C886CD9008633D8 /* synth.caf in Resources */,
+				06E1A7031C886CD9008633D8 /* Stargaze.caf in Resources */,
 				C6D5F63D1BC7B52C0050C1AE /* Patron-BoldItalic.ttf in Resources */,
+				06E1A7041C886CD9008633D8 /* Summit.caf in Resources */,
+				06E1A7011C886CD9008633D8 /* Silk.caf in Resources */,
+				06E1A6EE1C886CD9008633D8 /* Cosmic.caf in Resources */,
+				06E1A6FC1C886CD9008633D8 /* Radar.caf in Resources */,
+				06E1A6F31C886CD9008633D8 /* input.caf in Resources */,
 				2B1B8BE61C24487A005A699E /* DSTermsViewController.xib in Resources */,
+				06E1A6F11C886CD9008633D8 /* Hillside.caf in Resources */,
 				6A50C21D1BCCBB8C002B11AC /* DSProfileTableViewCell.xib in Resources */,
 				0621A6BC1C5B49DE00121B8E /* Glass.aiff in Resources */,
+				06E1A6EA1C886CD9008633D8 /* circles.caf in Resources */,
 				51F3C2F61BE75D40001E1FEC /* LocationCollectionViewCell.xib in Resources */,
 				511C735E1BE3801100D3D61D /* ChatTableViewCell.xib in Resources */,
 				2B83CAC61BE895AB0064EC7F /* Default-568h@2x.png in Resources */,
 				2B0C3B401C2A7A00009B7B42 /* fontawesome-webfont.ttf in Resources */,
+				06E1A6FB1C886CD9008633D8 /* pulse.caf in Resources */,
 				065433161BF38B0400DABBFC /* button-16.mp3 in Resources */,
 				C6D5F6391BC7B52C0050C1AE /* FutworaPro-Regular.otf in Resources */,
 				ED0A471C1C2E98C3000CAB95 /* DSChatDetailViewController.xib in Resources */,
+				06E1A6F01C886CD9008633D8 /* hello.caf in Resources */,
 				C6D5F6401BC7B52C0050C1AE /* Patron-Italic.ttf in Resources */,
 				6AE7361F1C05AA5D00C7DCF0 /* SettingView.xib in Resources */,
 				EACB22BC1BC7C7F7002FAD54 /* DSLoginViewController.xib in Resources */,
+				06E1A6F61C886CD9008633D8 /* note.caf in Resources */,
+				06E1A6FF1C886CD9008633D8 /* Sencha.caf in Resources */,
+				06E1A6FE1C886CD9008633D8 /* Ripples.caf in Resources */,
 				6A6AB6171C88330700A09E08 /* CustomSoundview.xib in Resources */,
+				06E1A7081C886CD9008633D8 /* Waves.caf in Resources */,
+				06E1A7061C886CD9008633D8 /* Twinkle.caf in Resources */,
+				06E1A6E31C886CD9008633D8 /* aurora.caf in Resources */,
+				06E1A6EF1C886CD9008633D8 /* Crystals.caf in Resources */,
 				C6D5F63A1BC7B52C0050C1AE /* Patron-Black.ttf in Resources */,
 				51F3C2F41BE75D40001E1FEC /* DSLocationViewController.xib in Resources */,
+				06E1A6E41C886CD9008633D8 /* bamboo.caf in Resources */,
+				06E1A6F71C886CD9008633D8 /* Opening.caf in Resources */,
 				511C73651BE3804E00D3D61D /* DSChatsTableViewController.xib in Resources */,
 				C6D5F6421BC7B52C0050C1AE /* Patron-MediumItalic.ttf in Resources */,
 				0621A6BF1C5B5F7700121B8E /* silence.aiff in Resources */,
 				C6D5F60C1BC7AF500050C1AE /* Launch Screen.xib in Resources */,
 				6A8D15D41BCC059B000F1FB4 /* DSProfileTableViewController.xib in Resources */,
+				06E1A6EC1C886CD9008633D8 /* complete.caf in Resources */,
 				C6D5F6441BC7B52C0050C1AE /* Patron-Thin.ttf in Resources */,
 				6A59C87E1C2807FD00286E35 /* DSNearbyCustomCell.xib in Resources */,
 				C6D5F6411BC7B52C0050C1AE /* Patron-Medium.ttf in Resources */,
+				06E1A7001C886CD9008633D8 /* Signal.caf in Resources */,
+				06E1A6E91C886CD9008633D8 /* chord.caf in Resources */,
+				06E1A6FD1C886CD9008633D8 /* Radiate.caf in Resources */,
+				06E1A6E51C886CD9008633D8 /* Beacon.caf in Resources */,
 				ED0A47221C2E9965000CAB95 /* ChatDetailCustomcell.xib in Resources */,
 				C6D5F6431BC7B52C0050C1AE /* Patron-Regular.ttf in Resources */,
+				06E1A6EB1C886CD9008633D8 /* Circuit.caf in Resources */,
 				C6D5F67C1BC7EC440050C1AE /* Images.xcassets in Resources */,
 				EAFC96591BD20FD400B3593D /* DSInterestAndHobbiesViewController.xib in Resources */,
+				06E1A6F91C886CD9008633D8 /* popcorn.caf in Resources */,
+				06E1A6F21C886CD9008633D8 /* Illuminate.caf in Resources */,
 				6A0C8D8B1C0C25510056DA81 /* CustomAlterview.xib in Resources */,
 				C6D5F6451BC7B52C0050C1AE /* Patron-ThinItalic.ttf in Resources */,
 				EADB949F1BDF566C00512374 /* HomeViewController.xib in Resources */,
+				06E1A7071C886CD9008633D8 /* Uplift.caf in Resources */,
 				C6D5F63E1BC7B52C0050C1AE /* Patron-ExtraLight.ttf in Resources */,
 				EAFC97981BD21CF800B3593D /* DSInterestAndHobbiesCollectionViewCell.xib in Resources */,
+				06E1A6F81C886CD9008633D8 /* Playtime.caf in Resources */,
 				C6D5F63B1BC7B52C0050C1AE /* Patron-BlackItalic.ttf in Resources */,
 				C6D5F63C1BC7B52C0050C1AE /* Patron-Bold.ttf in Resources */,
 				6A71A9381C0471F900D6D5F4 /* NSLocalization.strings in Resources */,
@@ -1410,7 +1570,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.oclockapps.DoSomething;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "56d595cc-2666-42b4-aeeb-1bf784982ddf";
+				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
