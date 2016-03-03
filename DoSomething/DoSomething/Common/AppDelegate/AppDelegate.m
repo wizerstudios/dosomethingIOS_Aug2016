@@ -485,23 +485,37 @@
         
         NSLog(@"Active");
         NSString *NotificationSound;
+       
         
         NotificationSound = [NSString stringWithFormat:@"%@",[[userInfo valueForKey:@"aps"]valueForKey:@"setting_sound"]];
-        
+       // NotificationSound = [NSString stringWithFormat:@"%@",[[userInfo valueForKey:@"aps"]valueForKey:@"sound"]];
         
         if([NotificationSound isEqualToString:@"1"]){
             
-           // NSString *playSoundOnAlert = [NSString stringWithFormat:@"%@",[[userInfo objectForKey:@"aps"] objectForKey:@"sound"]];
+            NSString *sound = [NSString stringWithFormat:@"%@",[[userInfo objectForKey:@"aps"] objectForKey:@"sound"]];
+            if([sound isEqualToString:@"default"])
+            {
+                NSString *playSoundOnAlert = [[NSBundle mainBundle] pathForResource:@"Glass"ofType:@"aiff"];
+                NSURL *soundURL = [NSURL fileURLWithPath:playSoundOnAlert];
+                
+                AudioServicesCreateSystemSoundID((__bridge CFURLRef)soundURL, &_notificationSound);
+                
+                AudioServicesPlaySystemSound(_notificationSound);
+            }
+            else
+            {
+             NSString *playSound = [sound stringByReplacingOccurrencesOfString:@".caf" withString:@""];
             
           //   NSURL *soundURL =[NSURL fileURLWithPath:[NSString stringWithFormat:@"%@/%@",[[NSBundle mainBundle] resourcePath],playSoundOnAlert]];
             
-            NSString *playSoundOnAlert = [[NSBundle mainBundle] pathForResource:@"Glass"
-                                                                  ofType:@"aiff"];
+            NSString *playSoundOnAlert = [[NSBundle mainBundle] pathForResource:playSound
+                                                                  ofType:@"caf"];
             NSURL *soundURL = [NSURL fileURLWithPath:playSoundOnAlert];
             
             AudioServicesCreateSystemSoundID((__bridge CFURLRef)soundURL, &_notificationSound);
             
             AudioServicesPlaySystemSound(_notificationSound);
+            }
             
         }
         

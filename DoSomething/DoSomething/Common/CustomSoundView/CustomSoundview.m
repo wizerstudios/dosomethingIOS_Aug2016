@@ -22,10 +22,14 @@
     self.soundmenuView.hidden =YES;
    
     [self.view setHidden:YES];
-    [self loadAudioFileList];
-    [self loadAudioFileListNew];
+   // [self loadAudioFileList];
+    //[self loadAudioFileListNew];
+    [self loadAudioListArray];
 }
-
+-(void)loadAudioListArray
+{
+    audioFileList=[[NSMutableArray alloc]initWithObjects:@"Aurora.caf",@"Bamboo.caf",@"Beacon.caf",@"Bulletin.caf",@"By The Seaside.caf",@"Chimes.caf",@"Chord.caf",@"Circles.caf",@"Circuit.caf",@"Complete.caf",@"Constellation.caf",@"Cosmic.caf",@"Crystals.caf",@"Hello.caf",@"Hillside.caf",@"Illuminate.caf",@"Input.caf",@"Keys.caf",@"Night Owl.caf",@"Note.caf",@"Opening.caf",@"Playtime.caf",@"Popcorn.caf",@"Presto.caf",@"Pulse.caf",@"Radar.caf",@"Radiate.caf",@"Ripples.caf",@"Sencha.caf",@"Signal.caf",@"Silk.caf",@"Slow Rise.caf",@"Stargaze.caf",@"Summit.caf",@"Synth.caf",@"Twinkle.caf",@"Uplift.caf",@"Waves.caf",@"Silence.caf", nil];
+}
 -(void)loadAudioFileList{
     audioFileList = [[NSMutableArray alloc] init];
     
@@ -152,7 +156,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return [combinationArray count];
+    return [audioFileList count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -169,7 +173,7 @@
         cell = soundMenuCell;
     }
     
-    NSString *string = [combinationArray[indexPath.row]lastPathComponent];
+    NSString *string = [audioFileList[indexPath.row]lastPathComponent];
     
     NSString *string1 = [string stringByReplacingOccurrencesOfString:@".caf" withString:@""];
     
@@ -181,7 +185,7 @@
     if([[NSUserDefaults standardUserDefaults] integerForKey:@"selectSound"] == selectedrow) {
         
         cell.selectedsoundMenuImg.image = [UIImage imageNamed:@"Soundon"];
-        self.selectSoundStr =[combinationArray[indexPath.row]lastPathComponent ];
+        self.selectSoundStr =[audioFileList[indexPath.row]lastPathComponent ];
     }
     
     cell.soundNamelbl.text = [string3 capitalizedString];
@@ -192,8 +196,21 @@
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     SystemSoundID soundID;
-    AudioServicesCreateSystemSoundID((__bridge_retained CFURLRef)[combinationArray objectAtIndex:indexPath.row],&soundID);
+    NSString *string = [audioFileList[indexPath.row]lastPathComponent];
+    
+    NSString *string1 = [string stringByReplacingOccurrencesOfString:@".caf" withString:@""];
+
+//   AudioServicesCreateSystemSoundID((__bridge_retained CFURLRef)[combinationArray objectAtIndex:indexPath.row],&soundID);
+//   AudioServicesPlaySystemSound(soundID);
+    NSString *playSoundOnAlert = [[NSBundle mainBundle] pathForResource:string1
+                                                                 ofType:@"caf"];
+   
+    NSURL *soundURL = [NSURL fileURLWithPath:playSoundOnAlert];
+    
+    AudioServicesCreateSystemSoundID((__bridge CFURLRef)soundURL, &soundID);
+    
     AudioServicesPlaySystemSound(soundID);
+
     NSIndexPath *selectedIndexPath = indexPath;
     NSInteger selectedrow = selectedIndexPath.row;
     NSLog(@"selectedrow=%ld",(long)selectedrow);
@@ -208,8 +225,9 @@
         [[NSUserDefaults standardUserDefaults] setInteger:selectedrow forKey:@"selectSound"];
         [[NSUserDefaults standardUserDefaults]synchronize];
         cell.selectedsoundMenuImg.image = [UIImage imageNamed:@"Soundon"];
-        _selectSoundStr =[combinationArray[indexPath.row] lastPathComponent];
-        NSLog(@"Soundstring=%@",_selectSoundStr);
+        _selectSoundStr =[audioFileList[indexPath.row] lastPathComponent];
+       // NSLog(@"Soundstring=%@",_selectSoundStr);
+         //_selectSoundStr=playSoundOnAlert;
         [self.soundmenutableview reloadData];
         
     }
@@ -217,7 +235,7 @@
     
     
     
-    NSLog(@"File url: %@", [[combinationArray objectAtIndex:indexPath.row] description]);
+   // NSLog(@"File url: %@", [[combinationArray objectAtIndex:indexPath.row] description]);
 }
 -(IBAction)DidclickSoundMenuCancel:(id)sender
 {
