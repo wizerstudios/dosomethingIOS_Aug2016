@@ -656,6 +656,7 @@
 }
 -(IBAction)didClickSoundOk:(id)sender
 {
+   
     selectSoundStr=objCustomSoundview.selectSoundStr;
     NSLog(@"Soundstring=%@",selectSoundStr);
     [self loadUpdateNotificationAPI];
