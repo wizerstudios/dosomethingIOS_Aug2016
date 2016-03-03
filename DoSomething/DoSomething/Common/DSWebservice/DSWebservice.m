@@ -174,6 +174,7 @@ static NSString       *ServiceMimeType    = @"image/jpeg";
 notification_message:(NSString *)isnotification_message
 notification_sound  :(NSString *)isnotification_sound
              isMatch:(NSString *)isMatch
+               sound:(NSString *)selectSound
             pushType:(NSString *)pushType
             fbimage :(NSString *)fbimage
              success:(WebserviceRequestSuccessHandler)success
@@ -700,12 +701,13 @@ request_send_user_id:(NSString *)request_send_user_id
                messageStr:(NSString *)messageStr
                  soundstr:(NSString *)soundStr
                     match:(NSString *)domatch
+                    sound:(NSString *)soundType
                   success:(WebserviceRequestSuccessHandler)success
                   failure:(WebserviceRequestFailureHandler)failure{
     
-    urlString = [URL_FOR_RESOURCE(@"") stringByAppendingString:[NSString stringWithFormat:@"%@?sessionid=%@&notification_message=%@&notification_sound=%@&do_match=%@",notificationUpdate,sessionId,messageStr,soundStr,domatch]];
+    urlString = [URL_FOR_RESOURCE(@"") stringByAppendingString:[NSString stringWithFormat:@"%@?sessionid=%@&notification_message=%@&notification_sound=%@&do_match=%@&sound=%@",notificationUpdate,sessionId,messageStr,soundStr,domatch,soundType]];
     
-    NSLog(@"urlString = %@",urlString);
+    NSLog(@"urlStringnotification = %@",urlString);
     
     [self sendRequestWithURLString:urlString
                      andParameters:nil

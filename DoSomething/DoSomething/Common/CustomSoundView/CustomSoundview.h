@@ -1,0 +1,23 @@
+//
+//  CustomSoundview.h
+//  DoSomething
+//
+//  Created by Sha on 3/3/16.
+//  Copyright © 2016 OClock Apps. All rights reserved.
+//
+
+#import <UIKit/UIKit.h>
+#import "SoundTableCell.h"
+@interface CustomSoundview : UIViewController<UITableViewDataSource,UITableViewDelegate>
+{
+    NSMutableArray *audioFileList;
+    NSMutableArray * audioFilelistNew;
+    NSMutableArray *combinationArray;
+    IBOutlet SoundTableCell *soundMenuCell;
+}
+@property(nonatomic,strong) IBOutlet UIView * soundmenuView;
+@property (nonatomic,strong) IBOutlet UITableView * soundmenutableview;
+@property (nonatomic ,strong) IBOutlet UIButton * soundMenuCancelBtn;
+@property (nonatomic,strong)IBOutlet UIButton *soundmenuOkBtn;
+@property (nonatomic,strong)  NSString * selectSoundStr;
+@end

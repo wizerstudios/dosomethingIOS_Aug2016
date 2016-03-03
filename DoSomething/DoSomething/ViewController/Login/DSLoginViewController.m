@@ -713,6 +713,7 @@
                notification_message:@"Yes"
                notification_sound  :@"Yes"
                             isMatch:@"Yes"
+                              sound:@""
                            pushType:push_type
                             fbimage:@""
                             success:^(AFHTTPRequestOperation *operation, id responseObject){

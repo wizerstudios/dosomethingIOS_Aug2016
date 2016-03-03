@@ -23,7 +23,7 @@
 #import "DSTermsViewController.h"
 #import "IQKeyboardManager.h"
 #import "IQUIView+IQKeyboardToolbar.h"
-
+#import "CustomSoundview.h"
 
 
 @interface DSProfileTableViewController ()<CLLocationManagerDelegate,UIAlertViewDelegate,UIScrollViewDelegate>
@@ -89,6 +89,7 @@
     CGSize dataSize;
     BOOL isLogin;
     CustomAlterview *objCustomAlterview;
+    CustomSoundview * objCustomSoundView;
     
     BOOL isSelectMale,isSelectFemale,isSave;
     UIWindow *windowInfo;
@@ -103,6 +104,7 @@
     
      BOOL isclickIconAddBtn;
     NSString * FBImageStr;
+    NSString *selectSoundStr;
 }
 
 @end
@@ -196,6 +198,7 @@
     [super viewDidAppear:animated];
     
     [self CustomAlterview];
+    [self CustomSoundview];
 }
 
 -(void)loadNavigation{
@@ -981,8 +984,44 @@
     [objCustomAlterview.alertMsgLabel setTextColor:[UIColor colorWithRed:(255/255.0f) green:(255/255.0f) blue:(255/255.0f) alpha:1.0f]];
     
 }
-
-
+#pragma CustomSoundView
+-(void)CustomSoundview
+{
+    objCustomSoundView = [[CustomSoundview alloc] initWithNibName:@"CustomSoundview" bundle:nil];
+    objCustomSoundView.view.frame = CGRectMake(self.view.frame.origin.x,self.view.frame.origin.y, CGRectGetWidth(self.view.frame), self.view.frame.size.height);
+    // [objCustomSoundview.alertBgView setHidden:YES];
+    [objCustomSoundView.soundmenuView setHidden:YES];
+    
+    [objCustomSoundView.soundMenuCancelBtn addTarget:self action:@selector(DidclickSoundMenuCancel:) forControlEvents:UIControlEventTouchUpInside];
+    [objCustomSoundView.soundmenuOkBtn addTarget:self action:@selector(didClickSoundOk:) forControlEvents:UIControlEventTouchUpInside];
+    //    if(IS_IPHONE6||IS_IPHONE6_Plus)
+    //    {
+    //        objCustomAlterview.mainalterviewheight.constant=50;
+    //    }
+    //    else
+    //    {
+    //        objCustomAlterview.mainalterviewheight.constant=0;
+    //    }
+    
+    [self.view addSubview:objCustomSoundView.view];
+ 
+}
+-(IBAction)DidclickSoundMenuCancel:(id)sender
+{
+    objCustomSoundView.view.hidden=YES;
+    objCustomSoundView.soundmenuView.hidden=YES;
+    
+}
+-(IBAction)didClickSoundOk:(id)sender
+{
+    selectSoundStr=objCustomSoundView.selectSoundStr;
+    NSLog(@"Soundstring=%@",selectSoundStr);
+    //[self loadUpdateNotificationAPI];
+    objCustomSoundView.view.hidden=YES;
+    objCustomSoundView.soundmenuView.hidden=YES;
+    
+    
+}
 #pragma mark - TableView Datasource & Delegate
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
@@ -1897,7 +1936,8 @@
 }
 -(void)NotificationsoundBtnSwipRightAction:(id)sender
 {
-    
+    objCustomSoundView.view.hidden=NO;
+    objCustomSoundView.soundmenuView.hidden=NO;
     [cell.SoundSwitchBtn setImage:[UIImage imageNamed:@"switch_on"] forState:UIControlStateNormal];
     isNotification_sound =@"Yes";
     
@@ -2366,6 +2406,7 @@
                notification_message:isNotification_message
                notification_sound  :isNotification_sound
                             isMatch:isNotification_match
+                            sound:selectSoundStr
                            pushType:push_type
                             fbimage:FBImageStr
                             success:^(AFHTTPRequestOperation *operation, id responseObject){

@@ -16,6 +16,7 @@
 #import "CustomAlterview.h"
 #import "DSTermsViewController.h"
 
+#import "CustomSoundview.h"
 @interface SettingView ()
 {
    
@@ -27,8 +28,10 @@
     AppDelegate     *appDelegate;
   
     CustomAlterview * objCustomAlterview;
+    CustomSoundview * objCustomSoundview;
     UIWindow        *windowInfo;
     NSString        * currentLatitude, * currentLongitude;
+    NSString * selectSoundStr;
     
 
 }
@@ -52,6 +55,7 @@
     notificationMsg=[profileDict valueForKey:@"notification_message"];
     notificationSound=[profileDict valueForKey:@"notification_sound"];
     notificationMatch=[profileDict valueForKey:@"isMatch"];
+   
     
 }
 -(void)viewWillAppear:(BOOL)animated{
@@ -67,6 +71,7 @@
     [self loadNavigationview];
     
     [self CustomAlterviewload];
+    [self customSoundView];
    
     self.deletebuttonBottomoposition.constant =(IS_IPHONE4)?30:0;
     self.scrollYposition.constant =0;
@@ -190,7 +195,8 @@
 }
 -(void)NotificationsoundBtnSwipRightAction:(id)sender
 {
-    
+    objCustomSoundview.view.hidden=NO;
+    objCustomSoundview.soundmenuView.hidden=NO;
     [soundSwitch setImage:[UIImage imageNamed:@"switch_on"] forState:UIControlStateNormal];
     notificationSound =@"Yes";
     [[UIApplication sharedApplication] registerForRemoteNotificationTypes:UIRemoteNotificationTypeBadge | UIRemoteNotificationTypeAlert | UIRemoteNotificationTypeSound];
@@ -395,6 +401,28 @@
     objCustomAlterview.alertMainBgView.hidden = YES;
     objCustomAlterview.view.hidden =YES;
 }
+#pragma customSoundview
+-(void)customSoundView
+{
+    objCustomSoundview = [[CustomSoundview alloc] initWithNibName:@"CustomSoundview" bundle:nil];
+    objCustomSoundview.view.frame = CGRectMake(self.view.frame.origin.x,self.view.frame.origin.y, CGRectGetWidth(self.view.frame), self.view.frame.size.height);
+   // [objCustomSoundview.alertBgView setHidden:YES];
+    [objCustomSoundview.soundmenuView setHidden:YES];
+    
+    [objCustomSoundview.soundMenuCancelBtn addTarget:self action:@selector(DidclickSoundMenuCancel:) forControlEvents:UIControlEventTouchUpInside];
+    [objCustomSoundview.soundmenuOkBtn addTarget:self action:@selector(didClickSoundOk:) forControlEvents:UIControlEventTouchUpInside];
+//    if(IS_IPHONE6||IS_IPHONE6_Plus)
+//    {
+//        objCustomAlterview.mainalterviewheight.constant=50;
+//    }
+//    else
+//    {
+//        objCustomAlterview.mainalterviewheight.constant=0;
+//    }
+    
+    [self.settingScroll addSubview:objCustomSoundview.view];
+
+}
 
 #pragma mark - Button Actions
 
@@ -575,6 +603,7 @@
         
         [objWebService updateNotification:ProfileUpdate_API sessionID:[COMMON getSessionID]messageStr:notificationMsg soundstr:notificationSound
                                     match:notificationMatch
+                                   sound:selectSoundStr
                                   success:^(AFHTTPRequestOperation *operation, id responseObject){
                                       NSLog(@"responseObject = %@",responseObject);
                                       
@@ -608,4 +637,28 @@
     }
    }
 
+
+- (void)didReceiveMemoryWarning
+{
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
+}
+
+
+-(IBAction)DidclickSoundMenuCancel:(id)sender
+{
+    objCustomSoundview.view.hidden=YES;
+    objCustomSoundview.soundmenuView.hidden=YES;
+ 
+}
+-(IBAction)didClickSoundOk:(id)sender
+{
+    selectSoundStr=objCustomSoundview.selectSoundStr;
+    NSLog(@"Soundstring=%@",selectSoundStr);
+    [self loadUpdateNotificationAPI];
+    objCustomSoundview.view.hidden=YES;
+    objCustomSoundview.soundmenuView.hidden=YES;
+
+    
+}
 @end

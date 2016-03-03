@@ -105,6 +105,7 @@ typedef void (^WebserviceRequestXMLFailureHandler)(AFHTTPRequestOperation  *oper
 notification_message:(NSString *)isnotification_message
 notification_sound:(NSString *)isnotification_sound
            isMatch:(NSString*)isMatch
+               sound:(NSString *)selectSound
             pushType:(NSString *)pushType
             fbimage :(NSString *)fbimage
             success:(WebserviceRequestSuccessHandler)success
@@ -262,6 +263,7 @@ message_send_user_id:(NSString *)message_send_user_id
                messageStr:(NSString *)messageStr
                  soundstr:(NSString *)soundStr
                     match:(NSString *)domatch
+                    sound:(NSString *)soundType
                   success:(WebserviceRequestSuccessHandler)success
                   failure:(WebserviceRequestFailureHandler)failure;
 
