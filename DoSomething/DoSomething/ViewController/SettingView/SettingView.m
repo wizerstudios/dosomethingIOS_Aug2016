@@ -185,7 +185,8 @@
 
 -(void)NotificationsoundBtnSwipLeftAction:(id)sender
 {
-    
+    objCustomSoundview.view.hidden=NO;
+    objCustomSoundview.soundmenuView.hidden=NO;
     [soundSwitch setImage:[UIImage imageNamed:@"switch_off"] forState:UIControlStateNormal];
     notificationSound =@"No";
 //    appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
@@ -346,6 +347,8 @@
 
     
     else if([sender tag] == 602){
+        objCustomSoundview.view.hidden=NO;
+        objCustomSoundview.soundmenuView.hidden=NO;
         if ( [notificationSound isEqualToString:@"Yes"]) {
             
             [soundSwitch setImage:[UIImage imageNamed:@"switch_off"] forState:UIControlStateNormal];

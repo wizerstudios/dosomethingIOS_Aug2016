@@ -5,6 +5,9 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
     </dependencies>
     <customFonts key="customFonts">
+        <mutableArray key="Patron-Medium.ttf">
+            <string>Patron-Medium</string>
+        </mutableArray>
         <mutableArray key="Patron-Regular.ttf">
             <string>Patron-Regular</string>
             <string>Patron-Regular</string>
@@ -25,6 +28,12 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="470"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Notifications tone" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="F5q-16-xJw">
+                    <rect key="frame" x="10" y="10" width="150" height="21"/>
+                    <fontDescription key="fontDescription" name="Patron-Medium" family="Patron" pointSize="14"/>
+                    <color key="textColor" red="0.32156862745098036" green="0.32156862745098036" blue="0.32156862745098036" alpha="1" colorSpace="calibratedRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="AUe-Dv-LYv">
                     <rect key="frame" x="35" y="35" width="250" height="400"/>
                     <subviews>
@@ -59,7 +68,7 @@
                             </state>
                         </button>
                     </subviews>
-                    <color key="backgroundColor" red="0.90980392160000001" green="0.90980392160000001" blue="0.90980392160000001" alpha="1" colorSpace="calibratedRGB"/>
+                    <color key="backgroundColor" red="0.97647058823529409" green="0.97647058823529409" blue="0.97647058823529409" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
                         <constraint firstItem="fga-Na-LF2" firstAttribute="leading" secondItem="N7O-PS-GJ4" secondAttribute="trailing" constant="40" id="4Fg-9I-CIL"/>
                         <constraint firstItem="MGp-jc-DkK" firstAttribute="leading" secondItem="AUe-Dv-LYv" secondAttribute="leading" constant="5" id="J2V-Cm-lit"/>
@@ -75,7 +84,7 @@
                     </constraints>
                 </view>
             </subviews>
-            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+            <color key="backgroundColor" red="0.9882352941176471" green="0.9882352941176471" blue="0.9882352941176471" alpha="0.64826974693251538" colorSpace="calibratedRGB"/>
             <constraints>
                 <constraint firstItem="AUe-Dv-LYv" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="35" id="a3U-py-t79"/>
                 <constraint firstAttribute="trailing" secondItem="AUe-Dv-LYv" secondAttribute="trailing" constant="35" id="nqm-Cd-XFz"/>

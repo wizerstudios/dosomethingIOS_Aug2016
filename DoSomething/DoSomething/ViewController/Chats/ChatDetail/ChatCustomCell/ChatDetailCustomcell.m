@@ -62,7 +62,7 @@
             
             NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
             
-            [dateFormat setDateFormat:@"YYYY-MM-dd HH:mm:ss"];
+            [dateFormat setDateFormat:@"YYYY-MM-dd hh:mm:ss"];
             NSArray *components = [timeStr componentsSeparatedByString:@" "];
             NSString *msgsenddate = components[0];
             NSString *time = components[1];
@@ -135,7 +135,7 @@
             [dateFormatt setDateFormat:@"yyyy-MM-dd"];
             
             NSDateFormatter *timeFormat = [[NSDateFormatter alloc] init];
-            [timeFormat setDateFormat:@"HH:mm:ss"];
+            [timeFormat setDateFormat:@"hh:mm:ss"];
             
             NSDate *now = [[NSDate alloc] init];
             
