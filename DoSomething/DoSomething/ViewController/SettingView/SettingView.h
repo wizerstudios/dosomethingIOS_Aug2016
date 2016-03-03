@@ -8,14 +8,15 @@
 
 #import <UIKit/UIKit.h>
 #import <CoreLocation/CoreLocation.h>
-
+#import "SoundTableCell.h"
 @interface SettingView : UIViewController<CLLocationManagerDelegate>
 {
     
     IBOutlet UILabel * messLbl;
     IBOutlet UILabel *soundLbl;
    
- 
+   
+   
 }
 
 @property (strong,nonatomic) IBOutlet UIScrollView  *settingScroll;
@@ -28,5 +29,6 @@
 @property (strong,nonatomic)  IBOutlet UIButton *soundSwitch;
 
 @property (strong,nonatomic) IBOutlet UIButton *matchSwitch;
+
 
 @end
