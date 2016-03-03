@@ -171,7 +171,7 @@
 
 /* Begin PBXFileReference section */
 		0621A6BB1C5B49DE00121B8E /* Glass.aiff */ = {isa = PBXFileReference; lastKnownFileType = audio.aiff; path = Glass.aiff; sourceTree = "<group>"; };
-		0621A6BD1C5B4DD900121B8E /* silence.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = silence.caf; sourceTree = "<group>"; };
+		0621A6BD1C5B4DD900121B8E /* silence.caf */ = {isa = PBXFileReference; lastKnownFileType = file; name = silence.caf; path = ../silence.caf; sourceTree = "<group>"; };
 		0621A6BE1C5B5F7700121B8E /* silence.aiff */ = {isa = PBXFileReference; lastKnownFileType = audio.aiff; path = silence.aiff; sourceTree = "<group>"; };
 		065433151BF38B0400DABBFC /* button-16.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "button-16.mp3"; sourceTree = "<group>"; };
 		065BAC4D1BC7A135005AF493 /* DoSomething.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DoSomething.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -431,7 +431,6 @@
 			children = (
 				06E1A6BC1C886CD9008633D8 /* Notifications */,
 				0621A6BE1C5B5F7700121B8E /* silence.aiff */,
-				0621A6BD1C5B4DD900121B8E /* silence.caf */,
 				0621A6BB1C5B49DE00121B8E /* Glass.aiff */,
 				065433151BF38B0400DABBFC /* button-16.mp3 */,
 			);
@@ -525,6 +524,7 @@
 				06E1A6E01C886CD9008633D8 /* Twinkle.caf */,
 				06E1A6E11C886CD9008633D8 /* Uplift.caf */,
 				06E1A6E21C886CD9008633D8 /* Waves.caf */,
+				0621A6BD1C5B4DD900121B8E /* silence.caf */,
 			);
 			path = Notifications;
 			sourceTree = "<group>";
