@@ -44,10 +44,59 @@
     
 }
 
+- (NSString *) getDisplayTime:(NSString *) strDate {
+    NSString *displayTime = @"";
+    
+    if (strDate == NULL || [strDate isEqualToString:@""]) {
+        return @"";
+    }
+    
+    NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
+    [dateFormat setTimeZone:[NSTimeZone systemTimeZone]];
+    NSLocale *usLocale = [[NSLocale alloc] initWithLocaleIdentifier:@"en_US"];
+    [dateFormat setLocale:usLocale];
+    [dateFormat setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
+    [dateFormat setFormatterBehavior:NSDateFormatterBehaviorDefault];
+    
+    NSDate *formatDate = [[NSDate alloc] init];
+    formatDate = [dateFormat dateFromString:strDate];
+    
+    
+    NSDate *currentDate = [[NSDate alloc] init];
+    
+    NSDateFormatter *dateFormatDay = [[NSDateFormatter alloc] init];
+    [dateFormatDay setDateFormat:@"yyyy/MM/dd"];
+    NSString *strDateFormatDay  = [dateFormatDay stringFromDate:formatDate];
+    NSString *strCurrentDay     = [dateFormatDay stringFromDate:currentDate];
+    
+    
+    if ([strDateFormatDay isEqualToString:strCurrentDay]) {
+        
+        NSDateFormatter *hourFormat = [[NSDateFormatter alloc] init];
+        [hourFormat setDateFormat:@"hh:mm a"];
+        NSString *strHour = [hourFormat stringFromDate:formatDate];
+        
+        displayTime = [NSString stringWithFormat:@"Today %@",strHour];
+        
+        
+    } else {
+        NSDateFormatter *finalDateFormat = [[NSDateFormatter alloc] init];
+        [finalDateFormat setDateFormat:@"yyyy/MM/dd hh:mm a"];
+        displayTime = [finalDateFormat stringFromDate:formatDate];
+    }
+    
+    NSLog(@"Final Format for %@ is %@",strDate,displayTime);
+    
+    return displayTime;
+}
+
 -(void)loadMessageView{
     if([chatArray count]){
        sender_bubbleimgView.hidden=NO;
        
+        NSString *displayTime = [self getDisplayTime:[chatArray valueForKey:@"senttime"]];
+        self.chatTime.text = displayTime;
+
         if([[chatArray valueForKey:@"type"] isEqualToString:@"SENDER"]){
             
             sender_msgLbl.text=[chatArray valueForKey:@"Message"];
@@ -58,20 +107,6 @@
            // sender_bubbleimgView.image = [[UIImage imageNamed:[NSString stringWithFormat:@""]] stretchableImageWithLeftCapWidth:20 topCapHeight:16];
             sender_bubbleimgView.layer.cornerRadius = 7;
             
-            NSString *timeStr = [chatArray valueForKey:@"senttime"];
-            
-            NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
-            
-            [dateFormat setDateFormat:@"YYYY-MM-dd HH:mm:ss"];
-            NSArray *components = [timeStr componentsSeparatedByString:@" "];
-            NSString *msgsenddate = components[0];
-            NSString *time = components[1];
-       
-            NSDate *date = [dateFormat dateFromString:timeStr];
-            
-            [dateFormat setDateFormat:@"hh:mm a"];
-            
-            timeStr = [dateFormat stringFromDate:date];
             
            
             if(IS_IPHONE6_Plus){
@@ -131,29 +166,6 @@
                  self.chatTime.frame = CGRectMake(windowSize.width-55 - ME_RIGHT_WIDTH_SPACE - MAX(dataSize.width, [COMMON dataSize:sender_msgLbl.text withFontName:@"HelveticaNeue" ofSize:15 withSize:CGSizeMake(195.0, 999.0)].width + BUBBLE_WIDTH_SPACE)+dataSize.width+50, sender_bubbleimgView.frame.origin.y-30,100,40);
 
             }
-            NSDateFormatter *dateFormatt = [[NSDateFormatter alloc] init];
-            [dateFormatt setDateFormat:@"yyyy-MM-dd"];
-            
-            NSDateFormatter *timeFormat = [[NSDateFormatter alloc] init];
-            [timeFormat setDateFormat:@"hh:mm:ss"];
-            
-            NSDate *now = [[NSDate alloc] init];
-            
-            NSString *theDate = [dateFormatt stringFromDate:now];
-             [ self.chatTime setTextColor:[UIColor grayColor]];
-            
-            if([msgsenddate isEqualToString:theDate])
-            {
-                self.chatTime.text =[NSString stringWithFormat:@"today %@",timeStr] ;
-            }
-            else{
-                self.chatTime.text =[NSString stringWithFormat:@"%@ %@",msgsenddate,timeStr] ;
-            }
-
-            // self.chatTime.text = timeStr;
-            
-            
-            
         }
         else {
             
@@ -173,56 +185,14 @@
                                              MAX(dataSize.width, [COMMON dataSize:sender_msgLbl.text withFontName:@"HelveticaNeue" ofSize:15 withSize:CGSizeMake(195.0, 999.0)].width+10 + BUBBLE_WIDTH_SPACE),
                                              dataSize.height-10);
             [sender_msgLbl setTextColor:[UIColor blackColor]];
-            
-            
-           
-            
-            
-            
-            NSString *timeStr = [chatArray valueForKey:@"senttime"];
-            
-            
-            NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
-            
-            [dateFormat setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
-            NSArray *components = [timeStr componentsSeparatedByString:@" "];
-            NSString *msgsenddate = components[0];
-            NSString *time = components[1];
-            
-            NSDate *date = [dateFormat dateFromString:timeStr];
-            [dateFormat setDateFormat:@"hh:mm a"];
-            timeStr = [dateFormat stringFromDate:date];
-        
-
+  
             sender_bubbleimgView.frame = CGRectMake(10,
                                                     y_Position + sender_bubbleimgView.frame.origin.y,
                                                     MAX(dataSize.width, [COMMON dataSize:sender_msgLbl.text withFontName:@"HelveticaNeue" ofSize:15 withSize:CGSizeMake(195.0, 999.0)].width + BUBBLE_WIDTH_SPACE)+y_Position + sender_bubbleimgView.frame.origin.y,
                                                     dataSize.height+BUBBLE_IMAGE_HEIGHT-10);
             self.chatTime.frame = CGRectMake(MAX(dataSize.width, [COMMON dataSize:sender_msgLbl.text withFontName:@"HelveticaNeue" ofSize:15 withSize:CGSizeMake(195.0, 999.0)].width + BUBBLE_WIDTH_SPACE)+y_Position + sender_bubbleimgView.frame.origin.y-80, sender_bubbleimgView.frame.origin.y-30,100,40);
-            
-            NSDateFormatter *dateFormatt = [[NSDateFormatter alloc] init];
-            [dateFormatt setDateFormat:@"yyyy-MM-dd"];
-            
-            NSDateFormatter *timeFormat = [[NSDateFormatter alloc] init];
-            [timeFormat setDateFormat:@"hh:mm:ss"];
-            
-            NSDate *now = [[NSDate alloc] init];
-            
-            NSString *theDate = [dateFormatt stringFromDate:now];
-            if([msgsenddate isEqualToString:theDate])
-            {
-                 self.chatTime.text =[NSString stringWithFormat:@"today %@",timeStr] ;
-            }
-            else{
-                     self.chatTime.text =[NSString stringWithFormat:@"%@ %@",msgsenddate,timeStr] ;
-            }
-
 
             [self.chatTime setTextColor:[UIColor blackColor]];
-            
-          
-            
-            
             
         }
         
