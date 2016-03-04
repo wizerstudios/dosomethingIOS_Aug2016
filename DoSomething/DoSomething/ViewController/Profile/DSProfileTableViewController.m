@@ -1016,10 +1016,13 @@
     playsoundBundleStr=objCustomSoundView.urlString;
     soundID =*(objCustomSoundView.selectSoundID);
 
-    AudioServicesRemoveSystemSoundCompletion (soundID);
-    
-    AudioServicesDisposeSystemSoundID(soundID);
-
+    if(soundID != 0)
+    {
+        
+        AudioServicesRemoveSystemSoundCompletion (soundID);
+        
+        AudioServicesDisposeSystemSoundID(soundID);
+    }
 }
 -(IBAction)didClickSoundOk:(id)sender
 {
@@ -1030,9 +1033,13 @@
     playsoundBundleStr=objCustomSoundView.urlString;
    soundID =*(objCustomSoundView.selectSoundID);
     
-    AudioServicesRemoveSystemSoundCompletion (soundID);
-    
-    AudioServicesDisposeSystemSoundID(soundID);
+    if(soundID != 0)
+    {
+        
+        AudioServicesRemoveSystemSoundCompletion (soundID);
+        
+        AudioServicesDisposeSystemSoundID(soundID);
+    }
 
     objCustomSoundView.view.hidden=YES;
     objCustomSoundView.soundmenuView.hidden=YES;

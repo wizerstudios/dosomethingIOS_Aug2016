@@ -51,6 +51,8 @@ typedef enum {
 -(NSString *)getCurrentDateTime;
 
 - (void)LoadIcon:(UIView *)view;
+- (void)DSLoadIcon:(UIView *)view;
+- (void)DSRemoveLoading;
 - (void)removeLoading;
 -(BOOL)isInternetReachable;
 - (void) showErrorAlert:(NSString *)strMessage;

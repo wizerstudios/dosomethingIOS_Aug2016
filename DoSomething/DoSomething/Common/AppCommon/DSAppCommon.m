@@ -280,26 +280,62 @@ DSAppCommon *sharedCommon = nil;
     //Set the corner radius
    
     
-    NSURL *imageURL = [[NSBundle mainBundle] URLForResource:@"DoSomething_loading" withExtension:@"gif"];;
-    NSData *imageData = [NSData dataWithContentsOfURL:imageURL];
+//    NSURL *imageURL = [[NSBundle mainBundle] URLForResource:@"DoSomething_loading" withExtension:@"gif"];;
+//    NSData *imageData = [NSData dataWithContentsOfURL:imageURL];
     /*
      //load local gif image
      NSString* filePath = [[NSBundle mainBundle] pathForResource:@"1.gif" ofType:nil];
      NSData* imageData = [NSData dataWithContentsOfFile:filePath];
      */
+//    _gifImageView = [[SCGIFImageView alloc] initWithFrame:CGRectMake(0,0,37,37)] ;
+//    [_gifImageView setData:imageData];
+//    [loadingView addSubview:_gifImageView];
+    
+
+    activityView = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhite];
+    [activityView setFrame:CGRectMake(1, 1, 37, 37)];
+    [activityView setHidesWhenStopped:YES];
+    [activityView startAnimating];
+    [loadingView addSubview:activityView];
+    [view addSubview:loadingView];
+}
+- (void)DSLoadIcon:(UIView *)view
+{
+    [self removeLoading];
+    [self DSRemoveLoading];
+    if(IS_IPHONE6)
+    {
+        loadingView = [[UIView alloc] initWithFrame:CGRectMake((view.frame.size.width)/2, (view.frame.size.height)/2, 37, 37)];
+    }
+    else  if(IS_IPHONE6_Plus)
+    {
+        loadingView = [[UIView alloc] initWithFrame:CGRectMake((view.frame.size.width+40)/2, (view.frame.size.height+100)/2, 37, 37)];
+    }
+    else
+    {
+        loadingView = [[UIView alloc] initWithFrame:CGRectMake((view.frame.size.width-20)/2, (view.frame.size.height-37)/2, 37, 37)];
+    }
+    [loadingView.layer setCornerRadius:20.0];
+    
+    [loadingView setBackgroundColor:[UIColor clearColor]];
+    //Enable maskstobound so that corner radius would work.
+    [loadingView.layer setMasksToBounds:YES];
+    //Set the corner radius
+    
+    
+    NSURL *imageURL = [[NSBundle mainBundle] URLForResource:@"DoSomething_loading" withExtension:@"gif"];;
+    NSData *imageData = [NSData dataWithContentsOfURL:imageURL];
+   
     _gifImageView = [[SCGIFImageView alloc] initWithFrame:CGRectMake(0,0,37,37)] ;
     [_gifImageView setData:imageData];
     [loadingView addSubview:_gifImageView];
-    
-
-//    activityView = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhite];
-   // [animatedImageView setFrame:CGRectMake(1, 1, 37, 37)];
-//    [activityView setHidesWhenStopped:YES];
-//    [activityView startAnimating];
-//    [loadingView addSubview:activityView];
     [view addSubview:loadingView];
-}
 
+}
+-(void)DSRemoveLoading
+{
+    [loadingView removeFromSuperview];
+}
 -(void)removeLoading{
     [loadingView removeFromSuperview];
 }

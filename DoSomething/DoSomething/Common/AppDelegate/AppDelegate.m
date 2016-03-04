@@ -493,7 +493,7 @@
         if([NotificationSound isEqualToString:@"1"]){
             
             NSString *sound = [NSString stringWithFormat:@"%@",[[userInfo objectForKey:@"aps"] objectForKey:@"sound"]];
-            if([sound isEqualToString:@"default"])
+            if([sound isEqualToString:@"Default"])
             {
                 NSString *playSoundOnAlert = [[NSBundle mainBundle] pathForResource:@"Glass"ofType:@"aiff"];
                 NSURL *soundURL = [NSURL fileURLWithPath:playSoundOnAlert];
@@ -507,7 +507,8 @@
              NSString *playSound = [sound stringByReplacingOccurrencesOfString:@".caf" withString:@""];
             
           //   NSURL *soundURL =[NSURL fileURLWithPath:[NSString stringWithFormat:@"%@/%@",[[NSBundle mainBundle] resourcePath],playSoundOnAlert]];
-            
+            if(![playSound isEqualToString:@"Silence"])
+            {
             NSString *playSoundOnAlert = [[NSBundle mainBundle] pathForResource:playSound
                                                                   ofType:@"caf"];
             NSURL *soundURL = [NSURL fileURLWithPath:playSoundOnAlert];
@@ -515,6 +516,7 @@
             AudioServicesCreateSystemSoundID((__bridge CFURLRef)soundURL, &_notificationSound);
             
             AudioServicesPlaySystemSound(_notificationSound);
+            }
             }
             
         }

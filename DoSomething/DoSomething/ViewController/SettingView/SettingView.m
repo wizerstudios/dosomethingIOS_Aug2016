@@ -655,9 +655,13 @@
     objCustomSoundview.soundmenuView.hidden=YES;
     playsoundBundleStr=objCustomSoundview.urlString;
     soundID =*(objCustomSoundview.selectSoundID);
-    AudioServicesRemoveSystemSoundCompletion (soundID);
-    
-    AudioServicesDisposeSystemSoundID(soundID);
+    if(soundID != 0)
+    {
+        
+        AudioServicesRemoveSystemSoundCompletion (soundID);
+        
+        AudioServicesDisposeSystemSoundID(soundID);
+    }
  
 }
 -(IBAction)didClickSoundOk:(id)sender
@@ -668,13 +672,18 @@
     //[self loadUpdateNotificationAPI];
     playsoundBundleStr=objCustomSoundview.urlString;
     //NSURL *soundURL = [NSURL fileURLWithPath:playsoundBundleStr];
-    soundID =*(objCustomSoundview.selectSoundID);
-//    
+     soundID =*(objCustomSoundview.selectSoundID);
+    if(soundID != 0)
+    {
+       
+        AudioServicesRemoveSystemSoundCompletion (soundID);
+        
+        AudioServicesDisposeSystemSoundID(soundID);
+    }
+//
 //    AudioServicesCreateSystemSoundID((__bridge CFURLRef)soundURL, &soundID);
     
-    AudioServicesRemoveSystemSoundCompletion (soundID);
     
-    AudioServicesDisposeSystemSoundID(soundID);
     objCustomSoundview.view.hidden=YES;
     objCustomSoundview.soundmenuView.hidden=YES;
 

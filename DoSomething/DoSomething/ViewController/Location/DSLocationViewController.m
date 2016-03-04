@@ -125,7 +125,7 @@
 
     else
     {
-         [COMMON LoadIcon:self.view];
+         [COMMON DSLoadIcon:self.view];
          [self nearestLocationWebservice];
     }
   
@@ -439,7 +439,7 @@
                          [commonlocationArray addObject:dict];
                      }
                  }
-                 [COMMON removeLoading];
+                 [COMMON DSRemoveLoading];
              }
              else if([[[responseObject valueForKey:@"nearestusers"]valueForKey:@"status"] isEqualToString:@"error"])
              {
@@ -453,7 +453,7 @@
              }
              else{
                  isAllPost = YES;
-                 [COMMON removeLoading];
+                 [COMMON DSRemoveLoading];
                  if([[[responseObject valueForKey:@"nearestusers"]valueForKey:@"status"] isEqualToString:@"failed"])
                  {
                      [commonlocationArray removeLastObject];
@@ -467,7 +467,7 @@
          }
                             failure:^(AFHTTPRequestOperation *operation, id error)
          {
-             [COMMON removeLoading];
+             [COMMON DSRemoveLoading];
          }];
     }
     else{
