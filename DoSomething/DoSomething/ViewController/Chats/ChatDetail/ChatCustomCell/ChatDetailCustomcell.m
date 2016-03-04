@@ -76,8 +76,8 @@
         [hourFormat setDateFormat:@"hh:mm a"];
         NSString *strHour = [hourFormat stringFromDate:formatDate];
         
-        displayTime = [NSString stringWithFormat:@"Today %@",strHour];
-        
+        displayTime =[NSString stringWithFormat:@"Today %@",strHour];
+        //[NSString stringWithFormat:@"%@ %@ AM",strDate,displayTime];
         
     } else {
         NSDateFormatter *finalDateFormat = [[NSDateFormatter alloc] init];
@@ -94,8 +94,7 @@
     if([chatArray count]){
        sender_bubbleimgView.hidden=NO;
        
-        NSString *displayTime = [self getDisplayTime:[chatArray valueForKey:@"senttime"]];
-        self.chatTime.text = displayTime;
+      
 
         if([[chatArray valueForKey:@"type"] isEqualToString:@"SENDER"]){
             
@@ -163,7 +162,10 @@
                                                         MAX(dataSize.width, [COMMON dataSize:sender_msgLbl.text withFontName:@"HelveticaNeue" ofSize:15 withSize:CGSizeMake(195.0, 999.0)].width + BUBBLE_WIDTH_SPACE)+20,
                                                         dataSize.height+BUBBLE_IMAGE_HEIGHT-10);
                 
-                 self.chatTime.frame = CGRectMake(windowSize.width-55 - ME_RIGHT_WIDTH_SPACE - MAX(dataSize.width, [COMMON dataSize:sender_msgLbl.text withFontName:@"HelveticaNeue" ofSize:15 withSize:CGSizeMake(195.0, 999.0)].width + BUBBLE_WIDTH_SPACE)+dataSize.width+50, sender_bubbleimgView.frame.origin.y-30,100,40);
+                 self.chatTime.frame = CGRectMake(windowSize.width-90 - ME_RIGHT_WIDTH_SPACE - MAX(dataSize.width, [COMMON dataSize:sender_msgLbl.text withFontName:@"HelveticaNeue" ofSize:15 withSize:CGSizeMake(195.0, 999.0)].width + BUBBLE_WIDTH_SPACE)+dataSize.width+50, sender_bubbleimgView.frame.origin.y-30,100,40);
+                self.chatTime.textColor=[UIColor lightGrayColor];
+                NSString *displayTime = [chatArray valueForKey:@"displaysenttime"];
+                self.chatTime.text = displayTime;
 
             }
         }
@@ -190,9 +192,11 @@
                                                     y_Position + sender_bubbleimgView.frame.origin.y,
                                                     MAX(dataSize.width, [COMMON dataSize:sender_msgLbl.text withFontName:@"HelveticaNeue" ofSize:15 withSize:CGSizeMake(195.0, 999.0)].width + BUBBLE_WIDTH_SPACE)+y_Position + sender_bubbleimgView.frame.origin.y,
                                                     dataSize.height+BUBBLE_IMAGE_HEIGHT-10);
-            self.chatTime.frame = CGRectMake(MAX(dataSize.width, [COMMON dataSize:sender_msgLbl.text withFontName:@"HelveticaNeue" ofSize:15 withSize:CGSizeMake(195.0, 999.0)].width + BUBBLE_WIDTH_SPACE)+y_Position + sender_bubbleimgView.frame.origin.y-80, sender_bubbleimgView.frame.origin.y-30,100,40);
+            self.chatTime.frame = CGRectMake(MAX(dataSize.width, [COMMON dataSize:sender_msgLbl.text withFontName:@"HelveticaNeue" ofSize:15 withSize:CGSizeMake(195.0, 999.0)].width + BUBBLE_WIDTH_SPACE)+y_Position + sender_bubbleimgView.frame.origin.y-100, sender_bubbleimgView.frame.origin.y-30,150,40);
 
             [self.chatTime setTextColor:[UIColor blackColor]];
+            NSString *displayTime = [chatArray valueForKey:@"displayreceivedtime"];
+            self.chatTime.text = displayTime;
             
         }
         
