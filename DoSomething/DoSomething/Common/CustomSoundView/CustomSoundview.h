@@ -21,4 +21,5 @@
 @property (nonatomic ,strong) IBOutlet UIButton * soundMenuCancelBtn;
 @property (nonatomic,strong)IBOutlet UIButton *soundmenuOkBtn;
 @property (nonatomic,strong)  NSString * selectSoundStr;
+@property(nonatomic,strong) NSString* urlString;
 @end

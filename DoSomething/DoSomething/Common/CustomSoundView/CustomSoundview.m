@@ -10,7 +10,9 @@
 #import <AudioToolbox/AudioToolbox.h>
 #import "SoundTableCell.h"
 @interface CustomSoundview ()
-
+{
+    SystemSoundID soundID;
+}
 
 @end
 
@@ -22,129 +24,12 @@
     self.soundmenuView.hidden =YES;
    
     [self.view setHidden:YES];
-   // [self loadAudioFileList];
-    //[self loadAudioFileListNew];
+  
     [self loadAudioListArray];
 }
 -(void)loadAudioListArray
 {
-    audioFileList=[[NSMutableArray alloc]initWithObjects:@"Aurora.caf",@"Bamboo.caf",@"Beacon.caf",@"Bulletin.caf",@"By The Seaside.caf",@"Chimes.caf",@"Chord.caf",@"Circles.caf",@"Circuit.caf",@"Complete.caf",@"Constellation.caf",@"Cosmic.caf",@"Crystals.caf",@"Hello.caf",@"Hillside.caf",@"Illuminate.caf",@"Input.caf",@"Keys.caf",@"Night Owl.caf",@"Note.caf",@"Opening.caf",@"Playtime.caf",@"Popcorn.caf",@"Presto.caf",@"Pulse.caf",@"Radar.caf",@"Radiate.caf",@"Ripples.caf",@"Sencha.caf",@"Signal.caf",@"Silk.caf",@"Slow Rise.caf",@"Stargaze.caf",@"Summit.caf",@"Synth.caf",@"Twinkle.caf",@"Uplift.caf",@"Waves.caf",@"Silence.caf", nil];
-}
--(void)loadAudioFileList{
-    audioFileList = [[NSMutableArray alloc] init];
-    
-    NSFileManager *fileManager = [[NSFileManager alloc] init];
-    
-    NSURL *directoryURL = [NSURL URLWithString:@"/System/Library/Audio/UISounds/Modern"];
-    
-    NSArray *keys = [NSArray arrayWithObject:NSURLIsDirectoryKey];
-    
-    
-    
-    NSDirectoryEnumerator *enumerator = [fileManager
-                                         
-                                         enumeratorAtURL:directoryURL
-                                         
-                                         includingPropertiesForKeys:keys
-                                         
-                                         options:0
-                                         
-                                         errorHandler:^(NSURL *url, NSError *error) {
-                                             
-                                             // Handle the error.
-                                             
-                                             // Return YES if the enumeration should continue after the error.
-                                             
-                                             return YES;
-                                             
-                                         }];
-    
-    for (NSURL *url in enumerator) {
-        
-        NSError *error;
-        
-        NSNumber *isDirectory = nil;
-        
-        if (! [url getResourceValue:&isDirectory forKey:NSURLIsDirectoryKey error:&error]) {
-            
-            // handle error
-            
-        }
-        
-        else if (! [isDirectory boolValue]) {
-            
-            [audioFileList addObject:url];
-            
-        }
-        
-    }
-    
-    NSLog(@"audioFileList: %@", audioFileList);
-}
--(void)loadAudioFileListNew{
-    
-    audioFilelistNew = [[NSMutableArray alloc] init];
-    
-    NSFileManager *fileManager = [[NSFileManager alloc] init];
-    
-    NSURL *directoryURL = [NSURL URLWithString:@"/System/Library/Audio/UISounds/New"];
-    
-    NSArray *keys = [NSArray arrayWithObject:NSURLIsDirectoryKey];
-    
-    
-    
-    NSDirectoryEnumerator *enumerator = [fileManager
-                                         
-                                         enumeratorAtURL:directoryURL
-                                         
-                                         includingPropertiesForKeys:keys
-                                         
-                                         options:0
-                                         
-                                         errorHandler:^(NSURL *url, NSError *error) {
-                                             
-                                             // Handle the error.
-                                             
-                                             // Return YES if the enumeration should continue after the error.
-                                             
-                                             return YES;
-                                             
-                                         }];
-    
-    for (NSURL *url in enumerator) {
-        
-        NSError *error;
-        
-        NSNumber *isDirectory = nil;
-        
-        if (! [url getResourceValue:&isDirectory forKey:NSURLIsDirectoryKey error:&error]) {
-            
-            // handle error
-            
-        }
-        
-        else if (! [isDirectory boolValue]) {
-            
-            [audioFilelistNew addObject:url];
-            
-        }
-        
-    }
-    
-    NSLog(@"audioFileList: %@", audioFilelistNew);
-    
-    [self combineAudioArray];
-    
-}
-
--(void)combineAudioArray{
-    
-    
-    
-    combinationArray =[[audioFileList arrayByAddingObjectsFromArray:audioFilelistNew]mutableCopy];
-    
-    NSLog(@"audioFileList: %@", combinationArray);
-    
+    audioFileList=[[NSMutableArray alloc]initWithObjects:@"Default.caf",@"Silence.caf",@"Aurora.caf",@"Bamboo.caf",@"Beacon.caf",@"Bulletin.caf",@"By The Seaside.caf",@"Chimes.caf",@"Chord.caf",@"Circles.caf",@"Circuit.caf",@"Complete.caf",@"Constellation.caf",@"Cosmic.caf",@"Crystals.caf",@"Hello.caf",@"Hillside.caf",@"Illuminate.caf",@"Input.caf",@"Keys.caf",@"Night Owl.caf",@"Note.caf",@"Opening.caf",@"Playtime.caf",@"Popcorn.caf",@"Presto.caf",@"Pulse.caf",@"Radar.caf",@"Radiate.caf",@"Ripples.caf",@"Sencha.caf",@"Signal.caf",@"Silk.caf",@"Slow Rise.caf",@"Stargaze.caf",@"Summit.caf",@"Synth.caf",@"Twinkle.caf",@"Uplift.caf",@"Waves.caf",@"Silence.caf", nil];
 }
 
 #pragma mark - Table view data source
@@ -195,21 +80,36 @@
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    SystemSoundID soundID;
-    NSString *string = [audioFileList[indexPath.row]lastPathComponent];
     
-    NSString *string1 = [string stringByReplacingOccurrencesOfString:@".caf" withString:@""];
+    
+    NSString *Soundstring = [audioFileList[indexPath.row]lastPathComponent];
+    
+    NSString *seprateSOundName = [Soundstring stringByReplacingOccurrencesOfString:@".caf" withString:@""];
 
+    if(![seprateSOundName isEqualToString:@"Default"]){
 //   AudioServicesCreateSystemSoundID((__bridge_retained CFURLRef)[combinationArray objectAtIndex:indexPath.row],&soundID);
 //   AudioServicesPlaySystemSound(soundID);
-    NSString *playSoundOnAlert = [[NSBundle mainBundle] pathForResource:string1
+        
+        if(![seprateSOundName isEqualToString:@"Silence"])
+        {
+
+    
+            AudioServicesRemoveSystemSoundCompletion (soundID);
+        
+            AudioServicesDisposeSystemSoundID(soundID);
+
+    NSString *playSoundOnAlert = [[NSBundle mainBundle] pathForResource:seprateSOundName
                                                                  ofType:@"caf"];
    
     NSURL *soundURL = [NSURL fileURLWithPath:playSoundOnAlert];
+    self.urlString=[NSString stringWithFormat:@"%@",soundURL];
+            NSLog(@"url=%@",self.urlString);
     
     AudioServicesCreateSystemSoundID((__bridge CFURLRef)soundURL, &soundID);
     
-    AudioServicesPlaySystemSound(soundID);
+        AudioServicesPlaySystemSound(soundID);
+        }
+    }
 
     NSIndexPath *selectedIndexPath = indexPath;
     NSInteger selectedrow = selectedIndexPath.row;
@@ -247,6 +147,9 @@
     NSLog(@"Soundstring=%@",_selectSoundStr);
    // [self loadUpdateNotificationAPI];
     self.soundmenuView.hidden=YES;
+    AudioServicesRemoveSystemSoundCompletion (soundID);
+    
+    AudioServicesDisposeSystemSoundID(soundID);
 }
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

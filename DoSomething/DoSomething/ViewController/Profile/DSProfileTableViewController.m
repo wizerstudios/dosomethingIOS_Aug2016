@@ -24,7 +24,7 @@
 #import "IQKeyboardManager.h"
 #import "IQUIView+IQKeyboardToolbar.h"
 #import "CustomSoundview.h"
-
+#import <AudioToolbox/AudioToolbox.h>
 
 @interface DSProfileTableViewController ()<CLLocationManagerDelegate,UIAlertViewDelegate,UIScrollViewDelegate>
 {
@@ -105,6 +105,7 @@
      BOOL isclickIconAddBtn;
     NSString * FBImageStr;
     NSString *selectSoundStr;
+    NSString *playsoundBundleStr;
 }
 
 @end
@@ -1008,15 +1009,36 @@
 }
 -(IBAction)DidclickSoundMenuCancel:(id)sender
 {
+     SystemSoundID soundID;
     objCustomSoundView.view.hidden=YES;
     objCustomSoundView.soundmenuView.hidden=YES;
+    playsoundBundleStr=objCustomSoundView.urlString;
+    NSURL *soundURL = [NSURL fileURLWithPath:playsoundBundleStr];
     
+    
+    AudioServicesCreateSystemSoundID((__bridge CFURLRef)soundURL, &soundID);
+
+    AudioServicesRemoveSystemSoundCompletion (soundID);
+    
+    AudioServicesDisposeSystemSoundID(soundID);
+
 }
 -(IBAction)didClickSoundOk:(id)sender
 {
+     SystemSoundID soundID;
     selectSoundStr=objCustomSoundView.selectSoundStr;
     NSLog(@"Soundstring=%@",selectSoundStr);
     //[self loadUpdateNotificationAPI];
+    playsoundBundleStr=objCustomSoundView.urlString;
+    NSURL *soundURL = [NSURL fileURLWithPath:playsoundBundleStr];
+    
+    
+    AudioServicesCreateSystemSoundID((__bridge CFURLRef)soundURL, &soundID);
+    
+    AudioServicesRemoveSystemSoundCompletion (soundID);
+    
+    AudioServicesDisposeSystemSoundID(soundID);
+
     objCustomSoundView.view.hidden=YES;
     objCustomSoundView.soundmenuView.hidden=YES;
     
@@ -1997,6 +2019,8 @@
             
         }else{
             
+            objCustomSoundView.view.hidden=NO;
+            objCustomSoundView.soundmenuView.hidden=NO;
             [cell.SoundSwitchBtn setImage:[UIImage imageNamed:@"switch_on"] forState:UIControlStateNormal];
             //[self notificationButtonOFFAction:sender];
             isNotification_sound =@"Yes";
