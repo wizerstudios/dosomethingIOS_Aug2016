@@ -33,7 +33,7 @@
     NSString        * currentLatitude, * currentLongitude;
     NSString * selectSoundStr;
     NSString * playsoundBundleStr;
-  SystemSoundID soundID;
+    SystemSoundID *soundID;
 }
 @property (nonatomic,strong) IBOutlet NSLayoutConstraint    * deletebuttonBottomoposition;
 @property (nonatomic,strong) IBOutlet NSLayoutConstraint    * scrollYposition;
@@ -654,13 +654,13 @@
     objCustomSoundview.view.hidden=YES;
     objCustomSoundview.soundmenuView.hidden=YES;
     playsoundBundleStr=objCustomSoundview.urlString;
-    soundID =*(objCustomSoundview.selectSoundID);
-    if(soundID != 0)
+    soundID =(objCustomSoundview.selectSoundID);
+    if(soundID != 0 || soundID != NULL)
     {
         
-        AudioServicesRemoveSystemSoundCompletion (soundID);
+        AudioServicesRemoveSystemSoundCompletion (*(soundID));
         
-        AudioServicesDisposeSystemSoundID(soundID);
+        AudioServicesDisposeSystemSoundID(*(soundID));
     }
  
 }
@@ -672,17 +672,16 @@
     //[self loadUpdateNotificationAPI];
     playsoundBundleStr=objCustomSoundview.urlString;
     //NSURL *soundURL = [NSURL fileURLWithPath:playsoundBundleStr];
-     soundID =*(objCustomSoundview.selectSoundID);
-    if(soundID != 0)
+    // NSLog(@"selectSoundID=%d",objCustomSoundview.selectSoundID);
+     soundID =objCustomSoundview.selectSoundID;
+    if(soundID != 0  || soundID != NULL)
     {
        
-        AudioServicesRemoveSystemSoundCompletion (soundID);
+        AudioServicesRemoveSystemSoundCompletion (*(soundID));
         
-        AudioServicesDisposeSystemSoundID(soundID);
+        AudioServicesDisposeSystemSoundID(*(soundID));
     }
-//
-//    AudioServicesCreateSystemSoundID((__bridge CFURLRef)soundURL, &soundID);
-    
+  
     
     objCustomSoundview.view.hidden=YES;
     objCustomSoundview.soundmenuView.hidden=YES;

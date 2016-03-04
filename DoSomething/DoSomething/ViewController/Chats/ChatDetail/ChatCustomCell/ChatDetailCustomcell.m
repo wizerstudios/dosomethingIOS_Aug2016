@@ -62,11 +62,11 @@
             
             NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
             
-            [dateFormat setDateFormat:@"YYYY-MM-dd hh:mm:ss"];
+            [dateFormat setDateFormat:@"YYYY-MM-dd HH:mm:ss"];
             NSArray *components = [timeStr componentsSeparatedByString:@" "];
             NSString *msgsenddate = components[0];
             NSString *time = components[1];
-
+       
             NSDate *date = [dateFormat dateFromString:timeStr];
             
             [dateFormat setDateFormat:@"hh:mm a"];
@@ -174,11 +174,17 @@
                                              dataSize.height-10);
             [sender_msgLbl setTextColor:[UIColor blackColor]];
             
+            
+           
+            
+            
+            
             NSString *timeStr = [chatArray valueForKey:@"senttime"];
+            
             
             NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
             
-            [dateFormat setDateFormat:@"YYYY-MM-dd hh:mm:ss"];
+            [dateFormat setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
             NSArray *components = [timeStr componentsSeparatedByString:@" "];
             NSString *msgsenddate = components[0];
             NSString *time = components[1];

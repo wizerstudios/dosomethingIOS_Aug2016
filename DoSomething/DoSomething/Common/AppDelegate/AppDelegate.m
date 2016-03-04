@@ -493,7 +493,7 @@
         if([NotificationSound isEqualToString:@"1"]){
             
             NSString *sound = [NSString stringWithFormat:@"%@",[[userInfo objectForKey:@"aps"] objectForKey:@"sound"]];
-            if([sound isEqualToString:@"Default"])
+            if([sound isEqualToString:@"Default.caf"])
             {
                 NSString *playSoundOnAlert = [[NSBundle mainBundle] pathForResource:@"Glass"ofType:@"aiff"];
                 NSURL *soundURL = [NSURL fileURLWithPath:playSoundOnAlert];
