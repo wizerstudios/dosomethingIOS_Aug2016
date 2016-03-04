@@ -79,7 +79,6 @@
                         <constraint firstItem="N7O-PS-GJ4" firstAttribute="top" secondItem="MGp-jc-DkK" secondAttribute="bottom" constant="6" id="gGE-PD-lux"/>
                         <constraint firstAttribute="height" constant="400" id="gMe-vK-jwD"/>
                         <constraint firstItem="fga-Na-LF2" firstAttribute="top" secondItem="MGp-jc-DkK" secondAttribute="bottom" constant="6" id="ojW-1V-06x"/>
-                        <constraint firstAttribute="width" constant="250" id="tWp-v2-HoW"/>
                         <constraint firstAttribute="trailing" secondItem="fga-Na-LF2" secondAttribute="trailing" constant="16" id="uvY-Sr-Tp2"/>
                     </constraints>
                 </view>

@@ -15,7 +15,7 @@
 #import "AppDelegate.h"
 #import "CustomAlterview.h"
 #import "DSTermsViewController.h"
-
+#import <AudioToolbox/AudioToolbox.h>
 #import "CustomSoundview.h"
 @interface SettingView ()
 {
@@ -32,7 +32,7 @@
     UIWindow        *windowInfo;
     NSString        * currentLatitude, * currentLongitude;
     NSString * selectSoundStr;
-    
+    NSString * playsoundBundleStr;
 
 }
 @property (nonatomic,strong) IBOutlet NSLayoutConstraint    * deletebuttonBottomoposition;
@@ -185,8 +185,8 @@
 
 -(void)NotificationsoundBtnSwipLeftAction:(id)sender
 {
-    objCustomSoundview.view.hidden=NO;
-    objCustomSoundview.soundmenuView.hidden=NO;
+    //objCustomSoundview.view.hidden=NO;
+    //objCustomSoundview.soundmenuView.hidden=NO;
     [soundSwitch setImage:[UIImage imageNamed:@"switch_off"] forState:UIControlStateNormal];
     notificationSound =@"No";
 //    appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
@@ -347,15 +347,15 @@
 
     
     else if([sender tag] == 602){
-        objCustomSoundview.view.hidden=NO;
-        objCustomSoundview.soundmenuView.hidden=NO;
+        
         if ( [notificationSound isEqualToString:@"Yes"]) {
             
             [soundSwitch setImage:[UIImage imageNamed:@"switch_off"] forState:UIControlStateNormal];
             notificationSound =@"No";
             
         }else{
-            
+            objCustomSoundview.view.hidden=NO;
+            objCustomSoundview.soundmenuView.hidden=NO;
             [soundSwitch setImage:[UIImage imageNamed:@"switch_on"] forState:UIControlStateNormal];
             //[self notificationButtonOFFAction:sender];
             notificationSound =@"Yes";
@@ -650,16 +650,38 @@
 
 -(IBAction)DidclickSoundMenuCancel:(id)sender
 {
+     SystemSoundID soundID;
     objCustomSoundview.view.hidden=YES;
     objCustomSoundview.soundmenuView.hidden=YES;
+    playsoundBundleStr=objCustomSoundview.urlString;
+    NSURL *soundURL = [NSURL fileURLWithPath:playsoundBundleStr];
+    
+    
+    AudioServicesCreateSystemSoundID((__bridge CFURLRef)soundURL, &soundID);
+    
+    AudioServicesRemoveSystemSoundCompletion (soundID);
+    
+    AudioServicesDisposeSystemSoundID(soundID);
+    AudioServicesRemoveSystemSoundCompletion (soundID);
+    
+    AudioServicesDisposeSystemSoundID(soundID);
  
 }
 -(IBAction)didClickSoundOk:(id)sender
 {
-   
+    SystemSoundID soundID;
     selectSoundStr=objCustomSoundview.selectSoundStr;
     NSLog(@"Soundstring=%@",selectSoundStr);
-    [self loadUpdateNotificationAPI];
+    //[self loadUpdateNotificationAPI];
+    playsoundBundleStr=objCustomSoundview.urlString;
+    NSURL *soundURL = [NSURL fileURLWithPath:playsoundBundleStr];
+   
+    
+    AudioServicesCreateSystemSoundID((__bridge CFURLRef)soundURL, &soundID);
+    
+    AudioServicesRemoveSystemSoundCompletion (soundID);
+    
+    AudioServicesDisposeSystemSoundID(soundID);
     objCustomSoundview.view.hidden=YES;
     objCustomSoundview.soundmenuView.hidden=YES;
 
