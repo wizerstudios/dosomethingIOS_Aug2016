@@ -115,6 +115,22 @@
             
         }
     }
+    else{
+        NSString *playSoundOnAlert = [[NSBundle mainBundle] pathForResource:@"Glass"
+                                                                     ofType:@"aiff"];
+        
+        NSURL *soundURL = [NSURL fileURLWithPath:playSoundOnAlert];
+        self.urlString=[NSString stringWithFormat:@"%@",soundURL];
+        
+        
+        AudioServicesCreateSystemSoundID((__bridge CFURLRef)soundURL, &soundID);
+        
+        AudioServicesPlaySystemSound(soundID);
+        
+        
+        self.selectSoundID = &(soundID);
+
+    }
 
     NSIndexPath *selectedIndexPath = indexPath;
     NSInteger selectedrow = selectedIndexPath.row;
