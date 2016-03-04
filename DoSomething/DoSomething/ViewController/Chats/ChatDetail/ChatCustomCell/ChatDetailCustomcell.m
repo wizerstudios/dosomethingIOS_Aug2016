@@ -164,10 +164,11 @@
                 
                  self.chatTime.frame = CGRectMake(windowSize.width-90 - ME_RIGHT_WIDTH_SPACE - MAX(dataSize.width, [COMMON dataSize:sender_msgLbl.text withFontName:@"HelveticaNeue" ofSize:15 withSize:CGSizeMake(195.0, 999.0)].width + BUBBLE_WIDTH_SPACE)+dataSize.width+50, sender_bubbleimgView.frame.origin.y-30,100,40);
                 self.chatTime.textColor=[UIColor lightGrayColor];
-                NSString *displayTime = [chatArray valueForKey:@"displaysenttime"];
-                self.chatTime.text = displayTime;
+               
 
             }
+            NSString *displayTime = [chatArray valueForKey:@"displaysenttime"];
+            self.chatTime.text = displayTime;
         }
         else {
             
