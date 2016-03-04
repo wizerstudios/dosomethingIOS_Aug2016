@@ -33,7 +33,7 @@
     NSString        * currentLatitude, * currentLongitude;
     NSString * selectSoundStr;
     NSString * playsoundBundleStr;
-
+  SystemSoundID soundID;
 }
 @property (nonatomic,strong) IBOutlet NSLayoutConstraint    * deletebuttonBottomoposition;
 @property (nonatomic,strong) IBOutlet NSLayoutConstraint    * scrollYposition;
@@ -650,38 +650,40 @@
 
 -(IBAction)DidclickSoundMenuCancel:(id)sender
 {
-     SystemSoundID soundID;
+    
     objCustomSoundview.view.hidden=YES;
     objCustomSoundview.soundmenuView.hidden=YES;
     playsoundBundleStr=objCustomSoundview.urlString;
-    NSURL *soundURL = [NSURL fileURLWithPath:playsoundBundleStr];
-    
-    
-    AudioServicesCreateSystemSoundID((__bridge CFURLRef)soundURL, &soundID);
-    
-    AudioServicesRemoveSystemSoundCompletion (soundID);
-    
-    AudioServicesDisposeSystemSoundID(soundID);
-    AudioServicesRemoveSystemSoundCompletion (soundID);
-    
-    AudioServicesDisposeSystemSoundID(soundID);
+    soundID =*(objCustomSoundview.selectSoundID);
+    if(soundID != 0)
+    {
+        
+        AudioServicesRemoveSystemSoundCompletion (soundID);
+        
+        AudioServicesDisposeSystemSoundID(soundID);
+    }
  
 }
 -(IBAction)didClickSoundOk:(id)sender
 {
-    SystemSoundID soundID;
+    
     selectSoundStr=objCustomSoundview.selectSoundStr;
     NSLog(@"Soundstring=%@",selectSoundStr);
     //[self loadUpdateNotificationAPI];
     playsoundBundleStr=objCustomSoundview.urlString;
-    NSURL *soundURL = [NSURL fileURLWithPath:playsoundBundleStr];
-   
+    //NSURL *soundURL = [NSURL fileURLWithPath:playsoundBundleStr];
+     soundID =*(objCustomSoundview.selectSoundID);
+    if(soundID != 0)
+    {
+       
+        AudioServicesRemoveSystemSoundCompletion (soundID);
+        
+        AudioServicesDisposeSystemSoundID(soundID);
+    }
+//
+//    AudioServicesCreateSystemSoundID((__bridge CFURLRef)soundURL, &soundID);
     
-    AudioServicesCreateSystemSoundID((__bridge CFURLRef)soundURL, &soundID);
     
-    AudioServicesRemoveSystemSoundCompletion (soundID);
-    
-    AudioServicesDisposeSystemSoundID(soundID);
     objCustomSoundview.view.hidden=YES;
     objCustomSoundview.soundmenuView.hidden=YES;
 
