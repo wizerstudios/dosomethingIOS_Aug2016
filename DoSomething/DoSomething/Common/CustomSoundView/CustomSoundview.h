@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "SoundTableCell.h"
+#import <AudioToolbox/AudioToolbox.h>
 @interface CustomSoundview : UIViewController<UITableViewDataSource,UITableViewDelegate>
 {
     NSMutableArray *audioFileList;
@@ -22,4 +23,6 @@
 @property (nonatomic,strong)IBOutlet UIButton *soundmenuOkBtn;
 @property (nonatomic,strong)  NSString * selectSoundStr;
 @property(nonatomic,strong) NSString* urlString;
+@property (nonatomic) SystemSoundID * selectSoundID;
+
 @end

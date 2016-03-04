@@ -106,6 +106,7 @@
     NSString * FBImageStr;
     NSString *selectSoundStr;
     NSString *playsoundBundleStr;
+    SystemSoundID soundID;
 }
 
 @end
@@ -1009,14 +1010,11 @@
 }
 -(IBAction)DidclickSoundMenuCancel:(id)sender
 {
-     SystemSoundID soundID;
+    
     objCustomSoundView.view.hidden=YES;
     objCustomSoundView.soundmenuView.hidden=YES;
     playsoundBundleStr=objCustomSoundView.urlString;
-    NSURL *soundURL = [NSURL fileURLWithPath:playsoundBundleStr];
-    
-    
-    AudioServicesCreateSystemSoundID((__bridge CFURLRef)soundURL, &soundID);
+    soundID =*(objCustomSoundView.selectSoundID);
 
     AudioServicesRemoveSystemSoundCompletion (soundID);
     
@@ -1025,15 +1023,12 @@
 }
 -(IBAction)didClickSoundOk:(id)sender
 {
-     SystemSoundID soundID;
+    
     selectSoundStr=objCustomSoundView.selectSoundStr;
     NSLog(@"Soundstring=%@",selectSoundStr);
     //[self loadUpdateNotificationAPI];
     playsoundBundleStr=objCustomSoundView.urlString;
-    NSURL *soundURL = [NSURL fileURLWithPath:playsoundBundleStr];
-    
-    
-    AudioServicesCreateSystemSoundID((__bridge CFURLRef)soundURL, &soundID);
+   soundID =*(objCustomSoundView.selectSoundID);
     
     AudioServicesRemoveSystemSoundCompletion (soundID);
     

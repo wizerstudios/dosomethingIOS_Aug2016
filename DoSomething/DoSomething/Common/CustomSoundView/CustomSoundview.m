@@ -103,11 +103,16 @@
    
     NSURL *soundURL = [NSURL fileURLWithPath:playSoundOnAlert];
     self.urlString=[NSString stringWithFormat:@"%@",soundURL];
-            NSLog(@"url=%@",self.urlString);
+           
     
     AudioServicesCreateSystemSoundID((__bridge CFURLRef)soundURL, &soundID);
     
         AudioServicesPlaySystemSound(soundID);
+           
+           
+            self.selectSoundID = &(soundID);
+            
+            
         }
     }
 
@@ -137,6 +142,7 @@
     
    // NSLog(@"File url: %@", [[combinationArray objectAtIndex:indexPath.row] description]);
 }
+
 -(IBAction)DidclickSoundMenuCancel:(id)sender
 {
     self.soundmenuView.hidden=YES;
