@@ -29,52 +29,55 @@
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rYV-O7-Efh">
                                 <rect key="frame" x="-42" y="-21" width="42" height="21"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="35" id="cOP-AS-RWf"/>
+                                    <constraint firstAttribute="width" constant="200" id="832-Dt-gdz"/>
+                                    <constraint firstAttribute="height" constant="35" id="JZy-rd-aC3"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="Patron-Regular" family="Patron" pointSize="14"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                                 <variation key="default">
                                     <mask key="constraints">
-                                        <exclude reference="cOP-AS-RWf"/>
+                                        <exclude reference="832-Dt-gdz"/>
+                                        <exclude reference="JZy-rd-aC3"/>
                                     </mask>
                                 </variation>
                                 <variation key="heightClass=regular-widthClass=compact">
                                     <mask key="constraints">
-                                        <include reference="cOP-AS-RWf"/>
+                                        <include reference="832-Dt-gdz"/>
+                                        <include reference="JZy-rd-aC3"/>
                                     </mask>
                                 </variation>
                             </label>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="soundOff" translatesAutoresizingMaskIntoConstraints="NO" id="v9C-ol-EIO">
                                 <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="20" id="D3E-Nr-FYd"/>
-                                    <constraint firstAttribute="height" constant="20" id="o1a-p5-XtN"/>
+                                    <constraint firstAttribute="height" constant="20" id="E3l-DI-mAy"/>
+                                    <constraint firstAttribute="width" constant="20" id="JW2-qx-02v"/>
                                 </constraints>
                                 <variation key="default">
                                     <mask key="constraints">
-                                        <exclude reference="D3E-Nr-FYd"/>
-                                        <exclude reference="o1a-p5-XtN"/>
+                                        <exclude reference="E3l-DI-mAy"/>
+                                        <exclude reference="JW2-qx-02v"/>
                                     </mask>
                                 </variation>
                                 <variation key="heightClass=regular-widthClass=compact">
                                     <mask key="constraints">
-                                        <include reference="D3E-Nr-FYd"/>
-                                        <include reference="o1a-p5-XtN"/>
+                                        <include reference="E3l-DI-mAy"/>
+                                        <include reference="JW2-qx-02v"/>
                                     </mask>
                                 </variation>
                             </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="v9C-ol-EIO" firstAttribute="leading" secondItem="rYV-O7-Efh" secondAttribute="trailing" constant="28" id="0pN-v4-Q30"/>
-                            <constraint firstAttribute="height" constant="40" id="6pX-uc-vxo"/>
-                            <constraint firstAttribute="bottom" secondItem="v9C-ol-EIO" secondAttribute="bottom" constant="10" id="DlM-1K-Gna"/>
-                            <constraint firstItem="v9C-ol-EIO" firstAttribute="top" secondItem="CVE-p8-RHA" secondAttribute="top" constant="10" id="Fhi-b2-AQi"/>
-                            <constraint firstAttribute="bottom" secondItem="rYV-O7-Efh" secondAttribute="bottom" constant="2" id="SgZ-Tg-Axv"/>
-                            <constraint firstItem="rYV-O7-Efh" firstAttribute="leading" secondItem="CVE-p8-RHA" secondAttribute="leading" constant="2" id="Us4-VQ-NaW"/>
-                            <constraint firstItem="rYV-O7-Efh" firstAttribute="top" secondItem="CVE-p8-RHA" secondAttribute="top" constant="3" id="W91-Cl-3vN"/>
-                            <constraint firstAttribute="trailing" secondItem="v9C-ol-EIO" secondAttribute="trailing" constant="30" id="tVs-ZR-H8v"/>
+                            <constraint firstAttribute="bottom" secondItem="v9C-ol-EIO" secondAttribute="bottom" constant="10" id="0gj-hu-6E5"/>
+                            <constraint firstAttribute="height" constant="40" id="6NW-id-8It"/>
+                            <constraint firstItem="rYV-O7-Efh" firstAttribute="top" secondItem="CVE-p8-RHA" secondAttribute="top" constant="3" id="8nV-dH-cua"/>
+                            <constraint firstAttribute="bottom" secondItem="rYV-O7-Efh" secondAttribute="bottom" constant="2" id="Fy9-1T-at6"/>
+                            <constraint firstItem="rYV-O7-Efh" firstAttribute="leading" secondItem="CVE-p8-RHA" secondAttribute="leading" constant="2" id="Uyd-ci-aVh"/>
+                            <constraint firstAttribute="trailing" secondItem="v9C-ol-EIO" secondAttribute="trailing" constant="10" id="XDO-Eu-Jn3"/>
+                            <constraint firstItem="v9C-ol-EIO" firstAttribute="top" secondItem="CVE-p8-RHA" secondAttribute="top" constant="10" id="au0-bd-O4s"/>
+                            <constraint firstAttribute="width" constant="250" id="vHN-Q3-YhJ"/>
                         </constraints>
                         <variation key="default">
                             <mask key="subviews">
@@ -82,14 +85,14 @@
                                 <exclude reference="v9C-ol-EIO"/>
                             </mask>
                             <mask key="constraints">
-                                <exclude reference="6pX-uc-vxo"/>
-                                <exclude reference="SgZ-Tg-Axv"/>
-                                <exclude reference="Us4-VQ-NaW"/>
-                                <exclude reference="W91-Cl-3vN"/>
-                                <exclude reference="0pN-v4-Q30"/>
-                                <exclude reference="DlM-1K-Gna"/>
-                                <exclude reference="Fhi-b2-AQi"/>
-                                <exclude reference="tVs-ZR-H8v"/>
+                                <exclude reference="6NW-id-8It"/>
+                                <exclude reference="vHN-Q3-YhJ"/>
+                                <exclude reference="8nV-dH-cua"/>
+                                <exclude reference="Fy9-1T-at6"/>
+                                <exclude reference="Uyd-ci-aVh"/>
+                                <exclude reference="0gj-hu-6E5"/>
+                                <exclude reference="XDO-Eu-Jn3"/>
+                                <exclude reference="au0-bd-O4s"/>
                             </mask>
                         </variation>
                         <variation key="heightClass=regular-widthClass=compact">
@@ -98,33 +101,33 @@
                                 <include reference="v9C-ol-EIO"/>
                             </mask>
                             <mask key="constraints">
-                                <include reference="6pX-uc-vxo"/>
-                                <include reference="SgZ-Tg-Axv"/>
-                                <include reference="Us4-VQ-NaW"/>
-                                <include reference="W91-Cl-3vN"/>
-                                <include reference="0pN-v4-Q30"/>
-                                <include reference="DlM-1K-Gna"/>
-                                <include reference="Fhi-b2-AQi"/>
-                                <include reference="tVs-ZR-H8v"/>
+                                <include reference="6NW-id-8It"/>
+                                <include reference="vHN-Q3-YhJ"/>
+                                <include reference="8nV-dH-cua"/>
+                                <include reference="Fy9-1T-at6"/>
+                                <include reference="Uyd-ci-aVh"/>
+                                <include reference="0gj-hu-6E5"/>
+                                <include reference="XDO-Eu-Jn3"/>
+                                <include reference="au0-bd-O4s"/>
                             </mask>
                         </variation>
                     </view>
                 </subviews>
                 <constraints>
-                    <constraint firstItem="CVE-p8-RHA" firstAttribute="leading" secondItem="SbK-Bz-Urz" secondAttribute="leading" id="0eH-pM-Sgv"/>
-                    <constraint firstItem="CVE-p8-RHA" firstAttribute="top" secondItem="SbK-Bz-Urz" secondAttribute="top" id="OHb-05-BRP"/>
-                    <constraint firstAttribute="trailing" secondItem="CVE-p8-RHA" secondAttribute="trailing" id="Rt2-z3-DIO"/>
-                    <constraint firstAttribute="bottom" secondItem="CVE-p8-RHA" secondAttribute="bottom" constant="3" id="yqM-ob-yCg"/>
+                    <constraint firstItem="CVE-p8-RHA" firstAttribute="leading" secondItem="SbK-Bz-Urz" secondAttribute="leading" id="Bbo-2D-GSW"/>
+                    <constraint firstItem="CVE-p8-RHA" firstAttribute="top" secondItem="SbK-Bz-Urz" secondAttribute="top" id="Dzz-AU-DKn"/>
+                    <constraint firstAttribute="bottom" secondItem="CVE-p8-RHA" secondAttribute="bottom" constant="3" id="Nvh-wp-G6d"/>
+                    <constraint firstAttribute="trailing" secondItem="CVE-p8-RHA" secondAttribute="trailing" id="Rot-XF-acE"/>
                 </constraints>
                 <variation key="default">
                     <mask key="subviews">
                         <exclude reference="CVE-p8-RHA"/>
                     </mask>
                     <mask key="constraints">
-                        <exclude reference="0eH-pM-Sgv"/>
-                        <exclude reference="OHb-05-BRP"/>
-                        <exclude reference="Rt2-z3-DIO"/>
-                        <exclude reference="yqM-ob-yCg"/>
+                        <exclude reference="Bbo-2D-GSW"/>
+                        <exclude reference="Dzz-AU-DKn"/>
+                        <exclude reference="Nvh-wp-G6d"/>
+                        <exclude reference="Rot-XF-acE"/>
                     </mask>
                 </variation>
                 <variation key="heightClass=regular-widthClass=compact">
@@ -132,10 +135,10 @@
                         <include reference="CVE-p8-RHA"/>
                     </mask>
                     <mask key="constraints">
-                        <include reference="0eH-pM-Sgv"/>
-                        <include reference="OHb-05-BRP"/>
-                        <include reference="Rt2-z3-DIO"/>
-                        <include reference="yqM-ob-yCg"/>
+                        <include reference="Bbo-2D-GSW"/>
+                        <include reference="Dzz-AU-DKn"/>
+                        <include reference="Nvh-wp-G6d"/>
+                        <include reference="Rot-XF-acE"/>
                     </mask>
                 </variation>
             </tableViewCellContentView>

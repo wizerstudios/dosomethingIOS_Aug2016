@@ -666,8 +666,7 @@
 }
 -(IBAction)didClickSoundOk:(id)sender
 {
-    
-    selectSoundStr=objCustomSoundview.selectSoundStr;
+       selectSoundStr=objCustomSoundview.selectSoundStr;
     NSLog(@"Soundstring=%@",selectSoundStr);
     //[self loadUpdateNotificationAPI];
     playsoundBundleStr=objCustomSoundview.urlString;
@@ -681,11 +680,12 @@
         
         AudioServicesDisposeSystemSoundID(*(soundID));
     }
-  
-    
-    objCustomSoundview.view.hidden=YES;
+      objCustomSoundview.view.hidden=YES;
     objCustomSoundview.soundmenuView.hidden=YES;
-
-    
+}
+-(IBAction)displaySoundmenuList:(id)sender
+{
+    objCustomSoundview.view.hidden=NO;
+    objCustomSoundview.soundmenuView.hidden=NO;
 }
 @end

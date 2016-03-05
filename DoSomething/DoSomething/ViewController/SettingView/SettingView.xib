@@ -121,6 +121,16 @@
                                     <color key="textColor" red="0.55294117647058827" green="0.55294117647058827" blue="0.55294117647058827" alpha="1" colorSpace="calibratedRGB"/>
                                     <nil key="highlightedColor"/>
                                 </label>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OHN-bJ-OEZ">
+                                    <rect key="frame" x="8" y="72" width="145" height="34"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="34" id="ZcI-xS-inX"/>
+                                        <constraint firstAttribute="width" constant="145" id="kMp-Xv-jnn"/>
+                                    </constraints>
+                                    <connections>
+                                        <action selector="displaySoundmenuList:" destination="-1" eventType="touchUpInside" id="xXX-7u-x7D"/>
+                                    </connections>
+                                </button>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sound" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yEG-Rq-yMk">
                                     <rect key="frame" x="8" y="72" width="118" height="21"/>
                                     <constraints>
@@ -156,14 +166,17 @@
                             </subviews>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <constraints>
+                                <constraint firstItem="OHN-bJ-OEZ" firstAttribute="top" secondItem="gyb-UE-cx0" secondAttribute="bottom" constant="10" id="1V5-R3-5hc"/>
                                 <constraint firstItem="yEG-Rq-yMk" firstAttribute="top" secondItem="Mhh-yM-OrN" secondAttribute="bottom" constant="41" id="8DZ-Tb-iz6"/>
                                 <constraint firstItem="gyb-UE-cx0" firstAttribute="leading" secondItem="foH-is-yaE" secondAttribute="leading" constant="8" id="S9T-CF-kSD"/>
                                 <constraint firstItem="yEG-Rq-yMk" firstAttribute="top" secondItem="gyb-UE-cx0" secondAttribute="bottom" constant="10" id="T28-B2-xbR"/>
                                 <constraint firstItem="yEG-Rq-yMk" firstAttribute="top" secondItem="foH-is-yaE" secondAttribute="top" constant="72" id="TX4-ce-iG2"/>
                                 <constraint firstAttribute="height" constant="109" id="ZT5-8g-Ua7"/>
+                                <constraint firstAttribute="bottom" secondItem="OHN-bJ-OEZ" secondAttribute="bottom" constant="3" id="dmX-mr-Kq9"/>
                                 <constraint firstItem="yEG-Rq-yMk" firstAttribute="leading" secondItem="foH-is-yaE" secondAttribute="leadingMargin" id="km1-xV-lxS"/>
                                 <constraint firstItem="yEG-Rq-yMk" firstAttribute="leading" secondItem="Mhh-yM-OrN" secondAttribute="leading" id="rnj-wp-DlJ"/>
                                 <constraint firstItem="gyb-UE-cx0" firstAttribute="top" secondItem="Mhh-yM-OrN" secondAttribute="bottom" constant="10" id="vz9-Uy-Six"/>
+                                <constraint firstItem="OHN-bJ-OEZ" firstAttribute="leading" secondItem="foH-is-yaE" secondAttribute="leading" constant="8" id="yR0-1l-WkX"/>
                             </constraints>
                         </view>
                     </subviews>

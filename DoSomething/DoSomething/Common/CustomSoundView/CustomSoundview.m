@@ -9,6 +9,7 @@
 #import "CustomSoundview.h"
 #import <AudioToolbox/AudioToolbox.h>
 #import "SoundTableCell.h"
+#import "DSAppCommon.h"
 @interface CustomSoundview ()
 {
     SystemSoundID soundID;
@@ -20,8 +21,15 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [self.view setFrame:CGRectMake(0, 0,250,365)];
+  [self.view setFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, CGRectGetHeight(self.view.frame))];
+    
+    if(IS_IPHONE6)
+    {
+        self.soundmenutrailing.constant=90;
+        //self.soundmenuheight.constant =200;
+    }
     self.soundmenuView.hidden =YES;
+       
    
     [self.view setHidden:YES];
   

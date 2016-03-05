@@ -24,5 +24,6 @@
 @property (nonatomic,strong)  NSString * selectSoundStr;
 @property(nonatomic,strong) NSString* urlString;
 @property (nonatomic) SystemSoundID * selectSoundID;
-
+@property (nonatomic,strong)IBOutlet NSLayoutConstraint *soundmenutrailing;
+@property (nonatomic,strong)IBOutlet NSLayoutConstraint *soundmenuheight;
 @end
