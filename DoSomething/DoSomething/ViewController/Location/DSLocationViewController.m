@@ -851,10 +851,10 @@
        }
        
     }
-    self.upperLabel.text=@"";
-    self.lowerLabel.text=@"";
-    self.ageupperLabel.text=@"";
-    self.agelowerLabel.text =@"";
+   //self.upperLabel.text=@"";
+    //self.lowerLabel.text=@"";
+    //self.ageupperLabel.text=@"";
+    //self.agelowerLabel.text =@"";
     
 }
 -(void)filterviewPosition
@@ -1056,10 +1056,10 @@
 
     [self configureLabelSlider];
     [self configureAgeChangeSlider];
-    self.upperLabel.text=@"";
-    self.lowerLabel.text=@"";
-    self.ageupperLabel.text=@"";
-    self.agelowerLabel.text =@"";
+    //self.upperLabel.text=@"";
+    //self.lowerLabel.text=@"";
+    //self.ageupperLabel.text=@"";
+   // self.agelowerLabel.text =@"";
     filterAge=@"";  //18-26
     filterDistance=@"";  //0-5
     isfilterChange=YES;
@@ -1100,6 +1100,8 @@
     
     self.labelSlider.lowerValue = 0;
     self.labelSlider.upperValue = 100;
+    self.upperLabel.text   =@"100";
+    self.lowerLabel.text   =@"0";
 }
 
 - (void) updateDistanceSliderLabels
@@ -1119,7 +1121,7 @@
     self.upperLabel.text = [NSString stringWithFormat:@"%d", (int)self.labelSlider.upperValue];
     
     NSString * filterdistanceStr   =[NSString stringWithFormat:@"%@-%@",self.lowerLabel.text,self.upperLabel.text];
-   
+
 
      filterDistance=([filterdistanceStr isEqual:@"0-0"])?@"":filterdistanceStr;
      isfilterChange=YES;
@@ -1140,7 +1142,8 @@
     
     self.labelSlider1.lowerValue = 18;
     self.labelSlider1.upperValue = 80;
-
+    self.ageupperLabel.text         =@"80+";
+    self.agelowerLabel.text        =@"18";
 }
 
 - (void) updateAgeSliderLabels
