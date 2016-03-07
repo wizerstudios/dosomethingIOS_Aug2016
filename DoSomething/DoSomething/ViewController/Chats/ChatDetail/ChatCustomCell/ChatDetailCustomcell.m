@@ -165,10 +165,11 @@
                                                         dataSize.height+BUBBLE_IMAGE_HEIGHT-10);
                 
                  self.chatTime.frame = CGRectMake(windowSize.width-70 - ME_RIGHT_WIDTH_SPACE - MAX(dataSize.width, [COMMON dataSize:sender_msgLbl.text withFontName:@"HelveticaNeue" ofSize:15 withSize:CGSizeMake(195.0, 999.0)].width + BUBBLE_WIDTH_SPACE)+dataSize.width+50, sender_bubbleimgView.frame.origin.y-30,150,40);
-                self.chatTime.textColor=[UIColor lightGrayColor];
-               
+                
 
             }
+               self.chatTime.textColor=[UIColor lightGrayColor];
+
                    }
         else {
             

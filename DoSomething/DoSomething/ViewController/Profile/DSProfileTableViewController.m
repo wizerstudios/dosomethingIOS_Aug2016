@@ -683,7 +683,7 @@
     
     datePicker.tag =_tag;
     
-    if([currentTextfield.text length] > 0  && ![currentTextfield.text isEqualToString:@"DD / MM / YYYY"]){
+    if([currentTextfield.text length] > 0  && ![currentTextfield.text isEqualToString:@"DD/MM/YYYY"]){
         
         NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
         

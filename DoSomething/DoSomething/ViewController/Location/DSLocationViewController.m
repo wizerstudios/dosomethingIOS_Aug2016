@@ -140,7 +140,6 @@
     
     // Do any additional setup after loading the view from its nib.
 }
-
 - (void)viewWillAppear:(BOOL)animated
 {
     
@@ -204,7 +203,8 @@
             self.CollectionviewWidth.constant    =self.view.frame.size.width+100-10;
             self.filterviewxposition.constant    = self.CollectionviewWidth.constant+10;
         }
-        [self RequestSendNotification];
+        
+          [self RequestSendNotification];
     }
     else{
         self.matchActivityView.hidden=YES;
