@@ -46,4 +46,6 @@
 @property (nonatomic,strong) IBOutlet UIImageView *matcheduserImg;
 @property(nonatomic,strong) NSMutableArray * senduserDetail;
 
+@property(nonatomic,strong) NSString *sendrequestConversationID;
+
 @end

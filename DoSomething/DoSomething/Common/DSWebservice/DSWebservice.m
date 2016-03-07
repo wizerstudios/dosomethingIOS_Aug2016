@@ -619,8 +619,8 @@ request_send_user_id:(NSString *)request_send_user_id
     
     if(sessionid)               [msgDict setObject:sessionid forKey:@"sessionid"];
     if(message_send_user_id)    [msgDict setObject:message_send_user_id forKey:@"message_receiver_id"];
-                                [msgDict setObject:message forKey:@"message"];
-                                [msgDict setObject:conversationId forKey:@"conversation_id"];
+                               [msgDict setObject:message forKey:@"message"];
+     if(conversationId)        [msgDict setObject:conversationId forKey:@"conversation_id"];
     
     
     NSLog(@"urlString = %@",urlString);

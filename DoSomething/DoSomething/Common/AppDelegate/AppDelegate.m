@@ -567,7 +567,7 @@
                                 receiverDict = [[responseDict valueForKey:@"receiver"]objectAtIndex:0];
                                 if (receiverDict != NULL && [receiverDict count] > 0) {
                                     DSLocationViewController *locationview =[[DSLocationViewController alloc]initWithNibName:nil bundle:nil];
-                                   
+                                    locationview.sendrequestConversationID=conversationID;
                                     locationview.senduserDetail=[receiverDict mutableCopy];
                                     
                                     [self.navigationController pushViewController:locationview animated:YES];

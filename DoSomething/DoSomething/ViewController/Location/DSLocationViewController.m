@@ -90,7 +90,7 @@
 @implementation DSLocationViewController
 @synthesize delegate;
 @synthesize locationCollectionView,locationManager;
-@synthesize profileImages,profileNames,kiloMeterlabel,userID,dosomethingImageArry,commonlocationArray,matchactivityBtn,matchActivitylbl,matchActivityView;
+@synthesize profileImages,profileNames,kiloMeterlabel,userID,dosomethingImageArry,commonlocationArray,matchactivityBtn,matchActivitylbl,matchActivityView,sendrequestConversationID;
 - (void)viewDidLoad {
     
 
@@ -1202,6 +1202,7 @@
     NSMutableDictionary *matchuserdic = [[NSMutableDictionary alloc] init];
     ChatDetail.status =selectuserstatus;
     matchuserdic = ([matchUserArray isEqual:@""])?[self.senduserDetail mutableCopy]:[matchUserArray mutableCopy];
+    ChatDetail.conversionID=sendrequestConversationID;
     ChatDetail.chatuserDetailsDict = matchuserdic;
     
     [self.navigationController pushViewController:ChatDetail animated:YES];
