@@ -38,6 +38,7 @@
     ChatDetailCustomcell *ChatDetailcell;
     int height;
     NSMutableArray * recevierDetails;
+   
 }
 
 @end
@@ -56,6 +57,7 @@
     [[IQKeyboardManager sharedManager] considerToolbarPreviousNextInViewClass:[chatScrollview class]];
     
     [[IQKeyboardManager sharedManager] setEnableAutoToolbar:NO];
+    
     
     webService = [[DSWebservice alloc]init];
     
@@ -175,6 +177,7 @@
     [chatTableView setContentInset:UIEdgeInsetsMake(0,0, 0, 0)];
     
     [[IQKeyboardManager sharedManager]resignFirstResponder];
+    
 }
 - (void)backAction
 {
@@ -259,6 +262,7 @@
     }
 
     [chatView.placeHolderLabel setHidden:YES];
+    messageTimer = [NSTimer scheduledTimerWithTimeInterval:timerSeconds target:self selector:@selector(loadConverstionAPI) userInfo:nil repeats:YES];
     
    
 }
@@ -403,6 +407,7 @@
 
 -(void)sendAction:(id)sender{
     
+   
     NSString *conversationID;
     NSString *str=chatView.textView.text;
     
@@ -470,7 +475,7 @@
     [webService getConversation:GetConversation sessionID:[COMMON getSessionID] conversationId:conversationID dateTime:[COMMON getCurrentDateTime]
                         success:^(AFHTTPRequestOperation *operation, id responseObject){
                             
-                            NSLog(@"Conversation resp = %@",responseObject);
+                            NSLog(@"loadConverstionResponse = %@",responseObject);
                             
                             
                             NSMutableDictionary *responseDict = [[NSMutableDictionary alloc]init];
@@ -488,14 +493,15 @@
                                 NSString * objonline = [[recevierDetails valueForKey:@"online_status"] componentsJoinedByString:@""];
                                 NSString *onlinestatus=([objonline isEqualToString: @"0"])?@"offline":@"online";
                                 OnlineLabel.text =onlinestatus;
-                                
+                               
                                 [chatTableView reloadData];
-                                if (chatTableView.contentSize.height > chatTableView.frame.size.height)
+                              
+                                if (chatTableView.contentSize.height < chatTableView.frame.size.height)
                                     [chatTableView scrollRectToVisible:CGRectMake(0, chatTableView.contentSize.height - chatTableView.bounds.size.height, chatTableView.bounds.size.width,chatTableView.bounds.size.height) animated:YES];
                                 else{
                                    [chatTableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:conversationArray.count-1 inSection:0] atScrollPosition:UITableViewScrollPositionBottom animated:YES];
                                 }
-                                
+                               
                                 
                             }
                             else{
@@ -523,6 +529,7 @@
                         if([[msgResponseDict valueForKey:@"status"]isEqualToString:@"success"]){
                             
                             [self loadConverstionAPI];
+                            //[[IQKeyboardManager sharedManager] becomeFirstResponder];
                             
                         }
                        [COMMON removeLoading];

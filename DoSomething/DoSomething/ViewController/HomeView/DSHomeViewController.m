@@ -40,7 +40,7 @@
 
 @end
 @implementation DSHomeViewController
-@synthesize delegate;
+@synthesize delegate,walkAlterview;
 @synthesize kenView;
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -53,7 +53,8 @@
 
 - (void)viewDidLoad
 {
-    [super viewDidLoad];    
+    [super viewDidLoad];
+    self.walkAlterview.hidden=YES;
     self.kenView.delegate = self;
     _scrollViewImage.userInteractionEnabled =YES;
     

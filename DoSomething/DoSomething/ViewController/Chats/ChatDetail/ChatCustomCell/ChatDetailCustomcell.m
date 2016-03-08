@@ -169,6 +169,7 @@
 
             }
                self.chatTime.textColor=[UIColor lightGrayColor];
+           
 
                    }
         else {
@@ -197,6 +198,7 @@
             self.chatTime.frame = CGRectMake(MAX(dataSize.width, [COMMON dataSize:sender_msgLbl.text withFontName:@"HelveticaNeue" ofSize:15 withSize:CGSizeMake(195.0, 999.0)].width + BUBBLE_WIDTH_SPACE)+y_Position + sender_bubbleimgView.frame.origin.y-100, sender_bubbleimgView.frame.origin.y-30,150,40);
 
             [self.chatTime setTextColor:[UIColor blackColor]];
+           
            
             
         }

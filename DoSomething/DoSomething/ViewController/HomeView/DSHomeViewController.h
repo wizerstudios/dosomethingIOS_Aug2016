@@ -25,6 +25,6 @@
 //@property (nonatomic) CGFloat scrollPointsPerSecond;
 @property (strong, nonatomic) IBOutlet JBKenBurnsView *kenView;
 @property  IBOutlet NSLayoutConstraint *viewHeightConstraint;
-
+@property (nonatomic,strong) IBOutlet UIView * walkAlterview;
 
 @end
