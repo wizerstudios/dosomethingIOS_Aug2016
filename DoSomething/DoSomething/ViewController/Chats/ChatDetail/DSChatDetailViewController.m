@@ -38,7 +38,7 @@
     ChatDetailCustomcell *ChatDetailcell;
     int height;
     NSMutableArray * recevierDetails;
-   
+    BOOL  iskeyboardapear;
 }
 
 @end
@@ -177,6 +177,7 @@
     [chatTableView setContentInset:UIEdgeInsetsMake(0,0, 0, 0)];
     
     [[IQKeyboardManager sharedManager]resignFirstResponder];
+    iskeyboardapear=NO;
     
 }
 - (void)backAction
@@ -263,7 +264,7 @@
 
     [chatView.placeHolderLabel setHidden:YES];
     messageTimer = [NSTimer scheduledTimerWithTimeInterval:timerSeconds target:self selector:@selector(loadConverstionAPI) userInfo:nil repeats:YES];
-    
+    iskeyboardapear=YES;
    
 }
 
@@ -279,7 +280,7 @@
     [chatScrollview setContentOffset:CGPointMake(0,0)];
     
      messageTimer = [NSTimer scheduledTimerWithTimeInterval:timerSeconds target:self selector:@selector(loadConverstionAPI) userInfo:nil repeats:YES];
-    
+    iskeyboardapear=NO;
 }
 
 #pragma mark - Tableview Delegate
@@ -497,7 +498,13 @@
                                 [chatTableView reloadData];
                               
                                 if (chatTableView.contentSize.height < chatTableView.frame.size.height)
+                                {
+                                    if(iskeyboardapear==NO)
+                                    {
                                     [chatTableView scrollRectToVisible:CGRectMake(0, chatTableView.contentSize.height - chatTableView.bounds.size.height, chatTableView.bounds.size.width,chatTableView.bounds.size.height) animated:YES];
+                                    }
+                                }
+                               
                                 else{
                                    [chatTableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:conversationArray.count-1 inSection:0] atScrollPosition:UITableViewScrollPositionBottom animated:YES];
                                 }
