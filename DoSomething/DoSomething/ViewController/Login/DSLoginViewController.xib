@@ -432,43 +432,49 @@
                     <rect key="frame" x="0.0" y="0.0" width="320" height="570"/>
                     <subviews>
                         <imageView userInteractionEnabled="NO" alpha="0.83330000000000004" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="BlueBgText" translatesAutoresizingMaskIntoConstraints="NO" id="7wW-DK-JU8">
-                            <rect key="frame" x="40" y="245" width="240" height="100"/>
+                            <rect key="frame" x="40" y="245" width="240" height="60"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="240" id="7xm-iN-0NB"/>
-                                <constraint firstAttribute="height" constant="100" id="ZFM-Aw-4IA"/>
+                                <constraint firstAttribute="height" constant="60" id="ZFM-Aw-4IA"/>
                             </constraints>
                         </imageView>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Insert your email and password  to create your account" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TM3-0E-Wa8">
-                            <rect key="frame" x="50" y="255" width="220" height="80"/>
+                            <rect key="frame" x="50" y="255" width="220" height="44"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="220" id="mEb-kJ-BHc"/>
-                                <constraint firstAttribute="height" constant="80" id="sxS-QO-TAF"/>
+                                <constraint firstAttribute="height" constant="44" id="sxS-QO-TAF"/>
                             </constraints>
                             <fontDescription key="fontDescription" name="Patron-Bold" family="Patron" pointSize="14"/>
                             <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4f9-OD-Rjj">
-                            <rect key="frame" x="138" y="185" width="44" height="44"/>
-                            <constraints>
-                                <constraint firstAttribute="height" constant="44" id="89F-vd-JVi"/>
-                                <constraint firstAttribute="width" constant="44" id="xnq-4j-R5a"/>
-                            </constraints>
-                            <state key="normal" image="BlueCirecleimg"/>
+                            <rect key="frame" x="0.0" y="0.0" width="320" height="570"/>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             <connections>
                                 <action selector="didClickGeneralWalkAlterview:" destination="-1" eventType="touchUpInside" id="9sr-Jt-Pkq"/>
                             </connections>
                         </button>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="BlueCirecleimg" translatesAutoresizingMaskIntoConstraints="NO" id="XZR-Zk-8Gx">
+                            <rect key="frame" x="138" y="185" width="46" height="45"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="46" id="n0p-z3-3W8"/>
+                                <constraint firstAttribute="height" constant="45" id="orW-Bu-Nmg"/>
+                            </constraints>
+                        </imageView>
                     </subviews>
                     <color key="backgroundColor" red="0.48627450980392156" green="0.48627450980392156" blue="0.48627450980392156" alpha="0.19606738880368099" colorSpace="calibratedRGB"/>
                     <constraints>
+                        <constraint firstItem="4f9-OD-Rjj" firstAttribute="leading" secondItem="abI-SB-5fK" secondAttribute="leading" id="4IY-O7-pRl"/>
                         <constraint firstItem="7wW-DK-JU8" firstAttribute="centerX" secondItem="abI-SB-5fK" secondAttribute="centerX" id="4gr-Fp-t6n"/>
-                        <constraint firstItem="7wW-DK-JU8" firstAttribute="top" secondItem="4f9-OD-Rjj" secondAttribute="bottom" constant="16" id="4uJ-8G-sAE"/>
-                        <constraint firstItem="7wW-DK-JU8" firstAttribute="top" secondItem="4f9-OD-Rjj" secondAttribute="bottom" constant="16" id="8vq-pC-B8p"/>
-                        <constraint firstItem="4f9-OD-Rjj" firstAttribute="top" secondItem="abI-SB-5fK" secondAttribute="top" constant="185" id="Joz-QW-b5p"/>
-                        <constraint firstItem="4f9-OD-Rjj" firstAttribute="centerX" secondItem="abI-SB-5fK" secondAttribute="centerX" id="Jqf-SX-hZD"/>
-                        <constraint firstItem="TM3-0E-Wa8" firstAttribute="top" secondItem="4f9-OD-Rjj" secondAttribute="bottom" constant="26" id="NG0-IB-qec"/>
+                        <constraint firstItem="TM3-0E-Wa8" firstAttribute="top" secondItem="abI-SB-5fK" secondAttribute="top" constant="255" id="63v-mO-OqQ"/>
+                        <constraint firstAttribute="trailing" secondItem="4f9-OD-Rjj" secondAttribute="trailing" id="OxG-pM-Rw5"/>
+                        <constraint firstItem="4f9-OD-Rjj" firstAttribute="top" secondItem="abI-SB-5fK" secondAttribute="top" id="WON-gZ-Wb0"/>
                         <constraint firstItem="TM3-0E-Wa8" firstAttribute="centerX" secondItem="abI-SB-5fK" secondAttribute="centerX" id="mzD-Ct-noh"/>
+                        <constraint firstItem="TM3-0E-Wa8" firstAttribute="centerY" secondItem="7wW-DK-JU8" secondAttribute="centerY" constant="2" id="nGd-Be-cSv"/>
+                        <constraint firstAttribute="bottom" secondItem="4f9-OD-Rjj" secondAttribute="bottom" id="pwc-5Q-WNa"/>
+                        <constraint firstItem="XZR-Zk-8Gx" firstAttribute="centerX" secondItem="abI-SB-5fK" secondAttribute="centerX" constant="1" id="rRH-rR-zet"/>
+                        <constraint firstItem="7wW-DK-JU8" firstAttribute="top" secondItem="XZR-Zk-8Gx" secondAttribute="bottom" constant="15" id="zQm-bz-GS8"/>
                     </constraints>
                 </view>
             </subviews>

@@ -54,7 +54,7 @@
     
     [self loadNavigation];
     
-    self.WalkAlterview.hidden =YES;
+    self.WalkAlterview.hidden =NO;
     
     objWebservice =[[DSWebservice alloc]init];
     

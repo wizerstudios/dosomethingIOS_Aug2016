@@ -54,7 +54,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    self.walkAlterview.hidden=YES;
+    self.walkAlterview.hidden=NO;
     self.kenView.delegate = self;
     _scrollViewImage.userInteractionEnabled =YES;
     

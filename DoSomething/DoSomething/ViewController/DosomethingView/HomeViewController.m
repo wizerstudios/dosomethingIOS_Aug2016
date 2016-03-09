@@ -70,7 +70,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    self.WalkAlterview.hidden =YES;
+    self.WalkAlterview.hidden =NO;
     locationManager                 = [[CLLocationManager alloc] init];
     locationManager.delegate        = self;
     objWebService = [[DSWebservice alloc]init];

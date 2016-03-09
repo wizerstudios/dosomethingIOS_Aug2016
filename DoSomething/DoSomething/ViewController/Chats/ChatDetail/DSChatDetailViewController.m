@@ -51,7 +51,7 @@
 - (void)viewDidLoad {
     
     [super viewDidLoad];
-    self.WalkAlterview.hidden=YES;
+    self.WalkAlterview.hidden=NO;
     NSLog(@"conversionID=%@",_conversionID);
     
     [[IQKeyboardManager sharedManager] considerToolbarPreviousNextInViewClass:[chatScrollview class]];

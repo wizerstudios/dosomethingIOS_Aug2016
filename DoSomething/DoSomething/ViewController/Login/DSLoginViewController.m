@@ -55,7 +55,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.walkalterview.hidden=YES;
+    self.walkalterview.hidden=NO;
     [[IQKeyboardManager sharedManager]setEnableAutoToolbar:YES];
     fbUserDetailsDict = [[NSMutableDictionary alloc]init];
     locationManager                 = [[CLLocationManager alloc] init];
