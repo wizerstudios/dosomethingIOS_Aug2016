@@ -247,7 +247,10 @@
         [self.navigationController pushViewController:DSLoginView animated:YES];
  }
 
-
+-(IBAction)didClickGeneralWalkAlterview:(id)sender
+{
+    self.walkAlterview.hidden=YES;
+}
 
 
 @end

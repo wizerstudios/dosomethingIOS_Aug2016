@@ -86,4 +86,6 @@
 @property (strong, nonatomic) IBOutlet UIButton *buttonSigInFwd;
 - (IBAction)termsOfUseAction:(id)sender;
 
+@property (nonatomic,strong) IBOutlet UIView *walkalterview;
+
 @end

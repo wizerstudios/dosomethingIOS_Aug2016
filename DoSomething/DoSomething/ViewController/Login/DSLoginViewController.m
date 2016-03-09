@@ -55,7 +55,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+    self.walkalterview.hidden=YES;
     [[IQKeyboardManager sharedManager]setEnableAutoToolbar:YES];
     fbUserDetailsDict = [[NSMutableDictionary alloc]init];
     locationManager                 = [[CLLocationManager alloc] init];
@@ -808,7 +808,10 @@
     }
     
 }
-
+-(IBAction)didClickGeneralWalkAlterview:(id)sender
+{
+    self.walkalterview.hidden=YES;
+}
 - (IBAction)createAnAccountFB:(id)sender {
     [self loginByFacebook];
 }

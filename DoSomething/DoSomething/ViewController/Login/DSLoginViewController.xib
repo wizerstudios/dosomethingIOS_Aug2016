@@ -8,6 +8,7 @@
         <mutableArray key="Patron-Bold.ttf">
             <string>Patron-Bold</string>
             <string>Patron-Bold</string>
+            <string>Patron-Bold</string>
         </mutableArray>
         <mutableArray key="Patron-Regular.ttf">
             <string>Patron-Regular</string>
@@ -62,6 +63,7 @@
                 <outlet property="layoutConstraintTxtFieldViewHeight" destination="y1q-5u-QAL" id="wHQ-pO-6dX"/>
                 <outlet property="passwordTxt" destination="rXR-Rw-64v" id="5Tg-bE-ogj"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+                <outlet property="walkalterview" destination="abI-SB-5fK" id="KNU-Wa-fUH"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
@@ -426,13 +428,60 @@
                         <constraint firstItem="mGZ-Ur-QZJ" firstAttribute="top" secondItem="6vw-lR-Sh4" secondAttribute="bottom" id="vHz-uq-M0m"/>
                     </constraints>
                 </view>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="abI-SB-5fK">
+                    <rect key="frame" x="0.0" y="0.0" width="320" height="570"/>
+                    <subviews>
+                        <imageView userInteractionEnabled="NO" alpha="0.83330000000000004" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="BlueBgText" translatesAutoresizingMaskIntoConstraints="NO" id="7wW-DK-JU8">
+                            <rect key="frame" x="40" y="245" width="240" height="100"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="240" id="7xm-iN-0NB"/>
+                                <constraint firstAttribute="height" constant="100" id="ZFM-Aw-4IA"/>
+                            </constraints>
+                        </imageView>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Insert your email and password  to create your account" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TM3-0E-Wa8">
+                            <rect key="frame" x="50" y="255" width="220" height="80"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="220" id="mEb-kJ-BHc"/>
+                                <constraint firstAttribute="height" constant="80" id="sxS-QO-TAF"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" name="Patron-Bold" family="Patron" pointSize="14"/>
+                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4f9-OD-Rjj">
+                            <rect key="frame" x="138" y="185" width="44" height="44"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="44" id="89F-vd-JVi"/>
+                                <constraint firstAttribute="width" constant="44" id="xnq-4j-R5a"/>
+                            </constraints>
+                            <state key="normal" image="BlueCirecleimg"/>
+                            <connections>
+                                <action selector="didClickGeneralWalkAlterview:" destination="-1" eventType="touchUpInside" id="9sr-Jt-Pkq"/>
+                            </connections>
+                        </button>
+                    </subviews>
+                    <color key="backgroundColor" red="0.48627450980392156" green="0.48627450980392156" blue="0.48627450980392156" alpha="0.19606738880368099" colorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstItem="7wW-DK-JU8" firstAttribute="centerX" secondItem="abI-SB-5fK" secondAttribute="centerX" id="4gr-Fp-t6n"/>
+                        <constraint firstItem="7wW-DK-JU8" firstAttribute="top" secondItem="4f9-OD-Rjj" secondAttribute="bottom" constant="16" id="4uJ-8G-sAE"/>
+                        <constraint firstItem="7wW-DK-JU8" firstAttribute="top" secondItem="4f9-OD-Rjj" secondAttribute="bottom" constant="16" id="8vq-pC-B8p"/>
+                        <constraint firstItem="4f9-OD-Rjj" firstAttribute="top" secondItem="abI-SB-5fK" secondAttribute="top" constant="185" id="Joz-QW-b5p"/>
+                        <constraint firstItem="4f9-OD-Rjj" firstAttribute="centerX" secondItem="abI-SB-5fK" secondAttribute="centerX" id="Jqf-SX-hZD"/>
+                        <constraint firstItem="TM3-0E-Wa8" firstAttribute="top" secondItem="4f9-OD-Rjj" secondAttribute="bottom" constant="26" id="NG0-IB-qec"/>
+                        <constraint firstItem="TM3-0E-Wa8" firstAttribute="centerX" secondItem="abI-SB-5fK" secondAttribute="centerX" id="mzD-Ct-noh"/>
+                    </constraints>
+                </view>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
+                <constraint firstAttribute="bottom" secondItem="abI-SB-5fK" secondAttribute="bottom" id="Hhj-8c-mmC"/>
                 <constraint firstAttribute="bottom" secondItem="3nk-J8-Vnw" secondAttribute="bottom" id="KlA-eQ-fcr"/>
+                <constraint firstAttribute="trailing" secondItem="abI-SB-5fK" secondAttribute="trailing" id="P09-oi-Yy0"/>
                 <constraint firstItem="3nk-J8-Vnw" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="YVb-2A-kP5"/>
                 <constraint firstAttribute="trailing" secondItem="3nk-J8-Vnw" secondAttribute="trailing" id="gvQ-nt-2Lc"/>
                 <constraint firstItem="3nk-J8-Vnw" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="hZI-IL-HEF"/>
+                <constraint firstItem="abI-SB-5fK" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="kaz-37-dZL"/>
+                <constraint firstItem="abI-SB-5fK" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="oDu-AN-hbC"/>
             </constraints>
             <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="lightContent"/>
             <nil key="simulatedTopBarMetrics"/>
@@ -441,6 +490,8 @@
         </view>
     </objects>
     <resources>
+        <image name="BlueBgText" width="218" height="92"/>
+        <image name="BlueCirecleimg" width="44" height="44"/>
         <image name="bottom_img" width="414" height="57"/>
     </resources>
 </document>

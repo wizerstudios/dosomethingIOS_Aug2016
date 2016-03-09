@@ -51,7 +51,7 @@
 - (void)viewDidLoad {
     
     [super viewDidLoad];
-    
+    self.WalkAlterview.hidden=YES;
     NSLog(@"conversionID=%@",_conversionID);
     
     [[IQKeyboardManager sharedManager] considerToolbarPreviousNextInViewClass:[chatScrollview class]];
@@ -60,7 +60,7 @@
     
     
     webService = [[DSWebservice alloc]init];
-    
+    //iskeyboardapear=NO;
     conversationArray = [[NSMutableArray alloc]init];
     recevierDetails =[[NSMutableArray alloc]init];
     [self displayUserDetailsView];
@@ -503,6 +503,10 @@
                                     {
                                     [chatTableView scrollRectToVisible:CGRectMake(0, chatTableView.contentSize.height - chatTableView.bounds.size.height, chatTableView.bounds.size.width,chatTableView.bounds.size.height) animated:YES];
                                     }
+                                    else
+                                    {
+                                        [chatTableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:conversationArray.count-1 inSection:0] atScrollPosition:UITableViewScrollPositionBottom animated:YES];
+                                    }
                                 }
                                
                                 else{
@@ -578,5 +582,9 @@
     } failure:^(AFHTTPRequestOperation *operation, id error) {
         
     }];
+}
+-(IBAction)DidClickGeneralAlterviewBtn:(id)sender
+{
+    self.WalkAlterview.hidden=YES;
 }
 @end

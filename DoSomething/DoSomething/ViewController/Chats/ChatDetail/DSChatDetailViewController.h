@@ -57,4 +57,6 @@
 - (IBAction)pressDelete:(id)sender;
 - (IBAction)pressBlock:(id)sender;
 
+@property(nonatomic,strong) IBOutlet UIView * WalkAlterview;
+
 @end

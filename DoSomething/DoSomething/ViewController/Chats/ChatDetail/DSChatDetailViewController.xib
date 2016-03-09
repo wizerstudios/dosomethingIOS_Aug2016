@@ -6,7 +6,13 @@
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <customFonts key="customFonts">
+        <mutableArray key="Patron-Bold.ttf">
+            <string>Patron-Bold</string>
+        </mutableArray>
         <mutableArray key="Patron-Regular.ttf">
+            <string>Patron-Regular</string>
+            <string>Patron-Regular</string>
+            <string>Patron-Regular</string>
             <string>Patron-Regular</string>
             <string>Patron-Regular</string>
         </mutableArray>
@@ -17,6 +23,7 @@
                 <outlet property="OnlineLabel" destination="UiU-SP-n4d" id="A7f-WJ-Sf9"/>
                 <outlet property="ProfileImage" destination="hJo-cJ-0vp" id="0uT-2r-5K1"/>
                 <outlet property="ProfileName" destination="qTm-CV-HgT" id="0Bl-1e-Vjb"/>
+                <outlet property="WalkAlterview" destination="hjh-Vs-LAR" id="JMB-p3-wkh"/>
                 <outlet property="backgroundView" destination="XqN-Wp-lms" id="aJ3-oZ-xw7"/>
                 <outlet property="blockBtnYOrigin" destination="yqO-hr-pdc" id="Eja-XA-GJB"/>
                 <outlet property="chatButton" destination="MkV-9D-hoy" id="tG3-kG-cgw"/>
@@ -235,9 +242,62 @@
                         <constraint firstAttribute="trailing" secondItem="vGn-Bt-vGu" secondAttribute="trailing" id="x6t-fr-HkJ"/>
                     </constraints>
                 </view>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hjh-Vs-LAR">
+                    <rect key="frame" x="0.0" y="0.0" width="320" height="550"/>
+                    <subviews>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="BlueBgText" translatesAutoresizingMaskIntoConstraints="NO" id="omI-F6-CDY">
+                            <rect key="frame" x="65" y="270" width="200" height="100"/>
+                        </imageView>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Do send them a message and Let’s Do Something" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="stu-xQ-RiH">
+                            <rect key="frame" x="75" y="280" width="180" height="80"/>
+                            <fontDescription key="fontDescription" name="Patron-Bold" family="Patron" pointSize="12"/>
+                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="25B-fk-XPe">
+                            <rect key="frame" x="91" y="470" width="44" height="44"/>
+                            <state key="normal" image="BlueCirecleimg"/>
+                            <connections>
+                                <action selector="DidClickGeneralAlterviewBtn:" destination="-1" eventType="touchUpInside" id="Lin-jz-Z0K"/>
+                            </connections>
+                        </button>
+                        <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Ihs-xD-7x7">
+                            <rect key="frame" x="0.0" y="105" width="320" height="128"/>
+                            <subviews>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Hey;)    13:20   " textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="17u-dp-8CH">
+                                    <rect key="frame" x="200" y="10" width="100" height="24"/>
+                                    <color key="backgroundColor" red="0.88235294119999996" green="0.27058823529999998" blue="0.28235294119999998" alpha="1" colorSpace="calibratedRGB"/>
+                                    <fontDescription key="fontDescription" name="Patron-Regular" family="Patron" pointSize="12"/>
+                                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Wanna meet for a drink?      13:20" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sFd-6s-D6e">
+                                    <rect key="frame" x="110" y="40" width="200" height="25"/>
+                                    <color key="backgroundColor" red="0.88235294119999996" green="0.27058823529999998" blue="0.28235294119999998" alpha="1" colorSpace="calibratedRGB"/>
+                                    <fontDescription key="fontDescription" name="Patron-Regular" family="Patron" pointSize="12"/>
+                                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Oh hi!   13:24" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mMF-2P-4eU">
+                                    <rect key="frame" x="10" y="75" width="100" height="25"/>
+                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    <fontDescription key="fontDescription" name="Patron-Regular" family="Patron" pointSize="12"/>
+                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                            </subviews>
+                            <color key="backgroundColor" red="0.89411764705882346" green="0.89411764705882346" blue="0.89411764705882346" alpha="1" colorSpace="calibratedRGB"/>
+                        </view>
+                    </subviews>
+                    <color key="backgroundColor" red="0.20784313725490194" green="0.20784313725490194" blue="0.20784313725490194" alpha="0.60385113113496935" colorSpace="calibratedRGB"/>
+                </view>
             </subviews>
             <color key="backgroundColor" red="0.85098039215686272" green="0.85098039215686272" blue="0.85098039215686272" alpha="1" colorSpace="calibratedRGB"/>
             <constraints>
+                <constraint firstItem="hjh-Vs-LAR" firstAttribute="top" secondItem="o0E-7A-6vB" secondAttribute="top" id="Al8-OX-c2b"/>
+                <constraint firstItem="hjh-Vs-LAR" firstAttribute="leading" secondItem="o0E-7A-6vB" secondAttribute="leading" id="CTZ-6i-dJN"/>
+                <constraint firstAttribute="bottom" secondItem="hjh-Vs-LAR" secondAttribute="bottom" id="FYO-MK-cph"/>
+                <constraint firstAttribute="trailing" secondItem="hjh-Vs-LAR" secondAttribute="trailing" id="aDH-dd-ZDu"/>
                 <constraint firstItem="GpL-YA-edD" firstAttribute="top" secondItem="o0E-7A-6vB" secondAttribute="top" id="eLW-JG-n0T"/>
                 <constraint firstAttribute="bottom" secondItem="GpL-YA-edD" secondAttribute="bottom" id="pri-GO-iSi"/>
                 <constraint firstItem="GpL-YA-edD" firstAttribute="leading" secondItem="o0E-7A-6vB" secondAttribute="leading" id="rGA-oL-7YJ"/>
@@ -248,6 +308,8 @@
         </view>
     </objects>
     <resources>
+        <image name="BlueBgText" width="218" height="92"/>
+        <image name="BlueCirecleimg" width="44" height="44"/>
         <image name="menu_active" width="33" height="33"/>
     </resources>
 </document>

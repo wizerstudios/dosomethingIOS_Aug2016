@@ -86,4 +86,7 @@
 @property(nonatomic,strong) IBOutlet NSLayoutConstraint *aboutViewheight;
 @property(nonatomic,strong) IBOutlet NSLayoutConstraint *TypeImgexposition;
 
+@property (nonatomic,strong) IBOutlet UIView * WalAlterview;
+
+
 @end

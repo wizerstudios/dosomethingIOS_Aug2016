@@ -20,5 +20,6 @@
 @property (nonatomic,strong)  CLLocationManager       * locationManager;
 - (IBAction)pressDosomething:(id)sender;
 
+@property (nonatomic,strong) IBOutlet UIView *WalkAlterview;
 
 @end

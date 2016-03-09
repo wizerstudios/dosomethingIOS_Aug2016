@@ -54,6 +54,8 @@
     
     [self loadNavigation];
     
+    self.WalkAlterview.hidden =YES;
+    
     objWebservice =[[DSWebservice alloc]init];
     
     deviceUdid = [OpenUDID value];
@@ -645,5 +647,8 @@
     [self.navigationController popViewControllerAnimated:YES];
 }
 
-
+-(IBAction)didClickGeneralWalkAlterviewBtn:(id)sender
+{
+    self.WalkAlterview.hidden=YES;
+}
 @end

@@ -93,7 +93,7 @@
 @synthesize profileImages,profileNames,kiloMeterlabel,userID,dosomethingImageArry,commonlocationArray,matchactivityBtn,matchActivitylbl,matchActivityView,sendrequestConversationID;
 - (void)viewDidLoad {
     
-
+    self.walkAlterview.hidden=YES;
    
     refreshControl = [[UIRefreshControl alloc] init];
     
@@ -1284,6 +1284,11 @@
         self.matchActivityView.hidden =YES;
     }
 
+}
+
+-(IBAction)didClickGeneralWalkAlterviewBtn:(id)sender
+{
+    self.walkAlterview.hidden=YES;
 }
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

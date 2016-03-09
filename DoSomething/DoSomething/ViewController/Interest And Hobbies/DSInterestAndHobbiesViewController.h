@@ -18,4 +18,5 @@
 
 @property (nonatomic, retain) NSMutableArray *profileDetailsArray;
 
+@property (nonatomic,strong) IBOutlet UIView *WalkAlterview;
 @end

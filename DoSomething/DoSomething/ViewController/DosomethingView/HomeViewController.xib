@@ -11,11 +11,13 @@
         </mutableArray>
         <mutableArray key="Patron-Bold.ttf">
             <string>Patron-Bold</string>
+            <string>Patron-Bold</string>
         </mutableArray>
     </customFonts>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="HomeViewController">
             <connections>
+                <outlet property="WalkAlterview" destination="Ub6-PE-7Vk" id="mK4-se-CC3"/>
                 <outlet property="activatedView" destination="jli-ew-Tm4" id="PeP-HL-Aio"/>
                 <outlet property="anyTimeButton" destination="jWF-hV-6F5" id="ugN-Cb-km2"/>
                 <outlet property="bottombutton" destination="RNR-NB-6Yo" id="pdw-U7-MI0"/>
@@ -30,6 +32,36 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="570"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
+                <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Ub6-PE-7Vk">
+                    <rect key="frame" x="0.0" y="0.0" width="320" height="570"/>
+                    <subviews>
+                        <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="YyR-Uc-oIL">
+                            <rect key="frame" x="70" y="475" width="180" height="45"/>
+                            <subviews>
+                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xX1-jI-FdQ">
+                                    <rect key="frame" x="68" y="0.0" width="44" height="44"/>
+                                    <state key="normal" image="BlueCirecleimg"/>
+                                    <connections>
+                                        <action selector="didClickGeneralWalkAlterviewBtn:" destination="-1" eventType="touchUpInside" id="sbL-F9-baa"/>
+                                    </connections>
+                                </button>
+                            </subviews>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        </view>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="BlueBgText" translatesAutoresizingMaskIntoConstraints="NO" id="0XX-bg-H15">
+                            <rect key="frame" x="60" y="325" width="205" height="100"/>
+                        </imageView>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LYf-bF-xjg">
+                            <rect key="frame" x="70" y="330" width="180" height="80"/>
+                            <string key="text">Hit “let’s Do Something” 
+ to get thing started</string>
+                            <fontDescription key="fontDescription" name="Patron-Bold" family="Patron" pointSize="14"/>
+                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                </view>
                 <view alpha="0.89999997615814209" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jli-ew-Tm4">
                     <rect key="frame" x="0.0" y="80" width="320" height="390"/>
                     <subviews>
@@ -153,4 +185,8 @@
             <point key="canvasLocation" x="950" y="414"/>
         </view>
     </objects>
+    <resources>
+        <image name="BlueBgText" width="218" height="92"/>
+        <image name="BlueCirecleimg" width="44" height="44"/>
+    </resources>
 </document>

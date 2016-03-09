@@ -502,6 +502,15 @@
                 
                 AudioServicesPlaySystemSound(_notificationSound);
             }
+            else if([sound isEqualToString:@"default"])
+            {
+                NSString *playSoundOnAlert = [[NSBundle mainBundle] pathForResource:@"Glass"ofType:@"aiff"];
+                NSURL *soundURL = [NSURL fileURLWithPath:playSoundOnAlert];
+                
+                AudioServicesCreateSystemSoundID((__bridge CFURLRef)soundURL, &_notificationSound);
+                
+                AudioServicesPlaySystemSound(_notificationSound);
+            }
             else
             {
              NSString *playSound = [sound stringByReplacingOccurrencesOfString:@".caf" withString:@""];

@@ -70,6 +70,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    self.WalkAlterview.hidden =YES;
     locationManager                 = [[CLLocationManager alloc] init];
     locationManager.delegate        = self;
     objWebService = [[DSWebservice alloc]init];
@@ -774,6 +775,9 @@ minimumLineSpacingForSectionAtIndex:(NSInteger)section {
     [appDelegate.settingButton setBackgroundImage:[UIImage imageNamed:@"setting_icon.png"] forState:UIControlStateNormal];
 
 }
-
+-(IBAction)didClickGeneralWalkAlterviewBtn:(id)sender
+{
+    self.WalkAlterview.hidden=YES;
+}
 
 @end

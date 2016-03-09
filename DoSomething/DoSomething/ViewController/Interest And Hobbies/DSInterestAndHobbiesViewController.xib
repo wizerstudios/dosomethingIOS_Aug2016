@@ -7,6 +7,7 @@
     <customFonts key="customFonts">
         <mutableArray key="Patron-Bold.ttf">
             <string>Patron-Bold</string>
+            <string>Patron-Bold</string>
         </mutableArray>
         <mutableArray key="Patron-Regular.ttf">
             <string>Patron-Regular</string>
@@ -15,6 +16,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="DSInterestAndHobbiesViewController">
             <connections>
+                <outlet property="WalkAlterview" destination="2Ta-kt-XtJ" id="kcX-KW-Gwv"/>
                 <outlet property="interestAndHobbiesCollectionView" destination="djR-MD-Avp" id="wAX-W8-Tdh"/>
                 <outlet property="layoutConstraintCollectionviewYPos" destination="tvB-My-dqi" id="gC7-Fv-1nz"/>
                 <outlet property="layoutConstraintTapLabelYPos" destination="dAE-Je-FqF" id="24t-I8-fdA"/>
@@ -27,20 +29,6 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="djR-MD-Avp">
-                    <rect key="frame" x="10" y="42" width="300" height="523"/>
-                    <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                    <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="Dp7-xo-bMG">
-                        <size key="itemSize" width="50" height="60"/>
-                        <size key="headerReferenceSize" width="0.0" height="0.0"/>
-                        <size key="footerReferenceSize" width="0.0" height="0.0"/>
-                        <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
-                    </collectionViewFlowLayout>
-                    <connections>
-                        <outlet property="dataSource" destination="i5M-Pr-FkT" id="heh-wB-XDz"/>
-                        <outlet property="delegate" destination="i5M-Pr-FkT" id="NOJ-F0-Wp6"/>
-                    </connections>
-                </collectionView>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0zs-8r-iM7">
                     <rect key="frame" x="10" y="0.0" width="300" height="112"/>
                     <subviews>
@@ -81,17 +69,83 @@
                         <constraint firstAttribute="centerX" secondItem="Jca-BZ-Kzh" secondAttribute="centerX" constant="-12" id="oC3-xK-pU7"/>
                     </constraints>
                 </view>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2Ta-kt-XtJ">
+                    <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                    <subviews>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ydu-D7-NJc">
+                            <rect key="frame" x="256" y="15" width="44" height="44"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="44" id="G3w-zj-j9Y"/>
+                                <constraint firstAttribute="width" constant="44" id="WIL-BD-zTP"/>
+                            </constraints>
+                            <state key="normal" image="BlueCirecleimg"/>
+                            <connections>
+                                <action selector="didClickGeneralWalkAlterviewBtn:" destination="-1" eventType="touchUpInside" id="K6q-SQ-GaH"/>
+                            </connections>
+                        </button>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="BlueBgText" translatesAutoresizingMaskIntoConstraints="NO" id="tVv-HV-Rz4">
+                            <rect key="frame" x="40" y="100" width="240" height="100"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="240" id="1l1-tc-bSd"/>
+                                <constraint firstAttribute="height" constant="100" id="NNT-9P-J5g"/>
+                            </constraints>
+                        </imageView>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oK0-zv-bWO">
+                            <rect key="frame" x="50" y="110" width="220" height="80"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="80" id="Q8N-Cg-a38"/>
+                                <constraint firstAttribute="width" constant="220" id="WWf-gv-xBQ"/>
+                            </constraints>
+                            <string key="text">Select your interest and
+      ”Save” the selection</string>
+                            <fontDescription key="fontDescription" name="Patron-Bold" family="Patron" pointSize="14"/>
+                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
+                    <color key="backgroundColor" red="0.20784313725490194" green="0.20784313725490194" blue="0.20784313725490194" alpha="0.53316717791411039" colorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstItem="oK0-zv-bWO" firstAttribute="centerX" secondItem="2Ta-kt-XtJ" secondAttribute="centerX" id="22h-5j-NJQ"/>
+                        <constraint firstItem="tVv-HV-Rz4" firstAttribute="top" secondItem="ydu-D7-NJc" secondAttribute="bottom" constant="41" id="E5R-kv-1Sd"/>
+                        <constraint firstItem="tVv-HV-Rz4" firstAttribute="centerX" secondItem="2Ta-kt-XtJ" secondAttribute="centerX" id="UV9-vR-oPx"/>
+                        <constraint firstAttribute="trailing" secondItem="ydu-D7-NJc" secondAttribute="trailing" constant="20" id="VdW-dQ-FIJ"/>
+                        <constraint firstItem="oK0-zv-bWO" firstAttribute="top" secondItem="ydu-D7-NJc" secondAttribute="bottom" constant="51" id="ZND-nT-2cn"/>
+                        <constraint firstItem="ydu-D7-NJc" firstAttribute="top" secondItem="2Ta-kt-XtJ" secondAttribute="top" constant="15" id="bbE-95-L8T"/>
+                    </constraints>
+                </view>
+                <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="djR-MD-Avp">
+                    <rect key="frame" x="10" y="42" width="300" height="523"/>
+                    <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                    <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="Dp7-xo-bMG">
+                        <size key="itemSize" width="50" height="60"/>
+                        <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                        <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                        <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                    </collectionViewFlowLayout>
+                    <connections>
+                        <outlet property="dataSource" destination="i5M-Pr-FkT" id="heh-wB-XDz"/>
+                        <outlet property="delegate" destination="i5M-Pr-FkT" id="NOJ-F0-Wp6"/>
+                    </connections>
+                </collectionView>
             </subviews>
             <color key="backgroundColor" red="0.88235294117647056" green="0.90980392156862744" blue="0.90980392156862744" alpha="1" colorSpace="calibratedRGB"/>
             <constraints>
                 <constraint firstAttribute="trailing" secondItem="djR-MD-Avp" secondAttribute="trailing" constant="10" id="52M-BB-6WO"/>
                 <constraint firstItem="djR-MD-Avp" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="10" id="BLy-oh-TVW"/>
                 <constraint firstItem="0zs-8r-iM7" firstAttribute="leading" secondItem="djR-MD-Avp" secondAttribute="leading" id="FCv-MQ-TC4"/>
+                <constraint firstAttribute="trailing" secondItem="2Ta-kt-XtJ" secondAttribute="trailing" id="Y7z-Cc-7Ev"/>
+                <constraint firstAttribute="bottom" secondItem="2Ta-kt-XtJ" secondAttribute="bottom" id="bvZ-3H-Gg6"/>
                 <constraint firstItem="0zs-8r-iM7" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="fcm-je-VLN"/>
+                <constraint firstItem="2Ta-kt-XtJ" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="pvV-wR-fQH"/>
                 <constraint firstItem="djR-MD-Avp" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="42" id="tvB-My-dqi"/>
+                <constraint firstItem="2Ta-kt-XtJ" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="z9t-TR-Kpa"/>
                 <constraint firstAttribute="bottom" secondItem="djR-MD-Avp" secondAttribute="bottom" constant="3" id="zJH-49-Cal"/>
             </constraints>
             <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
         </view>
     </objects>
+    <resources>
+        <image name="BlueBgText" width="218" height="92"/>
+        <image name="BlueCirecleimg" width="44" height="44"/>
+    </resources>
 </document>

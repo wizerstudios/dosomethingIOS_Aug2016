@@ -4,9 +4,15 @@
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
     </dependencies>
+    <customFonts key="customFonts">
+        <mutableArray key="Patron-Bold.ttf">
+            <string>Patron-Bold</string>
+        </mutableArray>
+    </customFonts>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="DSProfileTableViewController">
             <connections>
+                <outlet property="WalAlterview" destination="Uf1-37-AaD" id="6gc-rx-Rd7"/>
                 <outlet property="layoutConstraintTableViewYPos" destination="aAr-Ul-5Um" id="zf3-Bo-H40"/>
                 <outlet property="tableViewHeightConstraint" destination="DO7-8o-td3" id="W9z-YD-cXW"/>
                 <outlet property="tableviewProfile" destination="HcG-cC-Fek" id="D9w-cN-jlO"/>
@@ -41,17 +47,72 @@
                         <constraint firstItem="HcG-cC-Fek" firstAttribute="top" secondItem="Bfj-Xy-2mh" secondAttribute="top" constant="5" id="aAr-Ul-5Um"/>
                     </constraints>
                 </view>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Uf1-37-AaD">
+                    <rect key="frame" x="0.0" y="0.0" width="320" height="518"/>
+                    <subviews>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="BlueBgText" translatesAutoresizingMaskIntoConstraints="NO" id="Vc9-a8-dhi">
+                            <rect key="frame" x="40" y="200" width="240" height="100"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="100" id="OJJ-c4-Wg3"/>
+                                <constraint firstAttribute="width" constant="240" id="kfw-Xc-5qi"/>
+                            </constraints>
+                        </imageView>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Once all information are filled in.  just hit “Save”" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GZ6-R2-Bzt">
+                            <rect key="frame" x="50" y="210" width="220" height="80"/>
+                            <fontDescription key="fontDescription" name="Patron-Bold" family="Patron" pointSize="14"/>
+                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Mq8-EG-kJG">
+                            <rect key="frame" x="255" y="15" width="60" height="60"/>
+                            <subviews>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wZg-m2-mQ0">
+                                    <rect key="frame" x="0.0" y="0.0" width="60" height="60"/>
+                                    <inset key="imageEdgeInsets" minX="10" minY="12" maxX="10" maxY="12"/>
+                                    <state key="normal" image="BlueCirecleimg"/>
+                                    <connections>
+                                        <action selector="didClickGeneralWalkAlterviewBtn:" destination="-1" eventType="touchUpInside" id="s0R-kx-bfD"/>
+                                    </connections>
+                                </button>
+                            </subviews>
+                            <color key="backgroundColor" red="0.88235294119999996" green="0.27058823529999998" blue="0.28235294119999998" alpha="0.90052243098159512" colorSpace="calibratedRGB"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="60" id="25f-VB-rX1"/>
+                                <constraint firstItem="wZg-m2-mQ0" firstAttribute="leading" secondItem="Mq8-EG-kJG" secondAttribute="leading" id="L7T-TE-FPy"/>
+                                <constraint firstAttribute="bottom" secondItem="wZg-m2-mQ0" secondAttribute="bottom" id="XEj-8F-uMW"/>
+                                <constraint firstAttribute="height" constant="60" id="dX4-nl-k2Q"/>
+                                <constraint firstItem="wZg-m2-mQ0" firstAttribute="top" secondItem="Mq8-EG-kJG" secondAttribute="top" id="pbq-u4-yph"/>
+                                <constraint firstAttribute="trailing" secondItem="wZg-m2-mQ0" secondAttribute="trailing" id="xnN-vC-ged"/>
+                            </constraints>
+                        </view>
+                    </subviews>
+                    <color key="backgroundColor" red="0.38039215686274508" green="0.38039215686274508" blue="0.38039215686274508" alpha="0.5" colorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="trailing" secondItem="Mq8-EG-kJG" secondAttribute="trailing" constant="5" id="6eI-1S-gaz"/>
+                        <constraint firstItem="Vc9-a8-dhi" firstAttribute="centerY" secondItem="Uf1-37-AaD" secondAttribute="centerY" constant="-9" id="GA0-4a-OqR"/>
+                        <constraint firstItem="Mq8-EG-kJG" firstAttribute="top" secondItem="Uf1-37-AaD" secondAttribute="top" constant="15" id="kyH-fN-QHc"/>
+                        <constraint firstItem="Vc9-a8-dhi" firstAttribute="centerX" secondItem="Uf1-37-AaD" secondAttribute="centerX" id="sKW-mp-iqc"/>
+                    </constraints>
+                </view>
             </subviews>
             <color key="backgroundColor" red="0.90980392160000001" green="0.90980392160000001" blue="0.90980392160000001" alpha="1" colorSpace="calibratedRGB"/>
             <constraints>
                 <constraint firstItem="Bfj-Xy-2mh" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="8QC-2b-VyL"/>
                 <constraint firstAttribute="bottom" secondItem="Bfj-Xy-2mh" secondAttribute="bottom" id="LzU-OQ-x5j"/>
                 <constraint firstItem="Bfj-Xy-2mh" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="Npe-MP-abf"/>
+                <constraint firstAttribute="trailing" secondItem="Uf1-37-AaD" secondAttribute="trailing" id="Ur2-8d-vE4"/>
+                <constraint firstItem="Uf1-37-AaD" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="VjB-YJ-Y8X"/>
+                <constraint firstAttribute="bottom" secondItem="Uf1-37-AaD" secondAttribute="bottom" id="aYm-L1-QtD"/>
                 <constraint firstAttribute="trailing" secondItem="Bfj-Xy-2mh" secondAttribute="trailing" id="dGM-he-Spt"/>
+                <constraint firstItem="Uf1-37-AaD" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="ilv-Ub-pvN"/>
             </constraints>
             <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="lightContent"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <point key="canvasLocation" x="232" y="368"/>
         </view>
     </objects>
+    <resources>
+        <image name="BlueBgText" width="218" height="92"/>
+        <image name="BlueCirecleimg" width="44" height="44"/>
+    </resources>
 </document>

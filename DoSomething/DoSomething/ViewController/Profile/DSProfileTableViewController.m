@@ -119,7 +119,7 @@
 - (void)viewDidLoad {
     
     [super viewDidLoad];
-    
+    self.WalAlterview.hidden =NO;
     Regpassword=emailPasswordToRegister;
     [[IQKeyboardManager sharedManager] considerToolbarPreviousNextInViewClass:[_tableviewProfile class]];
     [[IQKeyboardManager sharedManager]setEnableAutoToolbar:YES];
@@ -2822,7 +2822,10 @@
     [self.view addSubview:objCustomAlterview.view];
 }
 
-
+-(IBAction)didClickGeneralWalkAlterviewBtn:(id)sender
+{
+    self.WalAlterview.hidden=YES;
+}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

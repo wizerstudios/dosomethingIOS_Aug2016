@@ -48,4 +48,6 @@
 
 @property(nonatomic,strong) NSString *sendrequestConversationID;
 
+@property (nonatomic,strong) IBOutlet UIView * walkAlterview;
+
 @end
