@@ -26,6 +26,8 @@
 #import "CustomSoundview.h"
 #import <AudioToolbox/AudioToolbox.h>
 
+#define Red_Color   [UIColor colorWithRed:227.0f/255.0f green:64.0f/255.0f blue:81.0f/255.0f alpha:1.0f]
+
 @interface DSProfileTableViewController ()<CLLocationManagerDelegate,UIAlertViewDelegate,UIScrollViewDelegate>
 {
     DSWebservice            * objWebService;
@@ -119,7 +121,28 @@
 - (void)viewDidLoad {
     
     [super viewDidLoad];
-    self.WalAlterview.hidden =NO;
+    self.WalAlterview.hidden =YES;
+  
+    NSString * Firstlogin=[[NSUserDefaults standardUserDefaults]valueForKey:FirstCreateProfile];
+    
+     NSString * FirstSignin=[[NSUserDefaults standardUserDefaults]valueForKey:FistSiginprofile];
+    
+    if([Firstlogin isEqualToString:@"FirstCreateProfile"])
+    {
+        //self.WalAlterview.hidden =NO;
+         [self GerenalWalkAlterviewCreateAccount];
+        [[NSUserDefaults standardUserDefaults]removeObjectForKey:FirstCreateProfile];
+    }
+    
+    if([FirstSignin isEqualToString:@"FirstSiginProfile"])
+    {
+        //self.WalAlterview.hidden =NO;
+         [self GerenalWalkAlterviewSign];
+        [[NSUserDefaults standardUserDefaults]removeObjectForKey:FistSiginprofile];
+    }
+
+    
+
     Regpassword=emailPasswordToRegister;
     [[IQKeyboardManager sharedManager] considerToolbarPreviousNextInViewClass:[_tableviewProfile class]];
     [[IQKeyboardManager sharedManager]setEnableAutoToolbar:YES];
@@ -1860,6 +1883,7 @@
         
         [self notificationMethod];
         
+        
         UISwipeGestureRecognizer *messBtnleftRecognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(NotificationmsgBtnSwipLeftAction:)];
         [messBtnleftRecognizer setDirection: UISwipeGestureRecognizerDirectionLeft];
         [cell.messSwitchBtn addGestureRecognizer:messBtnleftRecognizer];
@@ -1890,6 +1914,7 @@
         [cell.vibrationSwitchBtn addTarget:self action:@selector(NotificationbuttonAction:) forControlEvents:UIControlEventTouchUpInside];
         [cell.SoundSwitchBtn addTarget:self action:@selector(NotificationbuttonAction:) forControlEvents:UIControlEventTouchUpInside];
         [cell.messSwitchBtn addTarget:self action:@selector(NotificationbuttonAction:) forControlEvents:UIControlEventTouchUpInside];
+        [cell.SoundviewDisplay addTarget:self action:@selector(displaySoundmenuList:) forControlEvents:UIControlEventTouchUpInside];
     }
     if(indexPath.row ==9)
     {
@@ -2825,11 +2850,152 @@
 -(IBAction)didClickGeneralWalkAlterviewBtn:(id)sender
 {
     self.WalAlterview.hidden=YES;
+    self.window.hidden=YES;
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+-(IBAction)displaySoundmenuList:(id)sender
+{
+    objCustomSoundView.view.hidden=NO;
+    objCustomSoundView.soundmenuView.hidden=NO;
+}
+-(void)GerenalWalkAlterviewCreateAccount
+{
+    self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+    
+    UIImageView * blueCirecleImg;
+    UILabel * Savelbl;
+    UIView * altermsgView;
+    if(IS_IPHONE6 || IS_IPHONE6_Plus)
+    {
+         blueCirecleImg=[[UIImageView alloc]initWithFrame:CGRectMake(self.view.frame.size.width-10,25,45,45)];
+         Savelbl=[[UILabel alloc]initWithFrame:CGRectMake(self.view.frame.size.width-5,30,35,35)];
+         altermsgView= [[UIView alloc]initWithFrame:CGRectMake(self.view.center.x-55,self.view.frame.origin.y+160,160,60)];
+    }
+    else{
+         blueCirecleImg=[[UIImageView alloc]initWithFrame:CGRectMake(self.view.frame.size.width-65,15,45,45)];
+         Savelbl=[[UILabel alloc]initWithFrame:CGRectMake(self.view.frame.size.width-60,20,35,35)];
+         altermsgView= [[UIView alloc]initWithFrame:CGRectMake(self.view.center.x-80,self.view.frame.origin.y+150,160,60)];
+    }
+    
+    
+//    blueCirecleImg=[[UIImageView alloc]initWithFrame:CGRectMake(self.view.frame.size.width-65,15,45,45)];
+    blueCirecleImg.image=[UIImage imageNamed:@"BlueCirecleimg"];
+    blueCirecleImg.userInteractionEnabled=YES;
+    [self.window addSubview:blueCirecleImg];
+    
+//    Savelbl=[[UILabel alloc]initWithFrame:CGRectMake(self.view.frame.size.width-60,20,35,35)];
+    Savelbl.text =@"Save";
+    Savelbl.textColor=[UIColor whiteColor];
+    Savelbl.textAlignment= NSTextAlignmentCenter;
+    Savelbl.numberOfLines=2;
+    [Savelbl setFont:[UIFont fontWithName:@"Patron-Regular" size:12]];
+    [self.window addSubview:Savelbl];
+    
+    
+    
+//    altermsgView= [[UIView alloc]initWithFrame:CGRectMake(self.view.center.x-80,self.view.frame.origin.y+150,160,60)];
+    
+    
+    UIImageView * blueTxtImg=[[UIImageView alloc]initWithFrame:CGRectMake(0,0,160,60)];
+    blueTxtImg.userInteractionEnabled=YES;
+    blueTxtImg.image=[UIImage imageNamed:@"BlueBgText"];
+    [altermsgView addSubview:blueTxtImg];
+    UILabel * AlterMsg=[[UILabel alloc]initWithFrame:CGRectMake(0,0,160,60)];
+    AlterMsg.text =@"Fill your info below";
+    AlterMsg.textColor=[UIColor whiteColor];
+    AlterMsg.textAlignment= NSTextAlignmentCenter;
+    AlterMsg.numberOfLines=2;
+    [AlterMsg setFont:[UIFont fontWithName:@"Patron-Regular" size:12]];
+    [altermsgView addSubview:AlterMsg];
+    
+    
+    [self.window addSubview:altermsgView];
+    
+    UIButton * ClosewindowBtn =[[UIButton alloc]initWithFrame:[[UIScreen mainScreen] bounds]];
+    [ClosewindowBtn addTarget:self action:@selector(didClickGeneralWalkAlterviewBtn:) forControlEvents:UIControlEventTouchUpInside];
+    
+    
+    [self.window addSubview:ClosewindowBtn];
+    self.window.hidden=NO;
+    [self.window makeKeyAndVisible];
+    self.window.backgroundColor =[UIColor colorWithRed:(53.0/255.0f) green:(53.0/255.0f) blue:(53.0/255.0f) alpha:0.5];
+    
+    
+}
+
+-(void)GerenalWalkAlterviewSign
+{
+    self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+    
+    UIView * CommWalkView;
+    UIImageView * blueCirecleImg;
+    UILabel * Savelbl;
+    UIView * altermsgView;
+    
+    if(IS_IPHONE6_Plus ||IS_IPHONE6)
+    {
+         CommWalkView=[[UIView alloc]initWithFrame:CGRectMake(self.view.frame.size.width-10,self.view.frame.origin.y+25,45,45)];
+         blueCirecleImg=[[UIImageView alloc]initWithFrame:CGRectMake(2,3,40,40)];
+        Savelbl=[[UILabel alloc]initWithFrame:CGRectMake(5,5,35,35)];
+         altermsgView= [[UIView alloc]initWithFrame:CGRectMake(self.view.center.x-60,self.view.center.y+60,200,60)];
+    }
+    else{
+         CommWalkView=[[UIView alloc]initWithFrame:CGRectMake(self.view.frame.size.width-63,self.view.frame.origin.y+15,45,45)];
+         blueCirecleImg=[[UIImageView alloc]initWithFrame:CGRectMake(2,3,40,40)];
+        Savelbl=[[UILabel alloc]initWithFrame:CGRectMake(5,5,35,35)];
+         altermsgView= [[UIView alloc]initWithFrame:CGRectMake(self.view.center.x-90,self.view.center.y+20,200,60)];
+    }
+    
+        CommWalkView.backgroundColor =Red_Color;
+    
+    
+
+    blueCirecleImg.image=[UIImage imageNamed:@"BlueCirecleimg"];
+    blueCirecleImg.userInteractionEnabled=YES;
+    [CommWalkView addSubview:blueCirecleImg];
+   
+//    Savelbl=[[UILabel alloc]initWithFrame:CGRectMake(5,5,35,35)];
+    Savelbl.text =@"Save";
+    Savelbl.textColor=[UIColor whiteColor];
+    Savelbl.textAlignment= NSTextAlignmentCenter;
+    Savelbl.numberOfLines=2;
+    [Savelbl setFont:[UIFont fontWithName:@"Patron-Regular" size:12]];
+    [CommWalkView addSubview:Savelbl];
+
+    
+//    altermsgView= [[UIView alloc]initWithFrame:CGRectMake(self.view.center.x-90,self.view.center.y+20,200,60)];
+    
+    
+    UIImageView * blueTxtImg=[[UIImageView alloc]initWithFrame:CGRectMake(0,0,200,60)];
+    blueTxtImg.userInteractionEnabled=YES;
+    blueTxtImg.image=[UIImage imageNamed:@"BlueBgText"];
+    [altermsgView addSubview:blueTxtImg];
+    UILabel * AlterMsg=[[UILabel alloc]initWithFrame:CGRectMake(0,0,200,60)];
+    AlterMsg.text =@"Once all information are filled in.\n just hit “Save”";
+    AlterMsg.textColor=[UIColor whiteColor];
+    AlterMsg.textAlignment= NSTextAlignmentCenter;
+    AlterMsg.numberOfLines=2;
+    [AlterMsg setFont:[UIFont fontWithName:@"Patron-Regular" size:12]];
+    [altermsgView addSubview:AlterMsg];
+    
+    
+    [self.window addSubview:altermsgView];
+    
+    UIButton * ClosewindowBtn =[[UIButton alloc]initWithFrame:[[UIScreen mainScreen] bounds]];
+    [ClosewindowBtn addTarget:self action:@selector(didClickGeneralWalkAlterviewBtn:) forControlEvents:UIControlEventTouchUpInside];
+    
+    [self.window addSubview:CommWalkView];
+    [self.window addSubview:ClosewindowBtn];
+    self.window.hidden=NO;
+    [self.window makeKeyAndVisible];
+    [self.window.rootViewController.view addSubview:CommWalkView];
+    self.window.backgroundColor =[UIColor colorWithRed:(53.0/255.0f) green:(53.0/255.0f) blue:(53.0/255.0f) alpha:0.5];
+    
+    
 }
 
 @end

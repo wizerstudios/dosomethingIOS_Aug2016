@@ -15,6 +15,7 @@
 {
     NSString        *facebookStr;
 }
+@property (strong, nonatomic) UIWindow *window;
 @property (nonatomic, retain) NSString *temp;
 
 @property (strong, nonatomic) IBOutlet UILabel *labelFacebook;

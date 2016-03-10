@@ -15,6 +15,7 @@
 @property (strong, nonatomic) IBOutlet NSLayoutConstraint *layoutConstraintCollectionviewYPos;
 @property (strong, nonatomic) IBOutlet NSLayoutConstraint *layoutConstraintTapLabelYPos;
 
+@property (strong, nonatomic) UIWindow                          *window;
 
 @property (nonatomic, retain) NSMutableArray *profileDetailsArray;
 

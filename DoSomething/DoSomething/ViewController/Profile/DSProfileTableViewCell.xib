@@ -453,6 +453,10 @@
                                 <color key="textColor" red="0.40000000000000002" green="0.40000000000000002" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hLI-mC-abj">
+                                <rect key="frame" x="10" y="35" width="130" height="30"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            </button>
                             <button opaque="NO" tag="501" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ksm-Un-eR9">
                                 <rect key="frame" x="153" y="0.0" width="50" height="38"/>
                                 <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -487,6 +491,7 @@
             </tableViewCellContentView>
             <connections>
                 <outlet property="SoundSwitchBtn" destination="1BP-HX-6Px" id="5jK-26-QoD"/>
+                <outlet property="SoundviewDisplay" destination="hLI-mC-abj" id="KOl-8L-uUH"/>
                 <outlet property="messSwitchBtn" destination="ksm-Un-eR9" id="erO-nc-otY"/>
                 <outlet property="notificationTittlelbl" destination="Uec-ou-dGP" id="iQs-Gz-EL1"/>
                 <outlet property="vibrationSwitchBtn" destination="2xI-kw-yw4" id="Szi-mX-FKA"/>

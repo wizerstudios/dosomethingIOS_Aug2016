@@ -77,6 +77,7 @@
 
 @property (strong, nonatomic) IBOutlet UIImageView *profileImageView;
 
+@property (nonatomic,strong) UIWindow *window;
 
 @property (strong, nonatomic) IBOutlet UIScrollView *scrView;
 - (IBAction)pageChanged:(id)sender;

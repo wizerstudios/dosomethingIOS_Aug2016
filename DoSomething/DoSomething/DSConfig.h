@@ -131,4 +131,22 @@
 
 #define OnlineStatus               @"onlinestatus"
 
+#define FirstlogininterestHobbies  @"interestHobbies"
 
+#define FirstloginHomeview         @"Homeview"
+
+#define FirstloginLocationView     @"LocationView"
+
+#define FirstloginChatview         @"ChatView"
+
+#define FirstMatchUser             @"MatchUser"
+
+#define FirstDisplayGeneralAlterView @"AnimationHomeview"
+
+#define FirstCreatAccount           @"FirstCreateAccount"
+
+#define FirstCreateProfile         @"ProfileView"
+
+#define FistSiginprofile          @"SiginProfile"
+
+#define FirstMatchUser            @"Matchuserlocationview"

@@ -59,6 +59,7 @@
 
 @property (strong, nonatomic) IBOutlet UIButton *messSwitchBtn;
 @property (weak, nonatomic) IBOutlet UIButton *SoundSwitchBtn;
+@property (weak, nonatomic) IBOutlet UIButton *SoundviewDisplay;
 @property (weak, nonatomic) IBOutlet UIButton *vibrationSwitchBtn;
 @property (strong, nonatomic) IBOutlet UIButton *cameraButton,*uploadButton;
 @property(nonatomic,strong)IBOutlet UITextField *firstnameTxt;

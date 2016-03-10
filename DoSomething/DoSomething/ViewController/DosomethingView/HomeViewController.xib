@@ -11,7 +11,9 @@
         </mutableArray>
         <mutableArray key="Patron-Bold.ttf">
             <string>Patron-Bold</string>
-            <string>Patron-Bold</string>
+        </mutableArray>
+        <mutableArray key="Patron-Regular.ttf">
+            <string>Patron-Regular</string>
         </mutableArray>
     </customFonts>
     <objects>
@@ -70,7 +72,7 @@
                             </constraints>
                             <string key="text">Hit “let’s Do Something” 
  to get thing started</string>
-                            <fontDescription key="fontDescription" name="Patron-Bold" family="Patron" pointSize="14"/>
+                            <fontDescription key="fontDescription" name="Patron-Regular" family="Patron" pointSize="14"/>
                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                             <nil key="highlightedColor"/>
                         </label>

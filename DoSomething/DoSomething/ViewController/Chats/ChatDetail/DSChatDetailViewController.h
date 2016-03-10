@@ -25,6 +25,8 @@
     
     
 }
+
+@property (nonatomic,strong) UIWindow * window;
 @property (nonatomic,strong) IBOutlet UIView * topview;
 @property (nonatomic ,strong) IBOutlet NSLayoutConstraint * topviewYposition;
 @property (nonatomic,strong) IBOutlet NSLayoutConstraint *chatscrollviewBottom;

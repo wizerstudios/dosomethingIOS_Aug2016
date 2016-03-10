@@ -15,7 +15,10 @@
     IBOutlet UIView *activatedView;
     IBOutlet UIButton *bottombutton,*nowButton,*anyTimeButton;
     IBOutlet UILabel *timeLabel;
+     
 }
+
+@property (strong, nonatomic) UIWindow                          *window;
 @property(nonatomic,strong) IBOutlet UICollectionView * homeCollectionView;
 @property (nonatomic,strong)  CLLocationManager       * locationManager;
 - (IBAction)pressDosomething:(id)sender;

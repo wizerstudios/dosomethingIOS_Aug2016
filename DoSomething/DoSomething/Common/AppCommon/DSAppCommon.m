@@ -227,6 +227,8 @@ DSAppCommon *sharedCommon = nil;
 - (BOOL) isUserLoggedIn {
     NSDictionary *userDetails = [self getUserDetails];
     if (userDetails != NULL) {
+        [[NSUserDefaults standardUserDefaults]removeObjectForKey:CurrentLongitude];
+        [[NSUserDefaults standardUserDefaults]removeObjectForKey:CurrentLatitude];
         return YES;
     }
     return NO;

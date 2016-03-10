@@ -53,8 +53,17 @@
     [super viewDidLoad];
     
     [self loadNavigation];
+    self.WalkAlterview.hidden =YES;
+   
+    NSString * Firstlogin=[[NSUserDefaults standardUserDefaults]valueForKey:FirstlogininterestHobbies];
     
-    self.WalkAlterview.hidden =NO;
+    if([Firstlogin isEqualToString:@"interestHobbies"])
+    {
+        [self GerenalWalkAlterview];
+        [[NSUserDefaults standardUserDefaults]removeObjectForKey:FirstlogininterestHobbies];
+    }
+
+   
     
     objWebservice =[[DSWebservice alloc]init];
     
@@ -650,5 +659,56 @@
 -(IBAction)didClickGeneralWalkAlterviewBtn:(id)sender
 {
     self.WalkAlterview.hidden=YES;
+    self.window.hidden=YES;
 }
+-(void)GerenalWalkAlterview
+{
+    self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+    
+    UIImageView * blueCirecleImg=[[UIImageView alloc]initWithFrame:CGRectMake(self.view.frame.size.width-65,15,45,45)];
+    blueCirecleImg.image=[UIImage imageNamed:@"BlueCirecleimg"];
+    blueCirecleImg.userInteractionEnabled=YES;
+    [self.window addSubview:blueCirecleImg];
+    
+    UILabel * Savelbl=[[UILabel alloc]initWithFrame:CGRectMake(self.view.frame.size.width-60,20,35,35)];
+    Savelbl.text =@"Save";
+    Savelbl.textColor=[UIColor whiteColor];
+    Savelbl.textAlignment= NSTextAlignmentCenter;
+    Savelbl.numberOfLines=2;
+    [Savelbl setFont:[UIFont fontWithName:@"Patron-Regular" size:12]];
+    [self.window addSubview:Savelbl];
+
+    
+    
+    UIView * altermsgView= [[UIView alloc]initWithFrame:CGRectMake(self.view.center.x-70,self.view.frame.origin.y+60,160,60)];
+    
+    
+    UIImageView * blueTxtImg=[[UIImageView alloc]initWithFrame:CGRectMake(0,0,160,60)];
+    blueTxtImg.userInteractionEnabled=YES;
+    blueTxtImg.image=[UIImage imageNamed:@"BlueBgText"];
+    [altermsgView addSubview:blueTxtImg];
+    UILabel * AlterMsg=[[UILabel alloc]initWithFrame:CGRectMake(0,0,160,60)];
+    AlterMsg.text =@"Select your interest and \n ”Save” the selection";
+    AlterMsg.textColor=[UIColor whiteColor];
+    AlterMsg.textAlignment= NSTextAlignmentCenter;
+    AlterMsg.numberOfLines=2;
+    [AlterMsg setFont:[UIFont fontWithName:@"Patron-Regular" size:12]];
+    [altermsgView addSubview:AlterMsg];
+    
+    
+    [self.window addSubview:altermsgView];
+    
+    UIButton * ClosewindowBtn =[[UIButton alloc]initWithFrame:[[UIScreen mainScreen] bounds]];
+    [ClosewindowBtn addTarget:self action:@selector(didClickGeneralWalkAlterviewBtn:) forControlEvents:UIControlEventTouchUpInside];
+    
+   
+    [self.window addSubview:ClosewindowBtn];
+    self.window.hidden=NO;
+    [self.window makeKeyAndVisible];
+    self.window.backgroundColor =[UIColor colorWithRed:(53.0/255.0f) green:(53.0/255.0f) blue:(53.0/255.0f) alpha:0.5];
+    
+
+}
+
+
 @end

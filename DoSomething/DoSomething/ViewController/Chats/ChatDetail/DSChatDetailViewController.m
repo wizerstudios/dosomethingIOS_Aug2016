@@ -23,6 +23,7 @@
 #define CELL_HEIGHT             CONTENT_START+15.f
 #define ME_RIGHT_WIDTH_SPACE    25.0f
 
+#define Red_Color   [UIColor colorWithRed:227.0f/255.0f green:64.0f/255.0f blue:81.0f/255.0f alpha:1.0f]
 
 @interface DSChatDetailViewController (){
     
@@ -51,7 +52,17 @@
 - (void)viewDidLoad {
     
     [super viewDidLoad];
-    self.WalkAlterview.hidden=NO;
+    
+    self.WalkAlterview.hidden =YES;
+   
+    NSString * Firstlogin=[[NSUserDefaults standardUserDefaults]valueForKey:FirstloginChatview];
+    
+    if([Firstlogin isEqualToString:@"ChatDetailview"])
+    {
+        [self GerenalWalkAlterview];
+        [[NSUserDefaults standardUserDefaults]removeObjectForKey:FirstloginChatview];
+    }
+
     NSLog(@"conversionID=%@",_conversionID);
     
     [[IQKeyboardManager sharedManager] considerToolbarPreviousNextInViewClass:[chatScrollview class]];
@@ -586,5 +597,112 @@
 -(IBAction)DidClickGeneralAlterviewBtn:(id)sender
 {
     self.WalkAlterview.hidden=YES;
+    self.window.hidden =YES;
 }
+-(void)GerenalWalkAlterview
+{
+    self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+   
+    
+    UIView * CommWalkView;
+    UILabel * signinMsg;
+    UILabel *emaillbl;
+    UILabel *passwordlbl;
+    UIImageView * blueCirecleImg;
+    UIView * altermsgView;
+    
+    if(IS_IPHONE6_Plus || IS_IPHONE6)
+    {
+         CommWalkView=[[UIView alloc]initWithFrame:CGRectMake(self.view.frame.origin.x,self.topview.frame.origin.y+self.topview.frame.size.height+50,self.window.frame.size.width,120)];
+         signinMsg=[[UILabel alloc]initWithFrame:CGRectMake(self.view.frame.size.width-50,10,80,30)];
+        emaillbl=[[UILabel alloc]initWithFrame:CGRectMake(self.view.frame.size.width-120,signinMsg.frame.origin.y+signinMsg.frame.size.height+5,150,30)];
+        passwordlbl=[[UILabel alloc]initWithFrame:CGRectMake(self.view.frame.origin.x+20,emaillbl.frame.origin.y+emaillbl.frame.size.height+10,80,30)];
+         blueCirecleImg=[[UIImageView alloc]initWithFrame:CGRectMake(self.view.frame.origin.x+80,self.window.frame.size.height-100,40,40)];
+        altermsgView= [[UIView alloc]initWithFrame:CGRectMake(self.view.frame.origin.x+60,self.view.center.y+20,240,60)];
+
+    }
+    else{
+         CommWalkView=[[UIView alloc]initWithFrame:CGRectMake(self.view.frame.origin.x,self.topview.frame.origin.y+self.topview.frame.size.height+30,self.window.frame.size.width,120)];
+         signinMsg=[[UILabel alloc]initWithFrame:CGRectMake(self.view.frame.size.width-90,10,80,30)];
+        emaillbl=[[UILabel alloc]initWithFrame:CGRectMake(self.view.frame.size.width-160,signinMsg.frame.origin.y+signinMsg.frame.size.height+5,150,30)];
+        passwordlbl=[[UILabel alloc]initWithFrame:CGRectMake(self.view.frame.origin.x+20,emaillbl.frame.origin.y+emaillbl.frame.size.height+10,80,30)];
+         blueCirecleImg=[[UIImageView alloc]initWithFrame:CGRectMake(self.view.frame.origin.x+80,self.view.frame.size.height-80,40,40)];
+        altermsgView= [[UIView alloc]initWithFrame:CGRectMake(self.view.frame.origin.x+40,self.view.center.y,240,60)];
+
+    }
+
+    CommWalkView.backgroundColor =[UIColor colorWithRed:(215/255.0f) green:(215/255.0f) blue:(215/255.0f) alpha:1.0f];
+    [self.window addSubview:CommWalkView];
+    
+ 
+    signinMsg.text =@"Hey); 13:20";
+    signinMsg.textColor=[UIColor whiteColor];
+    signinMsg.backgroundColor =Red_Color;
+    signinMsg.textAlignment= NSTextAlignmentCenter;
+    signinMsg.numberOfLines=1;
+    signinMsg.layer.cornerRadius=5;
+    signinMsg.layer.masksToBounds=YES;
+    [signinMsg setFont:[UIFont fontWithName:@"Patron-Regular" size:10]];
+    [CommWalkView addSubview:signinMsg];
+    
+    
+    emaillbl.text =@"Wanna meet for drink?  13:20";
+    emaillbl.textColor=[UIColor whiteColor];
+    emaillbl.backgroundColor =Red_Color;
+    emaillbl.textAlignment= NSTextAlignmentCenter;
+    emaillbl.numberOfLines=1;
+    [emaillbl setFont:[UIFont fontWithName:@"Patron-Regular" size:10]];
+    emaillbl.layer.cornerRadius=5;
+    emaillbl.layer.masksToBounds=YES;
+    [CommWalkView addSubview:emaillbl];
+    
+
+    passwordlbl.text =@"oh hi!  13:24";
+    passwordlbl.textColor=[UIColor blackColor];
+    passwordlbl.backgroundColor =[UIColor whiteColor];
+    passwordlbl.textAlignment= NSTextAlignmentCenter;
+    passwordlbl.numberOfLines=1;
+    [passwordlbl setFont:[UIFont fontWithName:@"Patron-Regular" size:10]];
+    passwordlbl.layer.cornerRadius=5;
+    passwordlbl.layer.masksToBounds=YES;
+    [CommWalkView addSubview:passwordlbl];
+    
+    
+
+    blueCirecleImg.image=[UIImage imageNamed:@"BlueCirecleimg"];
+    blueCirecleImg.userInteractionEnabled=YES;
+    [self.window addSubview:blueCirecleImg];
+    
+
+    
+    UIImageView * blueTxtImg=[[UIImageView alloc]initWithFrame:CGRectMake(0,0,240,60)];
+    blueTxtImg.userInteractionEnabled=YES;
+    blueTxtImg.image=[UIImage imageNamed:@"BlueBgText"];
+    [altermsgView addSubview:blueTxtImg];
+    UILabel * AlterMsg=[[UILabel alloc]initWithFrame:CGRectMake(0,0,240,60)];
+    AlterMsg.text =@"Do send them a message and \n Let’s Do Something";
+    AlterMsg.textColor=[UIColor whiteColor];
+    AlterMsg.textAlignment= NSTextAlignmentCenter;
+    AlterMsg.numberOfLines=2;
+    [AlterMsg setFont:[UIFont fontWithName:@"Patron-Regular" size:12]];
+    [altermsgView addSubview:AlterMsg];
+    
+    
+    [self.window addSubview:altermsgView];
+    
+    UIButton * ClosewindowBtn =[[UIButton alloc]initWithFrame:[[UIScreen mainScreen] bounds]];
+    [ClosewindowBtn addTarget:self action:@selector(DidClickGeneralAlterviewBtn:) forControlEvents:UIControlEventTouchUpInside];
+    
+   
+    [self.window addSubview:ClosewindowBtn];
+    self.window.hidden=NO;
+    [self.window makeKeyAndVisible];
+   
+    self.window.backgroundColor =[UIColor colorWithRed:(53.0/255.0f) green:(53.0/255.0f) blue:(53.0/255.0f) alpha:0.5];
+    
+   
+    
+}
+
+
 @end

@@ -52,6 +52,10 @@
     [[NSUserDefaults standardUserDefaults]removeObjectForKey:CurrentLongitude];
     [[NSUserDefaults standardUserDefaults]removeObjectForKey:CurrentLatitude];
     
+    [[NSUserDefaults standardUserDefaults] setObject:@"HomeviewAnimation" forKey:FirstDisplayGeneralAlterView];
+    
+    [[NSUserDefaults standardUserDefaults] setObject:@"Firstmatchuser" forKey:FirstMatchUser];
+    
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
        // self.isNotificationSound = YES;
         [self initAPNS];

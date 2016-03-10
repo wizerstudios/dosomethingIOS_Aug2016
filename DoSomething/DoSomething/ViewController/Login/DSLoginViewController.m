@@ -23,6 +23,8 @@
 #import "IQKeyboardManager.h"
 #import "IQUIView+IQKeyboardToolbar.h"
 
+#define Red_Color   [UIColor colorWithRed:227.0f/255.0f green:64.0f/255.0f blue:81.0f/255.0f alpha:1.0f]
+
 @interface DSLoginViewController ()<CLLocationManagerDelegate>
 {
     DSWebservice            * objWebService;
@@ -55,7 +57,8 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.walkalterview.hidden=NO;
+    self.walkalterview.hidden =YES;
+   
     [[IQKeyboardManager sharedManager]setEnableAutoToolbar:YES];
     fbUserDetailsDict = [[NSMutableDictionary alloc]init];
     locationManager                 = [[CLLocationManager alloc] init];
@@ -78,6 +81,17 @@
         self.layoutConstraintTextFieldCenterLabelYPos.constant =60;
     }
  if ([temp isEqualToString:@"createAnAccount"]){
+     
+    
+     NSString * Firstlogin=[[NSUserDefaults standardUserDefaults]valueForKey:FirstCreatAccount];
+     
+     if([Firstlogin isEqualToString:@"FirstCreatAccount"])
+     {
+         [self GerenalWalkAlterview];
+         [[NSUserDefaults standardUserDefaults]removeObjectForKey:FirstCreatAccount];
+          [[NSUserDefaults standardUserDefaults] setObject:@"FirstCreateProfile" forKey:FirstCreateProfile];
+     }
+
       self.buttonSignInHeightConstraint.constant =56;
      if (IS_IPHONE6 ||IS_IPHONE6_Plus){
        self.layoutConstraintSignInButtonHeight.constant =65;
@@ -291,6 +305,7 @@
 
 -(void)signinMethod
 {
+     [[NSUserDefaults standardUserDefaults] setObject:@"FirstSiginProfile" forKey:FistSiginprofile];
     if (IS_IPHONE6 ||IS_IPHONE6_Plus){
         self.layoutConstraintSignInButtonHeight.constant =47;
         self.layoutConstraintBackButtonHeight.constant =49;
@@ -397,6 +412,7 @@
 #pragma mark - Create and Sign Button Action
 -(void)CreateAnAccount
 {
+    
      [[[UIApplication sharedApplication] keyWindow] endEditing:YES];
     objSigninType=@"1";
     if([NSString isEmpty:self.emailTxt.text] && [NSString isEmpty:self.passwordTxt.text]){
@@ -650,6 +666,14 @@
              if([[loginDict valueForKey:@"status"]isEqualToString:@"success"]){
                  
                  [COMMON setUserDetails:[[loginDict valueForKey:@"userDetails"]objectAtIndex:0]];
+                 [[NSUserDefaults standardUserDefaults] setObject:@"interestHobbies" forKey:FirstlogininterestHobbies];
+                
+                 [[NSUserDefaults standardUserDefaults] setObject:@"HomeView" forKey:FirstloginHomeview];
+               
+                 [[NSUserDefaults standardUserDefaults]setObject:@"Locationview" forKey:FirstloginLocationView];
+                 
+                 [[NSUserDefaults standardUserDefaults]setObject:@"ChatDetailview" forKey:FirstloginChatview];
+                                 
                  NSLog(@"userdetails = %@",[COMMON getUserDetails]);
                  [self gotoHomeView];
                  [COMMON removeLoading];
@@ -811,6 +835,7 @@
 -(IBAction)didClickGeneralWalkAlterview:(id)sender
 {
     self.walkalterview.hidden=YES;
+    self.window.hidden=YES;
 }
 - (IBAction)createAnAccountFB:(id)sender {
     [self loginByFacebook];
@@ -819,4 +844,148 @@
 
 - (IBAction)termsOfUseAction:(id)sender {
 }
+
+
+-(void)GerenalWalkAlterview
+{
+    UILabel * signinMsg;
+    UILabel *emaillbl;
+    UILabel *passwordlbl;
+    self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+    UIView * CommWalkView;
+   
+    
+    if(IS_IPHONE6 || IS_IPHONE6_Plus)
+    {
+       CommWalkView=[[UIView alloc]initWithFrame:CGRectMake(self.view.frame.origin.x,self.view.frame.origin.y+80,self.window.frame.size.width,130)];
+        signinMsg=[[UILabel alloc]initWithFrame:CGRectMake(self.view.frame.origin.x+20,self.view.frame.origin.y+10,160,30)];
+        emaillbl=[[UILabel alloc]initWithFrame:CGRectMake(self.view.frame.origin.x+20,signinMsg.frame.origin.y+signinMsg.frame.size.height+10,self.view.frame.size.width-40,30)];
+         passwordlbl=[[UILabel alloc]initWithFrame:CGRectMake(self.view.frame.origin.x+20,emaillbl.frame.origin.y+emaillbl.frame.size.height+10,self.view.frame.size.width-40,30)];
+    }
+    else
+    {
+        CommWalkView=[[UIView alloc]initWithFrame:CGRectMake(self.view.frame.origin.x,self.view.frame.origin.y+80,self.view.frame.size.width,110)];
+        signinMsg=[[UILabel alloc]initWithFrame:CGRectMake(self.view.frame.origin.x+20,self.view.frame.origin.y+10,160,20)];
+        emaillbl=[[UILabel alloc]initWithFrame:CGRectMake(self.view.frame.origin.x+20,signinMsg.frame.origin.y+signinMsg.frame.size.height+10,self.view.frame.size.width-40,20)];
+         passwordlbl=[[UILabel alloc]initWithFrame:CGRectMake(self.view.frame.origin.x+20,emaillbl.frame.origin.y+emaillbl.frame.size.height+10,self.view.frame.size.width-40,20)];
+    }
+     CommWalkView.backgroundColor =[UIColor whiteColor];
+    [self.window addSubview:CommWalkView];
+    
+    
+    
+    
+    signinMsg.text =@"Or sign up with your email";
+    signinMsg.textColor=Red_Color;
+    signinMsg.textAlignment= NSTextAlignmentCenter;
+    signinMsg.numberOfLines=1;
+    [signinMsg setFont:[UIFont fontWithName:@"Patron-Regular" size:12]];
+    [CommWalkView addSubview:signinMsg];
+    
+    
+  
+    emaillbl.text =@"Email";
+    emaillbl.textColor=[UIColor lightGrayColor];
+    emaillbl.textAlignment= NSTextAlignmentLeft;
+    emaillbl.numberOfLines=1;
+    [emaillbl setFont:[UIFont fontWithName:@"Patron-Regular" size:12]];
+    [CommWalkView addSubview:emaillbl];
+
+    passwordlbl.text =@"Password";
+    passwordlbl.textColor=[UIColor lightGrayColor];
+    passwordlbl.textAlignment= NSTextAlignmentLeft;
+    passwordlbl.numberOfLines=1;
+    [passwordlbl setFont:[UIFont fontWithName:@"Patron-Regular" size:12]];
+    [CommWalkView addSubview:passwordlbl];
+
+    
+    
+    UILabel * CreateMsg;
+    
+    UIView * CreateView;
+    UILabel * CreateMsglbl;
+    UIImageView * blueCirecleImg;
+    
+    if(IS_IPHONE6_Plus||IS_IPHONE6)
+    {
+        CreateView=[[UIView alloc]initWithFrame:CGRectMake(self.view.frame.origin.x,CommWalkView.frame.origin.y+CommWalkView.frame.size.height,self.window.frame.size.width,73)];
+        CreateMsg=[[UILabel alloc]initWithFrame:CGRectMake(CreateView.center.x-80,CreateView.frame.origin.y-200,160,30)];
+        CreateMsglbl=[[UILabel alloc]initWithFrame:CGRectMake(CreateView.frame.origin.x+20,CreateView.frame.origin.y-180,self.view.frame.size.width-40,30)];
+        blueCirecleImg=[[UIImageView alloc]initWithFrame:CGRectMake(self.view.center.x,CreateView.frame.origin.y-200,45,45)];
+    }
+    else
+    {
+        CreateView=[[UIView alloc]initWithFrame:CGRectMake(self.view.frame.origin.x,CommWalkView.frame.origin.y+CommWalkView.frame.size.height,self.view.frame.size.width,50)];
+        CreateMsg=[[UILabel alloc]initWithFrame:CGRectMake(CreateView.center.x-80,CreateView.frame.origin.y-180,160,20)];
+        CreateMsglbl=[[UILabel alloc]initWithFrame:CGRectMake(CreateView.frame.origin.x+20,CreateView.frame.origin.y-160,self.view.frame.size.width-40,20)];
+        blueCirecleImg=[[UIImageView alloc]initWithFrame:CGRectMake(self.view.center.x-20,CreateView.frame.origin.y-187,45,45)];
+    }
+    CreateView.backgroundColor =Red_Color;
+    [self.window addSubview:CreateView];
+    
+
+    blueCirecleImg.image=[UIImage imageNamed:@"BlueCirecleimg"];
+    blueCirecleImg.userInteractionEnabled=YES;
+    [CreateView addSubview:blueCirecleImg];
+
+    CreateMsg.text =@"create your account";
+    CreateMsg.textColor=[UIColor whiteColor];
+    CreateMsg.textAlignment= NSTextAlignmentCenter;
+    CreateMsg.numberOfLines=1;
+    [CreateMsg setFont:[UIFont fontWithName:@"Patron-Bold" size:12]];
+    [CreateView addSubview:CreateMsg];
+
+    
+    CreateMsglbl.text =@"By selecting this,you agree to our Terms of Use and our Privacy Policy";
+    CreateMsglbl.textColor=[UIColor whiteColor];
+    CreateMsglbl.textAlignment= NSTextAlignmentCenter;
+    CreateMsglbl.numberOfLines=1;
+    [CreateMsglbl setFont:[UIFont fontWithName:@"Patron-Regular" size:8]];
+    [CreateView addSubview:CreateMsglbl];
+
+    
+    UIView * altermsgView;
+    UIImageView * blueTxtImg;
+    UILabel * AlterMsg;
+    if(IS_IPHONE6|| IS_IPHONE6_Plus)
+    {
+        altermsgView= [[UIView alloc]initWithFrame:CGRectMake(self.view.frame.origin.x+60,self.view.center.y+20,240,60)];
+         blueTxtImg=[[UIImageView alloc]initWithFrame:CGRectMake(0,0,240,60)];
+         AlterMsg=[[UILabel alloc]initWithFrame:CGRectMake(0,0,240,60)];
+    }
+    else{
+        altermsgView= [[UIView alloc]initWithFrame:CGRectMake(self.view.frame.origin.x+40,self.view.center.y-40,240,60)];
+        blueTxtImg=[[UIImageView alloc]initWithFrame:CGRectMake(0,0,240,60)];
+        AlterMsg=[[UILabel alloc]initWithFrame:CGRectMake(0,0,240,60)];
+    }
+    
+
+    blueTxtImg.userInteractionEnabled=YES;
+    blueTxtImg.image=[UIImage imageNamed:@"BlueBgText"];
+    [altermsgView addSubview:blueTxtImg];
+   
+    AlterMsg.text =@"Insert your email and password \n to “create your account”";
+    AlterMsg.textColor=[UIColor whiteColor];
+    AlterMsg.textAlignment= NSTextAlignmentCenter;
+    AlterMsg.numberOfLines=2;
+    [AlterMsg setFont:[UIFont fontWithName:@"Patron-Regular" size:12]];
+    [altermsgView addSubview:AlterMsg];
+    
+    
+    [self.window addSubview:altermsgView];
+    
+    UIButton * ClosewindowBtn =[[UIButton alloc]initWithFrame:[[UIScreen mainScreen] bounds]];
+    [ClosewindowBtn addTarget:self action:@selector(didClickGeneralWalkAlterview:) forControlEvents:UIControlEventTouchUpInside];
+    
+    //[self.window addSubview:CommWalkView];
+    [self.window addSubview:ClosewindowBtn];
+    self.window.hidden=NO;
+    [self.window makeKeyAndVisible];
+    //[self.window.rootViewController.view addSubview:CommWalkView];
+    self.window.backgroundColor =[UIColor colorWithRed:(53.0/255.0f) green:(53.0/255.0f) blue:(53.0/255.0f) alpha:0.5];
+    
+    //[self.view addSubview:self.window];
+    
+}
+
 @end

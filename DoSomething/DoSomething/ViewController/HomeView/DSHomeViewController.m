@@ -54,7 +54,17 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    self.walkAlterview.hidden=NO;
+   
+    self.walkAlterview.hidden =YES;
+    NSString * Firstlogin=[[NSUserDefaults standardUserDefaults]valueForKey:FirstDisplayGeneralAlterView];
+    
+    if([Firstlogin isEqualToString:@"HomeviewAnimation"])
+    {
+        self.walkAlterview.hidden =NO;
+        [[NSUserDefaults standardUserDefaults]removeObjectForKey:FirstDisplayGeneralAlterView];
+         [[NSUserDefaults standardUserDefaults] setObject:@"FirstCreatAccount" forKey:FirstCreatAccount];
+    }
+
     self.kenView.delegate = self;
     _scrollViewImage.userInteractionEnabled =YES;
     
