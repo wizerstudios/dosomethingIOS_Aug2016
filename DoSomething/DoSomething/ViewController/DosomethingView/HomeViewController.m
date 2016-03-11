@@ -91,13 +91,15 @@
         [self loadActivityAPI:getLast availableStr:@"" doSomethingId:@""];
     }
     self.WalkAlterview.hidden =YES;
+   
     
-    NSString * Firstlogin=[[NSUserDefaults standardUserDefaults]valueForKey:FirstloginHomeview];
+    NSString * CreateAccount =[[NSUserDefaults standardUserDefaults]valueForKey:FirstRegistor];
     
-    if([Firstlogin isEqualToString:@"HomeView"])
+    
+    if([CreateAccount isEqualToString:@"Registration"])
     {
-        [self GerenalWalkAlterview];
-        [[NSUserDefaults standardUserDefaults]removeObjectForKey:FirstloginHomeview];
+        [self CreateAccountWalkAlterview];
+        [[NSUserDefaults standardUserDefaults]removeObjectForKey:FirstRegistor];
     }
 
 }
@@ -668,6 +670,13 @@ minimumLineSpacingForSectionAtIndex:(NSInteger)section {
     }
     
     [activatedView setHidden:NO];
+    NSString * Firstlogin=[[NSUserDefaults standardUserDefaults]valueForKey:FirstloginHomeview];
+    if([Firstlogin isEqualToString:@"HomeView"])
+    {
+        [self GerenalWalkAlterview];
+        [[NSUserDefaults standardUserDefaults]removeObjectForKey:FirstloginHomeview];
+    }
+    
     [self.view setBackgroundColor:[UIColor clearColor]];
     [self.homeCollectionView setAlpha:0.085];
     [self.homeCollectionView setUserInteractionEnabled:NO];
@@ -813,7 +822,7 @@ minimumLineSpacingForSectionAtIndex:(NSInteger)section {
          blueCirecleImg=[[UIImageView alloc]initWithFrame:CGRectMake(56,3,45,45)];
     }
     CommWalkView.backgroundColor =Red_Color;
-   // UIImageView * blueCirecleImg=[[UIImageView alloc]initWithFrame:CGRectMake(56,3,45,45)];
+ 
     blueCirecleImg.image=[UIImage imageNamed:@"BlueCirecleimg"];
     blueCirecleImg.userInteractionEnabled=YES;
     [CommWalkView addSubview:blueCirecleImg];
@@ -824,10 +833,6 @@ minimumLineSpacingForSectionAtIndex:(NSInteger)section {
     letdoSomethinglbl.numberOfLines=1;
     [letdoSomethinglbl setFont:[UIFont fontWithName:@"Patron-Bold" size:12]];
     [CommWalkView addSubview:letdoSomethinglbl];
-
-   
-    
-//    UIView * altermsgView= [[UIView alloc]initWithFrame:CGRectMake(self.view.center.x-70,self.view.frame.size.height-175,160,60)];
 
     
     UIImageView * blueTxtImg=[[UIImageView alloc]initWithFrame:CGRectMake(0,0,160,60)];
@@ -855,9 +860,73 @@ minimumLineSpacingForSectionAtIndex:(NSInteger)section {
     [self.window.rootViewController.view addSubview:CommWalkView];
     self.window.backgroundColor =[UIColor colorWithRed:(53.0/255.0f) green:(53.0/255.0f) blue:(53.0/255.0f) alpha:0.5];
     
-    //[self.view addSubview:self.window];
-    
 }
 
+-(void)CreateAccountWalkAlterview
+{
+    self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+    
+   
+    UIView * altermsgView;
+    UIImageView * blueCirecleImg1;
+    UIImageView * blueCirecleImg2;
+    UIImageView * blueCirecleImg3;
+    if(IS_IPHONE6_Plus||IS_IPHONE6)
+    {
+       
+        altermsgView= [[UIView alloc]initWithFrame:CGRectMake(self.view.center.x-50,self.view.frame.size.height-70,160,60)];
+        blueCirecleImg1=[[UIImageView alloc]initWithFrame:CGRectMake(self.view.frame.origin.x+35,self.view.center.y+40,45,45)];
+        blueCirecleImg2=[[UIImageView alloc]initWithFrame:CGRectMake(self.view.center.x,self.view.center.y+40,45,45)];
+         blueCirecleImg3=[[UIImageView alloc]initWithFrame:CGRectMake(self.view.frame.size.width-30,self.view.center.y+40,45,45)];
+    }
+    else{
+        
+      
+        altermsgView= [[UIView alloc]initWithFrame:CGRectMake(self.view.center.x-70,self.view.frame.size.height-175,160,60)];
+      
+        blueCirecleImg1=[[UIImageView alloc]initWithFrame:CGRectMake(self.view.frame.origin.x+35,self.view.center.y,45,45)];
+        blueCirecleImg2=[[UIImageView alloc]initWithFrame:CGRectMake(self.view.center.x-20,self.view.center.y,45,45)];
+        blueCirecleImg3=[[UIImageView alloc]initWithFrame:CGRectMake(self.view.frame.size.width-80,self.view.center.y,45,45)];
+    }
+   
+    
+    blueCirecleImg1.image=[UIImage imageNamed:@"BlueCirecleimg"];
+    blueCirecleImg1.userInteractionEnabled=YES;
+    [self.window addSubview:blueCirecleImg1];
+    
+    blueCirecleImg2.image=[UIImage imageNamed:@"BlueCirecleimg"];
+    blueCirecleImg2.userInteractionEnabled=YES;
+    [self.window addSubview:blueCirecleImg2];
+    
+    blueCirecleImg3.image=[UIImage imageNamed:@"BlueCirecleimg"];
+    blueCirecleImg3.userInteractionEnabled=YES;
+    [self.window addSubview:blueCirecleImg3];
+    
+    
+    UIImageView * blueTxtImg=[[UIImageView alloc]initWithFrame:CGRectMake(0,0,160,60)];
+    blueTxtImg.userInteractionEnabled=YES;
+    blueTxtImg.image=[UIImage imageNamed:@"BlueBgText"];
+    [altermsgView addSubview:blueTxtImg];
+    UILabel * AlterMsg=[[UILabel alloc]initWithFrame:CGRectMake(0,0,160,60)];
+    AlterMsg.text =@"Select any 3 activites";
+    AlterMsg.textColor=[UIColor whiteColor];
+    AlterMsg.textAlignment= NSTextAlignmentCenter;
+    AlterMsg.numberOfLines=2;
+    [AlterMsg setFont:[UIFont fontWithName:@"Patron-Regular" size:12]];
+    [altermsgView addSubview:AlterMsg];
+    
+    
+    [self.window addSubview:altermsgView];
+    
+    UIButton * ClosewindowBtn =[[UIButton alloc]initWithFrame:[[UIScreen mainScreen] bounds]];
+    [ClosewindowBtn addTarget:self action:@selector(didClickGeneralWalkAlterviewBtn:) forControlEvents:UIControlEventTouchUpInside];
+    
+    
+    [self.window addSubview:ClosewindowBtn];
+    self.window.hidden=NO;
+    [self.window makeKeyAndVisible];
+   
+    self.window.backgroundColor =[UIColor colorWithRed:(53.0/255.0f) green:(53.0/255.0f) blue:(53.0/255.0f) alpha:0.5];
 
+}
 @end

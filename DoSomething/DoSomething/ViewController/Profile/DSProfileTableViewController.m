@@ -125,7 +125,6 @@
   
     NSString * Firstlogin=[[NSUserDefaults standardUserDefaults]valueForKey:FirstCreateProfile];
     
-     NSString * FirstSignin=[[NSUserDefaults standardUserDefaults]valueForKey:FistSiginprofile];
     
     if([Firstlogin isEqualToString:@"FirstCreateProfile"])
     {
@@ -134,15 +133,6 @@
         [[NSUserDefaults standardUserDefaults]removeObjectForKey:FirstCreateProfile];
     }
     
-    if([FirstSignin isEqualToString:@"FirstSiginProfile"])
-    {
-        //self.WalAlterview.hidden =NO;
-         [self GerenalWalkAlterviewSign];
-        [[NSUserDefaults standardUserDefaults]removeObjectForKey:FistSiginprofile];
-    }
-
-    
-
     Regpassword=emailPasswordToRegister;
     [[IQKeyboardManager sharedManager] considerToolbarPreviousNextInViewClass:[_tableviewProfile class]];
     [[IQKeyboardManager sharedManager]setEnableAutoToolbar:YES];
@@ -1879,6 +1869,15 @@
         else
         {
             cell.notificationTittlelbl.hidden=NO;
+            NSString * FirstSignin=[[NSUserDefaults standardUserDefaults]valueForKey:FistSiginprofile];
+            if([FirstSignin isEqualToString:@"FirstSiginProfile"])
+            {
+                //self.WalAlterview.hidden =NO;
+                [self GerenalWalkAlterviewSign];
+                [[NSUserDefaults standardUserDefaults]removeObjectForKey:FistSiginprofile];
+            }
+
+            
         }
         
         [self notificationMethod];
@@ -2938,10 +2937,10 @@
     
     if(IS_IPHONE6_Plus ||IS_IPHONE6)
     {
-         CommWalkView=[[UIView alloc]initWithFrame:CGRectMake(self.view.frame.size.width-10,self.view.frame.origin.y+25,45,45)];
+         CommWalkView=[[UIView alloc]initWithFrame:CGRectMake(self.view.frame.size.width-63,self.view.frame.origin.y+25,45,45)];
          blueCirecleImg=[[UIImageView alloc]initWithFrame:CGRectMake(2,3,40,40)];
         Savelbl=[[UILabel alloc]initWithFrame:CGRectMake(5,5,35,35)];
-         altermsgView= [[UIView alloc]initWithFrame:CGRectMake(self.view.center.x-60,self.view.center.y+60,200,60)];
+         altermsgView= [[UIView alloc]initWithFrame:CGRectMake(self.view.center.x-80,self.view.center.y+60,200,60)];
     }
     else{
          CommWalkView=[[UIView alloc]initWithFrame:CGRectMake(self.view.frame.size.width-63,self.view.frame.origin.y+15,45,45)];

@@ -51,7 +51,7 @@
 - (void)viewDidLoad {
     
     [super viewDidLoad];
-    
+   
     [self loadNavigation];
     self.WalkAlterview.hidden =YES;
    
@@ -665,12 +665,29 @@
 {
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     
-    UIImageView * blueCirecleImg=[[UIImageView alloc]initWithFrame:CGRectMake(self.view.frame.size.width-65,15,45,45)];
+    UIImageView * blueCirecleImg;
+    UILabel * Savelbl;
+    UIView * altermsgView;
+    
+    if(IS_IPHONE6 || IS_IPHONE6_Plus)
+    {
+          blueCirecleImg=[[UIImageView alloc]initWithFrame:CGRectMake(self.view.frame.size.width-10,25,45,45)];
+        Savelbl=[[UILabel alloc]initWithFrame:CGRectMake(self.view.frame.size.width-5,30,35,35)];
+        altermsgView= [[UIView alloc]initWithFrame:CGRectMake(self.view.center.x-50,self.view.frame.origin.y+70,160,60)];
+
+    }
+    else
+    {
+           blueCirecleImg=[[UIImageView alloc]initWithFrame:CGRectMake(self.view.frame.size.width-65,15,45,45)];
+        Savelbl=[[UILabel alloc]initWithFrame:CGRectMake(self.view.frame.size.width-60,20,35,35)];
+        altermsgView= [[UIView alloc]initWithFrame:CGRectMake(self.view.center.x-70,self.view.frame.origin.y+60,160,60)];
+
+    }
     blueCirecleImg.image=[UIImage imageNamed:@"BlueCirecleimg"];
     blueCirecleImg.userInteractionEnabled=YES;
     [self.window addSubview:blueCirecleImg];
     
-    UILabel * Savelbl=[[UILabel alloc]initWithFrame:CGRectMake(self.view.frame.size.width-60,20,35,35)];
+   //Savelbl=[[UILabel alloc]initWithFrame:CGRectMake(self.view.frame.size.width-60,20,35,35)];
     Savelbl.text =@"Save";
     Savelbl.textColor=[UIColor whiteColor];
     Savelbl.textAlignment= NSTextAlignmentCenter;
@@ -680,7 +697,7 @@
 
     
     
-    UIView * altermsgView= [[UIView alloc]initWithFrame:CGRectMake(self.view.center.x-70,self.view.frame.origin.y+60,160,60)];
+//    altermsgView= [[UIView alloc]initWithFrame:CGRectMake(self.view.center.x-70,self.view.frame.origin.y+60,160,60)];
     
     
     UIImageView * blueTxtImg=[[UIImageView alloc]initWithFrame:CGRectMake(0,0,160,60)];

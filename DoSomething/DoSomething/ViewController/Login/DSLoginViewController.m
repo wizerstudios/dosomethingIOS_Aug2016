@@ -85,6 +85,8 @@
     
      NSString * Firstlogin=[[NSUserDefaults standardUserDefaults]valueForKey:FirstCreatAccount];
      
+    [[NSUserDefaults standardUserDefaults] setObject:@"FirstSiginProfile" forKey:FistSiginprofile];
+     
      if([Firstlogin isEqualToString:@"FirstCreatAccount"])
      {
          [self GerenalWalkAlterview];
@@ -120,7 +122,7 @@
      _buttonSigInFwd.hidden=YES;
 }
  if ([temp isEqualToString:@"Signin"]){
-     
+
      [self signinMethod];
  }
     
@@ -305,7 +307,7 @@
 
 -(void)signinMethod
 {
-     [[NSUserDefaults standardUserDefaults] setObject:@"FirstSiginProfile" forKey:FistSiginprofile];
+    
     if (IS_IPHONE6 ||IS_IPHONE6_Plus){
         self.layoutConstraintSignInButtonHeight.constant =47;
         self.layoutConstraintBackButtonHeight.constant =49;
@@ -666,14 +668,16 @@
              if([[loginDict valueForKey:@"status"]isEqualToString:@"success"]){
                  
                  [COMMON setUserDetails:[[loginDict valueForKey:@"userDetails"]objectAtIndex:0]];
-                 [[NSUserDefaults standardUserDefaults] setObject:@"interestHobbies" forKey:FirstlogininterestHobbies];
+                
                 
                  [[NSUserDefaults standardUserDefaults] setObject:@"HomeView" forKey:FirstloginHomeview];
                
                  [[NSUserDefaults standardUserDefaults]setObject:@"Locationview" forKey:FirstloginLocationView];
                  
                  [[NSUserDefaults standardUserDefaults]setObject:@"ChatDetailview" forKey:FirstloginChatview];
-                                 
+                 
+                 [[NSUserDefaults standardUserDefaults] setObject:@"Firstmatchuser" forKey:FirstMatchUser];
+
                  NSLog(@"userdetails = %@",[COMMON getUserDetails]);
                  [self gotoHomeView];
                  [COMMON removeLoading];
@@ -773,6 +777,9 @@
     
     
     [[NSNotificationCenter defaultCenter] removeObserver:self];
+    [[NSUserDefaults standardUserDefaults] setObject:@"Registration" forKey:FirstRegistor];
+    
+
     
     [self gotoHomeView];
     

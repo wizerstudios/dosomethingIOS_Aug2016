@@ -54,7 +54,7 @@
     
     [[NSUserDefaults standardUserDefaults] setObject:@"HomeviewAnimation" forKey:FirstDisplayGeneralAlterView];
     
-    [[NSUserDefaults standardUserDefaults] setObject:@"Firstmatchuser" forKey:FirstMatchUser];
+        [[NSUserDefaults standardUserDefaults] setObject:@"interestHobbies" forKey:FirstlogininterestHobbies];
     
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
        // self.isNotificationSound = YES;

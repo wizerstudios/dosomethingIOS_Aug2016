@@ -262,7 +262,7 @@
     
     if([Firstlogin isEqualToString:@"Firstmatchuser"])
     {
-         self.walkAlterview.hidden =NO;
+        self.walkAlterview.hidden =NO;
         self.blueCircle.hidden=NO;
         
         [[NSUserDefaults standardUserDefaults]removeObjectForKey:FirstMatchUser];
