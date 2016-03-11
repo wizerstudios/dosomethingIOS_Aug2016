@@ -614,60 +614,19 @@
     if(IS_IPHONE6_Plus || IS_IPHONE6)
     {
          CommWalkView=[[UIView alloc]initWithFrame:CGRectMake(self.view.frame.origin.x,self.topview.frame.origin.y+self.topview.frame.size.height+50,self.window.frame.size.width,120)];
-         signinMsg=[[UILabel alloc]initWithFrame:CGRectMake(self.view.frame.size.width-50,10,80,30)];
-        emaillbl=[[UILabel alloc]initWithFrame:CGRectMake(self.view.frame.size.width-120,signinMsg.frame.origin.y+signinMsg.frame.size.height+5,150,30)];
-        passwordlbl=[[UILabel alloc]initWithFrame:CGRectMake(self.view.frame.origin.x+20,emaillbl.frame.origin.y+emaillbl.frame.size.height+10,80,30)];
+        
          blueCirecleImg=[[UIImageView alloc]initWithFrame:CGRectMake(self.view.frame.origin.x+80,self.window.frame.size.height-100,40,40)];
         altermsgView= [[UIView alloc]initWithFrame:CGRectMake(self.view.frame.origin.x+60,self.view.center.y+20,240,60)];
 
     }
     else{
-         CommWalkView=[[UIView alloc]initWithFrame:CGRectMake(self.view.frame.origin.x,self.topview.frame.origin.y+self.topview.frame.size.height+30,self.window.frame.size.width,120)];
-         signinMsg=[[UILabel alloc]initWithFrame:CGRectMake(self.view.frame.size.width-90,10,80,30)];
-        emaillbl=[[UILabel alloc]initWithFrame:CGRectMake(self.view.frame.size.width-160,signinMsg.frame.origin.y+signinMsg.frame.size.height+5,150,30)];
-        passwordlbl=[[UILabel alloc]initWithFrame:CGRectMake(self.view.frame.origin.x+20,emaillbl.frame.origin.y+emaillbl.frame.size.height+10,80,30)];
-         blueCirecleImg=[[UIImageView alloc]initWithFrame:CGRectMake(self.view.frame.origin.x+80,self.view.frame.size.height-80,40,40)];
+        
+        
+        blueCirecleImg=[[UIImageView alloc]initWithFrame:CGRectMake(self.view.frame.origin.x+80,self.view.frame.size.height-80,40,40)];
         altermsgView= [[UIView alloc]initWithFrame:CGRectMake(self.view.frame.origin.x+40,self.view.center.y,240,60)];
 
     }
 
-    CommWalkView.backgroundColor =[UIColor colorWithRed:(215/255.0f) green:(215/255.0f) blue:(215/255.0f) alpha:1.0f];
-    [self.window addSubview:CommWalkView];
-    
- 
-    signinMsg.text =@"Hey); 13:20";
-    signinMsg.textColor=[UIColor whiteColor];
-    signinMsg.backgroundColor =Red_Color;
-    signinMsg.textAlignment= NSTextAlignmentCenter;
-    signinMsg.numberOfLines=1;
-    signinMsg.layer.cornerRadius=5;
-    signinMsg.layer.masksToBounds=YES;
-    [signinMsg setFont:[UIFont fontWithName:@"Patron-Regular" size:10]];
-    [CommWalkView addSubview:signinMsg];
-    
-    
-    emaillbl.text =@"Wanna meet for drink?  13:20";
-    emaillbl.textColor=[UIColor whiteColor];
-    emaillbl.backgroundColor =Red_Color;
-    emaillbl.textAlignment= NSTextAlignmentCenter;
-    emaillbl.numberOfLines=1;
-    [emaillbl setFont:[UIFont fontWithName:@"Patron-Regular" size:10]];
-    emaillbl.layer.cornerRadius=5;
-    emaillbl.layer.masksToBounds=YES;
-    [CommWalkView addSubview:emaillbl];
-    
-
-    passwordlbl.text =@"oh hi!  13:24";
-    passwordlbl.textColor=[UIColor blackColor];
-    passwordlbl.backgroundColor =[UIColor whiteColor];
-    passwordlbl.textAlignment= NSTextAlignmentCenter;
-    passwordlbl.numberOfLines=1;
-    [passwordlbl setFont:[UIFont fontWithName:@"Patron-Regular" size:10]];
-    passwordlbl.layer.cornerRadius=5;
-    passwordlbl.layer.masksToBounds=YES;
-    [CommWalkView addSubview:passwordlbl];
-    
-    
 
     blueCirecleImg.image=[UIImage imageNamed:@"BlueCirecleimg"];
     blueCirecleImg.userInteractionEnabled=YES;

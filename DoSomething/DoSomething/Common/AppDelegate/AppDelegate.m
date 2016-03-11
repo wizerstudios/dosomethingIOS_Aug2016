@@ -29,6 +29,7 @@
     
      AVAudioPlayer           *audioPlayer;
     BOOL _isStartTimer;
+    BOOL firstlanch;
 }
 
 
@@ -52,7 +53,29 @@
     [[NSUserDefaults standardUserDefaults]removeObjectForKey:CurrentLongitude];
     [[NSUserDefaults standardUserDefaults]removeObjectForKey:CurrentLatitude];
     
-    [[NSUserDefaults standardUserDefaults] setObject:@"HomeviewAnimation" forKey:FirstDisplayGeneralAlterView];
+    if ([[[NSUserDefaults standardUserDefaults]valueForKey:@"ISINTIAL"]length]==0) {
+        
+        [[NSUserDefaults standardUserDefaults]setObject:@"YES" forKey:@"ISINTIAL"];
+        
+        [[NSUserDefaults standardUserDefaults]synchronize];
+         [[NSUserDefaults standardUserDefaults] setBool:YES forKey:FirstDisplayGeneralAlterView];
+        
+        
+        
+    }else
+        
+    {
+        
+        [[NSUserDefaults standardUserDefaults]setObject:@"NO" forKey:@"ISINTIAL"];
+        
+        [[NSUserDefaults standardUserDefaults]synchronize];
+         [[NSUserDefaults standardUserDefaults] setBool:NO forKey:FirstDisplayGeneralAlterView];
+        
+    }
+    
+   
+    
+   // [[NSUserDefaults standardUserDefaults] setObject:@"HomeviewAnimation" forKey:FirstDisplayGeneralAlterView];
     
         [[NSUserDefaults standardUserDefaults] setObject:@"interestHobbies" forKey:FirstlogininterestHobbies];
     

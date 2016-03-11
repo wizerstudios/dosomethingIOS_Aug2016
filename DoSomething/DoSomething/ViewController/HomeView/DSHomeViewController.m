@@ -56,12 +56,12 @@
     [super viewDidLoad];
    
     self.walkAlterview.hidden =YES;
-    NSString * Firstlogin=[[NSUserDefaults standardUserDefaults]valueForKey:FirstDisplayGeneralAlterView];
+ 
     
-    if([Firstlogin isEqualToString:@"HomeviewAnimation"])
+    if( [[NSUserDefaults standardUserDefaults] boolForKey:FirstDisplayGeneralAlterView] == YES)
     {
         self.walkAlterview.hidden =NO;
-        [[NSUserDefaults standardUserDefaults]removeObjectForKey:FirstDisplayGeneralAlterView];
+         [[NSUserDefaults standardUserDefaults] setBool:NO forKey:FirstDisplayGeneralAlterView];
          [[NSUserDefaults standardUserDefaults] setObject:@"FirstCreatAccount" forKey:FirstCreatAccount];
     }
 

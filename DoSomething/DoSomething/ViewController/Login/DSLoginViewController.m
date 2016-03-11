@@ -83,6 +83,7 @@
  if ([temp isEqualToString:@"createAnAccount"]){
      
     
+     
      NSString * Firstlogin=[[NSUserDefaults standardUserDefaults]valueForKey:FirstCreatAccount];
      
     [[NSUserDefaults standardUserDefaults] setObject:@"FirstSiginProfile" forKey:FistSiginprofile];
@@ -855,102 +856,9 @@
 
 -(void)GerenalWalkAlterview
 {
-    UILabel * signinMsg;
-    UILabel *emaillbl;
-    UILabel *passwordlbl;
-    self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
-    UIView * CommWalkView;
-   
-    
-    if(IS_IPHONE6 || IS_IPHONE6_Plus)
-    {
-       CommWalkView=[[UIView alloc]initWithFrame:CGRectMake(self.view.frame.origin.x,self.view.frame.origin.y+80,self.window.frame.size.width,130)];
-        signinMsg=[[UILabel alloc]initWithFrame:CGRectMake(self.view.frame.origin.x+20,self.view.frame.origin.y+10,160,30)];
-        emaillbl=[[UILabel alloc]initWithFrame:CGRectMake(self.view.frame.origin.x+20,signinMsg.frame.origin.y+signinMsg.frame.size.height+10,self.view.frame.size.width-40,30)];
-         passwordlbl=[[UILabel alloc]initWithFrame:CGRectMake(self.view.frame.origin.x+20,emaillbl.frame.origin.y+emaillbl.frame.size.height+10,self.view.frame.size.width-40,30)];
-    }
-    else
-    {
-        CommWalkView=[[UIView alloc]initWithFrame:CGRectMake(self.view.frame.origin.x,self.view.frame.origin.y+80,self.view.frame.size.width,110)];
-        signinMsg=[[UILabel alloc]initWithFrame:CGRectMake(self.view.frame.origin.x+20,self.view.frame.origin.y+10,160,20)];
-        emaillbl=[[UILabel alloc]initWithFrame:CGRectMake(self.view.frame.origin.x+20,signinMsg.frame.origin.y+signinMsg.frame.size.height+10,self.view.frame.size.width-40,20)];
-         passwordlbl=[[UILabel alloc]initWithFrame:CGRectMake(self.view.frame.origin.x+20,emaillbl.frame.origin.y+emaillbl.frame.size.height+10,self.view.frame.size.width-40,20)];
-    }
-     CommWalkView.backgroundColor =[UIColor whiteColor];
-    [self.window addSubview:CommWalkView];
-    
-    
-    
-    
-    signinMsg.text =@"Or sign up with your email";
-    signinMsg.textColor=Red_Color;
-    signinMsg.textAlignment= NSTextAlignmentCenter;
-    signinMsg.numberOfLines=1;
-    [signinMsg setFont:[UIFont fontWithName:@"Patron-Regular" size:12]];
-    [CommWalkView addSubview:signinMsg];
-    
-    
   
-    emaillbl.text =@"Email";
-    emaillbl.textColor=[UIColor lightGrayColor];
-    emaillbl.textAlignment= NSTextAlignmentLeft;
-    emaillbl.numberOfLines=1;
-    [emaillbl setFont:[UIFont fontWithName:@"Patron-Regular" size:12]];
-    [CommWalkView addSubview:emaillbl];
-
-    passwordlbl.text =@"Password";
-    passwordlbl.textColor=[UIColor lightGrayColor];
-    passwordlbl.textAlignment= NSTextAlignmentLeft;
-    passwordlbl.numberOfLines=1;
-    [passwordlbl setFont:[UIFont fontWithName:@"Patron-Regular" size:12]];
-    [CommWalkView addSubview:passwordlbl];
-
-    
-    
-    UILabel * CreateMsg;
-    
-    UIView * CreateView;
-    UILabel * CreateMsglbl;
+    self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     UIImageView * blueCirecleImg;
-    
-    if(IS_IPHONE6_Plus||IS_IPHONE6)
-    {
-        CreateView=[[UIView alloc]initWithFrame:CGRectMake(self.view.frame.origin.x,CommWalkView.frame.origin.y+CommWalkView.frame.size.height,self.window.frame.size.width,73)];
-        CreateMsg=[[UILabel alloc]initWithFrame:CGRectMake(CreateView.center.x-80,CreateView.frame.origin.y-200,160,30)];
-        CreateMsglbl=[[UILabel alloc]initWithFrame:CGRectMake(CreateView.frame.origin.x+20,CreateView.frame.origin.y-180,self.view.frame.size.width-40,30)];
-        blueCirecleImg=[[UIImageView alloc]initWithFrame:CGRectMake(self.view.center.x,CreateView.frame.origin.y-200,45,45)];
-    }
-    else
-    {
-        CreateView=[[UIView alloc]initWithFrame:CGRectMake(self.view.frame.origin.x,CommWalkView.frame.origin.y+CommWalkView.frame.size.height,self.view.frame.size.width,50)];
-        CreateMsg=[[UILabel alloc]initWithFrame:CGRectMake(CreateView.center.x-80,CreateView.frame.origin.y-180,160,20)];
-        CreateMsglbl=[[UILabel alloc]initWithFrame:CGRectMake(CreateView.frame.origin.x+20,CreateView.frame.origin.y-160,self.view.frame.size.width-40,20)];
-        blueCirecleImg=[[UIImageView alloc]initWithFrame:CGRectMake(self.view.center.x-20,CreateView.frame.origin.y-187,45,45)];
-    }
-    CreateView.backgroundColor =Red_Color;
-    [self.window addSubview:CreateView];
-    
-
-    blueCirecleImg.image=[UIImage imageNamed:@"BlueCirecleimg"];
-    blueCirecleImg.userInteractionEnabled=YES;
-    [CreateView addSubview:blueCirecleImg];
-
-    CreateMsg.text =@"create your account";
-    CreateMsg.textColor=[UIColor whiteColor];
-    CreateMsg.textAlignment= NSTextAlignmentCenter;
-    CreateMsg.numberOfLines=1;
-    [CreateMsg setFont:[UIFont fontWithName:@"Patron-Bold" size:12]];
-    [CreateView addSubview:CreateMsg];
-
-    
-    CreateMsglbl.text =@"By selecting this,you agree to our Terms of Use and our Privacy Policy";
-    CreateMsglbl.textColor=[UIColor whiteColor];
-    CreateMsglbl.textAlignment= NSTextAlignmentCenter;
-    CreateMsglbl.numberOfLines=1;
-    [CreateMsglbl setFont:[UIFont fontWithName:@"Patron-Regular" size:8]];
-    [CreateView addSubview:CreateMsglbl];
-
-    
     UIView * altermsgView;
     UIImageView * blueTxtImg;
     UILabel * AlterMsg;
@@ -959,13 +867,19 @@
         altermsgView= [[UIView alloc]initWithFrame:CGRectMake(self.view.frame.origin.x+60,self.view.center.y+20,240,60)];
          blueTxtImg=[[UIImageView alloc]initWithFrame:CGRectMake(0,0,240,60)];
          AlterMsg=[[UILabel alloc]initWithFrame:CGRectMake(0,0,240,60)];
+         blueCirecleImg=[[UIImageView alloc]initWithFrame:CGRectMake(self.view.center.x,self.view.center.y,45,45)];
     }
     else{
-        altermsgView= [[UIView alloc]initWithFrame:CGRectMake(self.view.frame.origin.x+40,self.view.center.y-40,240,60)];
+         blueCirecleImg=[[UIImageView alloc]initWithFrame:CGRectMake(self.view.center.x-20,self.view.center.y-90,45,45)];
+        altermsgView= [[UIView alloc]initWithFrame:CGRectMake(self.view.frame.origin.x+40,self.view.center.y-20,240,60)];
         blueTxtImg=[[UIImageView alloc]initWithFrame:CGRectMake(0,0,240,60)];
         AlterMsg=[[UILabel alloc]initWithFrame:CGRectMake(0,0,240,60)];
     }
     
+    blueCirecleImg.image=[UIImage imageNamed:@"BlueCirecleimg"];
+    blueCirecleImg.userInteractionEnabled=YES;
+    [self.window addSubview:blueCirecleImg];
+
 
     blueTxtImg.userInteractionEnabled=YES;
     blueTxtImg.image=[UIImage imageNamed:@"BlueBgText"];
