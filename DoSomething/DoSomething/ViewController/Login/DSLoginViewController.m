@@ -83,18 +83,18 @@
  if ([temp isEqualToString:@"createAnAccount"]){
      
     
-     
      NSString * Firstlogin=[[NSUserDefaults standardUserDefaults]valueForKey:FirstCreatAccount];
      
-    [[NSUserDefaults standardUserDefaults] setObject:@"FirstSiginProfile" forKey:FistSiginprofile];
+     [[NSUserDefaults standardUserDefaults] setObject:@"FirstSiginProfile" forKey:FistSiginprofile];
      
      if([Firstlogin isEqualToString:@"FirstCreatAccount"])
      {
          [self GerenalWalkAlterview];
-         [[NSUserDefaults standardUserDefaults]removeObjectForKey:FirstCreatAccount];
-          [[NSUserDefaults standardUserDefaults] setObject:@"FirstCreateProfile" forKey:FirstCreateProfile];
+      
+        
      }
-
+     
+    
       self.buttonSignInHeightConstraint.constant =56;
      if (IS_IPHONE6 ||IS_IPHONE6_Plus){
        self.layoutConstraintSignInButtonHeight.constant =65;
@@ -146,6 +146,7 @@
     self.navigationController.navigationBarHidden=YES;
     [self.navigationItem setHidesBackButton:YES animated:NO];
     [self.navigationController.navigationBar setTranslucent:NO];
+    
     
     deviceUdid = [OpenUDID value];
     [self getUserCurrenLocation];
@@ -550,7 +551,7 @@
                          failure:^(AFHTTPRequestOperation *operation, id error) {
                              NSLog(@"Error = %@",error);
                              
-                             [self showAltermessage:@"ERROR"];
+                            // [self showAltermessage:@"ERROR"];
                              [COMMON removeLoading];
                              
                              
@@ -616,6 +617,7 @@
 #pragma mark - gotoProfileView
 
 -(void)gotoProfileView:(NSString *)strEmailId :(NSString *)strPassword :(BOOL)selectMail{
+     [[NSUserDefaults standardUserDefaults] setObject:@"Yes" forKey:FirstCreateProfile];
     DSProfileTableViewController *profileVC  = [[DSProfileTableViewController alloc]initWithNibName:@"DSProfileTableViewController" bundle:nil];
     profileVC.emailAddressToRegister  = strEmailId;
     profileVC.emailPasswordToRegister = strPassword;
@@ -624,9 +626,11 @@
 }
    //----Profile View With FacebookProfileID
 -(void)gotoProfileView:(NSString*)FBProfileID{
-    DSProfileTableViewController *profileVC  = [[DSProfileTableViewController alloc]initWithNibName:@"DSProfileTableViewController" bundle:nil];
+       DSProfileTableViewController *profileVC  = [[DSProfileTableViewController alloc]initWithNibName:@"DSProfileTableViewController" bundle:nil];
     profileVC.userDetailsDict = [fbUserDetailsDict mutableCopy];
     profileVC.FBprofileID=FBProfileID;
+    [[NSUserDefaults standardUserDefaults] setObject:@"Yes" forKey:FirstCreateProfile];
+
     [self.navigationController pushViewController:profileVC animated:YES];
 }
 
@@ -673,11 +677,11 @@
                 
                  [[NSUserDefaults standardUserDefaults] setObject:@"HomeView" forKey:FirstloginHomeview];
                
-                 [[NSUserDefaults standardUserDefaults]setObject:@"Locationview" forKey:FirstloginLocationView];
+                 [[NSUserDefaults standardUserDefaults]setObject:@"Yes" forKey:FirstloginLocationView];
                  
-                 [[NSUserDefaults standardUserDefaults]setObject:@"ChatDetailview" forKey:FirstloginChatview];
+                 [[NSUserDefaults standardUserDefaults]setObject:@"Yes" forKey:FirstloginChatview];
                  
-                 [[NSUserDefaults standardUserDefaults] setObject:@"Firstmatchuser" forKey:FirstMatchUser];
+               
 
                  NSLog(@"userdetails = %@",[COMMON getUserDetails]);
                  [self gotoHomeView];
@@ -778,7 +782,7 @@
     
     
     [[NSNotificationCenter defaultCenter] removeObserver:self];
-    [[NSUserDefaults standardUserDefaults] setObject:@"Registration" forKey:FirstRegistor];
+   
     
 
     
@@ -842,6 +846,7 @@
 }
 -(IBAction)didClickGeneralWalkAlterview:(id)sender
 {
+     [[NSUserDefaults standardUserDefaults]removeObjectForKey:FirstCreatAccount];
     self.walkalterview.hidden=YES;
     self.window.hidden=YES;
 }
@@ -858,16 +863,18 @@
 {
   
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+    UIButton * ClosewindowBtn =[[UIButton alloc]initWithFrame:[[UIScreen mainScreen] bounds]];
+    [ClosewindowBtn addTarget:self action:@selector(didClickGeneralWalkAlterview:) forControlEvents:UIControlEventTouchUpInside];
     UIImageView * blueCirecleImg;
     UIView * altermsgView;
     UIImageView * blueTxtImg;
     UILabel * AlterMsg;
     if(IS_IPHONE6|| IS_IPHONE6_Plus)
     {
-        altermsgView= [[UIView alloc]initWithFrame:CGRectMake(self.view.frame.origin.x+60,self.view.center.y+20,240,60)];
+        altermsgView= [[UIView alloc]initWithFrame:CGRectMake(self.window.center.x-110,self.view.center.y+40,240,60)];
          blueTxtImg=[[UIImageView alloc]initWithFrame:CGRectMake(0,0,240,60)];
          AlterMsg=[[UILabel alloc]initWithFrame:CGRectMake(0,0,240,60)];
-         blueCirecleImg=[[UIImageView alloc]initWithFrame:CGRectMake(self.view.center.x,self.view.center.y,45,45)];
+         blueCirecleImg=[[UIImageView alloc]initWithFrame:CGRectMake(self.window.center.x-20,self.view.center.y-60,45,45)];
     }
     else{
          blueCirecleImg=[[UIImageView alloc]initWithFrame:CGRectMake(self.view.center.x-20,self.view.center.y-90,45,45)];
@@ -895,17 +902,16 @@
     
     [self.window addSubview:altermsgView];
     
-    UIButton * ClosewindowBtn =[[UIButton alloc]initWithFrame:[[UIScreen mainScreen] bounds]];
-    [ClosewindowBtn addTarget:self action:@selector(didClickGeneralWalkAlterview:) forControlEvents:UIControlEventTouchUpInside];
+   
     
-    //[self.window addSubview:CommWalkView];
+  
     [self.window addSubview:ClosewindowBtn];
     self.window.hidden=NO;
     [self.window makeKeyAndVisible];
-    //[self.window.rootViewController.view addSubview:CommWalkView];
+  
     self.window.backgroundColor =[UIColor colorWithRed:(53.0/255.0f) green:(53.0/255.0f) blue:(53.0/255.0f) alpha:0.5];
     
-    //[self.view addSubview:self.window];
+   
     
 }
 

@@ -57,10 +57,11 @@
    
     NSString * Firstlogin=[[NSUserDefaults standardUserDefaults]valueForKey:FirstloginChatview];
     
-    if([Firstlogin isEqualToString:@"ChatDetailview"])
+    if([Firstlogin isEqualToString:@"Yes"])
     {
         [self GerenalWalkAlterview];
-        [[NSUserDefaults standardUserDefaults]removeObjectForKey:FirstloginChatview];
+        
+        [[NSUserDefaults standardUserDefaults]setObject:@"No" forKey:FirstloginChatview];
     }
 
     NSLog(@"conversionID=%@",_conversionID);

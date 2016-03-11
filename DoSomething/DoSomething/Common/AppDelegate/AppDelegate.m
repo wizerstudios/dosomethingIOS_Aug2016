@@ -59,6 +59,8 @@
         
         [[NSUserDefaults standardUserDefaults]synchronize];
          [[NSUserDefaults standardUserDefaults] setBool:YES forKey:FirstDisplayGeneralAlterView];
+          [[NSUserDefaults standardUserDefaults] setObject:@"YES" forKey:FirstlogininterestHobbies];
+          [[NSUserDefaults standardUserDefaults] setObject:@"Yes" forKey:FirstMatchUser];
         
         
         
@@ -70,6 +72,8 @@
         
         [[NSUserDefaults standardUserDefaults]synchronize];
          [[NSUserDefaults standardUserDefaults] setBool:NO forKey:FirstDisplayGeneralAlterView];
+         [[NSUserDefaults standardUserDefaults] setObject:@"NO" forKey:FirstlogininterestHobbies];
+          [[NSUserDefaults standardUserDefaults] setObject:@"No" forKey:FirstMatchUser];
         
     }
     
@@ -77,7 +81,7 @@
     
    // [[NSUserDefaults standardUserDefaults] setObject:@"HomeviewAnimation" forKey:FirstDisplayGeneralAlterView];
     
-        [[NSUserDefaults standardUserDefaults] setObject:@"interestHobbies" forKey:FirstlogininterestHobbies];
+    
     
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
        // self.isNotificationSound = YES;

@@ -57,10 +57,10 @@
    
     NSString * Firstlogin=[[NSUserDefaults standardUserDefaults]valueForKey:FirstlogininterestHobbies];
     
-    if([Firstlogin isEqualToString:@"interestHobbies"])
+    if([Firstlogin isEqualToString:@"YES"])
     {
         [self GerenalWalkAlterview];
-        [[NSUserDefaults standardUserDefaults]removeObjectForKey:FirstlogininterestHobbies];
+        [[NSUserDefaults standardUserDefaults] setObject:@"NO" forKey:FirstlogininterestHobbies];
     }
 
    

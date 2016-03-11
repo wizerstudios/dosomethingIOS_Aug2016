@@ -95,12 +95,12 @@
     
    
     NSString * Firstlogin=[[NSUserDefaults standardUserDefaults]valueForKey:FirstloginLocationView];
-    
-    if([Firstlogin isEqualToString:@"Locationview"])
+     
+    if([Firstlogin isEqualToString:@"Yes"])
     {
        // self.walkAlterview.hidden =NO;
         [self GerenalWalkAlterview];
-        [[NSUserDefaults standardUserDefaults]removeObjectForKey:FirstloginLocationView];
+         [[NSUserDefaults standardUserDefaults]setObject:@"No" forKey:FirstloginLocationView];
     }
 
     refreshControl = [[UIRefreshControl alloc] init];
@@ -260,12 +260,12 @@
      self.blueCircle.hidden=YES;
     NSString * Firstlogin=[[NSUserDefaults standardUserDefaults]valueForKey:FirstMatchUser];
     
-    if([Firstlogin isEqualToString:@"Firstmatchuser"])
+    if([Firstlogin isEqualToString:@"Yes"])
     {
         self.walkAlterview.hidden =NO;
         self.blueCircle.hidden=NO;
         
-        [[NSUserDefaults standardUserDefaults]removeObjectForKey:FirstMatchUser];
+        [[NSUserDefaults standardUserDefaults] setObject:@"No" forKey:FirstMatchUser];
     }
 
     if(matchUserArray !=0 && ![matchUserArray isEqual:@"0"])
@@ -1219,6 +1219,8 @@
 
 -(IBAction)didClickmatchuserDosomethingBtnAction:(id)sender
 {
+    self.walkAlterview.hidden =YES;
+    self.blueCircle.hidden=YES;
     DSChatDetailViewController *ChatDetail =[[DSChatDetailViewController alloc]initWithNibName:nil bundle:nil];
     NSMutableDictionary *matchuserdic = [[NSMutableDictionary alloc] init];
     ChatDetail.status =selectuserstatus;
@@ -1320,79 +1322,29 @@
 -(void)GerenalWalkAlterview
 {
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
-    UIView * CommWalkView;
-    UILabel * distancelbl;
-    UIImageView * profileImg;
-    UILabel * namelbl;
-    UIImageView * hobbiesImg;
+
     UIImageView * blueCirecleImg;
     UIView * altermsgView;
     
     
     if(IS_IPHONE6 || IS_IPHONE6_Plus)
     {
-        CommWalkView=[[UIView alloc]initWithFrame:CGRectMake(self.view.frame.size.width-60,self.view.center.y,100,150)];
-         distancelbl=[[UILabel alloc]initWithFrame:CGRectMake(0,0,CommWalkView.frame.size.width,20)];
-        profileImg=[[UIImageView alloc]initWithFrame:CGRectMake(10,distancelbl.frame.origin.y+distancelbl.frame.size.height,80,80)];
-         namelbl=[[UILabel alloc]initWithFrame:CGRectMake(0,100,CommWalkView.frame.size.width,20)];
-        hobbiesImg=[[UIImageView alloc]initWithFrame:CGRectMake(10,118,80,30)];
-        blueCirecleImg=[[UIImageView alloc]initWithFrame:CGRectMake(40,125,20,20)];
-        altermsgView= [[UIView alloc]initWithFrame:CGRectMake(self.view.center.x-60,self.view.center.y+40,140,60)];
+       
+        altermsgView= [[UIView alloc]initWithFrame:CGRectMake(self.window.center.x-80,self.window.center.y,140,60)];
+         blueCirecleImg=[[UIImageView alloc]initWithFrame:CGRectMake(self.window.frame.size.width-75,self.window.center.y+120,20,20)];
 
     }
     else{
-         CommWalkView=[[UIView alloc]initWithFrame:CGRectMake(self.view.frame.size.width-90,self.view.center.y-20,80,100)];
-         distancelbl=[[UILabel alloc]initWithFrame:CGRectMake(0,0,80,20)];
-        profileImg=[[UIImageView alloc]initWithFrame:CGRectMake(20,15,45,45)];
-         namelbl=[[UILabel alloc]initWithFrame:CGRectMake(0,55,80,20)];
-        hobbiesImg=[[UIImageView alloc]initWithFrame:CGRectMake(10,70,60,28)];
-        blueCirecleImg=[[UIImageView alloc]initWithFrame:CGRectMake(30,77,20,20)];
-        altermsgView= [[UIView alloc]initWithFrame:CGRectMake(self.view.center.x-80,self.view.center.y,140,60)];
-
+        
+        altermsgView= [[UIView alloc]initWithFrame:CGRectMake(self.window.center.x-80,self.window.center.y+40,140,60)];
+        blueCirecleImg=[[UIImageView alloc]initWithFrame:CGRectMake(self.window.frame.size.width-63,self.window.center.y+153,20,20)];
     }
     
-    
-    [self.window addSubview:CommWalkView];
-    CommWalkView.backgroundColor =[UIColor whiteColor];
-    
-   //distancelbl=[[UILabel alloc]initWithFrame:CGRectMake(0,0,80,20)];
-    distancelbl.text =@"10km";
-    distancelbl.textColor=[UIColor blackColor];
-    distancelbl.textAlignment= NSTextAlignmentCenter;
-    distancelbl.numberOfLines=1;
-    [distancelbl setFont:[UIFont fontWithName:@"Patron-Regular" size:10]];
-    [CommWalkView addSubview:distancelbl];
-    
-    //profileImg=[[UIImageView alloc]initWithFrame:CGRectMake(20,15,45,45)];
-    profileImg.image=[UIImage imageNamed:@"chong"];
-    profileImg.userInteractionEnabled=YES;
-    [CommWalkView addSubview:profileImg];
-    
-    
-//     namelbl=[[UILabel alloc]initWithFrame:CGRectMake(0,55,80,20)];
-    namelbl.text =@"Chong";
-    namelbl.textColor=[UIColor blackColor];
-    namelbl.textAlignment= NSTextAlignmentCenter;
-    namelbl.numberOfLines=1;
-    [namelbl setFont:[UIFont fontWithName:@"Patron-Regular" size:10]];
-    [CommWalkView addSubview:namelbl];
-    
-    
-//     hobbiesImg=[[UIImageView alloc]initWithFrame:CGRectMake(10,70,60,28)];
-    hobbiesImg.image=[UIImage imageNamed:@"hobbiesrequest_image"];
-    hobbiesImg.userInteractionEnabled=YES;
-    [CommWalkView addSubview:hobbiesImg];
-    
-//    blueCirecleImg=[[UIImageView alloc]initWithFrame:CGRectMake(30,77,20,20)];
+
     blueCirecleImg.image=[UIImage imageNamed:@"BlueCirecleimg"];
     blueCirecleImg.userInteractionEnabled=YES;
-    [CommWalkView addSubview:blueCirecleImg];
+    [self.window addSubview:blueCirecleImg];
 
-    
-    
-//    altermsgView= [[UIView alloc]initWithFrame:CGRectMake(self.view.center.x-80,self.view.center.y,140,60)];
-    
-    
     
     UIImageView * blueTxtImg=[[UIImageView alloc]initWithFrame:CGRectMake(0,0,140,60)];
     blueTxtImg.userInteractionEnabled=YES;
@@ -1412,11 +1364,11 @@
     UIButton * ClosewindowBtn =[[UIButton alloc]initWithFrame:[[UIScreen mainScreen] bounds]];
     [ClosewindowBtn addTarget:self action:@selector(didClickGeneralWalkAlterviewBtn:) forControlEvents:UIControlEventTouchUpInside];
     
-    [self.window addSubview:CommWalkView];
+    //[self.window addSubview:CommWalkView];
     [self.window addSubview:ClosewindowBtn];
     self.window.hidden=NO;
     [self.window makeKeyAndVisible];
-    //[self.window.rootViewController.view addSubview:CommWalkView];
+    
     self.window.backgroundColor =[UIColor colorWithRed:(53.0/255.0f) green:(53.0/255.0f) blue:(53.0/255.0f) alpha:0.5];
     
     //[self.view addSubview:self.window];

@@ -126,11 +126,11 @@
     NSString * Firstlogin=[[NSUserDefaults standardUserDefaults]valueForKey:FirstCreateProfile];
     
     
-    if([Firstlogin isEqualToString:@"FirstCreateProfile"])
+    if([Firstlogin isEqualToString:@"Yes"])
     {
         //self.WalAlterview.hidden =NO;
          [self GerenalWalkAlterviewCreateAccount];
-        [[NSUserDefaults standardUserDefaults]removeObjectForKey:FirstCreateProfile];
+         [[NSUserDefaults standardUserDefaults] setObject:@"No" forKey:FirstCreateProfile];
     }
     
     Regpassword=emailPasswordToRegister;
@@ -1869,14 +1869,6 @@
         else
         {
             cell.notificationTittlelbl.hidden=NO;
-            NSString * FirstSignin=[[NSUserDefaults standardUserDefaults]valueForKey:FistSiginprofile];
-            if([FirstSignin isEqualToString:@"FirstSiginProfile"])
-            {
-                //self.WalAlterview.hidden =NO;
-                [self GerenalWalkAlterviewSign];
-                [[NSUserDefaults standardUserDefaults]removeObjectForKey:FistSiginprofile];
-            }
-
             
         }
         
@@ -1925,6 +1917,15 @@
         else{
             cell.termsOfUse.hidden =NO;
             cell.privacyPolicy.hidden=NO;
+            NSString * FirstSignin=[[NSUserDefaults standardUserDefaults]valueForKey:FistSiginprofile];
+            if([FirstSignin isEqualToString:@"FirstSiginProfile"])
+            {
+                //self.WalAlterview.hidden =NO;
+                [self GerenalWalkAlterviewSign];
+                [[NSUserDefaults standardUserDefaults]removeObjectForKey:FistSiginprofile];
+            }
+            
+
         }
         if (IS_IPHONE6 ||IS_IPHONE6_Plus){
             cell.layoutConstraintTermsOfUseBtnDependViewHeight.constant =50;
@@ -2542,6 +2543,7 @@
     
     [[NSNotificationCenter defaultCenter] removeObserver:self];
     
+    
     [self gotoHomeView];
     
 }
@@ -2870,9 +2872,9 @@
     UIView * altermsgView;
     if(IS_IPHONE6 || IS_IPHONE6_Plus)
     {
-         blueCirecleImg=[[UIImageView alloc]initWithFrame:CGRectMake(self.view.frame.size.width-10,25,45,45)];
-         Savelbl=[[UILabel alloc]initWithFrame:CGRectMake(self.view.frame.size.width-5,30,35,35)];
-         altermsgView= [[UIView alloc]initWithFrame:CGRectMake(self.view.center.x-55,self.view.frame.origin.y+160,160,60)];
+         blueCirecleImg=[[UIImageView alloc]initWithFrame:CGRectMake(self.window.frame.size.width-65,self.window.frame.origin.y+25,45,45)];
+         Savelbl=[[UILabel alloc]initWithFrame:CGRectMake(self.window.frame.size.width-60,self.window.frame.origin.y+30,35,35)];
+         altermsgView= [[UIView alloc]initWithFrame:CGRectMake(self.window.center.x-75,self.view.frame.origin.y+160,150,50)];
     }
     else{
          blueCirecleImg=[[UIImageView alloc]initWithFrame:CGRectMake(self.view.frame.size.width-65,15,45,45)];
@@ -2880,13 +2882,10 @@
          altermsgView= [[UIView alloc]initWithFrame:CGRectMake(self.view.center.x-80,self.view.frame.origin.y+150,160,60)];
     }
     
-    
-//    blueCirecleImg=[[UIImageView alloc]initWithFrame:CGRectMake(self.view.frame.size.width-65,15,45,45)];
     blueCirecleImg.image=[UIImage imageNamed:@"BlueCirecleimg"];
     blueCirecleImg.userInteractionEnabled=YES;
     [self.window addSubview:blueCirecleImg];
     
-//    Savelbl=[[UILabel alloc]initWithFrame:CGRectMake(self.view.frame.size.width-60,20,35,35)];
     Savelbl.text =@"Save";
     Savelbl.textColor=[UIColor whiteColor];
     Savelbl.textAlignment= NSTextAlignmentCenter;
@@ -2895,10 +2894,7 @@
     [self.window addSubview:Savelbl];
     
     
-    
-//    altermsgView= [[UIView alloc]initWithFrame:CGRectMake(self.view.center.x-80,self.view.frame.origin.y+150,160,60)];
-    
-    
+
     UIImageView * blueTxtImg=[[UIImageView alloc]initWithFrame:CGRectMake(0,0,160,60)];
     blueTxtImg.userInteractionEnabled=YES;
     blueTxtImg.image=[UIImage imageNamed:@"BlueBgText"];
@@ -2940,7 +2936,7 @@
          CommWalkView=[[UIView alloc]initWithFrame:CGRectMake(self.view.frame.size.width-63,self.view.frame.origin.y+25,45,45)];
          blueCirecleImg=[[UIImageView alloc]initWithFrame:CGRectMake(2,3,40,40)];
         Savelbl=[[UILabel alloc]initWithFrame:CGRectMake(5,5,35,35)];
-         altermsgView= [[UIView alloc]initWithFrame:CGRectMake(self.view.center.x-80,self.view.center.y+60,200,60)];
+         altermsgView= [[UIView alloc]initWithFrame:CGRectMake(self.view.center.x-90,self.view.center.y+80,200,60)];
     }
     else{
          CommWalkView=[[UIView alloc]initWithFrame:CGRectMake(self.view.frame.size.width-63,self.view.frame.origin.y+15,45,45)];
@@ -2949,7 +2945,7 @@
          altermsgView= [[UIView alloc]initWithFrame:CGRectMake(self.view.center.x-90,self.view.center.y+20,200,60)];
     }
     
-        CommWalkView.backgroundColor =Red_Color;
+        CommWalkView.backgroundColor =[UIColor clearColor];
     
     
 
@@ -2957,16 +2953,12 @@
     blueCirecleImg.userInteractionEnabled=YES;
     [CommWalkView addSubview:blueCirecleImg];
    
-//    Savelbl=[[UILabel alloc]initWithFrame:CGRectMake(5,5,35,35)];
     Savelbl.text =@"Save";
     Savelbl.textColor=[UIColor whiteColor];
     Savelbl.textAlignment= NSTextAlignmentCenter;
     Savelbl.numberOfLines=2;
     [Savelbl setFont:[UIFont fontWithName:@"Patron-Regular" size:12]];
     [CommWalkView addSubview:Savelbl];
-
-    
-//    altermsgView= [[UIView alloc]initWithFrame:CGRectMake(self.view.center.x-90,self.view.center.y+20,200,60)];
     
     
     UIImageView * blueTxtImg=[[UIImageView alloc]initWithFrame:CGRectMake(0,0,200,60)];

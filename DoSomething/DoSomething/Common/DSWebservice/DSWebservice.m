@@ -283,6 +283,10 @@ notification_sound  :(NSString *)isnotification_sound
                                                                userInfo:responseObject];
          }
          }
+          [[NSUserDefaults standardUserDefaults] setObject:@"Registration" forKey:FirstRegistor];
+         [[NSUserDefaults standardUserDefaults]setObject:@"Yes" forKey:FirstloginLocationView];
+
+         [[NSUserDefaults standardUserDefaults]setObject:@"Yes" forKey:FirstloginChatview];
      }
      
        failure:^(AFHTTPRequestOperation *operation, NSError *error){

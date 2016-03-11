@@ -91,7 +91,7 @@
         [self loadActivityAPI:getLast availableStr:@"" doSomethingId:@""];
     }
     self.WalkAlterview.hidden =YES;
-   
+  
     
     NSString * CreateAccount =[[NSUserDefaults standardUserDefaults]valueForKey:FirstRegistor];
     
@@ -671,6 +671,7 @@ minimumLineSpacingForSectionAtIndex:(NSInteger)section {
     
     [activatedView setHidden:NO];
     NSString * Firstlogin=[[NSUserDefaults standardUserDefaults]valueForKey:FirstloginHomeview];
+      
     if([Firstlogin isEqualToString:@"HomeView"])
     {
         [self GerenalWalkAlterview];
@@ -811,8 +812,8 @@ minimumLineSpacingForSectionAtIndex:(NSInteger)section {
     UIImageView * blueCirecleImg;
     if(IS_IPHONE6_Plus||IS_IPHONE6)
     {
-         CommWalkView=[[UIView alloc]initWithFrame:CGRectMake(self.view.center.x-50,self.view.frame.size.height,(self.view.frame.size.width/2),50)];
-         altermsgView= [[UIView alloc]initWithFrame:CGRectMake(self.view.center.x-50,self.view.frame.size.height-70,160,60)];
+         CommWalkView=[[UIView alloc]initWithFrame:CGRectMake(self.window.center.x-70,self.window.frame.size.height-100,(self.view.frame.size.width/2),50)];
+         altermsgView= [[UIView alloc]initWithFrame:CGRectMake(self.window.center.x-60,self.window.frame.size.height-180,160,60)];
          blueCirecleImg=[[UIImageView alloc]initWithFrame:CGRectMake(56,3,45,45)];
     }
     else{
@@ -821,18 +822,18 @@ minimumLineSpacingForSectionAtIndex:(NSInteger)section {
         altermsgView= [[UIView alloc]initWithFrame:CGRectMake(self.view.center.x-70,self.view.frame.size.height-175,160,60)];
          blueCirecleImg=[[UIImageView alloc]initWithFrame:CGRectMake(56,3,45,45)];
     }
-    CommWalkView.backgroundColor =Red_Color;
+    CommWalkView.backgroundColor =[UIColor clearColor];
  
     blueCirecleImg.image=[UIImage imageNamed:@"BlueCirecleimg"];
     blueCirecleImg.userInteractionEnabled=YES;
     [CommWalkView addSubview:blueCirecleImg];
-    UILabel * letdoSomethinglbl=[[UILabel alloc]initWithFrame:CGRectMake(0,0,160,60)];
-    letdoSomethinglbl.text =@"Let’s Do Something";
-    letdoSomethinglbl.textColor=[UIColor whiteColor];
-    letdoSomethinglbl.textAlignment= NSTextAlignmentCenter;
-    letdoSomethinglbl.numberOfLines=1;
-    [letdoSomethinglbl setFont:[UIFont fontWithName:@"Patron-Bold" size:12]];
-    [CommWalkView addSubview:letdoSomethinglbl];
+//    UILabel * letdoSomethinglbl=[[UILabel alloc]initWithFrame:CGRectMake(0,0,160,60)];
+//    letdoSomethinglbl.text =@"Let’s Do Something";
+//    letdoSomethinglbl.textColor=[UIColor whiteColor];
+//    letdoSomethinglbl.textAlignment= NSTextAlignmentCenter;
+//    letdoSomethinglbl.numberOfLines=1;
+//    [letdoSomethinglbl setFont:[UIFont fontWithName:@"Patron-Bold" size:12]];
+//    [CommWalkView addSubview:letdoSomethinglbl];
 
     
     UIImageView * blueTxtImg=[[UIImageView alloc]initWithFrame:CGRectMake(0,0,160,60)];
@@ -874,10 +875,10 @@ minimumLineSpacingForSectionAtIndex:(NSInteger)section {
     if(IS_IPHONE6_Plus||IS_IPHONE6)
     {
        
-        altermsgView= [[UIView alloc]initWithFrame:CGRectMake(self.view.center.x-50,self.view.frame.size.height-70,160,60)];
-        blueCirecleImg1=[[UIImageView alloc]initWithFrame:CGRectMake(self.view.frame.origin.x+35,self.view.center.y+40,45,45)];
-        blueCirecleImg2=[[UIImageView alloc]initWithFrame:CGRectMake(self.view.center.x,self.view.center.y+40,45,45)];
-         blueCirecleImg3=[[UIImageView alloc]initWithFrame:CGRectMake(self.view.frame.size.width-30,self.view.center.y+40,45,45)];
+        altermsgView= [[UIView alloc]initWithFrame:CGRectMake(self.window.center.x-70,self.window.frame.size.height-160,160,60)];
+        blueCirecleImg1=[[UIImageView alloc]initWithFrame:CGRectMake(self.window.frame.origin.x+35,self.window.center.y,45,45)];
+        blueCirecleImg2=[[UIImageView alloc]initWithFrame:CGRectMake(self.window.center.x-20,self.window.center.y,45,45)];
+         blueCirecleImg3=[[UIImageView alloc]initWithFrame:CGRectMake(self.window.frame.size.width-80,self.window.center.y,45,45)];
     }
     else{
         
