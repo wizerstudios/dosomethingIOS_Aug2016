@@ -673,6 +673,7 @@
     
 
 }
+#pragma mark Request Action
 -(IBAction)didClickRequestSend:(id)sender
 {
     if(isgestureenable==YES)
@@ -729,6 +730,7 @@
             
         }
         [self loadRequestsendWebService];
+        
       
     }
       
@@ -788,6 +790,7 @@
                                         matchUserArray =[[responseObject valueForKey:@"sendrequest"]valueForKey:@"Conversaion"];
                                         
                                         [self loadMatchActivityMethod];
+                                        [self nearestLocationWebservice];
 //                                        NSString * resposeMsg =[[responseObject valueForKey:@"sendrequest"]valueForKey:@"Message"];
 //                                        [self showAltermessage:resposeMsg];
                  

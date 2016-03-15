@@ -1197,8 +1197,6 @@
             cell = cellProfileImg;
         }
         
-       
-      
 //        if (IS_IPHONE6 ||IS_IPHONE6_Plus)
 //        {
 //            //cell.layoutConstraintProfileImageHeight.constant =159;
