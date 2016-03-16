@@ -20,6 +20,8 @@
 @property(nonatomic,retain)IBOutlet  UIView * hobbiesImagebackView;
 @property(nonatomic,strong)IBOutlet UIButton *requestsendBtn;
 
+@property (nonatomic,strong) IBOutlet NSLayoutConstraint * dosomethingImage1Xposition;
 
+@property (nonatomic,strong) IBOutlet NSLayoutConstraint * dosomethingImage2Xposition;
 
 @end

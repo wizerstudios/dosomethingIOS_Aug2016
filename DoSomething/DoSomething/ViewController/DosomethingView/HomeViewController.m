@@ -511,7 +511,7 @@ minimumLineSpacingForSectionAtIndex:(NSInteger)section {
        // [bottombutton setUserInteractionEnabled:NO];
        [self loadActivityAPI:Cancel availableStr:@"" doSomethingId:@""];
     }else{
-        if([selectedItemsArray count] == 3){
+        if([selectedItemsArray count] <= 3){
             objCustomAlterview.view .hidden  = NO;
             objCustomAlterview.alertBgView.hidden = NO;
             objCustomAlterview.alertMainBgView.hidden = NO;
@@ -762,14 +762,38 @@ minimumLineSpacingForSectionAtIndex:(NSInteger)section {
        for (int i =0; i <[activityImageArray count]; i++) {
             hobbiesImage = [[UIImageView alloc]init];
             titleLabel = [[UILabel alloc]init];
-            hobbiesImage.frame = CGRectMake((i*(commonWidth + imageSize))+ imageXPos, yPos, imageSize, imageSize);
+            if([activityImageArray count] == 1)
+            {
+                 hobbiesImage.frame = CGRectMake((activatedView.frame.size.width/2.3), yPos, imageSize, imageSize);
+                titleLabel.frame = CGRectMake((activatedView.frame.size.width/2.5), yPos + imageSize+5, imageSize + 20, 15);
+            }
+           else if ([activityImageArray count] == 2)
+           {
+               if(IS_IPHONE6_Plus|| IS_IPHONE6)
+               {
+                   hobbiesImage.frame = CGRectMake((i*(commonWidth + imageSize))+ imageXPos*3, yPos, imageSize, imageSize);
+                   titleLabel.frame = CGRectMake((i*(commonWidth + imageSize))+ imageXPos*2.8, yPos + imageSize+5, imageSize + 20, 15);
+               }
+               else
+               {
+                hobbiesImage.frame = CGRectMake((i*(commonWidth + imageSize))+ imageXPos*2.5, yPos, imageSize, imageSize);
+               titleLabel.frame = CGRectMake((i*(commonWidth + imageSize))+ imageXPos*2, yPos + imageSize+5, imageSize + 20, 15);
+               }
+           }
+           
+           else
+           {
+                hobbiesImage.frame = CGRectMake((i*(commonWidth + imageSize))+ imageXPos, yPos, imageSize, imageSize);
+               titleLabel.frame = CGRectMake((i*(commonWidth + imageSize))+textXPos, yPos + imageSize+5, imageSize + 20, 15);
+           }
+           
             NSString *activityStr =[[[activityImageArray objectAtIndex:i]valueForKey:@"name"]uppercaseString];
         
             NSString *image =[[activityImageArray objectAtIndex:i]valueForKey:@"ActiveImage"];
             image= [image stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
             [hobbiesImage setImageWithURL:[NSURL URLWithString:image]];
                
-            titleLabel.frame = CGRectMake((i*(commonWidth + imageSize))+textXPos, yPos + imageSize+5, imageSize + 20, 15);
+            //titleLabel.frame = CGRectMake((i*(commonWidth + imageSize))+textXPos, yPos + imageSize+5, imageSize + 20, 15);
             [titleLabel setFont:[UIFont fontWithName:@"HelveticaNeue-Bold" size:10]];
             titleLabel.textAlignment = NSTextAlignmentCenter;
             titleLabel.textColor = Red_Color;

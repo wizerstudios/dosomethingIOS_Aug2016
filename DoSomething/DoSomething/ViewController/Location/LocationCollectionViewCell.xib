@@ -101,20 +101,20 @@
                                     <constraint firstAttribute="width" constant="25" id="fK2-r7-f4s"/>
                                 </constraints>
                             </imageView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="elS-s6-A7j">
-                                <rect key="frame" x="42" y="158" width="25" height="25"/>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="25" id="iOK-W7-y1R"/>
-                                    <constraint firstAttribute="width" constant="25" id="l9T-zI-ifq"/>
-                                </constraints>
-                            </imageView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="hUv-43-UZa">
                                 <rect key="frame" x="72" y="158" width="25" height="25"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="25" id="7QB-LX-sgp"/>
                                     <constraint firstAttribute="width" constant="25" id="8BA-NC-pP5"/>
+                                </constraints>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="elS-s6-A7j">
+                                <rect key="frame" x="42" y="158" width="25" height="25"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="25" id="iOK-W7-y1R"/>
+                                    <constraint firstAttribute="width" constant="25" id="l9T-zI-ifq"/>
                                 </constraints>
                             </imageView>
                         </subviews>
@@ -161,7 +161,9 @@
             <connections>
                 <outlet property="activeNow" destination="XyY-39-1Hh" id="CX7-3v-PB2"/>
                 <outlet property="dosomethingImage1" destination="hL2-Dp-N0G" id="BpS-e4-qK9"/>
+                <outlet property="dosomethingImage1Xposition" destination="JDM-Hn-8uo" id="V1x-FY-MCU"/>
                 <outlet property="dosomethingImage2" destination="elS-s6-A7j" id="LlY-RP-bu0"/>
+                <outlet property="dosomethingImage2Xposition" destination="LSQ-I1-biQ" id="4bQ-f9-5dI"/>
                 <outlet property="dosomethingImage3" destination="hUv-43-UZa" id="iZt-vT-xxg"/>
                 <outlet property="hobbiesImagebackView" destination="o8L-NC-hYd" id="e4P-6t-kyq"/>
                 <outlet property="imageProfile" destination="Qrf-6q-c2F" id="JD8-Jz-DiF"/>
