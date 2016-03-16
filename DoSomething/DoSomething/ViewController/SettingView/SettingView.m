@@ -408,8 +408,12 @@
 -(void)customSoundView
 {
     objCustomSoundview = [[CustomSoundview alloc] initWithNibName:@"CustomSoundview" bundle:nil];
-    objCustomSoundview.view.frame = CGRectMake(self.view.frame.origin.x,self.view.frame.origin.y, CGRectGetWidth(self.view.frame), self.view.frame.size.height);
+    objCustomSoundview.view.frame = CGRectMake(self.view.frame.origin.x,self.view.frame.origin.y,self.view.frame.size.width, self.view.frame.size.height);
    // [objCustomSoundview.alertBgView setHidden:YES];
+    if(IS_IPHONE6 || IS_IPHONE6_Plus)
+    {
+        objCustomSoundview.soundmenutrailing.constant=130;
+    }
     [objCustomSoundview.soundmenuView setHidden:YES];
     
     [objCustomSoundview.soundMenuCancelBtn addTarget:self action:@selector(DidclickSoundMenuCancel:) forControlEvents:UIControlEventTouchUpInside];

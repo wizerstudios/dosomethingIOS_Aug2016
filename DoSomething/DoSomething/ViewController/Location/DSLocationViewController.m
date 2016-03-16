@@ -202,6 +202,7 @@
     if(self.senduserDetail.count>0)
     {
         self.matchActivityView.hidden=NO;
+        [matchUserArray removeAllObjects];
         matchUserArray=self.senduserDetail;
         if(IS_IPHONE6 || IS_IPHONE6_Plus)
         {
@@ -438,7 +439,7 @@
              
              NSLog(@"response=%@",responseObject);
              recordCount =[[responseObject valueForKey:@"nearestusers"]valueForKey:@"recordCount"];
-             matchUserArray =[[responseObject valueForKey:@"nearestusers"]valueForKey:@"matchedUser"];
+             //matchUserArray =[[responseObject valueForKey:@"nearestusers"]valueForKey:@"matchedUser"];
              
              //[self loadMatchActivityMethod];
              
@@ -484,6 +485,7 @@
                  }
              }
              [refreshControl endRefreshing];
+             
              [locationCollectionView reloadData];
          }
                             failure:^(AFHTTPRequestOperation *operation, id error)
@@ -788,9 +790,10 @@
                                     if([[[responseObject valueForKey:@"sendrequest"]valueForKey:@"status"] isEqualToString:@"success"])
                                     {
                                         matchUserArray =[[responseObject valueForKey:@"sendrequest"]valueForKey:@"Conversaion"];
-                                        
-                                        [self loadMatchActivityMethod];
+                                         [self loadMatchActivityMethod];
                                         [self nearestLocationWebservice];
+                                       
+                                        
 //                                        NSString * resposeMsg =[[responseObject valueForKey:@"sendrequest"]valueForKey:@"Message"];
 //                                        [self showAltermessage:resposeMsg];
                  
@@ -1224,10 +1227,11 @@
 {
     self.walkAlterview.hidden =YES;
     self.blueCircle.hidden=YES;
+    self.matchActivityView.hidden =YES;
     DSChatDetailViewController *ChatDetail =[[DSChatDetailViewController alloc]initWithNibName:nil bundle:nil];
     NSMutableDictionary *matchuserdic = [[NSMutableDictionary alloc] init];
     ChatDetail.status =selectuserstatus;
-    matchuserdic = ([matchUserArray isEqual:@""])?[self.senduserDetail mutableCopy]:[matchUserArray mutableCopy];
+    matchuserdic = (self.senduserDetail.count > 0)?[self.senduserDetail mutableCopy]:[matchUserArray mutableCopy];
     ChatDetail.conversionID=sendrequestConversationID;
     ChatDetail.chatuserDetailsDict = matchuserdic;
     

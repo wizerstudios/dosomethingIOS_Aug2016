@@ -25,9 +25,9 @@ typedef void (^WebserviceRequestXMLFailureHandler)(AFHTTPRequestOperation  *oper
 
 
 #ifdef DEBUG
-    #define push_type   @"pro"
-#else
     #define push_type   @"dev"
+#else
+    #define push_type   @"pro"
 #endif
 
 #define URL_FOR_RESOURCE(RESOURCE) [NSString stringWithFormat:@"%@%@",BASE_URL,RESOURCE]

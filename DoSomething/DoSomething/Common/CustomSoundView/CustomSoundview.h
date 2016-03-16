@@ -26,4 +26,7 @@
 @property (nonatomic) SystemSoundID * selectSoundID;
 @property (nonatomic,strong)IBOutlet NSLayoutConstraint *soundmenutrailing;
 @property (nonatomic,strong)IBOutlet NSLayoutConstraint *soundmenuheight;
+
+
+
 @end

@@ -1009,14 +1009,10 @@
     
     [objCustomSoundView.soundMenuCancelBtn addTarget:self action:@selector(DidclickSoundMenuCancel:) forControlEvents:UIControlEventTouchUpInside];
     [objCustomSoundView.soundmenuOkBtn addTarget:self action:@selector(didClickSoundOk:) forControlEvents:UIControlEventTouchUpInside];
-    //    if(IS_IPHONE6||IS_IPHONE6_Plus)
-    //    {
-    //        objCustomAlterview.mainalterviewheight.constant=50;
-    //    }
-    //    else
-    //    {
-    //        objCustomAlterview.mainalterviewheight.constant=0;
-    //    }
+    if(IS_IPHONE6 || IS_IPHONE6_Plus)
+    {
+        objCustomSoundView.soundmenutrailing.constant=130;
+    }
     
     [self.view addSubview:objCustomSoundView.view];
  
