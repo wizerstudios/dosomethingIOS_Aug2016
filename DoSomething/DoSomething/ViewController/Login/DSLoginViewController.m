@@ -675,12 +675,12 @@
                  
                  [COMMON setUserDetails:[[loginDict valueForKey:@"userDetails"]objectAtIndex:0]];
                 
-                
-                 [[NSUserDefaults standardUserDefaults] setObject:@"HomeView" forKey:FirstloginHomeview];
-               
-                 [[NSUserDefaults standardUserDefaults]setObject:@"Yes" forKey:FirstloginLocationView];
-                 
-                 [[NSUserDefaults standardUserDefaults]setObject:@"Yes" forKey:FirstloginChatview];
+//                
+//                 [[NSUserDefaults standardUserDefaults] setObject:@"HomeView" forKey:FirstloginHomeview];
+//               
+//                 [[NSUserDefaults standardUserDefaults]setObject:@"Yes" forKey:FirstloginLocationView];
+//                 
+//                 [[NSUserDefaults standardUserDefaults]setObject:@"Yes" forKey:FirstloginChatview];
                  
                
 

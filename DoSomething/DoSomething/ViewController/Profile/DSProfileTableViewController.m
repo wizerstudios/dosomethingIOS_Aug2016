@@ -1193,11 +1193,6 @@
             cell = cellProfileImg;
         }
         
-//        if (IS_IPHONE6 ||IS_IPHONE6_Plus)
-//        {
-//            //cell.layoutConstraintProfileImageHeight.constant =159;
-//            //cell.layoutConstraintProfileImageWidth.constant =161;
-//        }
         cameraIcon=[UIButton buttonWithType:UIButtonTypeCustom];
         if(IS_IPHONE6)
         {
@@ -1407,90 +1402,6 @@
             
         }
         
-        if(profileDict != NULL)
-        {
-            
-            if(![[profileDict valueForKey:@"date_of_birth"] isEqual:currentTextfield.text]){
-                
-                
-                if(currentTextfield.text == NULL){
-                    if([[profileDict valueForKey:@"date_of_birth"]isEqualToString:@"00/00/0000"])
-                        cell.textFieldDPPlaceHolder.text = @"DD/MM/YYYY";
-                    else{
-                        NSString *dateStr = [profileDict valueForKey:@"date_of_birth"];
-                        dateStr = [dateStr stringByReplacingOccurrencesOfString:@"/" withString:@" / "];
-                        cell.textFieldDPPlaceHolder.text =dateStr;
-                        
-                    }
-                        [cell.textFieldDPPlaceHolder setTag:1000];
-
-                }
-                else{
-                   
-                    cell.textFieldDPPlaceHolder.text = currentTextfield.text;
-                }
-            }
-            else{
-                NSString *dateStr = [profileDict valueForKey:@"date_of_birth"];
-                dateStr = [dateStr stringByReplacingOccurrencesOfString:@"/" withString:@" / "];
-                cell.textFieldDPPlaceHolder.text =dateStr;
-                
-                
-            }
-             [cell.textFieldDPPlaceHolder setTag:1000];
-           
-            
-        }
-        else if(userDetailsDict.count > 0){
-          
-            NSString *datestr= [userDetailsDict valueForKey:@"birthday"];
-            if(datestr!=nil ){
-               
-                
-                if(currentTextfield.text == NULL){
-                    cell.textFieldDPPlaceHolder.text =[userDetailsDict valueForKey:@"birthday"];
-                    NSString *datestr=[userDetailsDict valueForKey:@"birthday"];
-                     currentTextfield.text=cell.textFieldDPPlaceHolder.text;
-                    NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
-                    [dateFormat setDateFormat:@"dd/mm/yyyy"];
-                    NSDate *date = [dateFormat dateFromString:datestr];
-                    dateFormat = [[NSDateFormatter alloc] init];
-                    [dateFormat setDateFormat:@"yyyy-MM-dd"];
-                    dateChange = [dateFormat stringFromDate:date];
-                    NSLog(@"%@",dateChange);
-                    
-                    strDOB       = (currentTextfield.text !=nil)?currentTextfield.text :dateChange;
-                    [cell.textFieldDPPlaceHolder setTag:1000];
-                    
-                }
-                else{
-                    [cell.textFieldDPPlaceHolder setTag:1000];
-                    cell.textFieldDPPlaceHolder.text = currentTextfield.text;
-                }
-            }
-            else{
-                if(currentTextfield.text == NULL){
-                    cell.textFieldDPPlaceHolder.text =[userDetailsDict valueForKey:@"birthday"];
-                    
-                    
-                    [cell.textFieldDPPlaceHolder setTag:1000];
-                    
-                }
-                else{
-                    [cell.textFieldDPPlaceHolder setTag:1000];
-                    cell.textFieldDPPlaceHolder.text = currentTextfield.text;
-                }
-            }
-        }
-        
-        else
-        {
-        if([currentTextfield.text isEqualToString:@""] || currentTextfield.text == nil)
-            
-            [cell.textFieldDPPlaceHolder setTag:1000];
-            cell.textFieldDPPlaceHolder.text = currentTextfield.text;
-            
-        }
         
         
     }
@@ -1503,76 +1414,7 @@
             
         }
         
-          cell.textViewAboutYou.delegate = self;
-        if(profileDict !=NULL){
-            
-            
-            if([[profileDict valueForKey:@"about"] isEqual:@""]){
-                
-                
-                cell.textViewAboutYou.text = textviewText;
-                
-                
-                strAbout =cell.textViewAboutYou.text;
-                
-//              dataSize = [COMMON getControlHeight:strAbout withFontName:@"Patron-Regular" ofSize:14.0 withSize:CGSizeMake(cell.frame.size.width-20,tableView.frame.size.height)];
-                
-                cell.textViewAboutYou.delegate = self;
-                
-            }
-            
-            else{
-                if(![[profileDict valueForKey:@"about"] isEqual:strAbout]){
-                    
-                  
-                    if(strAbout == NULL){
-                        cell.textViewAboutYou.text = [[profileDict valueForKey:@"about"]mutableCopy];
-                       strAbout =cell.textViewAboutYou.text;
-//                         dataSize = [COMMON getControlHeight:strAbout withFontName:@"Patron-Regular" ofSize:14.0 withSize:CGSizeMake(cell.frame.size.width-20,tableView.frame.size.height)];
-//                        self.aboutTextHeight.constant =dataSize.height;
-                    }
-                    else{
-                         cell.textViewAboutYou.text = strAbout;
-//                        dataSize = [COMMON getControlHeight:strAbout withFontName:@"Patron-Regular" ofSize:14.0 withSize:CGSizeMake(cell.frame.size.width-20,tableView.frame.size.height)];
-//                        self.aboutTextHeight.constant =dataSize.height-12;
-                    }
-                }
-                else{
-                    
-                    cell.textViewAboutYou.text = [[profileDict valueForKey:@"about"]mutableCopy];
-                    strAbout =cell.textViewAboutYou.text;
-                    
-                }
-               
-                
-            }
-            
-    }
-       
-        else{
-            if(textviewText == nil){
-                
-                if([strAbout isEqualToString:@""] ||strAbout == nil)
-                {
-               
-                cell.textViewAboutYou.text = @"Write something about yourself here.";
-                    cell.textViewAboutYou.scrollEnabled=YES;
-                  
-                   
-                }
-                else
-                {
-                    
-                    cell.textViewAboutYou.text =strAbout;
-//                    dataSize = [COMMON getControlHeight:strAbout withFontName:@"Patron-Regular" ofSize:14.0 withSize:CGSizeMake(cell.frame.size.width-20,tableView.frame.size.height)];
-//                    self.aboutTextHeight.constant =dataSize.height-12;
-
-                    
-                }
-                }
-            cell.textViewAboutYou.delegate = self;
-            
-        }
+        
         
         
     }
@@ -1639,6 +1481,162 @@
 
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)Tablecell forRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    
+    if(indexPath.row == 4)
+    {
+        if(profileDict != NULL)
+        {
+            
+            if(![[profileDict valueForKey:@"date_of_birth"] isEqual:currentTextfield.text]){
+                
+                
+                if(currentTextfield.text == NULL){
+                    if([[profileDict valueForKey:@"date_of_birth"]isEqualToString:@"00/00/0000"])
+                        cell.textFieldDPPlaceHolder.text = @"DD/MM/YYYY";
+                    else{
+                        NSString *dateStr = [profileDict valueForKey:@"date_of_birth"];
+                        dateStr = [dateStr stringByReplacingOccurrencesOfString:@"/" withString:@" / "];
+                        cell.textFieldDPPlaceHolder.text =dateStr;
+                        
+                    }
+                    [cell.textFieldDPPlaceHolder setTag:1000];
+                    
+                }
+                else{
+                    
+                    cell.textFieldDPPlaceHolder.text = currentTextfield.text;
+                }
+            }
+            else{
+                NSString *dateStr = [profileDict valueForKey:@"date_of_birth"];
+                dateStr = [dateStr stringByReplacingOccurrencesOfString:@"/" withString:@" / "];
+                cell.textFieldDPPlaceHolder.text =dateStr;
+                
+                
+            }
+            [cell.textFieldDPPlaceHolder setTag:1000];
+            
+            
+        }
+        else if(userDetailsDict.count > 0){
+            
+            NSString *datestr= [userDetailsDict valueForKey:@"birthday"];
+            if(datestr!=nil ){
+                
+                
+                if(currentTextfield.text == NULL){
+                    cell.textFieldDPPlaceHolder.text =[userDetailsDict valueForKey:@"birthday"];
+                    NSString *datestr=[userDetailsDict valueForKey:@"birthday"];
+                    currentTextfield.text=cell.textFieldDPPlaceHolder.text;
+                    NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
+                    [dateFormat setDateFormat:@"dd/mm/yyyy"];
+                    NSDate *date = [dateFormat dateFromString:datestr];
+                    dateFormat = [[NSDateFormatter alloc] init];
+                    [dateFormat setDateFormat:@"yyyy-MM-dd"];
+                    dateChange = [dateFormat stringFromDate:date];
+                    NSLog(@"%@",dateChange);
+                    
+                    strDOB       = (currentTextfield.text !=nil)?currentTextfield.text :dateChange;
+                    [cell.textFieldDPPlaceHolder setTag:1000];
+                    
+                }
+                else{
+                    [cell.textFieldDPPlaceHolder setTag:1000];
+                    cell.textFieldDPPlaceHolder.text = currentTextfield.text;
+                }
+            }
+            else{
+                if(currentTextfield.text == NULL){
+                    cell.textFieldDPPlaceHolder.text =[userDetailsDict valueForKey:@"birthday"];
+                    
+                    
+                    [cell.textFieldDPPlaceHolder setTag:1000];
+                    
+                }
+                else{
+                    [cell.textFieldDPPlaceHolder setTag:1000];
+                    cell.textFieldDPPlaceHolder.text = currentTextfield.text;
+                }
+            }
+        }
+        
+        else
+        {
+            if([currentTextfield.text isEqualToString:@""] || currentTextfield.text == nil)
+                
+                [cell.textFieldDPPlaceHolder setTag:1000];
+            cell.textFieldDPPlaceHolder.text = currentTextfield.text;
+            
+        }
+
+    }
+    
+    if(indexPath.row ==5)
+    {
+        cell.textViewAboutYou.delegate = self;
+        if(profileDict !=NULL){
+            
+            
+            if([[profileDict valueForKey:@"about"] isEqual:@""]){
+                
+                
+                cell.textViewAboutYou.text = textviewText;
+                
+                
+                strAbout =cell.textViewAboutYou.text;
+                
+                
+                cell.textViewAboutYou.delegate = self;
+                
+            }
+            
+            else{
+                if(![[profileDict valueForKey:@"about"] isEqual:strAbout]){
+                    
+                    
+                    if(strAbout == NULL){
+                        cell.textViewAboutYou.text = [[profileDict valueForKey:@"about"]mutableCopy];
+                        strAbout =cell.textViewAboutYou.text;
+                    }
+                    else{
+                        cell.textViewAboutYou.text = strAbout;
+                    }
+                }
+                else{
+                    
+                    cell.textViewAboutYou.text = [[profileDict valueForKey:@"about"]mutableCopy];
+                    strAbout =cell.textViewAboutYou.text;
+                    
+                }
+                
+                
+            }
+            
+        }
+        
+        else{
+            if(textviewText == nil){
+                
+                if([strAbout isEqualToString:@""] ||strAbout == nil)
+                {
+                    
+                    cell.textViewAboutYou.text = @"Write something about yourself here.";
+                    cell.textViewAboutYou.scrollEnabled=YES;
+                    
+                    
+                }
+                else
+                {
+                    
+                    cell.textViewAboutYou.text =strAbout;
+                    
+                }
+            }
+            cell.textViewAboutYou.delegate = self;
+            
+        }
+    }
+    
     if(indexPath.row==6)
     {
     yAxis = 31;

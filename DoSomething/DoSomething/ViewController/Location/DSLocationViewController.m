@@ -510,8 +510,7 @@
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
-    NSLog(@"commonlocationArray=%lu",(unsigned long)commonlocationArray.count);
-    return [commonlocationArray count];
+       return [commonlocationArray count];
 }
 
 -(UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
@@ -544,27 +543,33 @@
     
    NSMutableArray * dosomethingImageSprateArry =[[commonlocationArray valueForKey:@"dosomething"]objectAtIndex:indexPath.row];
     
-   
-   
-    dosomethingImageArry =([reguestStr isEqualToString:@"No"])?[dosomethingImageSprateArry valueForKey:@"NearbyImage"]:[dosomethingImageSprateArry valueForKey:@"InactiveImage"];
+      dosomethingImageArry =([reguestStr isEqualToString:@"No"])?[dosomethingImageSprateArry valueForKey:@"NearbyImage"]:[dosomethingImageSprateArry valueForKey:@"InactiveImage"];
      NSString *dosomethingImage1,* dosomethingImage2,* dosomethingImage3;
+    
     if([dosomethingImageArry count]== 1){
         NSLog(@"count one");
         if(![[dosomethingImageArry objectAtIndex:0]isEqualToString:@""])
         {
-            dosomethingImage1=[dosomethingImageArry objectAtIndex:0];
+            
             locationCellView.dosomethingImage1Xposition.constant=40;
-            [locationCellView.dosomethingImage1 setImageWithURL:[NSURL URLWithString:dosomethingImage1]];
+
+            dosomethingImage1=[dosomethingImageArry objectAtIndex:0];
+           
+           [locationCellView.dosomethingImage1 setImageWithURL:[NSURL URLWithString:dosomethingImage1]];
+            locationCellView.dosomethingImage2.image=[UIImage imageNamed:@""];
+             locationCellView.dosomethingImage3.image=[UIImage imageNamed:@""];
             
         }
+       
 
     }
     else if([dosomethingImageArry count] == 2){
          NSLog(@"count two");
         if(![[dosomethingImageArry objectAtIndex:0]isEqualToString:@""])
         {
+              locationCellView.dosomethingImage1Xposition.constant=60;
             dosomethingImage1=[dosomethingImageArry objectAtIndex:0];
-             locationCellView.dosomethingImage1Xposition.constant=60;
+           
             [locationCellView.dosomethingImage1 setImageWithURL:[NSURL URLWithString:dosomethingImage1]];
             
         }
@@ -573,11 +578,13 @@
             dosomethingImage2=[dosomethingImageArry objectAtIndex:1];
             locationCellView.dosomethingImage2Xposition.constant=30;
             [locationCellView.dosomethingImage2 setImageWithURL:[NSURL URLWithString:dosomethingImage2]];
+           
+            locationCellView.dosomethingImage3.image=[UIImage imageNamed:@""];
             
         }
 
         
-    }else if([dosomethingImageArry count] == 3){
+    }else {
    
           if(![[dosomethingImageArry objectAtIndex:0]isEqualToString:@""])
            {
@@ -1088,7 +1095,7 @@
    
     appDelegate.settingButton.userInteractionEnabled=YES;
     currentloadPage =@"";
-    //[self nearestLocationWebservice];
+   
 }
 
 -(IBAction)DidClickClearFilter:(id)sender
