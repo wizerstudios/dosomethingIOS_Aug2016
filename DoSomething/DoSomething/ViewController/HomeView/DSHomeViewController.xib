@@ -89,17 +89,18 @@
                             <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             <inset key="imageEdgeInsets" minX="5" minY="5" maxX="5" maxY="5"/>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7Ke-VI-iNv">
+                            <rect key="frame" x="61" y="518" width="45" height="45"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="45" id="6gU-r1-bih"/>
+                                <constraint firstAttribute="width" constant="45" id="9GY-Oj-lHS"/>
+                            </constraints>
+                            <state key="normal" image="BlueCirecleimg"/>
                             <connections>
-                                <action selector="didClickGeneralWalkAlterview:" destination="-1" eventType="touchUpInside" id="QtO-L3-Bil"/>
+                                <action selector="didClickGeneralWalkAlterview:" destination="-1" eventType="touchUpInside" id="FyA-Ie-dZy"/>
                             </connections>
                         </button>
-                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="BlueCirecleimg" translatesAutoresizingMaskIntoConstraints="NO" id="nfl-ul-wbT">
-                            <rect key="frame" x="60" y="518" width="45" height="45"/>
-                            <constraints>
-                                <constraint firstAttribute="width" constant="45" id="KUP-Ae-xqh"/>
-                                <constraint firstAttribute="height" constant="45" id="yIQ-JF-iz8"/>
-                            </constraints>
-                        </imageView>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kOG-bl-7CJ">
                             <rect key="frame" x="10" y="390" width="220" height="60"/>
                             <subviews>
@@ -130,14 +131,14 @@
                     </subviews>
                     <color key="backgroundColor" red="0.20000000000000001" green="0.20784313725490194" blue="0.19607843137254902" alpha="0.3984375" colorSpace="calibratedRGB"/>
                     <constraints>
+                        <constraint firstItem="7Ke-VI-iNv" firstAttribute="leading" secondItem="jWq-GO-PYP" secondAttribute="leading" constant="61" id="7wC-p3-pT5"/>
                         <constraint firstItem="FhX-SG-YBF" firstAttribute="top" secondItem="jWq-GO-PYP" secondAttribute="top" id="DIF-fr-yav"/>
                         <constraint firstItem="FhX-SG-YBF" firstAttribute="leading" secondItem="jWq-GO-PYP" secondAttribute="leading" id="Ihw-b5-ElN"/>
-                        <constraint firstAttribute="bottom" secondItem="nfl-ul-wbT" secondAttribute="bottom" constant="5" id="Qql-gE-XAh"/>
                         <constraint firstItem="kOG-bl-7CJ" firstAttribute="leading" secondItem="jWq-GO-PYP" secondAttribute="leading" constant="10" id="Vtc-xR-JWc"/>
-                        <constraint firstItem="nfl-ul-wbT" firstAttribute="leading" secondItem="jWq-GO-PYP" secondAttribute="leading" constant="60" id="aIF-f4-4Dc"/>
                         <constraint firstAttribute="bottom" secondItem="FhX-SG-YBF" secondAttribute="bottom" id="cui-KU-0La"/>
+                        <constraint firstAttribute="bottom" secondItem="7Ke-VI-iNv" secondAttribute="bottom" constant="5" id="dWB-1W-yM8"/>
                         <constraint firstAttribute="trailing" secondItem="FhX-SG-YBF" secondAttribute="trailing" id="isJ-Ak-n43"/>
-                        <constraint firstItem="nfl-ul-wbT" firstAttribute="top" secondItem="kOG-bl-7CJ" secondAttribute="bottom" constant="68" id="z5l-eS-R7L"/>
+                        <constraint firstItem="7Ke-VI-iNv" firstAttribute="top" secondItem="kOG-bl-7CJ" secondAttribute="bottom" constant="68" id="u14-Kw-f0d"/>
                     </constraints>
                 </view>
             </subviews>

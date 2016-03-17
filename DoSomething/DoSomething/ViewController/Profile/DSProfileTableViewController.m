@@ -871,7 +871,7 @@
         }
         else
         {
-            self.tableViewHeightConstraint.constant=self.view.frame.size.height+65;
+            self.tableViewHeightConstraint.constant=self.view.frame.size.height+50;
         }
     }
     
@@ -2592,6 +2592,8 @@
 #pragma mark - saveAction
 -(void)saveAction:(id)sender
 {
+    self.WalAlterview.hidden=YES;
+    self.window.hidden=YES;
     [self.view endEditing:YES];
 
     if(profileDict !=NULL){
@@ -2860,24 +2862,24 @@
 {
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     
-    UIImageView * blueCirecleImg;
+    UIButton * blueCirecleBtn;
     UILabel * Savelbl;
     UIView * altermsgView;
     if(IS_IPHONE6 || IS_IPHONE6_Plus)
     {
-         blueCirecleImg=[[UIImageView alloc]initWithFrame:CGRectMake(self.window.frame.size.width-65,self.window.frame.origin.y+25,45,45)];
+         blueCirecleBtn=[[UIButton alloc]initWithFrame:CGRectMake(self.window.frame.size.width-65,self.window.frame.origin.y+25,45,45)];
          Savelbl=[[UILabel alloc]initWithFrame:CGRectMake(self.window.frame.size.width-60,self.window.frame.origin.y+30,35,35)];
          altermsgView= [[UIView alloc]initWithFrame:CGRectMake(self.window.center.x-75,self.view.frame.origin.y+160,150,50)];
     }
     else{
-         blueCirecleImg=[[UIImageView alloc]initWithFrame:CGRectMake(self.view.frame.size.width-65,15,45,45)];
+         blueCirecleBtn=[[UIButton alloc]initWithFrame:CGRectMake(self.view.frame.size.width-65,15,45,45)];
          Savelbl=[[UILabel alloc]initWithFrame:CGRectMake(self.view.frame.size.width-60,20,35,35)];
          altermsgView= [[UIView alloc]initWithFrame:CGRectMake(self.view.center.x-80,self.view.frame.origin.y+150,160,60)];
     }
     
-    blueCirecleImg.image=[UIImage imageNamed:@"BlueCirecleimg"];
-    blueCirecleImg.userInteractionEnabled=YES;
-    [self.window addSubview:blueCirecleImg];
+    [blueCirecleBtn setImage:[UIImage imageNamed:@"BlueCirecleimg"] forState:UIControlStateNormal];
+    blueCirecleBtn.userInteractionEnabled=YES;
+    [self.window addSubview:blueCirecleBtn];
     
     Savelbl.text =@"Save";
     Savelbl.textColor=[UIColor whiteColor];
@@ -2903,11 +2905,11 @@
     
     [self.window addSubview:altermsgView];
     
-    UIButton * ClosewindowBtn =[[UIButton alloc]initWithFrame:[[UIScreen mainScreen] bounds]];
-    [ClosewindowBtn addTarget:self action:@selector(didClickGeneralWalkAlterviewBtn:) forControlEvents:UIControlEventTouchUpInside];
+   // UIButton * ClosewindowBtn =[[UIButton alloc]initWithFrame:[[UIScreen mainScreen] bounds]];
+    [blueCirecleBtn addTarget:self action:@selector(didClickGeneralWalkAlterviewBtn:) forControlEvents:UIControlEventTouchUpInside];
     
     
-    [self.window addSubview:ClosewindowBtn];
+   // [self.window addSubview:ClosewindowBtn];
     self.window.hidden=NO;
     [self.window makeKeyAndVisible];
     self.window.backgroundColor =[UIColor colorWithRed:(53.0/255.0f) green:(53.0/255.0f) blue:(53.0/255.0f) alpha:0.5];
@@ -2920,20 +2922,20 @@
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     
     UIView * CommWalkView;
-    UIImageView * blueCirecleImg;
+    UIButton * blueCirecleBtn;
     UILabel * Savelbl;
     UIView * altermsgView;
     
     if(IS_IPHONE6_Plus ||IS_IPHONE6)
     {
          CommWalkView=[[UIView alloc]initWithFrame:CGRectMake(self.view.frame.size.width-63,self.view.frame.origin.y+25,45,45)];
-         blueCirecleImg=[[UIImageView alloc]initWithFrame:CGRectMake(2,3,40,40)];
+         blueCirecleBtn=[[UIButton alloc]initWithFrame:CGRectMake(2,3,40,40)];
         Savelbl=[[UILabel alloc]initWithFrame:CGRectMake(5,5,35,35)];
          altermsgView= [[UIView alloc]initWithFrame:CGRectMake(self.view.center.x-90,self.view.center.y+80,200,60)];
     }
     else{
          CommWalkView=[[UIView alloc]initWithFrame:CGRectMake(self.view.frame.size.width-63,self.view.frame.origin.y+15,45,45)];
-         blueCirecleImg=[[UIImageView alloc]initWithFrame:CGRectMake(2,3,40,40)];
+         blueCirecleBtn=[[UIButton alloc]initWithFrame:CGRectMake(2,3,40,40)];
         Savelbl=[[UILabel alloc]initWithFrame:CGRectMake(5,5,35,35)];
          altermsgView= [[UIView alloc]initWithFrame:CGRectMake(self.view.center.x-90,self.view.center.y+20,200,60)];
     }
@@ -2942,9 +2944,9 @@
     
     
 
-    blueCirecleImg.image=[UIImage imageNamed:@"BlueCirecleimg"];
-    blueCirecleImg.userInteractionEnabled=YES;
-    [CommWalkView addSubview:blueCirecleImg];
+    [blueCirecleBtn setImage:[UIImage imageNamed:@"BlueCirecleimg"] forState:UIControlStateNormal];
+    //blueCirecleBtn.userInteractionEnabled=YES;
+    [CommWalkView addSubview:blueCirecleBtn];
    
     Savelbl.text =@"Save";
     Savelbl.textColor=[UIColor whiteColor];
@@ -2969,11 +2971,11 @@
     
     [self.window addSubview:altermsgView];
     
-    UIButton * ClosewindowBtn =[[UIButton alloc]initWithFrame:[[UIScreen mainScreen] bounds]];
-    [ClosewindowBtn addTarget:self action:@selector(didClickGeneralWalkAlterviewBtn:) forControlEvents:UIControlEventTouchUpInside];
+    //UIButton * ClosewindowBtn =[[UIButton alloc]initWithFrame:[[UIScreen mainScreen] bounds]];
+    [blueCirecleBtn addTarget:self action:@selector(saveAction:) forControlEvents:UIControlEventTouchUpInside];
     
     [self.window addSubview:CommWalkView];
-    [self.window addSubview:ClosewindowBtn];
+    //[self.window addSubview:ClosewindowBtn];
     self.window.hidden=NO;
     [self.window makeKeyAndVisible];
     [self.window.rootViewController.view addSubview:CommWalkView];

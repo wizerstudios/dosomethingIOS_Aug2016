@@ -52,7 +52,7 @@
                 <outlet property="avalableBothBtn" destination="ehZ-tW-FxO" id="Wc0-5B-yxB"/>
                 <outlet property="avalableNoBtn" destination="SPZ-Gb-emr" id="lJc-fU-eaJ"/>
                 <outlet property="avalableYesBtn" destination="b0G-N7-6UG" id="uFB-W2-3UT"/>
-                <outlet property="blueCircle" destination="spf-BL-EoB" id="QYU-0v-RGU"/>
+                <outlet property="blueCircleBtn" destination="nfN-Sl-Ldk" id="nBX-o5-OI8"/>
                 <outlet property="collectionviewxpostion" destination="AK0-aj-zIk" id="1cz-dX-N4r"/>
                 <outlet property="currentUserImg" destination="d4d-mC-Tg8" id="v5s-XD-BJ9"/>
                 <outlet property="filterview" destination="m8H-NP-Mj6" id="Ovc-jV-sQ2"/>
@@ -101,7 +101,7 @@
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FCH-QV-rlu">
                             <rect key="frame" x="65" y="350" width="220" height="80"/>
                             <subviews>
-                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="BlueBgText" translatesAutoresizingMaskIntoConstraints="NO" id="Qnb-bI-Px5">
+                                <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="BlueBgText" translatesAutoresizingMaskIntoConstraints="NO" id="Qnb-bI-Px5">
                                     <rect key="frame" x="0.0" y="0.0" width="220" height="80"/>
                                 </imageView>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Once there’s match.pop up  will be shown.so lets “Do Something”" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nFy-GO-ONO">
@@ -156,9 +156,13 @@
                                         <action selector="didClickmatchuserDosomethingBtnAction:" destination="-1" eventType="touchUpInside" id="SGc-Yb-hxV"/>
                                     </connections>
                                 </button>
-                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="BlueCirecleimg" translatesAutoresizingMaskIntoConstraints="NO" id="spf-BL-EoB">
-                                    <rect key="frame" x="120" y="165" width="35" height="35"/>
-                                </imageView>
+                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nfN-Sl-Ldk">
+                                    <rect key="frame" x="121" y="165" width="35" height="35"/>
+                                    <state key="normal" image="BlueCirecleimg"/>
+                                    <connections>
+                                        <action selector="didClickmatchuserDosomethingBtnAction:" destination="-1" eventType="touchUpInside" id="tJG-wq-jHP"/>
+                                    </connections>
+                                </button>
                             </subviews>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         </view>

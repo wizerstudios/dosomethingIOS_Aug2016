@@ -458,18 +458,18 @@
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             </button>
                             <button opaque="NO" tag="501" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ksm-Un-eR9">
-                                <rect key="frame" x="153" y="0.0" width="50" height="38"/>
+                                <rect key="frame" x="153" y="0.0" width="50" height="36"/>
                                 <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <state key="normal" image="switch_on">
                                     <color key="titleColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 </state>
                             </button>
                             <button opaque="NO" tag="502" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1BP-HX-6Px">
-                                <rect key="frame" x="153" y="37" width="50" height="35"/>
+                                <rect key="frame" x="153" y="33" width="50" height="36"/>
                                 <state key="normal" image="switch_on"/>
                             </button>
                             <button opaque="NO" tag="503" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2xI-kw-yw4">
-                                <rect key="frame" x="153" y="66" width="50" height="34"/>
+                                <rect key="frame" x="153" y="65" width="50" height="36"/>
                                 <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <state key="normal" image="switch_on">
                                     <color key="titleColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>

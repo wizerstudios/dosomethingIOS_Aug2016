@@ -606,32 +606,29 @@
    
     
     UIView * CommWalkView;
-    UILabel * signinMsg;
-    UILabel *emaillbl;
-    UILabel *passwordlbl;
-    UIImageView * blueCirecleImg;
+    UIButton * blueCirecleBtn;
     UIView * altermsgView;
     
     if(IS_IPHONE6_Plus || IS_IPHONE6)
     {
          CommWalkView=[[UIView alloc]initWithFrame:CGRectMake(self.view.frame.origin.x,self.topview.frame.origin.y+self.topview.frame.size.height+50,self.window.frame.size.width,120)];
         
-         blueCirecleImg=[[UIImageView alloc]initWithFrame:CGRectMake(self.view.frame.origin.x+80,self.window.frame.size.height-100,40,40)];
+         blueCirecleBtn=[[UIButton alloc]initWithFrame:CGRectMake(self.view.frame.origin.x+80,self.window.frame.size.height-100,40,40)];
         altermsgView= [[UIView alloc]initWithFrame:CGRectMake(self.view.frame.origin.x+60,self.view.center.y+20,240,60)];
 
     }
     else{
         
         
-        blueCirecleImg=[[UIImageView alloc]initWithFrame:CGRectMake(self.view.frame.origin.x+80,self.view.frame.size.height-80,40,40)];
+        blueCirecleBtn=[[UIButton alloc]initWithFrame:CGRectMake(self.view.frame.origin.x+80,self.view.frame.size.height-80,40,40)];
         altermsgView= [[UIView alloc]initWithFrame:CGRectMake(self.view.frame.origin.x+40,self.view.center.y,240,60)];
 
     }
 
 
-    blueCirecleImg.image=[UIImage imageNamed:@"BlueCirecleimg"];
-    blueCirecleImg.userInteractionEnabled=YES;
-    [self.window addSubview:blueCirecleImg];
+    [blueCirecleBtn setImage:[UIImage imageNamed:@"BlueCirecleimg"] forState: UIControlStateNormal];
+
+    [self.window addSubview:blueCirecleBtn];
     
 
     
@@ -650,11 +647,11 @@
     
     [self.window addSubview:altermsgView];
     
-    UIButton * ClosewindowBtn =[[UIButton alloc]initWithFrame:[[UIScreen mainScreen] bounds]];
-    [ClosewindowBtn addTarget:self action:@selector(DidClickGeneralAlterviewBtn:) forControlEvents:UIControlEventTouchUpInside];
+    //UIButton * ClosewindowBtn =[[UIButton alloc]initWithFrame:[[UIScreen mainScreen] bounds]];
+    [blueCirecleBtn addTarget:self action:@selector(DidClickGeneralAlterviewBtn:) forControlEvents:UIControlEventTouchUpInside];
     
    
-    [self.window addSubview:ClosewindowBtn];
+   // [self.window addSubview:ClosewindowBtn];
     self.window.hidden=NO;
     [self.window makeKeyAndVisible];
    
