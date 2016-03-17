@@ -49,6 +49,6 @@
 @property(nonatomic,strong) NSString *sendrequestConversationID;
 
 @property (nonatomic,strong) IBOutlet UIView * walkAlterview;
-@property (nonatomic,strong) IBOutlet UIImageView * blueCircle;
+@property (nonatomic,strong) IBOutlet UIButton* blueCircleBtn;
 
 @end

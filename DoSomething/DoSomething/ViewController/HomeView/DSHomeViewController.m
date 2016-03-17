@@ -260,6 +260,9 @@
 -(IBAction)didClickGeneralWalkAlterview:(id)sender
 {
     self.walkAlterview.hidden=YES;
+    DSLoginViewController *DSLoginView  = [[DSLoginViewController alloc]initWithNibName:@"DSLoginViewController" bundle:nil];
+    DSLoginView.temp = @"createAnAccount";
+    [self.navigationController pushViewController:DSLoginView animated:YES];
 }
 
 

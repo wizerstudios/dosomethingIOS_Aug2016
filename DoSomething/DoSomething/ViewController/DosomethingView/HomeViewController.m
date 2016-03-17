@@ -811,8 +811,12 @@ minimumLineSpacingForSectionAtIndex:(NSInteger)section {
 }
 -(void)loadInvalidSessionAlert:(NSNotification *)notification
 {
+    self.WalkAlterview.hidden=YES;
+    self.window.hidden=YES;
+    
     [[NSNotificationCenter defaultCenter] removeObserver:self];
     [COMMON removeUserDetails];
+    
     DSHomeViewController*objSplashView =[[DSHomeViewController alloc]initWithNibName:@"DSHomeViewController" bundle:nil];
     [self.navigationController pushViewController:objSplashView animated:NO];
     appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
@@ -825,6 +829,7 @@ minimumLineSpacingForSectionAtIndex:(NSInteger)section {
 {
     self.WalkAlterview.hidden=YES;
       self.window.hidden=YES;
+    
 }
 
 -(void)GerenalWalkAlterview
@@ -833,32 +838,24 @@ minimumLineSpacingForSectionAtIndex:(NSInteger)section {
     
     UIView * CommWalkView;
     UIView * altermsgView;
-    UIImageView * blueCirecleImg;
+    UIButton * blueCirecleBtn;
     if(IS_IPHONE6_Plus||IS_IPHONE6)
     {
          CommWalkView=[[UIView alloc]initWithFrame:CGRectMake(self.window.center.x-70,self.window.frame.size.height-100,(self.view.frame.size.width/2),50)];
          altermsgView= [[UIView alloc]initWithFrame:CGRectMake(self.window.center.x-60,self.window.frame.size.height-180,160,60)];
-         blueCirecleImg=[[UIImageView alloc]initWithFrame:CGRectMake(56,3,45,45)];
+         blueCirecleBtn=[[UIButton alloc]initWithFrame:CGRectMake(56,3,45,45)];
     }
     else{
     
         CommWalkView=[[UIView alloc]initWithFrame:CGRectMake(self.view.center.x-72,self.view.frame.size.height-100,(self.view.frame.size.width/2),50)];
         altermsgView= [[UIView alloc]initWithFrame:CGRectMake(self.view.center.x-70,self.view.frame.size.height-175,160,60)];
-         blueCirecleImg=[[UIImageView alloc]initWithFrame:CGRectMake(56,3,45,45)];
+         blueCirecleBtn=[[UIButton alloc]initWithFrame:CGRectMake(56,3,45,45)];
     }
     CommWalkView.backgroundColor =[UIColor clearColor];
  
-    blueCirecleImg.image=[UIImage imageNamed:@"BlueCirecleimg"];
-    blueCirecleImg.userInteractionEnabled=YES;
-    [CommWalkView addSubview:blueCirecleImg];
-//    UILabel * letdoSomethinglbl=[[UILabel alloc]initWithFrame:CGRectMake(0,0,160,60)];
-//    letdoSomethinglbl.text =@"Let’s Do Something";
-//    letdoSomethinglbl.textColor=[UIColor whiteColor];
-//    letdoSomethinglbl.textAlignment= NSTextAlignmentCenter;
-//    letdoSomethinglbl.numberOfLines=1;
-//    [letdoSomethinglbl setFont:[UIFont fontWithName:@"Patron-Bold" size:12]];
-//    [CommWalkView addSubview:letdoSomethinglbl];
-
+    [blueCirecleBtn setImage:[UIImage imageNamed:@"BlueCirecleimg"] forState:UIControlStateNormal];
+    blueCirecleBtn.userInteractionEnabled=YES;
+    [CommWalkView addSubview:blueCirecleBtn];
     
     UIImageView * blueTxtImg=[[UIImageView alloc]initWithFrame:CGRectMake(0,0,160,60)];
     blueTxtImg.userInteractionEnabled=YES;
@@ -875,11 +872,11 @@ minimumLineSpacingForSectionAtIndex:(NSInteger)section {
    
     [self.window addSubview:altermsgView];
     
-    UIButton * ClosewindowBtn =[[UIButton alloc]initWithFrame:[[UIScreen mainScreen] bounds]];
-    [ClosewindowBtn addTarget:self action:@selector(didClickGeneralWalkAlterviewBtn:) forControlEvents:UIControlEventTouchUpInside];
+    //UIButton * ClosewindowBtn =[[UIButton alloc]initWithFrame:[[UIScreen mainScreen] bounds]];
+    [blueCirecleBtn addTarget:self action:@selector(didClickGeneralWalkAlterviewBtn:) forControlEvents:UIControlEventTouchUpInside];
     
     [self.window addSubview:CommWalkView];
-    [self.window addSubview:ClosewindowBtn];
+    //[self.window addSubview:ClosewindowBtn];
     self.window.hidden=NO;
     [self.window makeKeyAndVisible];
     [self.window.rootViewController.view addSubview:CommWalkView];

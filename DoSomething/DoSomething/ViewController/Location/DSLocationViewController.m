@@ -94,12 +94,14 @@
 @synthesize profileImages,profileNames,kiloMeterlabel,userID,dosomethingImageArry,commonlocationArray,matchactivityBtn,matchActivitylbl,matchActivityView,sendrequestConversationID;
 - (void)viewDidLoad {
     
-   
+    self.walkAlterview.hidden =YES;
+    self.blueCircleBtn.hidden=YES;
     NSString * Firstlogin=[[NSUserDefaults standardUserDefaults]valueForKey:FirstloginLocationView];
      
     if([Firstlogin isEqualToString:@"Yes"])
     {
-       // self.walkAlterview.hidden =NO;
+         self.walkAlterview.hidden =NO;
+         self.blueCircleBtn.hidden=NO;
         [self GerenalWalkAlterview];
          [[NSUserDefaults standardUserDefaults]setObject:@"No" forKey:FirstloginLocationView];
     }
@@ -257,21 +259,18 @@
 }
 -(void)loadMatchActivityMethod
 {
-    
-    self.walkAlterview.hidden =YES;
-     self.blueCircle.hidden=YES;
-    NSString * Firstlogin=[[NSUserDefaults standardUserDefaults]valueForKey:FirstMatchUser];
-    
-    if([Firstlogin isEqualToString:@"Yes"])
-    {
-        self.walkAlterview.hidden =NO;
-        self.blueCircle.hidden=NO;
-        
-        [[NSUserDefaults standardUserDefaults] setObject:@"No" forKey:FirstMatchUser];
-    }
-
     if(matchUserArray !=0 && ![matchUserArray isEqual:@"0"])
     {
+        NSString * FirstMatch=[[NSUserDefaults standardUserDefaults]valueForKey:FirstMatchUser];
+        
+        if([FirstMatch isEqualToString:@"Yes"])
+        {
+            self.walkAlterview.hidden =NO;
+            self.blueCircleBtn.hidden=NO;
+            
+            [[NSUserDefaults standardUserDefaults] setObject:@"No" forKey:FirstMatchUser];
+        }
+
         self.matchActivityView.hidden =NO;
         if(IS_IPHONE6)
         {
@@ -1267,7 +1266,7 @@
 -(IBAction)didClickmatchuserDosomethingBtnAction:(id)sender
 {
     self.walkAlterview.hidden =YES;
-    self.blueCircle.hidden=YES;
+    self.blueCircleBtn.hidden=YES;
     self.matchActivityView.hidden =YES;
     DSChatDetailViewController *ChatDetail =[[DSChatDetailViewController alloc]initWithNibName:nil bundle:nil];
     NSMutableDictionary *matchuserdic = [[NSMutableDictionary alloc] init];
@@ -1293,8 +1292,19 @@
 
 -(void)RequestSendNotification
 {
+   
     if(matchUserArray !=0 && ![matchUserArray isEqual:@"0"])
     {
+        NSString * FirstMatch=[[NSUserDefaults standardUserDefaults]valueForKey:FirstMatchUser];
+        
+        if([FirstMatch isEqualToString:@"Yes"])
+        {
+            self.walkAlterview.hidden =NO;
+            self.blueCircleBtn.hidden=NO;
+            
+            [[NSUserDefaults standardUserDefaults] setObject:@"No" forKey:FirstMatchUser];
+        }
+
         self.matchActivityView.hidden =NO;
         if(IS_IPHONE6)
         {
@@ -1361,6 +1371,7 @@
 {
     self.walkAlterview.hidden=YES;
     self.window.hidden=YES;
+    
 }
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
@@ -1371,7 +1382,7 @@
 {
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
 
-    UIImageView * blueCirecleImg;
+    UIButton * blueCirecleBtn;
     UIView * altermsgView;
     
     
@@ -1379,19 +1390,19 @@
     {
        
         altermsgView= [[UIView alloc]initWithFrame:CGRectMake(self.window.center.x-80,self.window.center.y,140,60)];
-         blueCirecleImg=[[UIImageView alloc]initWithFrame:CGRectMake(self.window.frame.size.width-75,self.window.center.y+120,20,20)];
+         blueCirecleBtn=[[UIButton alloc]initWithFrame:CGRectMake(self.window.frame.size.width-75,self.window.center.y+120,20,20)];
 
     }
     else{
         
         altermsgView= [[UIView alloc]initWithFrame:CGRectMake(self.window.center.x-80,self.window.center.y+40,140,60)];
-        blueCirecleImg=[[UIImageView alloc]initWithFrame:CGRectMake(self.window.frame.size.width-63,self.window.center.y+153,20,20)];
+        blueCirecleBtn=[[UIButton alloc]initWithFrame:CGRectMake(self.window.frame.size.width-63,self.window.center.y+153,20,20)];
     }
     
 
-    blueCirecleImg.image=[UIImage imageNamed:@"BlueCirecleimg"];
-    blueCirecleImg.userInteractionEnabled=YES;
-    [self.window addSubview:blueCirecleImg];
+    [blueCirecleBtn setImage:[UIImage imageNamed:@"BlueCirecleimg"] forState:UIControlStateNormal];
+   // blueCirecleImg.userInteractionEnabled=YES;
+    [self.window addSubview:blueCirecleBtn];
 
     
     UIImageView * blueTxtImg=[[UIImageView alloc]initWithFrame:CGRectMake(0,0,140,60)];
@@ -1409,11 +1420,11 @@
     
     [self.window addSubview:altermsgView];
     
-    UIButton * ClosewindowBtn =[[UIButton alloc]initWithFrame:[[UIScreen mainScreen] bounds]];
-    [ClosewindowBtn addTarget:self action:@selector(didClickGeneralWalkAlterviewBtn:) forControlEvents:UIControlEventTouchUpInside];
+    //UIButton * ClosewindowBtn =[[UIButton alloc]initWithFrame:[[UIScreen mainScreen] bounds]];
+    [blueCirecleBtn addTarget:self action:@selector(didClickGeneralWalkAlterviewBtn:) forControlEvents:UIControlEventTouchUpInside];
     
-    //[self.window addSubview:CommWalkView];
-    [self.window addSubview:ClosewindowBtn];
+    
+    //[self.window addSubview:ClosewindowBtn];
     self.window.hidden=NO;
     [self.window makeKeyAndVisible];
     
