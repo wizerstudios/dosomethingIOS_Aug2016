@@ -151,6 +151,7 @@
     
     isLoadData=NO;
    
+   
 }
 -(void)viewWillAppear:(BOOL)animated
 {
@@ -260,7 +261,7 @@
         interstAndHobbiesArray = [[profileDict valueForKey:@"hobbieslist"]mutableCopy];
         hobbiesNameArray       =[[interstAndHobbiesArray valueForKey:@"name"]mutableCopy];
         imageNormalArray     = [[interstAndHobbiesArray valueForKey:@"image"]mutableCopy];
-        //self.tableViewHeightConstraint.constant=(IS_IPHONE6_Plus||IS_IPHONE6)? 50:50;
+      
         if(IS_GREATER_IOS9)
             
         {
@@ -870,7 +871,7 @@
         }
         else
         {
-            self.tableViewHeightConstraint.constant=self.view.frame.size.height+55;
+            self.tableViewHeightConstraint.constant=self.view.frame.size.height+65;
         }
     }
     

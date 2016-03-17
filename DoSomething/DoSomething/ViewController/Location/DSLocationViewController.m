@@ -18,6 +18,7 @@
 #import "CustomAlterview.h"
 #import "DSNearByDetailViewController.h"
 #import "DSChatDetailViewController.h"
+#import "HomeViewController.h"
 
 #define hobbiesbackcolor = [UIColor colorWithRed: (199.0/255.0) green: (65.0/255.0) blue: (81.0/255.0) alpha: 1.0];
 
@@ -1035,9 +1036,15 @@
 
 - (IBAction)alertPressCancel:(id)sender {
     
+    appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+    [appDelegate.locationButton setBackgroundImage:[UIImage imageNamed:@"loaction_normal.png"] forState:UIControlStateNormal];
+    
     objCustomAlterview. alertBgView.hidden = YES;
     objCustomAlterview.alertMainBgView.hidden = YES;
     objCustomAlterview.view .hidden  = YES;
+    
+   HomeViewController* homePage =[[HomeViewController alloc]initWithNibName:@"HomeViewController" bundle:nil];
+    [self.navigationController pushViewController:homePage animated:NO];
     
 }
 -(void)showAltermessage:(NSString*)msg
