@@ -156,7 +156,10 @@
 -(void)viewWillAppear:(BOOL)animated
 {
    
-   
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(loadInvalidSessionAlert:)
+                                                 name:@"InvalidSession"
+                                               object:nil];
     
     imageNormalArray =[[NSMutableArray alloc]init];
     
@@ -340,6 +343,22 @@
     [_tableviewProfile reloadData];
     
 }
+
+-(void)loadInvalidSessionAlert:(NSNotification *)notification
+{
+    
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+    [COMMON removeUserDetails];
+    
+    DSHomeViewController*objSplashView =[[DSHomeViewController alloc]initWithNibName:@"DSHomeViewController" bundle:nil];
+    [self.navigationController pushViewController:objSplashView animated:NO];
+    appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+    appDelegate.buttonsView.hidden=YES;
+    appDelegate.SepratorLbl.hidden=YES;
+    
+    
+}
+
 
 #pragma mark - profileDataArray
 
@@ -2906,7 +2925,7 @@
     [self.window addSubview:altermsgView];
     
    // UIButton * ClosewindowBtn =[[UIButton alloc]initWithFrame:[[UIScreen mainScreen] bounds]];
-    [blueCirecleBtn addTarget:self action:@selector(didClickGeneralWalkAlterviewBtn:) forControlEvents:UIControlEventTouchUpInside];
+    [blueCirecleBtn addTarget:self action:@selector(saveAction:) forControlEvents:UIControlEventTouchUpInside];
     
     
    // [self.window addSubview:ClosewindowBtn];
