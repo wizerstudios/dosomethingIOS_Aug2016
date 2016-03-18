@@ -48,7 +48,7 @@
             <connections>
                 <outlet property="CellSwitchOn" destination="OpY-gd-Xse" id="TUA-pO-U2v"/>
                 <outlet property="CellTermsOfUse" destination="1cD-va-IDg" id="A6k-KR-AFN"/>
-                <outlet property="TypeImgexposition" destination="LcU-dV-c53" id="PPG-fl-hwp"/>
+                <outlet property="TypeImgexposition" destination="9Kg-jk-IUG" id="Sif-JP-mVY"/>
                 <outlet property="aboutTextHeight" destination="8LF-bS-WIH" id="QBu-ae-Rrx"/>
                 <outlet property="aboutViewheight" destination="LZN-Hm-Jza" id="xXH-c8-HbF"/>
                 <outlet property="cellAddIcon" destination="5Fu-f3-SQN" id="Sg8-4z-pxE"/>
@@ -298,7 +298,7 @@
                 <outlet property="labelDPTitleText" destination="q6F-Oj-Gjb" id="iRk-hA-3dY"/>
                 <outlet property="textFieldDPPlaceHolder" destination="dvF-0c-ao5" id="M44-wF-lTx"/>
             </connections>
-            <point key="canvasLocation" x="280" y="387.5"/>
+            <point key="canvasLocation" x="286" y="398.5"/>
         </tableViewCell>
         <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="Cjl-HK-Sie" customClass="DSProfileTableViewCell">
             <rect key="frame" x="0.0" y="0.0" width="300" height="181"/>
@@ -307,103 +307,93 @@
                 <rect key="frame" x="0.0" y="0.0" width="300" height="180"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ivt-1I-e1x">
-                        <rect key="frame" x="0.0" y="0.0" width="300" height="180"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Account" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gmr-PN-Cp2">
+                        <rect key="frame" x="10" y="15" width="89" height="14"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="14" id="I78-Rr-wiD"/>
+                            <constraint firstAttribute="width" constant="89" id="dDu-Ic-Ifc"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" name="Patron-Bold" family="Patron" pointSize="13"/>
+                        <color key="textColor" red="0.40000000000000002" green="0.40000000000000002" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SHS-IW-ID9">
+                        <rect key="frame" x="0.0" y="44" width="300" height="136"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Account" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gmr-PN-Cp2">
-                                <rect key="frame" x="5" y="20" width="89" height="14"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="89" id="GLF-P3-IVL"/>
-                                    <constraint firstAttribute="height" constant="14" id="q9Y-7W-vUk"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" name="Patron-Bold" family="Patron" pointSize="13"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Current Password" lineBreakMode="wordWrap" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PmN-E8-WPL">
+                                <rect key="frame" x="7" y="42" width="75" height="22"/>
+                                <fontDescription key="fontDescription" name="Patron-Bold" family="Patron" pointSize="10"/>
                                 <color key="textColor" red="0.40000000000000002" green="0.40000000000000002" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SHS-IW-ID9">
-                                <rect key="frame" x="0.0" y="44" width="300" height="135"/>
-                                <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Current Password" lineBreakMode="wordWrap" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PmN-E8-WPL">
-                                        <rect key="frame" x="7" y="42" width="75" height="22"/>
-                                        <fontDescription key="fontDescription" name="Patron-Bold" family="Patron" pointSize="10"/>
-                                        <color key="textColor" red="0.40000000000000002" green="0.40000000000000002" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <textField opaque="NO" clipsSubviews="YES" tag="14" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="sig-cR-Dgx">
-                                        <rect key="frame" x="100" y="4" width="200" height="30"/>
-                                        <color key="textColor" red="0.59999999999999998" green="0.59999999999999998" blue="0.59999999999999998" alpha="1" colorSpace="calibratedRGB"/>
-                                        <fontDescription key="fontDescription" name="Patron-Bold" family="Patron" pointSize="10"/>
-                                        <textInputTraits key="textInputTraits" autocorrectionType="no"/>
-                                        <connections>
-                                            <outlet property="delegate" destination="-1" id="JcU-75-xM7"/>
-                                        </connections>
-                                    </textField>
-                                    <textField opaque="NO" clipsSubviews="YES" tag="15" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Your Current password" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="nd4-Zf-byl">
-                                        <rect key="frame" x="100" y="45" width="200" height="18"/>
-                                        <color key="textColor" red="0.59999999999999998" green="0.59999999999999998" blue="0.59999999999999998" alpha="1" colorSpace="calibratedRGB"/>
-                                        <fontDescription key="fontDescription" name="Patron-Regular" family="Patron" pointSize="10"/>
-                                        <textInputTraits key="textInputTraits" autocorrectionType="no" secureTextEntry="YES"/>
-                                        <connections>
-                                            <outlet property="delegate" destination="-1" id="2nH-NW-TmI"/>
-                                        </connections>
-                                    </textField>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Email" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Pdf-dj-LfX">
-                                        <rect key="frame" x="7" y="15" width="75" height="13"/>
-                                        <fontDescription key="fontDescription" name="Patron-Bold" family="Patron" pointSize="10"/>
-                                        <color key="textColor" red="0.40000000000000002" green="0.40000000000000002" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Password" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6TJ-ML-Q9A">
-                                        <rect key="frame" x="7" y="75" width="75" height="18"/>
-                                        <fontDescription key="fontDescription" name="Patron-Bold" family="Patron" pointSize="10"/>
-                                        <color key="textColor" red="0.40000000000000002" green="0.40000000000000002" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Password  Confirmation" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bkO-e6-NLw">
-                                        <rect key="frame" x="7" y="104" width="75" height="23"/>
-                                        <fontDescription key="fontDescription" name="Patron-Bold" family="Patron" pointSize="10"/>
-                                        <color key="textColor" red="0.40000000000000002" green="0.40000000000000002" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <textField opaque="NO" clipsSubviews="YES" tag="16" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Your new password" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="NqL-pg-IGU">
-                                        <rect key="frame" x="100" y="72" width="200" height="18"/>
-                                        <color key="textColor" red="0.40000000000000002" green="0.40000000000000002" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
-                                        <fontDescription key="fontDescription" name="Patron-Bold" family="Patron" pointSize="10"/>
-                                        <textInputTraits key="textInputTraits" autocorrectionType="no" secureTextEntry="YES"/>
-                                        <connections>
-                                            <outlet property="delegate" destination="-1" id="4n7-x7-yoN"/>
-                                        </connections>
-                                    </textField>
-                                    <textField opaque="NO" clipsSubviews="YES" tag="17" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Confirm your new password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Ac8-mg-rLM">
-                                        <rect key="frame" x="100" y="105" width="200" height="20"/>
-                                        <color key="textColor" red="0.40000000000000002" green="0.40000000000000002" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
-                                        <fontDescription key="fontDescription" name="Patron-Bold" family="Patron" pointSize="10"/>
-                                        <textInputTraits key="textInputTraits" autocorrectionType="no" secureTextEntry="YES"/>
-                                        <connections>
-                                            <outlet property="delegate" destination="-1" id="jnP-iW-cQe"/>
-                                        </connections>
-                                    </textField>
-                                </subviews>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                            </view>
+                            <textField opaque="NO" clipsSubviews="YES" tag="14" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="sig-cR-Dgx">
+                                <rect key="frame" x="100" y="4" width="200" height="30"/>
+                                <color key="textColor" red="0.59999999999999998" green="0.59999999999999998" blue="0.59999999999999998" alpha="1" colorSpace="calibratedRGB"/>
+                                <fontDescription key="fontDescription" name="Patron-Bold" family="Patron" pointSize="10"/>
+                                <textInputTraits key="textInputTraits" autocorrectionType="no"/>
+                                <connections>
+                                    <outlet property="delegate" destination="-1" id="JcU-75-xM7"/>
+                                </connections>
+                            </textField>
+                            <textField opaque="NO" clipsSubviews="YES" tag="15" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Your Current password" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="nd4-Zf-byl">
+                                <rect key="frame" x="100" y="45" width="200" height="18"/>
+                                <color key="textColor" red="0.59999999999999998" green="0.59999999999999998" blue="0.59999999999999998" alpha="1" colorSpace="calibratedRGB"/>
+                                <fontDescription key="fontDescription" name="Patron-Regular" family="Patron" pointSize="10"/>
+                                <textInputTraits key="textInputTraits" autocorrectionType="no" secureTextEntry="YES"/>
+                                <connections>
+                                    <outlet property="delegate" destination="-1" id="2nH-NW-TmI"/>
+                                </connections>
+                            </textField>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Email" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Pdf-dj-LfX">
+                                <rect key="frame" x="7" y="15" width="75" height="13"/>
+                                <fontDescription key="fontDescription" name="Patron-Bold" family="Patron" pointSize="10"/>
+                                <color key="textColor" red="0.40000000000000002" green="0.40000000000000002" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Password" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6TJ-ML-Q9A">
+                                <rect key="frame" x="7" y="75" width="75" height="18"/>
+                                <fontDescription key="fontDescription" name="Patron-Bold" family="Patron" pointSize="10"/>
+                                <color key="textColor" red="0.40000000000000002" green="0.40000000000000002" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Password  Confirmation" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bkO-e6-NLw">
+                                <rect key="frame" x="7" y="104" width="75" height="23"/>
+                                <fontDescription key="fontDescription" name="Patron-Bold" family="Patron" pointSize="10"/>
+                                <color key="textColor" red="0.40000000000000002" green="0.40000000000000002" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <textField opaque="NO" clipsSubviews="YES" tag="16" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Your new password" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="NqL-pg-IGU">
+                                <rect key="frame" x="100" y="72" width="200" height="18"/>
+                                <color key="textColor" red="0.40000000000000002" green="0.40000000000000002" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
+                                <fontDescription key="fontDescription" name="Patron-Bold" family="Patron" pointSize="10"/>
+                                <textInputTraits key="textInputTraits" autocorrectionType="no" secureTextEntry="YES"/>
+                                <connections>
+                                    <outlet property="delegate" destination="-1" id="4n7-x7-yoN"/>
+                                </connections>
+                            </textField>
+                            <textField opaque="NO" clipsSubviews="YES" tag="17" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Confirm your new password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Ac8-mg-rLM">
+                                <rect key="frame" x="100" y="105" width="200" height="20"/>
+                                <color key="textColor" red="0.40000000000000002" green="0.40000000000000002" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
+                                <fontDescription key="fontDescription" name="Patron-Bold" family="Patron" pointSize="10"/>
+                                <textInputTraits key="textInputTraits" autocorrectionType="no" secureTextEntry="YES"/>
+                                <connections>
+                                    <outlet property="delegate" destination="-1" id="jnP-iW-cQe"/>
+                                </connections>
+                            </textField>
                         </subviews>
-                        <color key="backgroundColor" red="0.90980392156862744" green="0.90980392156862744" blue="0.90980392156862744" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="SHS-IW-ID9" firstAttribute="leading" secondItem="ivt-1I-e1x" secondAttribute="leading" id="Q0P-Rj-JAQ"/>
-                            <constraint firstAttribute="trailing" secondItem="SHS-IW-ID9" secondAttribute="trailing" id="YVf-bD-Eiq"/>
-                            <constraint firstItem="SHS-IW-ID9" firstAttribute="top" secondItem="gmr-PN-Cp2" secondAttribute="bottom" constant="10" id="bHy-Hi-xe3"/>
-                            <constraint firstItem="gmr-PN-Cp2" firstAttribute="leading" secondItem="ivt-1I-e1x" secondAttribute="leading" constant="5" id="rc3-mj-rlO"/>
-                            <constraint firstAttribute="bottom" secondItem="SHS-IW-ID9" secondAttribute="bottom" constant="1" id="v1W-kH-IQG"/>
-                            <constraint firstItem="gmr-PN-Cp2" firstAttribute="top" secondItem="ivt-1I-e1x" secondAttribute="top" constant="20" id="yJL-U1-zj2"/>
+                            <constraint firstAttribute="height" constant="136" id="GF1-7s-cG4"/>
                         </constraints>
                     </view>
                 </subviews>
                 <color key="backgroundColor" red="0.90980392156862744" green="0.90980392156862744" blue="0.90980392156862744" alpha="1" colorSpace="calibratedRGB"/>
                 <constraints>
-                    <constraint firstAttribute="bottom" secondItem="ivt-1I-e1x" secondAttribute="bottom" id="Okb-Pw-iLp"/>
-                    <constraint firstItem="ivt-1I-e1x" firstAttribute="leading" secondItem="W5E-AF-OBh" secondAttribute="leading" id="dbQ-Ke-olk"/>
-                    <constraint firstItem="ivt-1I-e1x" firstAttribute="top" secondItem="W5E-AF-OBh" secondAttribute="top" id="f9o-A0-8xx"/>
-                    <constraint firstAttribute="trailing" secondItem="ivt-1I-e1x" secondAttribute="trailing" id="l4b-ao-mVW"/>
+                    <constraint firstAttribute="trailing" secondItem="SHS-IW-ID9" secondAttribute="trailing" id="bQH-YB-zsO"/>
+                    <constraint firstItem="gmr-PN-Cp2" firstAttribute="leading" secondItem="W5E-AF-OBh" secondAttribute="leading" constant="10" id="cgd-0J-zck"/>
+                    <constraint firstItem="gmr-PN-Cp2" firstAttribute="top" secondItem="W5E-AF-OBh" secondAttribute="top" constant="15" id="dfd-j8-5oZ"/>
+                    <constraint firstItem="SHS-IW-ID9" firstAttribute="top" secondItem="gmr-PN-Cp2" secondAttribute="bottom" constant="15" id="ehA-W5-MOP"/>
+                    <constraint firstItem="SHS-IW-ID9" firstAttribute="leading" secondItem="W5E-AF-OBh" secondAttribute="leading" id="ztM-sq-eik"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>
@@ -414,10 +404,11 @@
                 <outlet property="currentpasswordlbl" destination="PmN-E8-WPL" id="Flp-q1-QOT"/>
                 <outlet property="emailTextField" destination="sig-cR-Dgx" id="Fnb-Nf-P8O"/>
                 <outlet property="emailview" destination="SHS-IW-ID9" id="8g8-cO-ZUH"/>
+                <outlet property="layoutConstraintEmailPassViewHeight" destination="GF1-7s-cG4" id="cXb-C0-b2N"/>
                 <outlet property="passwordTextField" destination="nd4-Zf-byl" id="XJa-vF-VIw"/>
                 <outlet property="passwordlbl" destination="6TJ-ML-Q9A" id="mXI-r2-KBc"/>
             </connections>
-            <point key="canvasLocation" x="286" y="494"/>
+            <point key="canvasLocation" x="286" y="559.5"/>
         </tableViewCell>
         <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="151" id="OpY-gd-Xse" customClass="DSProfileTableViewCell">
             <rect key="frame" x="0.0" y="0.0" width="300" height="151"/>
@@ -535,6 +526,7 @@
                         </subviews>
                         <color key="backgroundColor" red="0.90980392156862744" green="0.90980392156862744" blue="0.90980392156862744" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
+                            <constraint firstAttribute="height" constant="40" id="DLU-pp-4H8"/>
                             <constraint firstItem="bzZ-MU-7QJ" firstAttribute="leading" secondItem="VtB-GW-ldJ" secondAttribute="trailing" constant="4" id="M9L-6S-2xl"/>
                             <constraint firstAttribute="bottom" secondItem="VtB-GW-ldJ" secondAttribute="bottom" id="Ofa-fc-w76"/>
                             <constraint firstItem="VtB-GW-ldJ" firstAttribute="leading" secondItem="tI3-zn-hET" secondAttribute="leading" id="Yc1-HO-AmY"/>
@@ -554,6 +546,11 @@
                     <constraint firstItem="tI3-zn-hET" firstAttribute="top" secondItem="yac-Lg-eap" secondAttribute="topMargin" constant="12" id="h6p-XO-Gnc"/>
                     <constraint firstItem="tI3-zn-hET" firstAttribute="leading" secondItem="yac-Lg-eap" secondAttribute="leading" id="kWu-7R-xoa"/>
                 </constraints>
+                <variation key="default">
+                    <mask key="constraints">
+                        <exclude reference="h6p-XO-Gnc"/>
+                    </mask>
+                </variation>
             </tableViewCellContentView>
             <connections>
                 <outlet property="privacyPolicy" destination="bzZ-MU-7QJ" id="4wL-FI-9PJ"/>
@@ -735,7 +732,7 @@
             </connections>
             <point key="canvasLocation" x="751" y="568"/>
         </tableViewCell>
-        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="ccx-HL-1Pr" customClass="DSProfileTableViewCell">
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="ccx-HL-1Pr" customClass="DSProfileTableViewCell">
             <rect key="frame" x="0.0" y="0.0" width="300" height="41"/>
             <autoresizingMask key="autoresizingMask"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="ccx-HL-1Pr" id="vTU-4W-FNn">
@@ -745,31 +742,29 @@
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0GV-jn-QOK">
                         <rect key="frame" x="0.0" y="0.0" width="300" height="40"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yyu-Og-U1D">
-                                <rect key="frame" x="45" y="5" width="220" height="30"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="8aA-jW-dS1">
+                                <rect key="frame" x="25" y="15" width="10" height="10"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="30" id="qsn-VS-eJd"/>
+                                    <constraint firstAttribute="width" constant="10" id="ZCP-y1-GEZ"/>
+                                    <constraint firstAttribute="height" constant="10" id="ur6-cg-Xo2"/>
                                 </constraints>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yyu-Og-U1D">
+                                <rect key="frame" x="40" y="10" width="220" height="20"/>
                                 <fontDescription key="fontDescription" name="Patron-Regular" family="Patron" pointSize="10"/>
                                 <color key="textColor" red="0.40000000000000002" green="0.40000000000000002" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="8aA-jW-dS1">
-                                <rect key="frame" x="25" y="14" width="10" height="10"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="10" id="5nd-BF-5GO"/>
-                                    <constraint firstAttribute="width" constant="10" id="iFA-bl-Ypu"/>
-                                </constraints>
-                            </imageView>
                         </subviews>
                         <color key="backgroundColor" red="0.90980392156862744" green="0.90980392156862744" blue="0.90980392156862744" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
-                            <constraint firstAttribute="height" constant="40" id="CVb-vC-l9N"/>
-                            <constraint firstItem="yyu-Og-U1D" firstAttribute="leading" secondItem="8aA-jW-dS1" secondAttribute="trailing" constant="10" id="LcU-dV-c53"/>
-                            <constraint firstItem="yyu-Og-U1D" firstAttribute="top" secondItem="0GV-jn-QOK" secondAttribute="top" constant="5" id="hgW-a5-r2F"/>
-                            <constraint firstAttribute="trailing" secondItem="yyu-Og-U1D" secondAttribute="trailing" constant="35" id="jdg-tX-9FU"/>
-                            <constraint firstItem="yyu-Og-U1D" firstAttribute="centerX" secondItem="0GV-jn-QOK" secondAttribute="centerX" constant="5" id="ncM-Lw-8T8"/>
-                            <constraint firstItem="8aA-jW-dS1" firstAttribute="top" secondItem="0GV-jn-QOK" secondAttribute="top" constant="14" id="nfW-EB-LDp"/>
+                            <constraint firstAttribute="bottom" secondItem="yyu-Og-U1D" secondAttribute="bottom" constant="10" id="2F3-9n-P1n"/>
+                            <constraint firstItem="yyu-Og-U1D" firstAttribute="leading" secondItem="0GV-jn-QOK" secondAttribute="leading" constant="40" id="93d-qd-zYa"/>
+                            <constraint firstItem="8aA-jW-dS1" firstAttribute="leading" secondItem="0GV-jn-QOK" secondAttribute="leading" constant="25" id="9Kg-jk-IUG"/>
+                            <constraint firstAttribute="trailing" secondItem="yyu-Og-U1D" secondAttribute="trailing" constant="40" id="FKQ-v7-BuE"/>
+                            <constraint firstItem="yyu-Og-U1D" firstAttribute="top" secondItem="0GV-jn-QOK" secondAttribute="top" constant="10" id="KzW-tK-1fX"/>
+                            <constraint firstItem="yyu-Og-U1D" firstAttribute="centerX" secondItem="0GV-jn-QOK" secondAttribute="centerX" id="eFy-lc-FGH"/>
+                            <constraint firstItem="8aA-jW-dS1" firstAttribute="centerY" secondItem="0GV-jn-QOK" secondAttribute="centerY" id="gYK-gs-d04"/>
                         </constraints>
                     </view>
                 </subviews>
@@ -784,7 +779,7 @@
                 <outlet property="logilTypelbl" destination="yyu-Og-U1D" id="B86-id-jM1"/>
                 <outlet property="loginTypeImg" destination="8aA-jW-dS1" id="bQR-9r-tUu"/>
             </connections>
-            <point key="canvasLocation" x="291" y="320.5"/>
+            <point key="canvasLocation" x="291" y="311.5"/>
         </tableViewCell>
     </objects>
     <resources>
