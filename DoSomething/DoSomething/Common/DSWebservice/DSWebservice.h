@@ -21,7 +21,7 @@ typedef void (^WebserviceRequestXMLFailureHandler)(AFHTTPRequestOperation  *oper
 //#define BASE_URL @"http://indiawebcoders.com/mobileapps/dosomething/"
 
 //PRODUCTION URL
-#define BASE_URL @"http://128.199.130.137/dosomething/"
+#define BASE_URL @"http://mobileapp.dosomethingapp.com/"
 
 
 #ifdef DEBUG
