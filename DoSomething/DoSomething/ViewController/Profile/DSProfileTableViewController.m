@@ -47,6 +47,8 @@
     float imageSize;
     float space;
     
+    
+    
     UIImage *profileImage;
     NSString *strProfileImage2;
     NSString *strProfileImage3;
@@ -156,7 +158,10 @@
 -(void)viewWillAppear:(BOOL)animated
 {
    
-   
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(loadInvalidSessionAlert:)
+                                                 name:@"InvalidSession"
+                                               object:nil];
     
     imageNormalArray =[[NSMutableArray alloc]init];
     
@@ -261,12 +266,12 @@
         interstAndHobbiesArray = [[profileDict valueForKey:@"hobbieslist"]mutableCopy];
         hobbiesNameArray       =[[interstAndHobbiesArray valueForKey:@"name"]mutableCopy];
         imageNormalArray     = [[interstAndHobbiesArray valueForKey:@"image"]mutableCopy];
-      
+       [self.view layoutIfNeeded];
         if(IS_GREATER_IOS9)
             
         {
             
-            self.tableViewHeightConstraint.constant=(IS_IPHONE6_Plus||IS_IPHONE6)? self.view.frame.size.height-70:self.tableviewProfile.frame.size.height+50;
+            self.tableViewHeightConstraint.constant=(IS_IPHONE6_Plus||IS_IPHONE6)?70:50;
             
         }
         
@@ -274,12 +279,14 @@
             
         {
             
-            self.tableViewHeightConstraint.constant=(IS_IPHONE6_Plus||IS_IPHONE6)? self.view.frame.size.height-70:self.tableviewProfile.frame.size.height+50;
+            self.tableViewHeightConstraint.constant=(IS_IPHONE6_Plus||IS_IPHONE6)?70:50;
             
             
         }
        
     }
+    
+   
     
     [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"SelectedItemCategoryID"];
     
@@ -340,6 +347,22 @@
     [_tableviewProfile reloadData];
     
 }
+
+-(void)loadInvalidSessionAlert:(NSNotification *)notification
+{
+    
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+    [COMMON removeUserDetails];
+    
+    DSHomeViewController*objSplashView =[[DSHomeViewController alloc]initWithNibName:@"DSHomeViewController" bundle:nil];
+    [self.navigationController pushViewController:objSplashView animated:NO];
+    appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+    appDelegate.buttonsView.hidden=YES;
+    appDelegate.SepratorLbl.hidden=YES;
+    
+    
+}
+
 
 #pragma mark - profileDataArray
 
@@ -863,21 +886,21 @@
         
         if(IS_IPHONE6)
         {
-            self.tableViewHeightConstraint.constant= self.view.frame.size.height+125;
+            self.tableViewHeightConstraint.constant= 0;//self.view.frame.size.height+125;
         }
         else if(IS_IPHONE6_Plus)
         {
-            self.tableViewHeightConstraint.constant= self.view.frame.size.height+190;
+            self.tableViewHeightConstraint.constant= 0; //self.view.frame.size.height+190;
         }
         else
         {
-            self.tableViewHeightConstraint.constant=self.view.frame.size.height+50;
+            self.tableViewHeightConstraint.constant=0;
         }
     }
     
     else{
         
-        self.tableViewHeightConstraint.constant=(IS_IPHONE6_Plus||IS_IPHONE6)? self.view.frame.size.height-20:self.view.frame.size.height;
+        self.tableViewHeightConstraint.constant=(IS_IPHONE6_Plus||IS_IPHONE6)? 0:0;
         
     }
     
@@ -1004,7 +1027,7 @@
 -(void)CustomSoundview
 {
     objCustomSoundView = [[CustomSoundview alloc] initWithNibName:@"CustomSoundview" bundle:nil];
-    objCustomSoundView.view.frame = CGRectMake(self.view.frame.origin.x,self.view.frame.origin.y, CGRectGetWidth(self.view.frame), self.view.frame.size.height);
+    objCustomSoundView.view.frame = CGRectMake(self.view.frame.origin.x, customNavigation.view.frame.origin.y+ customNavigation.view.frame.size.height+10, CGRectGetWidth(self.view.frame), self.view.frame.size.height-50);
     // [objCustomSoundview.alertBgView setHidden:YES];
     [objCustomSoundView.soundmenuView setHidden:YES];
     
@@ -1144,8 +1167,9 @@
                 }
               else if (userDetailsDict.count > 0)
               {
-                 return 100;
+                 return 80;
               }
+                
                 return 120;
             }
             if (indexPath.row ==8) {
@@ -1170,7 +1194,7 @@
        {
            if(profileDict!=nil)
            {
-               return 40;
+               return 50;
            }
            return 0;
        }
@@ -1740,29 +1764,7 @@
         hobbiesname.textAlignment = NSTextAlignmentCenter;
     }
     
-//    for (int i =0; i< [hobbiesNameArray  count]; i++) {
-//        
-//        NSString *image =[[hobbiesNameArray objectAtIndex:i]uppercaseString];
-//        UILabel *hobbiesname;
-//        
-//        if(i <= 4)
-//            hobbiesname = [[UILabel alloc]initWithFrame:CGRectMake((i*(commonWidth + imageSize))+textXPos, yAxis + imageSize, imageSize + 20, 15)];
-//        else if(i <= 9)
-//            hobbiesname = [[UILabel alloc]initWithFrame:CGRectMake(((i-5)*(commonWidth + imageSize))+textXPos, yAxis+(imageSize * 2)+space, imageSize + 20, 15)];
-//        else if(i <= 14)
-//            hobbiesname = [[UILabel alloc]initWithFrame:CGRectMake(((i-10)*(commonWidth + imageSize))+textXPos, yAxis+((imageSize+space) * 2)+imageSize, imageSize + 20, 15)];
-//        else
-//            hobbiesname = [[UILabel alloc]initWithFrame:CGRectMake(((i-15)*(commonWidth + imageSize))+textXPos, yAxis+((imageSize+space) * 3)+imageSize, imageSize + 20, 15)];
-//        
-//        [hobbiesname setFont:[UIFont fontWithName:@"Patron-Regular" size:7]];
-//        hobbiesname.textAlignment = NSTextAlignmentCenter;
-//        hobbiesname.textColor =[UIColor colorWithRed:(float)102.0/255 green:(float)102.0/255 blue:(float)102.0/255 alpha:1.0f];
-//        
-//        
-//        hobbiesname.text = image;
-//        [cell addSubview:hobbiesname];
-//        hobbiesname.textAlignment = NSTextAlignmentCenter;
-//    }
+
     }
     
     if(indexPath.row == 7)
@@ -1802,14 +1804,14 @@
                     
                 }
                 emailPasswordToRegister =(emailPasswordToRegister==nil)?[profileDict valueForKey:@"password"]:emailPasswordToRegister;
-                //cell.passwordTextField.placeholder  =(emailPasswordToRegister!=nil)?@"Your Current password":emailPasswordToRegister;
+               
                 cell.currentpassword.text    =(currentPassword==nil)?@"":@"Your new password";
                 cell.conformationpassword.text =(confirmPassword==nil)?@"":@"confirm your new password";
             }
             
         }
         else if(userDetailsDict.count > 0){
-            
+            cell.layoutConstraintEmailPassViewHeight.constant =40;
             NSString *loginType =[userDetailsDict valueForKey:@"type"];
             if([loginType isEqualToString:@"1"])
             {
@@ -1828,15 +1830,20 @@
             cell.currentpassword.hidden=YES;
             cell.conformationpassword.hidden=YES;
             cell.currentpasswordlbl.hidden=YES;
-            //cell.currentpasswordlbl.text =@"Password";
+           
             cell.confirmpasswordlbl.hidden =YES;
             cell.passwordlbl.hidden =YES;
             [cell.emailTextField setEnabled:NO];
+            if (IS_IPHONE6 ||IS_IPHONE6_Plus){
+                    //cell.layoutConstraintAccLabelYPos.constant =42;
+                        cell.layoutConstraintEmailPassViewHeight.constant =180;
+            }
+
             
         }
         else
         {
-            
+            cell.layoutConstraintEmailPassViewHeight.constant =80;
             cell.emailTextField.text = [self getEmail];
             cell.passwordTextField.text = [self getPassword];
             cell.currentpassword.hidden=YES;
@@ -1844,13 +1851,10 @@
             cell.currentpasswordlbl.text =@"Password";
             cell.confirmpasswordlbl.hidden =YES;
             cell.passwordlbl.hidden=YES;
+           
             
         }
         
-        if (IS_IPHONE6 ||IS_IPHONE6_Plus){
-            cell.layoutConstraintAccLabelYPos.constant =42;
-            cell.layoutConstraintEmailPassViewHeight.constant =50;
-        }
 
     }
     if(indexPath.row ==8)
@@ -1932,12 +1936,12 @@
         if([objloginType isEqualToString:@"dosomething"])
         {
             cell.logilTypelbl.text =@"You are connected via DoSomething Account";
-            self.TypeImgexposition.constant=(IS_IPHONE6||IS_IPHONE6_Plus)?-20:5;
+            self.TypeImgexposition.constant=(IS_IPHONE6||IS_IPHONE6_Plus)?40:20;
             cell.loginTypeImg.image=[UIImage imageNamed:@"loginTypeDS"];
         }
         else{
             cell.logilTypelbl.text =@"You are connected via Facebook";
-            self.TypeImgexposition.constant=(IS_IPHONE6||IS_IPHONE6_Plus)?-50:-25;
+            self.TypeImgexposition.constant=(IS_IPHONE6||IS_IPHONE6_Plus)?75:55;
             cell.loginTypeImg.image=[UIImage imageNamed:@"loginTypeFB"];
         }
 
@@ -2906,7 +2910,7 @@
     [self.window addSubview:altermsgView];
     
    // UIButton * ClosewindowBtn =[[UIButton alloc]initWithFrame:[[UIScreen mainScreen] bounds]];
-    [blueCirecleBtn addTarget:self action:@selector(didClickGeneralWalkAlterviewBtn:) forControlEvents:UIControlEventTouchUpInside];
+    [blueCirecleBtn addTarget:self action:@selector(saveAction:) forControlEvents:UIControlEventTouchUpInside];
     
     
    // [self.window addSubview:ClosewindowBtn];

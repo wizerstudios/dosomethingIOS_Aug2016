@@ -96,16 +96,7 @@
     
     self.walkAlterview.hidden =YES;
     self.blueCircleBtn.hidden=YES;
-    NSString * Firstlogin=[[NSUserDefaults standardUserDefaults]valueForKey:FirstloginLocationView];
-     
-    if([Firstlogin isEqualToString:@"Yes"])
-    {
-         self.walkAlterview.hidden =NO;
-         self.blueCircleBtn.hidden=NO;
-        [self GerenalWalkAlterview];
-         [[NSUserDefaults standardUserDefaults]setObject:@"No" forKey:FirstloginLocationView];
-    }
-
+   
     refreshControl = [[UIRefreshControl alloc] init];
     
     [refreshControl addTarget:self action:@selector(releaseToRefresh:) forControlEvents:UIControlEventValueChanged];
@@ -452,6 +443,16 @@
                      nearestUserdetaile =[[responseObject valueForKey:@"nearestusers"] valueForKey:@"UserList"];
                      commonlocationArray =[nearestUserdetaile mutableCopy];
                      [locationCollectionView reloadData];
+                     NSString * Firstlogin=[[NSUserDefaults standardUserDefaults]valueForKey:FirstloginLocationView];
+                     
+                     if([Firstlogin isEqualToString:@"Yes"])
+                     {
+                         self.walkAlterview.hidden =NO;
+                         self.blueCircleBtn.hidden=NO;
+                         [self GerenalWalkAlterview];
+                         [[NSUserDefaults standardUserDefaults]setObject:@"No" forKey:FirstloginLocationView];
+                     }
+
                  }
                  else
                  {
