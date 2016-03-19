@@ -21,7 +21,6 @@
                 <outlet property="soundmenuView" destination="AUe-Dv-LYv" id="Hfl-z9-2cD"/>
                 <outlet property="soundmenuheight" destination="zVT-Go-6mm" id="D7J-bp-a7z"/>
                 <outlet property="soundmenutableview" destination="MGp-jc-DkK" id="YXf-PE-kj9"/>
-                <outlet property="soundmenutrailing" destination="Nue-1d-qwr" id="5Zz-Eb-2gs"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -48,7 +47,6 @@
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="352" id="gfe-Sd-hGN"/>
-                                <constraint firstAttribute="width" constant="240" id="jxn-QK-jH8"/>
                             </constraints>
                             <connections>
                                 <outlet property="dataSource" destination="-1" id="aJm-Tg-7ZM"/>
@@ -83,6 +81,7 @@
                         <constraint firstItem="fga-Na-LF2" firstAttribute="leading" secondItem="N7O-PS-GJ4" secondAttribute="trailing" constant="40" id="2HB-R5-Izx"/>
                         <constraint firstItem="MGp-jc-DkK" firstAttribute="leading" secondItem="AUe-Dv-LYv" secondAttribute="leading" constant="5" id="7sD-Kj-fKr"/>
                         <constraint firstItem="N7O-PS-GJ4" firstAttribute="top" secondItem="MGp-jc-DkK" secondAttribute="bottom" constant="6" id="BCt-fa-Qbp"/>
+                        <constraint firstItem="MGp-jc-DkK" firstAttribute="centerX" secondItem="N7O-PS-GJ4" secondAttribute="centerX" id="Smm-ZC-jKq"/>
                         <constraint firstAttribute="trailing" secondItem="fga-Na-LF2" secondAttribute="trailing" constant="16" id="eyT-73-pki"/>
                         <constraint firstAttribute="trailing" secondItem="MGp-jc-DkK" secondAttribute="trailing" constant="5" id="soX-49-J5J"/>
                         <constraint firstItem="MGp-jc-DkK" firstAttribute="top" secondItem="AUe-Dv-LYv" secondAttribute="top" constant="5" id="uI7-kE-yuP"/>
@@ -93,10 +92,8 @@
             <color key="backgroundColor" red="0.9882352941176471" green="0.9882352941176471" blue="0.9882352941176471" alpha="0.64826974693251538" colorSpace="calibratedRGB"/>
             <constraints>
                 <constraint firstItem="F5q-16-xJw" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="10" id="BGh-bC-fe2"/>
-                <constraint firstAttribute="trailing" secondItem="AUe-Dv-LYv" secondAttribute="trailing" constant="35" id="Nue-1d-qwr"/>
                 <constraint firstItem="AUe-Dv-LYv" firstAttribute="top" secondItem="F5q-16-xJw" secondAttribute="bottom" constant="4" id="OwJ-qK-5p8"/>
                 <constraint firstItem="F5q-16-xJw" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="10" id="SXH-Qz-kZ5"/>
-                <constraint firstItem="AUe-Dv-LYv" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="35" id="bh4-Vs-bWI"/>
                 <constraint firstItem="AUe-Dv-LYv" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="ga8-Az-IfL"/>
                 <constraint firstAttribute="bottom" secondItem="AUe-Dv-LYv" secondAttribute="bottom" constant="35" id="zVT-Go-6mm"/>
             </constraints>
