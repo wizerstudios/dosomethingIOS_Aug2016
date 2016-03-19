@@ -94,14 +94,12 @@
                         <constraint firstItem="gkb-dE-JJh" firstAttribute="leading" secondItem="t35-GY-BW2" secondAttribute="leading" constant="10" id="AJQ-hO-b5S"/>
                         <constraint firstItem="CB6-yC-cZA" firstAttribute="top" secondItem="t35-GY-BW2" secondAttribute="top" constant="18" id="Fa3-ZJ-H0b"/>
                         <constraint firstItem="fn4-ol-eRv" firstAttribute="top" secondItem="t35-GY-BW2" secondAttribute="top" constant="18" id="Fbl-kM-KX1"/>
-                        <constraint firstAttribute="bottom" secondItem="xMx-Qy-VFu" secondAttribute="bottom" constant="2" id="MEs-Ih-6Bg"/>
                         <constraint firstAttribute="trailing" secondItem="xMx-Qy-VFu" secondAttribute="trailing" constant="10" id="Tr4-6F-e51"/>
                         <constraint firstItem="gkb-dE-JJh" firstAttribute="top" secondItem="t35-GY-BW2" secondAttribute="top" constant="26" id="aCb-3J-x3s"/>
                         <constraint firstAttribute="centerX" secondItem="dl2-RR-YB9" secondAttribute="centerX" id="gBD-4y-hlc"/>
                         <constraint firstItem="xMx-Qy-VFu" firstAttribute="top" secondItem="t35-GY-BW2" secondAttribute="top" constant="18" id="k9Y-mq-3IH"/>
                         <constraint firstItem="dl2-RR-YB9" firstAttribute="top" secondItem="t35-GY-BW2" secondAttribute="top" constant="30" id="shb-wQ-1JW"/>
                         <constraint firstAttribute="trailing" secondItem="fn4-ol-eRv" secondAttribute="trailing" constant="10" id="x6Z-nV-WID"/>
-                        <constraint firstAttribute="bottom" secondItem="gkb-dE-JJh" secondAttribute="bottom" constant="9" id="zDS-5Q-h8u"/>
                     </constraints>
                 </view>
             </subviews>

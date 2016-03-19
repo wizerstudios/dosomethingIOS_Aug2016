@@ -27,7 +27,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="240" height="43"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rYV-O7-Efh">
-                                <rect key="frame" x="0.0" y="11" width="200" height="25"/>
+                                <rect key="frame" x="5" y="11" width="195" height="25"/>
                                 <fontDescription key="fontDescription" name="Patron-Regular" family="Patron" pointSize="14"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
@@ -45,7 +45,7 @@
                             <constraint firstItem="rYV-O7-Efh" firstAttribute="top" secondItem="dem-gZ-NvL" secondAttribute="top" constant="11" id="ChY-7v-FOc"/>
                             <constraint firstItem="v9C-ol-EIO" firstAttribute="top" secondItem="dem-gZ-NvL" secondAttribute="top" constant="12" id="DkQ-xA-EBU"/>
                             <constraint firstAttribute="bottom" secondItem="rYV-O7-Efh" secondAttribute="bottom" constant="7" id="WFt-2C-vmt"/>
-                            <constraint firstItem="rYV-O7-Efh" firstAttribute="leading" secondItem="dem-gZ-NvL" secondAttribute="leading" id="WGf-zC-wid"/>
+                            <constraint firstItem="rYV-O7-Efh" firstAttribute="leading" secondItem="dem-gZ-NvL" secondAttribute="leading" constant="5" id="WGf-zC-wid"/>
                             <constraint firstItem="v9C-ol-EIO" firstAttribute="leading" secondItem="rYV-O7-Efh" secondAttribute="trailing" constant="10" id="kZ3-DU-CVt"/>
                             <constraint firstAttribute="trailing" secondItem="v9C-ol-EIO" secondAttribute="trailing" constant="10" id="tTL-RH-lK4"/>
                         </constraints>

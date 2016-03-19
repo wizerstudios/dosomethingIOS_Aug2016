@@ -1027,7 +1027,14 @@
 -(void)CustomSoundview
 {
     objCustomSoundView = [[CustomSoundview alloc] initWithNibName:@"CustomSoundview" bundle:nil];
+    if(IS_IPHONE6 || IS_IPHONE6_Plus)
+    {
+         objCustomSoundView.view.frame = CGRectMake(self.view.frame.origin.x, customNavigation.view.frame.origin.y+ customNavigation.view.frame.size.height+40, CGRectGetWidth(self.view.frame), self.view.frame.size.height-110);
+    }
+    else
+    {
     objCustomSoundView.view.frame = CGRectMake(self.view.frame.origin.x, customNavigation.view.frame.origin.y+ customNavigation.view.frame.size.height+10, CGRectGetWidth(self.view.frame), self.view.frame.size.height-50);
+    }
     // [objCustomSoundview.alertBgView setHidden:YES];
     [objCustomSoundView.soundmenuView setHidden:YES];
     
@@ -1959,7 +1966,7 @@
         if([objloginType isEqualToString:@"dosomething"])
         {
             cell.logilTypelbl.text =@"You are connected via DoSomething Account";
-            self.TypeImgexposition.constant=(IS_IPHONE6||IS_IPHONE6_Plus)?40:20;
+            self.TypeImgexposition.constant=(IS_IPHONE6||IS_IPHONE6_Plus)?50:20;
             cell.loginTypeImg.image=[UIImage imageNamed:@"loginTypeDS"];
         }
         else{

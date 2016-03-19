@@ -7,6 +7,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="DSProfileTableViewController">
             <connections>
+                <outlet property="layoutConstraintTableViewYPos" destination="knC-c8-3ae" id="obU-RS-xhz"/>
                 <outlet property="tableViewHeightConstraint" destination="D1Y-FS-FKh" id="2K5-IT-Qfe"/>
                 <outlet property="tableviewProfile" destination="HcG-cC-Fek" id="D9w-cN-jlO"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
