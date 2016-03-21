@@ -61,9 +61,9 @@
     UILabel *titleLabel;
     NSString                * currentLatitude, * currentLongitude;
     
-    UIImageView * blueCirecleImg1;
-    UIImageView * blueCirecleImg2;
-    UIImageView * blueCirecleImg3;
+    UIButton * blueCirecleImg1;
+    UIButton * blueCirecleImg2;
+    UIButton * blueCirecleImg3;
     UIButton * blueCirecleBtn;
    
 }
@@ -904,32 +904,34 @@ minimumLineSpacingForSectionAtIndex:(NSInteger)section {
     {
        
         altermsgView= [[UIView alloc]initWithFrame:CGRectMake(self.window.center.x-70,self.window.frame.size.height-160,160,60)];
-        blueCirecleImg1=[[UIImageView alloc]initWithFrame:CGRectMake(self.window.frame.origin.x+35,self.window.center.y,45,45)];
-        blueCirecleImg2=[[UIImageView alloc]initWithFrame:CGRectMake(self.window.center.x-20,self.window.center.y,45,45)];
-         blueCirecleImg3=[[UIImageView alloc]initWithFrame:CGRectMake(self.window.frame.size.width-80,self.window.center.y,45,45)];
+        blueCirecleImg1=[[UIButton alloc]initWithFrame:CGRectMake(self.window.frame.origin.x+35,self.window.center.y,45,45)];
+        blueCirecleImg2=[[UIButton alloc]initWithFrame:CGRectMake(self.window.center.x-20,self.window.center.y,45,45)];
+         blueCirecleImg3=[[UIButton alloc]initWithFrame:CGRectMake(self.window.frame.size.width-80,self.window.center.y,45,45)];
     }
     else{
         
       
         altermsgView= [[UIView alloc]initWithFrame:CGRectMake(self.view.center.x-70,self.view.frame.size.height-175,160,60)];
       
-        blueCirecleImg1=[[UIImageView alloc]initWithFrame:CGRectMake(self.view.frame.origin.x+35,self.view.center.y,45,45)];
-        blueCirecleImg2=[[UIImageView alloc]initWithFrame:CGRectMake(self.view.center.x-20,self.view.center.y,45,45)];
-        blueCirecleImg3=[[UIImageView alloc]initWithFrame:CGRectMake(self.view.frame.size.width-80,self.view.center.y,45,45)];
+        blueCirecleImg1=[[UIButton alloc]initWithFrame:CGRectMake(self.view.frame.origin.x+35,self.view.center.y,45,45)];
+        blueCirecleImg2=[[UIButton alloc]initWithFrame:CGRectMake(self.view.center.x-20,self.view.center.y,45,45)];
+        blueCirecleImg3=[[UIButton alloc]initWithFrame:CGRectMake(self.view.frame.size.width-80,self.view.center.y,45,45)];
     }
    
     
-    blueCirecleImg1.image=[UIImage imageNamed:@"BlueCirecleimg"];
+    [blueCirecleImg1 setImage:[UIImage imageNamed:@"BlueCirecleimg"]  forState:UIControlStateNormal];
     blueCirecleImg1.userInteractionEnabled=YES;
     [self flashOn:blueCirecleImg1];
     [self.window addSubview:blueCirecleImg1];
     
-    blueCirecleImg2.image=[UIImage imageNamed:@"BlueCirecleimg"];
+    [blueCirecleImg2 setImage:[UIImage imageNamed:@"BlueCirecleimg"]  forState:UIControlStateNormal];
+   // blueCirecleImg2.image=[UIImage imageNamed:@"BlueCirecleimg"];
     blueCirecleImg2.userInteractionEnabled=YES;
     [self flashOn:blueCirecleImg2];
     [self.window addSubview:blueCirecleImg2];
     
-    blueCirecleImg3.image=[UIImage imageNamed:@"BlueCirecleimg"];
+    [blueCirecleImg3 setImage:[UIImage imageNamed:@"BlueCirecleimg"]  forState:UIControlStateNormal];
+    //blueCirecleImg3.image=[UIImage imageNamed:@"BlueCirecleimg"];
     blueCirecleImg3.userInteractionEnabled=YES;
     [self flashOn:blueCirecleImg3];
     [self.window addSubview:blueCirecleImg3];
@@ -973,8 +975,8 @@ minimumLineSpacingForSectionAtIndex:(NSInteger)section {
 
 - (void)flashOn:(UIView *)v
 {
-    [UIView animateWithDuration:.5 delay:0 options:UIViewAnimationOptionAllowUserInteraction animations:^ {
-        v.alpha =.05;
+    [UIView animateWithDuration:0.5 delay:0 options:UIViewAnimationOptionAllowUserInteraction animations:^ {
+        v.alpha =1;
     } completion:^(BOOL finished) {
         [self flashOff:v];
     }];

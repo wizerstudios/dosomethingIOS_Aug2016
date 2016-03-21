@@ -738,8 +738,8 @@
 
 - (void)flashOn:(UIView *)v
 {
-    [UIView animateWithDuration:.5 delay:0 options:UIViewAnimationOptionAllowUserInteraction animations:^ {
-        v.alpha =.05;
+    [UIView animateWithDuration:0.5 delay:0 options:UIViewAnimationOptionAllowUserInteraction animations:^ {
+        v.alpha =1;
     } completion:^(BOOL finished) {
         [self flashOff:v];
     }];

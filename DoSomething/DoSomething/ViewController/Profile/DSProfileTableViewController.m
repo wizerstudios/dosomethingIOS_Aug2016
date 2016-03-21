@@ -1130,8 +1130,12 @@
             }
             else
             {
-                 //self.aboutTextHeight.constant=dataSize.height;
-                 return dataSize.height;
+                [self.view layoutIfNeeded];
+                
+//                self.aboutTextHeight.constant=dataSize.height;
+//                cell.contentView.frame=CGRectMake(cell.contentView.frame.origin.x,cell.contentView.frame.origin.y,cell.contentView.frame.size.width,dataSize.height);
+                // self.aboutTextHeight.constant=dataSize.height;
+                 return  dataSize.height;
             }
             
         }
@@ -1634,10 +1638,10 @@
                         cell.textViewAboutYou.text = [[profileDict valueForKey:@"about"]mutableCopy];
                         strAbout =cell.textViewAboutYou.text;
                         dataSize = [COMMON getControlHeight:strAbout withFontName:@"Patron-Regular" ofSize:14.0 withSize:CGSizeMake(tableView.frame.size.width-20,tableView.frame.size.height)];
-                        [self.view layoutIfNeeded];
-                        
-                        self.aboutTextHeight.constant=dataSize.height;
-                        cell.contentView.frame=CGRectMake(cell.contentView.frame.origin.x,cell.contentView.frame.origin.y,cell.contentView.frame.size.width,dataSize.height);
+//                        [self.view layoutIfNeeded];
+//                        
+//                        self.aboutTextHeight.constant=dataSize.height;
+                        //cell.contentView.frame=CGRectMake(cell.contentView.frame.origin.x,cell.contentView.frame.origin.y,cell.contentView.frame.size.width,dataSize.height);
                         
 
                     }
@@ -2982,7 +2986,7 @@
     
 
     [blueCirecleBtn setImage:[UIImage imageNamed:@"BlueCirecleimg"] forState:UIControlStateNormal];
-    //blueCirecleBtn.userInteractionEnabled=YES;
+   
     [self flashOn:blueCirecleBtn];
     [CommWalkView addSubview:blueCirecleBtn];
    
@@ -3034,7 +3038,7 @@
 - (void)flashOn:(UIView *)v
 {
     [UIView animateWithDuration:0.5 delay:0 options:UIViewAnimationOptionAllowUserInteraction animations:^ {
-        v.alpha = 0.05;
+        v.alpha =1;
     } completion:^(BOOL finished) {
         [self flashOff:v];
     }];
