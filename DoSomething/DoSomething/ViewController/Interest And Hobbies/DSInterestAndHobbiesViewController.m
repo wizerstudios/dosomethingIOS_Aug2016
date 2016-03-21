@@ -41,6 +41,8 @@
     
     NSMutableArray *profileHobbyArray;
     BOOL isDownloadactiveImg;
+    UIButton * blueCirecleBtn;
+
 
 }
 @end
@@ -662,13 +664,13 @@
 {
     self.WalkAlterview.hidden=YES;
     self.window.hidden=YES;
+    [self flashOff:blueCirecleBtn];
 }
 -(void)GerenalWalkAlterview
 {
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     
-    UIButton * blueCirecleBtn;
-    UILabel * Savelbl;
+       UILabel * Savelbl;
     UIView * altermsgView;
     
     if(IS_IPHONE6 || IS_IPHONE6_Plus)
@@ -687,6 +689,7 @@
     }
     [blueCirecleBtn setImage:[UIImage imageNamed:@"BlueCirecleimg"] forState:UIControlStateNormal];
    // blueCirecleImg.userInteractionEnabled=YES;
+    [self flashOn:blueCirecleBtn];
     [self.window addSubview:blueCirecleBtn];
     
    
@@ -723,6 +726,23 @@
     self.window.backgroundColor =[UIColor colorWithRed:(53.0/255.0f) green:(53.0/255.0f) blue:(53.0/255.0f) alpha:0.5];
     
 
+}
+- (void)flashOff:(UIView *)v
+{
+    [UIView animateWithDuration:0.3 delay:0 options:UIViewAnimationOptionAllowUserInteraction animations:^ {
+        v.alpha = .05;  //don't animate alpha to 0, otherwise you won't be able to interact with it
+    } completion:^(BOOL finished) {
+        [self flashOn:v];
+    }];
+}
+
+- (void)flashOn:(UIView *)v
+{
+    [UIView animateWithDuration:.5 delay:0 options:UIViewAnimationOptionAllowUserInteraction animations:^ {
+        v.alpha =.05;
+    } completion:^(BOOL finished) {
+        [self flashOff:v];
+    }];
 }
 
 

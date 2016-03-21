@@ -27,4 +27,6 @@
 @property  IBOutlet NSLayoutConstraint *viewHeightConstraint;
 @property (nonatomic,strong) IBOutlet UIView * walkAlterview;
 
+@property (nonatomic,strong) IBOutlet UIButton * walkAlterviewBtn;
+
 @end

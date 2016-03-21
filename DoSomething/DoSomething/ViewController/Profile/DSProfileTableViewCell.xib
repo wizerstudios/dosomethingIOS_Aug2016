@@ -49,8 +49,7 @@
                 <outlet property="CellSwitchOn" destination="OpY-gd-Xse" id="TUA-pO-U2v"/>
                 <outlet property="CellTermsOfUse" destination="1cD-va-IDg" id="A6k-KR-AFN"/>
                 <outlet property="TypeImgexposition" destination="9Kg-jk-IUG" id="Sif-JP-mVY"/>
-                <outlet property="aboutTextHeight" destination="8LF-bS-WIH" id="QBu-ae-Rrx"/>
-                <outlet property="aboutViewheight" destination="LZN-Hm-Jza" id="xXH-c8-HbF"/>
+                <outlet property="aboutTextHeight" destination="e2Y-8g-5ql" id="SfH-CJ-pg9"/>
                 <outlet property="cellAddIcon" destination="5Fu-f3-SQN" id="Sg8-4z-pxE"/>
                 <outlet property="cellButton" destination="fi2-qG-tV9" id="ml8-21-oRj"/>
                 <outlet property="cellDatePicker" destination="jaf-ij-gGi" id="1Ro-Do-NHV"/>
@@ -679,54 +678,39 @@
                 <rect key="frame" x="0.0" y="0.0" width="300" height="40"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="URf-8H-5OS">
-                        <rect key="frame" x="0.0" y="0.0" width="300" height="40"/>
-                        <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="About You" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Mvl-SM-bdc">
-                                <rect key="frame" x="7" y="4" width="75" height="16"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="16" id="GRD-Jj-riY"/>
-                                    <constraint firstAttribute="width" constant="75" id="SMz-Lb-K19"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" name="Patron-Bold" family="Patron" pointSize="10"/>
-                                <color key="textColor" red="0.40000000000000002" green="0.40000000000000002" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="d6I-S9-MzF">
-                                <rect key="frame" x="96" y="0.0" width="202" height="37"/>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="37" id="8LF-bS-WIH"/>
-                                </constraints>
-                                <color key="textColor" red="0.59999999999999998" green="0.59999999999999998" blue="0.59999999999999998" alpha="1" colorSpace="calibratedRGB"/>
-                                <fontDescription key="fontDescription" name="Patron-Regular" family="Patron" pointSize="10"/>
-                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                                <connections>
-                                    <outlet property="delegate" destination="fgc-Db-ZpK" id="WfK-gU-F4T"/>
-                                </connections>
-                            </textView>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="About You" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Mvl-SM-bdc">
+                        <rect key="frame" x="5" y="5" width="75" height="16"/>
                         <constraints>
-                            <constraint firstAttribute="height" constant="40" id="LZN-Hm-Jza"/>
-                            <constraint firstItem="d6I-S9-MzF" firstAttribute="leading" secondItem="Mvl-SM-bdc" secondAttribute="trailing" constant="14" id="Ulk-BD-krZ"/>
-                            <constraint firstAttribute="trailing" secondItem="d6I-S9-MzF" secondAttribute="trailing" constant="2" id="lPy-rC-cZh"/>
-                            <constraint firstItem="Mvl-SM-bdc" firstAttribute="top" secondItem="URf-8H-5OS" secondAttribute="top" constant="4" id="lcm-ii-XLV"/>
-                            <constraint firstItem="d6I-S9-MzF" firstAttribute="top" secondItem="URf-8H-5OS" secondAttribute="top" id="mfC-1r-3zk"/>
-                            <constraint firstAttribute="bottom" secondItem="d6I-S9-MzF" secondAttribute="bottom" constant="3" id="ovS-Pm-7LV"/>
-                            <constraint firstItem="Mvl-SM-bdc" firstAttribute="leading" secondItem="URf-8H-5OS" secondAttribute="leading" constant="7" id="v1f-l7-M6G"/>
+                            <constraint firstAttribute="width" constant="75" id="D66-fz-X8S"/>
+                            <constraint firstAttribute="height" constant="16" id="pxT-Ji-ZvY"/>
                         </constraints>
-                    </view>
+                        <fontDescription key="fontDescription" name="Patron-Bold" family="Patron" pointSize="10"/>
+                        <color key="textColor" red="0.40000000000000002" green="0.40000000000000002" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="d6I-S9-MzF">
+                        <rect key="frame" x="95" y="2" width="202" height="36"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="36" id="e2Y-8g-5ql"/>
+                        </constraints>
+                        <color key="textColor" red="0.59999999999999998" green="0.59999999999999998" blue="0.59999999999999998" alpha="1" colorSpace="calibratedRGB"/>
+                        <fontDescription key="fontDescription" name="Patron-Regular" family="Patron" pointSize="10"/>
+                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                        <connections>
+                            <outlet property="delegate" destination="fgc-Db-ZpK" id="WfK-gU-F4T"/>
+                        </connections>
+                    </textView>
                 </subviews>
                 <constraints>
-                    <constraint firstAttribute="trailing" secondItem="URf-8H-5OS" secondAttribute="trailing" id="CQF-Ug-a1c"/>
-                    <constraint firstItem="URf-8H-5OS" firstAttribute="leading" secondItem="j4x-Ki-SrC" secondAttribute="leading" id="hGL-ZQ-Ctj"/>
-                    <constraint firstItem="URf-8H-5OS" firstAttribute="top" secondItem="j4x-Ki-SrC" secondAttribute="top" id="hSN-i2-vWm"/>
-                    <constraint firstAttribute="bottom" secondItem="URf-8H-5OS" secondAttribute="bottom" id="lAL-me-aVG"/>
+                    <constraint firstItem="Mvl-SM-bdc" firstAttribute="top" secondItem="j4x-Ki-SrC" secondAttribute="top" constant="5" id="PQI-ct-RnH"/>
+                    <constraint firstAttribute="trailing" secondItem="d6I-S9-MzF" secondAttribute="trailing" constant="3" id="QrV-GX-G44"/>
+                    <constraint firstItem="Mvl-SM-bdc" firstAttribute="leading" secondItem="j4x-Ki-SrC" secondAttribute="leading" constant="5" id="cNH-o1-uZF"/>
+                    <constraint firstItem="d6I-S9-MzF" firstAttribute="leading" secondItem="Mvl-SM-bdc" secondAttribute="trailing" constant="15" id="nv0-Bu-enj"/>
+                    <constraint firstItem="d6I-S9-MzF" firstAttribute="top" secondItem="j4x-Ki-SrC" secondAttribute="top" constant="2" id="vZS-8t-UCR"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>
-                <outlet property="aboutview" destination="URf-8H-5OS" id="U4C-as-FYA"/>
                 <outlet property="labelAboutYou" destination="Mvl-SM-bdc" id="iim-O9-U9x"/>
                 <outlet property="textViewAboutYou" destination="d6I-S9-MzF" id="clv-p4-OFl"/>
             </connections>

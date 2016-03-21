@@ -40,7 +40,7 @@
 
 @end
 @implementation DSHomeViewController
-@synthesize delegate,walkAlterview;
+@synthesize delegate,walkAlterview,walkAlterviewBtn;
 @synthesize kenView;
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -56,7 +56,7 @@
     [super viewDidLoad];
    
     self.walkAlterview.hidden =YES;
- 
+    [self flashOn:walkAlterviewBtn];
     
     if( [[NSUserDefaults standardUserDefaults] boolForKey:FirstDisplayGeneralAlterView] == YES)
     {
@@ -260,9 +260,28 @@
 -(IBAction)didClickGeneralWalkAlterview:(id)sender
 {
     self.walkAlterview.hidden=YES;
+     [self flashOff:walkAlterviewBtn];
     DSLoginViewController *DSLoginView  = [[DSLoginViewController alloc]initWithNibName:@"DSLoginViewController" bundle:nil];
     DSLoginView.temp = @"createAnAccount";
     [self.navigationController pushViewController:DSLoginView animated:YES];
+}
+
+- (void)flashOff:(UIView *)v
+{
+    [UIView animateWithDuration:0.3 delay:0 options:UIViewAnimationOptionAllowUserInteraction animations:^ {
+        v.alpha = .05;  //don't animate alpha to 0, otherwise you won't be able to interact with it
+    } completion:^(BOOL finished) {
+        [self flashOn:v];
+    }];
+}
+
+- (void)flashOn:(UIView *)v
+{
+    [UIView animateWithDuration:0.5 delay:0 options:UIViewAnimationOptionAllowUserInteraction animations:^ {
+        v.alpha = .05;
+    } completion:^(BOOL finished) {
+        [self flashOff:v];
+    }];
 }
 
 

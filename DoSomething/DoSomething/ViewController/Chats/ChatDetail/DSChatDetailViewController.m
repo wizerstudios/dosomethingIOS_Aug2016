@@ -40,6 +40,7 @@
     int height;
     NSMutableArray * recevierDetails;
     BOOL  iskeyboardapear;
+     UIButton * blueCirecleBtn;
 }
 
 @end
@@ -599,6 +600,7 @@
 {
     self.WalkAlterview.hidden=YES;
     self.window.hidden =YES;
+     [self flashOff:blueCirecleBtn];
 }
 -(void)GerenalWalkAlterview
 {
@@ -606,7 +608,7 @@
    
     
     UIView * CommWalkView;
-    UIButton * blueCirecleBtn;
+   
     UIView * altermsgView;
     
     if(IS_IPHONE6_Plus || IS_IPHONE6)
@@ -627,7 +629,9 @@
 
 
     [blueCirecleBtn setImage:[UIImage imageNamed:@"BlueCirecleimg"] forState: UIControlStateNormal];
-
+  
+    [self flashOn:blueCirecleBtn];
+    
     [self.window addSubview:blueCirecleBtn];
     
 
@@ -659,6 +663,24 @@
     
    
     
+}
+
+- (void)flashOff:(UIView *)v
+{
+    [UIView animateWithDuration:0.3 delay:0 options:UIViewAnimationOptionAllowUserInteraction animations:^ {
+        v.alpha = .05;  //don't animate alpha to 0, otherwise you won't be able to interact with it
+    } completion:^(BOOL finished) {
+        [self flashOn:v];
+    }];
+}
+
+- (void)flashOn:(UIView *)v
+{
+    [UIView animateWithDuration:0.5 delay:0 options:UIViewAnimationOptionAllowUserInteraction animations:^ {
+        v.alpha = .05;
+    } completion:^(BOOL finished) {
+        [self flashOff:v];
+    }];
 }
 
 
