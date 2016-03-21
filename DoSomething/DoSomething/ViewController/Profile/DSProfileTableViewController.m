@@ -1130,11 +1130,9 @@
             }
             else
             {
-                [self.view layoutIfNeeded];
+
                 
-//                self.aboutTextHeight.constant=dataSize.height;
-//                cell.contentView.frame=CGRectMake(cell.contentView.frame.origin.x,cell.contentView.frame.origin.y,cell.contentView.frame.size.width,dataSize.height);
-                // self.aboutTextHeight.constant=dataSize.height;
+                self.aboutTextHeight.constant=dataSize.height;
                  return  dataSize.height;
             }
             
@@ -1623,10 +1621,7 @@
                 strAbout =cell.textViewAboutYou.text;
                
                
-                [self.view layoutIfNeeded];
-                
-                self.aboutTextHeight.constant=dataSize.height;
-                cell.contentView.frame=CGRectMake(cell.contentView.frame.origin.x,cell.contentView.frame.origin.y,cell.contentView.frame.size.width,dataSize.height);
+
                 
             }
             
@@ -1638,19 +1633,11 @@
                         cell.textViewAboutYou.text = [[profileDict valueForKey:@"about"]mutableCopy];
                         strAbout =cell.textViewAboutYou.text;
                         dataSize = [COMMON getControlHeight:strAbout withFontName:@"Patron-Regular" ofSize:14.0 withSize:CGSizeMake(tableView.frame.size.width-20,tableView.frame.size.height)];
-//                        [self.view layoutIfNeeded];
-//                        
-//                        self.aboutTextHeight.constant=dataSize.height;
-                        //cell.contentView.frame=CGRectMake(cell.contentView.frame.origin.x,cell.contentView.frame.origin.y,cell.contentView.frame.size.width,dataSize.height);
                         
 
                     }
                     else{
                         cell.textViewAboutYou.text = strAbout;
-                        [self.view layoutIfNeeded];
-                        
-                        self.aboutTextHeight.constant=dataSize.height;
-                        cell.contentView.frame=CGRectMake(cell.contentView.frame.origin.x,cell.contentView.frame.origin.y,cell.contentView.frame.size.width,dataSize.height);
                        
                     }
                 }
@@ -1658,10 +1645,6 @@
                     
                     cell.textViewAboutYou.text = [[profileDict valueForKey:@"about"]mutableCopy];
                     strAbout =cell.textViewAboutYou.text;
-                    [self.view layoutIfNeeded];
-                    
-                    self.aboutTextHeight.constant=dataSize.height;
-                    cell.contentView.frame=CGRectMake(cell.contentView.frame.origin.x,cell.contentView.frame.origin.y,cell.contentView.frame.size.width,dataSize.height);
                     
                 }
                 
@@ -1685,14 +1668,11 @@
                 {
                     
                     cell.textViewAboutYou.text =strAbout;
-                    [self.view layoutIfNeeded];
-                    
-                    self.aboutTextHeight.constant=dataSize.height;
-                    cell.contentView.frame=CGRectMake(cell.contentView.frame.origin.x,cell.contentView.frame.origin.y,cell.contentView.frame.size.width,dataSize.height);
+
                   
                 }
             }
-            //cell.textViewAboutYou.delegate = self;
+            cell.textViewAboutYou.delegate = self;
             
         }
     }

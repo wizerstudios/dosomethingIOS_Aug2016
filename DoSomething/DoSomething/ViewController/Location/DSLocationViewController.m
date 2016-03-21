@@ -1150,12 +1150,12 @@
     slider.trackImage = image;
 
     image = [UIImage imageNamed:@"Filter_track"];
-    image = [image imageWithAlignmentRectInsets:UIEdgeInsetsMake(0,0,0,0)];
+    image = [image imageWithAlignmentRectInsets:UIEdgeInsetsMake(0,2,0,2)];
     slider.lowerHandleImageNormal = image;
     slider.upperHandleImageNormal = image;
 
     image = [UIImage imageNamed:@"Filter_track"];          //slider-metal-handle-highlighted
-    image = [image imageWithAlignmentRectInsets:UIEdgeInsetsMake(0,0, 0,0)];
+    image = [image imageWithAlignmentRectInsets:UIEdgeInsetsMake(0,1, 0,1)];
     slider.lowerHandleImageHighlighted = image;
     slider.upperHandleImageHighlighted = image;
 }

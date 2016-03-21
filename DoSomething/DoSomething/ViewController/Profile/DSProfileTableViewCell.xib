@@ -280,18 +280,10 @@
                 </subviews>
                 <color key="backgroundColor" red="0.90980392156862744" green="0.90980392156862744" blue="0.90980392156862744" alpha="1" colorSpace="calibratedRGB"/>
                 <constraints>
-                    <constraint firstAttribute="bottomMargin" secondItem="jke-W9-34h" secondAttribute="bottom" constant="-15" id="KyY-Zw-hOd"/>
                     <constraint firstItem="jke-W9-34h" firstAttribute="top" secondItem="yDW-iu-fDt" secondAttribute="top" constant="10" id="TbI-EW-j3K"/>
                     <constraint firstAttribute="trailing" secondItem="jke-W9-34h" secondAttribute="trailing" id="TxT-PH-r3V"/>
                     <constraint firstItem="jke-W9-34h" firstAttribute="leading" secondItem="yDW-iu-fDt" secondAttribute="leading" id="cS5-VH-FK8"/>
-                    <constraint firstAttribute="bottom" secondItem="jke-W9-34h" secondAttribute="bottom" constant="-6" id="dWA-EB-sAy"/>
                 </constraints>
-                <variation key="default">
-                    <mask key="constraints">
-                        <exclude reference="KyY-Zw-hOd"/>
-                        <exclude reference="dWA-EB-sAy"/>
-                    </mask>
-                </variation>
             </tableViewCellContentView>
             <connections>
                 <outlet property="labelDPTitleText" destination="q6F-Oj-Gjb" id="iRk-hA-3dY"/>
@@ -624,10 +616,10 @@
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstItem="Aq5-3I-doL" firstAttribute="leading" secondItem="TYu-zj-QOQ" secondAttribute="leading" constant="7" id="A48-to-lZy"/>
+                                    <constraint firstItem="QOA-QP-Ciw" firstAttribute="centerY" secondItem="TYu-zj-QOQ" secondAttribute="centerY" id="PxQ-cb-Ey8"/>
                                     <constraint firstItem="QOA-QP-Ciw" firstAttribute="leading" secondItem="TYu-zj-QOQ" secondAttribute="leading" constant="100" id="Rmc-GB-tUr"/>
                                     <constraint firstAttribute="height" constant="44" id="Yth-HA-EyM"/>
-                                    <constraint firstItem="QOA-QP-Ciw" firstAttribute="top" secondItem="TYu-zj-QOQ" secondAttribute="top" constant="11" id="gxJ-q8-MYu"/>
-                                    <constraint firstItem="Aq5-3I-doL" firstAttribute="top" secondItem="TYu-zj-QOQ" secondAttribute="top" constant="11" id="sT4-cS-8iv"/>
+                                    <constraint firstItem="Aq5-3I-doL" firstAttribute="centerY" secondItem="TYu-zj-QOQ" secondAttribute="centerY" id="fBy-zx-V9d"/>
                                 </constraints>
                             </view>
                         </subviews>
