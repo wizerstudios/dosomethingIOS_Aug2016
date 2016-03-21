@@ -45,6 +45,7 @@
     
     CustomAlterview *objCustomAlterview;
     bool isForgotBackButton;
+    UIImageView * blueCirecleImg;
    
 }
 @end
@@ -850,6 +851,7 @@
      [[NSUserDefaults standardUserDefaults]removeObjectForKey:FirstCreatAccount];
     self.walkalterview.hidden=YES;
     self.window.hidden=YES;
+    [self flashOff:blueCirecleImg];
 }
 - (IBAction)createAnAccountFB:(id)sender {
     [self loginByFacebook];
@@ -866,7 +868,7 @@
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     UIButton * ClosewindowBtn =[[UIButton alloc]initWithFrame:[[UIScreen mainScreen] bounds]];
     [ClosewindowBtn addTarget:self action:@selector(didClickGeneralWalkAlterview:) forControlEvents:UIControlEventTouchUpInside];
-    UIImageView * blueCirecleImg;
+  
     UIView * altermsgView;
     UIImageView * blueTxtImg;
     UILabel * AlterMsg;
@@ -886,6 +888,7 @@
     
     blueCirecleImg.image=[UIImage imageNamed:@"BlueCirecleimg"];
     blueCirecleImg.userInteractionEnabled=YES;
+    [self flashOn:blueCirecleImg];
     [self.window addSubview:blueCirecleImg];
 
 
@@ -915,5 +918,23 @@
    
     
 }
+- (void)flashOff:(UIView *)v
+{
+    [UIView animateWithDuration:0.3 delay:0 options:UIViewAnimationOptionAllowUserInteraction animations:^ {
+        v.alpha = .05;  //don't animate alpha to 0, otherwise you won't be able to interact with it
+    } completion:^(BOOL finished) {
+        [self flashOn:v];
+    }];
+}
+
+- (void)flashOn:(UIView *)v
+{
+    [UIView animateWithDuration:0.5 delay:0 options:UIViewAnimationOptionAllowUserInteraction animations:^ {
+        v.alpha = .05;
+    } completion:^(BOOL finished) {
+        [self flashOff:v];
+    }];
+}
+
 
 @end

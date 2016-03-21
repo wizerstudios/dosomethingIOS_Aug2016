@@ -215,7 +215,7 @@
 
     [self.window.rootViewController.view addSubview:buttonsView];
     [self.window.rootViewController.view addSubview:SepratorLbl];
-   
+  
     [buttonsView addSubview:locationButton];
     [buttonsView addSubview:menuButton];
     [buttonsView addSubview:chatsButton];

@@ -20,6 +20,7 @@
                 <outlet property="view" destination="dVy-AE-imx" id="Lvz-12-kZl"/>
                 <outlet property="viewHeightConstraint" destination="J8O-ke-YvW" id="zIx-mb-zxK"/>
                 <outlet property="walkAlterview" destination="jWq-GO-PYP" id="h85-wB-25c"/>
+                <outlet property="walkAlterviewBtn" destination="7Ke-VI-iNv" id="9PU-y5-d6k"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>

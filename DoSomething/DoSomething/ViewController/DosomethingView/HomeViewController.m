@@ -60,6 +60,11 @@
     
     UILabel *titleLabel;
     NSString                * currentLatitude, * currentLongitude;
+    
+    UIImageView * blueCirecleImg1;
+    UIImageView * blueCirecleImg2;
+    UIImageView * blueCirecleImg3;
+    UIButton * blueCirecleBtn;
    
 }
 @end
@@ -829,6 +834,10 @@ minimumLineSpacingForSectionAtIndex:(NSInteger)section {
 {
     self.WalkAlterview.hidden=YES;
       self.window.hidden=YES;
+    [self flashOff:blueCirecleImg1];
+    [self flashOff:blueCirecleImg2];
+    [self flashOff:blueCirecleImg3];
+    [self flashOff:blueCirecleBtn];
     
 }
 
@@ -838,7 +847,7 @@ minimumLineSpacingForSectionAtIndex:(NSInteger)section {
     
     UIView * CommWalkView;
     UIView * altermsgView;
-    UIButton * blueCirecleBtn;
+    
     if(IS_IPHONE6_Plus||IS_IPHONE6)
     {
          CommWalkView=[[UIView alloc]initWithFrame:CGRectMake(self.window.center.x-70,self.window.frame.size.height-100,(self.view.frame.size.width/2),50)];
@@ -855,6 +864,7 @@ minimumLineSpacingForSectionAtIndex:(NSInteger)section {
  
     [blueCirecleBtn setImage:[UIImage imageNamed:@"BlueCirecleimg"] forState:UIControlStateNormal];
     blueCirecleBtn.userInteractionEnabled=YES;
+    [self flashOn:blueCirecleBtn];
     [CommWalkView addSubview:blueCirecleBtn];
     
     UIImageView * blueTxtImg=[[UIImageView alloc]initWithFrame:CGRectMake(0,0,160,60)];
@@ -890,9 +900,6 @@ minimumLineSpacingForSectionAtIndex:(NSInteger)section {
     
    
     UIView * altermsgView;
-    UIImageView * blueCirecleImg1;
-    UIImageView * blueCirecleImg2;
-    UIImageView * blueCirecleImg3;
     if(IS_IPHONE6_Plus||IS_IPHONE6)
     {
        
@@ -914,14 +921,17 @@ minimumLineSpacingForSectionAtIndex:(NSInteger)section {
     
     blueCirecleImg1.image=[UIImage imageNamed:@"BlueCirecleimg"];
     blueCirecleImg1.userInteractionEnabled=YES;
+    [self flashOn:blueCirecleImg1];
     [self.window addSubview:blueCirecleImg1];
     
     blueCirecleImg2.image=[UIImage imageNamed:@"BlueCirecleimg"];
     blueCirecleImg2.userInteractionEnabled=YES;
+    [self flashOn:blueCirecleImg2];
     [self.window addSubview:blueCirecleImg2];
     
     blueCirecleImg3.image=[UIImage imageNamed:@"BlueCirecleimg"];
     blueCirecleImg3.userInteractionEnabled=YES;
+    [self flashOn:blueCirecleImg3];
     [self.window addSubview:blueCirecleImg3];
     
     
@@ -951,4 +961,23 @@ minimumLineSpacingForSectionAtIndex:(NSInteger)section {
     self.window.backgroundColor =[UIColor colorWithRed:(53.0/255.0f) green:(53.0/255.0f) blue:(53.0/255.0f) alpha:0.5];
 
 }
+
+- (void)flashOff:(UIView *)v
+{
+    [UIView animateWithDuration:0.3 delay:0 options:UIViewAnimationOptionAllowUserInteraction animations:^ {
+        v.alpha = .05;  //don't animate alpha to 0, otherwise you won't be able to interact with it
+    } completion:^(BOOL finished) {
+        [self flashOn:v];
+    }];
+}
+
+- (void)flashOn:(UIView *)v
+{
+    [UIView animateWithDuration:.5 delay:0 options:UIViewAnimationOptionAllowUserInteraction animations:^ {
+        v.alpha =.05;
+    } completion:^(BOOL finished) {
+        [self flashOff:v];
+    }];
+}
+
 @end
