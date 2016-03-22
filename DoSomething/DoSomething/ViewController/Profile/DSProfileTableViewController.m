@@ -160,7 +160,10 @@
 -(void)viewWillAppear:(BOOL)animated
 {
    
-   
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(loadInvalidSessionAlert:)
+                                                 name:@"InvalidSession"
+                                               object:nil];
     
     imageNormalArray =[[NSMutableArray alloc]init];
     
@@ -182,7 +185,7 @@
     }
     [[NSUserDefaults standardUserDefaults]setObject:hobbiesMainArray forKey:HobbiesArray];
     
-    [self selectitemMethod];
+   
     
     infoArray=[[NSMutableArray alloc]initWithObjects:@"profile_noimg",@"profile_noimg",@"profile_noimg", nil];
     
@@ -193,6 +196,7 @@
             {
                 
                 [[NSUserDefaults standardUserDefaults]removeObjectForKey:HobbiesArray];
+
             }
 
         isLoadData = YES;
@@ -211,6 +215,7 @@
         strInterestHobbies = [[hobbiesMainArray valueForKey:@"hobbies_id"] componentsJoinedByString:@","];
        
     }
+     [self selectitemMethod];
 
      [_tableviewProfile reloadData];
     
@@ -261,13 +266,10 @@
 }
 -(void)profileImageDisplayMethod
 {
-     [self getUserCurrenLocation];
+    // [self getUserCurrenLocation];
     NSString * strsessionID =[profileDict valueForKey:@"SessionId"];
     loginUserSessionID = strsessionID;
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(loadInvalidSessionAlert:)
-                                                 name:@"InvalidSession"
-                                               object:nil];
+   
     
   
   
@@ -278,7 +280,10 @@
         [customNavigation.saveBtn setTitle:@"Save" forState:UIControlStateNormal];
         
         interstAndHobbiesArray = [[profileDict valueForKey:@"hobbieslist"]mutableCopy];
+       
         hobbiesNameArray       =[[interstAndHobbiesArray valueForKey:@"name"]mutableCopy];
+        
+        
         imageNormalArray     = [[interstAndHobbiesArray valueForKey:@"image"]mutableCopy];
        [self.view layoutIfNeeded];
         if(IS_GREATER_IOS9)
@@ -1164,13 +1169,13 @@
                 return commonHeight + 46;
 
             else if([imageNormalArray count] <= 9)
-                return (commonHeight*2)+46;
+                return  (commonHeight*2)+46;
 
             else if([imageNormalArray count] <= 14)
                 return (commonHeight * 3)+48;
                 
            else if([imageNormalArray count] <= 20)
-                return (commonHeight * 4)+52;
+               return  (commonHeight * 4)+52;
             }
 
        
@@ -1715,7 +1720,7 @@
         textXPos = 0;
         commonWidth=19.5;
     }
-    
+       
     NSString *plusIcon = @"Plus_icon.png";
       
     if ([imageNormalArray count] >=1)
@@ -1746,7 +1751,9 @@
         
         if(i <= 4){
             hobbiesImage = [[UIImageView alloc]initWithFrame:CGRectMake((i*(commonWidth + imageSize))+ imageXPos, yAxis, imageSize, imageSize)];
-            hobbiesname = [[UILabel alloc]initWithFrame:CGRectMake((i*(commonWidth + imageSize))+textXPos, yAxis + imageSize, imageSize + 20, 15)];
+            
+        hobbiesname = [[UILabel alloc]initWithFrame:CGRectMake((i*(commonWidth + imageSize))+textXPos, yAxis + imageSize, imageSize + 20, 15)];
+            
         }
         else if(i <= 9){
             hobbiesImage = [[UIImageView alloc]initWithFrame:CGRectMake(((i-5)*(commonWidth + imageSize))+ imageXPos, yAxis+imageSize+space, imageSize, imageSize)];
