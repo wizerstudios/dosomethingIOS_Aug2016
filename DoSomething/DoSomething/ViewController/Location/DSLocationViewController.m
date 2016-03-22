@@ -444,6 +444,8 @@
                      nearestUserdetaile =[[responseObject valueForKey:@"nearestusers"] valueForKey:@"UserList"];
                      commonlocationArray =[nearestUserdetaile mutableCopy];
                      [locationCollectionView reloadData];
+                     if(commonlocationArray.count > 4)
+                     {
                      NSString * Firstlogin=[[NSUserDefaults standardUserDefaults]valueForKey:FirstloginLocationView];
                      
                      if([Firstlogin isEqualToString:@"Yes"])
@@ -452,6 +454,7 @@
                          self.blueCircleBtn.hidden=NO;
                          [self GerenalWalkAlterview];
                          [[NSUserDefaults standardUserDefaults]setObject:@"No" forKey:FirstloginLocationView];
+                     }
                      }
 
                  }
@@ -1385,7 +1388,12 @@
 {
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
 
-   
+    UIButton * ClosewindowBtn =[[UIButton alloc]initWithFrame:[[UIScreen mainScreen] bounds]];
+    [ClosewindowBtn addTarget:self action:@selector(didClickGeneralWalkAlterviewBtn:) forControlEvents:UIControlEventTouchUpInside];
+    
+    
+    
+    [self.window addSubview:ClosewindowBtn];
     UIView * altermsgView;
     
     
@@ -1424,11 +1432,8 @@
     
     [self.window addSubview:altermsgView];
     
-    //UIButton * ClosewindowBtn =[[UIButton alloc]initWithFrame:[[UIScreen mainScreen] bounds]];
-    [blueCirecleBtn addTarget:self action:@selector(didClickGeneralWalkAlterviewBtn:) forControlEvents:UIControlEventTouchUpInside];
     
-    
-    //[self.window addSubview:ClosewindowBtn];
+    [blueCirecleBtn addTarget:self action:@selector(didClickGeneralWalkAlterviewSendRequest:) forControlEvents:UIControlEventTouchUpInside];
     self.window.hidden=NO;
     [self.window makeKeyAndVisible];
     
@@ -1436,6 +1441,64 @@
     
     //[self.view addSubview:self.window];
     
+}
+-(IBAction)didClickGeneralWalkAlterviewSendRequest:(id)sender
+{
+    self.walkAlterview.hidden=YES;
+    self.window .hidden=YES;
+    NSIndexPath *indexPath;
+    
+    if(commonlocationArray.count > 4)
+    {
+    
+    locationCellView = (LocationCollectionViewCell *) [locationCollectionView cellForItemAtIndexPath:[NSIndexPath indexPathForRow:5 inSection:0]];
+    
+    profileUserID=[[commonlocationArray valueForKey:@"user_id"] objectAtIndex:5];
+    
+    NSString *onlineStausofSelectuser=[[commonlocationArray valueForKey:@"online_status"] objectAtIndex:5];
+    selectuserstatus =([onlineStausofSelectuser isEqualToString:@"1"])? @"Online":@"Offline";
+    NSLog(@"%@",locationCellView.sendRequest.text);
+    if([locationCellView.sendRequest.text isEqualToString:@"Send Request"])
+    {
+        UIButton *buttonSender = (UIButton *)sender;
+        locationCellView.requestsendBtn = buttonSender;
+        [locationCellView.hobbiesImagebackView setBackgroundColor:[UIColor whiteColor]];
+        locationCellView.sendRequest.text =@"Request Sent!";
+        locationCellView.sendRequest.textColor=[UIColor lightGrayColor];
+        
+        
+        NSMutableDictionary *dict = [[NSMutableDictionary alloc] init];
+        dict = [[commonlocationArray objectAtIndex:5] mutableCopy];
+        
+        [dict removeObjectForKey:@"send_request"];
+        [dict setObject:@"Yes" forKey:@"send_request"];
+        detailsArray =[dict copy];
+        
+        dosomethingImageArry =[[[commonlocationArray valueForKey:@"dosomething"]objectAtIndex:indexPath.row] valueForKey:@"InactiveImage"];
+        if([dosomethingImageArry count]== 1){
+            NSLog(@"count one");
+        }
+        else if([dosomethingImageArry count] == 2){
+            NSLog(@"count two");
+        }else{
+            
+            NSString *dosomethingImage1=[dosomethingImageArry objectAtIndex:0];
+            NSString *dosomethingImage2=[dosomethingImageArry objectAtIndex:1];
+            NSString *dosomethingImage3=[dosomethingImageArry objectAtIndex:2];
+            
+            
+            [locationCellView.dosomethingImage1 setImageWithURL:[NSURL URLWithString:dosomethingImage1]];
+            [locationCellView.dosomethingImage2 setImageWithURL:[NSURL URLWithString:dosomethingImage2]];
+            [locationCellView.dosomethingImage3 setImageWithURL:[NSURL URLWithString:dosomethingImage3]];
+            
+            
+        }
+        [self loadRequestsendWebService];
+        
+        
+    }
+    }
+
 }
 - (void)flashOff:(UIView *)v
 {

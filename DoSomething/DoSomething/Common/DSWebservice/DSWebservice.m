@@ -416,6 +416,9 @@ notification_sound  :(NSString *)isnotification_sound
                success:(WebserviceRequestSuccessHandler)success
                failure:(WebserviceRequestFailureHandler)failure
 {
+    
+   
+    
    urlString = [URL_FOR_RESOURCE(@"") stringByAppendingString:[NSString stringWithFormat:@"%@?",locationUpdtURL]];
     NSLog(@"urlString = %@",urlString);
     NSMutableDictionary *locationUpdate = [[NSMutableDictionary alloc] init];
