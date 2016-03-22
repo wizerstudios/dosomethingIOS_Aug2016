@@ -125,16 +125,17 @@
     
     [super viewDidLoad];
     self.WalAlterview.hidden =YES;
-  
+    
     NSString * Firstlogin=[[NSUserDefaults standardUserDefaults]valueForKey:FirstCreateProfile];
     
     
     if([Firstlogin isEqualToString:@"Yes"])
     {
         //self.WalAlterview.hidden =NO;
-         [self GerenalWalkAlterviewCreateAccount];
-         [[NSUserDefaults standardUserDefaults] setObject:@"No" forKey:FirstCreateProfile];
+        [self GerenalWalkAlterviewCreateAccount];
+        [[NSUserDefaults standardUserDefaults] setObject:@"No" forKey:FirstCreateProfile];
     }
+
     
     Regpassword=emailPasswordToRegister;
     [[IQKeyboardManager sharedManager] considerToolbarPreviousNextInViewClass:[_tableviewProfile class]];
@@ -153,29 +154,29 @@
     isPageControl=NO;
     
     isLoadData=NO;
-   
+  
    
 }
 -(void)viewWillAppear:(BOOL)animated
 {
    
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(loadInvalidSessionAlert:)
-                                                 name:@"InvalidSession"
-                                               object:nil];
+   
     
     imageNormalArray =[[NSMutableArray alloc]init];
     
     hobbiesMainArray = [[NSMutableArray alloc]init];
     
-    profileDict=[[NSMutableDictionary alloc]init];
+     profileDict=[[NSMutableDictionary alloc]init];
     profileDict =[[NSUserDefaults standardUserDefaults] valueForKey:USERDETAILS];
+    
     
     if([[NSUserDefaults standardUserDefaults]valueForKey:HobbiesArray] != NULL)
         hobbiesMainArray = [[NSUserDefaults standardUserDefaults]valueForKey:HobbiesArray];
+
     else{
         if([profileDict valueForKey:@"hobbieslist"]!=NULL)
-               hobbiesMainArray = [[profileDict valueForKey:@"hobbieslist"]mutableCopy];
+        
+            hobbiesMainArray = [[profileDict valueForKey:@"hobbieslist"]mutableCopy];
         emailPasswordToRegister=[profileDict valueForKey:@"password"];
         
     }
@@ -188,6 +189,12 @@
     if(!isLoadData){
         [self initializeArray];
         [self profileImageDisplayMethod];
+            if (profileDict== nil)
+            {
+                
+                [[NSUserDefaults standardUserDefaults]removeObjectForKey:HobbiesArray];
+            }
+
         isLoadData = YES;
     }
     else if(isLoadData == YES && profileDict ==NULL)
@@ -257,6 +264,12 @@
      [self getUserCurrenLocation];
     NSString * strsessionID =[profileDict valueForKey:@"SessionId"];
     loginUserSessionID = strsessionID;
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(loadInvalidSessionAlert:)
+                                                 name:@"InvalidSession"
+                                               object:nil];
+    
+  
   
     if(profileDict != NULL)
     {
@@ -351,6 +364,8 @@
 
 -(void)loadInvalidSessionAlert:(NSNotification *)notification
 {
+     self.WalAlterview.hidden =YES;
+     self.window.hidden=YES;
     
     [[NSNotificationCenter defaultCenter] removeObserver:self];
     [COMMON removeUserDetails];
@@ -2881,7 +2896,12 @@
 -(void)GerenalWalkAlterviewCreateAccount
 {
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+    UIButton * ClosewindowBtn =[[UIButton alloc]initWithFrame:[[UIScreen mainScreen] bounds]];
+    [ClosewindowBtn addTarget:self action:@selector(didClickGeneralWalkAlterviewBtn:) forControlEvents:UIControlEventTouchUpInside];
     
+    
+    
+    [self.window addSubview:ClosewindowBtn];
     //UIButton * blueCirecleBtn;
     UILabel * Savelbl;
     UIView * altermsgView;
@@ -2923,14 +2943,10 @@
     [AlterMsg setFont:[UIFont fontWithName:@"Patron-Regular" size:12]];
     [altermsgView addSubview:AlterMsg];
     
-    
     [self.window addSubview:altermsgView];
-    
-   // UIButton * ClosewindowBtn =[[UIButton alloc]initWithFrame:[[UIScreen mainScreen] bounds]];
     [blueCirecleBtn addTarget:self action:@selector(saveAction:) forControlEvents:UIControlEventTouchUpInside];
-    
-    
-   // [self.window addSubview:ClosewindowBtn];
+
+   
     self.window.hidden=NO;
     [self.window makeKeyAndVisible];
     self.window.backgroundColor =[UIColor colorWithRed:(53.0/255.0f) green:(53.0/255.0f) blue:(53.0/255.0f) alpha:0.5];
@@ -2990,14 +3006,17 @@
     [AlterMsg setFont:[UIFont fontWithName:@"Patron-Regular" size:12]];
     [altermsgView addSubview:AlterMsg];
     
+        [self.window addSubview:altermsgView];
     
-    [self.window addSubview:altermsgView];
+    UIButton * ClosewindowBtn =[[UIButton alloc]initWithFrame:[[UIScreen mainScreen] bounds]];
+    [ClosewindowBtn addTarget:self action:@selector(didClickGeneralWalkAlterviewBtn:) forControlEvents:UIControlEventTouchUpInside];
+   
     
-    //UIButton * ClosewindowBtn =[[UIButton alloc]initWithFrame:[[UIScreen mainScreen] bounds]];
+   
+     [self.window addSubview:ClosewindowBtn];
+     [self.window addSubview:CommWalkView];
     [blueCirecleBtn addTarget:self action:@selector(saveAction:) forControlEvents:UIControlEventTouchUpInside];
-    
-    [self.window addSubview:CommWalkView];
-    //[self.window addSubview:ClosewindowBtn];
+
     self.window.hidden=NO;
     [self.window makeKeyAndVisible];
     [self.window.rootViewController.view addSubview:CommWalkView];

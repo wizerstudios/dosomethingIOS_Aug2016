@@ -81,52 +81,7 @@
         self.layoutConstraintPassTextFieldlYPos.constant =3;
         self.layoutConstraintTextFieldCenterLabelYPos.constant =60;
     }
- if ([temp isEqualToString:@"createAnAccount"]){
-     
-    
-     NSString * Firstlogin=[[NSUserDefaults standardUserDefaults]valueForKey:FirstCreatAccount];
-     
-     [[NSUserDefaults standardUserDefaults] setObject:@"FirstSiginProfile" forKey:FistSiginprofile];
-     
-     if([Firstlogin isEqualToString:@"FirstCreatAccount"])
-     {
-         [self GerenalWalkAlterview];
-      
-        
-     }
-     
-    
-      self.buttonSignInHeightConstraint.constant =56;
-     if (IS_IPHONE6 ||IS_IPHONE6_Plus){
-       self.layoutConstraintSignInButtonHeight.constant =65;
-         self.layoutConstraintBackButtonHeight.constant =50;
 
-     }
-     NSString *string = @"Create an account using Facebook";
-     NSMutableAttributedString *attStr = [[NSMutableAttributedString alloc] initWithString:string ];
-     [attStr addAttribute:NSFontAttributeName value:PATRON_REG(12) range:[string rangeOfString:@"Create an account using"]];
-     [attStr addAttribute:NSFontAttributeName value:PATRON_BOLD(12) range:[string rangeOfString:@"Facebook"]];
-     labelFacebook.attributedText = attStr;
-     labelFacebook.attributedText = attStr;
-     labelFacebook.tag = 10;
-     labelEmail.text =@"Or sign up with your email";
-     labelCreateAnAcc.text =@"Create Your Account";
-     labelInstruction.text =@"By selecting this,you agree to our Terms of Use and our Privacy Policy";
-     [buttonTermsOfUse setTitle:@"Terms of Use" forState:UIControlStateNormal];
-     [buttonPrivacyPolicy setTitle:@"Privacy Policy" forState:UIControlStateNormal];
-     [buttonTermsOfUse addTarget:self action:@selector(loadTermsOfUseViewAction:) forControlEvents:UIControlEventTouchUpInside];
-     [buttonPrivacyPolicy addTarget:self action:@selector(loadTermsOfUseViewAction:) forControlEvents:UIControlEventTouchUpInside];
-     [buttonHaveAnAcc setTitle:@"Have an account? Sign In" forState:UIControlStateNormal];
-     buttonCreateAnAcc.hidden =YES;
-     buttonForgotPass.hidden=YES;
-     [buttonSignIn addTarget:self action:@selector(CreateAnAccount) forControlEvents:UIControlEventTouchUpInside];
-     _forgotView.hidden=YES;
-     _buttonSigInFwd.hidden=YES;
-}
- if ([temp isEqualToString:@"Signin"]){
-
-     [self signinMethod];
- }
     
      [self CustomAlterview];
 
@@ -152,7 +107,52 @@
     deviceUdid = [OpenUDID value];
     [self getUserCurrenLocation];
     
-   
+    if ([temp isEqualToString:@"createAnAccount"]){
+        
+        
+        NSString * Firstlogin=[[NSUserDefaults standardUserDefaults]valueForKey:FirstCreatAccount];
+        
+        [[NSUserDefaults standardUserDefaults] setObject:@"FirstSiginProfile" forKey:FistSiginprofile];
+        
+        if([Firstlogin isEqualToString:@"FirstCreatAccount"])
+        {
+            [self GerenalWalkAlterview];
+            
+            
+        }
+        
+        
+        self.buttonSignInHeightConstraint.constant =56;
+        if (IS_IPHONE6 ||IS_IPHONE6_Plus){
+            self.layoutConstraintSignInButtonHeight.constant =65;
+            self.layoutConstraintBackButtonHeight.constant =50;
+            
+        }
+        NSString *string = @"Create an account using Facebook";
+        NSMutableAttributedString *attStr = [[NSMutableAttributedString alloc] initWithString:string ];
+        [attStr addAttribute:NSFontAttributeName value:PATRON_REG(12) range:[string rangeOfString:@"Create an account using"]];
+        [attStr addAttribute:NSFontAttributeName value:PATRON_BOLD(12) range:[string rangeOfString:@"Facebook"]];
+        labelFacebook.attributedText = attStr;
+        labelFacebook.attributedText = attStr;
+        labelFacebook.tag = 10;
+        labelEmail.text =@"Or sign up with your email";
+        labelCreateAnAcc.text =@"Create Your Account";
+        labelInstruction.text =@"By selecting this,you agree to our Terms of Use and our Privacy Policy";
+        [buttonTermsOfUse setTitle:@"Terms of Use" forState:UIControlStateNormal];
+        [buttonPrivacyPolicy setTitle:@"Privacy Policy" forState:UIControlStateNormal];
+        [buttonTermsOfUse addTarget:self action:@selector(loadTermsOfUseViewAction:) forControlEvents:UIControlEventTouchUpInside];
+        [buttonPrivacyPolicy addTarget:self action:@selector(loadTermsOfUseViewAction:) forControlEvents:UIControlEventTouchUpInside];
+        [buttonHaveAnAcc setTitle:@"Have an account? Sign In" forState:UIControlStateNormal];
+        buttonCreateAnAcc.hidden =YES;
+        buttonForgotPass.hidden=YES;
+        [buttonSignIn addTarget:self action:@selector(CreateAnAccount) forControlEvents:UIControlEventTouchUpInside];
+        _forgotView.hidden=YES;
+        _buttonSigInFwd.hidden=YES;
+    }
+    if ([temp isEqualToString:@"Signin"]){
+        
+        [self signinMethod];
+    }
 
 }
 #pragma mark get user CurrentLocation
