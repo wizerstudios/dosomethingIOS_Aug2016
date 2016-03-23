@@ -152,3 +152,5 @@
 //#define FirstMatchUser            @"Matchuserlocationview"
 
 #define FirstRegistor            @"RegistorAccount"
+
+#define GOOGLEANALYTICS_ID      @"UA-75477641-1"

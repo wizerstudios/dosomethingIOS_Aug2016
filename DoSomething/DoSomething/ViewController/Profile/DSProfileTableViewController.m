@@ -261,7 +261,7 @@
 }
 -(void)profileImageDisplayMethod
 {
-     [self getUserCurrenLocation];
+//     [self getUserCurrenLocation];
     NSString * strsessionID =[profileDict valueForKey:@"SessionId"];
     loginUserSessionID = strsessionID;
     [[NSNotificationCenter defaultCenter] addObserver:self

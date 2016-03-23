@@ -47,6 +47,7 @@ typedef enum {
 - (void)removeUserDetails;
 - (NSMutableDictionary *)getUserDetails;
 //- (NSString *)getUserId;
+-(void)TrackerWithName:(NSString *)message;
 
 -(NSString *)getCurrentDateTime;
 

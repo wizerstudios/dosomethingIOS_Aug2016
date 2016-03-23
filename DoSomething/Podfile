@@ -11,6 +11,7 @@ pod 'JBKenBurnsView'
 pod 'FBSDKLoginKit'
 pod 'Fabric'
 pod 'Crashlytics'
+pod 'GoogleAnalytics'
 
 end
 

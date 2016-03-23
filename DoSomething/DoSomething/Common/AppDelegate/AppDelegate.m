@@ -19,6 +19,7 @@
 #include <AudioToolbox/AudioToolbox.h>
 #import <AVFoundation/AVFoundation.h>
 #import "DSLocationViewController.h"
+#import "GAI.h"
 
 
 @interface AppDelegate (){
@@ -109,6 +110,22 @@
     
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
         [Fabric with:@[[Crashlytics class]]];
+    });
+    
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
+        // Optional: automatically send uncaught exceptions to Google Analytics.
+        [GAI sharedInstance].trackUncaughtExceptions = YES;
+        
+        // Optional: set Google Analytics dispatch interval to e.g. 20 seconds.
+        [GAI sharedInstance].dispatchInterval = 20;
+        
+        // Optional: set Logger to VERBOSE for debug information.
+        [[[GAI sharedInstance] logger] setLogLevel:kGAILogLevelVerbose];
+        
+        // Initialize tracker. Replace with your tracking ID.
+        [[GAI sharedInstance] trackerWithTrackingId:GOOGLEANALYTICS_ID];
+        
+        [COMMON TrackerWithName:@"Application Launch"];
     });
     
     [[NSUserDefaults standardUserDefaults]removeObjectForKey:HobbiesArray];

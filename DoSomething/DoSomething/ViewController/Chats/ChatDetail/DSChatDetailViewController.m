@@ -310,8 +310,8 @@
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     
     NSString *text      = [[conversationArray objectAtIndex:[indexPath row]] valueForKey:@"Message"];
-    CGSize dataSize = [COMMON dataSize:text withFontName:@"HelveticaNeue" ofSize:15 withSize:CGSizeMake(195.0, 999.0)];
-    return dataSize.height + CELL_HEIGHT+10;
+    CGSize dataSize1 = [COMMON dataSize:text withFontName:@"HelveticaNeue" ofSize:15 withSize:CGSizeMake(195.0, 999.0)];
+    return dataSize1.height + CELL_HEIGHT+10;
     
 }
 

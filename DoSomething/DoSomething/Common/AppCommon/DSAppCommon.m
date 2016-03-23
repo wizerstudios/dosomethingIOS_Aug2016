@@ -12,6 +12,24 @@
 #import "DSConfig.h"
 #import <MapKit/MapKit.h>
 #import "Reachability.h"
+
+#import "GAI.h"
+#import "GAIDictionaryBuilder.h"
+#import "GAITracker.h"
+#import "GAIFields.h"
+
+
+
+#ifdef DEBUG
+
+#define BUILD_FOR_DEVPRO                      @"dev"
+
+#else
+
+#define BUILD_FOR_DEVPRO                      @"pro"
+
+#endif
+
 @implementation DSAppCommon
 DSAppCommon *sharedCommon = nil;
 
@@ -426,7 +444,38 @@ DSAppCommon *sharedCommon = nil;
     
 }
 
+#pragma - Google Analytics
 
+-(void)TrackerWithName:(NSString *)message
+{
+    
+//    if ([BUILD_FOR_DEVPRO isEqualToString:@"dev"])
+//    {
+//        
+//    }
+//    else
+//    {
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
+            // May return nil if a tracker has not already been initialized with a
+            // property ID.
+            id tracker = [[GAI sharedInstance] defaultTracker];
+            
+            // This screen name value will remain set on the tracker and sent with
+            // hits until it is set to a new value or to nil.
+            [tracker set:kGAIScreenName
+                   value:message];
+            
+            // Previous V3 SDK versions
+            // [tracker send:[[GAIDictionaryBuilder createAppView] build]];
+            
+            // New SDK versions
+            [tracker send:[[GAIDictionaryBuilder createScreenView] build]];
+        });
+//    }
+}
+
+
+#pragma mark - Avoid Cloud store
 
 bool addSkipBackupAttributeToItemAtURL (NSURL* URL)
 {

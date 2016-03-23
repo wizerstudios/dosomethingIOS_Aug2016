@@ -74,6 +74,9 @@
 - (void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
+    
+    [COMMON TrackerWithName:@"Welcome Screen"];
+    
     bannerImage= @[[UIImage imageNamed:@"splash_bg"],
                    [UIImage imageNamed:@"bg1"],
                    [UIImage imageNamed:@"bg2"],
