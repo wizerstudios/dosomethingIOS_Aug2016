@@ -1702,7 +1702,7 @@
     yAxis = 31;
     imageSize =39;
     space = imageSize / 2;
-    commonHeight = imageSize+15;
+    //commonHeight = imageSize+15;
     int imageXPos = 0;
     int textXPos = 0;
     if(IS_IPHONE6_Plus){
@@ -1749,7 +1749,7 @@
         }
         
         
-        if(i <= 4){
+        if(i <= 5){
             hobbiesImage = [[UIImageView alloc]initWithFrame:CGRectMake((i*(commonWidth + imageSize))+ imageXPos, yAxis, imageSize, imageSize)];
             
         hobbiesname = [[UILabel alloc]initWithFrame:CGRectMake((i*(commonWidth + imageSize))+textXPos, yAxis + imageSize, imageSize + 20, 15)];

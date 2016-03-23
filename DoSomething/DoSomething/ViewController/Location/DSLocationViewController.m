@@ -402,7 +402,7 @@
                                   NSLog(@"responseObject = %@",responseObject);
                               }
                               failure:^(AFHTTPRequestOperation *operation, id error) {
-                                  //[self showAltermessage:[NSString stringWithFormat:@"%@",error]];
+                                  
                               }];
     }
     else{
@@ -488,7 +488,10 @@
                      isemptyuser=YES;
                      [commonlocationArray removeLastObject];
                      NSString * nearestuserMsg=[NSString stringWithFormat:@"%@",[[responseObject valueForKey:@"nearestusers"]valueForKey:@"Message"]];
-                     [self showAltermessage:nearestuserMsg];
+                     if(![nearestuserMsg isEqualToString:@"No Users Found"])
+                     {
+                         [self showAltermessage:nearestuserMsg];
+                     }
                      
                  }
              }
