@@ -50,6 +50,7 @@
     
     NSDictionary                *currentuser;
     NSString * selectuserstatus;
+    
     BOOL isgestureenable;
     BOOL isLoadWebservice;
     BOOL isAllPost;
@@ -416,7 +417,6 @@
 #pragma mark - nearestLocationWebserviceAPI
 -(void)nearestLocationWebservice
 {
-    
     if([COMMON isInternetReachable]){
         [objWebservice nearestUsers:NearestUsers_API
                           sessionid:[COMMON getSessionID]
@@ -442,6 +442,7 @@
                  isemptyuser=NO;
                  if ([[[responseObject valueForKey:@"nearestusers"]valueForKey:@"pageCount"] isEqualToString:@"1"])
                  {
+
                      NSMutableArray * nearestUserdetaile =[[NSMutableArray alloc]init];
                      nearestUserdetaile =[[responseObject valueForKey:@"nearestusers"] valueForKey:@"UserList"];
                      commonlocationArray =[nearestUserdetaile mutableCopy];
@@ -463,10 +464,18 @@
                  else
                  {
                      NSArray * nextpageUserdetaile =[[responseObject valueForKey:@"nearestusers"] valueForKey:@"UserList"];
+                     int  recordCounts =[[[responseObject valueForKey:@"nearestusers"]valueForKey:@"recordCount"] integerValue];
                      for (NSDictionary *dict in nextpageUserdetaile)
                      {
+                         NSLog(@"fdgffgh%@",dict);
                          [commonlocationArray addObject:dict];
+                         NSLog(@"commonlocationArray count%lu",(unsigned long)commonlocationArray.count);
+                         if(commonlocationArray.count  == recordCounts)
+                         {
+                              isAllPost=YES;
+                         }
                      }
+                    
                  }
                  [COMMON DSRemoveLoading];
              }
@@ -481,12 +490,14 @@
                  [appDelegate.settingButton setBackgroundImage:[UIImage imageNamed:@"setting_icon.png"] forState:UIControlStateNormal];
              }
              else{
-                 isAllPost = YES;
+                 
                  [COMMON DSRemoveLoading];
+                 
                  if([[[responseObject valueForKey:@"nearestusers"]valueForKey:@"status"] isEqualToString:@"failed"])
                  {
                      isemptyuser=YES;
-                     [commonlocationArray removeLastObject];
+                    
+                    // [commonlocationArray removeLastObject];
                      NSString * nearestuserMsg=[NSString stringWithFormat:@"%@",[[responseObject valueForKey:@"nearestusers"]valueForKey:@"Message"]];
                      if(![nearestuserMsg isEqualToString:@"No Users Found"])
                      {
@@ -705,7 +716,7 @@
 - (void)collectionView:(UICollectionView *)collectionView willDisplayCell:(UICollectionViewCell *)cell forItemAtIndexPath:(NSIndexPath *)indexPath
 {
    
-    if ((30-1) == indexPath.row && !isAllPost ) {
+    if (([commonlocationArray count]-1) == indexPath.row && !isAllPost ) {
         
         int x = [currentloadPage intValue];
         
@@ -739,9 +750,10 @@
      profileUserID=[[commonlocationArray valueForKey:@"user_id"] objectAtIndex:indexPath.row];
     
     NSString *onlineStausofSelectuser=[[commonlocationArray valueForKey:@"online_status"] objectAtIndex:indexPath.row];
-       selectuserstatus =([onlineStausofSelectuser isEqualToString:@"1"])? @"Online":@"Offline";
-        NSLog(@"%@",locationCellView.sendRequest.text);
-    if([locationCellView.sendRequest.text isEqualToString:@"Send Request"])
+        selectuserstatus =([onlineStausofSelectuser isEqualToString:@"1"])? @"Online":@"Offline";
+        RequestStr=[[commonlocationArray valueForKey:@"send_request"] objectAtIndex:indexPath.row];
+        NSLog(@"RequestStr%@",RequestStr);
+    if ([RequestStr isEqualToString:@"No"])                         //([locationCellView.sendRequest.text isEqualToString:@"Send Request"])
     {
         UIButton *buttonSender = (UIButton *)sender;
         locationCellView.requestsendBtn = buttonSender;
@@ -749,13 +761,14 @@
         locationCellView.sendRequest.text =@"Request Sent!";
         locationCellView.sendRequest.textColor=[UIColor lightGrayColor];
         
-       
         NSMutableDictionary *dict = [[NSMutableDictionary alloc] init];
         dict = [[commonlocationArray objectAtIndex:indexPath.row] mutableCopy];
         
         [dict removeObjectForKey:@"send_request"];
         [dict setObject:@"Yes" forKey:@"send_request"];
         detailsArray =[dict copy];
+        [commonlocationArray replaceObjectAtIndex:indexPath.row withObject:detailsArray];
+       
         
         dosomethingImageArry =[[[commonlocationArray valueForKey:@"dosomething"]objectAtIndex:indexPath.row] valueForKey:@"InactiveImage"];
         if([dosomethingImageArry count]== 1){
@@ -774,14 +787,14 @@
         [locationCellView.dosomethingImage2 setImageWithURL:[NSURL URLWithString:dosomethingImage2]];
         [locationCellView.dosomethingImage3 setImageWithURL:[NSURL URLWithString:dosomethingImage3]];
             
-            
+        
         }
         [self loadRequestsendWebService];
         
       
     }
       
-    else if([locationCellView.sendRequest.text isEqualToString:@"Request Sent!"])
+    else if([RequestStr isEqualToString:@"Yes"])        //([locationCellView.sendRequest.text isEqualToString:@"Request Sent!"])
     {
         UIButton *buttonSender = (UIButton *)sender;
         locationCellView.requestsendBtn = buttonSender;
@@ -795,7 +808,7 @@
         [dict removeObjectForKey:@"send_request"];
         [dict setObject:@"No" forKey:@"send_request"];
         detailsArray =[dict copy];
-        
+         [commonlocationArray replaceObjectAtIndex:indexPath.row withObject:detailsArray];
         
         
         dosomethingImageArry =[[[commonlocationArray valueForKey:@"dosomething"]objectAtIndex:indexPath.row] valueForKey:@"NearbyImage"];
@@ -836,7 +849,8 @@
                                     {
                                         matchUserArray =[[responseObject valueForKey:@"sendrequest"]valueForKey:@"Conversaion"];
                                          [self loadMatchActivityMethod];
-                                        [self nearestLocationWebservice];
+//
+                                         //[self nearestLocationWebservice];
                                        
                                         
 //                                        NSString * resposeMsg =[[responseObject valueForKey:@"sendrequest"]valueForKey:@"Message"];
@@ -855,9 +869,9 @@
         [COMMON showErrorAlert:@"Check Your Internet connection"];
         
     }
-
-    
 }
+
+
 -(IBAction)filterAction:(id)sender
 {
     if(isemptyuser!=YES)
@@ -1089,6 +1103,7 @@
     onlineStatus  =@"";
     filterAge     =@"";
     filterDistance=@"";
+    isAllPost = NO;
     [self nearestLocationWebservice];
 }
 
