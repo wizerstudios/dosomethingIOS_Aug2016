@@ -95,6 +95,7 @@
 @synthesize profileImages,profileNames,kiloMeterlabel,userID,dosomethingImageArry,commonlocationArray,matchactivityBtn,matchActivitylbl,matchActivityView,sendrequestConversationID;
 - (void)viewDidLoad {
     
+    [COMMON TrackerWithName:@"NearBy Screen"];
     self.walkAlterview.hidden =YES;
     self.blueCircleBtn.hidden=YES;
    
@@ -854,6 +855,7 @@
 }
 -(IBAction)filterAction:(id)sender
 {
+    [COMMON TrackerWithName:@"Applying Filter"];
     if(isFilteraction==NO)
     {
         self.collectionviewxpostion.constant =(IS_IPHONE6 || IS_IPHONE6_Plus)?-300:-245;

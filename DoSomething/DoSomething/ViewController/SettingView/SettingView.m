@@ -45,6 +45,8 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    [COMMON TrackerWithName:@"Settings"];
     locationManager                 = [[CLLocationManager alloc] init];
     locationManager.delegate        = self;
     objWebService =[[DSWebservice alloc]init];

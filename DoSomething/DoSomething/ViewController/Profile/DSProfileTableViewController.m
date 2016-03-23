@@ -2278,7 +2278,7 @@
 -(void)selectCamera: (UIButton *)sender
 
 {
-    
+    [COMMON TrackerWithName:@"User Profile"];
     imagepickerController = [[UIImagePickerController alloc] init];
     
     imagepickerController.delegate = self;

@@ -464,6 +464,7 @@ DSAppCommon *sharedCommon = nil;
             // hits until it is set to a new value or to nil.
             [tracker set:kGAIScreenName
                    value:message];
+           
             
             // Previous V3 SDK versions
             // [tracker send:[[GAIDictionaryBuilder createAppView] build]];

@@ -148,6 +148,7 @@
         [buttonSignIn addTarget:self action:@selector(CreateAnAccount) forControlEvents:UIControlEventTouchUpInside];
         _forgotView.hidden=YES;
         _buttonSigInFwd.hidden=YES;
+        [COMMON TrackerWithName:@"Create Account Screen"];
     }
     if ([temp isEqualToString:@"Signin"]){
         
@@ -255,6 +256,7 @@
    
     [buttonSignIn addTarget:self action:@selector(forgotPasswordAction:) forControlEvents:UIControlEventTouchUpInside];
     isForgotBackButton=YES;
+    [COMMON TrackerWithName:@"Forget Password Screen"];
     
 }
 #pragma mark forgotPasswordAction_API
@@ -334,6 +336,7 @@
     [buttonSignIn addTarget:self action:@selector(SignButtonAction) forControlEvents:UIControlEventTouchUpInside];
     _forgotView.hidden=YES;
     _buttonSigInFwd.hidden=YES;
+     [COMMON TrackerWithName:@"Login Screen"];
 
 }
 -(IBAction)loadTermsOfUseViewAction:(id)sender
@@ -417,7 +420,7 @@
 #pragma mark - Create and Sign Button Action
 -(void)CreateAnAccount
 {
-    
+    [COMMON TrackerWithName:@"Create Account with Email "];
      [[[UIApplication sharedApplication] keyWindow] endEditing:YES];
     objSigninType=@"1";
     if([NSString isEmpty:self.emailTxt.text] && [NSString isEmpty:self.passwordTxt.text]){
@@ -854,7 +857,9 @@
     [self flashOff:blueCirecleImg];
 }
 - (IBAction)createAnAccountFB:(id)sender {
+  
     [self loginByFacebook];
+    [COMMON TrackerWithName:@"Create Account with Facebook"];
 }
 
 

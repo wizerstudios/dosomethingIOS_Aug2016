@@ -40,6 +40,7 @@
     [super viewDidLoad];
     
     
+
     locationManager                 = [[CLLocationManager alloc] init];
     locationManager.delegate        = self;
     chatArray = [[NSMutableArray alloc]init];
@@ -73,7 +74,7 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    
+    [COMMON TrackerWithName:@"Chat Listing"];
     
     [self loadChatHistoryAPI];
     

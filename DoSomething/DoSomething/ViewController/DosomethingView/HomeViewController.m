@@ -129,6 +129,8 @@
     
     [super viewDidAppear:animated];
     
+    [COMMON TrackerWithName:@"Activities Screen"];
+    
     appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
     
     appDelegate.buttonsView.hidden=NO;

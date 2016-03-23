@@ -53,7 +53,8 @@
 - (void)viewDidLoad {
     
     [super viewDidLoad];
-   
+    [COMMON TrackerWithName:@"Interests Selection"];
+
     [self loadNavigation];
     self.WalkAlterview.hidden =YES;
    

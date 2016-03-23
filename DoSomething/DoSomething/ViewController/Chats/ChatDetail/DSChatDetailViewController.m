@@ -53,7 +53,7 @@
 - (void)viewDidLoad {
     
     [super viewDidLoad];
-    
+    [COMMON TrackerWithName:@"Chat Detail"];
     self.WalkAlterview.hidden =YES;
    
     NSString * Firstlogin=[[NSUserDefaults standardUserDefaults]valueForKey:FirstloginChatview];

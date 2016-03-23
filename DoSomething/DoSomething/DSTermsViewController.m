@@ -51,7 +51,10 @@
     
     [customNavigation.buttonBack addTarget:self action:@selector(backAction) forControlEvents:UIControlEventTouchUpInside];
 }
-
+-(void)viewDidAppear:(BOOL)animated
+{
+     [COMMON TrackerWithName:@"Terms of Use & Private Policy"];
+}
 #pragma mark - back Action
 - (void)backAction
 {
