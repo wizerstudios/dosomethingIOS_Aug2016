@@ -60,6 +60,7 @@
     NSMutableArray *detailsArray;
     BOOL isuserdetail;
     UIButton * blueCirecleBtn;
+    BOOL isemptyuser;
     
 }
 @property(nonatomic,strong)IBOutlet NSLayoutConstraint  * collectionviewxpostion;
@@ -438,7 +439,7 @@
              
              if ( responseObject !=nil && [[[responseObject valueForKey:@"nearestusers"]valueForKey:@"status"] isEqualToString:@"success"])
              {
-                 
+                 isemptyuser=NO;
                  if ([[[responseObject valueForKey:@"nearestusers"]valueForKey:@"pageCount"] isEqualToString:@"1"])
                  {
                      NSMutableArray * nearestUserdetaile =[[NSMutableArray alloc]init];
@@ -484,6 +485,7 @@
                  [COMMON DSRemoveLoading];
                  if([[[responseObject valueForKey:@"nearestusers"]valueForKey:@"status"] isEqualToString:@"failed"])
                  {
+                     isemptyuser=YES;
                      [commonlocationArray removeLastObject];
                      NSString * nearestuserMsg=[NSString stringWithFormat:@"%@",[[responseObject valueForKey:@"nearestusers"]valueForKey:@"Message"]];
                      [self showAltermessage:nearestuserMsg];
@@ -855,6 +857,8 @@
 }
 -(IBAction)filterAction:(id)sender
 {
+    if(isemptyuser!=YES)
+    {
     [COMMON TrackerWithName:@"Applying Filter"];
     if(isFilteraction==NO)
     {
@@ -918,6 +922,7 @@
            isfilterChange=NO;
        }
        
+    }
     }
    //self.upperLabel.text=@"";
     //self.lowerLabel.text=@"";
