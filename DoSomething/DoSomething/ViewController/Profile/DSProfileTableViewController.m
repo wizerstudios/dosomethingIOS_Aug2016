@@ -112,6 +112,7 @@
     NSString *playsoundBundleStr;
     SystemSoundID * soundID;
      UIButton * blueCirecleBtn;
+    NSString *plusIcon;
 }
 
 @end
@@ -124,6 +125,8 @@
 - (void)viewDidLoad {
     
     [super viewDidLoad];
+    
+   
     self.WalAlterview.hidden =YES;
     
     NSString * Firstlogin=[[NSUserDefaults standardUserDefaults]valueForKey:FirstCreateProfile];
@@ -224,7 +227,10 @@
     {
         [customNavigation.saveBtn setTitle:@"Create" forState:UIControlStateNormal];
     }
+   
+
     
+   
 }
 
 -(void)viewDidAppear:(BOOL)animated{
@@ -1160,22 +1166,22 @@
     
             if ( indexPath.row ==6)
             {
-                imageSize =39;
-                commonWidth=19.5;
-                commonHeight = 54;
+                //imageSize =39;
+                //commonWidth=19.5;
+                //commonHeight = 54;
             if([imageNormalArray count] < 1)
                 return 80;
-            else if([imageNormalArray count] <= 4)
-                return commonHeight + 46;
+            else if([imageNormalArray count] <=5)
+                return 100;
 
-            else if([imageNormalArray count] <= 9)
-                return  (commonHeight*2)+46;
+            else if([imageNormalArray count] <= 10)
+                return  154;
 
-            else if([imageNormalArray count] <= 14)
-                return (commonHeight * 3)+48;
+            else if([imageNormalArray count] <= 15)
+                return 210;
                 
            else if([imageNormalArray count] <= 20)
-               return  (commonHeight * 4)+52;
+               return  268;
             }
 
        
@@ -1482,6 +1488,19 @@
             [cell.buttonPushHobbies addTarget:self action:@selector(pushToHobbiesView) forControlEvents:UIControlEventTouchUpInside];
         }
         
+       plusIcon = @"Plus_icon.png";
+        
+        if ([imageNormalArray count] >=1)
+        {
+            for(NSString *strPlus in imageNormalArray)
+            {
+                if([strPlus isEqualToString:@"Plus_icon.png"])
+                    [imageNormalArray removeObject:strPlus];
+                
+            }
+            [imageNormalArray addObject:plusIcon];
+            
+        }
 
     }
     
@@ -1699,108 +1718,94 @@
     
     if(indexPath.row==6)
     {
-    yAxis = 31;
-    imageSize =39;
-    space = imageSize / 2;
-    //commonHeight = imageSize+15;
-    int imageXPos = 0;
-    int textXPos = 0;
-    if(IS_IPHONE6_Plus){
-        imageXPos = 33;
-        textXPos = 23;
-        commonWidth=29.5;
-    }
-    else if (IS_IPHONE6){
-        imageXPos = 18;
-        textXPos = 8;
-        commonWidth=29.5;
-    }
-    else{
-        imageXPos = 10;
-        textXPos = 0;
-        commonWidth=19.5;
-    }
-       
-    NSString *plusIcon = @"Plus_icon.png";
-      
-    if ([imageNormalArray count] >=1)
-    {
-        for(NSString *strPlus in imageNormalArray)
-        {
-            if([strPlus isEqualToString:@"Plus_icon.png"])
-                [imageNormalArray removeObject:strPlus];
-            
+        yAxis = 31;
+        imageSize =39;
+        space = imageSize / 2;
+        //commonHeight = imageSize+15;
+        int imageXPos = 0;
+        int textXPos = 0;
+        if(IS_IPHONE6_Plus){
+            imageXPos = 33;
+            textXPos = 23;
+            commonWidth=29.5;
         }
-        [imageNormalArray addObject:plusIcon];
-      
-    }
-
-    
-    UIButton *pushToHobbiesButton =[[UIButton alloc]initWithFrame:CGRectMake(0, 0, imageSize, imageSize)];
-    for (int i =0; i< [imageNormalArray  count]; i++) {
-        cell.plusIconImageView.hidden = YES;
-        UIImageView *hobbiesImage;
-         UILabel *hobbiesname;
-        NSString *imageName;
-        
-        if([hobbiesNameArray count] > i)
-        {
-           imageName =[[hobbiesNameArray objectAtIndex:i]uppercaseString];
-        }
-        
-        
-        if(i <= 5){
-            hobbiesImage = [[UIImageView alloc]initWithFrame:CGRectMake((i*(commonWidth + imageSize))+ imageXPos, yAxis, imageSize, imageSize)];
-            
-        hobbiesname = [[UILabel alloc]initWithFrame:CGRectMake((i*(commonWidth + imageSize))+textXPos, yAxis + imageSize, imageSize + 20, 15)];
-            
-        }
-        else if(i <= 9){
-            hobbiesImage = [[UIImageView alloc]initWithFrame:CGRectMake(((i-5)*(commonWidth + imageSize))+ imageXPos, yAxis+imageSize+space, imageSize, imageSize)];
-            hobbiesname = [[UILabel alloc]initWithFrame:CGRectMake(((i-5)*(commonWidth + imageSize))+textXPos, yAxis+(imageSize * 2)+space, imageSize + 20, 15)];
-        }
-        else if(i <= 14){
-            hobbiesImage = [[UIImageView alloc]initWithFrame:CGRectMake(((i-10)*(commonWidth + imageSize))+ imageXPos, yAxis+((imageSize+space) * 2), imageSize, imageSize)];
-             hobbiesname = [[UILabel alloc]initWithFrame:CGRectMake(((i-10)*(commonWidth + imageSize))+textXPos, yAxis+((imageSize+space) * 2)+imageSize, imageSize + 20, 15)];
+        else if (IS_IPHONE6){
+            imageXPos = 18;
+            textXPos = 8;
+            commonWidth=29.5;
         }
         else{
-            hobbiesImage = [[UIImageView alloc]initWithFrame:CGRectMake(((i-15)*(commonWidth + imageSize))+ imageXPos, yAxis+((imageSize+space) * 3), imageSize, imageSize)];
-            hobbiesname = [[UILabel alloc]initWithFrame:CGRectMake(((i-15)*(commonWidth + imageSize))+textXPos, yAxis+((imageSize+space) * 3)+imageSize, imageSize + 20, 15)];
-        }
-        
-        NSString *image =[imageNormalArray objectAtIndex:i];
-       
-        [hobbiesname setFont:[UIFont fontWithName:@"Patron-Regular" size:7]];
-                hobbiesname.textAlignment = NSTextAlignmentCenter;
-                hobbiesname.textColor =[UIColor colorWithRed:(float)102.0/255 green:(float)102.0/255 blue:(float)102.0/255 alpha:1.0f];
-        
-        
-        
-        
-        if([image isEqualToString:@"Plus_icon.png"])
-        {
-            [hobbiesImage setImage:[UIImage imageNamed:image]];
-        }
-        else
-        {
-            image= [image stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-            [hobbiesImage setImageWithURL:[NSURL URLWithString:image]];
-        }
-        
-        if (image == plusIcon) {
-            hobbiesImage.userInteractionEnabled = YES;
-            pushToHobbiesButton.imageView.contentMode = UIViewContentModeScaleAspectFit;
-            [hobbiesImage addSubview:pushToHobbiesButton];
+            imageXPos = 10;
+            textXPos = 0;
+            commonWidth=19.5;
         }
         
         
-        [cell addSubview:hobbiesImage];
-        [pushToHobbiesButton addTarget:self action:@selector(pushToHobbiesView) forControlEvents:UIControlEventTouchUpInside];
-        hobbiesname.text = imageName;
-        [cell addSubview:hobbiesname];
-        hobbiesname.textAlignment = NSTextAlignmentCenter;
-    }
-    
+        
+        UIButton *pushToHobbiesButton =[[UIButton alloc]initWithFrame:CGRectMake(0, 0, imageSize, imageSize)];
+        for (int i =0; i< [imageNormalArray  count]; i++) {
+            cell.plusIconImageView.hidden = YES;
+            UIImageView *hobbiesImage;
+            UILabel *hobbiesname;
+            NSString *imageName;
+            
+            if([hobbiesNameArray count] > i)
+            {
+                imageName =[[hobbiesNameArray objectAtIndex:i]uppercaseString];
+            }
+            
+            
+            if(i <= 4){
+                hobbiesImage = [[UIImageView alloc]initWithFrame:CGRectMake((i*(commonWidth + imageSize))+ imageXPos, yAxis, imageSize, imageSize)];
+                hobbiesname = [[UILabel alloc]initWithFrame:CGRectMake((i*(commonWidth + imageSize))+textXPos, yAxis + imageSize, imageSize + 20, 15)];
+            }
+            else if(i <= 9){
+                hobbiesImage = [[UIImageView alloc]initWithFrame:CGRectMake(((i-5)*(commonWidth + imageSize))+ imageXPos, yAxis+imageSize+space, imageSize, imageSize)];
+                hobbiesname = [[UILabel alloc]initWithFrame:CGRectMake(((i-5)*(commonWidth + imageSize))+textXPos, yAxis+(imageSize * 2)+space, imageSize + 20, 15)];
+            }
+            else if(i <= 14){
+                hobbiesImage = [[UIImageView alloc]initWithFrame:CGRectMake(((i-10)*(commonWidth + imageSize))+ imageXPos, yAxis+((imageSize+space) * 2), imageSize, imageSize)];
+                hobbiesname = [[UILabel alloc]initWithFrame:CGRectMake(((i-10)*(commonWidth + imageSize))+textXPos, yAxis+((imageSize+space) * 2)+imageSize, imageSize + 20, 15)];
+            }
+            else{
+                hobbiesImage = [[UIImageView alloc]initWithFrame:CGRectMake(((i-15)*(commonWidth + imageSize))+ imageXPos, yAxis+((imageSize+space) * 3), imageSize, imageSize)];
+                hobbiesname = [[UILabel alloc]initWithFrame:CGRectMake(((i-15)*(commonWidth + imageSize))+textXPos, yAxis+((imageSize+space) * 3)+imageSize, imageSize + 20, 15)];
+            }
+            
+            NSString *image =[imageNormalArray objectAtIndex:i];
+            
+            [hobbiesname setFont:[UIFont fontWithName:@"Patron-Regular" size:7]];
+            hobbiesname.textAlignment = NSTextAlignmentCenter;
+            hobbiesname.textColor =[UIColor colorWithRed:(float)102.0/255 green:(float)102.0/255 blue:(float)102.0/255 alpha:1.0f];
+            
+            
+            
+            
+            if([image isEqualToString:@"Plus_icon.png"])
+            {
+                [hobbiesImage setImage:[UIImage imageNamed:image]];
+            }
+            else
+            {
+                image= [image stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+                [hobbiesImage setImageWithURL:[NSURL URLWithString:image]];
+            }
+            
+            if (image == plusIcon) {
+                hobbiesImage.userInteractionEnabled = YES;
+                pushToHobbiesButton.imageView.contentMode = UIViewContentModeScaleAspectFit;
+                [hobbiesImage addSubview:pushToHobbiesButton];
+            }
+            
+            
+            [cell addSubview:hobbiesImage];
+            [pushToHobbiesButton addTarget:self action:@selector(pushToHobbiesView) forControlEvents:UIControlEventTouchUpInside];
+            hobbiesname.text = imageName;
+            [cell addSubview:hobbiesname];
+            hobbiesname.textAlignment = NSTextAlignmentCenter;
+        }
+        
+            
 
     }
     
