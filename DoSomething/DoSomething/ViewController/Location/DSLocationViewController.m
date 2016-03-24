@@ -718,10 +718,10 @@
     
     
 }
-- (void)collectionView:(UICollectionView *)collectionView willDisplayCell:(UICollectionViewCell *)cell forItemAtIndexPath:(NSIndexPath *)indexPath
+- (void)collectionView:(UICollectionView *)collectionView didEndDisplayingCell:(UICollectionViewCell *)cell forItemAtIndexPath:(NSIndexPath *)indexPath
 {
-   
-    if (([commonlocationArray count]-1) == indexPath.row && !isAllPost ) {
+    NSLog(@"indexpathcollection%@",indexPath);
+    if (([commonlocationArray count]-10) == indexPath.row && !isAllPost ) {
         
         int x = [currentloadPage intValue];
         
@@ -733,6 +733,11 @@
         //[locationCollectionView scrollToItemAtIndexPath:indexPath atScrollPosition:UICollectionViewScrollPositionTop animated:NO];
         
     }
+
+}
+- (void)collectionView:(UICollectionView *)collectionView willDisplayCell:(UICollectionViewCell *)cell forItemAtIndexPath:(NSIndexPath *)indexPath
+{
+   
     
 
 }
