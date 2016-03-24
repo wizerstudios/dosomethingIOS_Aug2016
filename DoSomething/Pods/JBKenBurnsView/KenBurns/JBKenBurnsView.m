@@ -253,12 +253,12 @@ enum JBSourceMode {
     if(pageControllBtn.currentPage)
     {
         [pageImageView setFrame:CGRectMake(pagecontrolxposition+_currentImageIndex*15,13,14,14)];
-         pageImageView.image =[UIImage imageNamed:@"dot_active"];
+         pageImageView.image =[UIImage imageNamed:@"Whitdot_active"];
     }
     else
     {
         [pageImageView setFrame:CGRectMake(_currentImageIndex+22,13,14,14)];
-        pageImageView.image =[UIImage imageNamed:@"dot_active"];
+        pageImageView.image =[UIImage imageNamed:@"Whitdot_active"];
     }
     [pageImageView setBackgroundColor:[UIColor clearColor]];
     [pageControllBtn addSubview:pageImageView];

@@ -224,7 +224,6 @@
     }
 
     
-   
 
     
     [[UISlider appearance] setThumbImage:[UIImage imageNamed:@"dot_Image"] forState:UIControlStateNormal];
@@ -447,18 +446,7 @@
                      nearestUserdetaile =[[responseObject valueForKey:@"nearestusers"] valueForKey:@"UserList"];
                      commonlocationArray =[nearestUserdetaile mutableCopy];
                      [locationCollectionView reloadData];
-                     if(commonlocationArray.count > 4)
-                     {
-                     NSString * Firstlogin=[[NSUserDefaults standardUserDefaults]valueForKey:FirstloginLocationView];
                      
-                     if([Firstlogin isEqualToString:@"Yes"])
-                     {
-                         self.walkAlterview.hidden =NO;
-                         self.blueCircleBtn.hidden=NO;
-                         [self GerenalWalkAlterview];
-                         [[NSUserDefaults standardUserDefaults]setObject:@"No" forKey:FirstloginLocationView];
-                     }
-                     }
 
                  }
                  else
@@ -477,6 +465,19 @@
                      }
                     
                  }
+                 if(commonlocationArray.count > 4)
+                 {
+                     NSString * Firstlogin=[[NSUserDefaults standardUserDefaults]valueForKey:FirstloginLocationView];
+                     
+                     if([Firstlogin isEqualToString:@"Yes"])
+                     {
+                         self.walkAlterview.hidden =NO;
+                         self.blueCircleBtn.hidden=NO;
+                         [self GerenalWalkAlterview];
+                         [[NSUserDefaults standardUserDefaults]setObject:@"No" forKey:FirstloginLocationView];
+                     }
+                 }
+
                  [COMMON DSRemoveLoading];
              }
              else if([[[responseObject valueForKey:@"nearestusers"]valueForKey:@"status"] isEqualToString:@"error"])
@@ -685,10 +686,14 @@
     {
         return UIEdgeInsetsMake(0,0, 0,5);
     }
+    else if(IS_IPHONE5)
+    {
+    return UIEdgeInsetsMake(0,0, 0, 5);
+    }
     else
     {
-    return UIEdgeInsetsMake(0,0, 0, 0);
-    }                                         // top, left, bottom, right
+        return UIEdgeInsetsMake(0,0, 0, 0);
+    }    // top, left, bottom, right
 }
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath;
@@ -849,12 +854,7 @@
                                     {
                                         matchUserArray =[[responseObject valueForKey:@"sendrequest"]valueForKey:@"Conversaion"];
                                          [self loadMatchActivityMethod];
-//
-                                         //[self nearestLocationWebservice];
-                                       
-                                        
-//                                        NSString * resposeMsg =[[responseObject valueForKey:@"sendrequest"]valueForKey:@"Message"];
-//                                        [self showAltermessage:resposeMsg];
+
                  
                                     }
              
@@ -1498,18 +1498,53 @@
         [dict removeObjectForKey:@"send_request"];
         [dict setObject:@"Yes" forKey:@"send_request"];
         detailsArray =[dict copy];
+        [commonlocationArray replaceObjectAtIndex:indexPath.row withObject:detailsArray];
+        NSString *dosomethingImage1;
+        NSString *dosomethingImage2;
+        NSString *dosomethingImage3;
         
         dosomethingImageArry =[[[commonlocationArray valueForKey:@"dosomething"]objectAtIndex:indexPath.row] valueForKey:@"InactiveImage"];
         if([dosomethingImageArry count]== 1){
+            if(![[dosomethingImageArry objectAtIndex:0]isEqualToString:@""])
+            {
+                
+                locationCellView.dosomethingImage1Xposition.constant=40;
+                
+                dosomethingImage1=[dosomethingImageArry objectAtIndex:0];
+                
+                [locationCellView.dosomethingImage1 setImageWithURL:[NSURL URLWithString:dosomethingImage1]];
+                locationCellView.dosomethingImage2.image=[UIImage imageNamed:@""];
+                locationCellView.dosomethingImage3.image=[UIImage imageNamed:@""];
+                
+            }
+
             NSLog(@"count one");
         }
         else if([dosomethingImageArry count] == 2){
             NSLog(@"count two");
+            if(![[dosomethingImageArry objectAtIndex:0]isEqualToString:@""])
+            {
+                locationCellView.dosomethingImage1Xposition.constant=60;
+                dosomethingImage1=[dosomethingImageArry objectAtIndex:0];
+                
+                [locationCellView.dosomethingImage1 setImageWithURL:[NSURL URLWithString:dosomethingImage1]];
+                
+            }
+            if (![[dosomethingImageArry objectAtIndex:1] isEqualToString:@""])
+            {
+                dosomethingImage2=[dosomethingImageArry objectAtIndex:1];
+                locationCellView.dosomethingImage2Xposition.constant=30;
+                [locationCellView.dosomethingImage2 setImageWithURL:[NSURL URLWithString:dosomethingImage2]];
+                
+                locationCellView.dosomethingImage3.image=[UIImage imageNamed:@""];
+                
+            }
+
         }else{
             
-            NSString *dosomethingImage1=[dosomethingImageArry objectAtIndex:0];
-            NSString *dosomethingImage2=[dosomethingImageArry objectAtIndex:1];
-            NSString *dosomethingImage3=[dosomethingImageArry objectAtIndex:2];
+            dosomethingImage1=[dosomethingImageArry objectAtIndex:0];
+            dosomethingImage2=[dosomethingImageArry objectAtIndex:1];
+            dosomethingImage3=[dosomethingImageArry objectAtIndex:2];
             
             
             [locationCellView.dosomethingImage1 setImageWithURL:[NSURL URLWithString:dosomethingImage1]];

@@ -58,13 +58,13 @@
     self.walkAlterview.hidden =YES;
     [self flashOn:walkAlterviewBtn];
     
-    if( [[NSUserDefaults standardUserDefaults] boolForKey:FirstDisplayGeneralAlterView] == YES)
-    {
-        self.walkAlterview.hidden =NO;
-         [[NSUserDefaults standardUserDefaults] setBool:NO forKey:FirstDisplayGeneralAlterView];
-         [[NSUserDefaults standardUserDefaults] setObject:@"FirstCreatAccount" forKey:FirstCreatAccount];
-    }
-
+//    if( [[NSUserDefaults standardUserDefaults] boolForKey:FirstDisplayGeneralAlterView] == YES)
+//    {
+//        self.walkAlterview.hidden =NO;
+//         [[NSUserDefaults standardUserDefaults] setBool:NO forKey:FirstDisplayGeneralAlterView];
+//         [[NSUserDefaults standardUserDefaults] setObject:@"FirstCreatAccount" forKey:FirstCreatAccount];
+//    }
+//
     self.kenView.delegate = self;
     _scrollViewImage.userInteractionEnabled =YES;
     

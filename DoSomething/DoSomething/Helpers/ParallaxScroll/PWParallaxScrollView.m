@@ -143,7 +143,7 @@ static const NSInteger PWInvalidPosition = -1;
     pageControllBtn.numberOfPages = 5;
     pageControllBtn.currentPage = _currentIndex;
     
-    pageControllBtn.pageIndicatorTintColor = [UIColor redColor];
+    pageControllBtn.pageIndicatorTintColor = [UIColor whiteColor];
     
     pageControllBtn.currentPageIndicatorTintColor =[UIColor clearColor];
     
@@ -410,12 +410,12 @@ static const NSInteger PWInvalidPosition = -1;
         if(self.currentIndex==0)
         {
             [pageImageView setFrame:CGRectMake(pagecontrolxposition+self.currentIndex*15,13,14,14)];
-            pageImageView.image =[UIImage imageNamed:@"dot_active"];
+            pageImageView.image =[UIImage imageNamed:@"Whitdot_active"];
         }
         else
         {
             [pageImageView setFrame:CGRectMake(pagecontrolxposition+self.currentIndex*15,13,14,14)];
-            pageImageView.image =[UIImage imageNamed:@"dot_active"];
+            pageImageView.image =[UIImage imageNamed:@"Whitdot_active"];
         }
         [pageImageView setBackgroundColor:[UIColor clearColor]];
         [self nextImage:self.currentIndex];
@@ -500,7 +500,7 @@ static const NSInteger PWInvalidPosition = -1;
     [textImageview setBackgroundColor:[UIColor clearColor]];
     pageControll = [[UIPageControl alloc]init];
     
-    pageControll.backgroundColor = [UIColor redColor];
+    pageControll.backgroundColor = [UIColor whiteColor];
     [pageControll setFrame:CGRectMake(self.center.x-50,self.frame.size.height-80,120,40)];
     pageControll.numberOfPages = 5;
     pageControll.currentPage = _currentIndex;
@@ -508,7 +508,7 @@ static const NSInteger PWInvalidPosition = -1;
     
     float pagecontrolxposition;
     pagecontrolxposition =_currentIndex+22;
-    pageControllBtn.pageIndicatorTintColor = [UIColor redColor];
+    pageControllBtn.pageIndicatorTintColor = [UIColor whiteColor];
     
     pageControllBtn.currentPageIndicatorTintColor =[UIColor clearColor];
     
@@ -519,12 +519,12 @@ static const NSInteger PWInvalidPosition = -1;
     if(pageControllBtn.currentPage)
     {
         [pageImageView setFrame:CGRectMake(pagecontrolxposition+_currentIndex*15,13,14,14)];
-        pageImageView.image =[UIImage imageNamed:@"dot_active"];
+        pageImageView.image =[UIImage imageNamed:@"Whitdot_active"];
     }
     else
     {
         [pageImageView setFrame:CGRectMake(_currentIndex+22,13,14,14)];
-        pageImageView.image =[UIImage imageNamed:@"dot_active"];
+        pageImageView.image =[UIImage imageNamed:@"Whitdot_active"];
     }
     [pageImageView setBackgroundColor:[UIColor clearColor]];
     [pageControllBtn addSubview:pageImageView];

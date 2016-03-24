@@ -116,7 +116,7 @@
         
         if([Firstlogin isEqualToString:@"FirstCreatAccount"])
         {
-            [self GerenalWalkAlterview];
+            //[self GerenalWalkAlterview];
             
             
         }

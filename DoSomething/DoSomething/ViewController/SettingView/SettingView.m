@@ -584,7 +584,7 @@
                                         [COMMON removeUserDetails];
                                         
                                         [[NSUserDefaults standardUserDefaults]removeObjectForKey:HobbiesArray];
-                                        
+                                        [[NSUserDefaults standardUserDefaults]setObject:@"No" forKey:FirstloginChatview];
                                     }
                                     
                                 }
