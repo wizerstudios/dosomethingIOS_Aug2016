@@ -113,6 +113,8 @@
     SystemSoundID * soundID;
      UIButton * blueCirecleBtn;
     NSString *plusIcon;
+    
+    
 }
 
 @end
@@ -1788,6 +1790,7 @@
             else
             {
                 image= [image stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+//                 downloadImageFromUrl(image,hobbiesImage);
                 [hobbiesImage setImageWithURL:[NSURL URLWithString:image]];
             }
             
