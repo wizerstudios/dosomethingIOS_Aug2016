@@ -17,6 +17,8 @@
 #import "DSTermsViewController.h"
 #import <AudioToolbox/AudioToolbox.h>
 #import "CustomSoundview.h"
+#import <FBSDKCoreKit/FBSDKCoreKit.h>
+#import <FBSDKLoginKit/FBSDKLoginKit.h>
 @interface SettingView ()
 {
    
@@ -34,6 +36,7 @@
     NSString * selectSoundStr;
     NSString * playsoundBundleStr;
     SystemSoundID *soundID;
+    NSMutableDictionary *profileDict;
 }
 @property (nonatomic,strong) IBOutlet NSLayoutConstraint    * deletebuttonBottomoposition;
 @property (nonatomic,strong) IBOutlet NSLayoutConstraint    * scrollYposition;
@@ -51,7 +54,7 @@
     locationManager.delegate        = self;
     objWebService =[[DSWebservice alloc]init];
     settingScroll.scrollEnabled =YES;
-    NSMutableDictionary *profileDict=[[NSMutableDictionary alloc]init];
+    profileDict=[[NSMutableDictionary alloc]init];
     profileDict = [COMMON getUserDetails];
    
     notificationMsg=[profileDict valueForKey:@"notification_message"];
@@ -581,6 +584,12 @@
                                         
                                     {
                                         
+                                    
+                                        if([[profileDict valueForKey:@"type"]isEqualToString:@"2"]){
+                                            FBSDKLoginManager *loginManager = [[FBSDKLoginManager alloc] init];
+                                            [loginManager logOut];
+                                             [FBSDKAccessToken setCurrentAccessToken:nil];
+                                        }
                                         [COMMON removeUserDetails];
                                         
                                         [[NSUserDefaults standardUserDefaults]removeObjectForKey:HobbiesArray];

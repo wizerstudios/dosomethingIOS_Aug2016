@@ -130,11 +130,12 @@
     
     [[NSUserDefaults standardUserDefaults]removeObjectForKey:HobbiesArray];
     [[NSUserDefaults standardUserDefaults]removeObjectForKey:@"backAction"];
-  
     
     return YES;
     
 }
+
+
 - (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation {
     return [[FBSDKApplicationDelegate sharedInstance] application:application
                                                           openURL:url
@@ -147,7 +148,6 @@
 {
    CGRect statusBarFrame = [[UIApplication sharedApplication] statusBarFrame];
     
-    NSLog(@"statusBarFrame=%@",statusBarFrame);
     buttonsView=[[UIView alloc]init];
     SepratorLbl     =[[UILabel alloc]init];
     badgeCountLabel = [[UILabel alloc]init];
@@ -478,12 +478,15 @@
 }
 -(void)loadonlineStausAPI:(NSString *) status
 {
-     webservice = [[DSWebservice alloc]init];
-    [webservice getOnlinstatus:OnlineStatus sessionID:[COMMON getSessionID] status:status success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        NSLog(@"onlinestausresponseObject= %@",responseObject);
-    } failure:^(AFHTTPRequestOperation *operation, id error) {
-        NSLog(@"onlinestausresponseObjecterror= %@",error);
-    }];
+    
+    if(![[COMMON getSessionID] isEqualToString:@"(null)"]){
+         webservice = [[DSWebservice alloc]init];
+        [webservice getOnlinstatus:OnlineStatus sessionID:[COMMON getSessionID] status:status success:^(AFHTTPRequestOperation *operation, id responseObject) {
+            NSLog(@"onlinestausresponseObject= %@",responseObject);
+        } failure:^(AFHTTPRequestOperation *operation, id error) {
+            NSLog(@"onlinestausresponseObjecterror= %@",error);
+        }];
+    }
 }
 -(void)loadConverstaionAPI:(NSString *)_conversationID{
     
