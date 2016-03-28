@@ -75,8 +75,7 @@
 - (void)viewDidLoad
 {
     
-    
-    [super viewDidLoad];
+        [super viewDidLoad];
        locationManager                 = [[CLLocationManager alloc] init];
     locationManager.delegate        = self;
     objWebService = [[DSWebservice alloc]init];
@@ -116,13 +115,18 @@
                                              selector:@selector(loadInvalidSessionAlert:)
                                                  name:@"InvalidSession"
                                                object:nil];
+    
+    
 
     appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
     appDelegate.buttonsView.hidden=NO;
     appDelegate.SepratorLbl.hidden=NO;
+   
     [self loadnavigationview];
     [self setupCollectionView];
     [self audioplayMethod];
+    
+
 }
 
 -(void)viewDidAppear:(BOOL)animated{
@@ -186,6 +190,7 @@
 #pragma mark - loadnavigationview
 -(void)loadnavigationview
 {
+
     self.navigationController.navigationBarHidden=NO;
     [self.navigationItem setHidesBackButton:YES animated:NO];
     [self.navigationController.navigationBar setTranslucent:YES];
@@ -208,6 +213,7 @@
     selectedItemsArray = [[NSMutableArray alloc]init];
     [self CustomAlterviewload];
 }
+
 #pragma mark - CustomAlterviewload
 -(void)CustomAlterviewload
 {
@@ -983,5 +989,7 @@ minimumLineSpacingForSectionAtIndex:(NSInteger)section {
         [self flashOff:v];
     }];
 }
+
+
 
 @end

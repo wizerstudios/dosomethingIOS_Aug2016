@@ -25,4 +25,6 @@
 
 @property (nonatomic,strong) IBOutlet UIView *WalkAlterview;
 
+-(void)onStatusbarChange:(NSNotification*)notification;
+
 @end

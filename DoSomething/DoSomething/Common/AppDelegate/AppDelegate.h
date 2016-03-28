@@ -25,6 +25,9 @@
     SettingView             *objSettingView;
 
 }
+
+@property (assign, nonatomic) CGRect currentStatusBarFrame;
+
 @property (strong, nonatomic) UIWindow                          *window;
 
 @property (nonatomic, strong) UINavigationController            *navigationController;
@@ -48,5 +51,6 @@
 @property (nonatomic) BOOL                               isNotificationSound;
 @property (strong)NSTimer *onlineStatusTimer;
 -(void)initAPNS;
+-(void)TabBarViews;
 @end
 

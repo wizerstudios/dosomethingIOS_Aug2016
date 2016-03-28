@@ -100,7 +100,7 @@
         self.window.rootViewController = splashViewController;
         self.navigationController = [[UINavigationController alloc] initWithRootViewController:splashViewController];
     }
-
+   
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     [self.window setRootViewController:self.navigationController];
     self.window.backgroundColor=[UIColor whiteColor];
@@ -145,15 +145,24 @@
 
 -(void)TabBarViews
 {
-  
+   CGRect statusBarFrame = [[UIApplication sharedApplication] statusBarFrame];
+    
+    NSLog(@"statusBarFrame=%@",statusBarFrame);
     buttonsView=[[UIView alloc]init];
     SepratorLbl     =[[UILabel alloc]init];
     badgeCountLabel = [[UILabel alloc]init];
     
     [buttonsView setBackgroundColor:[UIColor whiteColor]];
     [SepratorLbl setBackgroundColor:[UIColor grayColor]];
+   if(statusBarFrame.size.height==40)
+   {
+      buttonsView.frame=CGRectMake(self.window.frame.origin.x,self.window.frame.size.height-70,self.window.frame.size.width,50);
+   }
+    else
+    {
+        buttonsView.frame=CGRectMake(self.window.frame.origin.x,self.window.frame.size.height-50,self.window.frame.size.width,50);
 
-    buttonsView.frame=CGRectMake(self.window.frame.origin.x,self.window.frame.size.height-50,self.window.frame.size.width,50);
+    }
      SepratorLbl.frame =CGRectMake(buttonsView.frame.origin.x,buttonsView.frame.origin.y-2,buttonsView.frame.size.width,3);
      buttonsView.hidden=YES;
     SepratorLbl.hidden=YES;
@@ -639,5 +648,47 @@
     
 
 }
+- (void)application:(UIApplication *)application didChangeStatusBarFrame:(CGRect)oldStatusBarFrame
+{
+//    NSMutableDictionary *dict = [[NSMutableDictionary alloc] init];
+//    [dict setObject:@"trigger" forKey:@"frame"];
+//    if(oldStatusBarFrame.size.height==20)
+//    {
+//       [dict setObject:@"triggerYes" forKey:@"oldFram"];
+//         self.buttonsView.frame=CGRectMake(self.window.frame.origin.x,self.window.frame.origin.y+self.window.frame.size.height-70,self.window.frame.size.width,50);
+//         self.SepratorLbl.frame =CGRectMake(self.buttonsView.frame.origin.x,self.buttonsView.frame.origin.y-2,self.buttonsView.frame.size.width,3);
+//    }
+//    else if(oldStatusBarFrame.size.height==40)
+//    {
+//         [dict setObject:@"triggerNo" forKey:@"oldFram"];
+//         self.buttonsView.frame=CGRectMake(self.window.frame.origin.x,self.window.frame.origin.y+self.window.frame.size.height-50,self.window.frame.size.width,50);
+//         self.SepratorLbl.frame =CGRectMake(self.buttonsView.frame.origin.x,self.buttonsView.frame.origin.y-2,self.buttonsView.frame.size.width,3);
+//    }
+    
+//    [[NSNotificationCenter defaultCenter] postNotificationName:@"trigger"
+//                                                        object:self
+//                                                      userInfo:dict];
+    
+}
+- (void)application:(UIApplication *)application willChangeStatusBarFrame:(CGRect)newStatusBarFrame
+{
+    NSMutableDictionary *dict = [[NSMutableDictionary alloc] init];
+    [dict setObject:@"trigger" forKey:@"frame"];
+    if(newStatusBarFrame.size.height==20)
+    {
+        [dict setObject:@"triggerYes" forKey:@"oldFram"];
+        self.buttonsView.frame=CGRectMake(self.window.frame.origin.x,self.window.frame.origin.y+self.window.frame.size.height-50,self.window.frame.size.width,50);
+        self.SepratorLbl.frame =CGRectMake(self.buttonsView.frame.origin.x,self.buttonsView.frame.origin.y-2,self.buttonsView.frame.size.width,3);
+    }
+    else if(newStatusBarFrame.size.height==40)
+    {
+        [dict setObject:@"triggerNo" forKey:@"oldFram"];
+        self.buttonsView.frame=CGRectMake(self.window.frame.origin.x,self.window.frame.origin.y+self.window.frame.size.height-70,self.window.frame.size.width,50);
+        self.SepratorLbl.frame =CGRectMake(self.buttonsView.frame.origin.x,self.buttonsView.frame.origin.y-2,self.buttonsView.frame.size.width,3);
+    }
+
+    
+    
+}// in screen coordinates
 
 @end
