@@ -19,7 +19,7 @@
 #import "UIImageView+AFNetworking.h"
 #import "OpenUDID.h"
 #import "CustomAlterview.h"
-
+#import "DSLocationViewController.h"
 
 #define ITEMS_PAGE_SIZE 4
 #define ITEM_CELL_IDENTIFIER @"ItemCell"
@@ -65,7 +65,7 @@
     UIButton * blueCirecleImg2;
     UIButton * blueCirecleImg3;
     UIButton * blueCirecleBtn;
-   
+    HomeCustomCell *cell;
 }
 @end
 
@@ -347,7 +347,7 @@
 -(UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     static NSString *cellIdentifier = @"ItemCell";
-    HomeCustomCell *cell = (HomeCustomCell *)[collectionView dequeueReusableCellWithReuseIdentifier:cellIdentifier forIndexPath:indexPath];
+    cell = (HomeCustomCell *)[collectionView dequeueReusableCellWithReuseIdentifier:cellIdentifier forIndexPath:indexPath];
     [cell setNeedsDisplay];
     cell.MenuImg = nil;
     cell.MenuTittle = nil;
@@ -370,11 +370,11 @@
                                                             green:(65/255.0f)
                                                              blue:(81/255.0f)
                                                             alpha:1.0f];
-                NSString * objstr = [NSString stringWithFormat:@"%@",[data valueForKey:@"ActiveImage"]];
+               NSString * objstr = [NSString stringWithFormat:@"%@",[data valueForKey:@"ActiveImage"]];
                 objstr= [objstr stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
                 [cell.MenuImg setImageWithURL:[NSURL URLWithString:objstr]];
                 
-                NSString * activeobjstr = [NSString stringWithFormat:@"%@",[data valueForKey:@"InactiveImage"]];
+                NSString * activeobjstr = [NSString stringWithFormat:@"%@",[data valueForKey:@"ActiveImage"]];
                 activeobjstr= [activeobjstr stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
                 [cell.activeImg setImageWithURL:[NSURL URLWithString:activeobjstr]];
                 break;
@@ -387,12 +387,18 @@
                                                     green:(164/255.0f)
                                                      blue:(164/255.0f)
                                                     alpha:1.0f];
-        NSString * objstr = [NSString stringWithFormat:@"%@",[data valueForKey:@"InactiveImage"]];
-        objstr= [objstr stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-        [cell.MenuImg setImageWithURL:[NSURL URLWithString:objstr]];
+        
         NSString * activeobjstr = [NSString stringWithFormat:@"%@",[data valueForKey:@"ActiveImage"]];
         activeobjstr= [activeobjstr stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
         [cell.activeImg setImageWithURL:[NSURL URLWithString:activeobjstr]];
+        [cell.activeImg setHidden:YES];
+       
+        
+        NSString * objstr = [NSString stringWithFormat:@"%@",[data valueForKey:@"InactiveImage"]];
+        objstr= [objstr stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+        [cell.MenuImg setImageWithURL:[NSURL URLWithString:objstr]];
+         [cell.MenuImg setHidden:NO];
+       
     }
     _homeCollectionView.allowsMultipleSelection = YES;
     cell.layer.shouldRasterize = YES;
@@ -415,7 +421,7 @@ minimumLineSpacingForSectionAtIndex:(NSInteger)section {
 
 - (UICollectionViewCell *)loadingCellForIndexPath:(NSIndexPath *)indexPath {
     
-    HomeCustomCell *cell = (HomeCustomCell *)[self.homeCollectionView dequeueReusableCellWithReuseIdentifier:LOADING_CELL_IDENTIFIER
+   cell = (HomeCustomCell *)[self.homeCollectionView dequeueReusableCellWithReuseIdentifier:LOADING_CELL_IDENTIFIER
                                                                                                 forIndexPath:indexPath];
     return cell;
 }
@@ -437,7 +443,7 @@ minimumLineSpacingForSectionAtIndex:(NSInteger)section {
 {
     isSelectMenu=YES;
    
-    HomeCustomCell *cell = (HomeCustomCell *)[collectionView cellForItemAtIndexPath:indexPath];
+    cell = (HomeCustomCell *)[collectionView cellForItemAtIndexPath:indexPath];
     NSMutableDictionary *data = [menuArray objectAtIndex:indexPath.row];
     
     if([selectedItemsArray count] <= 2)
@@ -454,6 +460,7 @@ minimumLineSpacingForSectionAtIndex:(NSInteger)section {
                                                      blue:(81/255.0f)
                                                     alpha:1.0f];
         [cell.MenuImg setHidden:YES];
+        [cell.activeImg setHidden:NO];
     }
     else
     {
@@ -478,7 +485,7 @@ minimumLineSpacingForSectionAtIndex:(NSInteger)section {
 #pragma mark - didDeselectItemAtIndexPath
 -(void)collectionView: (UICollectionView *)collectionView didDeselectItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    HomeCustomCell *cell = (HomeCustomCell *)[collectionView cellForItemAtIndexPath:indexPath];
+    cell = (HomeCustomCell *)[collectionView cellForItemAtIndexPath:indexPath];
     NSMutableDictionary *data = [menuArray objectAtIndex:indexPath.row];
     NSArray *selectArray = [[NSArray alloc]init];
     selectArray = [selectedItemsArray copy];
@@ -494,7 +501,7 @@ minimumLineSpacingForSectionAtIndex:(NSInteger)section {
             [audioPlayer prepareToPlay];
             [audioPlayer play];
            [selectedItemsArray removeObject:strDeselect];
-           //isdeSelect=YES;
+           
             cell.MenuTittle.textColor = [UIColor colorWithRed:(164/255.0f)
                                                         green:(164/255.0f)
                                                          blue:(164/255.0f)
@@ -525,8 +532,9 @@ minimumLineSpacingForSectionAtIndex:(NSInteger)section {
 #pragma mark - pressDosomethingAction
 - (IBAction)pressDosomething:(id)sender {
     if([sender tag] == 1000){
-       // [bottombutton setUserInteractionEnabled:NO];
+       
        [self loadActivityAPI:Cancel availableStr:@"" doSomethingId:@""];
+        [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"SelectNewItem"];
     }else{
         if([selectedItemsArray count] <= 3){
             objCustomAlterview.view .hidden  = NO;
@@ -539,8 +547,7 @@ minimumLineSpacingForSectionAtIndex:(NSInteger)section {
             objCustomAlterview.alertMsgLabel.textAlignment = NSTextAlignmentCenter;
             objCustomAlterview. alertMsgLabel.lineBreakMode = NSLineBreakByWordWrapping;
             objCustomAlterview.alertMsgLabel.textColor = [UIColor whiteColor];
-           // isInitialLoadingAPI = NO;
-            //[self loadActivityAPI:getLast availableStr:@"" doSomethingId:@""];
+          
         }
         else{
             [self showAltermessage:@"3 ACTIVITIES\nSHOULD BE SELECTED "];
@@ -552,6 +559,7 @@ minimumLineSpacingForSectionAtIndex:(NSInteger)section {
     objCustomAlterview. alertBgView.hidden = YES;
     objCustomAlterview.alertMainBgView.hidden = YES;
     objCustomAlterview.view .hidden  = YES;
+    
 
 }
 - (IBAction)alertPressYes:(id)sender {
@@ -594,7 +602,7 @@ minimumLineSpacingForSectionAtIndex:(NSInteger)section {
                               }
                               failure:^(AFHTTPRequestOperation *operation, id error) {
                                   
-                                  //[self showAltermessage:[NSString stringWithFormat:@"%@",error]];
+                                 
                               }];
         
 
@@ -622,13 +630,14 @@ minimumLineSpacingForSectionAtIndex:(NSInteger)section {
              NSString *msgString = [activityMainDict valueForKey:@"Message"];
              
              if([msgString isEqualToString:@"Activity Canelled successfully"]){
-                 // [self showAltermessage:msgString];
+                
                  [activatedView setHidden:YES];
                  [self.homeCollectionView setAlpha:1];
                  [self.homeCollectionView setUserInteractionEnabled:YES];
                  [activityImageArray removeAllObjects];
                  isSelectMenu = NO;
                  [selectedItemsArray removeAllObjects];
+                 
                  [self.homeCollectionView reloadData];
                  [bottombutton setTag:1001];
                  [bottombutton setTitle:@"Let's Do Something!" forState:UIControlStateNormal];
@@ -657,7 +666,7 @@ minimumLineSpacingForSectionAtIndex:(NSInteger)section {
                            failure:^(AFHTTPRequestOperation *operation, id error) {
                                
                                
-                               // [self showAltermessage:[NSString stringWithFormat:@"%@",error]];
+                              
                            }];
 
     }
@@ -711,37 +720,35 @@ minimumLineSpacingForSectionAtIndex:(NSInteger)section {
     timeLabel.numberOfLines = 3;
     nowButton.hidden=YES;
     anyTimeButton.hidden =YES;
-   // if([_availStr isEqualToString:@"No"]){
-       // [nowButton setBackgroundColor:Green_Color];
-        //[anyTimeButton setBackgroundColor:Gray_Color];
-       // [anyTimeButton setUserInteractionEnabled:NO];
-   // }
-    //else{
-        //[nowButton setBackgroundColor:Gray_Color];
-       // [anyTimeButton setBackgroundColor:Red_Color];
-       // [nowButton setUserInteractionEnabled:NO];
-  //  }
     
     [self loadActivityImageView];
+    if([timeStr isEqualToString:@"    Last Selected:\nFew seconds ago"])
+    {
+        if([[NSUserDefaults standardUserDefaults] boolForKey:@"SelectNewItem"]== YES) {
+            NSTimer * nextImageTimer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(nextImage) userInfo:nil repeats:NO];
+            [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"SelectNewItem"];
+        }
+       
+        
+    }
     
 }
-
+-(void)nextImage
+{
+    [appDelegate.locationButton setBackgroundImage:[UIImage imageNamed:@"loaction_active.png"] forState:UIControlStateNormal];
+    DSLocationViewController * locationview =[[DSLocationViewController alloc]initWithNibName:@"DSLocationViewController" bundle:nil];
+    [self.navigationController pushViewController:locationview animated:NO];
+    
+}
 -(IBAction)nowAction:(id)sender{
-   // [nowButton setBackgroundColor:Gray_Color];
-   // [anyTimeButton setBackgroundColor:Red_Color];
-   // [nowButton setUserInteractionEnabled:NO];
-   // [anyTimeButton setUserInteractionEnabled:YES];
+   
    
     strselectDosomething = [selectedItemsArray componentsJoinedByString:@","];
     [self loadActivityAPI:Update availableStr:@"Yes" doSomethingId:strselectDosomething];
     
 }
 -(IBAction)anyTimeAction:(id)sender{
-    //[nowButton setBackgroundColor:Green_Color];
-    //[anyTimeButton setBackgroundColor:Gray_Color];
-    //[anyTimeButton setUserInteractionEnabled:NO];
-    //[nowButton setUserInteractionEnabled:YES];
-   // strselectDosomething = [selectedItemsArray componentsJoinedByString:@","];
+   
     [self loadActivityAPI:Update availableStr:@"No" doSomethingId:strselectDosomething];
 }
 

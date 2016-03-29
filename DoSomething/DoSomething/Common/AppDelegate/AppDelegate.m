@@ -207,7 +207,7 @@
     
     profileButton.frame=CGRectMake(20,3,40,40);
     locationButton.frame=CGRectMake(profileButton.frame.origin.x+profileButton.frame.size.width+20,3,40,40);
-    menuButton.frame=CGRectMake(buttonsView.center.x-15,3,45,45);
+    menuButton.frame=CGRectMake(buttonsView.center.x-25,3,40,40);
     chatsButton.frame=CGRectMake(menuButton.frame.origin.x+menuButton.frame.size.width+17,3,40,40);
     settingButton.frame =CGRectMake(chatsButton.frame.origin.x+chatsButton.frame.size.width+17,3,40,40);
     
