@@ -60,7 +60,7 @@
         
         [[NSUserDefaults standardUserDefaults]synchronize];
          [[NSUserDefaults standardUserDefaults] setBool:YES forKey:FirstDisplayGeneralAlterView];
-          [[NSUserDefaults standardUserDefaults] setObject:@"YES" forKey:FirstlogininterestHobbies];
+        
           [[NSUserDefaults standardUserDefaults] setObject:@"Yes" forKey:FirstMatchUser];
         
         
@@ -73,7 +73,7 @@
         
         [[NSUserDefaults standardUserDefaults]synchronize];
          [[NSUserDefaults standardUserDefaults] setBool:NO forKey:FirstDisplayGeneralAlterView];
-         [[NSUserDefaults standardUserDefaults] setObject:@"NO" forKey:FirstlogininterestHobbies];
+//         [[NSUserDefaults standardUserDefaults] setObject:@"NO" forKey:FirstlogininterestHobbies];
           [[NSUserDefaults standardUserDefaults] setObject:@"No" forKey:FirstMatchUser];
         
     }

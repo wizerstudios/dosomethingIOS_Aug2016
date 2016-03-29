@@ -57,10 +57,13 @@
 @property (strong, nonatomic) DVSwitch *switcher;
 @property (strong, nonatomic) IBOutlet UITableView *tableviewProfile;
 
+@property (strong,nonatomic) IBOutlet UIScrollView * profileScrollView;
+
 @property(strong,nonatomic) IBOutlet NSLayoutConstraint *tableViewHeightConstraint;
 
 @property (strong, nonatomic) IBOutlet NSLayoutConstraint *layoutConstraintTableViewYPos;
 
+@property (strong, nonatomic) IBOutlet NSLayoutConstraint * profiletableheight;
 
 @property (nonatomic, retain) NSMutableArray *placeHolderArray;
 @property (strong, nonatomic) NSData *profileData,*profileData1,*profileData2,*profileData3;

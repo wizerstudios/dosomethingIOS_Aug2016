@@ -623,6 +623,7 @@
 
 -(void)gotoProfileView:(NSString *)strEmailId :(NSString *)strPassword :(BOOL)selectMail{
      [[NSUserDefaults standardUserDefaults] setObject:@"Yes" forKey:FirstCreateProfile];
+     [[NSUserDefaults standardUserDefaults] setObject:@"YES" forKey:FirstlogininterestHobbies];
     DSProfileTableViewController *profileVC  = [[DSProfileTableViewController alloc]initWithNibName:@"DSProfileTableViewController" bundle:nil];
     profileVC.emailAddressToRegister  = strEmailId;
     profileVC.emailPasswordToRegister = strPassword;
@@ -635,7 +636,7 @@
     profileVC.userDetailsDict = [fbUserDetailsDict mutableCopy];
     profileVC.FBprofileID=FBProfileID;
     [[NSUserDefaults standardUserDefaults] setObject:@"Yes" forKey:FirstCreateProfile];
-
+   [[NSUserDefaults standardUserDefaults] setObject:@"YES" forKey:FirstlogininterestHobbies];
     [self.navigationController pushViewController:profileVC animated:YES];
 }
 

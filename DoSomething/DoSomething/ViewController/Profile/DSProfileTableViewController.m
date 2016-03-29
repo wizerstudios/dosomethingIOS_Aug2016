@@ -122,7 +122,7 @@
 
 @implementation DSProfileTableViewController
 @synthesize  profileData1,textviewText, placeHolderArray,FBprofileID;
-@synthesize userDetailsDict,emailAddressToRegister,emailPasswordToRegister,selectEmail,currentPassword,confirmPassword;
+@synthesize userDetailsDict,emailAddressToRegister,emailPasswordToRegister,selectEmail,currentPassword,confirmPassword,profileScrollView;
 
 - (void)viewDidLoad {
     
@@ -298,7 +298,9 @@
             
         {
             
+           
             self.tableViewHeightConstraint.constant=(IS_IPHONE6_Plus||IS_IPHONE6)?50:50;
+            
             
         }
         
@@ -915,21 +917,23 @@
         
         if(IS_IPHONE6)
         {
-            self.tableViewHeightConstraint.constant= 0;//self.view.frame.size.height+125;
+           // self.tableViewHeightConstraint.constant= 0;//self.view.frame.size.height+125;
         }
         else if(IS_IPHONE6_Plus)
         {
-            self.tableViewHeightConstraint.constant= 0; //self.view.frame.size.height+190;
+            //self.tableViewHeightConstraint.constant= 0; //self.view.frame.size.height+190;
         }
         else
         {
-            self.tableViewHeightConstraint.constant=0;
+           // self.tableViewHeightConstraint.constant=465;
+            
         }
     }
     
     else{
         
-        self.tableViewHeightConstraint.constant=(IS_IPHONE6_Plus||IS_IPHONE6)? 0:0;
+        //self.tableViewHeightConstraint.constant=(IS_IPHONE6_Plus||IS_IPHONE6)? 0:0;
+//         [profileScrollView setContentSize:CGSizeMake(0, self.tableviewProfile.frame.origin.y + self.tableviewProfile.contentSize.height)];
         
     }
     
@@ -1160,8 +1164,9 @@
             {
 
                 
-                self.aboutTextHeight.constant=dataSize.height;
-                 return  dataSize.height;
+                self.aboutTextHeight.constant=dataSize.height-10;
+                
+                 return  dataSize.height-10;
             }
             
         }
@@ -1464,102 +1469,6 @@
             cell = cellDatePicker;
             
         }
-        
-        
-        
-    }
-    if (indexPath.row == 5)
-    {
-        if (cell == nil)
-        {
-            [[NSBundle mainBundle] loadNibNamed:@"DSProfileTableViewCell" owner:self options:nil];
-            cell = cellTextView;
-            
-        }
-        
-        
-        
-        
-    }
-    
-    if(indexPath.row == 6)
-    {
-        if (cell == nil){
-            [[NSBundle mainBundle] loadNibNamed:@"DSProfileTableViewCell" owner:self options:nil];
-            cell = cellAddIcon;
-            [cell.buttonPushHobbies addTarget:self action:@selector(pushToHobbiesView) forControlEvents:UIControlEventTouchUpInside];
-        }
-        
-       plusIcon = @"Plus_icon.png";
-        
-        if ([imageNormalArray count] >=1)
-        {
-            for(NSString *strPlus in imageNormalArray)
-            {
-                if([strPlus isEqualToString:@"Plus_icon.png"])
-                    [imageNormalArray removeObject:strPlus];
-                
-            }
-            [imageNormalArray addObject:plusIcon];
-            
-        }
-
-    }
-    
-    if (indexPath.row == 7)
-    {
-        if (cell == nil)
-        {
-            [[NSBundle mainBundle] loadNibNamed:@"DSProfileTableViewCell" owner:self options:nil];
-            cell = cellEmailPassword;
-            
-        }
-
-    }
-    if (indexPath.row == 8)
-    {
-        
-        if (cell == nil)
-        {
-            [[NSBundle mainBundle] loadNibNamed:@"DSProfileTableViewCell" owner:self options:nil];
-            cell = CellSwitchOn;
-            
-        }
-
-        
-    }
-
-    if (indexPath.row == 9)
-    {
-        
-        if (cell == nil)
-        {
-            [[NSBundle mainBundle] loadNibNamed:@"DSProfileTableViewCell" owner:self options:nil];
-            cell = CellTermsOfUse;
-            
-        }
-        
-    }
-    if(indexPath.row==10)
-    {
-        if (cell == nil)
-        {
-            [[NSBundle mainBundle] loadNibNamed:@"DSProfileTableViewCell" owner:self options:nil];
-            cell = cellloginTypeView;
-        }
-
-    }
-
-    [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
-        return cell;
-    
-}
-
-- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)Tablecell forRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    
-    if(indexPath.row == 4)
-    {
         if(profileDict != NULL)
         {
             
@@ -1645,10 +1554,18 @@
             
         }
 
+        
+        
     }
-    
-    if(indexPath.row ==5)
+    if (indexPath.row == 5)
     {
+        if (cell == nil)
+        {
+            [[NSBundle mainBundle] loadNibNamed:@"DSProfileTableViewCell" owner:self options:nil];
+            cell = cellTextView;
+            
+        }
+        
         cell.textViewAboutYou.delegate = self;
         if(profileDict !=NULL){
             
@@ -1660,9 +1577,9 @@
                 
                 
                 strAbout =cell.textViewAboutYou.text;
-               
-               
-
+                
+                
+                
                 
             }
             
@@ -1675,11 +1592,11 @@
                         strAbout =cell.textViewAboutYou.text;
                         dataSize = [COMMON getControlHeight:strAbout withFontName:@"Patron-Regular" ofSize:14.0 withSize:CGSizeMake(tableView.frame.size.width-20,tableView.frame.size.height)];
                         
-
+                        
                     }
                     else{
                         cell.textViewAboutYou.text = strAbout;
-                       
+                        
                     }
                 }
                 else{
@@ -1709,14 +1626,127 @@
                 {
                     
                     cell.textViewAboutYou.text =strAbout;
-
-                  
+                    
+                    
                 }
             }
             cell.textViewAboutYou.delegate = self;
             
         }
+
+        
+        
     }
+    
+    if(indexPath.row == 6)
+    {
+        if (cell == nil){
+            [[NSBundle mainBundle] loadNibNamed:@"DSProfileTableViewCell" owner:self options:nil];
+            cell = cellAddIcon;
+            [cell.buttonPushHobbies addTarget:self action:@selector(pushToHobbiesView) forControlEvents:UIControlEventTouchUpInside];
+        }
+        
+       plusIcon = @"Plus_icon.png";
+        
+        if ([imageNormalArray count] >=1)
+        {
+            for(NSString *strPlus in imageNormalArray)
+            {
+                if([strPlus isEqualToString:@"Plus_icon.png"])
+                    [imageNormalArray removeObject:strPlus];
+                
+            }
+            [imageNormalArray addObject:plusIcon];
+            
+        }
+
+    }
+    
+    if (indexPath.row == 7)
+    {
+        if (cell == nil)
+        {
+            [[NSBundle mainBundle] loadNibNamed:@"DSProfileTableViewCell" owner:self options:nil];
+            cell = cellEmailPassword;
+            
+        }
+
+    }
+    if (indexPath.row == 8)
+    {
+        
+        if (cell == nil)
+        {
+            [[NSBundle mainBundle] loadNibNamed:@"DSProfileTableViewCell" owner:self options:nil];
+            cell = CellSwitchOn;
+            
+        }
+
+        
+    }
+
+    if (indexPath.row == 9)
+    {
+        
+        if (cell == nil)
+        {
+            [[NSBundle mainBundle] loadNibNamed:@"DSProfileTableViewCell" owner:self options:nil];
+            cell = CellTermsOfUse;
+            
+        }
+        
+    }
+    if(indexPath.row==10)
+    {
+        if (cell == nil)
+        {
+            [[NSBundle mainBundle] loadNibNamed:@"DSProfileTableViewCell" owner:self options:nil];
+            cell = cellloginTypeView;
+        }
+
+    }
+
+    [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
+    
+    [self settableviewheight];
+    
+    return cell;
+    
+}
+-(void)settableviewheight{
+
+    [self.tableviewProfile setScrollEnabled:NO];
+   
+    self.tableViewHeightConstraint.constant=(IS_IPHONE6|| IS_IPHONE6_Plus)?self.tableviewProfile.frame.origin.y + self.tableviewProfile.contentSize.height+50:self.tableviewProfile.frame.origin.y + self.tableviewProfile.contentSize.height-10;
+    
+    if(profileDict != NULL)
+    {
+        if(IS_IPHONE6 || IS_IPHONE6_Plus)
+        {
+            [profileScrollView setContentSize:CGSizeMake(0, self.tableviewProfile.frame.origin.y + self.tableviewProfile.contentSize.height+self.tableViewHeightConstraint.constant-(self.profiletableheight.constant+130))];
+        }
+        else
+        {
+        [profileScrollView setContentSize:CGSizeMake(0, self.tableviewProfile.frame.origin.y + self.tableviewProfile.contentSize.height+self.tableViewHeightConstraint.constant-(self.profiletableheight.constant+55))];
+        }
+    }
+    else
+    {
+        if(IS_IPHONE6 || IS_IPHONE6_Plus)
+        {
+            [profileScrollView setContentSize:CGSizeMake(0, self.tableviewProfile.frame.origin.y + self.tableviewProfile.contentSize.height+self.tableViewHeightConstraint.constant-(self.profiletableheight.constant+150))];
+        }
+        else
+        {
+        [profileScrollView setContentSize:CGSizeMake(0, self.tableviewProfile.frame.origin.y + self.tableviewProfile.contentSize.height+self.tableViewHeightConstraint.constant-(self.profiletableheight.constant+110))];
+        }
+    }
+
+}
+
+- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)Tablecell forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    
     
     if(indexPath.row==6)
     {
@@ -2268,17 +2298,23 @@
 
     strAbout = textView.text;
     
-     [self.tableviewProfile scrollToRowAtIndexPath:[self.tableviewProfile indexPathForCell:cell] atScrollPosition:UITableViewScrollPositionBottom animated:NO];
-    
+    //[self.tableviewProfile scrollToRowAtIndexPath:[self.tableviewProfile indexPathForCell:cell] atScrollPosition:UITableViewScrollPositionBottom animated:NO];
+    //[self.tableviewProfile reloadData];
     [self.tableviewProfile beginUpdates];
+     NSArray *indexPaths = [[NSArray alloc] initWithObjects:indexPath, nil];
+    [self.tableviewProfile reloadRowsAtIndexPaths:indexPaths withRowAnimation:UITableViewRowAnimationNone];
+    [self performSelector:@selector(settableviewheight) withObject:nil afterDelay:0.2];
     [self.tableviewProfile endUpdates];
+   
+    
+
 }
 - (void) textViewDidChange:(UITextView *)textView
 {
     
-    [self.tableviewProfile beginUpdates];
-      
-    [self.tableviewProfile endUpdates];
+//    [self.tableviewProfile beginUpdates];
+//      
+//    [self.tableviewProfile endUpdates];
     
 }
 
