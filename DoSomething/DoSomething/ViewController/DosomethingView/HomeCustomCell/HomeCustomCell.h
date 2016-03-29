@@ -14,6 +14,8 @@
 
 @property (nonatomic,strong) IBOutlet UIImageView * MenuImg;
 
+@property (nonatomic,strong) IBOutlet UIImageView * activeImg;
+
 @property (nonatomic, strong) NSString *imageName;
 
 

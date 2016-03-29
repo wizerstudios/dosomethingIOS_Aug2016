@@ -28,6 +28,13 @@
                         <color key="textColor" white="0.66666666666666663" alpha="0.94000000000000006" colorSpace="calibratedWhite"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <imageView userInteractionEnabled="NO" tag="81" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="lzd-fe-ugv">
+                        <rect key="frame" x="20" y="8" width="50" height="50"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="50" id="YaG-U7-hRB"/>
+                            <constraint firstAttribute="height" constant="50" id="pC8-vl-dzS"/>
+                        </constraints>
+                    </imageView>
                     <imageView userInteractionEnabled="NO" tag="101" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="CDk-AK-Onw">
                         <rect key="frame" x="20" y="8" width="50" height="50"/>
                         <constraints>
@@ -40,6 +47,9 @@
             </view>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             <constraints>
+                <constraint firstItem="lzd-fe-ugv" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="20" id="6qt-hy-0dS"/>
+                <constraint firstItem="lzd-fe-ugv" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="8" id="Aq0-x7-r7s"/>
+                <constraint firstItem="W2T-Ws-Y05" firstAttribute="top" secondItem="lzd-fe-ugv" secondAttribute="bottom" constant="12" id="HNW-BQ-pUz"/>
                 <constraint firstItem="W2T-Ws-Y05" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="5" id="KYS-HH-dIf"/>
                 <constraint firstItem="CDk-AK-Onw" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="20" id="PHu-59-acm"/>
                 <constraint firstItem="CDk-AK-Onw" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="8" id="Sdg-zv-f3a"/>
@@ -49,6 +59,7 @@
             <connections>
                 <outlet property="MenuImg" destination="CDk-AK-Onw" id="ct5-cU-hmE"/>
                 <outlet property="MenuTittle" destination="W2T-Ws-Y05" id="d6j-PF-7A5"/>
+                <outlet property="activeImg" destination="lzd-fe-ugv" id="cfm-lM-BZm"/>
             </connections>
             <point key="canvasLocation" x="463.5" y="248.5"/>
         </collectionViewCell>

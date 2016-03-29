@@ -1553,8 +1553,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-1";
 				CLANG_ENABLE_OBJC_ARC = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Loganathan Venkatesh (RNTZRSZ4TL)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Loganathan Venkatesh (RNTZRSZ4TL)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1590,7 +1590,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.oclockapps.DoSomething;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "8b7e0f20-ab57-4f5c-aa41-de6dc5a81ec9";
+				PROVISIONING_PROFILE = "07a2982c-0fca-4e01-992d-7712adc13f32";
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;

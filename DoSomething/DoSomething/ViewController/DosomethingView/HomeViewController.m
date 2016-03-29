@@ -355,6 +355,7 @@
     {
         cell.MenuImg = (UIImageView *)[cell viewWithTag:101];
         cell.MenuTittle = (UILabel *)[cell viewWithTag:201];
+        cell.activeImg =(UIImageView *)[cell viewWithTag:81];
     }
     NSDictionary *data = [menuArray objectAtIndex:indexPath.row];
     
@@ -372,6 +373,10 @@
                 NSString * objstr = [NSString stringWithFormat:@"%@",[data valueForKey:@"ActiveImage"]];
                 objstr= [objstr stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
                 [cell.MenuImg setImageWithURL:[NSURL URLWithString:objstr]];
+                
+                NSString * activeobjstr = [NSString stringWithFormat:@"%@",[data valueForKey:@"InactiveImage"]];
+                activeobjstr= [activeobjstr stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+                [cell.activeImg setImageWithURL:[NSURL URLWithString:activeobjstr]];
                 break;
             }
         }
@@ -385,6 +390,9 @@
         NSString * objstr = [NSString stringWithFormat:@"%@",[data valueForKey:@"InactiveImage"]];
         objstr= [objstr stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
         [cell.MenuImg setImageWithURL:[NSURL URLWithString:objstr]];
+        NSString * activeobjstr = [NSString stringWithFormat:@"%@",[data valueForKey:@"ActiveImage"]];
+        activeobjstr= [activeobjstr stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+        [cell.activeImg setImageWithURL:[NSURL URLWithString:activeobjstr]];
     }
     _homeCollectionView.allowsMultipleSelection = YES;
     cell.layer.shouldRasterize = YES;
@@ -445,9 +453,7 @@ minimumLineSpacingForSectionAtIndex:(NSInteger)section {
                                                     green:(65/255.0f)
                                                      blue:(81/255.0f)
                                                     alpha:1.0f];
-        NSString * objstr = [NSString stringWithFormat:@"%@",[data valueForKey:@"ActiveImage"]];
-        objstr= [objstr stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-        [cell.MenuImg setImageWithURL:[NSURL URLWithString:objstr]];
+        [cell.MenuImg setHidden:YES];
     }
     else
     {
@@ -493,10 +499,8 @@ minimumLineSpacingForSectionAtIndex:(NSInteger)section {
                                                         green:(164/255.0f)
                                                          blue:(164/255.0f)
                                                         alpha:1.0f];
-           NSString * objstr = [NSString stringWithFormat:@"%@",[data valueForKey:@"InactiveImage"]];
-           objstr= [objstr stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-           [cell.MenuImg setImageWithURL:[NSURL URLWithString:objstr]];
-            //cell.MenuImg.image = [UIImage imageNamed:objstr];
+
+           [cell.MenuImg setHidden:NO];
        }
     }
 }
@@ -556,7 +560,7 @@ minimumLineSpacingForSectionAtIndex:(NSInteger)section {
     [objCustomAlterview.view setHidden:YES];
     strselectDosomething = [selectedItemsArray componentsJoinedByString:@","];
     [self loadActivityAPI:Update availableStr:@"Yes" doSomethingId:strselectDosomething];
-    //[self loadupdateDosomethingWebService:strselectDosomething:@"Yes"];
+ 
 
 }
 - (IBAction)alertPressNo:(id)sender {
@@ -565,7 +569,7 @@ minimumLineSpacingForSectionAtIndex:(NSInteger)section {
     [objCustomAlterview.view setHidden:YES];
     strselectDosomething = [selectedItemsArray componentsJoinedByString:@","];
     [self loadActivityAPI:Update availableStr:@"No" doSomethingId:strselectDosomething];
-    //[self loadupdateDosomethingWebService:strselectDosomething :@"No"];
+    
 }
 #pragma mark - loadupdateDosomethingWebService
 
