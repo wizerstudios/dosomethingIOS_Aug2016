@@ -420,7 +420,7 @@ notification_sound  :(NSString *)isnotification_sound
         return;
     }
    urlString = [URL_FOR_RESOURCE(@"") stringByAppendingString:[NSString stringWithFormat:@"%@?",locationUpdtURL]];
-    NSLog(@"urlString = %@",urlString);
+    
     NSMutableDictionary *locationUpdate = [[NSMutableDictionary alloc] init];
     
              [locationUpdate    setObject:sessionid                 forKey:@"sessionid"];

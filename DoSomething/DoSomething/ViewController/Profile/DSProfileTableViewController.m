@@ -294,24 +294,10 @@
         
         imageNormalArray     = [[interstAndHobbiesArray valueForKey:@"image"]mutableCopy];
        [self.view layoutIfNeeded];
-        if(IS_GREATER_IOS9)
-            
-        {
-            
-           
-            self.tableViewHeightConstraint.constant=(IS_IPHONE6_Plus||IS_IPHONE6)?50:50;
-            
-            
-        }
         
-        else
-            
-        {
-            
-            self.tableViewHeightConstraint.constant=(IS_IPHONE6_Plus||IS_IPHONE6)?50:50;
-            
-            
-        }
+        self.tableViewHeightConstraint.constant=(IS_IPHONE6_Plus||IS_IPHONE6)?50:50;
+        
+        
        
     }
     
@@ -911,31 +897,6 @@
 
 -(void)initializeArray{
     
-    if(IS_GREATER_IOS9)
-        
-    {
-        
-        if(IS_IPHONE6)
-        {
-           // self.tableViewHeightConstraint.constant= 0;//self.view.frame.size.height+125;
-        }
-        else if(IS_IPHONE6_Plus)
-        {
-            //self.tableViewHeightConstraint.constant= 0; //self.view.frame.size.height+190;
-        }
-        else
-        {
-           // self.tableViewHeightConstraint.constant=465;
-            
-        }
-    }
-    
-    else{
-        
-        //self.tableViewHeightConstraint.constant=(IS_IPHONE6_Plus||IS_IPHONE6)? 0:0;
-//         [profileScrollView setContentSize:CGSizeMake(0, self.tableviewProfile.frame.origin.y + self.tableviewProfile.contentSize.height)];
-        
-    }
     
     placeHolderArray = [[NSMutableArray alloc] initWithCapacity: 1];
     

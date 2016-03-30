@@ -536,7 +536,8 @@ minimumLineSpacingForSectionAtIndex:(NSInteger)section {
        [self loadActivityAPI:Cancel availableStr:@"" doSomethingId:@""];
         [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"SelectNewItem"];
     }else{
-        if([selectedItemsArray count] <= 3){
+        if([selectedItemsArray count] <= 3 && [selectedItemsArray count]!=0
+           ){
             objCustomAlterview.view .hidden  = NO;
             objCustomAlterview.alertBgView.hidden = NO;
             objCustomAlterview.alertMainBgView.hidden = NO;
@@ -550,7 +551,7 @@ minimumLineSpacingForSectionAtIndex:(NSInteger)section {
           
         }
         else{
-            [self showAltermessage:@"3 ACTIVITIES\nSHOULD BE SELECTED "];
+            [self showAltermessage:@"1 ACTIVITIES\nSHOULD BE SELECTED "];
         }
     }
     
@@ -722,7 +723,7 @@ minimumLineSpacingForSectionAtIndex:(NSInteger)section {
     anyTimeButton.hidden =YES;
     
     [self loadActivityImageView];
-    if([timeStr isEqualToString:@"    Last Selected:\nFew seconds ago"])
+    if([[activityMainDict valueForKey:@"Available"] isEqualToString:@"Yes"] && [[activityMainDict valueForKey:@"LastActivity"] isEqualToString:@"Few seconds ago"])
     {
         if([[NSUserDefaults standardUserDefaults] boolForKey:@"SelectNewItem"]== YES) {
             NSTimer * nextImageTimer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(nextImage) userInfo:nil repeats:NO];
