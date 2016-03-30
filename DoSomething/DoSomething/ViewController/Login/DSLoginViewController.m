@@ -46,12 +46,13 @@
     CustomAlterview *objCustomAlterview;
     bool isForgotBackButton;
     UIImageView * blueCirecleImg;
+    BOOL _isStartTimer;
    
 }
 @end
 
 @implementation DSLoginViewController
-@synthesize temp,labelFacebook,labelEmail,labelSignIn,buttonTermsOfUse,buttonPrivacyPolicy,buttonSignIn,buttonForgotPass,buttonCreateAnAcc,labelInstruction,labelCreateAnAcc,buttonHaveAnAcc,locationManager;
+@synthesize temp,labelFacebook,labelEmail,labelSignIn,buttonTermsOfUse,buttonPrivacyPolicy,buttonSignIn,buttonForgotPass,buttonCreateAnAcc,labelInstruction,labelCreateAnAcc,buttonHaveAnAcc,locationManager,onlineStatusTimer;
 
 
 
@@ -642,9 +643,64 @@
 
 #pragma mark - gotoHomeView
 -(void)gotoHomeView{
+    
     HomeViewController * objHomeview = [[HomeViewController alloc]initWithNibName:@"HomeViewController" bundle:nil];
     [self.navigationController pushViewController:objHomeview animated:NO];
+    _isStartTimer = YES;
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [self loadonlineStausAPI:@"1"];
+        [self startTimer];
+    });
 }
+
+-(void)startTimer{
+    
+    if(onlineStatusTimer == nil)
+        onlineStatusTimer = [NSTimer scheduledTimerWithTimeInterval:timerSeconds target:self selector:@selector(loadonlineStausAPI) userInfo:nil repeats:YES];
+    
+}
+-(void)stopTimer{
+    
+    if(onlineStatusTimer){
+        [onlineStatusTimer invalidate];
+        onlineStatusTimer =nil;
+    }
+    
+}
+-(void)loadonlineStausAPI
+{
+    if(_isStartTimer==YES)
+    {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self loadonlineStausAPI:@"1"];
+            [self startTimer];
+        });
+        
+    }
+    else
+    {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self loadonlineStausAPI:@"0"];
+            [self stopTimer];
+        });
+        
+    }
+    
+}
+-(void)loadonlineStausAPI:(NSString *) status
+{
+    
+    if(![[COMMON getSessionID] isEqualToString:@"(null)"]){
+        objWebService = [[DSWebservice alloc]init];
+        [objWebService getOnlinstatus:OnlineStatus sessionID:[COMMON getSessionID] status:status success:^(AFHTTPRequestOperation *operation, id responseObject) {
+            NSLog(@"onlinestausresponseObject= %@",responseObject);
+        } failure:^(AFHTTPRequestOperation *operation, id error) {
+            NSLog(@"onlinestausresponseObjecterror= %@",error);
+        }];
+    }
+}
+
+
 #pragma mark - loadloginAPI
 -(void)loadloginAPI
 {
@@ -680,12 +736,6 @@
                  
                  [COMMON setUserDetails:[[loginDict valueForKey:@"userDetails"]objectAtIndex:0]];
                 
-//                
-//                 [[NSUserDefaults standardUserDefaults] setObject:@"HomeView" forKey:FirstloginHomeview];
-//               
-//                 [[NSUserDefaults standardUserDefaults]setObject:@"Yes" forKey:FirstloginLocationView];
-//                 
-//                 [[NSUserDefaults standardUserDefaults]setObject:@"Yes" forKey:FirstloginChatview];
                  
                
 

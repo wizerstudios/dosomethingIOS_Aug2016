@@ -85,6 +85,8 @@
 @property (strong, nonatomic) IBOutlet UIView *forgotSecondView;
 @property (strong, nonatomic) IBOutlet UITextField *forgotTextField;
 @property (strong, nonatomic) IBOutlet UIButton *buttonSigInFwd;
+
+@property (strong)NSTimer *onlineStatusTimer;
 - (IBAction)termsOfUseAction:(id)sender;
 
 @property (nonatomic,strong) IBOutlet UIView *walkalterview;

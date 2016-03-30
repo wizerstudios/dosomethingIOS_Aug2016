@@ -37,6 +37,7 @@
     NSString * playsoundBundleStr;
     SystemSoundID *soundID;
     NSMutableDictionary *profileDict;
+     BOOL _isStartTimer;
 }
 @property (nonatomic,strong) IBOutlet NSLayoutConstraint    * deletebuttonBottomoposition;
 @property (nonatomic,strong) IBOutlet NSLayoutConstraint    * scrollYposition;
@@ -44,7 +45,7 @@
 
 @end
 @implementation SettingView
-@synthesize settingScroll,locationManager,messSwitch,soundSwitch,matchSwitch;
+@synthesize settingScroll,locationManager,messSwitch,soundSwitch,matchSwitch,onlineStatusTimer;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -399,6 +400,14 @@
 - (IBAction)alertPressYes:(id)sender {
     
     [self logoutDeleteAction];
+    _isStartTimer = NO;
+    
+    
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [self loadonlineStausAPI:@"0"];
+        [self stopTimer];
+    });
+
     objCustomAlterview.view.hidden =YES;
     objCustomAlterview. alertBgView.hidden = YES;
     objCustomAlterview.alertMainBgView.hidden = YES;
@@ -588,7 +597,7 @@
                                         if([[profileDict valueForKey:@"type"]isEqualToString:@"2"]){
                                             FBSDKLoginManager *loginManager = [[FBSDKLoginManager alloc] init];
                                             [loginManager logOut];
-                                             [FBSDKAccessToken setCurrentAccessToken:nil];
+                                            [FBSDKAccessToken setCurrentAccessToken:nil];
                                         }
                                         [COMMON removeUserDetails];
                                         
@@ -703,4 +712,52 @@
     objCustomSoundview.view.hidden=NO;
     objCustomSoundview.soundmenuView.hidden=NO;
 }
+-(void)startTimer{
+    
+    if(onlineStatusTimer == nil)
+        onlineStatusTimer = [NSTimer scheduledTimerWithTimeInterval:timerSeconds target:self selector:@selector(loadonlineStausAPI) userInfo:nil repeats:YES];
+    
+}
+-(void)stopTimer{
+    
+    if(onlineStatusTimer){
+        [onlineStatusTimer invalidate];
+        onlineStatusTimer =nil;
+    }
+    
+}
+-(void)loadonlineStausAPI
+{
+    if(_isStartTimer==YES)
+    {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self loadonlineStausAPI:@"1"];
+            [self startTimer];
+        });
+        
+    }
+    else
+    {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self loadonlineStausAPI:@"0"];
+            [self stopTimer];
+        });
+        
+    }
+    
+}
+-(void)loadonlineStausAPI:(NSString *) status
+{
+    
+    if(![[COMMON getSessionID] isEqualToString:@"(null)"]){
+        objWebService = [[DSWebservice alloc]init];
+        [objWebService getOnlinstatus:OnlineStatus sessionID:[COMMON getSessionID] status:status success:^(AFHTTPRequestOperation *operation, id responseObject) {
+            NSLog(@"onlinestausresponseObject= %@",responseObject);
+        } failure:^(AFHTTPRequestOperation *operation, id error) {
+            NSLog(@"onlinestausresponseObjecterror= %@",error);
+        }];
+    }
+}
+
+
 @end

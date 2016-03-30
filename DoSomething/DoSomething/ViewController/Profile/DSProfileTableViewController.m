@@ -400,7 +400,7 @@
     self.scrView.pagingEnabled=YES;
     self.scrView.delegate=self;
     
-    int spacing = 20;
+    int spacing = 80;
    
     
     for(int i = 0; i < 3; i++)
@@ -1225,6 +1225,7 @@
         cameraIcon=[UIButton buttonWithType:UIButtonTypeCustom];
         if(IS_IPHONE6)
         {
+            self.scrView.frame =CGRectMake(self.scrView.frame.origin.x,self.scrView.frame.origin.y,self.view .frame.size.width,self.scrView.frame.size.height);
         [cameraIcon setFrame:CGRectMake(cell.contentView.center.x+5,cell.contentView.frame.size.height-36,37,37)];
         }
         else  if(IS_IPHONE6_Plus)

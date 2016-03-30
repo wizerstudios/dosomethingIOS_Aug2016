@@ -722,9 +722,15 @@
 {
     NSLog(@"indexpathcollection%@",indexPath);
     if (([commonlocationArray count]-10) == indexPath.row && !isAllPost ) {
-        
-        int x = [currentloadPage intValue];
-        
+        int x;
+        if([currentloadPage isEqualToString:@""])
+        {
+            x=1;
+        }
+        else
+        {
+          x = [currentloadPage intValue];
+        }
         x ++;
         
         currentloadPage= [NSString stringWithFormat:@"%d",x];

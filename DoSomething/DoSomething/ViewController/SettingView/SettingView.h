@@ -30,5 +30,5 @@
 
 @property (strong,nonatomic) IBOutlet UIButton *matchSwitch;
 
-
+@property (strong)NSTimer *onlineStatusTimer;
 @end

@@ -653,25 +653,6 @@
 }
 - (void)application:(UIApplication *)application didChangeStatusBarFrame:(CGRect)oldStatusBarFrame
 {
-//    NSMutableDictionary *dict = [[NSMutableDictionary alloc] init];
-//    [dict setObject:@"trigger" forKey:@"frame"];
-//    if(oldStatusBarFrame.size.height==20)
-//    {
-//       [dict setObject:@"triggerYes" forKey:@"oldFram"];
-//         self.buttonsView.frame=CGRectMake(self.window.frame.origin.x,self.window.frame.origin.y+self.window.frame.size.height-70,self.window.frame.size.width,50);
-//         self.SepratorLbl.frame =CGRectMake(self.buttonsView.frame.origin.x,self.buttonsView.frame.origin.y-2,self.buttonsView.frame.size.width,3);
-//    }
-//    else if(oldStatusBarFrame.size.height==40)
-//    {
-//         [dict setObject:@"triggerNo" forKey:@"oldFram"];
-//         self.buttonsView.frame=CGRectMake(self.window.frame.origin.x,self.window.frame.origin.y+self.window.frame.size.height-50,self.window.frame.size.width,50);
-//         self.SepratorLbl.frame =CGRectMake(self.buttonsView.frame.origin.x,self.buttonsView.frame.origin.y-2,self.buttonsView.frame.size.width,3);
-//    }
-    
-//    [[NSNotificationCenter defaultCenter] postNotificationName:@"trigger"
-//                                                        object:self
-//                                                      userInfo:dict];
-    
 }
 - (void)application:(UIApplication *)application willChangeStatusBarFrame:(CGRect)newStatusBarFrame
 {
