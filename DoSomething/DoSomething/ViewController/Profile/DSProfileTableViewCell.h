@@ -83,4 +83,7 @@
 
 @property(nonatomic,strong) IBOutlet UIButton * dobBtn;
 
+
+@property (nonatomic,strong) IBOutlet UIButton * addnextprofileimageimage;
+
 @end
