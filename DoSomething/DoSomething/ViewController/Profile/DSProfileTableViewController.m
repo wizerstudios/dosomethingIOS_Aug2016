@@ -503,8 +503,7 @@
         [singleTap setNumberOfTapsRequired:1];
         [userProfileImage addGestureRecognizer:singleTap];
         [self.scrView addSubview:userProfileImage];
-        [userProfileImage setBackgroundColor:[UIColor greenColor]];
-        [self.scrView setBackgroundColor:[UIColor redColor]];
+        
 //        cameraImage = [[UIImageView alloc]initWithFrame:CGRectMake(userProfileImage.frame.size.width / 2 -17, self.scrView.frame.size.height - 55, 30, 30)];
 //        [cameraImage setTag:i+200];
 //        [cameraImage setImage:[UIImage imageNamed:@"profile_camera_icon"]];
