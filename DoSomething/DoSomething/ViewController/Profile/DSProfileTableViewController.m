@@ -504,13 +504,13 @@
         [userProfileImage addGestureRecognizer:singleTap];
         [self.scrView addSubview:userProfileImage];
         
-        cameraImage = [[UIImageView alloc]initWithFrame:CGRectMake(userProfileImage.frame.size.width / 2 -17, self.scrView.frame.size.height - 55, 30, 30)];
-        [cameraImage setTag:i+200];
-        [cameraImage setImage:[UIImage imageNamed:@"profile_camera_icon"]];
-        // [topViewCell setHidden:YES];
-        cameraImage.userInteractionEnabled = YES;
-        [cameraImage setUserInteractionEnabled:YES];
-        [userProfileImage addSubview:cameraImage];
+//        cameraImage = [[UIImageView alloc]initWithFrame:CGRectMake(userProfileImage.frame.size.width / 2 -17, self.scrView.frame.size.height - 55, 30, 30)];
+//        [cameraImage setTag:i+200];
+//        [cameraImage setImage:[UIImage imageNamed:@"profile_camera_icon"]];
+//        // [topViewCell setHidden:YES];
+//        cameraImage.userInteractionEnabled = YES;
+//        [cameraImage setUserInteractionEnabled:YES];
+//        [userProfileImage addSubview:cameraImage];
       
 
     }
@@ -532,7 +532,7 @@
 
         else
         {
-            [self.scrView setContentOffset:CGPointMake(1.8*self.profileImageView.frame.size.width, 0)animated:NO];
+            [self.scrView setContentOffset:CGPointMake(2.3*self.profileImageView.frame.size.width, 0)animated:NO];
         }
     }
     else if(CurrentImage == 2)
@@ -548,7 +548,7 @@
 
         else
         {
-            [self.scrView setContentOffset:CGPointMake((3.6*self.profileImageView.frame.size.width), 0)animated:NO];
+            [self.scrView setContentOffset:CGPointMake((4.6*self.profileImageView.frame.size.width), 0)animated:NO];
         }
     }
     
@@ -1710,7 +1710,7 @@
         else
         {
             [profileScrollView setContentSize:CGSizeMake(0, self.tableviewProfile.frame.origin.y + self.tableviewProfile.contentSize.height+self.tableViewHeightConstraint.constant-(self.profiletableheight.constant+55))];
-            NSLog(@"tableheight=%f",self.tableviewProfile.frame.size.height);
+            
         }
     }
     else
@@ -2290,7 +2290,7 @@
     strAbout = textView.text;
     
     //[self.tableviewProfile scrollToRowAtIndexPath:[self.tableviewProfile indexPathForCell:cell] atScrollPosition:UITableViewScrollPositionBottom animated:NO];
-    //[self.tableviewProfile reloadData];
+    
     [self.tableviewProfile beginUpdates];
      NSArray *indexPaths = [[NSArray alloc] initWithObjects:indexPath, nil];
     [self.tableviewProfile reloadRowsAtIndexPaths:indexPaths withRowAnimation:UITableViewRowAnimationNone];
@@ -2332,6 +2332,7 @@
         
     }
     
+    
     else{
         
         UIActionSheet *actionSheet1 = [[UIActionSheet alloc] initWithTitle:@"" delegate:self cancelButtonTitle:NSLocalizedString(@"CANCEL",@"") destructiveButtonTitle:NSLocalizedString(@"CAMERA",@"") otherButtonTitles:NSLocalizedString(@"PHOTO LIBRARY",@""), nil];
@@ -2341,6 +2342,17 @@
         [actionSheet1 sizeToFit];
         
     }
+    
+    UIAlertAction *RemoveImage = [UIAlertAction actionWithTitle:NSLocalizedString(@"REMOVE",@"") style:UIAlertActionStyleDefault
+                             
+                                                   handler:^(UIAlertAction * action) {
+                                                       
+                                                       //[self promptForCamera];
+                                                       
+                                                       [self RemoveprofileImage];
+                                                       
+                                                   }];
+    
     
     UIAlertAction *camera = [UIAlertAction actionWithTitle:NSLocalizedString(@"CANCEL",@"") style:UIAlertActionStyleDefault
                              
@@ -2380,6 +2392,7 @@
     
     if(IS_GREATER_IOS8){
         
+        [alert addAction:RemoveImage];
         [alert addAction:camera];
         
         [alert addAction:photoRoll];
@@ -2392,7 +2405,88 @@
     
 }
 
+-(void)RemoveprofileImage
+{
+     int spacing = 80;
+    int imgfield;
+    if(CurrentImage == 0)
+    {
+        imgfield =1;
+    }
+    else
+    {
+           imgfield=CurrentImage+1;
+    }
+    NSString * removeimgField=[NSString stringWithFormat:@"image%d",imgfield];
+   [objWebService getDeleteprofileImage:deleteprofileImg sessionID:[COMMON getSessionID] Fieldimage:removeimgField success:^(AFHTTPRequestOperation *operation, id responseObject) {
+       if([[[responseObject valueForKey:@"deleteprofileimage"]valueForKey:@"status"]isEqualToString:@"success"])
+       {
+           UIImage * profilenoimage=[UIImage imageNamed:@"profile_noimg"];
+           self.scrView.scrollEnabled = YES;
+           if(CurrentImage==0)
+           {
+               profileImage1 = profilenoimage;
+               userProfileImage.image=profilenoimage;
+              
+               if(IS_IPHONE6)
+               {
+                   [self.scrView setContentOffset:CGPointMake(1.95*self.profileImageView.frame.size.width - 25  , 0)animated:NO];
+               }
+               else  if(IS_IPHONE6_Plus)
+               {
+                   [self.scrView setContentOffset:CGPointMake(1.95*self.profileImageView.frame.size.width - 25  , 0)animated:NO];
+               }
+               
+               else
+               {
+                  
+//                   [self.scrView setContentOffset:CGPointMake(2.3*self.profileImageView.frame.size.width, 0)animated:NO];
+                   self.scrView.frame = CGRectMake(-300, self.scrView.frame.origin.y,self.scrView.frame.size.width+300,self.scrView.frame.size.height);
+               }
 
+               if(userDetailsDict>0)
+               {
+                   
+                   FBImageStr=@"1";
+               }
+           }
+           else if(CurrentImage == 1)
+           {
+               profileImage2 = profilenoimage;
+                userProfileImage.image=profilenoimage;
+               if(IS_IPHONE6)
+               {
+                   [self.scrView setContentOffset:CGPointMake(3.65*self.profileImageView.frame.size.width - 15, 0)animated:NO];
+               }
+               else  if(IS_IPHONE6_Plus)
+               {
+                   [self.scrView setContentOffset:CGPointMake(3.65*self.profileImageView.frame.size.width -15 , 0)animated:NO];
+               }
+               
+               else
+               {
+                   [self.scrView setContentOffset:CGPointMake((4.6*self.profileImageView.frame.size.width), 0)animated:NO];
+               }
+
+           }
+           else if(CurrentImage == 2)
+           {
+               profileImage3 = profilenoimage;
+               userProfileImage.image=profilenoimage;
+                [self.scrView setContentOffset:CGPointMake(0, 0)animated:NO];
+               
+               
+           }
+           
+           
+           
+            NSLog(@"deleteimageresponse=%@",responseObject);
+           
+       }
+   } failure:^(AFHTTPRequestOperation *operation, id error) {
+       NSLog(@"error=%@",error);
+   }];
+}
 
 -(void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
 

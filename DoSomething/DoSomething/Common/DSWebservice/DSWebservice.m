@@ -795,7 +795,30 @@ request_send_user_id:(NSString *)request_send_user_id
 
 }
 
-
+-(void)getDeleteprofileImage:(NSString *)deleteprofileImage sessionID:(NSString *)sessionid Fieldimage:(NSString *)fieldimage success:(WebserviceRequestSuccessHandler)success failure:(WebserviceRequestFailureHandler)failure
+{
+    urlString = [URL_FOR_RESOURCE(@"") stringByAppendingString:[NSString stringWithFormat:@"%@?sessionid=%@&field=%@",deleteprofileImage,sessionid,fieldimage]];
+    
+    NSLog(@"urlString = %@",urlString);
+    
+    [self sendRequestWithURLString:urlString
+                     andParameters:nil
+                            method:ServiceGet
+           completionSucessHandler:success
+          completionFailureHandler:failure];
+}
+-(void)getCheckrequeststatus:(NSString *)checkrequest requestsenduserid:(NSString *)requestsenduserid sessionID:(NSString *)sessionid success:(WebserviceRequestSuccessHandler)success failure:(WebserviceRequestFailureHandler)failure
+{
+    urlString = [URL_FOR_RESOURCE(@"") stringByAppendingString:[NSString stringWithFormat:@"%@?request_send_user_id=%@&sessionid=%@",checkrequest,requestsenduserid,sessionid]];
+    
+    NSLog(@"urlString = %@",urlString);
+    
+    [self sendRequestWithURLString:urlString
+                     andParameters:nil
+                            method:ServiceGet
+           completionSucessHandler:success
+          completionFailureHandler:failure];
+}
 #pragma mark - Helpers
 
 - (void)sendRequestWithURLString:(NSString *)url

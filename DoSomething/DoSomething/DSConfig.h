@@ -153,4 +153,9 @@
 
 #define FirstRegistor            @"RegistorAccount"
 
+#define deleteprofileImg         @"deleteprofileimage"
+
+#define checkrequestSend        @"checkrequeststatus"
+
+
 #define GOOGLEANALYTICS_ID      @"UA-75477641-1"

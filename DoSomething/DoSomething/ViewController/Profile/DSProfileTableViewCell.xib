@@ -105,6 +105,10 @@
                             <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="uey-h2-iAy">
                                 <rect key="frame" x="113" y="189" width="79" height="11"/>
                             </view>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uKk-0p-oJH">
+                                <rect key="frame" x="250" y="167" width="40" height="33"/>
+                                <state key="normal" image="profile_camera_icon"/>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="0.92941176469999998" green="0.92941176469999998" blue="0.92941176469999998" alpha="1" colorSpace="deviceRGB"/>
                         <constraints>
@@ -760,6 +764,7 @@
     </objects>
     <resources>
         <image name="Plus_icon" width="37" height="37"/>
+        <image name="profile_camera_icon" width="30" height="30"/>
         <image name="switch_on" width="35" height="18"/>
     </resources>
 </document>

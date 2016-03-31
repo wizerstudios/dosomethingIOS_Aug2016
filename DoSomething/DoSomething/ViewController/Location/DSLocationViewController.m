@@ -1306,17 +1306,38 @@
 
 -(IBAction)didClickmatchuserDosomethingBtnAction:(id)sender
 {
+    
+    
     self.walkAlterview.hidden =YES;
     self.blueCircleBtn.hidden=YES;
     self.matchActivityView.hidden =YES;
-    DSChatDetailViewController *ChatDetail =[[DSChatDetailViewController alloc]initWithNibName:nil bundle:nil];
     NSMutableDictionary *matchuserdic = [[NSMutableDictionary alloc] init];
-    ChatDetail.status =selectuserstatus;
     matchuserdic = (self.senduserDetail.count > 0)?[self.senduserDetail mutableCopy]:[matchUserArray mutableCopy];
-    ChatDetail.conversionID=sendrequestConversationID;
-    ChatDetail.chatuserDetailsDict = matchuserdic;
+    [objWebservice getCheckrequeststatus:checkrequestSend requestsenduserid:[matchuserdic valueForKey:@"UserId"] sessionID:[COMMON getSessionID] success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        
+        if([[[responseObject valueForKey:@"checkrequeststatus"]valueForKey:@"status"] isEqualToString:@"success"])
+        {
+            DSChatDetailViewController *ChatDetail =[[DSChatDetailViewController alloc]initWithNibName:nil bundle:nil];
+            
+            ChatDetail.status =selectuserstatus;
+            
+            ChatDetail.conversionID= [[responseObject valueForKey:@"checkrequeststatus"]valueForKey:@"Conversaion"];                 //sendrequestConversationID;
+            ChatDetail.chatuserDetailsDict = matchuserdic;
+            
+            [self.navigationController pushViewController:ChatDetail animated:YES];
+        }
+        else if ([[[responseObject valueForKey:@"checkrequeststatus"]valueForKey:@"status"] isEqualToString:@"failed"])
+        {
+             DSChatsTableViewController *Chatlist =[[DSChatsTableViewController alloc]initWithNibName:nil bundle:nil];
+             [self.navigationController pushViewController:Chatlist animated:YES];
+        }
+        NSLog(@"resp=%@",responseObject);
+    } failure:^(AFHTTPRequestOperation *operation, id error) {
+        
+    }];
     
-    [self.navigationController pushViewController:ChatDetail animated:YES];
+    
+   
  
 }
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex

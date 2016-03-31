@@ -291,4 +291,18 @@ message_send_user_id:(NSString *)message_send_user_id
                status:(NSString *)status
               success:(WebserviceRequestSuccessHandler)success
               failure:(WebserviceRequestFailureHandler)failure;
+
+
+-(void)getDeleteprofileImage:(NSString *)deleteprofileImage
+                   sessionID:(NSString *)sessionid
+                   Fieldimage:(NSString *)fieldimage
+                     success:(WebserviceRequestSuccessHandler)success
+                     failure:(WebserviceRequestFailureHandler)failure;
+
+
+-(void)getCheckrequeststatus:(NSString *) checkrequest
+          requestsenduserid :(NSString *) requestsenduserid
+                   sessionID:(NSString *) sessionid
+                     success:(WebserviceRequestSuccessHandler)success
+                     failure:(WebserviceRequestFailureHandler)failure;
 @end
