@@ -242,7 +242,23 @@
     [self CustomAlterview];
     [self CustomSoundview];
 }
-
+-(void)viewDidLayoutSubviews{
+    
+    if(IS_GREATER_IOS8)
+    {
+        
+    }
+    else
+    {
+        [self.view layoutIfNeeded];
+        
+        //    self.tableviewProfile.frame=CGRectMake(0,self.profileScrollView.frame.origin.y,294,self.tableviewProfile.contentSize.height+350);
+        //self.profiletableheight.constant=self.tableviewProfile.contentSize.height+100;
+        self.tableViewHeightConstraint.constant=self.tableviewProfile.contentSize.height+350;
+        [profileScrollView setContentSize:CGSizeMake(0, self.tableviewProfile.frame.origin.y + self.tableviewProfile.contentSize.height+self.tableViewHeightConstraint.constant-(self.profiletableheight.constant+110))];
+        NSLog(@"tableheight=%f", self.tableViewHeightConstraint.constant);
+    }
+}
 -(void)loadNavigation{
     self.navigationController.navigationBarHidden=NO;
     [self.navigationItem setHidesBackButton:YES animated:NO];
@@ -1225,7 +1241,7 @@
         cameraIcon=[UIButton buttonWithType:UIButtonTypeCustom];
         if(IS_IPHONE6)
         {
-            self.scrView.frame =CGRectMake(self.scrView.frame.origin.x,self.scrView.frame.origin.y,self.view .frame.size.width,self.scrView.frame.size.height);
+//            self.scrView.frame =CGRectMake(self.scrView.frame.origin.x,self.scrView.frame.origin.y,self.view .frame.size.width,self.scrView.frame.size.height);
         [cameraIcon setFrame:CGRectMake(cell.contentView.center.x+5,cell.contentView.frame.size.height-36,37,37)];
         }
         else  if(IS_IPHONE6_Plus)
@@ -1676,10 +1692,14 @@
     
 }
 -(void)settableviewheight{
-
+    
     [self.tableviewProfile setScrollEnabled:NO];
-   
-    self.tableViewHeightConstraint.constant=(IS_IPHONE6|| IS_IPHONE6_Plus)?self.tableviewProfile.frame.origin.y + self.tableviewProfile.contentSize.height+50:self.tableviewProfile.frame.origin.y + self.tableviewProfile.contentSize.height-10;
+    
+    if(IS_GREATER_IOS8)
+    {
+        self.tableViewHeightConstraint.constant=(IS_IPHONE6|| IS_IPHONE6_Plus)?self.tableviewProfile.frame.origin.y + self.tableviewProfile.contentSize.height+50:self.tableviewProfile.frame.origin.y + self.tableviewProfile.contentSize.height-10;
+    }
+    
     
     if(profileDict != NULL)
     {
@@ -1689,7 +1709,8 @@
         }
         else
         {
-        [profileScrollView setContentSize:CGSizeMake(0, self.tableviewProfile.frame.origin.y + self.tableviewProfile.contentSize.height+self.tableViewHeightConstraint.constant-(self.profiletableheight.constant+55))];
+            [profileScrollView setContentSize:CGSizeMake(0, self.tableviewProfile.frame.origin.y + self.tableviewProfile.contentSize.height+self.tableViewHeightConstraint.constant-(self.profiletableheight.constant+55))];
+            NSLog(@"tableheight=%f",self.tableviewProfile.frame.size.height);
         }
     }
     else
@@ -1700,12 +1721,20 @@
         }
         else
         {
-        [profileScrollView setContentSize:CGSizeMake(0, self.tableviewProfile.frame.origin.y + self.tableviewProfile.contentSize.height+self.tableViewHeightConstraint.constant-(self.profiletableheight.constant+110))];
+            if(IS_GREATER_IOS8)
+            {
+                [profileScrollView setContentSize:CGSizeMake(0, self.tableviewProfile.frame.origin.y + self.tableviewProfile.contentSize.height+self.tableViewHeightConstraint.constant-(self.profiletableheight.constant+110))];
+            }
+            else{
+                [self viewDidLayoutSubviews];
+                
+                
+            }
+            
         }
     }
-
+    
 }
-
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)Tablecell forRowAtIndexPath:(NSIndexPath *)indexPath
 {
     
