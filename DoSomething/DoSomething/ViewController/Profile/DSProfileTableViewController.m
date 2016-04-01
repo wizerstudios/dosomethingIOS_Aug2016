@@ -2596,6 +2596,7 @@
            {
                //[COMMON removeUserDetails];
                //[self checkUserEmail];
+                [self loadloginAPi];
            }
 //           [self setupScrollView:self.scrView :currentpage];
 //           
@@ -2617,7 +2618,7 @@
 
 -(void)loadloginAPi
 {
-    
+    NSString* proflieid=[profileDict valueForKey:@"profile_id"];
     NSString *deviceToken = [[NSUserDefaults standardUserDefaults]valueForKey:DeviceToken];
     if(deviceToken == nil)
         deviceToken = @"";
@@ -2625,7 +2626,7 @@
                        type:[profileDict valueForKey:@"type"]
                       email:[profileDict valueForKey:@"email"]
                    password:[profileDict valueForKey:@"password"]
-                  profileId:@""
+                  profileId:proflieid
                         dob:@""
                profileImage:@""
                      gender:@""
@@ -2682,14 +2683,14 @@
         
         [COMMON LoadIcon:self.view];
         [objWebService checkUser:CheckUser_API
-                           email:email
+                           email:[profileDict valueForKey:@"email"]
                             type:[profileDict valueForKey:@"type"]
-                        password:password
-                      first_name:firstName
-                       last_name:lastName
-                             dob:dob
-                          gender:gender
-                    profileImage:profileImage
+                        password:@""
+                      first_name:@""
+                       last_name:@""
+                             dob:@""
+                          gender:@""
+                    profileImage:@""
                          success:^(AFHTTPRequestOperation *operation, id responseObject){
                              NSLog(@"checkuser = %@",responseObject);
                              if(([[[responseObject objectForKey:@"checkuser"]objectForKey:@"RegisterType"]  isEqual: @"1"])){
@@ -2706,8 +2707,9 @@
                                  if(([[[responseObject objectForKey:@"checkuser"]objectForKey:@"RegisterType"]  isEqual: @"2"])){
                                      
                                      if([[[responseObject objectForKey:@"checkuser"]objectForKey:@"status"]  isEqual: @"success"])
+                                     {
                                          [self gotoProfileView:profileID];
-                                     
+                                     }
                                      //else
                                         // [self loadloginAPI];
                                      
