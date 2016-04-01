@@ -79,6 +79,7 @@
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" bounces="NO" alwaysBounceVertical="YES" alwaysBounceHorizontal="YES" pagingEnabled="YES" translatesAutoresizingMaskIntoConstraints="NO" id="U02-po-bf5">
                                 <rect key="frame" x="0.0" y="20" width="300" height="150"/>
+                                <color key="backgroundColor" red="0.90980392160000001" green="0.90980392160000001" blue="0.90980392160000001" alpha="1" colorSpace="calibratedRGB"/>
                                 <connections>
                                     <outlet property="delegate" destination="-1" id="v01-p1-4gU"/>
                                 </connections>
@@ -93,7 +94,7 @@
                                 </connections>
                             </pageControl>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Your Profile" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MDZ-Us-VGR">
-                                <rect key="frame" x="2" y="10" width="75" height="21"/>
+                                <rect key="frame" x="2" y="5" width="75" height="21"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="21" id="6hC-rW-kUU"/>
                                     <constraint firstAttribute="width" constant="75" id="b6t-Nz-Ywg"/>
@@ -112,7 +113,7 @@
                         </subviews>
                         <color key="backgroundColor" red="0.92941176469999998" green="0.92941176469999998" blue="0.92941176469999998" alpha="1" colorSpace="deviceRGB"/>
                         <constraints>
-                            <constraint firstItem="MDZ-Us-VGR" firstAttribute="top" secondItem="R2K-2f-wgq" secondAttribute="top" constant="10" id="RRE-Aw-Qew"/>
+                            <constraint firstItem="MDZ-Us-VGR" firstAttribute="top" secondItem="R2K-2f-wgq" secondAttribute="top" constant="5" id="RRE-Aw-Qew"/>
                             <constraint firstItem="MDZ-Us-VGR" firstAttribute="leading" secondItem="R2K-2f-wgq" secondAttribute="leading" constant="2" id="Y5l-Kr-eh1"/>
                         </constraints>
                     </view>
