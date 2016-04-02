@@ -9,5 +9,5 @@
 #import <UIKit/UIKit.h>
 
 @interface DSTermsViewController : UIViewController
-
+@property (nonatomic,strong) IBOutlet UIWebView * termscontentweb;
 @end

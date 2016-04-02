@@ -50,6 +50,15 @@
     [self.navigationController.navigationBar addSubview:customNavigation.view];
     
     [customNavigation.buttonBack addTarget:self action:@selector(backAction) forControlEvents:UIControlEventTouchUpInside];
+    [self loadContent];
+}
+-(void)loadContent
+{
+    
+    NSArray *paths = NSSearchPathForDirectoriesInDomains( NSDocumentDirectory, NSUserDomainMask ,YES );
+    NSString *documentsDirectory = [paths objectAtIndex:0];
+    NSString *path = [documentsDirectory stringByAppendingPathComponent:@"Privacy Policy.docx"];
+    [self.termscontentweb loadRequest:[NSURLRequest requestWithURL:[NSURL fileURLWithPath:path]]];
 }
 -(void)viewDidAppear:(BOOL)animated
 {

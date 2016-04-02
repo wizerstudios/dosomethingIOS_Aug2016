@@ -319,6 +319,8 @@
 		6AB3E5981C9D172C0040F979 /* SoundTableCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SoundTableCell.xib; sourceTree = "<group>"; };
 		6ACBF64C1C2E8BAC00AFE131 /* PWParallaxScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PWParallaxScrollView.h; path = Helpers/ParallaxScroll/PWParallaxScrollView.h; sourceTree = "<group>"; };
 		6ACBF64D1C2E8BAC00AFE131 /* PWParallaxScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PWParallaxScrollView.m; path = Helpers/ParallaxScroll/PWParallaxScrollView.m; sourceTree = "<group>"; };
+		6AD1E6FE1CB0154200CC4D18 /* Privacy Policy.docx */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Privacy Policy.docx"; sourceTree = "<group>"; };
+		6AD1E6FF1CB0154300CC4D18 /* Terms of Service.docx */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Terms of Service.docx"; sourceTree = "<group>"; };
 		6AD8A52C1C2AECE800828AED /* NMRangeSlider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NMRangeSlider.h; sourceTree = "<group>"; };
 		6AD8A52D1C2AECE800828AED /* NMRangeSlider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NMRangeSlider.m; sourceTree = "<group>"; };
 		6AE7361B1C05AA5D00C7DCF0 /* SettingView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingView.h; sourceTree = "<group>"; };
@@ -809,6 +811,8 @@
 		6A71A92E1C046FB200D6D5F4 /* Resourse */ = {
 			isa = PBXGroup;
 			children = (
+				6AD1E6FE1CB0154200CC4D18 /* Privacy Policy.docx */,
+				6AD1E6FF1CB0154300CC4D18 /* Terms of Service.docx */,
 				6A3F8DDC1C84418100D013F8 /* GIF Library */,
 				6A3F8DD01C843B8500D013F8 /* DoSomething_loading.gif */,
 				6A71A93A1C0471F900D6D5F4 /* NSLocalization.strings */,
