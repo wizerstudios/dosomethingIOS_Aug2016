@@ -610,7 +610,7 @@
 }
 -(void) pageScrollView :(NSMutableArray *) numberofPage {
     
-    //if(isPageControl==NO ){
+    if(isPageControl==NO ){
         xslider=0;
         pgDtView=[[UIView alloc]init];
         pgDtView.backgroundColor=[UIColor clearColor];
@@ -643,11 +643,11 @@
                 {
                     [pgDtView setFrame:CGRectMake(20, -5, profileImagePageControl.numberOfPages*18, 10)];
                 }
-                if(i==2)
+               else if(i==2)
                 {
                   [pgDtView setFrame:CGRectMake(15, -5, profileImagePageControl.numberOfPages*18, 10)];
                 }
-                if(i==2)
+                else if(i==3)
                 {
                     [pgDtView setFrame:CGRectMake(10, -5, profileImagePageControl.numberOfPages*18, 10)];
                 }
@@ -656,8 +656,8 @@
             
         }
         
-    //}
-    //isPageControl=YES;
+    }
+    isPageControl=YES;
    [cell.topViewCell addSubview:pgDtView];
    
     
@@ -693,42 +693,13 @@
     int i;
     NSString *image ;
     UIImageView *_imageView;
-    [scrMain setBackgroundColor:[UIColor redColor]];
+    [scrMain setBackgroundColor:[UIColor colorWithRed:(232/255.0f) green:(232/255.0f) blue:(232/255.0f) alpha:1.0f]];
+    
     NSData * profileData ;
     for (i=0; i < profileDataArray.count; i++)
     {
         profileData = [profileDataArray objectAtIndex:i];
         image     = [profileDataArray objectAtIndex:i];
-        
-//        if(currentindex==1)
-//        {
-//             image     = [profileDataArray objectAtIndex:i];
-//            
-//        }
-//        else if (currentindex==2)
-//        {
-//            if(i==0)
-//            {
-//               image     = [profileDataArray objectAtIndex:i];
-//            }
-//            else
-//            {
-//                image     = [profileDataArray objectAtIndex:i];
-//            }
-//            
-//        }
-//        else if (currentindex==3)
-//        {
-//            if(i==0)
-//            {
-//                image     = [profileDataArray objectAtIndex:i];
-//            }
-//            else
-//            {
-//                image     = [profileDataArray objectAtIndex:i];
-//            }
-//
-//        }
         
         _imageView = [[UIImageView alloc] initWithFrame:CGRectMake(i*scrMain.frame.size.width+85,20,120, self.scrView.frame.size.height-30)];
         _imageView.contentMode=UIViewContentModeScaleToFill;
@@ -811,15 +782,7 @@
                 }
             }
 
-//        if([image isEqualToString:@"profile_noimg.png"])
-//        {
-//            [_imageView setImage:[UIImage imageNamed:image]];
-//        }
-//        else
-//        {
-//             downloadImageFromUrl(image, _imageView);
-//            [_imageView setImageWithURL:[NSURL URLWithString:image]];
-//        }
+
         }
     
     }
@@ -828,10 +791,14 @@
     
     [self.tableviewProfile addSubview:scrMain];
     
-        if(currentindex == 1)
-            [scrMain setContentOffset:CGPointMake(0, 0)animated:NO];
-        else if(currentindex == 2)
+        if(currentindex == 0)
         {
+            //CurrentImage =0;
+            [scrMain setContentOffset:CGPointMake(0, 0)animated:NO];
+        }
+        else if(currentindex == 1)
+        {
+          // CurrentImage =1;
             if(IS_IPHONE6)
             {
                 [scrMain setContentOffset:CGPointMake(1.95*_imageView.frame.size.width - 25  , 0)animated:NO];
@@ -846,8 +813,9 @@
                 [scrMain setContentOffset:CGPointMake(2.5*_imageView.frame.size.width, 0)animated:NO];
             }
         }
-        else if(currentindex ==3)
+        else if(currentindex ==2)
         {
+            //CurrentImage =2;
             if(IS_IPHONE6)
             {
                 [scrMain setContentOffset:CGPointMake(3.65*_imageView.frame.size.width - 15, 0)animated:NO];
@@ -864,6 +832,7 @@
         }
     
     //profileImagePageControl.numberOfPages=Currentindex;
+    isPageControl=NO;
        [self pageScrollView:  profileDataArray];
    }
 
@@ -1516,14 +1485,14 @@
 //       }
 //       else
 //       {
-        if( isPick==YES)
-        {
-            [self setupScrollView:self.scrView :CurrentImage];
-        }
-        else
-        {
+//        if( isPick==YES)
+//        {
+//            [self setupScrollView:self.scrView :CurrentImage];
+//        }
+//        else
+//        {
             [self setupScrollView:self.scrView :profileDataArray.count];
-        }
+        //}
         // [self profileScroll];
       // }
         
@@ -1536,7 +1505,7 @@
         
                 
         
-        userProfileImage.layer.masksToBounds = YES;
+       // userProfileImage.layer.masksToBounds = YES;
         
     }
 
@@ -2576,94 +2545,37 @@
 
 -(void)addnextprofileimage:(UIButton *)sender
 {
-    
+    int imageIndex;
     NSLog(@"profiledataarray=%lu",(unsigned long)profileDataArray.count);
+    if (profileDataArray.count > 1)
+    {
+        //[profileImagePageControl setHidden:NO];
+        cell.addnextprofileimageimage.userInteractionEnabled=YES;
+        isPageControl=NO;
+        imageIndex = 1;
+    }
     if(profileDataArray.count == 1)
     {
         NSString * addimage =@"profile_noimg.png";
         [profileDataArray addObject:addimage];
-        CurrentImage=2;
+        imageIndex = 2;
         // CurrentImage=0;
     }
     else if (profileDataArray.count == 2)
     {
         NSString * addimage =@"profile_noimg.png";
         [profileDataArray addObject:addimage];
-         CurrentImage=3;
+         imageIndex=3;
         //CurrentImage =2;
     }
     else if (profileDataArray.count == 3)
     {
-        CurrentImage=[profileDataArray count];
-        CurrentImage = 3;
+      
+        imageIndex = 3;
     }
-//    if (profileDataArray.count > 1)
-//    {
-//        //[profileImagePageControl setHidden:NO];
-//        isPageControl=NO;
-//    }
-   // photoaddImg=YES;
-     //CurrentImage =2;
-    //[self profileScroll];
-//    if(profileDataArray.count >0)
-//    {
-//        CurrentImage=[profileDataArray count];
-//         CurrentImage++;
-//    }
-//    else if (profileDataArray.count <= 3)
-//    {
-//        
-//    }
-    [self setupScrollView:self.scrView :CurrentImage];
-    //[self selectCamera:sender];
-}
-- (void)setupScrollViewCameraaction:(UIScrollView *)scrMain :(int) currentindex
-{
-    scrMain.frame=CGRectMake(self.scrView.frame.origin.x,self.scrView.frame.origin.y+70,self.scrView.frame.size.width,self.scrView.frame.size.height);
-    int i;
-    //UIImage *image;
-    for (i=0; i< currentindex; i++)
-    {
-        
-        NSString *image     = [profileDataArray objectAtIndex:i];
-        
-        UIImageView *_imageView = [[UIImageView alloc] initWithFrame:CGRectMake(i*scrMain.frame.size.width+80,0,150, self.scrView.frame.size.height)];
-        _imageView.contentMode=UIViewContentModeScaleToFill;
-        [_imageView setImageWithURL:[NSURL URLWithString:image]];
-        //[_imageView setImage:image];
-        _imageView.tag=i;
-        _imageView.layer.cornerRadius = _imageView.frame.size.height / 2;
-        _imageView.layer.masksToBounds = YES;
-        [_imageView setUserInteractionEnabled:YES];
-        UITapGestureRecognizer *singleTap =  [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(selectCamera:)];
-        [singleTap setNumberOfTapsRequired:1];
-        [_imageView addGestureRecognizer:singleTap];
-        [scrMain addSubview:_imageView];
-        
-    }
-    if(currentindex==0)
-    {
-        //image = [UIImage imageNamed:@"profile_noimg.png"];
-        //[userProfileImage setImageWithURL:[NSURL URLWithString:image]];
-    }
-    else if (currentindex==1)
-    {
-        //image = [UIImage imageNamed:@"profile_noimg.png"];
-        //[userProfileImage setImageWithURL:[NSURL URLWithString:image]];
-    }
-    else if (currentindex==2)
-    {
-        //image = [UIImage imageNamed:@"profile_noimg.png"];
-        //[userProfileImage setImageWithURL:[NSURL URLWithString:image]];
-    }
-
-    scrMain.contentSize=CGSizeMake(scrMain.frame.size.width*i, self.scrView.frame.size.height);
     
-    [self.view addSubview:scrMain];
+       [self setupScrollView:self.scrView :imageIndex];
     
-    
-    
-    //    [NSTimer scheduledTimerWithTimeInterval:0.8 target:self selector:@selector(scrollingTimer) userInfo:nil repeats:YES];
 }
 
 #pragma mark - Camera Action
@@ -2672,7 +2584,7 @@
 {
     
     NSLog(@"currentimge=%ld",(long)CurrentImage);
-    NSString * currentimgField=[NSString stringWithFormat:@"image%d",CurrentImage+1];
+    NSString * currentimgField=[NSString stringWithFormat:@"image%d",CurrentImage];
     
     NSString * selectimg=[profileDict valueForKey:currentimgField];
     
@@ -3008,9 +2920,9 @@
             FBImageStr=@"1";
         }
         }
-    else if(CurrentImage == 2)
+    else if(CurrentImage == 1)
         profileImage2 = image;
-    else if(CurrentImage == 3)
+    else if(CurrentImage == 2)
         profileImage3 = image;
     
     NSData *profileData = UIImagePNGRepresentation([info objectForKey:UIImagePickerControllerEditedImage]);
