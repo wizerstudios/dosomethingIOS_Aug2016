@@ -10,4 +10,6 @@
 
 @interface DSTermsViewController : UIViewController
 @property (nonatomic,strong) IBOutlet UIWebView * termscontentweb;
+@property (nonatomic,strong) NSString * policytypeofContent;
+@property (nonatomic ,strong) IBOutlet NSLayoutConstraint * termtoplblYposition;
 @end

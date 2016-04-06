@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7706" systemVersion="15C50" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9531" systemVersion="15C50" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
     </dependencies>
     <customFonts key="customFonts">
         <mutableArray key="Patron-Regular.ttf">
@@ -12,6 +12,8 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="DSTermsViewController">
             <connections>
+                <outlet property="termscontentweb" destination="mli-LR-3OY" id="8cg-JB-7Po"/>
+                <outlet property="termtoplblYposition" destination="pjp-X7-X4O" id="m6r-PV-s77"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -21,34 +23,33 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="TERMS OF USE AND PRIVATE POLICY" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3VM-kV-WVL">
-                    <rect key="frame" x="29" y="83" width="269" height="21"/>
-                    <animations/>
+                    <rect key="frame" x="29" y="30" width="269" height="21"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="21" id="7aR-uk-SJM"/>
-                        <constraint firstAttribute="width" constant="269" id="tpj-XZ-nOW"/>
+                        <constraint firstAttribute="height" constant="21" id="wIb-ju-jyA"/>
                     </constraints>
                     <fontDescription key="fontDescription" name="Patron-Regular" family="Patron" pointSize="15"/>
                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <webView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mli-LR-3OY">
-                    <rect key="frame" x="15" y="105" width="290" height="463"/>
-                    <animations/>
-                    <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="deviceRGB"/>
+                <webView contentMode="scaleToFill" scalesPageToFit="YES" suppressesIncrementalRendering="YES" translatesAutoresizingMaskIntoConstraints="NO" id="mli-LR-3OY">
+                    <rect key="frame" x="5" y="55" width="310" height="510"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <dataDetectorType key="dataDetectorTypes" phoneNumber="YES" link="YES" calendarEvent="YES"/>
+                    <connections>
+                        <outlet property="delegate" destination="-1" id="O4S-3Z-4Dy"/>
+                    </connections>
                 </webView>
             </subviews>
-            <animations/>
-            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             <constraints>
-                <constraint firstAttribute="trailing" secondItem="mli-LR-3OY" secondAttribute="trailing" constant="15" id="Cnq-Cy-Btl"/>
-                <constraint firstItem="3VM-kV-WVL" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="83" id="DFc-49-11d"/>
-                <constraint firstAttribute="bottom" secondItem="3VM-kV-WVL" secondAttribute="bottom" constant="464" id="DxX-za-Pfn"/>
-                <constraint firstAttribute="trailing" secondItem="3VM-kV-WVL" secondAttribute="trailing" constant="22" id="XLE-Kj-ukq"/>
-                <constraint firstAttribute="bottom" secondItem="mli-LR-3OY" secondAttribute="bottom" id="b3T-Wt-lhl"/>
-                <constraint firstItem="3VM-kV-WVL" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="29" id="fJ2-RU-mUy"/>
-                <constraint firstItem="mli-LR-3OY" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="15" id="hce-nz-C80"/>
-                <constraint firstItem="mli-LR-3OY" firstAttribute="top" secondItem="3VM-kV-WVL" secondAttribute="bottom" constant="1" id="jel-Us-4HP"/>
-                <constraint firstItem="3VM-kV-WVL" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" constant="3.5" id="mKz-Lw-oq7"/>
+                <constraint firstItem="mli-LR-3OY" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="5" id="9WM-cV-96W"/>
+                <constraint firstItem="mli-LR-3OY" firstAttribute="top" secondItem="3VM-kV-WVL" secondAttribute="bottom" constant="4" id="CsP-3c-6Qd"/>
+                <constraint firstAttribute="bottom" secondItem="mli-LR-3OY" secondAttribute="bottom" constant="3" id="D1d-lW-f5N"/>
+                <constraint firstAttribute="trailing" secondItem="3VM-kV-WVL" secondAttribute="trailing" constant="22" id="Gf6-Kg-22J"/>
+                <constraint firstItem="mli-LR-3OY" firstAttribute="top" secondItem="3VM-kV-WVL" secondAttribute="bottom" constant="4" id="hMG-WM-frs"/>
+                <constraint firstItem="3VM-kV-WVL" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="29" id="hwa-fc-hcW"/>
+                <constraint firstItem="3VM-kV-WVL" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="30" id="pjp-X7-X4O"/>
+                <constraint firstAttribute="trailing" secondItem="mli-LR-3OY" secondAttribute="trailing" constant="5" id="zO3-W9-rbr"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
         </view>

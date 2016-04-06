@@ -92,6 +92,8 @@
 		51F3C2F41BE75D40001E1FEC /* DSLocationViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 51F3C2EF1BE75D40001E1FEC /* DSLocationViewController.xib */; };
 		51F3C2F51BE75D40001E1FEC /* LocationCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 51F3C2F11BE75D40001E1FEC /* LocationCollectionViewCell.m */; };
 		51F3C2F61BE75D40001E1FEC /* LocationCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 51F3C2F21BE75D40001E1FEC /* LocationCollectionViewCell.xib */; };
+		6A0316F51CB5592300506435 /* PrivacyPolicy.docx in Resources */ = {isa = PBXBuildFile; fileRef = 6A0316F11CB5316B00506435 /* PrivacyPolicy.docx */; };
+		6A0316F61CB5598D00506435 /* TermsofService.docx in Resources */ = {isa = PBXBuildFile; fileRef = 6A0316F31CB5316C00506435 /* TermsofService.docx */; };
 		6A0C8D8A1C0C25510056DA81 /* CustomAlterview.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A0C8D881C0C25510056DA81 /* CustomAlterview.m */; };
 		6A0C8D8B1C0C25510056DA81 /* CustomAlterview.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6A0C8D891C0C25510056DA81 /* CustomAlterview.xib */; };
 		6A1FBD1B1C87269F00F88AC8 /* SoundTableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A1FBD1A1C87269D00F88AC8 /* SoundTableCell.m */; };
@@ -292,6 +294,8 @@
 		51F3C2F11BE75D40001E1FEC /* LocationCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocationCollectionViewCell.m; sourceTree = "<group>"; };
 		51F3C2F21BE75D40001E1FEC /* LocationCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LocationCollectionViewCell.xib; sourceTree = "<group>"; };
 		60244D170FD7494CCFDD04A4 /* libPods-DoSomething.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-DoSomething.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		6A0316F21CB5316C00506435 /* en */ = {isa = PBXFileReference; lastKnownFileType = file; name = en; path = en.lproj/PrivacyPolicy.docx; sourceTree = "<group>"; };
+		6A0316F41CB5316C00506435 /* en */ = {isa = PBXFileReference; lastKnownFileType = file; name = en; path = en.lproj/TermsofService.docx; sourceTree = "<group>"; };
 		6A0C8D871C0C25510056DA81 /* CustomAlterview.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomAlterview.h; sourceTree = "<group>"; };
 		6A0C8D881C0C25510056DA81 /* CustomAlterview.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomAlterview.m; sourceTree = "<group>"; };
 		6A0C8D891C0C25510056DA81 /* CustomAlterview.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CustomAlterview.xib; sourceTree = "<group>"; };
@@ -319,8 +323,6 @@
 		6AB3E5981C9D172C0040F979 /* SoundTableCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SoundTableCell.xib; sourceTree = "<group>"; };
 		6ACBF64C1C2E8BAC00AFE131 /* PWParallaxScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PWParallaxScrollView.h; path = Helpers/ParallaxScroll/PWParallaxScrollView.h; sourceTree = "<group>"; };
 		6ACBF64D1C2E8BAC00AFE131 /* PWParallaxScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PWParallaxScrollView.m; path = Helpers/ParallaxScroll/PWParallaxScrollView.m; sourceTree = "<group>"; };
-		6AD1E6FE1CB0154200CC4D18 /* Privacy Policy.docx */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Privacy Policy.docx"; sourceTree = "<group>"; };
-		6AD1E6FF1CB0154300CC4D18 /* Terms of Service.docx */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Terms of Service.docx"; sourceTree = "<group>"; };
 		6AD8A52C1C2AECE800828AED /* NMRangeSlider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NMRangeSlider.h; sourceTree = "<group>"; };
 		6AD8A52D1C2AECE800828AED /* NMRangeSlider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NMRangeSlider.m; sourceTree = "<group>"; };
 		6AE7361B1C05AA5D00C7DCF0 /* SettingView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingView.h; sourceTree = "<group>"; };
@@ -811,8 +813,8 @@
 		6A71A92E1C046FB200D6D5F4 /* Resourse */ = {
 			isa = PBXGroup;
 			children = (
-				6AD1E6FE1CB0154200CC4D18 /* Privacy Policy.docx */,
-				6AD1E6FF1CB0154300CC4D18 /* Terms of Service.docx */,
+				6A0316F11CB5316B00506435 /* PrivacyPolicy.docx */,
+				6A0316F31CB5316C00506435 /* TermsofService.docx */,
 				6A3F8DDC1C84418100D013F8 /* GIF Library */,
 				6A3F8DD01C843B8500D013F8 /* DoSomething_loading.gif */,
 				6A71A93A1C0471F900D6D5F4 /* NSLocalization.strings */,
@@ -1221,6 +1223,7 @@
 				06E1A6E71C886CD9008633D8 /* By The Seaside.caf in Resources */,
 				EAF1DC521BD8B2AF00D51354 /* DSHomeViewController.xib in Resources */,
 				2B2C08911C27BB6C00996441 /* DSNearByDetailViewController.xib in Resources */,
+				6A0316F51CB5592300506435 /* PrivacyPolicy.docx in Resources */,
 				2B83CAC41BE895AB0064EC7F /* Default.png in Resources */,
 				06E1A6F51C886CD9008633D8 /* Night Owl.caf in Resources */,
 				06E1A7021C886CD9008633D8 /* Slow Rise.caf in Resources */,
@@ -1288,6 +1291,7 @@
 				ED0A47221C2E9965000CAB95 /* ChatDetailCustomcell.xib in Resources */,
 				C6D5F6431BC7B52C0050C1AE /* Patron-Regular.ttf in Resources */,
 				06E1A6EB1C886CD9008633D8 /* Circuit.caf in Resources */,
+				6A0316F61CB5598D00506435 /* TermsofService.docx in Resources */,
 				C6D5F67C1BC7EC440050C1AE /* Images.xcassets in Resources */,
 				EAFC96591BD20FD400B3593D /* DSInterestAndHobbiesViewController.xib in Resources */,
 				06E1A6F91C886CD9008633D8 /* Popcorn.caf in Resources */,
@@ -1448,6 +1452,22 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
+		6A0316F11CB5316B00506435 /* PrivacyPolicy.docx */ = {
+			isa = PBXVariantGroup;
+			children = (
+				6A0316F21CB5316C00506435 /* en */,
+			);
+			name = PrivacyPolicy.docx;
+			sourceTree = "<group>";
+		};
+		6A0316F31CB5316C00506435 /* TermsofService.docx */ = {
+			isa = PBXVariantGroup;
+			children = (
+				6A0316F41CB5316C00506435 /* en */,
+			);
+			name = TermsofService.docx;
+			sourceTree = "<group>";
+		};
 		6A3F8DD01C843B8500D013F8 /* DoSomething_loading.gif */ = {
 			isa = PBXVariantGroup;
 			children = (

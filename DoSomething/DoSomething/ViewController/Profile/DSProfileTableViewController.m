@@ -538,8 +538,6 @@
         pgDtView=[[UIView alloc]init];
         pgDtView.backgroundColor=[UIColor clearColor];
         pageImageView =[[UIImageView alloc]init];
-        NSLog(@"profilearray=%d",profileDataArray.count);
-        NSLog(@"infoarry=%d",infoArray.count);
         profileImagePageControl.numberOfPages = infoArray.count;
         if(infoArray.count > 3)
         {
@@ -2010,12 +2008,28 @@
         if([objloginType isEqualToString:@"dosomething"])
         {
             cell.logilTypelbl.text =@"You are connected via DoSomething Account";
-            self.TypeImgexposition.constant=(IS_IPHONE6||IS_IPHONE6_Plus)?50:20;
+           
+            if(IS_IPHONE6_Plus)
+            {
+                 self.TypeImgexposition.constant=68;
+            }
+            else
+            {
+                 self.TypeImgexposition.constant=(IS_IPHONE6)?50:20;
+            }
             cell.loginTypeImg.image=[UIImage imageNamed:@"loginTypeDS"];
         }
         else{
             cell.logilTypelbl.text =@"You are connected via Facebook";
-            self.TypeImgexposition.constant=(IS_IPHONE6||IS_IPHONE6_Plus)?75:55;
+            if(IS_IPHONE6_Plus)
+            {
+                self.TypeImgexposition.constant=100;
+            }
+            else
+            {
+                self.TypeImgexposition.constant=(IS_IPHONE6||IS_IPHONE6_Plus)?75:55;
+            }
+            
             cell.loginTypeImg.image=[UIImage imageNamed:@"loginTypeFB"];
         }
 
@@ -2154,7 +2168,7 @@
 {
     
     DSTermsViewController* termViewController = [[DSTermsViewController alloc] init];
-    
+     termViewController.policytypeofContent =@"Term";
     [self.navigationController pushViewController:termViewController animated:YES];
 }
 

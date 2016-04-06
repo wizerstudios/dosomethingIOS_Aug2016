@@ -438,8 +438,8 @@
              
              if ( responseObject !=nil && [[[responseObject valueForKey:@"nearestusers"]valueForKey:@"status"] isEqualToString:@"success"])
              {
-                 isemptyuser=NO;
-                 if ([[[responseObject valueForKey:@"nearestusers"]valueForKey:@"pageCount"] isEqualToString:@"1"])
+                // isemptyuser=NO;
+                 if ([[[responseObject valueForKey:@"nearestusers"]valueForKey:@"page"] isEqualToString:@"1"])
                  {
 
                      NSMutableArray * nearestUserdetaile =[[NSMutableArray alloc]init];
@@ -496,7 +496,7 @@
                  
                  if([[[responseObject valueForKey:@"nearestusers"]valueForKey:@"status"] isEqualToString:@"failed"])
                  {
-                     isemptyuser=YES;
+                     //isemptyuser=YES;
                     
                     // [commonlocationArray removeLastObject];
                      NSString * nearestuserMsg=[NSString stringWithFormat:@"%@",[[responseObject valueForKey:@"nearestusers"]valueForKey:@"Message"]];
@@ -783,7 +783,6 @@
         [dict removeObjectForKey:@"send_request"];
         [dict setObject:@"Yes" forKey:@"send_request"];
         detailsArray =[dict copy];
-        [commonlocationArray replaceObjectAtIndex:indexPath.row withObject:detailsArray];
        
         
         dosomethingImageArry =[[[commonlocationArray valueForKey:@"dosomething"]objectAtIndex:indexPath.row] valueForKey:@"InactiveImage"];
@@ -885,8 +884,8 @@
 
 -(IBAction)filterAction:(id)sender
 {
-    if(isemptyuser!=YES)
-    {
+//    if(isemptyuser!=YES)
+//    {
     [COMMON TrackerWithName:@"Applying Filter"];
     if(isFilteraction==NO)
     {
@@ -951,7 +950,7 @@
        }
        
     }
-    }
+   // }
    //self.upperLabel.text=@"";
     //self.lowerLabel.text=@"";
     //self.ageupperLabel.text=@"";

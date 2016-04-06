@@ -15,7 +15,7 @@
 #import "NSString+FontAwesome.h"
 
 
-@interface DSTermsViewController ()
+@interface DSTermsViewController ()<UIWebViewDelegate>
 
 @end
 
@@ -23,7 +23,8 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+    [self loadContent];
+
     // Do any additional setup after loading the view from its nib.
 }
 -(void)viewWillAppear:(BOOL)animated
@@ -37,11 +38,13 @@
     customNavigation.view.frame = CGRectMake(0,-20, CGRectGetWidth(self.view.frame), 65);
     if (IS_IPHONE6 ){
         customNavigation.view.frame = CGRectMake(0,-20, 375, 76);
+        self.termtoplblYposition.constant =80;
         
     }
     if(IS_IPHONE6_Plus)
     {
         customNavigation.view.frame = CGRectMake(0,-20, 420, 83);
+         self.termtoplblYposition.constant =100;
         
     }
     [customNavigation.menuBtn setHidden:YES];
@@ -50,16 +53,27 @@
     [self.navigationController.navigationBar addSubview:customNavigation.view];
     
     [customNavigation.buttonBack addTarget:self action:@selector(backAction) forControlEvents:UIControlEventTouchUpInside];
-    [self loadContent];
-}
+    }
 -(void)loadContent
 {
     
-    NSArray *paths = NSSearchPathForDirectoriesInDomains( NSDocumentDirectory, NSUserDomainMask ,YES );
-    NSString *documentsDirectory = [paths objectAtIndex:0];
-    NSString *path = [documentsDirectory stringByAppendingPathComponent:@"Privacy Policy.docx"];
-    [self.termscontentweb loadRequest:[NSURLRequest requestWithURL:[NSURL fileURLWithPath:path]]];
-}
+    NSBundle *mainBundle = [NSBundle mainBundle];
+    NSURL *homeIndexUrl;
+    if([self.policytypeofContent isEqualToString:@"Term"])
+    {
+         homeIndexUrl = [mainBundle URLForResource:@"TermsofService" withExtension:@"docx"];
+    }
+    else
+    {
+        homeIndexUrl = [mainBundle URLForResource:@"PrivacyPolicy" withExtension:@"docx"];
+    }
+    
+    NSURLRequest *urlReq = [NSURLRequest requestWithURL:homeIndexUrl];
+    
+    [self.termscontentweb loadRequest:urlReq];
+    
+   
+    }
 -(void)viewDidAppear:(BOOL)animated
 {
      [COMMON TrackerWithName:@"Terms of Use & Private Policy"];

@@ -142,7 +142,7 @@
         [buttonTermsOfUse setTitle:@"Terms of Use" forState:UIControlStateNormal];
         [buttonPrivacyPolicy setTitle:@"Privacy Policy" forState:UIControlStateNormal];
         [buttonTermsOfUse addTarget:self action:@selector(loadTermsOfUseViewAction:) forControlEvents:UIControlEventTouchUpInside];
-        [buttonPrivacyPolicy addTarget:self action:@selector(loadTermsOfUseViewAction:) forControlEvents:UIControlEventTouchUpInside];
+        [buttonPrivacyPolicy addTarget:self action:@selector(loadTermspolicyViewAction:) forControlEvents:UIControlEventTouchUpInside];
         [buttonHaveAnAcc setTitle:@"Have an account? Sign In" forState:UIControlStateNormal];
         buttonCreateAnAcc.hidden =YES;
         buttonForgotPass.hidden=YES;
@@ -343,10 +343,15 @@
 -(IBAction)loadTermsOfUseViewAction:(id)sender
 {
     DSTermsViewController* termViewController = [[DSTermsViewController alloc] init];
-    
+    termViewController.policytypeofContent =@"Term";
     [self.navigationController pushViewController:termViewController animated:YES];
 }
-
+-(IBAction)loadTermspolicyViewAction:(id)sender
+{
+    DSTermsViewController* termViewController = [[DSTermsViewController alloc] init];
+    termViewController.policytypeofContent =@"policy";
+    [self.navigationController pushViewController:termViewController animated:YES];
+}
 
 #pragma mark - CustomalterviewMethod
 

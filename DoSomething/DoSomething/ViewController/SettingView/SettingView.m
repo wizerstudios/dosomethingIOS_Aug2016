@@ -424,9 +424,11 @@
     objCustomSoundview = [[CustomSoundview alloc] initWithNibName:@"CustomSoundview" bundle:nil];
     objCustomSoundview.view.frame = CGRectMake(self.view.frame.origin.x,self.view.frame.origin.y,self.view.frame.size.width, self.view.frame.size.height);
    // [objCustomSoundview.alertBgView setHidden:YES];
+    [self.view layoutIfNeeded];
     if(IS_IPHONE6 || IS_IPHONE6_Plus)
     {
-        objCustomSoundview.soundmenutrailing.constant=130;
+        objCustomSoundview.soundmenuheight.constant=180;
+       // objCustomSoundview.soundmenutrailing.constant=130;
     }
     [objCustomSoundview.soundmenuView setHidden:YES];
     
@@ -492,14 +494,14 @@
 -(IBAction)didClickTearmofuseAction:(id)sender
 {
     DSTermsViewController* termViewController = [[DSTermsViewController alloc] init];
-    
+     termViewController.policytypeofContent =@"Term";
     [self.navigationController pushViewController:termViewController animated:YES];
 }
 -(IBAction)didClickprivacypolicyAction:(id)sender
 {
     
     DSTermsViewController* termViewController = [[DSTermsViewController alloc] init];
-    
+     termViewController.policytypeofContent =@"policy";
     [self.navigationController pushViewController:termViewController animated:YES];
     
 }
