@@ -551,7 +551,7 @@ minimumLineSpacingForSectionAtIndex:(NSInteger)section {
           
         }
         else{
-            [self showAltermessage:@"1 ACTIVITIES\nSHOULD BE SELECTED "];
+            [self showAltermessage:@"PLEASE SELECT AT LEAST\n 1 ACTIVITY"];
         }
     }
     
