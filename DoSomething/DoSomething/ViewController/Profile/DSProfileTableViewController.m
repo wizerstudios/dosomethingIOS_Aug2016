@@ -120,9 +120,10 @@
     NSString *firstName,*lastName,*email,*dob,*gender,*profileID,*password;
     UIImage *fbProfileImage;
     
-    BOOL photoaddImg;
+    BOOL is_photoaddImg;
     
     BOOL isTapGesture;
+    
 }
 
 @end
@@ -460,6 +461,9 @@
             else
                [userProfileImage setImageWithURL:[NSURL URLWithString:image]];
             
+            if(i==2){
+                [cell.imageAddButton setHidden:YES];
+            }
             userProfileImage.layer.cornerRadius = userProfileImage.frame.size.height / 2;
             userProfileImage.layer.masksToBounds = YES;
             [userProfileImage setUserInteractionEnabled:YES];
@@ -472,6 +476,7 @@
             
             [userProfileImage setContentMode:UIViewContentModeScaleAspectFill];
             [cameraIcon setHidden:YES];
+            
             [cell.topViewCell setHidden:NO];
             self.scrView.scrollEnabled = YES;
         }
@@ -483,7 +488,10 @@
     {
 
         [self.scrView setContentOffset:CGPointMake(0, 0)animated:NO];
-        
+        if(profileDict!=nil)
+        {
+           [self pageScrollView];
+        }
     }
     else if(CurrentImage == 1)
     {
@@ -500,7 +508,7 @@
         {
             [self.scrView setContentOffset:CGPointMake(2.3*self.profileImageView.frame.size.width, 0)animated:NO];
         }
-       [self pageScrollView];
+         [self pageScrollView];
     }
     else if(CurrentImage == 2)
     {
@@ -517,6 +525,7 @@
         {
             [self.scrView setContentOffset:CGPointMake((4.6*self.profileImageView.frame.size.width), 0)animated:NO];
         }
+         [cell.imageAddButton setHidden:YES];
          [self pageScrollView];
     }
    
@@ -529,7 +538,13 @@
         pgDtView=[[UIView alloc]init];
         pgDtView.backgroundColor=[UIColor clearColor];
         pageImageView =[[UIImageView alloc]init];
+        NSLog(@"profilearray=%d",profileDataArray.count);
+        NSLog(@"infoarry=%d",infoArray.count);
         profileImagePageControl.numberOfPages = infoArray.count;
+        if(infoArray.count > 3)
+        {
+             [cell.imageAddButton setHidden:NO];
+        }
         
         for(int i=0;i<profileImagePageControl.numberOfPages;i++)
         {
@@ -539,8 +554,8 @@
             [blkdot setImage:[UIImage imageNamed:@"dot_normal"]];
             
             [pgDtView addSubview:blkdot];
-            [pageImageView setFrame:CGRectMake(0, 0, 8, 8)];
-            [pageImageView setImage:[UIImage imageNamed:@"dot_active_red"]];
+           
+            
             [pgDtView addSubview:pageImageView];
             [cell.topViewCell addSubview:pgDtView];
             if(IS_IPHONE6) {
@@ -553,18 +568,30 @@
                 if(i==1)
                 {
                     [pgDtView setFrame:CGRectMake(20, -5, profileImagePageControl.numberOfPages*18, 10)];
+                     [pageImageView setFrame:CGRectMake(i*18, 0, 8, 8)];
                 }
                else if(i==2)
                 {
                   [pgDtView setFrame:CGRectMake(15, -5, profileImagePageControl.numberOfPages*18, 10)];
+                    if(is_photoaddImg==YES)
+                    {
+                        [pageImageView setFrame:CGRectMake(i*18, 0, 8, 8)];
+                    }
+                    else
+                    {
+                        [pageImageView setFrame:CGRectMake(0, 0, 8, 8)];
+                    }
+
+                    
                 }
                 else if(i==3)
                 {
                     [pgDtView setFrame:CGRectMake(10, -5, profileImagePageControl.numberOfPages*18, 10)];
+                   [pageImageView setFrame:CGRectMake(i*18, 0, 8, 8)];
                 }
             }
             
-            
+            [pageImageView setImage:[UIImage imageNamed:@"dot_active_red"]];
         }
         
     }
@@ -588,7 +615,7 @@
     CurrentImage = scrollView.contentOffset.x / scrollView.frame.size.width;
     
     if (scrollView==self.scrView) {    }
-    pull=@"";
+    //pull=@"";
     jslider = scrollView.contentOffset.x / scrollView.frame.size.width;
     [self.scrView setNeedsDisplay];
     profileImagePageControl.currentPage=jslider;
@@ -2639,6 +2666,7 @@
     NSData *profileData = UIImagePNGRepresentation([info objectForKey:UIImagePickerControllerEditedImage]);
     
     NSLog(@"profileDataArray = %@",profileDataArray);
+     NSLog(@"infoarray = %d",infoArray.count);
     NSString *imageStr;
     for (int i = 0; i < [profileDataArray count]; i++) {
         
@@ -2652,10 +2680,17 @@
             if(i == 1){
                 CurrentImage = 1;
                  profileImage2 = image;
+                is_photoaddImg=YES;
+                [infoArray removeLastObject];
+               
+                
             }
             if(i == 2){
                 CurrentImage = 2;
                  profileImage3 = image;
+                isPageControl=NO;
+                is_photoaddImg=YES;
+                
             }
             
             [profileDataArray replaceObjectAtIndex:i withObject:profileData];
