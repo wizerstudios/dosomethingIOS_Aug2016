@@ -432,9 +432,7 @@
              
              NSLog(@"response=%@",responseObject);
              recordCount =[[responseObject valueForKey:@"nearestusers"]valueForKey:@"recordCount"];
-             //matchUserArray =[[responseObject valueForKey:@"nearestusers"]valueForKey:@"matchedUser"];
-             
-             //[self loadMatchActivityMethod];
+            
              
              if ( responseObject !=nil && [[[responseObject valueForKey:@"nearestusers"]valueForKey:@"status"] isEqualToString:@"success"])
              {
@@ -445,7 +443,7 @@
                      NSMutableArray * nearestUserdetaile =[[NSMutableArray alloc]init];
                      nearestUserdetaile =[[responseObject valueForKey:@"nearestusers"] valueForKey:@"UserList"];
                      commonlocationArray =[nearestUserdetaile mutableCopy];
-                     [locationCollectionView reloadData];
+                    // [locationCollectionView reloadData];
                      
 
                  }
@@ -506,14 +504,19 @@
                      {
                          [self showAltermessage:nearestuserMsg];
                      }
+                     else{
+                           [commonlocationArray removeAllObjects];
+                         
+                     }
                      
                  }
+                 [locationCollectionView reloadData];
              }
              [refreshControl endRefreshing];
              
              
          }
-                            failure:^(AFHTTPRequestOperation *operation, id error)
+        failure:^(AFHTTPRequestOperation *operation, id error)
          {
              [COMMON DSRemoveLoading];
          }];
@@ -788,16 +791,51 @@
        
         
         dosomethingImageArry =[[[commonlocationArray valueForKey:@"dosomething"]objectAtIndex:indexPath.row] valueForKey:@"InactiveImage"];
+        NSString *dosomethingImage1;
+        NSString *dosomethingImage2;
+        NSString *dosomethingImage3;
+        
         if([dosomethingImageArry count]== 1){
             NSLog(@"count one");
+            if(![[dosomethingImageArry objectAtIndex:0]isEqualToString:@""])
+            {
+                
+                locationCellView.dosomethingImage1Xposition.constant=40;
+                
+                dosomethingImage1=[dosomethingImageArry objectAtIndex:0];
+                
+                [locationCellView.dosomethingImage1 setImageWithURL:[NSURL URLWithString:dosomethingImage1]];
+                locationCellView.dosomethingImage2.image=[UIImage imageNamed:@""];
+                locationCellView.dosomethingImage3.image=[UIImage imageNamed:@""];
+                
+            }
+
         }
         else if([dosomethingImageArry count] == 2){
+            if(![[dosomethingImageArry objectAtIndex:0]isEqualToString:@""])
+            {
+                locationCellView.dosomethingImage1Xposition.constant=60;
+                dosomethingImage1=[dosomethingImageArry objectAtIndex:0];
+                
+                [locationCellView.dosomethingImage1 setImageWithURL:[NSURL URLWithString:dosomethingImage1]];
+                
+            }
+            if (![[dosomethingImageArry objectAtIndex:1] isEqualToString:@""])
+            {
+                dosomethingImage2=[dosomethingImageArry objectAtIndex:1];
+                locationCellView.dosomethingImage2Xposition.constant=30;
+                [locationCellView.dosomethingImage2 setImageWithURL:[NSURL URLWithString:dosomethingImage2]];
+                
+                locationCellView.dosomethingImage3.image=[UIImage imageNamed:@""];
+                
+            }
+
             NSLog(@"count two");
         }else{
         
-        NSString *dosomethingImage1=[dosomethingImageArry objectAtIndex:0];
-        NSString *dosomethingImage2=[dosomethingImageArry objectAtIndex:1];
-        NSString *dosomethingImage3=[dosomethingImageArry objectAtIndex:2];
+       dosomethingImage1=[dosomethingImageArry objectAtIndex:0];
+       dosomethingImage2=[dosomethingImageArry objectAtIndex:1];
+        dosomethingImage3=[dosomethingImageArry objectAtIndex:2];
         
        
         [locationCellView.dosomethingImage1 setImageWithURL:[NSURL URLWithString:dosomethingImage1]];
@@ -829,16 +867,50 @@
         
         
         dosomethingImageArry =[[[commonlocationArray valueForKey:@"dosomething"]objectAtIndex:indexPath.row] valueForKey:@"NearbyImage"];
+        NSString *dosomethingImage1;
+        NSString *dosomethingImage2;
+        NSString *dosomethingImage3;
         if([dosomethingImageArry count]== 1){
             NSLog(@"count one");
+            if(![[dosomethingImageArry objectAtIndex:0]isEqualToString:@""])
+            {
+                
+                locationCellView.dosomethingImage1Xposition.constant=40;
+                
+                dosomethingImage1=[dosomethingImageArry objectAtIndex:0];
+                
+                [locationCellView.dosomethingImage1 setImageWithURL:[NSURL URLWithString:dosomethingImage1]];
+                locationCellView.dosomethingImage2.image=[UIImage imageNamed:@""];
+                locationCellView.dosomethingImage3.image=[UIImage imageNamed:@""];
+                
+            }
+
         }
         else if([dosomethingImageArry count] == 2){
+            if(![[dosomethingImageArry objectAtIndex:0]isEqualToString:@""])
+            {
+                locationCellView.dosomethingImage1Xposition.constant=60;
+                dosomethingImage1=[dosomethingImageArry objectAtIndex:0];
+                
+                [locationCellView.dosomethingImage1 setImageWithURL:[NSURL URLWithString:dosomethingImage1]];
+                
+            }
+            if (![[dosomethingImageArry objectAtIndex:1] isEqualToString:@""])
+            {
+                dosomethingImage2=[dosomethingImageArry objectAtIndex:1];
+                locationCellView.dosomethingImage2Xposition.constant=30;
+                [locationCellView.dosomethingImage2 setImageWithURL:[NSURL URLWithString:dosomethingImage2]];
+                
+                locationCellView.dosomethingImage3.image=[UIImage imageNamed:@""];
+                
+            }
+
             NSLog(@"count two");
         }else{
             
-            NSString *dosomethingImage1=[dosomethingImageArry objectAtIndex:0];
-            NSString *dosomethingImage2=[dosomethingImageArry objectAtIndex:1];
-            NSString *dosomethingImage3=[dosomethingImageArry objectAtIndex:2];
+            dosomethingImage1=[dosomethingImageArry objectAtIndex:0];
+            dosomethingImage2=[dosomethingImageArry objectAtIndex:1];
+            dosomethingImage3=[dosomethingImageArry objectAtIndex:2];
             
             
             [locationCellView.dosomethingImage1 setImageWithURL:[NSURL URLWithString:dosomethingImage1]];
@@ -1181,7 +1253,7 @@
 {
     UIImage* image = nil;
 
-    image = [UIImage imageNamed:@"backgroundImg"];  //slider-metal-trackBackground
+    image = [UIImage imageNamed:@""];  //slider-metal-trackBackground
     image = [image resizableImageWithCapInsets:UIEdgeInsetsMake(0.0, 0.0, 0.0, 10.0)];
     slider.trackBackgroundImage = image;
 
@@ -1194,7 +1266,7 @@
     slider.lowerHandleImageNormal = image;
     slider.upperHandleImageNormal = image;
 
-    image = [UIImage imageNamed:@"Filter_track"];          //slider-metal-handle-highlighted
+    image = [UIImage imageNamed:@""];          //slider-metal-handle-highlighted
     image = [image imageWithAlignmentRectInsets:UIEdgeInsetsMake(0,1, 0,1)];
     slider.lowerHandleImageHighlighted = image;
     slider.upperHandleImageHighlighted = image;

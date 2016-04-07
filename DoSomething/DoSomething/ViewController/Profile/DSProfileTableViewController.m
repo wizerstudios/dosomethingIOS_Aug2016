@@ -124,6 +124,26 @@
     
     BOOL isTapGesture;
     
+    
+    
+    /* -------------------  User Profile Images  ------------------- */
+    
+    
+    NSMutableArray *userProfileImageArray;
+    
+    NSInteger currentImageIndex;
+    
+    NSInteger selectedImageIndex;
+    
+    NSInteger totalImageCount;
+    
+    BOOL isUserProfileEmpty;
+    
+    BOOL isNewUser;
+    
+    BOOL isSelectIndex;
+
+    
 }
 
 @end
@@ -168,6 +188,8 @@
     isPageControl=NO;
     
     isLoadData=NO;
+    
+    [self setInitialProfileArray];
    
 }
 -(void)viewWillAppear:(BOOL)animated
@@ -528,17 +550,14 @@
          [cell.imageAddButton setHidden:YES];
          [self pageScrollView];
     }
-   
-    
 }
 -(void) pageScrollView{
     
-    if(isPageControl==NO ){
         xslider=0;
         pgDtView=[[UIView alloc]init];
         pgDtView.backgroundColor=[UIColor clearColor];
         pageImageView =[[UIImageView alloc]init];
-        profileImagePageControl.numberOfPages = infoArray.count;
+        profileImagePageControl.numberOfPages = totalImageCount + 1;
         if(infoArray.count > 3)
         {
              [cell.imageAddButton setHidden:NO];
@@ -550,12 +569,11 @@
             
             [blkdot setFrame:CGRectMake(i*18, 0, 8, 8 )];
             [blkdot setImage:[UIImage imageNamed:@"dot_normal"]];
-            
             [pgDtView addSubview:blkdot];
-           
             
             [pgDtView addSubview:pageImageView];
             [cell.topViewCell addSubview:pgDtView];
+            
             if(IS_IPHONE6) {
             [pgDtView setFrame:CGRectMake(40, -5, profileImagePageControl.numberOfPages*18, 10)];
             }
@@ -579,8 +597,6 @@
                     {
                         [pageImageView setFrame:CGRectMake(0, 0, 8, 8)];
                     }
-
-                    
                 }
                 else if(i==3)
                 {
@@ -592,11 +608,8 @@
             [pageImageView setImage:[UIImage imageNamed:@"dot_active_red"]];
         }
         
-    }
     isPageControl=YES;
    [cell.topViewCell addSubview:pgDtView];
-   
-    
 }
 
 - (IBAction)pageChanged:(id)sender {
@@ -610,13 +623,12 @@
 #pragma mark - UIScrollViewDelegate
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView
 {
-    CurrentImage = scrollView.contentOffset.x / scrollView.frame.size.width;
+    currentImageIndex = scrollView.contentOffset.x / scrollView.frame.size.width;
     
     if (scrollView==self.scrView) {    }
-    //pull=@"";
     jslider = scrollView.contentOffset.x / scrollView.frame.size.width;
     [self.scrView setNeedsDisplay];
-    profileImagePageControl.currentPage=jslider;
+    profileImagePageControl.currentPage = jslider;
     [pageImageView setFrame:CGRectMake(jslider*18, 0, 8, 8)];
     
     isTapping=NO;
@@ -1190,10 +1202,13 @@
                     {
                     return 180;
                     }
+                    
                 }
               else if (userDetailsDict.count > 0)
               {
-                 return 80;
+                 
+                  return 80;
+                
               }
                 
                 return 120;
@@ -1247,7 +1262,7 @@
         cameraIcon=[UIButton buttonWithType:UIButtonTypeCustom];
         if(IS_IPHONE6)
         {
-//            self.scrView.frame =CGRectMake(self.scrView.frame.origin.x,self.scrView.frame.origin.y,self.view .frame.size.width,self.scrView.frame.size.height);
+
         [cameraIcon setFrame:CGRectMake(cell.contentView.center.x+5,cell.contentView.frame.size.height-36,37,37)];
         }
         else  if(IS_IPHONE6_Plus)
@@ -1259,26 +1274,32 @@
             [cameraIcon setFrame:CGRectMake(cell.contentView.center.x-22,cell.contentView.frame.size.height-36,37,37)];
         }
         [cameraIcon addTarget:self action:@selector(selectCamera:) forControlEvents:UIControlEventTouchUpInside];
-        UIImage *cameraIconImg = [UIImage imageNamed:@"camera_icon"];
-        [cameraIcon setImage:cameraIconImg forState:UIControlStateNormal];
-        [cameraIcon setTag:101];
-        [cell addSubview:cameraIcon];
-              [cell.addnextprofileimageimage addTarget:self action:@selector(selectCamera:) forControlEvents:UIControlEventTouchUpInside];
+        
+//        UIImage *cameraIconImg = [UIImage imageNamed:@"camera_icon"];
+//        [cameraIcon setImage:cameraIconImg forState:UIControlStateNormal];
+//        [cameraIcon setTag:101];
+//        [cell addSubview:cameraIcon];
+        
+        [cell.addnextprofileimageimage addTarget:self action:@selector(selectCamera:) forControlEvents:UIControlEventTouchUpInside];
         [cameraIcon setHidden:NO];
         
-         [self profileScroll];
+         [self setUserProfileImages];
         
-        if(!profileData1){
-            [profileImagePageControl setHidden:YES];
-            
+        if(totalImageCount == 2)
+        {
+            cell.addnextprofileimageimage.hidden = YES;
+            profileImagePageControl.hidden = NO;
+        }
+        else if(totalImageCount == 1)
+        {
+            cell.addnextprofileimageimage.hidden = NO;
+            profileImagePageControl.hidden = NO;
         }
         else
-            [profileImagePageControl setHidden:NO];
-        
-                
-        
-       // userProfileImage.layer.masksToBounds = YES;
-        
+        {
+            cell.addnextprofileimageimage.hidden = NO;
+            profileImagePageControl.hidden = YES;
+        }
     }
 
     
@@ -1883,7 +1904,7 @@
             
         }
         else if(userDetailsDict.count > 0){
-            cell.layoutConstraintEmailPassViewHeight.constant =40;
+            
             NSString *loginType =[userDetailsDict valueForKey:@"type"];
             if([loginType isEqualToString:@"1"])
             {
@@ -1908,7 +1929,7 @@
             [cell.emailTextField setEnabled:NO];
             if (IS_IPHONE6 ||IS_IPHONE6_Plus){
                     //cell.layoutConstraintAccLabelYPos.constant =42;
-                        cell.layoutConstraintEmailPassViewHeight.constant =180;
+                        cell.layoutConstraintEmailPassViewHeight.constant =40;
             }
 
             
@@ -2336,20 +2357,30 @@
     
 }
 
--(void)updateProfileImageAction{
+-(void)updateProfileImageAction: (UITapGestureRecognizer *)tapGesture
+{
+    UIView *selectedView = tapGesture.view;
+    selectedImageIndex = selectedView.tag - 1;
     
     isTapGesture = YES;
-    
     [self selectimagePicker];
-    
 }
+
+
+//-(void)updateProfileImageAction{
+//    
+//    isTapGesture = YES;
+//    
+//    [self selectimagePicker];
+//    
+//}
 
 -(void)selectimagePicker{
     
     NSLog(@"currentimge=%ld",(long)CurrentImage);
-    
+//
     NSString * currentimgField=[NSString stringWithFormat:@"image%d",CurrentImage];
-    
+//
     NSString * selectimg=[profileDict valueForKey:currentimgField];
     
     [COMMON TrackerWithName:@"User Profile"];
@@ -2417,7 +2448,7 @@
                                                    }];
     UIAlertAction *RemoveImage;
     
-    if(![selectimg isEqualToString:@""])
+    if(!isNewUser)
     {
         
         RemoveImage = [UIAlertAction actionWithTitle:NSLocalizedString(@"REMOVE",@"") style:UIAlertActionStyleDefault
@@ -2443,17 +2474,14 @@
         
         if(isTapGesture == YES){
             
-            if(![selectimg isEqualToString:@""])
+            if(!isNewUser)
             {
                 [alert addAction:RemoveImage];
             }
         }
         
         [self presentViewController:alert animated:YES completion:nil];
-        
     }
-
-    
 }
 
 #pragma mark - Camera Action
@@ -2467,6 +2495,7 @@
     
 }
 
+/*
 -(void)RemoveprofileImage
 {
     int imgfield;
@@ -2550,6 +2579,8 @@
    }];
     }
 }
+ 
+ */
 
 
 -(void)loadloginAPi
@@ -2674,6 +2705,42 @@
 }
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
 {
+    
+    UIImage *image = nil;
+    [cell.topViewCell setHidden:NO];
+    image = [info valueForKey:UIImagePickerControllerEditedImage];
+    NSData *profileData = UIImagePNGRepresentation([info objectForKey:UIImagePickerControllerEditedImage]);
+    if([[userProfileImageArray objectAtIndex:0] isEqual:@""])
+    {
+        currentImageIndex = 0;
+        profileImage1  = [UIImage imageWithData:profileData];
+    }
+    else if ([[userProfileImageArray objectAtIndex:1] isEqual:@""])
+    {
+        currentImageIndex = 1;
+        profileImage2  = [UIImage imageWithData:profileData];
+    }
+    else if ([[userProfileImageArray objectAtIndex:2] isEqual:@""])
+    {
+        currentImageIndex = 2;
+        profileImage3  = [UIImage imageWithData:profileData];
+    }
+    
+    if(isNewUser)
+    {
+        currentImageIndex = 0;
+         profileImage1  = [UIImage imageWithData:profileData];
+        isNewUser = NO;
+    }
+    
+    NSInteger selectedIndex = (isTapGesture) ? selectedImageIndex : currentImageIndex;
+    
+    
+    [userProfileImageArray replaceObjectAtIndex:selectedIndex withObject:image];
+    [self setUserProfileImages];
+
+    [imagepickerController dismissViewControllerAnimated:YES completion:nil];
+    /*
     UIImage *image = nil;
     [cell.topViewCell setHidden:NO];
     image = [info valueForKey:UIImagePickerControllerEditedImage];
@@ -2717,6 +2784,8 @@
         }
         
     }
+     
+     */
    
 
 }
@@ -2740,6 +2809,11 @@
         deviceToken = @"";
     
     NSString *fbProfileStr;
+    
+    UIImage *imageOne   = [userProfileImageArray objectAtIndex:0];
+    UIImage *imageTwo   = [userProfileImageArray objectAtIndex:1];
+    UIImage *imageThree = [userProfileImageArray objectAtIndex:2];
+    
     if([strType isEqualToString:@"2"])
         fbProfileStr =([FBImageStr isEqualToString:@"1"])?@"":[userDetailsDict valueForKey:@"profileImage"];
     if([COMMON isInternetReachable]){
@@ -2752,9 +2826,9 @@
                            password:(currentPassword==nil)?emailPasswordToRegister:currentPassword
                           profileId:strProfileID
                                 dob:dateChange
-                      profileImage1:profileImage1
-                      profileImage2:profileImage2
-                      profileImage3:profileImage3
+                      profileImage1:imageOne
+                      profileImage2:imageTwo
+                      profileImage3:imageThree
                    IntersertHobbies:strInterestHobbies
                               About:strAbout
                              gender:strGender
@@ -2791,12 +2865,15 @@
 #pragma mark - updateAPI
 -(void) updateAPI{
     
-    [COMMON LoadIcon:self.view];
+    [COMMON AddLoadIcon:self.view];
     if(currentLatitude == nil)
         currentLatitude = @"";
     if(currentLongitude == nil)
         currentLongitude = @"";
     
+    UIImage *imageOne   = [userProfileImageArray objectAtIndex:0];
+    UIImage *imageTwo   = [userProfileImageArray objectAtIndex:1];
+    UIImage *imageThree = [userProfileImageArray objectAtIndex:2];
     
     if([COMMON isInternetReachable]){
         [objWebService profileUpdate:ProfileUpdate_API
@@ -2804,9 +2881,9 @@
                            last_name:LastName
                                  dob:dateChange
                             password:(currentPassword==nil)?emailPasswordToRegister:currentPassword
-                       profileImage1:profileImage1
-                       profileImage2:profileImage2
-                       profileImage3:profileImage3
+                       profileImage1:imageOne
+                       profileImage2:imageTwo
+                       profileImage3:imageThree
                               gender:strGender
                                about:strAbout
                              hobbies:strInterestHobbies
@@ -2836,7 +2913,7 @@
 #pragma mark - loadRegisterNotification
 -(void)loadRegister{
     
-    [COMMON LoadIcon:self.view];
+    [COMMON AddLoadIcon:self.view];
     
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(loadRegisterView:)
@@ -2858,7 +2935,7 @@
 #pragma mark - loadUpdateNotification
 -(void)loadUpdate{
     
-    [COMMON LoadIcon:self.view];
+    [COMMON AddLoadIcon:self.view];
     
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(loadUpdateView:)
@@ -2945,7 +3022,7 @@
 #pragma mark - saveAction
 -(void)loadValidations
 {
-    [self SaveLoadIcon:self.view];
+    [COMMON AddLoadIcon:self.view];
     
     strType      = (selectEmail== YES)?@"1":@"2";
     strProfileID = (FBprofileID!=nil)?FBprofileID:@"";
@@ -2969,23 +3046,22 @@
             {
 
                 [self showAltermessage:FIRSTNAME_REQUIRED];
-                //[COMMON removeLoading];
-                [self SaveremoveLoading];
+                [COMMON removeLoading];
+               
                 return;
             }
             else if(LastName ==nil)
             {
                 [self showAltermessage:LASTNAME_REQUIRED];
-                //[COMMON removeLoading];
-                [self SaveremoveLoading];
-                return;
+                [COMMON removeLoading];
+                    return;
         
             }
             else if ([strGender isEqualToString:@""] || strGender == NULL)
             {
                 [self showAltermessage:GENDER_REQUIRED];
-                [self SaveremoveLoading];
-                //[COMMON removeLoading];
+                
+                [COMMON removeLoading];
                 return;
             }
 
@@ -2994,24 +3070,24 @@
             {
 
                 [self showAltermessage:DOB_REQUIRED];
-                //[COMMON removeLoading];
-                [self SaveremoveLoading];
+                [COMMON removeLoading];
+                
                 return;
             }
             else if ([strAbout isEqualToString:@""] || strAbout == NULL )
             {
                 
                 [self showAltermessage:@"About Required"];
-                //[COMMON removeLoading];
-                [self SaveremoveLoading];
+                [COMMON removeLoading];
+               
                 return;
             }
    
            else if ([emailAddressToRegister isEqualToString:@""] || emailAddressToRegister == nil)
             {
                 [self showAltermessage:EMAIL_REQUIRED];
-                //[COMMON removeLoading];
-                [self SaveremoveLoading];
+                [COMMON removeLoading];
+                
                
                 return;
                 
@@ -3022,10 +3098,9 @@
         
                 if(userDetailsDict > 0)
                 {
-                    //[COMMON removeLoading];
-                    [self SaveremoveLoading];
-                    //[self loadRegister];
-                    //[self showAltermessage:@"By clicking create,you agree to the Term of \n Use & Privacy policy"];
+                    [COMMON removeLoading];
+                    
+                   
                     [self showAccountCreateAltermessage:@"By clicking create,you agree to the Term of \n Use & Privacy policy"];
                     return;
                 }
@@ -3033,17 +3108,17 @@
                     
                 {
                    [self showAltermessage:PASSWORD_REQUIRED];
-                   //[COMMON removeLoading];
-                    [self SaveremoveLoading];
+                   [COMMON removeLoading];
+                    
                     return;
                 }
             }
             else
             
             {
-                [self SaveremoveLoading];
-                //[COMMON removeLoading];
-               // [self loadRegister];
+               
+                [COMMON removeLoading];
+              
                 [self showAccountCreateAltermessage:@"By clicking create,you agree to the Term of \n Use & Privacy policy"];
             }
 
@@ -3055,8 +3130,8 @@
         {
             
             [self showAltermessage:@"About Required"];
-            //[COMMON removeLoading];
-            [self SaveremoveLoading];
+            [COMMON removeLoading];
+           
             return;
         }
 
@@ -3066,8 +3141,8 @@
         {
             
             [self showAltermessage:@"Enter your Current password"];
-           // [COMMON removeLoading];
-            [self SaveremoveLoading];
+           [COMMON removeLoading];
+            
             return;
         }
         
@@ -3075,8 +3150,8 @@
         {
             
             [self showAltermessage:@"Your password mismatching"];
-            //[COMMON removeLoading];
-            [self SaveremoveLoading];
+            [COMMON removeLoading];
+            
             return;
         }
         
@@ -3085,22 +3160,22 @@
             if([emailPasswordToRegister isEqualToString:@""])
             {
                 [self showAltermessage:@"Enter your current password"];
-                //[COMMON removeLoading];
-                [self SaveremoveLoading];
+                [COMMON removeLoading];
+              
                 return;
             }
             else if(![confirmPassword isEqualToString:@""] && confirmPassword!=nil)
             {
                 [self showAltermessage:@"Enter your New password"];
-                //[COMMON removeLoading];
-                [self SaveremoveLoading];
+                [COMMON removeLoading];
+              
                 return;
             }
             else
             
             {
-                //[self SaveremoveLoading];
-                //[COMMON removeLoading];
+               
+                [COMMON removeLoading];
                 [self updateAPI];
            
             }
@@ -3111,23 +3186,23 @@
             if([currentPassword isEqualToString:@""])
             {
                 [self showAltermessage:@"Enter New password"];
-                //[COMMON removeLoading];
-                [self SaveremoveLoading];
+                [COMMON removeLoading];
+               
                 return;
             }
             else if (currentPassword!=nil || confirmPassword !=nil)
             {
                 if(![currentPassword isEqualToString:confirmPassword])
                 [self showAltermessage:@"Password don't match"];
-                //[COMMON removeLoading];
-                [self SaveremoveLoading];
+                [COMMON removeLoading];
+               
                 return;
                 
             }
             else
             {
-                //[self SaveremoveLoading];
-                //[COMMON removeLoading];
+                
+                [COMMON removeLoading];
                 [self updateAPI];
             }
         
@@ -3137,24 +3212,24 @@
             if([currentPassword isEqualToString:@""] || currentPassword==nil)
             {
                 [self showAltermessage:@"Enter New password"];
-                //[COMMON removeLoading];
-                [self SaveremoveLoading];
+                [COMMON removeLoading];
+               
                 return;
             }
             else
             {
-                //[COMMON removeLoading];
+                [COMMON removeLoading];
                 [self updateAPI];
             }
         }
        
         else
          {
-           //[COMMON removeLoading];
+           [COMMON removeLoading];
            [self updateAPI];
          }
     }
-  [self SaveremoveLoading];
+  
 }
 
 #pragma mark - CustomAlterviewload
@@ -3342,41 +3417,141 @@
     }];
 }
 
-#pragma mark User Interaction Loading :
+#pragma mark - Display User Profile
 
--(void)SaveLoadIcon:(UIView *)view
+/*  *****************************  Display User Profile Image  ***************************** */
+
+-(void)setInitialProfileArray
 {
-    //[self removeLoading];
-    if(IS_IPHONE6)
+    UIImage *defaultProfile = [UIImage imageNamed:@"profile_noimg"];
+    NSMutableDictionary *profileDictionary = [COMMON getUserDetails];
+    userProfileImageArray  = [NSMutableArray new];
+    
+    if(userDetailsDict != NULL)   /// FB User Deatil
     {
-        loadingView = [[UIView alloc] initWithFrame:CGRectMake((view.frame.size.width)/2, (view.frame.size.height)/2, 37, 37)];
+        NSString *imageString = [userDetailsDict valueForKey:@"profileImage"];
+        NSURL *imageURL = [NSURL URLWithString:imageString];
+        NSData *imageData = [NSData dataWithContentsOfURL:imageURL];
+        UIImage *fbImage = [UIImage imageWithData:imageData];
+        
+        id fbProfile = (imageData == nil) ? defaultProfile : fbImage;
+        
+        userProfileImageArray = [@[fbProfile, @"", @""] mutableCopy];
+        isNewUser = NO;
     }
-    else  if(IS_IPHONE6_Plus)
+    else if(profileDictionary != NULL)  /// User Details
     {
-        loadingView = [[UIView alloc] initWithFrame:CGRectMake((view.frame.size.width+40)/2, (view.frame.size.height+100)/2, 37, 37)];
+        NSURL *imageURLOne   = [NSURL URLWithString:[profileDictionary valueForKey:@"image1"]];
+        NSData *imageDataOne = [NSData dataWithContentsOfURL:imageURLOne];
+        
+        NSURL *imageURLTwo   = [NSURL URLWithString:[profileDictionary valueForKey:@"image2"]];
+        NSData *imageDataTwo = [NSData dataWithContentsOfURL:imageURLTwo];
+        
+        NSURL *imageURLThree   = [NSURL URLWithString:[profileDictionary valueForKey:@"image3"]];
+        NSData *imageDataThree = [NSData dataWithContentsOfURL:imageURLThree];
+        
+        UIImage *imageOne   = [UIImage imageWithData:imageDataOne];
+        UIImage *imageTwo   = [UIImage imageWithData:imageDataTwo];
+        UIImage *imageThree = [UIImage imageWithData:imageDataThree];
+        
+        id profileImageOne   = (imageDataOne == nil)   ? @"" : imageOne;
+        id profileImageTwo   = (imageDataTwo == nil)   ? @"" : imageTwo;
+        id profileImageThree = (imageDataThree == nil) ? @"" : imageThree;
+        
+        userProfileImageArray = [@[profileImageOne, profileImageTwo, profileImageThree] mutableCopy];
+        isNewUser = NO;
     }
     else
     {
-        loadingView = [[UIView alloc] initWithFrame:CGRectMake((view.frame.size.width-20)/2, (view.frame.size.height-37)/2, 37, 37)];
+        userProfileImageArray = [@[defaultProfile, @"", @""] mutableCopy];
+        isNewUser = YES;
     }
-    [loadingView.layer setCornerRadius:20.0];
     
-    [loadingView setBackgroundColor:[UIColor clearColor]];
-    //Enable maskstobound so that corner radius would work.
-    [loadingView.layer setMasksToBounds:YES];
-    //Set the corner radius
-    
-    activityView = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhite];
-    [activityView setFrame:CGRectMake(1, 1, 37, 37)];
-    [activityView setHidesWhenStopped:YES];
-    [activityView startAnimating];
-    [loadingView addSubview:activityView];
-    [view addSubview:loadingView];
-    [view bringSubviewToFront:loadingView];
+    [self pageScrollView];
 }
 
--(void)SaveremoveLoading{
-    [loadingView removeFromSuperview];
+-(void)setUserProfileImages
+{
+    self.scrView.pagingEnabled=YES;
+    self.scrView.delegate=self;
+    [self.scrView setShowsHorizontalScrollIndicator:NO];
+    totalImageCount = 0;
+    
+    for(int imageIndex = 0; imageIndex < [userProfileImageArray count]; imageIndex++)
+    {
+        if(![[userProfileImageArray objectAtIndex:imageIndex] isEqual:@""])
+        {
+            UIImage *imageProfile = [userProfileImageArray objectAtIndex:imageIndex];
+            
+            NSInteger extraSpace;
+            
+            if(IS_IPHONE6_Plus)
+                extraSpace = 130;
+            else if (IS_IPHONE6)
+                extraSpace = 110;
+            else
+                extraSpace = 90;
+            
+            userProfileImage = [[UIImageView alloc]initWithFrame:CGRectMake((imageIndex * self.scrView.frame.size.width) + extraSpace,
+                                                                            20, self.profileImageView.frame.size.width, self.profileImageView.frame.size.height)];
+            
+            [userProfileImage setImage:imageProfile];
+            userProfileImage.layer.cornerRadius = userProfileImage.frame.size.height / 2;
+            userProfileImage.layer.masksToBounds = YES;
+            [userProfileImage setUserInteractionEnabled:YES];
+            
+            UITapGestureRecognizer *singleTap =  [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(updateProfileImageAction:)];
+            [singleTap setNumberOfTapsRequired:1];
+            userProfileImage.tag = 1 + imageIndex;
+            [userProfileImage addGestureRecognizer:singleTap];
+            [self.scrView addSubview:userProfileImage];
+            
+            [userProfileImage setContentMode:UIViewContentModeScaleAspectFill];
+            [cameraIcon setHidden:YES];
+            [cell.topViewCell setHidden:NO];
+            self.scrView.scrollEnabled = YES;
+            
+            [self.scrView setContentSize:CGSizeMake(self.scrView.frame.size.width*(imageIndex+1), 150)];
+            totalImageCount = imageIndex;
+        }
+    }
+    
+    if(totalImageCount != 0)
+        [self pageScrollView];
+}
+
+-(void)RemoveprofileImage
+{
+    UIImage *defaultProfile = [UIImage imageNamed:@"profile_noimg"];
+    UIImage *imageTwo   = [userProfileImageArray objectAtIndex:1];
+    UIImage *imageThree = [userProfileImageArray objectAtIndex:2];
+    
+    id profilaImageTwo   = (imageTwo == nil)   ? @"" : imageTwo;
+    id profilaImageThree = (imageThree == nil) ? @"" : imageThree;
+    
+    if(selectedImageIndex == 0)
+    {
+        [userProfileImageArray replaceObjectAtIndex:0 withObject:profilaImageTwo];
+        [userProfileImageArray replaceObjectAtIndex:1 withObject:profilaImageThree];
+        [userProfileImageArray replaceObjectAtIndex:2 withObject:@""];
+    }
+    else if (selectedImageIndex == 1)
+    {
+        [userProfileImageArray replaceObjectAtIndex:1 withObject:profilaImageThree];
+        [userProfileImageArray replaceObjectAtIndex:2 withObject:@""];
+    }
+    else if (selectedImageIndex == 2)
+    {
+        [userProfileImageArray replaceObjectAtIndex:2 withObject:@""];
+    }
+    
+    if([imageTwo isEqual:@""] && [imageThree isEqual:@""])
+    {
+        userProfileImageArray = [@[defaultProfile, @"", @""] mutableCopy];
+        isNewUser = YES;
+    }
+    
+    [_tableviewProfile reloadData];
 }
 
 

@@ -280,20 +280,8 @@ DSAppCommon *sharedCommon = nil;
 -(void)LoadIcon:(UIView *)view
 {
     [self removeLoading];
-    if(IS_IPHONE6)
-    {
-        loadingView = [[UIView alloc] initWithFrame:CGRectMake((view.frame.size.width)/2, (view.frame.size.height)/2, 37, 37)];
-    }
-    else  if(IS_IPHONE6_Plus)
-    {
-        loadingView = [[UIView alloc] initWithFrame:CGRectMake((view.frame.size.width+40)/2, (view.frame.size.height+100)/2, 37, 37)];
-    }
-    else
-    {
-        loadingView = [[UIView alloc] initWithFrame:CGRectMake((view.frame.size.width-20)/2, (view.frame.size.height-37)/2, 37, 37)];
-    }
-    [loadingView.layer setCornerRadius:20.0];
-   
+//    [loadingView.layer setCornerRadius:20.0];
+   loadingView = [[UIView alloc] initWithFrame:CGRectMake((view.frame.size.width-37)/2, (view.frame.size.height-37)/2, 37, 37)];
     [loadingView setBackgroundColor:[UIColor clearColor]];
     //Enable maskstobound so that corner radius would work.
     [loadingView.layer setMasksToBounds:YES];
@@ -307,6 +295,28 @@ DSAppCommon *sharedCommon = nil;
     [view addSubview:loadingView];
     [view bringSubviewToFront:loadingView];
 }
+
+-(void)AddLoadIcon:(UIView *)view
+{
+    [self removeLoading];
+    //    [loadingView.layer setCornerRadius:20.0];
+    loadingView = [[UIView alloc] initWithFrame:CGRectMake((view.frame.size.width-37)/2, (view.frame.size.height-37)/2, 37, 37)];
+    [loadingView setBackgroundColor:[UIColor clearColor]];
+    //Enable maskstobound so that corner radius would work.
+    [loadingView.layer setMasksToBounds:YES];
+    //Set the corner radius
+    
+    activityView = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+    [activityView setFrame:CGRectMake(1, 1, 37, 37)];
+    [activityView setHidesWhenStopped:YES];
+    [activityView startAnimating];
+    [loadingView addSubview:activityView];
+    [view addSubview:loadingView];
+    [view bringSubviewToFront:loadingView];
+}
+
+
+
 - (void)DSLoadIcon:(UIView *)view
 {
     [self removeLoading];
@@ -323,6 +333,7 @@ DSAppCommon *sharedCommon = nil;
     {
         loadingView = [[UIView alloc] initWithFrame:CGRectMake((view.frame.size.width-20)/2, (view.frame.size.height-37)/2, 37, 37)];
     }
+   
     [loadingView.layer setCornerRadius:20.0];
     
     [loadingView setBackgroundColor:[UIColor clearColor]];
@@ -345,6 +356,9 @@ DSAppCommon *sharedCommon = nil;
     [loadingView removeFromSuperview];
 }
 -(void)removeLoading{
+    [loadingView removeFromSuperview];
+}
+-(void)removeAddLoading{
     [loadingView removeFromSuperview];
 }
 

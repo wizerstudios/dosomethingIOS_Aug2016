@@ -424,6 +424,7 @@ NSUInteger DeviceSystemMajorVersion() {
     //------------------------------
     // Track Brackground
     self.trackBackground = [[UIImageView alloc] initWithImage:self.trackBackgroundImage];
+    
     self.trackBackground.frame = [self trackBackgroundRect];
     
     

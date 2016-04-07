@@ -53,6 +53,7 @@ typedef enum {
 
 - (void)LoadIcon:(UIView *)view;
 - (void)DSLoadIcon:(UIView *)view;
+-(void)AddLoadIcon:(UIView *)view;
 - (void)DSRemoveLoading;
 - (void)removeLoading;
 -(BOOL)isInternetReachable;
