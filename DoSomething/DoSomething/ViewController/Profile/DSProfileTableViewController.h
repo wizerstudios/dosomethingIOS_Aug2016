@@ -53,6 +53,9 @@
     UIImageView *page1,*page2,*page3;
     NSInteger CurrentImage;
     
+    UIView  *loadingView;
+    UIActivityIndicatorView *activityView;
+    
 }
 @property (strong, nonatomic) DVSwitch *switcher;
 @property (strong, nonatomic) IBOutlet UITableView *tableviewProfile;

@@ -2945,7 +2945,7 @@
 #pragma mark - saveAction
 -(void)loadValidations
 {
-    [COMMON LoadIcon:self.view];
+    [self SaveLoadIcon:self.view];
     
     strType      = (selectEmail== YES)?@"1":@"2";
     strProfileID = (FBprofileID!=nil)?FBprofileID:@"";
@@ -2969,21 +2969,23 @@
             {
 
                 [self showAltermessage:FIRSTNAME_REQUIRED];
-                [COMMON removeLoading];
+                //[COMMON removeLoading];
+                [self SaveremoveLoading];
                 return;
             }
             else if(LastName ==nil)
             {
                 [self showAltermessage:LASTNAME_REQUIRED];
-                [COMMON removeLoading];
+                //[COMMON removeLoading];
+                [self SaveremoveLoading];
                 return;
         
             }
             else if ([strGender isEqualToString:@""] || strGender == NULL)
             {
                 [self showAltermessage:GENDER_REQUIRED];
-       
-                [COMMON removeLoading];
+                [self SaveremoveLoading];
+                //[COMMON removeLoading];
                 return;
             }
 
@@ -2992,21 +2994,24 @@
             {
 
                 [self showAltermessage:DOB_REQUIRED];
-                [COMMON removeLoading];
+                //[COMMON removeLoading];
+                [self SaveremoveLoading];
                 return;
             }
             else if ([strAbout isEqualToString:@""] || strAbout == NULL )
             {
                 
                 [self showAltermessage:@"About Required"];
-                [COMMON removeLoading];
+                //[COMMON removeLoading];
+                [self SaveremoveLoading];
                 return;
             }
    
            else if ([emailAddressToRegister isEqualToString:@""] || emailAddressToRegister == nil)
             {
                 [self showAltermessage:EMAIL_REQUIRED];
-                [COMMON removeLoading];
+                //[COMMON removeLoading];
+                [self SaveremoveLoading];
                
                 return;
                 
@@ -3017,7 +3022,8 @@
         
                 if(userDetailsDict > 0)
                 {
-                    [COMMON removeLoading];
+                    //[COMMON removeLoading];
+                    [self SaveremoveLoading];
                     //[self loadRegister];
                     //[self showAltermessage:@"By clicking create,you agree to the Term of \n Use & Privacy policy"];
                     [self showAccountCreateAltermessage:@"By clicking create,you agree to the Term of \n Use & Privacy policy"];
@@ -3027,14 +3033,16 @@
                     
                 {
                    [self showAltermessage:PASSWORD_REQUIRED];
-                   [COMMON removeLoading];
+                   //[COMMON removeLoading];
+                    [self SaveremoveLoading];
                     return;
                 }
             }
             else
             
             {
-                [COMMON removeLoading];
+                [self SaveremoveLoading];
+                //[COMMON removeLoading];
                // [self loadRegister];
                 [self showAccountCreateAltermessage:@"By clicking create,you agree to the Term of \n Use & Privacy policy"];
             }
@@ -3047,7 +3055,8 @@
         {
             
             [self showAltermessage:@"About Required"];
-            [COMMON removeLoading];
+            //[COMMON removeLoading];
+            [self SaveremoveLoading];
             return;
         }
 
@@ -3057,7 +3066,8 @@
         {
             
             [self showAltermessage:@"Enter your Current password"];
-            [COMMON removeLoading];
+           // [COMMON removeLoading];
+            [self SaveremoveLoading];
             return;
         }
         
@@ -3065,7 +3075,8 @@
         {
             
             [self showAltermessage:@"Your password mismatching"];
-            [COMMON removeLoading];
+            //[COMMON removeLoading];
+            [self SaveremoveLoading];
             return;
         }
         
@@ -3074,19 +3085,22 @@
             if([emailPasswordToRegister isEqualToString:@""])
             {
                 [self showAltermessage:@"Enter your current password"];
-                [COMMON removeLoading];
+                //[COMMON removeLoading];
+                [self SaveremoveLoading];
                 return;
             }
             else if(![confirmPassword isEqualToString:@""] && confirmPassword!=nil)
             {
                 [self showAltermessage:@"Enter your New password"];
-                [COMMON removeLoading];
+                //[COMMON removeLoading];
+                [self SaveremoveLoading];
                 return;
             }
             else
             
             {
-                [COMMON removeLoading];
+                //[self SaveremoveLoading];
+                //[COMMON removeLoading];
                 [self updateAPI];
            
             }
@@ -3097,20 +3111,23 @@
             if([currentPassword isEqualToString:@""])
             {
                 [self showAltermessage:@"Enter New password"];
-                [COMMON removeLoading];
+                //[COMMON removeLoading];
+                [self SaveremoveLoading];
                 return;
             }
             else if (currentPassword!=nil || confirmPassword !=nil)
             {
                 if(![currentPassword isEqualToString:confirmPassword])
                 [self showAltermessage:@"Password don't match"];
-                [COMMON removeLoading];
+                //[COMMON removeLoading];
+                [self SaveremoveLoading];
                 return;
                 
             }
             else
             {
-                [COMMON removeLoading];
+                //[self SaveremoveLoading];
+                //[COMMON removeLoading];
                 [self updateAPI];
             }
         
@@ -3120,23 +3137,24 @@
             if([currentPassword isEqualToString:@""] || currentPassword==nil)
             {
                 [self showAltermessage:@"Enter New password"];
-                [COMMON removeLoading];
+                //[COMMON removeLoading];
+                [self SaveremoveLoading];
                 return;
             }
             else
             {
-                [COMMON removeLoading];
+                //[COMMON removeLoading];
                 [self updateAPI];
             }
         }
        
         else
          {
-           [COMMON removeLoading];
+           //[COMMON removeLoading];
            [self updateAPI];
          }
     }
-  
+  [self SaveremoveLoading];
 }
 
 #pragma mark - CustomAlterviewload
@@ -3323,5 +3341,43 @@
         [self flashOff:v];
     }];
 }
+
+#pragma mark User Interaction Loading :
+
+-(void)SaveLoadIcon:(UIView *)view
+{
+    //[self removeLoading];
+    if(IS_IPHONE6)
+    {
+        loadingView = [[UIView alloc] initWithFrame:CGRectMake((view.frame.size.width)/2, (view.frame.size.height)/2, 37, 37)];
+    }
+    else  if(IS_IPHONE6_Plus)
+    {
+        loadingView = [[UIView alloc] initWithFrame:CGRectMake((view.frame.size.width+40)/2, (view.frame.size.height+100)/2, 37, 37)];
+    }
+    else
+    {
+        loadingView = [[UIView alloc] initWithFrame:CGRectMake((view.frame.size.width-20)/2, (view.frame.size.height-37)/2, 37, 37)];
+    }
+    [loadingView.layer setCornerRadius:20.0];
+    
+    [loadingView setBackgroundColor:[UIColor clearColor]];
+    //Enable maskstobound so that corner radius would work.
+    [loadingView.layer setMasksToBounds:YES];
+    //Set the corner radius
+    
+    activityView = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhite];
+    [activityView setFrame:CGRectMake(1, 1, 37, 37)];
+    [activityView setHidesWhenStopped:YES];
+    [activityView startAnimating];
+    [loadingView addSubview:activityView];
+    [view addSubview:loadingView];
+    [view bringSubviewToFront:loadingView];
+}
+
+-(void)SaveremoveLoading{
+    [loadingView removeFromSuperview];
+}
+
 
 @end

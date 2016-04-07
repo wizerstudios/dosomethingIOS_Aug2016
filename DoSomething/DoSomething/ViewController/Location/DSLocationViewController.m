@@ -479,6 +479,7 @@
                  }
 
                  [COMMON DSRemoveLoading];
+                 [locationCollectionView reloadData];
              }
              else if([[[responseObject valueForKey:@"nearestusers"]valueForKey:@"status"] isEqualToString:@"error"])
              {
@@ -490,6 +491,7 @@
                  appDelegate.SepratorLbl.hidden=YES;
                  [appDelegate.settingButton setBackgroundImage:[UIImage imageNamed:@"setting_icon.png"] forState:UIControlStateNormal];
              }
+             
              else{
                  
                  [COMMON DSRemoveLoading];
@@ -509,7 +511,7 @@
              }
              [refreshControl endRefreshing];
              
-             [locationCollectionView reloadData];
+             
          }
                             failure:^(AFHTTPRequestOperation *operation, id error)
          {

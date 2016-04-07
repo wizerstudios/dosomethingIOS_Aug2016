@@ -305,6 +305,7 @@ DSAppCommon *sharedCommon = nil;
     [activityView startAnimating];
     [loadingView addSubview:activityView];
     [view addSubview:loadingView];
+    [view bringSubviewToFront:loadingView];
 }
 - (void)DSLoadIcon:(UIView *)view
 {
