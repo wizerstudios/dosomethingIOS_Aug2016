@@ -504,13 +504,13 @@
                      {
                          [self showAltermessage:nearestuserMsg];
                      }
-                     else{
-                           [commonlocationArray removeAllObjects];
-                         
-                     }
+//                     else{
+//                           [commonlocationArray removeAllObjects];
+//                         
+//                     }
                      
                  }
-                 [locationCollectionView reloadData];
+                 //[locationCollectionView reloadData];
              }
              [refreshControl endRefreshing];
              

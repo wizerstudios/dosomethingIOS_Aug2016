@@ -2810,10 +2810,6 @@
     
     NSString *fbProfileStr;
     
-    UIImage *imageOne   = [userProfileImageArray objectAtIndex:0];
-    UIImage *imageTwo   = [userProfileImageArray objectAtIndex:1];
-    UIImage *imageThree = [userProfileImageArray objectAtIndex:2];
-    
     if([strType isEqualToString:@"2"])
         fbProfileStr =([FBImageStr isEqualToString:@"1"])?@"":[userDetailsDict valueForKey:@"profileImage"];
     if([COMMON isInternetReachable]){
@@ -2826,9 +2822,9 @@
                            password:(currentPassword==nil)?emailPasswordToRegister:currentPassword
                           profileId:strProfileID
                                 dob:dateChange
-                      profileImage1:imageOne
-                      profileImage2:imageTwo
-                      profileImage3:imageThree
+                      profileImage1:[userProfileImageArray objectAtIndex:0]
+                      profileImage2:[userProfileImageArray objectAtIndex:1]
+                      profileImage3:[userProfileImageArray objectAtIndex:2]
                    IntersertHobbies:strInterestHobbies
                               About:strAbout
                              gender:strGender
@@ -2871,19 +2867,15 @@
     if(currentLongitude == nil)
         currentLongitude = @"";
     
-    UIImage *imageOne   = [userProfileImageArray objectAtIndex:0];
-    UIImage *imageTwo   = [userProfileImageArray objectAtIndex:1];
-    UIImage *imageThree = [userProfileImageArray objectAtIndex:2];
-    
     if([COMMON isInternetReachable]){
         [objWebService profileUpdate:ProfileUpdate_API
                           first_name:FirstName
                            last_name:LastName
                                  dob:dateChange
                             password:(currentPassword==nil)?emailPasswordToRegister:currentPassword
-                       profileImage1:imageOne
-                       profileImage2:imageTwo
-                       profileImage3:imageThree
+                       profileImage1:[userProfileImageArray objectAtIndex:0]
+                       profileImage2:[userProfileImageArray objectAtIndex:1]
+                       profileImage3:[userProfileImageArray objectAtIndex:2]
                               gender:strGender
                                about:strAbout
                              hobbies:strInterestHobbies
@@ -3434,7 +3426,7 @@
         NSData *imageData = [NSData dataWithContentsOfURL:imageURL];
         UIImage *fbImage = [UIImage imageWithData:imageData];
         
-        id fbProfile = (imageData == nil) ? defaultProfile : fbImage;
+        UIImage *fbProfile = (imageData == nil) ? defaultProfile : fbImage;
         
         userProfileImageArray = [@[fbProfile, @"", @""] mutableCopy];
         isNewUser = NO;
@@ -3454,9 +3446,9 @@
         UIImage *imageTwo   = [UIImage imageWithData:imageDataTwo];
         UIImage *imageThree = [UIImage imageWithData:imageDataThree];
         
-        id profileImageOne   = (imageDataOne == nil)   ? @"" : imageOne;
-        id profileImageTwo   = (imageDataTwo == nil)   ? @"" : imageTwo;
-        id profileImageThree = (imageDataThree == nil) ? @"" : imageThree;
+        UIImage *profileImageOne   = (imageDataOne == nil)   ? @"" : imageOne;
+        UIImage *profileImageTwo   = (imageDataTwo == nil)   ? @"" : imageTwo;
+        UIImage *profileImageThree = (imageDataThree == nil) ? @"" : imageThree;
         
         userProfileImageArray = [@[profileImageOne, profileImageTwo, profileImageThree] mutableCopy];
         isNewUser = NO;
@@ -3526,8 +3518,8 @@
     UIImage *imageTwo   = [userProfileImageArray objectAtIndex:1];
     UIImage *imageThree = [userProfileImageArray objectAtIndex:2];
     
-    id profilaImageTwo   = (imageTwo == nil)   ? @"" : imageTwo;
-    id profilaImageThree = (imageThree == nil) ? @"" : imageThree;
+    UIImage *profilaImageTwo   = (imageTwo == nil)   ? @"" : imageTwo;
+    UIImage *profilaImageThree = (imageThree == nil) ? @"" : imageThree;
     
     if(selectedImageIndex == 0)
     {
