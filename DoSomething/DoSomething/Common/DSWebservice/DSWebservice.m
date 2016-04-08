@@ -214,7 +214,7 @@ notification_sound  :(NSString *)isnotification_sound
      NSLog(@"RegisterdeteilsUrl = %@",urlString);
     [self POST:urlString parameters:registerDetails constructingBodyWithBlock:^(id<AFMultipartFormData> formData)
      {
-         if(profileImage1){
+         if(![profileImage1 isEqual:@""]){
              [formData appendPartWithFileData:UIImagePNGRepresentation(profileImage1)
                                          name:@"profileImage1"
                                      fileName:imageNameStr
@@ -224,7 +224,7 @@ notification_sound  :(NSString *)isnotification_sound
          }
         
                   
-         if(profileImage2){
+         if(![profileImage2 isEqual:@""]){
              [formData appendPartWithFileData:UIImagePNGRepresentation(profileImage2)
                                          name:@"profileImage2"
                                      fileName:imageNameStr
@@ -232,7 +232,7 @@ notification_sound  :(NSString *)isnotification_sound
              
              NSLog(@"formData = %@",formData);
          }
-         if(profileImage3){
+         if(![profileImage3 isEqual:@""]){
              [formData appendPartWithFileData:UIImagePNGRepresentation(profileImage3)
                                          name:@"profileImage3"
                                      fileName:imageNameStr
@@ -345,7 +345,7 @@ notification_sound  :(NSString *)isnotification_sound
     [self POST:urlString parameters:profileUpdate constructingBodyWithBlock:^(id<AFMultipartFormData> formData)
      {
          
-         if(profileImage1){
+         if(![profileImage1 isEqual:@""]){
              [formData appendPartWithFileData:UIImagePNGRepresentation(profileImage1)
                                          name:@"profileImage1"
                                      fileName:imageNameStr
@@ -353,7 +353,7 @@ notification_sound  :(NSString *)isnotification_sound
              
              NSLog(@"formData = %@",formData);
          }
-         if(profileImage2){
+         if(![profileImage2 isEqual:@""]){
              [formData appendPartWithFileData:UIImagePNGRepresentation(profileImage2)
                                          name:@"profileImage2"
                                      fileName:imageNameStr
@@ -361,7 +361,7 @@ notification_sound  :(NSString *)isnotification_sound
              
              NSLog(@"formData = %@",formData);
          }
-         if(profileImage3){
+         if(![profileImage3 isEqual:@""]){
              [formData appendPartWithFileData:UIImagePNGRepresentation(profileImage3)
                                          name:@"profileImage3"
                                      fileName:imageNameStr
