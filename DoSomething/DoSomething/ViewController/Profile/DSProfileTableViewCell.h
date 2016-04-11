@@ -32,6 +32,9 @@
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *layoutConstraintEmailPassViewHeight;
 @property (strong, nonatomic) IBOutlet NSLayoutConstraint *layoutConstraintProfileImageWidth;
 @property (strong, nonatomic) IBOutlet NSLayoutConstraint *layoutConstraintProfileImageHeight;
+@property (strong,nonatomic)  IBOutlet UIView * profileimagemainview;
+
+
 
 @property (weak, nonatomic) IBOutlet UIImageView *plusIconImageView;
 

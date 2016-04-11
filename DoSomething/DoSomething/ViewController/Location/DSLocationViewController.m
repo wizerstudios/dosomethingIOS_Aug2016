@@ -416,6 +416,7 @@
 #pragma mark - nearestLocationWebserviceAPI
 -(void)nearestLocationWebservice
 {
+    [COMMON AddLoadIcon:self.view];
     if([COMMON isInternetReachable]){
         [objWebservice nearestUsers:NearestUsers_API
                           sessionid:[COMMON getSessionID]
@@ -475,9 +476,12 @@
                          [[NSUserDefaults standardUserDefaults]setObject:@"No" forKey:FirstloginLocationView];
                      }
                  }
-
+                 [locationCollectionView setHidden:NO];
+                 
                  [COMMON DSRemoveLoading];
+                 [COMMON removeLoading];
                  [locationCollectionView reloadData];
+                  [refreshControl endRefreshing];
              }
              else if([[[responseObject valueForKey:@"nearestusers"]valueForKey:@"status"] isEqualToString:@"error"])
              {
@@ -490,28 +494,41 @@
                  [appDelegate.settingButton setBackgroundImage:[UIImage imageNamed:@"setting_icon.png"] forState:UIControlStateNormal];
              }
              
-             else{
+             else  if([[[responseObject valueForKey:@"nearestusers"]valueForKey:@"status"] isEqualToString:@"failed"]){
                  
                  [COMMON DSRemoveLoading];
                  
-                 if([[[responseObject valueForKey:@"nearestusers"]valueForKey:@"status"] isEqualToString:@"failed"])
-                 {
                      //isemptyuser=YES;
                     
                     // [commonlocationArray removeLastObject];
                      NSString * nearestuserMsg=[NSString stringWithFormat:@"%@",[[responseObject valueForKey:@"nearestusers"]valueForKey:@"Message"]];
+                     
                      if(![nearestuserMsg isEqualToString:@"No Users Found"])
                      {
-                         [self showAltermessage:nearestuserMsg];
+                        
+                          [self showAltermessage:nearestuserMsg];
+
                      }
-//                     else{
-//                           [commonlocationArray removeAllObjects];
-//                         
-//                     }
-                     
-                 }
-                 //[locationCollectionView reloadData];
-             }
+                         else
+                         {
+                             
+                             isAllPost=YES;
+                             if(commonlocationArray.count)
+                             {
+                                [locationCollectionView setHidden:NO];
+                             }
+                             else
+                             {
+                                 [locationCollectionView setHidden:YES];
+                             }
+                             
+                             
+                         }
+        
+        }
+                
+             
+             
              [refreshControl endRefreshing];
              
              
@@ -550,7 +567,8 @@
         locationCellView.bounds = CGRectMake(0,0, 100, 180);
     
 
-    
+    if(commonlocationArray.count)
+    {
     NSString *profileImg = [[commonlocationArray valueForKey:@"image1_thumb"] objectAtIndex:indexPath.row];
     
    
@@ -656,7 +674,7 @@
     
     [locationCellView.requestsendBtn addTarget:self action:@selector(didClickRequestSend:) forControlEvents:UIControlEventTouchUpInside];
    
-
+    }
     return locationCellView;
 }
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
@@ -961,6 +979,7 @@
 //    if(isemptyuser!=YES)
 //    {
     [COMMON TrackerWithName:@"Applying Filter"];
+    
     if(isFilteraction==NO)
     {
         self.collectionviewxpostion.constant =(IS_IPHONE6 || IS_IPHONE6_Plus)?-300:-245;
@@ -1019,6 +1038,8 @@
         isgestureenable=YES;
        if( isfilterChange==YES)
        {
+           commonlocationArray =[[NSMutableArray alloc]init];
+
             [self nearestLocationWebservice];
            isfilterChange=NO;
        }

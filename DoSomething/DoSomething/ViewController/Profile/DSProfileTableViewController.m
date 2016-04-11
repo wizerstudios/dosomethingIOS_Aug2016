@@ -137,8 +137,6 @@
     
     NSInteger totalImageCount;
     
-    BOOL isUserProfileEmpty;
-    
     BOOL isNewUser;
     
     BOOL isSelectIndex;
@@ -189,12 +187,84 @@
     
     isLoadData=NO;
     
-    [self setInitialProfileArray];
    
+   
+}
+
+-(void)viewAllmethod
+{
+    [self setInitialProfileArray];
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(loadInvalidSessionAlert:)
+                                                 name:@"InvalidSession"
+                                               object:nil];
+    
+    imageNormalArray =[[NSMutableArray alloc]init];
+    
+    hobbiesMainArray = [[NSMutableArray alloc]init];
+    
+    profileDict=[[NSMutableDictionary alloc]init];
+    profileDict =[[NSUserDefaults standardUserDefaults] valueForKey:USERDETAILS];
+    
+    
+    if([[NSUserDefaults standardUserDefaults]valueForKey:HobbiesArray] != NULL)
+        hobbiesMainArray = [[NSUserDefaults standardUserDefaults]valueForKey:HobbiesArray];
+    
+    else{
+        if([profileDict valueForKey:@"hobbieslist"]!=NULL)
+            
+            hobbiesMainArray = [[profileDict valueForKey:@"hobbieslist"]mutableCopy];
+        emailPasswordToRegister=[profileDict valueForKey:@"password"];
+        
+    }
+    [[NSUserDefaults standardUserDefaults]setObject:hobbiesMainArray forKey:HobbiesArray];
+    
+    
+    
+    infoArray=[[NSMutableArray alloc]initWithObjects:@"profile_noimg",@"profile_noimg",@"profile_noimg", nil];
+    
+    if(!isLoadData){
+        [self initializeArray];
+        [self profileImageDisplayMethod];
+        if (profileDict== nil)
+        {
+            
+            [[NSUserDefaults standardUserDefaults]removeObjectForKey:HobbiesArray];
+            
+        }
+        
+        isLoadData = YES;
+    }
+    else if(isLoadData == YES && profileDict ==NULL)
+    {
+        
+        hobbiesMainArray = [[[NSUserDefaults standardUserDefaults]valueForKey:HobbiesArray]mutableCopy];
+        
+        imageNormalArray = [[hobbiesMainArray valueForKey:@"image"]mutableCopy];
+        
+        hobbiesNameArray = [hobbiesMainArray valueForKey:@"name"];
+        
+        
+        
+        strInterestHobbies = [[hobbiesMainArray valueForKey:@"hobbies_id"] componentsJoinedByString:@","];
+        
+    }
+    [self selectitemMethod];
+    
+    [_tableviewProfile reloadData];
+    
+    [self loadNavigation];
+    if(profileDict==NULL)
+    {
+        [customNavigation.saveBtn setTitle:@"Create" forState:UIControlStateNormal];
+    }
+    
+    
+
 }
 -(void)viewWillAppear:(BOOL)animated
 {
-   
+    [self setInitialProfileArray];
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(loadInvalidSessionAlert:)
                                                  name:@"InvalidSession"
@@ -575,10 +645,10 @@
             [cell.topViewCell addSubview:pgDtView];
             
             if(IS_IPHONE6) {
-            [pgDtView setFrame:CGRectMake(40, -5, profileImagePageControl.numberOfPages*18, 10)];
+            [pgDtView setFrame:CGRectMake(20, -5, profileImagePageControl.numberOfPages*18, 10)];
             }
             else if(IS_IPHONE6_Plus) {
-                [pgDtView setFrame:CGRectMake(60, -5, profileImagePageControl.numberOfPages*18, 10)];
+                [pgDtView setFrame:CGRectMake(40, -5, profileImagePageControl.numberOfPages*18, 10)];
             }
             else{
                 if(i==1)
@@ -616,6 +686,7 @@
    
     
     CGFloat x = profileImagePageControl.currentPage * self.scrView.frame.size.width;
+    NSLog(@"pagenation=%f",x);
     [self.scrView setContentOffset:CGPointMake(x, 0) animated:YES];
 }
 
@@ -626,11 +697,13 @@
     currentImageIndex = scrollView.contentOffset.x / scrollView.frame.size.width;
     
     if (scrollView==self.scrView) {    }
+    
     jslider = scrollView.contentOffset.x / scrollView.frame.size.width;
     [self.scrView setNeedsDisplay];
     profileImagePageControl.currentPage = jslider;
     [pageImageView setFrame:CGRectMake(jslider*18, 0, 8, 8)];
-    
+     //[userProfileImage setFrame:CGRectMake(currentImageIndex*40, 0, 8, 8)];
+   
     isTapping=NO;
     scrolldragging=@"YES";
 }
@@ -1258,12 +1331,14 @@
             [[NSBundle mainBundle] loadNibNamed:@"DSProfileTableViewCell" owner:self options:nil];
             cell = cellProfileImg;
         }
-        
+        profileImagePageControl.pageIndicatorTintColor = [UIColor clearColor];
+        profileImagePageControl.currentPageIndicatorTintColor = [UIColor clearColor];
+      
         cameraIcon=[UIButton buttonWithType:UIButtonTypeCustom];
         if(IS_IPHONE6)
         {
-
-        [cameraIcon setFrame:CGRectMake(cell.contentView.center.x+5,cell.contentView.frame.size.height-36,37,37)];
+            
+              [cameraIcon setFrame:CGRectMake(cell.contentView.center.x+5,cell.contentView.frame.size.height-36,37,37)];
         }
         else  if(IS_IPHONE6_Plus)
         {
@@ -3442,13 +3517,15 @@
         NSURL *imageURLThree   = [NSURL URLWithString:[profileDictionary valueForKey:@"image3"]];
         NSData *imageDataThree = [NSData dataWithContentsOfURL:imageURLThree];
         
+        
         UIImage *imageOne   = [UIImage imageWithData:imageDataOne];
         UIImage *imageTwo   = [UIImage imageWithData:imageDataTwo];
         UIImage *imageThree = [UIImage imageWithData:imageDataThree];
         
-        UIImage *profileImageOne   = (imageDataOne == nil)   ? @"" : imageOne;
+        UIImage *profileImageOne   = (imageDataOne == nil)   ? [UIImage imageNamed:@""] : imageOne;
         UIImage *profileImageTwo   = (imageDataTwo == nil)   ? @"" : imageTwo;
         UIImage *profileImageThree = (imageDataThree == nil) ? @"" : imageThree;
+        
         
         userProfileImageArray = [@[profileImageOne, profileImageTwo, profileImageThree] mutableCopy];
         isNewUser = NO;
@@ -3480,14 +3557,35 @@
             if(IS_IPHONE6_Plus)
                 extraSpace = 130;
             else if (IS_IPHONE6)
+            {
                 extraSpace = 110;
+            }
             else
                 extraSpace = 90;
-            
-            userProfileImage = [[UIImageView alloc]initWithFrame:CGRectMake((imageIndex * self.scrView.frame.size.width) + extraSpace,
+            if(IS_IPHONE6)
+            {
+                if(imageIndex==0 || imageIndex==2)
+                {
+                 userProfileImage = [[UIImageView alloc]initWithFrame:CGRectMake((imageIndex * self.scrView.frame.size.width) + extraSpace,
                                                                             20, self.profileImageView.frame.size.width, self.profileImageView.frame.size.height)];
             
+                }
+                if(imageIndex==1)
+                {
+                    userProfileImage = [[UIImageView alloc]initWithFrame:CGRectMake((imageIndex * self.scrView.frame.size.width)+50 + extraSpace,
+                                                                                    20, self.profileImageView.frame.size.width, self.profileImageView.frame.size.height)];
+                    
+                }
+                               
+            }
+            else
+            {
+                userProfileImage = [[UIImageView alloc]initWithFrame:CGRectMake((imageIndex * self.scrView.frame.size.width) + extraSpace,
+                                                                                20, self.profileImageView.frame.size.width, self.profileImageView.frame.size.height)];
+            }
+          
             [userProfileImage setImage:imageProfile];
+        
             userProfileImage.layer.cornerRadius = userProfileImage.frame.size.height / 2;
             userProfileImage.layer.masksToBounds = YES;
             [userProfileImage setUserInteractionEnabled:YES];
@@ -3503,7 +3601,15 @@
             [cell.topViewCell setHidden:NO];
             self.scrView.scrollEnabled = YES;
             
-            [self.scrView setContentSize:CGSizeMake(self.scrView.frame.size.width*(imageIndex+1), 150)];
+            if(IS_IPHONE6)
+            {
+              [self.scrView setContentSize:CGSizeMake(self.scrView.frame.size.width*(imageIndex+1)+45, 150)];
+            }
+            else
+            {
+                [self.scrView setContentSize:CGSizeMake(self.scrView.frame.size.width*(imageIndex+1), 150)];
+            }
+            
             totalImageCount = imageIndex;
         }
     }
@@ -3518,8 +3624,8 @@
     UIImage *imageTwo   = [userProfileImageArray objectAtIndex:1];
     UIImage *imageThree = [userProfileImageArray objectAtIndex:2];
     
-    UIImage *profilaImageTwo   = (imageTwo == nil)   ? @"" : imageTwo;
-    UIImage *profilaImageThree = (imageThree == nil) ? @"" : imageThree;
+    UIImage *profilaImageTwo   = (imageTwo == nil)   ? [UIImage imageNamed:@""] : imageTwo;
+    UIImage *profilaImageThree = (imageThree == nil) ? [UIImage imageNamed:@""] : imageThree;
     
     if(selectedImageIndex == 0)
     {
