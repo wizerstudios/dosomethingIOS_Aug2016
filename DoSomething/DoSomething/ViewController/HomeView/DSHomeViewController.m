@@ -177,7 +177,7 @@
     // CGFloat yPosition = 0;
     
     mainview=[[UIView alloc]initWithFrame:CGRectMake(self.view.frame.origin.x,0,self.view.frame.size.width,self.view.frame.size.height)];
-    [mainview setBackgroundColor:[UIColor redColor]];
+    [mainview setBackgroundColor:[UIColor clearColor]];
     [foregroundView addSubview:mainview];
     
     if(IS_IPHONE4)
@@ -217,7 +217,7 @@
 - (void)parallaxScrollView:(PWParallaxScrollView *)scrollView didChangeIndex:(NSInteger)index
     {
        
-           }
+    }
     
     
 - (void)parallaxScrollView:(PWParallaxScrollView *)scrollView didEndDeceleratingAtIndex:(NSInteger)index

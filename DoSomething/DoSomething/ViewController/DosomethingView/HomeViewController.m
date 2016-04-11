@@ -723,7 +723,7 @@ minimumLineSpacingForSectionAtIndex:(NSInteger)section {
     anyTimeButton.hidden =YES;
     
     [self loadActivityImageView];
-    if([[activityMainDict valueForKey:@"Available"] isEqualToString:@"Yes"] && [[activityMainDict valueForKey:@"LastActivity"] isEqualToString:@"Few seconds ago"])
+    if([[activityMainDict valueForKey:@"LastActivity"] isEqualToString:@"Few seconds ago"])
     {
         if([[NSUserDefaults standardUserDefaults] boolForKey:@"SelectNewItem"]== YES) {
             NSTimer * nextImageTimer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(gotolocationview) userInfo:nil repeats:NO];

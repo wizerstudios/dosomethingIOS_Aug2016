@@ -23,6 +23,7 @@ static const NSInteger PWInvalidPosition = -1;
     NSArray * pageController;
     UIImageView*pageImageView;
     NSTimer *nextImageTimer;
+    bool is_scroll;
 }
 
 @property (nonatomic, assign) BOOL isLandscape;
@@ -423,6 +424,8 @@ static const NSInteger PWInvalidPosition = -1;
         [self nextImage:self.currentIndex];
         if([self.delegate respondsToSelector:@selector(parallaxScrollView:didChangeIndex:)]){
             [self.delegate parallaxScrollView:self didChangeIndex:self.currentIndex];
+            is_scroll =true;
+             [self nextImage:self.currentIndex];
         }
     }
 }
@@ -602,20 +605,34 @@ static const NSInteger PWInvalidPosition = -1;
     [self addSubview:imageView];
     [self addSubview:textImageview];
     [self addSubview:pageControllBtn];
-    
+   if(is_scroll == true)
+   {
+       [UIView animateWithDuration:2.0 animations:^{
+           imageView.alpha = 0.5;
+       }];
+       is_scroll= false;
+       
+       
+
+   }
+    else
+    {
     // Generates the animation  //before: UIViewAnimationCurveEaseInOut
-    [UIView animateWithDuration:15.0 delay:0 options:UIViewAnimationOptionCurveEaseOut animations:^
-     {
-         CGAffineTransform rotate    = CGAffineTransformMakeRotation(rotation);
-         CGAffineTransform moveRight = CGAffineTransformMakeTranslation(moveX, moveY);
-         CGAffineTransform combo1    = CGAffineTransformConcat(rotate, moveRight);
-         CGAffineTransform zoomIn    = CGAffineTransformMakeScale(zoomInX, zoomInY);
-         CGAffineTransform transform = CGAffineTransformConcat(zoomIn, combo1);
-         imageView.transform = transform;
-         
-         
-     } completion:^(BOOL finished) {}];
-    
+        [UIView animateWithDuration:15.0 delay:0 options:UIViewAnimationOptionCurveEaseOut animations:^
+         {
+             CGAffineTransform rotate    = CGAffineTransformMakeRotation(rotation);
+             CGAffineTransform moveRight = CGAffineTransformMakeTranslation(moveX, moveY);
+             CGAffineTransform combo1    = CGAffineTransformConcat(rotate, moveRight);
+             CGAffineTransform zoomIn    = CGAffineTransformMakeScale(zoomInX, zoomInY);
+             CGAffineTransform transform = CGAffineTransformConcat(zoomIn, combo1);
+             imageView.transform = transform;
+             
+             
+         } completion:^(BOOL finished) {
+            
+         }];
+
+       }
 }
 
 - (float)getResizeRatioFromImage:(UIImage *)image width:(float)frameWidth height:(float)frameHeight

@@ -578,21 +578,10 @@
             [cell.topViewCell addSubview:pgDtView];
             
             if(IS_IPHONE6) {
-            [pgDtView setFrame:CGRectMake(20, -5, profileImagePageControl.numberOfPages*18, 10)];
-            }
-            else if(IS_IPHONE6_Plus) {
-                [pgDtView setFrame:CGRectMake(40, -5, profileImagePageControl.numberOfPages*18, 10)];
-            }
-            else
-            {
-                [pgDtView setFrame:CGRectMake(20, -5, profileImagePageControl.numberOfPages*18, 10)];
-            }
 
-           
-        
-//               else if(i==1)
-//                {
-//                  [pgDtView setFrame:CGRectMake(15, -5, profileImagePageControl.numberOfPages*18, 10)];
+                if( i ==1)
+                {
+                    [pgDtView setFrame:CGRectMake(30, -5, profileImagePageControl.numberOfPages*18, 10)];
 //                    if(is_photoaddImg==YES)
 //                    {
 //                        [pageImageView setFrame:CGRectMake(i*18, 0, 8, 8)];
@@ -601,12 +590,44 @@
 //                    {
 //                        [pageImageView setFrame:CGRectMake(0, 0, 8, 8)];
 //                    }
-//                }
-//                else if(i==2)
-//                {
-//                    [pgDtView setFrame:CGRectMake(10, -5, profileImagePageControl.numberOfPages*18, 10)];
-//                   [pageImageView setFrame:CGRectMake(i*18, 0, 8, 8)];
-//                }
+                }
+                else if(i ==2)
+                {
+                    [pgDtView setFrame:CGRectMake(20, -5, profileImagePageControl.numberOfPages*18, 10)];
+                    //[pageImageView setFrame:CGRectMake(i*18, 0, 8, 8)];
+                }
+
+            }
+            else if(IS_IPHONE6_Plus) {
+                
+                if( i ==1)
+                {
+                    [pgDtView setFrame:CGRectMake(50, -5, profileImagePageControl.numberOfPages*18, 10)];
+                }
+                else if(i ==2)
+                {
+                    [pgDtView setFrame:CGRectMake(40, -5, profileImagePageControl.numberOfPages*18, 10)];
+                    
+                }
+
+            }
+            else
+            {
+                if( i ==1)
+                {
+                    [pgDtView setFrame:CGRectMake(30, -5, profileImagePageControl.numberOfPages*18, 10)];
+                }
+                else if(i ==2)
+                {
+                    [pgDtView setFrame:CGRectMake(20, -5, profileImagePageControl.numberOfPages*18, 10)];
+                    
+                }
+
+            }
+
+           
+        
+            
             
             
            
@@ -628,8 +649,6 @@
 #pragma mark - UIScrollViewDelegate
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView
 {
-
-    
     
     CGFloat pageWidths = scrollView.frame.size.width; // you need to have a **iVar** with getter for scrollView
     float fractionalPage = scrollView.contentOffset.x / pageWidths;
@@ -3571,6 +3590,7 @@
 
 -(void)RemoveprofileImage
 {
+    
     UIImage *defaultProfile = [UIImage imageNamed:@"profile_noimg"];
     UIImage *imageTwo   = [userProfileImageArray objectAtIndex:1];
     UIImage *imageThree = [userProfileImageArray objectAtIndex:2];
@@ -3599,7 +3619,16 @@
         userProfileImageArray = [@[defaultProfile, @"", @""] mutableCopy];
         isNewUser = YES;
     }
-    
+     NSString * removeimgField=[NSString stringWithFormat:@"image%ld",(long)selectedImageIndex];
+    [objWebService getDeleteprofileImage:deleteprofileImg sessionID:[COMMON getSessionID] Fieldimage:removeimgField success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        if([[[responseObject valueForKey:@"deleteprofileimage"]valueForKey:@"status"]isEqualToString:@"success"])
+        {
+            NSLog(@"response=%@",responseObject);
+        }
+    }
+    failure:^(AFHTTPRequestOperation *operation, id error) {
+                                     NSLog(@"error=%@",error);
+                        }];
     [_tableviewProfile reloadData];
 }
 
