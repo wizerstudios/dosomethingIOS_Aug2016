@@ -80,7 +80,7 @@
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" alwaysBounceVertical="YES" alwaysBounceHorizontal="YES" pagingEnabled="YES" translatesAutoresizingMaskIntoConstraints="NO" id="U02-po-bf5">
                                 <rect key="frame" x="0.0" y="20" width="300" height="150"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="300" id="9WJ-Gl-eUp"/>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="300" id="9WJ-Gl-eUp"/>
                                 </constraints>
                                 <connections>
                                     <outlet property="delegate" destination="-1" id="v01-p1-4gU"/>
@@ -117,8 +117,12 @@
                                     <constraint firstAttribute="height" constant="11" id="QYf-8c-A5U"/>
                                 </constraints>
                             </view>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uKk-0p-oJH">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uKk-0p-oJH">
                                 <rect key="frame" x="250" y="167" width="40" height="33"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="33" id="YVL-8Z-17E"/>
+                                    <constraint firstAttribute="width" constant="40" id="wKB-DB-DlU"/>
+                                </constraints>
                                 <inset key="imageEdgeInsets" minX="-3" minY="-5" maxX="-6" maxY="-6"/>
                                 <state key="normal" image="camera_icon"/>
                             </button>
@@ -127,6 +131,7 @@
                         <constraints>
                             <constraint firstItem="LRb-lA-1vW" firstAttribute="centerX" secondItem="R2K-2f-wgq" secondAttribute="centerX" constant="-16" id="7sA-5b-H01"/>
                             <constraint firstAttribute="trailing" secondItem="U02-po-bf5" secondAttribute="trailing" id="BSB-ld-Qd8"/>
+                            <constraint firstAttribute="bottom" secondItem="uKk-0p-oJH" secondAttribute="bottom" id="KY2-vf-xUp"/>
                             <constraint firstItem="uey-h2-iAy" firstAttribute="centerX" secondItem="R2K-2f-wgq" secondAttribute="centerX" id="ZhW-49-L52"/>
                             <constraint firstAttribute="bottom" secondItem="uey-h2-iAy" secondAttribute="bottom" id="dx5-2B-Pyy"/>
                             <constraint firstItem="U02-po-bf5" firstAttribute="top" secondItem="R2K-2f-wgq" secondAttribute="top" constant="20" id="exc-gy-BqT"/>
@@ -135,6 +140,7 @@
                             <constraint firstAttribute="bottom" secondItem="LRb-lA-1vW" secondAttribute="bottom" constant="-10" id="oIF-gB-tXh"/>
                             <constraint firstItem="U02-po-bf5" firstAttribute="leading" secondItem="R2K-2f-wgq" secondAttribute="leading" id="q2h-GV-Kof"/>
                             <constraint firstItem="LRb-lA-1vW" firstAttribute="top" secondItem="U02-po-bf5" secondAttribute="bottom" constant="3" id="vEi-L0-ygT"/>
+                            <constraint firstAttribute="trailing" secondItem="uKk-0p-oJH" secondAttribute="trailing" constant="10" id="wkW-9t-a5E"/>
                         </constraints>
                     </view>
                 </subviews>

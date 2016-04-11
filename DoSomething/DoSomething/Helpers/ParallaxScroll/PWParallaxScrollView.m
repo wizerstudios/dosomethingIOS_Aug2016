@@ -373,6 +373,8 @@ static const NSInteger PWInvalidPosition = -1;
         [_foregroundScrollView setContentOffset:CGPointMake(factor * scrollView.contentOffset.x, 0)];
     
     CGFloat offsetX = scrollView.contentOffset.x;
+   
+   
     [self determineBackgroundView:offsetX];
     
     CGRect visibleRect;

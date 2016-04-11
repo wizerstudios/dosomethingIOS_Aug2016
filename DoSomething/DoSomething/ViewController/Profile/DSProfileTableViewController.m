@@ -187,84 +187,12 @@
     
     isLoadData=NO;
     
-   
-   
+     [self setInitialProfileArray];
 }
 
--(void)viewAllmethod
-{
-    [self setInitialProfileArray];
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(loadInvalidSessionAlert:)
-                                                 name:@"InvalidSession"
-                                               object:nil];
-    
-    imageNormalArray =[[NSMutableArray alloc]init];
-    
-    hobbiesMainArray = [[NSMutableArray alloc]init];
-    
-    profileDict=[[NSMutableDictionary alloc]init];
-    profileDict =[[NSUserDefaults standardUserDefaults] valueForKey:USERDETAILS];
-    
-    
-    if([[NSUserDefaults standardUserDefaults]valueForKey:HobbiesArray] != NULL)
-        hobbiesMainArray = [[NSUserDefaults standardUserDefaults]valueForKey:HobbiesArray];
-    
-    else{
-        if([profileDict valueForKey:@"hobbieslist"]!=NULL)
-            
-            hobbiesMainArray = [[profileDict valueForKey:@"hobbieslist"]mutableCopy];
-        emailPasswordToRegister=[profileDict valueForKey:@"password"];
-        
-    }
-    [[NSUserDefaults standardUserDefaults]setObject:hobbiesMainArray forKey:HobbiesArray];
-    
-    
-    
-    infoArray=[[NSMutableArray alloc]initWithObjects:@"profile_noimg",@"profile_noimg",@"profile_noimg", nil];
-    
-    if(!isLoadData){
-        [self initializeArray];
-        [self profileImageDisplayMethod];
-        if (profileDict== nil)
-        {
-            
-            [[NSUserDefaults standardUserDefaults]removeObjectForKey:HobbiesArray];
-            
-        }
-        
-        isLoadData = YES;
-    }
-    else if(isLoadData == YES && profileDict ==NULL)
-    {
-        
-        hobbiesMainArray = [[[NSUserDefaults standardUserDefaults]valueForKey:HobbiesArray]mutableCopy];
-        
-        imageNormalArray = [[hobbiesMainArray valueForKey:@"image"]mutableCopy];
-        
-        hobbiesNameArray = [hobbiesMainArray valueForKey:@"name"];
-        
-        
-        
-        strInterestHobbies = [[hobbiesMainArray valueForKey:@"hobbies_id"] componentsJoinedByString:@","];
-        
-    }
-    [self selectitemMethod];
-    
-    [_tableviewProfile reloadData];
-    
-    [self loadNavigation];
-    if(profileDict==NULL)
-    {
-        [customNavigation.saveBtn setTitle:@"Create" forState:UIControlStateNormal];
-    }
-    
-    
-
-}
 -(void)viewWillAppear:(BOOL)animated
 {
-    [self setInitialProfileArray];
+    
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(loadInvalidSessionAlert:)
                                                  name:@"InvalidSession"
@@ -275,6 +203,7 @@
     hobbiesMainArray = [[NSMutableArray alloc]init];
     
      profileDict=[[NSMutableDictionary alloc]init];
+    
     profileDict =[[NSUserDefaults standardUserDefaults] valueForKey:USERDETAILS];
     
     
@@ -325,6 +254,8 @@
      [_tableviewProfile reloadData];
     
     [self loadNavigation];
+  
+
     if(profileDict==NULL)
     {
         [customNavigation.saveBtn setTitle:@"Create" forState:UIControlStateNormal];
@@ -706,6 +637,13 @@
    
     isTapping=NO;
     scrolldragging=@"YES";
+    NSString * FirstSignin=[[NSUserDefaults standardUserDefaults]valueForKey:FistSiginprofile];
+    if([FirstSignin isEqualToString:@"FirstSiginProfile"])
+    {
+        //self.WalAlterview.hidden =NO;
+        [self GerenalWalkAlterviewSign];
+        [[NSUserDefaults standardUserDefaults]removeObjectForKey:FistSiginprofile];
+    }
 }
 
 
@@ -2082,13 +2020,7 @@
         else{
             cell.termsOfUse.hidden =NO;
             cell.privacyPolicy.hidden=NO;
-            NSString * FirstSignin=[[NSUserDefaults standardUserDefaults]valueForKey:FistSiginprofile];
-            if([FirstSignin isEqualToString:@"FirstSiginProfile"])
-            {
-                //self.WalAlterview.hidden =NO;
-                [self GerenalWalkAlterviewSign];
-                [[NSUserDefaults standardUserDefaults]removeObjectForKey:FistSiginprofile];
-            }
+          
             
 
         }
@@ -3561,7 +3493,7 @@
                 extraSpace = 110;
             }
             else
-                extraSpace = 90;
+                extraSpace = 80;
             if(IS_IPHONE6)
             {
                 if(imageIndex==0 || imageIndex==2)
@@ -3605,9 +3537,13 @@
             {
               [self.scrView setContentSize:CGSizeMake(self.scrView.frame.size.width*(imageIndex+1)+45, 150)];
             }
-            else
+            else if(IS_IPHONE6_Plus)
             {
                 [self.scrView setContentSize:CGSizeMake(self.scrView.frame.size.width*(imageIndex+1), 150)];
+            }
+            else
+            {
+                 [self.scrView setContentSize:CGSizeMake(self.scrView.frame.size.width*(imageIndex+1)-8, 150)];
             }
             
             totalImageCount = imageIndex;
