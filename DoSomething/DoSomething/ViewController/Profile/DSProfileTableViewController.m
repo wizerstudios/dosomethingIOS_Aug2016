@@ -572,6 +572,8 @@
             [blkdot setImage:[UIImage imageNamed:@"dot_normal"]];
             [pgDtView addSubview:blkdot];
              [pageImageView setImage:[UIImage imageNamed:@"dot_active_red"]];
+             [pageImageView setFrame:CGRectMake(0, 0, 8, 8)];
+            
             [pgDtView addSubview:pageImageView];
             [cell.topViewCell addSubview:pgDtView];
             
@@ -586,8 +588,7 @@
                 [pgDtView setFrame:CGRectMake(20, -5, profileImagePageControl.numberOfPages*18, 10)];
             }
 
-            
-            //[pageImageView setFrame:CGRectMake(i*18, 0, 8, 8)];
+           
         
 //               else if(i==1)
 //                {
@@ -627,25 +628,35 @@
 #pragma mark - UIScrollViewDelegate
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView
 {
-    currentImageIndex = scrollView.contentOffset.x / scrollView.frame.size.width;
+
     
-    if (scrollView==self.scrView) {    }
     
-    jslider = scrollView.contentOffset.x / scrollView.frame.size.width;
-    [self.scrView setNeedsDisplay];
-    profileImagePageControl.currentPage = jslider;
-    [pageImageView setFrame:CGRectMake(jslider*18, 0, 8, 8)];
-    //[userProfileImage setFrame:CGRectMake(currentImageIndex*40, 0, 8, 8)];
-   
+    CGFloat pageWidths = scrollView.frame.size.width; // you need to have a **iVar** with getter for scrollView
+    float fractionalPage = scrollView.contentOffset.x / pageWidths;
+    NSInteger page = lround(fractionalPage);
+   profileImagePageControl.currentPage = page;
+    [pageImageView setFrame:CGRectMake(page*18, 0, 8, 8)];
+    
     isTapping=NO;
     scrolldragging=@"YES";
-//    NSString * FirstSignin=[[NSUserDefaults standardUserDefaults]valueForKey:FistSiginprofile];
-//    if([FirstSignin isEqualToString:@"FirstSiginProfile"])
-//    {
-//        //self.WalAlterview.hidden =NO;
-//        [self GerenalWalkAlterviewSign];
-//        [[NSUserDefaults standardUserDefaults]removeObjectForKey:FistSiginprofile];
-//    }
+    //    if([FirstSignin isEqualToString:@"FirstSiginProfile"])
+    //    {
+    //        //self.WalAlterview.hidden =NO;
+    //        [self GerenalWalkAlterviewSign];
+    //        [[NSUserDefaults standardUserDefaults]removeObjectForKey:FistSiginprofile];
+    //    }
+    
+    
+//     CurrentImage = scrollView.contentOffset.x / scrollView.frame.size.width;
+//        
+//        if (scrollView==self.scrView) {    }
+//        pull=@"";
+//        jslider = scrollView.contentOffset.x / scrollView.frame.size.width;
+//        [self.scrView setNeedsDisplay];
+//        profileImagePageControl.currentPage=selectedImageIndex;
+    
+    //    NSString * FirstSignin=[[NSUserDefaults standardUserDefaults]valueForKey:FistSiginprofile];
+
 }
 
 
