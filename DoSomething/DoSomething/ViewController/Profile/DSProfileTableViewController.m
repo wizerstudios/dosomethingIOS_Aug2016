@@ -1976,6 +1976,10 @@
                     //cell.layoutConstraintAccLabelYPos.constant =42;
                         cell.layoutConstraintEmailPassViewHeight.constant =40;
             }
+            else
+            {
+                cell.layoutConstraintEmailPassViewHeight.constant =40;
+            }
 
             
         }
@@ -3512,6 +3516,7 @@
     
      UIImage * lastobject = [userProfileImageArray valueForKey: @"@lastObject"];
     
+
     
     for(int imageIndex = 0; imageIndex < [userProfileImageArray count]; imageIndex++)
     {
@@ -3551,17 +3556,17 @@
                 if(![lastobject  isEqual: @""] && imageIndex ==1)
                 {
                     
-                    userProfileImage = [[UIImageView alloc]initWithFrame:CGRectMake((imageIndex * self.scrView.frame.size.width)+ extraSpace,
+                    userProfileImage = [[UIImageView alloc]initWithFrame:CGRectMake((imageIndex * self.scrView.frame.size.width)+110,
                                                                                     20, self.profileImageView.frame.size.width, self.profileImageView.frame.size.height)];
                 }
-//                else if (![lastobject  isEqual: @""] && imageIndex ==2)
-//                {
-//                    
-//                        
-//                        userProfileImage = [[UIImageView alloc]initWithFrame:CGRectMake((imageIndex * self.scrView.frame.size.width)+200,
-//                                                                                        20, self.profileImageView.frame.size.width, self.profileImageView.frame.size.height)];
-//                    
-//                }
+                else if (![lastobject  isEqual: @""] && imageIndex ==2)
+                {
+                    
+                        
+                        userProfileImage = [[UIImageView alloc]initWithFrame:CGRectMake((imageIndex * self.scrView.frame.size.width)+120,
+                                                                                        20, self.profileImageView.frame.size.width, self.profileImageView.frame.size.height)];
+                    
+                }
                 else
                 {
                     userProfileImage = [[UIImageView alloc]initWithFrame:CGRectMake((imageIndex * self.scrView.frame.size.width) + extraSpace,
@@ -3601,7 +3606,7 @@
             }
             else if(IS_IPHONE6_Plus)
             {
-                [self.scrView setContentSize:CGSizeMake(self.scrView.frame.size.width*(imageIndex+1)+90, 150)];
+                [self.scrView setContentSize:CGSizeMake(self.scrView.frame.size.width*(imageIndex+1)+80, 150)];
             }
             else
             {
