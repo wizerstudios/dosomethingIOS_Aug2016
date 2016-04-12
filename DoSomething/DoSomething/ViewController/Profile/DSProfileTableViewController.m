@@ -602,11 +602,11 @@
                 
                 if( i ==1)
                 {
-                    [pgDtView setFrame:CGRectMake(50, -5, profileImagePageControl.numberOfPages*18, 10)];
+                    [pgDtView setFrame:CGRectMake(30, -5, profileImagePageControl.numberOfPages*18, 10)];
                 }
                 else if(i ==2)
                 {
-                    [pgDtView setFrame:CGRectMake(40, -5, profileImagePageControl.numberOfPages*18, 10)];
+                    [pgDtView setFrame:CGRectMake(20, -5, profileImagePageControl.numberOfPages*18, 10)];
                     
                 }
 
@@ -3522,7 +3522,9 @@
             NSInteger extraSpace;
             
             if(IS_IPHONE6_Plus)
+            {
                 extraSpace = 130;
+            }
             else if (IS_IPHONE6)
             {
                 extraSpace = 115;
@@ -3543,6 +3545,32 @@
                                                                             20, self.profileImageView.frame.size.width, self.profileImageView.frame.size.height)];
                 }
             }
+            
+            if(IS_IPHONE6_Plus)
+            {
+                if(![lastobject  isEqual: @""] && imageIndex ==1)
+                {
+                    
+                    userProfileImage = [[UIImageView alloc]initWithFrame:CGRectMake((imageIndex * self.scrView.frame.size.width)+ extraSpace,
+                                                                                    20, self.profileImageView.frame.size.width, self.profileImageView.frame.size.height)];
+                }
+//                else if (![lastobject  isEqual: @""] && imageIndex ==2)
+//                {
+//                    
+//                        
+//                        userProfileImage = [[UIImageView alloc]initWithFrame:CGRectMake((imageIndex * self.scrView.frame.size.width)+200,
+//                                                                                        20, self.profileImageView.frame.size.width, self.profileImageView.frame.size.height)];
+//                    
+//                }
+                else
+                {
+                    userProfileImage = [[UIImageView alloc]initWithFrame:CGRectMake((imageIndex * self.scrView.frame.size.width) + extraSpace,
+                                                                                    20, self.profileImageView.frame.size.width, self.profileImageView.frame.size.height)];
+                }
+            }
+
+            
+            
             else
             {
                 userProfileImage = [[UIImageView alloc]initWithFrame:CGRectMake((imageIndex * self.scrView.frame.size.width) + extraSpace,
@@ -3573,7 +3601,7 @@
             }
             else if(IS_IPHONE6_Plus)
             {
-                [self.scrView setContentSize:CGSizeMake(self.scrView.frame.size.width*(imageIndex+1), 150)];
+                [self.scrView setContentSize:CGSizeMake(self.scrView.frame.size.width*(imageIndex+1)+90, 150)];
             }
             else
             {

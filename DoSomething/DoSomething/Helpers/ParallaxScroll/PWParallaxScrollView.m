@@ -441,6 +441,7 @@ static const NSInteger PWInvalidPosition = -1;
 - (UIView *)hitTest:(CGPoint)point withEvent:(UIEvent *)event
 {
     for (UIView *subview in _foregroundScrollView.subviews) {
+    
         CGPoint convertedPoint = [self convertPoint:point toView:subview];
         UIView *result = [subview hitTest:convertedPoint withEvent:event];
         
@@ -476,6 +477,7 @@ static const NSInteger PWInvalidPosition = -1;
     UIImageView *imageView = nil;
     UIImageView    * textImageview   =nil;
     UIPageControl * pageControll =nil;
+    UIView * settranspate =nil;
     
     float originX       = -1;
     float originY       = -1;
@@ -493,6 +495,7 @@ static const NSInteger PWInvalidPosition = -1;
     float optimusWidth  = (image.size.width * resizeRatio) * enlargeRatio;
     float optimusHeight = (image.size.height * resizeRatio) * enlargeRatio;
     imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0,self.frame.size.width,518)];
+    settranspate=[[UIView alloc]initWithFrame:CGRectMake(0, 0,self.frame.size.width,self.frame.size.height)];
    
     if(_currentIndex == 0)
     {
@@ -536,7 +539,8 @@ static const NSInteger PWInvalidPosition = -1;
     
     
     imageView.backgroundColor = [UIColor greenColor];
-    
+    settranspate.backgroundColor =[UIColor whiteColor];
+    settranspate.hidden =YES;
     
     
     // Calcule the maximum move allowed.
@@ -605,15 +609,24 @@ static const NSInteger PWInvalidPosition = -1;
     [self addSubview:imageView];
     [self addSubview:textImageview];
     [self addSubview:pageControllBtn];
+    [self addSubview:settranspate];
+    
    if(is_scroll == true)
    {
-       [UIView animateWithDuration:2.0 animations:^{
-           imageView.alpha = 0.5;
-       }];
-       is_scroll= false;
-       
-       
-
+        settranspate.hidden =NO;
+       [UIView animateWithDuration:0.5 delay:0 options:UIViewAnimationOptionCurveEaseOut animations:^
+        {
+         
+            settranspate.alpha =0.5;
+            imageView.alpha = 1.0;
+            
+            
+        } completion:^(BOOL finished) {
+              is_scroll= false;
+            [settranspate removeFromSuperview];
+            [imageView removeFromSuperview];
+        }];
+    
    }
     else
     {
