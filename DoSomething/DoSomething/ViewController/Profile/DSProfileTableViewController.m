@@ -939,10 +939,7 @@
 - (void)textFieldDidEndEditing:(UITextField *)textField{
     
     
-    
     textField.textColor =[UIColor colorWithRed:(float)161.0/255 green:(float)161.0/255 blue:(float)161.0/255 alpha:1.0f];
-    
-    
     
     NSString *selOptionVal;
     
@@ -1530,7 +1527,7 @@
         }
         if(profileDict != NULL)
         {
-            
+            cell.textFieldDPPlaceHolder.enabled=NO;
             if(![[profileDict valueForKey:@"date_of_birth"] isEqual:currentTextfield.text]){
                 
                 
@@ -1564,23 +1561,18 @@
         }
         else if(userDetailsDict.count > 0){
             
-            NSString *datestr= [userDetailsDict valueForKey:@"birthday"];
+             cell.textFieldDPPlaceHolder.enabled=YES;
+          //  NSString *datestr= [userDetailsDict valueForKey:@"birthday"];
+            NSString *tempdatestring= [userDetailsDict valueForKey:@"birthday"];
+            NSString *datestr= [self changefbDateFormat:tempdatestring];
+            
             if(datestr!=nil ){
-                
-                
                 if(currentTextfield.text == NULL){
-                    cell.textFieldDPPlaceHolder.text =[userDetailsDict valueForKey:@"birthday"];
-                    NSString *datestr=[userDetailsDict valueForKey:@"birthday"];
+                    cell.textFieldDPPlaceHolder.text = datestr;
                     currentTextfield.text=cell.textFieldDPPlaceHolder.text;
-                    NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
-                    [dateFormat setDateFormat:@"dd/mm/yyyy"];
-                    NSDate *date = [dateFormat dateFromString:datestr];
-                    dateFormat = [[NSDateFormatter alloc] init];
-                    [dateFormat setDateFormat:@"yyyy-MM-dd"];
-                    dateChange = [dateFormat stringFromDate:date];
-                    NSLog(@"%@",dateChange);
-                    
-                    strDOB       = (currentTextfield.text !=nil)?currentTextfield.text :dateChange;
+                    dateChange = [self changeDateFormat:datestr];
+                    NSLog(@"dateChange = %@",dateChange);
+                    strDOB = (currentTextfield.text !=nil)?currentTextfield.text :dateChange;
                     [cell.textFieldDPPlaceHolder setTag:1000];
                     
                 }
@@ -1816,11 +1808,7 @@
             {
                 [profileScrollView setContentSize:CGSizeMake(0, self.tableviewProfile.frame.origin.y + self.tableviewProfile.contentSize.height+self.tableViewHeightConstraint.constant-(self.profiletableheight.constant+110))];
             }
-            else{
-                [self viewDidLayoutSubviews];
-                
-                
-            }
+            
             
         }
     }
@@ -2393,14 +2381,40 @@
     }
     
     strAbout = textView.text;
+     dataSize = [COMMON getControlHeight:strAbout withFontName:@"Patron-Regular" ofSize:14.0 withSize:CGSizeMake(textView.frame.size.width-20,textView.frame.size.height)];
     
-    //[self.tableviewProfile scrollToRowAtIndexPath:[self.tableviewProfile indexPathForCell:cell] atScrollPosition:UITableViewScrollPositionBottom animated:NO];
     
-    [self.tableviewProfile beginUpdates];
-    NSArray *indexPaths = [[NSArray alloc] initWithObjects:indexPath, nil];
-    [self.tableviewProfile reloadRowsAtIndexPaths:indexPaths withRowAnimation:UITableViewRowAnimationNone];
-    [self performSelector:@selector(settableviewheight) withObject:nil afterDelay:0.2];
-    [self.tableviewProfile endUpdates];
+    [self.tableviewProfile scrollToRowAtIndexPath:[self.tableviewProfile indexPathForCell:cell] atScrollPosition:UITableViewScrollPositionBottom animated:NO];
+    
+   
+    if(IS_IPHONE6 || IS_IPHONE6_Plus)
+    {
+        if(dataSize.height > 65)
+        {
+            [self.tableviewProfile beginUpdates];
+            NSArray *indexPaths = [[NSArray alloc] initWithObjects:indexPath, nil];
+            [self.tableviewProfile reloadRowsAtIndexPaths:indexPaths withRowAnimation:UITableViewRowAnimationNone];
+           [self performSelector:@selector(settableviewheight) withObject:nil afterDelay:0.2];
+             [self.tableviewProfile endUpdates];
+        }
+    }
+    else
+    {
+//        [self.tableviewProfile beginUpdates];
+//        NSArray *indexPaths = [[NSArray alloc] initWithObjects:indexPath, nil];
+//        [self.tableviewProfile reloadRowsAtIndexPaths:indexPaths withRowAnimation:UITableViewRowAnimationNone];
+//        [self.tableviewProfile endUpdates];
+
+       
+        if(dataSize.height > 50)
+        {
+            //[self performSelector:@selector(settableviewheight) withObject:nil afterDelay:0.2];
+            
+        }
+        
+    }
+    
+    
     
     
     
@@ -2830,11 +2844,7 @@
     }
     
     NSInteger selectedIndex = (isTapGesture) ? selectedImageIndex : currentImageIndex;
-    
-    
     [userProfileImageArray replaceObjectAtIndex:selectedIndex withObject:image];
-    
-    
     
     [self setUserProfileImages];
     [imagepickerController dismissViewControllerAnimated:YES completion:nil];
@@ -2909,6 +2919,8 @@
     
     NSString *fbProfileStr;
     
+    NSString *dobStr = [self changeDateFormat:currentTextfield.text];
+    
     if([strType isEqualToString:@"2"])
         fbProfileStr =([FBImageStr isEqualToString:@"1"])?@"":[userDetailsDict valueForKey:@"profileImage"];
     if([COMMON isInternetReachable]){
@@ -2920,7 +2932,7 @@
                               email:emailAddressToRegister
                            password:(currentPassword==nil)?emailPasswordToRegister:currentPassword
                           profileId:strProfileID
-                                dob:dateChange
+                                dob:dobStr
                       profileImage1:[userProfileImageArray objectAtIndex:0]
                       profileImage2:[userProfileImageArray objectAtIndex:1]
                       profileImage3:[userProfileImageArray objectAtIndex:2]
@@ -3742,4 +3754,26 @@
                                  }];
     [_tableviewProfile reloadData];
 }
+
+-(NSString *)changeDateFormat:(NSString *)_date{
+    
+    NSDateFormatter *dateFormat = [[NSDateFormatter alloc]init];
+    [dateFormat setDateFormat:@"dd/MM/yyyy"];
+    NSDate *changeddate = [dateFormat dateFromString:_date];
+    [dateFormat setDateFormat:@"yyyy-MM-dd"];
+    NSString *dateStr = [dateFormat stringFromDate:changeddate];
+    return dateStr;
+    
+}
+
+-(NSString *)changefbDateFormat:(NSString *)_date{
+    NSDateFormatter *fbdateFormat = [[NSDateFormatter alloc]init];
+    [fbdateFormat setDateFormat:@"MM/dd/yyyy"];
+    NSDate *changeddate = [fbdateFormat dateFromString:_date];
+    [fbdateFormat setDateFormat:@"dd/MM/yyyy"];
+    NSString *dateStr = [fbdateFormat stringFromDate:changeddate];
+    return dateStr;
+    
+}
+
 @end

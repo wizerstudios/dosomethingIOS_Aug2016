@@ -12,6 +12,17 @@
 #import "DSAppCommon.h"
 #define enlargeRatio 1.1
 
+
+
+typedef enum ScrollDirection {
+    ScrollDirectionNone,
+    ScrollDirectionRight,
+    ScrollDirectionLeft,
+    ScrollDirectionUp,
+    ScrollDirectionDown,
+    ScrollDirectionCrazy,
+} ScrollDirection;
+
 static const NSInteger PWInvalidPosition = -1;
 
 @interface PWParallaxScrollView () <UIScrollViewDelegate,CLLocationManagerDelegate,KenBurnsViewDelegate>
@@ -24,6 +35,7 @@ static const NSInteger PWInvalidPosition = -1;
     UIImageView*pageImageView;
     NSTimer *nextImageTimer;
     bool is_scroll;
+     NSString * scrolldirectionstr;
 }
 
 @property (nonatomic, assign) BOOL isLandscape;
@@ -50,6 +62,7 @@ static const NSInteger PWInvalidPosition = -1;
 
 //@property (nonatomic,strong) DSProfileTableViewController *objSplash;
 
+@property (nonatomic, assign) CGFloat lastContentOffset;
 - (void)touchScrollViewTapped:(id)sender;
 
 @end
@@ -422,10 +435,25 @@ static const NSInteger PWInvalidPosition = -1;
         }
         [pageImageView setBackgroundColor:[UIColor clearColor]];
         [self nextImage:self.currentIndex];
-        if([self.delegate respondsToSelector:@selector(parallaxScrollView:didChangeIndex:)]){
-            [self.delegate parallaxScrollView:self didChangeIndex:self.currentIndex];
-            is_scroll =true;
-             [self nextImage:self.currentIndex];
+        if([self.delegate respondsToSelector:@selector(parallaxScrollView:didChangeIndex:direction:)]){
+            [self.layer removeAllAnimations];
+
+            ScrollDirection scrollDirection;
+           
+            if (self.lastContentOffset > scrollView.contentOffset.x)
+            {
+                scrollDirection = ScrollDirectionRight;
+                scrolldirectionstr=@"ScrollDirectionRight";
+               
+            }
+            else if (self.lastContentOffset < scrollView.contentOffset.x)
+            {
+                scrollDirection = ScrollDirectionLeft;
+                scrolldirectionstr=@"ScrollDirectionLeft";
+            }
+            self.lastContentOffset = scrollView.contentOffset.x;
+            [self.delegate parallaxScrollView:self didChangeIndex:self.currentIndex direction:scrolldirectionstr];
+           
         }
     }
 }
@@ -434,6 +462,39 @@ static const NSInteger PWInvalidPosition = -1;
 {
     if([self.delegate respondsToSelector:@selector(parallaxScrollView:didEndDeceleratingAtIndex:)]){
         [self.delegate parallaxScrollView:self didEndDeceleratingAtIndex:self.currentIndex];
+    }
+}
+
+- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView
+{
+//    if([self.delegate respondsToSelector:@selector(parallaxScrollView:didChangeIndex:direction:)]){
+//        [self.layer removeAllAnimations];
+//        
+//        ScrollDirection scrollDirection;
+//        
+//        if (self.lastContentOffset > scrollView.contentOffset.x)
+//        {
+//            scrollDirection = ScrollDirectionRight;
+//            scrolldirectionstr=@"ScrollDirectionRight";
+//            
+//        }
+//        else if (self.lastContentOffset < scrollView.contentOffset.x)
+//        {
+//            scrollDirection = ScrollDirectionLeft;
+//            scrolldirectionstr=@"ScrollDirectionLeft";
+//        }
+//        self.lastContentOffset = scrollView.contentOffset.x;
+//        [self.delegate parallaxScrollView:self didChangeIndex:self.currentIndex direction:scrolldirectionstr];
+//        
+//    }
+}
+
+-(void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate
+{
+    if(decelerate){
+        if([self.delegate respondsToSelector:@selector(parallaxScrollView:didEndDeceleratingAtIndex:)]){
+            [self.delegate parallaxScrollView:self didEndDeceleratingAtIndex:self.currentIndex];
+        }
     }
 }
 
@@ -477,7 +538,6 @@ static const NSInteger PWInvalidPosition = -1;
     UIImageView *imageView = nil;
     UIImageView    * textImageview   =nil;
     UIPageControl * pageControll =nil;
-    UIView * settranspate =nil;
     
     float originX       = -1;
     float originY       = -1;
@@ -495,7 +555,6 @@ static const NSInteger PWInvalidPosition = -1;
     float optimusWidth  = (image.size.width * resizeRatio) * enlargeRatio;
     float optimusHeight = (image.size.height * resizeRatio) * enlargeRatio;
     imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0,self.frame.size.width,518)];
-    settranspate=[[UIView alloc]initWithFrame:CGRectMake(0, 0,self.frame.size.width,self.frame.size.height)];
    
     if(_currentIndex == 0)
     {
@@ -539,8 +598,6 @@ static const NSInteger PWInvalidPosition = -1;
     
     
     imageView.backgroundColor = [UIColor greenColor];
-    settranspate.backgroundColor =[UIColor whiteColor];
-    settranspate.hidden =YES;
     
     
     // Calcule the maximum move allowed.
@@ -609,29 +666,10 @@ static const NSInteger PWInvalidPosition = -1;
     [self addSubview:imageView];
     [self addSubview:textImageview];
     [self addSubview:pageControllBtn];
-    [self addSubview:settranspate];
     
-   if(is_scroll == true)
-   {
-        settranspate.hidden =NO;
-       [UIView animateWithDuration:0.5 delay:0 options:UIViewAnimationOptionCurveEaseOut animations:^
-        {
-         
-            settranspate.alpha =0.5;
-            imageView.alpha = 1.0;
-            
-            
-        } completion:^(BOOL finished) {
-              is_scroll= false;
-            [settranspate removeFromSuperview];
-            [imageView removeFromSuperview];
-        }];
-    
-   }
-    else
-    {
+
     // Generates the animation  //before: UIViewAnimationCurveEaseInOut
-        [UIView animateWithDuration:15.0 delay:0 options:UIViewAnimationOptionCurveEaseOut animations:^
+        [UIView animateWithDuration:10.0 delay:0 options:UIViewAnimationOptionCurveEaseOut animations:^
          {
              CGAffineTransform rotate    = CGAffineTransformMakeRotation(rotation);
              CGAffineTransform moveRight = CGAffineTransformMakeTranslation(moveX, moveY);
@@ -644,8 +682,8 @@ static const NSInteger PWInvalidPosition = -1;
          } completion:^(BOOL finished) {
             
          }];
-
-       }
+    //}
+    
 }
 
 - (float)getResizeRatioFromImage:(UIImage *)image width:(float)frameWidth height:(float)frameHeight

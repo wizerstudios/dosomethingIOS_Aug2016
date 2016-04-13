@@ -517,6 +517,10 @@
 }
 #pragma mark - checkuserEmailAPI
 - (void)checkUserEmail{
+    NSLog(@"dob=%@",dob);
+    NSString *dobStr = [self changeDateFormat:dob];
+    NSLog(@"dobStr =  %@ ",dobStr);
+    
     if([COMMON isInternetReachable]){
         
         [COMMON LoadIcon:self.view];
@@ -526,7 +530,7 @@
                         password:password
                       first_name:firstName
                        last_name:lastName
-                             dob:dob
+                             dob:dobStr
                           gender:gender
                     profileImage:profileImage
                          success:^(AFHTTPRequestOperation *operation, id responseObject){
@@ -601,6 +605,7 @@
                  gender = [userData valueForKey:@"gender"];
                  profileImage = [NSString stringWithFormat:@"https://graph.facebook.com/%@/picture?type=large&return_ssl_resources=1", userData[@"id"]];
                  NSString * strDOB=[userData valueForKey:@"birthday"];
+                 NSLog(@"dob=%@",strDOB);
                  dob = (strDOB==nil)?@"":[userData valueForKey:@"birthday"]; //@""; //
                  NSLog(@"birthday=%@",[userData valueForKey:@"birthday"]);
                  [fbUserDetailsDict setObject:profileImage forKey:@"profileImage"];
@@ -995,6 +1000,16 @@
     } completion:^(BOOL finished) {
         [self flashOff:v];
     }];
+}
+
+-(NSString *)changeDateFormat:(NSString *)_date{
+    NSDateFormatter *dateFormat = [[NSDateFormatter alloc]init];
+    [dateFormat setDateFormat:@"MM/dd/yyyy"];
+    NSDate *changeddate = [dateFormat dateFromString:_date];
+    [dateFormat setDateFormat:@"yyyy-MM-dd"];
+    NSString *dateStr = [dateFormat stringFromDate:changeddate];
+    return dateStr;
+    
 }
 
 

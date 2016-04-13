@@ -490,6 +490,8 @@
     objCustomAlterview.alertMsgLabel.lineBreakMode = NSLineBreakByWordWrapping;
     objCustomAlterview.alertMsgLabel.numberOfLines = 2;
     [objCustomAlterview.alertMsgLabel setTextColor:[UIColor colorWithRed:(255/255.0f) green:(255/255.0f) blue:(255/255.0f) alpha:1.0f]];
+    
+    
 }
 -(IBAction)didClickTearmofuseAction:(id)sender
 {
@@ -595,11 +597,14 @@
                                         
                                     {
                                         
+                                        if([optionLogoutDelete isEqualToString:@"delete"])
+                                        {
                                     
                                         if([[profileDict valueForKey:@"type"]isEqualToString:@"2"]){
                                             FBSDKLoginManager *loginManager = [[FBSDKLoginManager alloc] init];
                                             [loginManager logOut];
                                             [FBSDKAccessToken setCurrentAccessToken:nil];
+                                        }
                                         }
                                         [COMMON removeUserDetails];
                                         
