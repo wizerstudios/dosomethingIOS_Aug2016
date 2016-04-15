@@ -104,6 +104,7 @@
     {
         [self CreateAccountWalkAlterview];
         [[NSUserDefaults standardUserDefaults]removeObjectForKey:FirstRegistor];
+        [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"SelectNewItem"];
     }
 
 }
@@ -703,6 +704,7 @@ minimumLineSpacingForSectionAtIndex:(NSInteger)section {
     {
         [self GerenalWalkAlterview];
         [[NSUserDefaults standardUserDefaults]removeObjectForKey:FirstloginHomeview];
+        
     }
     
     [self.view setBackgroundColor:[UIColor clearColor]];
@@ -723,10 +725,10 @@ minimumLineSpacingForSectionAtIndex:(NSInteger)section {
     anyTimeButton.hidden =YES;
     
     [self loadActivityImageView];
-    if([[activityMainDict valueForKey:@"Available"] isEqualToString:@"Yes"] && [[activityMainDict valueForKey:@"LastActivity"] isEqualToString:@"Few seconds ago"])
+    if([[activityMainDict valueForKey:@"LastActivity"] isEqualToString:@"Few seconds ago"])
     {
         if([[NSUserDefaults standardUserDefaults] boolForKey:@"SelectNewItem"]== YES) {
-            NSTimer * nextImageTimer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(nextImage) userInfo:nil repeats:NO];
+            NSTimer * nextImageTimer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(gotolocationview) userInfo:nil repeats:NO];
             [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"SelectNewItem"];
         }
        
@@ -734,7 +736,7 @@ minimumLineSpacingForSectionAtIndex:(NSInteger)section {
     }
     
 }
--(void)nextImage
+-(void)gotolocationview
 {
     [appDelegate.locationButton setBackgroundImage:[UIImage imageNamed:@"loaction_active.png"] forState:UIControlStateNormal];
     DSLocationViewController * locationview =[[DSLocationViewController alloc]initWithNibName:@"DSLocationViewController" bundle:nil];
@@ -962,7 +964,7 @@ minimumLineSpacingForSectionAtIndex:(NSInteger)section {
     blueTxtImg.image=[UIImage imageNamed:@"BlueBgText"];
     [altermsgView addSubview:blueTxtImg];
     UILabel * AlterMsg=[[UILabel alloc]initWithFrame:CGRectMake(0,0,160,60)];
-    AlterMsg.text =@"Select any 3 activites";
+    AlterMsg.text =@"Select any 3 activities";
     AlterMsg.textColor=[UIColor whiteColor];
     AlterMsg.textAlignment= NSTextAlignmentCenter;
     AlterMsg.numberOfLines=2;

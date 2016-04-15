@@ -1,10 +1,3 @@
-
-//  ProfileTableViewController.m
-//  DoSomething
-//
-//  Created by Sha on 10/12/15.
-//  Copyright (c) 2015 OClock Apps. All rights reserved.
-//
 #define pageWidth           380
 #import "DSProfileTableViewController.h"
 #import "DSInterestAndHobbiesViewController.h"
@@ -25,8 +18,8 @@
 #import "IQUIView+IQKeyboardToolbar.h"
 #import "CustomSoundview.h"
 #import <AudioToolbox/AudioToolbox.h>
-#import <FBSDKCoreKit/FBSDKCoreKit.h>
-#import <FBSDKLoginKit/FBSDKLoginKit.h>
+//#import <FBSDKCoreKit/FBSDKCoreKit.h>
+//#import <FBSDKLoginKit/FBSDKLoginKit.h>
 
 #define Red_Color   [UIColor colorWithRed:227.0f/255.0f green:64.0f/255.0f blue:81.0f/255.0f alpha:1.0f]
 
@@ -69,7 +62,7 @@
     NSMutableArray *FGimageArray;
     UIButton *pageControllBtn;
     UIImageView *foregroundView;
-     UIView * mainview;
+    UIView * mainview;
     UIImageView * objImag;
     NSInteger Currentindex;
     NSString *strInterestHobbies;
@@ -91,7 +84,7 @@
     UIImage *profileImage3;
     NSMutableDictionary *profileDict;
     NSMutableArray *profileImageArray;
-
+    
     CGSize dataSize;
     BOOL isLogin;
     CustomAlterview *objCustomAlterview;
@@ -108,19 +101,19 @@
     NSMutableArray *hobbiesMainArray;
     NSString * Regpassword;
     
-     BOOL isclickIconAddBtn;
+    BOOL isclickIconAddBtn;
     NSString * FBImageStr;
     NSString *selectSoundStr;
     NSString *playsoundBundleStr;
     SystemSoundID * soundID;
-     UIButton * blueCirecleBtn;
+    UIButton * blueCirecleBtn;
     NSString *plusIcon;
     BOOL isRemoveprofileimg;
     NSMutableDictionary *fbUserDetailsDict;
     NSString *firstName,*lastName,*email,*dob,*gender,*profileID,*password;
     UIImage *fbProfileImage;
     
-    BOOL is_photoaddImg;
+    BOOL is_profileImgediting;
     
     BOOL isTapGesture;
     
@@ -140,7 +133,7 @@
     BOOL isNewUser;
     
     BOOL isSelectIndex;
-
+    
     
 }
 
@@ -154,8 +147,8 @@
 - (void)viewDidLoad {
     
     [super viewDidLoad];
-   
-   
+    
+    
     self.WalAlterview.hidden =YES;
     
     NSString * Firstlogin=[[NSUserDefaults standardUserDefaults]valueForKey:FirstCreateProfile];
@@ -167,7 +160,7 @@
         [self GerenalWalkAlterviewCreateAccount];
         [[NSUserDefaults standardUserDefaults] setObject:@"No" forKey:FirstCreateProfile];
     }
-
+    
     
     Regpassword=emailPasswordToRegister;
     [[IQKeyboardManager sharedManager] considerToolbarPreviousNextInViewClass:[_tableviewProfile class]];
@@ -187,7 +180,7 @@
     
     isLoadData=NO;
     
-     [self setInitialProfileArray];
+    [self setInitialProfileArray];
 }
 
 -(void)viewWillAppear:(BOOL)animated
@@ -202,37 +195,37 @@
     
     hobbiesMainArray = [[NSMutableArray alloc]init];
     
-     profileDict=[[NSMutableDictionary alloc]init];
+    profileDict=[[NSMutableDictionary alloc]init];
     
     profileDict =[[NSUserDefaults standardUserDefaults] valueForKey:USERDETAILS];
     
     
     if([[NSUserDefaults standardUserDefaults]valueForKey:HobbiesArray] != NULL)
         hobbiesMainArray = [[NSUserDefaults standardUserDefaults]valueForKey:HobbiesArray];
-
+    
     else{
         if([profileDict valueForKey:@"hobbieslist"]!=NULL)
-        
+            
             hobbiesMainArray = [[profileDict valueForKey:@"hobbieslist"]mutableCopy];
         emailPasswordToRegister=[profileDict valueForKey:@"password"];
         
     }
     [[NSUserDefaults standardUserDefaults]setObject:hobbiesMainArray forKey:HobbiesArray];
     
-   
+    
     
     infoArray=[[NSMutableArray alloc]initWithObjects:@"profile_noimg",@"profile_noimg",@"profile_noimg", nil];
     
     if(!isLoadData){
         [self initializeArray];
         [self profileImageDisplayMethod];
-            if (profileDict== nil)
-            {
-                
-                [[NSUserDefaults standardUserDefaults]removeObjectForKey:HobbiesArray];
-
-            }
-
+        if (profileDict== nil)
+        {
+            
+            [[NSUserDefaults standardUserDefaults]removeObjectForKey:HobbiesArray];
+            
+        }
+        
         isLoadData = YES;
     }
     else if(isLoadData == YES && profileDict ==NULL)
@@ -244,26 +237,27 @@
         
         hobbiesNameArray = [hobbiesMainArray valueForKey:@"name"];
         
-       
+        
         
         strInterestHobbies = [[hobbiesMainArray valueForKey:@"hobbies_id"] componentsJoinedByString:@","];
-       
+        
     }
-     [self selectitemMethod];
-
-     [_tableviewProfile reloadData];
+    [self selectitemMethod];
+    
+    [_tableviewProfile reloadData];
     
     [self loadNavigation];
-  
-
+    
+    
     if(profileDict==NULL)
     {
         [customNavigation.saveBtn setTitle:@"Create" forState:UIControlStateNormal];
     }
-   
-
     
-   
+    
+    
+    
+    
 }
 
 -(void)viewDidAppear:(BOOL)animated{
@@ -281,12 +275,22 @@
     }
     else
     {
+        if(is_profileImgediting== YES)
+        {
+            
+            NSTimer * loadscrollview=[NSTimer scheduledTimerWithTimeInterval:2.0 target:self selector:@selector(updateprofileimageloadstop)userInfo:nil repeats:NO];
+            
+        }
         [self.view layoutIfNeeded];
         
         self.tableViewHeightConstraint.constant=self.tableviewProfile.contentSize.height+350;
-        [profileScrollView setContentSize:CGSizeMake(0, self.tableviewProfile.frame.origin.y + self.tableviewProfile.contentSize.height+self.tableViewHeightConstraint.constant-(self.profiletableheight.constant+110))];
+        [profileScrollView setContentSize:CGSizeMake(0, self.tableviewProfile.frame.origin.y + self.tableviewProfile.contentSize.height+self.tableViewHeightConstraint.constant-(self.profiletableheight.constant+50))];
         NSLog(@"tableheight=%f", self.tableViewHeightConstraint.constant);
     }
+}
+-(void)updateprofileimageloadstop
+{
+    [COMMON removeLoading];
 }
 -(void)loadNavigation{
     self.navigationController.navigationBarHidden=NO;
@@ -308,10 +312,10 @@
     [customNavigation.menuBtn setHidden:YES];
     if(profileDict == NULL)
     {
-    [customNavigation.buttonBack setHidden:NO];
+        [customNavigation.buttonBack setHidden:NO];
     }
     [customNavigation.saveBtn setHidden:NO];
-   
+    
     [self.navigationController.navigationBar addSubview:customNavigation.view];
     [customNavigation.saveBtn addTarget:self action:@selector(saveAction:) forControlEvents:UIControlEventTouchUpInside];
     [customNavigation.buttonBack addTarget:self action:@selector(backAction) forControlEvents:UIControlEventTouchUpInside];
@@ -319,13 +323,13 @@
 }
 -(void)profileImageDisplayMethod
 {
-//     [self getUserCurrenLocation];
+    //     [self getUserCurrenLocation];
     NSString * strsessionID =[profileDict valueForKey:@"SessionId"];
     loginUserSessionID = strsessionID;
-   
     
-  
-  
+    
+    
+    
     if(profileDict != NULL)
     {
         [self initializeArrayProfile];
@@ -333,7 +337,7 @@
         [customNavigation.saveBtn setTitle:@"Save" forState:UIControlStateNormal];
         
         interstAndHobbiesArray = [[profileDict valueForKey:@"hobbieslist"]mutableCopy];
-       
+        
         hobbiesNameArray       =[[interstAndHobbiesArray valueForKey:@"name"]mutableCopy];
         
         
@@ -344,10 +348,10 @@
         self.tableViewHeightConstraint.constant=(IS_IPHONE6_Plus||IS_IPHONE6)?50:50;
         
         
-       
+        
     }
     
-   
+    
     
     [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"SelectedItemCategoryID"];
     
@@ -412,8 +416,8 @@
 
 -(void)loadInvalidSessionAlert:(NSNotification *)notification
 {
-     self.WalAlterview.hidden =YES;
-     self.window.hidden=YES;
+    self.WalAlterview.hidden =YES;
+    self.window.hidden=YES;
     
     [[NSNotificationCenter defaultCenter] removeObserver:self];
     [COMMON removeUserDetails];
@@ -443,14 +447,14 @@
 
 //#pragma mark - scroll
 //-(void)profileScroll{
-//    
+//
 //    self.scrView.pagingEnabled=YES;
 //    self.scrView.delegate=self;
 //    [self.scrView setShowsHorizontalScrollIndicator:NO];
-//    
+//
 //    int spacing = 80;
 //    int i;
-//    
+//
 //    for(i = 0; i < 3; i++)
 //    {
 //        NSData * profileData = [profileDataArray objectAtIndex:i];
@@ -475,7 +479,7 @@
 //                [cell.topViewCell setHidden:YES];
 //                self.scrView.scrollEnabled = NO;
 //            }
-//            
+//
 //        }
 //        else{
 //
@@ -483,30 +487,30 @@
 //               [userProfileImage setImage:[UIImage imageWithData:profileData]];
 //            else
 //               [userProfileImage setImageWithURL:[NSURL URLWithString:image]];
-//            
+//
 //            if(i==2){
 //                [cell.imageAddButton setHidden:YES];
 //            }
 //            userProfileImage.layer.cornerRadius = userProfileImage.frame.size.height / 2;
 //            userProfileImage.layer.masksToBounds = YES;
 //            [userProfileImage setUserInteractionEnabled:YES];
-//           
+//
 //            UITapGestureRecognizer *singleTap =  [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(updateProfileImageAction)];
 //            [singleTap setNumberOfTapsRequired:1];
 //            [userProfileImage addGestureRecognizer:singleTap];
 //            [self.scrView addSubview:userProfileImage];
 //            [self.scrView setContentSize:CGSizeMake(self.scrView.frame.size.width*(i+1), 150)];
-//            
+//
 //            [userProfileImage setContentMode:UIViewContentModeScaleAspectFill];
 //            [cameraIcon setHidden:YES];
-//            
+//
 //            [cell.topViewCell setHidden:NO];
 //            self.scrView.scrollEnabled = YES;
 //        }
-//      
+//
 //
 //    }
-//    
+//
 //    if(CurrentImage == 0)
 //    {
 //
@@ -554,69 +558,91 @@
 //}
 -(void) pageScrollView{
     
-        xslider=0;
-        pgDtView=[[UIView alloc]init];
-        pgDtView.backgroundColor=[UIColor clearColor];
-        pageImageView =[[UIImageView alloc]init];
-        profileImagePageControl.numberOfPages = totalImageCount + 1;
-        if(infoArray.count > 3)
-        {
-             [cell.imageAddButton setHidden:NO];
-        }
+    xslider=0;
+    pgDtView=[[UIView alloc]init];
+    pgDtView.backgroundColor=[UIColor clearColor];
+    pageImageView =[[UIImageView alloc]init];
+    profileImagePageControl.numberOfPages = totalImageCount + 1;
+    if(infoArray.count > 3)
+    {
+        [cell.imageAddButton setHidden:NO];
+    }
+    
+    for(int i=0;i<profileImagePageControl.numberOfPages;i++)
+    {
+        blkdot=[[UIImageView alloc]init];
         
-        for(int i=0;i<profileImagePageControl.numberOfPages;i++)
-        {
-            blkdot=[[UIImageView alloc]init];
+        [blkdot setFrame:CGRectMake(i*18, 0, 8, 8 )];
+        [blkdot setImage:[UIImage imageNamed:@"dot_normal"]];
+        [pgDtView addSubview:blkdot];
+        [pageImageView setImage:[UIImage imageNamed:@"dot_active_red"]];
+        [pageImageView setFrame:CGRectMake(0, 0, 8, 8)];
+        
+        [pgDtView addSubview:pageImageView];
+        [cell.topViewCell addSubview:pgDtView];
+        
+        if(IS_IPHONE6) {
             
-            [blkdot setFrame:CGRectMake(i*18, 0, 8, 8 )];
-            [blkdot setImage:[UIImage imageNamed:@"dot_normal"]];
-            [pgDtView addSubview:blkdot];
-             [pageImageView setImage:[UIImage imageNamed:@"dot_active_red"]];
-            [pgDtView addSubview:pageImageView];
-            [cell.topViewCell addSubview:pgDtView];
-            
-            if(IS_IPHONE6) {
-            [pgDtView setFrame:CGRectMake(20, -5, profileImagePageControl.numberOfPages*18, 10)];
+            if( i ==1)
+            {
+                [pgDtView setFrame:CGRectMake(30, -5, profileImagePageControl.numberOfPages*18, 10)];
+                //                    if(is_photoaddImg==YES)
+                //                    {
+                //                        [pageImageView setFrame:CGRectMake(i*18, 0, 8, 8)];
+                //                    }
+                //                    else
+                //                    {
+                //                        [pageImageView setFrame:CGRectMake(0, 0, 8, 8)];
+                //                    }
             }
-            else if(IS_IPHONE6_Plus) {
-                [pgDtView setFrame:CGRectMake(40, -5, profileImagePageControl.numberOfPages*18, 10)];
-            }
-            else
+            else if(i ==2)
             {
                 [pgDtView setFrame:CGRectMake(20, -5, profileImagePageControl.numberOfPages*18, 10)];
+                //[pageImageView setFrame:CGRectMake(i*18, 0, 8, 8)];
             }
-
             
-            //[pageImageView setFrame:CGRectMake(i*18, 0, 8, 8)];
-        
-//               else if(i==1)
-//                {
-//                  [pgDtView setFrame:CGRectMake(15, -5, profileImagePageControl.numberOfPages*18, 10)];
-//                    if(is_photoaddImg==YES)
-//                    {
-//                        [pageImageView setFrame:CGRectMake(i*18, 0, 8, 8)];
-//                    }
-//                    else
-//                    {
-//                        [pageImageView setFrame:CGRectMake(0, 0, 8, 8)];
-//                    }
-//                }
-//                else if(i==2)
-//                {
-//                    [pgDtView setFrame:CGRectMake(10, -5, profileImagePageControl.numberOfPages*18, 10)];
-//                   [pageImageView setFrame:CGRectMake(i*18, 0, 8, 8)];
-//                }
+        }
+        else if(IS_IPHONE6_Plus) {
             
+            if( i ==1)
+            {
+                [pgDtView setFrame:CGRectMake(30, -5, profileImagePageControl.numberOfPages*18, 10)];
+            }
+            else if(i ==2)
+            {
+                [pgDtView setFrame:CGRectMake(20, -5, profileImagePageControl.numberOfPages*18, 10)];
+                
+            }
             
-           
+        }
+        else
+        {
+            if( i ==1)
+            {
+                [pgDtView setFrame:CGRectMake(30, -5, profileImagePageControl.numberOfPages*18, 10)];
+            }
+            else if(i ==2)
+            {
+                [pgDtView setFrame:CGRectMake(20, -5, profileImagePageControl.numberOfPages*18, 10)];
+                
+            }
+            
         }
         
+        
+        
+        
+        
+        
+        
+    }
+    
     isPageControl=YES;
-   [cell.topViewCell addSubview:pgDtView];
+    [cell.topViewCell addSubview:pgDtView];
 }
 
 - (IBAction)pageChanged:(id)sender {
-   
+    
     
     CGFloat x = profileImagePageControl.currentPage * self.scrView.frame.size.width;
     NSLog(@"pagenation=%f",x);
@@ -627,25 +653,33 @@
 #pragma mark - UIScrollViewDelegate
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView
 {
-    currentImageIndex = scrollView.contentOffset.x / scrollView.frame.size.width;
     
-    if (scrollView==self.scrView) {    }
+    CGFloat pageWidths = scrollView.frame.size.width; // you need to have a **iVar** with getter for scrollView
+    float fractionalPage = scrollView.contentOffset.x / pageWidths;
+    NSInteger page = lround(fractionalPage);
+    profileImagePageControl.currentPage = page;
+    [pageImageView setFrame:CGRectMake(page*18, 0, 8, 8)];
     
-    jslider = scrollView.contentOffset.x / scrollView.frame.size.width;
-    [self.scrView setNeedsDisplay];
-    profileImagePageControl.currentPage = jslider;
-    [pageImageView setFrame:CGRectMake(jslider*18, 0, 8, 8)];
-    //[userProfileImage setFrame:CGRectMake(currentImageIndex*40, 0, 8, 8)];
-   
     isTapping=NO;
     scrolldragging=@"YES";
-//    NSString * FirstSignin=[[NSUserDefaults standardUserDefaults]valueForKey:FistSiginprofile];
-//    if([FirstSignin isEqualToString:@"FirstSiginProfile"])
-//    {
-//        //self.WalAlterview.hidden =NO;
-//        [self GerenalWalkAlterviewSign];
-//        [[NSUserDefaults standardUserDefaults]removeObjectForKey:FistSiginprofile];
-//    }
+    //    if([FirstSignin isEqualToString:@"FirstSiginProfile"])
+    //    {
+    //        //self.WalAlterview.hidden =NO;
+    //        [self GerenalWalkAlterviewSign];
+    //        [[NSUserDefaults standardUserDefaults]removeObjectForKey:FistSiginprofile];
+    //    }
+    
+    
+    //     CurrentImage = scrollView.contentOffset.x / scrollView.frame.size.width;
+    //
+    //        if (scrollView==self.scrView) {    }
+    //        pull=@"";
+    //        jslider = scrollView.contentOffset.x / scrollView.frame.size.width;
+    //        [self.scrView setNeedsDisplay];
+    //        profileImagePageControl.currentPage=selectedImageIndex;
+    
+    //    NSString * FirstSignin=[[NSUserDefaults standardUserDefaults]valueForKey:FistSiginprofile];
+    
 }
 
 
@@ -655,7 +689,7 @@
         emailAddressToRegister = @"";
     }
     NSString *emailAddress = emailAddressToRegister;
-   
+    
     return emailAddress;
 }
 - (NSString *) getPassword {
@@ -664,7 +698,7 @@
         emailPasswordToRegister =Regpassword;              //@"";
     }
     NSString *emailPassword = emailPasswordToRegister;
-   
+    
     return emailPassword;
 }
 
@@ -716,7 +750,7 @@
         });
         
     });
-
+    
     
 }
 
@@ -735,9 +769,9 @@
     {
         [objWebService locationUpdate:LocationUpdate_API
                             sessionid:[COMMON getSessionID]
-                            latitude:currentLatitude
+                             latitude:currentLatitude
                             longitude:currentLongitude
-                            deviceToken:deviceToken
+                          deviceToken:deviceToken
                              pushType:push_type
                               success:^(AFHTTPRequestOperation *operation, id responseObject){
                                   NSLog(@"responseObject = %@",responseObject);
@@ -793,8 +827,12 @@
         NSDate *dateFromString = [[NSDate alloc] init];
         
         dateFromString = [dateFormatter dateFromString:currentTextfield.text];
+        if(dateFromString !=nil)
+        {
+            [datePicker setDate:dateFromString animated:NO];
+        }
         
-        [datePicker setDate:dateFromString animated:NO];
+        //[datePicker setDate:dateFromString animated:NO];
         
     }
     
@@ -817,7 +855,7 @@
     NSString *dateString =  [dateFormat stringFromDate:sender.date];
     
     currentTextfield.text = dateString;
-
+    
     
 }
 
@@ -840,7 +878,7 @@
             {
                 LastName =strSearchLetters;
             }
-           
+            
             else if (textField.tag ==14)
             {
                 emailAddressToRegister = strSearchLetters;
@@ -862,15 +900,15 @@
         }
         
     }
-
-        return YES;
+    
+    return YES;
 }
 
 
 -(BOOL)textFieldShouldReturn:(UITextField*)textField {
     
     [textField resignFirstResponder];
- 
+    
     return YES;
     
 }
@@ -880,9 +918,9 @@
     NSInteger tag = [textField tag];
     if(textField.tag == 1000){
         //[textField resignFirstResponder];
-
+        
         [self loadDatePicker:tag];
-       }
+    }
     else if (textField.tag == 15)
     {
         emailPasswordToRegister = @"";
@@ -895,36 +933,33 @@
     {
         confirmPassword =@"";
     }
-
+    
 }
 
 - (void)textFieldDidEndEditing:(UITextField *)textField{
     
-   
-
+    
     textField.textColor =[UIColor colorWithRed:(float)161.0/255 green:(float)161.0/255 blue:(float)161.0/255 alpha:1.0f];
     
-
+    NSString *selOptionVal;
     
-  NSString *selOptionVal;
-
     if (textField.tag ==1000) {
         selOptionVal = cell.textFieldDPPlaceHolder.text;
-       
+        
         NSDate *date = datePicker.date;
         NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
         [formatter setDateFormat:@"dd/MM/yyyy"];
         selOptionVal = [formatter stringFromDate:date];
-       
+        
         if(selOptionVal != nil || ![selOptionVal isEqualToString:@""]){
-          
+            
             currentTextfield.text =selOptionVal;
         }
         
         
     }
-  //  [self.tableviewProfile scrollToRowAtIndexPath:[self.tableviewProfile indexPathForCell:cell] atScrollPosition:UITableViewScrollPositionBottom animated:NO];
-
+    //  [self.tableviewProfile scrollToRowAtIndexPath:[self.tableviewProfile indexPathForCell:cell] atScrollPosition:UITableViewScrollPositionBottom animated:NO];
+    
     
 }
 
@@ -939,7 +974,7 @@
     isclickIconAddBtn = YES;
     DSInterestAndHobbiesViewController * DSHobbiesView  = [[DSInterestAndHobbiesViewController alloc]initWithNibName:@"DSInterestAndHobbiesViewController" bundle:nil];
     [self.navigationController pushViewController:DSHobbiesView animated:YES];
-
+    
 }
 
 -(void)initializeArray{
@@ -960,9 +995,9 @@
                                     [NSMutableDictionary dictionaryWithObjectsAndKeys:@"TermsOfUse",@"placeHolder",@"",@"TypingText", nil], nil]atIndex:0];
     
     
-   
-   
-   
+    
+    
+    
 }
 -(void)initializeArrayProfile{
     
@@ -977,7 +1012,7 @@
                                     [NSMutableDictionary dictionaryWithObjectsAndKeys:@"Write something about yourself here.",@"placeHolder", nil],
                                     [NSMutableDictionary dictionaryWithObjectsAndKeys:@"Hobbies",@"placeHolder", nil],
                                     [NSMutableDictionary dictionaryWithObjectsAndKeys:[profileDict valueForKey:@"email"],@"placeHolder",@"Password",@"placeHolderPass",@"Current\n password",@"placeHolderCurrentPassword",@"Password\n Conformation",@"placeHolderconformation",@"",@"TypingTextPass", nil], [NSMutableDictionary dictionaryWithObjectsAndKeys:@"loginType",@"placeHolder", nil],
-                                     [NSMutableDictionary dictionaryWithObjectsAndKeys:@"loginType",@"placeHolder", nil],[NSMutableDictionary dictionaryWithObjectsAndKeys:@"loginType",@"placeHolder", nil], nil]atIndex:0];
+                                    [NSMutableDictionary dictionaryWithObjectsAndKeys:@"loginType",@"placeHolder", nil],[NSMutableDictionary dictionaryWithObjectsAndKeys:@"loginType",@"placeHolder", nil], nil]atIndex:0];
     
 }
 
@@ -996,9 +1031,9 @@
     [objCustomAlterview.btnYes addTarget:self action:@selector(alertPressYes:) forControlEvents:UIControlEventTouchUpInside];
     [objCustomAlterview.btnNo addTarget:self action:@selector(alertPressNo:) forControlEvents:UIControlEventTouchUpInside];
     [objCustomAlterview.alertCancelButton addTarget:self action:@selector(alertPressCancel:) forControlEvents:UIControlEventTouchUpInside];
-     objCustomAlterview.mainalterviewheight.constant=0;
-
-
+    objCustomAlterview.mainalterviewheight.constant=0;
+    
+    
     
     [self.view addSubview:objCustomAlterview.view];
 }
@@ -1008,14 +1043,14 @@
     objCustomAlterview. alertBgView.hidden = YES;
     objCustomAlterview.alertMainBgView.hidden = YES;
     objCustomAlterview.view .hidden  = YES;
-   
+    
 }
 -(IBAction)alertPressYes:(id)sender
 {
     objCustomAlterview. alertBgView.hidden = YES;
     objCustomAlterview.alertMainBgView.hidden = YES;
     objCustomAlterview.view .hidden  = YES;
-     [self loadRegister];
+    [self loadRegister];
 }
 -(IBAction)alertPressCancel:(id)sender
 {
@@ -1025,7 +1060,7 @@
 }
 -(void)showAltermessage:(NSString*)msg
 {
-
+    
     objCustomAlterview.view.hidden =NO;
     //objCustomAlterview.view.alpha=0.0;
     objCustomAlterview.alertBgView.hidden = NO;
@@ -1060,7 +1095,7 @@
     objCustomAlterview.alertMsgLabel.text = msg;
     objCustomAlterview.alertMsgLabel.textAlignment = NSTextAlignmentCenter;
     objCustomAlterview.alertMsgLabel.lineBreakMode = NSLineBreakByWordWrapping;
-    objCustomAlterview.alertMsgLabel.numberOfLines = 2;
+    objCustomAlterview.alertMsgLabel.numberOfLines = 3;
     [objCustomAlterview.alertMsgLabel setTextColor:[UIColor colorWithRed:(255/255.0f) green:(255/255.0f) blue:(255/255.0f) alpha:1.0f]];
     
 }
@@ -1070,11 +1105,11 @@
     objCustomSoundView = [[CustomSoundview alloc] initWithNibName:@"CustomSoundview" bundle:nil];
     if(IS_IPHONE6 || IS_IPHONE6_Plus)
     {
-         objCustomSoundView.view.frame = CGRectMake(self.view.frame.origin.x, customNavigation.view.frame.origin.y+ customNavigation.view.frame.size.height+40, CGRectGetWidth(self.view.frame), self.view.frame.size.height-110);
+        objCustomSoundView.view.frame = CGRectMake(self.view.frame.origin.x, customNavigation.view.frame.origin.y+ customNavigation.view.frame.size.height+40, CGRectGetWidth(self.view.frame), self.view.frame.size.height-110);
     }
     else
     {
-    objCustomSoundView.view.frame = CGRectMake(self.view.frame.origin.x, customNavigation.view.frame.origin.y+ customNavigation.view.frame.size.height+10, CGRectGetWidth(self.view.frame), self.view.frame.size.height-50);
+        objCustomSoundView.view.frame = CGRectMake(self.view.frame.origin.x, customNavigation.view.frame.origin.y+ customNavigation.view.frame.size.height+10, CGRectGetWidth(self.view.frame), self.view.frame.size.height-50);
     }
     // [objCustomSoundview.alertBgView setHidden:YES];
     [objCustomSoundView.soundmenuView setHidden:YES];
@@ -1087,7 +1122,7 @@
     }
     
     [self.view addSubview:objCustomSoundView.view];
- 
+    
 }
 -(IBAction)DidclickSoundMenuCancel:(id)sender
 {
@@ -1096,7 +1131,7 @@
     objCustomSoundView.soundmenuView.hidden=YES;
     playsoundBundleStr=objCustomSoundView.urlString;
     soundID =objCustomSoundView.selectSoundID;
-
+    
     if(soundID != 0 || soundID != NULL)
     {
         
@@ -1112,7 +1147,7 @@
     NSLog(@"Soundstring=%@",selectSoundStr);
     //[self loadUpdateNotificationAPI];
     playsoundBundleStr=objCustomSoundView.urlString;
-   soundID =objCustomSoundView.selectSoundID
+    soundID =objCustomSoundView.selectSoundID
     ;
     
     if(soundID != 0 || soundID != NULL)
@@ -1122,7 +1157,7 @@
         
         AudioServicesDisposeSystemSoundID(*(soundID));
     }
-
+    
     objCustomSoundView.view.hidden=YES;
     objCustomSoundView.soundmenuView.hidden=YES;
     
@@ -1137,125 +1172,125 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-   return [placeHolderArray[section] count];
+    return [placeHolderArray[section] count];
     
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     
-        if (indexPath.row == 0 ){
-               return 200;
-        }
-        if(indexPath.row ==1)
-        {
-            return 80;
-        }
-        if(indexPath.row ==2)
-        {
-            return 0;
-        }
-        if(indexPath.row ==3)
-        {
-            return 45;
-        }
-       if(indexPath.row == 4)
-           return  48;
+    if (indexPath.row == 0 ){
+        return 200;
+    }
+    if(indexPath.row ==1)
+    {
+        return 80;
+    }
+    if(indexPath.row ==2)
+    {
+        return 0;
+    }
+    if(indexPath.row ==3)
+    {
+        return 45;
+    }
+    if(indexPath.row == 4)
+        return  48;
     
-       if(indexPath.row == 5)
+    if(indexPath.row == 5)
+    {
+        dataSize = [COMMON getControlHeight:strAbout withFontName:@"Patron-Regular" ofSize:14.0 withSize:CGSizeMake(tableView.frame.size.width-20,tableView.frame.size.height)];
+        if([strAbout isEqualToString:@""]|| dataSize.height ==20){
+            return 40;
+        }
+        else
         {
-            dataSize = [COMMON getControlHeight:strAbout withFontName:@"Patron-Regular" ofSize:14.0 withSize:CGSizeMake(tableView.frame.size.width-20,tableView.frame.size.height)];
-            if([strAbout isEqualToString:@""]|| dataSize.height ==20){
-                return 40;
+            
+            
+            self.aboutTextHeight.constant=dataSize.height-10;
+            
+            return  dataSize.height-10;
+        }
+        
+    }
+    
+    if ( indexPath.row ==6)
+    {
+        //imageSize =39;
+        //commonWidth=19.5;
+        //commonHeight = 54;
+        if([imageNormalArray count] < 1)
+            return 80;
+        else if([imageNormalArray count] <=5)
+            return 100;
+        
+        else if([imageNormalArray count] <= 10)
+            return  154;
+        
+        else if([imageNormalArray count] <= 15)
+            return 210;
+        
+        else if([imageNormalArray count] <= 20)
+            return  268;
+    }
+    
+    
+    if ( indexPath.row == 7) {
+        
+        
+        if(profileDict!=nil)
+        {
+            NSString *objlogintype=[profileDict valueForKey:@"showpassword"];
+            if([objlogintype isEqual:@"no"])
+                
+            {
+                return 0;
             }
             else
             {
-
-                
-                self.aboutTextHeight.constant=dataSize.height-10;
-                
-                 return  dataSize.height-10;
+                return 180;
             }
             
         }
-    
-            if ( indexPath.row ==6)
-            {
-                //imageSize =39;
-                //commonWidth=19.5;
-                //commonHeight = 54;
-            if([imageNormalArray count] < 1)
-                return 80;
-            else if([imageNormalArray count] <=5)
-                return 100;
-
-            else if([imageNormalArray count] <= 10)
-                return  154;
-
-            else if([imageNormalArray count] <= 15)
-                return 210;
-                
-           else if([imageNormalArray count] <= 20)
-               return  268;
-            }
-
-       
-            if ( indexPath.row == 7) {
-                
-                
-                if(profileDict!=nil)
-                {
-                    NSString *objlogintype=[profileDict valueForKey:@"showpassword"];
-                    if([objlogintype isEqual:@"no"])
-                    
-                    {
-                        return 0;
-                    }
-                    else
-                    {
-                    return 180;
-                    }
-                    
-                }
-              else if (userDetailsDict.count > 0)
-              {
-                 
-                  return 80;
-                
-              }
-                
-                return 120;
-            }
-            if (indexPath.row ==8) {
-                
-                if(profileDict!=nil)
-                {
-                    return 0;
-                }
-                return 150;
-            }
-
+        else if (userDetailsDict.count > 0)
+        {
+            
+            return 80;
+            
+        }
         
-            if (indexPath.row == 9) {
-                
-                if(profileDict != nil)
-                {
-                    return 0;
-                }
-                return 80;
-            }
-       if(indexPath.row ==10)
-       {
-           if(profileDict!=nil)
-           {
-               return 50;
-           }
-           return 0;
-       }
-
-
-    return 0;
+        return 120;
     }
+    if (indexPath.row ==8) {
+        
+        if(profileDict!=nil)
+        {
+            return 0;
+        }
+        return 150;
+    }
+    
+    
+    if (indexPath.row == 9) {
+        
+        if(profileDict != nil)
+        {
+            return 0;
+        }
+        return 80;
+    }
+    if(indexPath.row ==10)
+    {
+        if(profileDict!=nil)
+        {
+            return 50;
+        }
+        return 0;
+    }
+    
+    
+    return 0;
+}
 
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -1273,32 +1308,33 @@
         }
         profileImagePageControl.pageIndicatorTintColor = [UIColor clearColor];
         profileImagePageControl.currentPageIndicatorTintColor = [UIColor clearColor];
-      
+        
         cameraIcon=[UIButton buttonWithType:UIButtonTypeCustom];
         if(IS_IPHONE6)
         {
             
-              [cameraIcon setFrame:CGRectMake(cell.contentView.center.x+5,cell.contentView.frame.size.height-36,37,37)];
+            [cameraIcon setFrame:CGRectMake(cell.contentView.center.x+5,cell.contentView.frame.size.height-36,37,37)];
         }
         else  if(IS_IPHONE6_Plus)
         {
             [cameraIcon setFrame:CGRectMake(cell.contentView.center.x+25,cell.contentView.frame.size.height-36,37,37)];
         }
-
+        
         else{
             [cameraIcon setFrame:CGRectMake(cell.contentView.center.x-22,cell.contentView.frame.size.height-36,37,37)];
         }
         [cameraIcon addTarget:self action:@selector(selectCamera:) forControlEvents:UIControlEventTouchUpInside];
         
-//        UIImage *cameraIconImg = [UIImage imageNamed:@"camera_icon"];
-//        [cameraIcon setImage:cameraIconImg forState:UIControlStateNormal];
-//        [cameraIcon setTag:101];
-//        [cell addSubview:cameraIcon];
+        //        UIImage *cameraIconImg = [UIImage imageNamed:@"camera_icon"];
+        //        [cameraIcon setImage:cameraIconImg forState:UIControlStateNormal];
+        //        [cameraIcon setTag:101];
+        //        [cell addSubview:cameraIcon];
         
         [cell.addnextprofileimageimage addTarget:self action:@selector(selectCamera:) forControlEvents:UIControlEventTouchUpInside];
         [cameraIcon setHidden:NO];
         
-         [self setUserProfileImages];
+        [self setUserProfileImages];
+        
         
         if(totalImageCount == 2)
         {
@@ -1316,7 +1352,7 @@
             profileImagePageControl.hidden = YES;
         }
     }
-
+    
     
     if (indexPath.row == 1 )
     {
@@ -1331,7 +1367,7 @@
         if (IS_IPHONE6 ||IS_IPHONE6_Plus)
         {
             //cell.layoutConstraintViewHeight.constant =49;
-
+            
         }
         if(profileDict !=NULL){
             [cell.textFieldPlaceHolder setEnabled:NO];
@@ -1346,7 +1382,7 @@
             [cell.lastNameTxt setEnabled:NO];
         }
         else if(userDetailsDict.count > 0){
-
+            
             cell.firstnameTxt.text =(FirstName==0)?[userDetailsDict valueForKey:@"first_name"]:FirstName;
             cell.lastNameTxt.text  =(LastName==0)? [userDetailsDict valueForKey:@"last_name"]:LastName;
             FirstName = cell.firstnameTxt.text;
@@ -1358,15 +1394,15 @@
             [cell.lastNameTxt setEnabled:NO];
         }
         else
-           {
+        {
             cell.firstnameTxt.text = FirstName;
             cell.lastNameTxt.text   =LastName;
             cell.firstaftersepratorlbl.hidden =NO;
-           }
+        }
         cell.firstnameTxt.autocapitalizationType = UITextAutocapitalizationTypeSentences;
         cell.lastNameTxt.autocapitalizationType = UITextAutocapitalizationTypeSentences;
         cell.lastNameTxt.autocorrectionType = UITextAutocorrectionTypeNo;
-
+        
     }
     
     if(indexPath.row ==2)
@@ -1378,7 +1414,7 @@
             
         }
         [cellButton setHidden:YES];
-
+        
     }
     if (indexPath.row == 3)
     {
@@ -1417,9 +1453,9 @@
         
         
         if( profileDict !=NULL){
-
+            
             profileGenderValueLabel.text =[profileDict valueForKey:@"gender"];
-           
+            
         }
         else if(userDetailsDict.count > 0){
             
@@ -1434,7 +1470,7 @@
                     [cell.femaleButton setTitleColor:[UIColor redColor] forState:UIControlStateNormal];
                     strGender=[userDetailsDict valueForKey:@"gender"];
                     [cell.maleButton setTitleColor:[UIColor darkGrayColor] forState:UIControlStateNormal];
-
+                    
                 }
             }
             else{
@@ -1445,7 +1481,7 @@
                     [cell.femaleButton setTitleColor:[UIColor redColor] forState:UIControlStateNormal];
                 }
             }
-        
+            
             [profileGenderView setHidden:YES];
             [profileGenderLabel setHidden:YES];
             [profileGenderValueLabel setHidden:YES];
@@ -1491,7 +1527,7 @@
         }
         if(profileDict != NULL)
         {
-            
+            cell.textFieldDPPlaceHolder.enabled=NO;
             if(![[profileDict valueForKey:@"date_of_birth"] isEqual:currentTextfield.text]){
                 
                 
@@ -1525,23 +1561,18 @@
         }
         else if(userDetailsDict.count > 0){
             
-            NSString *datestr= [userDetailsDict valueForKey:@"birthday"];
+             cell.textFieldDPPlaceHolder.enabled=YES;
+          //  NSString *datestr= [userDetailsDict valueForKey:@"birthday"];
+            NSString *tempdatestring= [userDetailsDict valueForKey:@"birthday"];
+            NSString *datestr= [self changefbDateFormat:tempdatestring];
+            
             if(datestr!=nil ){
-                
-                
                 if(currentTextfield.text == NULL){
-                    cell.textFieldDPPlaceHolder.text =[userDetailsDict valueForKey:@"birthday"];
-                    NSString *datestr=[userDetailsDict valueForKey:@"birthday"];
+                    cell.textFieldDPPlaceHolder.text = datestr;
                     currentTextfield.text=cell.textFieldDPPlaceHolder.text;
-                    NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
-                    [dateFormat setDateFormat:@"dd/mm/yyyy"];
-                    NSDate *date = [dateFormat dateFromString:datestr];
-                    dateFormat = [[NSDateFormatter alloc] init];
-                    [dateFormat setDateFormat:@"yyyy-MM-dd"];
-                    dateChange = [dateFormat stringFromDate:date];
-                    NSLog(@"%@",dateChange);
-                    
-                    strDOB       = (currentTextfield.text !=nil)?currentTextfield.text :dateChange;
+                    dateChange = [self changeDateFormat:datestr];
+                    NSLog(@"dateChange = %@",dateChange);
+                    strDOB = (currentTextfield.text !=nil)?currentTextfield.text :dateChange;
                     [cell.textFieldDPPlaceHolder setTag:1000];
                     
                 }
@@ -1573,7 +1604,7 @@
             cell.textFieldDPPlaceHolder.text = currentTextfield.text;
             
         }
-
+        
         
         
     }
@@ -1653,7 +1684,7 @@
             cell.textViewAboutYou.delegate = self;
             
         }
-
+        
         
         
     }
@@ -1666,7 +1697,7 @@
             [cell.buttonPushHobbies addTarget:self action:@selector(pushToHobbiesView) forControlEvents:UIControlEventTouchUpInside];
         }
         
-       plusIcon = @"Plus_icon.png";
+        plusIcon = @"Plus_icon.png";
         
         if ([imageNormalArray count] >=1)
         {
@@ -1679,7 +1710,7 @@
             [imageNormalArray addObject:plusIcon];
             
         }
-
+        
     }
     
     if (indexPath.row == 7)
@@ -1690,7 +1721,7 @@
             cell = cellEmailPassword;
             
         }
-
+        
     }
     if (indexPath.row == 8)
     {
@@ -1701,10 +1732,10 @@
             cell = CellSwitchOn;
             
         }
-
+        
         
     }
-
+    
     if (indexPath.row == 9)
     {
         
@@ -1723,12 +1754,21 @@
             [[NSBundle mainBundle] loadNibNamed:@"DSProfileTableViewCell" owner:self options:nil];
             cell = cellloginTypeView;
         }
-
+        
     }
-
-    [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
     
-    [self settableviewheight];
+    [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
+    if(IS_GREATER_IOS8)
+    {
+        [self settableviewheight];
+        
+    }
+    else
+    {
+        [self viewDidLayoutSubviews];
+    }
+    
+    
     
     return cell;
     
@@ -1751,6 +1791,7 @@
         }
         else
         {
+            
             [profileScrollView setContentSize:CGSizeMake(0, self.tableviewProfile.frame.origin.y + self.tableviewProfile.contentSize.height+self.tableViewHeightConstraint.constant-(self.profiletableheight.constant+55))];
             
         }
@@ -1767,11 +1808,7 @@
             {
                 [profileScrollView setContentSize:CGSizeMake(0, self.tableviewProfile.frame.origin.y + self.tableviewProfile.contentSize.height+self.tableViewHeightConstraint.constant-(self.profiletableheight.constant+110))];
             }
-            else{
-                [self viewDidLayoutSubviews];
-                
-                
-            }
+            
             
         }
     }
@@ -1853,7 +1890,7 @@
             else
             {
                 image= [image stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-//                 downloadImageFromUrl(image,hobbiesImage);
+                //                 downloadImageFromUrl(image,hobbiesImage);
                 [hobbiesImage setImageWithURL:[NSURL URLWithString:image]];
             }
             
@@ -1871,8 +1908,8 @@
             hobbiesname.textAlignment = NSTextAlignmentCenter;
         }
         
-            
-
+        
+        
     }
     
     if(indexPath.row == 7)
@@ -1912,7 +1949,7 @@
                     
                 }
                 emailPasswordToRegister =(emailPasswordToRegister==nil)?[profileDict valueForKey:@"password"]:emailPasswordToRegister;
-               
+                
                 cell.currentpassword.text    =(currentPassword==nil)?@"":@"Your new password";
                 cell.conformationpassword.text =(confirmPassword==nil)?@"":@"confirm your new password";
             }
@@ -1938,15 +1975,19 @@
             cell.currentpassword.hidden=YES;
             cell.conformationpassword.hidden=YES;
             cell.currentpasswordlbl.hidden=YES;
-           
+            
             cell.confirmpasswordlbl.hidden =YES;
             cell.passwordlbl.hidden =YES;
             [cell.emailTextField setEnabled:NO];
             if (IS_IPHONE6 ||IS_IPHONE6_Plus){
-                    //cell.layoutConstraintAccLabelYPos.constant =42;
-                        cell.layoutConstraintEmailPassViewHeight.constant =40;
+                //cell.layoutConstraintAccLabelYPos.constant =42;
+                cell.layoutConstraintEmailPassViewHeight.constant =40;
             }
-
+            else
+            {
+                cell.layoutConstraintEmailPassViewHeight.constant =40;
+            }
+            
             
         }
         else
@@ -1959,11 +2000,11 @@
             cell.currentpasswordlbl.text =@"Password";
             cell.confirmpasswordlbl.hidden =YES;
             cell.passwordlbl.hidden=YES;
-           
+            
             
         }
         
-
+        
     }
     if(indexPath.row ==8)
     {
@@ -2022,15 +2063,15 @@
         else{
             cell.termsOfUse.hidden =NO;
             cell.privacyPolicy.hidden=NO;
-          
             
-
+            
+            
         }
         if (IS_IPHONE6 ||IS_IPHONE6_Plus){
             cell.layoutConstraintTermsOfUseBtnDependViewHeight.constant =50;
         }
         
-
+        
     }
     if(indexPath.row==10)
     {
@@ -2038,14 +2079,14 @@
         if([objloginType isEqualToString:@"dosomething"])
         {
             cell.logilTypelbl.text =@"You are connected via DoSomething Account";
-           
+            
             if(IS_IPHONE6_Plus)
             {
-                 self.TypeImgexposition.constant=68;
+                self.TypeImgexposition.constant=68;
             }
             else
             {
-                 self.TypeImgexposition.constant=(IS_IPHONE6)?50:20;
+                self.TypeImgexposition.constant=(IS_IPHONE6)?50:20;
             }
             cell.loginTypeImg.image=[UIImage imageNamed:@"loginTypeDS"];
         }
@@ -2062,9 +2103,9 @@
             
             cell.loginTypeImg.image=[UIImage imageNamed:@"loginTypeFB"];
         }
-
+        
     }
-
+    
 }
 
 #pragma mark- hide keyboard
@@ -2079,16 +2120,16 @@
     
     [cell.messSwitchBtn setImage:[UIImage imageNamed:@"switch_off"] forState:UIControlStateNormal];
     isNotification_message =@"No";
-            
+    
     
 }
 -(void)NotificationmessBtnSwipRightAction:(id)sender
-  {
+{
     
-        [cell.messSwitchBtn setImage:[UIImage imageNamed:@"switch_on"] forState:UIControlStateNormal];
-        isNotification_message =@"Yes";
+    [cell.messSwitchBtn setImage:[UIImage imageNamed:@"switch_on"] forState:UIControlStateNormal];
+    isNotification_message =@"Yes";
     
-  }
+}
 
 
 -(void)NotificationsoundBtnSwipLeftAction:(id)sender
@@ -2133,7 +2174,7 @@
     }
     
     NSIndexPath *indexPath;
-   
+    
     
     indexPath = [_tableviewProfile indexPathForCell:(UITableViewCell *)button];
     cell = (DSProfileTableViewCell *) [_tableviewProfile cellForRowAtIndexPath:[NSIndexPath indexPathForRow:indexPath.row inSection:0]];
@@ -2142,7 +2183,7 @@
         if ( [isNotification_message isEqualToString:@"Yes"]) {
             
             [cell.messSwitchBtn setImage:[UIImage imageNamed:@"switch_off"] forState:UIControlStateNormal];
-             isNotification_message =@"No";
+            isNotification_message =@"No";
             
         }else{
             
@@ -2150,11 +2191,11 @@
             //[self notificationButtonOFFAction:sender];
             isNotification_message =@"Yes";
         }
-
+        
         
     }
     
-   else if([sender tag] == 502){
+    else if([sender tag] == 502){
         if ( [isNotification_sound isEqualToString:@"Yes"]) {
             
             [cell.SoundSwitchBtn setImage:[UIImage imageNamed:@"switch_off"] forState:UIControlStateNormal];
@@ -2168,27 +2209,27 @@
             //[self notificationButtonOFFAction:sender];
             isNotification_sound =@"Yes";
         }
-
+        
         
     }
     
-   else if([sender tag] == 503)
-   {
-       if ( [isNotification_match isEqualToString:@"Yes"]) {
-           
-           [cell.vibrationSwitchBtn setImage:[UIImage imageNamed:@"switch_off"] forState:UIControlStateNormal];
-           isNotification_match =@"No";
-           
-       }else{
-           
-           [cell.vibrationSwitchBtn setImage:[UIImage imageNamed:@"switch_on"] forState:UIControlStateNormal];
-           //[self notificationButtonOFFAction:sender];
-           isNotification_match =@"Yes";
-       }
-       
-       
-   }
-
+    else if([sender tag] == 503)
+    {
+        if ( [isNotification_match isEqualToString:@"Yes"]) {
+            
+            [cell.vibrationSwitchBtn setImage:[UIImage imageNamed:@"switch_off"] forState:UIControlStateNormal];
+            isNotification_match =@"No";
+            
+        }else{
+            
+            [cell.vibrationSwitchBtn setImage:[UIImage imageNamed:@"switch_on"] forState:UIControlStateNormal];
+            //[self notificationButtonOFFAction:sender];
+            isNotification_match =@"Yes";
+        }
+        
+        
+    }
+    
 }
 
 
@@ -2198,7 +2239,7 @@
 {
     
     DSTermsViewController* termViewController = [[DSTermsViewController alloc] init];
-     termViewController.policytypeofContent =@"Term";
+    //termViewController.policytypeofContent =@"Term";
     [self.navigationController pushViewController:termViewController animated:YES];
 }
 
@@ -2214,7 +2255,7 @@
     {
         [cell.messSwitchBtn setImage:[UIImage imageNamed:@"switch_on"] forState:UIControlStateNormal];
         isNotification_message =@"Yes";
-
+        
         
     }
     if([objSound isEqualToString:@"switch_on"])
@@ -2227,13 +2268,13 @@
     {
         [cell.vibrationSwitchBtn setImage:[UIImage imageNamed:@"switch_on"] forState:UIControlStateNormal];
         isNotification_match =@"Yes";
-       
+        
     }
     
     if([objMsg isEqualToString:@"switch_off"])
     {
-//        [cell.messSwitchBtn setTintColor:[UIColor redColor]];
-//        [cell.messSwitchBtn setBackgroundColor:[UIColor colorWithRed:232.0f/255.0f green:232.0f/255.0f blue:232.0f/255.0f alpha:1.0f]];
+        //        [cell.messSwitchBtn setTintColor:[UIColor redColor]];
+        //        [cell.messSwitchBtn setBackgroundColor:[UIColor colorWithRed:232.0f/255.0f green:232.0f/255.0f blue:232.0f/255.0f alpha:1.0f]];
         [cell.messSwitchBtn setImage:[UIImage imageNamed:@"switch_off"] forState:UIControlStateNormal];
         isNotification_message =@"No";
     }
@@ -2258,7 +2299,7 @@
     
     [sender setBackgroundColor:[UIColor whiteColor]];
     [sender setOnTintColor:[UIColor colorWithRed:232.0f/255.0f green:232.0f/255.0f blue:232.0f/255.0f alpha:1.0f]];
-
+    
 }
 
 -(void)notificationButtonOFFAction:(id)sender
@@ -2278,7 +2319,7 @@
     }
     
     NSIndexPath *indexPath;
-     NSString *selOptionVal;
+    NSString *selOptionVal;
     
     indexPath = [_tableviewProfile indexPathForCell:(UITableViewCell *)button];
     cell = (DSProfileTableViewCell *) [_tableviewProfile cellForRowAtIndexPath:[NSIndexPath indexPathForRow:indexPath.row inSection:0]];
@@ -2286,24 +2327,24 @@
     if([sender tag] == 2004){
         selOptionVal = @"male";
         [cell.maleButton setTitleColor:[UIColor redColor] forState:UIControlStateNormal];
-       [cell.femaleButton setTitleColor:[UIColor colorWithRed:(161.0/255.0f) green:(161.0/255.0f) blue:(161.0/255.0f) alpha:1.0f] forState:UIControlStateNormal];
+        [cell.femaleButton setTitleColor:[UIColor colorWithRed:(161.0/255.0f) green:(161.0/255.0f) blue:(161.0/255.0f) alpha:1.0f] forState:UIControlStateNormal];
         isSelectMale =YES;
         isSelectFemale=NO;
         
     }
     
     if([sender tag] == 2005){
-       selOptionVal = @"female";
-      
+        selOptionVal = @"female";
+        
         [cell.femaleButton setTitleColor:[UIColor redColor] forState:UIControlStateNormal];
-         [cell.maleButton setTitleColor:[UIColor colorWithRed:(161.0/255.0f) green:(161.0/255.0f) blue:(161.0/255.0f) alpha:1.0f] forState:UIControlStateNormal];
+        [cell.maleButton setTitleColor:[UIColor colorWithRed:(161.0/255.0f) green:(161.0/255.0f) blue:(161.0/255.0f) alpha:1.0f] forState:UIControlStateNormal];
         isSelectFemale=YES;
-         isSelectMale =NO;
+        isSelectMale =NO;
     }
     
     strGender =selOptionVal;
     
-   }
+}
 
 #pragma mark - Textview delegate
 
@@ -2317,11 +2358,11 @@
     if(textView.tag == 0) {
         if([textView.text isEqualToString:@"Write something about yourself here."])
         {
-        textView.text = @"";
+            textView.text = @"";
         }
         textView.tag = 1;
         strAbout = textView.text;
-       
+        
     }
     
 }
@@ -2331,33 +2372,61 @@
     cell.textViewAboutYou.scrollEnabled=NO;
     CGPoint position = [textView convertPoint:CGPointZero toView: _tableviewProfile ];
     NSIndexPath *indexPath = [_tableviewProfile indexPathForRowAtPoint: position];
-   
+    
     cell = (DSProfileTableViewCell *)[_tableviewProfile cellForRowAtIndexPath:indexPath];
     
     if([textView.text length] == 0)
     {
         textView.tag = 0;
     }
-
+    
     strAbout = textView.text;
+     dataSize = [COMMON getControlHeight:strAbout withFontName:@"Patron-Regular" ofSize:14.0 withSize:CGSizeMake(textView.frame.size.width-20,textView.frame.size.height)];
     
-    //[self.tableviewProfile scrollToRowAtIndexPath:[self.tableviewProfile indexPathForCell:cell] atScrollPosition:UITableViewScrollPositionBottom animated:NO];
     
-    [self.tableviewProfile beginUpdates];
-     NSArray *indexPaths = [[NSArray alloc] initWithObjects:indexPath, nil];
-    [self.tableviewProfile reloadRowsAtIndexPaths:indexPaths withRowAnimation:UITableViewRowAnimationNone];
-    [self performSelector:@selector(settableviewheight) withObject:nil afterDelay:0.2];
-    [self.tableviewProfile endUpdates];
+    [self.tableviewProfile scrollToRowAtIndexPath:[self.tableviewProfile indexPathForCell:cell] atScrollPosition:UITableViewScrollPositionBottom animated:NO];
+    
    
-    
+    if(IS_IPHONE6 || IS_IPHONE6_Plus)
+    {
+        if(dataSize.height > 65)
+        {
+            [self.tableviewProfile beginUpdates];
+            NSArray *indexPaths = [[NSArray alloc] initWithObjects:indexPath, nil];
+            [self.tableviewProfile reloadRowsAtIndexPaths:indexPaths withRowAnimation:UITableViewRowAnimationNone];
+           [self performSelector:@selector(settableviewheight) withObject:nil afterDelay:0.2];
+             [self.tableviewProfile endUpdates];
+        }
+    }
+    else
+    {
+        
+       
+        if(dataSize.height > 50)
+        {
+            [self.tableviewProfile beginUpdates];
+            NSArray *indexPaths = [[NSArray alloc] initWithObjects:indexPath, nil];
+            [self.tableviewProfile reloadRowsAtIndexPaths:indexPaths withRowAnimation:UITableViewRowAnimationNone];
+            [self performSelector:@selector(settableviewheight) withObject:nil afterDelay:0.2];
 
+            [self.tableviewProfile endUpdates];
+
+            
+        }
+        
+    }
+    
+    
+    
+    
+    
 }
 - (void) textViewDidChange:(UITextView *)textView
 {
     
-//    [self.tableviewProfile beginUpdates];
-//      
-//    [self.tableviewProfile endUpdates];
+    //    [self.tableviewProfile beginUpdates];
+    //
+    //    [self.tableviewProfile endUpdates];
     
 }
 
@@ -2377,19 +2446,23 @@
 
 
 //-(void)updateProfileImageAction{
-//    
+//
 //    isTapGesture = YES;
-//    
+//
 //    [self selectimagePicker];
-//    
+//
 //}
 
 -(void)selectimagePicker{
     
     NSLog(@"currentimge=%ld",(long)CurrentImage);
-//
+    //
+    if(CurrentImage==0)
+    {
+        CurrentImage=CurrentImage+1;
+    }
     NSString * currentimgField=[NSString stringWithFormat:@"image%d",CurrentImage];
-//
+    //
     NSString * selectimg=[profileDict valueForKey:currentimgField];
     
     [COMMON TrackerWithName:@"User Profile"];
@@ -2413,10 +2486,21 @@
     }
     else{
         
-        UIActionSheet *actionSheet1 = [[UIActionSheet alloc] initWithTitle:@"" delegate:self cancelButtonTitle:NSLocalizedString(@"CANCEL",@"") destructiveButtonTitle:NSLocalizedString(@"CAMERA",@"") otherButtonTitles:NSLocalizedString(@"PHOTO LIBRARY",@""), nil];
+        UIActionSheet *actionSheet1 ;
+        actionSheet1 = [[UIActionSheet alloc] initWithTitle:@"" delegate:self cancelButtonTitle:NSLocalizedString(@"CANCEL",@"") destructiveButtonTitle:NSLocalizedString(@"CAMERA",@"") otherButtonTitles:NSLocalizedString(@"PHOTO LIBRARY",@""), nil];
+        
+        
+        
+        if(isTapGesture == YES){
+            
+            if(!isNewUser)
+            {
+                actionSheet1 = [[UIActionSheet alloc] initWithTitle:@"" delegate:self cancelButtonTitle:NSLocalizedString(@"CANCEL",@"") destructiveButtonTitle:NSLocalizedString(@"CAMERA",@"") otherButtonTitles:NSLocalizedString(@"PHOTO LIBRARY",@""),NSLocalizedString(@"REMOVE",@""), nil];
+                
+            }
+        }
         
         [actionSheet1 showInView:self.view];
-        
         [actionSheet1 sizeToFit];
         
     }
@@ -2505,89 +2589,89 @@
 }
 
 /*
--(void)RemoveprofileImage
-{
-    int imgfield;
-    
-    if(CurrentImage == 0)
-    {
-        imgfield =1;
-    }
-    else
-    {
-           imgfield=CurrentImage+1;
-    }
-    NSString * removeimgField=[NSString stringWithFormat:@"image%d",imgfield];
-    
-    NSString * Removeselectimg=[profileDict valueForKey:removeimgField];
-    
-            NSLog(@"sfhdsfdhsgfdg%@",Removeselectimg);
-    
-    if(![Removeselectimg isEqualToString:@""])
-    {
-    
-   [objWebService getDeleteprofileImage:deleteprofileImg sessionID:[COMMON getSessionID] Fieldimage:removeimgField success:^(AFHTTPRequestOperation *operation, id responseObject) {
-       if([[[responseObject valueForKey:@"deleteprofileimage"]valueForKey:@"status"]isEqualToString:@"success"])
-       {
-//          if(profileDataArray.count!=0)
-//          {
-//           [profileDataArray removeObjectAtIndex:CurrentImage];
-//              if(profileDataArray.count == 0)
-//              {
-//                  [profileDataArray addObject:@"profile_noimg.png"];
-//              }
-//          }
-//           
-//           self.scrView.scrollEnabled = YES;
-//           int  currentpage;
-//           
-//           if(imgfield == 1)
-//           {
-//               
-//               currentpage = 0;
-//        
-//       }
-//
-//           else if(imgfield == 2)
-//           {
-//              
-//
-//               currentpage=1;
-//
-//           }
-//           else if(imgfield == 3)
-//           {
-//              
-//               currentpage=2;
-//            }
-           if([[profileDict valueForKey:@"type"] isEqualToString:@"1"])
-           {
-             [COMMON removeUserDetails];
-             [self loadloginAPi];
-           }
-           else if([[profileDict valueForKey:@"type"] isEqualToString:@"2"])
-           {
-               //[COMMON removeUserDetails];
-               //[self checkUserEmail];
-                [self loadloginAPi];
-           }
-//           [self setupScrollView:self.scrView :currentpage];
-//           
-//           
-//           jslider = profileDataArray.count;   //self.scrView.contentOffset.x / self.scrView.frame.size.width;
-//           [self.scrView setNeedsDisplay];
-//           profileImagePageControl.currentPage=jslider;
-//           [pageImageView setFrame:CGRectMake(jslider*18, 0, 8, 8)];
-//
-       
-            NSLog(@"deleteimageresponse=%@",responseObject);
-       
-       }
-   } failure:^(AFHTTPRequestOperation *operation, id error) {
-       NSLog(@"error=%@",error);
-   }];
-    }
-}
+ -(void)RemoveprofileImage
+ {
+ int imgfield;
+ 
+ if(CurrentImage == 0)
+ {
+ imgfield =1;
+ }
+ else
+ {
+ imgfield=CurrentImage+1;
+ }
+ NSString * removeimgField=[NSString stringWithFormat:@"image%d",imgfield];
+ 
+ NSString * Removeselectimg=[profileDict valueForKey:removeimgField];
+ 
+ NSLog(@"sfhdsfdhsgfdg%@",Removeselectimg);
+ 
+ if(![Removeselectimg isEqualToString:@""])
+ {
+ 
+ [objWebService getDeleteprofileImage:deleteprofileImg sessionID:[COMMON getSessionID] Fieldimage:removeimgField success:^(AFHTTPRequestOperation *operation, id responseObject) {
+ if([[[responseObject valueForKey:@"deleteprofileimage"]valueForKey:@"status"]isEqualToString:@"success"])
+ {
+ //          if(profileDataArray.count!=0)
+ //          {
+ //           [profileDataArray removeObjectAtIndex:CurrentImage];
+ //              if(profileDataArray.count == 0)
+ //              {
+ //                  [profileDataArray addObject:@"profile_noimg.png"];
+ //              }
+ //          }
+ //
+ //           self.scrView.scrollEnabled = YES;
+ //           int  currentpage;
+ //
+ //           if(imgfield == 1)
+ //           {
+ //
+ //               currentpage = 0;
+ //
+ //       }
+ //
+ //           else if(imgfield == 2)
+ //           {
+ //
+ //
+ //               currentpage=1;
+ //
+ //           }
+ //           else if(imgfield == 3)
+ //           {
+ //
+ //               currentpage=2;
+ //            }
+ if([[profileDict valueForKey:@"type"] isEqualToString:@"1"])
+ {
+ [COMMON removeUserDetails];
+ [self loadloginAPi];
+ }
+ else if([[profileDict valueForKey:@"type"] isEqualToString:@"2"])
+ {
+ //[COMMON removeUserDetails];
+ //[self checkUserEmail];
+ [self loadloginAPi];
+ }
+ //           [self setupScrollView:self.scrView :currentpage];
+ //
+ //
+ //           jslider = profileDataArray.count;   //self.scrView.contentOffset.x / self.scrView.frame.size.width;
+ //           [self.scrView setNeedsDisplay];
+ //           profileImagePageControl.currentPage=jslider;
+ //           [pageImageView setFrame:CGRectMake(jslider*18, 0, 8, 8)];
+ //
+ 
+ NSLog(@"deleteimageresponse=%@",responseObject);
+ 
+ }
+ } failure:^(AFHTTPRequestOperation *operation, id error) {
+ NSLog(@"error=%@",error);
+ }];
+ }
+ }
  
  */
 
@@ -2650,7 +2734,7 @@
                         [COMMON removeLoading];
                         
                     }];
-
+    
 }
 
 
@@ -2703,7 +2787,20 @@
             
             break;
             
+        case 2:
+            if(isTapGesture == YES){
+                
+                if(!isNewUser)
+                {
+                    [self RemoveprofileImage];
+                }
+            }
             
+            else{
+                [imagepickerController dismissViewControllerAnimated:YES completion:nil];
+            }
+            
+            break;
             
         default:
             
@@ -2714,7 +2811,13 @@
 }
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
 {
-    
+    if(IS_GREATER_IOS8)
+    {}
+    else{
+        [COMMON LoadIcon:self.view];
+        is_profileImgediting=YES;
+        
+    }
     UIImage *image = nil;
     [cell.topViewCell setHidden:NO];
     image = [info valueForKey:UIImagePickerControllerEditedImage];
@@ -2738,65 +2841,64 @@
     if(isNewUser)
     {
         currentImageIndex = 0;
-         profileImage1  = [UIImage imageWithData:profileData];
+        profileImage1  = [UIImage imageWithData:profileData];
         isNewUser = NO;
     }
     
     NSInteger selectedIndex = (isTapGesture) ? selectedImageIndex : currentImageIndex;
-    
-    
     [userProfileImageArray replaceObjectAtIndex:selectedIndex withObject:image];
-    [self setUserProfileImages];
-
-    [imagepickerController dismissViewControllerAnimated:YES completion:nil];
-    /*
-    UIImage *image = nil;
-    [cell.topViewCell setHidden:NO];
-    image = [info valueForKey:UIImagePickerControllerEditedImage];
-    NSData *profileData = UIImagePNGRepresentation([info objectForKey:UIImagePickerControllerEditedImage]);
     
-    NSLog(@"profileDataArray = %@",profileDataArray);
+    [self setUserProfileImages];
+    [imagepickerController dismissViewControllerAnimated:YES completion:nil];
+    
+    /*
+     UIImage *image = nil;
+     [cell.topViewCell setHidden:NO];
+     image = [info valueForKey:UIImagePickerControllerEditedImage];
+     NSData *profileData = UIImagePNGRepresentation([info objectForKey:UIImagePickerControllerEditedImage]);
+     
+     NSLog(@"profileDataArray = %@",profileDataArray);
      NSLog(@"infoarray = %d",infoArray.count);
-    NSString *imageStr;
-    for (int i = 0; i < [profileDataArray count]; i++) {
-        
-         imageStr = [NSString stringWithFormat:@"%@",[profileDataArray objectAtIndex:i]];
-        
-        if([imageStr isKindOfClass:[NSData class]])
-            imageStr = [[NSString alloc] initWithData:[profileDataArray objectAtIndex:i] encoding:NSUTF8StringEncoding];
-        
-        if([imageStr isEqualToString:@""]){
-            
-            if(i == 1){
-                CurrentImage = 1;
-                 profileImage2 = image;
-                is_photoaddImg=YES;
-                [infoArray removeLastObject];
-               
-                
-            }
-            if(i == 2){
-                CurrentImage = 2;
-                 profileImage3 = image;
-                isPageControl=NO;
-                is_photoaddImg=YES;
-                
-            }
-            
-            [profileDataArray replaceObjectAtIndex:i withObject:profileData];
-            
-            [self profileScroll];
-            
-            [imagepickerController dismissViewControllerAnimated:YES completion:nil];
-            
-            return;
-        }
-        
-    }
+     NSString *imageStr;
+     for (int i = 0; i < [profileDataArray count]; i++) {
+     
+     imageStr = [NSString stringWithFormat:@"%@",[profileDataArray objectAtIndex:i]];
+     
+     if([imageStr isKindOfClass:[NSData class]])
+     imageStr = [[NSString alloc] initWithData:[profileDataArray objectAtIndex:i] encoding:NSUTF8StringEncoding];
+     
+     if([imageStr isEqualToString:@""]){
+     
+     if(i == 1){
+     CurrentImage = 1;
+     profileImage2 = image;
+     is_photoaddImg=YES;
+     [infoArray removeLastObject];
+     
+     
+     }
+     if(i == 2){
+     CurrentImage = 2;
+     profileImage3 = image;
+     isPageControl=NO;
+     is_photoaddImg=YES;
+     
+     }
+     
+     [profileDataArray replaceObjectAtIndex:i withObject:profileData];
+     
+     [self profileScroll];
+     
+     [imagepickerController dismissViewControllerAnimated:YES completion:nil];
+     
+     return;
+     }
+     
+     }
      
      */
-   
-
+    
+    
 }
 
 #pragma mark - gotoHomeView
@@ -2819,6 +2921,8 @@
     
     NSString *fbProfileStr;
     
+    NSString *dobStr = [self changeDateFormat:currentTextfield.text];
+    
     if([strType isEqualToString:@"2"])
         fbProfileStr =([FBImageStr isEqualToString:@"1"])?@"":[userDetailsDict valueForKey:@"profileImage"];
     if([COMMON isInternetReachable]){
@@ -2830,7 +2934,7 @@
                               email:emailAddressToRegister
                            password:(currentPassword==nil)?emailPasswordToRegister:currentPassword
                           profileId:strProfileID
-                                dob:dateChange
+                                dob:dobStr
                       profileImage1:[userProfileImageArray objectAtIndex:0]
                       profileImage2:[userProfileImageArray objectAtIndex:1]
                       profileImage3:[userProfileImageArray objectAtIndex:2]
@@ -2845,7 +2949,7 @@
                notification_message:isNotification_message
                notification_sound  :isNotification_sound
                             isMatch:isNotification_match
-                            sound:selectSoundStr
+                              sound:selectSoundStr
                            pushType:push_type
                             fbimage:FBImageStr
                             success:^(AFHTTPRequestOperation *operation, id responseObject){
@@ -2866,11 +2970,11 @@
         [COMMON showErrorAlert:@"Check Your Internet connection"];
         
     }
-  }
+}
 #pragma mark - updateAPI
 -(void) updateAPI{
     
-    [COMMON AddLoadIcon:self.view];
+    //[COMMON AddLoadIcon:self.view];
     if(currentLatitude == nil)
         currentLatitude = @"";
     if(currentLongitude == nil)
@@ -2909,19 +3013,19 @@
         [COMMON showErrorAlert:@"Check Your Internet connection"];
         
     }
-
+    
 }
 #pragma mark - loadRegisterNotification
 -(void)loadRegister{
     
-    [COMMON AddLoadIcon:self.view];
+    //  [COMMON AddLoadIcon:self.view];
     
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(loadRegisterView:)
                                                  name:@"registerform"
                                                object:nil];
     [self registerAPI];
-
+    
     
 }
 -(void)loadRegisterView:(NSNotification *)notification{
@@ -2936,7 +3040,7 @@
 #pragma mark - loadUpdateNotification
 -(void)loadUpdate{
     
-    [COMMON AddLoadIcon:self.view];
+    // [COMMON AddLoadIcon:self.view];
     
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(loadUpdateView:)
@@ -2956,7 +3060,7 @@
     
     
     
-   [self updateAPI];
+    [self updateAPI];
     
     
 }
@@ -2965,7 +3069,7 @@
     
     [[NSNotificationCenter defaultCenter] removeObserver:self];
     
-   // [self showAltermessage:@"Profile Updated Successfully"];
+    // [self showAltermessage:@"Profile Updated Successfully"];
     [COMMON removeLoading];
     
 }
@@ -2979,7 +3083,7 @@
     appDelegate.buttonsView.hidden=YES;
     appDelegate.SepratorLbl.hidden=YES;
     [appDelegate.settingButton setBackgroundImage:[UIImage imageNamed:@"profile_icon.png"] forState:UIControlStateNormal];
-
+    
 }
 
 #pragma mark - saveAction
@@ -2988,17 +3092,17 @@
     self.WalAlterview.hidden=YES;
     self.window.hidden=YES;
     [self.view endEditing:YES];
-
-    if(profileDict !=NULL){
     
-          strGender = [profileDict valueForKey:@"gender"];
-          [self loadValidations];
-           isSave =YES;
-       
+    if(profileDict !=NULL){
+        
+        strGender = [profileDict valueForKey:@"gender"];
+        [self loadValidations];
+        isSave =YES;
+        
     }
     else
-         [self loadValidations];
-    }
+        [self loadValidations];
+}
 
 -(void) enableSendButton:(NSNotification*)notification
 {
@@ -3010,30 +3114,30 @@
 //}
 //#pragma mark - dateConverter
 //-(void)dateConverter{
-//    
+//
 //    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
 //    [dateFormatter setDateFormat:@"dd/MM/yyyy"];
 //    NSDate *date = [dateFormatter dateFromString: strDOB];
 //    dateFormatter = [[NSDateFormatter alloc] init];
 //    [dateFormatter setDateFormat:@"yyyy-MM-dd"];
 //    dateChange = [dateFormatter stringFromDate:date];
-//    
-//    
+//
+//
 //}
 #pragma mark - saveAction
 -(void)loadValidations
 {
-    [COMMON AddLoadIcon:self.view];
+    // [COMMON AddLoadIcon:self.view];
     
     strType      = (selectEmail== YES)?@"1":@"2";
     strProfileID = (FBprofileID!=nil)?FBprofileID:@"";
     NSString *datestr= [userDetailsDict valueForKey:@"birthday"];
     if(userDetailsDict==0)
     {
-    strDOB       = (currentTextfield.text !=nil)?currentTextfield.text :[profileDict valueForKey:@"date_of_birth"];
+        strDOB       = (currentTextfield.text !=nil)?currentTextfield.text :[profileDict valueForKey:@"date_of_birth"];
         strDOB  = (currentTextfield.text !=nil)?currentTextfield.text :[profileDict valueForKey:@"date_of_birth"];
         dateChange=[NSString stringWithFormat:@"%@/%@/%@",[[strDOB componentsSeparatedByString:@"/"]objectAtIndex:2],[[strDOB componentsSeparatedByString:@"/"]objectAtIndex:1],[[strDOB componentsSeparatedByString:@"/"]objectAtIndex:0]];
-    
+        
     }
     else if (datestr==nil)
     {
@@ -3041,162 +3145,162 @@
         strDOB  = (currentTextfield.text !=nil)?currentTextfield.text :[profileDict valueForKey:@"date_of_birth"];
         dateChange=[NSString stringWithFormat:@"%@/%@/%@",[[strDOB componentsSeparatedByString:@"/"]objectAtIndex:2],[[strDOB componentsSeparatedByString:@"/"]objectAtIndex:1],[[strDOB componentsSeparatedByString:@"/"]objectAtIndex:0]];
     }
-           if(profileDict== NULL)
+    if(profileDict== NULL)
     {
-            if(FirstName == nil)
-            {
-
-                [self showAltermessage:FIRSTNAME_REQUIRED];
-                [COMMON removeLoading];
-               
-                return;
-            }
-            else if(LastName ==nil)
-            {
-                [self showAltermessage:LASTNAME_REQUIRED];
-                [COMMON removeLoading];
-                    return;
+        if(FirstName == nil)
+        {
+            
+            [self showAltermessage:FIRSTNAME_REQUIRED];
+            [COMMON removeLoading];
+            
+            return;
+        }
+        else if(LastName ==nil)
+        {
+            [self showAltermessage:LASTNAME_REQUIRED];
+            [COMMON removeLoading];
+            return;
+            
+        }
+        else if ([strGender isEqualToString:@""] || strGender == NULL)
+        {
+            [self showAltermessage:GENDER_REQUIRED];
+            
+            [COMMON removeLoading];
+            return;
+        }
         
-            }
-            else if ([strGender isEqualToString:@""] || strGender == NULL)
-            {
-                [self showAltermessage:GENDER_REQUIRED];
-                
-                [COMMON removeLoading];
-                return;
-            }
-
-    
-            else if ([dateChange isEqualToString:@""] || dateChange == NULL )
-            {
-
-                [self showAltermessage:DOB_REQUIRED];
-                [COMMON removeLoading];
-                
-                return;
-            }
-            else if ([strAbout isEqualToString:@""] || strAbout == NULL )
-            {
-                
-                [self showAltermessage:@"About Required"];
-                [COMMON removeLoading];
-               
-                return;
-            }
-   
-           else if ([emailAddressToRegister isEqualToString:@""] || emailAddressToRegister == nil)
-            {
-                [self showAltermessage:EMAIL_REQUIRED];
-                [COMMON removeLoading];
-                
-               
-                return;
-                
-            }
-    
-            else if ([emailPasswordToRegister isEqualToString:@""] || emailPasswordToRegister == nil)
-            {
         
-                if(userDetailsDict > 0)
-                {
-                    [COMMON removeLoading];
-                    
-                   
-                    [self showAccountCreateAltermessage:@"By clicking create,you agree to the Term of \n Use & Privacy policy"];
-                    return;
-                }
-                else
-                    
-                {
-                   [self showAltermessage:PASSWORD_REQUIRED];
-                   [COMMON removeLoading];
-                    
-                    return;
-                }
+        else if ([dateChange isEqualToString:@""] || dateChange == NULL )
+        {
+            
+            [self showAltermessage:DOB_REQUIRED];
+            [COMMON removeLoading];
+            
+            return;
+        }
+        else if ([strAbout isEqualToString:@""] || strAbout == NULL )
+        {
+            
+            [self showAltermessage:@"About Required"];
+            [COMMON removeLoading];
+            
+            return;
+        }
+        
+        else if ([emailAddressToRegister isEqualToString:@""] || emailAddressToRegister == nil)
+        {
+            [self showAltermessage:EMAIL_REQUIRED];
+            [COMMON removeLoading];
+            
+            
+            return;
+            
+        }
+        
+        else if ([emailPasswordToRegister isEqualToString:@""] || emailPasswordToRegister == nil)
+        {
+            
+            if(userDetailsDict > 0)
+            {
+                [COMMON removeLoading];
+                
+                
+                [self showAccountCreateAltermessage:@"By clicking 'create',you agree to the 'Terms of Use' and 'Privacy policy'"];
+                return;
             }
             else
-            
+                
             {
-               
+                [self showAltermessage:PASSWORD_REQUIRED];
                 [COMMON removeLoading];
-              
-                [self showAccountCreateAltermessage:@"By clicking create,you agree to the Term of \n Use & Privacy policy"];
+                
+                return;
             }
-
+        }
+        else
+            
+        {
+            
+            [COMMON removeLoading];
+            
+            [self showAccountCreateAltermessage:@"By clicking 'create',you agree to the 'Terms of Use' and 'Privacy policy'"];
+        }
+        
     }
     
-     if(profileDict!=nil)
+    if(profileDict!=nil)
     {
         if ([strAbout isEqualToString:@""] || strAbout == NULL )
         {
             
             [self showAltermessage:@"About Required"];
             [COMMON removeLoading];
-           
-            return;
-        }
-
-       if([[profileDict valueForKey:@"showpassword"] isEqualToString:@"Yes"])
-       {
-         if ([emailPasswordToRegister isEqualToString:@""] || emailPasswordToRegister == nil)
-        {
-            
-            [self showAltermessage:@"Enter your Current password"];
-           [COMMON removeLoading];
             
             return;
         }
         
-        else if (![[profileDict valueForKey:@"password"] isEqualToString:emailPasswordToRegister])
+        if([[profileDict valueForKey:@"showpassword"] isEqualToString:@"Yes"])
         {
-            
-            [self showAltermessage:@"Your password mismatching"];
-            [COMMON removeLoading];
-            
-            return;
-        }
-        
-        else if([currentPassword isEqualToString:@""])
-        {
-            if([emailPasswordToRegister isEqualToString:@""])
+            if ([emailPasswordToRegister isEqualToString:@""] || emailPasswordToRegister == nil)
             {
-                [self showAltermessage:@"Enter your current password"];
+                
+                [self showAltermessage:@"Enter your Current password"];
                 [COMMON removeLoading];
-              
+                
                 return;
             }
-            else if(![confirmPassword isEqualToString:@""] && confirmPassword!=nil)
+            
+            else if (![[profileDict valueForKey:@"password"] isEqualToString:emailPasswordToRegister])
             {
-                [self showAltermessage:@"Enter your New password"];
+                
+                [self showAltermessage:@"Your password mismatching"];
                 [COMMON removeLoading];
-              
+                
                 return;
             }
-            else
             
+            else if([currentPassword isEqualToString:@""])
             {
-               
-                [COMMON removeLoading];
-                [self updateAPI];
-           
+                if([emailPasswordToRegister isEqualToString:@""])
+                {
+                    [self showAltermessage:@"Enter your current password"];
+                    [COMMON removeLoading];
+                    
+                    return;
+                }
+                else if(![confirmPassword isEqualToString:@""] && confirmPassword!=nil)
+                {
+                    [self showAltermessage:@"Enter your New password"];
+                    [COMMON removeLoading];
+                    
+                    return;
+                }
+                else
+                    
+                {
+                    
+                    [COMMON removeLoading];
+                    [self updateAPI];
+                    
+                }
             }
         }
-        }
-       else  if ([confirmPassword isEqualToString:@""] || confirmPassword==nil)
+        else  if ([confirmPassword isEqualToString:@""] || confirmPassword==nil)
         {
             if([currentPassword isEqualToString:@""])
             {
                 [self showAltermessage:@"Enter New password"];
                 [COMMON removeLoading];
-               
+                
                 return;
             }
             else if (currentPassword!=nil || confirmPassword !=nil)
             {
                 if(![currentPassword isEqualToString:confirmPassword])
-                [self showAltermessage:@"Password don't match"];
+                    [self showAltermessage:@"Password don't match"];
                 [COMMON removeLoading];
-               
+                
                 return;
                 
             }
@@ -3206,7 +3310,7 @@
                 [COMMON removeLoading];
                 [self updateAPI];
             }
-        
+            
         }
         else if (![confirmPassword isEqualToString:@""])
         {
@@ -3214,7 +3318,7 @@
             {
                 [self showAltermessage:@"Enter New password"];
                 [COMMON removeLoading];
-               
+                
                 return;
             }
             else
@@ -3223,14 +3327,14 @@
                 [self updateAPI];
             }
         }
-       
+        
         else
-         {
-           [COMMON removeLoading];
-           [self updateAPI];
-         }
+        {
+            [COMMON removeLoading];
+            [self updateAPI];
+        }
     }
-  
+    
 }
 
 #pragma mark - CustomAlterviewload
@@ -3256,7 +3360,7 @@
 {
     self.WalAlterview.hidden=YES;
     self.window.hidden=YES;
-     [self flashOff:blueCirecleBtn];
+    [self flashOff:blueCirecleBtn];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -3282,19 +3386,19 @@
     UIView * altermsgView;
     if(IS_IPHONE6 || IS_IPHONE6_Plus)
     {
-         blueCirecleBtn=[[UIButton alloc]initWithFrame:CGRectMake(self.window.frame.size.width-65,self.window.frame.origin.y+25,45,45)];
-         Savelbl=[[UILabel alloc]initWithFrame:CGRectMake(self.window.frame.size.width-60,self.window.frame.origin.y+30,35,35)];
-         altermsgView= [[UIView alloc]initWithFrame:CGRectMake(self.window.center.x-75,self.view.frame.origin.y+160,150,50)];
+        blueCirecleBtn=[[UIButton alloc]initWithFrame:CGRectMake(self.window.frame.size.width-65,self.window.frame.origin.y+25,45,45)];
+        Savelbl=[[UILabel alloc]initWithFrame:CGRectMake(self.window.frame.size.width-60,self.window.frame.origin.y+30,35,35)];
+        altermsgView= [[UIView alloc]initWithFrame:CGRectMake(self.window.center.x-75,self.view.frame.origin.y+160,150,50)];
     }
     else{
-         blueCirecleBtn=[[UIButton alloc]initWithFrame:CGRectMake(self.view.frame.size.width-65,15,45,45)];
-         Savelbl=[[UILabel alloc]initWithFrame:CGRectMake(self.view.frame.size.width-60,20,35,35)];
-         altermsgView= [[UIView alloc]initWithFrame:CGRectMake(self.view.center.x-80,self.view.frame.origin.y+150,160,60)];
+        blueCirecleBtn=[[UIButton alloc]initWithFrame:CGRectMake(self.view.frame.size.width-65,15,45,45)];
+        Savelbl=[[UILabel alloc]initWithFrame:CGRectMake(self.view.frame.size.width-60,20,35,35)];
+        altermsgView= [[UIView alloc]initWithFrame:CGRectMake(self.view.center.x-80,self.view.frame.origin.y+150,160,60)];
     }
     
     [blueCirecleBtn setImage:[UIImage imageNamed:@"BlueCirecleimg"] forState:UIControlStateNormal];
     blueCirecleBtn.userInteractionEnabled=YES;
-     [self flashOn:blueCirecleBtn];
+    [self flashOn:blueCirecleBtn];
     [self.window addSubview:blueCirecleBtn];
     
     Savelbl.text =@"Save";
@@ -3305,7 +3409,7 @@
     [self.window addSubview:Savelbl];
     
     
-
+    
     UIImageView * blueTxtImg=[[UIImageView alloc]initWithFrame:CGRectMake(0,0,160,60)];
     blueTxtImg.userInteractionEnabled=YES;
     blueTxtImg.image=[UIImage imageNamed:@"BlueBgText"];
@@ -3320,8 +3424,8 @@
     
     [self.window addSubview:altermsgView];
     [blueCirecleBtn addTarget:self action:@selector(saveAction:) forControlEvents:UIControlEventTouchUpInside];
-
-   
+    
+    
     self.window.hidden=NO;
     [self.window makeKeyAndVisible];
     self.window.backgroundColor =[UIColor colorWithRed:(53.0/255.0f) green:(53.0/255.0f) blue:(53.0/255.0f) alpha:0.5];
@@ -3334,33 +3438,33 @@
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     
     UIView * CommWalkView;
-   
+    
     UILabel * Savelbl;
     UIView * altermsgView;
     
     if(IS_IPHONE6_Plus ||IS_IPHONE6)
     {
-         CommWalkView=[[UIView alloc]initWithFrame:CGRectMake(self.view.frame.size.width-63,self.view.frame.origin.y+25,45,45)];
-         blueCirecleBtn=[[UIButton alloc]initWithFrame:CGRectMake(2,3,40,40)];
+        CommWalkView=[[UIView alloc]initWithFrame:CGRectMake(self.view.frame.size.width-63,self.view.frame.origin.y+25,45,45)];
+        blueCirecleBtn=[[UIButton alloc]initWithFrame:CGRectMake(2,3,40,40)];
         Savelbl=[[UILabel alloc]initWithFrame:CGRectMake(5,5,35,35)];
-         altermsgView= [[UIView alloc]initWithFrame:CGRectMake(self.view.center.x-90,self.view.center.y+80,200,60)];
+        altermsgView= [[UIView alloc]initWithFrame:CGRectMake(self.view.center.x-90,self.view.center.y+80,200,60)];
     }
     else{
-         CommWalkView=[[UIView alloc]initWithFrame:CGRectMake(self.view.frame.size.width-63,self.view.frame.origin.y+15,45,45)];
-         blueCirecleBtn=[[UIButton alloc]initWithFrame:CGRectMake(2,3,40,40)];
+        CommWalkView=[[UIView alloc]initWithFrame:CGRectMake(self.view.frame.size.width-63,self.view.frame.origin.y+15,45,45)];
+        blueCirecleBtn=[[UIButton alloc]initWithFrame:CGRectMake(2,3,40,40)];
         Savelbl=[[UILabel alloc]initWithFrame:CGRectMake(5,5,35,35)];
-         altermsgView= [[UIView alloc]initWithFrame:CGRectMake(self.view.center.x-90,self.view.center.y+20,200,60)];
+        altermsgView= [[UIView alloc]initWithFrame:CGRectMake(self.view.center.x-90,self.view.center.y+20,200,60)];
     }
     
-        CommWalkView.backgroundColor =[UIColor clearColor];
+    CommWalkView.backgroundColor =[UIColor clearColor];
     
     
-
+    
     [blueCirecleBtn setImage:[UIImage imageNamed:@"BlueCirecleimg"] forState:UIControlStateNormal];
-   
+    
     [self flashOn:blueCirecleBtn];
     [CommWalkView addSubview:blueCirecleBtn];
-   
+    
     Savelbl.text =@"Save";
     Savelbl.textColor=[UIColor whiteColor];
     Savelbl.textAlignment= NSTextAlignmentCenter;
@@ -3381,17 +3485,17 @@
     [AlterMsg setFont:[UIFont fontWithName:@"Patron-Regular" size:12]];
     [altermsgView addSubview:AlterMsg];
     
-        [self.window addSubview:altermsgView];
+    [self.window addSubview:altermsgView];
     
     UIButton * ClosewindowBtn =[[UIButton alloc]initWithFrame:[[UIScreen mainScreen] bounds]];
     [ClosewindowBtn addTarget:self action:@selector(didClickGeneralWalkAlterviewBtn:) forControlEvents:UIControlEventTouchUpInside];
-   
     
-   
-     [self.window addSubview:ClosewindowBtn];
-     [self.window addSubview:CommWalkView];
+    
+    
+    [self.window addSubview:ClosewindowBtn];
+    [self.window addSubview:CommWalkView];
     [blueCirecleBtn addTarget:self action:@selector(saveAction:) forControlEvents:UIControlEventTouchUpInside];
-
+    
     self.window.hidden=NO;
     [self.window makeKeyAndVisible];
     [self.window.rootViewController.view addSubview:CommWalkView];
@@ -3480,7 +3584,8 @@
     [self.scrView setShowsHorizontalScrollIndicator:NO];
     totalImageCount = 0;
     
-     UIImage * lastobject = [userProfileImageArray valueForKey: @"@lastObject"];
+    UIImage * lastobject = [userProfileImageArray valueForKey: @"@lastObject"];
+    
     
     
     for(int imageIndex = 0; imageIndex < [userProfileImageArray count]; imageIndex++)
@@ -3488,18 +3593,31 @@
         if(![[userProfileImageArray objectAtIndex:imageIndex] isEqual:@""])
         {
             UIImage *imageProfile = [userProfileImageArray objectAtIndex:imageIndex];
-           
+            
             NSInteger extraSpace;
             
             if(IS_IPHONE6_Plus)
+            {
                 extraSpace = 130;
+            }
             else if (IS_IPHONE6)
             {
                 extraSpace = 115;
             }
             else
-                extraSpace = 80;
-           
+            {
+                if(imageIndex==1 ||imageIndex==2)
+                {
+                    extraSpace =80;
+                }
+                
+                else
+                    
+                {
+                    extraSpace = 90;
+                }
+            }
+            
             if(IS_IPHONE6)
             {
                 if(![lastobject  isEqual: @""] && imageIndex ==1)
@@ -3509,10 +3627,36 @@
                 }
                 else
                 {
-                 userProfileImage = [[UIImageView alloc]initWithFrame:CGRectMake((imageIndex * self.scrView.frame.size.width) + extraSpace,
-                                                                            20, self.profileImageView.frame.size.width, self.profileImageView.frame.size.height)];
+                    userProfileImage = [[UIImageView alloc]initWithFrame:CGRectMake((imageIndex * self.scrView.frame.size.width) + extraSpace,
+                                                                                    20, self.profileImageView.frame.size.width, self.profileImageView.frame.size.height)];
                 }
             }
+            
+            if(IS_IPHONE6_Plus)
+            {
+                if(![lastobject  isEqual: @""] && imageIndex ==1)
+                {
+                    
+                    userProfileImage = [[UIImageView alloc]initWithFrame:CGRectMake((imageIndex * self.scrView.frame.size.width)+extraSpace,
+                                                                                    20, self.profileImageView.frame.size.width, self.profileImageView.frame.size.height)];
+                }
+                else if (![lastobject  isEqual: @""] && imageIndex ==2)
+                {
+                    
+                    
+                    userProfileImage = [[UIImageView alloc]initWithFrame:CGRectMake((imageIndex * self.scrView.frame.size.width)+120,
+                                                                                    20, self.profileImageView.frame.size.width, self.profileImageView.frame.size.height)];
+                    
+                }
+                else
+                {
+                    userProfileImage = [[UIImageView alloc]initWithFrame:CGRectMake((imageIndex * self.scrView.frame.size.width) + extraSpace,
+                                                                                    20, self.profileImageView.frame.size.width, self.profileImageView.frame.size.height)];
+                }
+            }
+            
+            
+            
             else
             {
                 userProfileImage = [[UIImageView alloc]initWithFrame:CGRectMake((imageIndex * self.scrView.frame.size.width) + extraSpace,
@@ -3521,7 +3665,7 @@
             
             
             [userProfileImage setImage:imageProfile];
-        
+            
             userProfileImage.layer.cornerRadius = userProfileImage.frame.size.height / 2;
             userProfileImage.layer.masksToBounds = YES;
             [userProfileImage setUserInteractionEnabled:YES];
@@ -3539,27 +3683,31 @@
             
             if(IS_IPHONE6)
             {
-              [self.scrView setContentSize:CGSizeMake(self.scrView.frame.size.width*(imageIndex+1)+45, 150)];
+                [self.scrView setContentSize:CGSizeMake(self.scrView.frame.size.width*(imageIndex+1)+45, 150)];
             }
             else if(IS_IPHONE6_Plus)
             {
-                [self.scrView setContentSize:CGSizeMake(self.scrView.frame.size.width*(imageIndex+1), 150)];
+                [self.scrView setContentSize:CGSizeMake(self.scrView.frame.size.width*(imageIndex+1)+80, 150)];
             }
             else
             {
-                 [self.scrView setContentSize:CGSizeMake(self.scrView.frame.size.width*(imageIndex+1)-8, 150)];
+                [self.scrView setContentSize:CGSizeMake(self.scrView.frame.size.width*(imageIndex+1)-8, 150)];
             }
             
             totalImageCount = imageIndex;
         }
     }
     
+    
     if(totalImageCount != 0)
-    [self pageScrollView];
+        [self pageScrollView];
 }
 
 -(void)RemoveprofileImage
 {
+    NSString * obj =[profileDict valueForKey:@"image1"];
+    
+    NSLog(@"objimage=%@",obj);
     UIImage *defaultProfile = [UIImage imageNamed:@"profile_noimg"];
     UIImage *imageTwo   = [userProfileImageArray objectAtIndex:1];
     UIImage *imageThree = [userProfileImageArray objectAtIndex:2];
@@ -3588,9 +3736,46 @@
         userProfileImageArray = [@[defaultProfile, @"", @""] mutableCopy];
         isNewUser = YES;
     }
+    if(selectedImageIndex==0)
+    {
+        selectedImageIndex=selectedImageIndex+1;
+    }
+    NSString * removeimgField=[NSString stringWithFormat:@"image%ld",(long)selectedImageIndex];
     
+    NSLog(@"removeimgField=%@",removeimgField);
+    
+    
+    [objWebService getDeleteprofileImage:deleteprofileImg sessionID:[COMMON getSessionID] Fieldimage:removeimgField success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        if([[[responseObject valueForKey:@"deleteprofileimage"]valueForKey:@"status"]isEqualToString:@"success"])
+        {
+            NSLog(@"response=%@",responseObject);
+        }
+    }
+                                 failure:^(AFHTTPRequestOperation *operation, id error) {
+                                     NSLog(@"error=%@",error);
+                                 }];
     [_tableviewProfile reloadData];
 }
 
+-(NSString *)changeDateFormat:(NSString *)_date{
+    
+    NSDateFormatter *dateFormat = [[NSDateFormatter alloc]init];
+    [dateFormat setDateFormat:@"dd/MM/yyyy"];
+    NSDate *changeddate = [dateFormat dateFromString:_date];
+    [dateFormat setDateFormat:@"yyyy-MM-dd"];
+    NSString *dateStr = [dateFormat stringFromDate:changeddate];
+    return dateStr;
+    
+}
+
+-(NSString *)changefbDateFormat:(NSString *)_date{
+    NSDateFormatter *fbdateFormat = [[NSDateFormatter alloc]init];
+    [fbdateFormat setDateFormat:@"MM/dd/yyyy"];
+    NSDate *changeddate = [fbdateFormat dateFromString:_date];
+    [fbdateFormat setDateFormat:@"dd/MM/yyyy"];
+    NSString *dateStr = [fbdateFormat stringFromDate:changeddate];
+    return dateStr;
+    
+}
 
 @end
