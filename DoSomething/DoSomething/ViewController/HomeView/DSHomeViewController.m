@@ -222,164 +222,22 @@
     
 - (void)parallaxScrollView:(PWParallaxScrollView *)scrollView didChangeIndex:(NSInteger)index direction:(NSString *)ScrollDirection
     {
-        UIView* shadeView = [[UIView alloc]initWithFrame:self.view.frame];
-        shadeView.backgroundColor = [UIColor lightGrayColor];
-        shadeView.alpha = .4;
-        shadeView.tag=1500;
-        _isLandscape=YES;
-       
-        UIImage *image;
         
-        
-       if([ScrollDirection isEqualToString:@"ScrollDirectionLeft"]&& index < 4)
-       {
-           index =index+1;
-       }
-        else if ([ScrollDirection isEqualToString:@"ScrollDirectionRight"] && index < 0)
-        {
-            index =index-1;
-        }
-        
-      image =[UIImage imageNamed:FGimageArray[index]];
-        
-        
-        
-        UIImageView *imageView = nil;
-        UIImageView    * textImageview   =nil;
-       
-        
-        float originX       = -1;
-        float originY       = -1;
-        float zoomInX       = -1;
-        float zoomInY       = -1;
-        float moveX         = -1;
-        float moveY         = -1;
-        
-        float frameWidth    = _isLandscape ? self.view.bounds.size.width: self.view.bounds.size.height;
-        float frameHeight   = _isLandscape ? self.view.bounds.size.height: self.view.bounds.size.width;
-        
-        float resizeRatio = [self getResizeRatioFromImage:image width:frameWidth height:frameHeight];
-        
-        // Resize the image.
-        float optimusWidth  = (image.size.width * resizeRatio) * enlargeRatio;
-        float optimusHeight = (image.size.height * resizeRatio) * enlargeRatio;
-        imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0,self.view.frame.size.width,518)];
-        imageView.tag=1500;
-        
-        
-        if(index == 0)
-        {
-            textImageview  =[[UIImageView alloc] initWithFrame:CGRectMake(self.view.center.x-60,self.view.center.y-80,145,63)];
-        }
-        else{
-            textImageview  =[[UIImageView alloc] initWithFrame:CGRectMake(self.view.center.x-100,self.view.center.y-60,227,67)];
-        }
-        textImageview.image =[UIImage imageNamed:bannerTitleArray[index]];
-        [textImageview setBackgroundColor:[UIColor clearColor]];
-        textImageview.tag=1500;
-        
-        
-        imageView.backgroundColor = [UIColor greenColor];
-       
-        
-        
-        // Calcule the maximum move allowed.
-        float maxMoveX = optimusWidth - frameWidth;
-        float maxMoveY = optimusHeight - frameHeight;
-        
-        float rotation = (arc4random() % 9) / 100;
-        
-        switch (arc4random() % 4) {
-            case 0:
-                originX = 0;
-                originY = 0;
-                zoomInX = 1.25;
-                zoomInY = 1.25;
-                moveX   = -maxMoveX;
-                moveY   = -maxMoveY;
-                break;
-                
-            case 1:
-                originX = 0;
-                originY = frameHeight - optimusHeight;
-                zoomInX = 1.10;
-                zoomInY = 1.10;
-                moveX   = -maxMoveX;
-                moveY   = maxMoveY;
-                break;
-                
-            case 2:
-                originX = frameWidth - optimusWidth;
-                originY = 0;
-                zoomInX = 1.30;
-                zoomInY = 1.30;
-                moveX   = maxMoveX;
-                moveY   = -maxMoveY;
-                break;
-                
-            case 3:
-                originX = frameWidth - optimusWidth;
-                originY = frameHeight - optimusHeight;
-                zoomInX = 1.20;
-                zoomInY = 1.20;
-                moveX   = maxMoveX;
-                moveY   = maxMoveY;
-                break;
-                
-            default:
-                NSLog(@"Unknown random number found in JBKenBurnsView _animate");
-                break;
-        }
-        
-        
-        CALayer *picLayer    = [CALayer layer];
-        picLayer.contents    = (id)image.CGImage;
-        picLayer.anchorPoint = CGPointMake(0, 0);
-        picLayer.bounds      = CGRectMake(0, 0, optimusWidth, optimusHeight);
-        picLayer.position    = CGPointMake(originX, originY);
-        
-        [imageView.layer addSublayer:picLayer];
-        
-        
-        CATransition *animation = [CATransition animation];
-        [animation setDuration:1];
-        [animation setType:kCATransitionFade];
-        // [[self layer] addAnimation:animation forKey:nil];
-        
-        [shadeView addSubview:imageView];
-       // [shadeView addSubview:textImageview];
-//
-        [UIView animateWithDuration:15.0 delay:0 options:UIViewAnimationOptionCurveEaseOut animations:^
-         {
-             CGAffineTransform rotate    = CGAffineTransformMakeRotation(rotation);
-             CGAffineTransform moveRight = CGAffineTransformMakeTranslation(moveX, moveY);
-             CGAffineTransform combo1    = CGAffineTransformConcat(rotate, moveRight);
-             CGAffineTransform zoomIn    = CGAffineTransformMakeScale(zoomInX, zoomInY);
-             CGAffineTransform transform = CGAffineTransformConcat(zoomIn, combo1);
-             imageView.transform = transform;
-             
-             
-         } completion:^(BOOL finished) {
-             
-         }];
-        [scrollView insertSubview:shadeView atIndex:index];
-        [scrollView bringSubviewToFront:shadeView];
-
     }
     
     
 - (void)parallaxScrollView:(PWParallaxScrollView *)scrollView didEndDeceleratingAtIndex:(NSInteger)index
 {
-        for(UIView * view in scrollView.subviews)
-        {
-            if(view.tag == 1500)
-            {
-              //  [UIView animateWithDuration:0.1 animations:^{
-                 [view removeFromSuperview];
-           // }];
-               
-            }
-        }
+//        for(UIView * view in scrollView.subviews)
+//        {
+//            if(view.tag == 1500)
+//            {
+//              //  [UIView animateWithDuration:0.1 animations:^{
+//                 [view removeFromSuperview];
+//           // }];
+//               
+//            }
+//        }
         Currentindex = index;
     
         if (index == [BGimageArray count] - 1) {
@@ -438,6 +296,153 @@
         [self flashOff:v];
     }];
 }
+
+#pragma animation
+//-(void)animationDidStart:(CAAnimation *)anim{
+//    UIView* shadeView = [[UIView alloc]initWithFrame:self.view.frame];
+//    shadeView.backgroundColor = [UIColor lightGrayColor];
+//    shadeView.alpha = .4;
+//    shadeView.tag=1500;
+//    _isLandscape=YES;
+//    
+//    UIImage *image;
+//    
+//    
+//    if([ScrollDirection isEqualToString:@"ScrollDirectionLeft"]&& index < 4)
+//    {
+//        index =index+1;
+//    }
+//    else if ([ScrollDirection isEqualToString:@"ScrollDirectionRight"] && index < 0)
+//    {
+//        index =index-1;
+//    }
+//    
+//    image =[UIImage imageNamed:FGimageArray[index]];
+//    
+//    
+//    
+//    UIImageView *imageView = nil;
+//    UIImageView    * textImageview   =nil;
+//    
+//    
+//    float originX       = -1;
+//    float originY       = -1;
+//    float zoomInX       = -1;
+//    float zoomInY       = -1;
+//    float moveX         = -1;
+//    float moveY         = -1;
+//    
+//    float frameWidth    = _isLandscape ? self.view.bounds.size.width: self.view.bounds.size.height;
+//    float frameHeight   = _isLandscape ? self.view.bounds.size.height: self.view.bounds.size.width;
+//    
+//    float resizeRatio = [self getResizeRatioFromImage:image width:frameWidth height:frameHeight];
+//    
+//    // Resize the image.
+//    float optimusWidth  = (image.size.width * resizeRatio) * enlargeRatio;
+//    float optimusHeight = (image.size.height * resizeRatio) * enlargeRatio;
+//    imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0,self.view.frame.size.width,518)];
+//    imageView.tag=1500;
+//    
+//    
+//    if(index == 0)
+//    {
+//        textImageview  =[[UIImageView alloc] initWithFrame:CGRectMake(self.view.center.x-60,self.view.center.y-80,145,63)];
+//    }
+//    else{
+//        textImageview  =[[UIImageView alloc] initWithFrame:CGRectMake(self.view.center.x-100,self.view.center.y-60,227,67)];
+//    }
+//    textImageview.image =[UIImage imageNamed:bannerTitleArray[index]];
+//    [textImageview setBackgroundColor:[UIColor clearColor]];
+//    textImageview.tag=1500;
+//    
+//    
+//    imageView.backgroundColor = [UIColor greenColor];
+//    
+//    
+//    
+//    // Calcule the maximum move allowed.
+//    float maxMoveX = optimusWidth - frameWidth;
+//    float maxMoveY = optimusHeight - frameHeight;
+//    
+//    float rotation = (arc4random() % 9) / 100;
+//    
+//    switch (arc4random() % 4) {
+//        case 0:
+//            originX = 0;
+//            originY = 0;
+//            zoomInX = 1.25;
+//            zoomInY = 1.25;
+//            moveX   = -maxMoveX;
+//            moveY   = -maxMoveY;
+//            break;
+//            
+//        case 1:
+//            originX = 0;
+//            originY = frameHeight - optimusHeight;
+//            zoomInX = 1.10;
+//            zoomInY = 1.10;
+//            moveX   = -maxMoveX;
+//            moveY   = maxMoveY;
+//            break;
+//            
+//        case 2:
+//            originX = frameWidth - optimusWidth;
+//            originY = 0;
+//            zoomInX = 1.30;
+//            zoomInY = 1.30;
+//            moveX   = maxMoveX;
+//            moveY   = -maxMoveY;
+//            break;
+//            
+//        case 3:
+//            originX = frameWidth - optimusWidth;
+//            originY = frameHeight - optimusHeight;
+//            zoomInX = 1.20;
+//            zoomInY = 1.20;
+//            moveX   = maxMoveX;
+//            moveY   = maxMoveY;
+//            break;
+//            
+//        default:
+//            NSLog(@"Unknown random number found in JBKenBurnsView _animate");
+//            break;
+//    }
+//    
+//    
+//    CALayer *picLayer    = [CALayer layer];
+//    picLayer.contents    = (id)image.CGImage;
+//    picLayer.anchorPoint = CGPointMake(0, 0);
+//    picLayer.bounds      = CGRectMake(0, 0, optimusWidth, optimusHeight);
+//    picLayer.position    = CGPointMake(originX, originY);
+//    
+//    [imageView.layer addSublayer:picLayer];
+//    
+//    
+//    CATransition *animation = [CATransition animation];
+//    [animation setDuration:1];
+//    [animation setType:kCATransitionFade];
+//    // [[self layer] addAnimation:animation forKey:nil];
+//    
+//    [shadeView addSubview:imageView];
+//    // [shadeView addSubview:textImageview];
+//    //
+//    [UIView animateWithDuration:15.0 delay:0 options:UIViewAnimationOptionCurveEaseOut animations:^
+//     {
+//         CGAffineTransform rotate    = CGAffineTransformMakeRotation(rotation);
+//         CGAffineTransform moveRight = CGAffineTransformMakeTranslation(moveX, moveY);
+//         CGAffineTransform combo1    = CGAffineTransformConcat(rotate, moveRight);
+//         CGAffineTransform zoomIn    = CGAffineTransformMakeScale(zoomInX, zoomInY);
+//         CGAffineTransform transform = CGAffineTransformConcat(zoomIn, combo1);
+//         imageView.transform = transform;
+//         
+//         
+//     } completion:^(BOOL finished) {
+//         
+//     }];
+//    [scrollView insertSubview:shadeView atIndex:index];
+//    [scrollView bringSubviewToFront:shadeView];
+//
+//}
 
 - (float)getResizeRatioFromImage:(UIImage *)image width:(float)frameWidth height:(float)frameHeight
 {

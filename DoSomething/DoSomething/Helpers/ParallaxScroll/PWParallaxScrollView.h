@@ -49,6 +49,10 @@
 - (void)parallaxScrollView:(PWParallaxScrollView *)scrollView didChangeIndex:(NSInteger)index direction:(NSString *) ScrollDirection;
 - (void)parallaxScrollView:(PWParallaxScrollView *)scrollView didEndDeceleratingAtIndex:(NSInteger)index;
 - (void)parallaxScrollView:(PWParallaxScrollView *)scrollView didRecieveTapAtIndex:(NSInteger)index;
+- (void)parallaxScrollView:(PWParallaxScrollView *)scrollView didRecieveTapAtIndex:(NSInteger)index direction:(NSString *) ScrollDirection;
+
+
+
 
 - (void)backScrollView:(PWParallaxScrollView *)scrollView didChangeIndex:(NSInteger)index;
 

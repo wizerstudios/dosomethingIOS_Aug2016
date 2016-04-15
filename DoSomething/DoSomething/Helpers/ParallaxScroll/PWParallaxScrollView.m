@@ -48,6 +48,7 @@ static const NSInteger PWInvalidPosition = -1;
 @property (nonatomic, assign) NSInteger userHoldingDownIndex;
 
 @property (nonatomic, strong) UIScrollView *touchScrollView;
+
 @property (nonatomic, strong) UIScrollView *foregroundScrollView;
 @property (nonatomic, strong) UIScrollView *backgroundScrollView;
 
@@ -124,8 +125,15 @@ static const NSInteger PWInvalidPosition = -1;
     
     UITapGestureRecognizer *tapGestureRecognize = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(touchScrollViewTapped:)];
     tapGestureRecognize.numberOfTapsRequired = 1;
-    [_touchScrollView addGestureRecognizer:tapGestureRecognize];
+//    UILongPressGestureRecognizer *longTap = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(longTouch:)];
+//    [longTap setNumberOfTapsRequired:0]; // Set your own number here
+//    [longTap setMinimumPressDuration:0.3];
+//    [tapGestureRecognize requireGestureRecognizerToFail:longTap];
     
+    [_touchScrollView addGestureRecognizer:tapGestureRecognize];
+    //[_touchScrollView addGestureRecognizer:longTap];
+    
+
    
     
     self.foregroundScrollView = [[UIScrollView alloc] initWithFrame:self.bounds];
@@ -164,10 +172,14 @@ static const NSInteger PWInvalidPosition = -1;
     
     [pageControllBtn setCurrentPage:_currentIndex];
     
+   
+    
     pageImageView =[[UIImageView alloc]init];
+   
     
     [self addSubview:_foregroundScrollView];
     [self addSubview:_touchScrollView];
+    
     [self addSubview:pageControllBtn];
     [self nextImage:_currentIndex];
     nextImageTimer = [NSTimer scheduledTimerWithTimeInterval:15.0 target:self selector:@selector(nextImage) userInfo:nil repeats:YES];
@@ -246,6 +258,180 @@ static const NSInteger PWInvalidPosition = -1;
 }
 
 #pragma mark - private method
+- (void) longTouch: (UILongPressGestureRecognizer *)recognizer
+{
+    
+        [self parallaxScrollView:self didRecieveTapAtIndex:self.currentIndex direction:scrolldirectionstr];
+    
+    
+    if (recognizer.state == UIGestureRecognizerStateEnded) {
+        
+        for(UIView * view in _touchScrollView.subviews)
+        {
+            if(view.tag == 1600)
+            {
+                //  [UIView animateWithDuration:0.1 animations:^{
+                [view removeFromSuperview];
+                // }];
+                
+            }
+        }
+
+       
+    }
+
+}
+//- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer
+//{
+//    return YES;
+//}
+- (void)parallaxScrollView:(PWParallaxScrollView *)scrollView didRecieveTapAtIndex:(NSInteger)index direction:(NSString *) ScrollDirection
+{
+    UIView* shadeView = [[UIView alloc]initWithFrame:self.frame];
+    shadeView.backgroundColor = [UIColor lightGrayColor];
+    shadeView.alpha = .4;
+    shadeView.tag=1600;
+    _isLandscape=YES;
+    
+    UIImage *image;
+    
+    
+    if([ScrollDirection isEqualToString:@"ScrollDirectionLeft"]&& index < 4)
+    {
+        index =index+1;
+    }
+    else if ([ScrollDirection isEqualToString:@"ScrollDirectionRight"] && index < 0)
+    {
+        index =index-1;
+    }
+    
+    image =[UIImage imageNamed:FGimageArray[index]];
+    
+    
+    
+    UIImageView *imageView = nil;
+    UIImageView    * textImageview   =nil;
+    
+    
+    float originX       = -1;
+    float originY       = -1;
+    float zoomInX       = -1;
+    float zoomInY       = -1;
+    float moveX         = -1;
+    float moveY         = -1;
+    
+    float frameWidth    = _isLandscape ? self.bounds.size.width: self.bounds.size.height;
+    float frameHeight   = _isLandscape ? self.bounds.size.height: self.bounds.size.width;
+    
+    float resizeRatio = [self getResizeRatioFromImage:image width:frameWidth height:frameHeight];
+    
+    // Resize the image.
+    float optimusWidth  = (image.size.width * resizeRatio) * enlargeRatio;
+    float optimusHeight = (image.size.height * resizeRatio) * enlargeRatio;
+    imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0,self.frame.size.width,518)];
+    imageView.tag=1600;
+    
+    
+    if(index == 0)
+    {
+        textImageview  =[[UIImageView alloc] initWithFrame:CGRectMake(self.center.x-60,self.center.y-80,145,63)];
+    }
+    else{
+        textImageview  =[[UIImageView alloc] initWithFrame:CGRectMake(self.center.x-100,self.center.y-60,227,67)];
+    }
+    textImageview.image =[UIImage imageNamed:bannerText[index]];
+    [textImageview setBackgroundColor:[UIColor clearColor]];
+    textImageview.tag=1600;
+    
+    
+    imageView.backgroundColor = [UIColor greenColor];
+    
+    
+    
+    // Calcule the maximum move allowed.
+    float maxMoveX = optimusWidth - frameWidth;
+    float maxMoveY = optimusHeight - frameHeight;
+    
+    float rotation = (arc4random() % 9) / 100;
+    
+    switch (arc4random() % 4) {
+        case 0:
+            originX = 0;
+            originY = 0;
+            zoomInX = 1.25;
+            zoomInY = 1.25;
+            moveX   = -maxMoveX;
+            moveY   = -maxMoveY;
+            break;
+            
+        case 1:
+            originX = 0;
+            originY = frameHeight - optimusHeight;
+            zoomInX = 1.10;
+            zoomInY = 1.10;
+            moveX   = -maxMoveX;
+            moveY   = maxMoveY;
+            break;
+            
+        case 2:
+            originX = frameWidth - optimusWidth;
+            originY = 0;
+            zoomInX = 1.30;
+            zoomInY = 1.30;
+            moveX   = maxMoveX;
+            moveY   = -maxMoveY;
+            break;
+            
+        case 3:
+            originX = frameWidth - optimusWidth;
+            originY = frameHeight - optimusHeight;
+            zoomInX = 1.20;
+            zoomInY = 1.20;
+            moveX   = maxMoveX;
+            moveY   = maxMoveY;
+            break;
+            
+        default:
+            NSLog(@"Unknown random number found in JBKenBurnsView _animate");
+            break;
+    }
+    
+    
+    CALayer *picLayer    = [CALayer layer];
+    picLayer.contents    = (id)image.CGImage;
+    picLayer.anchorPoint = CGPointMake(0, 0);
+    picLayer.bounds      = CGRectMake(0, 0, optimusWidth, optimusHeight);
+    picLayer.position    = CGPointMake(originX, originY);
+    
+    [imageView.layer addSublayer:picLayer];
+    
+    
+    CATransition *animation = [CATransition animation];
+    [animation setDuration:1];
+    [animation setType:kCATransitionFade];
+    // [[self layer] addAnimation:animation forKey:nil];
+    
+    [shadeView addSubview:imageView];
+    // [shadeView addSubview:textImageview];
+    //
+    [UIView animateWithDuration:12.0 delay:0 options:UIViewAnimationOptionCurveEaseOut animations:^
+     {
+         CGAffineTransform rotate    = CGAffineTransformMakeRotation(rotation);
+         CGAffineTransform moveRight = CGAffineTransformMakeTranslation(moveX, moveY);
+         CGAffineTransform combo1    = CGAffineTransformConcat(rotate, moveRight);
+         CGAffineTransform zoomIn    = CGAffineTransformMakeScale(zoomInX, zoomInY);
+         CGAffineTransform transform = CGAffineTransformConcat(zoomIn, combo1);
+         imageView.transform = transform;
+         
+         
+     } completion:^(BOOL finished) {
+         
+     }];
+    [_touchScrollView addSubview:shadeView ];
+    [self bringSubviewToFront:_touchScrollView];
+
+}
+
 - (void)touchScrollViewTapped:(id)sender
 {
     if ([self.delegate respondsToSelector:@selector(parallaxScrollView:didRecieveTapAtIndex:)])
@@ -253,6 +439,7 @@ static const NSInteger PWInvalidPosition = -1;
         [self.delegate parallaxScrollView:self didRecieveTapAtIndex:self.currentIndex];
     }
 }
+
 -(void)touchScrollViewTappedswipe:(UISwipeGestureRecognizer*)gesture
 {
     if ([self.delegate respondsToSelector:@selector(parallaxScrollView:didRecieveTapAtIndex:)])
@@ -662,11 +849,14 @@ static const NSInteger PWInvalidPosition = -1;
     [animation setDuration:1];
     [animation setType:kCATransitionFade];
     // [[self layer] addAnimation:animation forKey:nil];
+   
+    
     
     [self addSubview:imageView];
     [self addSubview:textImageview];
     [self addSubview:pageControllBtn];
-    
+   
+
 
     // Generates the animation  //before: UIViewAnimationCurveEaseInOut
         [UIView animateWithDuration:10.0 delay:0 options:UIViewAnimationOptionCurveEaseOut animations:^

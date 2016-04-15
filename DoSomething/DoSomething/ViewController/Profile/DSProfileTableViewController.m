@@ -2400,15 +2400,17 @@
     }
     else
     {
-//        [self.tableviewProfile beginUpdates];
-//        NSArray *indexPaths = [[NSArray alloc] initWithObjects:indexPath, nil];
-//        [self.tableviewProfile reloadRowsAtIndexPaths:indexPaths withRowAnimation:UITableViewRowAnimationNone];
-//        [self.tableviewProfile endUpdates];
-
+        
        
         if(dataSize.height > 50)
         {
-            //[self performSelector:@selector(settableviewheight) withObject:nil afterDelay:0.2];
+            [self.tableviewProfile beginUpdates];
+            NSArray *indexPaths = [[NSArray alloc] initWithObjects:indexPath, nil];
+            [self.tableviewProfile reloadRowsAtIndexPaths:indexPaths withRowAnimation:UITableViewRowAnimationNone];
+            [self performSelector:@selector(settableviewheight) withObject:nil afterDelay:0.2];
+
+            [self.tableviewProfile endUpdates];
+
             
         }
         
@@ -3635,7 +3637,7 @@
                 if(![lastobject  isEqual: @""] && imageIndex ==1)
                 {
                     
-                    userProfileImage = [[UIImageView alloc]initWithFrame:CGRectMake((imageIndex * self.scrView.frame.size.width)+110,
+                    userProfileImage = [[UIImageView alloc]initWithFrame:CGRectMake((imageIndex * self.scrView.frame.size.width)+extraSpace,
                                                                                     20, self.profileImageView.frame.size.width, self.profileImageView.frame.size.height)];
                 }
                 else if (![lastobject  isEqual: @""] && imageIndex ==2)
