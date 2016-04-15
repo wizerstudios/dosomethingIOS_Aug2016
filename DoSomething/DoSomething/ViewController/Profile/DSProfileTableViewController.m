@@ -1095,7 +1095,7 @@
     objCustomAlterview.alertMsgLabel.text = msg;
     objCustomAlterview.alertMsgLabel.textAlignment = NSTextAlignmentCenter;
     objCustomAlterview.alertMsgLabel.lineBreakMode = NSLineBreakByWordWrapping;
-    objCustomAlterview.alertMsgLabel.numberOfLines = 2;
+    objCustomAlterview.alertMsgLabel.numberOfLines = 3;
     [objCustomAlterview.alertMsgLabel setTextColor:[UIColor colorWithRed:(255/255.0f) green:(255/255.0f) blue:(255/255.0f) alpha:1.0f]];
     
 }
@@ -3206,7 +3206,7 @@
                 [COMMON removeLoading];
                 
                 
-                [self showAccountCreateAltermessage:@"By clicking create,you agree to the Term of \n Use & Privacy policy"];
+                [self showAccountCreateAltermessage:@"By clicking 'create',you agree to the 'Terms of Use' and 'Privacy policy'"];
                 return;
             }
             else
@@ -3224,7 +3224,7 @@
             
             [COMMON removeLoading];
             
-            [self showAccountCreateAltermessage:@"By clicking create,you agree to the Term of \n Use & Privacy policy"];
+            [self showAccountCreateAltermessage:@"By clicking 'create',you agree to the 'Terms of Use' and 'Privacy policy'"];
         }
         
     }

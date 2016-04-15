@@ -23,9 +23,10 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    [self.termscontentweb setDelegate:self];
     [self loadContent];
 
-    // Do any additional setup after loading the view from its nib.
 }
 -(void)viewWillAppear:(BOOL)animated
 {
@@ -53,7 +54,8 @@
     [self.navigationController.navigationBar addSubview:customNavigation.view];
     
     [customNavigation.buttonBack addTarget:self action:@selector(backAction) forControlEvents:UIControlEventTouchUpInside];
-    }
+}
+
 -(void)loadContent
 {
     
@@ -69,6 +71,11 @@
     }
     
     NSURLRequest *urlReq = [NSURLRequest requestWithURL:homeIndexUrl];
+    NSString *padding = [NSString stringWithFormat:@"<html> \n"
+                         "<head><style type='text/css'>body{font-family:arial;font-size:20px;color:#333;line-height:20px;padding:0px; zoom = 50.0;}</style> </head>\n<body>\n</body></html>"];
+    [self.termscontentweb  stringByEvaluatingJavaScriptFromString:padding];
+    self.termscontentweb.scalesPageToFit = YES;
+    self.termscontentweb.contentMode = UIViewContentModeScaleAspectFill;
     
     [self.termscontentweb loadRequest:urlReq];
     
@@ -85,19 +92,17 @@
     [COMMON removeLoading];
     
 }
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+
+- (void)webViewDidStartLoad:(UIWebView *)webView
+{
 }
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+- (void)webViewDidFinishLoad:(UIWebView *)webView{
+ 
 }
-*/
+- (void)webView:(UIWebView *)webView didFailLoadWithError:(nullable NSError *)error
+{
+    NSLog(@"error =%@",error);
+}
 
 @end

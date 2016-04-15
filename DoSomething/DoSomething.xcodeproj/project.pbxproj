@@ -1527,7 +1527,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "1781afac-0cbd-417c-85bf-38093999b40a";
 				SDKROOT = iphoneos;
 			};
 			name = Debug;
@@ -1590,7 +1590,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.oclockapps.DoSomething;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "1781afac-0cbd-417c-85bf-38093999b40a";
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
