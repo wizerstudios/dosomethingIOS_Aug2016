@@ -83,6 +83,12 @@ void downloadImageFromUrl(NSString* urlString, UIImageView * imageview);
 
 - (CGSize)getControlHeight:(NSString *)string withFontName:(NSString *)fontName ofSize:(NSInteger)size withSize:(CGSize)LabelWidth;
 
+//LocalFileSaving
+-(BOOL) isFileExistsInLocal:(NSString *)fileName fileType:(NSString *) fileType;
+void saveContentsToFile (id data, NSString* filename);
+- (id)getContentsFromLocal:(NSString *)fileName fileType:(NSString *)fileType;
+-(void)deleteDocumentPathContents;
+
 @end
 extern DSAppCommon *sharedCommon;
 #define COMMON (sharedCommon? sharedCommon:[DSAppCommon common])

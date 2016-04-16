@@ -15,6 +15,8 @@
 #import "OpenUDID.h"
 #import "UIImageView+AFNetworking.h"
 #import "AppDelegate.h"
+#import "ImageCache.h"
+#import "UIImage+Resizing.h"
 
 
 
@@ -229,7 +231,17 @@
              
              
              hobbiesArry=[objselectionname valueForKey:@"hobbieslist"];
+             NSLog(@"hobbiesArry = %@",hobbiesArry);
              
+             for (int i = 0; i<[hobbiesArry count]; i++) {
+                 
+                 for( int j = 0; j < [hobbiesArry [i]count];j++){
+                     NSString *imageurlStr1 = [[[hobbiesArry valueForKey:@"image"]objectAtIndex:i]objectAtIndex:j];
+                     NSData *imageData1   = [NSData dataWithContentsOfURL:[NSURL URLWithString:imageurlStr1]];
+                     saveContentsToFile(imageData1, [NSString stringWithFormat:@"hobbies/%@",[imageurlStr1 lastPathComponent]]);
+                 }
+                 
+             }
              [[NSUserDefaults standardUserDefaults] setObject:hobbiesArry forKey:@"ListofinterestArray"];
              [[NSUserDefaults standardUserDefaults] synchronize];
              interstAndHobbiesArray=[hobbiesArry mutableCopy];
@@ -563,42 +575,39 @@
     
     [cell.nameLabel setText:[[[[interstAndHobbiesArray valueForKey:@"name"]objectAtIndex:indexPath.section]objectAtIndex:indexPath.row]uppercaseString]];
     
-    NSString *image;
+      NSString *imageStr;
+    
+      UIImage * image;
     
     NSDictionary *dict = [[interstAndHobbiesArray objectAtIndex:indexPath.section]objectAtIndex:indexPath.row];
     
     if([profileHobbyArray containsObject:dict]){
-        if( isDownloadactiveImg==YES)
-        {
-            image = [dict valueForKey:@"image"];
-            
-            downloadImageFromUrl(image, cell.interestAndHobbiesImageView);
-           // [cell.interestAndHobbiesImageView setImageWithURL:[NSURL URLWithString:image]];
-        }
 
-        image = [dict valueForKey:@"image_active"];
+
+        imageStr = [dict valueForKey:@"image_active"];
         
         [cell.nameLabel setTextColor:[UIColor colorWithRed:(224.0f/255) green:(62.0f/255) blue:(79.0f/255) alpha:1.0f]];
     }
     
     else{
         
-        if( isDownloadactiveImg==YES)
-        {
-             image = [dict valueForKey:@"image_active"];
-            downloadImageFromUrl(image, cell.interestAndHobbiesImageView);
-            //[cell.interestAndHobbiesImageView setImageWithURL:[NSURL URLWithString:image]];
-        }
-        image = [dict valueForKey:@"image"];
+        imageStr = [dict valueForKey:@"image"];
+        
+        image = [[ImageCache sharedInstance] imageFromlocalcache:imageStr imageType:@"hobbies"];
         
         [cell.nameLabel setTextColor:[UIColor grayColor]];
     }
     
-//    downloadImageFromUrl(image, cell.interestAndHobbiesImageView);
-//    [cell.interestAndHobbiesImageView setImageWithURL:[NSURL URLWithString:image]];
-    image = [image stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+    if(image == nil){
+        
+        imageStr = [imageStr stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+        
+        [cell.interestAndHobbiesImageView setImageWithURL:[NSURL URLWithString:imageStr]];
+    }
+    else{
+        [cell.interestAndHobbiesImageView setImage:image];
+    }
     
-    [cell.interestAndHobbiesImageView setImageWithURL:[NSURL URLWithString:image]];
     
     
     return cell;

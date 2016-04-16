@@ -20,6 +20,9 @@
 #import "OpenUDID.h"
 #import "CustomAlterview.h"
 #import "DSLocationViewController.h"
+#import "ImageCache.h"
+#import "UIImage+Resizing.h"
+
 
 #define ITEMS_PAGE_SIZE 4
 #define ITEM_CELL_IDENTIFIER @"ItemCell"
@@ -75,8 +78,8 @@
 - (void)viewDidLoad
 {
     
-        [super viewDidLoad];
-       locationManager                 = [[CLLocationManager alloc] init];
+    [super viewDidLoad];
+    locationManager                 = [[CLLocationManager alloc] init];
     locationManager.delegate        = self;
     objWebService = [[DSWebservice alloc]init];
     activityMainDict = [[NSMutableDictionary alloc]init];
@@ -168,6 +171,13 @@
                  menuArray=[NSMutableArray alloc];
                  homeviewlist = [responseObject valueForKey:@"dosomethinglist"];
                  menuArray =[homeviewlist valueForKey:@"list"];
+                 for(int i = 0; i <[menuArray count] ;i++){
+                     
+                     NSString *imageurlStr1 = [[menuArray valueForKey:@"InactiveImage"]objectAtIndex:i];
+                     NSData *imageData1   = [NSData dataWithContentsOfURL:[NSURL URLWithString:imageurlStr1]];
+                     saveContentsToFile(imageData1, [NSString stringWithFormat:@"dosomething/%@",[imageurlStr1 lastPathComponent]]);
+                 }
+                 
                  [[NSUserDefaults standardUserDefaults] setObject:menuArray forKey:@"MenuListArray"];
                  [[NSUserDefaults standardUserDefaults] synchronize];
                  [COMMON removeLoading];
@@ -352,6 +362,8 @@
     [cell setNeedsDisplay];
     cell.MenuImg = nil;
     cell.MenuTittle = nil;
+    UIImage *imageName;
+    
     if (cell != nil)
     {
         cell.MenuImg = (UIImageView *)[cell viewWithTag:101];
@@ -372,7 +384,9 @@
                                                              blue:(81/255.0f)
                                                             alpha:1.0f];
                NSString * objstr = [NSString stringWithFormat:@"%@",[data valueForKey:@"ActiveImage"]];
-                objstr= [objstr stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+                
+                imageName = [[ImageCache sharedInstance] imageFromlocalcache:objstr imageType:@"hobbies"];
+
                 [cell.MenuImg setImageWithURL:[NSURL URLWithString:objstr]];
                 
                 NSString * activeobjstr = [NSString stringWithFormat:@"%@",[data valueForKey:@"ActiveImage"]];
@@ -396,8 +410,10 @@
        
         
         NSString * objstr = [NSString stringWithFormat:@"%@",[data valueForKey:@"InactiveImage"]];
-        objstr= [objstr stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-        [cell.MenuImg setImageWithURL:[NSURL URLWithString:objstr]];
+//        objstr= [objstr stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+//        [cell.MenuImg setImageWithURL:[NSURL URLWithString:objstr]];
+        imageName = [[ImageCache sharedInstance]imageFromlocalcache:objstr imageType:@"dosomething"];
+        [cell.MenuImg setImage:imageName];
          [cell.MenuImg setHidden:NO];
        
     }

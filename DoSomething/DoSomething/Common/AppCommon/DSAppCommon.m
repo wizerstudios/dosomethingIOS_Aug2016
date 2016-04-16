@@ -683,7 +683,7 @@ void saveContentsToFile (id data, NSString* filename) {
     
     fileNameToSave = [documentsDirectory stringByAppendingPathComponent:filename];
     
-    //NSLog(@"fileNameToSave = %@",fileNameToSave);
+    NSLog(@"fileNameToSave = %@",fileNameToSave);
     
     [data writeToFile:fileNameToSave atomically:YES];
     
@@ -691,6 +691,44 @@ void saveContentsToFile (id data, NSString* filename) {
     
     // NSLog(@"url = %@",[NSURL fileURLWithPath:fileNameToSave]);
     addSkipBackupAttributeToItemAtURL([NSURL fileURLWithPath:fileNameToSave]);
+}
+
+#pragma mark GettingFilesInLocal
+
+-(BOOL) isFileExistsInLocal:(NSString *)fileName fileType:(NSString *) fileType {
+    NSFileManager *fileManagerPath = [NSFileManager defaultManager];
+    NSArray *pathsValue = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *documentsDirectoryPath = [pathsValue objectAtIndex:0];
+    NSString *filePath = [documentsDirectoryPath stringByAppendingPathComponent:fileName];
+    if ([fileManagerPath fileExistsAtPath:filePath isDirectory:NO]) {
+        return YES;
+    } else {
+        return NO;
+    }
+}
+
+- (id)getContentsFromLocal:(NSString *)fileName fileType:(NSString *)fileType {
+    NSArray *pathsValue = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    //    NSArray *pathvalue = @"FranceOptique/Resources/";
+    NSString *documentsDirectoryPath = [pathsValue objectAtIndex:0];
+    NSString *filePath = [documentsDirectoryPath stringByAppendingPathComponent:fileName];
+    
+    //    NSLog(@"FilePath = %@",filePath);
+    NSData *data = [NSData dataWithContentsOfURL:[NSURL fileURLWithPath:filePath]];
+    return data;
+    
+}
+
+-(void)deleteDocumentPathContents {
+    NSString *documentPath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+    for (NSString *path in [[NSFileManager defaultManager] contentsOfDirectoryAtPath:documentPath error:nil]) {
+        [[NSFileManager defaultManager] removeItemAtPath:[documentPath stringByAppendingPathComponent:path] error:nil];
+    }
+    
+    NSString *tempPath = NSTemporaryDirectory();
+    for (NSString *path in [[NSFileManager defaultManager] contentsOfDirectoryAtPath:tempPath error:nil]) {
+        [[NSFileManager defaultManager] removeItemAtPath:[tempPath stringByAppendingPathComponent:path] error:nil];
+    }
 }
 
 
