@@ -3206,7 +3206,7 @@
                 [COMMON removeLoading];
                 
                 
-                [self showAccountCreateAltermessage:@"By clicking 'create',you agree to the 'Terms of Use' and 'Privacy policy'"];
+                [self showAccountCreateAltermessage:@"By clicking \"Create\", you agree to the \"Terms of Use\" and \"Privacy Policy\""];
                 return;
             }
             else
@@ -3224,7 +3224,7 @@
             
             [COMMON removeLoading];
             
-            [self showAccountCreateAltermessage:@"By clicking 'create',you agree to the 'Terms of Use' and 'Privacy policy'"];
+            [self showAccountCreateAltermessage:@"By clicking \"Create\", you agree to the \"Terms of Use\" and \"Privacy Policy\""];
         }
         
     }
