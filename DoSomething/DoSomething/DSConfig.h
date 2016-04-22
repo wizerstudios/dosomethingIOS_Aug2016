@@ -71,7 +71,7 @@
 
 #define FILL_DETAILS                @"Please Enter Email and Password"
 
-#define FILL_ALL_DETAILS            @"Please Enter FirstName, LastName , Date Of Birth , Email , Password"
+#define FILL_ALL_DETAILS            @"Please Enter First Name, Last Name , Date Of Birth , Email , Password"
 
 #define INVALID_EMAIL               @"Enter Valid Email"
 
@@ -80,9 +80,9 @@
 #define PASSWORD_REQUIRED           @"Password Required"
 
 
-#define FIRSTNAME_REQUIRED          @"FirstName Required"
+#define FIRSTNAME_REQUIRED          @"First Name Required"
 
-#define LASTNAME_REQUIRED           @"LastName Required"
+#define LASTNAME_REQUIRED           @"Last Name Required"
 
 #define GENDER_REQUIRED             @"Gender Required"
 
