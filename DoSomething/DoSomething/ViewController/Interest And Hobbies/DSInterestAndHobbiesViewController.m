@@ -202,7 +202,7 @@
     
     if([COMMON isInternetReachable]){
         
-        [COMMON LoadIcon:self.view];
+        [COMMON AddLoadIcon:self.view];
         
         [objWebservice getHobbies:GetHobbies_API sessionid:deviceUdid success:^(AFHTTPRequestOperation *operation, id responseObject)
          

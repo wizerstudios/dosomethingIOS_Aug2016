@@ -146,7 +146,7 @@
     
     customNavigation = [[CustomNavigationView alloc] initWithNibName:@"CustomNavigationView" bundle:nil];
     
-    customNavigation.view.frame = CGRectMake(0,-20, CGRectGetWidth(self.view.frame), 65);
+     customNavigation.view.frame = CGRectMake(0,-20, CGRectGetWidth(self.view.frame), 65);
      self.topviewYposition.constant = customNavigation.view.frame.size.height;//65
     
     if (IS_IPHONE6 )
@@ -156,12 +156,12 @@
          self.chatviewbottom.constant =420;
          self.chattableheight.constant =10;
          self.blockBtnYOrigin.constant = 435;
-        self.topviewYposition.constant = customNavigation.view.frame.origin.y+customNavigation.view.frame.size.height+28;
+         self.topviewYposition.constant = customNavigation.view.frame.origin.y+customNavigation.view.frame.size.height+28;
          self.menuImageyOrigin.constant = 93;
         
     }
     
-    if(IS_IPHONE6_Plus)
+    else if(IS_IPHONE6_Plus)
     {
         
         customNavigation.view.frame = CGRectMake(0,-20, 420, 83);
@@ -170,6 +170,10 @@
         self.blockBtnYOrigin.constant = 505;
         self.topviewYposition.constant = customNavigation.view.frame.size.height+5;
         self.menuImageyOrigin.constant = 95;
+    }
+    else if(IS_IPHONE4){
+        self.chatviewbottom.constant =256;
+         self.blockBtnYOrigin.constant = 250;
     }
     
    

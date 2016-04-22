@@ -65,9 +65,8 @@
                                                                constant:20.0]];
     
    
-    [COMMON LoadIcon:self.view];
+    [COMMON AddLoadIcon:self.view];
 
-   
     
 }
 

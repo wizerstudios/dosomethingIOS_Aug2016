@@ -94,6 +94,14 @@
     }
     
 }
+
+-(void)viewDidLayoutSubviews{
+    
+    if(IS_IPHONE4){
+        [self.settingScroll setContentSize:CGSizeMake(320,450)];
+    }
+    
+}
 -(void)loadNavigationview
 {
     self.navigationController.navigationBarHidden=NO;
@@ -428,20 +436,12 @@
     if(IS_IPHONE6 || IS_IPHONE6_Plus)
     {
         objCustomSoundview.soundmenuheight.constant=180;
-       // objCustomSoundview.soundmenutrailing.constant=130;
     }
+    
     [objCustomSoundview.soundmenuView setHidden:YES];
     
     [objCustomSoundview.soundMenuCancelBtn addTarget:self action:@selector(DidclickSoundMenuCancel:) forControlEvents:UIControlEventTouchUpInside];
     [objCustomSoundview.soundmenuOkBtn addTarget:self action:@selector(didClickSoundOk:) forControlEvents:UIControlEventTouchUpInside];
-//    if(IS_IPHONE6||IS_IPHONE6_Plus)
-//    {
-//        objCustomAlterview.mainalterviewheight.constant=50;
-//    }
-//    else
-//    {
-//        objCustomAlterview.mainalterviewheight.constant=0;
-//    }
     
     [self.settingScroll addSubview:objCustomSoundview.view];
 

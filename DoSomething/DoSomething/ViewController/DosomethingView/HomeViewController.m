@@ -186,8 +186,9 @@
                  [self loadActivityAPI:getLast availableStr:@"" doSomethingId:@""];
              }
          }
-                            failure:^(AFHTTPRequestOperation *operation, id error)
+          failure:^(AFHTTPRequestOperation *operation, id error)
          {
+             
          }];
         
     }
@@ -414,7 +415,7 @@
 //        [cell.MenuImg setImageWithURL:[NSURL URLWithString:objstr]];
         imageName = [[ImageCache sharedInstance]imageFromlocalcache:objstr imageType:@"dosomething"];
         [cell.MenuImg setImage:imageName];
-         [cell.MenuImg setHidden:NO];
+        [cell.MenuImg setHidden:NO];
        
     }
     _homeCollectionView.allowsMultipleSelection = YES;
