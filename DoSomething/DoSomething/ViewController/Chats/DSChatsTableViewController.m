@@ -65,7 +65,7 @@
                                                                constant:20.0]];
     
    
-    [COMMON AddLoadIcon:self.view];
+    [COMMON DSLoadIcon:self.view];
 
     
 }
@@ -458,12 +458,12 @@
                              [ChatTableView reloadData];
                          }
                          
-                         [COMMON removeLoading];
+                         [COMMON DSRemoveLoading];
                                                   
                      }
      
                      failure:^(AFHTTPRequestOperation *operation, id error) {
-                         [COMMON removeLoading];
+                         [COMMON DSRemoveLoading];
                          
                      }];
     
@@ -530,6 +530,5 @@
     
     NSLog(@"total = %d",total);
 }
-
 
 @end

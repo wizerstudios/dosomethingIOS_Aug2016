@@ -172,6 +172,7 @@
     kiloMeterlabel =[[NSArray alloc]init];
      detailsArray=[[NSMutableArray alloc]init];
     if([[NSUserDefaults standardUserDefaults] boolForKey:@"ViewuserDetail"]) {
+        [COMMON AddLoadIcon:self.view];
       [self nearestLocationWebservice];
       [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"ViewuserDetail"];
     }
@@ -416,7 +417,7 @@
 #pragma mark - nearestLocationWebserviceAPI
 -(void)nearestLocationWebservice
 {
-    [COMMON AddLoadIcon:self.view];
+    
     if([COMMON isInternetReachable]){
         [objWebservice nearestUsers:NearestUsers_API
                           sessionid:[COMMON getSessionID]
@@ -593,7 +594,7 @@
      NSString *dosomethingImage1,* dosomethingImage2,* dosomethingImage3;
     
     if([dosomethingImageArry count]== 1){
-        NSLog(@"count one");
+       
         if(![[dosomethingImageArry objectAtIndex:0]isEqualToString:@""])
         {
             
@@ -743,7 +744,7 @@
 }
 - (void)collectionView:(UICollectionView *)collectionView didEndDisplayingCell:(UICollectionViewCell *)cell forItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSLog(@"indexpathcollection%@",indexPath);
+   
     if (([commonlocationArray count]-10) == indexPath.row && !isAllPost ) {
         int x;
         if([currentloadPage isEqualToString:@""])
@@ -757,7 +758,7 @@
         x ++;
         
         currentloadPage= [NSString stringWithFormat:@"%d",x];
-        
+        [COMMON AddLoadIcon:self.view];
         [self nearestLocationWebservice];
         //[locationCollectionView scrollToItemAtIndexPath:indexPath atScrollPosition:UICollectionViewScrollPositionTop animated:NO];
         
@@ -814,7 +815,7 @@
         NSString *dosomethingImage3;
         
         if([dosomethingImageArry count]== 1){
-            NSLog(@"count one");
+            
             if(![[dosomethingImageArry objectAtIndex:0]isEqualToString:@""])
             {
                 
@@ -889,7 +890,7 @@
         NSString *dosomethingImage2;
         NSString *dosomethingImage3;
         if([dosomethingImageArry count]== 1){
-            NSLog(@"count one");
+           
             if(![[dosomethingImageArry objectAtIndex:0]isEqualToString:@""])
             {
                 
@@ -1039,7 +1040,7 @@
        if( isfilterChange==YES)
        {
            commonlocationArray =[[NSMutableArray alloc]init];
-
+            [COMMON AddLoadIcon:self.view];
             [self nearestLocationWebservice];
            isfilterChange=NO;
        }
@@ -1209,6 +1210,7 @@
     filterAge     =@"";
     filterDistance=@"";
     isAllPost = NO;
+    [COMMON AddLoadIcon:self.view];
     [self nearestLocationWebservice];
 }
 
@@ -1644,7 +1646,6 @@
                 
             }
 
-            NSLog(@"count one");
         }
         else if([dosomethingImageArry count] == 2){
             NSLog(@"count two");

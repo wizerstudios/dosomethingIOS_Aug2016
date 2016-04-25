@@ -186,6 +186,8 @@
 -(void)viewWillAppear:(BOOL)animated
 {
     
+    [super viewWillAppear:animated];
+    
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(loadInvalidSessionAlert:)
                                                  name:@"InvalidSession"
@@ -2467,9 +2469,9 @@
     {
         CurrentImage=CurrentImage+1;
     }
-    NSString * currentimgField=[NSString stringWithFormat:@"image%d",CurrentImage];
+    //NSString * currentimgField=[NSString stringWithFormat:@"image%ld",(long)CurrentImage];
     //
-    NSString * selectimg=[profileDict valueForKey:currentimgField];
+   // NSString * selectimg=[profileDict valueForKey:currentimgField];
     
     [COMMON TrackerWithName:@"User Profile"];
     

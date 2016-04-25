@@ -70,6 +70,7 @@
 
 -(void)viewWillAppear:(BOOL)animated
 {
+    [super viewWillAppear:animated];
     [self loadCustomNavigationview];
     
     interstAndHobbiesArray  = [[userDetailsArray valueForKey:@"hobbieslist"]mutableCopy];

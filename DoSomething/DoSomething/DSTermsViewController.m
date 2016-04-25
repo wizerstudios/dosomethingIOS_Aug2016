@@ -30,6 +30,7 @@
 }
 -(void)viewWillAppear:(BOOL)animated
 {
+    [super viewWillAppear:animated];
     self.navigationController.navigationBarHidden=NO;
     [self.navigationItem setHidesBackButton:YES animated:NO];
     [self.navigationController.navigationBar setTranslucent:YES];
@@ -84,6 +85,7 @@
 -(void)viewDidAppear:(BOOL)animated
 {
      [COMMON TrackerWithName:@"Terms of Use & Private Policy"];
+    
 }
 #pragma mark - back Action
 - (void)backAction

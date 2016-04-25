@@ -123,7 +123,7 @@
     
 }
 -(void)viewDidDisappear:(BOOL)animated{
-    
+    [super viewDidDisappear:animated];
 }
 
 - (void)initControl

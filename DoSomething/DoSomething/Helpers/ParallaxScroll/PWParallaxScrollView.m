@@ -315,10 +315,10 @@ static const NSInteger PWInvalidPosition = -1;
     
     float originX       = -1;
     float originY       = -1;
-    float zoomInX       = -1;
-    float zoomInY       = -1;
-    float moveX         = -1;
-    float moveY         = -1;
+//    float zoomInX       = -1;
+//    float zoomInY       = -1;
+//    float moveX         = -1;
+//    float moveY         = -1;
     
     float frameWidth    = _isLandscape ? self.bounds.size.width: self.bounds.size.height;
     float frameHeight   = _isLandscape ? self.bounds.size.height: self.bounds.size.width;
@@ -348,54 +348,6 @@ static const NSInteger PWInvalidPosition = -1;
     
     
     
-    // Calcule the maximum move allowed.
-//    float maxMoveX = optimusWidth - frameWidth;
-//    float maxMoveY = optimusHeight - frameHeight;
-//    
-//    float rotation = (arc4random() % 9) / 100;
-//    
-//    switch (arc4random() % 4) {
-//        case 0:
-//            originX = 0;
-//            originY = 0;
-//            zoomInX = 1.25;
-//            zoomInY = 1.25;
-//            moveX   = -maxMoveX;
-//            moveY   = -maxMoveY;
-//            break;
-//            
-//        case 1:
-//            originX = 0;
-//            originY = frameHeight - optimusHeight;
-//            zoomInX = 1.10;
-//            zoomInY = 1.10;
-//            moveX   = -maxMoveX;
-//            moveY   = maxMoveY;
-//            break;
-//            
-//        case 2:
-//            originX = frameWidth - optimusWidth;
-//            originY = 0;
-//            zoomInX = 1.30;
-//            zoomInY = 1.30;
-//            moveX   = maxMoveX;
-//            moveY   = -maxMoveY;
-//            break;
-//            
-//        case 3:
-//            originX = frameWidth - optimusWidth;
-//            originY = frameHeight - optimusHeight;
-//            zoomInX = 1.20;
-//            zoomInY = 1.20;
-//            moveX   = maxMoveX;
-//            moveY   = maxMoveY;
-//            break;
-//            
-//        default:
-//            NSLog(@"Unknown random number found in JBKenBurnsView _animate");
-//            break;
-  //  }
-    
     
     CALayer *picLayer    = [CALayer layer];
     picLayer.contents    = (id)image.CGImage;
@@ -413,20 +365,6 @@ static const NSInteger PWInvalidPosition = -1;
     
     [shadeView addSubview:imageView];
     // [shadeView addSubview:textImageview];
-    //
-//    [UIView animateWithDuration:12.0 delay:0 options:UIViewAnimationOptionCurveEaseOut animations:^
-//     {
-//         CGAffineTransform rotate    = CGAffineTransformMakeRotation(rotation);
-//         CGAffineTransform moveRight = CGAffineTransformMakeTranslation(moveX, moveY);
-//         CGAffineTransform combo1    = CGAffineTransformConcat(rotate, moveRight);
-//         CGAffineTransform zoomIn    = CGAffineTransformMakeScale(zoomInX, zoomInY);
-//         CGAffineTransform transform = CGAffineTransformConcat(zoomIn, combo1);
-//         imageView.transform = transform;
-//         
-//         
-//     } completion:^(BOOL finished) {
-//         
-//     }];
     [_touchScrollView addSubview:shadeView ];
     [self bringSubviewToFront:_touchScrollView];
 

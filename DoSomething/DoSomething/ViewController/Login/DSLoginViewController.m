@@ -94,6 +94,7 @@
 }
 -(void)viewWillAppear:(BOOL)animated
 {
+    [super viewWillAppear:animated];
     [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"SelectedItem"];
     [[NSUserDefaults standardUserDefaults] synchronize];
     [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"SelectedItemNormal"];

@@ -152,7 +152,7 @@
     if (IS_IPHONE6 )
     {
     
-         customNavigation.view.frame = CGRectMake(0,-20, CGRectGetWidth(self.view.frame), 76);
+         customNavigation.view.frame = CGRectMake(0,-20,375, 76);
          self.chatviewbottom.constant =420;
          self.chattableheight.constant =10;
          self.blockBtnYOrigin.constant = 435;
@@ -686,6 +686,7 @@
         [self flashOff:v];
     }];
 }
+
 
 
 @end
