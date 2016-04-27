@@ -1571,6 +1571,7 @@
             
         }
         else if(userDetailsDict.count > 0){
+            //  NSString *datestr= [userDetailsDict valueForKey:@"birthday"];
             NSString *tempdatestring= [userDetailsDict valueForKey:@"birthday"];
             if([tempdatestring isEqualToString:@""] || tempdatestring == nil)
             {
@@ -1579,12 +1580,12 @@
             else {
                 cell.textFieldDPPlaceHolder.enabled = NO;
             }
-          //  NSString *datestr= [userDetailsDict valueForKey:@"birthday"];
-//            NSString *tempdatestring= [userDetailsDict valueForKey:@"birthday"];
+
             NSString *datestr= [self changefbDateFormat:tempdatestring];
             
             if(datestr!=nil ){
                 if(currentTextfield.text == NULL){
+                    currentTextfield=[[UITextField alloc]init];
                     cell.textFieldDPPlaceHolder.text = datestr;
                     currentTextfield.text=cell.textFieldDPPlaceHolder.text;
                     dateChange = [self changeDateFormat:datestr];
