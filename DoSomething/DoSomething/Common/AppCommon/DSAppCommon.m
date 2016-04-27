@@ -176,11 +176,11 @@ DSAppCommon *sharedCommon = nil;
                                                context:nil];
         
         
-        dataHeight = CGSizeMake(textRect.size.width , textRect.size.height);
+        dataHeight = CGSizeMake(textRect.size.width , textRect.size.height+20);
         
     }
     
-    return CGSizeMake(dataHeight.width, dataHeight.height+20);
+    return CGSizeMake(dataHeight.width, dataHeight.height);
 }
 
 #pragma  mark - Cell Height

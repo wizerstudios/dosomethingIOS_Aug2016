@@ -561,22 +561,22 @@ static const NSInteger PWInvalidPosition = -1;
         [pageImageView setBackgroundColor:[UIColor clearColor]];
         [self nextImage:self.currentIndex];
         if([self.delegate respondsToSelector:@selector(parallaxScrollView:didChangeIndex:direction:)]){
-            [self.layer removeAllAnimations];
-
-            ScrollDirection scrollDirection;
-           
-            if (self.lastContentOffset > scrollView.contentOffset.x)
-            {
-                scrollDirection = ScrollDirectionRight;
-                scrolldirectionstr=@"ScrollDirectionRight";
-               
-            }
-            else if (self.lastContentOffset < scrollView.contentOffset.x)
-            {
-                scrollDirection = ScrollDirectionLeft;
-                scrolldirectionstr=@"ScrollDirectionLeft";
-            }
-            self.lastContentOffset = scrollView.contentOffset.x;
+//            [self.layer removeAllAnimations];
+//
+//            ScrollDirection scrollDirection;
+//           
+//            if (self.lastContentOffset > scrollView.contentOffset.x)
+//            {
+//                scrollDirection = ScrollDirectionRight;
+//                scrolldirectionstr=@"ScrollDirectionRight";
+//               
+//            }
+//            else if (self.lastContentOffset < scrollView.contentOffset.x)
+//            {
+//                scrollDirection = ScrollDirectionLeft;
+//                scrolldirectionstr=@"ScrollDirectionLeft";
+//            }
+//            self.lastContentOffset = scrollView.contentOffset.x;
             [self.delegate parallaxScrollView:self didChangeIndex:self.currentIndex direction:scrolldirectionstr];
            
         }

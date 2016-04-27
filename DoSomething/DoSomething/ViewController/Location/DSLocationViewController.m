@@ -216,6 +216,7 @@
     }
     else{
         self.matchActivityView.hidden=YES;
+        
         if(IS_IPHONE6 || IS_IPHONE6_Plus)
         {
             //self.CollectionviewWidth.constant =self.view.frame.size.width+100;
@@ -294,6 +295,7 @@
     
     currentuser=[[NSMutableDictionary alloc]init];
     currentuser =[[NSUserDefaults standardUserDefaults] valueForKey:USERDETAILS];
+        [customNavigation.FilterBtn setHidden:YES];
     NSString *objCurrentuserImg=[currentuser valueForKey:@"image1_thumb"];
         if([objCurrentuserImg isEqualToString:@""] || objCurrentuserImg ==nil)
         {
@@ -324,6 +326,7 @@
     }
     else{
         self.matchActivityView.hidden =YES;
+        
     }
 }
 -(void)filterPageButtonAction
@@ -1403,7 +1406,7 @@
 -(IBAction)didClickmatchuserDosomethingBtnAction:(id)sender
 {
     
-    
+    [customNavigation.FilterBtn setHidden:NO];
     self.walkAlterview.hidden =YES;
     self.blueCircleBtn.hidden=YES;
     self.matchActivityView.hidden =YES;
