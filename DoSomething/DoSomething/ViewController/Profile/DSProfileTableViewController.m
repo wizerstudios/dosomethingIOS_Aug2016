@@ -920,8 +920,17 @@
     NSInteger tag = [textField tag];
     if(textField.tag == 1000){
         //[textField resignFirstResponder];
-        
-        [self loadDatePicker:tag];
+        if(userDetailsDict!=nil)
+        {
+            NSString *tempdatestring= [userDetailsDict valueForKey:@"birthday"];
+            if([tempdatestring isEqualToString:@""] || tempdatestring == nil)
+            {
+                [self loadDatePicker:tag];
+            }
+        }
+        else{
+            [self loadDatePicker:tag];
+        }
     }
     else if (textField.tag == 15)
     {
@@ -1562,10 +1571,16 @@
             
         }
         else if(userDetailsDict.count > 0){
-            
-             cell.textFieldDPPlaceHolder.enabled=YES;
-          //  NSString *datestr= [userDetailsDict valueForKey:@"birthday"];
             NSString *tempdatestring= [userDetailsDict valueForKey:@"birthday"];
+            if([tempdatestring isEqualToString:@""] || tempdatestring == nil)
+            {
+                cell.textFieldDPPlaceHolder.enabled = YES;
+            }
+            else {
+                cell.textFieldDPPlaceHolder.enabled = NO;
+            }
+          //  NSString *datestr= [userDetailsDict valueForKey:@"birthday"];
+//            NSString *tempdatestring= [userDetailsDict valueForKey:@"birthday"];
             NSString *datestr= [self changefbDateFormat:tempdatestring];
             
             if(datestr!=nil ){
