@@ -508,7 +508,7 @@
                                     DSChatDetailViewController *ChatDetail =[[DSChatDetailViewController alloc]initWithNibName:nil bundle:nil];
                                     ChatDetail.conversionID = _conversationID;
                                     ChatDetail.chatuserDetailsDict = [receiverDict mutableCopy];
-                                    [self.navigationController pushViewController:ChatDetail animated:YES];
+                                   // [self.navigationController pushViewController:ChatDetail animated:YES];
                                 }
                             }
                         }
@@ -639,7 +639,7 @@
                                     locationview.sendrequestConversationID=conversationID;
                                     locationview.senduserDetail=[receiverDict mutableCopy];
                                     
-                                    [self.navigationController pushViewController:locationview animated:YES];
+                                    [self.navigationController pushViewController:locationview animated:NO];
                                 }
                             }
                         }

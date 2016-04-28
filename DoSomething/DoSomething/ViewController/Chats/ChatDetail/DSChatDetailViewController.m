@@ -14,6 +14,7 @@
 #import "DSWebservice.h"
 #import "IQKeyboardManager.h"
 #import "IQUIView+IQKeyboardToolbar.h"
+#import "UIImageView+AFNetworking.h"
 
 #define CONTENT_WIDTH           200.f
 #define CONTENT_START           0.f
@@ -215,9 +216,11 @@
     
     if([profileStr length]>0){
         
-        downloadImageFromUrl(profileStr, ProfileImage);
+        [ProfileImage setImageWithURL:[NSURL URLWithString:profileStr]];
         
-        ProfileImage.image = [UIImage imageNamed:profileStr];
+//        downloadImageFromUrl(profileStr, ProfileImage);
+        
+//        ProfileImage.image = [UIImage imageNamed:profileStr];
         
     }else{
         

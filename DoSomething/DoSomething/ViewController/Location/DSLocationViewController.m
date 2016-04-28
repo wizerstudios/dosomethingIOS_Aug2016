@@ -610,8 +610,6 @@
              locationCellView.dosomethingImage3.image=[UIImage imageNamed:@""];
             
         }
-       
-
     }
     else if([dosomethingImageArry count] == 2){
          NSLog(@"count two");
@@ -665,10 +663,10 @@
     else
     {
         profileImg= [profileImg stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-        downloadImageFromUrl(profileImg,locationCellView.imageProfile);
-        
-        
-        [locationCellView.imageProfile setImage:[UIImage imageNamed:profileImg]];
+//        downloadImageFromUrl(profileImg,locationCellView.imageProfile);
+        [locationCellView.imageProfile setImageWithURL:[NSURL URLWithString:profileImg]];
+
+//        [locationCellView.imageProfile setImage:[UIImage imageNamed:profileImg]];
    
     }
     
@@ -1405,7 +1403,6 @@
 
 -(IBAction)didClickmatchuserDosomethingBtnAction:(id)sender
 {
-    
     [customNavigation.FilterBtn setHidden:NO];
     self.walkAlterview.hidden =YES;
     self.blueCircleBtn.hidden=YES;
@@ -1453,7 +1450,7 @@
 
 -(void)RequestSendNotification
 {
-   
+    [customNavigation.FilterBtn setHidden:YES];
     if(matchUserArray !=0 && ![matchUserArray isEqual:@"0"])
     {
         NSString * FirstMatch=[[NSUserDefaults standardUserDefaults]valueForKey:FirstMatchUser];
@@ -1483,13 +1480,13 @@
         NSString *matchprofileImg =[matchUserArray valueForKey:@"image1"];
         if([matchprofileImg isEqualToString:@""] || matchprofileImg ==nil)
         {
-            [self.currentUserImg setImage:[UIImage imageNamed:@"profile_noimg"]];
+            [self.matcheduserImg setImage:[UIImage imageNamed:@"profile_noimg"]];
         }
         else
         {
             matchprofileImg= [matchprofileImg stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-            downloadImageFromUrl(matchprofileImg,self.currentUserImg);
-            [self.currentUserImg setImage:[UIImage imageNamed:matchprofileImg]];
+            downloadImageFromUrl(matchprofileImg,self.matcheduserImg);
+            [self.matcheduserImg setImage:[UIImage imageNamed:matchprofileImg]];
         }
         
         currentuser=[[NSMutableDictionary alloc]init];
@@ -1497,14 +1494,14 @@
         NSString *objCurrentuserImg=[currentuser valueForKey:@"image1_thumb"];
         if([objCurrentuserImg isEqualToString:@""] || objCurrentuserImg ==nil)
         {
-            [self.matcheduserImg setImage:[UIImage imageNamed:@"profile_noimg"]];
+            [self.currentUserImg setImage:[UIImage imageNamed:@"profile_noimg"]];
         }
         else
         {
             objCurrentuserImg= [objCurrentuserImg stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-            downloadImageFromUrl(objCurrentuserImg,self.matcheduserImg);
+            downloadImageFromUrl(objCurrentuserImg,self.currentUserImg);
             
-            [self.matcheduserImg setImage:[UIImage imageNamed:objCurrentuserImg]];
+            [self.currentUserImg setImage:[UIImage imageNamed:objCurrentuserImg]];
         }
         
         
@@ -1519,7 +1516,7 @@
         self.matcheduserImg.layer.borderWidth=1;
         [self.matcheduserImg.layer setBorderColor:[UIColor redColor].CGColor];
         
-        NSString*objmatchusername =[NSString stringWithFormat:@"You and %@ are a match \n Start Chatting to",[currentuser valueForKey:@"first_name"]];
+        NSString*objmatchusername =[NSString stringWithFormat:@"You and %@ are a match \n Start Chatting to",[matchUserArray valueForKey:@"Name"]];
         self.matchActivitylbl.text =objmatchusername;
     }
     else{
