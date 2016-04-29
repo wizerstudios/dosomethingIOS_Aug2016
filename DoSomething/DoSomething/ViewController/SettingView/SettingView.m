@@ -19,6 +19,7 @@
 #import "CustomSoundview.h"
 #import <FBSDKCoreKit/FBSDKCoreKit.h>
 #import <FBSDKLoginKit/FBSDKLoginKit.h>
+#import "HomeViewController.h"
 @interface SettingView ()
 {
    
@@ -38,6 +39,7 @@
     SystemSoundID *soundID;
     NSMutableDictionary *profileDict;
      BOOL _isStartTimer;
+     HomeViewController      * DosomethingView ;
 }
 @property (nonatomic,strong) IBOutlet NSLayoutConstraint    * deletebuttonBottomoposition;
 @property (nonatomic,strong) IBOutlet NSLayoutConstraint    * scrollYposition;
@@ -655,6 +657,13 @@
                                           [COMMON setUserDetails:userDetailsDict];
                                           
                                           [COMMON removeLoading];
+                                          
+                                          
+                                        DosomethingView =[[HomeViewController alloc]initWithNibName:@"HomeViewController" bundle:nil];
+                                          
+                                          [self.navigationController pushViewController:DosomethingView animated:NO];
+
+                                          
                                       }
                                       
                                       

@@ -3022,6 +3022,7 @@
                            sessionid:loginUserSessionID
                              success:^(AFHTTPRequestOperation *operation, id responseObject) {
                                  
+                                
                                  
                                  [COMMON removeLoading];
                              }
@@ -3064,11 +3065,11 @@
 #pragma mark - loadUpdateNotification
 -(void)loadUpdate{
     
-    // [COMMON AddLoadIcon:self.view];
+     [COMMON AddLoadIcon:self.view];
     
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(loadUpdateView:)
-                                                 name:@"updateprofile"
+                                                 name:@"updateprofiledata"
                                                object:nil];
     
     [[NSNotificationCenter defaultCenter] addObserver:self
@@ -3092,7 +3093,7 @@
     
     
     [[NSNotificationCenter defaultCenter] removeObserver:self];
-    
+    [self gotoHomeView];
     // [self showAltermessage:@"Profile Updated Successfully"];
     [COMMON removeLoading];
     
@@ -3306,6 +3307,7 @@
                     
                     [COMMON removeLoading];
                     [self updateAPI];
+                     [self loadUpdate];
                     
                 }
             }
@@ -3333,6 +3335,7 @@
                 
                 [COMMON removeLoading];
                 [self updateAPI];
+                 [self loadUpdate];
             }
             
         }
@@ -3349,6 +3352,7 @@
             {
                 [COMMON removeLoading];
                 [self updateAPI];
+                 [self loadUpdate];
             }
         }
         
@@ -3356,6 +3360,7 @@
         {
             [COMMON removeLoading];
             [self updateAPI];
+             [self loadUpdate];
         }
     }
     

@@ -383,7 +383,8 @@ notification_sound  :(NSString *)isnotification_sound
          if([[profileUpdateDict valueForKey:@"status"]isEqualToString:@"success"]){
              [COMMON setUserDetails:[[profileUpdateDict valueForKey:@"userDetails"]objectAtIndex:0]];
              NSLog(@"userdetails = %@",[COMMON getUserDetails]);
-             [[NSNotificationCenter defaultCenter] postNotificationName:@"updateprofile"object:self userInfo:responseObject];
+             [[NSNotificationCenter defaultCenter] postNotificationName:@"updateprofiledata"object:self userInfo:responseObject];
+            
 
          }
          else {
@@ -392,7 +393,7 @@ notification_sound  :(NSString *)isnotification_sound
              
          }
 
-         [[NSNotificationCenter defaultCenter]postNotificationName:@"profilesuccess"object:self userInfo:nil];
+         //[[NSNotificationCenter defaultCenter]postNotificationName:@"profilesuccess"object:self userInfo:nil];
 
          [COMMON removeLoading];
 

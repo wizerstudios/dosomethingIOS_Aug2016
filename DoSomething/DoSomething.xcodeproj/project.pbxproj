@@ -1641,7 +1641,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.dosomethingapp.ios;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "07a2982c-0fca-4e01-992d-7712adc13f32";
+				PROVISIONING_PROFILE = "5d278628-726b-411d-98d2-bc44fe900437";
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
