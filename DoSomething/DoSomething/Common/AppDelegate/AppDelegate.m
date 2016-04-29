@@ -424,11 +424,11 @@
 
 - (void)applicationWillEnterForeground:(UIApplication *)application
 {
-    _isStartTimer = YES;
-    dispatch_async(dispatch_get_main_queue(), ^{
-        [self loadonlineStausAPI:@"1"];
-        [self startTimer];
-    });
+//    _isStartTimer = YES;
+//    dispatch_async(dispatch_get_main_queue(), ^{
+//        [self loadonlineStausAPI:@"1"];
+//        [self startTimer];
+//    });
     
    }
 
@@ -437,6 +437,11 @@
    [UIApplication sharedApplication].applicationIconBadgeNumber = 0;
 
    [FBSDKAppEvents activateApp];
+    _isStartTimer = YES;
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [self loadonlineStausAPI:@"1"];
+        [self startTimer];
+    });
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application {
