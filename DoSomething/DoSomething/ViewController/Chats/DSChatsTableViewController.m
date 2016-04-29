@@ -65,7 +65,7 @@
                                                                constant:20.0]];
     
    
-    [COMMON DSLoadIcon:self.view];
+    //[COMMON DSLoadIcon:self.view];
 
     
 }

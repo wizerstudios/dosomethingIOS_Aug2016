@@ -66,12 +66,12 @@ typedef enum {
 -(NSString *)getUserID;
 -(NSString *)getLatitude;
 -(NSString *)getLongitude;
--(NSMutableArray *)getuserLatitudeandLongitude;
+//-(NSMutableArray *)getuserLatitudeandLongitude;
 
 - (CGSize)dataSize:(NSString *)string withFontName:(NSString *)fontName ofSize:(NSInteger)size withSize:(CGSize)LabelWidth;
 
 - (void) setMessageCount:(NSString *)messageCount;
-- (NSString *) getMessageCount;
+//- (NSString *) getMessageCount;
 
 
 void downloadImageFromUrl(NSString* urlString, UIImageView * imageview);

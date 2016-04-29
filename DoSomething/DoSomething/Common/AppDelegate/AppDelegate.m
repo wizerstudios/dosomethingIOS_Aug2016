@@ -28,7 +28,7 @@
     
     SystemSoundID _notificationSound;
     
-     AVAudioPlayer           *audioPlayer;
+     //AVAudioPlayer           *audioPlayer;
     BOOL _isStartTimer;
     BOOL firstlanch;
 }

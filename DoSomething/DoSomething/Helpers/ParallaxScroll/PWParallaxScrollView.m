@@ -33,7 +33,7 @@ static const NSInteger PWInvalidPosition = -1;
      NSMutableArray *FGimageArray;
     NSArray * pageController;
     UIImageView*pageImageView;
-    NSTimer *nextImageTimer;
+    //NSTimer *nextImageTimer;
     bool is_scroll;
      NSString * scrolldirectionstr;
 }
@@ -70,7 +70,7 @@ static const NSInteger PWInvalidPosition = -1;
 
 @implementation PWParallaxScrollView
 
-@synthesize isdifferSpeed,tutorialpageOkButton,pageControllBtn;
+@synthesize isdifferSpeed,tutorialpageOkButton,pageControllBtn,nextImageTimer;
 
 #pragma mark
 
@@ -183,7 +183,7 @@ static const NSInteger PWInvalidPosition = -1;
     [self addSubview:pageControllBtn];
     [self nextImage:_currentIndex];
     nextImageTimer = [NSTimer scheduledTimerWithTimeInterval:15.0 target:self selector:@selector(nextImage) userInfo:nil repeats:YES];
-    [_nextImageTimer fire];
+    [nextImageTimer fire];
 
     
     

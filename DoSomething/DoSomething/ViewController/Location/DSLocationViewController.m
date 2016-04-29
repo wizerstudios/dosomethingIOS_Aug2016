@@ -131,7 +131,7 @@
 
     else
     {
-         [COMMON DSLoadIcon:self.view];
+         //[COMMON DSLoadIcon:self.view];
          [self nearestLocationWebservice];
     }
   
@@ -455,7 +455,7 @@
                  else
                  {
                      NSArray * nextpageUserdetaile =[[responseObject valueForKey:@"nearestusers"] valueForKey:@"UserList"];
-                     int  recordCounts =[[[responseObject valueForKey:@"nearestusers"]valueForKey:@"recordCount"] integerValue];
+                     NSInteger  recordCounts =[[[responseObject valueForKey:@"nearestusers"]valueForKey:@"recordCount"] integerValue];
                      for (NSDictionary *dict in nextpageUserdetaile)
                      {
                          NSLog(@"fdgffgh%@",dict);

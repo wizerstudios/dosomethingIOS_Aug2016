@@ -31,6 +31,7 @@
 #endif
 
 @implementation DSAppCommon
+@synthesize locationManager;
 DSAppCommon *sharedCommon = nil;
 
 + (DSAppCommon *)common {

@@ -18,8 +18,8 @@
 #import "IQUIView+IQKeyboardToolbar.h"
 #import "CustomSoundview.h"
 #import <AudioToolbox/AudioToolbox.h>
-//#import <FBSDKCoreKit/FBSDKCoreKit.h>
-//#import <FBSDKLoginKit/FBSDKLoginKit.h>
+#import <FBSDKCoreKit/FBSDKCoreKit.h>
+#import <FBSDKLoginKit/FBSDKLoginKit.h>
 
 #define Red_Color   [UIColor colorWithRed:227.0f/255.0f green:64.0f/255.0f blue:81.0f/255.0f alpha:1.0f]
 
@@ -134,6 +134,7 @@
     
     BOOL isSelectIndex;
     
+    NSTimer * loadscrollview;
     
 }
 
@@ -280,7 +281,7 @@
         if(is_profileImgediting== YES)
         {
             
-            NSTimer * loadscrollview=[NSTimer scheduledTimerWithTimeInterval:2.0 target:self selector:@selector(updateprofileimageloadstop)userInfo:nil repeats:NO];
+            loadscrollview=[NSTimer scheduledTimerWithTimeInterval:2.0 target:self selector:@selector(updateprofileimageloadstop)userInfo:nil repeats:NO];
             
         }
         [self.view layoutIfNeeded];

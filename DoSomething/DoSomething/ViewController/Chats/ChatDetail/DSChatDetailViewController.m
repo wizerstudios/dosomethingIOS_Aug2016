@@ -41,7 +41,9 @@
     int height;
     NSMutableArray * recevierDetails;
     BOOL  iskeyboardapear;
-     UIButton * blueCirecleBtn;
+    UIButton * blueCirecleBtn;
+    NSMutableDictionary *msgResponseDict;
+    UIView * CommWalkView;
 }
 
 @end
@@ -553,7 +555,7 @@
                     [webService sendMessage:SendMessage_API sessionid:[COMMON getSessionID] message_send_user_id:_receiverId message:chatView.textView.text conversation_id:_conversationId success:^(AFHTTPRequestOperation *operation, id responseObject){
                         
                         NSLog(@"Conversation resp = %@",responseObject);
-                        NSMutableDictionary *msgResponseDict = [[NSMutableDictionary alloc]init];
+                       msgResponseDict = [[NSMutableDictionary alloc]init];
                         
                         msgResponseDict = [responseObject valueForKey:@"sendmessage"];
                         
@@ -614,7 +616,7 @@
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
    
     
-    UIView * CommWalkView;
+    
    
     UIView * altermsgView;
     
