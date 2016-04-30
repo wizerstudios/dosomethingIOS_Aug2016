@@ -45,6 +45,9 @@
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+    
+    [[AVAudioSession sharedInstance] setCategory:AVAudioSessionCategoryAmbient error:nil];
+
     // Override point for customization after application launch.
       NSLog(@"### Running FB SDK Version: %@", [FBSDKSettings sdkVersion]);
     
@@ -424,6 +427,8 @@
 
 - (void)applicationWillEnterForeground:(UIApplication *)application
 {
+    [[AVAudioSession sharedInstance] setCategory:AVAudioSessionCategoryAmbient error:nil];
+
 //    _isStartTimer = YES;
 //    dispatch_async(dispatch_get_main_queue(), ^{
 //        [self loadonlineStausAPI:@"1"];
