@@ -8,10 +8,11 @@
 
 #import <UIKit/UIKit.h>
 #import "JBKenBurnsView.h"
+
 @protocol HelpViewDelegate <NSObject>
 -(IBAction)cancelBtnAction:(id)sender;
 @end
-@interface DSHomeViewController : UIViewController <KenBurnsViewDelegate>
+@interface DSHomeViewController : UIViewController <KenBurnsViewDelegate,UIGestureRecognizerDelegate>
 {
     NSMutableArray *bannerImageArr;
     IBOutlet UIButton *scrollpauseBtn;
