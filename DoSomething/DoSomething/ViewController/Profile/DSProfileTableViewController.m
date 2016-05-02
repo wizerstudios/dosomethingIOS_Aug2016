@@ -1115,9 +1115,13 @@
 -(void)CustomSoundview
 {
     objCustomSoundView = [[CustomSoundview alloc] initWithNibName:@"CustomSoundview" bundle:nil];
-    if(IS_IPHONE6 || IS_IPHONE6_Plus)
+    if(IS_IPHONE6)
     {
         objCustomSoundView.view.frame = CGRectMake(self.view.frame.origin.x, customNavigation.view.frame.origin.y+ customNavigation.view.frame.size.height+40, CGRectGetWidth(self.view.frame), self.view.frame.size.height-110);
+    }
+    else if(IS_IPHONE6_Plus)
+    {
+        objCustomSoundView.view.frame = CGRectMake(self.view.frame.origin.x, customNavigation.view.frame.origin.y+ customNavigation.view.frame.size.height+40, CGRectGetWidth(self.view.frame), self.view.frame.size.height-250);
     }
     else
     {

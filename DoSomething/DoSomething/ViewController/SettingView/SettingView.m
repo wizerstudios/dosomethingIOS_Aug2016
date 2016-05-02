@@ -436,9 +436,13 @@
     objCustomSoundview.view.frame = CGRectMake(self.view.frame.origin.x,self.view.frame.origin.y,self.view.frame.size.width, self.view.frame.size.height);
    // [objCustomSoundview.alertBgView setHidden:YES];
     [self.view layoutIfNeeded];
-    if(IS_IPHONE6 || IS_IPHONE6_Plus)
+    if(IS_IPHONE6 )
     {
         objCustomSoundview.soundmenuheight.constant=180;
+    }
+    else if(IS_IPHONE6_Plus)
+    {
+        objCustomSoundview.soundmenuheight.constant=300;
     }
     
     [objCustomSoundview.soundmenuView setHidden:YES];
