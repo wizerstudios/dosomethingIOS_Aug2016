@@ -51,27 +51,22 @@ typedef enum {
 
 -(NSString *)getCurrentDateTime;
 
-- (void)LoadIcon:(UIView *)view;
 - (void)DSLoadIcon:(UIView *)view;
--(void)AddLoadIcon:(UIView *)view;
+- (void)DSLoaderIcon:(UIView *)view;
 - (void)DSRemoveLoading;
-- (void)removeLoading;
 -(BOOL)isInternetReachable;
 - (void) showErrorAlert:(NSString *)strMessage;
 - (currentDevice)getCurrentDevice;
 - (BOOL) isUserLoggedIn;
 - (void)getUserCurrenLocation;
-//- (void) getUserCurrentLocationData;
 -(NSString *)getSessionID;
 -(NSString *)getUserID;
 -(NSString *)getLatitude;
 -(NSString *)getLongitude;
-//-(NSMutableArray *)getuserLatitudeandLongitude;
 
 - (CGSize)dataSize:(NSString *)string withFontName:(NSString *)fontName ofSize:(NSInteger)size withSize:(CGSize)LabelWidth;
 
 - (void) setMessageCount:(NSString *)messageCount;
-//- (NSString *) getMessageCount;
 
 
 void downloadImageFromUrl(NSString* urlString, UIImageView * imageview);

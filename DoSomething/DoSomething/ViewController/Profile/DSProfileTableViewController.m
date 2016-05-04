@@ -294,7 +294,7 @@
 }
 -(void)updateprofileimageloadstop
 {
-    [COMMON removeLoading];
+    [COMMON DSRemoveLoading];
 }
 -(void)loadNavigation{
     self.navigationController.navigationBarHidden=NO;
@@ -743,19 +743,18 @@
     NSLog(@"current latitude & longitude for main view = %@ & %@",currentLatitude,currentLongitude);
     NSLog(@"savedLatitude & saved Longitude = %@ & %@",savedLatitude,savedLongitude);
     
-    
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        
-        if((![currentLatitude isEqualToString:savedLatitude] || ![currentLongitude isEqualToString:savedLongitude]) && (currentLongitude !=nil || currentLatitude != nil))
-            [self loadLocationUpdateAPI];
-        
-        dispatch_async(dispatch_get_main_queue(), ^(){
+    if([COMMON isInternetReachable]) {
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+            
+            if((![currentLatitude isEqualToString:savedLatitude] || ![currentLongitude isEqualToString:savedLongitude]) && (currentLongitude !=nil || currentLatitude != nil))
+                [self loadLocationUpdateAPI];
+            
+            dispatch_async(dispatch_get_main_queue(), ^(){
+                
+            });
             
         });
-        
-    });
-    
-    
+    }
 }
 
 - (void)locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error
@@ -2742,7 +2741,7 @@
              
              
              NSLog(@"userdetails = %@",[COMMON getUserDetails]);
-             [COMMON removeLoading];
+             [COMMON DSRemoveLoading];
              
              DSProfileTableViewController*profileview =[[DSProfileTableViewController alloc]initWithNibName:@"DSProfileTableViewController" bundle:nil];
              [self.navigationController pushViewController:profileview animated:NO];
@@ -2751,7 +2750,7 @@
          else{
              NSLog(@"responseObject = %@",responseObject);
              //[self showAltermessage:[loginDict valueForKey:@"Message"]];
-             [COMMON removeLoading];
+             [COMMON DSRemoveLoading];
              
          }
          
@@ -2761,7 +2760,7 @@
                         
                         NSLog(@"ERROR = %@",error);
                         
-                        [COMMON removeLoading];
+                        [COMMON DSRemoveLoading];
                         
                     }];
     
@@ -2844,7 +2843,7 @@
     if(IS_GREATER_IOS8)
     {}
     else{
-        [COMMON LoadIcon:self.view];
+        [COMMON DSLoadIcon:self.view];
         is_profileImgediting=YES;
         
     }
@@ -2983,12 +2982,12 @@
                            pushType:push_type
                             fbimage:FBImageStr
                             success:^(AFHTTPRequestOperation *operation, id responseObject){
-                                [COMMON removeLoading];
+                                [COMMON DSRemoveLoading];
                             }
          
                             failure:^(AFHTTPRequestOperation *operation, id error) {
                                 
-                                [COMMON removeLoading];
+                                [COMMON DSRemoveLoading];
                                 
                                 
                             }];
@@ -3028,12 +3027,10 @@
                            sessionid:loginUserSessionID
                              success:^(AFHTTPRequestOperation *operation, id responseObject) {
                                  
-                                
-                                 
-                                 [COMMON removeLoading];
+                                 [COMMON DSRemoveLoading];
                              }
                              failure:^(AFHTTPRequestOperation *operation, id error) {
-                                 [COMMON removeLoading];
+                                 [COMMON DSRemoveLoading];
                                  
                              }
          ];
@@ -3071,7 +3068,7 @@
 #pragma mark - loadUpdateNotification
 -(void)loadUpdate{
     
-     [COMMON AddLoadIcon:self.view];
+     [COMMON DSLoadIcon:self.view];
     
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(loadUpdateView:)
@@ -3101,7 +3098,7 @@
     [[NSNotificationCenter defaultCenter] removeObserver:self];
     [self gotoHomeView];
     // [self showAltermessage:@"Profile Updated Successfully"];
-    [COMMON removeLoading];
+    [COMMON DSRemoveLoading];
     
 }
 -(void)loadUpdateError:(NSNotification *)notification
@@ -3182,14 +3179,14 @@
         {
             
             [self showAltermessage:FIRSTNAME_REQUIRED];
-            [COMMON removeLoading];
+            [COMMON DSRemoveLoading];
             
             return;
         }
         else if(LastName ==nil)
         {
             [self showAltermessage:LASTNAME_REQUIRED];
-            [COMMON removeLoading];
+            [COMMON DSRemoveLoading];
             return;
             
         }
@@ -3197,7 +3194,7 @@
         {
             [self showAltermessage:GENDER_REQUIRED];
             
-            [COMMON removeLoading];
+            [COMMON DSRemoveLoading];
             return;
         }
         
@@ -3206,7 +3203,7 @@
         {
             
             [self showAltermessage:DOB_REQUIRED];
-            [COMMON removeLoading];
+            [COMMON DSRemoveLoading];
             
             return;
         }
@@ -3214,7 +3211,7 @@
         {
             
             [self showAltermessage:@"About Required"];
-            [COMMON removeLoading];
+            [COMMON DSRemoveLoading];
             
             return;
         }
@@ -3222,7 +3219,7 @@
         else if ([emailAddressToRegister isEqualToString:@""] || emailAddressToRegister == nil)
         {
             [self showAltermessage:EMAIL_REQUIRED];
-            [COMMON removeLoading];
+            [COMMON DSRemoveLoading];
             
             
             return;
@@ -3234,7 +3231,7 @@
             
             if(userDetailsDict > 0)
             {
-                [COMMON removeLoading];
+                [COMMON DSRemoveLoading];
                 
                 
                 [self showAccountCreateAltermessage:@"By clicking \"Create\", you agree to the \"Terms of Use\" and \"Privacy Policy\""];
@@ -3244,7 +3241,7 @@
                 
             {
                 [self showAltermessage:PASSWORD_REQUIRED];
-                [COMMON removeLoading];
+                [COMMON DSRemoveLoading];
                 
                 return;
             }
@@ -3253,7 +3250,7 @@
             
         {
             
-            [COMMON removeLoading];
+            [COMMON DSRemoveLoading];
             
             [self showAccountCreateAltermessage:@"By clicking \"Create\", you agree to the \"Terms of Use\" and \"Privacy Policy\""];
         }
@@ -3266,7 +3263,7 @@
         {
             
             [self showAltermessage:@"About Required"];
-            [COMMON removeLoading];
+            [COMMON DSRemoveLoading];
             
             return;
         }
@@ -3277,7 +3274,7 @@
             {
                 
                 [self showAltermessage:@"Enter your Current password"];
-                [COMMON removeLoading];
+                [COMMON DSRemoveLoading];
                 
                 return;
             }
@@ -3286,7 +3283,7 @@
             {
                 
                 [self showAltermessage:@"Your password mismatching"];
-                [COMMON removeLoading];
+                [COMMON DSRemoveLoading];
                 
                 return;
             }
@@ -3296,14 +3293,14 @@
                 if([emailPasswordToRegister isEqualToString:@""])
                 {
                     [self showAltermessage:@"Enter your current password"];
-                    [COMMON removeLoading];
+                    [COMMON DSRemoveLoading];
                     
                     return;
                 }
                 else if(![confirmPassword isEqualToString:@""] && confirmPassword!=nil)
                 {
                     [self showAltermessage:@"Enter your New password"];
-                    [COMMON removeLoading];
+                    [COMMON DSRemoveLoading];
                     
                     return;
                 }
@@ -3311,7 +3308,7 @@
                     
                 {
                     
-                    [COMMON removeLoading];
+                    [COMMON DSRemoveLoading];
                     [self updateAPI];
                      [self loadUpdate];
                     
@@ -3323,7 +3320,7 @@
             if([currentPassword isEqualToString:@""])
             {
                 [self showAltermessage:@"Enter New password"];
-                [COMMON removeLoading];
+                [COMMON DSRemoveLoading];
                 
                 return;
             }
@@ -3331,7 +3328,7 @@
             {
                 if(![currentPassword isEqualToString:confirmPassword])
                     [self showAltermessage:@"Password don't match"];
-                [COMMON removeLoading];
+                [COMMON DSRemoveLoading];
                 
                 return;
                 
@@ -3339,7 +3336,7 @@
             else
             {
                 
-                [COMMON removeLoading];
+                [COMMON DSRemoveLoading];
                 [self updateAPI];
                  [self loadUpdate];
             }
@@ -3350,13 +3347,13 @@
             if([currentPassword isEqualToString:@""] || currentPassword==nil)
             {
                 [self showAltermessage:@"Enter New password"];
-                [COMMON removeLoading];
+                [COMMON DSRemoveLoading];
                 
                 return;
             }
             else
             {
-                [COMMON removeLoading];
+                [COMMON DSRemoveLoading];
                 [self updateAPI];
                  [self loadUpdate];
             }
@@ -3364,7 +3361,7 @@
         
         else
         {
-            [COMMON removeLoading];
+            [COMMON DSRemoveLoading];
             [self updateAPI];
              [self loadUpdate];
         }

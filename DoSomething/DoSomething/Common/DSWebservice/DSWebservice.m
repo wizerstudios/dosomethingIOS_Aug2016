@@ -395,13 +395,13 @@ notification_sound  :(NSString *)isnotification_sound
 
          //[[NSNotificationCenter defaultCenter]postNotificationName:@"profilesuccess"object:self userInfo:nil];
 
-         [COMMON removeLoading];
+         [COMMON DSRemoveLoading];
 
      }
      
        failure:^(AFHTTPRequestOperation *operation, NSError *error){
            NSLog(@"Error = %@",error);
-           [COMMON removeLoading];
+           [COMMON DSRemoveLoading];
           
        }];
 

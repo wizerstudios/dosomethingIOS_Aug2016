@@ -172,7 +172,7 @@
     kiloMeterlabel =[[NSArray alloc]init];
      detailsArray=[[NSMutableArray alloc]init];
     if([[NSUserDefaults standardUserDefaults] boolForKey:@"ViewuserDetail"]) {
-        [COMMON AddLoadIcon:self.view];
+        [COMMON DSLoadIcon:self.view];
       [self nearestLocationWebservice];
       [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"ViewuserDetail"];
     }
@@ -483,7 +483,6 @@
                  [locationCollectionView setHidden:NO];
                  
                  [COMMON DSRemoveLoading];
-                 [COMMON removeLoading];
                  [locationCollectionView reloadData];
                   [refreshControl endRefreshing];
              }
@@ -759,7 +758,7 @@
         x ++;
         
         currentloadPage= [NSString stringWithFormat:@"%d",x];
-        [COMMON AddLoadIcon:self.view];
+        [COMMON DSLoadIcon:self.view];
         [self nearestLocationWebservice];
         //[locationCollectionView scrollToItemAtIndexPath:indexPath atScrollPosition:UICollectionViewScrollPositionTop animated:NO];
         
@@ -1041,7 +1040,7 @@
        if( isfilterChange==YES)
        {
            commonlocationArray =[[NSMutableArray alloc]init];
-            [COMMON AddLoadIcon:self.view];
+            [COMMON DSLoadIcon:self.view];
             [self nearestLocationWebservice];
            isfilterChange=NO;
        }
@@ -1211,7 +1210,7 @@
     filterAge     =@"";
     filterDistance=@"";
     isAllPost = NO;
-    [COMMON AddLoadIcon:self.view];
+    [COMMON DSLoadIcon:self.view];
     [self nearestLocationWebservice];
 }
 

@@ -338,7 +338,6 @@
 
 - (void)application:(UIApplication *)app didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken
 {
-    
     NSString *token = [[deviceToken description] stringByTrimmingCharactersInSet: [NSCharacterSet characterSetWithCharactersInString:@"<>"]];
     token = [token stringByReplacingOccurrencesOfString:@" " withString:@""];
     NSLog(@"content---%@", token);
@@ -505,6 +504,7 @@
         }
     }
 }
+
 -(void)loadConverstaionAPI:(NSString *)_conversationID{
     
     if ([COMMON isInternetReachable]) {
@@ -531,7 +531,7 @@
                             }
          
                             failure:^(AFHTTPRequestOperation *operation, id error) {
-                                [COMMON removeLoading];
+                                [COMMON DSRemoveLoading];
                                 
                             }];
     }
@@ -661,7 +661,7 @@
                             }
          
                             failure:^(AFHTTPRequestOperation *operation, id error) {
-                                [COMMON removeLoading];
+                                [COMMON DSRemoveLoading];
                                 
                             }];
     }

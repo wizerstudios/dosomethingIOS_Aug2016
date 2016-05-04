@@ -308,19 +308,17 @@
     NSLog(@"current latitude & longitude for main view = %@ & %@",currentLatitude,currentLongitude);
     NSLog(@"savedLatitude & saved Longitude = %@ & %@",savedLatitude,savedLongitude);
 
-    
-       dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        
-        if((![currentLatitude isEqualToString:savedLatitude] || ![currentLongitude isEqualToString:savedLongitude]) && (currentLongitude !=nil || currentLatitude != nil))
-             [self loadLocationUpdateAPI];
-           
-          dispatch_async(dispatch_get_main_queue(), ^(){
+    if ([COMMON isInternetReachable]) {
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
             
-         });
-           
-    });
-    
-    
+            if((![currentLatitude isEqualToString:savedLatitude] || ![currentLongitude isEqualToString:savedLongitude]) && (currentLongitude !=nil || currentLatitude != nil))
+                [self loadLocationUpdateAPI];
+            
+            dispatch_async(dispatch_get_main_queue(), ^(){
+                
+            });
+        });
+    }
 }
 - (void)locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error
 {
@@ -330,7 +328,6 @@
 
 -(void)NotificationbuttonAction:(UIButton *)sender
 {
-       
     if([sender tag] == 601){
         if ( [notificationMsg isEqualToString:@"Yes"]) {
             
@@ -343,8 +340,6 @@
             //[self notificationButtonOFFAction:sender];
             notificationMsg =@"Yes";
         }
-        
-        
     }
     else if([sender tag] == 604){
         if ( [notificationMatch isEqualToString:@"Yes"]) {
@@ -358,11 +353,7 @@
             //[self notificationButtonOFFAction:sender];
             notificationMatch =@"Yes";
         }
-        
-        
     }
-
-    
     else if([sender tag] == 602){
         
         if ( [notificationSound isEqualToString:@"Yes"]) {
@@ -377,18 +368,13 @@
             //[self notificationButtonOFFAction:sender];
             notificationSound =@"Yes";
         }
-        
-        
     }
-    
-    
-   }
+}
 
 #pragma mark - Custom AlertView
 
 -(void)CustomAlterviewload
 {
-    
     objCustomAlterview = [[CustomAlterview alloc] initWithNibName:@"CustomAlterview" bundle:nil];
     objCustomAlterview.view.frame = CGRectMake(self.view.frame.origin.x,self.view.frame.origin.y, CGRectGetWidth(self.view.frame), self.view.frame.size.height);
     [objCustomAlterview.alertBgView setHidden:YES];
@@ -458,7 +444,7 @@
 
 -(IBAction)didClickSaveBntAction:(id)sender
 {
-    [COMMON LoadIcon:self.view];
+    [COMMON DSLoadIcon:self.view];
     [self loadUpdateNotificationAPI];
 }
 
@@ -543,12 +529,11 @@
 #pragma mark - WebService
 -(void)loadLocationUpdateAPI{
     
-    NSString *deviceToken = [[NSUserDefaults standardUserDefaults]valueForKey:DeviceToken];
-    if(deviceToken == nil)
-        deviceToken = @"";
-    
-    
     if([COMMON isInternetReachable]){
+        
+        NSString *deviceToken = [[NSUserDefaults standardUserDefaults]valueForKey:DeviceToken];
+        if(deviceToken == nil)
+            deviceToken = @"";
         
         [objWebService locationUpdate:LocationUpdate_API sessionid:[COMMON getSessionID] latitude:currentLatitude longitude:currentLongitude
                           deviceToken:deviceToken pushType:push_type
@@ -570,9 +555,7 @@
         [COMMON showErrorAlert:@"Check Your Internet connection"];
         
     }
-    
-    
-  }
+}
 
 -(void)logoutDeleteAction{
     
@@ -660,7 +643,7 @@
                                           
                                           [COMMON setUserDetails:userDetailsDict];
                                           
-                                          [COMMON removeLoading];
+                                          [COMMON DSRemoveLoading];
                                           
                                           
                                         DosomethingView =[[HomeViewController alloc]initWithNibName:@"HomeViewController" bundle:nil];

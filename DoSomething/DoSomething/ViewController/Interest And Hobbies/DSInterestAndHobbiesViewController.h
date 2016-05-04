@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 #import "DSProfileTableViewController.h"
+#import "SCGIFImageView.h"
+
 
 @interface DSInterestAndHobbiesViewController : UIViewController<UICollectionViewDataSource,UICollectionViewDelegate,UICollectionViewDelegateFlowLayout>
 @property (strong, nonatomic) IBOutlet UICollectionView *interestAndHobbiesCollectionView;
@@ -20,4 +22,7 @@
 @property (nonatomic, retain) NSMutableArray *profileDetailsArray;
 
 @property (nonatomic,strong) IBOutlet UIView *WalkAlterview;
+
+@property (strong, nonatomic) IBOutlet SCGIFImageView * gifImageView;
+
 @end

@@ -59,7 +59,6 @@
 
 -(void)loadContent
 {
-    
     NSBundle *mainBundle = [NSBundle mainBundle];
     NSURL *homeIndexUrl;
     if([self.policytypeofContent isEqualToString:@"Term"])
@@ -91,7 +90,7 @@
 - (void)backAction
 {
     [self.navigationController popViewControllerAnimated:YES];
-    [COMMON removeLoading];
+    [COMMON DSRemoveLoading];
     
 }
 

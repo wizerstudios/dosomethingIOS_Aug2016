@@ -79,7 +79,6 @@
 
 - (void)viewDidLoad
 {
-    
     [super viewDidLoad];
     locationManager                 = [[CLLocationManager alloc] init];
     locationManager.delegate        = self;
@@ -87,11 +86,13 @@
     activityMainDict = [[NSMutableDictionary alloc]init];
     activityImageArray = [[NSMutableArray alloc]init];
     
-    
     [activatedView setHidden:YES];
     if([[NSUserDefaults standardUserDefaults] valueForKey:@"MenuListArray"]==nil){
-        [self LoadIcon];
-        [self loadhomeviewListWebservice];
+        
+        [COMMON DSLoaderIcon:self.view];
+        
+        [self performSelector:@selector(loadhomeviewListWebservice) withObject:nil afterDelay:5.0];
+//        [self loadhomeviewListWebservice];
     }
     else
     {
@@ -154,6 +155,7 @@
     }
     else
         [appDelegate.badgeCountLabel setHidden:YES];
+//    [COMMON DSRemoveLoading];
 }
 
 
@@ -162,7 +164,6 @@
 -(void)loadhomeviewListWebservice
 {
     if([COMMON isInternetReachable]){
-        
         
         [objWebService HomeviewList:DoSomething_API
                             success:^(AFHTTPRequestOperation *operation, id responseObject)
@@ -183,7 +184,7 @@
                  
                  [[NSUserDefaults standardUserDefaults] setObject:menuArray forKey:@"MenuListArray"];
                  [[NSUserDefaults standardUserDefaults] synchronize];
-                 [self removeLoading];
+                 [COMMON DSRemoveLoading];
                  [self.homeCollectionView reloadData];
                  isInitialLoadingAPI = YES;
                  [self loadActivityAPI:getLast availableStr:@"" doSomethingId:@""];
@@ -191,21 +192,20 @@
          }
           failure:^(AFHTTPRequestOperation *operation, id error)
          {
-             
+             [COMMON DSRemoveLoading];
          }];
         
     }
     else{
         
         [COMMON showErrorAlert:@"Check Your Internet connection"];
-        
+        [COMMON DSRemoveLoading];
     }
 
 }
 #pragma mark - loadnavigationview
 -(void)loadnavigationview
 {
-
     self.navigationController.navigationBarHidden=NO;
     [self.navigationItem setHidesBackButton:YES animated:NO];
     [self.navigationController.navigationBar setTranslucent:YES];
@@ -291,7 +291,6 @@
     
     if(!locationManager){
         
-        
         locationManager.distanceFilter  = kCLLocationAccuracyKilometer;
         locationManager.desiredAccuracy = kCLLocationAccuracyBest;
         locationManager.activityType    = CLActivityTypeAutomotiveNavigation;
@@ -307,7 +306,6 @@
 
 -(void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations {
     
-    
     CLLocation *newLocation = [locations lastObject];
     
     currentLatitude         = [NSString stringWithFormat:@"%@",[NSNumber numberWithDouble:newLocation.coordinate.latitude]];
@@ -319,6 +317,8 @@
     
     NSLog(@"current latitude & longitude for main view = %@ & %@",currentLatitude,currentLongitude);
     
+    if([COMMON isInternetReachable]){
+    
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
             
                   [self loadLocationUpdateAPI];
@@ -326,15 +326,12 @@
             dispatch_async(dispatch_get_main_queue(), ^(){
                 
             });
-            
         });
-  
-    
+    }
 }
 
 - (void)locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error
 {
-    
     NSLog(@"Cannot find the location for main view.");
 }
 
@@ -349,6 +346,7 @@
     [flowLayout setScrollDirection:UICollectionViewScrollDirectionVertical];
     [self.homeCollectionView setCollectionViewLayout:flowLayout];
 }
+
 #pragma mark Collectionview Delegate Method
 
 -(NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView {
@@ -605,11 +603,11 @@ minimumLineSpacingForSectionAtIndex:(NSInteger)section {
 
 -(void)loadLocationUpdateAPI{
     
+    NSString *deviceToken = [[NSUserDefaults standardUserDefaults]valueForKey:DeviceToken];
+    if(deviceToken == nil)
+        deviceToken = @"";
+
     if([COMMON isInternetReachable]){
-        
-        NSString *deviceToken = [[NSUserDefaults standardUserDefaults]valueForKey:DeviceToken];
-        if(deviceToken == nil)
-            deviceToken = @"";
         
         [objWebService locationUpdate:LocationUpdate_API sessionid:[COMMON getSessionID] latitude:currentLatitude longitude:currentLongitude
                           deviceToken:deviceToken pushType:push_type
@@ -634,8 +632,6 @@ minimumLineSpacingForSectionAtIndex:(NSInteger)section {
         [COMMON showErrorAlert:@"Check Your Internet connection"];
         
     }
-
-    
 }
 
 -(void)loadActivityAPI:(NSString *)_activityNameStr availableStr:(NSString *)_availableStr doSomethingId:(NSString *)_dosomethingId{
@@ -1002,7 +998,6 @@ minimumLineSpacingForSectionAtIndex:(NSInteger)section {
     [self.window makeKeyAndVisible];
    
     self.window.backgroundColor =[UIColor colorWithRed:(53.0/255.0f) green:(53.0/255.0f) blue:(53.0/255.0f) alpha:0.5];
-
 }
 
 - (void)flashOff:(UIView *)v
@@ -1023,28 +1018,4 @@ minimumLineSpacingForSectionAtIndex:(NSInteger)section {
     }];
 }
 
-
--(void)LoadIcon
-{
-    [self removeLoading];
-    //    [loadingView.layer setCornerRadius:20.0];
-    loadingView = [[UIView alloc] initWithFrame:CGRectMake((self.view.frame.size.width+37)/2, (self.view.frame.size.height)/2, 37, 37)];
-    [loadingView setBackgroundColor:[UIColor clearColor]];
-    //Enable maskstobound so that corner radius would work.
-    [loadingView.layer setMasksToBounds:YES];
-    //Set the corner radius
-    
-    UIActivityIndicatorView *activityView = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
-    [activityView setFrame:CGRectMake(1, 1, 37, 37)];
-    [activityView setHidesWhenStopped:YES];
-    [activityView startAnimating];
-    [loadingView addSubview:activityView];
-    [self.view addSubview:loadingView];
-    [self.view bringSubviewToFront:loadingView];
-}
-
--(void)removeLoading{
-    
-    [loadingView removeFromSuperview];
-}
 @end

@@ -180,7 +180,6 @@
 
 -(void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations {
     
-    
     CLLocation *newLocation = [locations lastObject];
     
     currentLatitude         = [NSString stringWithFormat:@"%@",[NSNumber numberWithDouble:newLocation.coordinate.latitude]];
@@ -464,11 +463,10 @@
         gender = @"";
         dob = @"";
         
-        [COMMON LoadIcon:self.view];
-        
-        [self checkUserEmail];
+        [COMMON DSLoadIcon:self.view];
+        [self performSelector:@selector(checkUserEmail) withObject:nil afterDelay:5.0];
+//        [self checkUserEmail];
     }
-   
 }
 -(void)SignButtonAction
 {
@@ -511,8 +509,9 @@
         gender = @"";
         dob = @"";
         
-        [COMMON LoadIcon:self.view];
-        [self loadloginAPI];
+        [COMMON DSLoadIcon:self.view];
+        [self performSelector:@selector(loadloginAPI) withObject:nil afterDelay:5.0];
+//        [self loadloginAPI];
         //[self checkUserEmail]
     }
 }
@@ -524,7 +523,7 @@
     
     if([COMMON isInternetReachable]){
         
-        [COMMON LoadIcon:self.view];
+        [COMMON DSLoadIcon:self.view];
         [objWebService checkUser:CheckUser_API
                            email:email
                             type:objSigninType
@@ -543,7 +542,7 @@
                                  else
                                      [self gotoProfileView:email :password:YES];
                                  
-                                 [COMMON removeLoading];
+                                 [COMMON DSRemoveLoading];
                              }
                              else {
                                  
@@ -558,7 +557,7 @@
                                      
                                      
                                  }
-                                 [COMMON removeLoading];
+                                 [COMMON DSRemoveLoading];
                              }
                              
                              
@@ -567,7 +566,7 @@
                              NSLog(@"Error = %@",error);
                              
                             // [self showAltermessage:@"ERROR"];
-                             [COMMON removeLoading];
+                             [COMMON DSRemoveLoading];
                              
                              
                          }];
@@ -612,7 +611,7 @@
                  [fbUserDetailsDict setObject:profileImage forKey:@"profileImage"];
                  NSLog(@"fbUserDetailsDictt = %@",fbUserDetailsDict);
                  
-                 [COMMON LoadIcon:self.view];
+                 [COMMON DSLoadIcon:self.view];
                  
                  if(labelFacebook.tag == 10)
                  {
@@ -621,7 +620,7 @@
                  }
                  
                  else{
-                    [COMMON LoadIcon:self.view];
+                     [COMMON DSLoadIcon:self.view];
                     // [self loadloginAPI];
                      [self checkUserEmail];
                  }
@@ -746,31 +745,27 @@
              if([[loginDict valueForKey:@"status"]isEqualToString:@"success"]){
                  
                  [COMMON setUserDetails:[[loginDict valueForKey:@"userDetails"]objectAtIndex:0]];
-                
-                 
-               
 
                  NSLog(@"userdetails = %@",[COMMON getUserDetails]);
                  [self gotoHomeView];
-                 [COMMON removeLoading];
+                 [COMMON DSRemoveLoading];
                  
              }
              else{
                  NSLog(@"responseObject = %@",responseObject);
                  [self showAltermessage:[loginDict valueForKey:@"Message"]];
-                 [COMMON removeLoading];
+                 [COMMON DSRemoveLoading];
                  
              }
              
-             
          }
-                        failure:^(AFHTTPRequestOperation *operation, id error){
+        failure:^(AFHTTPRequestOperation *operation, id error){
                             
-                            NSLog(@"ERROR = %@",error);
+            NSLog(@"ERROR = %@",error);
                             
-                            [COMMON removeLoading];
+            [COMMON DSRemoveLoading];
                             
-                        }];
+        }];
     }
     else{
         
@@ -778,7 +773,7 @@
         
     }
     
-   }
+}
 
 #pragma mark - loadCreateAPI
 -(void)loadCreateAPI
@@ -817,15 +812,13 @@
                            pushType:push_type
                             fbimage:@""
                             success:^(AFHTTPRequestOperation *operation, id responseObject){
-                                [COMMON removeLoading];
+                                [COMMON DSRemoveLoading];
                             }
                             failure:^(AFHTTPRequestOperation *operation, id error) {
-                                [COMMON removeLoading];
+                                [COMMON DSRemoveLoading];
                                 
                             }];
-        
-        
-    }
+            }
     else{
         
         [COMMON showErrorAlert:@"Check Your Internet connection"];
@@ -850,9 +843,6 @@
     
     [[NSNotificationCenter defaultCenter] removeObserver:self];
    
-    
-
-    
     [self gotoHomeView];
     
 }

@@ -99,7 +99,6 @@
     [self.navigationItem setHidesBackButton:YES animated:NO];
     
      [chatScrollview setScrollEnabled:NO];
-    
 }
 
 -(void)viewwillDisappear:(BOOL)animated{
@@ -161,12 +160,9 @@
          self.blockBtnYOrigin.constant = 435;
          self.topviewYposition.constant = customNavigation.view.frame.origin.y+customNavigation.view.frame.size.height+28;
          self.menuImageyOrigin.constant = 93;
-        
     }
-    
     else if(IS_IPHONE6_Plus)
     {
-        
         customNavigation.view.frame = CGRectMake(0,-20, 420, 83);
         self.chatviewbottom.constant =488;
         self.chattableheight.constant =10;
@@ -178,8 +174,6 @@
         self.chatviewbottom.constant =256;
          self.blockBtnYOrigin.constant = 250;
     }
-    
-   
     
     [customNavigation.menuBtn setHidden:YES];
     
@@ -255,19 +249,16 @@
     }
     
       [chatButton setContentMode:UIViewContentModeScaleToFill];
-    NSString * selectuserstatus=( self.status == nil)?@"online":@"online";
-    OnlineLabel.text =selectuserstatus;
+    NSString * selectuserstatus=(self.status == nil)?@"online":@"online";
+    OnlineLabel.text = selectuserstatus;
     
     _transparentView.hidden = YES;
     
     _backgroundView.hidden = YES;
-    
-
 }
 
 
 #pragma mark - Textview
-
 
 -(void)textViewDidBeginEditing:(UITextView *)textView{
  
@@ -332,7 +323,6 @@
         [[NSBundle mainBundle] loadNibNamed:@"ChatDetailCustomcell" owner:self options:nil];
         ChatDetailcell = chatCustomcell;
     }
-    
     
     [ChatDetailcell setSelectionStyle:UITableViewCellSelectionStyleNone];
     [ChatDetailcell getMessageArray:[conversationArray objectAtIndex:indexPath.row]];
@@ -430,7 +420,6 @@
 
 -(void)sendAction:(id)sender{
     
-   
     NSString *conversationID;
     NSString *str=chatView.textView.text;
     
@@ -486,124 +475,134 @@
 
 -(void)loadConverstionAPI{
     
-    NSString *conversationID;
-    
-    if(_conversionID==nil)
-          conversationID = [chatuserDetailsDict valueForKey:@"id"];
-    
-    else
-        conversationID=_conversionID;
-    
-    
-    [webService getConversation:GetConversation sessionID:[COMMON getSessionID] conversationId:conversationID dateTime:[COMMON getCurrentDateTime]
-                        success:^(AFHTTPRequestOperation *operation, id responseObject){
-                            
-                            NSLog(@"loadConverstionResponse = %@",responseObject);
-                            
-                            
-                            NSMutableDictionary *responseDict = [[NSMutableDictionary alloc]init];
-                            
-                            responseDict = [[responseObject valueForKey:@"getconversation"]mutableCopy];
-                            
-                            if([[responseDict valueForKey:@"status"]isEqualToString:@"success"]){
+    if ([COMMON isInternetReachable]) {
+        
+        NSString *conversationID;
+        
+        if(_conversionID==nil)
+            conversationID = [chatuserDetailsDict valueForKey:@"id"];
+        
+        else
+            conversationID=_conversionID;
+        
+        
+        [webService getConversation:GetConversation sessionID:[COMMON getSessionID] conversationId:conversationID dateTime:[COMMON getCurrentDateTime]
+                            success:^(AFHTTPRequestOperation *operation, id responseObject){
+                                
+                                NSLog(@"loadConverstionResponse = %@",responseObject);
                                 
                                 
-                                if([conversationArray count])
-                                   [conversationArray removeAllObjects];
+                                NSMutableDictionary *responseDict = [[NSMutableDictionary alloc]init];
                                 
-                                conversationArray = [[responseDict valueForKey:@"converation"]mutableCopy];
-                                 recevierDetails=[[responseDict valueForKey:@"receiver"] mutableCopy];
-                                NSString * objonline = [[recevierDetails valueForKey:@"online_status"] componentsJoinedByString:@""];
-                                NSString *onlinestatus=([objonline isEqualToString: @"0"])?@"offline":@"online";
-                                OnlineLabel.text =onlinestatus;
-                               
-                                [chatTableView reloadData];
-                              
-                                if (chatTableView.contentSize.height < chatTableView.frame.size.height)
-                                {
-                                    if(iskeyboardapear==NO)
+                                responseDict = [[responseObject valueForKey:@"getconversation"]mutableCopy];
+                                
+                                if([[responseDict valueForKey:@"status"]isEqualToString:@"success"]){
+                                    
+                                    
+                                    if([conversationArray count])
+                                        [conversationArray removeAllObjects];
+                                    
+                                    conversationArray = [[responseDict valueForKey:@"converation"]mutableCopy];
+                                    recevierDetails=[[responseDict valueForKey:@"receiver"] mutableCopy];
+                                    NSString * objonline = [[recevierDetails valueForKey:@"online_status"] componentsJoinedByString:@""];
+                                    NSString *onlinestatus=([objonline isEqualToString: @"0"])?@"offline":@"online";
+                                    OnlineLabel.text =onlinestatus;
+                                    
+                                    [chatTableView reloadData];
+                                    
+                                    if (chatTableView.contentSize.height < chatTableView.frame.size.height)
                                     {
-                                    [chatTableView scrollRectToVisible:CGRectMake(0, chatTableView.contentSize.height - chatTableView.bounds.size.height, chatTableView.bounds.size.width,chatTableView.bounds.size.height) animated:YES];
+                                        if(iskeyboardapear==NO)
+                                        {
+                                            [chatTableView scrollRectToVisible:CGRectMake(0, chatTableView.contentSize.height - chatTableView.bounds.size.height, chatTableView.bounds.size.width,chatTableView.bounds.size.height) animated:YES];
+                                        }
+                                        else
+                                        {
+                                            [chatTableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:conversationArray.count-1 inSection:0] atScrollPosition:UITableViewScrollPositionBottom animated:YES];
+                                        }
                                     }
-                                    else
-                                    {
+                                    
+                                    else{
                                         [chatTableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:conversationArray.count-1 inSection:0] atScrollPosition:UITableViewScrollPositionBottom animated:YES];
                                     }
+                                    
+                                    
                                 }
-                               
                                 else{
-                                   [chatTableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:conversationArray.count-1 inSection:0] atScrollPosition:UITableViewScrollPositionBottom animated:YES];
+                                    [messageTimer invalidate];
                                 }
-                               
                                 
                             }
-                            else{
-                                [messageTimer invalidate];
-                            }
-                            
-                        }
-     
-                        failure:^(AFHTTPRequestOperation *operation, id error) {
-                            [COMMON removeLoading];
-                            
-                        }];
-    
+         
+                            failure:^(AFHTTPRequestOperation *operation, id error) {
+                                [COMMON DSRemoveLoading];
+                                
+                            }];
+
+    }
 }
 
 -(void)loadSendMessageAPI:(NSString *)_receiverId conversationId:(NSString *)_conversationId{
     
-                    [webService sendMessage:SendMessage_API sessionid:[COMMON getSessionID] message_send_user_id:_receiverId message:chatView.textView.text conversation_id:_conversationId success:^(AFHTTPRequestOperation *operation, id responseObject){
-                        
-                        NSLog(@"Conversation resp = %@",responseObject);
-                       msgResponseDict = [[NSMutableDictionary alloc]init];
-                        
-                        msgResponseDict = [responseObject valueForKey:@"sendmessage"];
-                        
-                        if([[msgResponseDict valueForKey:@"status"]isEqualToString:@"success"]){
+    if ([COMMON isInternetReachable]) {
+        
+        [webService sendMessage:SendMessage_API sessionid:[COMMON getSessionID] message_send_user_id:_receiverId message:chatView.textView.text conversation_id:_conversationId success:^(AFHTTPRequestOperation *operation, id responseObject){
+            
+            NSLog(@"Conversation resp = %@",responseObject);
+            msgResponseDict = [[NSMutableDictionary alloc]init];
+            
+            msgResponseDict = [responseObject valueForKey:@"sendmessage"];
+            
+            if([[msgResponseDict valueForKey:@"status"]isEqualToString:@"success"]){
+                
+                [self loadConverstionAPI];
+                //[[IQKeyboardManager sharedManager] becomeFirstResponder];
+                
+            }
+            [COMMON DSRemoveLoading];
+            
+        }
+         
+                        failure:^(AFHTTPRequestOperation *operation, id error) {
+                            [COMMON DSRemoveLoading];
                             
-                            [self loadConverstionAPI];
-                            //[[IQKeyboardManager sharedManager] becomeFirstResponder];
-                            
-                        }
-                       [COMMON removeLoading];
-                        
-                    }
-     
-                    failure:^(AFHTTPRequestOperation *operation, id error) {
-                        [COMMON removeLoading];
-                        
-                    }];
-
-    
+                        }];
+    }
 }
 
 #pragma deleteuserchatdetails, Blockuser
 -(void)loadDeleteUserChatHistory
 {
-     NSString *conversationID = [chatuserDetailsDict valueForKey:@"id"];
-    
-    [webService deleteUserChatHist:DeleteConversation sessionid:[COMMON getSessionID] chat_user_id:conversationID success:^(AFHTTPRequestOperation *operation, id responseObject)
-    {
+    if ([COMMON isInternetReachable]) {
+        NSString *conversationID = [chatuserDetailsDict valueForKey:@"id"];
         
-        [self.navigationController popViewControllerAnimated:YES];
-        
-    } failure:^(AFHTTPRequestOperation *operation, id error) {
-       
-    }];
+        [webService deleteUserChatHist:DeleteConversation sessionid:[COMMON getSessionID] chat_user_id:conversationID success:^(AFHTTPRequestOperation *operation, id responseObject)
+         {
+             
+             [self.navigationController popViewControllerAnimated:YES];
+             
+         } failure:^(AFHTTPRequestOperation *operation, id error) {
+             
+         }];
+    }
 }
+
 -(void)loadblockUser
 {
-     NSString *conversationID = [chatuserDetailsDict valueForKey:@"id"];
-    
-    [webService blockUser:BlockUser_API sessionid:[COMMON getSessionID] block_user_id:conversationID success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        NSLog(@"response:%@",responseObject);
-        [[NSUserDefaults standardUserDefaults]setObject:@"Yes" forKey:@"backAction"];
-        [[NSUserDefaults standardUserDefaults]synchronize];
-        [self.navigationController popViewControllerAnimated:YES];
+    if ([COMMON isInternetReachable]) {
+
+        NSString *conversationID = [chatuserDetailsDict valueForKey:@"id"];
         
-    } failure:^(AFHTTPRequestOperation *operation, id error) {
-        
-    }];
+        [webService blockUser:BlockUser_API sessionid:[COMMON getSessionID] block_user_id:conversationID success:^(AFHTTPRequestOperation *operation, id responseObject) {
+            NSLog(@"response:%@",responseObject);
+            [[NSUserDefaults standardUserDefaults]setObject:@"Yes" forKey:@"backAction"];
+            [[NSUserDefaults standardUserDefaults]synchronize];
+            [self.navigationController popViewControllerAnimated:YES];
+            
+        } failure:^(AFHTTPRequestOperation *operation, id error) {
+            
+        }];
+    }
 }
 -(IBAction)DidClickGeneralAlterviewBtn:(id)sender
 {
@@ -615,9 +614,6 @@
 {
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
    
-    
-    
-   
     UIView * altermsgView;
     
     if(IS_IPHONE6_Plus || IS_IPHONE6)
@@ -626,24 +622,18 @@
         
          blueCirecleBtn=[[UIButton alloc]initWithFrame:CGRectMake(self.view.frame.origin.x+80,self.window.frame.size.height-100,40,40)];
         altermsgView= [[UIView alloc]initWithFrame:CGRectMake(self.view.frame.origin.x+60,self.view.center.y+20,240,60)];
-
     }
     else{
         
-        
         blueCirecleBtn=[[UIButton alloc]initWithFrame:CGRectMake(self.view.frame.origin.x+80,self.view.frame.size.height-80,40,40)];
         altermsgView= [[UIView alloc]initWithFrame:CGRectMake(self.view.frame.origin.x+40,self.view.center.y,240,60)];
-
     }
-
 
     [blueCirecleBtn setImage:[UIImage imageNamed:@"BlueCirecleimg"] forState: UIControlStateNormal];
   
     [self flashOn:blueCirecleBtn];
     
     [self.window addSubview:blueCirecleBtn];
-    
-
     
     UIImageView * blueTxtImg=[[UIImageView alloc]initWithFrame:CGRectMake(0,0,240,60)];
     blueTxtImg.userInteractionEnabled=YES;
@@ -657,21 +647,16 @@
     [AlterMsg setFont:[UIFont fontWithName:@"Patron-Regular" size:12]];
     [altermsgView addSubview:AlterMsg];
     
-    
     [self.window addSubview:altermsgView];
     
     //UIButton * ClosewindowBtn =[[UIButton alloc]initWithFrame:[[UIScreen mainScreen] bounds]];
     [blueCirecleBtn addTarget:self action:@selector(DidClickGeneralAlterviewBtn:) forControlEvents:UIControlEventTouchUpInside];
-    
    
    // [self.window addSubview:ClosewindowBtn];
     self.window.hidden=NO;
     [self.window makeKeyAndVisible];
    
     self.window.backgroundColor =[UIColor colorWithRed:(53.0/255.0f) green:(53.0/255.0f) blue:(53.0/255.0f) alpha:0.5];
-    
-   
-    
 }
 
 - (void)flashOff:(UIView *)v

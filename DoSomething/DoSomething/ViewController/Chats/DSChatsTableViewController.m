@@ -39,8 +39,6 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    
-
     locationManager                 = [[CLLocationManager alloc] init];
     locationManager.delegate        = self;
     chatArray = [[NSMutableArray alloc]init];
@@ -65,14 +63,13 @@
                                                                constant:20.0]];
     
    
-    //[COMMON DSLoadIcon:self.view];
-
-    
+    [COMMON DSLoaderIcon:self.view];
 }
 
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+    
     [COMMON TrackerWithName:@"Chat Listing"];
     
     [self loadChatHistoryAPI];
@@ -183,7 +180,6 @@
 
 -(void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations {
     
-    
     CLLocation *newLocation = [locations lastObject];
     
     currentLatitude         = [NSString stringWithFormat:@"%@",[NSNumber numberWithDouble:newLocation.coordinate.latitude]];
@@ -198,19 +194,17 @@
     NSLog(@"current latitude & longitude for main view = %@ & %@",currentLatitude,currentLongitude);
     NSLog(@"savedLatitude & saved Longitude = %@ & %@",savedLatitude,savedLongitude);
     
-    
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        
-        if((![currentLatitude isEqualToString:savedLatitude] || ![currentLongitude isEqualToString:savedLongitude]) && (currentLongitude !=nil || currentLatitude != nil))
-            [self loadLocationUpdateAPI];
-        
-        dispatch_async(dispatch_get_main_queue(), ^(){
+    if([COMMON isInternetReachable]) {
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
             
+            if((![currentLatitude isEqualToString:savedLatitude] || ![currentLongitude isEqualToString:savedLongitude]) && (currentLongitude !=nil || currentLatitude != nil))
+                [self loadLocationUpdateAPI];
+            
+            dispatch_async(dispatch_get_main_queue(), ^(){
+                
+            });
         });
-        
-    });
-    
-    
+    }
 }
 - (void)locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error
 {
@@ -414,95 +408,98 @@
 
 -(void)loadLocationUpdateAPI{
     
-    NSString *deviceToken = [[NSUserDefaults standardUserDefaults]valueForKey:DeviceToken];
-    if(deviceToken == nil)
-        deviceToken = @"";
-    
-    [webService locationUpdate:LocationUpdate_API sessionid:[COMMON getSessionID] latitude:currentLatitude longitude:currentLongitude
-                 deviceToken:deviceToken pushType:push_type
-                       success:^(AFHTTPRequestOperation *operation, id responseObject){
-                           NSLog(@"responseObject = %@",responseObject);
-                           if([[responseObject valueForKey:@"status"]isEqualToString:@"success"]){
-                               [[NSUserDefaults standardUserDefaults] setObject:currentLatitude  forKey:CurrentLatitude];
-                               [[NSUserDefaults standardUserDefaults] setObject:currentLongitude forKey:CurrentLongitude];
-                               [[NSUserDefaults standardUserDefaults] synchronize];
+    if ([COMMON isInternetReachable]) {
+
+        NSString *deviceToken = [[NSUserDefaults standardUserDefaults]valueForKey:DeviceToken];
+        if(deviceToken == nil)
+            deviceToken = @"";
+        
+        [webService locationUpdate:LocationUpdate_API sessionid:[COMMON getSessionID] latitude:currentLatitude longitude:currentLongitude
+                       deviceToken:deviceToken pushType:push_type
+                           success:^(AFHTTPRequestOperation *operation, id responseObject){
+                               NSLog(@"responseObject = %@",responseObject);
+                               if([[responseObject valueForKey:@"status"]isEqualToString:@"success"]){
+                                   [[NSUserDefaults standardUserDefaults] setObject:currentLatitude  forKey:CurrentLatitude];
+                                   [[NSUserDefaults standardUserDefaults] setObject:currentLongitude forKey:CurrentLongitude];
+                                   [[NSUserDefaults standardUserDefaults] synchronize];
+                               }
                            }
-                       }
-                       failure:^(AFHTTPRequestOperation *operation, id error) {
-                           
-                       }];
-    
-    
+                           failure:^(AFHTTPRequestOperation *operation, id error) {
+                               
+                           }];
+    }
 }
 
 -(void)loadChatHistoryAPI{
     
-    [self stopTimer];
-    
-    [webService userChatHist:ChatHistory_API sessionid:[COMMON getSessionID] dateTime:[COMMON getCurrentDateTime]
-                     success:^(AFHTTPRequestOperation *operation, id responseObject){
-                         
-                         
-                         if(_isStartTimer == YES)
-                              [self startTimer];
-                         
-                         NSLog(@"responseObject = %@",responseObject);
-                         if([[[responseObject valueForKey:@"getchathistory"] valueForKey:@"status"]isEqualToString:@"success"]){
-                         
-                             chatArray = [[[responseObject valueForKey:@"getchathistory"]valueForKey:@"converation"] mutableCopy];
+    if ([COMMON isInternetReachable]) {
+        
+        [self stopTimer];
+        [webService userChatHist:ChatHistory_API sessionid:[COMMON getSessionID] dateTime:[COMMON getCurrentDateTime]
+                         success:^(AFHTTPRequestOperation *operation, id responseObject){
                              
-                             [self loadTabbarMsgCount];
-                                                     
-                             [refreshControl endRefreshing];
                              
-                             [ChatTableView reloadData];
+                             if(_isStartTimer == YES)
+                                 [self startTimer];
+                             
+                             NSLog(@"responseObject = %@",responseObject);
+                             if([[[responseObject valueForKey:@"getchathistory"] valueForKey:@"status"]isEqualToString:@"success"]){
+                                 
+                                 chatArray = [[[responseObject valueForKey:@"getchathistory"]valueForKey:@"converation"] mutableCopy];
+                                 
+                                 [self loadTabbarMsgCount];
+                                 
+                                 [refreshControl endRefreshing];
+                                 
+                                 [ChatTableView reloadData];
+                             }
+                             
+                             [COMMON DSRemoveLoading];
+                             
                          }
-                         
-                         [COMMON DSRemoveLoading];
-                                                  
-                     }
-     
-                     failure:^(AFHTTPRequestOperation *operation, id error) {
-                         [COMMON DSRemoveLoading];
-                         
-                     }];
-    
-    
+         
+                         failure:^(AFHTTPRequestOperation *operation, id error) {
+                             [COMMON DSRemoveLoading];
+                             
+                         }];
+    }
 }
 
 
 #pragma deleteuserchatdetails, Blockuser
 -(void)loadDeleteUserChatHistory:(NSString*) deleteuserID :(NSInteger)selectIndex
 {
-     NSLog(@"selectIndex:%ld",(long)selectIndex);
-    
-    [webService deleteUserChatHist:DeleteConversation sessionid:[COMMON getSessionID] chat_user_id:deleteuserID success:^(AFHTTPRequestOperation *operation, id responseObject)
-     {
-         NSLog(@"response:%@",responseObject);
-         if([[[responseObject valueForKey:@"deleteconversation"]valueForKey:@"status"]isEqualToString:@"success"])
+    if ([COMMON isInternetReachable]) {
+        NSLog(@"selectIndex:%ld",(long)selectIndex);
+        
+        [webService deleteUserChatHist:DeleteConversation sessionid:[COMMON getSessionID] chat_user_id:deleteuserID success:^(AFHTTPRequestOperation *operation, id responseObject)
          {
-             NSIndexPath *path = [NSIndexPath indexPathForRow:selectIndex inSection:0];
-         
-            //[chatArray removeObject:selectIndex];
-             [self tableView:ChatTableView commitEditingStyle:UITableViewCellEditingStyleDelete forRowAtIndexPath:path];
-
-             //[ChatTableView reloadData];
-         }
-         
-     } failure:^(AFHTTPRequestOperation *operation, id error) {
-         
-     }];
+             NSLog(@"response:%@",responseObject);
+             if([[[responseObject valueForKey:@"deleteconversation"]valueForKey:@"status"]isEqualToString:@"success"])
+             {
+                 NSIndexPath *path = [NSIndexPath indexPathForRow:selectIndex inSection:0];
+                 
+                 //[chatArray removeObject:selectIndex];
+                 [self tableView:ChatTableView commitEditingStyle:UITableViewCellEditingStyleDelete forRowAtIndexPath:path];
+                 
+                 //[ChatTableView reloadData];
+             }
+             
+         } failure:^(AFHTTPRequestOperation *operation, id error) {
+             
+         }];
+    }
 }
 -(void)loadblockUser:(NSString*)blockuserID
 {
-   
-    
-    [webService blockUser:BlockUser_API sessionid:[COMMON getSessionID] block_user_id:blockuserID success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        NSLog(@"response:%@",responseObject);
-        
-    } failure:^(AFHTTPRequestOperation *operation, id error) {
-        
-    }];
+    if ([COMMON isInternetReachable]) {
+        [webService blockUser:BlockUser_API sessionid:[COMMON getSessionID] block_user_id:blockuserID success:^(AFHTTPRequestOperation *operation, id responseObject) {
+            NSLog(@"response:%@",responseObject);
+            
+        } failure:^(AFHTTPRequestOperation *operation, id error) {
+            
+        }];
+    }
 }
 
 -(void)loadTabbarMsgCount{

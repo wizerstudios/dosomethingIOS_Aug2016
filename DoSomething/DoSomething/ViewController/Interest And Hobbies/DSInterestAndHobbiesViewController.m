@@ -113,9 +113,7 @@
             
             profileHobbyArray = [[profileDict valueForKey:@"hobbieslist"]mutableCopy];
         
-    }
-    
-    
+    }   
 }
 
 -(void)loadNavigation{
@@ -200,10 +198,9 @@
 }
 -(void)loadHobbiesWebserviceMethod
 {
-    
     if([COMMON isInternetReachable]){
         
-        [self LoadIcon];
+//        [COMMON DSLoadIcon:self.interestAndHobbiesCollectionView];
         
         [objWebservice getHobbies:GetHobbies_API sessionid:deviceUdid success:^(AFHTTPRequestOperation *operation, id responseObject)
          {
@@ -240,19 +237,22 @@
              [[NSUserDefaults standardUserDefaults] synchronize];
              interstAndHobbiesArray=[hobbiesArry mutableCopy];
              
-             [self removeLoading];
+             [COMMON DSRemoveLoading];
              
              [interestAndHobbiesCollectionView reloadData];
              
              [self localArray];
              
          } failure:^(AFHTTPRequestOperation *operation, id error) {
-             
+             [COMMON DSRemoveLoading];
+
          }];
     }
     else{
         
         [COMMON showErrorAlert:@"Check Your Internet connection"];
+        [COMMON DSRemoveLoading];
+
     }
 }
 -(void)localArray
@@ -293,11 +293,11 @@
     
     if([[NSUserDefaults standardUserDefaults] valueForKey:@"ListofinterestArray"]==nil){
         
-        [self LoadIcon];
+        [COMMON DSLoaderIcon:self.interestAndHobbiesCollectionView];
         isDownloadactiveImg=YES;
-        [self loadHobbiesWebserviceMethod];
         
-        
+        [self performSelector:@selector(loadHobbiesWebserviceMethod) withObject:nil afterDelay:5.0];
+//        [self loadHobbiesWebserviceMethod];
         
     }
     else{
@@ -312,8 +312,6 @@
     }
 
     //[self loadHobbiesWebserviceMethod];
-        
-    
 }
 
 
@@ -737,29 +735,4 @@
         [self flashOff:v];
     }];
 }
-
--(void)LoadIcon
-{
-    [self removeLoading];
-    //    [loadingView.layer setCornerRadius:20.0];
-    loadingView = [[UIView alloc] initWithFrame:CGRectMake((self.view.frame.size.width+37)/2, (self.view.frame.size.height)/2, 37, 37)];
-    [loadingView setBackgroundColor:[UIColor clearColor]];
-    //Enable maskstobound so that corner radius would work.
-    [loadingView.layer setMasksToBounds:YES];
-    //Set the corner radius
-    
-    UIActivityIndicatorView *activityView = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
-    [activityView setFrame:CGRectMake(1, 1, 37, 37)];
-    [activityView setHidesWhenStopped:YES];
-    [activityView startAnimating];
-    [loadingView addSubview:activityView];
-    [self.view addSubview:loadingView];
-    [self.view bringSubviewToFront:loadingView];
-}
-
--(void)removeLoading{
-    
-    [loadingView removeFromSuperview];
-}
-
 @end

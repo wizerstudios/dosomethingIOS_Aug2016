@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import <CoreLocation/CoreLocation.h>
+#import "SCGIFImageView.h"
 
 @interface HomeViewController : UIViewController<CLLocationManagerDelegate>
 {
@@ -24,6 +25,8 @@
 - (IBAction)pressDosomething:(id)sender;
 
 @property (nonatomic,strong) IBOutlet UIView *WalkAlterview;
+
+@property (strong, nonatomic) IBOutlet SCGIFImageView * gifImageView;
 
 //-(void)onStatusbarChange:(NSNotification*)notification;
 

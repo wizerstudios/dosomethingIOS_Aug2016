@@ -133,7 +133,7 @@ DSAppCommon *sharedCommon = nil;
 
 -(void)reachabilityNotReachableAlert{
     
-    [self removeLoading];
+    [self DSRemoveLoading];
     
     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:[[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleName"] message:@"It appears that you have lost network connectivity. Please check your network settings!" delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil];
     
@@ -270,90 +270,51 @@ DSAppCommon *sharedCommon = nil;
 
 #pragma mark User Interaction Loading :
 
--(void)LoadIcon:(UIView *)view
-{
-    [self removeLoading];
-//    [loadingView.layer setCornerRadius:20.0];
-   loadingView = [[UIView alloc] initWithFrame:CGRectMake((view.frame.size.width-37)/2, (view.frame.size.height-37)/2, 37, 37)];
-    [loadingView setBackgroundColor:[UIColor clearColor]];
-    //Enable maskstobound so that corner radius would work.
-    [loadingView.layer setMasksToBounds:YES];
-    //Set the corner radius
-   
-    activityView = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhite];
-    [activityView setFrame:CGRectMake(1, 1, 37, 37)];
-    [activityView setHidesWhenStopped:YES];
-    [activityView startAnimating];
-    [loadingView addSubview:activityView];
-    [view addSubview:loadingView];
-    [view bringSubviewToFront:loadingView];
-}
-
--(void)AddLoadIcon:(UIView *)view
-{
-    [self removeLoading];
-    //    [loadingView.layer setCornerRadius:20.0];
-    loadingView = [[UIView alloc] initWithFrame:CGRectMake((view.frame.size.width-37)/2, (view.frame.size.height-37)/2, 37, 37)];
-    [loadingView setBackgroundColor:[UIColor clearColor]];
-    //Enable maskstobound so that corner radius would work.
-    [loadingView.layer setMasksToBounds:YES];
-    //Set the corner radius
-    
-    activityView = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
-    [activityView setFrame:CGRectMake(1, 1, 37, 37)];
-    [activityView setHidesWhenStopped:YES];
-    [activityView startAnimating];
-    [loadingView addSubview:activityView];
-    [view addSubview:loadingView];
-    [view bringSubviewToFront:loadingView];
-}
-
-
 - (void)DSLoadIcon:(UIView *)view
 {
-    [self removeLoading];
-    [self DSRemoveLoading];
-    if(IS_IPHONE6)
-    {
-        loadingView = [[UIView alloc] initWithFrame:CGRectMake((view.frame.size.width)/2, (view.frame.size.height)/2, 37, 37)];
-    }
-    else  if(IS_IPHONE6_Plus)
-    {
-        loadingView = [[UIView alloc] initWithFrame:CGRectMake((view.frame.size.width+40)/2, (view.frame.size.height+100)/2, 37, 37)];
-    }
-    else
-    {
-        loadingView = [[UIView alloc] initWithFrame:CGRectMake((view.frame.size.width-20)/2, (view.frame.size.height-37)/2, 37, 37)];
-    }
-   
-    [loadingView.layer setCornerRadius:20.0];
-    
-    [loadingView setBackgroundColor:[UIColor clearColor]];
-    //Enable maskstobound so that corner radius would work.
-    [loadingView.layer setMasksToBounds:YES];
-    //Set the corner radius
-    
-    
-    NSURL *imageURL = [[NSBundle mainBundle] URLForResource:@"DoSomething_loading" withExtension:@"gif"];;
-    NSData *imageData = [NSData dataWithContentsOfURL:imageURL];
-   
-    _gifImageView = [[SCGIFImageView alloc] initWithFrame:CGRectMake(0,0,37,37)] ;
-    [_gifImageView setData:imageData];
-    [loadingView addSubview:_gifImageView];
-    [view addSubview:loadingView];
+    if([COMMON isInternetReachable]) {
+        
+        [self DSRemoveLoading];
 
+        NSURL *imageURL = [[NSBundle mainBundle] URLForResource:@"DoSomething_loading" withExtension:@"gif"];;
+        NSData *imageData = [NSData dataWithContentsOfURL:imageURL];
+        
+        _gifImageView = [[SCGIFImageView alloc] initWithFrame:CGRectMake((view.frame.size.width-37)/2, (view.frame.size.height)/2,37,37)] ;
+        [_gifImageView setData:imageData];
+        [view addSubview:_gifImageView];
+    }
 }
+
 -(void)DSRemoveLoading
 {
-    [loadingView removeFromSuperview];
-}
--(void)removeLoading{
-    [loadingView removeFromSuperview];
-}
--(void)removeAddLoading{
-    [loadingView removeFromSuperview];
+    [_gifImageView removeFromSuperview];
 }
 
+- (void)DSLoaderIcon:(UIView *)view
+{
+    if([COMMON isInternetReachable]) {
+        [self DSRemoveLoading];
+        
+        NSURL *imageURL = [[NSBundle mainBundle] URLForResource:@"DoSomething_loading" withExtension:@"gif"];;
+        NSData *imageData = [NSData dataWithContentsOfURL:imageURL];
+        
+        if (IS_IPHONE4) {
+            _gifImageView = [[SCGIFImageView alloc] initWithFrame:CGRectMake((view.frame.size.width-37)/2, (view.frame.size.height-50)/2,37,37)] ;
+        }
+        else if (IS_IPHONE5) {
+            _gifImageView = [[SCGIFImageView alloc] initWithFrame:CGRectMake((view.frame.size.width-37)/2, (view.frame.size.height-37)/2,37,37)] ;
+        }
+        else if (IS_IPHONE6) {
+            _gifImageView = [[SCGIFImageView alloc] initWithFrame:CGRectMake((view.frame.size.width)/2, (view.frame.size.height)/2,37,37)] ;
+        }
+        else if (IS_IPHONE6_Plus) {
+            _gifImageView = [[SCGIFImageView alloc] initWithFrame:CGRectMake((view.frame.size.width+37)/2, (view.frame.size.height+37)/2,37,37)] ;
+        }
+        [_gifImageView setData:imageData];
+        
+        [view addSubview:_gifImageView];
+    }
+}
 
 #pragma mark Set Message Count
 
@@ -372,7 +333,6 @@ DSAppCommon *sharedCommon = nil;
 #pragma mark get user CurrentLocation
 
 - (void)getUserCurrenLocation{
-    
     
     if(!locationManager){
         locationManager                 = [[CLLocationManager alloc] init];
@@ -405,22 +365,18 @@ DSAppCommon *sharedCommon = nil;
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         
         //[self loadLocationUpdateAPI];
-        
-        
     });
-
 }
 
 - (void)locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error
 {
-    
     NSLog(@"Cannot find the location for main view.");
 }
 
 //checking
 #pragma mark - getUserCurrentLocationData
 - (void)getUserCurrentLocationData{
-  //  [self getUserCurrenLocation];
+
     objWebService = [[DSWebservice alloc]init];
     LocationDict=[[NSMutableDictionary alloc]init];
     LocationDict =[[NSUserDefaults standardUserDefaults] valueForKey:USERDETAILS];
@@ -455,7 +411,6 @@ DSAppCommon *sharedCommon = nil;
 
 -(void)TrackerWithName:(NSString *)message
 {
-    
 //    if ([BUILD_FOR_DEVPRO isEqualToString:@"dev"])
 //    {
 //        
@@ -472,7 +427,6 @@ DSAppCommon *sharedCommon = nil;
             // hits until it is set to a new value or to nil.
             [tracker set:kGAIScreenName
                    value:message];
-           
             
             // Previous V3 SDK versions
             // [tracker send:[[GAIDictionaryBuilder createAppView] build]];
@@ -515,14 +469,10 @@ bool addSkipBackupAttributeToItemAtURL (NSURL* URL)
 
 
 void downloadImageFromUrl(NSString* urlString, UIImageView * imageview)
-
 {
-    
     UIView *loadingView = [[UIView alloc] initWithFrame:CGRectMake((imageview.frame.size.width-47)/2, (imageview.frame.size.height-47)/2, 37, 37)];
     
     [loadingView.layer setCornerRadius:5.0];
-    
-    
     
     [loadingView setBackgroundColor:[UIColor clearColor]];
     
@@ -531,8 +481,6 @@ void downloadImageFromUrl(NSString* urlString, UIImageView * imageview)
     [loadingView.layer setMasksToBounds:YES];
     
     //Set the corner radius
-    
-    
     
     UIActivityIndicatorView *activityView = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
     
@@ -546,15 +494,7 @@ void downloadImageFromUrl(NSString* urlString, UIImageView * imageview)
     
     [imageview addSubview:loadingView];
     
-    
-    
-    
-    
     NSString *imageFile = [[[NSString stringWithFormat:@"%@",urlString] componentsSeparatedByString:@"/"] lastObject];
-    
-    
-    
-    
     
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory,NSUserDomainMask, YES);
     
@@ -562,89 +502,55 @@ void downloadImageFromUrl(NSString* urlString, UIImageView * imageview)
     
     NSString *fileNameToSave = [documentsDirectory stringByAppendingPathComponent:imageFile];
     
-    
-    
     if ([[NSFileManager defaultManager] fileExistsAtPath:fileNameToSave]) {
         
-        
-        
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-            
-            
             
             NSData *data = [NSData dataWithContentsOfFile:fileNameToSave];
             
             UIImage *img = [UIImage imageWithData:data];
             
-            
-            
             dispatch_sync(dispatch_get_main_queue(), ^{
-                
-                
                 
                 if(img) {
                     
                     imageview.image=img;
                     
                     imageview.contentMode = UIViewContentModeScaleAspectFill;
-                    
-                    
                     
                     [activityView stopAnimating];
-                    
                 }
-                
             });
-            
-            
-            
-            
-            
         });
-        
-        
-        
     }
-    
     else {
         
-        NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:urlString]];
-        
-        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        if ([COMMON isInternetReachable]) {
+
+            NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:urlString]];
             
-            
-            
-            NSData *data = [NSURLConnection sendSynchronousRequest:request returningResponse:nil error:nil];
-            
-            UIImage *img = [UIImage imageWithData:data];
-            
-            
-            
-            dispatch_sync(dispatch_get_main_queue(), ^{
+            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
                 
-                if(img) {
-                    
-                    imageview.image=img;
-                    
-                    imageview.contentMode = UIViewContentModeScaleAspectFill;
-                    
-                    saveContentsToFile(data,imageFile);
-                    
-                }
+                NSData *data = [NSURLConnection sendSynchronousRequest:request returningResponse:nil error:nil];
                 
-                [activityView stopAnimating];
+                UIImage *img = [UIImage imageWithData:data];
                 
+                dispatch_sync(dispatch_get_main_queue(), ^{
+                    
+                    if(img) {
+                        
+                        imageview.image=img;
+                        
+                        imageview.contentMode = UIViewContentModeScaleAspectFill;
+                        
+                        saveContentsToFile(data,imageFile);
+                    }
+                    [activityView stopAnimating];
+                });
             });
-            
-            
-            
-        });
-        
+        }
     }
-    
 }
-
-
 
 
 void saveContentsToFile (id data, NSString* filename) {
@@ -660,8 +566,6 @@ void saveContentsToFile (id data, NSString* filename) {
         if (![[NSFileManager defaultManager] fileExistsAtPath:dirNameToSave])
             [[NSFileManager defaultManager] createDirectoryAtPath:dirNameToSave withIntermediateDirectories:YES attributes:nil error:nil];
         
-        
-        
         for (int i=1; i<[namesArray count]-1; i++) {
             
             dirNameToSave = [dirNameToSave stringByAppendingPathComponent:[namesArray objectAtIndex:i]];
@@ -671,7 +575,6 @@ void saveContentsToFile (id data, NSString* filename) {
                 [[NSFileManager defaultManager] createDirectoryAtPath:dirNameToSave withIntermediateDirectories:YES attributes:nil error:nil];
             
         }
-        
     }
     
     fileNameToSave = [documentsDirectory stringByAppendingPathComponent:filename];
