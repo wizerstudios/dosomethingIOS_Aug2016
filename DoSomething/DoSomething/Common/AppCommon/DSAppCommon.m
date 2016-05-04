@@ -132,25 +132,17 @@ DSAppCommon *sharedCommon = nil;
 }
 
 -(void)reachabilityNotReachableAlert{
+    
     [self removeLoading];
-   
     
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:[[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleName"] message:@"It appears that you have lost network connectivity. Please check your network settings!" delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil];
     
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:[[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleName"]
-                                                    message:@"It appears that you have lost network connectivity. Please check your network settings!"
-                                                   delegate:self
-                                          cancelButtonTitle:@"Ok"
-                                          otherButtonTitles:nil];
     [alert show];
-    
-    NSLog(@"Data Not Connected");
     
 }
 #pragma mark - Alert Function
 
 - (void) showErrorAlert:(NSString *)strMessage{
-    
-    
     
     UIAlertView *errorAlert = [[UIAlertView alloc] initWithTitle:[[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleName"]
                                                          message:strMessage
@@ -317,7 +309,6 @@ DSAppCommon *sharedCommon = nil;
 }
 
 
-
 - (void)DSLoadIcon:(UIView *)view
 {
     [self removeLoading];
@@ -471,6 +462,7 @@ DSAppCommon *sharedCommon = nil;
 //    }
 //    else
 //    {
+    if ([COMMON isInternetReachable]) {
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
             // May return nil if a tracker has not already been initialized with a
             // property ID.
@@ -488,7 +480,7 @@ DSAppCommon *sharedCommon = nil;
             // New SDK versions
             [tracker send:[[GAIDictionaryBuilder createScreenView] build]];
         });
-//    }
+    }
 }
 
 

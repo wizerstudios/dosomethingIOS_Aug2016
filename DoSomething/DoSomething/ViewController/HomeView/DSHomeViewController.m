@@ -127,16 +127,16 @@
     
     frontImageView = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, self.view.bounds.size.height)];
     
-    alphaView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, self.view.bounds.size.height)];
+//    alphaView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, self.view.bounds.size.height)];
     
     [self.view addSubview:frontImageView];
     
-    [self.view addSubview:alphaView];
+//    [self.view addSubview:alphaView];
     
     [frontImageView setAlpha:0.0f];
     
-    [alphaView setBackgroundColor:[UIColor whiteColor]];
-    alphaView.alpha = 0;
+//    [alphaView setBackgroundColor:[UIColor whiteColor]];
+//    alphaView.alpha = 0;
     
 }
 
@@ -182,12 +182,12 @@
         [frontImageView.layer addAnimation:transition forKey:nil];
         
         [UIView animateWithDuration:0.5f delay:0.f options:UIViewAnimationOptionCurveEaseIn animations:^{
-            [alphaView setAlpha:0.6f];
+//            [alphaView setAlpha:0.6f];
             [frontImageView setAlpha:0.6f];
             
         } completion:^(BOOL finished) {
             [UIView animateWithDuration:0.5f delay:0.f options:UIViewAnimationOptionCurveEaseInOut animations:^{
-                [alphaView setAlpha:0.0f];
+//                [alphaView setAlpha:0.0f];
                 [frontImageView setAlpha:0.0f];
             } completion:nil];
             
@@ -219,12 +219,12 @@
         [frontImageView.layer addAnimation:transition forKey:nil];
         
         [UIView animateWithDuration:0.5f delay:0.f options:UIViewAnimationOptionCurveEaseIn animations:^{
-            [alphaView setAlpha:0.6f];
+//            [alphaView setAlpha:0.6f];
             [frontImageView setAlpha:0.6f];
             
         } completion:^(BOOL finished) {
             [UIView animateWithDuration:0.5f delay:0.f options:UIViewAnimationOptionCurveEaseInOut animations:^{
-                [alphaView setAlpha:0.f];
+//                [alphaView setAlpha:0.f];
                 [frontImageView setAlpha:0.0f];
                 
             } completion:nil];

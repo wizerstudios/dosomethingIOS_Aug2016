@@ -111,25 +111,29 @@
     [COMMON getUserCurrenLocation];
     [self TabBarViews];
     
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
-        [Fabric with:@[[Crashlytics class]]];
-    });
-    
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
-        // Optional: automatically send uncaught exceptions to Google Analytics.
-        [GAI sharedInstance].trackUncaughtExceptions = YES;
+    if ([COMMON isInternetReachable]) {
         
-        // Optional: set Google Analytics dispatch interval to e.g. 20 seconds.
-        [GAI sharedInstance].dispatchInterval = 20;
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
+            [Fabric with:@[[Crashlytics class]]];
+        });
         
-        // Optional: set Logger to VERBOSE for debug information.
-        [[[GAI sharedInstance] logger] setLogLevel:kGAILogLevelVerbose];
-        
-        // Initialize tracker. Replace with your tracking ID.
-        [[GAI sharedInstance] trackerWithTrackingId:GOOGLEANALYTICS_ID];
-        
-        [COMMON TrackerWithName:@"Application Launch"];
-    });
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
+            // Optional: automatically send uncaught exceptions to Google Analytics.
+            [GAI sharedInstance].trackUncaughtExceptions = YES;
+            
+            // Optional: set Google Analytics dispatch interval to e.g. 20 seconds.
+            [GAI sharedInstance].dispatchInterval = 20;
+            
+            // Optional: set Logger to VERBOSE for debug information.
+            [[[GAI sharedInstance] logger] setLogLevel:kGAILogLevelVerbose];
+            
+            // Initialize tracker. Replace with your tracking ID.
+            [[GAI sharedInstance] trackerWithTrackingId:GOOGLEANALYTICS_ID];
+            
+            [COMMON TrackerWithName:@"Application Launch"];
+        });
+
+    }
     
     [[NSUserDefaults standardUserDefaults]removeObjectForKey:HobbiesArray];
     [[NSUserDefaults standardUserDefaults]removeObjectForKey:@"backAction"];
@@ -439,6 +443,7 @@
 
 - (void)applicationDidBecomeActive:(UIApplication *)application {
  
+    
    [UIApplication sharedApplication].applicationIconBadgeNumber = 0;
 
    [FBSDKAppEvents activateApp];
@@ -488,47 +493,48 @@
 }
 -(void)loadonlineStausAPI:(NSString *) status
 {
-    
-    if(![[COMMON getSessionID] isEqualToString:@"(null)"]){
-         webservice = [[DSWebservice alloc]init];
-        [webservice getOnlinstatus:OnlineStatus sessionID:[COMMON getSessionID] status:status success:^(AFHTTPRequestOperation *operation, id responseObject) {
-            NSLog(@"onlinestausresponseObject= %@",responseObject);
-        } failure:^(AFHTTPRequestOperation *operation, id error) {
-            NSLog(@"onlinestausresponseObjecterror= %@",error);
-        }];
+    if ([COMMON isInternetReachable]) {
+        
+        if(![[COMMON getSessionID] isEqualToString:@"(null)"]){
+            webservice = [[DSWebservice alloc]init];
+            [webservice getOnlinstatus:OnlineStatus sessionID:[COMMON getSessionID] status:status success:^(AFHTTPRequestOperation *operation, id responseObject) {
+                NSLog(@"onlinestausresponseObject= %@",responseObject);
+            } failure:^(AFHTTPRequestOperation *operation, id error) {
+                NSLog(@"onlinestausresponseObjecterror= %@",error);
+            }];
+        }
     }
 }
 -(void)loadConverstaionAPI:(NSString *)_conversationID{
     
-    
-    webservice = [[DSWebservice alloc]init];
-    
-    [webservice getConversation:GetConversation sessionID:[COMMON getSessionID] conversationId:_conversationID dateTime:[COMMON getCurrentDateTime]
-                        success:^(AFHTTPRequestOperation *operation, id responseObject){
-                            
-                            NSMutableDictionary *responseDict = [[NSMutableDictionary alloc]init];
-                            
-                            responseDict = [[responseObject valueForKey:@"getconversation"]mutableCopy];
-                            
-                            if([[responseDict valueForKey:@"status"]isEqualToString:@"success"]){
+    if ([COMMON isInternetReachable]) {
+        webservice = [[DSWebservice alloc]init];
+        
+        [webservice getConversation:GetConversation sessionID:[COMMON getSessionID] conversationId:_conversationID dateTime:[COMMON getCurrentDateTime]
+                            success:^(AFHTTPRequestOperation *operation, id responseObject){
                                 
-                                NSMutableDictionary *receiverDict = [[NSMutableDictionary alloc]init];
-                                receiverDict = [[responseDict valueForKey:@"receiver"]objectAtIndex:0];
-                                if (receiverDict != NULL && [receiverDict count] > 0) {
-                                    DSChatDetailViewController *ChatDetail =[[DSChatDetailViewController alloc]initWithNibName:nil bundle:nil];
-                                    ChatDetail.conversionID = _conversationID;
-                                    ChatDetail.chatuserDetailsDict = [receiverDict mutableCopy];
-                                   // [self.navigationController pushViewController:ChatDetail animated:YES];
+                                NSMutableDictionary *responseDict = [[NSMutableDictionary alloc]init];
+                                
+                                responseDict = [[responseObject valueForKey:@"getconversation"]mutableCopy];
+                                
+                                if([[responseDict valueForKey:@"status"]isEqualToString:@"success"]){
+                                    
+                                    NSMutableDictionary *receiverDict = [[NSMutableDictionary alloc]init];
+                                    receiverDict = [[responseDict valueForKey:@"receiver"]objectAtIndex:0];
+                                    if (receiverDict != NULL && [receiverDict count] > 0) {
+                                        DSChatDetailViewController *ChatDetail =[[DSChatDetailViewController alloc]initWithNibName:nil bundle:nil];
+                                        ChatDetail.conversionID = _conversationID;
+                                        ChatDetail.chatuserDetailsDict = [receiverDict mutableCopy];
+                                        // [self.navigationController pushViewController:ChatDetail animated:YES];
+                                    }
                                 }
                             }
-                        }
-     
-                        failure:^(AFHTTPRequestOperation *operation, id error) {
-                            [COMMON removeLoading];
-                            
-                        }];
-    
-    
+         
+                            failure:^(AFHTTPRequestOperation *operation, id error) {
+                                [COMMON removeLoading];
+                                
+                            }];
+    }
 }
 
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo fetchCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler {
@@ -586,10 +592,9 @@
              NSString *playSound = [sound stringByReplacingOccurrencesOfString:@".caf" withString:@""];
             
           //   NSURL *soundURL =[NSURL fileURLWithPath:[NSString stringWithFormat:@"%@/%@",[[NSBundle mainBundle] resourcePath],playSoundOnAlert]];
-            if(![playSound isEqualToString:@"Silence"])
+            if(![playSound isEqualToString:@"Silence"] || playSound != nil)
             {
-            NSString *playSoundOnAlert = [[NSBundle mainBundle] pathForResource:playSound
-                                                                  ofType:@"caf"];
+            NSString *playSoundOnAlert = [[NSBundle mainBundle] pathForResource:playSound ofType:@"caf"];
             NSURL *soundURL = [NSURL fileURLWithPath:playSoundOnAlert];
             
             AudioServicesCreateSystemSoundID((__bridge CFURLRef)soundURL, &_notificationSound);
@@ -631,35 +636,35 @@
 
 -(void)RequestSend:(NSString *)conversationID
 {
-    webservice = [[DSWebservice alloc]init];
-    
-    [webservice getConversation:GetConversation sessionID:[COMMON getSessionID] conversationId:conversationID dateTime:[COMMON getCurrentDateTime]
-                        success:^(AFHTTPRequestOperation *operation, id responseObject){
-                            
-                            NSMutableDictionary *responseDict = [[NSMutableDictionary alloc]init];
-                            
-                            responseDict = [[responseObject valueForKey:@"getconversation"]mutableCopy];
-                            
-                            if([[responseDict valueForKey:@"status"]isEqualToString:@"success"]){
+    if ([COMMON isInternetReachable]) {
+        webservice = [[DSWebservice alloc]init];
+        
+        [webservice getConversation:GetConversation sessionID:[COMMON getSessionID] conversationId:conversationID dateTime:[COMMON getCurrentDateTime]
+                            success:^(AFHTTPRequestOperation *operation, id responseObject){
                                 
-                                NSMutableArray *receiverDict = [[NSMutableArray alloc]init];
-                                receiverDict = [[responseDict valueForKey:@"receiver"]objectAtIndex:0];
-                                if (receiverDict != NULL && [receiverDict count] > 0) {
-                                    DSLocationViewController *locationview =[[DSLocationViewController alloc]initWithNibName:nil bundle:nil];
-                                    locationview.sendrequestConversationID=conversationID;
-                                    locationview.senduserDetail=[receiverDict mutableCopy];
+                                NSMutableDictionary *responseDict = [[NSMutableDictionary alloc]init];
+                                
+                                responseDict = [[responseObject valueForKey:@"getconversation"]mutableCopy];
+                                
+                                if([[responseDict valueForKey:@"status"]isEqualToString:@"success"]){
                                     
-                                    [self.navigationController pushViewController:locationview animated:NO];
+                                    NSMutableArray *receiverDict = [[NSMutableArray alloc]init];
+                                    receiverDict = [[responseDict valueForKey:@"receiver"]objectAtIndex:0];
+                                    if (receiverDict != NULL && [receiverDict count] > 0) {
+                                        DSLocationViewController *locationview =[[DSLocationViewController alloc]initWithNibName:nil bundle:nil];
+                                        locationview.sendrequestConversationID=conversationID;
+                                        locationview.senduserDetail=[receiverDict mutableCopy];
+                                        
+                                        [self.navigationController pushViewController:locationview animated:NO];
+                                    }
                                 }
                             }
-                        }
-     
-                        failure:^(AFHTTPRequestOperation *operation, id error) {
-                            [COMMON removeLoading];
-                            
-                        }];
-    
-
+         
+                            failure:^(AFHTTPRequestOperation *operation, id error) {
+                                [COMMON removeLoading];
+                                
+                            }];
+    }
 }
 - (void)application:(UIApplication *)application didChangeStatusBarFrame:(CGRect)oldStatusBarFrame
 {

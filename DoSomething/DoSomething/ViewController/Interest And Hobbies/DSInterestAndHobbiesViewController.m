@@ -45,7 +45,7 @@
     BOOL isDownloadactiveImg;
     UIButton * blueCirecleBtn;
 
-
+    UIView *loadingView;
 }
 @end
 
@@ -203,14 +203,10 @@
     
     if([COMMON isInternetReachable]){
         
-        [COMMON AddLoadIcon:self.view];
+        [self LoadIcon];
         
         [objWebservice getHobbies:GetHobbies_API sessionid:deviceUdid success:^(AFHTTPRequestOperation *operation, id responseObject)
-         
          {
-             
-             NSLog(@"response:%@",responseObject);
-             
              hobbiesArry=[[NSMutableArray alloc]init];
              
              sectionNameArray=[[NSMutableArray alloc]init];
@@ -229,10 +225,7 @@
              
              [[NSUserDefaults standardUserDefaults] synchronize];
              
-             
-             
              hobbiesArry=[objselectionname valueForKey:@"hobbieslist"];
-             NSLog(@"hobbiesArry = %@",hobbiesArry);
              
              for (int i = 0; i<[hobbiesArry count]; i++) {
                  
@@ -247,32 +240,20 @@
              [[NSUserDefaults standardUserDefaults] synchronize];
              interstAndHobbiesArray=[hobbiesArry mutableCopy];
              
-             [COMMON removeLoading];
+             [self removeLoading];
              
              [interestAndHobbiesCollectionView reloadData];
              
              [self localArray];
              
-             
-             
          } failure:^(AFHTTPRequestOperation *operation, id error) {
              
-             
-             NSLog(@"intersesthobbieseror=%@",error);
-             
-             
          }];
-
-        
-        
     }
     else{
         
         [COMMON showErrorAlert:@"Check Your Internet connection"];
-        
     }
-
-    
 }
 -(void)localArray
 {
@@ -312,7 +293,7 @@
     
     if([[NSUserDefaults standardUserDefaults] valueForKey:@"ListofinterestArray"]==nil){
         
-        [COMMON LoadIcon:self.view];
+        [self LoadIcon];
         isDownloadactiveImg=YES;
         [self loadHobbiesWebserviceMethod];
         
@@ -757,5 +738,28 @@
     }];
 }
 
+-(void)LoadIcon
+{
+    [self removeLoading];
+    //    [loadingView.layer setCornerRadius:20.0];
+    loadingView = [[UIView alloc] initWithFrame:CGRectMake((self.view.frame.size.width+37)/2, (self.view.frame.size.height)/2, 37, 37)];
+    [loadingView setBackgroundColor:[UIColor clearColor]];
+    //Enable maskstobound so that corner radius would work.
+    [loadingView.layer setMasksToBounds:YES];
+    //Set the corner radius
+    
+    UIActivityIndicatorView *activityView = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+    [activityView setFrame:CGRectMake(1, 1, 37, 37)];
+    [activityView setHidesWhenStopped:YES];
+    [activityView startAnimating];
+    [loadingView addSubview:activityView];
+    [self.view addSubview:loadingView];
+    [self.view bringSubviewToFront:loadingView];
+}
+
+-(void)removeLoading{
+    
+    [loadingView removeFromSuperview];
+}
 
 @end

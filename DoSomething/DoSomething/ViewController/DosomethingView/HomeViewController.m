@@ -69,6 +69,8 @@
     UIButton * blueCirecleImg3;
     UIButton * blueCirecleBtn;
     HomeCustomCell *cell;
+    UIView *loadingView;
+
 }
 @end
 
@@ -88,7 +90,7 @@
     
     [activatedView setHidden:YES];
     if([[NSUserDefaults standardUserDefaults] valueForKey:@"MenuListArray"]==nil){
-        [COMMON LoadIcon:self.view];
+        [self LoadIcon];
         [self loadhomeviewListWebservice];
     }
     else
@@ -181,7 +183,7 @@
                  
                  [[NSUserDefaults standardUserDefaults] setObject:menuArray forKey:@"MenuListArray"];
                  [[NSUserDefaults standardUserDefaults] synchronize];
-                 [COMMON removeLoading];
+                 [self removeLoading];
                  [self.homeCollectionView reloadData];
                  isInitialLoadingAPI = YES;
                  [self loadActivityAPI:getLast availableStr:@"" doSomethingId:@""];
@@ -603,12 +605,11 @@ minimumLineSpacingForSectionAtIndex:(NSInteger)section {
 
 -(void)loadLocationUpdateAPI{
     
-    NSString *deviceToken = [[NSUserDefaults standardUserDefaults]valueForKey:DeviceToken];
-    if(deviceToken == nil)
-        deviceToken = @"";
-    
-    
     if([COMMON isInternetReachable]){
+        
+        NSString *deviceToken = [[NSUserDefaults standardUserDefaults]valueForKey:DeviceToken];
+        if(deviceToken == nil)
+            deviceToken = @"";
         
         [objWebService locationUpdate:LocationUpdate_API sessionid:[COMMON getSessionID] latitude:currentLatitude longitude:currentLongitude
                           deviceToken:deviceToken pushType:push_type
@@ -1023,5 +1024,27 @@ minimumLineSpacingForSectionAtIndex:(NSInteger)section {
 }
 
 
+-(void)LoadIcon
+{
+    [self removeLoading];
+    //    [loadingView.layer setCornerRadius:20.0];
+    loadingView = [[UIView alloc] initWithFrame:CGRectMake((self.view.frame.size.width+37)/2, (self.view.frame.size.height)/2, 37, 37)];
+    [loadingView setBackgroundColor:[UIColor clearColor]];
+    //Enable maskstobound so that corner radius would work.
+    [loadingView.layer setMasksToBounds:YES];
+    //Set the corner radius
+    
+    UIActivityIndicatorView *activityView = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+    [activityView setFrame:CGRectMake(1, 1, 37, 37)];
+    [activityView setHidesWhenStopped:YES];
+    [activityView startAnimating];
+    [loadingView addSubview:activityView];
+    [self.view addSubview:loadingView];
+    [self.view bringSubviewToFront:loadingView];
+}
 
+-(void)removeLoading{
+    
+    [loadingView removeFromSuperview];
+}
 @end

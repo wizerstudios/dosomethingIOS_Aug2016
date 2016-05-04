@@ -181,12 +181,13 @@
     
     isLoadData=NO;
     
-    [self setInitialProfileArray];
+    if ([COMMON isInternetReachable]) {
+        [self setInitialProfileArray];
+    }
 }
 
 -(void)viewWillAppear:(BOOL)animated
 {
-    
     [super viewWillAppear:animated];
     
     [[NSNotificationCenter defaultCenter] addObserver:self
@@ -3597,7 +3598,6 @@
         UIImage *profileImageOne   = (imageDataOne == nil)   ? [UIImage imageNamed:@""] : imageOne;
         UIImage *profileImageTwo   = (imageDataTwo == nil)   ? @"" : imageTwo;
         UIImage *profileImageThree = (imageDataThree == nil) ? @"" : imageThree;
-        
         
         userProfileImageArray = [@[profileImageOne, profileImageTwo, profileImageThree] mutableCopy];
         isNewUser = NO;
