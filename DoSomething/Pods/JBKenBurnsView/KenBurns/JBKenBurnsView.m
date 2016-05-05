@@ -406,7 +406,6 @@ enum JBSourceMode {
         _currentImageIndex = _imagesArray.count-1;
     }
     
-    
     UIImage *image = self.currentImage;
     UIImage *imageText =self.currentText;
     
@@ -599,11 +598,11 @@ enum JBSourceMode {
     
     [self notifyDelegate];
     
-    // Restart or stop
-    if (_currentImageIndex == _imagesArray.count - 1) {
-        if (_shouldLoop) { _currentImageIndex = -1; }
-        else { [_nextImageTimer invalidate]; }
-    }
+//    // Restart or stop
+//    if (_currentImageIndex == _imagesArray.count - 1) {
+//        if (_shouldLoop) { _currentImageIndex = -1; }
+//        else { [_nextImageTimer invalidate]; }
+//    }
 }
 
 - (float)getResizeRatioFromImage:(UIImage *)image width:(float)frameWidth height:(float)frameHeight
