@@ -279,7 +279,13 @@ DSAppCommon *sharedCommon = nil;
         NSURL *imageURL = [[NSBundle mainBundle] URLForResource:@"DoSomething_loading" withExtension:@"gif"];;
         NSData *imageData = [NSData dataWithContentsOfURL:imageURL];
         
-        _gifImageView = [[SCGIFImageView alloc] initWithFrame:CGRectMake((view.frame.size.width-37)/2, (view.frame.size.height)/2,37,37)] ;
+        CGFloat screenWidth = [UIScreen mainScreen].bounds.size.width;
+        CGFloat screenHeight = [UIScreen mainScreen].bounds.size.height;
+        CGFloat XPos,YPos;
+        XPos = ((screenWidth/2)-20);
+        YPos = ((screenHeight/2)-20);
+        _gifImageView = [[SCGIFImageView alloc] initWithFrame:CGRectMake(XPos,YPos,40,40)];
+        
         [_gifImageView setData:imageData];
         [view addSubview:_gifImageView];
     }
@@ -298,18 +304,12 @@ DSAppCommon *sharedCommon = nil;
         NSURL *imageURL = [[NSBundle mainBundle] URLForResource:@"DoSomething_loading" withExtension:@"gif"];;
         NSData *imageData = [NSData dataWithContentsOfURL:imageURL];
         
-        if (IS_IPHONE4) {
-            _gifImageView = [[SCGIFImageView alloc] initWithFrame:CGRectMake((view.frame.size.width-37)/2, (view.frame.size.height-50)/2,37,37)] ;
-        }
-        else if (IS_IPHONE5) {
-            _gifImageView = [[SCGIFImageView alloc] initWithFrame:CGRectMake((view.frame.size.width-37)/2, (view.frame.size.height-37)/2,37,37)] ;
-        }
-        else if (IS_IPHONE6) {
-            _gifImageView = [[SCGIFImageView alloc] initWithFrame:CGRectMake((view.frame.size.width)/2, (view.frame.size.height)/2,37,37)] ;
-        }
-        else if (IS_IPHONE6_Plus) {
-            _gifImageView = [[SCGIFImageView alloc] initWithFrame:CGRectMake((view.frame.size.width+37)/2, (view.frame.size.height+37)/2,37,37)] ;
-        }
+        CGFloat screenWidth = [UIScreen mainScreen].bounds.size.width;
+        CGFloat screenHeight = [UIScreen mainScreen].bounds.size.height;
+        CGFloat XPos,YPos;
+        XPos = ((screenWidth/2)-20);
+        YPos = ((screenHeight/2)-20);
+        _gifImageView = [[SCGIFImageView alloc] initWithFrame:CGRectMake(XPos,YPos,40,40)];
         [_gifImageView setData:imageData];
         
         [view addSubview:_gifImageView];
