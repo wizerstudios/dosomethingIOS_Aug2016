@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "JBKenBurnsView.h"
+#import "PWParallaxScrollView.h"
 
 @protocol HelpViewDelegate <NSObject>
 -(IBAction)cancelBtnAction:(id)sender;
@@ -17,14 +18,14 @@
     NSMutableArray *bannerImageArr;
     IBOutlet UIButton *scrollpauseBtn;
 }
-@property (strong, nonatomic) IBOutlet UIScrollView *scrollViewImage;
+
 @property (strong, nonatomic) IBOutlet UIButton *signInBtn;
 @property (strong, nonatomic) IBOutlet UIButton *createAnAccBtn;
 @property (strong, nonatomic) IBOutlet UIPageControl *infoPageControl;
 @property(nonatomic,retain)id<HelpViewDelegate> delegate;
 @property (nonatomic,retain) NSLayoutConstraint *pagerConstraint;
 //@property (nonatomic) CGFloat scrollPointsPerSecond;
-@property (strong, nonatomic) IBOutlet JBKenBurnsView *kenView;
+
 @property  IBOutlet NSLayoutConstraint *viewHeightConstraint;
 @property (nonatomic,strong) IBOutlet UIView * walkAlterview;
 

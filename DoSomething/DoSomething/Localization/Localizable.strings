@@ -1,0 +1,29 @@
+/* 
+  Localizable.strings
+  DoSomething
+
+  Created by OCS iOS Developer on 31/05/16.
+  Copyright © 2016 OClock Apps. All rights reserved.
+*/
+
+//HOME VIEW
+
+"title1"     ="\n\nD O S O M E T H I N G";
+"title2"     ="Shared Moments";
+"title3"     ="Active Lifestyle";
+"title4"     ="New Interactions";
+"title5"     ="Unexcepted Experiences";
+
+"subTitle1"     ="";
+"subTitle2"     ="Do Something that connects\nyou with people";
+"subTitle3"     ="Do Something that stimulates\nyour mind and body";
+"subTitle4"     ="Do Something that broadens\nsocial network";
+"subTitle5"     ="Do Something that frees you from\nyour comfort zone";
+
+
+
+"text1"     ="DO SOMETHING";
+"text2"     ="Shared Moments\nDo Something that connects\nyou with people";
+"text3"     ="Actvie Lifestyle\nDo Something that stimulates\nyour mind and body";
+"text4"     ="New Interactions\nDo Something that broadens\nsocial network";
+"text5"     ="Unexcepted Experiences\nDo Something that frees you from\nyour comfort zone";

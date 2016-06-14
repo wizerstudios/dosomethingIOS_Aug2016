@@ -50,5 +50,6 @@
 
 @property (nonatomic,strong) IBOutlet UIView * walkAlterview;
 @property (nonatomic,strong) IBOutlet UIButton* blueCircleBtn;
+@property (assign, nonatomic) BOOL  isSendRequestClicked;
 
 @end

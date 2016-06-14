@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10116" systemVersion="15C50" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10117" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
@@ -26,10 +26,12 @@
                 <outlet property="chatscrollviewBottom" destination="axR-ZJ-ySz" id="WM5-43-CQm"/>
                 <outlet property="chattableheight" destination="HpC-X7-WXp" id="6xN-1e-G0w"/>
                 <outlet property="chatviewbottom" destination="4QE-ih-MRe" id="Qaj-rn-7U4"/>
+                <outlet property="matchUnMatchButton" destination="oN8-4b-sIL" id="t1a-Re-OYs"/>
                 <outlet property="menuImageyOrigin" destination="hGl-T5-KT4" id="x6p-DG-hfC"/>
                 <outlet property="topview" destination="Vyo-Sj-gzT" id="ek0-k7-Mz6"/>
                 <outlet property="topviewYposition" destination="qWI-8w-a4W" id="FWd-GD-RwO"/>
                 <outlet property="transparentView" destination="vGn-Bt-vGu" id="NiA-3f-b4p"/>
+                <outlet property="unMatchBtn" destination="GHE-0z-1mU" id="RNA-lF-gz8"/>
                 <outlet property="view" destination="o0E-7A-6vB" id="yT4-ay-ktK"/>
             </connections>
         </placeholder>
@@ -182,7 +184,7 @@
                                         <constraint firstAttribute="height" constant="60" id="W4e-9a-EdR"/>
                                     </constraints>
                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
-                                    <state key="normal" title="Block">
+                                    <state key="normal">
                                         <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                     </state>

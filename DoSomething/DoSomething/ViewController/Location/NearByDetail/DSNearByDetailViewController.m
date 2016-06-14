@@ -47,6 +47,7 @@
     UIWindow *windowInfo;
     UIButton * profilebutton1,* profilebutton2,* profilebutton3;
     NSString *profileImageString;
+    NSMutableArray *matchedUserArray;
     
 
 }
@@ -458,6 +459,17 @@
             [NearbyCustomcell.letsDoSomethingButton setTitle:@"   Let's Do \n Something" forState:UIControlStateNormal];
         }
         
+        NSString* checkMatchUser = [userDetailsArray valueForKey:@"matched"];
+        
+        if(![checkMatchUser isEqualToString:@"No"]){
+            [NearbyCustomcell.letsDoSomethingButton setBackgroundColor:[UIColor colorWithRed:228.0f/255.0f
+                                                                                       green:64.0f/255.0f
+                                                                                        blue:81.0f/255.0f
+                                                                                       alpha:1.0f]];
+            [NearbyCustomcell.letsDoSomethingButton setTitle:@"Matched" forState:UIControlStateNormal];
+        }
+
+        
         imageSize =39;
         yAxis = 31;
       //  commonWidth=19.5;
@@ -720,27 +732,26 @@
         [self.tableView endUpdates];
         
     }
-    else if([requestStr isEqualToString:@"Yes"])
-    {
-        
-        UIButton *buttonSender = (UIButton *)sender;
-        NearbyCustomcell.letsDoSomethingButton = buttonSender;
-        [NearbyCustomcell.letsDoSomethingButton setBackgroundColor:[UIColor colorWithRed:228.0f/255.0f
-                                                                                   green:64.0f/255.0f
-                                                                                    blue:81.0f/255.0f
-                                                                                   alpha:1.0f]];
-        [NearbyCustomcell.letsDoSomethingButton setTitle:@"   Let's Do \n Something" forState:UIControlStateNormal];
-        requestUserID = [userDetailsArray valueForKey:@"user_id"];
-
-        [self loadRequestSendWebService];
-        requestStr=@"No";
-        [self.tableView beginUpdates];
-        [self.tableView reloadRowsAtIndexPaths:@[NearbyCustomcell] withRowAnimation:UITableViewRowAnimationNone];
-        [self.tableView endUpdates];
-        
-        
-
-    }
+//    else if([requestStr isEqualToString:@"Yes"])
+//    {
+//        
+//        UIButton *buttonSender = (UIButton *)sender;
+//        NearbyCustomcell.letsDoSomethingButton = buttonSender;
+//        [NearbyCustomcell.letsDoSomethingButton setBackgroundColor:[UIColor colorWithRed:228.0f/255.0f
+//                                                                                   green:64.0f/255.0f
+//                                                                                    blue:81.0f/255.0f
+//                                                                                   alpha:1.0f]];
+//        [NearbyCustomcell.letsDoSomethingButton setTitle:@"   Let's Do \n Something" forState:UIControlStateNormal];
+//        requestUserID = [userDetailsArray valueForKey:@"user_id"];
+//
+//        [self loadRequestSendWebService];
+//        requestStr=@"No";
+//        [self.tableView beginUpdates];
+//        [self.tableView reloadRowsAtIndexPaths:@[NearbyCustomcell] withRowAnimation:UITableViewRowAnimationNone];
+//        [self.tableView endUpdates];
+//      
+//    }
+    
     
 }
 
@@ -752,6 +763,18 @@
               request_send_user_id:requestUserID
                            success:^(AFHTTPRequestOperation *operation, id responseObject) {
                                NSLog(@"SEND REQ%@",responseObject);
+                               
+                               if([[[responseObject valueForKey:@"sendrequest"]valueForKey:@"status"] isEqualToString:@"success"])
+                               {
+                                   matchedUserArray = [[NSMutableArray alloc]init];
+                                   matchedUserArray =[[[responseObject valueForKey:@"sendrequest"]valueForKey:@"Conversaion"]mutableCopy];
+                                   if(![matchedUserArray isEqual:@"0"]){
+                                       [self loadNearByPageMatchUser:matchedUserArray];
+                                   }
+                                   
+                               }
+                               
+                               
                               
                            } failure:^(AFHTTPRequestOperation *operation, id error) {
                                NSLog(@"SEND REQ ERR%@",error);
@@ -761,6 +784,17 @@
         
         [COMMON showErrorAlert:@"Check Your Internet connection"];
         
+    }
+
+}
+#pragma mark - loadNearByPageMatchUser
+-(void)loadNearByPageMatchUser:(NSMutableArray *)userArray{
+    if ([userArray count]!=0) {
+        DSLocationViewController *locationview =[[DSLocationViewController alloc]initWithNibName:nil bundle:nil];
+        NSString*conversationID = [userArray valueForKey:@"id"];
+        locationview.sendrequestConversationID=conversationID;
+        locationview.senduserDetail=[userArray mutableCopy];
+        [self.navigationController pushViewController:locationview animated:NO];
     }
 
 }

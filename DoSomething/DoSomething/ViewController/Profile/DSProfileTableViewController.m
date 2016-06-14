@@ -23,7 +23,7 @@
 
 #define Red_Color   [UIColor colorWithRed:227.0f/255.0f green:64.0f/255.0f blue:81.0f/255.0f alpha:1.0f]
 
-@interface DSProfileTableViewController ()<CLLocationManagerDelegate,UIAlertViewDelegate,UIScrollViewDelegate>
+@interface DSProfileTableViewController ()<CLLocationManagerDelegate,UIAlertViewDelegate,UIScrollViewDelegate >
 {
     DSWebservice            * objWebService;
     CLLocationManager       *locationManager;
@@ -144,6 +144,7 @@
 @implementation DSProfileTableViewController
 @synthesize  profileData1,textviewText, placeHolderArray,FBprofileID;
 @synthesize userDetailsDict,emailAddressToRegister,emailPasswordToRegister,selectEmail,currentPassword,confirmPassword,profileScrollView;
+@synthesize isFromLoginView,isFromInterestView;
 
 - (void)viewDidLoad {
     
@@ -190,11 +191,12 @@
 {
     [super viewWillAppear:animated];
     
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(loadInvalidSessionAlert:)
-                                                 name:@"InvalidSession"
-                                               object:nil];
-    
+    if(isFromLoginView!=YES){
+        [[NSNotificationCenter defaultCenter] addObserver:self
+                                                 selector:@selector(loadInvalidSessionAlert:)
+                                                     name:@"InvalidSession"
+                                                   object:nil];
+    }
     imageNormalArray =[[NSMutableArray alloc]init];
     
     hobbiesMainArray = [[NSMutableArray alloc]init];
@@ -247,27 +249,20 @@
         
     }
     [self selectitemMethod];
-    
     [_tableviewProfile reloadData];
-    
     [self loadNavigation];
-    
+   
     
     if(profileDict==NULL)
     {
         [customNavigation.saveBtn setTitle:@"Create" forState:UIControlStateNormal];
     }
-    
-    
-    
-    
-    
 }
 
 -(void)viewDidAppear:(BOOL)animated{
     
     [super viewDidAppear:animated];
-    
+    [_tableviewProfile reloadData];
     [self CustomAlterview];
     [self CustomSoundview];
 }
@@ -330,8 +325,6 @@
     //     [self getUserCurrenLocation];
     NSString * strsessionID =[profileDict valueForKey:@"SessionId"];
     loginUserSessionID = strsessionID;
-    
-    
     
     
     if(profileDict != NULL)
@@ -414,7 +407,7 @@
     
     hobbiesNameArray = [hobbiesMainArray valueForKey:@"name"];
     
-    [_tableviewProfile reloadData];
+    //[_tableviewProfile reloadData];
     
 }
 
@@ -706,89 +699,6 @@
     return emailPassword;
 }
 
-#pragma mark get user CurrentLocation
-
-- (void)getUserCurrenLocation{
-    
-    if(!locationManager){
-        
-        locationManager.distanceFilter  = kCLLocationAccuracyKilometer;
-        locationManager.desiredAccuracy = kCLLocationAccuracyBest;
-        locationManager.activityType    = CLActivityTypeAutomotiveNavigation;
-    }
-    if ([locationManager respondsToSelector:@selector(requestAlwaysAuthorization)])
-        [locationManager requestAlwaysAuthorization];
-    
-    if ([locationManager respondsToSelector:@selector(requestWhenInUseAuthorization)])
-        [locationManager requestWhenInUseAuthorization];
-    
-    [locationManager startUpdatingLocation];
-}
-
-
--(void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations {
-    
-    
-    CLLocation *newLocation = [locations lastObject];
-    
-    currentLatitude         = [NSString stringWithFormat:@"%@",[NSNumber numberWithDouble:newLocation.coordinate.latitude]];
-    
-    currentLongitude        = [NSString stringWithFormat:@"%@",[NSNumber numberWithDouble:newLocation.coordinate.longitude]];
-    
-    [locationManager stopUpdatingLocation];
-    
-    NSString *savedLatitude =  [[NSUserDefaults standardUserDefaults]valueForKey:CurrentLatitude];
-    NSString *savedLongitude = [[NSUserDefaults standardUserDefaults]valueForKey:CurrentLongitude];
-    
-    NSLog(@"current latitude & longitude for main view = %@ & %@",currentLatitude,currentLongitude);
-    NSLog(@"savedLatitude & saved Longitude = %@ & %@",savedLatitude,savedLongitude);
-    
-    if([COMMON isInternetReachable]) {
-        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-            
-            if((![currentLatitude isEqualToString:savedLatitude] || ![currentLongitude isEqualToString:savedLongitude]) && (currentLongitude !=nil || currentLatitude != nil))
-                [self loadLocationUpdateAPI];
-            
-            dispatch_async(dispatch_get_main_queue(), ^(){
-                
-            });
-            
-        });
-    }
-}
-
-- (void)locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error
-{
-    
-    NSLog(@"Cannot find the location for main view.");
-}
-
--(void)loadLocationUpdateAPI{
-    
-    NSString *deviceToken = [[NSUserDefaults standardUserDefaults]valueForKey:DeviceToken];
-    if(deviceToken == nil)
-        deviceToken = @"";
-    if(profileDict != NULL)
-    {
-        [objWebService locationUpdate:LocationUpdate_API
-                            sessionid:[COMMON getSessionID]
-                             latitude:currentLatitude
-                            longitude:currentLongitude
-                          deviceToken:deviceToken
-                             pushType:push_type
-                              success:^(AFHTTPRequestOperation *operation, id responseObject){
-                                  NSLog(@"responseObject = %@",responseObject);
-                                  [[NSUserDefaults standardUserDefaults] setObject:currentLatitude  forKey:CurrentLatitude];
-                                  [[NSUserDefaults standardUserDefaults] setObject:currentLongitude forKey:CurrentLongitude];
-                                  [[NSUserDefaults standardUserDefaults] synchronize];
-                                  
-                              }
-                              failure:^(AFHTTPRequestOperation *operation, id error) {
-                                  
-                              }];
-    }
-    
-}
 
 -(void)loadDatePicker:(NSInteger)_tag{
     
@@ -799,21 +709,20 @@
     [datePicker setDatePickerMode:UIDatePickerModeDate];
     NSCalendar *calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
     NSDate *currentDate = [NSDate date];
-    NSDateComponents *components = [calendar components:(NSCalendarUnitYear | NSCalendarUnitMonth | NSCalendarUnitDay) fromDate:[NSDate date]];
+   // NSDateComponents *components = [calendar components:(NSCalendarUnitYear | NSCalendarUnitMonth | NSCalendarUnitDay) fromDate:[NSDate date]];
     NSDateComponents *comps = [[NSDateComponents alloc] init];
-    NSInteger year = components.year;
-    NSInteger month = components.month;
-    NSInteger day = components.day;
-    NSInteger minimumYear = year - 1915;//Given some year here for example
-    NSInteger minimumMonth = month - 1;
-    NSInteger minimumDay = day - 1;
-    [comps setYear:-minimumYear];
-    [comps setMonth:-minimumMonth];
-    [comps setDay:-minimumDay];
-    NSDate *minDate = [calendar dateByAddingComponents:comps toDate:currentDate options:0];
+
+    [comps setYear:-18];
+    NSDate *maxDate = [calendar dateByAddingComponents:comps toDate:currentDate options:0];
+    [comps setYear: -100];
+    NSDate * minDate = [calendar dateByAddingComponents: comps toDate: currentDate options: 0];
     
     [datePicker setMinimumDate:minDate];
-    [datePicker setMaximumDate:[NSDate date]];
+    [datePicker setMaximumDate:maxDate];
+
+    NSLog(@"minDate   %@", minDate);
+    NSLog(@"[NSDate date]   %@", [NSDate date]);
+    NSLog(@"maxDate%@", maxDate);
     
     datePicker.backgroundColor = [UIColor whiteColor];
     
@@ -1585,7 +1494,7 @@
             else {
                 cell.textFieldDPPlaceHolder.enabled = NO;
             }
-
+            
             NSString *datestr= [self changefbDateFormat:tempdatestring];
             
             if(datestr!=nil ){
@@ -1641,6 +1550,7 @@
         }
         
         cell.textViewAboutYou.delegate = self;
+        cell.textViewAboutYou.scrollEnabled=YES;
         if(profileDict !=NULL){
             
             
@@ -1818,7 +1728,7 @@
         else
         {
             
-          [profileScrollView setContentSize:CGSizeMake(0, self.tableviewProfile.frame.origin.y + self.tableviewProfile.contentSize.height+self.tableViewHeightConstraint.constant-(self.profiletableheight.constant+55))];
+            [profileScrollView setContentSize:CGSizeMake(0, self.tableviewProfile.frame.origin.y + self.tableviewProfile.contentSize.height+self.tableViewHeightConstraint.constant-(self.profiletableheight.constant+55))];
             
         }
     }
@@ -2398,7 +2308,7 @@
 
 -(void)textViewDidEndEditing:(UITextView *)textView
 {
-    cell.textViewAboutYou.scrollEnabled=NO;
+    // cell.textViewAboutYou.scrollEnabled=NO;
     CGPoint position = [textView convertPoint:CGPointZero toView: _tableviewProfile ];
     NSIndexPath *indexPath = [_tableviewProfile indexPathForRowAtPoint: position];
     
@@ -2410,44 +2320,48 @@
     }
     
     strAbout = textView.text;
-     dataSize = [COMMON getControlHeight:strAbout withFontName:@"Patron-Regular" ofSize:14.0 withSize:CGSizeMake(textView.frame.size.width-20,textView.frame.size.height)];
+    dataSize = [COMMON getControlHeight:strAbout withFontName:@"Patron-Regular" ofSize:14.0 withSize:CGSizeMake(textView.frame.size.width-20,textView.frame.size.height)];
     
     
     [self.tableviewProfile scrollToRowAtIndexPath:[self.tableviewProfile indexPathForCell:cell] atScrollPosition:UITableViewScrollPositionBottom animated:NO];
     
-   
+    
     if(IS_IPHONE6 || IS_IPHONE6_Plus)
     {
         if(dataSize.height > 65)
         {
-            [self.tableviewProfile beginUpdates];
-            NSArray *indexPaths = [[NSArray alloc] initWithObjects:indexPath, nil];
-            [self.tableviewProfile reloadRowsAtIndexPaths:indexPaths withRowAnimation:UITableViewRowAnimationNone];
-           [self performSelector:@selector(settableviewheight) withObject:nil afterDelay:0.2];
-             [self.tableviewProfile endUpdates];
+//            [self.tableviewProfile beginUpdates];
+//            NSArray *indexPaths = [[NSArray alloc] initWithObjects:indexPath, nil];
+//            [self.tableviewProfile reloadRowsAtIndexPaths:indexPaths withRowAnimation:UITableViewRowAnimationNone];
+//            [self performSelector:@selector(settableviewheight) withObject:nil afterDelay:0.2];
+//            [self.tableviewProfile endUpdates];
+//            [_tableviewProfile reloadData];
         }
     }
     else
     {
-        
-       
         if(dataSize.height > 50)
         {
-            [self.tableviewProfile beginUpdates];
-            NSArray *indexPaths = [[NSArray alloc] initWithObjects:indexPath, nil];
-            [self.tableviewProfile reloadRowsAtIndexPaths:indexPaths withRowAnimation:UITableViewRowAnimationNone];
-            [self performSelector:@selector(settableviewheight) withObject:nil afterDelay:0.2];
-
-            [self.tableviewProfile endUpdates];
-
+//            [self.tableviewProfile beginUpdates];
+//            NSArray *indexPaths = [[NSArray alloc] initWithObjects:indexPath, nil];
+//            [self.tableviewProfile reloadRowsAtIndexPaths:indexPaths withRowAnimation:UITableViewRowAnimationNone];
+//            [self performSelector:@selector(settableviewheight) withObject:nil afterDelay:0.2];
+//            [self.tableviewProfile endUpdates];
+//            [_tableviewProfile reloadData];
             
         }
         
     }
+    [self.tableviewProfile beginUpdates];
+    NSArray *indexPaths = [[NSArray alloc] initWithObjects:indexPath, nil];
+    [self.tableviewProfile reloadRowsAtIndexPaths:indexPaths withRowAnimation:UITableViewRowAnimationNone];
+    [self performSelector:@selector(settableviewheight) withObject:nil afterDelay:0.2];
+    [self.tableviewProfile endUpdates];
+    [_tableviewProfile reloadData];
     
-    
-    
-    
+    //[_tableviewProfile reloadData];
+}
+-(void)loadTableViewEndEditing{
     
 }
 - (void) textViewDidChange:(UITextView *)textView
@@ -2492,7 +2406,7 @@
     }
     //NSString * currentimgField=[NSString stringWithFormat:@"image%ld",(long)CurrentImage];
     //
-   // NSString * selectimg=[profileDict valueForKey:currentimgField];
+    // NSString * selectimg=[profileDict valueForKey:currentimgField];
     
     [COMMON TrackerWithName:@"User Profile"];
     
@@ -2964,9 +2878,9 @@
                            password:(currentPassword==nil)?emailPasswordToRegister:currentPassword
                           profileId:strProfileID
                                 dob:dobStr
-                      profileImage1:[userProfileImageArray objectAtIndex:0]
-                      profileImage2:[userProfileImageArray objectAtIndex:1]
-                      profileImage3:[userProfileImageArray objectAtIndex:2]
+                      profileImage1:(UIImage *)[userProfileImageArray objectAtIndex:0]
+                      profileImage2:(UIImage *)[userProfileImageArray objectAtIndex:1]
+                      profileImage3:(UIImage *)[userProfileImageArray objectAtIndex:2]
                    IntersertHobbies:strInterestHobbies
                               About:strAbout
                              gender:strGender
@@ -3015,9 +2929,9 @@
                            last_name:LastName
                                  dob:dateChange
                             password:(currentPassword==nil)?emailPasswordToRegister:currentPassword
-                       profileImage1:[userProfileImageArray objectAtIndex:0]
-                       profileImage2:[userProfileImageArray objectAtIndex:1]
-                       profileImage3:[userProfileImageArray objectAtIndex:2]
+                       profileImage1:(UIImage *)[userProfileImageArray objectAtIndex:0]
+                       profileImage2:(UIImage *)[userProfileImageArray objectAtIndex:1]
+                       profileImage3:(UIImage *)[userProfileImageArray objectAtIndex:2]
                               gender:strGender
                                about:strAbout
                              hobbies:strInterestHobbies
@@ -3068,7 +2982,7 @@
 #pragma mark - loadUpdateNotification
 -(void)loadUpdate{
     
-     [COMMON DSLoadIcon:self.view];
+    [COMMON DSLoadIcon:self.view];
     
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(loadUpdateView:)
@@ -3310,7 +3224,7 @@
                     
                     [COMMON DSRemoveLoading];
                     [self updateAPI];
-                     [self loadUpdate];
+                    [self loadUpdate];
                     
                 }
             }
@@ -3338,7 +3252,7 @@
                 
                 [COMMON DSRemoveLoading];
                 [self updateAPI];
-                 [self loadUpdate];
+                [self loadUpdate];
             }
             
         }
@@ -3355,7 +3269,7 @@
             {
                 [COMMON DSRemoveLoading];
                 [self updateAPI];
-                 [self loadUpdate];
+                [self loadUpdate];
             }
         }
         
@@ -3363,7 +3277,7 @@
         {
             [COMMON DSRemoveLoading];
             [self updateAPI];
-             [self loadUpdate];
+            [self loadUpdate];
         }
     }
     
@@ -3571,7 +3485,7 @@
         NSData *imageData = [NSData dataWithContentsOfURL:imageURL];
         UIImage *fbImage = [UIImage imageWithData:imageData];
         
-        UIImage *fbProfile = (imageData == nil) ? defaultProfile : fbImage;
+        id fbProfile = (imageData == nil) ? defaultProfile : fbImage;
         
         userProfileImageArray = [@[fbProfile, @"", @""] mutableCopy];
         isNewUser = NO;
@@ -3588,13 +3502,14 @@
         NSData *imageDataThree = [NSData dataWithContentsOfURL:imageURLThree];
         
         
-        UIImage *imageOne   = [UIImage imageWithData:imageDataOne];
-        UIImage *imageTwo   = [UIImage imageWithData:imageDataTwo];
-        UIImage *imageThree = [UIImage imageWithData:imageDataThree];
+        id imageOne   = [UIImage imageWithData:imageDataOne];
+        id imageTwo   = [UIImage imageWithData:imageDataTwo];
+        id imageThree = [UIImage imageWithData:imageDataThree];
         
-        UIImage *profileImageOne   = (imageDataOne == nil)   ? [UIImage imageNamed:@""] : imageOne;
+        UIImage *profileImageOne   = (imageDataOne == nil)   ? defaultProfile : imageOne;
         UIImage *profileImageTwo   = (imageDataTwo == nil)   ? @"" : imageTwo;
         UIImage *profileImageThree = (imageDataThree == nil) ? @"" : imageThree;
+        
         
         userProfileImageArray = [@[profileImageOne, profileImageTwo, profileImageThree] mutableCopy];
         isNewUser = NO;

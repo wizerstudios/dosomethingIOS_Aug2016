@@ -76,6 +76,7 @@
 
 @implementation HomeViewController
 @synthesize locationManager;
+@synthesize isFromLoginView;
 
 - (void)viewDidLoad
 {
@@ -119,13 +120,14 @@
     [super viewWillAppear:animated];
     [self getUserCurrenLocation];
     
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(loadInvalidSessionAlert:)
-                                                 name:@"InvalidSession"
-                                               object:nil];
+        
+    if(isFromLoginView!=YES){
+        [[NSNotificationCenter defaultCenter] addObserver:self
+                                                 selector:@selector(loadInvalidSessionAlert:)
+                                                     name:@"InvalidSession"
+                                                   object:nil];
+    }
     
-    
-
     appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
     appDelegate.buttonsView.hidden=NO;
     appDelegate.SepratorLbl.hidden=NO;
@@ -135,6 +137,9 @@
     [self audioplayMethod];
     
 
+}
+-(void)invalidPerformSelector{
+    
 }
 
 -(void)viewDidAppear:(BOOL)animated{
@@ -311,7 +316,9 @@
     currentLatitude         = [NSString stringWithFormat:@"%@",[NSNumber numberWithDouble:newLocation.coordinate.latitude]];
     
     currentLongitude        = [NSString stringWithFormat:@"%@",[NSNumber numberWithDouble:newLocation.coordinate.longitude]];
-    
+    [[NSUserDefaults standardUserDefaults] setObject:currentLatitude  forKey:CurrentLatitude];
+    [[NSUserDefaults standardUserDefaults] setObject:currentLongitude forKey:CurrentLongitude];
+    [[NSUserDefaults standardUserDefaults] synchronize];
         // Turn off the location manager to save power.
     [locationManager stopUpdatingLocation];
     
@@ -609,14 +616,15 @@ minimumLineSpacingForSectionAtIndex:(NSInteger)section {
 
     if([COMMON isInternetReachable]){
         
-        [objWebService locationUpdate:LocationUpdate_API sessionid:[COMMON getSessionID] latitude:currentLatitude longitude:currentLongitude
+        [objWebService locationUpdate:LocationUpdate_API
+                            sessionid:[COMMON getSessionID]
+                             latitude:[COMMON getLatitude]//currentLatitude
+                            longitude:[COMMON getLongitude]//currentLongitude
                           deviceToken:deviceToken pushType:push_type
                               success:^(AFHTTPRequestOperation *operation, id responseObject){
                                   NSLog(@"responseObject = %@",responseObject);
                                   if([[responseObject valueForKey:@"status"]isEqualToString:@"success"]){
-                                      [[NSUserDefaults standardUserDefaults] setObject:currentLatitude  forKey:CurrentLatitude];
-                                      [[NSUserDefaults standardUserDefaults] setObject:currentLongitude forKey:CurrentLongitude];
-                                      [[NSUserDefaults standardUserDefaults] synchronize];
+                                    //  [self setLocationDefaults];
                                   }
                               }
                               failure:^(AFHTTPRequestOperation *operation, id error) {
@@ -633,7 +641,13 @@ minimumLineSpacingForSectionAtIndex:(NSInteger)section {
         
     }
 }
-
+-(void)setLocationDefaults{
+    
+    [[NSUserDefaults standardUserDefaults] setObject:currentLatitude  forKey:CurrentLatitude];
+    [[NSUserDefaults standardUserDefaults] setObject:currentLongitude forKey:CurrentLongitude];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+    
+}
 -(void)loadActivityAPI:(NSString *)_activityNameStr availableStr:(NSString *)_availableStr doSomethingId:(NSString *)_dosomethingId{
     
     if([COMMON isInternetReachable]){
@@ -853,6 +867,12 @@ minimumLineSpacingForSectionAtIndex:(NSInteger)section {
 }
 -(void)loadInvalidSessionAlert:(NSNotification *)notification
 {
+    NSLog(@"notification-->%@",notification);
+    NSDictionary *profile = [notification userInfo];
+    
+    NSLog(@"profile = %@",profile);
+    
+   
     self.WalkAlterview.hidden=YES;
     self.window.hidden=YES;
     

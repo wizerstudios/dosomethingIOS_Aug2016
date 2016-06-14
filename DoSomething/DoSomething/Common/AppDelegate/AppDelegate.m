@@ -437,6 +437,7 @@
 //        [self loadonlineStausAPI:@"1"];
 //        [self startTimer];
 //    });
+    [COMMON getUserCurrenLocation];
     
    }
 
@@ -538,7 +539,7 @@
 }
 
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo fetchCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler {
-    
+   
     if(application.applicationState == UIApplicationStateInactive) {
         
         NSLog(@"Inactive");

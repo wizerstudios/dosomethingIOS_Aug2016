@@ -82,6 +82,9 @@
 		2BD72B161BFCC5D4003846E9 /* UIRefreshControl+AFNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BD72B0D1BFCC5D4003846E9 /* UIRefreshControl+AFNetworking.m */; };
 		2BD72B171BFCC5D4003846E9 /* UIWebView+AFNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BD72B0F1BFCC5D4003846E9 /* UIWebView+AFNetworking.m */; };
 		2BD72B1A1BFCC713003846E9 /* OpenUDID.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BD72B191BFCC713003846E9 /* OpenUDID.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		2BD7A5651CEF205C0046119B /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2BD7A5641CEF205C0046119B /* UIKit.framework */; };
+		2BE5417F1CFE8FE70099CE5C /* PWParallaxScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BE5417E1CFE8FE70099CE5C /* PWParallaxScrollView.m */; };
+		2BE541821CFE90C60099CE5C /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 2BE541811CFE90C60099CE5C /* Localizable.strings */; };
 		511C735D1BE3801100D3D61D /* ChatTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 511C73581BE3801100D3D61D /* ChatTableViewCell.m */; };
 		511C735E1BE3801100D3D61D /* ChatTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 511C73591BE3801100D3D61D /* ChatTableViewCell.xib */; };
 		511C73641BE3804E00D3D61D /* DSChatsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 511C73621BE3804E00D3D61D /* DSChatsTableViewController.m */; };
@@ -280,6 +283,10 @@
 		2BD72B0F1BFCC5D4003846E9 /* UIWebView+AFNetworking.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIWebView+AFNetworking.m"; sourceTree = "<group>"; };
 		2BD72B181BFCC713003846E9 /* OpenUDID.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OpenUDID.h; sourceTree = "<group>"; };
 		2BD72B191BFCC713003846E9 /* OpenUDID.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OpenUDID.m; sourceTree = "<group>"; };
+		2BD7A5641CEF205C0046119B /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		2BE5417D1CFE8FE70099CE5C /* PWParallaxScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PWParallaxScrollView.h; sourceTree = "<group>"; };
+		2BE5417E1CFE8FE70099CE5C /* PWParallaxScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PWParallaxScrollView.m; sourceTree = "<group>"; };
+		2BE541811CFE90C60099CE5C /* Localizable.strings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; path = Localizable.strings; sourceTree = "<group>"; };
 		511C73571BE3801100D3D61D /* ChatTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChatTableViewCell.h; sourceTree = "<group>"; };
 		511C73581BE3801100D3D61D /* ChatTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChatTableViewCell.m; sourceTree = "<group>"; };
 		511C73591BE3801100D3D61D /* ChatTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ChatTableViewCell.xib; sourceTree = "<group>"; };
@@ -423,6 +430,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2BD7A5651CEF205C0046119B /* UIKit.framework in Frameworks */,
 				6A3F8DDB1C84403300D013F8 /* CoreGraphics.framework in Frameworks */,
 				EDAE16281BF3873B0061E99D /* AVFoundation.framework in Frameworks */,
 				ED78176F1BEC7F6400C7138F /* CoreLocation.framework in Frameworks */,
@@ -477,6 +485,7 @@
 		065BAC501BC7A135005AF493 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				2BE541801CFE90C60099CE5C /* Localization */,
 				6A71A92E1C046FB200D6D5F4 /* Resourse */,
 				065433141BF38B0400DABBFC /* Audio */,
 				C6D5F67B1BC7EC440050C1AE /* Images.xcassets */,
@@ -593,6 +602,7 @@
 		2BD72A841BFCC1CC003846E9 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
+				2BE5417C1CFE8FE70099CE5C /* PWParallaxScrollView */,
 				6AA86BDF1C5102C2006D30F0 /* Reachability */,
 				6AD8A52B1C2AECE800828AED /* SliderClass */,
 				2B1B8B931C23E7C9005A699E /* AwesomeFont */,
@@ -687,6 +697,24 @@
 			path = "Helpers/UIKit+AFNetworking";
 			sourceTree = "<group>";
 		};
+		2BE5417C1CFE8FE70099CE5C /* PWParallaxScrollView */ = {
+			isa = PBXGroup;
+			children = (
+				2BE5417D1CFE8FE70099CE5C /* PWParallaxScrollView.h */,
+				2BE5417E1CFE8FE70099CE5C /* PWParallaxScrollView.m */,
+			);
+			name = PWParallaxScrollView;
+			path = Helpers/PWParallaxScrollView;
+			sourceTree = "<group>";
+		};
+		2BE541801CFE90C60099CE5C /* Localization */ = {
+			isa = PBXGroup;
+			children = (
+				2BE541811CFE90C60099CE5C /* Localizable.strings */,
+			);
+			path = Localization;
+			sourceTree = "<group>";
+		};
 		2BEA3FC51C15AD7100237D12 /* TermsOfUse */ = {
 			isa = PBXGroup;
 			children = (
@@ -700,6 +728,7 @@
 		3D9284336DE9EF0F3BACE1DA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				2BD7A5641CEF205C0046119B /* UIKit.framework */,
 				6A3F8DDA1C84403300D013F8 /* CoreGraphics.framework */,
 				60244D170FD7494CCFDD04A4 /* libPods-DoSomething.a */,
 			);
@@ -1289,6 +1318,7 @@
 				06E1A6F71C886CD9008633D8 /* Opening.caf in Resources */,
 				511C73651BE3804E00D3D61D /* DSChatsTableViewController.xib in Resources */,
 				C6D5F6421BC7B52C0050C1AE /* Patron-MediumItalic.ttf in Resources */,
+				2BE541821CFE90C60099CE5C /* Localizable.strings in Resources */,
 				C6D5F60C1BC7AF500050C1AE /* Launch Screen.xib in Resources */,
 				6A8D15D41BCC059B000F1FB4 /* DSProfileTableViewController.xib in Resources */,
 				06E1A6EC1C886CD9008633D8 /* Complete.caf in Resources */,
@@ -1424,6 +1454,7 @@
 				EAEF25241BCF9EF600F83E82 /* IQSegmentedNextPrevious.m in Sources */,
 				2B83CACE1BE8D4FD0064EC7F /* NSString+validations.m in Sources */,
 				ED0A471B1C2E98C3000CAB95 /* DSChatDetailViewController.m in Sources */,
+				2BE5417F1CFE8FE70099CE5C /* PWParallaxScrollView.m in Sources */,
 				6A59C87D1C2807FD00286E35 /* DSNearbyCustomCell.m in Sources */,
 				2BD72B171BFCC5D4003846E9 /* UIWebView+AFNetworking.m in Sources */,
 				2B83CAAF1BE8744E0064EC7F /* DSWebservice.m in Sources */,
@@ -1629,7 +1660,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.dosomethingapp.ios;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "40883d77-5483-46c1-b7ea-e8215acb0419";
+				PROVISIONING_PROFILE = "81e002ba-a601-458c-a155-61a85bdc14eb";
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;

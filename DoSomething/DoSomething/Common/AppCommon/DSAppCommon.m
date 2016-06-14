@@ -238,8 +238,8 @@ DSAppCommon *sharedCommon = nil;
 - (BOOL) isUserLoggedIn {
     NSDictionary *userDetails = [self getUserDetails];
     if (userDetails != NULL) {
-        [[NSUserDefaults standardUserDefaults]removeObjectForKey:CurrentLongitude];
-        [[NSUserDefaults standardUserDefaults]removeObjectForKey:CurrentLatitude];
+       // [[NSUserDefaults standardUserDefaults]removeObjectForKey:CurrentLongitude];
+       // [[NSUserDefaults standardUserDefaults]removeObjectForKey:CurrentLatitude];
         return YES;
     }
     return NO;
@@ -259,12 +259,12 @@ DSAppCommon *sharedCommon = nil;
 
 -(NSString *)getLatitude
 {
-    NSString *Latitude =[[NSUserDefaults standardUserDefaults]valueForKey:@"currentLatitude"];
-     return Latitude;
+    NSString *Latitude =[[NSUserDefaults standardUserDefaults]valueForKey:CurrentLatitude];//currentLatitudeCurrentLatitude
+    return Latitude;
 }
 -(NSString *)getLongitude
 {
-    NSString *Longitude =[[NSUserDefaults standardUserDefaults]valueForKey:@"currentLongitude"];
+    NSString *Longitude =[[NSUserDefaults standardUserDefaults]valueForKey:CurrentLongitude];
     return Longitude;
 }
 
@@ -356,8 +356,8 @@ DSAppCommon *sharedCommon = nil;
     currentLatitude         = [NSString stringWithFormat:@"%@",[NSNumber numberWithDouble:newLocation.coordinate.latitude]];
     currentLongitude        = [NSString stringWithFormat:@"%@",[NSNumber numberWithDouble:newLocation.coordinate.longitude]];
     
-    [[NSUserDefaults standardUserDefaults] setObject:currentLatitude  forKey:@"currentLatitude"];
-    [[NSUserDefaults standardUserDefaults] setObject:currentLongitude forKey:@"currentLongitude"];
+    [[NSUserDefaults standardUserDefaults] setObject:currentLatitude  forKey:CurrentLatitude];
+    [[NSUserDefaults standardUserDefaults] setObject:currentLongitude forKey:CurrentLongitude];
     [[NSUserDefaults standardUserDefaults] synchronize];
     
     [locationManager stopUpdatingLocation];

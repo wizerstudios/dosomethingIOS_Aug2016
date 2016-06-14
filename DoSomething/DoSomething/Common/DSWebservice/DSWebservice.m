@@ -574,6 +574,31 @@ request_send_user_id:(NSString *)request_send_user_id
            completionSucessHandler:success
           completionFailureHandler:failure];
 }
+#pragma mark POST CancelRequest
+
+-(void)cancelRequest:(NSString *)sendRequestURL
+         sessionid:(NSString *)sessionid
+request_send_user_id:(NSString *)request_send_user_id
+           success:(WebserviceRequestSuccessHandler)success
+           failure:(WebserviceRequestFailureHandler)failure
+{
+    urlString = [URL_FOR_RESOURCE(@"") stringByAppendingString:[NSString stringWithFormat:@"%@?",sendRequestURL]];
+    
+    NSMutableDictionary *sendRequest = [[NSMutableDictionary alloc] init];
+    
+    if(sessionid)               [sendRequest    setObject:sessionid                 forKey:@"sessionid"];
+    if(request_send_user_id)    [sendRequest    setObject:request_send_user_id            forKey:@"request_send_user_id"];
+    
+    NSLog(@"urlString = %@",urlString);
+    NSLog(@"UpdateDoSomething = %@",sendRequest);
+    
+    [self sendRequestWithURLString:urlString
+                     andParameters:sendRequest
+                            method:ServicePost
+           completionSucessHandler:success
+          completionFailureHandler:failure];
+}
+
 
 
 #pragma mark GET ChatHistory

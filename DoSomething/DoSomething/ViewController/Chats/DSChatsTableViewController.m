@@ -1,4 +1,4 @@
-//
+ //
 //  DSChatsTableViewController.m
 //  DoSomething
 //
@@ -28,6 +28,9 @@
     UIRefreshControl            * refreshControl;
     AppDelegate *appDelegate;
     BOOL _isStartTimer;
+    NSInteger currentUserRow;
+    NSString *currentUserid;
+    NSString *currentUserIdToUnmatch;
     
 }
 
@@ -51,7 +54,17 @@
 
     [[NSUserDefaults standardUserDefaults]removeObjectForKey:@"backAction"];
     
-     [self getUserCurrenLocation];
+    //[self getUserCurrenLocation];
+    if([COMMON isInternetReachable]) {
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+            [self loadLocationUpdateAPI];
+            
+            dispatch_async(dispatch_get_main_queue(), ^(){
+                
+            });
+        });
+    }
+
     
     if(IS_IPHONE6 || IS_IPHONE6_Plus)
         [self.view addConstraint:[NSLayoutConstraint constraintWithItem:ChatTableView
@@ -349,31 +362,43 @@
         return NO;
 }
 -(NSArray *)tableView:(UITableView *)tableView editActionsForRowAtIndexPath:(NSIndexPath *)indexPath {
+    //BLOCK Changed into UnMatch
+//    NSMutableArray*objselectuser = [chatArray objectAtIndex:indexPath.row];
+//    NSString *requestStr=[objselectuser valueForKey:@"send_request"];
+//    NSString *titleStr;
+//    if ([requestStr isEqualToString:@"No"]) {
+//        titleStr = @"Match";
+//    }
+//    else{
+//        titleStr = @"Unmatch";
+//    }
+//    
+//    UITableViewRowAction *blockButton = [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleDefault title:titleStr handler:^(UITableViewRowAction *action, NSIndexPath *indexPath){
+//        NSString *userId=[objselectuser valueForKey:@"UserId"];
+//        //[self loadblockUser:userid];
+//        //requestapi
+//        [self.ChatTableView setEditing:YES];
+//    }];
+//    
+//    
+//    [blockButton.title sizeWithAttributes:@{NSFontAttributeName:[UIFont fontWithName:@"Patron-Regular" size:11.0]}];
+//    
+//    blockButton.backgroundColor =[UIColor colorWithRed:0.465f green:0.465f blue:0.465f alpha:1.0f] ;
     
-    UITableViewRowAction *blockButton = [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleDefault title:@"Block" handler:^(UITableViewRowAction *action, NSIndexPath *indexPath){
-         NSMutableArray*objselectuser = [chatArray objectAtIndex:indexPath.row];
-        NSString *userid=[objselectuser valueForKey:@"id"];
-        [self loadblockUser:userid];
-        [self.ChatTableView setEditing:YES];
-        
-        
-    }];
+     //Delete Changed into UnMatch
     
-    
-    [blockButton.title sizeWithAttributes:@{NSFontAttributeName:[UIFont fontWithName:@"Patron-Regular" size:11.0]}];
-    
-    blockButton.backgroundColor =[UIColor colorWithRed:0.465f green:0.465f blue:0.465f alpha:1.0f] ;
-    
-    
-    UITableViewRowAction *deleteButton = [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleDefault title:@"Delete"  handler:^(UITableViewRowAction *action, NSIndexPath *indexPath){
+    UITableViewRowAction *deleteButton = [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleDefault title:@"Unmatch"  handler:^(UITableViewRowAction *action, NSIndexPath *indexPath){
          NSLog(@"index:%ld",(long)indexPath.row);
-        NSInteger row = indexPath.row;
+        currentUserRow = indexPath.row;
        
        // NSInteger* selectIndex= &row;
         NSMutableArray*objselectuser = [chatArray objectAtIndex:indexPath.row];
-        NSString *userid=[objselectuser valueForKey:@"id"];
+        currentUserid=[objselectuser valueForKey:@"id"];
+        currentUserIdToUnmatch=[objselectuser valueForKey:@"UserId"];
+        [COMMON DSLoadIcon:self.view];
+        [self loadCancelRequestWebService:currentUserIdToUnmatch];
         //[timeArray objectAtIndex:indexPath.row];
-        [self loadDeleteUserChatHistory:userid :row];
+        
         //[self.ChatTableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationRight];
         
     }];
@@ -382,9 +407,13 @@
     
     deleteButton.backgroundColor =[UIColor colorWithRed:(230/255.0) green:(63/255.0) blue:(82/255.0) alpha:1];
     
-    
-    
-    return @[deleteButton,blockButton];}
+    //return @[deleteButton,blockButton];
+    return @[deleteButton];
+}
+-(void)loadDeleteAPI{
+    [COMMON DSRemoveLoading];
+    [self loadDeleteUserChatHistory:currentUserid :currentUserRow];
+}
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -414,14 +443,15 @@
         if(deviceToken == nil)
             deviceToken = @"";
         
-        [webService locationUpdate:LocationUpdate_API sessionid:[COMMON getSessionID] latitude:currentLatitude longitude:currentLongitude
+        [webService locationUpdate:LocationUpdate_API
+                         sessionid:[COMMON getSessionID]
+                          latitude:[COMMON getLatitude]//currentLatitude
+                         longitude:[COMMON getLongitude]//currentLongitude
                        deviceToken:deviceToken pushType:push_type
                            success:^(AFHTTPRequestOperation *operation, id responseObject){
                                NSLog(@"responseObject = %@",responseObject);
                                if([[responseObject valueForKey:@"status"]isEqualToString:@"success"]){
-                                   [[NSUserDefaults standardUserDefaults] setObject:currentLatitude  forKey:CurrentLatitude];
-                                   [[NSUserDefaults standardUserDefaults] setObject:currentLongitude forKey:CurrentLongitude];
-                                   [[NSUserDefaults standardUserDefaults] synchronize];
+                                   //[self setLocationDefaults];
                                }
                            }
                            failure:^(AFHTTPRequestOperation *operation, id error) {
@@ -429,7 +459,13 @@
                            }];
     }
 }
+-(void)setLocationDefaults{
+    
+   [[NSUserDefaults standardUserDefaults] setObject:currentLatitude  forKey:CurrentLatitude];
+   [[NSUserDefaults standardUserDefaults] setObject:currentLongitude forKey:CurrentLongitude];
+   [[NSUserDefaults standardUserDefaults] synchronize];
 
+}
 -(void)loadChatHistoryAPI{
     
     if ([COMMON isInternetReachable]) {
@@ -474,13 +510,16 @@
         
         [webService deleteUserChatHist:DeleteConversation sessionid:[COMMON getSessionID] chat_user_id:deleteuserID success:^(AFHTTPRequestOperation *operation, id responseObject)
          {
-             NSLog(@"response:%@",responseObject);
+             NSLog(@"deleteresponse:%@",responseObject);
              if([[[responseObject valueForKey:@"deleteconversation"]valueForKey:@"status"]isEqualToString:@"success"])
              {
+                 
                  NSIndexPath *path = [NSIndexPath indexPathForRow:selectIndex inSection:0];
                  
                  //[chatArray removeObject:selectIndex];
                  [self tableView:ChatTableView commitEditingStyle:UITableViewCellEditingStyleDelete forRowAtIndexPath:path];
+                 
+                 
                  
                  //[ChatTableView reloadData];
              }
@@ -500,6 +539,39 @@
             
         }];
     }
+}
+
+#pragma mark - loadCancelRequestWebService
+-(void)loadCancelRequestWebService :(NSString*) UserIdToUnmatch
+{
+    
+    if([COMMON isInternetReachable]){
+        [webService cancelRequest:CancelRequest_API
+                      sessionid:[COMMON getSessionID]
+           request_send_user_id:UserIdToUnmatch
+                        success:^(AFHTTPRequestOperation *operation, id responseObject) {
+                            NSLog(@"SEND REQ%@",responseObject);
+                            [COMMON DSRemoveLoading];
+                            [self gotolocationview];
+                            
+                        } failure:^(AFHTTPRequestOperation *operation, id error) {
+                            [COMMON DSRemoveLoading];
+                            NSLog(@"SEND REQ ERR%@",error);
+                        }];
+    }
+    else{
+        [COMMON DSRemoveLoading];
+        [COMMON showErrorAlert:@"Check Your Internet connection"];
+        
+    }
+}
+
+-(void)gotolocationview
+{
+    [appDelegate.locationButton setBackgroundImage:[UIImage imageNamed:@"loaction_active.png"] forState:UIControlStateNormal];
+    DSLocationViewController * locationview =[[DSLocationViewController alloc]initWithNibName:@"DSLocationViewController" bundle:nil];
+    [self.navigationController pushViewController:locationview animated:NO];
+    
 }
 
 -(void)loadTabbarMsgCount{

@@ -13,12 +13,12 @@
 #import "DAAutoScroll.h"
 #import "HomeViewController.h"
 #import "AppDelegate.h"
-//#import "PWParallaxScrollView.h"
+
 
 #define enlargeRatio 1.1
 #define imageBufer 3
 
-@interface DSHomeViewController ()
+@interface DSHomeViewController ()<PWParallaxScrollViewDataSource, PWParallaxScrollViewDelegate>
 {
     int frameHt;
     int frameWt;
@@ -32,22 +32,39 @@
     UIImageView *foregroundView;
     UIView * mainview;
     UIImageView * objImag;
-      NSInteger Currentindex;
+    //NSInteger Currentindex;
     NSMutableArray * bannerTitleArray;
     
     NSInteger swipeCount;
     UIImageView *frontImageView;
     UIView *alphaView;
     NSArray *myImages;
+    
+    //newchanges
+    int               pgDtViewBottomSpace;
+    
+    NSInteger         Currentindex;
+    
+    NSDictionary    * commonDict;
+    
+    UIButton        * pageControllBtn;
+    
+    UIView          * pgDtView;
+    
+    UIButton *blkdot;
+    
+    BOOL isMyCurrentIndex;
+
 
 }
-//@property (nonatomic, strong) PWParallaxScrollView *parallaxscrollView;
+@property (strong, nonatomic) IBOutlet PWParallaxScrollView *scrollView;
+@property (strong, nonatomic) IBOutlet UIView *homeView;
+
 @property (nonatomic, assign) BOOL isLandscape;
 
 @end
 @implementation DSHomeViewController
 @synthesize delegate,walkAlterview,walkAlterviewBtn;
-@synthesize kenView;
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -60,26 +77,14 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-   
+    
+    isMyCurrentIndex=NO;
     self.walkAlterview.hidden =YES;
     [self flashOn:walkAlterviewBtn];
+    
+    
 
-    self.kenView.delegate = self;
-    _scrollViewImage.userInteractionEnabled = YES;
-    
-    swipeCount = 0;
-    
-    //........towards right Gesture recogniser for swiping.....//
-    UISwipeGestureRecognizer *rightRecognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(rightSwipeHandle:)];
-    rightRecognizer.direction = UISwipeGestureRecognizerDirectionRight;
-    [rightRecognizer setNumberOfTouchesRequired:1];
-    [self.view addGestureRecognizer:rightRecognizer];
-    
-    //........towards left Gesture recogniser for swiping.....//
-    UISwipeGestureRecognizer *leftRecognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(leftSwipeHandle:)];
-    leftRecognizer.direction = UISwipeGestureRecognizerDirectionLeft;
-    [leftRecognizer setNumberOfTouchesRequired:1];
-    [self.view addGestureRecognizer:leftRecognizer];
+   
 
 }
 
@@ -88,16 +93,94 @@
     [super viewWillAppear:animated];
     [self.navigationController setNavigationBarHidden:YES];
     [self.navigationItem setHidesBackButton:YES];
-
+    
+    [super viewWillAppear:YES];
+    
+    self.automaticallyAdjustsScrollViewInsets = NO;
+    [[UIApplication sharedApplication] setStatusBarHidden:NO withAnimation:UIStatusBarAnimationNone];
+    
     if(IS_IPHONE6_Plus)
         self.viewHeightConstraint.constant = 688;
     else if(IS_IPHONE6)
         self.viewHeightConstraint.constant = 620;
     else
-        self.viewHeightConstraint.constant = 518;
+        self.viewHeightConstraint.constant = 525;//518
+    
+    [self setCommonDict];
+    [self initControl];
+    [self reloadData];
+    
+    //[_createAnAccBtn setHidden:YES];
+    //[_signInBtn setHidden:YES];
 
 }
+-(void)setCommonDict
+{
 
+        commonDict = @{
+                       @"BGimageArray":@[@"finalSplash",@"finalBg1",@"finalBg2",@"finalBg3",@"finalBg4"],
+                       @"centerLogoImageArray":@[@"bglogo",@"",@"",@"",@""
+                               ],
+                       @"titleArray":@[NSLocalizedString(@"title1", @""),
+                                       NSLocalizedString(@"title2", @""),
+                                       NSLocalizedString(@"title3", @""),
+                                       NSLocalizedString(@"title4", @""),
+                                       NSLocalizedString(@"title5", @"")],
+                       
+                       @"subTitleArray":@[NSLocalizedString(@"subTitle1", @""),
+                                      NSLocalizedString(@"subTitle2", @""),
+                                      NSLocalizedString(@"subTitle3", @""),
+                                      NSLocalizedString(@"subTitle4", @""),
+                                      NSLocalizedString(@"subTitle5", @"")]
+                       
+                       
+                       };
+    
+//    commonDict = @{
+//                   @"BGimageArray":@[@"finalSplash",@"finalBg1",@"finalBg2",@"finalBg3",@"finalBg4"],
+//                   @"centerLogoImageArray":@[@"bgText5",@"bgText1",@"bgText2",@"bgText3",@"bgText4"
+//                                             ],
+//                   
+//                   
+//                   };
+    
+        if (IS_IPHONE4)
+        {
+            pgDtViewBottomSpace = 90;//100
+        }
+        else if (IS_IPHONE5)
+        {
+            pgDtViewBottomSpace = 110;//120
+        }
+        else
+        {
+            pgDtViewBottomSpace = 127;//157
+        }
+    
+    
+}
+
+
+#pragma mark - view's life cycle
+
+- (void)initControl
+{
+    
+     self.scrollView = [[PWParallaxScrollView alloc] initWithFrame:self.view.bounds];
+     self.scrollView.isdifferSpeed = YES;
+     _scrollView.foregroundScreenEdgeInsets = UIEdgeInsetsMake(0, 0, 0, 0);
+     [_homeView insertSubview:_scrollView atIndex:0];
+    
+}
+
+
+- (void)reloadData
+{
+    
+     _scrollView.delegate = self;
+     _scrollView.dataSource = self;
+    
+}
 
 - (void)viewDidAppear:(BOOL)animated
 {
@@ -105,25 +188,6 @@
     
     [COMMON TrackerWithName:@"Welcome Screen"];
     
-    bannerImage= @[[UIImage imageNamed:@"splash_bg"],
-                   [UIImage imageNamed:@"bg1"],
-                   [UIImage imageNamed:@"bg2"],
-                   [UIImage imageNamed:@"bg3"],
-                   [UIImage imageNamed:@"bg4"]];
-    bannerText  = @[[UIImage imageNamed:@"bgText5"],
-                   [UIImage imageNamed:@"bgText1"],
-                   [UIImage imageNamed:@"bgText2"],
-                   [UIImage imageNamed:@"bgText3"],
-                   [UIImage imageNamed:@"bgText4"]];
-    pageController =@[@"1",@"2",@"3",@"4",@"5"];
-    
-    [self.kenView animateWithImages:bannerImage
-                         BannerText:bannerText
-                         Pagenation:pageController
-                 transitionDuration:7
-                       initialDelay:0
-                               loop:YES
-                        isLandscape:YES];
     
     frontImageView = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, self.view.bounds.size.height)];
     
@@ -146,96 +210,6 @@
     return YES;
 }
 
-#pragma mark - KenBurnsViewDelegate
-
-- (void)kenBurns:(JBKenBurnsView *)kenBurns didShowImage:(UIImage *)image atIndex:(NSUInteger)index
-{
-    
-}
-
-- (void)kenBurns:(JBKenBurnsView *)kenBurns didFinishAllImages:(NSArray *)images
-{
-    
-}
-
-
-#pragma mark - Gesture Methods
-
-- (void)rightSwipeHandle:(UISwipeGestureRecognizer*)gestureRecognizer
-{
-    if (swipeCount >= 0) {
-        if (swipeCount == 0) {
-            swipeCount = 4;
-        }
-        else {
-            swipeCount--;
-        }
-        [frontImageView setImage:[myImages objectAtIndex:swipeCount]];
-        
-        CATransition *transition = nil;
-        transition = [CATransition animation];
-        transition.duration = 2;//kAnimationDuration
-        transition.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut];
-        //        transition.type = kCATransitionPush;
-        transition.subtype =kCATransitionFromRight;
-        transition.delegate = self;
-        [frontImageView.layer addAnimation:transition forKey:nil];
-        
-        [UIView animateWithDuration:0.5f delay:0.f options:UIViewAnimationOptionCurveEaseIn animations:^{
-//            [alphaView setAlpha:0.6f];
-            [frontImageView setAlpha:0.6f];
-            
-        } completion:^(BOOL finished) {
-            [UIView animateWithDuration:0.5f delay:0.f options:UIViewAnimationOptionCurveEaseInOut animations:^{
-//                [alphaView setAlpha:0.0f];
-                [frontImageView setAlpha:0.0f];
-            } completion:nil];
-            
-            [self.kenView previousImage];
-        }];
-    }
-    else {
-    }
-}
-
-- (void)leftSwipeHandle:(UISwipeGestureRecognizer*)gestureRecognizer
-{
-     if (swipeCount <= 4) {
-        if (swipeCount == 4) {
-            swipeCount = 0;
-        }
-        else {
-            swipeCount++;
-        }
-        [frontImageView setImage:[myImages objectAtIndex:swipeCount]];
-        
-        CATransition *transition = nil;
-        transition = [CATransition animation];
-        transition.duration = 2;//kAnimationDuration
-        transition.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut];
-        //        transition.type = kCATransitionPush;
-        transition.subtype =kCATransitionFromLeft;
-        transition.delegate = self;
-        [frontImageView.layer addAnimation:transition forKey:nil];
-        
-        [UIView animateWithDuration:0.5f delay:0.f options:UIViewAnimationOptionCurveEaseIn animations:^{
-//            [alphaView setAlpha:0.6f];
-            [frontImageView setAlpha:0.6f];
-            
-        } completion:^(BOOL finished) {
-            [UIView animateWithDuration:0.5f delay:0.f options:UIViewAnimationOptionCurveEaseInOut animations:^{
-//                [alphaView setAlpha:0.f];
-                [frontImageView setAlpha:0.0f];
-                
-            } completion:nil];
-            [self.kenView nextImage];
-            
-        }];
-        
-    }
-    else {
-    }
-}
 
 #pragma mark - ButtonAction
 
@@ -246,7 +220,6 @@
     [self.navigationController pushViewController:DSLoginView animated:YES];
     
 }
-
 
 - (IBAction)createAnAccount:(id)sender{
     
@@ -267,6 +240,166 @@
     DSLoginView.temp = @"createAnAccount";
     [self.navigationController pushViewController:DSLoginView animated:YES];
 }
+
+#pragma mark - PWParallaxScrollViewSource
+
+- (NSInteger)numberOfItemsInScrollView:(PWParallaxScrollView *)scrollView
+{
+        int pgDtViewBottomWidth;
+    
+        pgDtViewBottomWidth = (int)([[commonDict valueForKey:@"BGimageArray"] count] - 1) * 25;
+        
+        pgDtView = [[UIView alloc] initWithFrame:CGRectMake((SCREEN_WIDTH/2) - (pgDtViewBottomWidth/2), SCREEN_HEIGHT - pgDtViewBottomSpace, pgDtViewBottomWidth, 10)];
+        
+        pgDtView.backgroundColor = [UIColor clearColor];
+        
+        void (^cornerRadius)(UIButton *) = ^(UIButton * commonButton)
+        {
+            commonButton.layer.masksToBounds = YES;
+            commonButton.layer.cornerRadius  = CGRectGetHeight(commonButton.frame)/2;
+        };
+        
+        
+        for(int i=0;i<[[commonDict valueForKey:@"BGimageArray"] count];i++)
+        {
+            blkdot = [[UIButton alloc]init];
+            
+            [blkdot setFrame:CGRectMake(i*25, 0, 10, 10)];
+            
+            [blkdot setTag:i];
+            
+            blkdot.enabled = NO;
+            
+          // [blkdot setBackgroundColor:[UIColor whiteColor]];
+            
+            cornerRadius(blkdot);
+            
+            [blkdot setImage:[UIImage imageNamed:@"Whitdot_active"] forState:UIControlStateNormal];
+            
+            [pgDtView addSubview:blkdot];
+        }
+    if(isMyCurrentIndex!=YES){
+        pageControllBtn = [[UIButton alloc]init];
+        
+        pageControllBtn.backgroundColor = [UIColor whiteColor];
+        
+        pageControllBtn.enabled = NO;
+        
+        [pageControllBtn setFrame:CGRectMake(0, 0, 10, 10)];
+        
+        // [pageControllBtn setImage:[UIImage imageNamed:@"tinyWhiteDot_Hobby"] forState:UIControlStateNormal];
+        
+        cornerRadius(pageControllBtn);
+        
+        [pgDtView addSubview:pageControllBtn];
+        
+        [self.view addSubview: pgDtView];
+    }
+        return [[commonDict valueForKey:@"BGimageArray"] count];
+    
+    
+}
+
+- (UIView *)backgroundViewAtIndex:(NSInteger)index scrollView:(PWParallaxScrollView *)scrollView
+{
+     UIImageView *imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:[commonDict valueForKey:@"BGimageArray"][index]]];
+     imageView.contentMode = UIViewContentModeScaleAspectFill;
+     return imageView;
+    
+}
+- (UIView *)foregroundViewAtIndex:(NSInteger)index scrollView:(PWParallaxScrollView *)scrollView
+{
+    @try
+    {
+        NSInteger centerViewWidth,
+        centerViewImageViewHeightandWidth;
+        
+        centerViewImageViewHeightandWidth   = SCREEN_HEIGHT / 2;
+        centerViewWidth                     = SCREEN_HEIGHT;
+       
+        //backgroundView
+        UIView * backgroundView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)];
+        backgroundView.backgroundColor = [UIColor clearColor];
+        CGFloat centreWidth= (SCREEN_WIDTH-(SCREEN_WIDTH/2));
+        
+        UIView * centreView = [[UIView alloc]initWithFrame:CGRectMake(SCREEN_WIDTH/6, SCREEN_HEIGHT/2.2,centreWidth, centerViewImageViewHeightandWidth)];
+        centreView.backgroundColor = [UIColor lightGrayColor];
+       // [backgroundView addSubview:centreView];
+        
+         //centerViewImageView
+        CGFloat imageWidth= (SCREEN_WIDTH-(SCREEN_WIDTH/3));
+        UIImageView * centerViewImageView = [[UIImageView alloc]initWithFrame:CGRectMake(SCREEN_WIDTH/6, SCREEN_HEIGHT/3.5,imageWidth, centerViewImageViewHeightandWidth)];
+        centerViewImageView.contentMode = UIViewContentModeScaleAspectFit;
+        centerViewImageView.image = IMAGE([[commonDict valueForKey:@"centerLogoImageArray"] objectAtIndex:index]);
+        
+       // [backgroundView addSubview:centerViewImageView];
+        
+        int logoImageBottomSpace,subTitleLabelSpace;
+        if(IS_IPHONE6_Plus||IS_IPHONE6||IS_IPAD){
+            logoImageBottomSpace=45;
+            subTitleLabelSpace = 50;
+        }
+        else{
+            logoImageBottomSpace=40;
+            subTitleLabelSpace = 58;
+        }
+        
+        if(index==0){
+            CGFloat logoImageWidth= (SCREEN_WIDTH-(SCREEN_WIDTH/3));
+            UIImageView * logoImageView = [[UIImageView alloc]initWithFrame:CGRectMake(SCREEN_WIDTH/6, ((SCREEN_HEIGHT/2)-logoImageBottomSpace),logoImageWidth, 30)];
+            logoImageView.contentMode = UIViewContentModeScaleAspectFit;
+            logoImageView.image = IMAGE([[commonDict valueForKey:@"centerLogoImageArray"] objectAtIndex:index]);
+           // logoImageView.backgroundColor = [UIColor lightGrayColor];
+            [backgroundView addSubview:logoImageView];
+        }
+        
+        CGFloat titleLabelWidth= (SCREEN_WIDTH-(SCREEN_WIDTH/4));
+        UILabel * titleLabel = [[UILabel alloc]initWithFrame:CGRectMake(SCREEN_WIDTH/8, SCREEN_HEIGHT/2.2,titleLabelWidth, 60)];
+        titleLabel.numberOfLines = 0;
+        titleLabel.font = [COMMON getResizeableFont:PATRON_BOLD(18)];
+        titleLabel.textAlignment = NSTextAlignmentCenter;
+        titleLabel.textColor = [UIColor whiteColor];
+        titleLabel.text = [[commonDict valueForKey:@"titleArray"] objectAtIndex:index];
+        //titleLabel.backgroundColor = [UIColor grayColor];
+        [backgroundView addSubview:titleLabel];
+        
+        CGFloat subTitleLabelWidth= (SCREEN_WIDTH-(SCREEN_WIDTH/4));
+        UILabel * subTitle = [[UILabel alloc]initWithFrame:CGRectMake(SCREEN_WIDTH/8, titleLabel.frame.origin.y+titleLabel.frame.size.height-subTitleLabelSpace,subTitleLabelWidth, 110)];
+        subTitle.numberOfLines = 0;
+        //[COMMON getResizeableFont:FuturaStd_Book(11)]
+        subTitle.font = [COMMON getResizeableFont:PATRON_REG(14)];
+        subTitle.textAlignment = NSTextAlignmentCenter;
+        subTitle.textColor = [UIColor whiteColor];
+        subTitle.text = [[commonDict valueForKey:@"subTitleArray"] objectAtIndex:index];
+        //subTitle.backgroundColor = [UIColor lightGrayColor];
+        [backgroundView addSubview:subTitle];
+        
+        return backgroundView;
+    }
+    @catch (NSException *exception)
+    {
+       
+    }
+   
+}
+#pragma mark - PWParallaxScrollViewDelegate
+
+- (void)parallaxScrollView:(PWParallaxScrollView *)scrollView didChangeIndex:(NSInteger)index
+{
+     [pageControllBtn setFrame:CGRectMake(25*index, 0, 10, 10)];
+     pageControllBtn.backgroundColor = [UIColor whiteColor];
+     Currentindex = index;
+    isMyCurrentIndex=YES;
+    
+}
+
+
+- (void)parallaxScrollView:(PWParallaxScrollView *)scrollView didEndDeceleratingAtIndex:(NSInteger)index
+{
+     Currentindex = index;
+     isMyCurrentIndex=YES;
+}
+
 
 - (void)flashOff:(UIView *)v
 {

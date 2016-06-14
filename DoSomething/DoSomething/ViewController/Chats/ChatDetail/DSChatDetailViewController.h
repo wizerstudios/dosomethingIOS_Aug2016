@@ -25,6 +25,8 @@
     
     
 }
+@property (strong, nonatomic) IBOutlet UIButton *unMatchBtn;
+@property (strong, nonatomic) IBOutlet UIButton *matchUnMatchButton;
 
 @property (nonatomic,strong) UIWindow * window;
 @property (nonatomic,strong) IBOutlet UIView * topview;

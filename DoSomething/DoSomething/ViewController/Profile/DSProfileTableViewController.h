@@ -94,6 +94,8 @@
 @property(nonatomic,strong) IBOutlet NSLayoutConstraint *TypeImgexposition;
 
 @property (nonatomic,strong) IBOutlet UIView * WalAlterview;
+@property (assign, nonatomic) BOOL  isFromLoginView;
+@property (assign, nonatomic) BOOL  isFromInterestView;
 
 
 @end

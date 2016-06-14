@@ -69,7 +69,15 @@
 -(void)viewWillAppear:(BOOL)animated{
     
     [super viewWillAppear:animated];
-    [self getUserCurrenLocation];
+   // [self getUserCurrenLocation];
+    if ([COMMON isInternetReachable]) {
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+            [self loadLocationUpdateAPI];
+            dispatch_async(dispatch_get_main_queue(), ^(){
+                
+            });
+        });
+    }
    
     
     [[NSNotificationCenter defaultCenter] addObserver:self
@@ -535,14 +543,15 @@
         if(deviceToken == nil)
             deviceToken = @"";
         
-        [objWebService locationUpdate:LocationUpdate_API sessionid:[COMMON getSessionID] latitude:currentLatitude longitude:currentLongitude
+        [objWebService locationUpdate:LocationUpdate_API
+                            sessionid:[COMMON getSessionID]
+                             latitude:[COMMON getLatitude]//currentLatitude
+                            longitude:[COMMON getLongitude]//currentLongitude
                           deviceToken:deviceToken pushType:push_type
                               success:^(AFHTTPRequestOperation *operation, id responseObject){
                                   NSLog(@"responseObject = %@",responseObject);
                                   if([[responseObject valueForKey:@"status"]isEqualToString:@"success"]){
-                                      [[NSUserDefaults standardUserDefaults] setObject:currentLatitude  forKey:CurrentLatitude];
-                                      [[NSUserDefaults standardUserDefaults] setObject:currentLongitude forKey:CurrentLongitude];
-                                      [[NSUserDefaults standardUserDefaults] synchronize];
+                                      //[self setLocationDefaults];
                                   }
                               }
                               failure:^(AFHTTPRequestOperation *operation, id error) {
@@ -557,6 +566,13 @@
     }
 }
 
+-(void)setLocationDefaults{
+    
+    [[NSUserDefaults standardUserDefaults] setObject:currentLatitude  forKey:CurrentLatitude];
+    [[NSUserDefaults standardUserDefaults] setObject:currentLongitude forKey:CurrentLongitude];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+    
+}
 -(void)logoutDeleteAction{
     
     if([COMMON isInternetReachable]){

@@ -47,6 +47,7 @@
 
     UIView *loadingView;
 }
+@property (nonatomic, strong) NSIndexPath *selectedItemIndexPath;
 @end
 
 @implementation DSInterestAndHobbiesViewController
@@ -582,7 +583,7 @@
         
         imageStr = [imageStr stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
         
-        [cell.interestAndHobbiesImageView setImageWithURL:[NSURL URLWithString:imageStr]];
+        [cell.interestAndHobbiesImageView setImageWithURL:[NSURL URLWithString:imageStr] placeholderImage:[UIImage imageNamed:@"tinyWhiteDot_Hobby"]];//Whitdot_active
     }
     else{
         [cell.interestAndHobbiesImageView setImage:image];
@@ -601,7 +602,7 @@
     NSMutableDictionary *dict = [[NSMutableDictionary alloc]init];
     
     dict = [[[interstAndHobbiesArray objectAtIndex:indexPath.section]objectAtIndex:indexPath.row]mutableCopy];
-    
+
     if([profileHobbyArray containsObject:dict])
         
         [profileHobbyArray removeObject:dict];
@@ -613,16 +614,17 @@
     [[NSUserDefaults standardUserDefaults]setObject:profileHobbyArray forKey:HobbiesArray];
     
     [[NSUserDefaults standardUserDefaults]synchronize];
-     [CATransaction begin];
-     [CATransaction setValue:(id)kCFBooleanTrue forKey:kCATransactionAnimationDuration];
+    [CATransaction begin];
+    [CATransaction setValue:(id)kCFBooleanTrue forKey:kCATransactionAnimationDuration];
     [interestAndHobbiesCollectionView reloadItemsAtIndexPaths:@[indexPath]];
-
-     [CATransaction commit];
+    [CATransaction commit];
   
     
      
     //[interestAndHobbiesCollectionView reloadData];
     
+    
+       
 
 }
 

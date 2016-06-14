@@ -28,6 +28,8 @@
 
 @interface DSChatDetailViewController (){
     
+    AppDelegate *appDelegate;
+    
     NSUInteger supportUser;
     
     NSMutableArray *conversationArray;
@@ -88,6 +90,7 @@
     [chatTableView addGestureRecognizer:tapGestureRecognizer];
 }
 - (void)viewWillAppear:(BOOL)animated
+
 {
      [self loadNavigation];
     [super viewWillAppear:animated];
@@ -99,6 +102,13 @@
     [self.navigationItem setHidesBackButton:YES animated:NO];
     
      [chatScrollview setScrollEnabled:NO];
+    
+    [_matchUnMatchButton setHidden:YES];
+    
+    [_unMatchBtn setTitle:@"Unmatch" forState:UIControlStateNormal];
+    [_unMatchBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    _unMatchBtn.titleLabel.font = [UIFont fontWithName:@"Patron-Regular" size:15];
+   
 }
 
 -(void)viewwillDisappear:(BOOL)animated{
@@ -196,7 +206,9 @@
 }
 - (void)backAction
 {
+    [COMMON DSRemoveLoading];
     [[NSUserDefaults standardUserDefaults]setObject:@"Yes" forKey:@"backAction"];
+    [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"DSChatDetailBackAction"];
     [self.navigationController popViewControllerAnimated:YES];
 }
 
@@ -309,9 +321,18 @@
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     
+//    NSString *text      = [[conversationArray objectAtIndex:[indexPath row]] valueForKey:@"Message"];
+//    CGSize dataSize1 = [COMMON dataSize:text withFontName:@"HelveticaNeue" ofSize:15 withSize:CGSizeMake(195.0, 999.0)];
+//    return dataSize1.height + CELL_HEIGHT+10;
+
+    
     NSString *text      = [[conversationArray objectAtIndex:[indexPath row]] valueForKey:@"Message"];
-    CGSize dataSize1 = [COMMON dataSize:text withFontName:@"HelveticaNeue" ofSize:15 withSize:CGSizeMake(195.0, 999.0)];
-    return dataSize1.height + CELL_HEIGHT+10;
+    NSString *cellIdentifier = @"Cell";
+    ChatDetailcell = (ChatDetailCustomcell *) [tableView dequeueReusableCellWithIdentifier:cellIdentifier];[[NSBundle mainBundle] loadNibNamed:@"ChatDetailCustomcell" owner:self options:nil];
+    ChatDetailcell = chatCustomcell;
+    CGSize dataSize1 = [COMMON getControlHeight:text withFontName:@"HelveticaNeue" ofSize:15.0 withSize:CGSizeMake(chatTableView.frame.size.width,chatTableView.frame.size.height)];
+    return dataSize1.height + CELL_HEIGHT+50;
+
     
 }
 
@@ -326,6 +347,9 @@
     
     [ChatDetailcell setSelectionStyle:UITableViewCellSelectionStyleNone];
     [ChatDetailcell getMessageArray:[conversationArray objectAtIndex:indexPath.row]];
+    [ChatDetailcell setBackgroundColor:[UIColor purpleColor]];
+    //[chatTableView setSeparatorColor:[UIColor blackColor]];
+   // [chatTableView setSeparatorStyle:UITableViewCellSeparatorStyleSingleLine];
     return ChatDetailcell;
     
 }
@@ -390,9 +414,15 @@
     _backgroundView.hidden = YES;
     
     _menuImageview.hidden = NO;
+    [COMMON DSLoadIcon:self.view];
+    [self loadCancelRequestWebService];
+   // [self performSelector:@selector(loadDeleteAPI) withObject:nil afterDelay:0.2];
     
+    
+}
+-(void)loadDeleteAPI{
+    [COMMON DSRemoveLoading];
     [self loadDeleteUserChatHistory];
-    
 }
 
 - (IBAction)pressBlock:(id)sender {
@@ -402,7 +432,8 @@
     _backgroundView.hidden = YES;
     
     _menuImageview.hidden = NO;
-    [self loadblockUser];
+    //[self loadblockUser];
+    [self loadCancelRequestWebService];
     
 }
 - (IBAction)showReallyFunkyIBActionSheet:(id)sender
@@ -461,9 +492,6 @@
            [chatTableView scrollRectToVisible:CGRectMake(0, chatTableView.contentSize.height - chatTableView.bounds.size.height, chatTableView.bounds.size.width,chatTableView.bounds.size.height) animated:NO];
       
         [self loadSendMessageAPI:receiverId conversationId:conversationID];
-       
-        
-        
         
     }
     chatView.textView.text=@"";
@@ -579,7 +607,7 @@
         [webService deleteUserChatHist:DeleteConversation sessionid:[COMMON getSessionID] chat_user_id:conversationID success:^(AFHTTPRequestOperation *operation, id responseObject)
          {
              
-             [self.navigationController popViewControllerAnimated:YES];
+             //[self.navigationController popViewControllerAnimated:YES];
              
          } failure:^(AFHTTPRequestOperation *operation, id error) {
              
@@ -604,6 +632,42 @@
         }];
     }
 }
+
+#pragma mark - loadCancelRequestWebService
+-(void)loadCancelRequestWebService
+{
+     NSString *selectedUserId = [chatuserDetailsDict valueForKey:@"UserId"];
+    if([COMMON isInternetReachable]){
+        [webService cancelRequest:CancelRequest_API
+                        sessionid:[COMMON getSessionID]
+             request_send_user_id:selectedUserId
+                          success:^(AFHTTPRequestOperation *operation, id responseObject) {
+                              NSLog(@"SEND REQ%@",responseObject);
+                              [COMMON DSRemoveLoading];
+                              [self gotolocationview];
+                              
+                          } failure:^(AFHTTPRequestOperation *operation, id error) {
+                              [COMMON DSRemoveLoading];
+                              NSLog(@"SEND REQ ERR%@",error);
+                          }];
+    }
+    else{
+        [COMMON DSRemoveLoading];
+        [COMMON showErrorAlert:@"Check Your Internet connection"];
+        
+    }
+}
+
+-(void)gotolocationview
+{
+    [appDelegate.locationButton setBackgroundImage:[UIImage imageNamed:@"loaction_active.png"] forState:UIControlStateNormal];
+    DSLocationViewController * locationview =[[DSLocationViewController alloc]initWithNibName:@"DSLocationViewController" bundle:nil];
+    [self.navigationController pushViewController:locationview animated:NO];
+    
+}
+
+
+
 -(IBAction)DidClickGeneralAlterviewBtn:(id)sender
 {
     self.WalkAlterview.hidden=YES;

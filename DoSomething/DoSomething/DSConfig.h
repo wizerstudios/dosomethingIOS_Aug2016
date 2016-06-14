@@ -30,6 +30,13 @@
 
 #define IS_GREATER_IOS9                 (([[[UIDevice currentDevice] systemVersion] floatValue] >= 9)?YES:NO)
 
+//SIZE
+#define SCREEN_WIDTH                    [UIScreen mainScreen].bounds.size.width
+#define SCREEN_HEIGHT                   [UIScreen mainScreen].bounds.size.height
+
+//Image
+#define IMAGE(_name)                    [UIImage imageNamed:_name]
+#define IMAGETOCOLOR(_name)             [UIColor colorWithPatternImage:IMAGE(_name)]
 
 #pragma mark - FONTS
 
@@ -105,6 +112,7 @@
 #define NearestUsers_API            @"nearestusers"
 #define UserDetails_API             @"getuserdetails"
 #define SendRequest_API             @"sendrequest"
+#define CancelRequest_API           @"cancelrequest"
 #define ChatHistory_API             @"getChatHistory"
 #define UserChatHistory_API         @"getUserChatHistory"
 #define SendMessage_API             @"sendmessage"

@@ -23,6 +23,7 @@
 #import "IQKeyboardManager.h"
 #import "IQUIView+IQKeyboardToolbar.h"
 
+
 #define Red_Color   [UIColor colorWithRed:227.0f/255.0f green:64.0f/255.0f blue:81.0f/255.0f alpha:1.0f]
 
 @interface DSLoginViewController ()<CLLocationManagerDelegate>
@@ -107,7 +108,9 @@
     
     
     deviceUdid = [OpenUDID value];
-    [self getUserCurrenLocation];
+    [self getUserCurrenLocation];//OLD
+    
+    //[COMMON getUserCurrenLocation];//ADDED
     
     if ([temp isEqualToString:@"createAnAccount"]){
         
@@ -134,6 +137,8 @@
         NSMutableAttributedString *attStr = [[NSMutableAttributedString alloc] initWithString:string ];
         [attStr addAttribute:NSFontAttributeName value:PATRON_REG(12) range:[string rangeOfString:@"Create an account using"]];
         [attStr addAttribute:NSFontAttributeName value:PATRON_BOLD(12) range:[string rangeOfString:@"Facebook"]];
+        
+        
         labelFacebook.attributedText = attStr;
         labelFacebook.attributedText = attStr;
         labelFacebook.tag = 10;
@@ -186,8 +191,12 @@
     
     currentLongitude        = [NSString stringWithFormat:@"%@",[NSNumber numberWithDouble:newLocation.coordinate.longitude]];
     
-    [[NSUserDefaults standardUserDefaults] setObject:currentLatitude  forKey:@"currentLatitude"];
-    [[NSUserDefaults standardUserDefaults] setObject:currentLongitude forKey:@"currentLongitude"];
+//    [[NSUserDefaults standardUserDefaults] setObject:currentLatitude  forKey:@"currentLatitude"];
+//    [[NSUserDefaults standardUserDefaults] setObject:currentLongitude forKey:@"currentLongitude"];
+//    [[NSUserDefaults standardUserDefaults] synchronize];
+    
+    [[NSUserDefaults standardUserDefaults] setObject:currentLatitude  forKey:CurrentLatitude];
+    [[NSUserDefaults standardUserDefaults] setObject:currentLongitude forKey:CurrentLongitude];
     [[NSUserDefaults standardUserDefaults] synchronize];
     
     // Turn off the location manager to save power.
@@ -554,8 +563,9 @@
                                      else
                                          [self loadloginAPI];
                                      
-                                     
-                                     
+                                 }
+                                 else if([[[responseObject objectForKey:@"checkuser"]objectForKey:@"status"]  isEqual: @"error"]){
+                                     [self showAltermessage:[[responseObject objectForKey:@"checkuser"]objectForKey:@"Message"]];
                                  }
                                  [COMMON DSRemoveLoading];
                              }
@@ -586,9 +596,11 @@
     objSigninType=@"2";
     
     FBSDKLoginManager *login = [[FBSDKLoginManager alloc] init];
+    [login logOut];
     login.loginBehavior = FBSDKLoginBehaviorNative;
     [login logInWithReadPermissions:@[@"email"] fromViewController:self handler:^(FBSDKLoginManagerLoginResult *result, NSError *error) {
-         if (error) {
+             if (error) {
+             NSLog(@"fbUsererror = %@",error);
 
          } else if (result.isCancelled) {
          } else {
@@ -628,6 +640,8 @@
              }];
          }
      }];
+    
+        
 }
 
 #pragma mark - gotoProfileView
@@ -639,6 +653,7 @@
     profileVC.emailAddressToRegister  = strEmailId;
     profileVC.emailPasswordToRegister = strPassword;
     profileVC.selectEmail             = selectMail;
+    profileVC.isFromLoginView =YES;
     [self.navigationController pushViewController:profileVC animated:YES];
 }
    //----Profile View With FacebookProfileID
@@ -646,6 +661,7 @@
        DSProfileTableViewController *profileVC  = [[DSProfileTableViewController alloc]initWithNibName:@"DSProfileTableViewController" bundle:nil];
     profileVC.userDetailsDict = [fbUserDetailsDict mutableCopy];
     profileVC.FBprofileID=FBProfileID;
+    profileVC.isFromLoginView =YES;
     [[NSUserDefaults standardUserDefaults] setObject:@"Yes" forKey:FirstCreateProfile];
    [[NSUserDefaults standardUserDefaults] setObject:@"YES" forKey:FirstlogininterestHobbies];
     [self.navigationController pushViewController:profileVC animated:YES];
@@ -657,6 +673,7 @@
     HomeViewController * objHomeview = [[HomeViewController alloc]initWithNibName:@"HomeViewController" bundle:nil];
     [self.navigationController pushViewController:objHomeview animated:NO];
     _isStartTimer = YES;
+    objHomeview.isFromLoginView =YES;
     dispatch_async(dispatch_get_main_queue(), ^{
         [self loadonlineStausAPI:@"1"];
         [self startTimer];
@@ -728,8 +745,8 @@
                             dob:dob
                    profileImage:profileImage
                          gender:gender
-                       latitude:currentLatitude
-                      longitude:currentLongitude
+                       latitude:[COMMON getLatitude]//currentLatitude
+                      longitude:[COMMON getLongitude]//currentLongitude
                          device:@"iPhone"
                        deviceid:deviceToken
                        pushType:push_type
@@ -747,6 +764,7 @@
                  [COMMON setUserDetails:[[loginDict valueForKey:@"userDetails"]objectAtIndex:0]];
 
                  NSLog(@"userdetails = %@",[COMMON getUserDetails]);
+                 
                  [self gotoHomeView];
                  [COMMON DSRemoveLoading];
                  
@@ -800,8 +818,8 @@
                    IntersertHobbies:nil
                               About:@""
                              gender:gender
-                           latitude:currentLatitude
-                          longitude:currentLongitude
+                           latitude:[COMMON getLatitude]//currentLatitude
+                          longitude:[COMMON getLongitude]//currentLongitude
                              device:@"iPhone"
                            deviceid:deviceToken
                      fbprofileImage:@""

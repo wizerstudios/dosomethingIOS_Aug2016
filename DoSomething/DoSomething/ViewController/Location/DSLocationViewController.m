@@ -62,6 +62,9 @@
     BOOL isuserdetail;
     UIButton * blueCirecleBtn;
     BOOL isemptyuser;
+    NSInteger selectedRequestBtnIndex;
+    
+    BOOL testCollection;
     
 }
 @property(nonatomic,strong)IBOutlet NSLayoutConstraint  * collectionviewxpostion;
@@ -107,8 +110,8 @@
     [self.locationCollectionView addSubview:refreshControl];
    
     latitude     =[COMMON getLatitude];
-  
     longitude    =[COMMON  getLongitude];
+    
     matchUserArray =[[NSMutableArray alloc]init];
     commonlocationArray =[[NSMutableArray alloc]init];
     onlineStatus=@"";
@@ -131,8 +134,11 @@
 
     else
     {
-         //[COMMON DSLoadIcon:self.view];
+         [COMMON DSLoadIcon:self.view]; //bef hidden
          [self nearestLocationWebservice];
+         [self performSelector:@selector(removeLoading) withObject:nil afterDelay:0.5];
+        
+        
     }
   
     
@@ -146,6 +152,9 @@
     
     // Do any additional setup after loading the view from its nib.
 }
+-(void)removeLoading{
+    [COMMON DSRemoveLoading];
+}
 - (void)viewWillAppear:(BOOL)animated
 {
     
@@ -153,84 +162,101 @@
     
     [self.navigationItem setHidesBackButton:YES animated:NO];
     
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(loadInvalidSessionAlert:)
-                                                 name:@"InvalidSession"
-                                               object:nil];
-   
-    [self loadCustomNavigationview];
-    [self CustomAlterview];
     
-    UINib *cellNib = [UINib nibWithNibName:@"LocationCollectionViewCell" bundle:nil];
-    [self.locationCollectionView registerNib:cellNib forCellWithReuseIdentifier:@"LocationCell"];
+        [[NSNotificationCenter defaultCenter] addObserver:self
+                                                 selector:@selector(loadInvalidSessionAlert:)
+                                                     name:@"InvalidSession"
+                                                   object:nil];
+        
+        [self loadCustomNavigationview];
+        [self CustomAlterview];
+        
+        UINib *cellNib = [UINib nibWithNibName:@"LocationCollectionViewCell" bundle:nil];
+        [self.locationCollectionView registerNib:cellNib forCellWithReuseIdentifier:@"LocationCell"];
+        
+        locationCollectionView.delegate=self;
+        locationCollectionView.dataSource=self;
+        profileImages =[[NSArray alloc]init];
+        profileNames =[[NSArray alloc]init];
+        dosomethingImageArry=[[NSMutableArray alloc]init];
+        kiloMeterlabel =[[NSArray alloc]init];
+        detailsArray=[[NSMutableArray alloc]init];
+        NSLog(@"currentPageNow-->%@",currentloadPage);
+        if([[NSUserDefaults standardUserDefaults] boolForKey:@"ViewuserDetail"]) {
+            //currentloadPage =@"";
+            NSLog(@"currentPageNow-->%@",currentloadPage);
+            [COMMON DSLoadIcon:self.view];
+            [self nearestLocationWebservice];
+            [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"ViewuserDetail"];
+        }
+        if([[NSUserDefaults standardUserDefaults] boolForKey:@"DSChatDetailBackAction"]) {
+            currentloadPage =@"";
+            NSLog(@"currentPageNow-->%@",currentloadPage);
+            [COMMON DSLoadIcon:self.view];
+            [self nearestLocationWebservice];
+            [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"DSChatDetailBackAction"];
+        }
+        
+        
+        if(!isLoadData){
+            
+            UICollectionViewFlowLayout *flowLayout1 = [[UICollectionViewFlowLayout alloc] init];
+            CGFloat screenWidth = [UIScreen mainScreen].bounds.size.width;
+            flowLayout1.headerReferenceSize = CGSizeMake(locationCollectionView.bounds.size.width,45);
+            NSLog(@"locationCollectionView%f",locationCollectionView.bounds.size.width);
+            NSLog(@"screenWidth%f",screenWidth);
+            NSLog(@"matchActivityView%f",matchActivityView.frame.size.width);
+            
+            [locationCollectionView setCollectionViewLayout:flowLayout1];
+            
+            if(IS_IPHONE5)
+                        [self.view addConstraint:[NSLayoutConstraint constraintWithItem:locationCollectionView
+                                                                              attribute:NSLayoutAttributeTop
+                                                                              relatedBy:NSLayoutRelationEqual
+                                                                                 toItem:self.view
+                                                                              attribute:NSLayoutAttributeTop
+                                                                             multiplier:1.0
+                                                                               constant:-20.0]];
+                isLoadData=YES;
+            
+        }
+        
+        
+        [self filterPageButtonAction];
+        
     
-    locationCollectionView.delegate=self;
-    locationCollectionView.dataSource=self;
-    profileImages =[[NSArray alloc]init];
-    profileNames =[[NSArray alloc]init];
-    dosomethingImageArry=[[NSMutableArray alloc]init];
-    kiloMeterlabel =[[NSArray alloc]init];
-     detailsArray=[[NSMutableArray alloc]init];
-    if([[NSUserDefaults standardUserDefaults] boolForKey:@"ViewuserDetail"]) {
-        [COMMON DSLoadIcon:self.view];
-      [self nearestLocationWebservice];
-      [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"ViewuserDetail"];
-    }
-    
-    
-    if(!isLoadData){
-    UICollectionViewFlowLayout *flowLayout1 = [[UICollectionViewFlowLayout alloc] init];
-    flowLayout1.headerReferenceSize = CGSizeMake(locationCollectionView.bounds.size.width,45);
-      
-
-    [locationCollectionView setCollectionViewLayout:flowLayout1];
-    
-
-    if(IS_IPHONE5)
-        [self.view addConstraint:[NSLayoutConstraint constraintWithItem:locationCollectionView
-                                                              attribute:NSLayoutAttributeTop
-                                                              relatedBy:NSLayoutRelationEqual
-                                                                 toItem:self.view
-                                                              attribute:NSLayoutAttributeTop
-                                                             multiplier:1.0
-                                                               constant:-20.0]];
-        isLoadData=YES;
-    
-    }
-     [self filterPageButtonAction];
     if(self.senduserDetail.count>0)
     {
+        testCollection=YES;
         self.matchActivityView.hidden=NO;
         [matchUserArray removeAllObjects];
         matchUserArray=self.senduserDetail;
         if(IS_IPHONE6 || IS_IPHONE6_Plus)
         {
-//            self.CollectionviewWidth.constant =self.view.frame.size.width+100;
-            //self.filterviewxposition.constant =self.view.frame.size.width ;
+            self.CollectionviewWidth.constant =self.view.frame.size.width+100;
+            self.filterviewxposition.constant =self.view.frame.size.width;
             self.collectionviewxpostion.constant =10;
-            self.CollectionviewWidth.constant    =self.view.frame.size.width+100-10;
-            self.filterviewxposition.constant    = self.CollectionviewWidth.constant+10;
+            CGFloat screenWidth = [UIScreen mainScreen].bounds.size.width;
+            self.CollectionviewWidth.constant    =self.view.frame.size.width;//+100-10;//self.view.frame.size.width+100-10
+            self.filterviewxposition.constant    = screenWidth;//self.CollectionviewWidth.constant+10;
         }
         
           [self RequestSendNotification];
+        
     }
     else{
         self.matchActivityView.hidden=YES;
         
         if(IS_IPHONE6 || IS_IPHONE6_Plus)
         {
-            //self.CollectionviewWidth.constant =self.view.frame.size.width+100;
-            self.filterviewxposition.constant =self.view.frame.size.width ;
+            CGFloat screenWidth = [UIScreen mainScreen].bounds.size.width;
+            self.CollectionviewWidth.constant =self.view.frame.size.width+100;
+            self.filterviewxposition.constant =self.view.frame.size.width;//self.view.frame.size.width
             
         }
     }
 
-    
-
-    
     [[UISlider appearance] setThumbImage:[UIImage imageNamed:@"dot_Image"] forState:UIControlStateNormal];
-    
-   
     
 }
 -(void)loadCustomNavigationview
@@ -257,6 +283,8 @@
 {
     if(matchUserArray !=0 && ![matchUserArray isEqual:@"0"])
     {
+        [self performSelector:@selector(nearestLocationWebservice) withObject:nil afterDelay:0.2];
+
         NSString * FirstMatch=[[NSUserDefaults standardUserDefaults]valueForKey:FirstMatchUser];
         
         if([FirstMatch isEqualToString:@"Yes"])
@@ -308,8 +336,6 @@
 
             [self.currentUserImg setImage:[UIImage imageNamed:objCurrentuserImg]];
         }
-    
-   
     
     self.currentUserImg .layer.cornerRadius = 60;
      self.currentUserImg .clipsToBounds = YES;
@@ -420,6 +446,7 @@
 #pragma mark - nearestLocationWebserviceAPI
 -(void)nearestLocationWebservice
 {
+
     
     if([COMMON isInternetReachable]){
         [objWebservice nearestUsers:NearestUsers_API
@@ -458,7 +485,7 @@
                      NSInteger  recordCounts =[[[responseObject valueForKey:@"nearestusers"]valueForKey:@"recordCount"] integerValue];
                      for (NSDictionary *dict in nextpageUserdetaile)
                      {
-                         NSLog(@"fdgffgh%@",dict);
+                         NSLog(@"nextpage%@",dict);
                          [commonlocationArray addObject:dict];
                          NSLog(@"commonlocationArray count%lu",(unsigned long)commonlocationArray.count);
                          if(commonlocationArray.count  == recordCounts)
@@ -483,7 +510,11 @@
                  [locationCollectionView setHidden:NO];
                  
                  [COMMON DSRemoveLoading];
-                 [locationCollectionView reloadData];
+                 
+                     [locationCollectionView reloadData];
+                     
+                 
+                 
                   [refreshControl endRefreshing];
              }
              else if([[[responseObject valueForKey:@"nearestusers"]valueForKey:@"status"] isEqualToString:@"error"])
@@ -519,6 +550,7 @@
                              if(commonlocationArray.count)
                              {
                                 [locationCollectionView setHidden:NO];
+                                 
                              }
                              else
                              {
@@ -569,120 +601,146 @@
     if(IS_IPHONE6)
         locationCellView.bounds = CGRectMake(0,0, 100, 180);
     
-
+    
     if(commonlocationArray.count)
     {
-    NSString *profileImg = [[commonlocationArray valueForKey:@"image1_thumb"] objectAtIndex:indexPath.row];
-    
-   
-    NSString * firstname =[[commonlocationArray valueForKey:@"first_name"] objectAtIndex:indexPath.row];
-    NSString * lastname  =[[commonlocationArray valueForKey:@"last_name"] objectAtIndex:indexPath.row];
-    
-    locationCellView.nameProfile.text =[NSString stringWithFormat:@"%@ %@", firstname, lastname];;
-    locationCellView.kiloMeter.text=[[commonlocationArray valueForKey:@"distance"] objectAtIndex:indexPath.row];
-    NSString * availableStr =[[commonlocationArray valueForKey:@"available_now"] objectAtIndex:indexPath.row];
-    locationCellView.activeNow.text=([availableStr isEqualToString:@"Yes"])?@"NOW":@"";
-    locationCellView.activeNow.backgroundColor=([availableStr isEqualToString:@"Yes"])?[UIColor whiteColor]:[UIColor clearColor];
-    NSString* reguestStr = [[commonlocationArray valueForKey:@"send_request"] objectAtIndex:indexPath.row];
-    
-    locationCellView.sendRequest.text = ([reguestStr isEqualToString:@"No"])?@"Send Request":@"Request Sent!";
-    
-    locationCellView.sendRequest.textColor =([reguestStr isEqualToString:@"No"])?[UIColor whiteColor]:[UIColor lightGrayColor];
-    locationCellView.hobbiesImagebackView.backgroundColor =([reguestStr isEqualToString:@"No"])?[UIColor colorWithRed:(218/255.0) green:(40/255.0) blue:(64.0/255.0f) alpha:1.0]:[UIColor whiteColor];
-    
-   NSMutableArray * dosomethingImageSprateArry =[[commonlocationArray valueForKey:@"dosomething"]objectAtIndex:indexPath.row];
-    
-      dosomethingImageArry =([reguestStr isEqualToString:@"No"])?[dosomethingImageSprateArry valueForKey:@"NearbyImage"]:[dosomethingImageSprateArry valueForKey:@"InactiveImage"];
-     NSString *dosomethingImage1,* dosomethingImage2,* dosomethingImage3;
-    
-    if([dosomethingImageArry count]== 1){
-       
-        if(![[dosomethingImageArry objectAtIndex:0]isEqualToString:@""])
-        {
+        NSString *profileImg = [[commonlocationArray valueForKey:@"image1_thumb"] objectAtIndex:indexPath.row];
+        
+        
+        NSString * firstname =[[commonlocationArray valueForKey:@"first_name"] objectAtIndex:indexPath.row];
+        NSString * lastname  =[[commonlocationArray valueForKey:@"last_name"] objectAtIndex:indexPath.row];
+        
+        locationCellView.nameProfile.text =[NSString stringWithFormat:@"%@ %@", firstname, lastname];;
+        locationCellView.kiloMeter.text=[[commonlocationArray valueForKey:@"distance"] objectAtIndex:indexPath.row];
+        NSString * availableStr =[[commonlocationArray valueForKey:@"available_now"] objectAtIndex:indexPath.row];
+        locationCellView.activeNow.text=([availableStr isEqualToString:@"Yes"])?@"NOW":@"";
+        locationCellView.activeNow.backgroundColor=([availableStr isEqualToString:@"Yes"])?[UIColor whiteColor]:[UIColor clearColor];
+        NSString* reguestStr = [[commonlocationArray valueForKey:@"send_request"] objectAtIndex:indexPath.row];
+        NSString* checkMatchUser = [[commonlocationArray valueForKey:@"matched"] objectAtIndex:indexPath.row];
+        
+        locationCellView.sendRequest.text = ([reguestStr isEqualToString:@"No"])?@"Send Request":@"Request Sent!";
+        
+        locationCellView.sendRequest.textColor =([reguestStr isEqualToString:@"No"])?[UIColor whiteColor]:[UIColor lightGrayColor];
+        locationCellView.hobbiesImagebackView.backgroundColor =([reguestStr isEqualToString:@"No"])?[UIColor colorWithRed:(218/255.0) green:(40/255.0) blue:(64.0/255.0f) alpha:1.0]:[UIColor whiteColor];
+        NSMutableArray * dosomethingImageSprateArry =[[commonlocationArray valueForKey:@"dosomething"]objectAtIndex:indexPath.row];
+        
+        dosomethingImageArry =([reguestStr isEqualToString:@"No"])?[dosomethingImageSprateArry valueForKey:@"NearbyImage"]:[dosomethingImageSprateArry valueForKey:@"InactiveImage"];
+        NSString *dosomethingImage1,* dosomethingImage2,* dosomethingImage3;
+        
+        
+        if([dosomethingImageArry count]== 1){
             
-            locationCellView.dosomethingImage1Xposition.constant=40;
-
-            dosomethingImage1=[dosomethingImageArry objectAtIndex:0];
-           
-           [locationCellView.dosomethingImage1 setImageWithURL:[NSURL URLWithString:dosomethingImage1]];
-            locationCellView.dosomethingImage2.image=[UIImage imageNamed:@""];
-             locationCellView.dosomethingImage3.image=[UIImage imageNamed:@""];
+            if(![[dosomethingImageArry objectAtIndex:0]isEqualToString:@""])
+            {
+                
+                locationCellView.dosomethingImage1Xposition.constant=40;
+                
+                dosomethingImage1=[dosomethingImageArry objectAtIndex:0];
+                
+                [locationCellView.dosomethingImage1 setImageWithURL:[NSURL URLWithString:dosomethingImage1]];
+                locationCellView.dosomethingImage2.image=[UIImage imageNamed:@""];
+                locationCellView.dosomethingImage3.image=[UIImage imageNamed:@""];
+                
+            }
+        }
+        else if([dosomethingImageArry count] == 2){
+            NSLog(@"count two");
+            if(![[dosomethingImageArry objectAtIndex:0]isEqualToString:@""])
+            {
+                locationCellView.dosomethingImage1Xposition.constant=60;
+                dosomethingImage1=[dosomethingImageArry objectAtIndex:0];
+                
+                [locationCellView.dosomethingImage1 setImageWithURL:[NSURL URLWithString:dosomethingImage1]];
+                
+            }
+            if (![[dosomethingImageArry objectAtIndex:1] isEqualToString:@""])
+            {
+                dosomethingImage2=[dosomethingImageArry objectAtIndex:1];
+                locationCellView.dosomethingImage2Xposition.constant=30;
+                [locationCellView.dosomethingImage2 setImageWithURL:[NSURL URLWithString:dosomethingImage2]];
+                
+                locationCellView.dosomethingImage3.image=[UIImage imageNamed:@""];
+                
+            }
+            
+            
+        }else {
+            
+            if(![[dosomethingImageArry objectAtIndex:0]isEqualToString:@""])
+            {
+                dosomethingImage1=[dosomethingImageArry objectAtIndex:0];
+                locationCellView.dosomethingImage1Xposition.constant=10;
+                [locationCellView.dosomethingImage1 setImageWithURL:[NSURL URLWithString:dosomethingImage1]];
+                
+            }
+            if (![[dosomethingImageArry objectAtIndex:1] isEqualToString:@""])
+            {
+                dosomethingImage2=[dosomethingImageArry objectAtIndex:1];
+                locationCellView.dosomethingImage2Xposition.constant=(IS_IPHONE6 || IS_IPHONE6_Plus)?5:8;
+                [locationCellView.dosomethingImage2 setImageWithURL:[NSURL URLWithString:dosomethingImage2]];
+                
+            }
+            if (![[dosomethingImageArry objectAtIndex:2]isEqualToString:@""])
+            {
+                dosomethingImage3=[dosomethingImageArry objectAtIndex:2];
+                [locationCellView.dosomethingImage3 setImageWithURL:[NSURL URLWithString:dosomethingImage3]];
+            }
+        }
+        
+        
+        if([profileImg isEqual: [NSNull null]] || [profileImg isEqualToString:@""])
+        {
+            [locationCellView.imageProfile setImage:[UIImage imageNamed:@"profile_noimg"]];
+        }
+        else
+        {
+            profileImg= [profileImg stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+            //        downloadImageFromUrl(profileImg,locationCellView.imageProfile);
+            [locationCellView.imageProfile setImageWithURL:[NSURL URLWithString:profileImg]];
+            
+            //        [locationCellView.imageProfile setImage:[UIImage imageNamed:profileImg]];
             
         }
-    }
-    else if([dosomethingImageArry count] == 2){
-         NSLog(@"count two");
-        if(![[dosomethingImageArry objectAtIndex:0]isEqualToString:@""])
-        {
-              locationCellView.dosomethingImage1Xposition.constant=60;
-            dosomethingImage1=[dosomethingImageArry objectAtIndex:0];
-           
-            [locationCellView.dosomethingImage1 setImageWithURL:[NSURL URLWithString:dosomethingImage1]];
+        if([checkMatchUser isEqualToString:@"No"]){
+            [locationCellView.requestsendBtn setTitle:@"" forState:UIControlStateNormal];
+            [locationCellView.dosomethingImage1 setHidden:NO];
+            [locationCellView.dosomethingImage2 setHidden:NO];
+            [locationCellView.dosomethingImage3 setHidden:NO];
             
         }
-        if (![[dosomethingImageArry objectAtIndex:1] isEqualToString:@""])
-        {
-            dosomethingImage2=[dosomethingImageArry objectAtIndex:1];
-            locationCellView.dosomethingImage2Xposition.constant=30;
-            [locationCellView.dosomethingImage2 setImageWithURL:[NSURL URLWithString:dosomethingImage2]];
-           
-            locationCellView.dosomethingImage3.image=[UIImage imageNamed:@""];
-            
+        else{
+            [locationCellView.hobbiesImagebackView setBackgroundColor:[UIColor colorWithRed:(218/255.0) green:(40/255.0) blue:(64.0/255.0f) alpha:1.0]];
+            [locationCellView.requestsendBtn setTitle:@"Matched" forState:UIControlStateNormal];
+            [locationCellView.requestsendBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+            locationCellView.requestsendBtn.titleLabel.font = [UIFont fontWithName:@"Patron-Regular" size:15];
+            locationCellView.sendRequest.text =@"";
+            [locationCellView.dosomethingImage1 setHidden:YES];
+            [locationCellView.dosomethingImage2 setHidden:YES];
+            [locationCellView.dosomethingImage3 setHidden:YES];
         }
 
         
-    }else {
-   
-          if(![[dosomethingImageArry objectAtIndex:0]isEqualToString:@""])
-           {
-                dosomethingImage1=[dosomethingImageArry objectAtIndex:0];
-               locationCellView.dosomethingImage1Xposition.constant=10;
-              [locationCellView.dosomethingImage1 setImageWithURL:[NSURL URLWithString:dosomethingImage1]];
-               
-           }
-         if (![[dosomethingImageArry objectAtIndex:1] isEqualToString:@""])
-        {
-            dosomethingImage2=[dosomethingImageArry objectAtIndex:1];
-            locationCellView.dosomethingImage2Xposition.constant=(IS_IPHONE6 || IS_IPHONE6_Plus)?5:8;
-            [locationCellView.dosomethingImage2 setImageWithURL:[NSURL URLWithString:dosomethingImage2]];
-           
-        }
-       if (![[dosomethingImageArry objectAtIndex:2]isEqualToString:@""])
-        {
-             dosomethingImage3=[dosomethingImageArry objectAtIndex:2];
-            [locationCellView.dosomethingImage3 setImageWithURL:[NSURL URLWithString:dosomethingImage3]];
-        }
-    }
-   
-    
-    if([profileImg isEqual: [NSNull null]] || [profileImg isEqualToString:@""])
-    {
-        [locationCellView.imageProfile setImage:[UIImage imageNamed:@"profile_noimg"]];
-    }
-    else
-    {
-        profileImg= [profileImg stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-//        downloadImageFromUrl(profileImg,locationCellView.imageProfile);
-        [locationCellView.imageProfile setImageWithURL:[NSURL URLWithString:profileImg]];
-
-//        [locationCellView.imageProfile setImage:[UIImage imageNamed:profileImg]];
-   
-    }
-    
-    locationCellView.imageProfile.layer.cornerRadius = locationCellView.imageProfile.frame.size.height/2;
-    
-    locationCellView.imageProfile.layer.masksToBounds = YES;
-    
-    [locationCellView.requestsendBtn addTarget:self action:@selector(didClickRequestSend:) forControlEvents:UIControlEventTouchUpInside];
-   
+        locationCellView.imageProfile.layer.cornerRadius = locationCellView.imageProfile.frame.size.height/2;
+        
+        locationCellView.imageProfile.layer.masksToBounds = YES;
+        
+        [locationCellView.requestsendBtn addTarget:self action:@selector(didClickRequestSend:) forControlEvents:UIControlEventTouchUpInside];
+        
     }
     return locationCellView;
+
 }
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
 {
+    
     CGSize returnSize = CGSizeZero;
-    if (IS_IPHONE6)
-        returnSize = CGSizeMake((self.view.frame.size.width / 3.300f), 184);
+    if (IS_IPHONE6){
+        if(testCollection==YES){
+            returnSize = CGSizeMake(((self.view.frame.size.width) / 3.300f), 184);//3.300f
+        }else
+            returnSize = CGSizeMake((self.view.frame.size.width / 3.300f), 184);//3.300f
+        
+    }
     if(IS_IPHONE6_Plus)
         returnSize = CGSizeMake((self.view.frame.size.width / 3.300f), 182);
     if (IS_IPHONE4 ||IS_IPHONE5 )
@@ -707,7 +765,7 @@
         return UIEdgeInsetsMake(0,15, 0, 0);
     }
     else if(IS_IPHONE6)
-    {
+    {   
         return UIEdgeInsetsMake(0,0, 0,5);
     }
     else if(IS_IPHONE5)
@@ -728,14 +786,13 @@
     if(isgestureenable ==YES)
     {
     cell = [collectionView cellForItemAtIndexPath:indexPath];
-      
-        if([detailsArray count] == 0)
-        {
-             detailsArray = [[commonlocationArray objectAtIndex:indexPath.row] mutableCopy];
-        }
-        
+//        if([detailsArray count] == 0)
+//        {
+//            detailsArray = [[commonlocationArray objectAtIndex:indexPath.row] mutableCopy];
+//        }
+        NSLog(@"currentPage_On_Push-->%@",currentloadPage);
+        detailsArray = [[commonlocationArray objectAtIndex:indexPath.row] mutableCopy];
         DSNearByDetailViewController * detailViewController  = [[DSNearByDetailViewController alloc]initWithNibName:@"DSNearByDetailViewController" bundle:nil];
-    
         detailViewController.userDetailsArray = detailsArray;
         [self.navigationController pushViewController:detailViewController animated:YES];
     }
@@ -780,6 +837,9 @@
     while (![button isKindOfClass:[UICollectionViewCell class]]) {
         button = [button superview];
     }
+    UIButton *RequestBtn = (UIButton *)sender;
+    NSLog(@"RequestBtn.tag%ld",(long)RequestBtn.tag);
+    selectedRequestBtnIndex = RequestBtn.tag;
     
     NSIndexPath *indexPath;
     
@@ -799,7 +859,13 @@
         locationCellView.requestsendBtn = buttonSender;
         [locationCellView.hobbiesImagebackView setBackgroundColor:[UIColor whiteColor]];
         locationCellView.sendRequest.text =@"Request Sent!";
-        locationCellView.sendRequest.textColor=[UIColor lightGrayColor];
+         locationCellView.sendRequest.textColor=[UIColor lightGrayColor];
+        
+        [locationCellView.dosomethingImage1 setHidden:NO];
+        [locationCellView.dosomethingImage2 setHidden:NO];
+        [locationCellView.dosomethingImage3 setHidden:NO];
+        
+       
         
         NSMutableDictionary *dict = [[NSMutableDictionary alloc] init];
         dict = [[commonlocationArray objectAtIndex:indexPath.row] mutableCopy];
@@ -807,8 +873,8 @@
         [dict removeObjectForKey:@"send_request"];
         [dict setObject:@"Yes" forKey:@"send_request"];
         detailsArray =[dict copy];
-       
-        
+        [commonlocationArray replaceObjectAtIndex:indexPath.row withObject:detailsArray];
+
         dosomethingImageArry =[[[commonlocationArray valueForKey:@"dosomething"]objectAtIndex:indexPath.row] valueForKey:@"InactiveImage"];
         NSString *dosomethingImage1;
         NSString *dosomethingImage2;
@@ -852,92 +918,91 @@
             NSLog(@"count two");
         }else{
         
-       dosomethingImage1=[dosomethingImageArry objectAtIndex:0];
-       dosomethingImage2=[dosomethingImageArry objectAtIndex:1];
-        dosomethingImage3=[dosomethingImageArry objectAtIndex:2];
-        
+            dosomethingImage1=[dosomethingImageArry objectAtIndex:0];
+            dosomethingImage2=[dosomethingImageArry objectAtIndex:1];
+            dosomethingImage3=[dosomethingImageArry objectAtIndex:2];
        
         [locationCellView.dosomethingImage1 setImageWithURL:[NSURL URLWithString:dosomethingImage1]];
         [locationCellView.dosomethingImage2 setImageWithURL:[NSURL URLWithString:dosomethingImage2]];
         [locationCellView.dosomethingImage3 setImageWithURL:[NSURL URLWithString:dosomethingImage3]];
-            
         
         }
+        
         [self loadRequestsendWebService];
         
       
     }
       
-    else if([RequestStr isEqualToString:@"Yes"])        //([locationCellView.sendRequest.text isEqualToString:@"Request Sent!"])
-    {
-        UIButton *buttonSender = (UIButton *)sender;
-        locationCellView.requestsendBtn = buttonSender;
-        [locationCellView.hobbiesImagebackView setBackgroundColor:[UIColor colorWithRed:(218/255.0) green:(40/255.0) blue:(64.0/255.0f) alpha:1.0]];
-        locationCellView.sendRequest.text =@"Send Request";
-        locationCellView.sendRequest.textColor=[UIColor whiteColor];
-        
-        NSMutableDictionary *dict = [[NSMutableDictionary alloc] init];
-        dict = [[commonlocationArray objectAtIndex:indexPath.row] mutableCopy];
-        
-        [dict removeObjectForKey:@"send_request"];
-        [dict setObject:@"No" forKey:@"send_request"];
-        detailsArray =[dict copy];
-         [commonlocationArray replaceObjectAtIndex:indexPath.row withObject:detailsArray];
-        
-        
-        dosomethingImageArry =[[[commonlocationArray valueForKey:@"dosomething"]objectAtIndex:indexPath.row] valueForKey:@"NearbyImage"];
-        NSString *dosomethingImage1;
-        NSString *dosomethingImage2;
-        NSString *dosomethingImage3;
-        if([dosomethingImageArry count]== 1){
-           
-            if(![[dosomethingImageArry objectAtIndex:0]isEqualToString:@""])
-            {
-                
-                locationCellView.dosomethingImage1Xposition.constant=40;
-                
-                dosomethingImage1=[dosomethingImageArry objectAtIndex:0];
-                
-                [locationCellView.dosomethingImage1 setImageWithURL:[NSURL URLWithString:dosomethingImage1]];
-                locationCellView.dosomethingImage2.image=[UIImage imageNamed:@""];
-                locationCellView.dosomethingImage3.image=[UIImage imageNamed:@""];
-                
-            }
-
-        }
-        else if([dosomethingImageArry count] == 2){
-            if(![[dosomethingImageArry objectAtIndex:0]isEqualToString:@""])
-            {
-                locationCellView.dosomethingImage1Xposition.constant=60;
-                dosomethingImage1=[dosomethingImageArry objectAtIndex:0];
-                
-                [locationCellView.dosomethingImage1 setImageWithURL:[NSURL URLWithString:dosomethingImage1]];
-                
-            }
-            if (![[dosomethingImageArry objectAtIndex:1] isEqualToString:@""])
-            {
-                dosomethingImage2=[dosomethingImageArry objectAtIndex:1];
-                locationCellView.dosomethingImage2Xposition.constant=30;
-                [locationCellView.dosomethingImage2 setImageWithURL:[NSURL URLWithString:dosomethingImage2]];
-                
-                locationCellView.dosomethingImage3.image=[UIImage imageNamed:@""];
-                
-            }
-
-            NSLog(@"count two");
-        }else{
-            
-            dosomethingImage1=[dosomethingImageArry objectAtIndex:0];
-            dosomethingImage2=[dosomethingImageArry objectAtIndex:1];
-            dosomethingImage3=[dosomethingImageArry objectAtIndex:2];
-            
-            
-            [locationCellView.dosomethingImage1 setImageWithURL:[NSURL URLWithString:dosomethingImage1]];
-            [locationCellView.dosomethingImage2 setImageWithURL:[NSURL URLWithString:dosomethingImage2]];
-            [locationCellView.dosomethingImage3 setImageWithURL:[NSURL URLWithString:dosomethingImage3]];
-        }
-        [self loadRequestsendWebService];
-    }
+   // else if([RequestStr isEqualToString:@"Yes"])        //([locationCellView.sendRequest.text isEqualToString:@"Request Sent!"])
+//    {
+//        UIButton *buttonSender = (UIButton *)sender;
+//        locationCellView.requestsendBtn = buttonSender;
+//        [locationCellView.hobbiesImagebackView setBackgroundColor:[UIColor colorWithRed:(218/255.0) green:(40/255.0) blue:(64.0/255.0f) alpha:1.0]];
+//        locationCellView.sendRequest.text =@"Send Request";
+//        locationCellView.sendRequest.textColor=[UIColor whiteColor];
+//        
+//        NSMutableDictionary *dict = [[NSMutableDictionary alloc] init];
+//        dict = [[commonlocationArray objectAtIndex:indexPath.row] mutableCopy];
+//        
+//        [dict removeObjectForKey:@"send_request"];
+//        [dict setObject:@"No" forKey:@"send_request"];
+//        detailsArray =[dict copy];
+//         [commonlocationArray replaceObjectAtIndex:indexPath.row withObject:detailsArray];
+//        
+//        
+//        dosomethingImageArry =[[[commonlocationArray valueForKey:@"dosomething"]objectAtIndex:indexPath.row] valueForKey:@"NearbyImage"];
+//        NSString *dosomethingImage1;
+//        NSString *dosomethingImage2;
+//        NSString *dosomethingImage3;
+//        if([dosomethingImageArry count]== 1){
+//           
+//            if(![[dosomethingImageArry objectAtIndex:0]isEqualToString:@""])
+//            {
+//                
+//                locationCellView.dosomethingImage1Xposition.constant=40;
+//                
+//                dosomethingImage1=[dosomethingImageArry objectAtIndex:0];
+//                
+//                [locationCellView.dosomethingImage1 setImageWithURL:[NSURL URLWithString:dosomethingImage1]];
+//                locationCellView.dosomethingImage2.image=[UIImage imageNamed:@""];
+//                locationCellView.dosomethingImage3.image=[UIImage imageNamed:@""];
+//                
+//            }
+//
+//        }
+//        else if([dosomethingImageArry count] == 2){
+//            if(![[dosomethingImageArry objectAtIndex:0]isEqualToString:@""])
+//            {
+//                locationCellView.dosomethingImage1Xposition.constant=60;
+//                dosomethingImage1=[dosomethingImageArry objectAtIndex:0];
+//                
+//                [locationCellView.dosomethingImage1 setImageWithURL:[NSURL URLWithString:dosomethingImage1]];
+//                
+//            }
+//            if (![[dosomethingImageArry objectAtIndex:1] isEqualToString:@""])
+//            {
+//                dosomethingImage2=[dosomethingImageArry objectAtIndex:1];
+//                locationCellView.dosomethingImage2Xposition.constant=30;
+//                [locationCellView.dosomethingImage2 setImageWithURL:[NSURL URLWithString:dosomethingImage2]];
+//                
+//                locationCellView.dosomethingImage3.image=[UIImage imageNamed:@""];
+//                
+//            }
+//
+//            NSLog(@"count two");
+//        }else{
+//            
+//            dosomethingImage1=[dosomethingImageArry objectAtIndex:0];
+//            dosomethingImage2=[dosomethingImageArry objectAtIndex:1];
+//            dosomethingImage3=[dosomethingImageArry objectAtIndex:2];
+//            
+//            
+//            [locationCellView.dosomethingImage1 setImageWithURL:[NSURL URLWithString:dosomethingImage1]];
+//            [locationCellView.dosomethingImage2 setImageWithURL:[NSURL URLWithString:dosomethingImage2]];
+//            [locationCellView.dosomethingImage3 setImageWithURL:[NSURL URLWithString:dosomethingImage3]];
+//        }
+//        [self loadRequestsendWebService];
+//    }
         
         }
     }
@@ -955,11 +1020,12 @@
                                 {
                                     if([[[responseObject valueForKey:@"sendrequest"]valueForKey:@"status"] isEqualToString:@"success"])
                                     {
+                                        
                                         matchUserArray =[[responseObject valueForKey:@"sendrequest"]valueForKey:@"Conversaion"];
                                          [self loadMatchActivityMethod];
-
-                 
-                                    }
+                                        
+                                        //_isSendRequestClicked=YES;
+                                                                          }
              
                                 }
                              failure:^(AFHTTPRequestOperation *operation, id error)
@@ -997,12 +1063,12 @@
                [self filterviewPosition];
           }];
         
-       
-            
-            
+        
+        
+        
             [customNavigation.FilterBtn setImage:[UIImage imageNamed:@""] forState:UIControlStateNormal];
             [customNavigation.FilterBtn setTitle:@"Apply" forState:UIControlStateNormal];
-        
+                
             appDelegate.settingButton.userInteractionEnabled=NO;
             isFilteraction=YES;
             [self.locationCollectionView setUserInteractionEnabled:YES];
@@ -1018,7 +1084,7 @@
     {
         self.collectionviewxpostion.constant =10;
         self.CollectionviewWidth.constant    =self.view.frame.size.width-10;
-        self.filterviewxposition.constant    = self.CollectionviewWidth.constant+10;
+        self.filterviewxposition.constant    = self.view.frame.size.width+10;//self.CollectionviewWidth.constant+10;
         [UIView animateWithDuration:0.5 animations:^{
             
             [self.view layoutIfNeeded];
@@ -1204,11 +1270,11 @@
 - (void)releaseToRefresh:(UIRefreshControl *)_refreshControl
 {
     currentloadPage=@"";
-    avalableStatus=@"";
-    GenderStatus =@"";
-    onlineStatus  =@"";
-    filterAge     =@"";
-    filterDistance=@"";
+    //avalableStatus=@"";
+    //GenderStatus =@"";
+    //onlineStatus  =@"";
+    //filterAge     =@"";
+    //filterDistance=@"";
     isAllPost = NO;
     [COMMON DSLoadIcon:self.view];
     [self nearestLocationWebservice];
@@ -1219,7 +1285,7 @@
     isgestureenable=YES;
     self.collectionviewxpostion.constant =10;
     self.CollectionviewWidth.constant    =self.view.frame.size.width-10;
-    self.filterviewxposition.constant    = self.CollectionviewWidth.constant+10;
+    self.filterviewxposition.constant    = self.view.frame.size.width+10;//self.CollectionviewWidth.constant+10;
     [UIView animateWithDuration:0.5 animations:^{
         
         [self.view layoutIfNeeded];
@@ -1430,7 +1496,7 @@
     } failure:^(AFHTTPRequestOperation *operation, id error) {
         
     }];
-    
+  [self.matchActivityView removeFromSuperview];
     
    
  
@@ -1502,8 +1568,6 @@
             
             [self.currentUserImg setImage:[UIImage imageNamed:objCurrentuserImg]];
         }
-        
-        
         
         self.currentUserImg .layer.cornerRadius = 60;
         self.currentUserImg .clipsToBounds = YES;
@@ -1614,9 +1678,13 @@
     {
         UIButton *buttonSender = (UIButton *)sender;
         locationCellView.requestsendBtn = buttonSender;
-        [locationCellView.hobbiesImagebackView setBackgroundColor:[UIColor whiteColor]];
-        locationCellView.sendRequest.text =@"Request Sent!";
-        locationCellView.sendRequest.textColor=[UIColor lightGrayColor];
+        //[locationCellView.hobbiesImagebackView setBackgroundColor:[UIColor whiteColor]];
+       // locationCellView.sendRequest.text =@"Request Sent!";
+        //locationCellView.sendRequest.textColor=[UIColor lightGrayColor];
+        [locationCellView.hobbiesImagebackView setBackgroundColor:[UIColor colorWithRed:(218/255.0) green:(40/255.0) blue:(64.0/255.0f) alpha:1.0]];
+        [locationCellView.requestsendBtn setTitle:@"Matched" forState:UIControlStateNormal];
+        [locationCellView.requestsendBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+        locationCellView.requestsendBtn.titleLabel.font = [UIFont fontWithName:@"Patron-Regular" size:15];
         
         
         NSMutableDictionary *dict = [[NSMutableDictionary alloc] init];
@@ -1673,9 +1741,9 @@
             dosomethingImage3=[dosomethingImageArry objectAtIndex:2];
             
             
-            [locationCellView.dosomethingImage1 setImageWithURL:[NSURL URLWithString:dosomethingImage1]];
-            [locationCellView.dosomethingImage2 setImageWithURL:[NSURL URLWithString:dosomethingImage2]];
-            [locationCellView.dosomethingImage3 setImageWithURL:[NSURL URLWithString:dosomethingImage3]];
+           // [locationCellView.dosomethingImage1 setImageWithURL:[NSURL URLWithString:dosomethingImage1]];
+            //[locationCellView.dosomethingImage2 setImageWithURL:[NSURL URLWithString:dosomethingImage2]];
+            //[locationCellView.dosomethingImage3 setImageWithURL:[NSURL URLWithString:dosomethingImage3]];
             
             
         }

@@ -31,6 +31,7 @@
     self.layoutConstraintBackBtnYPos.constant =25;
     self.layoutConstraintSaveBtnYPos.constant = 25;
     self.layoutConstraintBackArrowYPos.constant=39;
+    self.layoutConstraintFilterBtnYPos.constant=26;
 
     }
 }

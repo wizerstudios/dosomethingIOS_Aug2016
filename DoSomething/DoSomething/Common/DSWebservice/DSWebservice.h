@@ -197,6 +197,14 @@ notification_sound:(NSString *)isnotification_sound
            success:(WebserviceRequestSuccessHandler)success
            failure:(WebserviceRequestFailureHandler)failure;
 
+//POST CancelRequest API
+
+-(void)cancelRequest:(NSString *)sendRequestURL
+         sessionid:(NSString *)sessionid
+request_send_user_id:(NSString *)request_send_user_id
+           success:(WebserviceRequestSuccessHandler)success
+           failure:(WebserviceRequestFailureHandler)failure;
+
 //Get ChatHistory API
 
 -(void)getchatHistory:(NSString *)chatHistoryURL

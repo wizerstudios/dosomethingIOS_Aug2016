@@ -10,9 +10,6 @@
 
 @interface ChatDetailCustomcell : UITableViewCell{
     
-    
-  
-    
     CGSize dataSize;
     CGSize windowSize;
     NSMutableArray *chatArray;

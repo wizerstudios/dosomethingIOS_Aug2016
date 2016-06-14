@@ -28,5 +28,7 @@
 
 @property (strong, nonatomic) IBOutlet NSLayoutConstraint *layoutConstraintSaveBtnYPos;
 
+@property (strong, nonatomic) IBOutlet NSLayoutConstraint *layoutConstraintFilterBtnYPos;
+
 
 @end

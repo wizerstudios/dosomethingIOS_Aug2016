@@ -29,5 +29,5 @@
 @property (strong, nonatomic) IBOutlet SCGIFImageView * gifImageView;
 
 //-(void)onStatusbarChange:(NSNotification*)notification;
-
+@property (assign, nonatomic) BOOL  isFromLoginView;
 @end
