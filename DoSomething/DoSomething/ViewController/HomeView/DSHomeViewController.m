@@ -81,11 +81,7 @@
     isMyCurrentIndex=NO;
     self.walkAlterview.hidden =YES;
     [self flashOn:walkAlterviewBtn];
-    
-    
-
    
-
 }
 
 - (void)viewWillAppear:(BOOL)animated{
@@ -135,14 +131,7 @@
                        
                        
                        };
-    
-//    commonDict = @{
-//                   @"BGimageArray":@[@"finalSplash",@"finalBg1",@"finalBg2",@"finalBg3",@"finalBg4"],
-//                   @"centerLogoImageArray":@[@"bgText5",@"bgText1",@"bgText2",@"bgText3",@"bgText4"
-//                                             ],
-//                   
-//                   
-//                   };
+
     
         if (IS_IPHONE4)
         {
@@ -191,16 +180,15 @@
     
     frontImageView = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, self.view.bounds.size.height)];
     
-//    alphaView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, self.view.bounds.size.height)];
+
     
     [self.view addSubview:frontImageView];
     
-//    [self.view addSubview:alphaView];
+
     
     [frontImageView setAlpha:0.0f];
     
-//    [alphaView setBackgroundColor:[UIColor whiteColor]];
-//    alphaView.alpha = 0;
+
     
 }
 
@@ -302,9 +290,11 @@
 
 - (UIView *)backgroundViewAtIndex:(NSInteger)index scrollView:(PWParallaxScrollView *)scrollView
 {
+    
      UIImageView *imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:[commonDict valueForKey:@"BGimageArray"][index]]];
      imageView.contentMode = UIViewContentModeScaleAspectFill;
      return imageView;
+    
     
 }
 - (UIView *)foregroundViewAtIndex:(NSInteger)index scrollView:(PWParallaxScrollView *)scrollView
@@ -398,6 +388,7 @@
 {
      Currentindex = index;
      isMyCurrentIndex=YES;
+    
 }
 
 
