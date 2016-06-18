@@ -332,7 +332,7 @@ DSAppCommon *sharedCommon = nil;
 
 #pragma mark get user CurrentLocation
 
-- (void)getUserCurrenLocation{
+- (void)getUserCurrentLocation{
     
     if(!locationManager){
         locationManager                 = [[CLLocationManager alloc] init];

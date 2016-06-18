@@ -102,6 +102,7 @@
     else
         self.viewHeightConstraint.constant = 525;//518
     
+    
     [self setCommonDict];
     [self initControl];
     [self reloadData];

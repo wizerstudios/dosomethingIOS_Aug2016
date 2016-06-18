@@ -108,9 +108,9 @@
     
     
     deviceUdid = [OpenUDID value];
-    [self getUserCurrenLocation];//OLD
+    [self getUserCurrentLocation];//OLD
     
-    //[COMMON getUserCurrenLocation];//ADDED
+    //[COMMON getUserCurrentLocation];//ADDEDnot using
     
     if ([temp isEqualToString:@"createAnAccount"]){
         
@@ -165,7 +165,7 @@
 }
 #pragma mark get user CurrentLocation
 
-- (void)getUserCurrenLocation{
+- (void)getUserCurrentLocation{
     
     if(!locationManager){
         
@@ -190,11 +190,12 @@
     currentLatitude         = [NSString stringWithFormat:@"%@",[NSNumber numberWithDouble:newLocation.coordinate.latitude]];
     
     currentLongitude        = [NSString stringWithFormat:@"%@",[NSNumber numberWithDouble:newLocation.coordinate.longitude]];
-    
+  // OLD
 //    [[NSUserDefaults standardUserDefaults] setObject:currentLatitude  forKey:@"currentLatitude"];
 //    [[NSUserDefaults standardUserDefaults] setObject:currentLongitude forKey:@"currentLongitude"];
 //    [[NSUserDefaults standardUserDefaults] synchronize];
     
+    //NEW
     [[NSUserDefaults standardUserDefaults] setObject:currentLatitude  forKey:CurrentLatitude];
     [[NSUserDefaults standardUserDefaults] setObject:currentLongitude forKey:CurrentLongitude];
     [[NSUserDefaults standardUserDefaults] synchronize];

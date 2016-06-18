@@ -62,6 +62,7 @@
 		2B83CACA1BE8975F0064EC7F /* Default-736h@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2B83CAC91BE8975F0064EC7F /* Default-736h@3x.png */; };
 		2B83CACE1BE8D4FD0064EC7F /* NSString+validations.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B83CACD1BE8D4FD0064EC7F /* NSString+validations.m */; };
 		2BC69E6F1C2976E80074C486 /* ChatTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BC69E6E1C2976E80074C486 /* ChatTextView.m */; };
+		2BCDC88B1D1557D400E901D4 /* DSHomeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2BCDC88A1D1557D400E901D4 /* DSHomeViewController.xib */; };
 		2BD72ADF1BFCC2BF003846E9 /* DAAutoScroll.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BD72ADE1BFCC2BF003846E9 /* DAAutoScroll.m */; };
 		2BD72AE21BFCC584003846E9 /* AFNetworkActivityLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BD72AE11BFCC584003846E9 /* AFNetworkActivityLogger.m */; };
 		2BD72AF61BFCC5AD003846E9 /* AFHTTPRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BD72AE41BFCC5AD003846E9 /* AFHTTPRequestOperation.m */; };
@@ -159,7 +160,6 @@
 		EAEF25351BCFEBF400F83E82 /* CustomNavigationView.m in Sources */ = {isa = PBXBuildFile; fileRef = EAEF25331BCFEBF400F83E82 /* CustomNavigationView.m */; };
 		EAEF25361BCFEBF400F83E82 /* CustomNavigationView.xib in Resources */ = {isa = PBXBuildFile; fileRef = EAEF25341BCFEBF400F83E82 /* CustomNavigationView.xib */; };
 		EAF1DC511BD8B2AF00D51354 /* DSHomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EAF1DC4F1BD8B2AF00D51354 /* DSHomeViewController.m */; };
-		EAF1DC521BD8B2AF00D51354 /* DSHomeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = EAF1DC501BD8B2AF00D51354 /* DSHomeViewController.xib */; };
 		EAFC96581BD20FD400B3593D /* DSInterestAndHobbiesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EAFC96561BD20FD400B3593D /* DSInterestAndHobbiesViewController.m */; };
 		EAFC96591BD20FD400B3593D /* DSInterestAndHobbiesViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = EAFC96571BD20FD400B3593D /* DSInterestAndHobbiesViewController.xib */; };
 		EAFC97971BD21CF800B3593D /* DSInterestAndHobbiesCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = EAFC97951BD21CF800B3593D /* DSInterestAndHobbiesCollectionViewCell.m */; };
@@ -241,6 +241,7 @@
 		2B83CACD1BE8D4FD0064EC7F /* NSString+validations.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+validations.m"; sourceTree = "<group>"; };
 		2BC69E6D1C2976E80074C486 /* ChatTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChatTextView.h; sourceTree = "<group>"; };
 		2BC69E6E1C2976E80074C486 /* ChatTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChatTextView.m; sourceTree = "<group>"; };
+		2BCDC88A1D1557D400E901D4 /* DSHomeViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DSHomeViewController.xib; sourceTree = "<group>"; };
 		2BD72ADD1BFCC2BF003846E9 /* DAAutoScroll.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DAAutoScroll.h; sourceTree = "<group>"; };
 		2BD72ADE1BFCC2BF003846E9 /* DAAutoScroll.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DAAutoScroll.m; sourceTree = "<group>"; };
 		2BD72AE01BFCC584003846E9 /* AFNetworkActivityLogger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFNetworkActivityLogger.h; sourceTree = "<group>"; };
@@ -402,7 +403,6 @@
 		EAEF25341BCFEBF400F83E82 /* CustomNavigationView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CustomNavigationView.xib; sourceTree = "<group>"; };
 		EAF1DC4E1BD8B2AF00D51354 /* DSHomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DSHomeViewController.h; sourceTree = "<group>"; };
 		EAF1DC4F1BD8B2AF00D51354 /* DSHomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DSHomeViewController.m; sourceTree = "<group>"; };
-		EAF1DC501BD8B2AF00D51354 /* DSHomeViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DSHomeViewController.xib; sourceTree = "<group>"; };
 		EAFC96551BD20FD400B3593D /* DSInterestAndHobbiesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DSInterestAndHobbiesViewController.h; sourceTree = "<group>"; };
 		EAFC96561BD20FD400B3593D /* DSInterestAndHobbiesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DSInterestAndHobbiesViewController.m; sourceTree = "<group>"; };
 		EAFC96571BD20FD400B3593D /* DSInterestAndHobbiesViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DSInterestAndHobbiesViewController.xib; sourceTree = "<group>"; };
@@ -1124,7 +1124,7 @@
 			children = (
 				EAF1DC4E1BD8B2AF00D51354 /* DSHomeViewController.h */,
 				EAF1DC4F1BD8B2AF00D51354 /* DSHomeViewController.m */,
-				EAF1DC501BD8B2AF00D51354 /* DSHomeViewController.xib */,
+				2BCDC88A1D1557D400E901D4 /* DSHomeViewController.xib */,
 			);
 			name = HomeView;
 			path = ViewController/HomeView;
@@ -1261,7 +1261,6 @@
 			files = (
 				06E1A6ED1C886CD9008633D8 /* Constellation.caf in Resources */,
 				06E1A6E71C886CD9008633D8 /* By The Seaside.caf in Resources */,
-				EAF1DC521BD8B2AF00D51354 /* DSHomeViewController.xib in Resources */,
 				2B2C08911C27BB6C00996441 /* DSNearByDetailViewController.xib in Resources */,
 				6A0316F51CB5592300506435 /* PrivacyPolicy.docx in Resources */,
 				2B83CAC41BE895AB0064EC7F /* Default.png in Resources */,
@@ -1314,6 +1313,7 @@
 				06E1A6EF1C886CD9008633D8 /* Crystals.caf in Resources */,
 				C6D5F63A1BC7B52C0050C1AE /* Patron-Black.ttf in Resources */,
 				51F3C2F41BE75D40001E1FEC /* DSLocationViewController.xib in Resources */,
+				2BCDC88B1D1557D400E901D4 /* DSHomeViewController.xib in Resources */,
 				06E1A6E41C886CD9008633D8 /* Bamboo.caf in Resources */,
 				06E1A6F71C886CD9008633D8 /* Opening.caf in Resources */,
 				511C73651BE3804E00D3D61D /* DSChatsTableViewController.xib in Resources */,

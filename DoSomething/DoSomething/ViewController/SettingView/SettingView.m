@@ -69,7 +69,7 @@
 -(void)viewWillAppear:(BOOL)animated{
     
     [super viewWillAppear:animated];
-   // [self getUserCurrenLocation];
+   // [self getUserCurrentLocation];
     if ([COMMON isInternetReachable]) {
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
             [self loadLocationUpdateAPI];
@@ -280,7 +280,7 @@
 
 #pragma mark get user CurrentLocation
 
-- (void)getUserCurrenLocation{
+- (void)getUserCurrentLocation{
     
     if(!locationManager){
         

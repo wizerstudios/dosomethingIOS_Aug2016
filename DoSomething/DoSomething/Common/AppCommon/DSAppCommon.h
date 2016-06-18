@@ -58,7 +58,7 @@ typedef enum {
 - (void) showErrorAlert:(NSString *)strMessage;
 - (currentDevice)getCurrentDevice;
 - (BOOL) isUserLoggedIn;
-- (void)getUserCurrenLocation;
+- (void)getUserCurrentLocation;
 -(NSString *)getSessionID;
 -(NSString *)getUserID;
 -(NSString *)getLatitude;

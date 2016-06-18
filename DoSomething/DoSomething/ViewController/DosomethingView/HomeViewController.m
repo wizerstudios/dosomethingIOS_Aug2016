@@ -118,7 +118,7 @@
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    [self getUserCurrenLocation];
+    [self getUserCurrentLocation];
     
         
     if(isFromLoginView!=YES){
@@ -292,7 +292,7 @@
 
 #pragma mark get user CurrentLocation
 
-- (void)getUserCurrenLocation{
+- (void)getUserCurrentLocation{
     
     if(!locationManager){
         

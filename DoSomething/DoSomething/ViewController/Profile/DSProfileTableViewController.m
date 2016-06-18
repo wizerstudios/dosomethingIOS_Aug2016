@@ -322,7 +322,7 @@
 }
 -(void)profileImageDisplayMethod
 {
-    //     [self getUserCurrenLocation];
+    //     [self getUserCurrentLocation];
     NSString * strsessionID =[profileDict valueForKey:@"SessionId"];
     loginUserSessionID = strsessionID;
     

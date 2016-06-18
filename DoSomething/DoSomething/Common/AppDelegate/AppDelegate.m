@@ -108,7 +108,7 @@
     [self.window setRootViewController:self.navigationController];
     self.window.backgroundColor=[UIColor whiteColor];
     [self.window makeKeyAndVisible];
-    [COMMON getUserCurrenLocation];
+    //[COMMON getUserCurrentLocation];//hidden for alret reason
     [self TabBarViews];
     
     if ([COMMON isInternetReachable]) {
@@ -437,7 +437,7 @@
 //        [self loadonlineStausAPI:@"1"];
 //        [self startTimer];
 //    });
-    [COMMON getUserCurrenLocation];
+    //[COMMON getUserCurrentLocation];//hidden for alret reason
     
    }
 
