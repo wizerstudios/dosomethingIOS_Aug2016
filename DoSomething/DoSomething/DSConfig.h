@@ -99,6 +99,8 @@
 
 #define UnreadMsgCount              @"chatunreadmessage"
 
+#define LOCATION_MESSAGE            @"Turn on Location Services to allow DoSomething to find matches near you"
+
 //API Keys
 #define CheckUser_API               @"checkuser"
 #define User_Logout_Delete_API      @"useraction"
@@ -156,6 +158,10 @@
 #define FirstCreateProfile         @"ProfileView"
 
 #define FistSiginprofile          @"SiginProfile"
+
+//ALERT
+
+#define FirstTimeLocationAlert      @"firstTimeLocationAlert"
 
 //#define FirstMatchUser            @"Matchuserlocationview"
 

@@ -303,24 +303,29 @@ DSAppCommon *sharedCommon = nil;
     [_gifImageView removeFromSuperview];
 }
 
-- (void)DSLoaderIcon:(UIView *)view
-{
-    if([COMMON isInternetReachable]) {
-        [self DSRemoveLoading];
-        
-        NSURL *imageURL = [[NSBundle mainBundle] URLForResource:@"DoSomething_loading" withExtension:@"gif"];;
-        NSData *imageData = [NSData dataWithContentsOfURL:imageURL];
-        
-        CGFloat screenWidth = [UIScreen mainScreen].bounds.size.width;
-        CGFloat screenHeight = [UIScreen mainScreen].bounds.size.height;
-        CGFloat XPos,YPos;
-        XPos = ((screenWidth/2)-20);
-        YPos = ((screenHeight/2)-20);
-        _gifImageView = [[SCGIFImageView alloc] initWithFrame:CGRectMake(XPos,YPos,40,40)];
-        [_gifImageView setData:imageData];
-        
-        [view addSubview:_gifImageView];
+
+#pragma mark - checkLocationServicesTurnedOn
+- (void) checkLocationServicesTurnedOn:(NSString *)string{
+    if(![CLLocationManager locationServicesEnabled] || ([CLLocationManager authorizationStatus]!=kCLAuthorizationStatusAuthorizedWhenInUse && [CLLocationManager authorizationStatus]!=kCLAuthorizationStatusAuthorizedAlways))
+    {
+        if([string isEqualToString:@"login"]){
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"alertBoxLoginView"object:self userInfo:nil];
+        }
+        else{
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"alertBoxHomeView"object:self userInfo:nil];
+        }
     }
+    else{
+        
+       if([string isEqualToString:@"login"]){
+           [[NSNotificationCenter defaultCenter] postNotificationName:@"loginCurrentLocation"object:self userInfo:nil];
+       }
+       else{
+           [[NSNotificationCenter defaultCenter] postNotificationName:@"homeCurrentLocation"object:self userInfo:nil];
+       }
+        
+    }
+    
 }
 
 #pragma mark Set Message Count

@@ -52,7 +52,7 @@ typedef enum {
 -(NSString *)getCurrentDateTime;
 
 - (void)DSLoadIcon:(UIView *)view;
-- (void)DSLoaderIcon:(UIView *)view;
+
 - (void)DSRemoveLoading;
 -(BOOL)isInternetReachable;
 - (void) showErrorAlert:(NSString *)strMessage;
@@ -63,6 +63,9 @@ typedef enum {
 -(NSString *)getUserID;
 -(NSString *)getLatitude;
 -(NSString *)getLongitude;
+//location
+
+-(void)checkLocationServicesTurnedOn:(NSString *)string;
 
 - (CGSize)dataSize:(NSString *)string withFontName:(NSString *)fontName ofSize:(NSInteger)size withSize:(CGSize)LabelWidth;
 
