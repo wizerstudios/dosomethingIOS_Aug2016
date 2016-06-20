@@ -121,15 +121,11 @@
     currentloadPage= @"";
     if (![CLLocationManager locationServicesEnabled]) {
         
-        
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Location Service Disabled"
-                                                        message:@"Turn on location services to allow “Do Something” to determine your locationDoSomething would like to use your location"
-                                                       delegate:self
-                                              cancelButtonTitle:@"Settings"
-                                              otherButtonTitles:@"Cancel", nil];
-        [alert show];
-        
-        
+        [self alertBoxView];
+    }
+    else if([CLLocationManager locationServicesEnabled]){
+        //checkApplicationHasLocationServicesPermission
+        [self checkApplicationHasLocationServicesPermission];
     }
 
     else
@@ -152,6 +148,23 @@
     
     // Do any additional setup after loading the view from its nib.
 }
+
+#pragma mark - checkApplicationHasLocationServicesPermission
+-(void) checkApplicationHasLocationServicesPermission {
+    if ([CLLocationManager authorizationStatus] == kCLAuthorizationStatusDenied) {
+        [self alertBoxView];
+    }
+}
+-(void)alertBoxView{
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Location Service Disabled"
+                                                    message:@"Turn on location services to allow “Do Something” to determine your locationDoSomething would like to use your location"
+                                                   delegate:self
+                                          cancelButtonTitle:@"Settings"
+                                          otherButtonTitles:@"Cancel", nil];
+    [alert show];
+
+}
+
 -(void)removeLoading{
     [COMMON DSRemoveLoading];
 }
@@ -424,8 +437,8 @@
     if([COMMON isInternetReachable]){
         [objWebservice locationUpdate:LocationUpdate_API
                             sessionid:[COMMON getSessionID]
-                             latitude:currentLatitude
-                            longitude:currentLongitude
+                             latitude:[COMMON getLatitude]//currentLatitude
+                            longitude:[COMMON getLongitude]//currentLongitude
                           deviceToken:deviceToken
                              pushType:push_type
                               success:^(AFHTTPRequestOperation *operation, id responseObject){

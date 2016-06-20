@@ -37,7 +37,7 @@
 #define Gray_Color  [UIColor colorWithRed:169.0f/255.0f green:169.0f/255.0f blue:169.0f/255.0f alpha:1.0f]
 
 
-@interface HomeViewController ()<UICollectionViewDataSource,UICollectionViewDelegate>
+@interface HomeViewController ()<UICollectionViewDataSource,UICollectionViewDelegate,UIAlertViewDelegate>
 {
     AppDelegate             *appDelegate;
     DSWebservice            * objWebService;
@@ -118,8 +118,10 @@
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    [self getUserCurrentLocation];
     
+    [self checkLocationServicesTurnedOn];
+    
+    //[self getUserCurrentLocation];
         
     if(isFromLoginView!=YES){
         [[NSNotificationCenter defaultCenter] addObserver:self
@@ -288,6 +290,40 @@
     audioPlayer = [[AVAudioPlayer alloc]initWithContentsOfURL:[NSURL fileURLWithPath:path]
                                                         error:NULL];
     [audioPlayer prepareToPlay];
+}
+
+#pragma mark - checkLocationServicesTurnedOn
+- (void) checkLocationServicesTurnedOn {
+    if (![CLLocationManager locationServicesEnabled]) {
+        [self alertBoxView];
+    }
+    else if([CLLocationManager locationServicesEnabled]){
+        //checkApplicationHasLocationServicesPermission
+        [self checkApplicationHasLocationServicesPermission];
+    }
+    
+}
+#pragma mark - checkApplicationHasLocationServicesPermission
+-(void) checkApplicationHasLocationServicesPermission {
+    if ([CLLocationManager authorizationStatus] == kCLAuthorizationStatusDenied) {
+        [self alertBoxView];
+    }
+}
+-(void)alertBoxView{
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Do Something"
+                                                    message:@"Turn on Location Services to allow DoSomething to find matches near you"
+                                                   delegate:self
+                                          cancelButtonTitle:@"Ok"
+                                          otherButtonTitles:@"Cancel",nil];
+    [alert show];
+}
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if (buttonIndex == 0)
+    {
+        //code for getUserCurrentLocation
+        [self getUserCurrentLocation];
+    }
 }
 
 #pragma mark get user CurrentLocation

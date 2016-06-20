@@ -260,11 +260,18 @@ DSAppCommon *sharedCommon = nil;
 -(NSString *)getLatitude
 {
     NSString *Latitude =[[NSUserDefaults standardUserDefaults]valueForKey:CurrentLatitude];//currentLatitudeCurrentLatitude
+    if(Latitude==nil){
+        Latitude=@"";
+    }
+    
     return Latitude;
 }
 -(NSString *)getLongitude
 {
     NSString *Longitude =[[NSUserDefaults standardUserDefaults]valueForKey:CurrentLongitude];
+    if(Longitude==nil){
+        Longitude=@"";
+    }
     return Longitude;
 }
 

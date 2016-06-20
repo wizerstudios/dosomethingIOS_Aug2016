@@ -26,7 +26,7 @@
 
 #define Red_Color   [UIColor colorWithRed:227.0f/255.0f green:64.0f/255.0f blue:81.0f/255.0f alpha:1.0f]
 
-@interface DSLoginViewController ()<CLLocationManagerDelegate>
+@interface DSLoginViewController ()<CLLocationManagerDelegate,UIAlertViewDelegate>
 {
     DSWebservice            * objWebService;
     bool                      isSignin;
@@ -108,9 +108,11 @@
     
     
     deviceUdid = [OpenUDID value];
-    [self getUserCurrentLocation];//OLD
     
-    //[COMMON getUserCurrentLocation];//ADDEDnot using
+    [self checkLocationServicesTurnedOn];
+    
+    //[self getUserCurrentLocation];//OLD
+    
     
     if ([temp isEqualToString:@"createAnAccount"]){
         
@@ -163,6 +165,40 @@
     }
 
 }
+#pragma mark - checkLocationServicesTurnedOn
+- (void) checkLocationServicesTurnedOn {
+    if (![CLLocationManager locationServicesEnabled]) {
+        [self alertBoxView];
+    }
+    else if([CLLocationManager locationServicesEnabled]){
+        //checkApplicationHasLocationServicesPermission
+        [self checkApplicationHasLocationServicesPermission];
+    }
+    
+}
+#pragma mark - checkApplicationHasLocationServicesPermission
+-(void) checkApplicationHasLocationServicesPermission {
+    if ([CLLocationManager authorizationStatus] == kCLAuthorizationStatusDenied) {
+        [self alertBoxView];
+    }
+}
+-(void)alertBoxView{
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Do Something"
+                                                    message:@"Turn on Location Services to allow DoSomething to find matches near you"
+                                                   delegate:self
+                                          cancelButtonTitle:@"Ok"
+                                          otherButtonTitles:@"Cancel",nil];
+    [alert show];
+}
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if (buttonIndex == 0)
+    {
+        //code for getUserCurrentLocation
+        [self getUserCurrentLocation];
+    }
+}
+
 #pragma mark get user CurrentLocation
 
 - (void)getUserCurrentLocation{
