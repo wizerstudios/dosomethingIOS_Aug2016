@@ -167,12 +167,13 @@
 }
 #pragma mark - checkLocationServicesTurnedOn
 - (void) checkLocationServicesTurnedOn {
-    if (![CLLocationManager locationServicesEnabled]) {
+    if(![CLLocationManager locationServicesEnabled] ||
+       ([CLLocationManager authorizationStatus]!=kCLAuthorizationStatusAuthorizedWhenInUse && [CLLocationManager authorizationStatus]!=kCLAuthorizationStatusAuthorizedAlways)) {
         [self alertBoxView];
     }
-    else if([CLLocationManager locationServicesEnabled]){
+    else {
         //checkApplicationHasLocationServicesPermission
-        [self checkApplicationHasLocationServicesPermission];
+        [self getUserCurrentLocation];
     }
     
 }
