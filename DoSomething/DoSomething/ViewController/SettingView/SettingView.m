@@ -313,8 +313,7 @@
     NSString *savedLatitude =  [[NSUserDefaults standardUserDefaults]valueForKey:CurrentLatitude];
     NSString *savedLongitude = [[NSUserDefaults standardUserDefaults]valueForKey:CurrentLongitude];
     
-    NSLog(@"current latitude & longitude for main view = %@ & %@",currentLatitude,currentLongitude);
-    NSLog(@"savedLatitude & saved Longitude = %@ & %@",savedLatitude,savedLongitude);
+  
 
     if ([COMMON isInternetReachable]) {
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
@@ -549,7 +548,7 @@
                             longitude:[COMMON getLongitude]//currentLongitude
                           deviceToken:deviceToken pushType:push_type
                               success:^(AFHTTPRequestOperation *operation, id responseObject){
-                                  NSLog(@"responseObject = %@",responseObject);
+                                 
                                   if([[responseObject valueForKey:@"status"]isEqualToString:@"success"]){
                                       //[self setLocationDefaults];
                                   }
@@ -597,7 +596,7 @@
          
                                 success:^(AFHTTPRequestOperation *operation, id responseObject) {
                                     
-                                    NSLog(@"logoutDeleteUser %@ =" , responseObject);
+                                    
                                     
                                     if([[[responseObject valueForKey:@"useraction"]valueForKey:@"status"] isEqualToString:@"success"])
                                         
@@ -645,7 +644,7 @@
                                     match:notificationMatch
                                    sound:selectSoundStr
                                   success:^(AFHTTPRequestOperation *operation, id responseObject){
-                                      NSLog(@"responseObject = %@",responseObject);
+                                      
                                       
                                       NSMutableDictionary *mainDict = [[NSMutableDictionary alloc]init];
                                       
@@ -772,9 +771,9 @@
     if(![[COMMON getSessionID] isEqualToString:@"(null)"]){
         objWebService = [[DSWebservice alloc]init];
         [objWebService getOnlinstatus:OnlineStatus sessionID:[COMMON getSessionID] status:status success:^(AFHTTPRequestOperation *operation, id responseObject) {
-            NSLog(@"onlinestausresponseObject= %@",responseObject);
+          
         } failure:^(AFHTTPRequestOperation *operation, id error) {
-            NSLog(@"onlinestausresponseObjecterror= %@",error);
+           
         }];
     }
 }

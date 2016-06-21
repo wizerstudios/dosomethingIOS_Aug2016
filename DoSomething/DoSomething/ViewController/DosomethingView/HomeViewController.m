@@ -172,7 +172,7 @@
     appDelegate.buttonsView.hidden=NO;
     
     NSString *countStr = [NSString stringWithFormat:@"%@",[[NSUserDefaults standardUserDefaults]valueForKey:UnreadMsgCount]];
-    NSLog(@"countStr = %@",countStr);
+    
     if(![countStr isEqualToString:@"0"] && ![countStr isEqualToString:@"(null)"]){
         [appDelegate.badgeCountLabel setHidden:NO];
         [appDelegate.badgeCountLabel setText:countStr];
@@ -194,7 +194,7 @@
          {
              if(responseObject!=nil)
              {
-                 NSLog(@"response:%@",responseObject);
+                 //NSLog(@"response:%@",responseObject);
                  NSMutableDictionary *homeviewlist = [[NSMutableDictionary alloc]init];
                  menuArray=[NSMutableArray alloc];
                  homeviewlist = [responseObject valueForKey:@"dosomethinglist"];
@@ -665,7 +665,6 @@ minimumLineSpacingForSectionAtIndex:(NSInteger)section {
                             longitude:[COMMON getLongitude]//currentLongitude
                           deviceToken:deviceToken pushType:push_type
                               success:^(AFHTTPRequestOperation *operation, id responseObject){
-                                  NSLog(@"responseObject = %@",responseObject);
                                   if([[responseObject valueForKey:@"status"]isEqualToString:@"success"]){
                                     //  [self setLocationDefaults];
                                   }
@@ -698,7 +697,7 @@ minimumLineSpacingForSectionAtIndex:(NSInteger)section {
         [objWebService getActivity:Activity activityName:_activityNameStr sessionId:[COMMON getSessionID] availableNow:_availableStr doSomethingId:_dosomethingId
                            success:^(AFHTTPRequestOperation *operation, id responseObject)
          {
-             NSLog(@"response object = %@",responseObject);
+             
              
              activityMainDict = [responseObject valueForKey:@"activity"];
              NSString *msgString = [activityMainDict valueForKey:@"Message"];
@@ -719,10 +718,10 @@ minimumLineSpacingForSectionAtIndex:(NSInteger)section {
              else{
                  id activityList = [activityMainDict valueForKey:@"activityList"];
                  
-                 NSLog(@"activityList = %@",activityList);
+                 
                  
                  if([activityList isKindOfClass:[NSArray class]]){
-                     NSLog(@"activity list");
+                    
                      activityImageArray = [activityList mutableCopy];
                      NSString *availStr = [activityMainDict valueForKey:@"Available"];
                      [self displayActivityView:availStr];
@@ -910,12 +909,9 @@ minimumLineSpacingForSectionAtIndex:(NSInteger)section {
 }
 -(void)loadInvalidSessionAlert:(NSNotification *)notification
 {
-    NSLog(@"notification-->%@",notification);
+    
     NSDictionary *profile = [notification userInfo];
-    
-    NSLog(@"profile = %@",profile);
-    
-   
+       
     self.WalkAlterview.hidden=YES;
     self.window.hidden=YES;
     

@@ -762,7 +762,7 @@
                          sessionid:[COMMON getSessionID]
               request_send_user_id:requestUserID
                            success:^(AFHTTPRequestOperation *operation, id responseObject) {
-                               NSLog(@"SEND REQ%@",responseObject);
+                               
                                
                                if([[[responseObject valueForKey:@"sendrequest"]valueForKey:@"status"] isEqualToString:@"success"])
                                {
@@ -777,7 +777,7 @@
                                
                               
                            } failure:^(AFHTTPRequestOperation *operation, id error) {
-                               NSLog(@"SEND REQ ERR%@",error);
+                               
                            }];
     }
     else{

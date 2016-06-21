@@ -85,7 +85,7 @@
         displayTime = [finalDateFormat stringFromDate:formatDate];
     }
     
-    NSLog(@"Final Format for %@ is %@",strDate,displayTime);
+    //NSLog(@"Final Format for %@ is %@",strDate,displayTime);
     
     return displayTime;
 }

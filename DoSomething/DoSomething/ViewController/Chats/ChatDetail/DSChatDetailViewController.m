@@ -220,7 +220,7 @@
     
     supportUser = [[chatuserDetailsDict valueForKey:@"supportuser"]integerValue];
         
-    NSLog(@"profileStr = %@",profileStr);
+    
     
     if([profileStr length]>0){
         
@@ -471,7 +471,7 @@
     NSIndexPath *indexPath = [chatTableView indexPathForRowAtPoint: position];
     
    ChatDetailcell = (ChatDetailCustomcell*)[chatTableView cellForRowAtIndexPath:indexPath];
-    NSLog(@"%@",str);
+   
     if(conversationArray.count > 1)
     {
         [ChatDetailcell getMessageArray:[conversationArray objectAtIndex:indexPath.row]];
@@ -516,9 +516,6 @@
         
         [webService getConversation:GetConversation sessionID:[COMMON getSessionID] conversationId:conversationID dateTime:[COMMON getCurrentDateTime]
                             success:^(AFHTTPRequestOperation *operation, id responseObject){
-                                
-                                NSLog(@"loadConverstionResponse = %@",responseObject);
-                                
                                 
                                 NSMutableDictionary *responseDict = [[NSMutableDictionary alloc]init];
                                 
@@ -576,7 +573,6 @@
         
         [webService sendMessage:SendMessage_API sessionid:[COMMON getSessionID] message_send_user_id:_receiverId message:chatView.textView.text conversation_id:_conversationId success:^(AFHTTPRequestOperation *operation, id responseObject){
             
-            NSLog(@"Conversation resp = %@",responseObject);
             msgResponseDict = [[NSMutableDictionary alloc]init];
             
             msgResponseDict = [responseObject valueForKey:@"sendmessage"];
@@ -622,7 +618,6 @@
         NSString *conversationID = [chatuserDetailsDict valueForKey:@"id"];
         
         [webService blockUser:BlockUser_API sessionid:[COMMON getSessionID] block_user_id:conversationID success:^(AFHTTPRequestOperation *operation, id responseObject) {
-            NSLog(@"response:%@",responseObject);
             [[NSUserDefaults standardUserDefaults]setObject:@"Yes" forKey:@"backAction"];
             [[NSUserDefaults standardUserDefaults]synchronize];
             [self.navigationController popViewControllerAnimated:YES];
@@ -642,13 +637,13 @@
                         sessionid:[COMMON getSessionID]
              request_send_user_id:selectedUserId
                           success:^(AFHTTPRequestOperation *operation, id responseObject) {
-                              NSLog(@"SEND REQ%@",responseObject);
+                             // NSLog(@"SEND REQ%@",responseObject);
                               [COMMON DSRemoveLoading];
                               [self gotolocationview];
                               
                           } failure:^(AFHTTPRequestOperation *operation, id error) {
                               [COMMON DSRemoveLoading];
-                              NSLog(@"SEND REQ ERR%@",error);
+                              //NSLog(@"SEND REQ ERR%@",error);
                           }];
     }
     else{

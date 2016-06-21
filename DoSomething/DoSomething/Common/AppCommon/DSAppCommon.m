@@ -212,8 +212,7 @@ DSAppCommon *sharedCommon = nil;
 #pragma mark - Userdetails
 
 -(void)setUserDetails:(NSMutableDictionary *)_dicInfo
-{    NSLog(@"setUserDetails = %@",_dicInfo);
-    
+{
     if([_dicInfo isKindOfClass:[NSMutableDictionary class]]){
         [[NSUserDefaults standardUserDefaults] setObject:_dicInfo forKey:USERDETAILS];
         [[NSUserDefaults standardUserDefaults] synchronize];
@@ -247,13 +246,11 @@ DSAppCommon *sharedCommon = nil;
 
 -(NSString *)getSessionID{
     NSString *sessionID = [NSString stringWithFormat:@"%@",[[self getUserDetails]valueForKey:@"SessionId"]];
-    NSLog(@"sessionID = %@",sessionID);
     return sessionID;
 }
 
 -(NSString *)getUserID{
     NSString *sessionID = [[self getUserDetails]valueForKey:@"user_id"];
-    NSLog(@"sessionID = %@",sessionID);
     return sessionID;
 }
 
@@ -394,9 +391,7 @@ DSAppCommon *sharedCommon = nil;
     LocationDict =[[NSUserDefaults standardUserDefaults] valueForKey:USERDETAILS];
     NSString * strsessionID =[LocationDict valueForKey:@"SessionId"];
     sessionId = strsessionID;
-    NSLog(@"strsessionID%@",strsessionID);
-    NSLog(@"currentLatitude%@",currentLatitude);
-    NSLog(@"currentLongitude%@",currentLongitude);
+    
     NSString *deviceToken = [[NSUserDefaults standardUserDefaults]valueForKey:DeviceToken];
     
     if(deviceToken == nil)
@@ -409,11 +404,10 @@ DSAppCommon *sharedCommon = nil;
                       deviceToken:deviceToken
                          pushType:push_type
                           success:^(AFHTTPRequestOperation *operation, id responseObject) {
-                              NSLog(@"LocationUpdate_API%@",responseObject);
-                              
+                             
                               
                           } failure:^(AFHTTPRequestOperation *operation, id error) {
-                               NSLog(@"LocationUpdateError%@",error);
+                              
                               
                           }];
     

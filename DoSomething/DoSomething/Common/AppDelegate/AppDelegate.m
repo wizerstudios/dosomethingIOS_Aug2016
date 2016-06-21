@@ -409,7 +409,7 @@
 }
 -(void)loadnotificationmsg:(NSString*)conversationID
 {
-    NSLog(@"session id=%@",[COMMON getSessionID]);
+    
     
     if(![[COMMON getSessionID]isEqualToString:@"(null)"]){
         [self loadConverstaionAPI:conversationID];
@@ -499,9 +499,9 @@
         if(![[COMMON getSessionID] isEqualToString:@"(null)"]){
             webservice = [[DSWebservice alloc]init];
             [webservice getOnlinstatus:OnlineStatus sessionID:[COMMON getSessionID] status:status success:^(AFHTTPRequestOperation *operation, id responseObject) {
-                NSLog(@"onlinestausresponseObject= %@",responseObject);
+                
             } failure:^(AFHTTPRequestOperation *operation, id error) {
-                NSLog(@"onlinestausresponseObjecterror= %@",error);
+                
             }];
         }
     }

@@ -284,7 +284,7 @@
         
         self.tableViewHeightConstraint.constant=self.tableviewProfile.contentSize.height+350;
         [profileScrollView setContentSize:CGSizeMake(0, self.tableviewProfile.frame.origin.y + self.tableviewProfile.contentSize.height+self.tableViewHeightConstraint.constant-(self.profiletableheight.constant+50))];
-        NSLog(@"tableheight=%f", self.tableViewHeightConstraint.constant);
+        
     }
 }
 -(void)updateprofileimageloadstop
@@ -642,7 +642,7 @@
     
     
     CGFloat x = profileImagePageControl.currentPage * self.scrView.frame.size.width;
-    NSLog(@"pagenation=%f",x);
+    
     [self.scrView setContentOffset:CGPointMake(x, 0) animated:YES];
 }
 
@@ -720,9 +720,6 @@
     [datePicker setMinimumDate:minDate];
     [datePicker setMaximumDate:maxDate];
 
-    NSLog(@"minDate   %@", minDate);
-    NSLog(@"[NSDate date]   %@", [NSDate date]);
-    NSLog(@"maxDate%@", maxDate);
     
     datePicker.backgroundColor = [UIColor whiteColor];
     
@@ -1069,7 +1066,6 @@
 {
     
     selectSoundStr=objCustomSoundView.selectSoundStr;
-    NSLog(@"Soundstring=%@",selectSoundStr);
     //[self loadUpdateNotificationAPI];
     playsoundBundleStr=objCustomSoundView.urlString;
     soundID =objCustomSoundView.selectSoundID
@@ -1503,7 +1499,7 @@
                     cell.textFieldDPPlaceHolder.text = datestr;
                     currentTextfield.text=cell.textFieldDPPlaceHolder.text;
                     dateChange = [self changeDateFormat:datestr];
-                    NSLog(@"dateChange = %@",dateChange);
+                  
                     strDOB = (currentTextfield.text !=nil)?currentTextfield.text :dateChange;
                     [cell.textFieldDPPlaceHolder setTag:1000];
                     
@@ -2398,7 +2394,7 @@
 
 -(void)selectimagePicker{
     
-    NSLog(@"currentimge=%ld",(long)CurrentImage);
+   
     //
     if(CurrentImage==0)
     {
@@ -2641,7 +2637,7 @@
                     success:^(AFHTTPRequestOperation *operation, id responseObject)
      {
          
-         NSLog(@"responseObjectLogin = %@",responseObject);
+         
          
          NSMutableDictionary *loginDict = [[NSMutableDictionary alloc]init];
          
@@ -2651,24 +2647,18 @@
              
              [COMMON setUserDetails:[[loginDict valueForKey:@"userDetails"]objectAtIndex:0]];
              
-             
-             
-             
-             NSLog(@"userdetails = %@",[COMMON getUserDetails]);
-             [COMMON DSRemoveLoading];
+                [COMMON DSRemoveLoading];
              
              DSProfileTableViewController*profileview =[[DSProfileTableViewController alloc]initWithNibName:@"DSProfileTableViewController" bundle:nil];
              [self.navigationController pushViewController:profileview animated:NO];
              
          }
          else{
-             NSLog(@"responseObject = %@",responseObject);
+             
              //[self showAltermessage:[loginDict valueForKey:@"Message"]];
              [COMMON DSRemoveLoading];
              
          }
-         
-         
      }
                     failure:^(AFHTTPRequestOperation *operation, id error){
                         
@@ -3653,7 +3643,7 @@
 {
     NSString * obj =[profileDict valueForKey:@"image1"];
     
-    NSLog(@"objimage=%@",obj);
+    
     UIImage *defaultProfile = [UIImage imageNamed:@"profile_noimg"];
     UIImage *imageTwo   = [userProfileImageArray objectAtIndex:1];
     UIImage *imageThree = [userProfileImageArray objectAtIndex:2];
@@ -3688,13 +3678,13 @@
     }
     NSString * removeimgField=[NSString stringWithFormat:@"image%ld",(long)selectedImageIndex];
     
-    NSLog(@"removeimgField=%@",removeimgField);
+    
     
     
     [objWebService getDeleteprofileImage:deleteprofileImg sessionID:[COMMON getSessionID] Fieldimage:removeimgField success:^(AFHTTPRequestOperation *operation, id responseObject) {
         if([[[responseObject valueForKey:@"deleteprofileimage"]valueForKey:@"status"]isEqualToString:@"success"])
         {
-            NSLog(@"response=%@",responseObject);
+            
         }
     }
                                  failure:^(AFHTTPRequestOperation *operation, id error) {

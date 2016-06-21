@@ -248,7 +248,7 @@ notification_sound  :(NSString *)isnotification_sound
        success:^(AFHTTPRequestOperation *operation, id responseObject)
      {
          if([type  isEqual: @"2"]){
-             NSLog(@"responseObject = %@",responseObject);
+             //NSLog(@"responseObject = %@",responseObject);
              
              NSMutableDictionary *registerDict = [[NSMutableDictionary alloc]init];
              
@@ -264,7 +264,7 @@ notification_sound  :(NSString *)isnotification_sound
                 // [self gotoHomeView];
              }
              else{
-                 NSLog(@"responseObject = %@",responseObject);
+                 //NSLog(@"responseObject = %@",responseObject);
                  NSString *errMsg = [NSString stringWithFormat:@"%@",[registerDict valueForKey:@"Message"]];
                  errMsg = [errMsg stringByReplacingOccurrencesOfString:@"{" withString:@""];
                  errMsg = [errMsg stringByReplacingOccurrencesOfString:@"}" withString:@""];
@@ -279,7 +279,7 @@ notification_sound  :(NSString *)isnotification_sound
          registerDict = [responseObject valueForKey:@"register"];
          if([[registerDict valueForKey:@"status"]isEqualToString:@"success"]){
              [COMMON setUserDetails:[[registerDict valueForKey:@"userDetails"]objectAtIndex:0]];
-             NSLog(@"userdetails = %@",[COMMON getUserDetails]);
+             //NSLog(@"userdetails = %@",[COMMON getUserDetails]);
              [[NSNotificationCenter defaultCenter] postNotificationName:@"registerform"
                                                                  object:self
                                                                userInfo:responseObject];
@@ -338,12 +338,12 @@ notification_sound  :(NSString *)isnotification_sound
     if(sessionid)          [profileUpdate    setObject:sessionid                  forKey:@"sessionid"];
     
     NSLog(@"urlString = %@",urlString);
-    NSLog(@"Profile Update = %@",profileUpdate);
+    
     
     NSDateFormatter *formatter = [[NSDateFormatter alloc]init];
     [formatter setDateFormat:@"yyyyMMddhhmmssSSS"];
     NSString *imageNameStr = [NSString stringWithFormat:@"%@.png",[formatter stringFromDate:[NSDate date]]];
-    NSLog(@"ProfileUpdatedetails%@",profileUpdate);
+    //NSLog(@"ProfileUpdatedetails%@",profileUpdate);
     [self POST:urlString parameters:profileUpdate constructingBodyWithBlock:^(id<AFMultipartFormData> formData)
      {
          
@@ -353,7 +353,7 @@ notification_sound  :(NSString *)isnotification_sound
                                      fileName:imageNameStr
                                      mimeType:@"image/png"];
              
-             NSLog(@"formData = %@",formData);
+             
          }
          if(![profileImage2 isKindOfClass:[NSString class]] && profileImage2){
              [formData appendPartWithFileData:UIImagePNGRepresentation(profileImage2)
@@ -361,7 +361,7 @@ notification_sound  :(NSString *)isnotification_sound
                                      fileName:imageNameStr
                                      mimeType:@"image/png"];
              
-             NSLog(@"formData = %@",formData);
+             
          }
          if(![profileImage3 isKindOfClass:[NSString class]] && profileImage3){
              [formData appendPartWithFileData:UIImagePNGRepresentation(profileImage3)
@@ -369,20 +369,20 @@ notification_sound  :(NSString *)isnotification_sound
                                      fileName:imageNameStr
                                      mimeType:@"image/png"];
              
-             NSLog(@"formData = %@",formData);
+             
          }
      }
 
        success:^(AFHTTPRequestOperation *operation, id responseObject)
      {
-         NSLog(@"UPDATEresponseObject = %@",responseObject);
+         
          
          
          NSMutableDictionary *profileUpdateDict = [[NSMutableDictionary alloc]init];
          profileUpdateDict = [responseObject valueForKey:@"updateprofile"];
          if([[profileUpdateDict valueForKey:@"status"]isEqualToString:@"success"]){
              [COMMON setUserDetails:[[profileUpdateDict valueForKey:@"userDetails"]objectAtIndex:0]];
-             NSLog(@"userdetails = %@",[COMMON getUserDetails]);
+             
              [[NSNotificationCenter defaultCenter] postNotificationName:@"updateprofiledata"object:self userInfo:responseObject];
             
 

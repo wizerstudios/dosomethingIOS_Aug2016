@@ -287,7 +287,7 @@
     
     NSString *ProfileName=[NSString stringWithFormat:@"%@",[chatDict valueForKey:@"image1"]];
     
-    NSLog(@"ProfileName = %@",ProfileName);
+    //NSLog(@"ProfileName = %@",ProfileName);
     
     if([ProfileName length]>0){
          [Cell.profileImageView setImageWithURL:[NSURL URLWithString:ProfileName]];
@@ -389,7 +389,7 @@
      //Delete Changed into UnMatch
     
     UITableViewRowAction *deleteButton = [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleDefault title:@"Unmatch"  handler:^(UITableViewRowAction *action, NSIndexPath *indexPath){
-         NSLog(@"index:%ld",(long)indexPath.row);
+        
         currentUserRow = indexPath.row;
        
        // NSInteger* selectIndex= &row;
@@ -450,7 +450,7 @@
                          longitude:[COMMON getLongitude]//currentLongitude
                        deviceToken:deviceToken pushType:push_type
                            success:^(AFHTTPRequestOperation *operation, id responseObject){
-                               NSLog(@"responseObject = %@",responseObject);
+                               
                                if([[responseObject valueForKey:@"status"]isEqualToString:@"success"]){
                                    //[self setLocationDefaults];
                                }
@@ -479,7 +479,7 @@
                              if(_isStartTimer == YES)
                                  [self startTimer];
                              
-                             NSLog(@"responseObject = %@",responseObject);
+                             
                              if([[[responseObject valueForKey:@"getchathistory"] valueForKey:@"status"]isEqualToString:@"success"]){
                                  
                                  chatArray = [[[responseObject valueForKey:@"getchathistory"]valueForKey:@"converation"] mutableCopy];
@@ -507,11 +507,11 @@
 -(void)loadDeleteUserChatHistory:(NSString*) deleteuserID :(NSInteger)selectIndex
 {
     if ([COMMON isInternetReachable]) {
-        NSLog(@"selectIndex:%ld",(long)selectIndex);
+        
         
         [webService deleteUserChatHist:DeleteConversation sessionid:[COMMON getSessionID] chat_user_id:deleteuserID success:^(AFHTTPRequestOperation *operation, id responseObject)
          {
-             NSLog(@"deleteresponse:%@",responseObject);
+             //NSLog(@"deleteresponse:%@",responseObject);
              if([[[responseObject valueForKey:@"deleteconversation"]valueForKey:@"status"]isEqualToString:@"success"])
              {
                  
@@ -534,7 +534,7 @@
 {
     if ([COMMON isInternetReachable]) {
         [webService blockUser:BlockUser_API sessionid:[COMMON getSessionID] block_user_id:blockuserID success:^(AFHTTPRequestOperation *operation, id responseObject) {
-            NSLog(@"response:%@",responseObject);
+            
             
         } failure:^(AFHTTPRequestOperation *operation, id error) {
             
@@ -551,13 +551,13 @@
                       sessionid:[COMMON getSessionID]
            request_send_user_id:UserIdToUnmatch
                         success:^(AFHTTPRequestOperation *operation, id responseObject) {
-                            NSLog(@"SEND REQ%@",responseObject);
+                            
                             [COMMON DSRemoveLoading];
                             [self gotolocationview];
                             
                         } failure:^(AFHTTPRequestOperation *operation, id error) {
                             [COMMON DSRemoveLoading];
-                            NSLog(@"SEND REQ ERR%@",error);
+                            
                         }];
     }
     else{
@@ -598,7 +598,7 @@
     }
     
     
-    NSLog(@"total = %d",total);
+    
 }
 
 @end

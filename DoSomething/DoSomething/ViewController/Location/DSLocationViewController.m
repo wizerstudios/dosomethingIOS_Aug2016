@@ -186,17 +186,17 @@
         dosomethingImageArry=[[NSMutableArray alloc]init];
         kiloMeterlabel =[[NSArray alloc]init];
         detailsArray=[[NSMutableArray alloc]init];
-        NSLog(@"currentPageNow-->%@",currentloadPage);
+    
         if([[NSUserDefaults standardUserDefaults] boolForKey:@"ViewuserDetail"]) {
             //currentloadPage =@"";
-            NSLog(@"currentPageNow-->%@",currentloadPage);
+           
             [COMMON DSLoadIcon:self.view];
             [self nearestLocationWebservice];
             [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"ViewuserDetail"];
         }
         if([[NSUserDefaults standardUserDefaults] boolForKey:@"DSChatDetailBackAction"]) {
             currentloadPage =@"";
-            NSLog(@"currentPageNow-->%@",currentloadPage);
+            
             [COMMON DSLoadIcon:self.view];
             [self nearestLocationWebservice];
             [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"DSChatDetailBackAction"];
@@ -208,9 +208,6 @@
             UICollectionViewFlowLayout *flowLayout1 = [[UICollectionViewFlowLayout alloc] init];
             CGFloat screenWidth = [UIScreen mainScreen].bounds.size.width;
             flowLayout1.headerReferenceSize = CGSizeMake(locationCollectionView.bounds.size.width,45);
-            NSLog(@"locationCollectionView%f",locationCollectionView.bounds.size.width);
-            NSLog(@"screenWidth%f",screenWidth);
-            NSLog(@"matchActivityView%f",matchActivityView.frame.size.width);
             
             [locationCollectionView setCollectionViewLayout:flowLayout1];
             
@@ -434,7 +431,7 @@
                           deviceToken:deviceToken
                              pushType:push_type
                               success:^(AFHTTPRequestOperation *operation, id responseObject){
-                                  NSLog(@"responseObject = %@",responseObject);
+                                  
                               }
                               failure:^(AFHTTPRequestOperation *operation, id error) {
                                   
@@ -467,7 +464,7 @@
                             success:^(AFHTTPRequestOperation *operation, id responseObject)
          {
              
-             NSLog(@"response=%@",responseObject);
+             
              recordCount =[[responseObject valueForKey:@"nearestusers"]valueForKey:@"recordCount"];
             
              
@@ -490,9 +487,9 @@
                      NSInteger  recordCounts =[[[responseObject valueForKey:@"nearestusers"]valueForKey:@"recordCount"] integerValue];
                      for (NSDictionary *dict in nextpageUserdetaile)
                      {
-                         NSLog(@"nextpage%@",dict);
+                         
                          [commonlocationArray addObject:dict];
-                         NSLog(@"commonlocationArray count%lu",(unsigned long)commonlocationArray.count);
+                        
                          if(commonlocationArray.count  == recordCounts)
                          {
                               isAllPost=YES;
@@ -653,7 +650,7 @@
             }
         }
         else if([dosomethingImageArry count] == 2){
-            NSLog(@"count two");
+            
             if(![[dosomethingImageArry objectAtIndex:0]isEqualToString:@""])
             {
                 locationCellView.dosomethingImage1Xposition.constant=60;
@@ -799,7 +796,7 @@
 //        {
 //            detailsArray = [[commonlocationArray objectAtIndex:indexPath.row] mutableCopy];
 //        }
-        NSLog(@"currentPage_On_Push-->%@",currentloadPage);
+        
         detailsArray = [[commonlocationArray objectAtIndex:indexPath.row] mutableCopy];
         DSNearByDetailViewController * detailViewController  = [[DSNearByDetailViewController alloc]initWithNibName:@"DSNearByDetailViewController" bundle:nil];
         detailViewController.userDetailsArray = detailsArray;
@@ -847,7 +844,6 @@
         button = [button superview];
     }
     UIButton *RequestBtn = (UIButton *)sender;
-    NSLog(@"RequestBtn.tag%ld",(long)RequestBtn.tag);
     selectedRequestBtnIndex = RequestBtn.tag;
     
     NSIndexPath *indexPath;
@@ -861,7 +857,7 @@
     NSString *onlineStausofSelectuser=[[commonlocationArray valueForKey:@"online_status"] objectAtIndex:indexPath.row];
         selectuserstatus =([onlineStausofSelectuser isEqualToString:@"1"])? @"Online":@"Offline";
         RequestStr=[[commonlocationArray valueForKey:@"send_request"] objectAtIndex:indexPath.row];
-        NSLog(@"RequestStr%@",RequestStr);
+      
     if ([RequestStr isEqualToString:@"No"])                         //([locationCellView.sendRequest.text isEqualToString:@"Send Request"])
     {
         UIButton *buttonSender = (UIButton *)sender;
@@ -924,7 +920,6 @@
                 
             }
 
-            NSLog(@"count two");
         }else{
         
             dosomethingImage1=[dosomethingImageArry objectAtIndex:0];
@@ -1039,7 +1034,7 @@
                                 }
                              failure:^(AFHTTPRequestOperation *operation, id error)
                             {
-                                NSLog(@"requestSend RESPONSE=%@",error);
+                                //NSLog(@"requestSend RESPONSE=%@",error);
                             }];
                             }
     else{
@@ -1501,7 +1496,7 @@
              DSChatsTableViewController *Chatlist =[[DSChatsTableViewController alloc]initWithNibName:nil bundle:nil];
              [self.navigationController pushViewController:Chatlist animated:YES];
         }
-        NSLog(@"resp=%@",responseObject);
+        
     } failure:^(AFHTTPRequestOperation *operation, id error) {
         
     }];
@@ -1682,7 +1677,7 @@
     
     NSString *onlineStausofSelectuser=[[commonlocationArray valueForKey:@"online_status"] objectAtIndex:5];
     selectuserstatus =([onlineStausofSelectuser isEqualToString:@"1"])? @"Online":@"Offline";
-    NSLog(@"%@",locationCellView.sendRequest.text);
+   
     if([locationCellView.sendRequest.text isEqualToString:@"Send Request"])
     {
         UIButton *buttonSender = (UIButton *)sender;
@@ -1724,7 +1719,7 @@
 
         }
         else if([dosomethingImageArry count] == 2){
-            NSLog(@"count two");
+            
             if(![[dosomethingImageArry objectAtIndex:0]isEqualToString:@""])
             {
                 locationCellView.dosomethingImage1Xposition.constant=60;

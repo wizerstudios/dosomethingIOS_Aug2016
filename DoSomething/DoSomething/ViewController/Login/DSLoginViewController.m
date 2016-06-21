@@ -332,10 +332,10 @@
             [objWebService forgetPasswordRequest:ForgetPassword_API
                                            email:self.forgotTextField.text
                                          success:^(AFHTTPRequestOperation *operation, id responseObject) {
-                                             NSLog(@"responseObjectPWD%@",responseObject);
+                                            
                                              if([[[responseObject objectForKey:@"forgetpassword"]objectForKey:@"status"] isEqualToString:@"success"]){
                                                  [self showAltermessage:@"Kindly check your Email for updated Password"];
-                                                 NSLog(@"responseObjectPWD%@",responseObject);
+                                                 
                                                  //[[responseObject objectForKey:@"forgetpassword"]objectForKey:@"message"]];
                                              }
                                              else{
@@ -343,7 +343,7 @@
                                              }
                                          }
                                          failure:^(AFHTTPRequestOperation *operation, id error) {
-                                             NSLog(@"error%@",error);
+                                            
                                              [self showAltermessage:[NSString stringWithFormat:@"%@",error]];
                                          }];
             
@@ -469,7 +469,7 @@
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
     
     [textField resignFirstResponder];
-    NSLog(@"textfield:%@",textField);
+    
     return YES;
 }
 - (BOOL)textFieldShouldEndEditing:(UITextField *)textField
@@ -573,9 +573,9 @@
 }
 #pragma mark - checkuserEmailAPI
 - (void)checkUserEmail{
-    NSLog(@"dob=%@",dob);
+   
     NSString *dobStr = [self changeDateFormat:dob];
-    NSLog(@"dobStr =  %@ ",dobStr);
+    
     
     if([COMMON isInternetReachable]){
         
@@ -590,7 +590,7 @@
                           gender:gender
                     profileImage:profileImage
                          success:^(AFHTTPRequestOperation *operation, id responseObject){
-                             NSLog(@"checkuser = %@",responseObject);
+                            
                              if(([[[responseObject objectForKey:@"checkuser"]objectForKey:@"RegisterType"]  isEqual: @"1"])){
                                  if([[[responseObject objectForKey:@"checkuser"]objectForKey:@"status"]  isEqual: @"error"])
                                      [self showAltermessage:[[responseObject objectForKey:@"checkuser"]objectForKey:@"Message"]];
@@ -664,11 +664,11 @@
                 gender = [userData valueForKey:@"gender"];
                 profileImage = [NSString stringWithFormat:@"https://graph.facebook.com/%@/picture?type=large&return_ssl_resources=1", userData[@"id"]];
                 NSString * strDOB=[userData valueForKey:@"birthday"];
-                NSLog(@"dob=%@",strDOB);
+               
                 dob = (strDOB==nil)?@"":[userData valueForKey:@"birthday"]; //@""; //
-                NSLog(@"birthday=%@",[userData valueForKey:@"birthday"]);
+                
                 [fbUserDetailsDict setObject:profileImage forKey:@"profileImage"];
-                NSLog(@"fbUserDetailsDictt = %@",fbUserDetailsDict);
+                
                 
                 [COMMON DSLoadIcon:self.view];
                 
@@ -767,10 +767,9 @@
     if(![[COMMON getSessionID] isEqualToString:@"(null)"]){
         objWebService = [[DSWebservice alloc]init];
         [objWebService getOnlinstatus:OnlineStatus sessionID:[COMMON getSessionID] status:status success:^(AFHTTPRequestOperation *operation, id responseObject) {
-            NSLog(@"onlinestausresponseObject= %@",responseObject);
+            
         } failure:^(AFHTTPRequestOperation *operation, id error) {
-            NSLog(@"onlinestausresponseObjecterror= %@",error);
-        }];
+            }];
     }
 }
 
@@ -800,7 +799,7 @@
                         success:^(AFHTTPRequestOperation *operation, id responseObject)
          {
              
-             NSLog(@"responseObjectLogin = %@",responseObject);
+             
              
              NSMutableDictionary *loginDict = [[NSMutableDictionary alloc]init];
              
@@ -810,14 +809,14 @@
                  
                  [COMMON setUserDetails:[[loginDict valueForKey:@"userDetails"]objectAtIndex:0]];
                  
-                 NSLog(@"userdetails = %@",[COMMON getUserDetails]);
+                
                  
                  [self gotoHomeView];
                  [COMMON DSRemoveLoading];
                  
              }
              else{
-                 NSLog(@"responseObject = %@",responseObject);
+                 
                  [self showAltermessage:[loginDict valueForKey:@"Message"]];
                  [COMMON DSRemoveLoading];
                  
