@@ -14,7 +14,7 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = 'primary'
-               BlueprintIdentifier = '2DC47F504509D02678EC958F'
+               BlueprintIdentifier = 'DE84CC96D835F0BF12312A55E7A6C5C7'
                BlueprintName = 'JBKenBurnsView'
                ReferencedContainer = 'container:Pods.xcodeproj'
                BuildableName = 'libJBKenBurnsView.a'>
