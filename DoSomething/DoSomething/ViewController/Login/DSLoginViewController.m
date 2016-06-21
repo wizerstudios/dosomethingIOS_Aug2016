@@ -31,7 +31,7 @@
     DSWebservice            * objWebService;
     bool                      isSignin;
     NSString                * objSigninType;
-   
+    
     NSString                * currentLatitude, * currentLongitude;
     NSString                * deviceUdid;
     
@@ -51,7 +51,7 @@
     
     BOOL isCheckLocationLogin;
     
-   
+    
 }
 @end
 
@@ -65,7 +65,7 @@
     
     [super viewDidLoad];
     self.walkalterview.hidden =YES;
-   
+    
     [[IQKeyboardManager sharedManager]setEnableAutoToolbar:YES];
     fbUserDetailsDict = [[NSMutableDictionary alloc]init];
     locationManager                 = [[CLLocationManager alloc] init];
@@ -76,7 +76,7 @@
     _emailTxt.autocorrectionType =UITextAutocorrectionTypeNo;
     _passwordTxt.autocorrectionType =UITextAutocorrectionTypeNo;
     if (IS_IPHONE6 ||IS_IPHONE6_Plus){
-     self.layoutConstraintTapBarImageHeight.constant =51;
+        self.layoutConstraintTapBarImageHeight.constant =51;
         self.layoutConstraintStatusBarHeight.constant =25;
         self.layoutConstraintFBlblViewHeight.constant=50;
         self.layoutConstraintTxtFieldViewHeight.constant =142;
@@ -98,8 +98,8 @@
                                                object:nil];
     
     
-     [self CustomAlterview];
-
+    [self CustomAlterview];
+    
     
 }
 - (UIStatusBarStyle)preferredStatusBarStyle
@@ -182,21 +182,10 @@
         [[NSUserDefaults standardUserDefaults] setObject:@"NO" forKey:FirstTimeLocationAlert];
         [[NSUserDefaults standardUserDefaults]synchronize];
     }
-
-
-}
-#pragma mark - checkLocationServicesTurnedOn
-- (void) checkLocationServicesTurnedOn {
-    if(![CLLocationManager locationServicesEnabled] ||
-       ([CLLocationManager authorizationStatus]!=kCLAuthorizationStatusAuthorizedWhenInUse && [CLLocationManager authorizationStatus]!=kCLAuthorizationStatusAuthorizedAlways)) {
-        [self alertBoxView];
-    }
-    else {
-        //checkApplicationHasLocationServicesPermission
-        [self getUserCurrentLocation];
-    }
+    
     
 }
+
 #pragma mark - checkLocationServicesTurnedOn
 - (void) checkLocationServicesTurnedOn {
     [COMMON checkLocationServicesTurnedOn:@"login"];
@@ -206,7 +195,7 @@
     isCheckLocationLogin=YES;
     [self showAltermessage:LOCATION_MESSAGE];
     
-} 
+}
 -(void)loginCurrentLocation{
     [self getUserCurrentLocation];
 }
@@ -237,10 +226,10 @@
     currentLatitude         = [NSString stringWithFormat:@"%@",[NSNumber numberWithDouble:newLocation.coordinate.latitude]];
     
     currentLongitude        = [NSString stringWithFormat:@"%@",[NSNumber numberWithDouble:newLocation.coordinate.longitude]];
-  // OLD
-//    [[NSUserDefaults standardUserDefaults] setObject:currentLatitude  forKey:@"currentLatitude"];
-//    [[NSUserDefaults standardUserDefaults] setObject:currentLongitude forKey:@"currentLongitude"];
-//    [[NSUserDefaults standardUserDefaults] synchronize];
+    // OLD
+    //    [[NSUserDefaults standardUserDefaults] setObject:currentLatitude  forKey:@"currentLatitude"];
+    //    [[NSUserDefaults standardUserDefaults] setObject:currentLongitude forKey:@"currentLongitude"];
+    //    [[NSUserDefaults standardUserDefaults] synchronize];
     
     //NEW
     [[NSUserDefaults standardUserDefaults] setObject:currentLatitude  forKey:CurrentLatitude];
@@ -270,7 +259,7 @@
         DSLoginView.temp = @"Signin";
         [self.navigationController pushViewController:DSLoginView animated:YES];
     }
-
+    
     
 }
 - (IBAction)CreateAnAccButton:(id)sender {
@@ -303,15 +292,15 @@
     
     [buttonForgotPass setTitle:@"Sign In " forState:UIControlStateNormal];
     [buttonForgotPass addTarget:self action:@selector(signinMethod) forControlEvents:UIControlEventTouchUpInside];
-   [_buttonSigInFwd addTarget:self action:@selector(HaveAnAccount:) forControlEvents:UIControlEventTouchUpInside];
+    [_buttonSigInFwd addTarget:self action:@selector(HaveAnAccount:) forControlEvents:UIControlEventTouchUpInside];
     
     //CreateAction
     [buttonCreateAnAcc setTitle:@"Create an Account" forState:UIControlStateNormal];
     buttonPrivacyPolicy.hidden =YES;
     buttonTermsOfUse.hidden =YES;
-   
+    
     buttonSignIn.hidden =NO;
-   
+    
     [buttonSignIn addTarget:self action:@selector(forgotPasswordAction:) forControlEvents:UIControlEventTouchUpInside];
     isForgotBackButton=YES;
     [COMMON TrackerWithName:@"Forget Password Screen"];
@@ -319,52 +308,52 @@
 }
 #pragma mark forgotPasswordAction_API
 - (void)forgotPasswordAction:(id)sender {
-      if([labelSignIn.text isEqualToString:@"Sign in"])
-      {
-          
-      }
+    if([labelSignIn.text isEqualToString:@"Sign in"])
+    {
+        
+    }
     else
     {
-    [self.view endEditing:YES];
-    
-    if([NSString isEmpty:self.forgotTextField.text] ){
+        [self.view endEditing:YES];
         
-        [self showAltermessage:EMAIL_REQUIRED];
-        return;
-    }
-    if(![NSString validateEmail:self.forgotTextField.text]){
-        [self showAltermessage:INVALID_EMAIL];
-        return;
-    }
-    
-    
-    if([COMMON isInternetReachable]){
+        if([NSString isEmpty:self.forgotTextField.text] ){
+            
+            [self showAltermessage:EMAIL_REQUIRED];
+            return;
+        }
+        if(![NSString validateEmail:self.forgotTextField.text]){
+            [self showAltermessage:INVALID_EMAIL];
+            return;
+        }
         
-        [objWebService forgetPasswordRequest:ForgetPassword_API
-                                       email:self.forgotTextField.text
-                                     success:^(AFHTTPRequestOperation *operation, id responseObject) {
-                                         NSLog(@"responseObjectPWD%@",responseObject);
-                                         if([[[responseObject objectForKey:@"forgetpassword"]objectForKey:@"status"] isEqualToString:@"success"]){
-                                             [self showAltermessage:@"Kindly check your Email for updated Password"];
+        
+        if([COMMON isInternetReachable]){
+            
+            [objWebService forgetPasswordRequest:ForgetPassword_API
+                                           email:self.forgotTextField.text
+                                         success:^(AFHTTPRequestOperation *operation, id responseObject) {
                                              NSLog(@"responseObjectPWD%@",responseObject);
-                                             //[[responseObject objectForKey:@"forgetpassword"]objectForKey:@"message"]];
+                                             if([[[responseObject objectForKey:@"forgetpassword"]objectForKey:@"status"] isEqualToString:@"success"]){
+                                                 [self showAltermessage:@"Kindly check your Email for updated Password"];
+                                                 NSLog(@"responseObjectPWD%@",responseObject);
+                                                 //[[responseObject objectForKey:@"forgetpassword"]objectForKey:@"message"]];
+                                             }
+                                             else{
+                                                 [self showAltermessage:[[responseObject objectForKey:@"forgetpassword"]objectForKey:@"message"]];
+                                             }
                                          }
-                                         else{
-                                             [self showAltermessage:[[responseObject objectForKey:@"forgetpassword"]objectForKey:@"message"]];
-                                         }
-                                     }
-                                     failure:^(AFHTTPRequestOperation *operation, id error) {
-                                         NSLog(@"error%@",error);
-                                         [self showAltermessage:[NSString stringWithFormat:@"%@",error]];
-                                     }];
+                                         failure:^(AFHTTPRequestOperation *operation, id error) {
+                                             NSLog(@"error%@",error);
+                                             [self showAltermessage:[NSString stringWithFormat:@"%@",error]];
+                                         }];
+            
+        }
         
-          }
-    
-    else{
-        
-        [COMMON showErrorAlert:@"Check Your Internet connection"];
-        
-    }
+        else{
+            
+            [COMMON showErrorAlert:@"Check Your Internet connection"];
+            
+        }
     }
 }
 
@@ -394,8 +383,8 @@
     [buttonSignIn addTarget:self action:@selector(SignButtonAction) forControlEvents:UIControlEventTouchUpInside];
     _forgotView.hidden=YES;
     _buttonSigInFwd.hidden=YES;
-     [COMMON TrackerWithName:@"Login Screen"];
-
+    [COMMON TrackerWithName:@"Login Screen"];
+    
 }
 -(IBAction)loadTermsOfUseViewAction:(id)sender
 {
@@ -427,19 +416,19 @@
     objCustomAlterview.alertMsgLabel.lineBreakMode = NSLineBreakByWordWrapping;
     objCustomAlterview.alertMsgLabel.numberOfLines = 2;
     [objCustomAlterview.alertMsgLabel setTextColor:[UIColor colorWithRed:(255/255.0f) green:(255/255.0f) blue:(255/255.0f) alpha:1.0f]];
-//    if(IS_IPHONE6)
-//    {
-//        objCustomAlterview.mainalterviewheight.constant=0;
-//    }
-//    else if(IS_IPHONE6_Plus)
-//    {
-//        objCustomAlterview.mainalterviewheight.constant=0;
-//    }
-//    else
-//    {
-        objCustomAlterview.mainalterviewheight.constant=0;
+    //    if(IS_IPHONE6)
+    //    {
+    //        objCustomAlterview.mainalterviewheight.constant=0;
+    //    }
+    //    else if(IS_IPHONE6_Plus)
+    //    {
+    //        objCustomAlterview.mainalterviewheight.constant=0;
+    //    }
+    //    else
+    //    {
+    objCustomAlterview.mainalterviewheight.constant=0;
     //}
-
+    
     [self.view addSubview:objCustomAlterview.view];
     
 }
@@ -454,7 +443,7 @@
         isCheckLocationLogin=NO;
     }
     
- 
+    
 }
 
 -(void)showAltermessage:(NSString*)msg
@@ -463,11 +452,11 @@
     objCustomAlterview.alertBgView.hidden = NO;
     objCustomAlterview.alertMainBgView.hidden = NO;
     objCustomAlterview.alertMsgLabel.text = msg;
-     if(isCheckLocationLogin==YES){
-         objCustomAlterview.alertMsgLabel.textAlignment = NSTextAlignmentCenter;
-         objCustomAlterview.alertMsgLabel.lineBreakMode = NSLineBreakByWordWrapping;
-         objCustomAlterview.alertMsgLabel.numberOfLines = 0;
-     }
+    if(isCheckLocationLogin==YES){
+        objCustomAlterview.alertMsgLabel.textAlignment = NSTextAlignmentCenter;
+        objCustomAlterview.alertMsgLabel.lineBreakMode = NSLineBreakByWordWrapping;
+        objCustomAlterview.alertMsgLabel.numberOfLines = 0;
+    }
 }
 
 #pragma mark- hide keyboard
@@ -480,13 +469,13 @@
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
     
     [textField resignFirstResponder];
-     NSLog(@"textfield:%@",textField);
+    NSLog(@"textfield:%@",textField);
     return YES;
 }
 - (BOOL)textFieldShouldEndEditing:(UITextField *)textField
 {
     [textField resignFirstResponder];
-   
+    
     return YES;
 }
 
@@ -494,10 +483,10 @@
 -(void)CreateAnAccount
 {
     [COMMON TrackerWithName:@"Create Account with Email "];
-     [[[UIApplication sharedApplication] keyWindow] endEditing:YES];
+    [[[UIApplication sharedApplication] keyWindow] endEditing:YES];
     objSigninType=@"1";
     if([NSString isEmpty:self.emailTxt.text] && [NSString isEmpty:self.passwordTxt.text]){
-       
+        
         
         [self showAltermessage:FILL_DETAILS];
         
@@ -532,7 +521,7 @@
         
         [COMMON DSLoadIcon:self.view];
         [self performSelector:@selector(checkUserEmail) withObject:nil afterDelay:5.0];
-//        [self checkUserEmail];
+        //        [self checkUserEmail];
     }
 }
 -(void)SignButtonAction
@@ -544,27 +533,27 @@
     if([NSString isEmpty:self.emailTxt.text] && [NSString isEmpty:self.passwordTxt.text]){
         
         [self showAltermessage:FILL_DETAILS];
-
+        
         return;
     }
     if([NSString isEmpty:self.emailTxt.text] && ![NSString isEmpty:self.passwordTxt.text]){
         
         [self showAltermessage:EMAIL_REQUIRED];
-       
+        
         return;
     }
-     if([labelSignIn.text isEqualToString:@"Sign in"])
-     {
-    if(![NSString isEmpty:self.emailTxt.text] && [NSString isEmpty:self.passwordTxt.text]){
-        
-        
-        [self showAltermessage:PASSWORD_REQUIRED];
-        return;
+    if([labelSignIn.text isEqualToString:@"Sign in"])
+    {
+        if(![NSString isEmpty:self.emailTxt.text] && [NSString isEmpty:self.passwordTxt.text]){
+            
+            
+            [self showAltermessage:PASSWORD_REQUIRED];
+            return;
+        }
     }
-     }
     if(![NSString isEmpty:self.emailTxt.text] && ![NSString isEmpty:self.passwordTxt.text]){
         if(![NSString validateEmail:self.emailTxt.text]){
-          
+            
             [self showAltermessage:INVALID_EMAIL];
             return;
         }
@@ -578,7 +567,7 @@
         
         [COMMON DSLoadIcon:self.view];
         [self performSelector:@selector(loadloginAPI) withObject:nil afterDelay:5.0];
-//        [self loadloginAPI];
+        //        [self loadloginAPI];
         //[self checkUserEmail]
     }
 }
@@ -633,7 +622,7 @@
                          failure:^(AFHTTPRequestOperation *operation, id error) {
                              NSLog(@"Error = %@",error);
                              
-                            // [self showAltermessage:@"ERROR"];
+                             // [self showAltermessage:@"ERROR"];
                              [COMMON DSRemoveLoading];
                              
                              
@@ -646,7 +635,7 @@
         [COMMON showErrorAlert:@"Check Your Internet connection"];
         
     }
-
+    
 }
 #pragma mark - loginByFacebook
 -(void)loginByFacebook
@@ -657,56 +646,56 @@
     [login logOut];
     login.loginBehavior = FBSDKLoginBehaviorNative;
     [login logInWithReadPermissions:@[@"email"] fromViewController:self handler:^(FBSDKLoginManagerLoginResult *result, NSError *error) {
-             if (error) {
-             NSLog(@"fbUsererror = %@",error);
-
-         } else if (result.isCancelled) {
-         } else {
-             FBSDKGraphRequest *request = [[FBSDKGraphRequest alloc] initWithGraphPath:@"me" parameters:@{@"fields": @"id,name,email,gender,birthday,first_name,last_name"}];
-             [request startWithCompletionHandler:^(FBSDKGraphRequestConnection *connection, id result, NSError *error) {
-                 // handle response
-                 NSDictionary *userData = (NSDictionary *)result;
-                 fbUserDetailsDict = [userData mutableCopy];
-                 
-                 firstName = [userData valueForKey:@"first_name"];
-                 lastName = [userData valueForKey:@"last_name"];
-                 email = [userData valueForKey:@"email"];
-                 profileID = [userData valueForKey:@"id"];
-                 gender = [userData valueForKey:@"gender"];
-                 profileImage = [NSString stringWithFormat:@"https://graph.facebook.com/%@/picture?type=large&return_ssl_resources=1", userData[@"id"]];
-                 NSString * strDOB=[userData valueForKey:@"birthday"];
-                 NSLog(@"dob=%@",strDOB);
-                 dob = (strDOB==nil)?@"":[userData valueForKey:@"birthday"]; //@""; //
-                 NSLog(@"birthday=%@",[userData valueForKey:@"birthday"]);
-                 [fbUserDetailsDict setObject:profileImage forKey:@"profileImage"];
-                 NSLog(@"fbUserDetailsDictt = %@",fbUserDetailsDict);
-                 
-                 [COMMON DSLoadIcon:self.view];
-                 
-                 if(labelFacebook.tag == 10)
-                 {
-                  // before used CreateAPI;
-                     [self checkUserEmail];
-                 }
-                 
-                 else{
-                     [COMMON DSLoadIcon:self.view];
+        if (error) {
+            NSLog(@"fbUsererror = %@",error);
+            
+        } else if (result.isCancelled) {
+        } else {
+            FBSDKGraphRequest *request = [[FBSDKGraphRequest alloc] initWithGraphPath:@"me" parameters:@{@"fields": @"id,name,email,gender,birthday,first_name,last_name"}];
+            [request startWithCompletionHandler:^(FBSDKGraphRequestConnection *connection, id result, NSError *error) {
+                // handle response
+                NSDictionary *userData = (NSDictionary *)result;
+                fbUserDetailsDict = [userData mutableCopy];
+                
+                firstName = [userData valueForKey:@"first_name"];
+                lastName = [userData valueForKey:@"last_name"];
+                email = [userData valueForKey:@"email"];
+                profileID = [userData valueForKey:@"id"];
+                gender = [userData valueForKey:@"gender"];
+                profileImage = [NSString stringWithFormat:@"https://graph.facebook.com/%@/picture?type=large&return_ssl_resources=1", userData[@"id"]];
+                NSString * strDOB=[userData valueForKey:@"birthday"];
+                NSLog(@"dob=%@",strDOB);
+                dob = (strDOB==nil)?@"":[userData valueForKey:@"birthday"]; //@""; //
+                NSLog(@"birthday=%@",[userData valueForKey:@"birthday"]);
+                [fbUserDetailsDict setObject:profileImage forKey:@"profileImage"];
+                NSLog(@"fbUserDetailsDictt = %@",fbUserDetailsDict);
+                
+                [COMMON DSLoadIcon:self.view];
+                
+                if(labelFacebook.tag == 10)
+                {
+                    // before used CreateAPI;
+                    [self checkUserEmail];
+                }
+                
+                else{
+                    [COMMON DSLoadIcon:self.view];
                     // [self loadloginAPI];
-                     [self checkUserEmail];
-                 }
-
-             }];
-         }
-     }];
+                    [self checkUserEmail];
+                }
+                
+            }];
+        }
+    }];
     
-        
+    
 }
 
 #pragma mark - gotoProfileView
 
 -(void)gotoProfileView:(NSString *)strEmailId :(NSString *)strPassword :(BOOL)selectMail{
-     [[NSUserDefaults standardUserDefaults] setObject:@"Yes" forKey:FirstCreateProfile];
-     [[NSUserDefaults standardUserDefaults] setObject:@"YES" forKey:FirstlogininterestHobbies];
+    [[NSUserDefaults standardUserDefaults] setObject:@"Yes" forKey:FirstCreateProfile];
+    [[NSUserDefaults standardUserDefaults] setObject:@"YES" forKey:FirstlogininterestHobbies];
     DSProfileTableViewController *profileVC  = [[DSProfileTableViewController alloc]initWithNibName:@"DSProfileTableViewController" bundle:nil];
     profileVC.emailAddressToRegister  = strEmailId;
     profileVC.emailPasswordToRegister = strPassword;
@@ -714,14 +703,14 @@
     profileVC.isFromLoginView =YES;
     [self.navigationController pushViewController:profileVC animated:YES];
 }
-   //----Profile View With FacebookProfileID
+//----Profile View With FacebookProfileID
 -(void)gotoProfileView:(NSString*)FBProfileID{
-       DSProfileTableViewController *profileVC  = [[DSProfileTableViewController alloc]initWithNibName:@"DSProfileTableViewController" bundle:nil];
+    DSProfileTableViewController *profileVC  = [[DSProfileTableViewController alloc]initWithNibName:@"DSProfileTableViewController" bundle:nil];
     profileVC.userDetailsDict = [fbUserDetailsDict mutableCopy];
     profileVC.FBprofileID=FBProfileID;
     profileVC.isFromLoginView =YES;
     [[NSUserDefaults standardUserDefaults] setObject:@"Yes" forKey:FirstCreateProfile];
-   [[NSUserDefaults standardUserDefaults] setObject:@"YES" forKey:FirstlogininterestHobbies];
+    [[NSUserDefaults standardUserDefaults] setObject:@"YES" forKey:FirstlogininterestHobbies];
     [self.navigationController pushViewController:profileVC animated:YES];
 }
 
@@ -789,8 +778,8 @@
 #pragma mark - loadloginAPI
 -(void)loadloginAPI
 {
-     NSString *deviceToken = [[NSUserDefaults standardUserDefaults]valueForKey:DeviceToken];
-     if(deviceToken == nil)
+    NSString *deviceToken = [[NSUserDefaults standardUserDefaults]valueForKey:DeviceToken];
+    if(deviceToken == nil)
         deviceToken = @"";
     
     if([COMMON isInternetReachable]){
@@ -820,7 +809,7 @@
              if([[loginDict valueForKey:@"status"]isEqualToString:@"success"]){
                  
                  [COMMON setUserDetails:[[loginDict valueForKey:@"userDetails"]objectAtIndex:0]];
-
+                 
                  NSLog(@"userdetails = %@",[COMMON getUserDetails]);
                  
                  [self gotoHomeView];
@@ -835,13 +824,13 @@
              }
              
          }
-        failure:^(AFHTTPRequestOperation *operation, id error){
+                        failure:^(AFHTTPRequestOperation *operation, id error){
                             
-            NSLog(@"ERROR = %@",error);
+                            NSLog(@"ERROR = %@",error);
                             
-            [COMMON DSRemoveLoading];
+                            [COMMON DSRemoveLoading];
                             
-        }];
+                        }];
     }
     else{
         
@@ -894,13 +883,13 @@
                                 [COMMON DSRemoveLoading];
                                 
                             }];
-            }
+    }
     else{
         
         [COMMON showErrorAlert:@"Check Your Internet connection"];
         
     }
-   
+    
     
 }
 #pragma mark - loadRegisterNotification
@@ -918,7 +907,7 @@
     
     
     [[NSNotificationCenter defaultCenter] removeObserver:self];
-   
+    
     [self gotoHomeView];
     
 }
@@ -938,7 +927,7 @@
     
     if(isForgotBackButton==YES)
     {
-
+        
         if (IS_IPHONE6 ||IS_IPHONE6_Plus){
             self.layoutConstraintSignInButtonHeight.constant =47;
             self.layoutConstraintBackButtonHeight.constant =49;
@@ -957,35 +946,35 @@
         }
         
     }
-   
-    else{
-
-    NSArray *viewControllers = [[self navigationController] viewControllers];
     
-    for( int i=0;i<[viewControllers count];i++){
+    else{
         
-        id obj=[viewControllers objectAtIndex:i];
+        NSArray *viewControllers = [[self navigationController] viewControllers];
         
-        if([obj isKindOfClass:[DSHomeViewController class]]){
+        for( int i=0;i<[viewControllers count];i++){
             
-            [[self navigationController] popToViewController:obj animated:YES];
+            id obj=[viewControllers objectAtIndex:i];
             
-            return;
-            
+            if([obj isKindOfClass:[DSHomeViewController class]]){
+                
+                [[self navigationController] popToViewController:obj animated:YES];
+                
+                return;
+                
+            }
         }
-    }
     }
     
 }
 -(IBAction)didClickGeneralWalkAlterview:(id)sender
 {
-     [[NSUserDefaults standardUserDefaults]removeObjectForKey:FirstCreatAccount];
+    [[NSUserDefaults standardUserDefaults]removeObjectForKey:FirstCreatAccount];
     self.walkalterview.hidden=YES;
     self.window.hidden=YES;
     [self flashOff:blueCirecleImg];
 }
 - (IBAction)createAnAccountFB:(id)sender {
-  
+    
     [self loginByFacebook];
     [COMMON TrackerWithName:@"Create Account with Facebook"];
 }
@@ -997,23 +986,23 @@
 
 -(void)GerenalWalkAlterview
 {
-  
+    
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     UIButton * ClosewindowBtn =[[UIButton alloc]initWithFrame:[[UIScreen mainScreen] bounds]];
     [ClosewindowBtn addTarget:self action:@selector(didClickGeneralWalkAlterview:) forControlEvents:UIControlEventTouchUpInside];
-  
+    
     UIView * altermsgView;
     UIImageView * blueTxtImg;
     UILabel * AlterMsg;
     if(IS_IPHONE6|| IS_IPHONE6_Plus)
     {
         altermsgView= [[UIView alloc]initWithFrame:CGRectMake(self.window.center.x-110,self.view.center.y+40,240,60)];
-         blueTxtImg=[[UIImageView alloc]initWithFrame:CGRectMake(0,0,240,60)];
-         AlterMsg=[[UILabel alloc]initWithFrame:CGRectMake(0,0,240,60)];
-         blueCirecleImg=[[UIImageView alloc]initWithFrame:CGRectMake(self.window.center.x-20,self.view.center.y-60,45,45)];
+        blueTxtImg=[[UIImageView alloc]initWithFrame:CGRectMake(0,0,240,60)];
+        AlterMsg=[[UILabel alloc]initWithFrame:CGRectMake(0,0,240,60)];
+        blueCirecleImg=[[UIImageView alloc]initWithFrame:CGRectMake(self.window.center.x-20,self.view.center.y-60,45,45)];
     }
     else{
-         blueCirecleImg=[[UIImageView alloc]initWithFrame:CGRectMake(self.view.center.x-20,self.view.center.y-90,45,45)];
+        blueCirecleImg=[[UIImageView alloc]initWithFrame:CGRectMake(self.view.center.x-20,self.view.center.y-90,45,45)];
         altermsgView= [[UIView alloc]initWithFrame:CGRectMake(self.view.frame.origin.x+40,self.view.center.y-20,240,60)];
         blueTxtImg=[[UIImageView alloc]initWithFrame:CGRectMake(0,0,240,60)];
         AlterMsg=[[UILabel alloc]initWithFrame:CGRectMake(0,0,240,60)];
@@ -1023,12 +1012,12 @@
     blueCirecleImg.userInteractionEnabled=YES;
     [self flashOn:blueCirecleImg];
     [self.window addSubview:blueCirecleImg];
-
-
+    
+    
     blueTxtImg.userInteractionEnabled=YES;
     blueTxtImg.image=[UIImage imageNamed:@"BlueBgText"];
     [altermsgView addSubview:blueTxtImg];
-   
+    
     AlterMsg.text =@"Insert your email and password \n to “create your account”";
     AlterMsg.textColor=[UIColor whiteColor];
     AlterMsg.textAlignment= NSTextAlignmentCenter;
@@ -1039,16 +1028,16 @@
     
     [self.window addSubview:altermsgView];
     
-   
     
-  
+    
+    
     [self.window addSubview:ClosewindowBtn];
     self.window.hidden=NO;
     [self.window makeKeyAndVisible];
-  
+    
     self.window.backgroundColor =[UIColor colorWithRed:(53.0/255.0f) green:(53.0/255.0f) blue:(53.0/255.0f) alpha:0.5];
     
-   
+    
     
 }
 - (void)flashOff:(UIView *)v
