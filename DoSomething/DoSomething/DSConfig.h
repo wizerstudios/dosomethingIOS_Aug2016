@@ -8,8 +8,6 @@
 
 #define APP_NAME [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleName"]
 
-
-
 #define screen_width                    [[UIScreen mainScreen] bounds].size.width
 //#define  IS_IPAD_DEVICE (([UIDevice currentDevice].userInterfaceIdiom==UIUserInterfaceIdiomPhone)?NO:YES)
 
