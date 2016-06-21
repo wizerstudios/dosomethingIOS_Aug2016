@@ -81,6 +81,10 @@
     isMyCurrentIndex=NO;
     self.walkAlterview.hidden =YES;
     [self flashOn:walkAlterviewBtn];
+    
+    
+    [[NSUserDefaults standardUserDefaults] setObject:@"YES" forKey:FirstTimeLocationAlert];
+    [[NSUserDefaults standardUserDefaults]synchronize];
    
 }
 

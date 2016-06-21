@@ -48,6 +48,9 @@
     bool isForgotBackButton;
     UIImageView * blueCirecleImg;
     BOOL _isStartTimer;
+    
+    BOOL isCheckLocationLogin;
+    
    
 }
 @end
@@ -59,6 +62,7 @@
 
 
 - (void)viewDidLoad {
+    
     [super viewDidLoad];
     self.walkalterview.hidden =YES;
    
@@ -83,7 +87,16 @@
         self.layoutConstraintPassTextFieldlYPos.constant =3;
         self.layoutConstraintTextFieldCenterLabelYPos.constant =60;
     }
-
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(alertBoxLoginView)
+                                                 name:@"alertBoxLoginView"
+                                               object:nil];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(loginCurrentLocation)
+                                                 name:@"loginCurrentLocation"
+                                               object:nil];
+    
     
      [self CustomAlterview];
 
@@ -109,7 +122,6 @@
     
     deviceUdid = [OpenUDID value];
     
-    [self checkLocationServicesTurnedOn];
     
     //[self getUserCurrentLocation];//OLD
     
@@ -163,6 +175,14 @@
         
         [self signinMethod];
     }
+    isCheckLocationLogin=NO;
+    NSString * locationAlert=[[NSUserDefaults standardUserDefaults]valueForKey:FirstTimeLocationAlert];
+    if([locationAlert isEqualToString:@"YES"]){
+        [self performSelector:@selector(checkLocationServicesTurnedOn) withObject:nil afterDelay:0.2];
+        [[NSUserDefaults standardUserDefaults] setObject:@"NO" forKey:FirstTimeLocationAlert];
+        [[NSUserDefaults standardUserDefaults]synchronize];
+    }
+
 
 }
 #pragma mark - checkLocationServicesTurnedOn
@@ -177,27 +197,18 @@
     }
     
 }
-#pragma mark - checkApplicationHasLocationServicesPermission
--(void) checkApplicationHasLocationServicesPermission {
-    if ([CLLocationManager authorizationStatus] == kCLAuthorizationStatusDenied) {
-        [self alertBoxView];
-    }
+#pragma mark - checkLocationServicesTurnedOn
+- (void) checkLocationServicesTurnedOn {
+    [COMMON checkLocationServicesTurnedOn:@"login"];
 }
--(void)alertBoxView{
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Do Something"
-                                                    message:@"Turn on Location Services to allow DoSomething to find matches near you"
-                                                   delegate:self
-                                          cancelButtonTitle:@"Ok"
-                                          otherButtonTitles:@"Cancel",nil];
-    [alert show];
-}
-- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
-{
-    if (buttonIndex == 0)
-    {
-        //code for getUserCurrentLocation
-        [self getUserCurrentLocation];
-    }
+
+-(void)alertBoxLoginView{
+    isCheckLocationLogin=YES;
+    [self showAltermessage:LOCATION_MESSAGE];
+    
+} 
+-(void)loginCurrentLocation{
+    [self getUserCurrentLocation];
 }
 
 #pragma mark get user CurrentLocation
@@ -205,7 +216,6 @@
 - (void)getUserCurrentLocation{
     
     if(!locationManager){
-        
         
         locationManager.distanceFilter  = kCLLocationAccuracyKilometer;
         locationManager.desiredAccuracy = kCLLocationAccuracyBest;
@@ -439,6 +449,11 @@
     objCustomAlterview. alertBgView.hidden = YES;
     objCustomAlterview.alertMainBgView.hidden = YES;
     objCustomAlterview.view .hidden  = YES;
+    if(isCheckLocationLogin==YES){
+        [self performSelector:@selector(getUserCurrentLocation) withObject:nil afterDelay:0.1];
+        isCheckLocationLogin=NO;
+    }
+    
  
 }
 
@@ -448,6 +463,11 @@
     objCustomAlterview.alertBgView.hidden = NO;
     objCustomAlterview.alertMainBgView.hidden = NO;
     objCustomAlterview.alertMsgLabel.text = msg;
+     if(isCheckLocationLogin==YES){
+         objCustomAlterview.alertMsgLabel.textAlignment = NSTextAlignmentCenter;
+         objCustomAlterview.alertMsgLabel.lineBreakMode = NSLineBreakByWordWrapping;
+         objCustomAlterview.alertMsgLabel.numberOfLines = 0;
+     }
 }
 
 #pragma mark- hide keyboard

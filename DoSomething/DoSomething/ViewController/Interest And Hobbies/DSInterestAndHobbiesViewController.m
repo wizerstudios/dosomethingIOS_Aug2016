@@ -294,7 +294,7 @@
     
     if([[NSUserDefaults standardUserDefaults] valueForKey:@"ListofinterestArray"]==nil){
         
-        [COMMON DSLoaderIcon:self.interestAndHobbiesCollectionView];
+        [COMMON DSLoadIcon:self.interestAndHobbiesCollectionView];
         isDownloadactiveImg=YES;
         
         [self performSelector:@selector(loadHobbiesWebserviceMethod) withObject:nil afterDelay:5.0];

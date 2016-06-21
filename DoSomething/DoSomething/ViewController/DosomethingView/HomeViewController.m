@@ -70,6 +70,8 @@
     UIButton * blueCirecleBtn;
     HomeCustomCell *cell;
     UIView *loadingView;
+    
+    BOOL isCheckLocationHome;
 
 }
 @end
@@ -88,9 +90,21 @@
     activityImageArray = [[NSMutableArray alloc]init];
     
     [activatedView setHidden:YES];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(alertBoxHomeView)
+                                                 name:@"alertBoxHomeView"
+                                               object:nil];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(homeCurrentLocation)
+                                                 name:@"homeCurrentLocation"
+                                               object:nil];
+    
+    
     if([[NSUserDefaults standardUserDefaults] valueForKey:@"MenuListArray"]==nil){
         
-        [COMMON DSLoaderIcon:self.view];
+        [COMMON DSLoadIcon:self.view];
         
         [self performSelector:@selector(loadhomeviewListWebservice) withObject:nil afterDelay:5.0];
 //        [self loadhomeviewListWebservice];
@@ -119,7 +133,6 @@
 {
     [super viewWillAppear:animated];
     
-    [self checkLocationServicesTurnedOn];
     
     //[self getUserCurrentLocation];
         
@@ -137,6 +150,10 @@
     [self loadnavigationview];
     [self setupCollectionView];
     [self audioplayMethod];
+    
+    isCheckLocationHome=NO;
+    [self performSelector:@selector(checkLocationServicesTurnedOn) withObject:nil afterDelay:0.1];
+    
     
 
 }
@@ -276,8 +293,16 @@
     objCustomAlterview.btnYes.hidden = YES;
     objCustomAlterview.btnNo.hidden = YES;
     objCustomAlterview.alertCancelButton.hidden=NO;
-    objCustomAlterview.alertMsgLabel.numberOfLines=5;
     objCustomAlterview.alertMsgLabel.text = msg;
+
+    if(isCheckLocationHome==YES){
+        objCustomAlterview.alertMsgLabel.textAlignment = NSTextAlignmentCenter;
+        objCustomAlterview.alertMsgLabel.numberOfLines=0;
+    }
+    else
+        objCustomAlterview.alertMsgLabel.numberOfLines=5;
+        
+
 }
 
 
@@ -294,38 +319,17 @@
 
 #pragma mark - checkLocationServicesTurnedOn
 - (void) checkLocationServicesTurnedOn {
-    if (![CLLocationManager locationServicesEnabled]) {
-        [self alertBoxView];
-    }
-    else if([CLLocationManager locationServicesEnabled]){
-        //checkApplicationHasLocationServicesPermission
-        [self checkApplicationHasLocationServicesPermission];
-    }
-    
-}
-#pragma mark - checkApplicationHasLocationServicesPermission
--(void) checkApplicationHasLocationServicesPermission {
-    if ([CLLocationManager authorizationStatus] == kCLAuthorizationStatusDenied) {
-        [self alertBoxView];
-    }
-}
--(void)alertBoxView{
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Do Something"
-                                                    message:@"Turn on Location Services to allow DoSomething to find matches near you"
-                                                   delegate:self
-                                          cancelButtonTitle:@"Ok"
-                                          otherButtonTitles:@"Cancel",nil];
-    [alert show];
-}
-- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
-{
-    if (buttonIndex == 0)
-    {
-        //code for getUserCurrentLocation
-        [self getUserCurrentLocation];
-    }
+    [COMMON checkLocationServicesTurnedOn:@"homeView"];
 }
 
+-(void)alertBoxHomeView{
+    isCheckLocationHome=YES;
+    [self showAltermessage:LOCATION_MESSAGE];
+    
+}
+-(void)homeCurrentLocation{
+    [self getUserCurrentLocation];
+}
 #pragma mark get user CurrentLocation
 
 - (void)getUserCurrentLocation{
@@ -622,7 +626,10 @@ minimumLineSpacingForSectionAtIndex:(NSInteger)section {
     objCustomAlterview. alertBgView.hidden = YES;
     objCustomAlterview.alertMainBgView.hidden = YES;
     objCustomAlterview.view .hidden  = YES;
-    
+    if(isCheckLocationHome==YES){
+        [self performSelector:@selector(homeCurrentLocation) withObject:nil afterDelay:0.2];
+        isCheckLocationHome=NO;
+    }
 
 }
 - (IBAction)alertPressYes:(id)sender {

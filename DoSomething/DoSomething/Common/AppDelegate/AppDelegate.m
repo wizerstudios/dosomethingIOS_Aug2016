@@ -56,6 +56,7 @@
     
     [[NSUserDefaults standardUserDefaults]removeObjectForKey:CurrentLongitude];
     [[NSUserDefaults standardUserDefaults]removeObjectForKey:CurrentLatitude];
+    [[NSUserDefaults standardUserDefaults]removeObjectForKey:FirstTimeLocationAlert];
     
     if ([[[NSUserDefaults standardUserDefaults]valueForKey:@"ISINTIAL"]length]==0) {
         

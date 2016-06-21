@@ -121,16 +121,13 @@
     currentloadPage= @"";
     if (![CLLocationManager locationServicesEnabled]) {
         
-        [self alertBoxView];
-    }
-    else if([CLLocationManager locationServicesEnabled]){
-        //checkApplicationHasLocationServicesPermission
-        [self checkApplicationHasLocationServicesPermission];
+        [self alertBoxLocationView];
     }
 
     else
     {
          [COMMON DSLoadIcon:self.view]; //bef hidden
+        
          [self nearestLocationWebservice];
          [self performSelector:@selector(removeLoading) withObject:nil afterDelay:0.5];
         
@@ -149,13 +146,8 @@
     // Do any additional setup after loading the view from its nib.
 }
 
-#pragma mark - checkApplicationHasLocationServicesPermission
--(void) checkApplicationHasLocationServicesPermission {
-    if ([CLLocationManager authorizationStatus] == kCLAuthorizationStatusDenied) {
-        [self alertBoxView];
-    }
-}
--(void)alertBoxView{
+#pragma mark - alertBoxLocationView
+-(void)alertBoxLocationView{
     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Location Service Disabled"
                                                     message:@"Turn on location services to allow “Do Something” to determine your locationDoSomething would like to use your location"
                                                    delegate:self
@@ -574,13 +566,17 @@
                          }
         
         }
-                
+              else  if([[[responseObject valueForKey:@"nearestusers"]valueForKey:@"status"] isEqualToString:@"failure"]){
+                  [COMMON DSRemoveLoading];
+              }
+             
              
              
              [refreshControl endRefreshing];
              
              
          }
+         
         failure:^(AFHTTPRequestOperation *operation, id error)
          {
              [COMMON DSRemoveLoading];

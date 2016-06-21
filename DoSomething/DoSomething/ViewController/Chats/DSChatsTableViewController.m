@@ -77,7 +77,7 @@
                                                                constant:20.0]];
     
    
-    [COMMON DSLoaderIcon:self.view];
+    [COMMON DSLoadIcon:self.view];
 }
 
 - (void)viewWillAppear:(BOOL)animated
