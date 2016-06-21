@@ -574,20 +574,12 @@
             if([sound isEqualToString:@"Default.caf"])
             {
                 NSString *playSoundOnAlert = [[NSBundle mainBundle] pathForResource:@"Glass"ofType:@"aiff"];
-                NSURL *soundURL = [NSURL fileURLWithPath:playSoundOnAlert];
-                
-                AudioServicesCreateSystemSoundID((__bridge CFURLRef)soundURL, &_notificationSound);
-                
-                AudioServicesPlaySystemSound(_notificationSound);
+               [self checkSoundFileExits:playSoundOnAlert];
             }
             else if([sound isEqualToString:@"default"])
             {
                 NSString *playSoundOnAlert = [[NSBundle mainBundle] pathForResource:@"Glass"ofType:@"aiff"];
-                NSURL *soundURL = [NSURL fileURLWithPath:playSoundOnAlert];
-                
-                AudioServicesCreateSystemSoundID((__bridge CFURLRef)soundURL, &_notificationSound);
-                
-                AudioServicesPlaySystemSound(_notificationSound);
+               [self checkSoundFileExits:playSoundOnAlert];
             }
             else
             {
@@ -596,12 +588,8 @@
           //   NSURL *soundURL =[NSURL fileURLWithPath:[NSString stringWithFormat:@"%@/%@",[[NSBundle mainBundle] resourcePath],playSoundOnAlert]];
             if(![playSound isEqualToString:@"Silence"] || playSound != nil)
             {
-            NSString *playSoundOnAlert = [[NSBundle mainBundle] pathForResource:playSound ofType:@"caf"];
-            NSURL *soundURL = [NSURL fileURLWithPath:playSoundOnAlert];
-            
-            AudioServicesCreateSystemSoundID((__bridge CFURLRef)soundURL, &_notificationSound);
-            
-            AudioServicesPlaySystemSound(_notificationSound);
+                NSString *playSoundOnAlert = [[NSBundle mainBundle] pathForResource:playSound ofType:@"caf"];
+                [self checkSoundFileExits:playSoundOnAlert];
             }
             }
             
@@ -636,6 +624,18 @@
     }
 }
 
+#pragma mark - checkSoundFileExits
+-(void)checkSoundFileExits:(NSString *)playSoundOnAlert{
+    if ([[NSFileManager defaultManager] fileExistsAtPath:playSoundOnAlert])
+    {
+        NSURL *soundURL = [NSURL fileURLWithPath:playSoundOnAlert];
+        
+        AudioServicesCreateSystemSoundID((__bridge CFURLRef)soundURL, &_notificationSound);
+        
+        AudioServicesPlaySystemSound(_notificationSound);
+    }
+    
+}
 -(void)RequestSend:(NSString *)conversationID
 {
     if ([COMMON isInternetReachable]) {
