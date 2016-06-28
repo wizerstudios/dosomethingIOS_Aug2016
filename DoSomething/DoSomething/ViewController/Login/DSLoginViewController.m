@@ -50,6 +50,8 @@
     BOOL _isStartTimer;
     
     BOOL isCheckLocationLogin;
+    BOOL isCheckUserFBEmailExists;
+    NSString *overrideStr;
     
     
 }
@@ -65,6 +67,7 @@
     
     [super viewDidLoad];
     self.walkalterview.hidden =YES;
+    isCheckUserFBEmailExists=NO;
     
     [[IQKeyboardManager sharedManager]setEnableAutoToolbar:YES];
     fbUserDetailsDict = [[NSMutableDictionary alloc]init];
@@ -412,6 +415,7 @@
     [objCustomAlterview.btnNo setHidden:YES];
     [objCustomAlterview.alertCancelButton setHidden:NO];
     [objCustomAlterview.alertCancelButton addTarget:self action:@selector(alertPressCancel:) forControlEvents:UIControlEventTouchUpInside];
+    
     objCustomAlterview.alertMsgLabel.textAlignment = NSTextAlignmentCenter;
     objCustomAlterview.alertMsgLabel.lineBreakMode = NSLineBreakByWordWrapping;
     objCustomAlterview.alertMsgLabel.numberOfLines = 2;
@@ -457,8 +461,39 @@
         objCustomAlterview.alertMsgLabel.lineBreakMode = NSLineBreakByWordWrapping;
         objCustomAlterview.alertMsgLabel.numberOfLines = 0;
     }
+    if(isCheckUserFBEmailExists==YES){
+        objCustomAlterview.alertMsgLabel.textAlignment = NSTextAlignmentCenter;
+        objCustomAlterview.alertMsgLabel.lineBreakMode = NSLineBreakByWordWrapping;
+        objCustomAlterview.alertMsgLabel.numberOfLines = 0;
+        [objCustomAlterview.alertMsgLabel setFont:[UIFont fontWithName:@"Patron-Regular" size:11]];
+        [objCustomAlterview.btnYes setHidden:NO];
+        [objCustomAlterview.btnNo setHidden:NO];
+         [objCustomAlterview.btnYes addTarget:self action:@selector(alertPressYes:) forControlEvents:UIControlEventTouchUpInside];
+        [objCustomAlterview.btnNo addTarget:self action:@selector(alertPressNo:) forControlEvents:UIControlEventTouchUpInside];
+        isCheckUserFBEmailExists=NO;
+       
+        
+    }
 }
 
+- (void)alertPressYes:(id)sender{
+    isCheckUserFBEmailExists=NO;
+    objCustomAlterview. alertBgView.hidden = YES;
+    objCustomAlterview.alertMainBgView.hidden = YES;
+    objCustomAlterview.view .hidden  = YES;
+    [COMMON DSRemoveLoading];
+    overrideStr=@"1";
+    [self checkUserEmail];
+    
+    
+}
+- (void)alertPressNo:(id)sender{
+    isCheckUserFBEmailExists=NO;
+    objCustomAlterview. alertBgView.hidden = YES;
+    objCustomAlterview.alertMainBgView.hidden = YES;
+    objCustomAlterview.view .hidden  = YES;
+    [COMMON DSRemoveLoading];
+}
 #pragma mark- hide keyboard
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event{
@@ -571,11 +606,45 @@
         //[self checkUserEmail]
     }
 }
+#pragma mark - checkUserFBEmailAPI
+-(void)checkUserFBEmailAPI{
+    if([COMMON isInternetReachable]){
+        [COMMON DSLoadIcon:self.view];
+        [objWebService checkUserFBEmail:CheckUserFBEmail_API
+                                  email:email
+                                   type:objSigninType
+                                success:^(AFHTTPRequestOperation *operation, id responseObject) {
+            {
+                NSLog(@"FB RESPONSE-->%@",responseObject);
+                if([[[responseObject objectForKey:@"checkfbemail"]objectForKey:@"status"]  isEqual: @"success"]){
+                    [COMMON DSRemoveLoading];
+                    [self checkUserEmail];
+                    
+                    
+                }
+                else if([[[responseObject objectForKey:@"checkfbemail"]objectForKey:@"status"] isEqual: @"failure"]){
+                    isCheckUserFBEmailExists=YES;
+                    [self showAltermessage:[[responseObject objectForKey:@"checkfbemail"]objectForKey:@"Message"]];
+                    [COMMON DSRemoveLoading];
+                }
+                
+                
+                
+            }
+        } failure:^(AFHTTPRequestOperation *operation, id error) {
+            {
+                 [COMMON DSRemoveLoading];
+            }
+        }];
+    }
+}
 #pragma mark - checkuserEmailAPI
 - (void)checkUserEmail{
    
     NSString *dobStr = [self changeDateFormat:dob];
-    
+    if(overrideStr==nil){
+        overrideStr=@"0";
+    }
     
     if([COMMON isInternetReachable]){
         
@@ -589,6 +658,7 @@
                              dob:dobStr
                           gender:gender
                     profileImage:profileImage
+                        override:overrideStr
                          success:^(AFHTTPRequestOperation *operation, id responseObject){
                             
                              if(([[[responseObject objectForKey:@"checkuser"]objectForKey:@"RegisterType"]  isEqual: @"1"])){
@@ -675,13 +745,15 @@
                 if(labelFacebook.tag == 10)
                 {
                     // before used CreateAPI;
-                    [self checkUserEmail];
+                    //[self checkUserEmail];
+                    [self checkUserFBEmailAPI];
                 }
                 
                 else{
                     [COMMON DSLoadIcon:self.view];
                     // [self loadloginAPI];
-                    [self checkUserEmail];
+                    //[self checkUserEmail];//changes to checkUserFBEmailAPI
+                    [self checkUserFBEmailAPI];
                 }
                 
             }];

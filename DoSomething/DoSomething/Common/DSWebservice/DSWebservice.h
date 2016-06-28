@@ -42,6 +42,12 @@ typedef void (^WebserviceRequestXMLFailureHandler)(AFHTTPRequestOperation  *oper
           success:(WebserviceRequestSuccessHandler)success
           failure:(WebserviceRequestFailureHandler)failure;
 
+// Check User FB Email API
+- (void)checkUserFBEmail:(NSString *)checkUserURL
+                   email:(NSString *)email
+                    type:(NSString *)type
+                 success:(WebserviceRequestSuccessHandler)success
+                 failure:(WebserviceRequestFailureHandler)failure;
 // Check User Email API
 - (void)checkUser:(NSString *)checkUserURL
             email:(NSString *)email
@@ -52,6 +58,7 @@ typedef void (^WebserviceRequestXMLFailureHandler)(AFHTTPRequestOperation  *oper
               dob:(NSString*)dob
            gender:(NSString*)gender
      profileImage:(NSString *)profileImage
+         override:(NSString *)overrideStr
               success:(WebserviceRequestSuccessHandler)success
               failure:(WebserviceRequestFailureHandler)failure;
 

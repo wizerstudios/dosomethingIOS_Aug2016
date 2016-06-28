@@ -774,9 +774,13 @@
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
 {
     NSString *strSearchLetters;
+    if([string isEqualToString:@" "])
+    {
+        return NO;
+    }
     if (string.length !=0)
     {
-        if(textField.text.length > 0)
+        if(textField.text.length > 0 || textField.text.length == 0)
         {
             strSearchLetters =[textField.text stringByAppendingString:string];
             if(textField.tag ==11)
@@ -2915,7 +2919,7 @@
     
     if([COMMON isInternetReachable]){
         [objWebService profileUpdate:ProfileUpdate_API
-                          first_name:FirstName
+                        first_name:FirstName
                            last_name:LastName
                                  dob:dateChange
                             password:(currentPassword==nil)?emailPasswordToRegister:currentPassword
@@ -3111,7 +3115,7 @@
             
             return;
         }
-        else if ([strAbout isEqualToString:@""] || strAbout == NULL )
+        else if ([strAbout isEqualToString:@""] || strAbout == NULL ||[strAbout isEqualToString:@" "] )
         {
             
             [self showAltermessage:@"About Required"];

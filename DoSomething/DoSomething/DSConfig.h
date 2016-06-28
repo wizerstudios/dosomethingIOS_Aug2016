@@ -102,6 +102,7 @@
 #define LOCATION_MESSAGE            @"Turn on Location Services to allow DoSomething to find matches near you"
 
 //API Keys
+#define CheckUserFBEmail_API        @"checkfbemail"
 #define CheckUser_API               @"checkuser"
 #define User_Logout_Delete_API      @"useraction"
 #define Login_API                   @"signin"

@@ -13,6 +13,7 @@
 #import "DAAutoScroll.h"
 #import "HomeViewController.h"
 #import "AppDelegate.h"
+#import "ILTranslucentView.h"
 
 
 #define enlargeRatio 1.1
@@ -54,6 +55,11 @@
     UIButton *blkdot;
     
     BOOL isMyCurrentIndex;
+    
+    NSInteger testCurrentIndex;
+    NSInteger testPrevIndex;
+    ILTranslucentView *translucentView;
+    
 
 
 }
@@ -77,7 +83,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
+    testCurrentIndex=0;
     isMyCurrentIndex=NO;
     self.walkAlterview.hidden =YES;
     [self flashOn:walkAlterviewBtn];
@@ -110,6 +116,8 @@
     [self setCommonDict];
     [self initControl];
     [self reloadData];
+    
+    
     
     //[_createAnAccBtn setHidden:YES];
     //[_signInBtn setHidden:YES];
@@ -298,8 +306,35 @@
     
      UIImageView *imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:[commonDict valueForKey:@"BGimageArray"][index]]];
      imageView.contentMode = UIViewContentModeScaleAspectFill;
-     return imageView;
     
+    
+    if(index!=0){
+        //by CATransEffect we will get BLACK animation and by transEffect we will get WHITE
+        //[self addCATranEffect:imageView];
+        //[self addTransEffect:imageView];
+
+    }    
+    return imageView;
+    
+}
+#pragma mark - CATransEffect
+-(void)addCATranEffect:(UIImageView*)imageView{
+    UIWindow *window = [UIApplication sharedApplication].keyWindow;
+    CATransition *viewIn = [CATransition animation];
+    [viewIn setDuration:3];
+    [viewIn setType:kCATransitionReveal];
+    [viewIn setTimingFunction:[CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseOut]];
+    [[imageView layer] addAnimation:viewIn forKey:kCATransitionReveal];
+    [[[window subviews] objectAtIndex:0] addSubview:imageView];
+}
+#pragma mark - TransEffect
+-(void)addTransEffect:(UIImageView*)imageView{
+    translucentView =[[ILTranslucentView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)];
+    [imageView addSubview:translucentView];
+    translucentView.translucentAlpha = 0.25;
+    translucentView.translucentStyle = UIBarStyleDefault;
+    translucentView.translucentTintColor = [UIColor colorWithRed:1 green:1 blue:1 alpha:0.3];
+    translucentView.backgroundColor = [UIColor clearColor];
     
 }
 - (UIView *)foregroundViewAtIndex:(NSInteger)index scrollView:(PWParallaxScrollView *)scrollView
@@ -377,6 +412,7 @@
     }
    
 }
+
 #pragma mark - PWParallaxScrollViewDelegate
 
 - (void)parallaxScrollView:(PWParallaxScrollView *)scrollView didChangeIndex:(NSInteger)index
@@ -385,7 +421,32 @@
      pageControllBtn.backgroundColor = [UIColor whiteColor];
      Currentindex = index;
     isMyCurrentIndex=YES;
+    testCurrentIndex = index;
+        
     
+//    if (testCurrentIndex > 0) {
+//        translucentView.translucentAlpha = 0.9;
+//        translucentView.translucentStyle = UIBarStyleDefault;
+//        translucentView.translucentTintColor = [UIColor clearColor];
+//        translucentView.backgroundColor = [UIColor clearColor];
+//        
+//      
+//        
+//    }
+    
+    
+//    if (testCurrentIndex < [[commonDict valueForKey:@"BGimageArray"] count] - 1) {
+//        translucentView.translucentAlpha = 0.8;
+//        translucentView.translucentStyle = UIBarStyleDefault;
+//        translucentView.translucentTintColor = [UIColor clearColor];
+//        
+//        translucentView.backgroundColor = [UIColor clearColor];
+//
+//       
+//    }
+
+    
+
 }
 
 
@@ -393,6 +454,9 @@
 {
      Currentindex = index;
      isMyCurrentIndex=YES;
+    [translucentView removeFromSuperview];
+    
+   
     
 }
 

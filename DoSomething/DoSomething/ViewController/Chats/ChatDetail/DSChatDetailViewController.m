@@ -15,6 +15,7 @@
 #import "IQKeyboardManager.h"
 #import "IQUIView+IQKeyboardToolbar.h"
 #import "UIImageView+AFNetworking.h"
+#import "DSNearByDetailViewController.h"
 
 #define CONTENT_WIDTH           200.f
 #define CONTENT_START           0.f
@@ -26,7 +27,7 @@
 
 #define Red_Color   [UIColor colorWithRed:227.0f/255.0f green:64.0f/255.0f blue:81.0f/255.0f alpha:1.0f]
 
-@interface DSChatDetailViewController (){
+@interface DSChatDetailViewController ()<UIGestureRecognizerDelegate>{
     
     AppDelegate *appDelegate;
     
@@ -46,6 +47,8 @@
     UIButton * blueCirecleBtn;
     NSMutableDictionary *msgResponseDict;
     UIView * CommWalkView;
+    
+    NSMutableArray *userDetailArray;
 }
 
 @end
@@ -81,7 +84,10 @@
     //iskeyboardapear=NO;
     conversationArray = [[NSMutableArray alloc]init];
     recevierDetails =[[NSMutableArray alloc]init];
+    userDetailArray = [[NSMutableArray alloc]init];
     [self displayUserDetailsView];
+    
+    [self getCurrentChatUserDetails];
     
     [self loadConverstionAPI];
     
@@ -110,6 +116,22 @@
     _unMatchBtn.titleLabel.font = [UIFont fontWithName:@"Patron-Regular" size:15];
    
 }
+
+#pragma mark - getCurrentChatUserDetail
+-(void)getCurrentChatUserDetails{
+    NSString * userId = [chatuserDetailsDict valueForKey:@"UserId"];
+    [webService getUserDetails:UserDetails_API
+                     sessionid:[COMMON getSessionID]
+               profile_user_id:userId
+                       success:^(AFHTTPRequestOperation *operation, id responseObject) {
+                           userDetailArray = [[responseObject objectForKey:@"getuserdetails"] valueForKey:@"userDetails"];
+                           
+                       } failure:^(AFHTTPRequestOperation *operation, id error) {
+                           
+                           
+                       }];
+}
+
 
 -(void)viewwillDisappear:(BOOL)animated{
    
@@ -214,13 +236,17 @@
 
 -(void)displayUserDetailsView{
     
-    ProfileName.text= [chatuserDetailsDict valueForKey:@"Name"];
     
+    ProfileName.text= [chatuserDetailsDict valueForKey:@"Name"];
+        
     NSString *profileStr = [NSString stringWithFormat:@"%@",[chatuserDetailsDict valueForKey:@"image1"]];
     
     supportUser = [[chatuserDetailsDict valueForKey:@"supportuser"]integerValue];
         
-    
+    if(supportUser!=1){
+        [self addGestureToImageName];
+    }
+
     
     if([profileStr length]>0){
         
@@ -268,7 +294,27 @@
     
     _backgroundView.hidden = YES;
 }
-
+#pragma mark - addGestureToImageName
+-(void)addGestureToImageName{
+    UITapGestureRecognizer *recognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(didUserClickedAction:)];
+    [recognizer setNumberOfTapsRequired:1];
+    ProfileName.userInteractionEnabled = YES;
+    [ProfileName addGestureRecognizer:recognizer];
+    
+    UITapGestureRecognizer *recognizer1 = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(didUserClickedAction:)];
+    [recognizer1 setNumberOfTapsRequired:1];
+    ProfileImage.userInteractionEnabled = YES;
+    [ProfileImage addGestureRecognizer:recognizer1];
+}
+#pragma mark - didUserClickedAction
+-(void)didUserClickedAction:(id)sender{
+    if([userDetailArray count]!=0){
+        DSNearByDetailViewController * detailViewController  = [[DSNearByDetailViewController alloc]initWithNibName:@"DSNearByDetailViewController" bundle:nil];
+        detailViewController.userDetailsArray = userDetailArray;
+        [self.navigationController pushViewController:detailViewController animated:YES];
+    }
+    
+}
 
 #pragma mark - Textview
 
@@ -353,7 +399,6 @@
     return ChatDetailcell;
     
 }
-
 
 
 #pragma mark - All the other junk for the sample project

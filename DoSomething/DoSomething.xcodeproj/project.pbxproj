@@ -85,6 +85,7 @@
 		2BD72B171BFCC5D4003846E9 /* UIWebView+AFNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BD72B0F1BFCC5D4003846E9 /* UIWebView+AFNetworking.m */; };
 		2BD72B1A1BFCC713003846E9 /* OpenUDID.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BD72B191BFCC713003846E9 /* OpenUDID.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		2BD7A5651CEF205C0046119B /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2BD7A5641CEF205C0046119B /* UIKit.framework */; };
+		2BDF97D01D197D5A001FA4CF /* ILTranslucentView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BDF97CF1D197D5A001FA4CF /* ILTranslucentView.m */; };
 		2BE5417F1CFE8FE70099CE5C /* PWParallaxScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BE5417E1CFE8FE70099CE5C /* PWParallaxScrollView.m */; };
 		2BE541821CFE90C60099CE5C /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 2BE541811CFE90C60099CE5C /* Localizable.strings */; };
 		511C735D1BE3801100D3D61D /* ChatTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 511C73581BE3801100D3D61D /* ChatTableViewCell.m */; };
@@ -284,6 +285,8 @@
 		2BD72B181BFCC713003846E9 /* OpenUDID.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OpenUDID.h; sourceTree = "<group>"; };
 		2BD72B191BFCC713003846E9 /* OpenUDID.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OpenUDID.m; sourceTree = "<group>"; };
 		2BD7A5641CEF205C0046119B /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		2BDF97CE1D197D5A001FA4CF /* ILTranslucentView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ILTranslucentView.h; path = Helpers/TransparentView/ILTranslucentView.h; sourceTree = "<group>"; };
+		2BDF97CF1D197D5A001FA4CF /* ILTranslucentView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ILTranslucentView.m; path = Helpers/TransparentView/ILTranslucentView.m; sourceTree = "<group>"; };
 		2BE5417D1CFE8FE70099CE5C /* PWParallaxScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PWParallaxScrollView.h; sourceTree = "<group>"; };
 		2BE5417E1CFE8FE70099CE5C /* PWParallaxScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PWParallaxScrollView.m; sourceTree = "<group>"; };
 		2BE541811CFE90C60099CE5C /* Localizable.strings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; path = Localizable.strings; sourceTree = "<group>"; };
@@ -611,6 +614,7 @@
 		2BD72A841BFCC1CC003846E9 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
+				2BDF97CD1D197CFD001FA4CF /* TransparentView */,
 				2BE5417C1CFE8FE70099CE5C /* PWParallaxScrollView */,
 				6AA86BDF1C5102C2006D30F0 /* Reachability */,
 				6AD8A52B1C2AECE800828AED /* SliderClass */,
@@ -704,6 +708,15 @@
 			);
 			name = "UIKit+AFNetworking";
 			path = "Helpers/UIKit+AFNetworking";
+			sourceTree = "<group>";
+		};
+		2BDF97CD1D197CFD001FA4CF /* TransparentView */ = {
+			isa = PBXGroup;
+			children = (
+				2BDF97CE1D197D5A001FA4CF /* ILTranslucentView.h */,
+				2BDF97CF1D197D5A001FA4CF /* ILTranslucentView.m */,
+			);
+			name = TransparentView;
 			sourceTree = "<group>";
 		};
 		2BE5417C1CFE8FE70099CE5C /* PWParallaxScrollView */ = {
@@ -1484,6 +1497,7 @@
 				6AA86BE21C5102C2006D30F0 /* Reachability.m in Sources */,
 				2BD72B121BFCC5D4003846E9 /* UIAlertView+AFNetworking.m in Sources */,
 				51F3C2F51BE75D40001E1FEC /* LocationCollectionViewCell.m in Sources */,
+				2BDF97D01D197D5A001FA4CF /* ILTranslucentView.m in Sources */,
 				6AD8A52E1C2AECE800828AED /* NMRangeSlider.m in Sources */,
 				ED5BB26D1CC2406800A10C89 /* ImageRequest.m in Sources */,
 				EADB949E1BDF566C00512374 /* HomeViewController.m in Sources */,

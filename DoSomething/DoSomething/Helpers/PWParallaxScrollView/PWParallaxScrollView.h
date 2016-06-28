@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import "ILTranslucentView.h"
+#import "DSConfig.h"
 @protocol PWParallaxScrollViewDataSource;
 @protocol PWParallaxScrollViewDelegate;
 
