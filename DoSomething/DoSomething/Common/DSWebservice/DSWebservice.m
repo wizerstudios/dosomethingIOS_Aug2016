@@ -56,9 +56,34 @@ static NSString       *ServiceMimeType    = @"image/jpeg";
            completionSucessHandler:success
           completionFailureHandler:failure];
 }
+#pragma mark - POST checkUserFB
+- (void)checkUserFBEmail:(NSString *)checkUserURL
+                   email:(NSString *)email
+                    type:(NSString *)type
+                 success:(WebserviceRequestSuccessHandler)success
+                 failure:(WebserviceRequestFailureHandler)failure
+{
+    urlString = [URL_FOR_RESOURCE(@"") stringByAppendingString:[NSString stringWithFormat:@"%@?",checkUserURL]];
+    
+    NSMutableDictionary *checkUserDetails = [[NSMutableDictionary alloc] init];
+    
+    if(email)              [checkUserDetails    setObject:email            forKey:@"email"];
+    if(type)               [checkUserDetails    setObject:type             forKey:@"type"];
+    
+    
+    NSLog(@"urlString = %@",urlString);
+    NSLog(@"checkUserDetails = %@",checkUserDetails);
+    
+    [self sendRequestWithURLString:urlString
+                     andParameters:checkUserDetails
+                            method:ServicePost
+           completionSucessHandler:success
+          completionFailureHandler:failure];
+    
+}
+
 
 #pragma mark - POST checkUser
-
 - (void)checkUser:(NSString *)checkUserURL
             email:(NSString *)email
              type:(NSString *)type
@@ -68,6 +93,7 @@ static NSString       *ServiceMimeType    = @"image/jpeg";
               dob:(NSString*)dob
            gender:(NSString*)gender
      profileImage:(NSString *)profileImage
+         override:(NSString *)override
               success:(WebserviceRequestSuccessHandler)success
               failure:(WebserviceRequestFailureHandler)failure
 {
@@ -82,6 +108,7 @@ static NSString       *ServiceMimeType    = @"image/jpeg";
     if(dob)                [checkUserDetails    setObject:dob              forKey:@"dob"];
     if(gender)             [checkUserDetails    setObject:gender           forKey:@"gender"];
     if(profileImage)       [checkUserDetails    setObject:profileImage     forKey:@"profileImage"];
+    if(override)           [checkUserDetails    setObject:override         forKey:@"override"];
 
     
     
