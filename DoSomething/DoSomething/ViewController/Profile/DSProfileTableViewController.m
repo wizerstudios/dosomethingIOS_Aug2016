@@ -778,7 +778,7 @@
     {
         return NO;
     }
-    if (string.length !=0)
+    if (string.length !=0 ||string.length ==0 )
     {
         if(textField.text.length > 0 || textField.text.length == 0)
         {
@@ -877,8 +877,7 @@
             
             currentTextfield.text =selOptionVal;
         }
-        
-        
+         
     }
     //  [self.tableviewProfile scrollToRowAtIndexPath:[self.tableviewProfile indexPathForCell:cell] atScrollPosition:UITableViewScrollPositionBottom animated:NO];
     
