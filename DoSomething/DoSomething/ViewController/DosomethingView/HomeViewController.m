@@ -646,7 +646,9 @@ minimumLineSpacingForSectionAtIndex:(NSInteger)section {
     objCustomAlterview.alertMainBgView.hidden = YES;
     [objCustomAlterview.view setHidden:YES];
     strselectDosomething = [selectedItemsArray componentsJoinedByString:@","];
-    [self loadActivityAPI:Update availableStr:@"No" doSomethingId:strselectDosomething];
+    //[self loadActivityAPI:Update availableStr:@"No" doSomethingId:strselectDosomething];
+    [self loadActivityAPI:Cancel availableStr:@"" doSomethingId:@""];
+    [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"SelectNewItem"];
     
 }
 #pragma mark - loadupdateDosomethingWebService
@@ -823,7 +825,9 @@ minimumLineSpacingForSectionAtIndex:(NSInteger)section {
 }
 -(IBAction)anyTimeAction:(id)sender{
    
-    [self loadActivityAPI:Update availableStr:@"No" doSomethingId:strselectDosomething];
+    //[self loadActivityAPI:Update availableStr:@"No" doSomethingId:strselectDosomething];
+    
+    [self loadActivityAPI:Cancel availableStr:@"" doSomethingId:@""];
 }
 
 

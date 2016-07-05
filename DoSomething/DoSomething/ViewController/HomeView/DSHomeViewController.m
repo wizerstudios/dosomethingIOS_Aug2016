@@ -386,7 +386,12 @@
         CGFloat titleLabelWidth= (SCREEN_WIDTH-(SCREEN_WIDTH/4));
         UILabel * titleLabel = [[UILabel alloc]initWithFrame:CGRectMake(SCREEN_WIDTH/8, SCREEN_HEIGHT/2.2,titleLabelWidth, 60)];
         titleLabel.numberOfLines = 0;
-        titleLabel.font = [COMMON getResizeableFont:PATRON_BOLD(18)];
+        if(index==0){
+            titleLabel.font = [COMMON getResizeableFont:PATRON_BOLD(14)];
+        }
+        else
+            titleLabel.font = [COMMON getResizeableFont:PATRON_BOLD(15)];//18
+
         titleLabel.textAlignment = NSTextAlignmentCenter;
         titleLabel.textColor = [UIColor whiteColor];
         titleLabel.text = [[commonDict valueForKey:@"titleArray"] objectAtIndex:index];
