@@ -8,8 +8,6 @@
 	<string>DoSomething</string>
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
-	<key>CFBundleGetInfoString</key>
-	<string></string>
 	<key>CFBundleIdentifier</key>
 	<string>$(PRODUCT_BUNDLE_IDENTIFIER)</string>
 	<key>CFBundleInfoDictionaryVersion</key>
@@ -34,7 +32,7 @@
 		</dict>
 	</array>
 	<key>CFBundleVersion</key>
-	<string>22</string>
+	<string>23</string>
 	<key>Fabric</key>
 	<dict>
 		<key>APIKey</key>
@@ -105,9 +103,9 @@
 		</dict>
 	</dict>
 	<key>NSLocationAlwaysUsageDescription</key>
-	<string>DoSomething would like to use your location</string>
+	<string>Turn on Location Services to allow DoSomething to find matches near you</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>DoSomething would like to use your location</string>
+	<string>Turn on Location Services to allow DoSomething to find matches near you</string>
 	<key>NSMainNibFile</key>
 	<string>Launch Screen</string>
 	<key>UIAppFonts</key>
