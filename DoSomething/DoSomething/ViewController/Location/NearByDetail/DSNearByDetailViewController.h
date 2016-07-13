@@ -33,6 +33,7 @@
     
     UIView *view;
 }
+@property (assign, nonatomic) BOOL  isFromLocationPage;
 
 @property (strong, nonatomic) IBOutlet UIScrollView *mainScroll;
 @property (strong, nonatomic) IBOutlet UIScrollView *profileImageScroll;

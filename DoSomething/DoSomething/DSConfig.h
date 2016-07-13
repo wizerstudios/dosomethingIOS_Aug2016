@@ -160,6 +160,10 @@
 
 #define FistSiginprofile          @"SiginProfile"
 
+#define DSChatDetailBackAction    @"DSChatDetailBackAction"
+
+#define ViewUserDetail              @"ViewUserDetail"
+
 //ALERT
 
 #define FirstTimeLocationAlert      @"firstTimeLocationAlert"

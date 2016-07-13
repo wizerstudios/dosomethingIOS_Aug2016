@@ -230,7 +230,7 @@
 {
     [COMMON DSRemoveLoading];
     [[NSUserDefaults standardUserDefaults]setObject:@"Yes" forKey:@"backAction"];
-    [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"DSChatDetailBackAction"];
+    [[NSUserDefaults standardUserDefaults] setBool:YES forKey:DSChatDetailBackAction];
     [self.navigationController popViewControllerAnimated:YES];
 }
 
@@ -311,6 +311,7 @@
     if([userDetailArray count]!=0){
         DSNearByDetailViewController * detailViewController  = [[DSNearByDetailViewController alloc]initWithNibName:@"DSNearByDetailViewController" bundle:nil];
         detailViewController.userDetailsArray = userDetailArray;
+        detailViewController.isFromLocationPage= NO;
         [self.navigationController pushViewController:detailViewController animated:YES];
     }
     

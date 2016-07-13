@@ -243,6 +243,8 @@ notification_sound  :(NSString *)isnotification_sound
     
     [self POST:urlString parameters:registerDetails constructingBodyWithBlock:^(id<AFMultipartFormData> formData)
      {
+       
+       
          if(!fbProfile && ![profileImage1 isKindOfClass:[NSString class]] && profileImage1){
              [formData appendPartWithFileData:UIImagePNGRepresentation(profileImage1)
                                          name:@"profileImage1"
@@ -250,6 +252,8 @@ notification_sound  :(NSString *)isnotification_sound
                                      mimeType:@"image/png"];
              
              NSLog(@"formData = %@",formData);
+             // NSLog(@"Size of Image(bytes):%@",[formData length]);
+             
          }
         
                   

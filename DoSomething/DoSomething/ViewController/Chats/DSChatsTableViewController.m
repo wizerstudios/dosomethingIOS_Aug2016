@@ -32,6 +32,9 @@
     NSString *currentUserid;
     NSString *currentUserIdToUnmatch;
     
+    //noConversation
+    UILabel *noConversationLabel;
+    
 }
 
 @end
@@ -479,7 +482,8 @@
                              if(_isStartTimer == YES)
                                  [self startTimer];
                              
-                             
+                             [ChatTableView setHidden:NO];
+                             [noConversationLabel setHidden:YES];
                              if([[[responseObject valueForKey:@"getchathistory"] valueForKey:@"status"]isEqualToString:@"success"]){
                                  
                                  chatArray = [[[responseObject valueForKey:@"getchathistory"]valueForKey:@"converation"] mutableCopy];
@@ -489,6 +493,13 @@
                                  [refreshControl endRefreshing];
                                  
                                  [ChatTableView reloadData];
+                             }
+                             else if([[[responseObject valueForKey:@"getchathistory"] valueForKey:@"Message"]isEqualToString:@"No Conversaion Details Found"]){
+                                 [self addLabelWhenNoConversation];
+                                 [ChatTableView setHidden:YES];
+                                 [noConversationLabel setHidden:NO];
+                                 
+                                 
                              }
                              
                              [COMMON DSRemoveLoading];
@@ -501,7 +512,19 @@
                          }];
     }
 }
+-(void)addLabelWhenNoConversation{
+    
+    noConversationLabel = [[UILabel alloc] initWithFrame:CGRectMake(10, (self.view.frame.size.height/2) -40,self.view.frame.size.width-20,40)];
+    
+    [noConversationLabel setFont:[COMMON getResizeableFont:PATRON_REG(12)]];
+    noConversationLabel.textColor = [UIColor colorWithRed:228.0f/255.0f green:64.0f/255.0f blue:81.0f/255.0f alpha:1.0f];
+    noConversationLabel.textAlignment = NSTextAlignmentCenter;
+    noConversationLabel.numberOfLines=0;
+    noConversationLabel.text = @"No Conversation Details Found";
+    [noConversationLabel setBackgroundColor:[UIColor clearColor]];
+    [self.view addSubview:noConversationLabel];
 
+}
 
 #pragma deleteuserchatdetails, Blockuser
 -(void)loadDeleteUserChatHistory:(NSString*) deleteuserID :(NSInteger)selectIndex

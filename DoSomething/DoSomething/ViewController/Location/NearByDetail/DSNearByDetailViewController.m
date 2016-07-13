@@ -48,6 +48,7 @@
     UIButton * profilebutton1,* profilebutton2,* profilebutton3;
     NSString *profileImageString;
     NSMutableArray *matchedUserArray;
+
     
 
 }
@@ -58,7 +59,7 @@
 @end
 
 @implementation DSNearByDetailViewController
-@synthesize userDetailsArray;
+@synthesize userDetailsArray,isFromLocationPage;
 - (void)viewDidLoad {
     [super viewDidLoad];
     objWebService =[[DSWebservice alloc]init];
@@ -712,7 +713,13 @@
     indexPath = [self.nearbyTbl indexPathForCell:(UITableViewCell *)button];
    
      NearbyCustomcell = (DSNearbyCustomCell *) [self.nearbyTbl cellForRowAtIndexPath:[NSIndexPath indexPathForRow:indexPath.row inSection:0]];
-    [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"ViewuserDetail"];
+    if(isFromLocationPage==YES){
+        [[NSUserDefaults standardUserDefaults] setBool:YES forKey:ViewUserDetail];
+    }
+    else{
+        [[NSUserDefaults standardUserDefaults] setBool:NO forKey:ViewUserDetail];
+    }
+    
     if(![requestStr isEqualToString:@"Yes"])
     {
         UIButton *buttonSender = (UIButton *)sender;

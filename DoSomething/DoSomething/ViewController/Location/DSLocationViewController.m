@@ -65,6 +65,8 @@
     NSInteger selectedRequestBtnIndex;
     
     BOOL testCollection;
+    //to get current
+    NSUInteger didSelectedIndex;
     
 }
 @property(nonatomic,strong)IBOutlet NSLayoutConstraint  * collectionviewxpostion;
@@ -99,6 +101,12 @@
 @synthesize locationCollectionView,locationManager;
 @synthesize profileImages,profileNames,kiloMeterlabel,userID,dosomethingImageArry,commonlocationArray,matchactivityBtn,matchActivitylbl,matchActivityView,sendrequestConversationID;
 - (void)viewDidLoad {
+    
+    
+    
+    [[NSUserDefaults standardUserDefaults]removeObjectForKey:ViewUserDetail];
+    
+    [[NSUserDefaults standardUserDefaults]removeObjectForKey:DSChatDetailBackAction];
     
     [COMMON TrackerWithName:@"NearBy Screen"];
     self.walkAlterview.hidden =YES;
@@ -187,19 +195,16 @@
         kiloMeterlabel =[[NSArray alloc]init];
         detailsArray=[[NSMutableArray alloc]init];
     
-        if([[NSUserDefaults standardUserDefaults] boolForKey:@"ViewuserDetail"]) {
+        if([[NSUserDefaults standardUserDefaults] boolForKey:ViewUserDetail]==YES) {
             //currentloadPage =@"";
-           
-            [COMMON DSLoadIcon:self.view];
-            [self nearestLocationWebservice];
-            [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"ViewuserDetail"];
+            [self updateLocationPageDataFromUserDetail];
         }
-        if([[NSUserDefaults standardUserDefaults] boolForKey:@"DSChatDetailBackAction"]) {
+        else if([[NSUserDefaults standardUserDefaults] boolForKey:DSChatDetailBackAction]==YES) {
             currentloadPage =@"";
             
             [COMMON DSLoadIcon:self.view];
             [self nearestLocationWebservice];
-            [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"DSChatDetailBackAction"];
+            [[NSUserDefaults standardUserDefaults] setBool:NO forKey:DSChatDetailBackAction];
         }
         
         
@@ -259,6 +264,24 @@
     }
 
     [[UISlider appearance] setThumbImage:[UIImage imageNamed:@"dot_Image"] forState:UIControlStateNormal];
+    
+}
+#pragma mark - updateLocationPageDataFromUserDetail
+-(void)updateLocationPageDataFromUserDetail {
+    
+    if([commonlocationArray count]!=0){
+        NSMutableDictionary *dict = [[NSMutableDictionary alloc] init];
+        dict = [[commonlocationArray objectAtIndex:didSelectedIndex] mutableCopy];
+        
+        [dict removeObjectForKey:@"send_request"];
+        [dict setObject:@"Yes" forKey:@"send_request"];
+        detailsArray =[dict copy];
+        [commonlocationArray replaceObjectAtIndex:didSelectedIndex withObject:detailsArray];
+        [COMMON DSLoadIcon:self.view];
+        [self nearestLocationWebservice];
+        
+    }
+    [[NSUserDefaults standardUserDefaults] setBool:NO forKey:ViewUserDetail];
     
 }
 -(void)loadCustomNavigationview
@@ -473,7 +496,7 @@
                 // isemptyuser=NO;
                  if ([[[responseObject valueForKey:@"nearestusers"]valueForKey:@"page"] isEqualToString:@"1"])
                  {
-
+                     commonlocationArray =[[NSMutableArray alloc]init];
                      NSMutableArray * nearestUserdetaile =[[NSMutableArray alloc]init];
                      nearestUserdetaile =[[responseObject valueForKey:@"nearestusers"] valueForKey:@"UserList"];
                      commonlocationArray =[nearestUserdetaile mutableCopy];
@@ -512,12 +535,8 @@
                  [locationCollectionView setHidden:NO];
                  
                  [COMMON DSRemoveLoading];
-                 
-                     [locationCollectionView reloadData];
-                     
-                 
-                 
-                  [refreshControl endRefreshing];
+                 [locationCollectionView reloadData];
+                 [refreshControl endRefreshing];
              }
              else if([[[responseObject valueForKey:@"nearestusers"]valueForKey:@"status"] isEqualToString:@"error"])
              {
@@ -718,7 +737,7 @@
             [locationCellView.hobbiesImagebackView setBackgroundColor:[UIColor colorWithRed:(218/255.0) green:(40/255.0) blue:(64.0/255.0f) alpha:1.0]];
             [locationCellView.requestsendBtn setTitle:@"Matched" forState:UIControlStateNormal];
             [locationCellView.requestsendBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-            locationCellView.requestsendBtn.titleLabel.font = [UIFont fontWithName:@"Patron-Regular" size:15];
+            locationCellView.requestsendBtn.titleLabel.font = [UIFont fontWithName:@"Patron-Regular" size:13];
             locationCellView.sendRequest.text =@"";
             [locationCellView.dosomethingImage1 setHidden:YES];
             [locationCellView.dosomethingImage2 setHidden:YES];
@@ -796,10 +815,11 @@
 //        {
 //            detailsArray = [[commonlocationArray objectAtIndex:indexPath.row] mutableCopy];
 //        }
-        
+        didSelectedIndex = indexPath.row;
         detailsArray = [[commonlocationArray objectAtIndex:indexPath.row] mutableCopy];
         DSNearByDetailViewController * detailViewController  = [[DSNearByDetailViewController alloc]initWithNibName:@"DSNearByDetailViewController" bundle:nil];
         detailViewController.userDetailsArray = detailsArray;
+        detailViewController.isFromLocationPage= YES;
         [self.navigationController pushViewController:detailViewController animated:YES];
     }
     
@@ -1688,7 +1708,7 @@
         [locationCellView.hobbiesImagebackView setBackgroundColor:[UIColor colorWithRed:(218/255.0) green:(40/255.0) blue:(64.0/255.0f) alpha:1.0]];
         [locationCellView.requestsendBtn setTitle:@"Matched" forState:UIControlStateNormal];
         [locationCellView.requestsendBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-        locationCellView.requestsendBtn.titleLabel.font = [UIFont fontWithName:@"Patron-Regular" size:15];
+        locationCellView.requestsendBtn.titleLabel.font = [UIFont fontWithName:@"Patron-Regular" size:13];
         
         
         NSMutableDictionary *dict = [[NSMutableDictionary alloc] init];

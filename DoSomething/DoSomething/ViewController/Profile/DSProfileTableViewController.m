@@ -2745,6 +2745,22 @@
     }
     
 }
+#pragma mark - to reduce imageSize
+- (UIImage *)imageWithImage:(UIImage *)image scaledToSize:(CGSize)newSize {
+    if ([[UIScreen mainScreen] respondsToSelector:@selector(scale)]) {
+        if ([[UIScreen mainScreen] scale] == 2.0) {
+            UIGraphicsBeginImageContextWithOptions(newSize, YES, 2.0);
+        } else {
+            UIGraphicsBeginImageContext(newSize);
+        }
+    } else {
+        UIGraphicsBeginImageContext(newSize);
+    }
+    [image drawInRect:CGRectMake(0, 0, newSize.width, newSize.height)];
+    UIImage *newImage = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    return newImage;
+}
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
 {
     if(IS_GREATER_IOS8)
@@ -2757,6 +2773,7 @@
     UIImage *image = nil;
     [cell.topViewCell setHidden:NO];
     image = [info valueForKey:UIImagePickerControllerEditedImage];
+    //image = [self imageWithImage:image scaledToSize:CGSizeMake(100.0f,100.0f)];
     NSData *profileData = UIImagePNGRepresentation([info objectForKey:UIImagePickerControllerEditedImage]);
     if([[userProfileImageArray objectAtIndex:0] isEqual:@""])
     {
