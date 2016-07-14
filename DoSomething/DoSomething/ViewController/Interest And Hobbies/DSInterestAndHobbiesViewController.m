@@ -610,10 +610,9 @@
     else
         [profileHobbyArray addObject:dict];
     
-    
-    [[NSUserDefaults standardUserDefaults]setObject:profileHobbyArray forKey:HobbiesArray];
-    
-    [[NSUserDefaults standardUserDefaults]synchronize];
+    //this will store even back press
+    //[[NSUserDefaults standardUserDefaults]setObject:profileHobbyArray forKey:HobbiesArray];
+    //[[NSUserDefaults standardUserDefaults]synchronize];
     [CATransaction begin];
     [CATransaction setValue:(id)kCFBooleanTrue forKey:kCATransactionAnimationDuration];
     [interestAndHobbiesCollectionView reloadItemsAtIndexPaths:@[indexPath]];
@@ -647,6 +646,10 @@
         appDelegate.buttonsView.hidden=NO;
          appDelegate.SepratorLbl.hidden=NO;
     }
+    //this will store when save action pressed.
+    [[NSUserDefaults standardUserDefaults]setObject:profileHobbyArray forKey:HobbiesArray];
+    [[NSUserDefaults standardUserDefaults]synchronize];
+
     DSProfileTableViewController *profile = [[DSProfileTableViewController alloc]init];
     profile.placeHolderArray = profileDetailsArray;
     [self.navigationController popViewControllerAnimated:YES];
