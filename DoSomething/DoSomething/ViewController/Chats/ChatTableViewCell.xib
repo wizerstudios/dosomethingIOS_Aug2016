@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10116" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10117" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
@@ -30,12 +30,12 @@
                         <rect key="frame" x="0.0" y="2" width="320" height="64"/>
                         <subviews>
                             <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="h4e-wB-0M2">
-                                <rect key="frame" x="29" y="22" width="20" height="20"/>
+                                <rect key="frame" x="23" y="22" width="20" height="20"/>
                             </activityIndicatorView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="jFl-vW-95V">
-                                <rect key="frame" x="13" y="4" width="57" height="56"/>
+                                <rect key="frame" x="11" y="7" width="44" height="48"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="57" id="PFn-yJ-Jov"/>
+                                    <constraint firstAttribute="width" constant="44" id="PFn-yJ-Jov"/>
                                 </constraints>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gJc-lJ-WiO">
@@ -90,28 +90,28 @@
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
-                            <constraint firstItem="22G-09-qka" firstAttribute="leading" secondItem="h4e-wB-0M2" secondAttribute="trailing" constant="35" id="10w-84-ifq"/>
+                            <constraint firstItem="22G-09-qka" firstAttribute="leading" secondItem="h4e-wB-0M2" secondAttribute="trailing" constant="41" id="10w-84-ifq"/>
                             <constraint firstAttribute="trailing" secondItem="CWk-TD-Uwu" secondAttribute="trailing" constant="8" id="1yt-pB-zW6"/>
-                            <constraint firstItem="jFl-vW-95V" firstAttribute="leading" secondItem="GJi-rD-MMc" secondAttribute="leading" constant="13" id="5tq-Zp-2RR"/>
-                            <constraint firstItem="gJc-lJ-WiO" firstAttribute="leading" secondItem="jFl-vW-95V" secondAttribute="trailing" constant="15" id="ATk-JH-elB"/>
-                            <constraint firstAttribute="bottom" secondItem="jFl-vW-95V" secondAttribute="bottom" constant="4" id="BwH-AD-YlD"/>
+                            <constraint firstItem="jFl-vW-95V" firstAttribute="leading" secondItem="GJi-rD-MMc" secondAttribute="leading" constant="11" id="5tq-Zp-2RR"/>
+                            <constraint firstItem="gJc-lJ-WiO" firstAttribute="leading" secondItem="jFl-vW-95V" secondAttribute="trailing" constant="30" id="ATk-JH-elB"/>
+                            <constraint firstAttribute="bottom" secondItem="jFl-vW-95V" secondAttribute="bottom" constant="9" id="BwH-AD-YlD"/>
                             <constraint firstItem="vXH-dh-o0J" firstAttribute="top" secondItem="GJi-rD-MMc" secondAttribute="top" id="Hco-Rs-7Ke"/>
                             <constraint firstAttribute="bottom" secondItem="oll-bZ-EgA" secondAttribute="bottom" constant="11" id="OxN-ha-YRE"/>
                             <constraint firstAttribute="trailing" secondItem="vXH-dh-o0J" secondAttribute="trailing" id="QQS-8S-e9J"/>
                             <constraint firstItem="oll-bZ-EgA" firstAttribute="leading" secondItem="22G-09-qka" secondAttribute="trailing" constant="29" id="Sap-ia-BrX"/>
-                            <constraint firstItem="22G-09-qka" firstAttribute="leading" secondItem="jFl-vW-95V" secondAttribute="trailing" constant="14" id="Xyv-Eb-MR5"/>
+                            <constraint firstItem="22G-09-qka" firstAttribute="leading" secondItem="jFl-vW-95V" secondAttribute="trailing" constant="29" id="Xyv-Eb-MR5"/>
                             <constraint firstItem="gJc-lJ-WiO" firstAttribute="top" secondItem="vXH-dh-o0J" secondAttribute="bottom" constant="6" id="Y8l-rY-2GD"/>
                             <constraint firstItem="vXH-dh-o0J" firstAttribute="leading" secondItem="GJi-rD-MMc" secondAttribute="leading" id="Yh2-AP-xda"/>
-                            <constraint firstItem="jFl-vW-95V" firstAttribute="top" secondItem="vXH-dh-o0J" secondAttribute="bottom" constant="2" id="ZYd-Lc-Lca"/>
+                            <constraint firstItem="jFl-vW-95V" firstAttribute="top" secondItem="vXH-dh-o0J" secondAttribute="bottom" constant="5" id="ZYd-Lc-Lca"/>
                             <constraint firstAttribute="bottom" secondItem="22G-09-qka" secondAttribute="bottom" constant="10" id="acR-60-5ad"/>
-                            <constraint firstItem="jFl-vW-95V" firstAttribute="centerY" secondItem="h4e-wB-0M2" secondAttribute="centerY" id="e2O-Up-ijx"/>
+                            <constraint firstItem="jFl-vW-95V" firstAttribute="centerY" secondItem="h4e-wB-0M2" secondAttribute="centerY" constant="-1.5" id="e2O-Up-ijx"/>
                             <constraint firstItem="CWk-TD-Uwu" firstAttribute="leading" secondItem="gJc-lJ-WiO" secondAttribute="trailing" constant="48" id="exG-nV-lIv"/>
                             <constraint firstItem="22G-09-qka" firstAttribute="top" secondItem="gJc-lJ-WiO" secondAttribute="bottom" constant="2" id="hW8-x7-8V0"/>
-                            <constraint firstItem="jFl-vW-95V" firstAttribute="top" secondItem="vXH-dh-o0J" secondAttribute="bottom" constant="2" id="k8T-u8-NLG"/>
+                            <constraint firstItem="jFl-vW-95V" firstAttribute="top" secondItem="vXH-dh-o0J" secondAttribute="bottom" constant="5" id="k8T-u8-NLG"/>
                             <constraint firstAttribute="trailing" secondItem="oll-bZ-EgA" secondAttribute="trailing" constant="13" id="leU-yr-lOw"/>
                             <constraint firstItem="22G-09-qka" firstAttribute="top" secondItem="gJc-lJ-WiO" secondAttribute="bottom" constant="2" id="lzA-UQ-W1a"/>
                             <constraint firstItem="oll-bZ-EgA" firstAttribute="top" secondItem="CWk-TD-Uwu" secondAttribute="bottom" constant="6" id="nCk-7i-xl2"/>
-                            <constraint firstItem="22G-09-qka" firstAttribute="leading" secondItem="jFl-vW-95V" secondAttribute="trailing" constant="14" id="oal-09-fmn"/>
+                            <constraint firstItem="22G-09-qka" firstAttribute="leading" secondItem="jFl-vW-95V" secondAttribute="trailing" constant="29" id="oal-09-fmn"/>
                             <constraint firstItem="CWk-TD-Uwu" firstAttribute="top" secondItem="vXH-dh-o0J" secondAttribute="bottom" constant="10" id="pcj-sU-sf8"/>
                         </constraints>
                     </view>
@@ -132,7 +132,7 @@
                 <outlet property="msgCountLabel" destination="oll-bZ-EgA" id="SQV-yS-yYm"/>
                 <outlet property="profileImageView" destination="jFl-vW-95V" id="t7G-6d-Oi4"/>
             </connections>
-            <point key="canvasLocation" x="196" y="192"/>
+            <point key="canvasLocation" x="196" y="191.5"/>
         </tableViewCell>
     </objects>
 </document>

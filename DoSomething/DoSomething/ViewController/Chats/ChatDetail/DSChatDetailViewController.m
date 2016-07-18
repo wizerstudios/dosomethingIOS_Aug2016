@@ -377,11 +377,35 @@
     NSString *cellIdentifier = @"Cell";
     ChatDetailcell = (ChatDetailCustomcell *) [tableView dequeueReusableCellWithIdentifier:cellIdentifier];[[NSBundle mainBundle] loadNibNamed:@"ChatDetailCustomcell" owner:self options:nil];
     ChatDetailcell = chatCustomcell;
-    CGSize dataSize1 = [COMMON getControlHeight:text withFontName:@"HelveticaNeue" ofSize:15.0 withSize:CGSizeMake(chatTableView.frame.size.width,chatTableView.frame.size.height)];
-    return dataSize1.height + CELL_HEIGHT+50;
-
     
-}
+    
+    //CGSize dataSize1 = [COMMON getControlHeight:text withFontName:@"HelveticaNeue" ofSize:15.0 withSize:CGSizeMake(chatTableView.frame.size.width,chatTableView.frame.size.height)];
+    //return dataSize1.height + CELL_HEIGHT+50;
+    
+    
+    UIFont *font = [UIFont fontWithName:@"HelveticaNeue" size:15.0];
+    
+    CGRect rect = [text boundingRectWithSize:CGSizeMake(SCREEN_WIDTH-40, CGFLOAT_MAX)
+                                           options:NSStringDrawingUsesLineFragmentOrigin
+                                        attributes:@{NSFontAttributeName:font}
+                                           context:nil];
+    CGFloat senderHeight =  rect.size.height;
+    NSLog(@"senderHeight%f-->",senderHeight);
+    
+    if(senderHeight>1500){
+        senderHeight = senderHeight-(senderHeight/4);
+        if(senderHeight>75){
+            senderHeight = (senderHeight-ChatDetailcell.frame.size.height);
+        }
+    }
+    if(senderHeight>150 && senderHeight<250){
+        senderHeight = senderHeight-(senderHeight/3);
+    }
+    [ChatDetailcell layoutIfNeeded];
+    
+    return senderHeight + CELL_HEIGHT +20;
+    
+ }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -394,9 +418,10 @@
     
     [ChatDetailcell setSelectionStyle:UITableViewCellSelectionStyleNone];
     [ChatDetailcell getMessageArray:[conversationArray objectAtIndex:indexPath.row]];
-    [ChatDetailcell setBackgroundColor:[UIColor purpleColor]];
+   // [ChatDetailcell setBackgroundColor:[UIColor purpleColor]];
     //[chatTableView setSeparatorColor:[UIColor blackColor]];
-   // [chatTableView setSeparatorStyle:UITableViewCellSeparatorStyleSingleLine];
+    //[chatTableView setSeparatorStyle:UITableViewCellSeparatorStyleSingleLine];
+    
     return ChatDetailcell;
     
 }

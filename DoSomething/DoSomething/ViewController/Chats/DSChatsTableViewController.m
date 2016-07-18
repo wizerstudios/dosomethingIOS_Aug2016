@@ -239,7 +239,7 @@
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return 65;
+    return 60;//65
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -300,8 +300,8 @@
         [Cell.profileImageView setImage:[UIImage imageNamed:@"profile_noimg.png"]];
          [Cell.activeIndicator setHidden:YES];
     }
-    
-    [Cell.profileImageView.layer setCornerRadius:29];
+     [Cell.profileImageView.layer setCornerRadius:22.2];//29
+   
     
     if(isSupportUser == 1){
         
@@ -312,8 +312,7 @@
         [Cell.profileImageView.layer setBorderColor:[[UIColor colorWithRed:229.0f/255.0f green:63.0f/255.0f blue:81.0f/255.0f alpha:1.0f] CGColor]];
         
     }
-
-    
+   
     NSUInteger msgCount = [[chatDict valueForKey:@"unreadmessage"]integerValue];
     
   //  msgCount = 3;
@@ -336,7 +335,6 @@
     
     
     [Cell setSelectionStyle:UITableViewCellSelectionStyleNone];
-    
     
     ChatTableView.backgroundColor = [UIColor colorWithRed:237.0f/255.0f green:237.0f/255.0f blue:237.0f/255.0f alpha:1.0f];
     
@@ -365,6 +363,8 @@
     else
         return NO;
 }
+
+
 -(NSArray *)tableView:(UITableView *)tableView editActionsForRowAtIndexPath:(NSIndexPath *)indexPath {
     //BLOCK Changed into UnMatch
 //    NSMutableArray*objselectuser = [chatArray objectAtIndex:indexPath.row];
@@ -391,8 +391,11 @@
     
      //Delete Changed into UnMatch
     
+
+    
     UITableViewRowAction *deleteButton = [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleDefault title:@"Unmatch"  handler:^(UITableViewRowAction *action, NSIndexPath *indexPath){
-        
+    
+    
         currentUserRow = indexPath.row;
        
        // NSInteger* selectIndex= &row;
@@ -414,6 +417,8 @@
     //return @[deleteButton,blockButton];
     return @[deleteButton];
 }
+
+
 -(void)loadDeleteAPI{
     [COMMON DSRemoveLoading];
     [self loadDeleteUserChatHistory:currentUserid :currentUserRow];
