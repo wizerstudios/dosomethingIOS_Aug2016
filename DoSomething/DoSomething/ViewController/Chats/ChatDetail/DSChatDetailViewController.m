@@ -390,7 +390,6 @@
                                         attributes:@{NSFontAttributeName:font}
                                            context:nil];
     CGFloat senderHeight =  rect.size.height;
-    NSLog(@"senderHeight%f-->",senderHeight);
     
     if(senderHeight>1500){
         senderHeight = senderHeight-(senderHeight/4);
@@ -711,7 +710,6 @@
                              // NSLog(@"SEND REQ%@",responseObject);
                               [COMMON DSRemoveLoading];
                               [self gotolocationview];
-                              
                           } failure:^(AFHTTPRequestOperation *operation, id error) {
                               [COMMON DSRemoveLoading];
                               //NSLog(@"SEND REQ ERR%@",error);

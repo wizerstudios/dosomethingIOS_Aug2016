@@ -15,5 +15,4 @@
 @property (strong, nonatomic) IBOutlet UITableView *ChatTableView;
 
 @property (strong)NSTimer *messageTimer;
--(NSString *)whitespaceReplacementWithSystemAttributes:(NSDictionary *)systemAttributes newAttributes:(NSDictionary *)newAttributes;
 @end

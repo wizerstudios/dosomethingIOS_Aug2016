@@ -239,7 +239,7 @@
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return 60;//65
+    return 50;//65 //55
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -300,9 +300,10 @@
         [Cell.profileImageView setImage:[UIImage imageNamed:@"profile_noimg.png"]];
          [Cell.activeIndicator setHidden:YES];
     }
-     [Cell.profileImageView.layer setCornerRadius:22.2];//29
+    [Cell.profileImageView.layer setCornerRadius:Cell.profileImageView.frame.size.height/2];//29 //22.2
    
-    
+    [Cell.profileImageView.layer setMasksToBounds:YES];
+  
     if(isSupportUser == 1){
         
         [Cell.profileImageView.layer setMasksToBounds:YES];
@@ -323,15 +324,18 @@
         
         [Cell.msgCountLabel setText:[NSString stringWithFormat:@"%lu",(unsigned long)msgCount]];
         
-        [Cell.msgCountLabel.layer setCornerRadius:10];
-      
+        [Cell.msgCountLabel.layer setCornerRadius:Cell.msgCountLabel.frame.size.height/2];
+        
         Cell.msgCountLabel.clipsToBounds = YES;
+
         
     }
     
-    else
-        
+    else{
         [Cell.msgCountLabel setHidden:YES];
+            }
+        
+    
     
     
     [Cell setSelectionStyle:UITableViewCellSelectionStyleNone];
@@ -364,7 +368,6 @@
         return NO;
 }
 
-
 -(NSArray *)tableView:(UITableView *)tableView editActionsForRowAtIndexPath:(NSIndexPath *)indexPath {
     //BLOCK Changed into UnMatch
 //    NSMutableArray*objselectuser = [chatArray objectAtIndex:indexPath.row];
@@ -391,8 +394,6 @@
     
      //Delete Changed into UnMatch
     
-
-    
     UITableViewRowAction *deleteButton = [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleDefault title:@"Unmatch"  handler:^(UITableViewRowAction *action, NSIndexPath *indexPath){
     
     
@@ -403,7 +404,7 @@
         currentUserid=[objselectuser valueForKey:@"id"];
         currentUserIdToUnmatch=[objselectuser valueForKey:@"UserId"];
         [COMMON DSLoadIcon:self.view];
-        [self loadCancelRequestWebService:currentUserIdToUnmatch];
+        [self loadCancelRequestWebService:currentUserIdToUnmatch :currentUserRow];
         //[timeArray objectAtIndex:indexPath.row];
         
         //[self.ChatTableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationRight];
@@ -571,7 +572,7 @@
 }
 
 #pragma mark - loadCancelRequestWebService
--(void)loadCancelRequestWebService :(NSString*) UserIdToUnmatch
+-(void)loadCancelRequestWebService :(NSString*) UserIdToUnmatch :(NSInteger)selectIndex
 {
     
     if([COMMON isInternetReachable]){
@@ -579,9 +580,12 @@
                       sessionid:[COMMON getSessionID]
            request_send_user_id:UserIdToUnmatch
                         success:^(AFHTTPRequestOperation *operation, id responseObject) {
+                            //[self gotolocationview];
                             
+                            NSIndexPath *path = [NSIndexPath indexPathForRow:selectIndex inSection:0];
+                        
+                            [self tableView:ChatTableView commitEditingStyle:UITableViewCellEditingStyleDelete forRowAtIndexPath:path];
                             [COMMON DSRemoveLoading];
-                            [self gotolocationview];
                             
                         } failure:^(AFHTTPRequestOperation *operation, id error) {
                             [COMMON DSRemoveLoading];
