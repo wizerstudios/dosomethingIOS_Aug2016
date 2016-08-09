@@ -492,7 +492,9 @@
                              [noConversationLabel setHidden:YES];
                              if([[[responseObject valueForKey:@"getchathistory"] valueForKey:@"status"]isEqualToString:@"success"]){
                                  
-                                 chatArray = [[[responseObject valueForKey:@"getchathistory"]valueForKey:@"converation"] mutableCopy];
+                                 
+                                 [self checkChatArrayCountBasedOnRequest:responseObject];
+                                 
                                  
                                  [self loadTabbarMsgCount];
                                  
@@ -517,6 +519,34 @@
                              
                          }];
     }
+}
+
+-(void)checkChatArrayCountBasedOnRequest:(id)responseObject{
+    
+    NSMutableArray * tempChatArray = [NSMutableArray new];
+    tempChatArray = [[[responseObject valueForKey:@"getchathistory"]valueForKey:@"converation"] mutableCopy];
+    
+    NSString* stringToFind = @"Yes";
+    NSMutableArray * checkArray = [[NSMutableArray alloc]init];
+    
+    for(NSDictionary * anEntry in tempChatArray)
+    {
+        NSString * send_requestStr = [anEntry valueForKey:@"send_request"];
+        NSString * supportUser = [anEntry valueForKey:@"supportuser"];
+        
+        NSString *checkRequestStr = [NSString stringWithFormat:@"%@",send_requestStr];
+        NSString *supportUserStr = [NSString stringWithFormat:@"%@",supportUser];
+        
+        if([supportUserStr containsString: @"1"]){
+            [checkArray addObject:[anEntry mutableCopy]];
+        }
+        if([checkRequestStr containsString: stringToFind]){
+            [checkArray addObject:[anEntry mutableCopy]];
+        }
+    }
+    
+    chatArray = [checkArray mutableCopy];
+    
 }
 -(void)addLabelWhenNoConversation{
     

@@ -495,17 +495,18 @@
     [self loadDeleteUserChatHistory];
 }
 
-- (IBAction)pressBlock:(id)sender {
-    
-    _transparentView.hidden = YES;
-    
-    _backgroundView.hidden = YES;
-    
-    _menuImageview.hidden = NO;
-    //[self loadblockUser];
-    [self loadCancelRequestWebService];
-    
-}
+//- (IBAction)pressBlock:(id)sender {
+//    
+//    _transparentView.hidden = YES;
+//    
+//    _backgroundView.hidden = YES;
+//    
+//    _menuImageview.hidden = NO;
+//    //[self loadblockUser];
+//    [self loadCancelRequestWebService];
+//    
+//}
+
 - (IBAction)showReallyFunkyIBActionSheet:(id)sender
 {
     _menuImageview.hidden = YES;
@@ -709,7 +710,7 @@
                           success:^(AFHTTPRequestOperation *operation, id responseObject) {
                              // NSLog(@"SEND REQ%@",responseObject);
                               [COMMON DSRemoveLoading];
-                              [self gotolocationview];
+                            [self.navigationController popViewControllerAnimated:YES];
                           } failure:^(AFHTTPRequestOperation *operation, id error) {
                               [COMMON DSRemoveLoading];
                               //NSLog(@"SEND REQ ERR%@",error);

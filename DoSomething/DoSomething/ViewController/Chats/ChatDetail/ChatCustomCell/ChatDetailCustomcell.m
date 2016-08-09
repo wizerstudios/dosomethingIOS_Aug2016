@@ -112,77 +112,45 @@
         self.chatTime.frame = CGRectMake(self.frame.size.width/2,2,(self.frame.size.width/2)-10,20);
         _chatTime.textAlignment = NSTextAlignmentRight;
         self.chatTime.backgroundColor=[UIColor clearColor];
-        
+         self.chatTime.textColor=[UIColor lightGrayColor];
         [sender_msgLbl setTextColor:[UIColor whiteColor]];
         
-        NSString *messageStr  = [chatArray valueForKey:@"Message"];
-        //UIFont *font = [UIFont fontWithName:@"HelveticaNeue" size:15.0];
-        
-        CGRect rect = [messageStr boundingRectWithSize:CGSizeMake(SCREEN_WIDTH-40, CGFLOAT_MAX)
-                                               options:NSStringDrawingUsesLineFragmentOrigin
-                                            attributes:@{NSFontAttributeName:sender_msgLbl.font}
-                                               context:nil];
-        
-        
-        CGFloat senderHeight =  rect.size.height;
-        CGFloat senderWidth = rect.size.width;
-       
-        CGFloat send_msgLblXPos=_chatTime.frame.origin.x+_chatTime.frame.size.width;
-        
-        sender_msgLbl.frame = CGRectMake(send_msgLblXPos-60,_chatTime.frame.size.height+5,40,senderHeight+10);
-        
         CGRect senderMsgLblFrame = sender_msgLbl.frame;
-        
-        CGFloat senderMsgLblFrameXPos;
-        
-        senderMsgLblFrameXPos=(SCREEN_WIDTH-senderWidth);
-        
-        self.sender_msgLbl.backgroundColor=[UIColor clearColor];
-        
-        senderMsgLblFrame.origin.x =senderMsgLblFrameXPos-20;//-40;//-20;
-            
-        senderMsgLblFrame.origin.y =_chatTime.frame.size.height+5;
-        
-        senderMsgLblFrame.size.width =rect.size.width;
-        
-        senderMsgLblFrame.size.height =senderHeight+10;
-        
+        senderMsgLblFrame.origin.x =20;
+        senderMsgLblFrame.size.width =SCREEN_WIDTH-40;
         [sender_msgLbl setFrame:senderMsgLblFrame];
-       
-        [sender_msgLbl sizeToFit];
-        sender_msgLbl.textAlignment = NSTextAlignmentLeft;
+        
+        sender_msgLbl.clipsToBounds = YES;
+        sender_msgLbl.layer.cornerRadius = 2;
         sender_msgLbl.numberOfLines = 0;
-        
+        [sender_msgLbl sizeToFit];
+        CGFloat XPos = SCREEN_WIDTH - (sender_msgLbl.frame.size.width +10);
+        sender_msgLbl.frame = CGRectMake(XPos, _chatTime.frame.size.height+5, sender_msgLbl.frame.size.width, sender_msgLbl.frame.size.height);
         sender_bubbleimgView.frame = CGRectMake(sender_msgLbl.frame.origin.x-5,(_chatTime.frame.origin.y+_chatTime.frame.size.height)-2,sender_msgLbl.frame.size.width+10,sender_msgLbl.frame.size.height+9);
-        
         self.chatTime.textColor=[UIColor lightGrayColor];
+        //sender_msgLbl.backgroundColor = [UIColor redColor];
     }
     else{
         //LEFT
-        NSString *messageStr  = [chatArray valueForKey:@"Message"];
-        sender_msgLbl.text=[chatArray valueForKey:@"Message"];
-        //windowSize = CGSizeMake(320,440);
-        sender_bubbleimgView.backgroundColor = [UIColor whiteColor];
-        sender_bubbleimgView.layer.cornerRadius = 7;
+        sender_msgLbl.text = [chatArray valueForKey:@"Message"];
         
+        CGRect senderMsgLblFrame = sender_msgLbl.frame;
+        senderMsgLblFrame.origin.x =10;
+        senderMsgLblFrame.size.width =SCREEN_WIDTH-20;
+        [sender_msgLbl setFrame:senderMsgLblFrame];
+
         self.chatTime.frame = CGRectMake(10,2,self.frame.size.width/2,20);
         _chatTime.textAlignment = NSTextAlignmentLeft;
         self.chatTime.backgroundColor=[UIColor clearColor];
-        
-        //UIFont *font = [UIFont fontWithName:@"HelveticaNeue" size:15.0];
-        
-        CGRect rect = [messageStr boundingRectWithSize:CGSizeMake(SCREEN_WIDTH-40, CGFLOAT_MAX)
-                                               options:NSStringDrawingUsesLineFragmentOrigin
-                                            attributes:@{NSFontAttributeName:sender_msgLbl.font}
-                                               context:nil];
-        CGFloat senderHeight =  rect.size.height;
-        
-        sender_msgLbl.frame = CGRectMake(15,_chatTime.frame.size.height+5,self.frame.size.width-30,senderHeight+10);
+        sender_bubbleimgView.backgroundColor = [UIColor whiteColor];
+        sender_bubbleimgView.layer.cornerRadius = 7;
         [sender_msgLbl setTextColor:[UIColor blackColor]];
+        sender_msgLbl.clipsToBounds = YES;
+        sender_msgLbl.layer.cornerRadius = 2;
         sender_msgLbl.numberOfLines = 0;
         [sender_msgLbl sizeToFit];
-        sender_msgLbl.textAlignment = NSTextAlignmentLeft;
-        
+        CGFloat XPos = 10;
+        sender_msgLbl.frame = CGRectMake(XPos, _chatTime.frame.size.height+5, sender_msgLbl.frame.size.width, sender_msgLbl.frame.size.height);
         sender_bubbleimgView.frame = CGRectMake(sender_msgLbl.frame.origin.x-5,(_chatTime.frame.origin.y+_chatTime.frame.size.height)-2,sender_msgLbl.frame.size.width+10,sender_msgLbl.frame.size.height+9);
         
         [self.chatTime setTextColor:[UIColor blackColor]];
